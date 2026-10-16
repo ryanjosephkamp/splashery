@@ -1,0 +1,36 @@
+{
+  "kind": "Pure displayed-field diagnostic for monotone depth spacing. No rendered quality or phone cost claim. No production change.",
+  "profiles": 212,
+  "flagged": 209,
+  "methodSha256": "cb63e56fd604bf98353086821a2a83d75d86e3de27d5d291e34149ef7ab170a1",
+  "variants": {
+    "identity": {
+      "mean": 0.5603716502335301,
+      "reduction": 0.0,
+      "flaggedFlatRegressions": 0,
+      "allFlatRegressions": 0,
+      "allOrderRegressions": 0
+    },
+    "farSpread": {
+      "mean": 0.5619222704621489,
+      "reduction": -0.002767128258491791,
+      "flaggedFlatRegressions": 99,
+      "allFlatRegressions": 101,
+      "allOrderRegressions": 105
+    },
+    "nearSpread": {
+      "mean": 0.5944792180096427,
+      "reduction": -0.06086597664585369,
+      "flaggedFlatRegressions": 153,
+      "allFlatRegressions": 154,
+      "allOrderRegressions": 56
+    },
+    "middleSpread": {
+      "mean": 0.5593816803855396,
+      "reduction": 0.0017666308557506838,
+      "flaggedFlatRegressions": 93,
+      "allFlatRegressions": 94,
+      "allOrderRegressions": 86
+    }
+  }
+}

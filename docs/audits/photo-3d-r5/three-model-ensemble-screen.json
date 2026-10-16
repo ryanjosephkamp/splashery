@@ -1,0 +1,5148 @@
+{
+  "kind": "Fixed four-method, sixteen-input three-model ensemble screen; no shipping asset, runtime model, rendered quality, or phone-cost claim",
+  "createdUTC": "2026-10-16T09:26:00.121Z",
+  "methodSha256": "39f762021e10b955e3cd74206cad9f00fac4a5af152397ff43b67d81b07e2f07",
+  "originalCoreSha256": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57",
+  "generationMethodSha256": "716fef9d75cad5a7189c4eeb87f4ed1088d8af99875d9cfae3ec697745c7411e",
+  "variants": ["mean-three", "median-three", "agreement-005", "agreement-010"],
+  "rows": [
+    {
+      "id": "forest",
+      "kind": "builtin",
+      "profile": "phone",
+      "sourceImageSha256": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 303,
+          "flipped": 46,
+          "flattened": 187,
+          "flippedFraction": 0.15181518151815182,
+          "flattenedFraction": 0.6171617161716172,
+          "fieldSha256": "cfd0c5ccacbce3cb395060869ba229242300fa18ee26f4c70a03b613e3b7c119"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 303,
+          "flipped": 54,
+          "flattened": 194,
+          "flippedFraction": 0.1782178217821782,
+          "flattenedFraction": 0.6402640264026402,
+          "fieldSha256": "4d12a7b2203b2ada088446c164819299045e07963131043215ef58625957b4c0"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 303,
+          "flipped": 51,
+          "flattened": 184,
+          "flippedFraction": 0.16831683168316833,
+          "flattenedFraction": 0.6072607260726073,
+          "fieldSha256": "bcdedd39c8fa9faefe6088ff5a8502248a56de998eb875ed6cf254fa9a5b860c"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 303,
+          "flipped": 50,
+          "flattened": 189,
+          "flippedFraction": 0.16501650165016502,
+          "flattenedFraction": 0.6237623762376238,
+          "fieldSha256": "a978b97c3516b830607bb33db11f756e3fbc33a3dc5598bc6370b973984463d9"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 303,
+          "flipped": 56,
+          "flattened": 193,
+          "flippedFraction": 0.1848184818481848,
+          "flattenedFraction": 0.636963696369637,
+          "fieldSha256": "3a4b314bf9ea73ad25c03962209d4b83cdddde1ba498f3e5130f8a9e90b7356b"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "8f9f5c461453d7702533a303be0a5b8dea1dca21346d7ed8c78b8b09e5e2b528",
+          "packedSha256": "b935400d1368d88bcf8dbccc773bdc88fd841d7a62ce390be2a2b91290a01e7a"
+        },
+        {
+          "name": "median-three",
+          "sha256": "d2966703b91db1201f39fbf435f73aa6458f5b94045e315af935b5efc0224ca1",
+          "packedSha256": "7552afe000e5078bc1ae2f3354d0be1f01e045081167d60cce1b9496ca34de8f"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "afc9319e25af9e4209ed8144800c3e702e7bfe51e5fe11b00fe599dc6330a4dc",
+          "packedSha256": "fa79a711c143f20f5eb4c19d9b1c44bfce9c7ecf1908d2a0ed6206c1962b0ff6"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "1ec353da98b101d005f0c77c06d54fb852ea510ef2a5dcd51dbd8f636c812d9c",
+          "packedSha256": "1a9603e328887501c9659654425489bc2539f9e4471eea94898b0135ec4b11e4"
+        }
+      ]
+    },
+    {
+      "id": "forest",
+      "kind": "builtin",
+      "profile": "desktop",
+      "sourceImageSha256": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 453,
+          "flipped": 63,
+          "flattened": 314,
+          "flippedFraction": 0.1390728476821192,
+          "flattenedFraction": 0.6931567328918322,
+          "fieldSha256": "6db2e34f67bcb3d026839fd55600e10630bb6c79e2fdad451bb3d7c8b0ec9523"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 453,
+          "flipped": 72,
+          "flattened": 314,
+          "flippedFraction": 0.15894039735099338,
+          "flattenedFraction": 0.6931567328918322,
+          "fieldSha256": "d0310d57aaba3d1d7922f2d14ee2a8244a00329aaf2f72d26fe7fe5cd9d50b58"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 453,
+          "flipped": 67,
+          "flattened": 312,
+          "flippedFraction": 0.1479028697571744,
+          "flattenedFraction": 0.6887417218543046,
+          "fieldSha256": "a8c6dfa2064eb4bbb318f9cc8592c418126f88b6dee3d14ea9995e0d34911170"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 453,
+          "flipped": 67,
+          "flattened": 306,
+          "flippedFraction": 0.1479028697571744,
+          "flattenedFraction": 0.6754966887417219,
+          "fieldSha256": "19aa06fc08ebee9e951d449bc57e6e75d794ef5326a23b17f9931b362e940a34"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 453,
+          "flipped": 71,
+          "flattened": 298,
+          "flippedFraction": 0.15673289183222958,
+          "flattenedFraction": 0.6578366445916115,
+          "fieldSha256": "c58247292ecfbebdf1387553254c0d92bfe519d13d73bc010dbda0b5b10eab57"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "8f9f5c461453d7702533a303be0a5b8dea1dca21346d7ed8c78b8b09e5e2b528",
+          "packedSha256": "b935400d1368d88bcf8dbccc773bdc88fd841d7a62ce390be2a2b91290a01e7a"
+        },
+        {
+          "name": "median-three",
+          "sha256": "d2966703b91db1201f39fbf435f73aa6458f5b94045e315af935b5efc0224ca1",
+          "packedSha256": "7552afe000e5078bc1ae2f3354d0be1f01e045081167d60cce1b9496ca34de8f"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "afc9319e25af9e4209ed8144800c3e702e7bfe51e5fe11b00fe599dc6330a4dc",
+          "packedSha256": "fa79a711c143f20f5eb4c19d9b1c44bfce9c7ecf1908d2a0ed6206c1962b0ff6"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "1ec353da98b101d005f0c77c06d54fb852ea510ef2a5dcd51dbd8f636c812d9c",
+          "packedSha256": "1a9603e328887501c9659654425489bc2539f9e4471eea94898b0135ec4b11e4"
+        }
+      ]
+    },
+    {
+      "id": "street",
+      "kind": "builtin",
+      "profile": "phone",
+      "sourceImageSha256": "b1475109359fdd1ff17e238a3b00f715c5778e05ec21e9b3a8e0b0c76ac0192e",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 942,
+          "flipped": 127,
+          "flattened": 598,
+          "flippedFraction": 0.13481953290870488,
+          "flattenedFraction": 0.6348195329087049,
+          "fieldSha256": "9d7784881aabb17414dac48480e316751febf98ce7aa82230cf594cf466a5738"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 942,
+          "flipped": 135,
+          "flattened": 614,
+          "flippedFraction": 0.14331210191082802,
+          "flattenedFraction": 0.6518046709129511,
+          "fieldSha256": "c90367b7a3915780a5f0077b35ac89765331d2fa065b9fa2827c2ee5227a5f5b"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 942,
+          "flipped": 123,
+          "flattened": 617,
+          "flippedFraction": 0.1305732484076433,
+          "flattenedFraction": 0.6549893842887473,
+          "fieldSha256": "acf5feab5e7bc8bd4a60f327f28f0d05260510cfe83befe490a8df890c38cb7e"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 942,
+          "flipped": 148,
+          "flattened": 536,
+          "flippedFraction": 0.15711252653927812,
+          "flattenedFraction": 0.5690021231422505,
+          "fieldSha256": "a491aa97028cf382e2a8597c2b2bfd5fb9ed6a2f5fe3d2ea53f7339a2d12c089"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 942,
+          "flipped": 116,
+          "flattened": 568,
+          "flippedFraction": 0.12314225053078556,
+          "flattenedFraction": 0.6029723991507431,
+          "fieldSha256": "07e6243bdb7eaf3431d7380570eea6b391b750be604e874807b0b359fd195926"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "070b9b858f2a2c405bf176072028d96763ebf66f217477ad3401474d2f2bff69",
+          "packedSha256": "3f14c9e6752e54959a85b199276f9aa88cf7e955904beabd11daf69d5d79b4d7"
+        },
+        {
+          "name": "median-three",
+          "sha256": "cd848b838c6fa9a93615b7663ab722b5c6618fd5f4451057d023e267cdc9942b",
+          "packedSha256": "09ea7a50a868183de1b82668fb6118894e3a96308266279d392b8a7ccd0e465f"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "175f03e2a8a83105acb9c48c7dc80a4697f2da5b00fceff35136ca18c139f7f7",
+          "packedSha256": "fce8d4078ef5673a9fefffe04880ab78b17861b5fc580c7a8a27a59e3067a250"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "ea2c24970f3196552f07ea264d62a1db57ff782493e715d89d61bd87f94fea8a",
+          "packedSha256": "6331742253196a82ac792ddc229339a889e632825ed05895ae84369b30bdc441"
+        }
+      ]
+    },
+    {
+      "id": "street",
+      "kind": "builtin",
+      "profile": "desktop",
+      "sourceImageSha256": "b1475109359fdd1ff17e238a3b00f715c5778e05ec21e9b3a8e0b0c76ac0192e",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 1206,
+          "flipped": 140,
+          "flattened": 812,
+          "flippedFraction": 0.11608623548922056,
+          "flattenedFraction": 0.6733001658374793,
+          "fieldSha256": "1859b97f7a42dcc334f759eae67d7e4053efd36bcc664c76197d1cbfc775ae9e"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 1206,
+          "flipped": 157,
+          "flattened": 816,
+          "flippedFraction": 0.13018242122719734,
+          "flattenedFraction": 0.6766169154228856,
+          "fieldSha256": "782e8efbb15f4aa683911371ff3b7faf55c56305bbaf8d3bf2415e37082a7212"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 1206,
+          "flipped": 150,
+          "flattened": 831,
+          "flippedFraction": 0.12437810945273632,
+          "flattenedFraction": 0.6890547263681592,
+          "fieldSha256": "d8568644c6bd1715e05fd71e1bc8f5ff623dba6d969be70a9156dbb31130771e"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 1206,
+          "flipped": 159,
+          "flattened": 785,
+          "flippedFraction": 0.1318407960199005,
+          "flattenedFraction": 0.6509121061359867,
+          "fieldSha256": "a0b7d05bfc573753137861fead5e04b6c08b1d75464bceee5bd7d3a50c832dff"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 1206,
+          "flipped": 146,
+          "flattened": 802,
+          "flippedFraction": 0.12106135986733002,
+          "flattenedFraction": 0.6650082918739635,
+          "fieldSha256": "f1156cc6b4c988ec8250807c6b54b314e6cefc3a2f44b4f0e54252e718cae390"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "070b9b858f2a2c405bf176072028d96763ebf66f217477ad3401474d2f2bff69",
+          "packedSha256": "3f14c9e6752e54959a85b199276f9aa88cf7e955904beabd11daf69d5d79b4d7"
+        },
+        {
+          "name": "median-three",
+          "sha256": "cd848b838c6fa9a93615b7663ab722b5c6618fd5f4451057d023e267cdc9942b",
+          "packedSha256": "09ea7a50a868183de1b82668fb6118894e3a96308266279d392b8a7ccd0e465f"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "175f03e2a8a83105acb9c48c7dc80a4697f2da5b00fceff35136ca18c139f7f7",
+          "packedSha256": "fce8d4078ef5673a9fefffe04880ab78b17861b5fc580c7a8a27a59e3067a250"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "ea2c24970f3196552f07ea264d62a1db57ff782493e715d89d61bd87f94fea8a",
+          "packedSha256": "6331742253196a82ac792ddc229339a889e632825ed05895ae84369b30bdc441"
+        }
+      ]
+    },
+    {
+      "id": "wildflowers",
+      "kind": "builtin",
+      "profile": "phone",
+      "sourceImageSha256": "298ad2d0f7c566ea06f682c6319ecda0461530865fc7bea25a00f3320ab7c26e",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 541,
+          "flipped": 170,
+          "flattened": 244,
+          "flippedFraction": 0.3142329020332717,
+          "flattenedFraction": 0.4510166358595194,
+          "fieldSha256": "56e95a368dfda6295b1e37dd893e93a8a5e6c867cde883e9e2e2614355ae8d28"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 541,
+          "flipped": 207,
+          "flattened": 192,
+          "flippedFraction": 0.3826247689463956,
+          "flattenedFraction": 0.35489833641404805,
+          "fieldSha256": "072aa5880cd913d9e152cda678eaf62cb8225421d1725a48fad00c010ae48688"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 541,
+          "flipped": 195,
+          "flattened": 212,
+          "flippedFraction": 0.36044362292051757,
+          "flattenedFraction": 0.39186691312384475,
+          "fieldSha256": "8e437c5832825ddd98e932f482accc8edbfdf85fc12e6ff38fe63e85b6043b08"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 541,
+          "flipped": 165,
+          "flattened": 235,
+          "flippedFraction": 0.3049907578558225,
+          "flattenedFraction": 0.4343807763401109,
+          "fieldSha256": "b68910963b3122fa7baf25790781a7ea56cfffdbd36bf8301488958d15299d23"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 541,
+          "flipped": 167,
+          "flattened": 218,
+          "flippedFraction": 0.30868761552680224,
+          "flattenedFraction": 0.4029574861367837,
+          "fieldSha256": "4327468c3d5795574a80920efb4da24bc736463be03ff87446f7d9ef948ce5e6"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "2d0191fc3f7cc5a4ed1e6eb735b1dc0beb3f9014260600cc4fcc8385ce8fbff9",
+          "packedSha256": "8f08217f1e5dbe86991205b7f594559670c42a757dec8f6d41181fb9ad545258"
+        },
+        {
+          "name": "median-three",
+          "sha256": "7b99509f3a9cbd492feb3905df11ff1bf24a25c623788d049fbd27aab3c4b1df",
+          "packedSha256": "dbf21c5e59bdc9b3eafb4fbf8e2c0e640c72ea0a83fe8885c8b7921d5e556d10"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "2568609d737932c023d67804037fb9c65fa1555144f9e888e2928569a40459dd",
+          "packedSha256": "e685418f7d4c51fcaa7918eb93a63738c081dd88b2e9a250d0c7f95dea760764"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "4e6f10ff2d8835447569076a99b09905da410f4c7b1370c5e1dfe6d07ceac0b7",
+          "packedSha256": "f3d700fa76477d2abdadb5244ab49937ff8f7fa1e9ce8e5c35256a8049b3f98c"
+        }
+      ]
+    },
+    {
+      "id": "wildflowers",
+      "kind": "builtin",
+      "profile": "desktop",
+      "sourceImageSha256": "298ad2d0f7c566ea06f682c6319ecda0461530865fc7bea25a00f3320ab7c26e",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 218,
+          "flattened": 351,
+          "flippedFraction": 0.2831168831168831,
+          "flattenedFraction": 0.45584415584415583,
+          "fieldSha256": "8318bb5c6f56fe4d06740c5986b54fdd96eab344e4c382de8ebda4e18df2f312"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 277,
+          "flattened": 296,
+          "flippedFraction": 0.35974025974025975,
+          "flattenedFraction": 0.38441558441558443,
+          "fieldSha256": "dd5659282ebfe6f3567872b491d48ad48f985770b102736aea0112a3f89a4a41"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 251,
+          "flattened": 325,
+          "flippedFraction": 0.32597402597402597,
+          "flattenedFraction": 0.42207792207792205,
+          "fieldSha256": "c37fd0df6f6d37580b08f5759ea70216f3bbaafbec1717fffbef124952c03343"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 229,
+          "flattened": 330,
+          "flippedFraction": 0.2974025974025974,
+          "flattenedFraction": 0.42857142857142855,
+          "fieldSha256": "f1010e457d756b2fac4403ca06ed4b90316bb77e5647b5aac75043fc6d0324aa"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 223,
+          "flattened": 326,
+          "flippedFraction": 0.2896103896103896,
+          "flattenedFraction": 0.42337662337662335,
+          "fieldSha256": "b29d7a6732f858f62816f9ecfa2277aa57c1d2b0db95a89d98df9e7b70839330"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "2d0191fc3f7cc5a4ed1e6eb735b1dc0beb3f9014260600cc4fcc8385ce8fbff9",
+          "packedSha256": "8f08217f1e5dbe86991205b7f594559670c42a757dec8f6d41181fb9ad545258"
+        },
+        {
+          "name": "median-three",
+          "sha256": "7b99509f3a9cbd492feb3905df11ff1bf24a25c623788d049fbd27aab3c4b1df",
+          "packedSha256": "dbf21c5e59bdc9b3eafb4fbf8e2c0e640c72ea0a83fe8885c8b7921d5e556d10"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "2568609d737932c023d67804037fb9c65fa1555144f9e888e2928569a40459dd",
+          "packedSha256": "e685418f7d4c51fcaa7918eb93a63738c081dd88b2e9a250d0c7f95dea760764"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "4e6f10ff2d8835447569076a99b09905da410f4c7b1370c5e1dfe6d07ceac0b7",
+          "packedSha256": "f3d700fa76477d2abdadb5244ab49937ff8f7fa1e9ce8e5c35256a8049b3f98c"
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "kind": "builtin",
+      "profile": "phone",
+      "sourceImageSha256": "ffe9d7a925de2c834f01fdb4339681c278f83e5f27603100d46c3749ddf7f26b",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 711,
+          "flipped": 246,
+          "flattened": 306,
+          "flippedFraction": 0.3459915611814346,
+          "flattenedFraction": 0.43037974683544306,
+          "fieldSha256": "26b4d9e0c598fddf31bc54d24df5449e5dda2904edab898acac1318a136ffaa9"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 711,
+          "flipped": 302,
+          "flattened": 230,
+          "flippedFraction": 0.4247538677918425,
+          "flattenedFraction": 0.3234880450070324,
+          "fieldSha256": "2391a5a0d4bfe58528bca7b872630d46b7177e25a15de1e64dec6ae88583e706"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 711,
+          "flipped": 246,
+          "flattened": 300,
+          "flippedFraction": 0.3459915611814346,
+          "flattenedFraction": 0.4219409282700422,
+          "fieldSha256": "c425c4e9ee02f5ed66ba874cd4892fab5160239275c7a1a6ae631c993ac6523f"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 711,
+          "flipped": 260,
+          "flattened": 281,
+          "flippedFraction": 0.3656821378340366,
+          "flattenedFraction": 0.3952180028129395,
+          "fieldSha256": "59ea85f3e3469393423b67e1d7b9a4ede0baafe2e6086f4ed950c7cea1b9a87b"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 711,
+          "flipped": 283,
+          "flattened": 258,
+          "flippedFraction": 0.3980309423347398,
+          "flattenedFraction": 0.3628691983122363,
+          "fieldSha256": "fd50b6ddfb664c35547898145779d54ff3efee8e4ab86d88df02c035e0ff917d"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "8004741bf91e3112d9762ca339f46bc494afcec5c51dc6752bb918cb45034b4e",
+          "packedSha256": "ea057ea04063d348fa1f0211485594663784ea8eccaf925f8bea5b0c623a3979"
+        },
+        {
+          "name": "median-three",
+          "sha256": "f163ddf985551f447e58c110135747092967ff59f748c6f02a385159df93339b",
+          "packedSha256": "9442af67927ed948d0a268ae36ce0f188d7248dd363d05fb18f6b4c3e5391ced"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "084c177717626bc27feb4b53eeb8e29e2b6c25dda157a9ab5e1542e4b3ca6050",
+          "packedSha256": "24a2b0784c7377f284a3abd5ead0bcf2f0dd3151563c48b606fdfc7732b0578e"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "1445b8eebaa9c5c0860129088cebe0c3caa912e0c44d1bb807f8e2d8c19d4697",
+          "packedSha256": "d14def6d040a3c7f8cea75dc5fcb4594b7fa991e650854c32ca96e2fae6a9a55"
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "kind": "builtin",
+      "profile": "desktop",
+      "sourceImageSha256": "ffe9d7a925de2c834f01fdb4339681c278f83e5f27603100d46c3749ddf7f26b",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 967,
+          "flipped": 329,
+          "flattened": 409,
+          "flippedFraction": 0.34022750775594623,
+          "flattenedFraction": 0.42295760082730094,
+          "fieldSha256": "4fcb08f593d7489c36c26ac4db94a8b76317ee962b2509063267ea9849475ec3"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 967,
+          "flipped": 402,
+          "flattened": 326,
+          "flippedFraction": 0.4157187176835574,
+          "flattenedFraction": 0.33712512926577043,
+          "fieldSha256": "bc134a9da53a59ea9007b7c04cfaad361f9ebd117e6592728b9044f26bdf16ac"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 967,
+          "flipped": 340,
+          "flattened": 403,
+          "flippedFraction": 0.3516028955532575,
+          "flattenedFraction": 0.41675284384694933,
+          "fieldSha256": "78f57f5d512e4a38a990e876195b219e2601360630538d3794d345cd37402f03"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 967,
+          "flipped": 340,
+          "flattened": 386,
+          "flippedFraction": 0.3516028955532575,
+          "flattenedFraction": 0.39917269906928643,
+          "fieldSha256": "489cabef1f74d61b2815c923a1d6b8150f25039b780d999c3359d4bc7fd44ca1"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 967,
+          "flipped": 381,
+          "flattened": 337,
+          "flippedFraction": 0.3940020682523268,
+          "flattenedFraction": 0.3485005170630817,
+          "fieldSha256": "374611396e831d6ed2ff28cc439d99b5ef7be1b7c191fc67eb6199deb55bdbda"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "8004741bf91e3112d9762ca339f46bc494afcec5c51dc6752bb918cb45034b4e",
+          "packedSha256": "ea057ea04063d348fa1f0211485594663784ea8eccaf925f8bea5b0c623a3979"
+        },
+        {
+          "name": "median-three",
+          "sha256": "f163ddf985551f447e58c110135747092967ff59f748c6f02a385159df93339b",
+          "packedSha256": "9442af67927ed948d0a268ae36ce0f188d7248dd363d05fb18f6b4c3e5391ced"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "084c177717626bc27feb4b53eeb8e29e2b6c25dda157a9ab5e1542e4b3ca6050",
+          "packedSha256": "24a2b0784c7377f284a3abd5ead0bcf2f0dd3151563c48b606fdfc7732b0578e"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "1445b8eebaa9c5c0860129088cebe0c3caa912e0c44d1bb807f8e2d8c19d4697",
+          "packedSha256": "d14def6d040a3c7f8cea75dc5fcb4594b7fa991e650854c32ca96e2fae6a9a55"
+        }
+      ]
+    },
+    {
+      "id": "truth-still-life",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "8dd6ef596e67f852d0d2e8cd47909842c8bc42577748d0b7ce7ad1cb70d47e51",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 81,
+          "flipped": 13,
+          "flattened": 54,
+          "flippedFraction": 0.16049382716049382,
+          "flattenedFraction": 0.6666666666666666,
+          "fieldSha256": "07b0f338dde3701128e7457ac880b010e8cc09b7bdeafbc92155ebae30c53520"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 81,
+          "flipped": 14,
+          "flattened": 49,
+          "flippedFraction": 0.1728395061728395,
+          "flattenedFraction": 0.6049382716049383,
+          "fieldSha256": "7e4334baa9719447beb3f099c4fcd5f93f0f9ddaf0e2dfbb7ec5e7fbb7e33ffb"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 81,
+          "flipped": 14,
+          "flattened": 49,
+          "flippedFraction": 0.1728395061728395,
+          "flattenedFraction": 0.6049382716049383,
+          "fieldSha256": "3bd730e703daf81177b328c15c56cf94414b11671b48d0804551590f130eb895"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 81,
+          "flipped": 13,
+          "flattened": 53,
+          "flippedFraction": 0.16049382716049382,
+          "flattenedFraction": 0.654320987654321,
+          "fieldSha256": "90b9c6ed64a3a40907c2fbe61bfba7b34e6293feeeae90388deebd85e18c7bea"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 81,
+          "flipped": 11,
+          "flattened": 51,
+          "flippedFraction": 0.13580246913580246,
+          "flattenedFraction": 0.6296296296296297,
+          "fieldSha256": "d9e48e0d65ef78548f251a4d03169bdfd999ecaddaeb5d9557e3a7b5848b99e3"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "a5975abee477b4df8137a0978baf0ca889b5076ac45a9e73a539302acb233c86",
+          "packedSha256": "5767f880cc7f02e582c158500cd9642d2e2479b8b61f795c2954743d55492e99"
+        },
+        {
+          "name": "median-three",
+          "sha256": "26bf6b7cc2d655e01cff4eabdb2a005fab5c41cc2c76c99dbc55c43eeee4d644",
+          "packedSha256": "a530e4a39b18faccc6c7e278335cf86c5050cbe0b5351e9bc01e66d79f623043"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "3a9783b2d8d95cded6ba2c6203acb58133203c2fbfb6d568cbf85d0cc3cf21f3",
+          "packedSha256": "f4ac8f08e317f21a2d8f6095b198da327ee3d41b60a67fe6b4c8288d4128004a"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "3c5a9d3bfaa94b308c54eb645aae37471f758d25c2bdad10a87e62941c3e6740",
+          "packedSha256": "457b181a412698268d09eb2002a1903414a463212063df43467ac1ace20c1101"
+        }
+      ]
+    },
+    {
+      "id": "truth-still-life",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "8dd6ef596e67f852d0d2e8cd47909842c8bc42577748d0b7ce7ad1cb70d47e51",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 179,
+          "flipped": 13,
+          "flattened": 142,
+          "flippedFraction": 0.07262569832402235,
+          "flattenedFraction": 0.7932960893854749,
+          "fieldSha256": "14a45b4387841347520b5e112dcceb8af39e906ebabadd766f3153367b11bf4b"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 179,
+          "flipped": 15,
+          "flattened": 139,
+          "flippedFraction": 0.08379888268156424,
+          "flattenedFraction": 0.776536312849162,
+          "fieldSha256": "8a434ae7ae73115ae2fe75700c1a31ce4d9a986352c179108aaa92e76321ae9e"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 179,
+          "flipped": 14,
+          "flattened": 133,
+          "flippedFraction": 0.0782122905027933,
+          "flattenedFraction": 0.7430167597765364,
+          "fieldSha256": "93487b449e1615cfc9112e4d0556a6aea353ac593c69e33bd573b71c92e33f09"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 179,
+          "flipped": 13,
+          "flattened": 139,
+          "flippedFraction": 0.07262569832402235,
+          "flattenedFraction": 0.776536312849162,
+          "fieldSha256": "2ff3f7a6042ccc68f1189cdd41e570dd3d3eaeef13b765a50fbb5ac1aaabb01e"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 179,
+          "flipped": 14,
+          "flattened": 138,
+          "flippedFraction": 0.0782122905027933,
+          "flattenedFraction": 0.770949720670391,
+          "fieldSha256": "ff426f5911d54e82f7ae6cf841736335fe734073b85942542d80d977e228cc30"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "a5975abee477b4df8137a0978baf0ca889b5076ac45a9e73a539302acb233c86",
+          "packedSha256": "5767f880cc7f02e582c158500cd9642d2e2479b8b61f795c2954743d55492e99"
+        },
+        {
+          "name": "median-three",
+          "sha256": "26bf6b7cc2d655e01cff4eabdb2a005fab5c41cc2c76c99dbc55c43eeee4d644",
+          "packedSha256": "a530e4a39b18faccc6c7e278335cf86c5050cbe0b5351e9bc01e66d79f623043"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "3a9783b2d8d95cded6ba2c6203acb58133203c2fbfb6d568cbf85d0cc3cf21f3",
+          "packedSha256": "f4ac8f08e317f21a2d8f6095b198da327ee3d41b60a67fe6b4c8288d4128004a"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "3c5a9d3bfaa94b308c54eb645aae37471f758d25c2bdad10a87e62941c3e6740",
+          "packedSha256": "457b181a412698268d09eb2002a1903414a463212063df43467ac1ace20c1101"
+        }
+      ]
+    },
+    {
+      "id": "truth-room",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "a913fb52e8a515455090a325b5151f419a4dd6b4c3a2c9efe1d7d5e4d8e8ae71",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 53,
+          "flipped": 9,
+          "flattened": 14,
+          "flippedFraction": 0.16981132075471697,
+          "flattenedFraction": 0.2641509433962264,
+          "fieldSha256": "74814cf66a1420d19194ddd797662cb739fbfbc25f94a5f2f76e1c4b8d5c4af3"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 53,
+          "flipped": 10,
+          "flattened": 11,
+          "flippedFraction": 0.18867924528301888,
+          "flattenedFraction": 0.20754716981132076,
+          "fieldSha256": "9554be7959db042b3c2e0309ab9439c9987202930f2ba3691b7c7b30070496ee"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 53,
+          "flipped": 10,
+          "flattened": 9,
+          "flippedFraction": 0.18867924528301888,
+          "flattenedFraction": 0.16981132075471697,
+          "fieldSha256": "ac8da158d81cb853434bab5193218b59c403b757b02f584ec97c4083e5ea23d0"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 53,
+          "flipped": 10,
+          "flattened": 12,
+          "flippedFraction": 0.18867924528301888,
+          "flattenedFraction": 0.22641509433962265,
+          "fieldSha256": "7314e31ef28d2bb0876bbbf1f2d696f6d0f3efce4515b24b3517a2ee0b9e1614"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 53,
+          "flipped": 10,
+          "flattened": 10,
+          "flippedFraction": 0.18867924528301888,
+          "flattenedFraction": 0.18867924528301888,
+          "fieldSha256": "04f401bff1471f62f18610d24bf50d1e70c38e7cd94e89dbe54c80da956d24aa"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "10134074d8124df17086accf91594c72131681c0706dacf26d81f516d32f9b6e",
+          "packedSha256": "b01cc0d2180faaec283280c3fb4e9a1bc726c9e2e196d6bebb6b60997b19b088"
+        },
+        {
+          "name": "median-three",
+          "sha256": "3d83b13f2ef9104d5957077bf56008e04fd42f191fd2baa39287582e89f0ccf5",
+          "packedSha256": "672a189e9f0b67d3ad49bb2563e8a79739d6857524cb55968d546ef253872664"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "20c684ea841c39a3670534f41a6985ee06030af65c125eb600a6a5cbc8797580",
+          "packedSha256": "0502264df46013e742ac07e1a9da85bb50f0600e64e57a856123b416b537603a"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "f80db37bcfa946eac878c1625f473890905016fa56ec02dc2d616d96aee5fefd",
+          "packedSha256": "50046d23f76e163aa0aac30abf4354d4a54d4f48ef4bb092223c98c03452ddfd"
+        }
+      ]
+    },
+    {
+      "id": "truth-room",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "a913fb52e8a515455090a325b5151f419a4dd6b4c3a2c9efe1d7d5e4d8e8ae71",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 70,
+          "flipped": 6,
+          "flattened": 21,
+          "flippedFraction": 0.08571428571428572,
+          "flattenedFraction": 0.3,
+          "fieldSha256": "6fd6551b903c92c5764fdca58aa82d78aadd5d421c1f5993d9b8890709090b80"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 70,
+          "flipped": 8,
+          "flattened": 16,
+          "flippedFraction": 0.11428571428571428,
+          "flattenedFraction": 0.22857142857142856,
+          "fieldSha256": "bc42486144a0430fdca5ed17856a56bd9e6e3098efdf1d584d3a7d5234852b61"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 70,
+          "flipped": 8,
+          "flattened": 17,
+          "flippedFraction": 0.11428571428571428,
+          "flattenedFraction": 0.24285714285714285,
+          "fieldSha256": "096f1bbca9943c5488d87a9a02dfbe0b4c9c49c7bbf3df0afe6bb0d1b5d1f65f"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 70,
+          "flipped": 8,
+          "flattened": 17,
+          "flippedFraction": 0.11428571428571428,
+          "flattenedFraction": 0.24285714285714285,
+          "fieldSha256": "ec71450eaed18669ec0e65bd744f29b5747d55dd27caf88d8e48cccbb9a5ea68"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 70,
+          "flipped": 9,
+          "flattened": 15,
+          "flippedFraction": 0.12857142857142856,
+          "flattenedFraction": 0.21428571428571427,
+          "fieldSha256": "c70c8b3af7485635f57bf79da1287d942328edfa8da408b72ece4da604427a32"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "10134074d8124df17086accf91594c72131681c0706dacf26d81f516d32f9b6e",
+          "packedSha256": "b01cc0d2180faaec283280c3fb4e9a1bc726c9e2e196d6bebb6b60997b19b088"
+        },
+        {
+          "name": "median-three",
+          "sha256": "3d83b13f2ef9104d5957077bf56008e04fd42f191fd2baa39287582e89f0ccf5",
+          "packedSha256": "672a189e9f0b67d3ad49bb2563e8a79739d6857524cb55968d546ef253872664"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "20c684ea841c39a3670534f41a6985ee06030af65c125eb600a6a5cbc8797580",
+          "packedSha256": "0502264df46013e742ac07e1a9da85bb50f0600e64e57a856123b416b537603a"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "f80db37bcfa946eac878c1625f473890905016fa56ec02dc2d616d96aee5fefd",
+          "packedSha256": "50046d23f76e163aa0aac30abf4354d4a54d4f48ef4bb092223c98c03452ddfd"
+        }
+      ]
+    },
+    {
+      "id": "truth-forest",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "6e302d145a62abbcf2dd716f7419153091a6f6939e2f5521b09a01e5c0b1cab4",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 11,
+          "flipped": 7,
+          "flattened": 1,
+          "flippedFraction": 0.6363636363636364,
+          "flattenedFraction": 0.09090909090909091,
+          "fieldSha256": "11369abcd20f6080e387e1f6bcdc6687810c48ce89ae11d8c01fc9c6c77c61ba"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 11,
+          "flipped": 7,
+          "flattened": 0,
+          "flippedFraction": 0.6363636363636364,
+          "flattenedFraction": 0,
+          "fieldSha256": "550ca961ae81c88326d81a83d775856334f76b5691145cb55c64eb99d24969d8"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 11,
+          "flipped": 7,
+          "flattened": 0,
+          "flippedFraction": 0.6363636363636364,
+          "flattenedFraction": 0,
+          "fieldSha256": "4ebb5ef7f1dabe996f2bc8379c05f4166cebea325557d0961abb0addd1ed0786"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 11,
+          "flipped": 7,
+          "flattened": 0,
+          "flippedFraction": 0.6363636363636364,
+          "flattenedFraction": 0,
+          "fieldSha256": "b3e2e1f890ea36aca34b9457613e91cdd2a3076172cc266833bc97720455cd84"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 11,
+          "flipped": 7,
+          "flattened": 0,
+          "flippedFraction": 0.6363636363636364,
+          "flattenedFraction": 0,
+          "fieldSha256": "c448aed4f3320b8e5b9d33d425e1da858796823f968d2820dc63821f49e6a594"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "c28e17586837885dc4d9200bddd436c845964f8fae0dc6020722b1bd8d85d33b",
+          "packedSha256": "4b261a3d2dd8f7ab733debe55bbab3a46c6edb00645e12813dddb1e4a3ba84be"
+        },
+        {
+          "name": "median-three",
+          "sha256": "38f7d0ef2156b2914b6f536cc345060951b957d7c0dd5441c14dd5ebf3ce9fa3",
+          "packedSha256": "b4828867e6003ad8e5ffd31702db344a58bdf5d0f532e8274e06ab172a86ad94"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "725e7f866ff4c0e95b92eb058b4569779c23ef6f8a41188bda4900debda67ad0",
+          "packedSha256": "9e1bbd0583d4b11c044372a4f168c7cd62c53ba3ebd60afd09886bde37821a01"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "08e6ddf4a7bf1c854fd13d83fed48357f3fee6d6af665e79ee76f724438999c6",
+          "packedSha256": "fddc36b78c099864a673b2041730e327f2ac640479d486aa72afc2586691cd21"
+        }
+      ]
+    },
+    {
+      "id": "truth-forest",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "6e302d145a62abbcf2dd716f7419153091a6f6939e2f5521b09a01e5c0b1cab4",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 14,
+          "flipped": 8,
+          "flattened": 0,
+          "flippedFraction": 0.5714285714285714,
+          "flattenedFraction": 0,
+          "fieldSha256": "459b772607ade1ac77bc14b9ce896c61a5c0fcedf3c48b6d3cc5b8577ca5c721"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 14,
+          "flipped": 8,
+          "flattened": 0,
+          "flippedFraction": 0.5714285714285714,
+          "flattenedFraction": 0,
+          "fieldSha256": "cf2d0744289345fd5a28917ae55eef4bdc036ef088af6ec763df749a5482ffe7"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 14,
+          "flipped": 8,
+          "flattened": 0,
+          "flippedFraction": 0.5714285714285714,
+          "flattenedFraction": 0,
+          "fieldSha256": "8c723ff2629b154a733da8164bce915146f44c915af6f88fa70b2065bc1e0a23"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 14,
+          "flipped": 8,
+          "flattened": 0,
+          "flippedFraction": 0.5714285714285714,
+          "flattenedFraction": 0,
+          "fieldSha256": "d0fdae05a7b890994aea4d56b87e2ee8351f7c923f1e1f46c9e129b1832fa071"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 14,
+          "flipped": 8,
+          "flattened": 0,
+          "flippedFraction": 0.5714285714285714,
+          "flattenedFraction": 0,
+          "fieldSha256": "d83ba63fc59c5f9d8dd1b1b906a49f3ae3888484e6e9f39bc264c862c2e91d8b"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "c28e17586837885dc4d9200bddd436c845964f8fae0dc6020722b1bd8d85d33b",
+          "packedSha256": "4b261a3d2dd8f7ab733debe55bbab3a46c6edb00645e12813dddb1e4a3ba84be"
+        },
+        {
+          "name": "median-three",
+          "sha256": "38f7d0ef2156b2914b6f536cc345060951b957d7c0dd5441c14dd5ebf3ce9fa3",
+          "packedSha256": "b4828867e6003ad8e5ffd31702db344a58bdf5d0f532e8274e06ab172a86ad94"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "725e7f866ff4c0e95b92eb058b4569779c23ef6f8a41188bda4900debda67ad0",
+          "packedSha256": "9e1bbd0583d4b11c044372a4f168c7cd62c53ba3ebd60afd09886bde37821a01"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "08e6ddf4a7bf1c854fd13d83fed48357f3fee6d6af665e79ee76f724438999c6",
+          "packedSha256": "fddc36b78c099864a673b2041730e327f2ac640479d486aa72afc2586691cd21"
+        }
+      ]
+    },
+    {
+      "id": "truth-stairs",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "f85a149718bcceb0a815d1deb96698add211d772c0f52f895aa28fe03561d51c",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 164,
+          "flipped": 58,
+          "flattened": 40,
+          "flippedFraction": 0.35365853658536583,
+          "flattenedFraction": 0.24390243902439024,
+          "fieldSha256": "996940b3c471f72e53d16eb4a5b592b0804a459a473e058ce0cdb3122e4ff8db"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 164,
+          "flipped": 75,
+          "flattened": 21,
+          "flippedFraction": 0.4573170731707317,
+          "flattenedFraction": 0.12804878048780488,
+          "fieldSha256": "34787b7bfd49c93422eb39b26162a9842b78860c77575eafc293012e259b162f"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 164,
+          "flipped": 73,
+          "flattened": 28,
+          "flippedFraction": 0.4451219512195122,
+          "flattenedFraction": 0.17073170731707318,
+          "fieldSha256": "378d49b29eb20ff8a1facb87ad43351fd630c29168a75aa03d67a0700cfcc7fe"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 164,
+          "flipped": 61,
+          "flattened": 30,
+          "flippedFraction": 0.3719512195121951,
+          "flattenedFraction": 0.18292682926829268,
+          "fieldSha256": "4d8b43c721e81e3f95bb3ce5b0742d028659a22c6fb88e1f34154d5b257f96ec"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 164,
+          "flipped": 67,
+          "flattened": 29,
+          "flippedFraction": 0.40853658536585363,
+          "flattenedFraction": 0.17682926829268292,
+          "fieldSha256": "87c03a02614b23af3b825387a233f40021b65f52c509c81251ea639a67ccf373"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "1995170c7b6f1300e3a546f357edc964ad671e65eda69ce01d91d8eb44da7058",
+          "packedSha256": "efaddec1a4d1a3b3bcb3f4a70609d525cf61b4c4badaeff9c99a9fc8e85eab9e"
+        },
+        {
+          "name": "median-three",
+          "sha256": "5d9cddb90e92d19637bbf22da29cc6e49db49000df7e457329982132d8b46bda",
+          "packedSha256": "dfe9e3167dcc6d2adc45446dc1616fd73d2d82464edcdf3817931d4a3a0d10fd"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "1dab687fdd9b6716947740b1cebdc3184b88464cca4578cb31c622c26f2d1855",
+          "packedSha256": "10f7d11e86a9ddccff6cb761679f66d289c77487268a0b261e47802f5fd2682e"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "62e62af48afd9b45d1fe73886ebcbc59a14d3817d2c5017540794445daec591e",
+          "packedSha256": "5e815c43cc9fbd73b8d288048e66e57f95076d56632a728b95828466b6778ec4"
+        }
+      ]
+    },
+    {
+      "id": "truth-stairs",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "f85a149718bcceb0a815d1deb96698add211d772c0f52f895aa28fe03561d51c",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 222,
+          "flipped": 76,
+          "flattened": 66,
+          "flippedFraction": 0.34234234234234234,
+          "flattenedFraction": 0.2972972972972973,
+          "fieldSha256": "b779d7f1e83008e18802747d64c8a3ff50a9a46170970aa9678e257f0cfea76c"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 222,
+          "flipped": 96,
+          "flattened": 45,
+          "flippedFraction": 0.43243243243243246,
+          "flattenedFraction": 0.20270270270270271,
+          "fieldSha256": "6a3bcab34c5c9f3c9f73a53143d2f229afa8938897d023482f6f734ed56da499"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 222,
+          "flipped": 90,
+          "flattened": 53,
+          "flippedFraction": 0.40540540540540543,
+          "flattenedFraction": 0.23873873873873874,
+          "fieldSha256": "ab90e9a9bef3bde9648e8f86e2698707003c2224f027f261d62c7896321754f8"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 222,
+          "flipped": 83,
+          "flattened": 54,
+          "flippedFraction": 0.3738738738738739,
+          "flattenedFraction": 0.24324324324324326,
+          "fieldSha256": "5f7300c957e5401602d3d0d33edb68e7ca93b5c1d810e32307205333a5325a8c"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 222,
+          "flipped": 84,
+          "flattened": 54,
+          "flippedFraction": 0.3783783783783784,
+          "flattenedFraction": 0.24324324324324326,
+          "fieldSha256": "a85c1361eb7d1c408c027ab2e4c7fbd6a55ac1c18931312390b18c57b6adca63"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "1995170c7b6f1300e3a546f357edc964ad671e65eda69ce01d91d8eb44da7058",
+          "packedSha256": "efaddec1a4d1a3b3bcb3f4a70609d525cf61b4c4badaeff9c99a9fc8e85eab9e"
+        },
+        {
+          "name": "median-three",
+          "sha256": "5d9cddb90e92d19637bbf22da29cc6e49db49000df7e457329982132d8b46bda",
+          "packedSha256": "dfe9e3167dcc6d2adc45446dc1616fd73d2d82464edcdf3817931d4a3a0d10fd"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "1dab687fdd9b6716947740b1cebdc3184b88464cca4578cb31c622c26f2d1855",
+          "packedSha256": "10f7d11e86a9ddccff6cb761679f66d289c77487268a0b261e47802f5fd2682e"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "62e62af48afd9b45d1fe73886ebcbc59a14d3817d2c5017540794445daec591e",
+          "packedSha256": "5e815c43cc9fbd73b8d288048e66e57f95076d56632a728b95828466b6778ec4"
+        }
+      ]
+    },
+    {
+      "id": "truth-coast",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "e5d6cf55f7b47b9347bda772a033ee6c365335429f66357845343b38083b270b",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 2,
+          "flipped": 0,
+          "flattened": 0,
+          "flippedFraction": 0,
+          "flattenedFraction": 0,
+          "fieldSha256": "fda457ca16078346b1e9e3065f824386ec7454aa8f5d453de2dbc10ae80788c9"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 2,
+          "flipped": 0,
+          "flattened": 0,
+          "flippedFraction": 0,
+          "flattenedFraction": 0,
+          "fieldSha256": "addd3f9f4997c35ba93c7bf2857e280fef44dd8dbafdd3befbc0201684484e05"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 2,
+          "flipped": 0,
+          "flattened": 0,
+          "flippedFraction": 0,
+          "flattenedFraction": 0,
+          "fieldSha256": "5aa4920b7967979d30b6f227bec61bac81adf39bcb2eeeed3e5d571ff04f84e3"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 2,
+          "flipped": 0,
+          "flattened": 0,
+          "flippedFraction": 0,
+          "flattenedFraction": 0,
+          "fieldSha256": "1ed54f76e93ba6936d1a3ee95bae3a23ec2be1055ec5f3aabe4a6181210fe6db"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 2,
+          "flipped": 0,
+          "flattened": 0,
+          "flippedFraction": 0,
+          "flattenedFraction": 0,
+          "fieldSha256": "b2c547f9dbd3ecc019d6f04405db344c8d5123bdebf020e6ab7212ba991c3533"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "284a10844d981bd0408b82a52aaa72f445ad69c8f8aab7e989e36aa5d7ffb8e7",
+          "packedSha256": "23df649f8a83873dc6a09c3a49ffb6be6ad162bd88a271bcea2effad2392d268"
+        },
+        {
+          "name": "median-three",
+          "sha256": "5bc8536534770ca3b95b08b71221c7526fedf7d966fc352f347e98e69f24e63a",
+          "packedSha256": "ac51025b4f2b6e9ad61869a8040a74bb9dd7562c2efde408d3b44095ee430900"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "39a6a053f75425dd35872421059aea9b0d1b783c1a6ad0b9be7f1a96e1a47269",
+          "packedSha256": "94772c22581855fb7a63593ac5b348572712acdaed55ebefd39182bb320e893a"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "a0d4eaff75268256820aede44b09f712198fa4aeb6e2663a0526634d5ee2cc91",
+          "packedSha256": "ebebd44d7ae58e5b4ba76733f688df5386748041bbff50c56665c21642de24e5"
+        }
+      ]
+    },
+    {
+      "id": "truth-coast",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "e5d6cf55f7b47b9347bda772a033ee6c365335429f66357845343b38083b270b",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 10,
+          "flipped": 1,
+          "flattened": 2,
+          "flippedFraction": 0.1,
+          "flattenedFraction": 0.2,
+          "fieldSha256": "98146441d89408ebefe8d439d88dc41ac3136c6b0597190fba744312d6a7c3fa"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 10,
+          "flipped": 1,
+          "flattened": 3,
+          "flippedFraction": 0.1,
+          "flattenedFraction": 0.3,
+          "fieldSha256": "5e736787ca052eccc4c4f75823d5739e761bfecfa06bc1d9768684c168b91e05"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 10,
+          "flipped": 1,
+          "flattened": 3,
+          "flippedFraction": 0.1,
+          "flattenedFraction": 0.3,
+          "fieldSha256": "e60ded39969b80aea7594ef825a5149d73fd655048750b74a27d5f008c6214da"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 10,
+          "flipped": 1,
+          "flattened": 3,
+          "flippedFraction": 0.1,
+          "flattenedFraction": 0.3,
+          "fieldSha256": "357dbc1e6bfdd1582978fea2c473d857f2e98d2377e91ad11ab3bf3f16e56a1d"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 10,
+          "flipped": 1,
+          "flattened": 3,
+          "flippedFraction": 0.1,
+          "flattenedFraction": 0.3,
+          "fieldSha256": "1a1dce95a815b10f2dec95acee02d706efa63824d4f81ebf4deae7fa3156d56e"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "284a10844d981bd0408b82a52aaa72f445ad69c8f8aab7e989e36aa5d7ffb8e7",
+          "packedSha256": "23df649f8a83873dc6a09c3a49ffb6be6ad162bd88a271bcea2effad2392d268"
+        },
+        {
+          "name": "median-three",
+          "sha256": "5bc8536534770ca3b95b08b71221c7526fedf7d966fc352f347e98e69f24e63a",
+          "packedSha256": "ac51025b4f2b6e9ad61869a8040a74bb9dd7562c2efde408d3b44095ee430900"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "39a6a053f75425dd35872421059aea9b0d1b783c1a6ad0b9be7f1a96e1a47269",
+          "packedSha256": "94772c22581855fb7a63593ac5b348572712acdaed55ebefd39182bb320e893a"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "a0d4eaff75268256820aede44b09f712198fa4aeb6e2663a0526634d5ee2cc91",
+          "packedSha256": "ebebd44d7ae58e5b4ba76733f688df5386748041bbff50c56665c21642de24e5"
+        }
+      ]
+    },
+    {
+      "id": "truth-desk",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "df87a33f04352ea196ac0a6e880db83c36950ee9133a020cf1264a52a93a390e",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 160,
+          "flipped": 21,
+          "flattened": 97,
+          "flippedFraction": 0.13125,
+          "flattenedFraction": 0.60625,
+          "fieldSha256": "5c661f33e00b687f3765f574bdc5592083800a0a63341f7636d7e9d30a911715"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 160,
+          "flipped": 18,
+          "flattened": 103,
+          "flippedFraction": 0.1125,
+          "flattenedFraction": 0.64375,
+          "fieldSha256": "36d7f776af6d236920d967d273b5846000f0adc9640e52d30d2929f3b8697ac1"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 160,
+          "flipped": 16,
+          "flattened": 102,
+          "flippedFraction": 0.1,
+          "flattenedFraction": 0.6375,
+          "fieldSha256": "cb75faf2de39ff27df6d9379e80cbce7c0af41f971f2b35476943ac555895f06"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 160,
+          "flipped": 17,
+          "flattened": 99,
+          "flippedFraction": 0.10625,
+          "flattenedFraction": 0.61875,
+          "fieldSha256": "4a9b547beee0b6d7e742e92144a5ccfed8c2920d06f83fc49068ab94402e9571"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 160,
+          "flipped": 17,
+          "flattened": 101,
+          "flippedFraction": 0.10625,
+          "flattenedFraction": 0.63125,
+          "fieldSha256": "7317a24a20ac57e2ef2c08f09823d42b7ba158dd546cedb2adcb5af7275d69ef"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "e0d148c41d68baa346b6a4ada0fd753539dc98cd17ac3beca263de5c16acad9f",
+          "packedSha256": "297988f347a5c89e1ed8a9ea7cadf07846cae7d15de114b84d8344dae4452c2a"
+        },
+        {
+          "name": "median-three",
+          "sha256": "c1eb77aace544d22f87d54220163dfc7fd27536ef83ae3e20aad68e876380dc9",
+          "packedSha256": "6d76ddaeb29bb04c72bdfb88a520323fc32f8480038385a0511e64370151a57f"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "b04dcf50ca528c4ff05757eac8a8fbe925c293dd480da909b2482232468d7d42",
+          "packedSha256": "1934864eaa775ff19b9b34a50096ca480ab97bd16804b6e92e5785069f708d7b"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "1bdaba6e7db2e2e298f68964a40b25521c26304523a5f224b43fea88c55ef736",
+          "packedSha256": "d0f761086a227d2f1be1cb5aa791ae8474bf4710089b01d1f6478965d7388f7a"
+        }
+      ]
+    },
+    {
+      "id": "truth-desk",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "df87a33f04352ea196ac0a6e880db83c36950ee9133a020cf1264a52a93a390e",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 232,
+          "flipped": 16,
+          "flattened": 156,
+          "flippedFraction": 0.06896551724137931,
+          "flattenedFraction": 0.6724137931034483,
+          "fieldSha256": "145e43eb5e1e8a79c7741fb99eda7a59c666fb3937e42eb525f247ac43b4cf3a"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 232,
+          "flipped": 15,
+          "flattened": 155,
+          "flippedFraction": 0.06465517241379311,
+          "flattenedFraction": 0.6681034482758621,
+          "fieldSha256": "272858e46ff37e91b017f29c915fa3284bbddedfb3b04c1df231d2f2f88f41a8"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 232,
+          "flipped": 18,
+          "flattened": 153,
+          "flippedFraction": 0.07758620689655173,
+          "flattenedFraction": 0.6594827586206896,
+          "fieldSha256": "28d8d43aacdb8857db13bfbc2cb3bf95f38d7a5669b9a33f72f6fd01f8bbc515"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 232,
+          "flipped": 17,
+          "flattened": 151,
+          "flippedFraction": 0.07327586206896551,
+          "flattenedFraction": 0.6508620689655172,
+          "fieldSha256": "e6a5affd2f209e4bd14a27724a2b21381dc4a83cd5ef07f14ca1bf2231667801"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 232,
+          "flipped": 18,
+          "flattened": 154,
+          "flippedFraction": 0.07758620689655173,
+          "flattenedFraction": 0.6637931034482759,
+          "fieldSha256": "0e0dd7d56a24e3e0df83dc682a58a904cc83afb3406bfd223e4291033c51ac67"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "e0d148c41d68baa346b6a4ada0fd753539dc98cd17ac3beca263de5c16acad9f",
+          "packedSha256": "297988f347a5c89e1ed8a9ea7cadf07846cae7d15de114b84d8344dae4452c2a"
+        },
+        {
+          "name": "median-three",
+          "sha256": "c1eb77aace544d22f87d54220163dfc7fd27536ef83ae3e20aad68e876380dc9",
+          "packedSha256": "6d76ddaeb29bb04c72bdfb88a520323fc32f8480038385a0511e64370151a57f"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "b04dcf50ca528c4ff05757eac8a8fbe925c293dd480da909b2482232468d7d42",
+          "packedSha256": "1934864eaa775ff19b9b34a50096ca480ab97bd16804b6e92e5785069f708d7b"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "1bdaba6e7db2e2e298f68964a40b25521c26304523a5f224b43fea88c55ef736",
+          "packedSha256": "d0f761086a227d2f1be1cb5aa791ae8474bf4710089b01d1f6478965d7388f7a"
+        }
+      ]
+    },
+    {
+      "id": "truth-fur",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "287e7886fd7cc08c3e4813b54a10839636e86415146bed62df7f28071f84396b",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 272,
+          "flipped": 53,
+          "flattened": 169,
+          "flippedFraction": 0.1948529411764706,
+          "flattenedFraction": 0.6213235294117647,
+          "fieldSha256": "17003234de2ef2e898ad15ed36106a1038a9add83487acda4d53871731603668"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 272,
+          "flipped": 75,
+          "flattened": 140,
+          "flippedFraction": 0.2757352941176471,
+          "flattenedFraction": 0.5147058823529411,
+          "fieldSha256": "cf87b0af372f1b3eeb1b61542507d34de909230f567679c2e448d1d690e27d91"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 272,
+          "flipped": 74,
+          "flattened": 146,
+          "flippedFraction": 0.27205882352941174,
+          "flattenedFraction": 0.5367647058823529,
+          "fieldSha256": "acb1f2c120aefd7f8d5e7f133475360d3c074cc47a2f8c1be6978bb0221deed2"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 272,
+          "flipped": 59,
+          "flattened": 157,
+          "flippedFraction": 0.21691176470588236,
+          "flattenedFraction": 0.5772058823529411,
+          "fieldSha256": "7d3a7dd3476cf16ff16f1a3c76b93ac913ceb8d2b8f6bc3734c43d9ece34d236"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 272,
+          "flipped": 66,
+          "flattened": 153,
+          "flippedFraction": 0.2426470588235294,
+          "flattenedFraction": 0.5625,
+          "fieldSha256": "aa856319a95b5466a6b4c5b9085993cf1879da95ad1ee71ee7ceef50a688ef5a"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "e3ed90f9cef2da8f92b4a1e14b17b6ea5434fab5c59ae9317941da1234d915a8",
+          "packedSha256": "01dc57fbfb23a13962694f18f04cce319fc8753db11dd66fb056ec7dbd954db6"
+        },
+        {
+          "name": "median-three",
+          "sha256": "9765d2eebe8e80f5132687199c7f27fb24a361ee3aadbff66b81f8132ef6e0b0",
+          "packedSha256": "dcd0db94fe8279f8da102ffdc37695956e3795a8708bbc1dcfecb770ff7efbfa"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "2680ad590066748401b747acb649ffc0d6de6c187470aa7f4ba3ebcf2c3643dc",
+          "packedSha256": "929084248f089c4b1d6792bc683d14a19bdbbe385331527504a3ce0d02ccc2e0"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "474657ec599aa01e68f93daab2eb3c64a40300a894448361d94485deca48b354",
+          "packedSha256": "47d8f21459cf38e7faecd4a06d3bac51f50e2ce05783e14fc4675f6f03662434"
+        }
+      ]
+    },
+    {
+      "id": "truth-fur",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "287e7886fd7cc08c3e4813b54a10839636e86415146bed62df7f28071f84396b",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 451,
+          "flipped": 81,
+          "flattened": 303,
+          "flippedFraction": 0.17960088691796008,
+          "flattenedFraction": 0.6718403547671841,
+          "fieldSha256": "dbc8a1505f5d01c69f13355ef48fdc940d6b5d9aa07fd293201dae662a425b6b"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 451,
+          "flipped": 114,
+          "flattened": 252,
+          "flippedFraction": 0.25277161862527714,
+          "flattenedFraction": 0.5587583148558758,
+          "fieldSha256": "05dd079539cce1505191bf516b62dec2908abe35bee3ecfccf7f34bc74d373fb"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 451,
+          "flipped": 104,
+          "flattened": 254,
+          "flippedFraction": 0.23059866962305986,
+          "flattenedFraction": 0.5631929046563193,
+          "fieldSha256": "aaefee6b765f823a5a420ae964324a8bb605718ea5d7c7e62de9d1718e894480"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 451,
+          "flipped": 92,
+          "flattened": 278,
+          "flippedFraction": 0.2039911308203991,
+          "flattenedFraction": 0.6164079822616408,
+          "fieldSha256": "086c6c140f53424caeb230612e380302dc90c25ff07c6e2946c9a7aba5c4d56d"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 451,
+          "flipped": 95,
+          "flattened": 267,
+          "flippedFraction": 0.2106430155210643,
+          "flattenedFraction": 0.5920177383592018,
+          "fieldSha256": "e1d77a4ab8adc2ef53ef0ac78d6e1c5c3c66fcae242f574a4a9d9251a6f5a079"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "e3ed90f9cef2da8f92b4a1e14b17b6ea5434fab5c59ae9317941da1234d915a8",
+          "packedSha256": "01dc57fbfb23a13962694f18f04cce319fc8753db11dd66fb056ec7dbd954db6"
+        },
+        {
+          "name": "median-three",
+          "sha256": "9765d2eebe8e80f5132687199c7f27fb24a361ee3aadbff66b81f8132ef6e0b0",
+          "packedSha256": "dcd0db94fe8279f8da102ffdc37695956e3795a8708bbc1dcfecb770ff7efbfa"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "2680ad590066748401b747acb649ffc0d6de6c187470aa7f4ba3ebcf2c3643dc",
+          "packedSha256": "929084248f089c4b1d6792bc683d14a19bdbbe385331527504a3ce0d02ccc2e0"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "474657ec599aa01e68f93daab2eb3c64a40300a894448361d94485deca48b354",
+          "packedSha256": "47d8f21459cf38e7faecd4a06d3bac51f50e2ce05783e14fc4675f6f03662434"
+        }
+      ]
+    },
+    {
+      "id": "truth-night",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "bf69a1e4c758002068d9de4efb792f4a0a643d2b68d676a988593639dcde5f0a",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 168,
+          "flipped": 9,
+          "flattened": 87,
+          "flippedFraction": 0.05357142857142857,
+          "flattenedFraction": 0.5178571428571429,
+          "fieldSha256": "9e3af4a942300736522535a919ff8204104dac690ce19c41803f0e0136abf1f1"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 168,
+          "flipped": 13,
+          "flattened": 72,
+          "flippedFraction": 0.07738095238095238,
+          "flattenedFraction": 0.42857142857142855,
+          "fieldSha256": "36ac8c108efcf0cfca61b9e7c8b610b615a571cd0d6ab11bc4ad62b643b37365"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 168,
+          "flipped": 11,
+          "flattened": 72,
+          "flippedFraction": 0.06547619047619048,
+          "flattenedFraction": 0.42857142857142855,
+          "fieldSha256": "f1f2de09ea91f6f51aabdca3ccf98e9f7f42b69f900f69a512377b9b5e5ab28c"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 168,
+          "flipped": 11,
+          "flattened": 78,
+          "flippedFraction": 0.06547619047619048,
+          "flattenedFraction": 0.4642857142857143,
+          "fieldSha256": "bb093b67149501bfdb7a2a28afaf1c8e0e1912157085343e81a855ab54139e93"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 168,
+          "flipped": 13,
+          "flattened": 61,
+          "flippedFraction": 0.07738095238095238,
+          "flattenedFraction": 0.3630952380952381,
+          "fieldSha256": "a2d516cd5ca7dd3c34733349973c568167be24c9b7f69e138482c36f1dc5e456"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "c28f1e44c4339b9c82e7016a5636c0d66b37530ccfe2b9285b429fdf7c1119d9",
+          "packedSha256": "08a975b9a1359e775f7228cfdb6999fcab74a1ea72a648cc1026cdd4fd7ca4d3"
+        },
+        {
+          "name": "median-three",
+          "sha256": "985a989d0d4f77c91d6f3863b559ff068f7a953fe2d57ec51b258dab8e96e774",
+          "packedSha256": "9d2806d4044889ef10e404faf1dfbfebe347e855329dae821c132ed4b907e951"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "1c55302b81f1a7fdd2333e15a792393b15ff86af2145e15c9ae95069aaa9fb71",
+          "packedSha256": "e68f910b79ab26eea12f8e01dfacfcb0fd713cafdc484260ac35dfc8eb9ba559"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "47c1a311f048ba5e62f931730a9d303efd1d0c7161eba29f8a10c0aeb9f0611d",
+          "packedSha256": "36fed7e22e9e45e9ec475413e92c75843eba4f252f84e19a2187147b19f9c24c"
+        }
+      ]
+    },
+    {
+      "id": "truth-night",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "bf69a1e4c758002068d9de4efb792f4a0a643d2b68d676a988593639dcde5f0a",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 150,
+          "flipped": 19,
+          "flattened": 75,
+          "flippedFraction": 0.12666666666666668,
+          "flattenedFraction": 0.5,
+          "fieldSha256": "00bf52a90bb2a05d5e5562b22d584320cf29624446a5df2a184757f99b963970"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 150,
+          "flipped": 20,
+          "flattened": 65,
+          "flippedFraction": 0.13333333333333333,
+          "flattenedFraction": 0.43333333333333335,
+          "fieldSha256": "bcaba920d40e4b1be72cad3c3b26b3e70d4727d75a00f31ec9a53685e791ca93"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 150,
+          "flipped": 20,
+          "flattened": 66,
+          "flippedFraction": 0.13333333333333333,
+          "flattenedFraction": 0.44,
+          "fieldSha256": "1674b6a9ec16594e36ac874ada050fce4a2b0d9db1e5fd9e8e445e060c98eeda"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 150,
+          "flipped": 19,
+          "flattened": 72,
+          "flippedFraction": 0.12666666666666668,
+          "flattenedFraction": 0.48,
+          "fieldSha256": "633dd21ce4587a98df10c9975b7f2d1b7823b09e9b20cb635b5d1b32c810c5fa"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 150,
+          "flipped": 22,
+          "flattened": 56,
+          "flippedFraction": 0.14666666666666667,
+          "flattenedFraction": 0.37333333333333335,
+          "fieldSha256": "3bfb53634a278a9adecdc40929f0a1e57d96dceba1f553fa31e23b5d372bcf32"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "c28f1e44c4339b9c82e7016a5636c0d66b37530ccfe2b9285b429fdf7c1119d9",
+          "packedSha256": "08a975b9a1359e775f7228cfdb6999fcab74a1ea72a648cc1026cdd4fd7ca4d3"
+        },
+        {
+          "name": "median-three",
+          "sha256": "985a989d0d4f77c91d6f3863b559ff068f7a953fe2d57ec51b258dab8e96e774",
+          "packedSha256": "9d2806d4044889ef10e404faf1dfbfebe347e855329dae821c132ed4b907e951"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "1c55302b81f1a7fdd2333e15a792393b15ff86af2145e15c9ae95069aaa9fb71",
+          "packedSha256": "e68f910b79ab26eea12f8e01dfacfcb0fd713cafdc484260ac35dfc8eb9ba559"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "47c1a311f048ba5e62f931730a9d303efd1d0c7161eba29f8a10c0aeb9f0611d",
+          "packedSha256": "36fed7e22e9e45e9ec475413e92c75843eba4f252f84e19a2187147b19f9c24c"
+        }
+      ]
+    },
+    {
+      "id": "truth-lattice",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "9baf2c9e2eca5121227c97c958f461f33bdb995d2c0d21e45dc1039b59b57df9",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 611,
+          "flipped": 155,
+          "flattened": 251,
+          "flippedFraction": 0.25368248772504093,
+          "flattenedFraction": 0.41080196399345337,
+          "fieldSha256": "c0fd9fa94b5537b12fbea41d6e6c60e5a8792e2338f5bc723e82c86b76716bda"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 611,
+          "flipped": 235,
+          "flattened": 143,
+          "flippedFraction": 0.38461538461538464,
+          "flattenedFraction": 0.23404255319148937,
+          "fieldSha256": "e871cfa9333e6594d021b5d34115238f8d205c3c0fbd8b5eb30ce535882870dc"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 611,
+          "flipped": 233,
+          "flattened": 146,
+          "flippedFraction": 0.381342062193126,
+          "flattenedFraction": 0.23895253682487724,
+          "fieldSha256": "0207770747e2b9d579880202ce4d63c474de51095626d2772972563f3d440643"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 611,
+          "flipped": 186,
+          "flattened": 202,
+          "flippedFraction": 0.3044189852700491,
+          "flattenedFraction": 0.33060556464811786,
+          "fieldSha256": "834ba25124fc4b591bcec864f46bcfb09adc378ded5473602808f2c4fcfd6554"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 611,
+          "flipped": 199,
+          "flattened": 179,
+          "flippedFraction": 0.32569558101472995,
+          "flattenedFraction": 0.29296235679214405,
+          "fieldSha256": "71211a44427ada5b16448cffee7daacf2345fce46b8d5053c170f47042bf4e79"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "e0449380f06d9bff8d4b8d3181a11f2bec01e4f8ef16da444a75b60419b84d30",
+          "packedSha256": "b38861fe0ffd68c987471281778630d1aaf181297372050bfc51be97206c7684"
+        },
+        {
+          "name": "median-three",
+          "sha256": "dc320be921f7d50e09deed0d1ca5522ca24695679c87b7a311ef4157f616fa09",
+          "packedSha256": "49dc60ed8f2a132089ea23f76c32cc91f0ef3beeaab37b3fa8ecec0cc9d188c7"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "5a096ef03f5f01df312a6263c2cac98339eed7c782c33393d16abdd01ed37460",
+          "packedSha256": "388f803331d8748f482ed4b48e7fae1eb619175546b12796f08aa0011f00f463"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "6fe324ea5d2d562af3821834aacfdf8c95df5a3b4c3370a10ae63ba1902b1b28",
+          "packedSha256": "6b39f98a491f65e9be8648c6c6536e798cfcc87f379d44336e002c06ec89576e"
+        }
+      ]
+    },
+    {
+      "id": "truth-lattice",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "9baf2c9e2eca5121227c97c958f461f33bdb995d2c0d21e45dc1039b59b57df9",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 618,
+          "flipped": 158,
+          "flattened": 251,
+          "flippedFraction": 0.255663430420712,
+          "flattenedFraction": 0.40614886731391586,
+          "fieldSha256": "9449eb91873a872a763ac845f4d4c0cf36cb429a9ac67757cf06b1002b744604"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 618,
+          "flipped": 219,
+          "flattened": 154,
+          "flippedFraction": 0.35436893203883496,
+          "flattenedFraction": 0.24919093851132687,
+          "fieldSha256": "4282294e7574c668a8a068439a64b42537cdfb2bfeaf0e95b89f74025d7aaa36"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 618,
+          "flipped": 208,
+          "flattened": 162,
+          "flippedFraction": 0.3365695792880259,
+          "flattenedFraction": 0.2621359223300971,
+          "fieldSha256": "9efa0bfd2d47b926b5aaae9778562071ebf3facd2c727424106b4b2815426439"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 618,
+          "flipped": 195,
+          "flattened": 182,
+          "flippedFraction": 0.3155339805825243,
+          "flattenedFraction": 0.29449838187702265,
+          "fieldSha256": "2ed23f32e2d39d8e1c0cc97cdbdb8321391c3fa821a2f06bd31382290aa18400"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 618,
+          "flipped": 201,
+          "flattened": 164,
+          "flippedFraction": 0.32524271844660196,
+          "flattenedFraction": 0.26537216828478966,
+          "fieldSha256": "c25fa988fabba9433aeba699cecefdfdfaf1e6212812aaf2c149f1ad39025cde"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "e0449380f06d9bff8d4b8d3181a11f2bec01e4f8ef16da444a75b60419b84d30",
+          "packedSha256": "b38861fe0ffd68c987471281778630d1aaf181297372050bfc51be97206c7684"
+        },
+        {
+          "name": "median-three",
+          "sha256": "dc320be921f7d50e09deed0d1ca5522ca24695679c87b7a311ef4157f616fa09",
+          "packedSha256": "49dc60ed8f2a132089ea23f76c32cc91f0ef3beeaab37b3fa8ecec0cc9d188c7"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "5a096ef03f5f01df312a6263c2cac98339eed7c782c33393d16abdd01ed37460",
+          "packedSha256": "388f803331d8748f482ed4b48e7fae1eb619175546b12796f08aa0011f00f463"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "6fe324ea5d2d562af3821834aacfdf8c95df5a3b4c3370a10ae63ba1902b1b28",
+          "packedSha256": "6b39f98a491f65e9be8648c6c6536e798cfcc87f379d44336e002c06ec89576e"
+        }
+      ]
+    },
+    {
+      "id": "truth-arches",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "19e0f74710242f032e1be31de49a6b5432f73497092a91179385f2ea3cac5c79",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 183,
+          "flipped": 74,
+          "flattened": 75,
+          "flippedFraction": 0.40437158469945356,
+          "flattenedFraction": 0.4098360655737705,
+          "fieldSha256": "15981fedef50037ee87b285e7e499bd372bb837404f0dc0ed38562e5709a2ba7"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 183,
+          "flipped": 71,
+          "flattened": 81,
+          "flippedFraction": 0.3879781420765027,
+          "flattenedFraction": 0.4426229508196721,
+          "fieldSha256": "86f0671b3e9c4525c8fc6e586a9ba9eeff3265507aff7969fed0198d8f4495c8"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 183,
+          "flipped": 70,
+          "flattened": 85,
+          "flippedFraction": 0.3825136612021858,
+          "flattenedFraction": 0.4644808743169399,
+          "fieldSha256": "ce30ec47acbc4e68e41b5174a87ce1d2a5745041edc66d73b236fb14edf944c1"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 183,
+          "flipped": 74,
+          "flattened": 76,
+          "flippedFraction": 0.40437158469945356,
+          "flattenedFraction": 0.41530054644808745,
+          "fieldSha256": "128b19c530647ee4b7263508c7bc108493b171678b08962b9720647d13a4d28c"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 183,
+          "flipped": 73,
+          "flattened": 78,
+          "flippedFraction": 0.3989071038251366,
+          "flattenedFraction": 0.4262295081967213,
+          "fieldSha256": "fbbcb1e47e1a0b2c872bd2850660f37182f9f7127e6dcf48f4700f36efa887c6"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "7149f7f4bf0cd6c25fb299959c4693478678d42e5cbeab8dda5442093375ed4d",
+          "packedSha256": "7cd247c24e40b2b5b9fdf075b79d29d41fbbf02fe7ad61661c1a980b0637d0b5"
+        },
+        {
+          "name": "median-three",
+          "sha256": "b739a4df1332932260daa2fb49584b795c0769da76d87f881d568feda7fbc3e0",
+          "packedSha256": "aa74572cde0d14fa0f180f7bf8151498a0fb76ef5589cfeb5b9e082b13765ce5"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "8427d6749ad97cca11dfd10d49678fbca6ee73167b4ce70ed53676d9361d9f27",
+          "packedSha256": "2dc4de62c7d6dd3394fbd70b4e3668011ecd108c1aa37f1c98c7877be8dd42e7"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "f4e48a1784d11da3927b3aa2cf29a78554a77b476ccd157b4a1df4f27b81cdc4",
+          "packedSha256": "b6da0348143cb89860bed2c892e5157573cd3ed5e6ec35972c07be2a37592c5b"
+        }
+      ]
+    },
+    {
+      "id": "truth-arches",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "19e0f74710242f032e1be31de49a6b5432f73497092a91179385f2ea3cac5c79",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 173,
+          "flipped": 68,
+          "flattened": 77,
+          "flippedFraction": 0.3930635838150289,
+          "flattenedFraction": 0.44508670520231214,
+          "fieldSha256": "d6624cdb89c3530294ed02d18d2533b3cfdb542cf13b1e8ca764cf8e443ae164"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 173,
+          "flipped": 70,
+          "flattened": 70,
+          "flippedFraction": 0.4046242774566474,
+          "flattenedFraction": 0.4046242774566474,
+          "fieldSha256": "6b3062b6f5838fe7932b75a428b454b343b66135276c31976a3c2d9641228f0b"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 173,
+          "flipped": 68,
+          "flattened": 78,
+          "flippedFraction": 0.3930635838150289,
+          "flattenedFraction": 0.4508670520231214,
+          "fieldSha256": "26eba7686d96614faea3d1bc26a8f353994884417543b9ac405ac84a8024af39"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 173,
+          "flipped": 68,
+          "flattened": 75,
+          "flippedFraction": 0.3930635838150289,
+          "flattenedFraction": 0.43352601156069365,
+          "fieldSha256": "097bed345347e26852809bcd36d646f5fc798bb329b537390e0452fefac21471"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 173,
+          "flipped": 70,
+          "flattened": 70,
+          "flippedFraction": 0.4046242774566474,
+          "flattenedFraction": 0.4046242774566474,
+          "fieldSha256": "d44ee63377a15a6701f3abd1895b3223c1f07feb0ab97134c19b214ac74eb111"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "7149f7f4bf0cd6c25fb299959c4693478678d42e5cbeab8dda5442093375ed4d",
+          "packedSha256": "7cd247c24e40b2b5b9fdf075b79d29d41fbbf02fe7ad61661c1a980b0637d0b5"
+        },
+        {
+          "name": "median-three",
+          "sha256": "b739a4df1332932260daa2fb49584b795c0769da76d87f881d568feda7fbc3e0",
+          "packedSha256": "aa74572cde0d14fa0f180f7bf8151498a0fb76ef5589cfeb5b9e082b13765ce5"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "8427d6749ad97cca11dfd10d49678fbca6ee73167b4ce70ed53676d9361d9f27",
+          "packedSha256": "2dc4de62c7d6dd3394fbd70b4e3668011ecd108c1aa37f1c98c7877be8dd42e7"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "f4e48a1784d11da3927b3aa2cf29a78554a77b476ccd157b4a1df4f27b81cdc4",
+          "packedSha256": "b6da0348143cb89860bed2c892e5157573cd3ed5e6ec35972c07be2a37592c5b"
+        }
+      ]
+    },
+    {
+      "id": "truth-leaves",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "4ebd5dc4a850e7f247ffe28b5b5bfc70a84beda8811ed3ad1b1e328cee6da8e7",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 181,
+          "flipped": 104,
+          "flattened": 25,
+          "flippedFraction": 0.574585635359116,
+          "flattenedFraction": 0.13812154696132597,
+          "fieldSha256": "5ff1e80e466e70edce3dbde9ed68935b167788e0cf893ec03d9489381ffa18cb"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 181,
+          "flipped": 110,
+          "flattened": 26,
+          "flippedFraction": 0.6077348066298343,
+          "flattenedFraction": 0.143646408839779,
+          "fieldSha256": "b15316f1e9cedf949b3f4e8b01e9bf52b495db91bc9c9ee88cfaead4443b46f0"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 181,
+          "flipped": 109,
+          "flattened": 31,
+          "flippedFraction": 0.6022099447513812,
+          "flattenedFraction": 0.1712707182320442,
+          "fieldSha256": "f79a3db52abe612512939bbd9ae9dbe727ad45c691c9b5369ae84cecb85f9c01"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 181,
+          "flipped": 103,
+          "flattened": 27,
+          "flippedFraction": 0.569060773480663,
+          "flattenedFraction": 0.14917127071823205,
+          "fieldSha256": "3042179478d38090f046ed43b22bb8873a8df4706df280f6e3dec44c67b7f353"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 181,
+          "flipped": 103,
+          "flattened": 29,
+          "flippedFraction": 0.569060773480663,
+          "flattenedFraction": 0.16022099447513813,
+          "fieldSha256": "1d795518a21fcdfcc45e0d52b7aecacc1f527c4dc406fcab60d9222e02ad5242"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "2a2b49bd933407d3d2cd4961a15fa88c0876495f3ada6f275cec9a8b987c7f51",
+          "packedSha256": "504a24a98f44ce6e477bd1f62999522599126bc150397c0ff399c3271db3ef15"
+        },
+        {
+          "name": "median-three",
+          "sha256": "86456ab4c761fc4db7c2fb3da795183bb4ed260a39ce5b80e8ea0936c8ea40a3",
+          "packedSha256": "205f09fe131b48e1995190e2c4fd786f39449eb116fe074213f9ac64578ff28f"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "aa57f00be47c81416a16d49ee8a2c9e6baaa39665e725e035aee315edbba6cb3",
+          "packedSha256": "158db53ebeab30b9373bd605158723cb625611752f60e04c85311390883c2bb5"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "a6cd32f44b3e2e85994c1c73cd504e109db4111633351b9e3c163e87cea23f4b",
+          "packedSha256": "6633f02e32eca4303f81c5540b726862736221a49a5e8394bf3ddf59af39cf6e"
+        }
+      ]
+    },
+    {
+      "id": "truth-leaves",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "4ebd5dc4a850e7f247ffe28b5b5bfc70a84beda8811ed3ad1b1e328cee6da8e7",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 171,
+          "flipped": 85,
+          "flattened": 42,
+          "flippedFraction": 0.49707602339181284,
+          "flattenedFraction": 0.24561403508771928,
+          "fieldSha256": "e3bef10af691f0da6bff378883b40e976f4b6921832e01f4d8a94fe371a9b1a6"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 171,
+          "flipped": 91,
+          "flattened": 32,
+          "flippedFraction": 0.5321637426900585,
+          "flattenedFraction": 0.1871345029239766,
+          "fieldSha256": "76ec136668ee6f3eb7c3113a60f4fc6c6f7f3575401aef860e40d68fc4dbd094"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 171,
+          "flipped": 88,
+          "flattened": 41,
+          "flippedFraction": 0.5146198830409356,
+          "flattenedFraction": 0.23976608187134502,
+          "fieldSha256": "b4cc07348cdf4cef4cf3939d0c1d3315b5c67803c7f016b943a12681bc6d9614"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 171,
+          "flipped": 87,
+          "flattened": 38,
+          "flippedFraction": 0.5087719298245614,
+          "flattenedFraction": 0.2222222222222222,
+          "fieldSha256": "632d28ad67a069f13231f3575aa876d69eed7aa93cd8bc1c259ee4857e68515d"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 171,
+          "flipped": 87,
+          "flattened": 42,
+          "flippedFraction": 0.5087719298245614,
+          "flattenedFraction": 0.24561403508771928,
+          "fieldSha256": "3c7ccf37cb002311c775d6d427a99a4c6e7d21680bea29a599261f64d5c45c70"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "2a2b49bd933407d3d2cd4961a15fa88c0876495f3ada6f275cec9a8b987c7f51",
+          "packedSha256": "504a24a98f44ce6e477bd1f62999522599126bc150397c0ff399c3271db3ef15"
+        },
+        {
+          "name": "median-three",
+          "sha256": "86456ab4c761fc4db7c2fb3da795183bb4ed260a39ce5b80e8ea0936c8ea40a3",
+          "packedSha256": "205f09fe131b48e1995190e2c4fd786f39449eb116fe074213f9ac64578ff28f"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "aa57f00be47c81416a16d49ee8a2c9e6baaa39665e725e035aee315edbba6cb3",
+          "packedSha256": "158db53ebeab30b9373bd605158723cb625611752f60e04c85311390883c2bb5"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "a6cd32f44b3e2e85994c1c73cd504e109db4111633351b9e3c163e87cea23f4b",
+          "packedSha256": "6633f02e32eca4303f81c5540b726862736221a49a5e8394bf3ddf59af39cf6e"
+        }
+      ]
+    },
+    {
+      "id": "truth-steps",
+      "kind": "truth",
+      "profile": "phone",
+      "sourceImageSha256": "1c73980d5513ffb4f4380baf52b9013ec06a450831b0756217fc67ba7da643f9",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 59,
+          "flipped": 10,
+          "flattened": 12,
+          "flippedFraction": 0.1694915254237288,
+          "flattenedFraction": 0.2033898305084746,
+          "fieldSha256": "bf9201d799dc2eae7491319c7b7135bbb6a3a263da1472fb3845f15fd9557428"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 59,
+          "flipped": 9,
+          "flattened": 10,
+          "flippedFraction": 0.15254237288135594,
+          "flattenedFraction": 0.1694915254237288,
+          "fieldSha256": "470b137e1a1c24fac6a2df0ebfa623b8ff1db618444172bcbcf17bbd8dc94f99"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 59,
+          "flipped": 9,
+          "flattened": 14,
+          "flippedFraction": 0.15254237288135594,
+          "flattenedFraction": 0.23728813559322035,
+          "fieldSha256": "c9b197be57844e7a82cbeec93969a51b7f1ef526b59d6e8e90f7395c6da8d2de"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 59,
+          "flipped": 10,
+          "flattened": 10,
+          "flippedFraction": 0.1694915254237288,
+          "flattenedFraction": 0.1694915254237288,
+          "fieldSha256": "701a0360bdf44d51c8431dddabd481bc0e841f009599102873bfbe96c1e1f21f"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 59,
+          "flipped": 10,
+          "flattened": 12,
+          "flippedFraction": 0.1694915254237288,
+          "flattenedFraction": 0.2033898305084746,
+          "fieldSha256": "ce47bb6bceb1254790fd99593d2fce6712d3da87b672393f2d8eb2aba62552c7"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "51015c6b7c27b65ea672f8b3e2cb2ec7fff4449677c816741320e75f75f8c45b",
+          "packedSha256": "4bbc63bc86364af541b2acd4fbc4afb46bdef46caaaed6a6ab88ea9d68f6d32e"
+        },
+        {
+          "name": "median-three",
+          "sha256": "c7cc5ca1a43f356bf53b11c872027829e786047141b82951a83d482af23b5459",
+          "packedSha256": "4c6325f7170d156699a37e687080e951563a5f9878098f421cca8256f34c5dfe"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "4a1d3a32216f65deec1a75476e89fd419c25e23b64b15a0702b688ed4fa2078c",
+          "packedSha256": "cfa193ef6ab4f961ed272eb43542865db7a3eabc69a421bb3b4fd7d2d70bca44"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "bb77306d1ae2f08b4ee436e69481d595a5eff72180ba72711ebbebedf6dc0870",
+          "packedSha256": "6e4b5566d1de74714a073282865d2cd21448e09005beb2c1d4307f8248207486"
+        }
+      ]
+    },
+    {
+      "id": "truth-steps",
+      "kind": "truth",
+      "profile": "desktop",
+      "sourceImageSha256": "1c73980d5513ffb4f4380baf52b9013ec06a450831b0756217fc67ba7da643f9",
+      "baselineExact": true,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 139,
+          "flipped": 14,
+          "flattened": 54,
+          "flippedFraction": 0.10071942446043165,
+          "flattenedFraction": 0.38848920863309355,
+          "fieldSha256": "d54a7a0f20d86e4cbf052b4d5ccb852da0e410cea74bb7d4ccc1e3bcfc36485e"
+        },
+        "mean-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 139,
+          "flipped": 16,
+          "flattened": 61,
+          "flippedFraction": 0.11510791366906475,
+          "flattenedFraction": 0.43884892086330934,
+          "fieldSha256": "576b2e70155568ccd2ea04a73918fe7068c085d82ca0a70d17fe97f7308bb2d9"
+        },
+        "median-three": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 139,
+          "flipped": 18,
+          "flattened": 60,
+          "flippedFraction": 0.12949640287769784,
+          "flattenedFraction": 0.4316546762589928,
+          "fieldSha256": "64a9925e60ff4cb0f4fe2da916c1c68691d638a408b6fa33fbf445dd6666bdaf"
+        },
+        "agreement-005": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 139,
+          "flipped": 18,
+          "flattened": 59,
+          "flippedFraction": 0.12949640287769784,
+          "flattenedFraction": 0.4244604316546763,
+          "fieldSha256": "499095d50b77c1a52d90b210490f3118eed4f3f8472e44f31aa4c140d0c7ba50"
+        },
+        "agreement-010": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 139,
+          "flipped": 18,
+          "flattened": 61,
+          "flippedFraction": 0.12949640287769784,
+          "flattenedFraction": 0.43884892086330934,
+          "fieldSha256": "8688db8f87f4cc042c474e6b0b0192a887a2ac483dbeb61eafaa6391d6194a8a"
+        }
+      },
+      "candidates": [
+        {
+          "name": "mean-three",
+          "sha256": "51015c6b7c27b65ea672f8b3e2cb2ec7fff4449677c816741320e75f75f8c45b",
+          "packedSha256": "4bbc63bc86364af541b2acd4fbc4afb46bdef46caaaed6a6ab88ea9d68f6d32e"
+        },
+        {
+          "name": "median-three",
+          "sha256": "c7cc5ca1a43f356bf53b11c872027829e786047141b82951a83d482af23b5459",
+          "packedSha256": "4c6325f7170d156699a37e687080e951563a5f9878098f421cca8256f34c5dfe"
+        },
+        {
+          "name": "agreement-005",
+          "sha256": "4a1d3a32216f65deec1a75476e89fd419c25e23b64b15a0702b688ed4fa2078c",
+          "packedSha256": "cfa193ef6ab4f961ed272eb43542865db7a3eabc69a421bb3b4fd7d2d70bca44"
+        },
+        {
+          "name": "agreement-010",
+          "sha256": "bb77306d1ae2f08b4ee436e69481d595a5eff72180ba72711ebbebedf6dc0870",
+          "packedSha256": "6e4b5566d1de74714a073282865d2cd21448e09005beb2c1d4307f8248207486"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "truth-still-life",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.017862327568203704,
+          "shift": 0.0387217980972172,
+          "calibrationPixels": 13007,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 91050,
+        "scoredPixels": 91050,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.019206885726314064,
+        "rmseMeters": 0.3365831195305428,
+        "p95Meters": 0.5609477891399504,
+        "pairs": 2993,
+        "reversedFraction": 0.0023387905111927833,
+        "flattenedFraction": 0.0010023387905111927
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.018060449002479086,
+            "shift": 0.040308855214424164,
+            "calibrationPixels": 13007,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 91050,
+          "scoredPixels": 91050,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.009483998791928495,
+          "rmseMeters": 0.23472346245801232,
+          "p95Meters": 0.28355582600908047,
+          "pairs": 2993,
+          "reversedFraction": 0.0006682258603407952,
+          "flattenedFraction": 0.0010023387905111927
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.018401041623847,
+            "shift": 0.03908109098315016,
+            "calibrationPixels": 13007,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 91050,
+          "scoredPixels": 91050,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.0066447811598540785,
+          "rmseMeters": 0.20441093817951014,
+          "p95Meters": 0.1925607551266495,
+          "pairs": 2993,
+          "reversedFraction": 0.0010023387905111927,
+          "flattenedFraction": 0.0006682258603407952
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.018365525816286025,
+            "shift": 0.03900852780477663,
+            "calibrationPixels": 13007,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 91050,
+          "scoredPixels": 91050,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.009588413140292169,
+          "rmseMeters": 0.266248937366785,
+          "p95Meters": 0.3559032408820677,
+          "pairs": 2993,
+          "reversedFraction": 0.0020046775810223854,
+          "flattenedFraction": 0.0010023387905111927
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.018221363966795103,
+            "shift": 0.04023277732146939,
+            "calibrationPixels": 13007,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 91050,
+          "scoredPixels": 91050,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.006907975774920544,
+          "rmseMeters": 0.25114649832077457,
+          "p95Meters": 0.22550548153758498,
+          "pairs": 2993,
+          "reversedFraction": 0.001670564650851988,
+          "flattenedFraction": 0.0006682258603407952
+        }
+      }
+    },
+    {
+      "id": "truth-room",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.020383695507642446,
+          "shift": 0.08790478570789181,
+          "calibrationPixels": 19037,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 133255,
+        "scoredPixels": 133255,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.023605518148868774,
+        "rmseMeters": 0.24973787983848247,
+        "p95Meters": 0.46560600170981914,
+        "pairs": 5268,
+        "reversedFraction": 0.0007593014426727411,
+        "flattenedFraction": 0.0015186028853454822
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.020700893573616878,
+            "shift": 0.0854339402259493,
+            "calibrationPixels": 19037,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 133255,
+          "scoredPixels": 133255,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.014001648907239,
+          "rmseMeters": 0.1522999588027665,
+          "p95Meters": 0.26505088923750364,
+          "pairs": 5268,
+          "reversedFraction": 0.00018982536066818528,
+          "flattenedFraction": 0.00018982536066818528
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.020595393244124682,
+            "shift": 0.08590707220557968,
+            "calibrationPixels": 19037,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 133255,
+          "scoredPixels": 133255,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.016534816950613984,
+          "rmseMeters": 0.17457538768573366,
+          "p95Meters": 0.3043463939126543,
+          "pairs": 5268,
+          "reversedFraction": 0.00018982536066818528,
+          "flattenedFraction": 0.00018982536066818528
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.020599850719146287,
+            "shift": 0.08597998910941135,
+            "calibrationPixels": 19037,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 133255,
+          "scoredPixels": 133255,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.01810143680603257,
+          "rmseMeters": 0.1921162185419288,
+          "p95Meters": 0.3251499920096599,
+          "pairs": 5268,
+          "reversedFraction": 0.0007593014426727411,
+          "flattenedFraction": 0.00037965072133637056
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.020664575571728638,
+            "shift": 0.08521741414920808,
+            "calibrationPixels": 19037,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 133255,
+          "scoredPixels": 133255,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.014358061776116674,
+          "rmseMeters": 0.15905205995156907,
+          "p95Meters": 0.2533723249735882,
+          "pairs": 5268,
+          "reversedFraction": 0.0005694760820045558,
+          "flattenedFraction": 0.00018982536066818528
+        }
+      }
+    },
+    {
+      "id": "truth-forest",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.030121004707998902,
+          "shift": 0.04235068475825472,
+          "calibrationPixels": 15259,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 106806,
+        "scoredPixels": 106806,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.04507592538980331,
+        "rmseMeters": 0.9777934584511261,
+        "p95Meters": 1.9344077421694355,
+        "pairs": 4324,
+        "reversedFraction": 0.020582793709528216,
+        "flattenedFraction": 0.018501387604070305
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.029296768126461682,
+            "shift": 0.04789228399644636,
+            "calibrationPixels": 15259,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 106806,
+          "scoredPixels": 106806,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.03795193219925344,
+          "rmseMeters": 0.745306394069283,
+          "p95Meters": 1.3875909895037974,
+          "pairs": 4324,
+          "reversedFraction": 0.006706753006475485,
+          "flattenedFraction": 0.007631822386679001
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.029004617956494165,
+            "shift": 0.04914499091985378,
+            "calibrationPixels": 15259,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 106806,
+          "scoredPixels": 106806,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.039111739430771945,
+          "rmseMeters": 0.8221844493221403,
+          "p95Meters": 1.3013661358133923,
+          "pairs": 4324,
+          "reversedFraction": 0.008325624421831638,
+          "flattenedFraction": 0.009481961147086031
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.029084721700911028,
+            "shift": 0.04775258290278825,
+            "calibrationPixels": 15259,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 106806,
+          "scoredPixels": 106806,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.04345659047417994,
+          "rmseMeters": 0.9531678403324925,
+          "p95Meters": 1.7984148425655775,
+          "pairs": 4324,
+          "reversedFraction": 0.01734505087881591,
+          "flattenedFraction": 0.01942645698427382
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.028866370097754095,
+            "shift": 0.04937878790572278,
+            "calibrationPixels": 15259,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 106806,
+          "scoredPixels": 106806,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.040414326537095355,
+          "rmseMeters": 0.8701202528373659,
+          "p95Meters": 1.4409733601128583,
+          "pairs": 4324,
+          "reversedFraction": 0.01156336725254394,
+          "flattenedFraction": 0.012488436632747455
+        }
+      }
+    },
+    {
+      "id": "truth-stairs",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.03792972203989845,
+          "shift": 0.04009243443369211,
+          "calibrationPixels": 11589,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 81035,
+        "scoredPixels": 81035,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.06840794333682626,
+        "rmseMeters": 1.0228442516780207,
+        "p95Meters": 1.9850951850089622,
+        "pairs": 2362,
+        "reversedFraction": 0.02243861134631668,
+        "flattenedFraction": 0.016088060965283656
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03900833065695084,
+            "shift": 0.03731847409301488,
+            "calibrationPixels": 11589,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 81035,
+          "scoredPixels": 81035,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.03467241637460669,
+          "rmseMeters": 0.5251978809478269,
+          "p95Meters": 0.7446312831468997,
+          "pairs": 2362,
+          "reversedFraction": 0.002540220152413209,
+          "flattenedFraction": 0.00550381033022862
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.038935117815500894,
+            "shift": 0.037365845950848235,
+            "calibrationPixels": 11589,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 81035,
+          "scoredPixels": 81035,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.035630249938015356,
+          "rmseMeters": 0.5256026330955291,
+          "p95Meters": 0.7789798680708291,
+          "pairs": 2362,
+          "reversedFraction": 0.003386960203217612,
+          "flattenedFraction": 0.006773920406435224
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03795278417384442,
+            "shift": 0.040346274603637836,
+            "calibrationPixels": 11589,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 81035,
+          "scoredPixels": 81035,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.05719656275193354,
+          "rmseMeters": 0.8537857561996359,
+          "p95Meters": 1.4808336864446314,
+          "pairs": 2362,
+          "reversedFraction": 0.015664690939881456,
+          "flattenedFraction": 0.010584250635055038
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03817003243517463,
+            "shift": 0.040036466960388914,
+            "calibrationPixels": 11589,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 81035,
+          "scoredPixels": 81035,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.04450431477233566,
+          "rmseMeters": 0.7214991021508005,
+          "p95Meters": 1.1906847979247335,
+          "pairs": 2362,
+          "reversedFraction": 0.00846740050804403,
+          "flattenedFraction": 0.0071972904318374255
+        }
+      }
+    },
+    {
+      "id": "truth-coast",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.026194610828717175,
+          "shift": 0.03117938726395243,
+          "calibrationPixels": 6690,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 46737,
+        "scoredPixels": 46737,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.03208708706183156,
+        "rmseMeters": 0.6222773095966146,
+        "p95Meters": 0.9150033700214433,
+        "pairs": 676,
+        "reversedFraction": 0,
+        "flattenedFraction": 0.0014792899408284023
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.026529809379497723,
+            "shift": 0.031131731209230226,
+            "calibrationPixels": 6690,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 46737,
+          "scoredPixels": 46737,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.024293278389132384,
+          "rmseMeters": 0.376658773046042,
+          "p95Meters": 0.5683464190147465,
+          "pairs": 676,
+          "reversedFraction": 0,
+          "flattenedFraction": 0.0014792899408284023
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.026404364726834485,
+            "shift": 0.0317108247553697,
+            "calibrationPixels": 6690,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 46737,
+          "scoredPixels": 46737,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.026201727822531853,
+          "rmseMeters": 0.42477139359856275,
+          "p95Meters": 0.715197438143397,
+          "pairs": 676,
+          "reversedFraction": 0,
+          "flattenedFraction": 0.0014792899408284023
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.02636710623338501,
+            "shift": 0.03185071202484693,
+            "calibrationPixels": 6690,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 46737,
+          "scoredPixels": 46737,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.02729462110021126,
+          "rmseMeters": 0.546259110385012,
+          "p95Meters": 0.6636098661187662,
+          "pairs": 676,
+          "reversedFraction": 0,
+          "flattenedFraction": 0.0014792899408284023
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.026471455740906258,
+            "shift": 0.03175909272603915,
+            "calibrationPixels": 6690,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 46737,
+          "scoredPixels": 46737,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.025050234033918838,
+          "rmseMeters": 0.5168624334634572,
+          "p95Meters": 0.5376017131358601,
+          "pairs": 676,
+          "reversedFraction": 0,
+          "flattenedFraction": 0.0014792899408284023
+        }
+      }
+    },
+    {
+      "id": "truth-desk",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.02803203820085574,
+          "shift": 0.05033486187539189,
+          "calibrationPixels": 18703,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 130918,
+        "scoredPixels": 130918,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.023611421057336865,
+        "rmseMeters": 0.27300175435812984,
+        "p95Meters": 0.4708435238070816,
+        "pairs": 6627,
+        "reversedFraction": 0.0010562848951259998,
+        "flattenedFraction": 0.0012071827372868568
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.028987761151432312,
+            "shift": 0.04856119773665675,
+            "calibrationPixels": 18703,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 130918,
+          "scoredPixels": 130918,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.015026032194602952,
+          "rmseMeters": 0.1621890718440295,
+          "p95Meters": 0.20896844476255438,
+          "pairs": 6627,
+          "reversedFraction": 0.0004526935264825713,
+          "flattenedFraction": 0.0006035913686434284
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.029038133238485375,
+            "shift": 0.04860600488388333,
+            "calibrationPixels": 18703,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 130918,
+          "scoredPixels": 130918,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.018362448045895898,
+          "rmseMeters": 0.18296272012751794,
+          "p95Meters": 0.24546613512951154,
+          "pairs": 6627,
+          "reversedFraction": 0.0007544892108042855,
+          "flattenedFraction": 0.0004526935264825713
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.028962884749033843,
+            "shift": 0.048386754627910845,
+            "calibrationPixels": 18703,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 130918,
+          "scoredPixels": 130918,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.01921153238620584,
+          "rmseMeters": 0.19700129002670508,
+          "p95Meters": 0.2849193452616472,
+          "pairs": 6627,
+          "reversedFraction": 0.001508978421608571,
+          "flattenedFraction": 0.0006035913686434284
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.029201229823468018,
+            "shift": 0.048081525509131216,
+            "calibrationPixels": 18703,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 130918,
+          "scoredPixels": 130918,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.016139971451085294,
+          "rmseMeters": 0.17548210290842567,
+          "p95Meters": 0.21115669160158745,
+          "pairs": 6627,
+          "reversedFraction": 0.0012071827372868568,
+          "flattenedFraction": 0.0007544892108042855
+        }
+      }
+    },
+    {
+      "id": "truth-fur",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.035219728484419836,
+          "shift": 0.061187759964882,
+          "calibrationPixels": 13423,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 94073,
+        "scoredPixels": 94073,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.06397036016998235,
+        "rmseMeters": 1.1290823461410937,
+        "p95Meters": 2.4580272200004476,
+        "pairs": 3426,
+        "reversedFraction": 0.01634559252772913,
+        "flattenedFraction": 0.0043782837127845885
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03581295984576873,
+            "shift": 0.05148240567006997,
+            "calibrationPixels": 13423,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 94073,
+          "scoredPixels": 94073,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.018330815005028867,
+          "rmseMeters": 0.6155060175851306,
+          "p95Meters": 0.31596281024226514,
+          "pairs": 3426,
+          "reversedFraction": 0.012259194395796848,
+          "flattenedFraction": 0.0043782837127845885
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.035607042790274344,
+            "shift": 0.05045889379283162,
+            "calibrationPixels": 13423,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 94073,
+          "scoredPixels": 94073,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.0217405973465976,
+          "rmseMeters": 0.668068850467688,
+          "p95Meters": 0.34917526161883394,
+          "pairs": 3426,
+          "reversedFraction": 0.012551079976649154,
+          "flattenedFraction": 0.0035026269702276708
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03611618953737115,
+            "shift": 0.05696468315080738,
+            "calibrationPixels": 13423,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 94073,
+          "scoredPixels": 94073,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.06359264602701138,
+          "rmseMeters": 0.9805190843783644,
+          "p95Meters": 1.6123878209649973,
+          "pairs": 3426,
+          "reversedFraction": 0.01576182136602452,
+          "flattenedFraction": 0.002918855808523059
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03635264965204494,
+            "shift": 0.0527883994033765,
+            "calibrationPixels": 13423,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 94073,
+          "scoredPixels": 94073,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.041290728988639024,
+          "rmseMeters": 0.8229518622635977,
+          "p95Meters": 0.5173179944059338,
+          "pairs": 3426,
+          "reversedFraction": 0.01634559252772913,
+          "flattenedFraction": 0.0017513134851138354
+        }
+      }
+    },
+    {
+      "id": "truth-night",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.03591685270849339,
+          "shift": 0.028146858163877058,
+          "calibrationPixels": 10365,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 72581,
+        "scoredPixels": 72581,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.07021886048702225,
+        "rmseMeters": 1.370853605783655,
+        "p95Meters": 1.6863311920197752,
+        "pairs": 1968,
+        "reversedFraction": 0.019817073170731708,
+        "flattenedFraction": 0.012703252032520325
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03524467700399753,
+            "shift": 0.04297143245880833,
+            "calibrationPixels": 10365,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 72581,
+          "scoredPixels": 72581,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.03589716987245642,
+          "rmseMeters": 0.5952191492273499,
+          "p95Meters": 1.1624053050755165,
+          "pairs": 1968,
+          "reversedFraction": 0.008130081300813009,
+          "flattenedFraction": 0.008130081300813009
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03386259539971565,
+            "shift": 0.04791202524639732,
+            "calibrationPixels": 10365,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 72581,
+          "scoredPixels": 72581,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.02903656730729294,
+          "rmseMeters": 0.5860738563095543,
+          "p95Meters": 1.1894475816012937,
+          "pairs": 1968,
+          "reversedFraction": 0.009146341463414634,
+          "flattenedFraction": 0.007621951219512195
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03426672895715902,
+            "shift": 0.03361568146548291,
+            "calibrationPixels": 10365,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 72581,
+          "scoredPixels": 72581,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.07699173642443623,
+          "rmseMeters": 1.4044838463960174,
+          "p95Meters": 2.4512756305610193,
+          "pairs": 1968,
+          "reversedFraction": 0.02032520325203252,
+          "flattenedFraction": 0.013211382113821139
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03337232342681077,
+            "shift": 0.04212480726426101,
+            "calibrationPixels": 10365,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 72581,
+          "scoredPixels": 72581,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.055204802336507305,
+          "rmseMeters": 0.935865067294609,
+          "p95Meters": 1.734941667849741,
+          "pairs": 1968,
+          "reversedFraction": 0.016260162601626018,
+          "flattenedFraction": 0.009146341463414634
+        }
+      }
+    },
+    {
+      "id": "truth-lattice",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.042582787909661704,
+          "shift": 0.06798809127142763,
+          "calibrationPixels": 13829,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 96755,
+        "scoredPixels": 96755,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.13181825072144607,
+        "rmseMeters": 1.4699389037536086,
+        "p95Meters": 2.6186997531156138,
+        "pairs": 3328,
+        "reversedFraction": 0.11268028846153846,
+        "flattenedFraction": 0.03936298076923077
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.054768152429361,
+            "shift": 0.04896825845754243,
+            "calibrationPixels": 13829,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 96755,
+          "scoredPixels": 96755,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.07493771540734201,
+          "rmseMeters": 0.8148796573915256,
+          "p95Meters": 1.2708373915216882,
+          "pairs": 3328,
+          "reversedFraction": 0.060396634615384616,
+          "flattenedFraction": 0.021334134615384616
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.05490229667688114,
+            "shift": 0.050325184575977976,
+            "calibrationPixels": 13829,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 96755,
+          "scoredPixels": 96755,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.05556991383459507,
+          "rmseMeters": 0.7756322565744623,
+          "p95Meters": 1.0741467228201698,
+          "pairs": 3328,
+          "reversedFraction": 0.04447115384615385,
+          "flattenedFraction": 0.020733173076923076
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.04526065526214016,
+            "shift": 0.0646710065999286,
+            "calibrationPixels": 13829,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 96755,
+          "scoredPixels": 96755,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.11500970801841272,
+          "rmseMeters": 1.3917555828845256,
+          "p95Meters": 2.49592175182317,
+          "pairs": 3328,
+          "reversedFraction": 0.10096153846153846,
+          "flattenedFraction": 0.03245192307692308
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.048665337934591824,
+            "shift": 0.060592987873102216,
+            "calibrationPixels": 13829,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 96755,
+          "scoredPixels": 96755,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.09331395679091334,
+          "rmseMeters": 1.2628544518465135,
+          "p95Meters": 1.9817966108886047,
+          "pairs": 3328,
+          "reversedFraction": 0.07632211538461539,
+          "flattenedFraction": 0.02403846153846154
+        }
+      }
+    },
+    {
+      "id": "truth-arches",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.046740833277858045,
+          "shift": 0.045727078639509255,
+          "calibrationPixels": 15225,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 106462,
+        "scoredPixels": 106462,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.11776588982061371,
+        "rmseMeters": 1.3539839292626568,
+        "p95Meters": 3.0622151397493376,
+        "pairs": 4433,
+        "reversedFraction": 0.028648770584254454,
+        "flattenedFraction": 0.01466275659824047
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.04888108232434988,
+            "shift": 0.057081718315181516,
+            "calibrationPixels": 15225,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 106462,
+          "scoredPixels": 106462,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.0604501728448149,
+          "rmseMeters": 0.7352924122376924,
+          "p95Meters": 1.7258865330134672,
+          "pairs": 4433,
+          "reversedFraction": 0.01466275659824047,
+          "flattenedFraction": 0.01849763140085721
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.04802078694167076,
+            "shift": 0.05677765051919343,
+            "calibrationPixels": 15225,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 106462,
+          "scoredPixels": 106462,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.052223749283067465,
+          "rmseMeters": 0.6462007589746771,
+          "p95Meters": 1.5085356426359224,
+          "pairs": 4433,
+          "reversedFraction": 0.011955786149334537,
+          "flattenedFraction": 0.015113918339724792
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.04636760491105398,
+            "shift": 0.0474232288013617,
+            "calibrationPixels": 15225,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 106462,
+          "scoredPixels": 106462,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.11513768625827987,
+          "rmseMeters": 1.272012590974091,
+          "p95Meters": 2.8336410496306232,
+          "pairs": 4433,
+          "reversedFraction": 0.02481389578163772,
+          "flattenedFraction": 0.013760433115271826
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.04587156819570784,
+            "shift": 0.051607751837984356,
+            "calibrationPixels": 15225,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 106462,
+          "scoredPixels": 106462,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.09748150613052084,
+          "rmseMeters": 1.0447099255501735,
+          "p95Meters": 2.47234259792185,
+          "pairs": 4433,
+          "reversedFraction": 0.019399954883825853,
+          "flattenedFraction": 0.01488833746898263
+        }
+      }
+    },
+    {
+      "id": "truth-leaves",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.03397469216957972,
+          "shift": 0.05162168878170639,
+          "calibrationPixels": 12659,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 88668,
+        "scoredPixels": 88668,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.0508893147576506,
+        "rmseMeters": 1.1357766745313862,
+        "p95Meters": 1.98081426369788,
+        "pairs": 2961,
+        "reversedFraction": 0.02330293819655522,
+        "flattenedFraction": 0.012833502195204323
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03468101553903132,
+            "shift": 0.048326026845761885,
+            "calibrationPixels": 12659,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 88668,
+          "scoredPixels": 88668,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.029658142056851862,
+          "rmseMeters": 0.8405429961910603,
+          "p95Meters": 1.344834054794859,
+          "pairs": 2961,
+          "reversedFraction": 0.01485984464707869,
+          "flattenedFraction": 0.005403579871664978
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.035276835171166386,
+            "shift": 0.04837553475373317,
+            "calibrationPixels": 12659,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 88668,
+          "scoredPixels": 88668,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.0406448330334216,
+          "rmseMeters": 0.895804954295265,
+          "p95Meters": 1.1976867575147487,
+          "pairs": 2961,
+          "reversedFraction": 0.015873015873015872,
+          "flattenedFraction": 0.011144883485309016
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03416282458678232,
+            "shift": 0.051220023635574916,
+            "calibrationPixels": 12659,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 88668,
+          "scoredPixels": 88668,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.049065175706738906,
+          "rmseMeters": 1.0952406145120626,
+          "p95Meters": 1.8621987200033585,
+          "pairs": 2961,
+          "reversedFraction": 0.022627490712597096,
+          "flattenedFraction": 0.012495778453225262
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.03444206212064389,
+            "shift": 0.05060723403283073,
+            "calibrationPixels": 12659,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 88668,
+          "scoredPixels": 88668,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.0450120952018376,
+          "rmseMeters": 1.0362159970762705,
+          "p95Meters": 1.5607676389095921,
+          "pairs": 2961,
+          "reversedFraction": 0.019587977034785545,
+          "flattenedFraction": 0.010469436001350895
+        }
+      }
+    },
+    {
+      "id": "truth-steps",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.027258499478260527,
+          "shift": 0.04734913492239142,
+          "calibrationPixels": 12264,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 85813,
+        "scoredPixels": 85813,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.0261349074853332,
+        "rmseMeters": 0.6230013409746812,
+        "p95Meters": 0.4446818954353944,
+        "pairs": 2191,
+        "reversedFraction": 0.005020538566864446,
+        "flattenedFraction": 0.0013692377909630307
+      },
+      "variants": {
+        "mean-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.027661723636563277,
+            "shift": 0.04953400596030828,
+            "calibrationPixels": 12264,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 85813,
+          "scoredPixels": 85813,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.013005966163458619,
+          "rmseMeters": 0.43319766491763656,
+          "p95Meters": 0.4361525335602714,
+          "pairs": 2191,
+          "reversedFraction": 0.004107713372889092,
+          "flattenedFraction": 0.0018256503879507074
+        },
+        "median-three": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.02836970459348897,
+            "shift": 0.0487680220645534,
+            "calibrationPixels": 12264,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 85813,
+          "scoredPixels": 85813,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.008035876865677492,
+          "rmseMeters": 0.4201482056538462,
+          "p95Meters": 0.27425350732846177,
+          "pairs": 2191,
+          "reversedFraction": 0.003194888178913738,
+          "flattenedFraction": 0.0018256503879507074
+        },
+        "agreement-005": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.02821616104319567,
+            "shift": 0.048513870229047934,
+            "calibrationPixels": 12264,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 85813,
+          "scoredPixels": 85813,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.011814198814182534,
+          "rmseMeters": 0.5152214350754049,
+          "p95Meters": 0.2437061219964125,
+          "pairs": 2191,
+          "reversedFraction": 0.005476951163852123,
+          "flattenedFraction": 0.0022820629849383844
+        },
+        "agreement-010": {
+          "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+          "fit": {
+            "scale": 0.028577972004540698,
+            "shift": 0.04812885347018137,
+            "calibrationPixels": 12264,
+            "split": "index % 8 == 0"
+          },
+          "fitError": null,
+          "pixels": 85813,
+          "scoredPixels": 85813,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "absRel": 0.008934371435055717,
+          "rmseMeters": 0.48675578702506295,
+          "p95Meters": 0.2471827989162385,
+          "pairs": 2191,
+          "reversedFraction": 0.005476951163852123,
+          "flattenedFraction": 0.0022820629849383844
+        }
+      }
+    }
+  ],
+  "finishedUTC": "2026-10-16T09:28:13.924Z",
+  "coverage": {
+    "inputs": 16,
+    "profiles": 32,
+    "builtInProfiles": 8,
+    "referenceScenes": 12,
+    "candidateFields": 128,
+    "completeBoundedStudy": true,
+    "completeAtlasCorpus": false
+  },
+  "summary": {
+    "mean-three": {
+      "builtinProfiles": 8,
+      "flatRegressions": 3,
+      "orderRegressions": 8,
+      "absRel": {
+        "beforeMean": 0.05606603034691909,
+        "afterMean": 0.03064244068389297,
+        "reduction": 0.4534579941849438,
+        "regressions": []
+      },
+      "rmseMeters": {
+        "beforeMean": 0.8804062144916665,
+        "afterMean": 0.5192511198931963,
+        "reduction": 0.4102141587074051,
+        "regressions": []
+      },
+      "p95Meters": {
+        "beforeMean": 1.5485560896562618,
+        "afterMean": 0.8095185399902208,
+        "reduction": 0.4772429972685637,
+        "regressions": []
+      },
+      "holePixels": {
+        "beforeMean": 0,
+        "afterMean": 0,
+        "reduction": null,
+        "regressions": []
+      },
+      "reversedFraction": {
+        "beforeMean": 0.021082581951042487,
+        "afterMean": 0.010414495236381913,
+        "reduction": 0.5060142414925161,
+        "regressions": []
+      },
+      "flattenedFraction": {
+        "beforeMean": 0.010425573001855783,
+        "afterMean": 0.006331669955584495,
+        "reduction": 0.3926789487294906,
+        "regressions": ["truth-arches", "truth-steps"]
+      }
+    },
+    "median-three": {
+      "builtinProfiles": 8,
+      "flatRegressions": 2,
+      "orderRegressions": 6,
+      "absRel": {
+        "beforeMean": 0.05606603034691909,
+        "afterMean": 0.029144775084861272,
+        "reduction": 0.4801705256369587,
+        "regressions": []
+      },
+      "rmseMeters": {
+        "beforeMean": 0.8804062144916665,
+        "afterMean": 0.5272030336903739,
+        "reduction": 0.4011820623111194,
+        "regressions": []
+      },
+      "p95Meters": {
+        "beforeMean": 1.5485560896562618,
+        "afterMean": 0.7609301833096553,
+        "reduction": 0.5086195531486615,
+        "regressions": []
+      },
+      "holePixels": {
+        "beforeMean": 0,
+        "afterMean": 0,
+        "reduction": null,
+        "regressions": []
+      },
+      "reversedFraction": {
+        "beforeMean": 0.021082581951042487,
+        "afterMean": 0.00923762528954289,
+        "reduction": 0.5618361493390941,
+        "regressions": []
+      },
+      "flattenedFraction": {
+        "beforeMean": 0.010425573001855783,
+        "afterMean": 0.006582343310124056,
+        "reduction": 0.3686348645822749,
+        "regressions": ["truth-arches", "truth-steps"]
+      }
+    },
+    "agreement-005": {
+      "builtinProfiles": 8,
+      "flatRegressions": 1,
+      "orderRegressions": 7,
+      "absRel": {
+        "beforeMean": 0.05606603034691909,
+        "afterMean": 0.050538358992326414,
+        "reduction": 0.098592165708704,
+        "regressions": ["truth-night"]
+      },
+      "rmseMeters": {
+        "beforeMean": 0.8804062144916665,
+        "afterMean": 0.8056510255894187,
+        "reduction": 0.08490988326952043,
+        "regressions": ["truth-night"]
+      },
+      "p95Meters": {
+        "beforeMean": 1.5485560896562618,
+        "afterMean": 1.367330172355161,
+        "reduction": 0.11702896557097142,
+        "regressions": ["truth-night"]
+      },
+      "holePixels": {
+        "beforeMean": 0,
+        "afterMean": 0,
+        "reduction": null,
+        "regressions": []
+      },
+      "reversedFraction": {
+        "beforeMean": 0.021082581951042487,
+        "afterMean": 0.018937466666806957,
+        "reduction": 0.10174822463476585,
+        "regressions": ["truth-desk", "truth-night", "truth-steps"]
+      },
+      "flattenedFraction": {
+        "beforeMean": 0.010425573001855783,
+        "afterMean": 0.009216334499445917,
+        "reduction": 0.11598772577724203,
+        "regressions": ["truth-forest", "truth-night", "truth-steps"]
+      }
+    },
+    "agreement-010": {
+      "builtinProfiles": 8,
+      "flatRegressions": 1,
+      "orderRegressions": 6,
+      "absRel": {
+        "beforeMean": 0.05606603034691909,
+        "afterMean": 0.040717695435745514,
+        "reduction": 0.273754621402708,
+        "regressions": []
+      },
+      "rmseMeters": {
+        "beforeMean": 0.8804062144916665,
+        "afterMean": 0.6902929617240516,
+        "reduction": 0.2159381086120381,
+        "regressions": []
+      },
+      "p95Meters": {
+        "beforeMean": 1.5485560896562618,
+        "afterMean": 1.0311369731815143,
+        "reduction": 0.3341300453570273,
+        "regressions": ["truth-night"]
+      },
+      "holePixels": {
+        "beforeMean": 0,
+        "afterMean": 0,
+        "reduction": null,
+        "regressions": []
+      },
+      "reversedFraction": {
+        "beforeMean": 0.021082581951042487,
+        "afterMean": 0.01473922873559712,
+        "reduction": 0.30088123125411126,
+        "regressions": ["truth-desk", "truth-steps"]
+      },
+      "flattenedFraction": {
+        "beforeMean": 0.010425573001855783,
+        "afterMean": 0.007112792531624039,
+        "reduction": 0.31775524181184667,
+        "regressions": ["truth-arches", "truth-steps"]
+      }
+    }
+  },
+  "rawStudySha256": "c0967f1515c3da6edd88450805f517387c301d43907167929ff8138f3253df18",
+  "generation": {
+    "rawSha256": "f935b97e0a64bb9cb7f4b10c9c52267a445c9b45c27d3bc709617a307f09167b",
+    "methodSha256": "716fef9d75cad5a7189c4eeb87f4ed1088d8af99875d9cfae3ec697745c7411e",
+    "rule": "Fixed three-model ensemble generation. Every pixel uses the same rule; input IDs and finder scores do not choose geometry. Positive affine percentile alignment to the original model scale, preserving tails; invalid or negative teacher samples retain the original depth. No shipping asset or runtime model.",
+    "outputRows": [
+      {
+        "id": "forest",
+        "variant": "mean-three",
+        "sha256": "8f9f5c461453d7702533a303be0a5b8dea1dca21346d7ed8c78b8b09e5e2b528",
+        "alignment": [
+          {
+            "scale": 8.338344675192113,
+            "shift": -0.10404929086589015,
+            "validPixels": 181300,
+            "fallbacks": 0
+          },
+          {
+            "scale": 0.9953883197283612,
+            "shift": -0.20703813886110184,
+            "validPixels": 181300,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "forest",
+        "variant": "median-three",
+        "sha256": "d2966703b91db1201f39fbf435f73aa6458f5b94045e315af935b5efc0224ca1",
+        "alignment": [
+          {
+            "scale": 8.338344675192113,
+            "shift": -0.10404929086589015,
+            "validPixels": 181300,
+            "fallbacks": 0
+          },
+          {
+            "scale": 0.9953883197283612,
+            "shift": -0.20703813886110184,
+            "validPixels": 181300,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "forest",
+        "variant": "agreement-005",
+        "sha256": "afc9319e25af9e4209ed8144800c3e702e7bfe51e5fe11b00fe599dc6330a4dc",
+        "alignment": [
+          {
+            "scale": 8.338344675192113,
+            "shift": -0.10404929086589015,
+            "validPixels": 181300,
+            "fallbacks": 0
+          },
+          {
+            "scale": 0.9953883197283612,
+            "shift": -0.20703813886110184,
+            "validPixels": 181300,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "forest",
+        "variant": "agreement-010",
+        "sha256": "1ec353da98b101d005f0c77c06d54fb852ea510ef2a5dcd51dbd8f636c812d9c",
+        "alignment": [
+          {
+            "scale": 8.338344675192113,
+            "shift": -0.10404929086589015,
+            "validPixels": 181300,
+            "fallbacks": 0
+          },
+          {
+            "scale": 0.9953883197283612,
+            "shift": -0.20703813886110184,
+            "validPixels": 181300,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "street",
+        "variant": "mean-three",
+        "sha256": "070b9b858f2a2c405bf176072028d96763ebf66f217477ad3401474d2f2bff69",
+        "alignment": [
+          {
+            "scale": 25.4783132908905,
+            "shift": -0.5173067376549497,
+            "validPixels": 161501,
+            "fallbacks": 44785
+          },
+          {
+            "scale": 1.949479186272317,
+            "shift": -0.4824537490740722,
+            "validPixels": 203056,
+            "fallbacks": 4061
+          }
+        ]
+      },
+      {
+        "id": "street",
+        "variant": "median-three",
+        "sha256": "cd848b838c6fa9a93615b7663ab722b5c6618fd5f4451057d023e267cdc9942b",
+        "alignment": [
+          {
+            "scale": 25.4783132908905,
+            "shift": -0.5173067376549497,
+            "validPixels": 161501,
+            "fallbacks": 44785
+          },
+          {
+            "scale": 1.949479186272317,
+            "shift": -0.4824537490740722,
+            "validPixels": 203056,
+            "fallbacks": 4061
+          }
+        ]
+      },
+      {
+        "id": "street",
+        "variant": "agreement-005",
+        "sha256": "175f03e2a8a83105acb9c48c7dc80a4697f2da5b00fceff35136ca18c139f7f7",
+        "alignment": [
+          {
+            "scale": 25.4783132908905,
+            "shift": -0.5173067376549497,
+            "validPixels": 161501,
+            "fallbacks": 44785
+          },
+          {
+            "scale": 1.949479186272317,
+            "shift": -0.4824537490740722,
+            "validPixels": 203056,
+            "fallbacks": 4061
+          }
+        ]
+      },
+      {
+        "id": "street",
+        "variant": "agreement-010",
+        "sha256": "ea2c24970f3196552f07ea264d62a1db57ff782493e715d89d61bd87f94fea8a",
+        "alignment": [
+          {
+            "scale": 25.4783132908905,
+            "shift": -0.5173067376549497,
+            "validPixels": 161501,
+            "fallbacks": 44785
+          },
+          {
+            "scale": 1.949479186272317,
+            "shift": -0.4824537490740722,
+            "validPixels": 203056,
+            "fallbacks": 4061
+          }
+        ]
+      },
+      {
+        "id": "wildflowers",
+        "variant": "mean-three",
+        "sha256": "2d0191fc3f7cc5a4ed1e6eb735b1dc0beb3f9014260600cc4fcc8385ce8fbff9",
+        "alignment": [
+          {
+            "scale": 6.297589926980809,
+            "shift": -0.21946630183298846,
+            "validPixels": 171462,
+            "fallbacks": 13267
+          },
+          {
+            "scale": 1.0417181910608642,
+            "shift": -0.2880680053241611,
+            "validPixels": 181300,
+            "fallbacks": 3625
+          }
+        ]
+      },
+      {
+        "id": "wildflowers",
+        "variant": "median-three",
+        "sha256": "7b99509f3a9cbd492feb3905df11ff1bf24a25c623788d049fbd27aab3c4b1df",
+        "alignment": [
+          {
+            "scale": 6.297589926980809,
+            "shift": -0.21946630183298846,
+            "validPixels": 171462,
+            "fallbacks": 13267
+          },
+          {
+            "scale": 1.0417181910608642,
+            "shift": -0.2880680053241611,
+            "validPixels": 181300,
+            "fallbacks": 3625
+          }
+        ]
+      },
+      {
+        "id": "wildflowers",
+        "variant": "agreement-005",
+        "sha256": "2568609d737932c023d67804037fb9c65fa1555144f9e888e2928569a40459dd",
+        "alignment": [
+          {
+            "scale": 6.297589926980809,
+            "shift": -0.21946630183298846,
+            "validPixels": 171462,
+            "fallbacks": 13267
+          },
+          {
+            "scale": 1.0417181910608642,
+            "shift": -0.2880680053241611,
+            "validPixels": 181300,
+            "fallbacks": 3625
+          }
+        ]
+      },
+      {
+        "id": "wildflowers",
+        "variant": "agreement-010",
+        "sha256": "4e6f10ff2d8835447569076a99b09905da410f4c7b1370c5e1dfe6d07ceac0b7",
+        "alignment": [
+          {
+            "scale": 6.297589926980809,
+            "shift": -0.21946630183298846,
+            "validPixels": 171462,
+            "fallbacks": 13267
+          },
+          {
+            "scale": 1.0417181910608642,
+            "shift": -0.2880680053241611,
+            "validPixels": 181300,
+            "fallbacks": 3625
+          }
+        ]
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "variant": "mean-three",
+        "sha256": "8004741bf91e3112d9762ca339f46bc494afcec5c51dc6752bb918cb45034b4e",
+        "alignment": [
+          {
+            "scale": 16.00022765356726,
+            "shift": -0.47034238426716535,
+            "validPixels": 174822,
+            "fallbacks": 9974
+          },
+          {
+            "scale": 1.396965046833411,
+            "shift": -0.5275778699994341,
+            "validPixels": 181300,
+            "fallbacks": 3625
+          }
+        ]
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "variant": "median-three",
+        "sha256": "f163ddf985551f447e58c110135747092967ff59f748c6f02a385159df93339b",
+        "alignment": [
+          {
+            "scale": 16.00022765356726,
+            "shift": -0.47034238426716535,
+            "validPixels": 174822,
+            "fallbacks": 9974
+          },
+          {
+            "scale": 1.396965046833411,
+            "shift": -0.5275778699994341,
+            "validPixels": 181300,
+            "fallbacks": 3625
+          }
+        ]
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "variant": "agreement-005",
+        "sha256": "084c177717626bc27feb4b53eeb8e29e2b6c25dda157a9ab5e1542e4b3ca6050",
+        "alignment": [
+          {
+            "scale": 16.00022765356726,
+            "shift": -0.47034238426716535,
+            "validPixels": 174822,
+            "fallbacks": 9974
+          },
+          {
+            "scale": 1.396965046833411,
+            "shift": -0.5275778699994341,
+            "validPixels": 181300,
+            "fallbacks": 3625
+          }
+        ]
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "variant": "agreement-010",
+        "sha256": "1445b8eebaa9c5c0860129088cebe0c3caa912e0c44d1bb807f8e2d8c19d4697",
+        "alignment": [
+          {
+            "scale": 16.00022765356726,
+            "shift": -0.47034238426716535,
+            "validPixels": 174822,
+            "fallbacks": 9974
+          },
+          {
+            "scale": 1.396965046833411,
+            "shift": -0.5275778699994341,
+            "validPixels": 181300,
+            "fallbacks": 3625
+          }
+        ]
+      },
+      {
+        "id": "truth-still-life",
+        "variant": "mean-three",
+        "sha256": "a5975abee477b4df8137a0978baf0ca889b5076ac45a9e73a539302acb233c86",
+        "alignment": [
+          {
+            "scale": 21.720722585930506,
+            "shift": -2.547419850566281,
+            "validPixels": 110713,
+            "fallbacks": 43095
+          },
+          {
+            "scale": 4.742234082903027,
+            "shift": -1.8340973788574524,
+            "validPixels": 152292,
+            "fallbacks": 248
+          }
+        ]
+      },
+      {
+        "id": "truth-still-life",
+        "variant": "median-three",
+        "sha256": "26bf6b7cc2d655e01cff4eabdb2a005fab5c41cc2c76c99dbc55c43eeee4d644",
+        "alignment": [
+          {
+            "scale": 21.720722585930506,
+            "shift": -2.547419850566281,
+            "validPixels": 110713,
+            "fallbacks": 43095
+          },
+          {
+            "scale": 4.742234082903027,
+            "shift": -1.8340973788574524,
+            "validPixels": 152292,
+            "fallbacks": 248
+          }
+        ]
+      },
+      {
+        "id": "truth-still-life",
+        "variant": "agreement-005",
+        "sha256": "3a9783b2d8d95cded6ba2c6203acb58133203c2fbfb6d568cbf85d0cc3cf21f3",
+        "alignment": [
+          {
+            "scale": 21.720722585930506,
+            "shift": -2.547419850566281,
+            "validPixels": 110713,
+            "fallbacks": 43095
+          },
+          {
+            "scale": 4.742234082903027,
+            "shift": -1.8340973788574524,
+            "validPixels": 152292,
+            "fallbacks": 248
+          }
+        ]
+      },
+      {
+        "id": "truth-still-life",
+        "variant": "agreement-010",
+        "sha256": "3c5a9d3bfaa94b308c54eb645aae37471f758d25c2bdad10a87e62941c3e6740",
+        "alignment": [
+          {
+            "scale": 21.720722585930506,
+            "shift": -2.547419850566281,
+            "validPixels": 110713,
+            "fallbacks": 43095
+          },
+          {
+            "scale": 4.742234082903027,
+            "shift": -1.8340973788574524,
+            "validPixels": 152292,
+            "fallbacks": 248
+          }
+        ]
+      },
+      {
+        "id": "truth-room",
+        "variant": "mean-three",
+        "sha256": "10134074d8124df17086accf91594c72131681c0706dacf26d81f516d32f9b6e",
+        "alignment": [
+          {
+            "scale": 20.217299561233833,
+            "shift": -3.094153357107253,
+            "validPixels": 152292,
+            "fallbacks": 0
+          },
+          {
+            "scale": 5.1147498306919905,
+            "shift": -3.4883275590694858,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-room",
+        "variant": "median-three",
+        "sha256": "3d83b13f2ef9104d5957077bf56008e04fd42f191fd2baa39287582e89f0ccf5",
+        "alignment": [
+          {
+            "scale": 20.217299561233833,
+            "shift": -3.094153357107253,
+            "validPixels": 152292,
+            "fallbacks": 0
+          },
+          {
+            "scale": 5.1147498306919905,
+            "shift": -3.4883275590694858,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-room",
+        "variant": "agreement-005",
+        "sha256": "20c684ea841c39a3670534f41a6985ee06030af65c125eb600a6a5cbc8797580",
+        "alignment": [
+          {
+            "scale": 20.217299561233833,
+            "shift": -3.094153357107253,
+            "validPixels": 152292,
+            "fallbacks": 0
+          },
+          {
+            "scale": 5.1147498306919905,
+            "shift": -3.4883275590694858,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-room",
+        "variant": "agreement-010",
+        "sha256": "f80db37bcfa946eac878c1625f473890905016fa56ec02dc2d616d96aee5fefd",
+        "alignment": [
+          {
+            "scale": 20.217299561233833,
+            "shift": -3.094153357107253,
+            "validPixels": 152292,
+            "fallbacks": 0
+          },
+          {
+            "scale": 5.1147498306919905,
+            "shift": -3.4883275590694858,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-forest",
+        "variant": "mean-three",
+        "sha256": "c28e17586837885dc4d9200bddd436c845964f8fae0dc6020722b1bd8d85d33b",
+        "alignment": [
+          {
+            "scale": 26.404402412955125,
+            "shift": -1.83094901791767,
+            "validPixels": 123490,
+            "fallbacks": 30207
+          },
+          {
+            "scale": 3.1660924549330964,
+            "shift": -1.3535107893756182,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-forest",
+        "variant": "median-three",
+        "sha256": "38f7d0ef2156b2914b6f536cc345060951b957d7c0dd5441c14dd5ebf3ce9fa3",
+        "alignment": [
+          {
+            "scale": 26.404402412955125,
+            "shift": -1.83094901791767,
+            "validPixels": 123490,
+            "fallbacks": 30207
+          },
+          {
+            "scale": 3.1660924549330964,
+            "shift": -1.3535107893756182,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-forest",
+        "variant": "agreement-005",
+        "sha256": "725e7f866ff4c0e95b92eb058b4569779c23ef6f8a41188bda4900debda67ad0",
+        "alignment": [
+          {
+            "scale": 26.404402412955125,
+            "shift": -1.83094901791767,
+            "validPixels": 123490,
+            "fallbacks": 30207
+          },
+          {
+            "scale": 3.1660924549330964,
+            "shift": -1.3535107893756182,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-forest",
+        "variant": "agreement-010",
+        "sha256": "08e6ddf4a7bf1c854fd13d83fed48357f3fee6d6af665e79ee76f724438999c6",
+        "alignment": [
+          {
+            "scale": 26.404402412955125,
+            "shift": -1.83094901791767,
+            "validPixels": 123490,
+            "fallbacks": 30207
+          },
+          {
+            "scale": 3.1660924549330964,
+            "shift": -1.3535107893756182,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-stairs",
+        "variant": "mean-three",
+        "sha256": "1995170c7b6f1300e3a546f357edc964ad671e65eda69ce01d91d8eb44da7058",
+        "alignment": [
+          {
+            "scale": 14.241243917609697,
+            "shift": -0.897680220858224,
+            "validPixels": 151201,
+            "fallbacks": 1366
+          },
+          {
+            "scale": 2.953744237506839,
+            "shift": -0.8654656657639463,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-stairs",
+        "variant": "median-three",
+        "sha256": "5d9cddb90e92d19637bbf22da29cc6e49db49000df7e457329982132d8b46bda",
+        "alignment": [
+          {
+            "scale": 14.241243917609697,
+            "shift": -0.897680220858224,
+            "validPixels": 151201,
+            "fallbacks": 1366
+          },
+          {
+            "scale": 2.953744237506839,
+            "shift": -0.8654656657639463,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-stairs",
+        "variant": "agreement-005",
+        "sha256": "1dab687fdd9b6716947740b1cebdc3184b88464cca4578cb31c622c26f2d1855",
+        "alignment": [
+          {
+            "scale": 14.241243917609697,
+            "shift": -0.897680220858224,
+            "validPixels": 151201,
+            "fallbacks": 1366
+          },
+          {
+            "scale": 2.953744237506839,
+            "shift": -0.8654656657639463,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-stairs",
+        "variant": "agreement-010",
+        "sha256": "62e62af48afd9b45d1fe73886ebcbc59a14d3817d2c5017540794445daec591e",
+        "alignment": [
+          {
+            "scale": 14.241243917609697,
+            "shift": -0.897680220858224,
+            "validPixels": 151201,
+            "fallbacks": 1366
+          },
+          {
+            "scale": 2.953744237506839,
+            "shift": -0.8654656657639463,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-coast",
+        "variant": "mean-three",
+        "sha256": "284a10844d981bd0408b82a52aaa72f445ad69c8f8aab7e989e36aa5d7ffb8e7",
+        "alignment": [
+          {
+            "scale": 56.02294008211806,
+            "shift": -2.0159483243818133,
+            "validPixels": 150275,
+            "fallbacks": 3175
+          },
+          {
+            "scale": 4.150297401128853,
+            "shift": -1.7694007480248748,
+            "validPixels": 152292,
+            "fallbacks": 248
+          }
+        ]
+      },
+      {
+        "id": "truth-coast",
+        "variant": "median-three",
+        "sha256": "5bc8536534770ca3b95b08b71221c7526fedf7d966fc352f347e98e69f24e63a",
+        "alignment": [
+          {
+            "scale": 56.02294008211806,
+            "shift": -2.0159483243818133,
+            "validPixels": 150275,
+            "fallbacks": 3175
+          },
+          {
+            "scale": 4.150297401128853,
+            "shift": -1.7694007480248748,
+            "validPixels": 152292,
+            "fallbacks": 248
+          }
+        ]
+      },
+      {
+        "id": "truth-coast",
+        "variant": "agreement-005",
+        "sha256": "39a6a053f75425dd35872421059aea9b0d1b783c1a6ad0b9be7f1a96e1a47269",
+        "alignment": [
+          {
+            "scale": 56.02294008211806,
+            "shift": -2.0159483243818133,
+            "validPixels": 150275,
+            "fallbacks": 3175
+          },
+          {
+            "scale": 4.150297401128853,
+            "shift": -1.7694007480248748,
+            "validPixels": 152292,
+            "fallbacks": 248
+          }
+        ]
+      },
+      {
+        "id": "truth-coast",
+        "variant": "agreement-010",
+        "sha256": "a0d4eaff75268256820aede44b09f712198fa4aeb6e2663a0526634d5ee2cc91",
+        "alignment": [
+          {
+            "scale": 56.02294008211806,
+            "shift": -2.0159483243818133,
+            "validPixels": 150275,
+            "fallbacks": 3175
+          },
+          {
+            "scale": 4.150297401128853,
+            "shift": -1.7694007480248748,
+            "validPixels": 152292,
+            "fallbacks": 248
+          }
+        ]
+      },
+      {
+        "id": "truth-desk",
+        "variant": "mean-three",
+        "sha256": "e0d148c41d68baa346b6a4ada0fd753539dc98cd17ac3beca263de5c16acad9f",
+        "alignment": [
+          {
+            "scale": 15.472554610727833,
+            "shift": -1.6031979113360377,
+            "validPixels": 152292,
+            "fallbacks": 0
+          },
+          {
+            "scale": 3.863475866925427,
+            "shift": -1.5357293710741715,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-desk",
+        "variant": "median-three",
+        "sha256": "c1eb77aace544d22f87d54220163dfc7fd27536ef83ae3e20aad68e876380dc9",
+        "alignment": [
+          {
+            "scale": 15.472554610727833,
+            "shift": -1.6031979113360377,
+            "validPixels": 152292,
+            "fallbacks": 0
+          },
+          {
+            "scale": 3.863475866925427,
+            "shift": -1.5357293710741715,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-desk",
+        "variant": "agreement-005",
+        "sha256": "b04dcf50ca528c4ff05757eac8a8fbe925c293dd480da909b2482232468d7d42",
+        "alignment": [
+          {
+            "scale": 15.472554610727833,
+            "shift": -1.6031979113360377,
+            "validPixels": 152292,
+            "fallbacks": 0
+          },
+          {
+            "scale": 3.863475866925427,
+            "shift": -1.5357293710741715,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-desk",
+        "variant": "agreement-010",
+        "sha256": "1bdaba6e7db2e2e298f68964a40b25521c26304523a5f224b43fea88c55ef736",
+        "alignment": [
+          {
+            "scale": 15.472554610727833,
+            "shift": -1.6031979113360377,
+            "validPixels": 152292,
+            "fallbacks": 0
+          },
+          {
+            "scale": 3.863475866925427,
+            "shift": -1.5357293710741715,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-fur",
+        "variant": "mean-three",
+        "sha256": "e3ed90f9cef2da8f92b4a1e14b17b6ea5434fab5c59ae9317941da1234d915a8",
+        "alignment": [
+          {
+            "scale": 25.2275459669849,
+            "shift": -2.086101689817062,
+            "validPixels": 108124,
+            "fallbacks": 46330
+          },
+          {
+            "scale": 3.342053180052348,
+            "shift": -1.067643559283081,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-fur",
+        "variant": "median-three",
+        "sha256": "9765d2eebe8e80f5132687199c7f27fb24a361ee3aadbff66b81f8132ef6e0b0",
+        "alignment": [
+          {
+            "scale": 25.2275459669849,
+            "shift": -2.086101689817062,
+            "validPixels": 108124,
+            "fallbacks": 46330
+          },
+          {
+            "scale": 3.342053180052348,
+            "shift": -1.067643559283081,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-fur",
+        "variant": "agreement-005",
+        "sha256": "2680ad590066748401b747acb649ffc0d6de6c187470aa7f4ba3ebcf2c3643dc",
+        "alignment": [
+          {
+            "scale": 25.2275459669849,
+            "shift": -2.086101689817062,
+            "validPixels": 108124,
+            "fallbacks": 46330
+          },
+          {
+            "scale": 3.342053180052348,
+            "shift": -1.067643559283081,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-fur",
+        "variant": "agreement-010",
+        "sha256": "474657ec599aa01e68f93daab2eb3c64a40300a894448361d94485deca48b354",
+        "alignment": [
+          {
+            "scale": 25.2275459669849,
+            "shift": -2.086101689817062,
+            "validPixels": 108124,
+            "fallbacks": 46330
+          },
+          {
+            "scale": 3.342053180052348,
+            "shift": -1.067643559283081,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-night",
+        "variant": "mean-three",
+        "sha256": "c28f1e44c4339b9c82e7016a5636c0d66b37530ccfe2b9285b429fdf7c1119d9",
+        "alignment": [
+          {
+            "scale": 27.01067684350888,
+            "shift": -1.2895333830012212,
+            "validPixels": 152292,
+            "fallbacks": 101
+          },
+          {
+            "scale": 2.8345881160308046,
+            "shift": -1.5783215695409434,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-night",
+        "variant": "median-three",
+        "sha256": "985a989d0d4f77c91d6f3863b559ff068f7a953fe2d57ec51b258dab8e96e774",
+        "alignment": [
+          {
+            "scale": 27.01067684350888,
+            "shift": -1.2895333830012212,
+            "validPixels": 152292,
+            "fallbacks": 101
+          },
+          {
+            "scale": 2.8345881160308046,
+            "shift": -1.5783215695409434,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-night",
+        "variant": "agreement-005",
+        "sha256": "1c55302b81f1a7fdd2333e15a792393b15ff86af2145e15c9ae95069aaa9fb71",
+        "alignment": [
+          {
+            "scale": 27.01067684350888,
+            "shift": -1.2895333830012212,
+            "validPixels": 152292,
+            "fallbacks": 101
+          },
+          {
+            "scale": 2.8345881160308046,
+            "shift": -1.5783215695409434,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-night",
+        "variant": "agreement-010",
+        "sha256": "47c1a311f048ba5e62f931730a9d303efd1d0c7161eba29f8a10c0aeb9f0611d",
+        "alignment": [
+          {
+            "scale": 27.01067684350888,
+            "shift": -1.2895333830012212,
+            "validPixels": 152292,
+            "fallbacks": 101
+          },
+          {
+            "scale": 2.8345881160308046,
+            "shift": -1.5783215695409434,
+            "validPixels": 152292,
+            "fallbacks": 0
+          }
+        ]
+      },
+      {
+        "id": "truth-lattice",
+        "variant": "mean-three",
+        "sha256": "e0449380f06d9bff8d4b8d3181a11f2bec01e4f8ef16da444a75b60419b84d30",
+        "alignment": [
+          {
+            "scale": 9.780516843564369,
+            "shift": -0.8025503897031686,
+            "validPixels": 121843,
+            "fallbacks": 32885
+          },
+          {
+            "scale": 2.2024313943595146,
+            "shift": -0.7938410590495117,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-lattice",
+        "variant": "median-three",
+        "sha256": "dc320be921f7d50e09deed0d1ca5522ca24695679c87b7a311ef4157f616fa09",
+        "alignment": [
+          {
+            "scale": 9.780516843564369,
+            "shift": -0.8025503897031686,
+            "validPixels": 121843,
+            "fallbacks": 32885
+          },
+          {
+            "scale": 2.2024313943595146,
+            "shift": -0.7938410590495117,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-lattice",
+        "variant": "agreement-005",
+        "sha256": "5a096ef03f5f01df312a6263c2cac98339eed7c782c33393d16abdd01ed37460",
+        "alignment": [
+          {
+            "scale": 9.780516843564369,
+            "shift": -0.8025503897031686,
+            "validPixels": 121843,
+            "fallbacks": 32885
+          },
+          {
+            "scale": 2.2024313943595146,
+            "shift": -0.7938410590495117,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-lattice",
+        "variant": "agreement-010",
+        "sha256": "6fe324ea5d2d562af3821834aacfdf8c95df5a3b4c3370a10ae63ba1902b1b28",
+        "alignment": [
+          {
+            "scale": 9.780516843564369,
+            "shift": -0.8025503897031686,
+            "validPixels": 121843,
+            "fallbacks": 32885
+          },
+          {
+            "scale": 2.2024313943595146,
+            "shift": -0.7938410590495117,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-arches",
+        "variant": "mean-three",
+        "sha256": "7149f7f4bf0cd6c25fb299959c4693478678d42e5cbeab8dda5442093375ed4d",
+        "alignment": [
+          {
+            "scale": 19.8773275962983,
+            "shift": -1.011478311163847,
+            "validPixels": 150700,
+            "fallbacks": 2289
+          },
+          {
+            "scale": 1.891264546577371,
+            "shift": -0.7099100994583857,
+            "validPixels": 152292,
+            "fallbacks": 2
+          }
+        ]
+      },
+      {
+        "id": "truth-arches",
+        "variant": "median-three",
+        "sha256": "b739a4df1332932260daa2fb49584b795c0769da76d87f881d568feda7fbc3e0",
+        "alignment": [
+          {
+            "scale": 19.8773275962983,
+            "shift": -1.011478311163847,
+            "validPixels": 150700,
+            "fallbacks": 2289
+          },
+          {
+            "scale": 1.891264546577371,
+            "shift": -0.7099100994583857,
+            "validPixels": 152292,
+            "fallbacks": 2
+          }
+        ]
+      },
+      {
+        "id": "truth-arches",
+        "variant": "agreement-005",
+        "sha256": "8427d6749ad97cca11dfd10d49678fbca6ee73167b4ce70ed53676d9361d9f27",
+        "alignment": [
+          {
+            "scale": 19.8773275962983,
+            "shift": -1.011478311163847,
+            "validPixels": 150700,
+            "fallbacks": 2289
+          },
+          {
+            "scale": 1.891264546577371,
+            "shift": -0.7099100994583857,
+            "validPixels": 152292,
+            "fallbacks": 2
+          }
+        ]
+      },
+      {
+        "id": "truth-arches",
+        "variant": "agreement-010",
+        "sha256": "f4e48a1784d11da3927b3aa2cf29a78554a77b476ccd157b4a1df4f27b81cdc4",
+        "alignment": [
+          {
+            "scale": 19.8773275962983,
+            "shift": -1.011478311163847,
+            "validPixels": 150700,
+            "fallbacks": 2289
+          },
+          {
+            "scale": 1.891264546577371,
+            "shift": -0.7099100994583857,
+            "validPixels": 152292,
+            "fallbacks": 2
+          }
+        ]
+      },
+      {
+        "id": "truth-leaves",
+        "variant": "mean-three",
+        "sha256": "2a2b49bd933407d3d2cd4961a15fa88c0876495f3ada6f275cec9a8b987c7f51",
+        "alignment": [
+          {
+            "scale": 11.349885107226203,
+            "shift": -1.2726890988414372,
+            "validPixels": 102010,
+            "fallbacks": 52322
+          },
+          {
+            "scale": 3.337887289706846,
+            "shift": -1.266226570546837,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-leaves",
+        "variant": "median-three",
+        "sha256": "86456ab4c761fc4db7c2fb3da795183bb4ed260a39ce5b80e8ea0936c8ea40a3",
+        "alignment": [
+          {
+            "scale": 11.349885107226203,
+            "shift": -1.2726890988414372,
+            "validPixels": 102010,
+            "fallbacks": 52322
+          },
+          {
+            "scale": 3.337887289706846,
+            "shift": -1.266226570546837,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-leaves",
+        "variant": "agreement-005",
+        "sha256": "aa57f00be47c81416a16d49ee8a2c9e6baaa39665e725e035aee315edbba6cb3",
+        "alignment": [
+          {
+            "scale": 11.349885107226203,
+            "shift": -1.2726890988414372,
+            "validPixels": 102010,
+            "fallbacks": 52322
+          },
+          {
+            "scale": 3.337887289706846,
+            "shift": -1.266226570546837,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-leaves",
+        "variant": "agreement-010",
+        "sha256": "a6cd32f44b3e2e85994c1c73cd504e109db4111633351b9e3c163e87cea23f4b",
+        "alignment": [
+          {
+            "scale": 11.349885107226203,
+            "shift": -1.2726890988414372,
+            "validPixels": 102010,
+            "fallbacks": 52322
+          },
+          {
+            "scale": 3.337887289706846,
+            "shift": -1.266226570546837,
+            "validPixels": 152292,
+            "fallbacks": 3045
+          }
+        ]
+      },
+      {
+        "id": "truth-steps",
+        "variant": "mean-three",
+        "sha256": "51015c6b7c27b65ea672f8b3e2cb2ec7fff4449677c816741320e75f75f8c45b",
+        "alignment": [
+          {
+            "scale": 18.701270153451222,
+            "shift": -1.524585849174065,
+            "validPixels": 151228,
+            "fallbacks": 1534
+          },
+          {
+            "scale": 3.5923286031590598,
+            "shift": -1.1095850544856432,
+            "validPixels": 152292,
+            "fallbacks": 998
+          }
+        ]
+      },
+      {
+        "id": "truth-steps",
+        "variant": "median-three",
+        "sha256": "c7cc5ca1a43f356bf53b11c872027829e786047141b82951a83d482af23b5459",
+        "alignment": [
+          {
+            "scale": 18.701270153451222,
+            "shift": -1.524585849174065,
+            "validPixels": 151228,
+            "fallbacks": 1534
+          },
+          {
+            "scale": 3.5923286031590598,
+            "shift": -1.1095850544856432,
+            "validPixels": 152292,
+            "fallbacks": 998
+          }
+        ]
+      },
+      {
+        "id": "truth-steps",
+        "variant": "agreement-005",
+        "sha256": "4a1d3a32216f65deec1a75476e89fd419c25e23b64b15a0702b688ed4fa2078c",
+        "alignment": [
+          {
+            "scale": 18.701270153451222,
+            "shift": -1.524585849174065,
+            "validPixels": 151228,
+            "fallbacks": 1534
+          },
+          {
+            "scale": 3.5923286031590598,
+            "shift": -1.1095850544856432,
+            "validPixels": 152292,
+            "fallbacks": 998
+          }
+        ]
+      },
+      {
+        "id": "truth-steps",
+        "variant": "agreement-010",
+        "sha256": "bb77306d1ae2f08b4ee436e69481d595a5eff72180ba72711ebbebedf6dc0870",
+        "alignment": [
+          {
+            "scale": 18.701270153451222,
+            "shift": -1.524585849174065,
+            "validPixels": 151228,
+            "fallbacks": 1534
+          },
+          {
+            "scale": 3.5923286031590598,
+            "shift": -1.1095850544856432,
+            "validPixels": 152292,
+            "fallbacks": 998
+          }
+        ]
+      }
+    ]
+  },
+  "teacherSources": {
+    "moge": {
+      "name": "MoGe-2 ViT-L",
+      "codeRevision": "74fbce054ebed49800de42d0ad0e83495065719a",
+      "utilsRevision": "62f09d58509485564e24d5d9f6aac9ee9ebc0c37",
+      "weightRevision": "39c4d5e957afe587e04eec59dc2bcc3be5ecd968",
+      "weightsSha256": "3eefd4abb2102f38f12b2d1992e5ff15e4923e5431c67dd494afe157e0111cd5",
+      "weightBytes": 1305030700,
+      "weightLicense": "MIT, verified on the live model card on October 16, 2026.",
+      "source": "https://github.com/microsoft/MoGe/blob/main/README.md",
+      "codeLicense": "https://github.com/microsoft/MoGe/blob/main/LICENSE",
+      "modelCard": "https://huggingface.co/Ruicheng/moge-2-vitl/raw/main/README.md",
+      "settings": {
+        "version": 2,
+        "device": "CPU",
+        "threads": 1,
+        "tokens": 1200,
+        "precision": "FP32",
+        "maximumImageSide": 768,
+        "seed": 0,
+        "input": "Original browser-decoded RGB, resized with Lanczos. Official masked inverse depth; invalid depth maps to zero. Bilinear resize to original model dimensions. Built-ins are packed and unpacked with the existing unsigned-16-bit format before the field screen."
+      }
+    },
+    "da3Large11": {
+      "name": "depth-anything/DA3-LARGE-1.1",
+      "revision": "0e109ae307c5982f319a67cf6f9f99ccdc0ec97c",
+      "weightsBytes": 1643843860,
+      "weightsSha256": "739905c423cf0d6ccaf9e61a8401d82ba1ac32d7f4d3ee6dca8f92b377633f64",
+      "strictLoadedParameters": 410941767,
+      "sourceRevision": "3d835ec1a5802d64a8b8b15f817a1ab54809bfe4",
+      "sourceCodeLicense": "Apache 2.0",
+      "modelCardLicense": "Apache 2.0",
+      "repositoryModelTableLicense": "CC BY-NC 4.0",
+      "licenseScope": "Offline research only; no weights or derived depth asset ships. Both stated licenses permit this research.",
+      "urlsActuallyOpened": [
+        "https://huggingface.co/api/models/depth-anything/DA3-LARGE-1.1?blobs=true",
+        "https://huggingface.co/depth-anything/DA3-LARGE-1.1/resolve/0e109ae307c5982f319a67cf6f9f99ccdc0ec97c/README.md?download=true",
+        "https://raw.githubusercontent.com/ByteDance-Seed/depth-anything-3/3d835ec1a5802d64a8b8b15f817a1ab54809bfe4/README.md"
+      ],
+      "processingMethodSha256": "ac310030efddae6f85e481cdb74bc32e59b0fc722e6989f8ca868794ca1c35c5",
+      "processing": "Official 504 upper-bound input processing, CPU one thread, FP32, seed zero, strict full-parameter safetensors loading with asserted shared LayerNorm aliases. Positive depth inverted, then bilinearly resampled to the original model dimensions. Original unsigned-16-bit pack/unpack only for built-in baked-asset comparison; references retain raw Float32."
+    }
+  },
+  "decision": "All four fixed combinations are cut. Every rule regresses built-in flat or order warnings. Mean and median improve all 12 reference AbsRel, RMSE, p95, and reversed-pair scores with no new holes, but still increase reference flat-pair warnings on arches and steps. No original threshold, metric, input membership, or shipping depth asset changes."
+}

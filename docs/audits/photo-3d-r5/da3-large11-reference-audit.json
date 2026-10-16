@@ -1,0 +1,666 @@
+{
+  "kind": "Complete-reference-corpus raw inverse-depth accuracy diagnostic. Global model replacement already failed the separate built-in warning gates. No selected-class, native-rendered quality, rendered-world geometry, or phone-cost acceptance.",
+  "createdUTC": "2026-10-16T08:57:17.375Z",
+  "methodSha256": "ab33a7b91e0f9d99a196ffe05a9563f187e0f82982311cc2086ed92757c3796d",
+  "baselineAtlasSha256": "f939791c31e0372b39d698d48aa7054c64cb3c550ae329d856179154ac387f48",
+  "requiredReferenceScenes": 12,
+  "carriedRawInferences": ["truth-still-life", "truth-fur"],
+  "freshRawInferences": 10,
+  "complete": true,
+  "rows": [
+    {
+      "id": "truth-still-life",
+      "sourceImageSha256": "8dd6ef596e67f852d0d2e8cd47909842c8bc42577748d0b7ce7ad1cb70d47e51",
+      "truthManifestSha256": "8e366037d337f6b2b8482b7e838cfefd24bd6376cd22255fd0030a4f605611a5",
+      "originalDepthSha256": "5ced1b992e17d8b38db9d330c0edd4093d5016dfd43e4dae85cebe40b1806463",
+      "candidateDepthSha256": "1e8a38353ef7764f8416138b002cf2d80613b0a25d5a2bc61eff1fe7bb0ea09a",
+      "carriedRawInference": true,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.017862327568203704,
+          "shift": 0.0387217980972172,
+          "calibrationPixels": 13007,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 91050,
+        "scoredPixels": 91050,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.019206885726314064,
+        "rmseMeters": 0.3365831195305428,
+        "p95Meters": 0.5609477891399504,
+        "pairs": 2993,
+        "reversedFraction": 0.0023387905111927833,
+        "flattenedFraction": 0.0010023387905111927
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.08775607967591992,
+          "shift": 0.0052036714250436435,
+          "calibrationPixels": 13007,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 91050,
+        "scoredPixels": 91050,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.00956141752362837,
+        "rmseMeters": 0.20234209701095826,
+        "p95Meters": 0.23121733416336987,
+        "pairs": 2993,
+        "reversedFraction": 0.001670564650851988,
+        "flattenedFraction": 0.0010023387905111927
+      }
+    },
+    {
+      "id": "truth-room",
+      "sourceImageSha256": "a913fb52e8a515455090a325b5151f419a4dd6b4c3a2c9efe1d7d5e4d8e8ae71",
+      "truthManifestSha256": "2bcd3d8f338c7fe19b73233a7148fa7fb2a7c6c736677f480164e68b4d309c00",
+      "originalDepthSha256": "75439b746ed78c0e1df7cba116d770aa0ab3507e622c98f30a397d84c6a6c718",
+      "candidateDepthSha256": "8f53fcb883a05c1cd34b60452160dcaea2dc6994d8ed017c646bfd6a8bf06bfc",
+      "carriedRawInference": false,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.020383695507642446,
+          "shift": 0.08790478570789181,
+          "calibrationPixels": 19037,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 133255,
+        "scoredPixels": 133255,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.023605518148868774,
+        "rmseMeters": 0.24973787983848247,
+        "p95Meters": 0.46560600170981914,
+        "pairs": 5268,
+        "reversedFraction": 0.0007593014426727411,
+        "flattenedFraction": 0.0015186028853454822
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.1060169473561963,
+          "shift": 0.010812174890577984,
+          "calibrationPixels": 19037,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 133255,
+        "scoredPixels": 133255,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.008095734203702638,
+        "rmseMeters": 0.12852740127512777,
+        "p95Meters": 0.13137098673103864,
+        "pairs": 5268,
+        "reversedFraction": 0.0011389521640091116,
+        "flattenedFraction": 0.0009491268033409263
+      }
+    },
+    {
+      "id": "truth-forest",
+      "sourceImageSha256": "6e302d145a62abbcf2dd716f7419153091a6f6939e2f5521b09a01e5c0b1cab4",
+      "truthManifestSha256": "970326f8a1e55875239562f32927c27e6719cbe0391eff805a26ea4a1b098174",
+      "originalDepthSha256": "cf646cb659841adc2b549ee2b5e2ba4c83e77e3efcdf75ffa960cc8ccf089265",
+      "candidateDepthSha256": "bc2d5d030404ba87cda825cfcb5ed00f87424dd172b1668727c4978af32afc59",
+      "carriedRawInference": false,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.030121004707998902,
+          "shift": 0.04235068475825472,
+          "calibrationPixels": 15259,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 106806,
+        "scoredPixels": 106806,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.04507592538980331,
+        "rmseMeters": 0.9777934584511261,
+        "p95Meters": 1.9344077421694355,
+        "pairs": 4324,
+        "reversedFraction": 0.020582793709528216,
+        "flattenedFraction": 0.018501387604070305
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.09105290192367652,
+          "shift": 0.010877252636507267,
+          "calibrationPixels": 15259,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 106806,
+        "scoredPixels": 106806,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.03974846302335172,
+        "rmseMeters": 0.8653742797668257,
+        "p95Meters": 1.4632597570908636,
+        "pairs": 4324,
+        "reversedFraction": 0.010175763182238668,
+        "flattenedFraction": 0.010638297872340425
+      }
+    },
+    {
+      "id": "truth-stairs",
+      "sourceImageSha256": "f85a149718bcceb0a815d1deb96698add211d772c0f52f895aa28fe03561d51c",
+      "truthManifestSha256": "008c7e4a774d440a6d77d5b2838855f8d257dee38d0b199c0aa80f181f355b62",
+      "originalDepthSha256": "2323f5b4d727db0cae2b585b163e04ec65571c27e13cc7299156cb508570b0e3",
+      "candidateDepthSha256": "103ae73a2ea82c1384998cb83ed2aa1caf85616d8c40708e14d1655e96bb6998",
+      "carriedRawInference": false,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.03792972203989845,
+          "shift": 0.04009243443369211,
+          "calibrationPixels": 11589,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 81035,
+        "scoredPixels": 81035,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.06840794333682626,
+        "rmseMeters": 1.0228442516780207,
+        "p95Meters": 1.9850951850089622,
+        "pairs": 2362,
+        "reversedFraction": 0.02243861134631668,
+        "flattenedFraction": 0.016088060965283656
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.1108607946293688,
+          "shift": 0.010781478485821956,
+          "calibrationPixels": 11589,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 81035,
+        "scoredPixels": 81035,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.02668578801646928,
+        "rmseMeters": 0.5410557189130333,
+        "p95Meters": 0.6803488782192595,
+        "pairs": 2362,
+        "reversedFraction": 0.0021168501270110076,
+        "flattenedFraction": 0.001693480101608806
+      }
+    },
+    {
+      "id": "truth-coast",
+      "sourceImageSha256": "e5d6cf55f7b47b9347bda772a033ee6c365335429f66357845343b38083b270b",
+      "truthManifestSha256": "5277ce5bf1cde99abf83007d8b2a07df0261a7dd5d33a501538f2ef23b15fc7a",
+      "originalDepthSha256": "4f82ab8fd5b7e9578daa9fe9a2aebbbe0ff45078c87106a74fe84a37ee6bb6d2",
+      "candidateDepthSha256": "0f7a6fd1daabe4364d26ba84920f4def4c29f35a910552cb088c7e6b962c7f2b",
+      "carriedRawInference": false,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.026194610828717175,
+          "shift": 0.03117938726395243,
+          "calibrationPixels": 6690,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 46737,
+        "scoredPixels": 46737,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.03208708706183156,
+        "rmseMeters": 0.6222773095966146,
+        "p95Meters": 0.9150033700214433,
+        "pairs": 676,
+        "reversedFraction": 0,
+        "flattenedFraction": 0.0014792899408284023
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.1137967874033219,
+          "shift": -0.02170874946343049,
+          "calibrationPixels": 6690,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 46737,
+        "scoredPixels": 46737,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.02985485309790973,
+        "rmseMeters": 0.5268292751721215,
+        "p95Meters": 0.6286770452300585,
+        "pairs": 676,
+        "reversedFraction": 0.0014792899408284023,
+        "flattenedFraction": 0.0014792899408284023
+      }
+    },
+    {
+      "id": "truth-desk",
+      "sourceImageSha256": "df87a33f04352ea196ac0a6e880db83c36950ee9133a020cf1264a52a93a390e",
+      "truthManifestSha256": "7a5e9d4795a3b1aceffc14110d2611861bc7af20e1ab4ff659a184a30ecc3db3",
+      "originalDepthSha256": "0b3535ded4d7b48a208284c531de3bccd7d5c0ceaaf3c44bb378ea5fbcffd550",
+      "candidateDepthSha256": "1be3cb36d45cf13d72554bbfa958a85eff58a3ea7e4cb4d475c6ea141a4e459d",
+      "carriedRawInference": false,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.02803203820085574,
+          "shift": 0.05033486187539189,
+          "calibrationPixels": 18703,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 130918,
+        "scoredPixels": 130918,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.023611421057336865,
+        "rmseMeters": 0.27300175435812984,
+        "p95Meters": 0.4708435238070816,
+        "pairs": 6627,
+        "reversedFraction": 0.0010562848951259998,
+        "flattenedFraction": 0.0012071827372868568
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.1132136159595496,
+          "shift": 0.0019426271148192515,
+          "calibrationPixels": 18703,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 130918,
+        "scoredPixels": 130918,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.022015762256651583,
+        "rmseMeters": 0.23662362832930117,
+        "p95Meters": 0.4153512404445223,
+        "pairs": 6627,
+        "reversedFraction": 0.0010562848951259998,
+        "flattenedFraction": 0.001358080579447714
+      }
+    },
+    {
+      "id": "truth-fur",
+      "sourceImageSha256": "287e7886fd7cc08c3e4813b54a10839636e86415146bed62df7f28071f84396b",
+      "truthManifestSha256": "bd30dc090187b024c9d2af651c21ae76b9d22e773a85201fcfd4e824920e059e",
+      "originalDepthSha256": "af989c10f9645838cb468d23093e38195358f46a2dfb19f64ac37b9c21fbf6b3",
+      "candidateDepthSha256": "7192b1d0c4d8400ba8aaec5a060e8f21a10de7ae11919643e266ceb9bbd97d2f",
+      "carriedRawInference": true,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.035219728484419836,
+          "shift": 0.061187759964882,
+          "calibrationPixels": 13423,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 94073,
+        "scoredPixels": 94073,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.06397036016998235,
+        "rmseMeters": 1.1290823461410937,
+        "p95Meters": 2.4580272200004476,
+        "pairs": 3426,
+        "reversedFraction": 0.01634559252772913,
+        "flattenedFraction": 0.0043782837127845885
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.12077530114871242,
+          "shift": 0.011623958583547294,
+          "calibrationPixels": 13423,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 94073,
+        "scoredPixels": 94073,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.03314864742832784,
+        "rmseMeters": 0.7191499007173484,
+        "p95Meters": 0.38272788032004357,
+        "pairs": 3426,
+        "reversedFraction": 0.013426736719206071,
+        "flattenedFraction": 0.003210741389375365
+      }
+    },
+    {
+      "id": "truth-night",
+      "sourceImageSha256": "bf69a1e4c758002068d9de4efb792f4a0a643d2b68d676a988593639dcde5f0a",
+      "truthManifestSha256": "ca37b83d22b93aacfe2410f63b2486a7ea1295294e4102cb371f7b6c23024b2a",
+      "originalDepthSha256": "146056dffb25d1f28cc0b620283069683a70deca7872b3411b900e8e5adc1fd5",
+      "candidateDepthSha256": "e674ef1ee1eb380b4135ba700179f3399c6a9972904f4b7caff7b8370d4c082f",
+      "carriedRawInference": false,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.03591685270849339,
+          "shift": 0.028146858163877058,
+          "calibrationPixels": 10365,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 72581,
+        "scoredPixels": 72581,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.07021886048702225,
+        "rmseMeters": 1.370853605783655,
+        "p95Meters": 1.6863311920197752,
+        "pairs": 1968,
+        "reversedFraction": 0.019817073170731708,
+        "flattenedFraction": 0.012703252032520325
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.0929545215166551,
+          "shift": 0.006394414796526429,
+          "calibrationPixels": 10365,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 72581,
+        "scoredPixels": 72581,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.03923969040920365,
+        "rmseMeters": 0.6904568814582704,
+        "p95Meters": 1.208286914089097,
+        "pairs": 1968,
+        "reversedFraction": 0.018292682926829267,
+        "flattenedFraction": 0.006097560975609756
+      }
+    },
+    {
+      "id": "truth-lattice",
+      "sourceImageSha256": "9baf2c9e2eca5121227c97c958f461f33bdb995d2c0d21e45dc1039b59b57df9",
+      "truthManifestSha256": "54e9b9694b03b40c9bac3352404af6b8d87dda3d2843d42fef8b0f92295d502c",
+      "originalDepthSha256": "901ccb32abf8375002d638669c839026ac488eb0f35165850d5f266098f5d9ec",
+      "candidateDepthSha256": "c656b42563a4575befc925dd250c05a27a3cad7ca01fb8042dd974c5d625cca3",
+      "carriedRawInference": false,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.042582787909661704,
+          "shift": 0.06798809127142763,
+          "calibrationPixels": 13829,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 96755,
+        "scoredPixels": 96755,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.13181825072144607,
+        "rmseMeters": 1.4699389037536086,
+        "p95Meters": 2.6186997531156138,
+        "pairs": 3328,
+        "reversedFraction": 0.11268028846153846,
+        "flattenedFraction": 0.03936298076923077
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.11249804310850299,
+          "shift": 0.02025437952397351,
+          "calibrationPixels": 13829,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 96755,
+        "scoredPixels": 96755,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.09075545396281004,
+        "rmseMeters": 1.1787274102717002,
+        "p95Meters": 2.1654097605370373,
+        "pairs": 3328,
+        "reversedFraction": 0.0751201923076923,
+        "flattenedFraction": 0.021634615384615384
+      }
+    },
+    {
+      "id": "truth-arches",
+      "sourceImageSha256": "19e0f74710242f032e1be31de49a6b5432f73497092a91179385f2ea3cac5c79",
+      "truthManifestSha256": "9bd1b253fff76eda5815b0e16ab55d9d954e4f9895f213466dd09227f1c40789",
+      "originalDepthSha256": "65fd1ac73c1839426f83a4fe9715f9d3e37ec534bc73f585018ce84b36ab3ffa",
+      "candidateDepthSha256": "b3b0f8fac9a42c276a93dcc80c74252483ddb0bf2df74ff23f16941a58cb7cdf",
+      "carriedRawInference": false,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.046740833277858045,
+          "shift": 0.045727078639509255,
+          "calibrationPixels": 15225,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 106462,
+        "scoredPixels": 106462,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.11776588982061371,
+        "rmseMeters": 1.3539839292626568,
+        "p95Meters": 3.0622151397493376,
+        "pairs": 4433,
+        "reversedFraction": 0.028648770584254454,
+        "flattenedFraction": 0.01466275659824047
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.09309459271059213,
+          "shift": 0.04390161400919739,
+          "calibrationPixels": 15225,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 106462,
+        "scoredPixels": 106462,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.09145890429878081,
+        "rmseMeters": 1.2440055015437628,
+        "p95Meters": 2.9299971675735446,
+        "pairs": 4433,
+        "reversedFraction": 0.020527859237536656,
+        "flattenedFraction": 0.03225806451612903
+      }
+    },
+    {
+      "id": "truth-leaves",
+      "sourceImageSha256": "4ebd5dc4a850e7f247ffe28b5b5bfc70a84beda8811ed3ad1b1e328cee6da8e7",
+      "truthManifestSha256": "0eeea9c87adc3d7ff5a702347f2b21948151d4d2ac8562f4023850d820843d81",
+      "originalDepthSha256": "9bbacd2bd2c3fba3319033a4dba8e4e3eb65872cb5d4a89bb163a6cf6ed9bd1b",
+      "candidateDepthSha256": "bcbd55779fb867dd83806a1043628e1d70e21823b755d3681a50ff4bb0a4af26",
+      "carriedRawInference": false,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.03397469216957972,
+          "shift": 0.05162168878170639,
+          "calibrationPixels": 12659,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 88668,
+        "scoredPixels": 88668,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.0508893147576506,
+        "rmseMeters": 1.1357766745313862,
+        "p95Meters": 1.98081426369788,
+        "pairs": 2961,
+        "reversedFraction": 0.02330293819655522,
+        "flattenedFraction": 0.012833502195204323
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.10832271663901524,
+          "shift": 0.005531469229244785,
+          "calibrationPixels": 12659,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 88668,
+        "scoredPixels": 88668,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.032428161802851324,
+        "rmseMeters": 0.8985502442853605,
+        "p95Meters": 1.0892370062397845,
+        "pairs": 2961,
+        "reversedFraction": 0.019925700776764605,
+        "flattenedFraction": 0.008105369807497468
+      }
+    },
+    {
+      "id": "truth-steps",
+      "sourceImageSha256": "1c73980d5513ffb4f4380baf52b9013ec06a450831b0756217fc67ba7da643f9",
+      "truthManifestSha256": "04dcfd3663144ffac60dda54ddbdd81e06d72fd1755f5221c49c133317eaee38",
+      "originalDepthSha256": "1d310987ed335e1db78c6c068dd32ddac2a23bae56f4aa3c13dda3db455912dd",
+      "candidateDepthSha256": "eaeb89ea62036b11841076f0c60c1ff8519fc6a99b86a7a032afd1b61952e739",
+      "carriedRawInference": false,
+      "baselineExact": true,
+      "before": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.027258499478260527,
+          "shift": 0.04734913492239142,
+          "calibrationPixels": 12264,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 85813,
+        "scoredPixels": 85813,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.0261349074853332,
+        "rmseMeters": 0.6230013409746812,
+        "p95Meters": 0.4446818954353944,
+        "pairs": 2191,
+        "reversedFraction": 0.005020538566864446,
+        "flattenedFraction": 0.0013692377909630307
+      },
+      "after": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.08949844126749004,
+          "shift": 0.032665129379677436,
+          "calibrationPixels": 12264,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 85813,
+        "scoredPixels": 85813,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.031102206712954758,
+        "rmseMeters": 0.8014450401089054,
+        "p95Meters": 1.8016538072738193,
+        "pairs": 2191,
+        "reversedFraction": 0.005933363760839799,
+        "flattenedFraction": 0.0018256503879507074
+      }
+    }
+  ],
+  "summary": {
+    "absRel": {
+      "supportedScenes": 12,
+      "beforeMean": 0.05606603034691909,
+      "afterMean": 0.037841256894720156,
+      "reduction": 0.3250591015527535,
+      "regressions": ["truth-steps"]
+    },
+    "rmseMeters": {
+      "supportedScenes": 12,
+      "beforeMean": 0.8804062144916666,
+      "afterMean": 0.6694239482377262,
+      "reduction": 0.23964195479442219,
+      "regressions": ["truth-steps"]
+    },
+    "p95Meters": {
+      "supportedScenes": 12,
+      "beforeMean": 1.5485560896562618,
+      "afterMean": 1.0939614814927032,
+      "reduction": 0.2935603115702877,
+      "regressions": ["truth-steps"]
+    },
+    "holePixels": {
+      "supportedScenes": 12,
+      "beforeMean": 0,
+      "afterMean": 0,
+      "reduction": null,
+      "regressions": []
+    },
+    "reversedFraction": {
+      "supportedScenes": 12,
+      "beforeMean": 0.021082581951042487,
+      "afterMean": 0.014238686724077826,
+      "reduction": 0.32462320046270454,
+      "regressions": ["truth-room", "truth-coast", "truth-steps"]
+    },
+    "flattenedFraction": {
+      "supportedScenes": 12,
+      "beforeMean": 0.010425573001855782,
+      "afterMean": 0.007521051379104599,
+      "reduction": 0.2785958740334147,
+      "regressions": ["truth-desk", "truth-arches", "truth-steps"]
+    }
+  },
+  "finishedUTC": "2026-10-16T08:58:34.129Z",
+  "model": {
+    "name": "depth-anything/DA3-LARGE-1.1",
+    "revision": "0e109ae307c5982f319a67cf6f9f99ccdc0ec97c",
+    "weightsBytes": 1643843860,
+    "weightsSha256": "739905c423cf0d6ccaf9e61a8401d82ba1ac32d7f4d3ee6dca8f92b377633f64",
+    "strictLoadedParameters": 410941767,
+    "sourceRevision": "3d835ec1a5802d64a8b8b15f817a1ab54809bfe4",
+    "sourceCodeLicense": "Apache 2.0",
+    "modelCardLicense": "Apache 2.0",
+    "repositoryModelTableLicense": "CC BY-NC 4.0",
+    "licenseScope": "Offline research only; no weights or derived depth asset ships. Both stated licenses permit this research.",
+    "urlsActuallyOpened": [
+      "https://huggingface.co/api/models/depth-anything/DA3-LARGE-1.1?blobs=true",
+      "https://huggingface.co/depth-anything/DA3-LARGE-1.1/resolve/0e109ae307c5982f319a67cf6f9f99ccdc0ec97c/README.md?download=true",
+      "https://raw.githubusercontent.com/ByteDance-Seed/depth-anything-3/3d835ec1a5802d64a8b8b15f817a1ab54809bfe4/README.md"
+    ],
+    "processingMethodSha256": "ac310030efddae6f85e481cdb74bc32e59b0fc722e6989f8ca868794ca1c35c5",
+    "processing": "Official 504 upper-bound input processing, CPU one thread, FP32, seed zero, strict full-parameter safetensors loading with asserted shared LayerNorm aliases. Positive depth inverted, then bilinearly resampled to the original model dimensions. Original unsigned-16-bit pack/unpack only for built-in baked-asset comparison; references retain raw Float32."
+  },
+  "rawStudySha256": "34545c3b3184e997f2d87e7dd82efb78ecdc20c99d88c9b14a55485b6493193c",
+  "decision": "Not a universal physical-depth improvement: steps AbsRel, RMSE, and p95 increase. Three reference scenes increase reversed-pair warnings, and three increase flattened-pair warnings. No extra holes are introduced. Mean gains do not excuse individual regressions, and these reference scenes are outside the selected flat-warning class."
+}
