@@ -15,7 +15,7 @@
 // layers (P1: an album photo raised as pop-up layers, then tilted),
 // album (an album photo rising, then turned).
 // --dpr=1 renders at one device pixel per CSS pixel (default 2). Writes
-// Task 95 adds r2-book, r2-lab, r2-album, r2-text, and r2-diagram: turns,
+// Task 95 adds r2-book, r2-lab, r2-album, r2-text, r2-chart, and r2-diagram: turns,
 // Pop out with layers off and on, and the original text/diagram inputs.
 // --profile=low and --width=390 match a phone; preparation waits are omitted.
 // --frames=1 also saves full-color PNG frames and their variable-duration concat list.
@@ -343,15 +343,17 @@ async function record(scene) {
     await run(() => window.__splashery.app.pictureStep(1));
     await play(1.2);
     await hold(650);
-  } else if (scene === "r2-text" || scene === "r2-diagram") {
+  } else if (["r2-text", "r2-chart", "r2-diagram"].includes(scene)) {
     await warm();
     await open("picture-lab", {});
     await run(() => (window.__splashery.player.frozen = false));
     await run(
       async ({ scene, base }) => {
         const { app } = window.__splashery;
-        if (scene === "r2-text")
-          await app.openMedia(new URL("work/pages-r2/fixtures/text.png", base).href);
+        if (scene === "r2-text" || scene === "r2-chart")
+          await app.openMedia(
+            new URL(`work/pages-r2/fixtures/${scene.slice(3)}.png`, base).href,
+          );
         else {
           // Original CC0 diagram, made by Ryan with Codex (GPT-6).
           const c = document.createElement("canvas");
