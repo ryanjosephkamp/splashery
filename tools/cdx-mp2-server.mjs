@@ -15,6 +15,7 @@ const types = {
   ".js": "text/javascript",
   ".mjs": "text/javascript",
   ".json": "application/json",
+  ".webmanifest": "application/manifest+json",
   ".wasm": "application/wasm",
   ".jpg": "image/jpeg",
   ".png": "image/png",

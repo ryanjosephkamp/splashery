@@ -23,14 +23,18 @@
 // relief reaches the toy through its tap box. The relief module loads with the first picture.
 
 import { depthBytes } from "../live/relief-height.js"; // lane Photo depth
+import { clipRasterView, clipRasterPlanes } from "./moving-photo-raster.js";
+import { drawFields, indexClipCaps } from "./moving-photo-geometry.js";
 import {
-  PIXELFORMAT_RGBA32F,
+  PIXELFORMAT_R32F,
   PRIMITIVE_TRIANGLES,
   VertexBuffer,
   VertexFormat,
   SEMANTIC_ATTR12,
+  SEMANTIC_ATTR13,
   TYPE_FLOAT32,
   BUFFER_DYNAMIC,
+  Mat4,
 } from "../pc.js"; // clip-only geometry/cache
 import { formatCount } from "../state.js";
 
@@ -57,7 +61,18 @@ const player = () => globalThis.window?.__splashery?.player || null;
 // Budget of grid cells for the relief on each device profile (its triangles are twice this).
 export const SHARP_CELLS = { low: 60000, mid: 120000, high: 200000, max: 300000 };
 const cellsFor = () => SHARP_CELLS[player()?.profile] || SHARP_CELLS.mid;
+export const sharpClipOnly = (clip) =>
+  !!(
+    S.src?.kind === "clip" &&
+    S.src.clip === clip &&
+    S.mesh?.visible &&
+    S.splatsOff === player()?.stage?.toy?.entity &&
+    !S.wake &&
+    !S.yielded
+  );
 let clipHolds = 0;
+let clipGeometry = null;
+let clipGeometryLoading = null;
 export function holdSharpClip() {
   clipHolds++;
   S.video?.pause();
@@ -169,6 +184,14 @@ export async function prepareSharpPhoto() {
 
 // Moving photo to 3D's build: the toy's state (MOVING), the picture's size and its lift.
 export function sharpClip(moving, { width, height, full }) {
+  // Prepare in parallel with the first small preview. A blocked or missing
+  // accelerator retains the exact JavaScript construction below.
+  clipGeometryLoading ||= import("./moving-photo-geometry.js")
+    .then(async (helper) => ({ ...helper, module: await helper.prepareGeometry() }))
+    .then((helper) => {
+      clipGeometry = helper;
+    })
+    .catch(() => {});
   const stage = player()?.stage;
   if (stage && S.clipStage !== stage) {
     S.clipStage = stage;
@@ -404,6 +427,7 @@ function status(on) {
 }
 
 function hide() {
+  S.mesh?.clipStream?.pause();
   status(false);
   splats(true);
   // (the relief stays until the splats are back, at the next update, so no frame shows neither)
@@ -433,6 +457,7 @@ export function sync() {
   }
   if (S.watching !== stage) {
     S.watching = stage;
+    watchClipDraws(stage);
     stage.onUpdate(() => {
       S.ticks++;
       if (S.wake) wake();
@@ -466,6 +491,9 @@ export function sync() {
   m.show(surface || S.wake);
   if (!surface) m.showBackground(true);
   status(m.visible);
+  // Hidden splat textures do not request a frame. A still camera must also
+  // present each ready clip picture; the draw signature drops duplicates.
+  if (src.kind === "clip" && sharpClipOnly(src.clip) && !m.clipWaitingDepth) stage.requestRender(0);
 }
 
 // The relief's grid: as fine as the depth, within the device's budget.
@@ -507,6 +535,40 @@ function fillClip(m, src) {
   clipBorder(m, src);
   if (m.u.uBack[2]) m.setPieces(null); // (a clip's relief blends by depth, as before)
   const playing = (pl) => !mv.opening && clipHolds === 0 && (pl?.motion?.targets?.play ?? 1) > 0.5;
+  if (m.clipStream && m.clipStream.clip !== clip) {
+    m.clipStream.close();
+    m.clipStream = null;
+    m.clipBitmap?.close();
+    m.clipBitmap = null;
+  }
+  if (
+    clip.long &&
+    playing(player()) &&
+    !clip.depthEase &&
+    clipGeometry &&
+    typeof VideoFrame !== "undefined" &&
+    typeof OffscreenCanvas !== "undefined"
+  ) {
+    m.clipStream ||= clipGeometry.videoGeometryStream(clip, m.cols, m.rows, m.clipAspect, () =>
+      player()?.stage?.requestRender?.(0),
+    );
+    const active = m.clipStream.play(mv.t);
+    const packet = m.clipStream.take(mv.t);
+    if (packet) {
+      m.clipStreamPacket = packet;
+      m.setDepth({ w: clip.w, h: clip.h, data: packet.depth });
+      m.clipStreamPacket = null;
+      const old = m.clipBitmap;
+      packet.bitmap.currentTime = packet.time;
+      m.setColor(packet.bitmap);
+      m.clipBitmap = packet.bitmap;
+      m.clipBitmapTime = packet.time;
+      old?.close();
+      S.key = `stream|${packet.id}`;
+      return;
+    }
+    if (active && m.clipDepthOwner === clip && m.color) return;
+  } else m.clipStream?.pause();
   let video = null;
   if (clip.video) video = clip.video;
   else if (
@@ -543,10 +605,18 @@ function fillClip(m, src) {
     !video.seeking &&
     Math.abs(video.currentTime - mv.t) < 0.25;
   const f = mv.frame;
+  const scratch = clip.scratch;
   const depth = clip.long
-    ? clip.scratch?.bytes || clip.shownDepth?.(mv.t)
+    ? scratch?.time === mv.t &&
+      scratch.depth === clip.depth &&
+      scratch.ready === clip.depth.ready &&
+      scratch.easeTick === (clip.depthEase ? Math.floor(performance.now() / 16) : null)
+      ? scratch.bytes
+      : clip.shownDepth?.(mv.t)
     : clip.shownDepth?.(f) || clip.near[f];
-  const key = `c${clip.name}|${clip.version || 0}|${clip.transition || clip.depthEase ? Math.floor(performance.now() / 16) : ""}|${f}|${clip.long ? clip.depth?.ready : ""}|${usable ? "v" : "f"}`;
+  const key = `c${clip.name}|${clip.version || 0}|${clip.transition || clip.depthEase ? Math.floor(performance.now() / 16) : ""}|${f}|${clip.long ? mv.t : ""}|${clip.long ? clip.depth?.ready : ""}|${usable ? "v" : "f"}`;
+  if (m.clipWaitingDepth && S.key === key && depth)
+    clipCellDepth(m, { w: clip.w, h: clip.h, data: depth });
   if (S.key !== key) {
     S.key = key;
     if (depth) m.setDepth({ w: clip.w, h: clip.h, data: depth });
@@ -555,7 +625,11 @@ function fillClip(m, src) {
     if (!usable && !clip.long && (clip.previewColor || clip.colors[f]))
       m.setColor(clip.previewColor || { w: clip.w, h: clip.h, data: clip.colors[f] });
   }
-  if (usable && (newFrame(video) || m.colorSrc !== (video.paused ? S.clipStill : video)))
+  if (
+    usable &&
+    (newFrame(video) ||
+      m.colorSrc !== (video.paused || !directClipVideo(video) ? S.clipStill : video))
+  )
     clipPicture(m, video);
 }
 
@@ -564,12 +638,19 @@ function fillClip(m, src) {
 // behind them. Match the existing softened rim without changing clip depth.
 function clipBorder(m, src) {
   m.clipAspect = src.height / src.width;
+  m.clipPreview = !!src.moving.opening;
   if (m.clipOnly) return;
   m.clipOnly = true;
+  for (const name of ["setColor", "setDepth"]) {
+    const original = m[name];
+    m[name] = function (...args) {
+      this.clipRevision = (this.clipRevision || 0) + 1;
+      return original.apply(this, args);
+    };
+  }
   // The border's geometry already uses softened depth. Cutting it from
   // the unsmoothed map can remove a physically smooth border triangle.
-  m.clipPreview = !!src.moving.opening;
-  const surface = m.clipPreview ? clipSoftShader(m.matS.shaderDesc) : m.matS.shaderDesc;
+  const surface = clipSoftShader(m.matS.shaderDesc);
   m.matS.shaderDesc = {
     ...surface,
     uniqueName: "mp3ClipSurface",
@@ -578,20 +659,9 @@ function clipBorder(m, src) {
       `
 void main(void) {
   vec2 uv = aPosition.xy;
-${
-  m.clipPreview
-    ? `  vec4 point = texelFetch(uClipSoft, ivec2(floor(uv * uGrid.zw + 0.5)), 0);\n  float d = point.r;\n  vUv = uv; vD = d; vEdge = point.b > uLayer.y ? 1.0 : 0.0;`
-    : `  vec2 cell = floor(uv * uGrid.zw + 0.5);
-  float rd = min(min(cell.x, cell.y), min(uGrid.z - cell.x, uGrid.w - cell.y));
-  float raw = textureLod(uDepth, uv, 0.0).r;
-  float d = rd < 6.0 ? psvRim(uv, raw) : raw;
-  float edge = 0.0;
-  if (rd > 6.0) {
-    for (int j = -1; j <= 1; j++) for (int k = -1; k <= 1; k++)
-      edge = max(edge, abs(textureLod(uDepth, uv + vec2(float(k), float(j)) / uGrid.zw, 0.0).r - raw));
-  }
-  vUv = uv; vD = d; vEdge = edge > uLayer.y ? 1.0 : 0.0;`
-}
+  vec4 point = texelFetch(uClipSoft, ivec2(floor(uv * uGrid.zw + 0.5)), 0);
+  float d = point.r;
+  vUv = uv; vD = d; vEdge = point.b > uLayer.y ? 1.0 : 0.0;
   gl_Position = psvPlace(vec3((uv.x - 0.5) * uGrid.x, (0.5 - uv.y) * uGrid.y, uLift.x * (d - uLift.y)));
 }`,
     vertexWGSL:
@@ -600,33 +670,24 @@ ${
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
   var output: VertexOutput;
   let uv = input.aPosition.xy;
-${
-  m.clipPreview
-    ? `  let point = textureLoad(uClipSoft, vec2i(floor(uv * uniform.uGrid.zw + 0.5)), 0);
+  let point = textureLoad(uClipSoft, vec2i(floor(uv * uniform.uGrid.zw + 0.5)), 0);
   let d = point.r;
-  output.vUv = uv; output.vD = d; output.vEdge = select(0.0, 1.0, point.b > uniform.uLayer.y);`
-    : `  let cell = floor(uv * uniform.uGrid.zw + 0.5);
-  let rd = min(min(cell.x, cell.y), min(uniform.uGrid.z - cell.x, uniform.uGrid.w - cell.y));
-  let raw = textureSampleLevel(uDepth, uDepthSampler, uv, 0.0).r;
-  var d = raw;
-  if (rd < 6.0) { d = psvRim(uv, raw); }
-  var edge = 0.0;
-  if (rd > 6.0) {
-    for (var j = -1; j <= 1; j++) { for (var k = -1; k <= 1; k++) {
-      edge = max(edge, abs(textureSampleLevel(uDepth, uDepthSampler, uv + vec2f(f32(k), f32(j)) / uniform.uGrid.zw, 0.0).r - raw));
-    } }
-  }
-  output.vUv = uv; output.vD = d; output.vEdge = select(0.0, 1.0, edge > uniform.uLayer.y);`
-}
+  output.vUv = uv; output.vD = d; output.vEdge = select(0.0, 1.0, point.b > uniform.uLayer.y);
   output.position = psvPlace(vec3f((uv.x - 0.5) * uniform.uGrid.x, (0.5 - uv.y) * uniform.uGrid.y, uniform.uLift.x * (d - uniform.uLift.y)));
   return output;
 }`,
-    fragmentGLSL: surface.fragmentGLSL
-      .replaceAll("uLayer.z", "0.0")
-      .replace("min(rim.x, rim.y) > 1.5", "min(rim.x, rim.y) > 6.0"),
-    fragmentWGSL: surface.fragmentWGSL
-      .replaceAll("uniform.uLayer.z", "0.0")
-      .replace("min(rim.x, rim.y) > 1.5", "min(rim.x, rim.y) > 6.0"),
+    fragmentGLSL: `uniform sampler2D uColor;
+varying vec2 vUv;
+void main(void) { gl_FragColor = vec4(texture(uColor, vUv).rgb, 1.0); }
+`,
+    fragmentWGSL: `var uColor: texture_2d<f32>;
+var uColorSampler: sampler;
+varying vUv: vec2f;
+@fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
+  var output: FragmentOutput;
+  output.color = textureSample(uColor, uColorSampler, input.vUv);
+  return output;
+}`,
   };
   m.matS.update();
   const frameShader = clipSoftShader(m.matF.shaderDesc);
@@ -663,6 +724,7 @@ void main(void) {
   m.matF.update();
   clipFrame(m);
   clipCells(m);
+  clipCaps(m);
   const setDepth = m.setDepth.bind(m);
   m.setDepth = (depth) => {
     setDepth(depth);
@@ -680,11 +742,23 @@ void main(void) {
       ...held,
       mesh: held.mesh + extraBytes,
       total: held.total + extraBytes,
-      triangles: 2 * m.cols * m.rows + 12 * m.miB.instancingCount + m.frame.primitive[0].count / 3,
+      triangles:
+        m.surface.mesh.primitive[0].count / 3 +
+        2 * m.miB.instancingCount +
+        ((m.clipCapCount || 0) + (m.clipTopCount || 0)) / 3 +
+        m.frame.primitive[0].count / 3,
     };
   };
   const destroy = m.destroy.bind(m);
   m.destroy = () => {
+    for (const prefix of ["clipCap", "clipTop"]) {
+      if (m[prefix + "Pass"]) m.layer.removeMeshInstances([m[prefix + "Pass"]]);
+      m[prefix + "Mesh"]?.destroy();
+    }
+    m.clipCapMaterial.destroy();
+    m.clipStream?.close();
+    m.clipBitmap?.close();
+    m.clipCache?.close();
     m.clipPatch?.destroy();
     m.clipFloor?.destroy();
     m.clipSoft?.destroy();
@@ -757,36 +831,6 @@ function clipCells(m) {
     [-0.5, 0.5, 0],
     [0.5, 0.5, 0],
   ]);
-  for (const [side, [a, b]] of [
-    [
-      [-0.5, -0.5],
-      [-0.5, 0.5],
-    ],
-    [
-      [0.5, 0.5],
-      [0.5, -0.5],
-    ],
-    [
-      [0.5, -0.5],
-      [-0.5, -0.5],
-    ],
-    [
-      [-0.5, 0.5],
-      [0.5, 0.5],
-    ],
-  ].entries())
-    quad([
-      [...a, -side - 1],
-      [...b, -side - 1],
-      [...a, side + 1],
-      [...b, side + 1],
-    ]);
-  quad([
-    [-0.5, -0.5, 5],
-    [0.5, -0.5, 5],
-    [-0.5, 0.5, 5],
-    [0.5, 0.5, 5],
-  ]);
   const mesh = (m.clipCells = new m.surface.mesh.constructor(m.device));
   mesh.setPositions(new Float32Array(positions), 3);
   mesh.setIndices(new Uint16Array(indices));
@@ -838,33 +882,39 @@ function clipCells(m) {
     c = textureSampleLevel(uColor, uColorSampler, input.vUv, log2(max(footprint, 1.0)));
   }`,
       ),
-    attributes: { ...desc.attributes, aClipCell: SEMANTIC_ATTR12 },
+    attributes: { ...desc.attributes, aClipTop: SEMANTIC_ATTR12, aClipFloor: SEMANTIC_ATTR13 },
     vertexGLSL:
       desc.vertexGLSL.slice(0, desc.vertexGLSL.indexOf("void main(void)")) +
       /* glsl */ `
-uniform highp sampler2D uClipPatch;
-uniform highp sampler2D uClipFloor;
-attribute float aClipCell;
+uniform vec4 uClipDimensions;
+attribute vec4 aClipTop;
+attribute vec4 aClipFloor;
 void main(void) {
-  ivec2 size = textureSize(uClipPatch, 0);
-  int id = int(aClipCell);
-  ivec2 cell = ivec2(id % size.x, id / size.x);
-  vec4 layer = texelFetch(uClipPatch, cell, 0);
+  ivec2 size = ivec2(uClipDimensions.xy);
+  uint code = floatBitsToUint(aClipTop.w);
+  uint face = (code >> 24u) & 7u;
+  ivec2 cell = ivec2(int(code & uint(uClipDimensions.w)), int((code & 16777215u) >> uint(uClipDimensions.z)));
+  vec3 layer = aClipTop.xyz;
   vec2 local = aPosition.xy;
+  if (face == 1u) local = vec2(-0.5, aPosition.x);
+  if (face == 2u) local = vec2(0.5, -aPosition.x);
+  if (face == 3u) local = vec2(-aPosition.x, -0.5);
+  if (face == 4u) local = vec2(aPosition.x, 0.5);
+  float pointZ = face > 0u && face < 5u ? (aPosition.y < 0.0 ? -float(face) : float(face)) : float(face);
   vec2 uv = (vec2(cell) + 0.5 + local) / vec2(size);
-  vec4 corner = texelFetch(uClipFloor, cell, 0);
+  vec4 corner = aClipFloor;
   float bottom = local.y < 0.0 ? (local.x < 0.0 ? corner.r : corner.g) : (local.x < 0.0 ? corner.b : corner.a);
-  float d = aPosition.z > 0.5 ? bottom : layer.x + dot(layer.yz, local);
+  float d = pointZ > 0.5 ? bottom : layer.x + dot(layer.yz, local);
   // The movie's outer edge meets its unchanged softened frame exactly.
   if (min(min(uv.x, uv.y), min(1.0 - uv.x, 1.0 - uv.y)) < 0.000001)
     d = psvRim(uv, textureLod(uDepth, uv, 0.0).r);
   vUv = uv;
-  if (abs(aPosition.z) > 0.5 && abs(aPosition.z) < 4.5) {
-    if (abs(aPosition.z) < 2.5) vUv.x = (float(cell.x) + 0.5) / float(size.x);
+  if (abs(pointZ) > 0.5 && abs(pointZ) < 4.5) {
+    if (abs(pointZ) < 2.5) vUv.x = (float(cell.x) + 0.5) / float(size.x);
     else vUv.y = (float(cell.y) + 0.5) / float(size.y);
   }
   vD = d;
-  vEdge = aPosition.z > 4.5 ? 0.0 : abs(aPosition.z);
+  vEdge = pointZ > 4.5 ? 0.0 : abs(pointZ);
   float z = uLift.x * (d - uLift.y);
   gl_Position = psvPlace(vec3((uv.x - 0.5) * uGrid.x, (0.5 - uv.y) * uGrid.y, z));
 }
@@ -872,30 +922,36 @@ void main(void) {
     vertexWGSL:
       desc.vertexWGSL.slice(0, desc.vertexWGSL.indexOf("@vertex fn vertexMain")) +
       /* wgsl */ `
-var uClipPatch: texture_2d<uff>;
-var uClipFloor: texture_2d<uff>;
-attribute aClipCell: f32;
+uniform uClipDimensions: vec4f;
+attribute aClipTop: vec4f;
+attribute aClipFloor: vec4f;
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
   var output: VertexOutput;
-  let size = vec2i(textureDimensions(uClipPatch, 0));
-  let id = i32(input.aClipCell);
-  let cell = vec2i(id % size.x, id / size.x);
-  let layer = textureLoad(uClipPatch, cell, 0);
-  let local = input.aPosition.xy;
+  let size = vec2i(uniform.uClipDimensions.xy);
+  let code = bitcast<u32>(input.aClipTop.w);
+  let face = (code >> 24u) & 7u;
+  let cell = vec2i(i32(code & u32(uniform.uClipDimensions.w)), i32((code & 16777215u) >> u32(uniform.uClipDimensions.z)));
+  let layer = input.aClipTop.xyz;
+  var local = input.aPosition.xy;
+  if (face == 1u) { local = vec2f(-0.5, input.aPosition.x); }
+  if (face == 2u) { local = vec2f(0.5, -input.aPosition.x); }
+  if (face == 3u) { local = vec2f(-input.aPosition.x, -0.5); }
+  if (face == 4u) { local = vec2f(input.aPosition.x, 0.5); }
+  let pointZ = select(f32(face), select(f32(face), -f32(face), input.aPosition.y < 0.0), face > 0u && face < 5u);
   let uv = (vec2f(cell) + 0.5 + local) / vec2f(size);
-  let corner = textureLoad(uClipFloor, cell, 0);
+  let corner = input.aClipFloor;
   let bottom = select(select(corner.a, corner.b, local.x < 0.0), select(corner.g, corner.r, local.x < 0.0), local.y < 0.0);
-  var d = select(layer.x + dot(layer.yz, local), bottom, input.aPosition.z > 0.5);
+  var d = select(layer.x + dot(layer.yz, local), bottom, pointZ > 0.5);
   if (min(min(uv.x, uv.y), min(1.0 - uv.x, 1.0 - uv.y)) < 0.000001) {
     d = psvRim(uv, textureSampleLevel(uDepth, uDepthSampler, uv, 0.0).r);
   }
   output.vUv = uv;
-  if (abs(input.aPosition.z) > 0.5 && abs(input.aPosition.z) < 4.5) {
-    if (abs(input.aPosition.z) < 2.5) { output.vUv.x = (f32(cell.x) + 0.5) / f32(size.x); }
+  if (abs(pointZ) > 0.5 && abs(pointZ) < 4.5) {
+    if (abs(pointZ) < 2.5) { output.vUv.x = (f32(cell.x) + 0.5) / f32(size.x); }
     else { output.vUv.y = (f32(cell.y) + 0.5) / f32(size.y); }
   }
   output.vD = d;
-  output.vEdge = select(abs(input.aPosition.z), 0.0, input.aPosition.z > 4.5);
+  output.vEdge = select(abs(pointZ), 0.0, pointZ > 4.5);
   let z = uniform.uLift.x * (d - uniform.uLift.y);
   output.position = psvPlace(vec3f((uv.x - 0.5) * uniform.uGrid.x, (0.5 - uv.y) * uniform.uGrid.y, z));
   return output;
@@ -903,6 +959,102 @@ attribute aClipCell: f32;
 `,
   };
   m.matB.update();
+}
+
+// The lower curve is shared at native corners. Its indexed mesh draws after
+// the walls, preserving the old cap depth ties and native color derivatives.
+function clipCaps(m) {
+  const desc = m.matB.shaderDesc,
+    surface = m.matS.shaderDesc;
+  m.clipCapMaterial = new m.matB.constructor({
+    ...desc,
+    uniqueName: "mp4IndexedCaps",
+    fragmentGLSL: `uniform sampler2D uColor;
+uniform vec4 uBack;
+varying vec2 vUv;
+void main(void) {
+  vec3 c = texture(uColor, vUv).rgb;
+  if (uBack.w > 0.5) c = vec3(1.0, 0.0, 1.0);
+  gl_FragColor = vec4(c, 1.0);
+}`,
+    fragmentWGSL: `var uColor: texture_2d<f32>;
+var uColorSampler: sampler;
+uniform uBack: vec4f;
+varying vUv: vec2f;
+@fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
+  var output: FragmentOutput;
+  var c = textureSample(uColor, uColorSampler, input.vUv).rgb;
+  if (uniform.uBack.w > 0.5) { c = vec3f(1.0, 0.0, 1.0); }
+  output.color = vec4f(c, 1.0);
+  return output;
+}`,
+
+    attributes: surface.attributes,
+    vertexGLSL:
+      surface.vertexGLSL.slice(0, surface.vertexGLSL.indexOf("void main(void)")) +
+      `
+uniform vec4 uClipDimensions;
+void main(void) {
+  vec2 uv = aPosition.xy / uClipDimensions.xy;
+  float d = aPosition.z;
+  vUv = uv; vD = d; vEdge = 0.0;
+  gl_Position = psvPlace(vec3((uv.x - 0.5) * uGrid.x, (0.5 - uv.y) * uGrid.y, uLift.x * (d - uLift.y)));
+}`,
+    vertexWGSL:
+      surface.vertexWGSL.slice(0, surface.vertexWGSL.indexOf("@vertex fn vertexMain")) +
+      `
+uniform uClipDimensions: vec4f;
+@vertex fn vertexMain(input: VertexInput) -> VertexOutput {
+  var output: VertexOutput;
+  let uv = input.aPosition.xy / uniform.uClipDimensions.xy;
+  let d = input.aPosition.z;
+  output.vUv = uv; output.vD = d; output.vEdge = 0.0;
+  output.position = psvPlace(vec3f((uv.x - 0.5) * uniform.uGrid.x, (0.5 - uv.y) * uniform.uGrid.y, uniform.uLift.x * (d - uniform.uLift.y)));
+  return output;
+}`,
+  });
+  m.clipCapMaterial.parameters = m.matB.parameters;
+  m.clipCapMaterial.cull = m.matB.cull;
+  m.clipCapMaterial.depthTest = true;
+  m.clipCapMaterial.depthWrite = true;
+  m.clipCapMaterial.update();
+  m.miF.drawBucket = 132;
+  m.miB.drawBucket = 129;
+  m.miS.drawBucket = 127;
+  const show = m.show.bind(m);
+  m.show = (on) => {
+    show(on);
+    for (const prefix of ["clipCap", "clipTop"])
+      if (m[prefix + "Pass"]) m[prefix + "Pass"].visible = m.visible && m[prefix + "Count"] > 0;
+  };
+}
+function clipCapUpload(m, data, top = false) {
+  const prefix = top ? "clipTop" : "clipCap";
+  const count = (m[prefix + "Count"] = data?.indices.length || 0);
+  if (!count) {
+    if (m[prefix + "Pass"]) m[prefix + "Pass"].visible = false;
+    return;
+  }
+  if (!m[prefix + "Mesh"]) {
+    const mesh = (m[prefix + "Mesh"] = new m.surface.mesh.constructor(m.device));
+    const pass = (m[prefix + "Pass"] = new m.miS.constructor(mesh, m.clipCapMaterial, m.node));
+    pass.cull = false;
+    pass.drawBucket = top ? 131 : 128;
+    m.layer.addMeshInstances([pass]);
+  }
+  const mesh = m[prefix + "Mesh"];
+  mesh.setPositions(data.positions, 3);
+  mesh.setIndices(data.indices);
+  mesh.update(PRIMITIVE_TRIANGLES, false);
+  m[prefix + "Pass"].visible = m.visible;
+  m.pieceBytes = m.clipSoftValues.byteLength + (m.clipInstances?.numBytes || 0) + clipCapBytes(m);
+}
+function clipCapBytes(m) {
+  return [m.clipCapMesh, m.clipTopMesh].reduce(
+    (sum, mesh) =>
+      sum + (mesh?.vertexBuffer?.numBytes || 0) + (mesh?.indexBuffer[0]?.numBytes || 0),
+    0,
+  );
 }
 
 // The frame and picture share every border vertex. The photo frame's 96
@@ -946,6 +1098,7 @@ function clipFrame(m) {
 }
 
 function clipCellDepth(m, { w, h, data }) {
+  m.clipDepthOwner = S.src?.clip;
   let field = m.clipField;
   if (!field || field.w !== w || field.h !== h) {
     field = m.clipField = {
@@ -963,38 +1116,94 @@ function clipCellDepth(m, { w, h, data }) {
       queue: new Int32Array(Math.max(w, h)),
       soft: new Float32Array((m.cols + 1) * (m.rows + 1) * 4),
     };
-    m.clipPatch?.destroy();
-    m.clipPatch = m.byteTexture("mp3-layered-depth", w, h, PIXELFORMAT_RGBA32F, field.patches);
-    m.matB.setParameter("uClipPatch", m.clipPatch);
-    m.clipFloor?.destroy();
-    m.clipFloor = m.byteTexture("mp3-local-floor", w, h, PIXELFORMAT_RGBA32F, field.floors);
-    m.matB.setParameter("uClipFloor", m.clipFloor);
+    m.clipXBits = Math.ceil(Math.log2(w));
+    m.clipXMask = 2 ** m.clipXBits - 1;
+    m.matB.setParameter("uClipDimensions", [w, h, m.clipXBits, m.clipXMask]);
     m.matB.setParameter("uClipCell", [1 / w, 1 / h]);
     m.clipSoft?.destroy();
+    m.clipSoftValues = new Float32Array((m.cols + 1) * (m.rows + 1));
     m.clipSoft = m.byteTexture(
       "mp3-border-depth",
       m.cols + 1,
       m.rows + 1,
-      PIXELFORMAT_RGBA32F,
-      field.soft,
+      PIXELFORMAT_R32F,
+      m.clipSoftValues,
     );
     for (const material of [m.matS, m.matB, m.matF]) material.setParameter("uClipSoft", m.clipSoft);
     m.clipInstances?.destroy();
-    m.clipInstances = new VertexBuffer(
-      m.device,
-      new VertexFormat(m.device, [
-        { semantic: SEMANTIC_ATTR12, components: 1, type: TYPE_FLOAT32 },
-      ]),
-      w * h,
-      { usage: BUFFER_DYNAMIC, data: field.ids },
-    );
-    m.miB.setInstancing(m.clipInstances, false);
-    m.pieceBytes = w * h * 36 + field.soft.byteLength;
+    m.clipInstances = null;
+    m.clipCapacity = 0;
+    m.pieceBytes = m.clipSoftValues.byteLength;
   }
   const src =
     data instanceof Uint8Array || data instanceof Uint8ClampedArray
       ? data
       : Uint8Array.from(data, (x) => Math.max(0, Math.min(255, Math.round(x * 255))));
+  if (clipGeometry) {
+    if (!field.compute) {
+      const native = clipGeometry.geometryField(clipGeometry.module, w, h, m.cols, m.rows);
+      Object.assign(field, native);
+    }
+    const clip = S.src?.clip;
+    if (m.clipCache && (m.clipCache.clip !== clip || m.clipCache.aspect !== m.clipAspect)) {
+      m.clipCache.close();
+      m.clipCache = null;
+    }
+    if (!m.clipPreview && clip && !clip.long && !clip.transition && m.clipCache?.clip !== clip) {
+      m.clipCache?.close();
+      m.clipCache = clipGeometry.geometryCache(clip, m.cols, m.rows, m.clipAspect);
+    }
+    if (
+      !clip?.long &&
+      !clip?.transition &&
+      m.clipGeometryOwner === clip &&
+      m.clipComputedSource === src &&
+      m.clipComputedAspect === m.clipAspect
+    ) {
+      m.clipWaitingDepth = false;
+      return;
+    }
+    const cached =
+      m.clipStreamPacket ||
+      (!clip?.long && !clip?.transition && m.clipCache?.clip === clip
+        ? m.clipCache.get(S.src.moving.frame, src)
+        : null);
+    if (
+      !cached &&
+      m.clipCache?.active &&
+      m.clipGeometryOwner === clip &&
+      !clip.transition &&
+      !m.clipPreview &&
+      (player()?.motion?.targets?.play ?? 1) > 0.5 &&
+      !player()?.stage?.captureWaiters.length &&
+      sharpClipOnly(clip) &&
+      clipAlone(m)
+    ) {
+      // Keep updates and the exact R8 input current while the worker finishes
+      // this geometry. No draw is submitted with an older geometry result.
+      m.clipWaitingDepth = true;
+      return;
+    }
+    m.clipWaitingDepth = false;
+    const values = cached || field;
+    m.miB.instancingCount = cached ? cached.count : field.compute(src, true, m.clipAspect);
+    clipSoftUpload(m, values.soft);
+    clipInstanceData(
+      m,
+      field,
+      m.miB.instancingCount,
+      cached?.instances,
+      cached?.indices,
+      cached?.raster,
+    );
+    m.clipComputedSource = src;
+    m.clipComputedAspect = m.clipAspect;
+    return;
+  }
+  if (field.sampleAspect !== m.clipAspect) {
+    field.sampleMaps = null;
+    field.sampleAspect = m.clipAspect;
+  }
   clipPatches(m, src, field);
   clipCutCells(m, field);
 }
@@ -1094,8 +1303,120 @@ function clipCutCells(m, field) {
     const possibleCut = slopeScale * (spanX * low[i] + spanY * high[i]) > threshold;
     if (Math.min(x, y, w - 1 - x, h - 1 - y) <= border || possibleCut) ids[count++] = i;
   }
-  m.clipInstances.setData(ids);
+  clipInstanceData(m, field, count);
+}
+
+// Instance attributes carry the same Float32 planes and corners directly.
+// This avoids two random float-texture reads at every wall/cap vertex.
+function clipInstanceData(m, field, cellCount, prepared = null, indices = null, raster = null) {
+  const draws = prepared
+    ? { instances: prepared, indices }
+    : drawFields(field, cellCount, m.cols, m.rows);
+  const planes = draws.instances,
+    count = planes.length / 8;
+  const mesh = m.surface.mesh;
+  if (!mesh.clipReferenceIndices) {
+    const buffer = mesh.indexBuffer[0];
+    mesh.clipReferenceIndices = new Uint32Array(buffer.numIndices);
+    buffer.readData(mesh.clipReferenceIndices);
+    const Type = buffer.bytesPerIndex === 2 ? Uint16Array : Uint32Array;
+    m.clipSurfaceIndices = new Type(buffer.numIndices);
+  }
+  m.clipSurfaceIndices.set(draws.indices);
+  mesh.indexBuffer[0].setData(m.clipSurfaceIndices);
+  mesh.primitive[0].count = draws.indices.length;
+  m.clipGeometryOwner = S.src.clip;
+  m.clipWaitingDepth = false;
+  m.clipAllPlanes = planes;
+  m.clipRasterPrepared = raster;
+  m.clipVisibilitySource = null;
+}
+
+// Only faces without raster samples are omitted. Keep both sides of every
+// solid: rear caps can close tiny numerical seams between neighboring cells.
+// A camera change immediately falls back to the full retained geometry.
+function clipVisibleFaces(m, pl) {
+  if (!m.clipAllPlanes) return;
+  const { w, h } = m.clipField,
+    device = m.device;
+  const camera = pl.stage.cameraEntity.camera;
+  const vp = new Mat4().mul2(camera.projectionMatrix, camera.viewMatrix).data;
+  const model = m.node.getWorldTransform().data;
+  const pose = ["uGrid", "uLift", "uTf", "uToy", "uBodyQ", "uBodyT"].map((name) =>
+    m.u[name].map(Math.fround),
+  );
+  const key = JSON.stringify([
+    Array.from(vp),
+    Array.from(model),
+    pose,
+    device.width,
+    device.height,
+  ]);
+  if (m.clipRasterViewKey !== key) {
+    m.clipRasterViewKey = key;
+    m.clipRasterQuantum ||= device.gl
+      ? 2 ** -device.gl.getParameter(device.gl.SUBPIXEL_BITS)
+      : 1 / 16;
+    const samples = device.samples || 1,
+      rect = camera.rect;
+    const aspectMatches = Math.abs(camera.aspectRatio - device.width / device.height) < 1e-6;
+    m.clipRasterView =
+      samples === 1 && aspectMatches && rect.x === 0 && rect.y === 0 && rect.z === 1 && rect.w === 1
+        ? clipRasterView(vp, model, m.u, device.width, device.height, w, h, m.clipRasterQuantum)
+        : null;
+    if (m.clipRasterView) m.clipRasterView.key = key;
+  }
+  const view = m.clipRasterView;
+  m.clipCache?.ahead(S.src.moving.frame, view);
+  m.clipStream?.view(view);
+  if (m.clipWaitingDepth) return;
+  const ready = view && m.clipRasterPrepared?.key === key ? m.clipRasterPrepared.instances : null;
+  const source = ready || m.clipAllPlanes;
+  if (m.clipVisibilitySource === source && m.clipVisibilityKey === key) return;
+  m.clipVisibilitySource = source;
+  m.clipVisibilityKey = key;
+  if (clipGeometry && !m.clipRasterNativeReady) {
+    m.clipNativeRaster = clipGeometry.geometryRaster(clipGeometry.module);
+    m.clipRasterNativeReady = true;
+  }
+  const indexed = ready
+    ? m.clipRasterPrepared
+    : indexClipCaps(clipRasterPlanes(source, w, h, view, m.clipNativeRaster), w, h);
+  clipCapUpload(m, indexed.caps);
+  clipCapUpload(m, indexed.tops, true);
+  const visible = indexed.instances,
+    count = visible.length / 8;
+  const stats = (m.clipRasterStats ||= { prepared: 0, computed: 0 });
+  stats[ready ? "prepared" : "computed"]++;
+  if (!m.clipInstances || m.clipCapacity < count) {
+    m.clipCapacity = 2 ** Math.ceil(Math.log2(Math.max(1, count)));
+    m.clipInstanceValues = new Float32Array(m.clipCapacity * 8);
+    m.miB.setInstancing(null);
+    m.clipInstances?.destroy();
+    m.clipInstances = new VertexBuffer(
+      m.device,
+      new VertexFormat(m.device, [
+        { semantic: SEMANTIC_ATTR12, components: 4, type: TYPE_FLOAT32 },
+        { semantic: SEMANTIC_ATTR13, components: 4, type: TYPE_FLOAT32 },
+      ]),
+      m.clipCapacity,
+      { usage: BUFFER_DYNAMIC },
+    );
+    m.miB.setInstancing(m.clipInstances, false);
+    m.pieceBytes = m.clipSoftValues.byteLength + m.clipInstances.numBytes + clipCapBytes(m);
+  }
+  m.clipInstanceValues.set(visible);
+  m.clipInstances.setData(m.clipInstanceValues);
   m.miB.instancingCount = count;
+}
+
+function clipSoftUpload(m, pixels) {
+  if (pixels.length !== m.clipSoftValues.length) {
+    for (let i = 0; i < m.clipSoftValues.length; i++) m.clipSoftValues[i] = pixels[i * 4];
+    pixels = m.clipSoftValues;
+  }
+  m.clipSoft.lock().set(pixels);
+  m.clipSoft.unlock();
 }
 
 // Each observed texel owns a tiny depth patch. Smooth neighbors supply its
@@ -1103,20 +1424,30 @@ function clipCutCells(m, field) {
 // foreground and background as separate layers rather than a stretched strip.
 function clipPatches(m, src, field) {
   const { w, h, heights, patches } = field;
-  const sample = (u, v) => {
-    const x = Math.max(0, Math.min(w - 1, u * w - 0.5));
-    const y = Math.max(0, Math.min(h - 1, v * h - 0.5));
-    const i = Math.floor(x),
-      j = Math.floor(y),
-      fx = x - i,
-      fy = y - j;
-    const a = j * w + i,
-      b = j * w + Math.min(w - 1, i + 1);
-    const c = Math.min(h - 1, j + 1) * w + i,
-      d = Math.min(h - 1, j + 1) * w + Math.min(w - 1, i + 1);
+  // Texture coordinates depend on the mesh, never on the movie frame. Keep
+  // the two separable axes instead of reclamping and flooring all 25 taps
+  // at every border vertex on every update. Float64 keeps the original math.
+  const maps = (field.sampleMaps ||= clipSampleMaps(m, w, h));
+  const sample = (xs, ys, x, y) => {
+    const i = x * 3,
+      j = y * 3;
+    const a = ys[j] * w,
+      b = ys[j + 1] * w;
+    const lo = xs[i],
+      hi = xs[i + 1],
+      fx = xs[i + 2],
+      fy = ys[j + 2];
     return (
-      ((src[a] * (1 - fx) + src[b] * fx) * (1 - fy) + (src[c] * (1 - fx) + src[d] * fx) * fy) / 255
+      ((src[a + lo] * (1 - fx) + src[a + hi] * fx) * (1 - fy) +
+        (src[b + lo] * (1 - fx) + src[b + hi] * fx) * fy) /
+      255
     );
+  };
+  const softened = (xs, ys, x, y) => {
+    let sum = 0;
+    for (let j = 0; j < 5; j++)
+      for (let k = 0; k < 5; k++) sum += sample(xs, ys, x * 5 + k, y * 5 + j);
+    return sum / 25;
   };
   const smooth = (a, b, v) => {
     const t = Math.max(0, Math.min(1, (v - a) / (b - a)));
@@ -1127,28 +1458,26 @@ function clipPatches(m, src, field) {
       const u = Math.fround(x / m.cols),
         v = Math.fround(y / m.rows);
       const rd = Math.min(x, y, m.cols - x, m.rows - y);
-      if (!m.clipPreview && rd > 6) continue;
-      const raw = sample(u, v);
+      const raw = sample(maps.gridX, maps.gridY, x * 5 + 2, y * 5 + 2);
       let d = raw,
         edge = 0;
       if (rd <= 6) {
-        let sum = 0;
-        for (let j = -2; j <= 2; j++)
-          for (let k = -2; k <= 2; k++) sum += sample(u + k * 0.02 * m.clipAspect, v + j * 0.02);
         const weight = smooth(2, 6, rd);
-        d = (sum / 25) * (1 - weight) + raw * weight;
+        d = softened(maps.gridX, maps.gridY, x, y) * (1 - weight) + raw * weight;
       } else {
         for (let j = -1; j <= 1; j++)
           for (let k = -1; k <= 1; k++)
-            edge = Math.max(edge, Math.abs(sample(u + k / m.cols, v + j / m.rows) - raw));
+            edge = Math.max(
+              edge,
+              Math.abs(sample(maps.edgeX, maps.edgeY, x * 3 + k + 1, y * 3 + j + 1) - raw),
+            );
       }
       const offset = (y * (m.cols + 1) + x) * 4;
       field.soft[offset] = d;
       field.soft[offset + 1] = raw;
       field.soft[offset + 2] = edge;
     }
-  m.clipSoft.lock().set(field.soft);
-  m.clipSoft.unlock();
+  clipSoftUpload(m, field.soft);
   for (let y = 0; y < h; y++)
     for (let x = 0; x < w; x++) {
       const i = y * w + x,
@@ -1157,11 +1486,8 @@ function clipPatches(m, src, field) {
       const rd = Math.min(u * m.cols, (1 - u) * m.cols, v * m.rows, (1 - v) * m.rows);
       let d = src[i] / 255;
       if (rd < 6) {
-        let sum = 0;
-        for (let j = -2; j <= 2; j++)
-          for (let k = -2; k <= 2; k++) sum += sample(u + k * 0.02 * m.clipAspect, v + j * 0.02);
         const weight = smooth(2, 6, rd);
-        d = (sum / 25) * (1 - weight) + d * weight;
+        d = softened(maps.pixelX, maps.pixelY, x, y) * (1 - weight) + d * weight;
       }
       heights[i] = d;
     }
@@ -1222,15 +1548,65 @@ function clipPatches(m, src, field) {
       floors[at + 2] = corners[corner + w + 1];
       floors[at + 3] = corners[corner + w + 2];
     }
-  m.clipFloor.lock().set(floors);
-  m.clipFloor.unlock();
-  m.clipPatch.lock().set(patches);
-  m.clipPatch.unlock();
 }
 
-// the browser's video texture/compositor keeps its previous presented frame.
+function clipSampleMaps(m, w, h) {
+  const axis = (count, size, coordinate, offsets) => {
+    const out = new Float64Array(count * offsets.length * 3);
+    for (let i = 0; i < count; i++)
+      for (let k = 0; k < offsets.length; k++) {
+        const p = Math.max(0, Math.min(size - 1, (coordinate(i) + offsets[k]) * size - 0.5));
+        const lo = Math.floor(p),
+          at = (i * offsets.length + k) * 3;
+        out[at] = lo;
+        out[at + 1] = Math.min(size - 1, lo + 1);
+        out[at + 2] = p - lo;
+      }
+    return out;
+  };
+  const ox = [-2, -1, 0, 1, 2].map((k) => k * 0.02 * m.clipAspect);
+  const oy = [-2, -1, 0, 1, 2].map((k) => k * 0.02);
+  return {
+    gridX: axis(m.cols + 1, w, (x) => Math.fround(x / m.cols), ox),
+    gridY: axis(m.rows + 1, h, (y) => Math.fround(y / m.rows), oy),
+    pixelX: axis(w, w, (x) => (x + 0.5) / w, ox),
+    pixelY: axis(h, h, (y) => (y + 0.5) / h, oy),
+    edgeX: axis(m.cols + 1, w, (x) => Math.fround(x / m.cols), [-1 / m.cols, 0, 1 / m.cols]),
+    edgeY: axis(m.rows + 1, h, (y) => Math.fround(y / m.rows), [-1 / m.rows, 0, 1 / m.rows]),
+  };
+}
+
+// WebGL video uploads may use coded pixels rather than the display-sized
+// picture (for example, non-square pixels). Use the native display canvas
+// for those sources and for browsers without transferable decoded frames.
+const clipVideoModes = new WeakMap();
+function directClipVideo(video) {
+  const key = `${video.currentSrc}|${video.videoWidth}|${video.videoHeight}`;
+  const saved = clipVideoModes.get(video);
+  if (saved?.key === key) return saved.direct;
+  let direct = false,
+    frame;
+  try {
+    frame = new VideoFrame(video);
+    direct =
+      frame.visibleRect.width === video.videoWidth &&
+      frame.visibleRect.height === video.videoHeight;
+  } catch {
+    /* The canvas path also works without WebCodecs. */
+  } finally {
+    frame?.close();
+  }
+  clipVideoModes.set(video, { key, direct });
+  return direct;
+}
+// A paused seek must read the decoder's current display picture. A fresh
+// canvas texture also avoids reusing differently sized coded video storage.
 function clipPicture(m, video) {
-  if (!video.paused) return m.setColor(video);
+  if (!video.paused && directClipVideo(video)) return m.setColor(video);
+  if (m.colorSrc instanceof HTMLVideoElement) {
+    m.color?.destroy();
+    m.color = null;
+  }
   const c = (S.clipStill ||= document.createElement("canvas"));
   if (c.width !== video.videoWidth || c.height !== video.videoHeight) {
     c.width = video.videoWidth;
@@ -1244,27 +1620,94 @@ function clipPicture(m, video) {
 // Whether the video has a new picture since the last upload (the browser says so where it can,
 // else its time moved), so a paused or slow video isn't uploaded again every frame.
 function newFrame(v) {
-  // A hidden, paused video can finish seeking without a compositor callback.
-  // Its clock still proves that a new decoded picture needs an upload.
   const moved = v.currentTime !== S.lastTime;
   S.lastTime = v.currentTime;
-  if (v.requestVideoFrameCallback) {
-    if (S.rvfc !== v) {
-      S.rvfc = v;
+  const decoded = v.getVideoPlaybackQuality?.().totalVideoFrames ?? v.webkitDecodedFrameCount;
+  const changed = decoded !== undefined && decoded !== S.decodedFrames;
+  S.decodedFrames = decoded;
+  if (S.rvfc !== v) {
+    S.rvfc = v;
+    S.fresh = true;
+    const tick = () => {
+      if (S.rvfc !== v) return;
       S.fresh = true;
-      const tick = () => {
-        if (S.rvfc !== v) return;
-        S.fresh = true;
-        v.requestVideoFrameCallback(tick);
-        player()?.stage?.requestRender?.();
-      };
-      v.requestVideoFrameCallback(tick);
-    }
-    const f = S.fresh;
-    S.fresh = false;
-    return f || moved;
+      v.requestVideoFrameCallback?.(tick);
+      player()?.stage?.requestRender?.(0);
+    };
+    v.requestVideoFrameCallback?.(tick);
   }
-  return moved;
+  const fresh = S.fresh;
+  S.fresh = false;
+  const now = performance.now();
+  const fallback = moved && (v.paused || now - (S.frameNoticedAt || 0) >= 100);
+  if (fresh || changed || fallback) S.frameNoticedAt = now;
+  return fresh || changed || fallback;
+}
+
+// A decoded picture is often slower than the display clock. Drawing the same
+// solid again competes with its next color readback, especially on a phone.
+// Keep the regular update clock, but draw only changed clip pixels or poses.
+// Captures and other visible scene geometry always retain the normal path.
+function clipAlone(m) {
+  return !m.layer.meshInstances.some(
+    (mi) =>
+      mi.visible &&
+      mi.node.enabled &&
+      mi !== m.miS &&
+      mi !== m.miB &&
+      mi !== m.miF &&
+      mi !== m.clipCapPass &&
+      mi !== m.clipTopPass,
+  );
+}
+function watchClipDraws(stage) {
+  let previous = null,
+    pending = null;
+  const signature = () => {
+    const m = S.mesh,
+      pl = player();
+    if (
+      S.stage !== stage ||
+      !m?.clipOnly ||
+      !sharpClipOnly(S.src?.clip) ||
+      pl?.loading ||
+      stage.graveyard.length ||
+      stage.captureWaiters.length ||
+      !clipAlone(m)
+    )
+      return null;
+    const camera = stage.cameraEntity.camera;
+    return JSON.stringify([
+      m.clipRevision,
+      m.miB.instancingCount,
+      m.u,
+      Array.from(m.node.getWorldTransform().data),
+      Array.from(stage.cameraEntity.getWorldTransform().data),
+      Array.from(camera.projectionMatrix.data),
+      camera.clearColor.r,
+      camera.clearColor.g,
+      camera.clearColor.b,
+      stage.app.graphicsDevice.width,
+      stage.app.graphicsDevice.height,
+    ]);
+  };
+  stage.app.on("framerender", () => {
+    if (
+      S.mesh?.clipWaitingDepth &&
+      sharpClipOnly(S.src?.clip) &&
+      clipAlone(S.mesh) &&
+      !stage.captureWaiters.length
+    ) {
+      stage.app.renderNextFrame = false;
+      return;
+    }
+    pending = signature();
+    if (pending === null) previous = null;
+    else if (pending === previous) stage.app.renderNextFrame = false;
+  });
+  stage.app.on("postrender", () => {
+    previous = pending;
+  });
 }
 
 function shape(m, src, pl) {
@@ -1337,6 +1780,7 @@ function follow() {
   m.node.setLocalScale(s.x, s.y, s.z);
   if (!wanted() && backgroundWanted()) m.showBackground(true);
   if (S.src?.kind === "clip" && S.src.moving.clip?.long) fillClip(m, S.src); // (keep the video in step)
+  if (S.src?.kind === "clip") clipVisibleFaces(m, pl);
 }
 
 // For the tests and the clip tools.

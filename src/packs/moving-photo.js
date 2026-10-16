@@ -46,6 +46,8 @@ import {
   cubicDepth,
   motionDepth,
 } from "../live/clip-stabilize.js";
+import { shrink, guidedDepth, nearAt } from "./moving-photo-depth.js";
+export { shrink, guidedDepth, nearAt } from "./moving-photo-depth.js";
 import { songTransport } from "./song-record.js";
 import { FILL, reliefScale } from "./photo-3d-core.js";
 import {
@@ -53,6 +55,7 @@ import {
   sharpClip,
   sharpDrive,
   sharpClipDrive,
+  sharpClipOnly,
   sharpView,
   presentSharpClip,
   holdSharpClip,
@@ -145,38 +148,6 @@ export function thin(frames, max = maxFrames()) {
   return out;
 }
 
-// RGBA (w by h) to a smaller w2 by h2, by averaging boxes; transparent parts
-// as white paper.
-export function shrink(data, w, h, w2, h2) {
-  const out = new Uint8ClampedArray(w2 * h2 * 4);
-  for (let y = 0; y < h2; y++)
-    for (let x = 0; x < w2; x++) {
-      const x0 = Math.floor((x * w) / w2);
-      const x1 = Math.max(x0 + 1, Math.floor(((x + 1) * w) / w2));
-      const y0 = Math.floor((y * h) / h2);
-      const y1 = Math.max(y0 + 1, Math.floor(((y + 1) * h) / h2));
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      let n = 0;
-      for (let yy = y0; yy < y1; yy++)
-        for (let xx = x0; xx < x1; xx++) {
-          const o = (yy * w + xx) * 4;
-          const a = data[o + 3] / 255;
-          r += data[o] * a + 255 * (1 - a);
-          g += data[o + 1] * a + 255 * (1 - a);
-          b += data[o + 2] * a + 255 * (1 - a);
-          n++;
-        }
-      const o = (y * w2 + x) * 4;
-      out[o] = r / n;
-      out[o + 1] = g / n;
-      out[o + 2] = b / n;
-      out[o + 3] = 255;
-    }
-  return out;
-}
-
 // The frame's size: `area` pixels in all, never larger than the source.
 const sizeFor = (w, h, area) => {
   const s = Math.min(1, Math.sqrt(area / (w * h)));
@@ -248,84 +219,6 @@ export function normalizeDepths(
     return out;
   });
   return normalized;
-}
-
-// Lane Photo fidelity r2: the depth (dw by dh, 0..1) enlarged to the frame (w by h) with the
-// frame's colors as the guide (a joint bilateral filter, as Photo to 3D's upsampleDepth): each
-// pixel takes the depths of the 3 by 3 depth cells around it, weighted by how near they lie and by
-// how alike the frame's color there (averaged over the cell) is to the pixel's own, so a near
-// thing's outline in the depth snaps to its outline in the picture. Where no cell's color is near
-// the pixel's, it falls back to the plain depth. Tables stand in for the exponentials:
-// a frame takes a few milliseconds per 100,000 pixels.
-const GUIDE_SIGMA = 0.09; // how alike two colors (0..1, summed squares of r, g, b) must be
-const GUIDE_LUT = 1024;
-const GUIDE_MAX = 0.25; // a color difference (squared) beyond this weighs nothing
-const rangeLut = (() => {
-  const t = new Float32Array(GUIDE_LUT + 1);
-  for (let i = 0; i <= GUIDE_LUT; i++)
-    t[i] = i === GUIDE_LUT ? 0 : Math.exp(-((i / GUIDE_LUT) * GUIDE_MAX) / (2 * GUIDE_SIGMA * GUIDE_SIGMA)); // prettier-ignore
-  return t;
-})();
-export function guidedDepth(dn, dw, dh, rgba, w, h) {
-  // the frame's colors averaged over each depth cell (0..1)
-  const lo = shrink(rgba, w, h, dw, dh);
-  const gl = new Float32Array(dw * dh * 3);
-  for (let k = 0; k < dw * dh; k++) {
-    gl[k * 3] = lo[k * 4] / 255;
-    gl[k * 3 + 1] = lo[k * 4 + 1] / 255;
-    gl[k * 3 + 2] = lo[k * 4 + 2] / 255;
-  }
-  const out = new Float32Array(w * h);
-  const sp = 1 / (2 * 0.8 * 0.8);
-  const scale = GUIDE_LUT / GUIDE_MAX;
-  // the 3 by 3 depth cells around the nearest one, and their distance weights along each axis
-  const ex = new Float32Array(3);
-  const ey = new Float32Array(3);
-  const cx = new Int32Array(3);
-  const cy = new Int32Array(3);
-  for (let y = 0; y < h; y++) {
-    const v = ((y + 0.5) * dh) / h - 0.5;
-    const jc = Math.round(v);
-    for (let a = 0; a < 3; a++) {
-      const jj = jc - 1 + a;
-      cy[a] = (jj < 0 ? 0 : jj >= dh ? dh - 1 : jj) * dw;
-      ey[a] = Math.exp(-((v - jj) ** 2) * sp);
-    }
-    for (let x = 0; x < w; x++) {
-      const u = ((x + 0.5) * dw) / w - 0.5;
-      const ic = Math.round(u);
-      for (let a = 0; a < 3; a++) {
-        const ii = ic - 1 + a;
-        cx[a] = ii < 0 ? 0 : ii >= dw ? dw - 1 : ii;
-        ex[a] = Math.exp(-((u - ii) ** 2) * sp);
-      }
-      const o = (y * w + x) * 4;
-      const r = rgba[o] / 255;
-      const g = rgba[o + 1] / 255;
-      const b = rgba[o + 2] / 255;
-      let sum = 0;
-      let wsum = 0;
-      let plain = 0;
-      let psum = 0;
-      for (let bj = 0; bj < 3; bj++)
-        for (let a = 0; a < 3; a++) {
-          const c = cy[bj] + cx[a];
-          const dr = gl[c * 3] - r;
-          const dg = gl[c * 3 + 1] - g;
-          const db = gl[c * 3 + 2] - b;
-          const q = (dr * dr + dg * dg + db * db) * scale;
-          const s = ex[a] * ey[bj];
-          const ws = s * rangeLut[q >= GUIDE_LUT ? GUIDE_LUT : q | 0];
-          sum += ws * dn[c];
-          wsum += ws;
-          plain += s * dn[c];
-          psum += s;
-        }
-      // where no cell's color is near the pixel's: the plain (distance-weighted) depth
-      out[y * w + x] = wsum > 1e-3 * psum ? sum / wsum : plain / psum;
-    }
-  }
-  return out;
 }
 
 // The packed depths of a clip's frames (the sample's file): a count, then
@@ -817,7 +710,7 @@ export async function openClip(file, name, onStatus, onPreview = null) {
       const data = g.getImageData(0, 0, w, h).data;
       frames = Array.from({ length: n }, () => ({ data, delay: (len * 1000) / n }));
       readFrames = (say, cancelled) => videoFrames(file, side, say, cancelled);
-      audio = await soundOf(URL.createObjectURL(file), true);
+      audio = await soundOf(copy.url, false, copy.video);
     }
     if (frames.length < 2) throw new Error("That file has only one picture. Open a GIF or a video that moves."); // prettier-ignore
     const cache = new Array(frames.length).fill(null);
@@ -943,10 +836,10 @@ export const READ = { lead: 0, slowed: 1, mode: "seek" };
 // A video's own sound (r5): a Track (song-stream.js) playing the file,
 // routed to the site's speaker button; its clock drives the frames. Null if
 // the browser can't play it (the clip then plays silently on its own clock).
-async function soundOf(url, own) {
+async function soundOf(url, own, media = null) {
   if (typeof Audio === "undefined") return null;
   const { Track } = await import("./song-stream.js");
-  const track = new Track(url);
+  const track = new Track(url, media);
   try {
     await track.ready;
   } catch {
@@ -1031,18 +924,54 @@ async function keepCopy(file) {
   }
 }
 
-const loadedVideo = async (url) => {
-  const v = document.createElement("video");
+const loadedVideo = async (url, existing = null) => {
+  const v = existing || document.createElement("video");
   v.muted = true;
   v.playsInline = true;
   v.preload = "auto";
-  v.src = url;
   await new Promise((resolve, reject) => {
-    v.addEventListener("loadeddata", resolve, { once: true });
-    v.addEventListener("error", () => reject(new Error("This browser can't play that video. MP4 (H.264) and WebM play almost everywhere.")), { once: true }); // prettier-ignore
+    const clear = () => {
+      v.removeEventListener("loadeddata", loaded);
+      v.removeEventListener("error", failed);
+    };
+    const loaded = () => {
+      clear();
+      resolve();
+    };
+    const failed = () => {
+      clear();
+      reject(
+        new Error(
+          "This browser can't play that video. MP4 (H.264) and WebM play almost everywhere.",
+        ),
+      );
+    };
+    v.addEventListener("loadeddata", loaded);
+    v.addEventListener("error", failed);
+    v.src = url;
   });
   return v;
 };
+
+// Cached depth and pictures need no inactive hardware decoder. Preserve the
+// same media element and its sound route, and reopen it only when selected.
+function parkOtherVideos(chosen) {
+  const clips = new Set([...MOVING.samples.values(), MOVING.custom]);
+  for (const clip of clips) {
+    if (!clip?.video || clip === chosen || clip.parkedURL) continue;
+    clip.video.pause();
+    clip.parkedURL = clip.video.currentSrc || clip.video.src;
+    clip.video.removeAttribute("src");
+    clip.video.load();
+  }
+}
+async function restoreClipVideo(clip) {
+  if (!clip?.parkedURL) return clip;
+  const url = clip.parkedURL;
+  await loadedVideo(url, clip.video);
+  delete clip.parkedURL;
+  return clip;
+}
 
 // Opens a long video: its picture's size, the plan for its depth, its
 // sound, and the first LONG_FIRST depth pictures; the rest are worked out
@@ -1073,7 +1002,7 @@ async function openLong(file, name, onStatus, duration, onPreview, worker) {
     url,
     mean: new Float32Array(w * h),
     depth: { ...plan, frames: new Array(plan.n).fill(null), ready: 0, done: 0, lo: null, hi: null },
-    audio: await soundOf(URL.createObjectURL(file), true),
+    audio: await soundOf(url, false, v),
     job: null,
   };
   clip.shownDepth = (t = 0) => longFrame(clip, t, false).near[0];
@@ -1275,43 +1204,6 @@ function depthBytes(D, m, colors) {
   return b;
 }
 
-// The nearness (0..1) at the picture's size (w by h) into `out`: depth
-// pictures a and b blended by f (0 a .. 1 b), with adjacent answers setting
-// their cubic tangents. Missing answers hold the last available depth.
-function nearAt(D, a, b, f, w, h, out) {
-  const back = (i) => {
-    for (let j = Math.min(i, D.n - 1); j >= 0; j--) if (D.frames[j]) return D.frames[j];
-    return null;
-  };
-  const A = back(a);
-  const B = back(b) || A;
-  if (!A) return out.fill(0.5);
-  const P = back(a - 1) || A;
-  const N = back(b + 1) || B;
-  const { w: dw, h: dh } = D.ms;
-  const blend = (D.blend ||= new Float32Array(dw * dh));
-  for (let i = 0; i < blend.length; i++)
-    blend[i] =
-      B === A || f <= 0
-        ? A[i] / 255
-        : cubicDepth(P[i] / 255, A[i] / 255, B[i] / 255, N[i] / 255, f);
-  for (let y = 0; y < h; y++) {
-    const fy = Math.max(0, Math.min(dh - 1, ((y + 0.5) / h) * dh - 0.5));
-    const y0 = Math.floor(fy);
-    const y1 = Math.min(dh - 1, y0 + 1);
-    const ay = fy - y0;
-    for (let x = 0; x < w; x++) {
-      const fx = Math.max(0, Math.min(dw - 1, ((x + 0.5) / w) * dw - 0.5));
-      const x0 = Math.floor(fx);
-      const x1 = Math.min(dw - 1, x0 + 1);
-      const ax = fx - x0;
-      const at = (F) => ((F[y0 * dw + x0] * (1 - ax) + F[y0 * dw + x1] * ax) * (1 - ay) + (F[y1 * dw + x0] * (1 - ax) + F[y1 * dw + x1] * ax) * ay); // prettier-ignore
-      out[y * w + x] = at(blend);
-    }
-  }
-  return out;
-}
-
 // The long clip's frame at t, as a one-frame clip frameImage can draw: the
 // muted copy's picture now, and the depth there.
 function longFrame(clip, t, colorsToo = true) {
@@ -1338,7 +1230,7 @@ function longFrame(clip, t, colorsToo = true) {
     L.colors = colors; // (the original's card shows it too)
   }
   const D = clip.depth;
-  const k = Math.max(0, t * D.rate - 0.5);
+  const k = Math.max(0, t * D.rate - (D.offset ?? 0.5));
   const a = Math.min(D.n - 1, Math.floor(k));
   nearAt(D, a, Math.min(D.n - 1, a + 1), k - a, w, h, L.near);
   if (D.colorGuide && colors) {
@@ -1367,6 +1259,10 @@ function longFrame(clip, t, colorsToo = true) {
     }
   }
   for (let i = 0; i < w * h; i++) L.bytes[i] = Math.round(255 * L.near[i]);
+  L.time = t;
+  L.depth = D;
+  L.ready = D.ready;
+  L.easeTick = clip.depthEase ? Math.floor(performance.now() / 16) : null;
   return { w, h, colors: [colors], near: [L.bytes], mean: clip.mean };
 }
 
@@ -1821,6 +1717,7 @@ export async function loadSample(id = "sample", onPreview = null) {
   const s = SAMPLES.find((x) => x.id === id) || SAMPLE;
   if (MOVING.samples.has(s.id)) {
     const cached = MOVING.samples.get(s.id);
+    await restoreClipVideo(cached);
     await onPreview?.(cached);
     return cached;
   }
@@ -1876,7 +1773,11 @@ export async function loadSample(id = "sample", onPreview = null) {
   );
   clip.sample = s.id;
   if (preview?.firstPresentedAt) clip.firstPresentedAt = preview.firstPresentedAt;
-  clip.audio = typeof Audio === "undefined" || s.gif ? null : await soundOf(new URL(sampleSound(s), import.meta.url).href, false); // prettier-ignore
+  if (typeof Audio !== "undefined" && !s.gif) {
+    const url = new URL(sampleSound(s), import.meta.url).href;
+    if (!s.sound) clip.video = await loadedVideo(url);
+    clip.audio = await soundOf(url, false, clip.video);
+  }
   MOVING.samples.set(s.id, clip);
   return clip;
 }
@@ -1899,13 +1800,18 @@ async function firstSheetFrame(bytes, w, h, sample) {
 async function loadLongSample(s, onPreview) {
   if (MOVING.samples.has(s.id)) {
     const cached = MOVING.samples.get(s.id);
+    await restoreClipVideo(cached);
     await onPreview?.(cached);
     return cached;
   }
   const root = `../../assets/toys/moving-photo-3d/${s.file}`;
   const [bytes, video] = await Promise.all([
     readBytes(`${root}.mp2depth`),
-    loadedVideo(new URL(`${root}.webm`, import.meta.url).href),
+    // Node recipe builders need the actual baked geometry, without a DOM
+    // media decoder. Browser scenes always open the selected film itself.
+    typeof document === "undefined"
+      ? null
+      : loadedVideo(new URL(`${root}.webm`, import.meta.url).href),
   ]);
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   const dw = view.getUint16(4, true),
@@ -1917,7 +1823,9 @@ async function loadLongSample(s, onPreview) {
     bytes.length !== 12 + dw * dh * n
   )
     throw new Error("The sample depth file is incomplete.");
-  const { w, h } = sizeFor(video.videoWidth, video.videoHeight, longArea());
+  const { w, h } = video
+    ? sizeFor(video.videoWidth, video.videoHeight, longArea())
+    : { w: dw, h: dh };
   const frames = Array.from({ length: n }, (_, i) =>
     bytes.subarray(12 + i * dw * dh, 12 + (i + 1) * dw * dh),
   );
@@ -1933,8 +1841,18 @@ async function loadLongSample(s, onPreview) {
     duration,
     video,
     mean: new Float32Array(w * h),
-    depth: { ms: { w: dw, h: dh }, n, rate: s.fps, frames, ready: n, done: n, colorGuide: true },
-    audio: await soundOf(video.src, false),
+    // The baker seeks i / fps. Inferred upload maps instead use (i + 0.5) / rate.
+    depth: {
+      ms: { w: dw, h: dh },
+      n,
+      rate: s.fps,
+      offset: 0,
+      frames,
+      ready: n,
+      done: n,
+      colorGuide: true,
+    },
+    audio: video ? await soundOf(video.src, false, video) : null,
   };
   clip.shownDepth = (t = 0) => longFrame(clip, t, false).near[0];
   const mean = new Float32Array(dw * dh);
@@ -1971,6 +1889,7 @@ function setShown(text) {
 
 // The clip's sound (r5), if it has one.
 const track = () => MOVING.clip?.audio?.track ?? null;
+const clipPosition = (t) => (MOVING.clip?.video === t.el ? t.el.currentTime : t.time());
 
 // Smd: the Toy tab's Speed slider (0 to 1, the middle is the clip's own speed) sets how fast the
 // clip plays, as it does the turntable on other toys: 0.25 to 1.75 times, its sound with it.
@@ -1993,7 +1912,7 @@ function soundTo(on) {
     if (Math.abs(t.el.currentTime - MOVING.t) > 0.03) t.el.currentTime = MOVING.t;
     t.play(MOVING.sound);
   } else if (!on && t.playing) {
-    MOVING.t = Math.min(MOVING.clip?.duration ?? Infinity, t.time());
+    MOVING.t = Math.min(MOVING.clip?.duration ?? Infinity, clipPosition(t));
     t.pause();
   }
 }
@@ -2232,6 +2151,7 @@ const photoVersion = () => {
   const clip = MOVING.clip;
   if (!clip) return "";
   clip.photoUid ||= ++photoUid;
+  if (!MOVING.original && sharpClipOnly(clip)) return `sharp|${clip.photoUid}`;
   const v = clip.video;
   return v ? `${clip.photoUid}|${v.readyState >= 2 ? 1 : 0}|${v.currentTime.toFixed(3)}` : `${clip.photoUid}|${MOVING.frame}`; // prettier-ignore
 };
@@ -2411,14 +2331,33 @@ export const MOVING_PHOTO = {
     },
     shown: () => MOVING.status || (MOVING.clip?.long && MOVING.longStatus) || (MOVING.clip ? clipLine(MOVING.clip) : ""), // prettier-ignore
   },
-  credits: [...SAMPLES, ...LONG_SAMPLES].map((s) => ({
-    label: s.label,
-    title: s.title,
-    source: s.source,
-    author: s.author,
-    license: s.license,
-    licenseUrl: s.licenseUrl,
-  })),
+  credits: [
+    {
+      label: "Clip playback and solid geometry",
+      title: "Moving photo to 3D, round 4",
+      source: "https://github.com/ryanjosephkamp/splashery",
+      author: "Made by Ryan with Codex (GPT-6)",
+      license: "MIT",
+      licenseUrl: "https://github.com/ryanjosephkamp/splashery/blob/main/LICENSE",
+    },
+    {
+      label: "Original round 4 test clips",
+      title: "Blocks, gate, wheel, orbit, and fast motion",
+      source:
+        "https://github.com/ryanjosephkamp/splashery/blob/892ed8eab6b3eb71c65c976f59da8b60b099a78c/tools/cdx-mp2-r4-inputs.mjs",
+      author: "Made by Ryan with Codex (GPT-6)",
+      license: "CC0 1.0",
+      licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+    },
+    ...[...SAMPLES, ...LONG_SAMPLES].map((s) => ({
+      label: s.label,
+      title: s.title,
+      source: s.source,
+      author: s.author,
+      license: s.license,
+      licenseUrl: s.licenseUrl,
+    })),
+  ],
   screen: {
     get width() {
       return (MOVING.grid?.cols || 16) * 2;
@@ -2428,7 +2367,9 @@ export const MOVING_PHOTO = {
     },
     // (Live r7: a long clip's picture also changes as its copy gets a frame
     // and its depth arrives.)
-    version: () => `${MOVING.clip?.name}|${MOVING.clip?.version || 0}|${MOVING.clip?.transition ? Math.floor(performance.now() / 16) : ""}|${MOVING.frame}|${MOVING.grid?.cols}|${longVersion(MOVING.clip)}`, // prettier-ignore
+    version: () => !MOVING.original && sharpClipOnly(MOVING.clip)
+      ? `sharp|${MOVING.clip?.photoUid}|${MOVING.grid?.cols}`
+      : `${MOVING.clip?.name}|${MOVING.clip?.version || 0}|${MOVING.clip?.transition ? Math.floor(performance.now() / 16) : ""}|${MOVING.frame}|${MOVING.grid?.cols}|${longVersion(MOVING.clip)}`, // prettier-ignore
     draw(g) {
       const clip = MOVING.clip;
       if (!clip || !MOVING.grid) return;
@@ -2457,8 +2398,9 @@ export const MOVING_PHOTO = {
     const pl = globalThis.window?.__splashery?.player;
     const release = holdOpening(pl, () => pl?.scene?.toy?.id === "moving-photo-3d" && (pl.scene.toy.options?.clip || "sample") === (o.clip || "sample")); // prettier-ignore
     try {
-      MOVING.want =
-        hasOwnClip(o) ? MOVING.custom : await loadSample(id, preview);
+      MOVING.want = hasOwnClip(o)
+        ? await restoreClipVideo(MOVING.custom)
+        : await loadSample(id, preview);
     } finally {
       release();
     }
@@ -2488,21 +2430,26 @@ export const MOVING_PHOTO = {
       MOVING.t = 0;
       tr.play(MOVING.sound);
     }
+    // A shared video already supplies the native picture. Subtracting the
+    // audio output delay from its clock shifts depth behind that picture and
+    // can seek the same element backward when paused. Separate audio tracks
+    // still use their audible clock for retained sample pictures.
+    const position = tr?.playing ? clipPosition(tr) : MOVING.t;
     if (!on) {
       if (tr?.playing) {
         // (Live r7: the picture stops where the sound stops, though the last
         // frame drawn may be a moment behind it.)
-        MOVING.t = Math.min(clip.duration - 0.02, Math.max(0, tr.time()));
+        MOVING.t = Math.min(clip.duration - 0.02, Math.max(0, position));
         soundTo(false);
       }
       MOVING.anchor = null;
     } else if (tr?.playing) {
       // r5: the frames follow the sound's clock (looping at the clip's end).
-      if (tr.time() >= clip.duration - 0.02) {
+      if (position >= clip.duration - 0.02) {
         tr.el.currentTime = 0;
         tr.anchor = null;
         MOVING.t = 0;
-      } else MOVING.t = tr.time();
+      } else MOVING.t = position;
       MOVING.anchor = null;
     } else if (tr?.el.ended && !tr.blocked) {
       // A slow frame can miss the sound's end entirely. Start the next loop,
@@ -2619,6 +2566,7 @@ export const MOVING_PHOTO = {
     k.reach([0, 0, 0.9]);
     k.data = { moving: { cols, rows, n: clip.n } };
     sharpClip(MOVING, { width, height, full }); // lane Photo sharp view
+    parkOtherVideos(clip);
   },
 };
 

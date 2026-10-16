@@ -36,12 +36,42 @@ export async function openRender(
     tier = "low",
     renderer = "webgl2",
     stepped = false,
+    bindNativePicture = false,
   } = {},
 ) {
   await page.goto(
     `${process.env.SPLASHERY_URL || "http://127.0.0.1:4388/"}?renderer=${renderer}&adapt=off&profile=${tier}&labs=1`,
   );
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  if (bindNativePicture)
+    await page.evaluate(async () => {
+      const { ReliefMesh } = await import("/src/live/relief-mesh.js");
+      const setColor = ReliefMesh.prototype.setColor;
+      ReliefMesh.prototype.setColor = function (...args) {
+        window.__mp3BoundMesh = this;
+        return setColor.apply(this, args);
+      };
+      // A disclosed measurement-only correction: bind the exact selected
+      // native picture to main's unchanged geometry and shaders. Main's stale
+      // MP3 picture and paused video compositor must not bias geometry metrics.
+      window.__mp3BindNative = () => {
+        const c = window.__mp3?.MOVING.clip,
+          mesh = window.__mp3BoundMesh;
+        if (!mesh || !c?.video || c.video.readyState < 2) return;
+        const canvas = (window.__mp3BoundCanvas ||= document.createElement("canvas"));
+        canvas.width = c.video.videoWidth;
+        canvas.height = c.video.videoHeight;
+        canvas.getContext("2d", { willReadFrequently: true }).drawImage(c.video, 0, 0);
+        canvas.currentTime = c.video.currentTime;
+        // Coded video storage can be narrower than its display dimensions.
+        // Allocate the independent native canvas texture at its actual size.
+        if (mesh.colorSrc instanceof HTMLVideoElement) {
+          mesh.color?.destroy();
+          mesh.color = null;
+        }
+        mesh.setColor(canvas);
+      };
+    });
   await page.evaluate(() => window.__splashery.app.chooseToy("moving-photo-3d"));
   await page.waitForFunction(() => window.__psv?.state().on && !window.__splashery.player.loading);
   await page.evaluate(async () => {
@@ -83,6 +113,8 @@ export async function openRender(
   await page.evaluate(async () => {
     const moving = window.__mp3,
       setup = document.createElement("canvas");
+    if (window.__mp3BindNative && moving.MOVING.clip.audio && !moving.MOVING.clip.long)
+      moving.MOVING.clip.audio.url = "";
     setup.width = moving.MOVING.grid.cols * 2;
     setup.height = moving.MOVING.grid.rows;
     moving.MOVING.t = 0;
@@ -118,7 +150,7 @@ export async function openRender(
     { timeout: 1_800_000 },
   );
   await page.evaluate(
-    async ({ source, id, stepped }) => {
+    async ({ source, id, stepped, bindNativePicture }) => {
       const m = window.__mp3,
         { player, app } = window.__splashery;
       const c = m.MOVING.clip;
@@ -147,7 +179,11 @@ export async function openRender(
       c.video?.pause();
       // The short Bunny's Sharp picture uses its native source video. Keep it
       // explicitly reachable for verified seeks, rather than relying on RVFC.
-      if (!c.video && id === "sample" && source) {
+      if (
+        !c.video &&
+        source &&
+        (id === "sample" || (bindNativePicture && /\.(mp4|webm|mov|m4v)$/i.test(source)))
+      ) {
         const v = document.createElement("video");
         v.muted = true;
         v.playsInline = true;
@@ -169,6 +205,7 @@ export async function openRender(
       window.__mp3Canvas = canvas;
       m.MOVING_PHOTO.screen.draw(canvas.getContext("2d"));
       (await import("/src/packs/photo-sharp.js")).sharpDrive({});
+      window.__mp3BindNative?.();
       player.stage.setClearColor([0, 0, 0], 0);
       await player.stage.captureFrame();
       // Each measured source frame explicitly calls the actual screen draw,
@@ -176,7 +213,7 @@ export async function openRender(
       // add unrelated work between the three renders without advancing time.
       if (stepped) player.stage.updateHandlers = [];
     },
-    { source, id, stepped },
+    { source, id, stepped, bindNativePicture },
   );
   return { openMs };
 }
@@ -194,6 +231,7 @@ export async function renderFrame(
     screenDiagnostics = false,
     debugSpecks = false,
     verifyDepth = false,
+    displayedDepth = false,
   } = {},
 ) {
   return page.evaluate(
@@ -208,6 +246,7 @@ export async function renderFrame(
       screenDiagnostics,
       debugSpecks,
       verifyDepth,
+      displayedDepth,
       oracle,
     }) => {
       const m = window.__mp3,
@@ -244,6 +283,7 @@ export async function renderFrame(
       st.setCameraPose(pl.camera.pose());
       m.MOVING_PHOTO.screen.draw(window.__mp3Canvas.getContext("2d"));
       (await import("/src/packs/photo-sharp.js")).sharpDrive({});
+      window.__mp3BindNative?.();
       const layer = st.app.scene.layers.getLayerByName("World");
       const meshes = layer.meshInstances.filter((mi) => mi.node.name === "psv-relief");
       const surface = meshes.find((mi) => mi.material.parameters.uLayer?.data[2] === 0);
@@ -314,6 +354,7 @@ export async function renderFrame(
         if (window.__mp3Ref) {
           layer.removeMeshInstances([window.__mp3Ref.mi]);
           window.__mp3Ref.mat.destroy();
+          window.__mp3Ref.ownedMesh?.destroy();
         }
         const desc = surface.material.shaderDesc;
         const mat = new pc.ShaderMaterial({
@@ -323,11 +364,22 @@ export async function renderFrame(
         mat.depthTest = true;
         mat.depthWrite = true;
         mat.update();
-        const mi = new pc.MeshInstance(surface.mesh, mat, surface.node);
+        let ownedMesh = null;
+        if (surface.mesh.clipReferenceIndices) {
+          // Runtime triangle culling must not shrink the coverage oracle.
+          // Keep its original complete grid on an independent reference mesh.
+          const positions = [];
+          surface.mesh.getPositions(positions);
+          ownedMesh = new pc.Mesh(st.device);
+          ownedMesh.setPositions(positions, 3);
+          ownedMesh.setIndices(surface.mesh.clipReferenceIndices);
+          ownedMesh.update(pc.PRIMITIVE_TRIANGLES);
+        }
+        const mi = new pc.MeshInstance(ownedMesh || surface.mesh, mat, surface.node);
         mi.cull = false;
         mi.visible = false;
         layer.addMeshInstances([mi]);
-        window.__mp3Ref = { surface, mat, mi };
+        window.__mp3Ref = { surface, mat, mi, ownedMesh };
       }
       const ref = window.__mp3Ref;
       for (const [name, param] of Object.entries(surface.material.parameters))
@@ -393,18 +445,20 @@ export async function renderFrame(
           let proof = cache.get(original);
           if (!proof) {
             const desc = original.shaderDesc;
-            const owned = !!desc.attributes?.aClipCell;
+            const owned = !!(desc.attributes?.aClipCell || desc.attributes?.aClipTop);
+            const sourceZ = desc.attributes?.aClipTop ? "pointZ" : "aPosition.z";
+            const sourceZW = desc.attributes?.aClipTop ? "pointZ" : "input.aPosition.z";
             const ownerGL = owned
               ? `
-  if (abs(aPosition.z) > 0.5 && abs(aPosition.z) < 4.5) {
-    if (abs(aPosition.z) < 2.5) vSourceUv.x = (float(cell.x) + 0.5) / float(size.x);
+  if (abs(${sourceZ}) > 0.5 && abs(${sourceZ}) < 4.5) {
+    if (abs(${sourceZ}) < 2.5) vSourceUv.x = (float(cell.x) + 0.5) / float(size.x);
     else vSourceUv.y = (float(cell.y) + 0.5) / float(size.y);
   }`
               : "";
             const ownerWG = owned
               ? `
-  if (abs(input.aPosition.z) > 0.5 && abs(input.aPosition.z) < 4.5) {
-    if (abs(input.aPosition.z) < 2.5) { output.vSourceUv.x = (f32(cell.x) + 0.5) / f32(size.x); }
+  if (abs(${sourceZW}) > 0.5 && abs(${sourceZW}) < 4.5) {
+    if (abs(${sourceZW}) < 2.5) { output.vSourceUv.x = (f32(cell.x) + 0.5) / f32(size.x); }
     else { output.vSourceUv.y = (f32(cell.y) + 0.5) / f32(size.y); }
   }`
               : "";
@@ -574,14 +628,14 @@ export async function renderFrame(
       metric.screenEdgeSpecks = screenMetric?.edgeSpecks ?? null;
       metric.unwitnessedSpecks = unwitnessed;
       if (metric.pixels < 100) throw new Error("Coverage reference did not render a picture");
-      const near = c.long ? c.scratch.bytes : c.near[m.MOVING.frame];
+      const inputDepth = c.long ? c.scratch.bytes : c.near[m.MOVING.frame];
+      const uploadedDepth = surface.material.parameters.uDepth.data._levels[0];
+      const depthInputMatches = samePixels(uploadedDepth, inputDepth);
+      const near = displayedDepth ? uploadedDepth : inputDepth;
       let colors = c.long ? c.scratch.colors : c.colors[m.MOVING.frame];
       if (!colors && c.scratch?.g) colors = c.scratch.g.getImageData(0, 0, c.w, c.h).data;
-      if (verifyDepth) {
-        const uploaded = surface.material.parameters.uDepth.data._levels[0];
-        if (!samePixels(uploaded, near))
-          throw new Error("Displayed R8 depth differs from the measured depth field");
-      }
+      if (verifyDepth && !depthInputMatches)
+        throw new Error("Displayed R8 depth differs from the measured depth field");
       const previous = window.__mp3Previous;
       let jitter = 0,
         flips = 0,
@@ -605,7 +659,8 @@ export async function renderFrame(
         sourceTime: c.video?.currentTime ?? t,
         sourcePixelsVerified: !!nativePixels || !c.video,
         sourceRasterPath: nativePixels?.rasterPath || "retained RGBA",
-        depthPixelsVerified: verifyDepth,
+        depthPixelsVerified: depthInputMatches,
+        temporalDepth: displayedDepth ? "displayed R8" : "retained depth",
         ...(debugSpecks ? { speckDetails } : {}),
         jitter,
         flips,
@@ -627,6 +682,7 @@ export async function renderFrame(
       screenDiagnostics,
       debugSpecks,
       verifyDepth,
+      displayedDepth,
       oracle: pictureMetrics.toString(),
     },
   );
@@ -709,7 +765,7 @@ export async function renderGoal(option, reconstructedSources) {
   const snapshot = option("snapshot", "");
   const sourceWitness = option("source-witness", "true") !== "false";
   const screenDiagnostics = option("screen-diagnostics", "false") === "true";
-  const oracleVersion = "native-role-v4";
+  const oracleVersion = "native-role-v5";
   const deadline = Date.parse(option("deadline", "")) || Infinity;
   const codeFiles = [
     "src/packs/moving-photo.js",

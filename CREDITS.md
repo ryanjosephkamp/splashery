@@ -1988,3 +1988,21 @@ merged. See [the failure-gallery report](docs/audits/photo-3d-failures-2026-10.m
 
 The crop controls, finder geometry, and scan-study tools are made by Ryan with Codex (GPT-6) under
 Splashery's MIT license.
+
+# Moving photo to 3D, round 4 (Codex task 92)
+
+The clip playback, geometry accelerator, and measurement code are made by Ryan with Codex (GPT-6),
+under Splashery's MIT license. The original C source and its build command accompany the small
+compiled geometry module; no compiler or third-party runtime is served with it.
+
+The four long-film depth caches were rebuilt with the original film frames by
+`tools/cdx-mp2-r4-bake.mjs` on October 16, 2026. The rebuild uses the existing upload refinement's
+color-gated half-second depth window. The original video files are unchanged, and these derived
+depth caches keep each film's CC BY license and Blender Foundation attribution listed above.
+
+The five `cdx-mp2-r4-*` measurement clips (blocks, gate, wheel, orbit, and fast motion) are original
+CC0 1.0 assets, made by Ryan with Codex (GPT-6). They contain procedural rigid geometry and an
+original test tone, with no external footage, people, or marks. Each is two seconds at 256 by 144;
+the fast clip runs at 60 frames per second. MP4, WebM, MOV, and GIF files exercise the local-file
+path. [The generator](tools/cdx-mp2-r4-inputs.mjs) is MIT, and each file's hash, size, and source
+record is in `tools/assets.json`. These fixtures have no shelf entry or automatic fetch.

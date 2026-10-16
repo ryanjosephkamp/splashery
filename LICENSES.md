@@ -471,3 +471,16 @@ These tool versions are retained with the public review evidence.
   https://ffmpeg.org/legal.html: H.264 video encoding with libx264 and checks of frame counts,
   duration, and dimensions. No executable is served. These are build tools allowed by Rules v1; the
   original rendered output is CC0.
+
+# Moving photo round 4 build and verification tools (not shipped)
+
+- Zig 0.14.1 ([MIT](https://raw.githubusercontent.com/ziglang/zig/0.14.1/LICENSE)) and its bundled
+  Clang compiler ([LLVM license](https://llvm.org/LICENSE.txt)): compile the original
+  `tools/cdx-mp2-geometry.c` to a freestanding WebAssembly module. The module imports no runtime or
+  library. The compiler is not served.
+  [Build documentation](https://ziglang.org/documentation/0.14.1/).
+- FFmpeg / ffprobe 7.1.5-0+deb13u1: the existing build tool listed above encodes the five original
+  test clips and review films. No executable is served.
+- Xvfb 21.1.16 ([X.Org licenses](https://www.x.org/releases/current/doc/xorg-docs/License.html)): a
+  virtual display for real Chromium verification with Mesa's software renderer. The installed X.Org
+  copyright file identifies the canonical X11/MIT form. No X server is served with the site.
