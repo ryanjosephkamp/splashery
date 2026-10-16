@@ -293,7 +293,7 @@ test.describe("sharp pages in the real renderer", () => {
       if (m.type() === "error" && /shader|compil|validation|syntax/i.test(m.text()))
         errors.push(m.text());
     });
-    await page.goto("/?renderer=webgl2&profile=low&adapt=off&labs=1");
+    await page.goto("/?renderer=webgl2&profile=mid&adapt=off&labs=1");
     await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
     await page.evaluate(() => window.__splashery.app.chooseToy("picture-lab"));
     await page.evaluate(() =>
