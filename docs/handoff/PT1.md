@@ -71,6 +71,11 @@ Ready for review (see the PR). Both toys are rebuilt; the engine PR is open.
   that names are uppercased, and the paint test uses the tool row. `cdx-pfc` and `cmp2-engine` pass
   unchanged.
 
+### Clips
+
+Effect review page 2, lane `PT1` (MP4s, 360 px): `pt1-name-toy-poke`, `pt1-name-toy-paint`,
+`pt1-name-toy-drop`, `pt1-name-toy-blow`, `pt1-name-toy-emoji`, and `pt1-shape-morph`.
+
 ## Known issues
 
 - Letters follow the device's fonts: rounded on a Mac or iPhone (`ui-rounded`), and the system's
