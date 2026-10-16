@@ -517,6 +517,8 @@ export class Pictures {
     if (this.retiring.length) this.stage.requestRender(200);
     const m = this.media;
     const now = performance.now();
+    const covered =
+      this.solid && this.player?.toyInfo?.id === "photo-album" && out?.parts?.cover?.angle === 0;
     for (const sh of this.sheets) {
       const o = out?.sheets?.[sh.def.id];
       const page = o?.page ?? this.page;
@@ -525,9 +527,10 @@ export class Pictures {
       // A hidden sheet asked for `ahead` is built all the same (after the
       // ones on show) and stays hidden, ready for when it shows (lane Books).
       sh.hidden = !(vis > 0);
+      sh.occluded = covered;
       const has = m && page >= 0 && page < count && (vis > 0 || !!o?.ahead);
       if (sh.slot) sh.slot.entity.enabled = !!has && !!sh.shown && !sh.hidden;
-      sh.slot?.surface?.show(!!has && !!sh.shown && !sh.hidden);
+      sh.slot?.surface?.show(!!has && !!sh.shown && !sh.hidden && !sh.occluded);
       if (!has) {
         sh.want = null;
         continue;
@@ -981,7 +984,7 @@ export class Pictures {
     slot.entity.enabled = !sheet.hidden;
     slot.surface?.destroy();
     slot.surface = data.surface ? new PictureSurface(st, slot, data.surface) : null;
-    slot.surface?.show(!sheet.hidden);
+    slot.surface?.show(!sheet.hidden && !sheet.occluded);
     // A continuous face is ready without the splat sort. Retire its old
     // picture immediately, so two resolutions or pages never overlap.
     if (data.surface && previous && previous !== slot) {
