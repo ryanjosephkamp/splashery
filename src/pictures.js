@@ -71,8 +71,7 @@ let workerFailed = false;
 let nextJob = 1;
 const waiting = new Map();
 
-// Builds a sheet in the worker (or here, if workers are unavailable).
-function buildOffThread(job) {
+function pictureWorker() {
   if (!worker && !workerFailed) {
     try {
       worker = new Worker(new URL("./pictures-worker.js", import.meta.url), { type: "module" });
@@ -93,6 +92,12 @@ function buildOffThread(job) {
       workerFailed = true;
     }
   }
+  return worker;
+}
+
+// Builds a sheet in the worker (or here, if workers are unavailable).
+function buildOffThread(job) {
+  pictureWorker();
   if (!worker) return Promise.resolve(buildSheet(job));
   const id = nextJob++;
   return new Promise((resolve, reject) => {
@@ -123,11 +128,15 @@ export class Pictures {
     this.prefetch = prefetch;
     this.decorate = decorate;
     this.stage = player.stage;
-    if (solid)
+    if (solid) {
+      // Start the shared worker while the source decodes, rather than
+      // putting its module startup after the first page's rasterization.
+      pictureWorker();
       warmPictureShaders(
         this.stage,
         defs.some((d) => d.leaf != null),
       );
+    }
     this.profile = profile;
     this.budget = PICTURE_BUDGETS[profile] || PICTURE_BUDGETS.mid;
     const c = transform?.center || [0, 0, 0];
@@ -715,7 +724,7 @@ export class Pictures {
         backing = document.createElement("canvas");
         backing.width = bw;
         backing.height = bh;
-        backing.getContext("2d").drawImage(canvas, 0, 0, bw, bh);
+        backing.getContext("2d", { willReadFrequently: true }).drawImage(canvas, 0, 0, bw, bh);
       }
       const pixels = backing
         ? backing.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, bw, bh).data
