@@ -628,6 +628,7 @@ function fillClip(m, src) {
   if (
     usable &&
     (newFrame(video) ||
+      S.stage?.captureWaiters.length > 0 ||
       m.colorSrc !== (video.paused || !directClipVideo(video) ? S.clipStill : video))
   )
     clipPicture(m, video);
@@ -1695,6 +1696,13 @@ function watchClipDraws(stage) {
     ]);
   };
   stage.app.on("framerender", () => {
+    if (
+      stage.captureWaiters.length &&
+      S.stage === stage &&
+      S.mesh?.clipOnly &&
+      S.src?.kind === "clip"
+    )
+      fillClip(S.mesh, S.src);
     if (
       S.mesh?.clipWaitingDepth &&
       sharpClipOnly(S.src?.clip) &&
