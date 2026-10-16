@@ -98,7 +98,10 @@ function buildOffThread(job) {
 export class Pictures {
   // defs: the recipe's sheets (k.sheets), transform: the kit's fit
   // ({ center, scale }), spine: k.spineDef or null.
-  constructor(player, { defs, transform, spine, profile, decorate = null, solid = false, backing = "sampled" }) {
+  constructor(
+    player,
+    { defs, transform, spine, profile, decorate = null, solid = false, backing = "sampled" },
+  ) {
     this.player = player;
     this.solid = solid;
     this.backing = backing;
@@ -456,6 +459,11 @@ export class Pictures {
     else cap = Math.sqrt((method === "screen" ? b.screen : b.pixels) * aspect);
     if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width * share); // prettier-ignore
     const target = Math.min(cap, Math.max(64, px * (this.solid && method === "ink" ? 1.5 : 1)));
+    // A face's supersampling should not pay for the next large Gaussian
+    // ladder step as well. Small texture steps retain the requested detail
+    // without keeping almost twice the projected resolution in memory.
+    if (this.solid && method === "ink")
+      return Math.max(32, Math.min(Math.floor(cap), Math.ceil(target / 32) * 32));
     let level = LADDER.find((w) => w >= target) ?? LADDER[LADDER.length - 1];
     level = Math.min(level, Math.floor(cap));
     return Math.max(32, level);
