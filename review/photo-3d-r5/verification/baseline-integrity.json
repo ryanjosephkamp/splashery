@@ -1,0 +1,619 @@
+{
+  "kind": "Integrity verification of the completed fresh original-finder baseline. Comparison with the earlier atlas is a stability diagnostic across different application source fingerprints, not identical-source repeat-noise evidence.",
+  "createdUTC": "2026-10-16T07:36:48.264Z",
+  "methodSha256": "acbbf49039bed5211eba9da34179724eb62b2d76c1836fbb1ad6ba10867c5ba0",
+  "baselineAtlasSha256": "f939791c31e0372b39d698d48aa7054c64cb3c550ae329d856179154ac387f48",
+  "earlierAtlasSha256": "6f863352c5d2f26b4ef8835e5903285cd6fcaff04660550fbc9d6281038b8ae9",
+  "sourceSha256": "4b28210795941d736d0c1dabd0d36afa48d516ae8f278108ecde53a86521b504",
+  "earlierSourceSha256": "da9dd312972fb05de2e4507125d55ad534bf30f3b8af67f3c58edb06c097071c",
+  "expectedInputs": 118,
+  "expectedProfiles": 236,
+  "expectedPoses": 2124,
+  "inputHashesChecked": 118,
+  "profilesChecked": 236,
+  "colorPosesDecoded": 2124,
+  "artifactHashesChecked": 10620,
+  "earlierPixelMismatches": [],
+  "earlierQualityDifferences": [],
+  "failedAttempts": [
+    {
+      "id": "new-03-25399041",
+      "profile": "phone",
+      "error": "page.evaluate: Target page, context or browser has been closed"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "forest",
+      "photoSha256": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "street",
+      "photoSha256": "b1475109359fdd1ff17e238a3b00f715c5778e05ec21e9b3a8e0b0c76ac0192e",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "still-life",
+      "photoSha256": "45ea7fcd9ba7da38e7545c8e010cb41bf8cf1ace878863a6d1e26de1d361d8d4",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "spiral-stairs",
+      "photoSha256": "f5ebb76d7ae6cfa0ba54666d7e198eb7d34b8af22057c50f033157bb523d52ac",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "palace-stairs",
+      "photoSha256": "b7af6c4e1ef71af39d47e0569d423f3f63f999e21a1bfdd725e7c014e8d54056",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "wildflowers",
+      "photoSha256": "298ad2d0f7c566ea06f682c6319ecda0461530865fc7bea25a00f3320ab7c26e",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-train",
+      "photoSha256": "144c3d68616a90a88b431ae5ce85af2bf162d6732984595dbe3c5b0d133b3c19",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-oasis",
+      "photoSha256": "95bce78e814b4e716e043229cad9d6b6eb84d0b37fb2293addeef14738e00b25",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-castle",
+      "photoSha256": "327657683c4bb4ebfeff4053c24b7a1935dc1b5993d7d814845d616da0f341c9",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cove",
+      "photoSha256": "e117988d621d24497eb41995cc0c2df8ec877fbfcd21041fa7ec1adcce2be962",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-harbor",
+      "photoSha256": "169d9933b2327ec98429e62d6d0f39a654fc07d67789c5e218739df85c1ac9c2",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-paper-valley",
+      "photoSha256": "6a1b1b83c1a47acd49f93662bf363fc51a73d523ed645ee8f165a8960ac9bffc",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-farm",
+      "photoSha256": "d52fb26d5eaf2726d2b4d69cbd6715a455d3eebb676f77b73d6e8e8b3e361b8a",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-treehouses",
+      "photoSha256": "ff7785a675b45aaaf629209a8c0e2ced08a237623e6117cb4a4edd8595ace4ec",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-library",
+      "photoSha256": "159a7200841e2da569509e3d105f10221e62816f36ff044101a2ad48685383e7",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-workshop",
+      "photoSha256": "827629c3066a0426c7dbbf15e9b67964e264aaf1d4aafc23f9005d1b0f235f56",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cloister",
+      "photoSha256": "c6dd6be19588dfd36258a306cf3a3fd61928a04e3ab9724ed2410da9cbd66960",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-greenhouse",
+      "photoSha256": "92628aca9001965ebb8f1f9c23a5dbd9b87384326fbcb9fbf0f9a996c91d0d48",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-attic",
+      "photoSha256": "ca62d8d11efd2031aa8c5327d082acaad90ca59ebd39bbbb6df3db06bc31b18d",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-bamboo",
+      "photoSha256": "995afee9bac39d4b4af161be5f8432937417574ea718c4444453585b7339c088",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-terraces",
+      "photoSha256": "978f0f60a45b291f2e914957332120e29c0e14062794e7a2f18d3bb49adb42a7",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-canyon",
+      "photoSha256": "f80db8c6ee4b757c732108dcde9deb7eeb55ee66bd63aa75fba92bdb1604c427",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-arch",
+      "photoSha256": "c50d1b4f5e0a918f099f84ade78d83f83b514be18f406b8b9f538ef78abd7c5e",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-fallen-log",
+      "photoSha256": "bdabb2b02f842ec113f1eaeeb42a1b5b50398e9f4aa4a600fd32bd0252460da0",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-alpine-lake",
+      "photoSha256": "92f52289f7e3acee7cd0cdc50d106bcec524830e5b3c79ef2c9cb370cf775a7c",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-ice-falls",
+      "photoSha256": "5fab39693316f99f0600774592ce743286688c36997001e8c6f94194943ad27f",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-floating-isles",
+      "photoSha256": "72a2aa55c3e44469d3e495c2d920b2446a23bcb327c1693cd29680917756e2d5",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-wave",
+      "photoSha256": "7a1927819029d6a15ebc98583f9902ea390ac40c3f944eeb1d09a1ee8c431af8",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-explorer-desk",
+      "photoSha256": "8dfd9344af8c938ad43271a70dae9878b53f5fbc0b955057dac9e1c70c485cef",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-watchmaker",
+      "photoSha256": "8bd8e49a3bc88a9251bc6ab79b80e600bca9b65a3b51980cc61fced738b004d4",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-dragonfly",
+      "photoSha256": "9350d94e2333fafec5b0b2336e3ff9978a41308909dd0c8e69468773bea6b1d9",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-mushrooms",
+      "photoSha256": "7d0c30bcd9b57b87cc29d3f91cfeb72fb6922b69d61f8ee458bb0e58846387b2",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-market",
+      "photoSha256": "a7967e4504a6faf52662b0f441296aebc1c4b5f15661641dd6dbfc6fff8954f1",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-gears",
+      "photoSha256": "19e7d7491a161423c634d7a96bc7f9a6152c7295f8144012a4fa9da32f53d2ae",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-chess",
+      "photoSha256": "462ee8741ab230e85a77a9a20cb923655e6648f4b8ded372c8573bdbfff8fbd5",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-book-city",
+      "photoSha256": "6f97479f00c34d81d97d57f360b05c9da0635789f191f64aa297425523cd7039",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "photoSha256": "89d091fe8ccafb70be7f7ba0ad45a3f8a458043d7081d4220e88fb3f64abab04",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "photoSha256": "f8e5c53ff90bde38a1c5d6822656e0d08e0d0f7a6fb0969a6938aebaae0fcfbe",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "photoSha256": "d5fc1ea1439dbb62211f096b34d4d1bad8fdfd56a89424089bd436f502388a7d",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "photoSha256": "9129e23766b05ade161ddbf1a9c3465b9a9b0811f4c89151a8b01413471066cf",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "photoSha256": "137e2957cd7a056e208c958040f0553bcfc78519a7d0d13703012d4eafba54ac",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "photoSha256": "deb5176bc7c425fdf01ce7ae42f1df922fb86de48d8109921a6d1cfbf58c4b5d",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "photoSha256": "e79d97ac8f5787bdda09f8b7944b0d503d800d87709e74cb1a3cbc9fbb135a3d",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "photoSha256": "de72e45e69979a64f2e8f089345e55a8c8f705785dc7dd513f797be893694b5b",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "photoSha256": "ef810a040a0a4f321364254317631e79014ff79fde5b8531ee352dcedf60022a",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "photoSha256": "f0f335785a4fc2f8f90a6f364b245d36c19b01dd87492ae768c332ea9c18127a",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "photoSha256": "d0f8f4e2454c88f4149c9aa4fb74766aa4cb131e53b64481c8cc25d66f526533",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "photoSha256": "1551c808a634f8eca5a3450dd7714827e43ce66ac21f13473d22445796287601",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "photoSha256": "48debdaa15ff18b97374c585714afba511043276a078898a09ee40067dfd4638",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "photoSha256": "5c7378593ae566a4ac867b60ad8ab492b16d86f541e1631de7b5df90100c1f75",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "photoSha256": "52f8348869561ffae0ef468f9f95fb905a7efc86c5eaf0473da8a23a8e37e98b",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "photoSha256": "85892836c21f9a4e69cb732bf667f3d25fa2bfe7cd9a3dd2a8eb809cfdc66cdf",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "photoSha256": "f8de93a94f884f06b02a8ad4af91f7a9c6dcb3397bea7378063467716b40efbc",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "photoSha256": "a0ff07392b40e8eacc08c1a95a2a3c3ae205f76a12d441b9e3e364863cae96f6",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "photoSha256": "e83b974c603b1da62f62067a30d340b32bfe10ffc4b11e415b12ef0d9854ca80",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "photoSha256": "6f0bf9cb0830d94b962f921c3bfef12eb89161f3382f7b11c5b1f9a1152d80a7",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "photoSha256": "94d271cb99f65a62cac14f1f8298141673eadb50cc721e7284ded692722af669",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "photoSha256": "6d0cd04fbefe956f1d4ef650555fdfbb3d3a2c32a19bd099527b28f8b92a4420",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "photoSha256": "bb015d7434cc474aae1f8136597ff886189dbb669a9a0cc92f676b753ad58740",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "photoSha256": "d97c08aea3c6d0431b9145145315d28d2fb4477c0c0eedb02198cd7b9c1bd9ef",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "photoSha256": "ec371af0d3f84216ab3192f8c7f3fb30cba2119a6af8e7fe1db48d08ef72da98",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "photoSha256": "ffe9d7a925de2c834f01fdb4339681c278f83e5f27603100d46c3749ddf7f26b",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "photoSha256": "f23952df933bbcd708534ef2b404bbbddddb502710a8723e45ceffbf3478cbf3",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "photoSha256": "61004a99fd5b9a034b496a20c571137e1eb41e7957c13429bf5ef2f9926a3c56",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "photoSha256": "65f02c443ca02ab650db7f53a29945a0df8691b619e84935cbc08696cee4a8ef",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "photoSha256": "097ab77aea595e18147f4abcd80230483f86c15537dc6a32863f2b159326277c",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "photoSha256": "b925ea29f1517bf327c7342ce2a3779898cb9ecb31bd1132e1287fc8f4043e5c",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "photoSha256": "7f6894a685255c3d5d890ef14fe5aa5c813b47ae9f08297b31bed89bb9b2099c",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "photoSha256": "b277ecb2d705f6104c18f1e1d940b248cd05cd00d4f1f51b789b39b6f52f9029",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "photoSha256": "823201a4c10440249ce4ca6a565a335ea178f99f07efc32f5a0e5ca23b9668e3",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "photoSha256": "4c3c6614d69f4d2fcac734e30676fd7faa477a9f7b7fa337e40a13e990d5de4f",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "photoSha256": "9e8894b15bdf8ab07f685341b0e33b85b86620c8ac11638f5abdd129455ec7a9",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "photoSha256": "427907337fae68313866150de2f96bea188f63c803235f75d4a5d9161c56ea5b",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "photoSha256": "1df172c95fd9dd9c480617bfea3cceabfe1e7359f06059c72287bb34b7df4924",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "photoSha256": "b6d9a095312ffae760b7f274cd446061e0562d73d4c698b7cabd6b6586b5eeff",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "photoSha256": "48fb04b3126eb12b8f417b5cd79e0f22e10c6c698e1f0038c9bad9d17b33ee07",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-still-life",
+      "photoSha256": "8dd6ef596e67f852d0d2e8cd47909842c8bc42577748d0b7ce7ad1cb70d47e51",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-room",
+      "photoSha256": "a913fb52e8a515455090a325b5151f419a4dd6b4c3a2c9efe1d7d5e4d8e8ae71",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-forest",
+      "photoSha256": "6e302d145a62abbcf2dd716f7419153091a6f6939e2f5521b09a01e5c0b1cab4",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-stairs",
+      "photoSha256": "f85a149718bcceb0a815d1deb96698add211d772c0f52f895aa28fe03561d51c",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-coast",
+      "photoSha256": "e5d6cf55f7b47b9347bda772a033ee6c365335429f66357845343b38083b270b",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-desk",
+      "photoSha256": "df87a33f04352ea196ac0a6e880db83c36950ee9133a020cf1264a52a93a390e",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-fur",
+      "photoSha256": "287e7886fd7cc08c3e4813b54a10839636e86415146bed62df7f28071f84396b",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-night",
+      "photoSha256": "bf69a1e4c758002068d9de4efb792f4a0a643d2b68d676a988593639dcde5f0a",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-lattice",
+      "photoSha256": "9baf2c9e2eca5121227c97c958f461f33bdb995d2c0d21e45dc1039b59b57df9",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-arches",
+      "photoSha256": "19e0f74710242f032e1be31de49a6b5432f73497092a91179385f2ea3cac5c79",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-leaves",
+      "photoSha256": "4ebd5dc4a850e7f247ffe28b5b5bfc70a84beda8811ed3ad1b1e328cee6da8e7",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "truth-steps",
+      "photoSha256": "1c73980d5513ffb4f4380baf52b9013ec06a450831b0756217fc67ba7da643f9",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-00-147167228",
+      "photoSha256": "fed188941861440e7406ca10278d82ccdf9f57349541f7382b30ad0f28702c96",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-01-131641833",
+      "photoSha256": "8b6e051fbd99c89b8e52da6c87f31b9e48e0578436f9b0b54cef010e169cf13c",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-02-104101424",
+      "photoSha256": "e12f50e843d51fe75cbb1270225a4ed68f1dc707b06cfa716a440b5cbf154346",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-02-88494704",
+      "photoSha256": "9d6d4985e2a1ebbd80ff9d806cb00691aecba21ec5f35141a8560bedf815f108",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-03-25399041",
+      "photoSha256": "ca148c468017b8954f3bac4470a7e5540f7f8e9699bab30dda4a527f81dd8a82",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-03-35525184",
+      "photoSha256": "a9db062073a03ec48ad1de34d88f0d994698b0c7d51f76d863c59a4d3ac5f02b",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-19-159668739",
+      "photoSha256": "e1ef6c6ef7ff07bc92076494040d63cdacebc27179981a0759d4a759f6074bdd",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-20-160820542",
+      "photoSha256": "daaa2f371e89ade6e5dc5bc33b0a7400ee4997bdd0d64fcfa69f266a9dec4852",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-07-198117086",
+      "photoSha256": "ccb5590ff31f00ed954c5c8fc804cb2cbc131e94f117267afaa27acc9ba45c35",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-07-131897774",
+      "photoSha256": "6ccb3a83c0ac4ebd9c41801322e868162afe129b71b8b08cb28b905c999ef281",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-07-27184681",
+      "photoSha256": "f33b0e859f8867a2b5472e703b5f465824ed63ee6eba855caed9b6ee1bd7c646",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-08-151156803",
+      "photoSha256": "e2a64785e4aa0d61ef6bbdff0df36ef4c443bb65229e54210de042c8c52e79b9",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-08-185005362",
+      "photoSha256": "90adca5702c44274cc13fd3ccfd1424f4269a83882245c727d36d31cc631f037",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-19-62150806",
+      "photoSha256": "eff75e5f8a7c5b179367beb612615fa3826369f201465499de4ce0e193549b9c",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-09-66685155",
+      "photoSha256": "f1042340638130a761a023cbc3cdae86e73999dc82b8301fd855c0dd8717df8c",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-11-159259312",
+      "photoSha256": "9ed6f3c97043a43917d8c0ac43f7bf023e60b5a360819d410ac58e5b9b2360d4",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-11-71852781",
+      "photoSha256": "c7c43f924a83fd9d192c44c55e6d1fb9f9ddaddd8813132ae441df1674e0ed25",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-11-89189482",
+      "photoSha256": "d33cadc1591dcb2ab8c2e68607779744829250b4479f872e2e74f56599fdeb5c",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-12-201484048",
+      "photoSha256": "78bd3f15ccd986992fc9f52a771778ccba0490abe64e4243dbfe27398fec96b4",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-12-201342968",
+      "photoSha256": "d3951057469a00f164b32a1d63fb2310915fea2b5e01efa3d93e38dd2b70ac5d",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-12-201385356",
+      "photoSha256": "54b4ba809e48ef51578ff9396f2f40c18d3efaac057f5c90b033bbe2c15c72f5",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-13-61309178",
+      "photoSha256": "7306c077e4bc34dd8f12038911fd47e83b49021c3ca3e0017322e7c6ef88a113",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-13-60172881",
+      "photoSha256": "563824dfe6d7cc19955aa0bc371ec3298b45f8f98911b0738c93ad561bbdbf2b",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-13-105399732",
+      "photoSha256": "12f2656e687fa91fb9dcfc62f86d322a75566094409f230048d5c618f44a8f78",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-14-76271548",
+      "photoSha256": "a54e6ca541cbf92f41a41a86fddaf9c54a34b7fc93610773e3b1ea396adb7ffa",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-14-16503745",
+      "photoSha256": "43ed391ee03d572b3e7fd68a1e53e17f68065b80d500b04ecb8f9a30e249dbb9",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-15-152970382",
+      "photoSha256": "2a01cf83f9dde54a0518920bdf7811b704e4b9bb4d3cc4e200eea73bde23e561",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-17-199401836",
+      "photoSha256": "2bc9e6d63515e37ca055f54e9c37dbc6d31f48a82b365f83bd37cec96ec3f141",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-17-27586242",
+      "photoSha256": "2b5699a6327287542b3891f00113950c6cec2896a569eccfbfa8d3ab91c11d60",
+      "profiles": ["phone", "desktop"]
+    },
+    {
+      "id": "new-18-51440683",
+      "photoSha256": "5c15ecf6971b53c29bb625cbc627e6dae5448e4f87a6420cb55a378aa40e53f8",
+      "profiles": ["phone", "desktop"]
+    }
+  ],
+  "complete": true,
+  "finishedUTC": "2026-10-16T07:39:32.961Z"
+}

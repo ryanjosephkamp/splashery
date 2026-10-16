@@ -1,0 +1,5296 @@
+{
+  "browser": "151.0.7922.173",
+  "methodHash": "da348743b9517c22aba35b12ce2ce8a8358fa23ae18d2689f376e62f7011ea4f",
+  "capturePolicy": {
+    "first": 2,
+    "sharpRest": 1,
+    "splats": 2,
+    "pairedWindow": true
+  },
+  "capture": "Two visible phone iframes; completed frames captured concurrently, with lossless raw-RGBA handoff to the video encoder. Camera poses and native drawing-buffer resolution remain unchanged.",
+  "builds": {
+    "before": {
+      "files": {
+        "src/packs/photo-3d.js": "bd1eba55b416860ecbdb41f1c442b83281f9e9f2f9ba8b2888f04edb85ec127b",
+        "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+        "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+        "src/photo3d/build-worker.js": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5",
+        "src/photo3d/prepare.js": "0259963e210e325403da3f32b24156b60ea9083c1d34525878f40503325c9ee8",
+        "src/photo3d/background.js": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa",
+        "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+        "src/photo3d/surface.js": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433",
+        "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+        "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+        "src/live/relief-height.js": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c",
+        "src/stage.js": "13f9da86865495adfc7863fd105ab759d0dbbd5f1812ddabc2ec1b9506e9ea5c",
+        "src/photo3d/preview.js": "287df71ea977f77a98e1fa756ebc3a939116c6fc7e9cfe8c2b4d8f784e163fce",
+        "src/photo3d/decode.js": "73e1e4ce8b87ec57aac3031c816e0ff600b5fb7d2076fef0f9eaf7aeb0073510",
+        "src/photo3d/decode-worker.js": "7f3ac7d7ddeaf1c0428249330c540ad0119bba97d5799acb53664892a375b103",
+        "src/photo3d/border.js": "57eecc152c1b2ecb5a9bb5fc452f39a5753f679fe175e6a7b2984a216b65378b",
+        "src/depth/engine.js": "953ad7094ed535a059f196e32eddbda4e7bbce0286f55baf2cb00eed4a7cbe89",
+        "src/packs/photo-3d-depth.js": "5afd7e5e88a4326add90604fc82c4b20e7f3dd31a1cec340ba7a61196cbe0a68"
+      },
+      "hash": "da709465e9e8df4b35fbde98eff65d9cf278de819b64b576309e9ac0bf6f45f9"
+    },
+    "after": {
+      "files": {
+        "src/packs/photo-3d.js": "6e8247dbdf01f007dbd745298ffdd794107cd61e1a266dd5c66471b51a7a6607",
+        "src/packs/photo-3d-core.js": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57",
+        "src/packs/photo-sharp.js": "86d1049b31b9278389857b406d4c18e68eada2f454927c6fb1e5cc9ccb58b1ab",
+        "src/photo3d/build-worker.js": "7ed4768c7b3a9440ad75461922aa1f33484342c1bb4ae9dd54458435869bb175",
+        "src/photo3d/prepare.js": "325e06171a1bed49cd242d515946906435e9845212e632a58f44b1539734b014",
+        "src/photo3d/background.js": "92b5950c792f10feeaaba024ae0751273564172279917f0e6c0ca415a254a279",
+        "src/photo3d/depth-edges.js": "5ddf367278f8988f0c75bb75968be5235586839f7690cd2feea27668e1d815e9",
+        "src/photo3d/surface.js": "cfa72273ea86c58635c5f6b12b9da2648fdd1a6e008502a36bf0d25912f41c15",
+        "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+        "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+        "src/live/relief-height.js": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c",
+        "src/stage.js": "9182ed245aff2195c52a865883dcc97ab61f4fbbf83105ae63f55ce39f08bf6c",
+        "src/photo3d/preview.js": "0935f439061b84c0b81f2f727e14514aba75422c373613ebaa6940267c559d86",
+        "src/photo3d/decode.js": "73e1e4ce8b87ec57aac3031c816e0ff600b5fb7d2076fef0f9eaf7aeb0073510",
+        "src/photo3d/decode-worker.js": "7f3ac7d7ddeaf1c0428249330c540ad0119bba97d5799acb53664892a375b103",
+        "src/photo3d/border.js": "57eecc152c1b2ecb5a9bb5fc452f39a5753f679fe175e6a7b2984a216b65378b",
+        "src/depth/engine.js": "2f59ffb7755ee1c96af95de2c93483c80dafc8c7f71007f2fc0bfb89cb332faf",
+        "src/packs/photo-3d-depth.js": "5afd7e5e88a4326add90604fc82c4b20e7f3dd31a1cec340ba7a61196cbe0a68"
+      },
+      "hash": "e11ccc93bc238a8a2b40dacdcddfc2b5b3d17f348bc360f140f9f109af44d58c"
+    }
+  },
+  "inputHashes": [
+    {
+      "id": "forest",
+      "photoSha256": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+      "depthSha256": "adc3d64fbe0d83aefcd5a9efe620f9d55d8b15739ff9aa6366c11c2e2a4b86f2",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "street",
+      "photoSha256": "b1475109359fdd1ff17e238a3b00f715c5778e05ec21e9b3a8e0b0c76ac0192e",
+      "depthSha256": "9ac184e3755a2986a07c63630396507ac204aeb0535ddf169425c87414a2249a",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "still-life",
+      "photoSha256": "45ea7fcd9ba7da38e7545c8e010cb41bf8cf1ace878863a6d1e26de1d361d8d4",
+      "depthSha256": "7c5de852e9c55fb15ccfd9e5a0fb43ab7db7cc0c40d6647c6db80d4bb47805c3",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "spiral-stairs",
+      "photoSha256": "f5ebb76d7ae6cfa0ba54666d7e198eb7d34b8af22057c50f033157bb523d52ac",
+      "depthSha256": "c95a69047c6bfdb2f66f183e8a8fe092bcd726b387f87f64a9f6c25b358cdc86",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "palace-stairs",
+      "photoSha256": "b7af6c4e1ef71af39d47e0569d423f3f63f999e21a1bfdd725e7c014e8d54056",
+      "depthSha256": "d0dfb7bc795cd2a7808367cab9fa3bba551f90f47d36f0931a23b62cf8056bb0",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "wildflowers",
+      "photoSha256": "298ad2d0f7c566ea06f682c6319ecda0461530865fc7bea25a00f3320ab7c26e",
+      "depthSha256": "518eef20aaddfff040e2f26cd64302aea99a6c581c80346811a369699767f3d7",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-train",
+      "photoSha256": "144c3d68616a90a88b431ae5ce85af2bf162d6732984595dbe3c5b0d133b3c19",
+      "depthSha256": "80a61d504491d0c617dda5ffccab0ad3a30ed0927604ed89b22b1113086834bd",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-oasis",
+      "photoSha256": "95bce78e814b4e716e043229cad9d6b6eb84d0b37fb2293addeef14738e00b25",
+      "depthSha256": "76bcc6faf0d913034e0dad3fd2a5d7f21b106e4e96caf95462511fb1c0c34629",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-castle",
+      "photoSha256": "327657683c4bb4ebfeff4053c24b7a1935dc1b5993d7d814845d616da0f341c9",
+      "depthSha256": "12cb96240a26168dccb377a730d23f06428c31498761d242b3e1ff1c50684367",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cove",
+      "photoSha256": "e117988d621d24497eb41995cc0c2df8ec877fbfcd21041fa7ec1adcce2be962",
+      "depthSha256": "a72f51ab2a1801d83e422446ccf33494c0cbb8c9a985a57465ab2154f9a9eb3c",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-harbor",
+      "photoSha256": "169d9933b2327ec98429e62d6d0f39a654fc07d67789c5e218739df85c1ac9c2",
+      "depthSha256": "8430f4e598045ec1a4addae88c9627d9354c66905879d8aefd74617f0dc5316f",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-paper-valley",
+      "photoSha256": "6a1b1b83c1a47acd49f93662bf363fc51a73d523ed645ee8f165a8960ac9bffc",
+      "depthSha256": "b1ba470dabc565a94e366e3d28103a8b7225725622b2cc7960d4a33aed05372c",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-farm",
+      "photoSha256": "d52fb26d5eaf2726d2b4d69cbd6715a455d3eebb676f77b73d6e8e8b3e361b8a",
+      "depthSha256": "1be7f3b2406ec84afc0e567b6a260f69ce45ad29c6cb813b4d44f0fa1ae3a4a0",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-treehouses",
+      "photoSha256": "ff7785a675b45aaaf629209a8c0e2ced08a237623e6117cb4a4edd8595ace4ec",
+      "depthSha256": "b3d01bb139ef7f97ced3a63c280169b9863ec6d0bf54a4ed9f9e07860a1448d7",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-library",
+      "photoSha256": "159a7200841e2da569509e3d105f10221e62816f36ff044101a2ad48685383e7",
+      "depthSha256": "7734bc9435cd8d3fcee40f4d629d22e813114e65c93799f70aa66ee6ca8370ad",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-workshop",
+      "photoSha256": "827629c3066a0426c7dbbf15e9b67964e264aaf1d4aafc23f9005d1b0f235f56",
+      "depthSha256": "a8aceab50427f3b1da9a56cf1d97dc0294a4c3af734f0224da4ff8bc6baf6e8b",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cloister",
+      "photoSha256": "c6dd6be19588dfd36258a306cf3a3fd61928a04e3ab9724ed2410da9cbd66960",
+      "depthSha256": "4508b77df16af0274330a25db4212c325c0a4ad2f6a3a7e116da67a0b816bfc4",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-greenhouse",
+      "photoSha256": "92628aca9001965ebb8f1f9c23a5dbd9b87384326fbcb9fbf0f9a996c91d0d48",
+      "depthSha256": "f80d624b4b65a5fd105ab82e3af5f076a96fc3cc20e17f8ed2cf15c1eea7e1d9",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-attic",
+      "photoSha256": "ca62d8d11efd2031aa8c5327d082acaad90ca59ebd39bbbb6df3db06bc31b18d",
+      "depthSha256": "8feb3f671279ec3673c3977275d5ac15b3e10b28b7a8c6a8b73b847f5150961a",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-bamboo",
+      "photoSha256": "995afee9bac39d4b4af161be5f8432937417574ea718c4444453585b7339c088",
+      "depthSha256": "e45e6b2893351468519207fd3d5a1d1efe935763051615844f40cc7009696346",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-terraces",
+      "photoSha256": "978f0f60a45b291f2e914957332120e29c0e14062794e7a2f18d3bb49adb42a7",
+      "depthSha256": "a20bb2e54f3fc63f2f16b78fdf40c8331d929390dfac086a0ed701f72a90db09",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-canyon",
+      "photoSha256": "f80db8c6ee4b757c732108dcde9deb7eeb55ee66bd63aa75fba92bdb1604c427",
+      "depthSha256": "d18a1296da8d336b509fcb068e2de858c83d82267289f573baf9e598900a9782",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-arch",
+      "photoSha256": "c50d1b4f5e0a918f099f84ade78d83f83b514be18f406b8b9f538ef78abd7c5e",
+      "depthSha256": "09c540d5ec543828de4d4936754bbed34cd179622bf05bb1ed68b7d24b7bef96",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-fallen-log",
+      "photoSha256": "bdabb2b02f842ec113f1eaeeb42a1b5b50398e9f4aa4a600fd32bd0252460da0",
+      "depthSha256": "f6e42303cd744a83c599ec8317e7bde434265fd015f7dd81eccb17bb4971b67f",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-alpine-lake",
+      "photoSha256": "92f52289f7e3acee7cd0cdc50d106bcec524830e5b3c79ef2c9cb370cf775a7c",
+      "depthSha256": "dc346729d3331ef13f058005a296f13a3f9a54bee8c6cfe2d3da207bb3aff37c",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-ice-falls",
+      "photoSha256": "5fab39693316f99f0600774592ce743286688c36997001e8c6f94194943ad27f",
+      "depthSha256": "99bf20e570b9db0abbd3293d86e8bc0495371616622735023f00e962db6b39a4",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-floating-isles",
+      "photoSha256": "72a2aa55c3e44469d3e495c2d920b2446a23bcb327c1693cd29680917756e2d5",
+      "depthSha256": "0bf63b6b949a8580986cbf474c800817043e0f8cf59f7fcac385135a90e7e28d",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-wave",
+      "photoSha256": "7a1927819029d6a15ebc98583f9902ea390ac40c3f944eeb1d09a1ee8c431af8",
+      "depthSha256": "ea2eb4186200da8860ff22e78d2e17ffeb55be07b0a1409383a783c9f8c42240",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-explorer-desk",
+      "photoSha256": "8dfd9344af8c938ad43271a70dae9878b53f5fbc0b955057dac9e1c70c485cef",
+      "depthSha256": "dc3406a10b70e77aa7f2316d59e76e78133729222448dc0b23e090069bff12ed",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-watchmaker",
+      "photoSha256": "8bd8e49a3bc88a9251bc6ab79b80e600bca9b65a3b51980cc61fced738b004d4",
+      "depthSha256": "443457d2f5e4061c9ad187b0e4a2dd6b25af4ceb6964b5b417f4e8bdc0173d43",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-dragonfly",
+      "photoSha256": "9350d94e2333fafec5b0b2336e3ff9978a41308909dd0c8e69468773bea6b1d9",
+      "depthSha256": "bdecd08490b971000bcc6920bdcc88bfd3e5f26f433403e1c8e932ad5d4c8848",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-mushrooms",
+      "photoSha256": "7d0c30bcd9b57b87cc29d3f91cfeb72fb6922b69d61f8ee458bb0e58846387b2",
+      "depthSha256": "9c7e1453e86b869454d1daa860e39aa6e1c46c07807c5fe523fb26b6c670af7b",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-market",
+      "photoSha256": "a7967e4504a6faf52662b0f441296aebc1c4b5f15661641dd6dbfc6fff8954f1",
+      "depthSha256": "c12d465f32d536bba85e19148e82d86e5bec934d12fe1c5940b7bc3a4c7ecd47",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-gears",
+      "photoSha256": "19e7d7491a161423c634d7a96bc7f9a6152c7295f8144012a4fa9da32f53d2ae",
+      "depthSha256": "7a8bdea9bbea09dfd478ebc2a65440ec586f3877ba3737ccf2a3cde67cf2515f",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-chess",
+      "photoSha256": "462ee8741ab230e85a77a9a20cb923655e6648f4b8ded372c8573bdbfff8fbd5",
+      "depthSha256": "c432ff5c61fa1d14593cf6f07a07f3ec3e403073234fc0781fd34c3c221ba088",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-book-city",
+      "photoSha256": "6f97479f00c34d81d97d57f360b05c9da0635789f191f64aa297425523cd7039",
+      "depthSha256": "9fe143be6e27746a379f73d797a9cc77cc422fa08cb33142cef8fc7170d3d901",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "photoSha256": "89d091fe8ccafb70be7f7ba0ad45a3f8a458043d7081d4220e88fb3f64abab04",
+      "depthSha256": "49ca439fee4de052ffa3754468228434530f0e07fbdd103130c87d9987f1d5c6",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "photoSha256": "f8e5c53ff90bde38a1c5d6822656e0d08e0d0f7a6fb0969a6938aebaae0fcfbe",
+      "depthSha256": "1fecbbdacf75f9221e34fe714447d3e57154b7ba6f2fd0947cf81a207d264656",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "photoSha256": "d5fc1ea1439dbb62211f096b34d4d1bad8fdfd56a89424089bd436f502388a7d",
+      "depthSha256": "fe99572d99a4d6834147712fadae5abeac0ac32264ddfc91689fa127aaf4ac83",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "photoSha256": "9129e23766b05ade161ddbf1a9c3465b9a9b0811f4c89151a8b01413471066cf",
+      "depthSha256": "d33f3dd6bffddeb2a3dd975b49655bf20fa5f7933ff875e25da56a4833736fb3",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "photoSha256": "137e2957cd7a056e208c958040f0553bcfc78519a7d0d13703012d4eafba54ac",
+      "depthSha256": "2764c3eb3377d2c819f06b610a57cb6b732ad83199e80a8f0c45662cc9206603",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "photoSha256": "deb5176bc7c425fdf01ce7ae42f1df922fb86de48d8109921a6d1cfbf58c4b5d",
+      "depthSha256": "d69f085613874e6b35b926093f72b062bd663522419d367474ef17497fd20de9",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "photoSha256": "e79d97ac8f5787bdda09f8b7944b0d503d800d87709e74cb1a3cbc9fbb135a3d",
+      "depthSha256": "6964a6d7a48ae2102548671a1c0d61e41629ac429177cb2560f3c1972b50a90e",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "photoSha256": "de72e45e69979a64f2e8f089345e55a8c8f705785dc7dd513f797be893694b5b",
+      "depthSha256": "cd81fe84cb384b9890a91d8d7ab334e3e50655d531fd7c81cf504a2640f9a07b",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "photoSha256": "ef810a040a0a4f321364254317631e79014ff79fde5b8531ee352dcedf60022a",
+      "depthSha256": "28a85cc609cbef85489b32950aab16e01ad9e2d249f4495cbbc2e2664b6209a1",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "photoSha256": "f0f335785a4fc2f8f90a6f364b245d36c19b01dd87492ae768c332ea9c18127a",
+      "depthSha256": "11e5cfb1aa042ad954a66048e3da20e9faefa40fd68cf9e92d970f14d164d167",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "photoSha256": "d0f8f4e2454c88f4149c9aa4fb74766aa4cb131e53b64481c8cc25d66f526533",
+      "depthSha256": "5364305f0080d85fd3167014e99a04ad5f4f8b6536f1f451c73bd0186265cb7f",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "photoSha256": "1551c808a634f8eca5a3450dd7714827e43ce66ac21f13473d22445796287601",
+      "depthSha256": "8e49189b7e3e5f9fdedf5058a283037d15374f1e316d2637abb1688282705d5c",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "photoSha256": "48debdaa15ff18b97374c585714afba511043276a078898a09ee40067dfd4638",
+      "depthSha256": "c7f9f3e28483395083a2bd1ccdac392ebba4808a29c8111b93ec17c27567d932",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "photoSha256": "5c7378593ae566a4ac867b60ad8ab492b16d86f541e1631de7b5df90100c1f75",
+      "depthSha256": "5fd153eedcf473e2eca1a1f6250320bb5922508c527e807339178ceac33083c9",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "photoSha256": "52f8348869561ffae0ef468f9f95fb905a7efc86c5eaf0473da8a23a8e37e98b",
+      "depthSha256": "c56e303a7e1cdd9f4694d34d1c40ce7e38b195bf05c58244a269e073b5bdda4d",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "photoSha256": "85892836c21f9a4e69cb732bf667f3d25fa2bfe7cd9a3dd2a8eb809cfdc66cdf",
+      "depthSha256": "761f67b9854272c54b98dfd0af342087d2211e9c5b64fab524550e9629c33adc",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "photoSha256": "f8de93a94f884f06b02a8ad4af91f7a9c6dcb3397bea7378063467716b40efbc",
+      "depthSha256": "678b1448ff1e16054cbe57682240e7f2662c67e12f028f08952fb9cea65c63f2",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "photoSha256": "a0ff07392b40e8eacc08c1a95a2a3c3ae205f76a12d441b9e3e364863cae96f6",
+      "depthSha256": "ed3e7fd093467e650585415a27482c9311797e248e48e22e5d60bfffe4ffde91",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "photoSha256": "e83b974c603b1da62f62067a30d340b32bfe10ffc4b11e415b12ef0d9854ca80",
+      "depthSha256": "73a8066256e83b0636de6d8617bf034a5d4a8659f43f6c83a7bccab7cffd08d1",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "photoSha256": "6f0bf9cb0830d94b962f921c3bfef12eb89161f3382f7b11c5b1f9a1152d80a7",
+      "depthSha256": "fd52a8dc719b7928419575e08ef58e62fe7447ef9ad08777e4b6b212ba25fe36",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "photoSha256": "94d271cb99f65a62cac14f1f8298141673eadb50cc721e7284ded692722af669",
+      "depthSha256": "6d2f0b709538fb1f2ef504a7a2284ec84a27ebaab789bb03ea0492bb2dae2bde",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "photoSha256": "6d0cd04fbefe956f1d4ef650555fdfbb3d3a2c32a19bd099527b28f8b92a4420",
+      "depthSha256": "672dd60fe6134b81e34fbd9dbc722fe07b889da1185c3199f3b4133bf5efbc62",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "photoSha256": "bb015d7434cc474aae1f8136597ff886189dbb669a9a0cc92f676b753ad58740",
+      "depthSha256": "94d2f1044d0e3acdcd2184bfe91785f08b576c59817b5545f05c327d5bd59db1",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "photoSha256": "d97c08aea3c6d0431b9145145315d28d2fb4477c0c0eedb02198cd7b9c1bd9ef",
+      "depthSha256": "278b30121a794565498f42b82a3200f542576430089ee94989f4e808f867ca6f",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "photoSha256": "ec371af0d3f84216ab3192f8c7f3fb30cba2119a6af8e7fe1db48d08ef72da98",
+      "depthSha256": "be24cd837a18800cbff37a20bd9a8939b57c956078287ba11a8dc6565be09dd5",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "photoSha256": "ffe9d7a925de2c834f01fdb4339681c278f83e5f27603100d46c3749ddf7f26b",
+      "depthSha256": "24e61dd7a16cbe3b67a77a649e02be8c95aaead060376af1c61b728da9325be9",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "photoSha256": "f23952df933bbcd708534ef2b404bbbddddb502710a8723e45ceffbf3478cbf3",
+      "depthSha256": "10c22a947bea4c0c50d7ea0a397dde0f06fd9adb82a49e85c4b74cc42f966c04",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "photoSha256": "61004a99fd5b9a034b496a20c571137e1eb41e7957c13429bf5ef2f9926a3c56",
+      "depthSha256": "ef7e8b1b1cdaf418e94d88b3d52e0ccf8bc6d761ae1dd930109965152447b60c",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "photoSha256": "65f02c443ca02ab650db7f53a29945a0df8691b619e84935cbc08696cee4a8ef",
+      "depthSha256": "e9e795204f27b3d3bb3b174ce7c704e1629b8946063d6f67a2c294c1d58c0709",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "photoSha256": "097ab77aea595e18147f4abcd80230483f86c15537dc6a32863f2b159326277c",
+      "depthSha256": "c4fd029d0b0a6c7b87492260633ab6b172bcab283a5d91baecffbabccf3ff554",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "photoSha256": "b925ea29f1517bf327c7342ce2a3779898cb9ecb31bd1132e1287fc8f4043e5c",
+      "depthSha256": "17650720f3053d26c80234724250ec3a1611cf0e9117a24a3cd8925dc4d59bbb",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "photoSha256": "7f6894a685255c3d5d890ef14fe5aa5c813b47ae9f08297b31bed89bb9b2099c",
+      "depthSha256": "b0f42bf730c37dc2050e78aa45f914780ddbf8bc069394ad4592222342cc8060",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "photoSha256": "b277ecb2d705f6104c18f1e1d940b248cd05cd00d4f1f51b789b39b6f52f9029",
+      "depthSha256": "d3bc06d8d3fddcba3ab40d9b396feb6d8f1c69ce384700fa89e8b3b3987a67d3",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "photoSha256": "823201a4c10440249ce4ca6a565a335ea178f99f07efc32f5a0e5ca23b9668e3",
+      "depthSha256": "b1c7479260386b52fda14b6977953e79049edf5ed6baea1fb2464738b1c1f0a8",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "photoSha256": "4c3c6614d69f4d2fcac734e30676fd7faa477a9f7b7fa337e40a13e990d5de4f",
+      "depthSha256": "fd41cecca45e8f8fdf20e8a64b4ec2e2c8d6f483b901fd9b5eaa0153680b483d",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "photoSha256": "9e8894b15bdf8ab07f685341b0e33b85b86620c8ac11638f5abdd129455ec7a9",
+      "depthSha256": "6f5ceb2d2d4484fa307b7c24e744e70c31951277f0405a8a6e71c0669a4b6b08",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "photoSha256": "427907337fae68313866150de2f96bea188f63c803235f75d4a5d9161c56ea5b",
+      "depthSha256": "6f85d947e2194a7c5b850caea981be9323c30d09ec15e7aedd935d4b8ecd1b5d",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "photoSha256": "1df172c95fd9dd9c480617bfea3cceabfe1e7359f06059c72287bb34b7df4924",
+      "depthSha256": "ace64d4210c832de6ae12b29713c04b7a74087b54658dd62532841da4cc5fa3c",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "photoSha256": "b6d9a095312ffae760b7f274cd446061e0562d73d4c698b7cabd6b6586b5eeff",
+      "depthSha256": "8721538945ad6ce321bd3456e13081e3e8cafed7970c176f0ca820d3ea9d6cd2",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "photoSha256": "48fb04b3126eb12b8f417b5cd79e0f22e10c6c698e1f0038c9bad9d17b33ee07",
+      "depthSha256": "5d7dcef366c594d06d4c9f3a203d09d16917846fe39376d41fb462c59b4d711f",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "truth-still-life",
+      "photoSha256": "8dd6ef596e67f852d0d2e8cd47909842c8bc42577748d0b7ce7ad1cb70d47e51",
+      "depthSha256": "5ced1b992e17d8b38db9d330c0edd4093d5016dfd43e4dae85cebe40b1806463",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-room",
+      "photoSha256": "a913fb52e8a515455090a325b5151f419a4dd6b4c3a2c9efe1d7d5e4d8e8ae71",
+      "depthSha256": "75439b746ed78c0e1df7cba116d770aa0ab3507e622c98f30a397d84c6a6c718",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-forest",
+      "photoSha256": "6e302d145a62abbcf2dd716f7419153091a6f6939e2f5521b09a01e5c0b1cab4",
+      "depthSha256": "cf646cb659841adc2b549ee2b5e2ba4c83e77e3efcdf75ffa960cc8ccf089265",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-stairs",
+      "photoSha256": "f85a149718bcceb0a815d1deb96698add211d772c0f52f895aa28fe03561d51c",
+      "depthSha256": "2323f5b4d727db0cae2b585b163e04ec65571c27e13cc7299156cb508570b0e3",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-coast",
+      "photoSha256": "e5d6cf55f7b47b9347bda772a033ee6c365335429f66357845343b38083b270b",
+      "depthSha256": "4f82ab8fd5b7e9578daa9fe9a2aebbbe0ff45078c87106a74fe84a37ee6bb6d2",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-desk",
+      "photoSha256": "df87a33f04352ea196ac0a6e880db83c36950ee9133a020cf1264a52a93a390e",
+      "depthSha256": "0b3535ded4d7b48a208284c531de3bccd7d5c0ceaaf3c44bb378ea5fbcffd550",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-fur",
+      "photoSha256": "287e7886fd7cc08c3e4813b54a10839636e86415146bed62df7f28071f84396b",
+      "depthSha256": "af989c10f9645838cb468d23093e38195358f46a2dfb19f64ac37b9c21fbf6b3",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-night",
+      "photoSha256": "bf69a1e4c758002068d9de4efb792f4a0a643d2b68d676a988593639dcde5f0a",
+      "depthSha256": "146056dffb25d1f28cc0b620283069683a70deca7872b3411b900e8e5adc1fd5",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-lattice",
+      "photoSha256": "9baf2c9e2eca5121227c97c958f461f33bdb995d2c0d21e45dc1039b59b57df9",
+      "depthSha256": "901ccb32abf8375002d638669c839026ac488eb0f35165850d5f266098f5d9ec",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-arches",
+      "photoSha256": "19e0f74710242f032e1be31de49a6b5432f73497092a91179385f2ea3cac5c79",
+      "depthSha256": "65fd1ac73c1839426f83a4fe9715f9d3e37ec534bc73f585018ce84b36ab3ffa",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-leaves",
+      "photoSha256": "4ebd5dc4a850e7f247ffe28b5b5bfc70a84beda8811ed3ad1b1e328cee6da8e7",
+      "depthSha256": "9bbacd2bd2c3fba3319033a4dba8e4e3eb65872cb5d4a89bb163a6cf6ed9bd1b",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "truth-steps",
+      "photoSha256": "1c73980d5513ffb4f4380baf52b9013ec06a450831b0756217fc67ba7da643f9",
+      "depthSha256": "1d310987ed335e1db78c6c068dd32ddac2a23bae56f4aa3c13dda3db455912dd",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-00-147167228",
+      "photoSha256": "fed188941861440e7406ca10278d82ccdf9f57349541f7382b30ad0f28702c96",
+      "depthSha256": "4e6bcb01ec1cf0935ba6e7023f9196844a457ac80aeff5de355e3ff3faa18fd7",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-01-131641833",
+      "photoSha256": "8b6e051fbd99c89b8e52da6c87f31b9e48e0578436f9b0b54cef010e169cf13c",
+      "depthSha256": "0832d5e8f2cec7b92d39d1a3f7f2305575ef43b654396c3b79d207af521be68b",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-02-104101424",
+      "photoSha256": "e12f50e843d51fe75cbb1270225a4ed68f1dc707b06cfa716a440b5cbf154346",
+      "depthSha256": "f8f78e730a8c7a0063c4726b9ee4e8e1f7a0e090db1fe7ac083ee972a341e86d",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-02-88494704",
+      "photoSha256": "9d6d4985e2a1ebbd80ff9d806cb00691aecba21ec5f35141a8560bedf815f108",
+      "depthSha256": "2b08901be5672032d5f6ccaddcc88b48abe5d6b04a066d2c2f2b7ad625f0dd47",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-03-25399041",
+      "photoSha256": "ca148c468017b8954f3bac4470a7e5540f7f8e9699bab30dda4a527f81dd8a82",
+      "depthSha256": "70cf89361be556486734d2cab31c9c7dc5d585a486e0e32ef6d3fae8b0536e0a",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-03-35525184",
+      "photoSha256": "a9db062073a03ec48ad1de34d88f0d994698b0c7d51f76d863c59a4d3ac5f02b",
+      "depthSha256": "ae9992795838348ae5da3638279d878734509ce64f4051b9e9ce011194178dc7",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-19-159668739",
+      "photoSha256": "e1ef6c6ef7ff07bc92076494040d63cdacebc27179981a0759d4a759f6074bdd",
+      "depthSha256": "72853c19472f78425dafc14bcc82b36832deaa56cfac606a161462d27bfb16fc",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-20-160820542",
+      "photoSha256": "daaa2f371e89ade6e5dc5bc33b0a7400ee4997bdd0d64fcfa69f266a9dec4852",
+      "depthSha256": "69e24756b845b5f6cd9158705b9cc15c2a48eefddfbe7ed4d555219968e10a25",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-07-198117086",
+      "photoSha256": "ccb5590ff31f00ed954c5c8fc804cb2cbc131e94f117267afaa27acc9ba45c35",
+      "depthSha256": "7300f5f68849f3f648f6175411ac51db14e294c665ecccd7e0adf81941a3c7bc",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-07-131897774",
+      "photoSha256": "6ccb3a83c0ac4ebd9c41801322e868162afe129b71b8b08cb28b905c999ef281",
+      "depthSha256": "95f0c1a67ff242b7ecde6d253cf8146a44a9c9fbd6b2bcd9c22b6fc7be111267",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-07-27184681",
+      "photoSha256": "f33b0e859f8867a2b5472e703b5f465824ed63ee6eba855caed9b6ee1bd7c646",
+      "depthSha256": "ba0d9d73cddcc57ab396e14231dd73067b7c5e5e9dfa0a8286efaf163619ae1a",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-08-151156803",
+      "photoSha256": "e2a64785e4aa0d61ef6bbdff0df36ef4c443bb65229e54210de042c8c52e79b9",
+      "depthSha256": "3f047651fc668a856fdebf680ed49b0a8c1d62eb13765179c06d3cb2e1d0d913",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-08-185005362",
+      "photoSha256": "90adca5702c44274cc13fd3ccfd1424f4269a83882245c727d36d31cc631f037",
+      "depthSha256": "4083168be0d97519419d620526887470217477bf9fa08179c673be34eac019d0",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-19-62150806",
+      "photoSha256": "eff75e5f8a7c5b179367beb612615fa3826369f201465499de4ce0e193549b9c",
+      "depthSha256": "2477d2bd725d35833dca601c7de6cd153fe83f3cbd1b957c06aeaa6ad895ab63",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-09-66685155",
+      "photoSha256": "f1042340638130a761a023cbc3cdae86e73999dc82b8301fd855c0dd8717df8c",
+      "depthSha256": "8245eba3de8d5e6d6c5dc728138edc049ffed573c719c18c92b9b85382a3c097",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-11-159259312",
+      "photoSha256": "9ed6f3c97043a43917d8c0ac43f7bf023e60b5a360819d410ac58e5b9b2360d4",
+      "depthSha256": "e3e6525d54246766b00fe5e3e5176c46dd90cc890063c875b84101f8aa8ad19f",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-11-71852781",
+      "photoSha256": "c7c43f924a83fd9d192c44c55e6d1fb9f9ddaddd8813132ae441df1674e0ed25",
+      "depthSha256": "383a05f90c9cbd8d001bb496bf644e28ec1debb59a327b9fc01d49924897054a",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-11-89189482",
+      "photoSha256": "d33cadc1591dcb2ab8c2e68607779744829250b4479f872e2e74f56599fdeb5c",
+      "depthSha256": "c99aa6e2dd44e7e643097a9215750c195c195b8516460a82b9e3c917311d1359",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-12-201484048",
+      "photoSha256": "78bd3f15ccd986992fc9f52a771778ccba0490abe64e4243dbfe27398fec96b4",
+      "depthSha256": "6475f98fc4541e9384df1fad54175f9f742da314bfe2dad6c98b7ef57404ae73",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-12-201342968",
+      "photoSha256": "d3951057469a00f164b32a1d63fb2310915fea2b5e01efa3d93e38dd2b70ac5d",
+      "depthSha256": "26cdbc95816772310ad4079ed82aa60e93accf679ec05e1ceb235a9b82f9f8da",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-12-201385356",
+      "photoSha256": "54b4ba809e48ef51578ff9396f2f40c18d3efaac057f5c90b033bbe2c15c72f5",
+      "depthSha256": "89d78c5bb9658195b291a3108a9ce7580c19c94f646480338d2f71fd5eef80da",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-13-61309178",
+      "photoSha256": "7306c077e4bc34dd8f12038911fd47e83b49021c3ca3e0017322e7c6ef88a113",
+      "depthSha256": "caa0f65a7f06b3357f432cc0f2a875ab89dafefb266564cc5dfa6e7438b2b20c",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-13-60172881",
+      "photoSha256": "563824dfe6d7cc19955aa0bc371ec3298b45f8f98911b0738c93ad561bbdbf2b",
+      "depthSha256": "d267ec74fba0f61c614e99d05b2e8698c2524f9fa05a446db526e5862e1c8299",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-13-105399732",
+      "photoSha256": "12f2656e687fa91fb9dcfc62f86d322a75566094409f230048d5c618f44a8f78",
+      "depthSha256": "f7f81268ea3bd4bacc6516440833797a7be8ffba5e983b3d0bb82d795f0b103d",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-14-76271548",
+      "photoSha256": "a54e6ca541cbf92f41a41a86fddaf9c54a34b7fc93610773e3b1ea396adb7ffa",
+      "depthSha256": "518c195315211306ce31943eebe5d1796c3b43e23cbbc8582eb8a411377ecfca",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-14-16503745",
+      "photoSha256": "43ed391ee03d572b3e7fd68a1e53e17f68065b80d500b04ecb8f9a30e249dbb9",
+      "depthSha256": "556f99489226b66462155cff462e58f28b43e227151526bda63fc3ef63c57287",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-15-152970382",
+      "photoSha256": "2a01cf83f9dde54a0518920bdf7811b704e4b9bb4d3cc4e200eea73bde23e561",
+      "depthSha256": "0399ddac5a10a480780a29cbff566058a1ab393c7dcd67c6c19ba74c47b915f1",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-17-199401836",
+      "photoSha256": "2bc9e6d63515e37ca055f54e9c37dbc6d31f48a82b365f83bd37cec96ec3f141",
+      "depthSha256": "2ee3835bf1c6628ee1bd364436a3d7284271abda563832394248499f9b6f9145",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-17-27586242",
+      "photoSha256": "2b5699a6327287542b3891f00113950c6cec2896a569eccfbfa8d3ab91c11d60",
+      "depthSha256": "46815ea5bcd9fb2300730ea4a2b526efdda7cfb82ff963e00c7aabdacc92044d",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "new-18-51440683",
+      "photoSha256": "5c15ecf6971b53c29bb625cbc627e6dae5448e4f87a6420cb55a378aa40e53f8",
+      "depthSha256": "b5157e3da01a2df42b840e68c9a924f86aa449ef806d265c5bf917d6e08b7e71",
+      "depthKind": "original raw Float32 inference, used equally by both builds"
+    },
+    {
+      "id": "lighthouse",
+      "photoSha256": "dbbf80d10cd7e70dd15e9a974861ddf29b4837db1f21aaafe6592b9eed7e1abc",
+      "depthSha256": "41b840482e4a4fe4a33998ad71e7410637057f82c9365092b176774820a73ae1",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "sailboat",
+      "photoSha256": "6cf2bb7000d0ce3c20bceb9ab036bff287e67406d8dffcc89ad65e18400dfa1f",
+      "depthSha256": "048ecae5e557e0b02d010d76fd94f5d253b937fe012ced638f860802b1a78748",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "tulips",
+      "photoSha256": "fc3671778f7badd088f3bdf9362303b39ad646bb9ca71dcb238eb2729b76ad06",
+      "depthSha256": "55ed1404a6732d8c5a0ab95b994e4206eb091688b495a6b5f8f831a45fe38921",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "daffodils",
+      "photoSha256": "fb637a70cb6eed538f27d9317e2e9093f4e5fc2d0b1f9ef553eeed1660abd909",
+      "depthSha256": "3833aecbb28de43afc0a2195df5274b84716f6eeb438841e7e578670ab0a89b9",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "red-barn",
+      "photoSha256": "150651deeadaa57b5379eea83d3d0feea92cb9d23db0ceea217e8314b2790d90",
+      "depthSha256": "79e2ca36f522a97bc8a1041039d690404538a0c35f275cae5c903b1eaba4696b",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "seashell",
+      "photoSha256": "77ce64a83c91cf79d8d05b098276b5a0ce40b6253573ad18934214cc12ee2476",
+      "depthSha256": "b554af4a5f1c7aa4a3ab8a5d167676300553ffe9d1b49d454371126e8a83a583",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "islands",
+      "photoSha256": "e15df9107aa85efb9c95529465fd4172ef76c1bf1826f03b9786fa2d7ccf18b2",
+      "depthSha256": "3a6300de2f6c61ea619ada1401d8bce36fe75aaaef769f6ee50dc5184e4b3d24",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "tulip-field",
+      "photoSha256": "7020a9f8a3d8e66e025cd83f65c0866769e90abbe0d92609164ae07908be9f83",
+      "depthSha256": "fafd8edbb57b884a4b514c6d46e8ff1f5cbcff20e05eae189ecd8d36eff0192f",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "mushroom",
+      "photoSha256": "a5cb152f0f28059eb135dd601148d22ccd0a8fd83384c8eaa01e4f3d94b2d9b6",
+      "depthSha256": "7218148687c211b8fba27e4186fe318a1ea7ac774a6e81ba0ac90b1797fd0f0d",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "waterfall",
+      "photoSha256": "62c01b365fb6833caed0cefcfef7449ec93958814cd6557eeaa43cd7611d6e50",
+      "depthSha256": "7bb64b6281e5a4499953cea355bfe38ea78bfeeeb3f054a1beba0253e9273af8",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "seashell-gif",
+      "photoSha256": "65124e509b9db0fa908b914cdf2056a2d8654b62708d4c501dc48601f3350f68",
+      "depthSha256": "5c12dc5fc2d0a76b36ba38f7fdeab2321b9507d23314f99cb211e479c77aa26c",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "mushroom-gif",
+      "photoSha256": "a348952674c902a8d20a5f38a8631f373ac1801b6ee6569feb458c979f7f2321",
+      "depthSha256": "e799a47b559dcd7c1be976ac77f5124c53944fec0a896c94071bcfb270d1a4b9",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "waterfall-gif",
+      "photoSha256": "5666a38972442a3788b93e468100c84236e7c3536914d059bfc33ee401b4287d",
+      "depthSha256": "fc1ecc747fedbc7ecedaf1dab1fd32667b64799a557e8b0f7e005ac6ccead341",
+      "depthKind": "original baked depth"
+    }
+  ],
+  "depth": 1,
+  "costUse": "Review only; supplied model output is identical in both builds. Cold inference and first-view cost are measured separately.",
+  "path": "Four continuous sine arcs: yaw -30,+30 then pitch -30,+30; no frame interpolation.",
+  "rows": [
+    {
+      "elapsedMs": 103659.54208699998,
+      "id": "new-14-16503745",
+      "view": "sharp",
+      "file": "new-14-16503745-sharp-before-after.mp4",
+      "sha256": "607c5d07fed8dad2f406c6122c6da6ffb528157e1ea63db68e35e8a6b84e116d",
+      "frames": 72,
+      "fps": 12,
+      "deviceScaleFactor": 3,
+      "profile": "low",
+      "nativeBuffer": [585, 1266],
+      "pixelComparison": [
+        {
+          "frame": 0,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3425545a339870d9a2a03068c2565522c1edf291d1def6823aa96ecbd2cfb748",
+            "3425545a339870d9a2a03068c2565522c1edf291d1def6823aa96ecbd2cfb748"
+          ]
+        },
+        {
+          "frame": 1,
+          "yaw": -5.2094453300079095,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "254e1f70a256d04f8349a64d6c561a6c6f3de946b0a8aa97b9c7e0ec17d1f301",
+            "254e1f70a256d04f8349a64d6c561a6c6f3de946b0a8aa97b9c7e0ec17d1f301"
+          ]
+        },
+        {
+          "frame": 2,
+          "yaw": -10.260604299770062,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "67bd8c2bd09c71b12e752e22686f86a998d558e77b824dbe585fed131f260aed",
+            "67bd8c2bd09c71b12e752e22686f86a998d558e77b824dbe585fed131f260aed"
+          ]
+        },
+        {
+          "frame": 3,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "0dbb3a5a3ac0af0519daffcf1e50513b36ef221505433f67eaa99734d7c43c7e",
+            "0dbb3a5a3ac0af0519daffcf1e50513b36ef221505433f67eaa99734d7c43c7e"
+          ]
+        },
+        {
+          "frame": 4,
+          "yaw": -19.283628290596177,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3db80035685211774612f85995181e632530be23ba6f411cf247b993ceabaaf9",
+            "3db80035685211774612f85995181e632530be23ba6f411cf247b993ceabaaf9"
+          ]
+        },
+        {
+          "frame": 5,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a510d2eb8c6bfa845f932adc3127132384810047a6f3933e39d83c9fe9a8f853",
+            "a510d2eb8c6bfa845f932adc3127132384810047a6f3933e39d83c9fe9a8f853"
+          ]
+        },
+        {
+          "frame": 6,
+          "yaw": -25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3a8267e78a5c7c629b6f37767459c67d4f8117b2c3840be0a5ee7d86a4f88ae2",
+            "3a8267e78a5c7c629b6f37767459c67d4f8117b2c3840be0a5ee7d86a4f88ae2"
+          ]
+        },
+        {
+          "frame": 7,
+          "yaw": -28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "163dba04c672a2e8842ea39849ca25e7450605ea5f9b93480c609b4d9af272e3",
+            "163dba04c672a2e8842ea39849ca25e7450605ea5f9b93480c609b4d9af272e3"
+          ]
+        },
+        {
+          "frame": 8,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "91abd6f837f547f6fe6c92fb81cbc59b5efbe790a4e9b99057d062977922494b",
+            "91abd6f837f547f6fe6c92fb81cbc59b5efbe790a4e9b99057d062977922494b"
+          ]
+        },
+        {
+          "frame": 9,
+          "yaw": -30,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "36ccdefe08efa35c9f239b6fa6584710d80eac6a6fa0054684205b96ee8f5ce3",
+            "36ccdefe08efa35c9f239b6fa6584710d80eac6a6fa0054684205b96ee8f5ce3"
+          ]
+        },
+        {
+          "frame": 10,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "91abd6f837f547f6fe6c92fb81cbc59b5efbe790a4e9b99057d062977922494b",
+            "91abd6f837f547f6fe6c92fb81cbc59b5efbe790a4e9b99057d062977922494b"
+          ]
+        },
+        {
+          "frame": 11,
+          "yaw": -28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "163dba04c672a2e8842ea39849ca25e7450605ea5f9b93480c609b4d9af272e3",
+            "163dba04c672a2e8842ea39849ca25e7450605ea5f9b93480c609b4d9af272e3"
+          ]
+        },
+        {
+          "frame": 12,
+          "yaw": -25.98076211353316,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3a8267e78a5c7c629b6f37767459c67d4f8117b2c3840be0a5ee7d86a4f88ae2",
+            "3a8267e78a5c7c629b6f37767459c67d4f8117b2c3840be0a5ee7d86a4f88ae2"
+          ]
+        },
+        {
+          "frame": 13,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a510d2eb8c6bfa845f932adc3127132384810047a6f3933e39d83c9fe9a8f853",
+            "a510d2eb8c6bfa845f932adc3127132384810047a6f3933e39d83c9fe9a8f853"
+          ]
+        },
+        {
+          "frame": 14,
+          "yaw": -19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3db80035685211774612f85995181e632530be23ba6f411cf247b993ceabaaf9",
+            "3db80035685211774612f85995181e632530be23ba6f411cf247b993ceabaaf9"
+          ]
+        },
+        {
+          "frame": 15,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "0dbb3a5a3ac0af0519daffcf1e50513b36ef221505433f67eaa99734d7c43c7e",
+            "0dbb3a5a3ac0af0519daffcf1e50513b36ef221505433f67eaa99734d7c43c7e"
+          ]
+        },
+        {
+          "frame": 16,
+          "yaw": -10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "67bd8c2bd09c71b12e752e22686f86a998d558e77b824dbe585fed131f260aed",
+            "67bd8c2bd09c71b12e752e22686f86a998d558e77b824dbe585fed131f260aed"
+          ]
+        },
+        {
+          "frame": 17,
+          "yaw": -5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "254e1f70a256d04f8349a64d6c561a6c6f3de946b0a8aa97b9c7e0ec17d1f301",
+            "254e1f70a256d04f8349a64d6c561a6c6f3de946b0a8aa97b9c7e0ec17d1f301"
+          ]
+        },
+        {
+          "frame": 18,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3425545a339870d9a2a03068c2565522c1edf291d1def6823aa96ecbd2cfb748",
+            "3425545a339870d9a2a03068c2565522c1edf291d1def6823aa96ecbd2cfb748"
+          ]
+        },
+        {
+          "frame": 19,
+          "yaw": 5.209445330007912,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b8a07f539297c939eff42b1be6ad647c53e1c3c9d8609404e5dacd9cc07fdd90",
+            "b8a07f539297c939eff42b1be6ad647c53e1c3c9d8609404e5dacd9cc07fdd90"
+          ]
+        },
+        {
+          "frame": 20,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "34c5471df2a93166a6c2c7bc73626a4b9c7106fcb6b06fe58c97ef3f70f69c09",
+            "34c5471df2a93166a6c2c7bc73626a4b9c7106fcb6b06fe58c97ef3f70f69c09"
+          ]
+        },
+        {
+          "frame": 21,
+          "yaw": 15.000000000000004,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "81c0891e737754217fff389f33b612f77f9317e720cbaba0dce2ca5e3c9ce7ef",
+            "81c0891e737754217fff389f33b612f77f9317e720cbaba0dce2ca5e3c9ce7ef"
+          ]
+        },
+        {
+          "frame": 22,
+          "yaw": 19.283628290596187,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8f181ea011c020451b28927525a616d04bc797bfffc546c74478ed3a6abe36ed",
+            "8f181ea011c020451b28927525a616d04bc797bfffc546c74478ed3a6abe36ed"
+          ]
+        },
+        {
+          "frame": 23,
+          "yaw": 22.981333293569335,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "395b54fd0bed3e9ebc7a6472c5da22c57e902f93f1cde276fda05e1d1524141c",
+            "395b54fd0bed3e9ebc7a6472c5da22c57e902f93f1cde276fda05e1d1524141c"
+          ]
+        },
+        {
+          "frame": 24,
+          "yaw": 25.980762113533153,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "7a87109efedcad6f6cc179707e72f8b1a24fa248ca76a7ec25f6b1519a4e5c4f",
+            "7a87109efedcad6f6cc179707e72f8b1a24fa248ca76a7ec25f6b1519a4e5c4f"
+          ]
+        },
+        {
+          "frame": 25,
+          "yaw": 28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "4785d3ed11e062be5570a85045e3b2a13375dac518ff1e6f2c6dfaf9df38d447",
+            "4785d3ed11e062be5570a85045e3b2a13375dac518ff1e6f2c6dfaf9df38d447"
+          ]
+        },
+        {
+          "frame": 26,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2d787f815363d56f44ecb92e80dd5f2893c97145d11da019fad37238006d9973",
+            "2d787f815363d56f44ecb92e80dd5f2893c97145d11da019fad37238006d9973"
+          ]
+        },
+        {
+          "frame": 27,
+          "yaw": 30,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6b30719f44d97628b625e4c4280c74592e0f34d4352dc8b4aca357df05069eff",
+            "6b30719f44d97628b625e4c4280c74592e0f34d4352dc8b4aca357df05069eff"
+          ]
+        },
+        {
+          "frame": 28,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2d787f815363d56f44ecb92e80dd5f2893c97145d11da019fad37238006d9973",
+            "2d787f815363d56f44ecb92e80dd5f2893c97145d11da019fad37238006d9973"
+          ]
+        },
+        {
+          "frame": 29,
+          "yaw": 28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "4785d3ed11e062be5570a85045e3b2a13375dac518ff1e6f2c6dfaf9df38d447",
+            "4785d3ed11e062be5570a85045e3b2a13375dac518ff1e6f2c6dfaf9df38d447"
+          ]
+        },
+        {
+          "frame": 30,
+          "yaw": 25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "7a87109efedcad6f6cc179707e72f8b1a24fa248ca76a7ec25f6b1519a4e5c4f",
+            "7a87109efedcad6f6cc179707e72f8b1a24fa248ca76a7ec25f6b1519a4e5c4f"
+          ]
+        },
+        {
+          "frame": 31,
+          "yaw": 22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "395b54fd0bed3e9ebc7a6472c5da22c57e902f93f1cde276fda05e1d1524141c",
+            "395b54fd0bed3e9ebc7a6472c5da22c57e902f93f1cde276fda05e1d1524141c"
+          ]
+        },
+        {
+          "frame": 32,
+          "yaw": 19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8f181ea011c020451b28927525a616d04bc797bfffc546c74478ed3a6abe36ed",
+            "8f181ea011c020451b28927525a616d04bc797bfffc546c74478ed3a6abe36ed"
+          ]
+        },
+        {
+          "frame": 33,
+          "yaw": 15.00000000000001,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "81c0891e737754217fff389f33b612f77f9317e720cbaba0dce2ca5e3c9ce7ef",
+            "81c0891e737754217fff389f33b612f77f9317e720cbaba0dce2ca5e3c9ce7ef"
+          ]
+        },
+        {
+          "frame": 34,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "34c5471df2a93166a6c2c7bc73626a4b9c7106fcb6b06fe58c97ef3f70f69c09",
+            "34c5471df2a93166a6c2c7bc73626a4b9c7106fcb6b06fe58c97ef3f70f69c09"
+          ]
+        },
+        {
+          "frame": 35,
+          "yaw": 5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b8a07f539297c939eff42b1be6ad647c53e1c3c9d8609404e5dacd9cc07fdd90",
+            "b8a07f539297c939eff42b1be6ad647c53e1c3c9d8609404e5dacd9cc07fdd90"
+          ]
+        },
+        {
+          "frame": 36,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3425545a339870d9a2a03068c2565522c1edf291d1def6823aa96ecbd2cfb748",
+            "3425545a339870d9a2a03068c2565522c1edf291d1def6823aa96ecbd2cfb748"
+          ]
+        },
+        {
+          "frame": 37,
+          "yaw": 0,
+          "pitch": -5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a8e85a6109565c0195b52ade13f42ac772902abc092d10f00ae1e1cd721baadd",
+            "a8e85a6109565c0195b52ade13f42ac772902abc092d10f00ae1e1cd721baadd"
+          ]
+        },
+        {
+          "frame": 38,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3f0b05a7815926ff7f079746fe9e30cbf59b2ab936ec13f53b35dd1c21045b00",
+            "3f0b05a7815926ff7f079746fe9e30cbf59b2ab936ec13f53b35dd1c21045b00"
+          ]
+        },
+        {
+          "frame": 39,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "dc8a3cf5a712344f33ae22113d0e35da0619afc64eb6c6d3532dd1e80fa65373",
+            "dc8a3cf5a712344f33ae22113d0e35da0619afc64eb6c6d3532dd1e80fa65373"
+          ]
+        },
+        {
+          "frame": 40,
+          "yaw": 0,
+          "pitch": -19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "115a41bde1e01d8f5418fe951778702c02c2a18f3c2c828444df896dbd454db5",
+            "115a41bde1e01d8f5418fe951778702c02c2a18f3c2c828444df896dbd454db5"
+          ]
+        },
+        {
+          "frame": 41,
+          "yaw": 0,
+          "pitch": -22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "58276c6b5f2645c9a008026b4c98d163fe0005c3c3aa8e5761861daa6ec24988",
+            "58276c6b5f2645c9a008026b4c98d163fe0005c3c3aa8e5761861daa6ec24988"
+          ]
+        },
+        {
+          "frame": 42,
+          "yaw": 0,
+          "pitch": -25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "93bc758e16832f718a3ec1ea1f0df2c3155b1be24b737659a5e9565181d137e7",
+            "93bc758e16832f718a3ec1ea1f0df2c3155b1be24b737659a5e9565181d137e7"
+          ]
+        },
+        {
+          "frame": 43,
+          "yaw": 0,
+          "pitch": -28.19077862357725,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3fb77ccb78ba7d7fac425c23585adb67aec8de7455a2146487519d5cfc68ba18",
+            "3fb77ccb78ba7d7fac425c23585adb67aec8de7455a2146487519d5cfc68ba18"
+          ]
+        },
+        {
+          "frame": 44,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6b1542bf550d4b2823d43e892d4c42eb50d4723229f745309d8c4fe7d631a30c",
+            "6b1542bf550d4b2823d43e892d4c42eb50d4723229f745309d8c4fe7d631a30c"
+          ]
+        },
+        {
+          "frame": 45,
+          "yaw": 0,
+          "pitch": -30,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b96d954b80260ce5320b6fe88a4fc6a51ffae29e99c3066fe115e38697c51605",
+            "b96d954b80260ce5320b6fe88a4fc6a51ffae29e99c3066fe115e38697c51605"
+          ]
+        },
+        {
+          "frame": 46,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6b1542bf550d4b2823d43e892d4c42eb50d4723229f745309d8c4fe7d631a30c",
+            "6b1542bf550d4b2823d43e892d4c42eb50d4723229f745309d8c4fe7d631a30c"
+          ]
+        },
+        {
+          "frame": 47,
+          "yaw": 0,
+          "pitch": -28.190778623577252,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3fb77ccb78ba7d7fac425c23585adb67aec8de7455a2146487519d5cfc68ba18",
+            "3fb77ccb78ba7d7fac425c23585adb67aec8de7455a2146487519d5cfc68ba18"
+          ]
+        },
+        {
+          "frame": 48,
+          "yaw": 0,
+          "pitch": -25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "93bc758e16832f718a3ec1ea1f0df2c3155b1be24b737659a5e9565181d137e7",
+            "93bc758e16832f718a3ec1ea1f0df2c3155b1be24b737659a5e9565181d137e7"
+          ]
+        },
+        {
+          "frame": 49,
+          "yaw": 0,
+          "pitch": -22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "58276c6b5f2645c9a008026b4c98d163fe0005c3c3aa8e5761861daa6ec24988",
+            "58276c6b5f2645c9a008026b4c98d163fe0005c3c3aa8e5761861daa6ec24988"
+          ]
+        },
+        {
+          "frame": 50,
+          "yaw": 0,
+          "pitch": -19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "115a41bde1e01d8f5418fe951778702c02c2a18f3c2c828444df896dbd454db5",
+            "115a41bde1e01d8f5418fe951778702c02c2a18f3c2c828444df896dbd454db5"
+          ]
+        },
+        {
+          "frame": 51,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "dc8a3cf5a712344f33ae22113d0e35da0619afc64eb6c6d3532dd1e80fa65373",
+            "dc8a3cf5a712344f33ae22113d0e35da0619afc64eb6c6d3532dd1e80fa65373"
+          ]
+        },
+        {
+          "frame": 52,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3f0b05a7815926ff7f079746fe9e30cbf59b2ab936ec13f53b35dd1c21045b00",
+            "3f0b05a7815926ff7f079746fe9e30cbf59b2ab936ec13f53b35dd1c21045b00"
+          ]
+        },
+        {
+          "frame": 53,
+          "yaw": 0,
+          "pitch": -5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a8e85a6109565c0195b52ade13f42ac772902abc092d10f00ae1e1cd721baadd",
+            "a8e85a6109565c0195b52ade13f42ac772902abc092d10f00ae1e1cd721baadd"
+          ]
+        },
+        {
+          "frame": 54,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3425545a339870d9a2a03068c2565522c1edf291d1def6823aa96ecbd2cfb748",
+            "3425545a339870d9a2a03068c2565522c1edf291d1def6823aa96ecbd2cfb748"
+          ]
+        },
+        {
+          "frame": 55,
+          "yaw": 0,
+          "pitch": 5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a3ec1cbae4e92dd319c7838b93065707a2fbe00e73bd17d16077f2df1389b52d",
+            "a3ec1cbae4e92dd319c7838b93065707a2fbe00e73bd17d16077f2df1389b52d"
+          ]
+        },
+        {
+          "frame": 56,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "bd42518f1d12a4dcb3d4fd259e397c4f93b3b83d91361a7a77f4aa7b2c30ef08",
+            "bd42518f1d12a4dcb3d4fd259e397c4f93b3b83d91361a7a77f4aa7b2c30ef08"
+          ]
+        },
+        {
+          "frame": 57,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cca681f14b0a30a6390becff590a51a73dd104fb1ceb129636de74983c2b7e2e",
+            "cca681f14b0a30a6390becff590a51a73dd104fb1ceb129636de74983c2b7e2e"
+          ]
+        },
+        {
+          "frame": 58,
+          "yaw": 0,
+          "pitch": 19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "41ecddac82e0e5a11b7c0eded26035610291df652bd202234c12732a2c3c49c3",
+            "41ecddac82e0e5a11b7c0eded26035610291df652bd202234c12732a2c3c49c3"
+          ]
+        },
+        {
+          "frame": 59,
+          "yaw": 0,
+          "pitch": 22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "49bddefd46ed5e7ab26a0eff746d09c25f16bf577ce0ea93f462b8738dfef290",
+            "49bddefd46ed5e7ab26a0eff746d09c25f16bf577ce0ea93f462b8738dfef290"
+          ]
+        },
+        {
+          "frame": 60,
+          "yaw": 0,
+          "pitch": 25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "389a49baacdcd78dedcb1cc4901dd33b92691c993d15c41de9c95d9900d77101",
+            "389a49baacdcd78dedcb1cc4901dd33b92691c993d15c41de9c95d9900d77101"
+          ]
+        },
+        {
+          "frame": 61,
+          "yaw": 0,
+          "pitch": 28.19077862357725,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "21f9273ee6fd740dc4129fd61fca91fbbaab98e87ae95fcb1e2e2c500a0d8479",
+            "21f9273ee6fd740dc4129fd61fca91fbbaab98e87ae95fcb1e2e2c500a0d8479"
+          ]
+        },
+        {
+          "frame": 62,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "4e406534e9512a2067796a5080d6a1aef4df7317236b79db055de190a67a57f0",
+            "4e406534e9512a2067796a5080d6a1aef4df7317236b79db055de190a67a57f0"
+          ]
+        },
+        {
+          "frame": 63,
+          "yaw": 0,
+          "pitch": 30,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d212e9b2450f91f840f1f606dd8cb586922ee0a70258ce057f3dd19c33865504",
+            "d212e9b2450f91f840f1f606dd8cb586922ee0a70258ce057f3dd19c33865504"
+          ]
+        },
+        {
+          "frame": 64,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "4e406534e9512a2067796a5080d6a1aef4df7317236b79db055de190a67a57f0",
+            "4e406534e9512a2067796a5080d6a1aef4df7317236b79db055de190a67a57f0"
+          ]
+        },
+        {
+          "frame": 65,
+          "yaw": 0,
+          "pitch": 28.190778623577252,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "21f9273ee6fd740dc4129fd61fca91fbbaab98e87ae95fcb1e2e2c500a0d8479",
+            "21f9273ee6fd740dc4129fd61fca91fbbaab98e87ae95fcb1e2e2c500a0d8479"
+          ]
+        },
+        {
+          "frame": 66,
+          "yaw": 0,
+          "pitch": 25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "389a49baacdcd78dedcb1cc4901dd33b92691c993d15c41de9c95d9900d77101",
+            "389a49baacdcd78dedcb1cc4901dd33b92691c993d15c41de9c95d9900d77101"
+          ]
+        },
+        {
+          "frame": 67,
+          "yaw": 0,
+          "pitch": 22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "49bddefd46ed5e7ab26a0eff746d09c25f16bf577ce0ea93f462b8738dfef290",
+            "49bddefd46ed5e7ab26a0eff746d09c25f16bf577ce0ea93f462b8738dfef290"
+          ]
+        },
+        {
+          "frame": 68,
+          "yaw": 0,
+          "pitch": 19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "41ecddac82e0e5a11b7c0eded26035610291df652bd202234c12732a2c3c49c3",
+            "41ecddac82e0e5a11b7c0eded26035610291df652bd202234c12732a2c3c49c3"
+          ]
+        },
+        {
+          "frame": 69,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cca681f14b0a30a6390becff590a51a73dd104fb1ceb129636de74983c2b7e2e",
+            "cca681f14b0a30a6390becff590a51a73dd104fb1ceb129636de74983c2b7e2e"
+          ]
+        },
+        {
+          "frame": 70,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "bd42518f1d12a4dcb3d4fd259e397c4f93b3b83d91361a7a77f4aa7b2c30ef08",
+            "bd42518f1d12a4dcb3d4fd259e397c4f93b3b83d91361a7a77f4aa7b2c30ef08"
+          ]
+        },
+        {
+          "frame": 71,
+          "yaw": 0,
+          "pitch": 5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a3ec1cbae4e92dd319c7838b93065707a2fbe00e73bd17d16077f2df1389b52d",
+            "a3ec1cbae4e92dd319c7838b93065707a2fbe00e73bd17d16077f2df1389b52d"
+          ]
+        }
+      ],
+      "size": [780, 844],
+      "label": "new-14-16503745 | CC0 photo | Sharp | Depth 1",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "source": {
+        "author": "Jebulon",
+        "url": "https://commons.wikimedia.org/wiki/File:Enclume_rouill%C3%A9e.jpg",
+        "license": "CC0 1.0",
+        "label": "CC0 photo"
+      },
+      "recordingLicense": "CC0 1.0, subject to the source image license"
+    },
+    {
+      "elapsedMs": 73629.09137000001,
+      "id": "new-15-152970382",
+      "view": "sharp",
+      "file": "new-15-152970382-sharp-before-after.mp4",
+      "sha256": "9a29d55809d255712dfbdc3267dcd400b78e6add09e7b02bf993dec19516e4c1",
+      "frames": 72,
+      "fps": 12,
+      "deviceScaleFactor": 3,
+      "profile": "low",
+      "nativeBuffer": [585, 1266],
+      "pixelComparison": [
+        {
+          "frame": 0,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3fee21593de7c39744929617b5884eedd054c90b27b4dd6dffab841685508b15",
+            "3fee21593de7c39744929617b5884eedd054c90b27b4dd6dffab841685508b15"
+          ]
+        },
+        {
+          "frame": 1,
+          "yaw": -5.2094453300079095,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "453186f57edad042fe5855e393879ebb8fc92c9f843613a3898c9d4b6fd32b7c",
+            "453186f57edad042fe5855e393879ebb8fc92c9f843613a3898c9d4b6fd32b7c"
+          ]
+        },
+        {
+          "frame": 2,
+          "yaw": -10.260604299770062,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "fc46c98b88154aef338212487a056d0bd08f20ae7d8071101150f53f548023af",
+            "fc46c98b88154aef338212487a056d0bd08f20ae7d8071101150f53f548023af"
+          ]
+        },
+        {
+          "frame": 3,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8de13e3d16f0fe7d546ac865e7e16b57150fa291fe122ea105e5c3397e4f241d",
+            "8de13e3d16f0fe7d546ac865e7e16b57150fa291fe122ea105e5c3397e4f241d"
+          ]
+        },
+        {
+          "frame": 4,
+          "yaw": -19.283628290596177,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "ac63bf5aedc81d5eeb4102def86a3effdc196d3e79adef67beeab4952615ceda",
+            "ac63bf5aedc81d5eeb4102def86a3effdc196d3e79adef67beeab4952615ceda"
+          ]
+        },
+        {
+          "frame": 5,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8b4ceb1afe3f818fb50116276b79bdb3aab8359c0e06c5240a609234de2d5a2e",
+            "8b4ceb1afe3f818fb50116276b79bdb3aab8359c0e06c5240a609234de2d5a2e"
+          ]
+        },
+        {
+          "frame": 6,
+          "yaw": -25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5067e5229c76cb839c798dbbf25a14b58a6b5a9a3738978b5b179e7ecca8c800",
+            "5067e5229c76cb839c798dbbf25a14b58a6b5a9a3738978b5b179e7ecca8c800"
+          ]
+        },
+        {
+          "frame": 7,
+          "yaw": -28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "75f91144a6ba335f5488e45d6a97b8c18d04faa0b60dc20d68a7420afe3121ba",
+            "75f91144a6ba335f5488e45d6a97b8c18d04faa0b60dc20d68a7420afe3121ba"
+          ]
+        },
+        {
+          "frame": 8,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a13bf2e07b01be73c09be9f14a9b591d4cf108ca9500668665a64701af547050",
+            "a13bf2e07b01be73c09be9f14a9b591d4cf108ca9500668665a64701af547050"
+          ]
+        },
+        {
+          "frame": 9,
+          "yaw": -30,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a978cd117ed114887c93f78147896005f895a2ce52fc9856a9167ea94d3a19b5",
+            "a978cd117ed114887c93f78147896005f895a2ce52fc9856a9167ea94d3a19b5"
+          ]
+        },
+        {
+          "frame": 10,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a13bf2e07b01be73c09be9f14a9b591d4cf108ca9500668665a64701af547050",
+            "a13bf2e07b01be73c09be9f14a9b591d4cf108ca9500668665a64701af547050"
+          ]
+        },
+        {
+          "frame": 11,
+          "yaw": -28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "75f91144a6ba335f5488e45d6a97b8c18d04faa0b60dc20d68a7420afe3121ba",
+            "75f91144a6ba335f5488e45d6a97b8c18d04faa0b60dc20d68a7420afe3121ba"
+          ]
+        },
+        {
+          "frame": 12,
+          "yaw": -25.98076211353316,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5067e5229c76cb839c798dbbf25a14b58a6b5a9a3738978b5b179e7ecca8c800",
+            "5067e5229c76cb839c798dbbf25a14b58a6b5a9a3738978b5b179e7ecca8c800"
+          ]
+        },
+        {
+          "frame": 13,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8b4ceb1afe3f818fb50116276b79bdb3aab8359c0e06c5240a609234de2d5a2e",
+            "8b4ceb1afe3f818fb50116276b79bdb3aab8359c0e06c5240a609234de2d5a2e"
+          ]
+        },
+        {
+          "frame": 14,
+          "yaw": -19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "ac63bf5aedc81d5eeb4102def86a3effdc196d3e79adef67beeab4952615ceda",
+            "ac63bf5aedc81d5eeb4102def86a3effdc196d3e79adef67beeab4952615ceda"
+          ]
+        },
+        {
+          "frame": 15,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8de13e3d16f0fe7d546ac865e7e16b57150fa291fe122ea105e5c3397e4f241d",
+            "8de13e3d16f0fe7d546ac865e7e16b57150fa291fe122ea105e5c3397e4f241d"
+          ]
+        },
+        {
+          "frame": 16,
+          "yaw": -10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "fc46c98b88154aef338212487a056d0bd08f20ae7d8071101150f53f548023af",
+            "fc46c98b88154aef338212487a056d0bd08f20ae7d8071101150f53f548023af"
+          ]
+        },
+        {
+          "frame": 17,
+          "yaw": -5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "453186f57edad042fe5855e393879ebb8fc92c9f843613a3898c9d4b6fd32b7c",
+            "453186f57edad042fe5855e393879ebb8fc92c9f843613a3898c9d4b6fd32b7c"
+          ]
+        },
+        {
+          "frame": 18,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3fee21593de7c39744929617b5884eedd054c90b27b4dd6dffab841685508b15",
+            "3fee21593de7c39744929617b5884eedd054c90b27b4dd6dffab841685508b15"
+          ]
+        },
+        {
+          "frame": 19,
+          "yaw": 5.209445330007912,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "586221d44f4501c3e0775dd630f544746777b8c27da7658873d17e2d40c2f929",
+            "586221d44f4501c3e0775dd630f544746777b8c27da7658873d17e2d40c2f929"
+          ]
+        },
+        {
+          "frame": 20,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cd26d637c1e8019d676dc244b3090d782ef2aba5e5419b9cc7c863b96072b4ad",
+            "cd26d637c1e8019d676dc244b3090d782ef2aba5e5419b9cc7c863b96072b4ad"
+          ]
+        },
+        {
+          "frame": 21,
+          "yaw": 15.000000000000004,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "95201bf7c49d08f30b29e353fb638235875eb2d0591ea415a005e4e2558a8023",
+            "95201bf7c49d08f30b29e353fb638235875eb2d0591ea415a005e4e2558a8023"
+          ]
+        },
+        {
+          "frame": 22,
+          "yaw": 19.283628290596187,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "c16c5346cd445a1c31e097454b18e45c26b5203c52dbb74d72fdc3a05bcf97c3",
+            "c16c5346cd445a1c31e097454b18e45c26b5203c52dbb74d72fdc3a05bcf97c3"
+          ]
+        },
+        {
+          "frame": 23,
+          "yaw": 22.981333293569335,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "93928d9653f96051e97be0a8be9a7d816a4287732e3056801a125f20cfedfd2b",
+            "93928d9653f96051e97be0a8be9a7d816a4287732e3056801a125f20cfedfd2b"
+          ]
+        },
+        {
+          "frame": 24,
+          "yaw": 25.980762113533153,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "598c0afcbd5fad67e2944067e80dca94e4215833ca79c405c0f31967792d2ff0",
+            "598c0afcbd5fad67e2944067e80dca94e4215833ca79c405c0f31967792d2ff0"
+          ]
+        },
+        {
+          "frame": 25,
+          "yaw": 28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "c1c2420dc29101fca529ccfb71e7bd94b9a57ca36fc12af25ccebfb163f1eed4",
+            "c1c2420dc29101fca529ccfb71e7bd94b9a57ca36fc12af25ccebfb163f1eed4"
+          ]
+        },
+        {
+          "frame": 26,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b9510a0fb1785503fe55ec6e3cdeff2c1ef7257f51f0e4dfc7206239fc7e0549",
+            "b9510a0fb1785503fe55ec6e3cdeff2c1ef7257f51f0e4dfc7206239fc7e0549"
+          ]
+        },
+        {
+          "frame": 27,
+          "yaw": 30,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6675eded16311919f08f9e5a19db5e55a4e502707a517901d8eeabd84a1f1ade",
+            "6675eded16311919f08f9e5a19db5e55a4e502707a517901d8eeabd84a1f1ade"
+          ]
+        },
+        {
+          "frame": 28,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b9510a0fb1785503fe55ec6e3cdeff2c1ef7257f51f0e4dfc7206239fc7e0549",
+            "b9510a0fb1785503fe55ec6e3cdeff2c1ef7257f51f0e4dfc7206239fc7e0549"
+          ]
+        },
+        {
+          "frame": 29,
+          "yaw": 28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "c1c2420dc29101fca529ccfb71e7bd94b9a57ca36fc12af25ccebfb163f1eed4",
+            "c1c2420dc29101fca529ccfb71e7bd94b9a57ca36fc12af25ccebfb163f1eed4"
+          ]
+        },
+        {
+          "frame": 30,
+          "yaw": 25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "598c0afcbd5fad67e2944067e80dca94e4215833ca79c405c0f31967792d2ff0",
+            "598c0afcbd5fad67e2944067e80dca94e4215833ca79c405c0f31967792d2ff0"
+          ]
+        },
+        {
+          "frame": 31,
+          "yaw": 22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "93928d9653f96051e97be0a8be9a7d816a4287732e3056801a125f20cfedfd2b",
+            "93928d9653f96051e97be0a8be9a7d816a4287732e3056801a125f20cfedfd2b"
+          ]
+        },
+        {
+          "frame": 32,
+          "yaw": 19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "c16c5346cd445a1c31e097454b18e45c26b5203c52dbb74d72fdc3a05bcf97c3",
+            "c16c5346cd445a1c31e097454b18e45c26b5203c52dbb74d72fdc3a05bcf97c3"
+          ]
+        },
+        {
+          "frame": 33,
+          "yaw": 15.00000000000001,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "95201bf7c49d08f30b29e353fb638235875eb2d0591ea415a005e4e2558a8023",
+            "95201bf7c49d08f30b29e353fb638235875eb2d0591ea415a005e4e2558a8023"
+          ]
+        },
+        {
+          "frame": 34,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cd26d637c1e8019d676dc244b3090d782ef2aba5e5419b9cc7c863b96072b4ad",
+            "cd26d637c1e8019d676dc244b3090d782ef2aba5e5419b9cc7c863b96072b4ad"
+          ]
+        },
+        {
+          "frame": 35,
+          "yaw": 5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "586221d44f4501c3e0775dd630f544746777b8c27da7658873d17e2d40c2f929",
+            "586221d44f4501c3e0775dd630f544746777b8c27da7658873d17e2d40c2f929"
+          ]
+        },
+        {
+          "frame": 36,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3fee21593de7c39744929617b5884eedd054c90b27b4dd6dffab841685508b15",
+            "3fee21593de7c39744929617b5884eedd054c90b27b4dd6dffab841685508b15"
+          ]
+        },
+        {
+          "frame": 37,
+          "yaw": 0,
+          "pitch": -5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f6aad032ccee4c22995065e2cb03ae82053125ee9178d8f00ae2eacf6731329a",
+            "f6aad032ccee4c22995065e2cb03ae82053125ee9178d8f00ae2eacf6731329a"
+          ]
+        },
+        {
+          "frame": 38,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "73394d6ce0cf60a69a088dabacc3fa9225902c0219aad64bd592146a1441b5a6",
+            "73394d6ce0cf60a69a088dabacc3fa9225902c0219aad64bd592146a1441b5a6"
+          ]
+        },
+        {
+          "frame": 39,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e2c8898bb2646bfab79e5f6213ce25d5bd85b3a2c4662ac6b9c5cc9e6d3b04fe",
+            "e2c8898bb2646bfab79e5f6213ce25d5bd85b3a2c4662ac6b9c5cc9e6d3b04fe"
+          ]
+        },
+        {
+          "frame": 40,
+          "yaw": 0,
+          "pitch": -19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d6d9f6a2f794e5dea56da1b95cbdb3e49f014b6bdebf45c16243263d4ad2f1c3",
+            "d6d9f6a2f794e5dea56da1b95cbdb3e49f014b6bdebf45c16243263d4ad2f1c3"
+          ]
+        },
+        {
+          "frame": 41,
+          "yaw": 0,
+          "pitch": -22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a1693b12e26cd4008cbf87362a44793137cba3716768f88755814af45813603f",
+            "a1693b12e26cd4008cbf87362a44793137cba3716768f88755814af45813603f"
+          ]
+        },
+        {
+          "frame": 42,
+          "yaw": 0,
+          "pitch": -25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f2782e2c39507019975c8c4b4a75ea41e712c72c28f6105778ebaf1ed1666aed",
+            "f2782e2c39507019975c8c4b4a75ea41e712c72c28f6105778ebaf1ed1666aed"
+          ]
+        },
+        {
+          "frame": 43,
+          "yaw": 0,
+          "pitch": -28.19077862357725,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5a91d69de8a1fa22a93f971bdb62ae7efd17f5c8fdd3aceb19cf03d14e399492",
+            "5a91d69de8a1fa22a93f971bdb62ae7efd17f5c8fdd3aceb19cf03d14e399492"
+          ]
+        },
+        {
+          "frame": 44,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8a5d01b8a6542760fe4d6b2dba7912f8cb9c6abef38d2443ac1b8bff3e74ece4",
+            "8a5d01b8a6542760fe4d6b2dba7912f8cb9c6abef38d2443ac1b8bff3e74ece4"
+          ]
+        },
+        {
+          "frame": 45,
+          "yaw": 0,
+          "pitch": -30,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b1e1c80ef081b85887f5a87afea49c46e135be820d9c98f9c6f8fb28f34f3c88",
+            "b1e1c80ef081b85887f5a87afea49c46e135be820d9c98f9c6f8fb28f34f3c88"
+          ]
+        },
+        {
+          "frame": 46,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8a5d01b8a6542760fe4d6b2dba7912f8cb9c6abef38d2443ac1b8bff3e74ece4",
+            "8a5d01b8a6542760fe4d6b2dba7912f8cb9c6abef38d2443ac1b8bff3e74ece4"
+          ]
+        },
+        {
+          "frame": 47,
+          "yaw": 0,
+          "pitch": -28.190778623577252,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5a91d69de8a1fa22a93f971bdb62ae7efd17f5c8fdd3aceb19cf03d14e399492",
+            "5a91d69de8a1fa22a93f971bdb62ae7efd17f5c8fdd3aceb19cf03d14e399492"
+          ]
+        },
+        {
+          "frame": 48,
+          "yaw": 0,
+          "pitch": -25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f2782e2c39507019975c8c4b4a75ea41e712c72c28f6105778ebaf1ed1666aed",
+            "f2782e2c39507019975c8c4b4a75ea41e712c72c28f6105778ebaf1ed1666aed"
+          ]
+        },
+        {
+          "frame": 49,
+          "yaw": 0,
+          "pitch": -22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a1693b12e26cd4008cbf87362a44793137cba3716768f88755814af45813603f",
+            "a1693b12e26cd4008cbf87362a44793137cba3716768f88755814af45813603f"
+          ]
+        },
+        {
+          "frame": 50,
+          "yaw": 0,
+          "pitch": -19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d6d9f6a2f794e5dea56da1b95cbdb3e49f014b6bdebf45c16243263d4ad2f1c3",
+            "d6d9f6a2f794e5dea56da1b95cbdb3e49f014b6bdebf45c16243263d4ad2f1c3"
+          ]
+        },
+        {
+          "frame": 51,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e2c8898bb2646bfab79e5f6213ce25d5bd85b3a2c4662ac6b9c5cc9e6d3b04fe",
+            "e2c8898bb2646bfab79e5f6213ce25d5bd85b3a2c4662ac6b9c5cc9e6d3b04fe"
+          ]
+        },
+        {
+          "frame": 52,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "73394d6ce0cf60a69a088dabacc3fa9225902c0219aad64bd592146a1441b5a6",
+            "73394d6ce0cf60a69a088dabacc3fa9225902c0219aad64bd592146a1441b5a6"
+          ]
+        },
+        {
+          "frame": 53,
+          "yaw": 0,
+          "pitch": -5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f6aad032ccee4c22995065e2cb03ae82053125ee9178d8f00ae2eacf6731329a",
+            "f6aad032ccee4c22995065e2cb03ae82053125ee9178d8f00ae2eacf6731329a"
+          ]
+        },
+        {
+          "frame": 54,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3fee21593de7c39744929617b5884eedd054c90b27b4dd6dffab841685508b15",
+            "3fee21593de7c39744929617b5884eedd054c90b27b4dd6dffab841685508b15"
+          ]
+        },
+        {
+          "frame": 55,
+          "yaw": 0,
+          "pitch": 5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "bb50927469ad32fed06751a76da328434935286c0341d23e16c685b47835aa12",
+            "bb50927469ad32fed06751a76da328434935286c0341d23e16c685b47835aa12"
+          ]
+        },
+        {
+          "frame": 56,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "346c7a1cbf7e6177bfad887ab130aeced90f36a88d22e4e1b3bd3fd5fe792b9a",
+            "346c7a1cbf7e6177bfad887ab130aeced90f36a88d22e4e1b3bd3fd5fe792b9a"
+          ]
+        },
+        {
+          "frame": 57,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "4f9523093d65124a69e3282696d404e4e948c42c749aa567eaa94575fba0661e",
+            "4f9523093d65124a69e3282696d404e4e948c42c749aa567eaa94575fba0661e"
+          ]
+        },
+        {
+          "frame": 58,
+          "yaw": 0,
+          "pitch": 19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "ab31bc554acc9bc2802a47604b54266b274b37fb9f3897057d739f19501d071e",
+            "ab31bc554acc9bc2802a47604b54266b274b37fb9f3897057d739f19501d071e"
+          ]
+        },
+        {
+          "frame": 59,
+          "yaw": 0,
+          "pitch": 22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2e3f30c9798c6b2e76c96095b6d596a0ad1d11d4331c3a1baa0b9b895eff37b1",
+            "2e3f30c9798c6b2e76c96095b6d596a0ad1d11d4331c3a1baa0b9b895eff37b1"
+          ]
+        },
+        {
+          "frame": 60,
+          "yaw": 0,
+          "pitch": 25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b106d42a32aee0c435886451d2dc7ff51a16534c426d572b7d782ce4640b1c99",
+            "b106d42a32aee0c435886451d2dc7ff51a16534c426d572b7d782ce4640b1c99"
+          ]
+        },
+        {
+          "frame": 61,
+          "yaw": 0,
+          "pitch": 28.19077862357725,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "dfe5b3da0242f2dc6659a5bdd07c600b29e3b437df937c5ff309594362be46b7",
+            "dfe5b3da0242f2dc6659a5bdd07c600b29e3b437df937c5ff309594362be46b7"
+          ]
+        },
+        {
+          "frame": 62,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f4390748947914c4b5ea3d8a1b45db9bf49703d26bfb7692b4ebe16c4b054a9e",
+            "f4390748947914c4b5ea3d8a1b45db9bf49703d26bfb7692b4ebe16c4b054a9e"
+          ]
+        },
+        {
+          "frame": 63,
+          "yaw": 0,
+          "pitch": 30,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f41a5a1075dd574f06e02550df0eb9df5f38b83241c8054677b987cfc0a70871",
+            "f41a5a1075dd574f06e02550df0eb9df5f38b83241c8054677b987cfc0a70871"
+          ]
+        },
+        {
+          "frame": 64,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f4390748947914c4b5ea3d8a1b45db9bf49703d26bfb7692b4ebe16c4b054a9e",
+            "f4390748947914c4b5ea3d8a1b45db9bf49703d26bfb7692b4ebe16c4b054a9e"
+          ]
+        },
+        {
+          "frame": 65,
+          "yaw": 0,
+          "pitch": 28.190778623577252,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "dfe5b3da0242f2dc6659a5bdd07c600b29e3b437df937c5ff309594362be46b7",
+            "dfe5b3da0242f2dc6659a5bdd07c600b29e3b437df937c5ff309594362be46b7"
+          ]
+        },
+        {
+          "frame": 66,
+          "yaw": 0,
+          "pitch": 25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b106d42a32aee0c435886451d2dc7ff51a16534c426d572b7d782ce4640b1c99",
+            "b106d42a32aee0c435886451d2dc7ff51a16534c426d572b7d782ce4640b1c99"
+          ]
+        },
+        {
+          "frame": 67,
+          "yaw": 0,
+          "pitch": 22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2e3f30c9798c6b2e76c96095b6d596a0ad1d11d4331c3a1baa0b9b895eff37b1",
+            "2e3f30c9798c6b2e76c96095b6d596a0ad1d11d4331c3a1baa0b9b895eff37b1"
+          ]
+        },
+        {
+          "frame": 68,
+          "yaw": 0,
+          "pitch": 19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "ab31bc554acc9bc2802a47604b54266b274b37fb9f3897057d739f19501d071e",
+            "ab31bc554acc9bc2802a47604b54266b274b37fb9f3897057d739f19501d071e"
+          ]
+        },
+        {
+          "frame": 69,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "4f9523093d65124a69e3282696d404e4e948c42c749aa567eaa94575fba0661e",
+            "4f9523093d65124a69e3282696d404e4e948c42c749aa567eaa94575fba0661e"
+          ]
+        },
+        {
+          "frame": 70,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "346c7a1cbf7e6177bfad887ab130aeced90f36a88d22e4e1b3bd3fd5fe792b9a",
+            "346c7a1cbf7e6177bfad887ab130aeced90f36a88d22e4e1b3bd3fd5fe792b9a"
+          ]
+        },
+        {
+          "frame": 71,
+          "yaw": 0,
+          "pitch": 5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "bb50927469ad32fed06751a76da328434935286c0341d23e16c685b47835aa12",
+            "bb50927469ad32fed06751a76da328434935286c0341d23e16c685b47835aa12"
+          ]
+        }
+      ],
+      "size": [780, 844],
+      "label": "new-15-152970382 | CC0 photo | Sharp | Depth 1",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "source": {
+        "author": "Rathfelder",
+        "url": "https://commons.wikimedia.org/wiki/File:Empty_street_stall.jpg",
+        "license": "CC0 1.0",
+        "label": "CC0 photo"
+      },
+      "recordingLicense": "CC0 1.0, subject to the source image license"
+    },
+    {
+      "elapsedMs": 63829.74409699999,
+      "id": "new-17-199401836",
+      "view": "sharp",
+      "file": "new-17-199401836-sharp-before-after.mp4",
+      "sha256": "2aed2c3e87754c17981eb16fc8067dee373703291539fe02a956aab8a08fbe1d",
+      "frames": 72,
+      "fps": 12,
+      "deviceScaleFactor": 3,
+      "profile": "low",
+      "nativeBuffer": [585, 1266],
+      "pixelComparison": [
+        {
+          "frame": 0,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "570ed787f9c6d686a4a6825795a4e4ae24a9e3a10509be4fdc934acb9579b560",
+            "570ed787f9c6d686a4a6825795a4e4ae24a9e3a10509be4fdc934acb9579b560"
+          ]
+        },
+        {
+          "frame": 1,
+          "yaw": -5.2094453300079095,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "aeb722ea8ff1a65134b239867cc5bd3185839a4d5c800eb87a78a4839ed4a32c",
+            "aeb722ea8ff1a65134b239867cc5bd3185839a4d5c800eb87a78a4839ed4a32c"
+          ]
+        },
+        {
+          "frame": 2,
+          "yaw": -10.260604299770062,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6bf7b16cbaeade700fcaab927a58a244b486f50edf643389acd63dc1dbaeb30f",
+            "6bf7b16cbaeade700fcaab927a58a244b486f50edf643389acd63dc1dbaeb30f"
+          ]
+        },
+        {
+          "frame": 3,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "9596676d18af938cf3560702fb53eb5993b64e8739a58b4d83190a14bc88eec0",
+            "9596676d18af938cf3560702fb53eb5993b64e8739a58b4d83190a14bc88eec0"
+          ]
+        },
+        {
+          "frame": 4,
+          "yaw": -19.283628290596177,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8f88a46d8ef0a3e161edbe3e1ab4816a2ece8caa703207e2f489a250966e8676",
+            "8f88a46d8ef0a3e161edbe3e1ab4816a2ece8caa703207e2f489a250966e8676"
+          ]
+        },
+        {
+          "frame": 5,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d985bc8b24476345a1b00ab0c45b636502753fea62fa3d1411b0e90a2b583668",
+            "d985bc8b24476345a1b00ab0c45b636502753fea62fa3d1411b0e90a2b583668"
+          ]
+        },
+        {
+          "frame": 6,
+          "yaw": -25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "56b946af1d79d2f210bb07a5982fe5ecd9b59fdd8aaf044d0d11d6c2d5351cdc",
+            "56b946af1d79d2f210bb07a5982fe5ecd9b59fdd8aaf044d0d11d6c2d5351cdc"
+          ]
+        },
+        {
+          "frame": 7,
+          "yaw": -28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "be20f9f573b6cfa821714090da44f2ca85ac0422841d4c8cbd64159bcbc4578d",
+            "be20f9f573b6cfa821714090da44f2ca85ac0422841d4c8cbd64159bcbc4578d"
+          ]
+        },
+        {
+          "frame": 8,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "75e718019dc8afaeb1d0558f20025942d677b0ad5cfcd677b5216e7a9ff86176",
+            "75e718019dc8afaeb1d0558f20025942d677b0ad5cfcd677b5216e7a9ff86176"
+          ]
+        },
+        {
+          "frame": 9,
+          "yaw": -30,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d3ca553eee2a7449993b2cf0387936a94beb490b10c4aa3069f86cff2ff88cb2",
+            "d3ca553eee2a7449993b2cf0387936a94beb490b10c4aa3069f86cff2ff88cb2"
+          ]
+        },
+        {
+          "frame": 10,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "75e718019dc8afaeb1d0558f20025942d677b0ad5cfcd677b5216e7a9ff86176",
+            "75e718019dc8afaeb1d0558f20025942d677b0ad5cfcd677b5216e7a9ff86176"
+          ]
+        },
+        {
+          "frame": 11,
+          "yaw": -28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "be20f9f573b6cfa821714090da44f2ca85ac0422841d4c8cbd64159bcbc4578d",
+            "be20f9f573b6cfa821714090da44f2ca85ac0422841d4c8cbd64159bcbc4578d"
+          ]
+        },
+        {
+          "frame": 12,
+          "yaw": -25.98076211353316,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "56b946af1d79d2f210bb07a5982fe5ecd9b59fdd8aaf044d0d11d6c2d5351cdc",
+            "56b946af1d79d2f210bb07a5982fe5ecd9b59fdd8aaf044d0d11d6c2d5351cdc"
+          ]
+        },
+        {
+          "frame": 13,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d985bc8b24476345a1b00ab0c45b636502753fea62fa3d1411b0e90a2b583668",
+            "d985bc8b24476345a1b00ab0c45b636502753fea62fa3d1411b0e90a2b583668"
+          ]
+        },
+        {
+          "frame": 14,
+          "yaw": -19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8f88a46d8ef0a3e161edbe3e1ab4816a2ece8caa703207e2f489a250966e8676",
+            "8f88a46d8ef0a3e161edbe3e1ab4816a2ece8caa703207e2f489a250966e8676"
+          ]
+        },
+        {
+          "frame": 15,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "9596676d18af938cf3560702fb53eb5993b64e8739a58b4d83190a14bc88eec0",
+            "9596676d18af938cf3560702fb53eb5993b64e8739a58b4d83190a14bc88eec0"
+          ]
+        },
+        {
+          "frame": 16,
+          "yaw": -10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6bf7b16cbaeade700fcaab927a58a244b486f50edf643389acd63dc1dbaeb30f",
+            "6bf7b16cbaeade700fcaab927a58a244b486f50edf643389acd63dc1dbaeb30f"
+          ]
+        },
+        {
+          "frame": 17,
+          "yaw": -5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "aeb722ea8ff1a65134b239867cc5bd3185839a4d5c800eb87a78a4839ed4a32c",
+            "aeb722ea8ff1a65134b239867cc5bd3185839a4d5c800eb87a78a4839ed4a32c"
+          ]
+        },
+        {
+          "frame": 18,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "570ed787f9c6d686a4a6825795a4e4ae24a9e3a10509be4fdc934acb9579b560",
+            "570ed787f9c6d686a4a6825795a4e4ae24a9e3a10509be4fdc934acb9579b560"
+          ]
+        },
+        {
+          "frame": 19,
+          "yaw": 5.209445330007912,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6513192fb68bc43cef893dbbb85e2347c661753ae036c6b56c06d87317ceda4f",
+            "6513192fb68bc43cef893dbbb85e2347c661753ae036c6b56c06d87317ceda4f"
+          ]
+        },
+        {
+          "frame": 20,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "08d2376c3bb0d4988f3a310895eaf0792083e5e1bc703a36e91bcd8516942e4b",
+            "08d2376c3bb0d4988f3a310895eaf0792083e5e1bc703a36e91bcd8516942e4b"
+          ]
+        },
+        {
+          "frame": 21,
+          "yaw": 15.000000000000004,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "697bc89ace20cd892aea1bb07ec69ab1b8085c115bbfc8db1271dc4e6a7bece5",
+            "697bc89ace20cd892aea1bb07ec69ab1b8085c115bbfc8db1271dc4e6a7bece5"
+          ]
+        },
+        {
+          "frame": 22,
+          "yaw": 19.283628290596187,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e5a0d79418b0619df92507ab4e33c2eb8de2060d37285ed4061365d08bb27e4f",
+            "e5a0d79418b0619df92507ab4e33c2eb8de2060d37285ed4061365d08bb27e4f"
+          ]
+        },
+        {
+          "frame": 23,
+          "yaw": 22.981333293569335,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "688ed5c14b198c182626b58ec8da11b33a470fcc7e6760afa0990ada457dabae",
+            "688ed5c14b198c182626b58ec8da11b33a470fcc7e6760afa0990ada457dabae"
+          ]
+        },
+        {
+          "frame": 24,
+          "yaw": 25.980762113533153,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3e48f6844924bdb69a3a3486b0b592445fe2d9233bc82cb7b341ceaaae71c76f",
+            "3e48f6844924bdb69a3a3486b0b592445fe2d9233bc82cb7b341ceaaae71c76f"
+          ]
+        },
+        {
+          "frame": 25,
+          "yaw": 28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "7e1a1a44bf524c0fac0bc70348db336d100ab2a71a7c4b0266111cd9278d5394",
+            "7e1a1a44bf524c0fac0bc70348db336d100ab2a71a7c4b0266111cd9278d5394"
+          ]
+        },
+        {
+          "frame": 26,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "103f11f8d443ae9b25178179deae31b48bc0ef138cef44499719fb5bc56f6da3",
+            "103f11f8d443ae9b25178179deae31b48bc0ef138cef44499719fb5bc56f6da3"
+          ]
+        },
+        {
+          "frame": 27,
+          "yaw": 30,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e30ce379600134cdf825d040e01ae4549a677951d9492579013c64b5f2d4fbea",
+            "e30ce379600134cdf825d040e01ae4549a677951d9492579013c64b5f2d4fbea"
+          ]
+        },
+        {
+          "frame": 28,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "103f11f8d443ae9b25178179deae31b48bc0ef138cef44499719fb5bc56f6da3",
+            "103f11f8d443ae9b25178179deae31b48bc0ef138cef44499719fb5bc56f6da3"
+          ]
+        },
+        {
+          "frame": 29,
+          "yaw": 28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "7e1a1a44bf524c0fac0bc70348db336d100ab2a71a7c4b0266111cd9278d5394",
+            "7e1a1a44bf524c0fac0bc70348db336d100ab2a71a7c4b0266111cd9278d5394"
+          ]
+        },
+        {
+          "frame": 30,
+          "yaw": 25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3e48f6844924bdb69a3a3486b0b592445fe2d9233bc82cb7b341ceaaae71c76f",
+            "3e48f6844924bdb69a3a3486b0b592445fe2d9233bc82cb7b341ceaaae71c76f"
+          ]
+        },
+        {
+          "frame": 31,
+          "yaw": 22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "688ed5c14b198c182626b58ec8da11b33a470fcc7e6760afa0990ada457dabae",
+            "688ed5c14b198c182626b58ec8da11b33a470fcc7e6760afa0990ada457dabae"
+          ]
+        },
+        {
+          "frame": 32,
+          "yaw": 19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e5a0d79418b0619df92507ab4e33c2eb8de2060d37285ed4061365d08bb27e4f",
+            "e5a0d79418b0619df92507ab4e33c2eb8de2060d37285ed4061365d08bb27e4f"
+          ]
+        },
+        {
+          "frame": 33,
+          "yaw": 15.00000000000001,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "697bc89ace20cd892aea1bb07ec69ab1b8085c115bbfc8db1271dc4e6a7bece5",
+            "697bc89ace20cd892aea1bb07ec69ab1b8085c115bbfc8db1271dc4e6a7bece5"
+          ]
+        },
+        {
+          "frame": 34,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "08d2376c3bb0d4988f3a310895eaf0792083e5e1bc703a36e91bcd8516942e4b",
+            "08d2376c3bb0d4988f3a310895eaf0792083e5e1bc703a36e91bcd8516942e4b"
+          ]
+        },
+        {
+          "frame": 35,
+          "yaw": 5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6513192fb68bc43cef893dbbb85e2347c661753ae036c6b56c06d87317ceda4f",
+            "6513192fb68bc43cef893dbbb85e2347c661753ae036c6b56c06d87317ceda4f"
+          ]
+        },
+        {
+          "frame": 36,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "570ed787f9c6d686a4a6825795a4e4ae24a9e3a10509be4fdc934acb9579b560",
+            "570ed787f9c6d686a4a6825795a4e4ae24a9e3a10509be4fdc934acb9579b560"
+          ]
+        },
+        {
+          "frame": 37,
+          "yaw": 0,
+          "pitch": -5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2e242438edf51cb121447aaa085384c7add9b7ea6b105940f2e8e1b40ac3ae66",
+            "2e242438edf51cb121447aaa085384c7add9b7ea6b105940f2e8e1b40ac3ae66"
+          ]
+        },
+        {
+          "frame": 38,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "83ef89a19b589db4b0ee5c1563a42a4b8caa2337c648812855754574aeaffbf9",
+            "83ef89a19b589db4b0ee5c1563a42a4b8caa2337c648812855754574aeaffbf9"
+          ]
+        },
+        {
+          "frame": 39,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "ebe5f4a9aa3f6c447350794d30ab24f66cc08213beb82c76d657caddb55eae90",
+            "ebe5f4a9aa3f6c447350794d30ab24f66cc08213beb82c76d657caddb55eae90"
+          ]
+        },
+        {
+          "frame": 40,
+          "yaw": 0,
+          "pitch": -19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d9badbe763e97d199c14641fa97138e95794fc02eb63b7e3117705808b1c4a8d",
+            "d9badbe763e97d199c14641fa97138e95794fc02eb63b7e3117705808b1c4a8d"
+          ]
+        },
+        {
+          "frame": 41,
+          "yaw": 0,
+          "pitch": -22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "95b463d2d9f1419386b44ed363c6a8bf95880e3b849440af4b7d230cbeddbf2f",
+            "95b463d2d9f1419386b44ed363c6a8bf95880e3b849440af4b7d230cbeddbf2f"
+          ]
+        },
+        {
+          "frame": 42,
+          "yaw": 0,
+          "pitch": -25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f0c7dee678e289ac44f47dc115d15c36dc36c8b646354e256d5c21e69e0391c8",
+            "f0c7dee678e289ac44f47dc115d15c36dc36c8b646354e256d5c21e69e0391c8"
+          ]
+        },
+        {
+          "frame": 43,
+          "yaw": 0,
+          "pitch": -28.19077862357725,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a17ce477b34ae355ca472d193169ef79b9268689b27b18244d8effe44c48b90b",
+            "a17ce477b34ae355ca472d193169ef79b9268689b27b18244d8effe44c48b90b"
+          ]
+        },
+        {
+          "frame": 44,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f7bcb3fd1e52168111c9532ca783f7165bebc4a44420ad75be133e376c16f3e9",
+            "f7bcb3fd1e52168111c9532ca783f7165bebc4a44420ad75be133e376c16f3e9"
+          ]
+        },
+        {
+          "frame": 45,
+          "yaw": 0,
+          "pitch": -30,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a654ea609451b7bfce1dfdf27a2c1327c94c389f2fd3d41dfd76df5b9f6755e5",
+            "a654ea609451b7bfce1dfdf27a2c1327c94c389f2fd3d41dfd76df5b9f6755e5"
+          ]
+        },
+        {
+          "frame": 46,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f7bcb3fd1e52168111c9532ca783f7165bebc4a44420ad75be133e376c16f3e9",
+            "f7bcb3fd1e52168111c9532ca783f7165bebc4a44420ad75be133e376c16f3e9"
+          ]
+        },
+        {
+          "frame": 47,
+          "yaw": 0,
+          "pitch": -28.190778623577252,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a17ce477b34ae355ca472d193169ef79b9268689b27b18244d8effe44c48b90b",
+            "a17ce477b34ae355ca472d193169ef79b9268689b27b18244d8effe44c48b90b"
+          ]
+        },
+        {
+          "frame": 48,
+          "yaw": 0,
+          "pitch": -25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f0c7dee678e289ac44f47dc115d15c36dc36c8b646354e256d5c21e69e0391c8",
+            "f0c7dee678e289ac44f47dc115d15c36dc36c8b646354e256d5c21e69e0391c8"
+          ]
+        },
+        {
+          "frame": 49,
+          "yaw": 0,
+          "pitch": -22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "95b463d2d9f1419386b44ed363c6a8bf95880e3b849440af4b7d230cbeddbf2f",
+            "95b463d2d9f1419386b44ed363c6a8bf95880e3b849440af4b7d230cbeddbf2f"
+          ]
+        },
+        {
+          "frame": 50,
+          "yaw": 0,
+          "pitch": -19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d9badbe763e97d199c14641fa97138e95794fc02eb63b7e3117705808b1c4a8d",
+            "d9badbe763e97d199c14641fa97138e95794fc02eb63b7e3117705808b1c4a8d"
+          ]
+        },
+        {
+          "frame": 51,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "ebe5f4a9aa3f6c447350794d30ab24f66cc08213beb82c76d657caddb55eae90",
+            "ebe5f4a9aa3f6c447350794d30ab24f66cc08213beb82c76d657caddb55eae90"
+          ]
+        },
+        {
+          "frame": 52,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "83ef89a19b589db4b0ee5c1563a42a4b8caa2337c648812855754574aeaffbf9",
+            "83ef89a19b589db4b0ee5c1563a42a4b8caa2337c648812855754574aeaffbf9"
+          ]
+        },
+        {
+          "frame": 53,
+          "yaw": 0,
+          "pitch": -5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2e242438edf51cb121447aaa085384c7add9b7ea6b105940f2e8e1b40ac3ae66",
+            "2e242438edf51cb121447aaa085384c7add9b7ea6b105940f2e8e1b40ac3ae66"
+          ]
+        },
+        {
+          "frame": 54,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "570ed787f9c6d686a4a6825795a4e4ae24a9e3a10509be4fdc934acb9579b560",
+            "570ed787f9c6d686a4a6825795a4e4ae24a9e3a10509be4fdc934acb9579b560"
+          ]
+        },
+        {
+          "frame": 55,
+          "yaw": 0,
+          "pitch": 5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8b17bc64c1eed2478b65e63f13c88509a5a596764247d31fb401e0c46d9ca62f",
+            "8b17bc64c1eed2478b65e63f13c88509a5a596764247d31fb401e0c46d9ca62f"
+          ]
+        },
+        {
+          "frame": 56,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "37a5865fe316ea0fbfc1f5aa65a20661eb2705c899cdc95d18498e115069acaa",
+            "37a5865fe316ea0fbfc1f5aa65a20661eb2705c899cdc95d18498e115069acaa"
+          ]
+        },
+        {
+          "frame": 57,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e180d1c42b4966a8c185dfe35bb895bc62a3ba476ec648dc9f3197f8358a7abe",
+            "e180d1c42b4966a8c185dfe35bb895bc62a3ba476ec648dc9f3197f8358a7abe"
+          ]
+        },
+        {
+          "frame": 58,
+          "yaw": 0,
+          "pitch": 19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "345e036393962487692fa9a88c938e850c020c5ef1548bde814a3411e34c7f89",
+            "345e036393962487692fa9a88c938e850c020c5ef1548bde814a3411e34c7f89"
+          ]
+        },
+        {
+          "frame": 59,
+          "yaw": 0,
+          "pitch": 22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "fa39bae8336be0c062e0634e83916f1cfcff04bfd8b367dcd0d885ba97255062",
+            "fa39bae8336be0c062e0634e83916f1cfcff04bfd8b367dcd0d885ba97255062"
+          ]
+        },
+        {
+          "frame": 60,
+          "yaw": 0,
+          "pitch": 25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "aca2ab020e9cb2279628efc8b6583f93134fc0a1a2983f3efc5900566db47df1",
+            "aca2ab020e9cb2279628efc8b6583f93134fc0a1a2983f3efc5900566db47df1"
+          ]
+        },
+        {
+          "frame": 61,
+          "yaw": 0,
+          "pitch": 28.19077862357725,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8117f7653199308771f36760b00bbe67707a6a4447cae21499bc9a8c48653e4f",
+            "8117f7653199308771f36760b00bbe67707a6a4447cae21499bc9a8c48653e4f"
+          ]
+        },
+        {
+          "frame": 62,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cc7620e3d6d0506f02adbfd5b904e2b7ce6742e0d1df2d2b2b217400ffeaffa4",
+            "cc7620e3d6d0506f02adbfd5b904e2b7ce6742e0d1df2d2b2b217400ffeaffa4"
+          ]
+        },
+        {
+          "frame": 63,
+          "yaw": 0,
+          "pitch": 30,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8ad2e761cc9d9e67ff78bb612b03fc03b58469c1db8db3811321edf8497f0587",
+            "8ad2e761cc9d9e67ff78bb612b03fc03b58469c1db8db3811321edf8497f0587"
+          ]
+        },
+        {
+          "frame": 64,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cc7620e3d6d0506f02adbfd5b904e2b7ce6742e0d1df2d2b2b217400ffeaffa4",
+            "cc7620e3d6d0506f02adbfd5b904e2b7ce6742e0d1df2d2b2b217400ffeaffa4"
+          ]
+        },
+        {
+          "frame": 65,
+          "yaw": 0,
+          "pitch": 28.190778623577252,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8117f7653199308771f36760b00bbe67707a6a4447cae21499bc9a8c48653e4f",
+            "8117f7653199308771f36760b00bbe67707a6a4447cae21499bc9a8c48653e4f"
+          ]
+        },
+        {
+          "frame": 66,
+          "yaw": 0,
+          "pitch": 25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "aca2ab020e9cb2279628efc8b6583f93134fc0a1a2983f3efc5900566db47df1",
+            "aca2ab020e9cb2279628efc8b6583f93134fc0a1a2983f3efc5900566db47df1"
+          ]
+        },
+        {
+          "frame": 67,
+          "yaw": 0,
+          "pitch": 22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "fa39bae8336be0c062e0634e83916f1cfcff04bfd8b367dcd0d885ba97255062",
+            "fa39bae8336be0c062e0634e83916f1cfcff04bfd8b367dcd0d885ba97255062"
+          ]
+        },
+        {
+          "frame": 68,
+          "yaw": 0,
+          "pitch": 19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "345e036393962487692fa9a88c938e850c020c5ef1548bde814a3411e34c7f89",
+            "345e036393962487692fa9a88c938e850c020c5ef1548bde814a3411e34c7f89"
+          ]
+        },
+        {
+          "frame": 69,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e180d1c42b4966a8c185dfe35bb895bc62a3ba476ec648dc9f3197f8358a7abe",
+            "e180d1c42b4966a8c185dfe35bb895bc62a3ba476ec648dc9f3197f8358a7abe"
+          ]
+        },
+        {
+          "frame": 70,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "37a5865fe316ea0fbfc1f5aa65a20661eb2705c899cdc95d18498e115069acaa",
+            "37a5865fe316ea0fbfc1f5aa65a20661eb2705c899cdc95d18498e115069acaa"
+          ]
+        },
+        {
+          "frame": 71,
+          "yaw": 0,
+          "pitch": 5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "8b17bc64c1eed2478b65e63f13c88509a5a596764247d31fb401e0c46d9ca62f",
+            "8b17bc64c1eed2478b65e63f13c88509a5a596764247d31fb401e0c46d9ca62f"
+          ]
+        }
+      ],
+      "size": [780, 844],
+      "label": "new-17-199401836 | CC0 photo | Sharp | Depth 1",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "source": {
+        "author": "TechnoKittyCat",
+        "url": "https://commons.wikimedia.org/wiki/File:Donburi_Rice_bowl_of_Chicken_Teriyaki_with_Tomato.jpg",
+        "license": "CC0 1.0",
+        "label": "CC0 photo"
+      },
+      "recordingLicense": "CC0 1.0, subject to the source image license"
+    },
+    {
+      "elapsedMs": 137848.51442199998,
+      "id": "new-17-27586242",
+      "view": "sharp",
+      "file": "new-17-27586242-sharp-before-after.mp4",
+      "sha256": "9b7758ebe903d1118eca348429cc107f3450e8ab28844be85b7640a626d6da5c",
+      "frames": 72,
+      "fps": 12,
+      "deviceScaleFactor": 3,
+      "profile": "low",
+      "nativeBuffer": [585, 1266],
+      "pixelComparison": [
+        {
+          "frame": 0,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a397bbeb1e46a27e64a717a792a806baedf09868ef55b1c5b963b93c45d95695",
+            "a397bbeb1e46a27e64a717a792a806baedf09868ef55b1c5b963b93c45d95695"
+          ]
+        },
+        {
+          "frame": 1,
+          "yaw": -5.2094453300079095,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "c4e78b2de3daee7303d04153ed33670cb12fbaf645a5a3cddbca27c82b8e5a7a",
+            "c4e78b2de3daee7303d04153ed33670cb12fbaf645a5a3cddbca27c82b8e5a7a"
+          ]
+        },
+        {
+          "frame": 2,
+          "yaw": -10.260604299770062,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "22485c8c03d6e09eb18b723b4b2bfe2b1b60d3bf562cf3885172f0f6b0ea1ca4",
+            "22485c8c03d6e09eb18b723b4b2bfe2b1b60d3bf562cf3885172f0f6b0ea1ca4"
+          ]
+        },
+        {
+          "frame": 3,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "44b923b8fc15486e5acb7300f4d8ff405283233a077129d34180d22a06becca0",
+            "44b923b8fc15486e5acb7300f4d8ff405283233a077129d34180d22a06becca0"
+          ]
+        },
+        {
+          "frame": 4,
+          "yaw": -19.283628290596177,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f97128c10049009c23c11d83de101923310e4af745790e8426ab29d805016da3",
+            "f97128c10049009c23c11d83de101923310e4af745790e8426ab29d805016da3"
+          ]
+        },
+        {
+          "frame": 5,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "00160e1692fa49a137f66ee4cf1a49ee46562813b6bf5d00c83ae370e499fcb4",
+            "00160e1692fa49a137f66ee4cf1a49ee46562813b6bf5d00c83ae370e499fcb4"
+          ]
+        },
+        {
+          "frame": 6,
+          "yaw": -25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "70bdf722db43bb6cf75ef8a033f900c8cd58f0e9ee0872dee10e612b4be4e45d",
+            "70bdf722db43bb6cf75ef8a033f900c8cd58f0e9ee0872dee10e612b4be4e45d"
+          ]
+        },
+        {
+          "frame": 7,
+          "yaw": -28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6c09ff8c652aa926190a764667086217a32824b0560d1f33f57240c368747f7e",
+            "6c09ff8c652aa926190a764667086217a32824b0560d1f33f57240c368747f7e"
+          ]
+        },
+        {
+          "frame": 8,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "bf50a438a3d6af1046befffb76d62076f5cc648f4ced22f90ff79a492a55cf76",
+            "bf50a438a3d6af1046befffb76d62076f5cc648f4ced22f90ff79a492a55cf76"
+          ]
+        },
+        {
+          "frame": 9,
+          "yaw": -30,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b79c57cfd023a1828b1aeeb58273c3c34c71421c5220efd5767427965f525468",
+            "b79c57cfd023a1828b1aeeb58273c3c34c71421c5220efd5767427965f525468"
+          ]
+        },
+        {
+          "frame": 10,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "bf50a438a3d6af1046befffb76d62076f5cc648f4ced22f90ff79a492a55cf76",
+            "bf50a438a3d6af1046befffb76d62076f5cc648f4ced22f90ff79a492a55cf76"
+          ]
+        },
+        {
+          "frame": 11,
+          "yaw": -28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6c09ff8c652aa926190a764667086217a32824b0560d1f33f57240c368747f7e",
+            "6c09ff8c652aa926190a764667086217a32824b0560d1f33f57240c368747f7e"
+          ]
+        },
+        {
+          "frame": 12,
+          "yaw": -25.98076211353316,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "70bdf722db43bb6cf75ef8a033f900c8cd58f0e9ee0872dee10e612b4be4e45d",
+            "70bdf722db43bb6cf75ef8a033f900c8cd58f0e9ee0872dee10e612b4be4e45d"
+          ]
+        },
+        {
+          "frame": 13,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "00160e1692fa49a137f66ee4cf1a49ee46562813b6bf5d00c83ae370e499fcb4",
+            "00160e1692fa49a137f66ee4cf1a49ee46562813b6bf5d00c83ae370e499fcb4"
+          ]
+        },
+        {
+          "frame": 14,
+          "yaw": -19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "f97128c10049009c23c11d83de101923310e4af745790e8426ab29d805016da3",
+            "f97128c10049009c23c11d83de101923310e4af745790e8426ab29d805016da3"
+          ]
+        },
+        {
+          "frame": 15,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "44b923b8fc15486e5acb7300f4d8ff405283233a077129d34180d22a06becca0",
+            "44b923b8fc15486e5acb7300f4d8ff405283233a077129d34180d22a06becca0"
+          ]
+        },
+        {
+          "frame": 16,
+          "yaw": -10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "22485c8c03d6e09eb18b723b4b2bfe2b1b60d3bf562cf3885172f0f6b0ea1ca4",
+            "22485c8c03d6e09eb18b723b4b2bfe2b1b60d3bf562cf3885172f0f6b0ea1ca4"
+          ]
+        },
+        {
+          "frame": 17,
+          "yaw": -5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "c4e78b2de3daee7303d04153ed33670cb12fbaf645a5a3cddbca27c82b8e5a7a",
+            "c4e78b2de3daee7303d04153ed33670cb12fbaf645a5a3cddbca27c82b8e5a7a"
+          ]
+        },
+        {
+          "frame": 18,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a397bbeb1e46a27e64a717a792a806baedf09868ef55b1c5b963b93c45d95695",
+            "a397bbeb1e46a27e64a717a792a806baedf09868ef55b1c5b963b93c45d95695"
+          ]
+        },
+        {
+          "frame": 19,
+          "yaw": 5.209445330007912,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6269374db9dc0e2690f8be97d20de1017ac62d0eb88ec69cded04d07f7a193ea",
+            "6269374db9dc0e2690f8be97d20de1017ac62d0eb88ec69cded04d07f7a193ea"
+          ]
+        },
+        {
+          "frame": 20,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "0212c0c9103f31ac2791f058d864ea2e481ef5b9a47a1a3cb726520baa6f82d3",
+            "0212c0c9103f31ac2791f058d864ea2e481ef5b9a47a1a3cb726520baa6f82d3"
+          ]
+        },
+        {
+          "frame": 21,
+          "yaw": 15.000000000000004,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e576fdd42900cab04b845d7aa42e939ac221988a1813d76300d44935b04e47cd",
+            "e576fdd42900cab04b845d7aa42e939ac221988a1813d76300d44935b04e47cd"
+          ]
+        },
+        {
+          "frame": 22,
+          "yaw": 19.283628290596187,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "efa7f026bfaff0d727a432a913f90635929b07c92fd4b83f2840e9be68ff597a",
+            "efa7f026bfaff0d727a432a913f90635929b07c92fd4b83f2840e9be68ff597a"
+          ]
+        },
+        {
+          "frame": 23,
+          "yaw": 22.981333293569335,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a596a465161d02f982373c3e969f9f2b16325128a776efdb7185c0844efbdc8f",
+            "a596a465161d02f982373c3e969f9f2b16325128a776efdb7185c0844efbdc8f"
+          ]
+        },
+        {
+          "frame": 24,
+          "yaw": 25.980762113533153,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "93e988fa69b039a2f2c0baa36f94e1de8a23fb933250879d5cf0e7b4ddddf9ff",
+            "93e988fa69b039a2f2c0baa36f94e1de8a23fb933250879d5cf0e7b4ddddf9ff"
+          ]
+        },
+        {
+          "frame": 25,
+          "yaw": 28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cb8d28215e0446bebf91b259301e61278fca3993e8af9de8af2764aad8654330",
+            "cb8d28215e0446bebf91b259301e61278fca3993e8af9de8af2764aad8654330"
+          ]
+        },
+        {
+          "frame": 26,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "c69363381bbf66fa4eabfa5527633c2f5d180bb540a153eaa184337b5ec6381e",
+            "c69363381bbf66fa4eabfa5527633c2f5d180bb540a153eaa184337b5ec6381e"
+          ]
+        },
+        {
+          "frame": 27,
+          "yaw": 30,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cb91539e14b650ff7eeef14a947f4fa96d57033c97d8ec29633f4dc83d380632",
+            "cb91539e14b650ff7eeef14a947f4fa96d57033c97d8ec29633f4dc83d380632"
+          ]
+        },
+        {
+          "frame": 28,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "c69363381bbf66fa4eabfa5527633c2f5d180bb540a153eaa184337b5ec6381e",
+            "c69363381bbf66fa4eabfa5527633c2f5d180bb540a153eaa184337b5ec6381e"
+          ]
+        },
+        {
+          "frame": 29,
+          "yaw": 28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cb8d28215e0446bebf91b259301e61278fca3993e8af9de8af2764aad8654330",
+            "cb8d28215e0446bebf91b259301e61278fca3993e8af9de8af2764aad8654330"
+          ]
+        },
+        {
+          "frame": 30,
+          "yaw": 25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "93e988fa69b039a2f2c0baa36f94e1de8a23fb933250879d5cf0e7b4ddddf9ff",
+            "93e988fa69b039a2f2c0baa36f94e1de8a23fb933250879d5cf0e7b4ddddf9ff"
+          ]
+        },
+        {
+          "frame": 31,
+          "yaw": 22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a596a465161d02f982373c3e969f9f2b16325128a776efdb7185c0844efbdc8f",
+            "a596a465161d02f982373c3e969f9f2b16325128a776efdb7185c0844efbdc8f"
+          ]
+        },
+        {
+          "frame": 32,
+          "yaw": 19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "efa7f026bfaff0d727a432a913f90635929b07c92fd4b83f2840e9be68ff597a",
+            "efa7f026bfaff0d727a432a913f90635929b07c92fd4b83f2840e9be68ff597a"
+          ]
+        },
+        {
+          "frame": 33,
+          "yaw": 15.00000000000001,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e576fdd42900cab04b845d7aa42e939ac221988a1813d76300d44935b04e47cd",
+            "e576fdd42900cab04b845d7aa42e939ac221988a1813d76300d44935b04e47cd"
+          ]
+        },
+        {
+          "frame": 34,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "0212c0c9103f31ac2791f058d864ea2e481ef5b9a47a1a3cb726520baa6f82d3",
+            "0212c0c9103f31ac2791f058d864ea2e481ef5b9a47a1a3cb726520baa6f82d3"
+          ]
+        },
+        {
+          "frame": 35,
+          "yaw": 5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6269374db9dc0e2690f8be97d20de1017ac62d0eb88ec69cded04d07f7a193ea",
+            "6269374db9dc0e2690f8be97d20de1017ac62d0eb88ec69cded04d07f7a193ea"
+          ]
+        },
+        {
+          "frame": 36,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a397bbeb1e46a27e64a717a792a806baedf09868ef55b1c5b963b93c45d95695",
+            "a397bbeb1e46a27e64a717a792a806baedf09868ef55b1c5b963b93c45d95695"
+          ]
+        },
+        {
+          "frame": 37,
+          "yaw": 0,
+          "pitch": -5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "855243fcbb51252596b463ec7bb4c729e6d86e038abf43276738d4602cfaa258",
+            "855243fcbb51252596b463ec7bb4c729e6d86e038abf43276738d4602cfaa258"
+          ]
+        },
+        {
+          "frame": 38,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "9a37a441aff2b093e007d685a551d8109a858a3939ae3c1fdeefe6d68ba27923",
+            "9a37a441aff2b093e007d685a551d8109a858a3939ae3c1fdeefe6d68ba27923"
+          ]
+        },
+        {
+          "frame": 39,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6b1b1c9ba52f75573f4f8617e379c7a48449969f45bf1b027de79e1d536503c0",
+            "6b1b1c9ba52f75573f4f8617e379c7a48449969f45bf1b027de79e1d536503c0"
+          ]
+        },
+        {
+          "frame": 40,
+          "yaw": 0,
+          "pitch": -19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3e100dcd150d69adbb7b497370f9929e1fb980dc0b8a121c1b7c1acdd548eb76",
+            "3e100dcd150d69adbb7b497370f9929e1fb980dc0b8a121c1b7c1acdd548eb76"
+          ]
+        },
+        {
+          "frame": 41,
+          "yaw": 0,
+          "pitch": -22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "db2c7e029433e97cf674a98c7ba048f994195ed3f5e2ba810443e1421d0eab83",
+            "db2c7e029433e97cf674a98c7ba048f994195ed3f5e2ba810443e1421d0eab83"
+          ]
+        },
+        {
+          "frame": 42,
+          "yaw": 0,
+          "pitch": -25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "750873dd708bc7489690e7f04a9c19b7ae0294426e9eb3fde6ce4b0f5265c48c",
+            "750873dd708bc7489690e7f04a9c19b7ae0294426e9eb3fde6ce4b0f5265c48c"
+          ]
+        },
+        {
+          "frame": 43,
+          "yaw": 0,
+          "pitch": -28.19077862357725,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "0b8cb7a606dd22e2a00f12d90f63e600d7131cc73f465960e2ea25df5ef648c4",
+            "0b8cb7a606dd22e2a00f12d90f63e600d7131cc73f465960e2ea25df5ef648c4"
+          ]
+        },
+        {
+          "frame": 44,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "32c83c242b914a5c6e45f3defbead8a75964137edad3c763f841b8dce1b42c65",
+            "32c83c242b914a5c6e45f3defbead8a75964137edad3c763f841b8dce1b42c65"
+          ]
+        },
+        {
+          "frame": 45,
+          "yaw": 0,
+          "pitch": -30,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b80e3757f88139a092aba4165073076e7c7ad826e248c50f13e00b2f39f09e2d",
+            "b80e3757f88139a092aba4165073076e7c7ad826e248c50f13e00b2f39f09e2d"
+          ]
+        },
+        {
+          "frame": 46,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "32c83c242b914a5c6e45f3defbead8a75964137edad3c763f841b8dce1b42c65",
+            "32c83c242b914a5c6e45f3defbead8a75964137edad3c763f841b8dce1b42c65"
+          ]
+        },
+        {
+          "frame": 47,
+          "yaw": 0,
+          "pitch": -28.190778623577252,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "0b8cb7a606dd22e2a00f12d90f63e600d7131cc73f465960e2ea25df5ef648c4",
+            "0b8cb7a606dd22e2a00f12d90f63e600d7131cc73f465960e2ea25df5ef648c4"
+          ]
+        },
+        {
+          "frame": 48,
+          "yaw": 0,
+          "pitch": -25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "750873dd708bc7489690e7f04a9c19b7ae0294426e9eb3fde6ce4b0f5265c48c",
+            "750873dd708bc7489690e7f04a9c19b7ae0294426e9eb3fde6ce4b0f5265c48c"
+          ]
+        },
+        {
+          "frame": 49,
+          "yaw": 0,
+          "pitch": -22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "db2c7e029433e97cf674a98c7ba048f994195ed3f5e2ba810443e1421d0eab83",
+            "db2c7e029433e97cf674a98c7ba048f994195ed3f5e2ba810443e1421d0eab83"
+          ]
+        },
+        {
+          "frame": 50,
+          "yaw": 0,
+          "pitch": -19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3e100dcd150d69adbb7b497370f9929e1fb980dc0b8a121c1b7c1acdd548eb76",
+            "3e100dcd150d69adbb7b497370f9929e1fb980dc0b8a121c1b7c1acdd548eb76"
+          ]
+        },
+        {
+          "frame": 51,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6b1b1c9ba52f75573f4f8617e379c7a48449969f45bf1b027de79e1d536503c0",
+            "6b1b1c9ba52f75573f4f8617e379c7a48449969f45bf1b027de79e1d536503c0"
+          ]
+        },
+        {
+          "frame": 52,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "9a37a441aff2b093e007d685a551d8109a858a3939ae3c1fdeefe6d68ba27923",
+            "9a37a441aff2b093e007d685a551d8109a858a3939ae3c1fdeefe6d68ba27923"
+          ]
+        },
+        {
+          "frame": 53,
+          "yaw": 0,
+          "pitch": -5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "855243fcbb51252596b463ec7bb4c729e6d86e038abf43276738d4602cfaa258",
+            "855243fcbb51252596b463ec7bb4c729e6d86e038abf43276738d4602cfaa258"
+          ]
+        },
+        {
+          "frame": 54,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a397bbeb1e46a27e64a717a792a806baedf09868ef55b1c5b963b93c45d95695",
+            "a397bbeb1e46a27e64a717a792a806baedf09868ef55b1c5b963b93c45d95695"
+          ]
+        },
+        {
+          "frame": 55,
+          "yaw": 0,
+          "pitch": 5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a1bf0d7f548f38ef12dc5fb258ad3e71a51a713dc931f9475a5aa741558cc37c",
+            "a1bf0d7f548f38ef12dc5fb258ad3e71a51a713dc931f9475a5aa741558cc37c"
+          ]
+        },
+        {
+          "frame": 56,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "14ec2fbf779da9bbfc7f604f01eab45b6c64695abcf3094317cdc3de0b7f38b4",
+            "14ec2fbf779da9bbfc7f604f01eab45b6c64695abcf3094317cdc3de0b7f38b4"
+          ]
+        },
+        {
+          "frame": 57,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "96eeff59a7d7b4516cf5d5682a8b4f0bd7bc2c98c32e7204a744fe22beb72b5d",
+            "96eeff59a7d7b4516cf5d5682a8b4f0bd7bc2c98c32e7204a744fe22beb72b5d"
+          ]
+        },
+        {
+          "frame": 58,
+          "yaw": 0,
+          "pitch": 19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b05ba888d8f02c77d741ba999e32f2f0c9609c25dd32f2d4ca1a550f547921c1",
+            "b05ba888d8f02c77d741ba999e32f2f0c9609c25dd32f2d4ca1a550f547921c1"
+          ]
+        },
+        {
+          "frame": 59,
+          "yaw": 0,
+          "pitch": 22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "1ebfd25196e23aa2a62a53a9bf449dd52e0ee5f5520935743de5eb0b023c05c9",
+            "1ebfd25196e23aa2a62a53a9bf449dd52e0ee5f5520935743de5eb0b023c05c9"
+          ]
+        },
+        {
+          "frame": 60,
+          "yaw": 0,
+          "pitch": 25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e41365f208863a6306cf232cd9b6ff0359c7cd78d3b063ab10e231d175855a79",
+            "e41365f208863a6306cf232cd9b6ff0359c7cd78d3b063ab10e231d175855a79"
+          ]
+        },
+        {
+          "frame": 61,
+          "yaw": 0,
+          "pitch": 28.19077862357725,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "22b41300e0b7f1c97e2b0081e3116d5904dcab70387706442a369ba1b31f0caa",
+            "22b41300e0b7f1c97e2b0081e3116d5904dcab70387706442a369ba1b31f0caa"
+          ]
+        },
+        {
+          "frame": 62,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "dd9e017f8cdeb274c0413683855d879c8c6c82a220e3028a8850122db3471f4b",
+            "dd9e017f8cdeb274c0413683855d879c8c6c82a220e3028a8850122db3471f4b"
+          ]
+        },
+        {
+          "frame": 63,
+          "yaw": 0,
+          "pitch": 30,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "0a70197915050afcf1348248a99395838b440a7f03d0e69f4ed00ab5be1a5545",
+            "0a70197915050afcf1348248a99395838b440a7f03d0e69f4ed00ab5be1a5545"
+          ]
+        },
+        {
+          "frame": 64,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "dd9e017f8cdeb274c0413683855d879c8c6c82a220e3028a8850122db3471f4b",
+            "dd9e017f8cdeb274c0413683855d879c8c6c82a220e3028a8850122db3471f4b"
+          ]
+        },
+        {
+          "frame": 65,
+          "yaw": 0,
+          "pitch": 28.190778623577252,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "22b41300e0b7f1c97e2b0081e3116d5904dcab70387706442a369ba1b31f0caa",
+            "22b41300e0b7f1c97e2b0081e3116d5904dcab70387706442a369ba1b31f0caa"
+          ]
+        },
+        {
+          "frame": 66,
+          "yaw": 0,
+          "pitch": 25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e41365f208863a6306cf232cd9b6ff0359c7cd78d3b063ab10e231d175855a79",
+            "e41365f208863a6306cf232cd9b6ff0359c7cd78d3b063ab10e231d175855a79"
+          ]
+        },
+        {
+          "frame": 67,
+          "yaw": 0,
+          "pitch": 22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "1ebfd25196e23aa2a62a53a9bf449dd52e0ee5f5520935743de5eb0b023c05c9",
+            "1ebfd25196e23aa2a62a53a9bf449dd52e0ee5f5520935743de5eb0b023c05c9"
+          ]
+        },
+        {
+          "frame": 68,
+          "yaw": 0,
+          "pitch": 19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b05ba888d8f02c77d741ba999e32f2f0c9609c25dd32f2d4ca1a550f547921c1",
+            "b05ba888d8f02c77d741ba999e32f2f0c9609c25dd32f2d4ca1a550f547921c1"
+          ]
+        },
+        {
+          "frame": 69,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "96eeff59a7d7b4516cf5d5682a8b4f0bd7bc2c98c32e7204a744fe22beb72b5d",
+            "96eeff59a7d7b4516cf5d5682a8b4f0bd7bc2c98c32e7204a744fe22beb72b5d"
+          ]
+        },
+        {
+          "frame": 70,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "14ec2fbf779da9bbfc7f604f01eab45b6c64695abcf3094317cdc3de0b7f38b4",
+            "14ec2fbf779da9bbfc7f604f01eab45b6c64695abcf3094317cdc3de0b7f38b4"
+          ]
+        },
+        {
+          "frame": 71,
+          "yaw": 0,
+          "pitch": 5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a1bf0d7f548f38ef12dc5fb258ad3e71a51a713dc931f9475a5aa741558cc37c",
+            "a1bf0d7f548f38ef12dc5fb258ad3e71a51a713dc931f9475a5aa741558cc37c"
+          ]
+        }
+      ],
+      "size": [780, 844],
+      "label": "new-17-27586242 | CC0 photo | Sharp | Depth 1",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "source": {
+        "author": "Hahifuheho",
+        "url": "https://commons.wikimedia.org/wiki/File:Tomatoes_in_a_punching_metal_bowl.jpg",
+        "license": "CC0 1.0",
+        "label": "CC0 photo"
+      },
+      "recordingLicense": "CC0 1.0, subject to the source image license"
+    },
+    {
+      "elapsedMs": 178087.93339999998,
+      "id": "new-18-51440683",
+      "view": "sharp",
+      "file": "new-18-51440683-sharp-before-after.mp4",
+      "sha256": "2d21c07461ba4c5e35aa9f1c0ace2870e6b4a192541cc483aa6f727f65406a6d",
+      "frames": 72,
+      "fps": 12,
+      "deviceScaleFactor": 3,
+      "profile": "low",
+      "nativeBuffer": [585, 1266],
+      "pixelComparison": [
+        {
+          "frame": 0,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "eaeaa6c0036a91fa3eb000f29e31b9dde973f813df149f6fc7e921257f17e855",
+            "eaeaa6c0036a91fa3eb000f29e31b9dde973f813df149f6fc7e921257f17e855"
+          ]
+        },
+        {
+          "frame": 1,
+          "yaw": -5.2094453300079095,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "106ba5c420216ce45f027103f54b10f30dd3e965a6473cbb2a8ba88f25326d0d",
+            "106ba5c420216ce45f027103f54b10f30dd3e965a6473cbb2a8ba88f25326d0d"
+          ]
+        },
+        {
+          "frame": 2,
+          "yaw": -10.260604299770062,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "27e0e1c4868fab1d3901b2f4a2eaa0cf7e474d2e25866515011709a742b4b8d9",
+            "27e0e1c4868fab1d3901b2f4a2eaa0cf7e474d2e25866515011709a742b4b8d9"
+          ]
+        },
+        {
+          "frame": 3,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "9e0d07555b0a06a64c06cab48d64601fccb13a6eee6aa71816a3aba0b5b19587",
+            "9e0d07555b0a06a64c06cab48d64601fccb13a6eee6aa71816a3aba0b5b19587"
+          ]
+        },
+        {
+          "frame": 4,
+          "yaw": -19.283628290596177,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "4072acb5b5920a12ce1573ec95a77e5b6669577e110e383142a220c678ffbdd6",
+            "4072acb5b5920a12ce1573ec95a77e5b6669577e110e383142a220c678ffbdd6"
+          ]
+        },
+        {
+          "frame": 5,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a51d49702f2da29144418fb012f2f016268ab090447805301ce15143d80bf8d1",
+            "a51d49702f2da29144418fb012f2f016268ab090447805301ce15143d80bf8d1"
+          ]
+        },
+        {
+          "frame": 6,
+          "yaw": -25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5e59f807de998517e7033eb18c0da530274a1c2ff8d5c7dd667179e7a7f95525",
+            "5e59f807de998517e7033eb18c0da530274a1c2ff8d5c7dd667179e7a7f95525"
+          ]
+        },
+        {
+          "frame": 7,
+          "yaw": -28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "fd30813b4130f33fd03ca73f4a78c1ce842691a3187423d737add232a4c733ca",
+            "fd30813b4130f33fd03ca73f4a78c1ce842691a3187423d737add232a4c733ca"
+          ]
+        },
+        {
+          "frame": 8,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "4cb7044fc0a5284d1e7fdf11e5df992bd6aa6d5570baa8e2983d0b1bf460b9c4",
+            "4cb7044fc0a5284d1e7fdf11e5df992bd6aa6d5570baa8e2983d0b1bf460b9c4"
+          ]
+        },
+        {
+          "frame": 9,
+          "yaw": -30,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "3d2be89c90311af3f0ddd967973ec1c205f9463f40e4b6948d1d998fe8eb9dda",
+            "3d2be89c90311af3f0ddd967973ec1c205f9463f40e4b6948d1d998fe8eb9dda"
+          ]
+        },
+        {
+          "frame": 10,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "4cb7044fc0a5284d1e7fdf11e5df992bd6aa6d5570baa8e2983d0b1bf460b9c4",
+            "4cb7044fc0a5284d1e7fdf11e5df992bd6aa6d5570baa8e2983d0b1bf460b9c4"
+          ]
+        },
+        {
+          "frame": 11,
+          "yaw": -28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "fd30813b4130f33fd03ca73f4a78c1ce842691a3187423d737add232a4c733ca",
+            "fd30813b4130f33fd03ca73f4a78c1ce842691a3187423d737add232a4c733ca"
+          ]
+        },
+        {
+          "frame": 12,
+          "yaw": -25.98076211353316,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5e59f807de998517e7033eb18c0da530274a1c2ff8d5c7dd667179e7a7f95525",
+            "5e59f807de998517e7033eb18c0da530274a1c2ff8d5c7dd667179e7a7f95525"
+          ]
+        },
+        {
+          "frame": 13,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a51d49702f2da29144418fb012f2f016268ab090447805301ce15143d80bf8d1",
+            "a51d49702f2da29144418fb012f2f016268ab090447805301ce15143d80bf8d1"
+          ]
+        },
+        {
+          "frame": 14,
+          "yaw": -19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "4072acb5b5920a12ce1573ec95a77e5b6669577e110e383142a220c678ffbdd6",
+            "4072acb5b5920a12ce1573ec95a77e5b6669577e110e383142a220c678ffbdd6"
+          ]
+        },
+        {
+          "frame": 15,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "9e0d07555b0a06a64c06cab48d64601fccb13a6eee6aa71816a3aba0b5b19587",
+            "9e0d07555b0a06a64c06cab48d64601fccb13a6eee6aa71816a3aba0b5b19587"
+          ]
+        },
+        {
+          "frame": 16,
+          "yaw": -10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "27e0e1c4868fab1d3901b2f4a2eaa0cf7e474d2e25866515011709a742b4b8d9",
+            "27e0e1c4868fab1d3901b2f4a2eaa0cf7e474d2e25866515011709a742b4b8d9"
+          ]
+        },
+        {
+          "frame": 17,
+          "yaw": -5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "106ba5c420216ce45f027103f54b10f30dd3e965a6473cbb2a8ba88f25326d0d",
+            "106ba5c420216ce45f027103f54b10f30dd3e965a6473cbb2a8ba88f25326d0d"
+          ]
+        },
+        {
+          "frame": 18,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "eaeaa6c0036a91fa3eb000f29e31b9dde973f813df149f6fc7e921257f17e855",
+            "eaeaa6c0036a91fa3eb000f29e31b9dde973f813df149f6fc7e921257f17e855"
+          ]
+        },
+        {
+          "frame": 19,
+          "yaw": 5.209445330007912,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "23131fb3a9e2ff92de258107fb31e5ae2a594fc5256ceeb91396677d1f2ab9ae",
+            "23131fb3a9e2ff92de258107fb31e5ae2a594fc5256ceeb91396677d1f2ab9ae"
+          ]
+        },
+        {
+          "frame": 20,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a20ee477910873201adb03079ced3a0ef8727194eb6030e4227a54e8cd139f75",
+            "a20ee477910873201adb03079ced3a0ef8727194eb6030e4227a54e8cd139f75"
+          ]
+        },
+        {
+          "frame": 21,
+          "yaw": 15.000000000000004,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "bd88bfc7f6ba7197686ed3346c38c560d6626223c9452831e74ca18c13cdc8f6",
+            "bd88bfc7f6ba7197686ed3346c38c560d6626223c9452831e74ca18c13cdc8f6"
+          ]
+        },
+        {
+          "frame": 22,
+          "yaw": 19.283628290596187,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6540f44f38141e18f40538f61cd7ec4f94ddf21e8553eea5ba3007f9c64dce3d",
+            "6540f44f38141e18f40538f61cd7ec4f94ddf21e8553eea5ba3007f9c64dce3d"
+          ]
+        },
+        {
+          "frame": 23,
+          "yaw": 22.981333293569335,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6c0f6b2bbf21dd88f4b1a7e61b5655846e3fa7c9a34f4917ff2029b7b11d2014",
+            "6c0f6b2bbf21dd88f4b1a7e61b5655846e3fa7c9a34f4917ff2029b7b11d2014"
+          ]
+        },
+        {
+          "frame": 24,
+          "yaw": 25.980762113533153,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e15fd954a59c8afac07e6df8afb647565145094781430acf67b315a7ec3525f9",
+            "e15fd954a59c8afac07e6df8afb647565145094781430acf67b315a7ec3525f9"
+          ]
+        },
+        {
+          "frame": 25,
+          "yaw": 28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5131c09a279f41e81ffd7025025a529de93425eaad3307cf22bff41d943c45c5",
+            "5131c09a279f41e81ffd7025025a529de93425eaad3307cf22bff41d943c45c5"
+          ]
+        },
+        {
+          "frame": 26,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a08cd641106936c1ec37ec83bd6904b7f313293157c5a9b28449c0902aefaca4",
+            "a08cd641106936c1ec37ec83bd6904b7f313293157c5a9b28449c0902aefaca4"
+          ]
+        },
+        {
+          "frame": 27,
+          "yaw": 30,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "ab95f94f6910e1807dc75c41077312bba60e35cca894c4b3ce3ce206eea702e0",
+            "ab95f94f6910e1807dc75c41077312bba60e35cca894c4b3ce3ce206eea702e0"
+          ]
+        },
+        {
+          "frame": 28,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a08cd641106936c1ec37ec83bd6904b7f313293157c5a9b28449c0902aefaca4",
+            "a08cd641106936c1ec37ec83bd6904b7f313293157c5a9b28449c0902aefaca4"
+          ]
+        },
+        {
+          "frame": 29,
+          "yaw": 28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5131c09a279f41e81ffd7025025a529de93425eaad3307cf22bff41d943c45c5",
+            "5131c09a279f41e81ffd7025025a529de93425eaad3307cf22bff41d943c45c5"
+          ]
+        },
+        {
+          "frame": 30,
+          "yaw": 25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e15fd954a59c8afac07e6df8afb647565145094781430acf67b315a7ec3525f9",
+            "e15fd954a59c8afac07e6df8afb647565145094781430acf67b315a7ec3525f9"
+          ]
+        },
+        {
+          "frame": 31,
+          "yaw": 22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6c0f6b2bbf21dd88f4b1a7e61b5655846e3fa7c9a34f4917ff2029b7b11d2014",
+            "6c0f6b2bbf21dd88f4b1a7e61b5655846e3fa7c9a34f4917ff2029b7b11d2014"
+          ]
+        },
+        {
+          "frame": 32,
+          "yaw": 19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6540f44f38141e18f40538f61cd7ec4f94ddf21e8553eea5ba3007f9c64dce3d",
+            "6540f44f38141e18f40538f61cd7ec4f94ddf21e8553eea5ba3007f9c64dce3d"
+          ]
+        },
+        {
+          "frame": 33,
+          "yaw": 15.00000000000001,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "bd88bfc7f6ba7197686ed3346c38c560d6626223c9452831e74ca18c13cdc8f6",
+            "bd88bfc7f6ba7197686ed3346c38c560d6626223c9452831e74ca18c13cdc8f6"
+          ]
+        },
+        {
+          "frame": 34,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a20ee477910873201adb03079ced3a0ef8727194eb6030e4227a54e8cd139f75",
+            "a20ee477910873201adb03079ced3a0ef8727194eb6030e4227a54e8cd139f75"
+          ]
+        },
+        {
+          "frame": 35,
+          "yaw": 5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "23131fb3a9e2ff92de258107fb31e5ae2a594fc5256ceeb91396677d1f2ab9ae",
+            "23131fb3a9e2ff92de258107fb31e5ae2a594fc5256ceeb91396677d1f2ab9ae"
+          ]
+        },
+        {
+          "frame": 36,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "eaeaa6c0036a91fa3eb000f29e31b9dde973f813df149f6fc7e921257f17e855",
+            "eaeaa6c0036a91fa3eb000f29e31b9dde973f813df149f6fc7e921257f17e855"
+          ]
+        },
+        {
+          "frame": 37,
+          "yaw": 0,
+          "pitch": -5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5134d068d3177b8674708dcb1919f05069cdb992df1beb1cca3b586616bf5d2c",
+            "5134d068d3177b8674708dcb1919f05069cdb992df1beb1cca3b586616bf5d2c"
+          ]
+        },
+        {
+          "frame": 38,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "1f6137373faa8cf0e2b09db00fae0b888d330cbe1556dedb0df1a7e81c6e68e5",
+            "1f6137373faa8cf0e2b09db00fae0b888d330cbe1556dedb0df1a7e81c6e68e5"
+          ]
+        },
+        {
+          "frame": 39,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5b281e615bdf3e99033e6711598c1143dd9994806c37a194d310f8d40488529f",
+            "5b281e615bdf3e99033e6711598c1143dd9994806c37a194d310f8d40488529f"
+          ]
+        },
+        {
+          "frame": 40,
+          "yaw": 0,
+          "pitch": -19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "98b5d2affabb81b925d456e5bd935fd30883dcabf0043ba64371a01faa21bab1",
+            "98b5d2affabb81b925d456e5bd935fd30883dcabf0043ba64371a01faa21bab1"
+          ]
+        },
+        {
+          "frame": 41,
+          "yaw": 0,
+          "pitch": -22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "0d44723e42f8ffccb40bb139c47a0633f8594fe56bb52693497a0ad7f83c53c9",
+            "0d44723e42f8ffccb40bb139c47a0633f8594fe56bb52693497a0ad7f83c53c9"
+          ]
+        },
+        {
+          "frame": 42,
+          "yaw": 0,
+          "pitch": -25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2bf72513504e11aeea1174c9fa544d8114e7f334165a64000ea933b4152d0880",
+            "2bf72513504e11aeea1174c9fa544d8114e7f334165a64000ea933b4152d0880"
+          ]
+        },
+        {
+          "frame": 43,
+          "yaw": 0,
+          "pitch": -28.19077862357725,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "01e2e6a13019d89489e5852ba00ad6fb4dd19800c50381e14582dd9851a7cc78",
+            "01e2e6a13019d89489e5852ba00ad6fb4dd19800c50381e14582dd9851a7cc78"
+          ]
+        },
+        {
+          "frame": 44,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d4cb4b4836306774aab4269d76e3b3f6a062a0037abad553cfbf9f337b1ea383",
+            "d4cb4b4836306774aab4269d76e3b3f6a062a0037abad553cfbf9f337b1ea383"
+          ]
+        },
+        {
+          "frame": 45,
+          "yaw": 0,
+          "pitch": -30,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "1c4a71867f07d92926217ea02cca7f371b9a427b60b334751fd41fccbfda63f9",
+            "1c4a71867f07d92926217ea02cca7f371b9a427b60b334751fd41fccbfda63f9"
+          ]
+        },
+        {
+          "frame": 46,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d4cb4b4836306774aab4269d76e3b3f6a062a0037abad553cfbf9f337b1ea383",
+            "d4cb4b4836306774aab4269d76e3b3f6a062a0037abad553cfbf9f337b1ea383"
+          ]
+        },
+        {
+          "frame": 47,
+          "yaw": 0,
+          "pitch": -28.190778623577252,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "01e2e6a13019d89489e5852ba00ad6fb4dd19800c50381e14582dd9851a7cc78",
+            "01e2e6a13019d89489e5852ba00ad6fb4dd19800c50381e14582dd9851a7cc78"
+          ]
+        },
+        {
+          "frame": 48,
+          "yaw": 0,
+          "pitch": -25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2bf72513504e11aeea1174c9fa544d8114e7f334165a64000ea933b4152d0880",
+            "2bf72513504e11aeea1174c9fa544d8114e7f334165a64000ea933b4152d0880"
+          ]
+        },
+        {
+          "frame": 49,
+          "yaw": 0,
+          "pitch": -22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "0d44723e42f8ffccb40bb139c47a0633f8594fe56bb52693497a0ad7f83c53c9",
+            "0d44723e42f8ffccb40bb139c47a0633f8594fe56bb52693497a0ad7f83c53c9"
+          ]
+        },
+        {
+          "frame": 50,
+          "yaw": 0,
+          "pitch": -19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "98b5d2affabb81b925d456e5bd935fd30883dcabf0043ba64371a01faa21bab1",
+            "98b5d2affabb81b925d456e5bd935fd30883dcabf0043ba64371a01faa21bab1"
+          ]
+        },
+        {
+          "frame": 51,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5b281e615bdf3e99033e6711598c1143dd9994806c37a194d310f8d40488529f",
+            "5b281e615bdf3e99033e6711598c1143dd9994806c37a194d310f8d40488529f"
+          ]
+        },
+        {
+          "frame": 52,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "1f6137373faa8cf0e2b09db00fae0b888d330cbe1556dedb0df1a7e81c6e68e5",
+            "1f6137373faa8cf0e2b09db00fae0b888d330cbe1556dedb0df1a7e81c6e68e5"
+          ]
+        },
+        {
+          "frame": 53,
+          "yaw": 0,
+          "pitch": -5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "5134d068d3177b8674708dcb1919f05069cdb992df1beb1cca3b586616bf5d2c",
+            "5134d068d3177b8674708dcb1919f05069cdb992df1beb1cca3b586616bf5d2c"
+          ]
+        },
+        {
+          "frame": 54,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "eaeaa6c0036a91fa3eb000f29e31b9dde973f813df149f6fc7e921257f17e855",
+            "eaeaa6c0036a91fa3eb000f29e31b9dde973f813df149f6fc7e921257f17e855"
+          ]
+        },
+        {
+          "frame": 55,
+          "yaw": 0,
+          "pitch": 5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "af5dddb0b4765922e6ef7113f01a6dd24b2cbfd62d08a286a3358a9a7c53c8c8",
+            "af5dddb0b4765922e6ef7113f01a6dd24b2cbfd62d08a286a3358a9a7c53c8c8"
+          ]
+        },
+        {
+          "frame": 56,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "9410014a1dbde796b20538e6bbe6bcfa7136a63bb4fa71f4da833765138d9928",
+            "9410014a1dbde796b20538e6bbe6bcfa7136a63bb4fa71f4da833765138d9928"
+          ]
+        },
+        {
+          "frame": 57,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "be5aac2ca4817a48ea3f413d75b660df17d67832a3dcf4ee45bf09da8453f329",
+            "be5aac2ca4817a48ea3f413d75b660df17d67832a3dcf4ee45bf09da8453f329"
+          ]
+        },
+        {
+          "frame": 58,
+          "yaw": 0,
+          "pitch": 19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2af95bd4912a04c6b8e359b4aebbeeffeacd1b2866f37dd889e9ef88288e6dc2",
+            "2af95bd4912a04c6b8e359b4aebbeeffeacd1b2866f37dd889e9ef88288e6dc2"
+          ]
+        },
+        {
+          "frame": 59,
+          "yaw": 0,
+          "pitch": 22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d931a397892464eefe56f29310a660adab78f83986f58bae7b056afb604b0639",
+            "d931a397892464eefe56f29310a660adab78f83986f58bae7b056afb604b0639"
+          ]
+        },
+        {
+          "frame": 60,
+          "yaw": 0,
+          "pitch": 25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "7113b296864631ef5740e0afbee3e29f8d025daac842a836f3170fb0305371c3",
+            "7113b296864631ef5740e0afbee3e29f8d025daac842a836f3170fb0305371c3"
+          ]
+        },
+        {
+          "frame": 61,
+          "yaw": 0,
+          "pitch": 28.19077862357725,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cc5b11c804e7aaa776e24cfeb34b49dc98cef01fcd595d59365c4726f3c32a66",
+            "cc5b11c804e7aaa776e24cfeb34b49dc98cef01fcd595d59365c4726f3c32a66"
+          ]
+        },
+        {
+          "frame": 62,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2b56296a89285d324d8394734034eb40f6d3caed34c7263fdfa8fa65bf99cfc2",
+            "2b56296a89285d324d8394734034eb40f6d3caed34c7263fdfa8fa65bf99cfc2"
+          ]
+        },
+        {
+          "frame": 63,
+          "yaw": 0,
+          "pitch": 30,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "0f678911d124c8481e839ba30aca4f0c0868dd11e120c23b257b117ab794f981",
+            "0f678911d124c8481e839ba30aca4f0c0868dd11e120c23b257b117ab794f981"
+          ]
+        },
+        {
+          "frame": 64,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2b56296a89285d324d8394734034eb40f6d3caed34c7263fdfa8fa65bf99cfc2",
+            "2b56296a89285d324d8394734034eb40f6d3caed34c7263fdfa8fa65bf99cfc2"
+          ]
+        },
+        {
+          "frame": 65,
+          "yaw": 0,
+          "pitch": 28.190778623577252,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "cc5b11c804e7aaa776e24cfeb34b49dc98cef01fcd595d59365c4726f3c32a66",
+            "cc5b11c804e7aaa776e24cfeb34b49dc98cef01fcd595d59365c4726f3c32a66"
+          ]
+        },
+        {
+          "frame": 66,
+          "yaw": 0,
+          "pitch": 25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "7113b296864631ef5740e0afbee3e29f8d025daac842a836f3170fb0305371c3",
+            "7113b296864631ef5740e0afbee3e29f8d025daac842a836f3170fb0305371c3"
+          ]
+        },
+        {
+          "frame": 67,
+          "yaw": 0,
+          "pitch": 22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d931a397892464eefe56f29310a660adab78f83986f58bae7b056afb604b0639",
+            "d931a397892464eefe56f29310a660adab78f83986f58bae7b056afb604b0639"
+          ]
+        },
+        {
+          "frame": 68,
+          "yaw": 0,
+          "pitch": 19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "2af95bd4912a04c6b8e359b4aebbeeffeacd1b2866f37dd889e9ef88288e6dc2",
+            "2af95bd4912a04c6b8e359b4aebbeeffeacd1b2866f37dd889e9ef88288e6dc2"
+          ]
+        },
+        {
+          "frame": 69,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "be5aac2ca4817a48ea3f413d75b660df17d67832a3dcf4ee45bf09da8453f329",
+            "be5aac2ca4817a48ea3f413d75b660df17d67832a3dcf4ee45bf09da8453f329"
+          ]
+        },
+        {
+          "frame": 70,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "9410014a1dbde796b20538e6bbe6bcfa7136a63bb4fa71f4da833765138d9928",
+            "9410014a1dbde796b20538e6bbe6bcfa7136a63bb4fa71f4da833765138d9928"
+          ]
+        },
+        {
+          "frame": 71,
+          "yaw": 0,
+          "pitch": 5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "af5dddb0b4765922e6ef7113f01a6dd24b2cbfd62d08a286a3358a9a7c53c8c8",
+            "af5dddb0b4765922e6ef7113f01a6dd24b2cbfd62d08a286a3358a9a7c53c8c8"
+          ]
+        }
+      ],
+      "size": [780, 844],
+      "label": "new-18-51440683 | CC0 photo | Sharp | Depth 1",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "source": {
+        "author": "www.Pixel.la Free Stock Photos",
+        "url": "https://commons.wikimedia.org/wiki/File:Landscape-sky-sunny-night_(24299136886).jpg",
+        "license": "CC0 1.0",
+        "label": "CC0 photo"
+      },
+      "recordingLicense": "CC0 1.0, subject to the source image license"
+    }
+  ],
+  "requestedInputs": 5,
+  "complete": true,
+  "retainedOriginalManifestSha256": "086afd96ded91b8cb7aece0e23084ee4932d91087014040dfe3b44e0ee545e43",
+  "applicationChange": "No retained reconstruction change. These are preservation recordings, not quality-improvement claims."
+}

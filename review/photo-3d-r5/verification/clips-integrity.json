@@ -1,0 +1,990 @@
+{
+  "complete": true,
+  "uniqueVideos": 54,
+  "checkpointVideos": 49,
+  "selectionVideos": 15,
+  "selectionOverlapWithCheckpoint": 10,
+  "extraVideos": 5,
+  "nativePairs": 3888,
+  "nativeChangedPixels": 0,
+  "checks": [
+    {
+      "id": "forest",
+      "file": "checkpoint/forest-sharp-before-after.mp4",
+      "sha256": "7890b69fa313b9caf3530e0c30cdf3e89ebd4fdf8d8267c04404962f6446e585",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "street",
+      "file": "checkpoint/street-sharp-before-after.mp4",
+      "sha256": "2fd54c20fe6baff0831f90f5b293236872bf11cb247dab086310a0164ff562c1",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "still-life",
+      "file": "checkpoint/still-life-sharp-before-after.mp4",
+      "sha256": "6ef37ebefc9d65d41e2766918618bb11d52019c15b5a04a6512c6d916cad5987",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "spiral-stairs",
+      "file": "checkpoint/spiral-stairs-sharp-before-after.mp4",
+      "sha256": "9479eb2a77db6dc7752eead49e91ec7b6a39b2e5a62b4bd57481a1e56cbd2816",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "palace-stairs",
+      "file": "checkpoint/palace-stairs-sharp-before-after.mp4",
+      "sha256": "6d6162e7ae3993be3f4e5ca973234cf5a744aae698fb2c03ee8a4394cc8b4e56",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "wildflowers",
+      "file": "checkpoint/wildflowers-sharp-before-after.mp4",
+      "sha256": "7bdbbd027ab44b6000e225642ceb09e1ae3074d29f21d998ba1d33b4519aad4a",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-train",
+      "file": "checkpoint/dot-train-sharp-before-after.mp4",
+      "sha256": "d0061c756a925bf7b5b82aec1fe32688407304ee3368e5ed4e92ee4561d7fbcc",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-oasis",
+      "file": "checkpoint/dot-oasis-sharp-before-after.mp4",
+      "sha256": "94e45e7dbb4def7461e17bea2b2863f638b1fff1b6511253716106f911bcda13",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-castle",
+      "file": "checkpoint/dot-castle-sharp-before-after.mp4",
+      "sha256": "457faa688f9beb597b7a1566b6b7039e76104124be76eafd630e69a75198d031",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-cove",
+      "file": "checkpoint/dot-cove-sharp-before-after.mp4",
+      "sha256": "18378f77d0e8a0d0b73a78115de849fcd206d6daa2c7a115b8cf533182b9554d",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-harbor",
+      "file": "checkpoint/dot-harbor-sharp-before-after.mp4",
+      "sha256": "8f7b95a3e9ab7aaceb8a25ee45f0a325c5319768dd00d268f3c04445ddec0178",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-paper-valley",
+      "file": "checkpoint/dot-paper-valley-sharp-before-after.mp4",
+      "sha256": "d8e33d0584ddc564127bdeeeb03a182529e5847a4702f28b554e69e3cf0e12b3",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-farm",
+      "file": "checkpoint/dot-farm-sharp-before-after.mp4",
+      "sha256": "6dc8b15a1d6d72a06360fd70c5a3044bd18979723f0fd43640699bead5d50641",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-treehouses",
+      "file": "checkpoint/dot-treehouses-sharp-before-after.mp4",
+      "sha256": "70a21c9cbee1aa580b47fc64b7232eb4c7935aeac73ee0253ca8ad220d536e10",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-library",
+      "file": "checkpoint/dot-library-sharp-before-after.mp4",
+      "sha256": "40f34f28f45ca4eda9796ab2a9258325b29e51e76311122250dceae378583893",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-workshop",
+      "file": "checkpoint/dot-workshop-sharp-before-after.mp4",
+      "sha256": "f4289263fe918ef2b421127deff8011cffcc583d95caca40f1008d83b014e5e6",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-cloister",
+      "file": "checkpoint/dot-cloister-sharp-before-after.mp4",
+      "sha256": "89b32e773f46e90d17e6467a259f5f42ee77c5c520b5a0c8693e5b866846fc0b",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-greenhouse",
+      "file": "checkpoint/dot-greenhouse-sharp-before-after.mp4",
+      "sha256": "fdbad207a588d870367f48efcbff18509ded60cf1e33fd7d9712a3c5a45181dc",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-attic",
+      "file": "checkpoint/dot-attic-sharp-before-after.mp4",
+      "sha256": "9af7f4530117e06e98e93fa30a4fa560f97c1f31986ba7be831dbd8cf63e9492",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-bamboo",
+      "file": "checkpoint/dot-bamboo-sharp-before-after.mp4",
+      "sha256": "ccf9c4d2b57fc6752d2ef79bdcf64f4189a5588becdea4e489f2905029327e9f",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-terraces",
+      "file": "checkpoint/dot-terraces-sharp-before-after.mp4",
+      "sha256": "cece9a1333df67f8fa006d8306ecbf44252045dc178fb3da020bebae93d2b10f",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-canyon",
+      "file": "checkpoint/dot-canyon-sharp-before-after.mp4",
+      "sha256": "1e7328896b80c0e0e68a52ec5fa4ae29995d1f529d9edaf0e35e7395ca039d69",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-arch",
+      "file": "checkpoint/dot-arch-sharp-before-after.mp4",
+      "sha256": "06c81b6dbcbf6a6151d08c4018f4cab33c32222067a066d832a3fd55a9b3e2dd",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-fallen-log",
+      "file": "checkpoint/dot-fallen-log-sharp-before-after.mp4",
+      "sha256": "6ab1f4b951e55d3edff33d751f800389242aff00c0b6070e36e5aea0c8b8a2d5",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-alpine-lake",
+      "file": "checkpoint/dot-alpine-lake-sharp-before-after.mp4",
+      "sha256": "8093b177bf45f50c30e12e82b61d75b6c55c5980ad54664494ff15463e5da2ca",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-ice-falls",
+      "file": "checkpoint/dot-ice-falls-sharp-before-after.mp4",
+      "sha256": "fbb83896c8e48ae3db5cd427488d1e27983de324a233fa483224e1b45d923969",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-floating-isles",
+      "file": "checkpoint/dot-floating-isles-sharp-before-after.mp4",
+      "sha256": "4ebc83e37ca49b525f2ff495a9ea17bba14439f923a39f956cbf4ba966a7b292",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-wave",
+      "file": "checkpoint/dot-wave-sharp-before-after.mp4",
+      "sha256": "452d6e6e55e3290266d0d11a5eefd4434c89c08d3f8529c520a0c2a8a632c0db",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-explorer-desk",
+      "file": "checkpoint/dot-explorer-desk-sharp-before-after.mp4",
+      "sha256": "f72c4deb3b619a2b22ba01f9a5bf3bd52bd048caababc3e166695ebbf405fbca",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-watchmaker",
+      "file": "checkpoint/dot-watchmaker-sharp-before-after.mp4",
+      "sha256": "7d281d16d96ec3bfe57b05e6a3e2b3bfe3eca3e77ec6ecc31f28911814b12486",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-dragonfly",
+      "file": "checkpoint/dot-dragonfly-sharp-before-after.mp4",
+      "sha256": "926ac1c533ddfafcd0736f03e470b4ceadd84434cf7410186f7eb6d2acd6ae8d",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-mushrooms",
+      "file": "checkpoint/dot-mushrooms-sharp-before-after.mp4",
+      "sha256": "73d17197ff4fd412d488fd778b532109f5ae1d139781851e761c21e41e669c31",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-market",
+      "file": "checkpoint/dot-market-sharp-before-after.mp4",
+      "sha256": "1c9e94320a7a8f14f5c5e8666b37446d899c194b6f6d96415c88a678f1dc6517",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-gears",
+      "file": "checkpoint/dot-gears-sharp-before-after.mp4",
+      "sha256": "12c740f20cb5326312373a64ead182a228f3240eb396c449ec33801d756406ae",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-chess",
+      "file": "checkpoint/dot-chess-sharp-before-after.mp4",
+      "sha256": "7d8644a16c455093f393d7327da5dbbba796b7cbd4ec153ce4b05a1f0b81a2e6",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "dot-book-city",
+      "file": "checkpoint/dot-book-city-sharp-before-after.mp4",
+      "sha256": "84ecd2595e5b03ebca3e106b400f20ed0a4f6729fed52384e0809915b3c8e837",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "lighthouse",
+      "file": "checkpoint/lighthouse-sharp-before-after.mp4",
+      "sha256": "2996687154745de285ba208eb7e5b9c751c59fe260e3ca3260d8e0a9916de877",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "sailboat",
+      "file": "checkpoint/sailboat-sharp-before-after.mp4",
+      "sha256": "5e8418ae61c78873c9806aeda63dd7a96a44f4ca138ddec73375dfac356cc7c7",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "tulips",
+      "file": "checkpoint/tulips-sharp-before-after.mp4",
+      "sha256": "e9126699da5506dad296c4d817abf279a9fbeaf9035eab74f4c2fda92fbd1a11",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "daffodils",
+      "file": "checkpoint/daffodils-sharp-before-after.mp4",
+      "sha256": "e5ecfb4c453d2ce0269091de0f17a8a961a82ab6058e2d1fe8b226d983b221d4",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "red-barn",
+      "file": "checkpoint/red-barn-sharp-before-after.mp4",
+      "sha256": "f257cc550c95232d8c277e13660bcc158ca8f929bc7f197532ae078c67cf16ef",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "seashell",
+      "file": "checkpoint/seashell-sharp-before-after.mp4",
+      "sha256": "ccfbb724f2057c0f3ab3de21f11ecc9b55c442340b8db7392a5b834ed26498be",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "islands",
+      "file": "checkpoint/islands-sharp-before-after.mp4",
+      "sha256": "e4fb5eac2e774b9d6836fbc637c21179d2a4a071bff6da27d97e1f7877360776",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "tulip-field",
+      "file": "checkpoint/tulip-field-sharp-before-after.mp4",
+      "sha256": "7fec07bf67eceb23f1bebdea91aa9430572e284cfc67b375d0766c3b9fc7cf0b",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "mushroom",
+      "file": "checkpoint/mushroom-sharp-before-after.mp4",
+      "sha256": "501c7f2b48f3c291c43d65f43225ee436c573f68699bd0dccc286339b26e0dd3",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "waterfall",
+      "file": "checkpoint/waterfall-sharp-before-after.mp4",
+      "sha256": "5034029eccdf7d76196c09e9646e6cd6c2270b19fba1971d4890e3be50073416",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "seashell-gif",
+      "file": "checkpoint/seashell-gif-sharp-before-after.mp4",
+      "sha256": "952c5fb73a47b7f87f02548ee907275fa19c3b400c47950f53ae841550016ebd",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "mushroom-gif",
+      "file": "checkpoint/mushroom-gif-sharp-before-after.mp4",
+      "sha256": "5142cccc98144ec6feafd38b57470e132897ae6f0a915318c25b40fba03c8d71",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "waterfall-gif",
+      "file": "checkpoint/waterfall-gif-sharp-before-after.mp4",
+      "sha256": "9b28fa38845e3f2fd4dec375af4a650117b75c51d8e03ef8c8098073d7a6a147",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "new-14-16503745",
+      "file": "selection-extra/new-14-16503745-sharp-before-after.mp4",
+      "sha256": "607c5d07fed8dad2f406c6122c6da6ffb528157e1ea63db68e35e8a6b84e116d",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "new-15-152970382",
+      "file": "selection-extra/new-15-152970382-sharp-before-after.mp4",
+      "sha256": "9a29d55809d255712dfbdc3267dcd400b78e6add09e7b02bf993dec19516e4c1",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "new-17-199401836",
+      "file": "selection-extra/new-17-199401836-sharp-before-after.mp4",
+      "sha256": "2aed2c3e87754c17981eb16fc8067dee373703291539fe02a956aab8a08fbe1d",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "new-17-27586242",
+      "file": "selection-extra/new-17-27586242-sharp-before-after.mp4",
+      "sha256": "9b7758ebe903d1118eca348429cc107f3450e8ab28844be85b7640a626d6da5c",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    },
+    {
+      "id": "new-18-51440683",
+      "file": "selection-extra/new-18-51440683-sharp-before-after.mp4",
+      "sha256": "2d21c07461ba4c5e35aa9f1c0ace2870e6b4a192541cc483aa6f727f65406a6d",
+      "video": {
+        "width": 780,
+        "height": 844,
+        "avg_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativePairsChecked": 72,
+      "nativeChangedPixels": 0
+    }
+  ],
+  "motionEvidence": {
+    "policy": "Every recording must contain more than one distinct actual native GL color frame. Movie labels are outside these native hashes.",
+    "minimumDistinctNativeFrames": 37,
+    "inputs": [
+      {
+        "id": "forest",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "street",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "still-life",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "spiral-stairs",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "palace-stairs",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "wildflowers",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-train",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-oasis",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-castle",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-cove",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-harbor",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-paper-valley",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-farm",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-treehouses",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-library",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-workshop",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-cloister",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-greenhouse",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-attic",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-bamboo",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-terraces",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-canyon",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-arch",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-fallen-log",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-alpine-lake",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-ice-falls",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-floating-isles",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-wave",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-explorer-desk",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-watchmaker",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-dragonfly",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-mushrooms",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-market",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-gears",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-chess",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "dot-book-city",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "lighthouse",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "sailboat",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "tulips",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "daffodils",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "red-barn",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "seashell",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "islands",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "tulip-field",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "mushroom",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "waterfall",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "seashell-gif",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "mushroom-gif",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "waterfall-gif",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "new-14-16503745",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "new-15-152970382",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "new-17-199401836",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "new-17-27586242",
+        "distinctNativeFrames": 37
+      },
+      {
+        "id": "new-18-51440683",
+        "distinctNativeFrames": 37
+      }
+    ]
+  }
+}

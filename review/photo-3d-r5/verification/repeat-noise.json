@@ -1,0 +1,2282 @@
+{
+  "schema": 1,
+  "sourceSha256": "4b28210795941d736d0c1dabd0d36afa48d516ae8f278108ecde53a86521b504",
+  "policy": "Only actual paired observations grant tolerance; every unmeasured case has zero tolerance.",
+  "repetitions": 1,
+  "repeatStudies": 3,
+  "incompleteRepeatStudies": 3,
+  "pairedObservations": 72,
+  "coveredProfiles": 72,
+  "requiredProfiles": 236,
+  "completeCorpus": false,
+  "maximumByMetric": {
+    "streaks": 0,
+    "textureLoss": 0,
+    "holes": 0,
+    "halos": 0,
+    "fringes": 0,
+    "missing": 0,
+    "depth": 0,
+    "paletteExcess": 0,
+    "edgeDisplacement": 0,
+    "transitionWidth": 0,
+    "lostTransitions": 0,
+    "fringeMaximum": 0,
+    "thinWidthError": 0,
+    "badProjectionFits": 0,
+    "lostProjectedThinSupport": 0,
+    "flatDepth": 0,
+    "depthAbsRel": 0,
+    "referenceFlatDepth": 0,
+    "referenceHoleFraction": 0,
+    "referenceRmse": 0,
+    "referenceP95": 0
+  },
+  "tolerance": {
+    "[\"forest\",\"phone\",\"streaks\"]": 0,
+    "[\"forest\",\"phone\",\"textureLoss\"]": 0,
+    "[\"forest\",\"phone\",\"holes\"]": 0,
+    "[\"forest\",\"phone\",\"halos\"]": 0,
+    "[\"forest\",\"phone\",\"fringes\"]": 0,
+    "[\"forest\",\"phone\",\"missing\"]": 0,
+    "[\"forest\",\"phone\",\"depth\"]": 0,
+    "[\"forest\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"forest\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"forest\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"forest\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"forest\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"forest\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"forest\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"forest\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"forest\",\"phone\",\"flatDepth\"]": 0,
+    "[\"forest\",\"desktop\",\"streaks\"]": 0,
+    "[\"forest\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"forest\",\"desktop\",\"holes\"]": 0,
+    "[\"forest\",\"desktop\",\"halos\"]": 0,
+    "[\"forest\",\"desktop\",\"fringes\"]": 0,
+    "[\"forest\",\"desktop\",\"missing\"]": 0,
+    "[\"forest\",\"desktop\",\"depth\"]": 0,
+    "[\"forest\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"forest\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"forest\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"forest\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"forest\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"forest\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"forest\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"forest\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"forest\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"street\",\"phone\",\"streaks\"]": 0,
+    "[\"street\",\"phone\",\"textureLoss\"]": 0,
+    "[\"street\",\"phone\",\"holes\"]": 0,
+    "[\"street\",\"phone\",\"halos\"]": 0,
+    "[\"street\",\"phone\",\"fringes\"]": 0,
+    "[\"street\",\"phone\",\"missing\"]": 0,
+    "[\"street\",\"phone\",\"depth\"]": 0,
+    "[\"street\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"street\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"street\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"street\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"street\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"street\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"street\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"street\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"street\",\"phone\",\"flatDepth\"]": 0,
+    "[\"street\",\"desktop\",\"streaks\"]": 0,
+    "[\"street\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"street\",\"desktop\",\"holes\"]": 0,
+    "[\"street\",\"desktop\",\"halos\"]": 0,
+    "[\"street\",\"desktop\",\"depth\"]": 0,
+    "[\"street\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"street\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"street\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"street\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"street\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"street\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"street\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"still-life\",\"phone\",\"streaks\"]": 0,
+    "[\"still-life\",\"phone\",\"textureLoss\"]": 0,
+    "[\"still-life\",\"phone\",\"holes\"]": 0,
+    "[\"still-life\",\"phone\",\"halos\"]": 0,
+    "[\"still-life\",\"phone\",\"depth\"]": 0,
+    "[\"still-life\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"still-life\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"still-life\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"still-life\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"still-life\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"still-life\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"still-life\",\"phone\",\"flatDepth\"]": 0,
+    "[\"still-life\",\"desktop\",\"streaks\"]": 0,
+    "[\"still-life\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"still-life\",\"desktop\",\"holes\"]": 0,
+    "[\"still-life\",\"desktop\",\"halos\"]": 0,
+    "[\"still-life\",\"desktop\",\"depth\"]": 0,
+    "[\"still-life\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"still-life\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"still-life\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"still-life\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"still-life\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"still-life\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"still-life\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"streaks\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"textureLoss\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"holes\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"halos\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"fringes\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"missing\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"depth\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"spiral-stairs\",\"phone\",\"flatDepth\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"streaks\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"holes\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"halos\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"fringes\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"missing\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"depth\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"spiral-stairs\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"streaks\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"textureLoss\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"holes\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"halos\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"depth\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"palace-stairs\",\"phone\",\"flatDepth\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"streaks\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"holes\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"halos\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"depth\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"palace-stairs\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"wildflowers\",\"phone\",\"streaks\"]": 0,
+    "[\"wildflowers\",\"phone\",\"textureLoss\"]": 0,
+    "[\"wildflowers\",\"phone\",\"holes\"]": 0,
+    "[\"wildflowers\",\"phone\",\"halos\"]": 0,
+    "[\"wildflowers\",\"phone\",\"fringes\"]": 0,
+    "[\"wildflowers\",\"phone\",\"missing\"]": 0,
+    "[\"wildflowers\",\"phone\",\"depth\"]": 0,
+    "[\"wildflowers\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"wildflowers\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"wildflowers\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"wildflowers\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"wildflowers\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"wildflowers\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"wildflowers\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"wildflowers\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"wildflowers\",\"phone\",\"flatDepth\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"streaks\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"holes\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"halos\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"fringes\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"missing\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"depth\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"wildflowers\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-train\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-train\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-train\",\"phone\",\"holes\"]": 0,
+    "[\"dot-train\",\"phone\",\"halos\"]": 0,
+    "[\"dot-train\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-train\",\"phone\",\"missing\"]": 0,
+    "[\"dot-train\",\"phone\",\"depth\"]": 0,
+    "[\"dot-train\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-train\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-train\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-train\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-train\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-train\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-train\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-train\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-train\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-train\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-train\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-train\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-train\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-train\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-train\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-train\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-train\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-train\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-train\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-train\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-train\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-train\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-train\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-train\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-train\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"holes\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"halos\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"missing\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"depth\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-oasis\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-oasis\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-castle\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-castle\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-castle\",\"phone\",\"holes\"]": 0,
+    "[\"dot-castle\",\"phone\",\"halos\"]": 0,
+    "[\"dot-castle\",\"phone\",\"depth\"]": 0,
+    "[\"dot-castle\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-castle\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-castle\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-castle\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-castle\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-castle\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-castle\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-castle\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-cove\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-cove\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-cove\",\"phone\",\"holes\"]": 0,
+    "[\"dot-cove\",\"phone\",\"halos\"]": 0,
+    "[\"dot-cove\",\"phone\",\"depth\"]": 0,
+    "[\"dot-cove\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-cove\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-cove\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-cove\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-cove\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-cove\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-cove\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-cove\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"holes\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"halos\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"missing\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"depth\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-harbor\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-harbor\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"holes\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"halos\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"depth\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-paper-valley\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-paper-valley\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-farm\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-farm\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-farm\",\"phone\",\"holes\"]": 0,
+    "[\"dot-farm\",\"phone\",\"halos\"]": 0,
+    "[\"dot-farm\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-farm\",\"phone\",\"missing\"]": 0,
+    "[\"dot-farm\",\"phone\",\"depth\"]": 0,
+    "[\"dot-farm\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-farm\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-farm\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-farm\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-farm\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-farm\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-farm\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-farm\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-farm\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-farm\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"holes\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"missing\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"depth\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-treehouses\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-treehouses\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-library\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-library\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-library\",\"phone\",\"holes\"]": 0,
+    "[\"dot-library\",\"phone\",\"halos\"]": 0,
+    "[\"dot-library\",\"phone\",\"depth\"]": 0,
+    "[\"dot-library\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-library\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-library\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-library\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-library\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-library\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-library\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-library\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-library\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-library\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-library\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-library\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-library\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-library\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-library\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-library\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-library\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-library\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-library\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"holes\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"halos\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"missing\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"depth\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-workshop\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-workshop\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"holes\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"halos\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"missing\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"depth\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-cloister\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-cloister\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"holes\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"halos\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"missing\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"depth\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-greenhouse\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-greenhouse\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-attic\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-attic\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-attic\",\"phone\",\"holes\"]": 0,
+    "[\"dot-attic\",\"phone\",\"halos\"]": 0,
+    "[\"dot-attic\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-attic\",\"phone\",\"missing\"]": 0,
+    "[\"dot-attic\",\"phone\",\"depth\"]": 0,
+    "[\"dot-attic\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-attic\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-attic\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-attic\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-attic\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-attic\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-attic\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-attic\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-attic\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-attic\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"holes\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"halos\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"missing\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"depth\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-bamboo\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-bamboo\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"holes\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"halos\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"missing\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"depth\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-terraces\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-terraces\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"holes\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"halos\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"depth\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-canyon\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-canyon\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-arch\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-arch\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-arch\",\"phone\",\"holes\"]": 0,
+    "[\"dot-arch\",\"phone\",\"halos\"]": 0,
+    "[\"dot-arch\",\"phone\",\"depth\"]": 0,
+    "[\"dot-arch\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-arch\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-arch\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-arch\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-arch\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-arch\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-arch\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-arch\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"holes\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"halos\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"missing\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"depth\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-fallen-log\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-fallen-log\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"holes\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"halos\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"depth\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-alpine-lake\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-alpine-lake\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"holes\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"halos\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"missing\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"depth\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-ice-falls\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-ice-falls\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"holes\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"halos\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"missing\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"depth\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-floating-isles\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-floating-isles\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-wave\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-wave\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-wave\",\"phone\",\"holes\"]": 0,
+    "[\"dot-wave\",\"phone\",\"halos\"]": 0,
+    "[\"dot-wave\",\"phone\",\"depth\"]": 0,
+    "[\"dot-wave\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-wave\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-wave\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-wave\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-wave\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-wave\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-wave\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-wave\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"holes\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"halos\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"missing\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"depth\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-explorer-desk\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-explorer-desk\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"streaks\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"textureLoss\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"holes\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"halos\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"fringes\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"missing\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"depth\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-watchmaker\",\"phone\",\"flatDepth\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"streaks\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"holes\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"halos\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"fringes\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"missing\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"depth\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"dot-watchmaker\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"streaks\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"textureLoss\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"holes\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"halos\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"depth\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"depthAbsRel\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"referenceFlatDepth\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"referenceHoleFraction\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"referenceRmse\"]": 0,
+    "[\"truth-still-life\",\"phone\",\"referenceP95\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"streaks\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"holes\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"halos\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"depth\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"depthAbsRel\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"referenceFlatDepth\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"referenceHoleFraction\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"referenceRmse\"]": 0,
+    "[\"truth-still-life\",\"desktop\",\"referenceP95\"]": 0,
+    "[\"truth-night\",\"phone\",\"streaks\"]": 0,
+    "[\"truth-night\",\"phone\",\"textureLoss\"]": 0,
+    "[\"truth-night\",\"phone\",\"holes\"]": 0,
+    "[\"truth-night\",\"phone\",\"halos\"]": 0,
+    "[\"truth-night\",\"phone\",\"depth\"]": 0,
+    "[\"truth-night\",\"phone\",\"depthAbsRel\"]": 0,
+    "[\"truth-night\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"truth-night\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"truth-night\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"truth-night\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"truth-night\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"truth-night\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"truth-night\",\"phone\",\"referenceFlatDepth\"]": 0,
+    "[\"truth-night\",\"phone\",\"referenceHoleFraction\"]": 0,
+    "[\"truth-night\",\"phone\",\"referenceRmse\"]": 0,
+    "[\"truth-night\",\"phone\",\"referenceP95\"]": 0,
+    "[\"truth-night\",\"desktop\",\"streaks\"]": 0,
+    "[\"truth-night\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"truth-night\",\"desktop\",\"holes\"]": 0,
+    "[\"truth-night\",\"desktop\",\"halos\"]": 0,
+    "[\"truth-night\",\"desktop\",\"depth\"]": 0,
+    "[\"truth-night\",\"desktop\",\"depthAbsRel\"]": 0,
+    "[\"truth-night\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"truth-night\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"truth-night\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"truth-night\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"truth-night\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"truth-night\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"truth-night\",\"desktop\",\"referenceFlatDepth\"]": 0,
+    "[\"truth-night\",\"desktop\",\"referenceHoleFraction\"]": 0,
+    "[\"truth-night\",\"desktop\",\"referenceRmse\"]": 0,
+    "[\"truth-night\",\"desktop\",\"referenceP95\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"streaks\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"textureLoss\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"holes\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"halos\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"fringes\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"missing\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"depth\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"depthAbsRel\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"referenceFlatDepth\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"referenceHoleFraction\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"referenceRmse\"]": 0,
+    "[\"truth-lattice\",\"phone\",\"referenceP95\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"streaks\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"holes\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"halos\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"fringes\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"missing\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"depth\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"depthAbsRel\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"referenceFlatDepth\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"referenceHoleFraction\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"referenceRmse\"]": 0,
+    "[\"truth-lattice\",\"desktop\",\"referenceP95\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"streaks\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"textureLoss\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"holes\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"halos\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"fringes\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"missing\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"depth\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"fringeMaximum\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"thinWidthError\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"new-08-185005362\",\"phone\",\"flatDepth\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"streaks\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"holes\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"halos\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"fringes\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"missing\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"depth\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"fringeMaximum\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"thinWidthError\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"new-08-185005362\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"streaks\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"textureLoss\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"holes\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"halos\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"depth\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"new-13-60172881\",\"phone\",\"flatDepth\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"streaks\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"holes\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"halos\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"depth\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"new-13-60172881\",\"desktop\",\"flatDepth\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"streaks\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"textureLoss\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"holes\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"halos\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"depth\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"paletteExcess\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"edgeDisplacement\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"transitionWidth\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"lostTransitions\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"badProjectionFits\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"lostProjectedThinSupport\"]": 0,
+    "[\"new-18-51440683\",\"phone\",\"flatDepth\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"streaks\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"textureLoss\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"holes\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"halos\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"depth\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"paletteExcess\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"edgeDisplacement\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"transitionWidth\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"lostTransitions\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"badProjectionFits\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"lostProjectedThinSupport\"]": 0,
+    "[\"new-18-51440683\",\"desktop\",\"flatDepth\"]": 0
+  },
+  "coverage": [
+    {
+      "id": "forest",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "forest",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "street",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "street",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "still-life",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "still-life",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "spiral-stairs",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "spiral-stairs",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "palace-stairs",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "palace-stairs",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "wildflowers",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "wildflowers",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-train",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-train",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-oasis",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-oasis",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-castle",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-castle",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-cove",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-cove",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-harbor",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-harbor",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-paper-valley",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-paper-valley",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-farm",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-farm",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-treehouses",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-treehouses",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-library",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-library",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-workshop",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-workshop",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-cloister",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-cloister",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-greenhouse",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-greenhouse",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-attic",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-attic",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-bamboo",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-bamboo",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-terraces",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-terraces",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-canyon",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-canyon",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-arch",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-arch",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-fallen-log",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-fallen-log",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-alpine-lake",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-alpine-lake",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-ice-falls",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-ice-falls",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-floating-isles",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-floating-isles",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-wave",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-wave",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-explorer-desk",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-explorer-desk",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-watchmaker",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "dot-watchmaker",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "dot-dragonfly",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-dragonfly",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-mushrooms",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-mushrooms",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-market",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-market",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-gears",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-gears",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-chess",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-chess",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-book-city",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-book-city",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "truth-still-life",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "truth-still-life",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "truth-room",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "truth-room",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "truth-forest",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "truth-forest",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "truth-stairs",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "truth-stairs",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "truth-coast",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "truth-coast",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "truth-desk",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "truth-desk",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "truth-fur",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "truth-fur",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "truth-night",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "truth-night",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "truth-lattice",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "truth-lattice",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "truth-arches",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "truth-arches",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "truth-leaves",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "truth-leaves",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "truth-steps",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "truth-steps",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-00-147167228",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-00-147167228",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-01-131641833",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-01-131641833",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-02-104101424",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-02-104101424",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-02-88494704",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-02-88494704",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-03-25399041",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-03-25399041",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-03-35525184",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-03-35525184",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-19-159668739",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-19-159668739",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-20-160820542",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-20-160820542",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-07-198117086",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-07-198117086",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-07-131897774",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-07-131897774",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-07-27184681",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-07-27184681",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-08-151156803",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-08-151156803",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-08-185005362",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "new-08-185005362",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "new-19-62150806",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-19-62150806",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-09-66685155",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-09-66685155",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-11-159259312",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-11-159259312",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-11-71852781",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-11-71852781",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-11-89189482",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-11-89189482",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-12-201484048",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-12-201484048",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-12-201342968",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-12-201342968",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-12-201385356",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-12-201385356",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-13-61309178",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-13-61309178",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-13-60172881",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "new-13-60172881",
+      "profile": "desktop",
+      "repeats": 1
+    },
+    {
+      "id": "new-13-105399732",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-13-105399732",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-14-76271548",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-14-76271548",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-14-16503745",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-14-16503745",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-15-152970382",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-15-152970382",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-17-199401836",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-17-199401836",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-17-27586242",
+      "profile": "phone",
+      "repeats": 0
+    },
+    {
+      "id": "new-17-27586242",
+      "profile": "desktop",
+      "repeats": 0
+    },
+    {
+      "id": "new-18-51440683",
+      "profile": "phone",
+      "repeats": 1
+    },
+    {
+      "id": "new-18-51440683",
+      "profile": "desktop",
+      "repeats": 1
+    }
+  ],
+  "atlasHashes": [
+    "f939791c31e0372b39d698d48aa7054c64cb3c550ae329d856179154ac387f48",
+    "697c157b213f8eebf573fbdf048bc95842dd6674df78563c2c68f346ff27aec2",
+    "fcbfab8f46e6a12ef26cda314296c6ab9ebcc522d77f935543c4c8b15ea2bee4",
+    "d64199a170b4cb0c73a1d2b923dcdea6f3f4e758191770bc3d0a8d78495c59cf"
+  ],
+  "methodSha256": "70bb855a443d69f255adc714056ab1193a931b99bfc599f93465b346ee2a95eb"
+}

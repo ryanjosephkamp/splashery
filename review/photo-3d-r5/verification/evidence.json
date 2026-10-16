@@ -1,0 +1,61 @@
+{
+  "kind": "Public numeric evidence only. Native images remain in the local capture workspace; recorded native RGBA and artifact hashes accompany every pose.",
+  "costUse": "Excluded: these captures ran concurrently with other audits. Their timing and memory fields are not cost acceptance evidence.",
+  "baselineSource": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+  "currentApplicationSource": "cc297c89ef4fa4bf04e43196ca3b37e39c97a372",
+  "codeReview": "https://github.com/ryanjosephkamp/splashery/pull/672",
+  "atlases": [
+    {
+      "name": "baseline",
+      "file": "baseline-atlas.json.gz",
+      "uncompressedSha256": "f939791c31e0372b39d698d48aa7054c64cb3c550ae329d856179154ac387f48",
+      "sha256": "dac1ce85d65d8d4b2a38fa63436af17e46ee41384e69faeaed510ca22dc7bc01",
+      "bytes": 1939159,
+      "completeCorpus": true,
+      "inputProfileCount": 236
+    },
+    {
+      "name": "repeat-first-30",
+      "file": "repeat-first-30-atlas.json.gz",
+      "uncompressedSha256": "697c157b213f8eebf573fbdf048bc95842dd6674df78563c2c68f346ff27aec2",
+      "sha256": "f4aa45373f3fe9926814e09519652f618bdbcec2e32cd28b994e319e55b7607e",
+      "bytes": 443036,
+      "completeCorpus": false,
+      "inputProfileCount": 60
+    },
+    {
+      "name": "repeat-tail",
+      "file": "repeat-tail-atlas.json.gz",
+      "uncompressedSha256": "fcbfab8f46e6a12ef26cda314296c6ab9ebcc522d77f935543c4c8b15ea2bee4",
+      "sha256": "7e93da89c62bd33e6e29ce19b5a727bf5e0582d3cdc26185f5fe17f756f42360",
+      "bytes": 100756,
+      "completeCorpus": false,
+      "inputProfileCount": 10
+    },
+    {
+      "name": "repeat-last",
+      "file": "repeat-last-atlas.json.gz",
+      "uncompressedSha256": "d64199a170b4cb0c73a1d2b923dcdea6f3f4e758191770bc3d0a8d78495c59cf",
+      "sha256": "ddef11988e2fd614892a1647c68ea948b2fd7349d6405b4b4f9a4648f2353a75",
+      "bytes": 34437,
+      "completeCorpus": false,
+      "inputProfileCount": 2
+    }
+  ],
+  "methods": [
+    {
+      "file": "method-source/cdx-p3d5-compare.mjs",
+      "sha256": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a"
+    },
+    {
+      "file": "method-source/cdx-p3d5-noise.mjs",
+      "sha256": "70bb855a443d69f255adc714056ab1193a931b99bfc599f93465b346ee2a95eb"
+    },
+    {
+      "file": "method-source/verify-completed-baseline.mjs.txt",
+      "sha256": "acbbf49039bed5211eba9da34179724eb62b2d76c1836fbb1ad6ba10867c5ba0"
+    }
+  ],
+  "repeatPolicy": "72 actual paired profiles across 36 inputs; one repeat each. All measured quality differences are zero. The remaining 164 profiles have zero acceptance tolerance. This is not complete-corpus repeat-noise coverage.",
+  "history": "The baseline preserves one browser attempt interrupted during an operator-requested shutdown, followed by a successful retry. All 236 saved final profiles have clean Sharp captures."
+}

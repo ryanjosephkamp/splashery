@@ -1,0 +1,30 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {PNG} from '/workspace/splashery/node_modules/pngjs/lib/png.js';
+import {qualityValues} from '/workspace/splashery/tools/cdx-p3d5-compare.mjs';
+import {inventory} from '/workspace/splashery/tools/p3df/inputs.mjs';
+import {POSES} from '/workspace/splashery/tools/p3df/scoring.mjs';
+const w='/workspace/work/p3d-r5',root=w+'/baseline',hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const atlasBytes=fs.readFileSync(root+'/atlas.json'),a=JSON.parse(atlasBytes),oldBytes=fs.readFileSync(w+'/review/photo-3d-failures/atlas.json'),old=JSON.parse(oldBytes),original=new Map(old.inputs.map(e=>[e.id,e])),entries=inventory({manifest:w+'/manifest.json'});
+assert.equal(a.complete,true);assert.equal(a.private,false);assert.equal(a.inputs.length,118);assert.equal(entries.length,118);
+const proof={kind:'Integrity verification of the completed fresh original-finder baseline. Comparison with the earlier atlas is a stability diagnostic across different application source fingerprints, not identical-source repeat-noise evidence.',createdUTC:new Date().toISOString(),methodSha256:hash(fs.readFileSync(import.meta.filename)),baselineAtlasSha256:hash(atlasBytes),earlierAtlasSha256:hash(oldBytes),sourceSha256:a.source.sha256,earlierSourceSha256:old.source.sha256,expectedInputs:118,expectedProfiles:236,expectedPoses:2124,inputHashesChecked:0,profilesChecked:0,colorPosesDecoded:0,artifactHashesChecked:0,earlierPixelMismatches:[],earlierQualityDifferences:[],failedAttempts:a.attempts.filter(x=>!x.passed).map(x=>({id:x.id,profile:x.profile,error:x.error||null})),inputs:[]};
+for(const e of a.inputs){
+ const originalEntry=original.get(e.id),input=entries.find(x=>x.id===e.id);assert(input&&originalEntry);assert.equal(hash(fs.readFileSync(input.file)),e.sha256);assert.equal(input.kind==='private',false);proof.inputHashesChecked++;
+ for(const key of['sha256','depthSha256','truthSha256'])assert.equal(input[key]??null,e[key]??null);
+ assert.deepEqual(Object.keys(e.profiles).sort(),['desktop','phone']);const row={id:e.id,photoSha256:e.sha256,profiles:[]};
+ for(const[name,p]of Object.entries(e.profiles)){
+  assert(p.sharp?.on);assert.equal(p.errors.length,0);assert.equal(p.externalRequests.length,0);assert.equal(p.rows.length,9);assert.deepEqual(p.rows.map(r=>[r.yaw,r.pitch]),POSES);proof.profilesChecked++;
+  const previous=originalEntry.profiles[name],before=qualityValues(previous),after=qualityValues(p);
+  for(const metric of Object.keys(before))if(before[metric]!==after[metric])proof.earlierQualityDifferences.push({id:e.id,profile:name,metric,before:before[metric],after:after[metric]});
+  for(const r of p.rows){
+   for(const[file,expected]of Object.entries(r.artifacts)){const actual=path.resolve(root,file);assert(actual.startsWith(root+'/'));assert.equal(hash(fs.readFileSync(actual)),expected);proof.artifactHashesChecked++;}
+   const png=PNG.sync.read(fs.readFileSync(path.join(root,r.image)));assert.deepEqual([png.width,png.height],p.native);assert.equal(hash(png.data),r.rgbaSha256);proof.colorPosesDecoded++;
+   const prior=previous.rows.find(x=>x.yaw===r.yaw&&x.pitch===r.pitch);assert(prior);if(prior.rgbaSha256!==r.rgbaSha256)proof.earlierPixelMismatches.push({id:e.id,profile:name,yaw:r.yaw,pitch:r.pitch});
+  }
+  row.profiles.push(name);
+ }
+ proof.inputs.push(row);fs.writeFileSync(w+'/baseline-integrity-verification.json',JSON.stringify(proof));console.log(JSON.stringify({checkedInputs:proof.inputs.length,decodedPoses:proof.colorPosesDecoded,artifactHashesChecked:proof.artifactHashesChecked}));
+}
+assert.equal(proof.profilesChecked,236);assert.equal(proof.colorPosesDecoded,2124);assert.equal(hash(fs.readFileSync(root+'/atlas.json')),proof.baselineAtlasSha256);proof.complete=true;proof.finishedUTC=new Date().toISOString();fs.writeFileSync(w+'/baseline-integrity-verification.json',JSON.stringify(proof,null,2));
