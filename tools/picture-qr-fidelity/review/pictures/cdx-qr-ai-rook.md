@@ -13,7 +13,7 @@ for its encoded square.
 
 ## Square
 
-Mean SSIM over 10/10 payloads: phone 0.2304 → 0.3250; print 0.2235 → 0.3172.
+Mean SSIM over 10/10 payloads: phone 0.2304 → 0.3581; print 0.2235 → 0.3504.
 
 | Main · Standard                                                 | Most detail                                                          |
 | --------------------------------------------------------------- | -------------------------------------------------------------------- |
@@ -21,7 +21,7 @@ Mean SSIM over 10/10 payloads: phone 0.2304 → 0.3250; print 0.2235 → 0.3172.
 
 ## Circle
 
-Mean SSIM over 10/10 payloads: phone 0.2168 → 0.3661; print 0.1481 → 0.3274.
+Mean SSIM over 10/10 payloads: phone 0.2168 → 0.3910; print 0.1481 → 0.3526.
 
 | Main · Standard                                                 | Most detail                                                          |
 | --------------------------------------------------------------- | -------------------------------------------------------------------- |

@@ -19,3 +19,7 @@ exactly. These images illustrate output, not timing. Source credits remain in
 | Frozen main                                              | Before retry forecast                                                         | Full retry forecast                                                              | Failure-first retry forecast                                                     |
 | -------------------------------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | ![Frozen main](main-all-met-459968-circle-8-390x844.png) | ![Before retry forecast](final-detail-detail-met-459968-circle-8-390x844.png) | ![Full retry forecast](qualified-retries-detail-met-459968-circle-8-390x844.png) | ![Failure-first retry forecast](priority-detail-met-459968-circle-8-390x844.png) |
+
+## October 15–16 review pass
+
+[Near-limit fallback PNGs and Winter fir comparison](review-pass/README.md).
