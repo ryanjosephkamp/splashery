@@ -6,6 +6,7 @@
 import { mix, shade, smoothstep, clamp } from "../kit.js";
 import { TOY_SOUNDS } from "../toy-sounds.js"; // lane Pages r6: the album's page sound on a pull
 import { MANUAL_PDF } from "../../manual/pdf-edition.js";
+import { RECIPES as NAME_TOY } from "./name-toy.js";
 
 // Each toy's tap state (one toy is shown at a time).
 const LAB = { tapN: 0, focus: false, sides: [], pend: 0 }; // (sides, pend: lane Pages r6)
@@ -3126,6 +3127,7 @@ function labDecorate(canvas, { variant }) {
 }
 
 export const RECIPES = {
+  "name-toy": NAME_TOY["name-toy"],
   "picture-lab": {
     kernel: "sharp", // polish: crisper text and edges (labs; src/kernels.js)
     // A flat sheet that shows whatever you open, and nothing else. It keeps
