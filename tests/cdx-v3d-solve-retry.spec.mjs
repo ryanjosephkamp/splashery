@@ -119,3 +119,61 @@ test("invalid camera minima fail before starting the solver", async ({ page }) =
   expect(result.errors).toHaveLength(7);
   for (const error of result.errors) expect(error).toMatch(/minCameras/);
 });
+
+test("the video pipeline retries short solves with intact pictures before seeding", async ({
+  page,
+}) => {
+  await fixture(page);
+  await page.route("**/src/video3d/extract.js", (route) =>
+    route.fulfill({
+      contentType: "text/javascript",
+      body: `export const openVideo=async()=>({duration:8}), closeVideo=()=>{};
+      export const grabFrames=async()=>[0,1,2].map(time=>({time,blob:new Blob(["picture"])}));`,
+    }),
+  );
+  await page.route("**/vendor/splatjs/src/session.js", async (route) => {
+    const response = await route.fetch();
+    const source = await response.text();
+    await route.fulfill({
+      response,
+      body: source.replace(
+        "return new Session(opts);",
+        `
+      const s = new Session(opts);
+      s.gpu = {owned:false};
+      globalThis.pipelineSession = s;
+      s.load = async () => s.frames = [0,1,2].map(i => ({name:'frame_00'+i+'.jpg',fw:4,fh:4,
+        tw:4,th:4,gray:new Float32Array(16),rgb:new Float32Array(48)}));
+      s.seed = async () => { throw new Error("observed accepted seed"); };
+      return s;`,
+      ),
+    });
+  });
+  const result = await page.evaluate(async () => {
+    Object.defineProperty(navigator, "gpu", {
+      configurable: true,
+      value: {
+        requestAdapter: async () => ({ info: { description: "test adapter" } }),
+      },
+    });
+    const { videoTo3D } = await import("/src/video3d/run.js");
+    let error;
+    try {
+      await videoTo3D(new File(["video"], "clip.mp4"), { tier: "phone" });
+    } catch (e) {
+      error = e.message;
+    }
+    return {
+      error,
+      calls: globalThis.solvedCalls,
+      accepted: globalThis.pipelineSession.recon?.cams.length,
+      released: globalThis.pipelineSession.frames.every((f) => f.gray === null),
+    };
+  });
+  expect(result).toEqual({
+    error: "observed accepted seed",
+    calls: 2,
+    accepted: 3,
+    released: true,
+  });
+});
