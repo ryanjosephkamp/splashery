@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 // Serve the repository first (npm run serve). This probe never changes production modules.
-// SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/lifecycle-probe.mjs --out=/tmp/lifecycle.json
+// SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/lifecycle-probe.mjs --out=.cache/lifecycle/full.json
 // --runs=3 (default), --only=clay,video,timers,sliders, --url=http://127.0.0.1:4173/
 import { chromium } from "@playwright/test";
 import fs from "node:fs/promises";
 import { pathToFileURL } from "node:url";
+import { dirname } from "node:path";
 import { execFileSync } from "node:child_process";
 import { makeSplat } from "../tests/fixtures.mjs";
 
@@ -810,6 +811,7 @@ export async function runProbe({
   only = ["clay", "video", "timers", "sliders"],
   out = null,
 } = {}) {
+  if (out) await fs.mkdir(dirname(out), { recursive: true });
   const browser = await chromium.launch({
     executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
     args: launchArgs,
@@ -865,9 +867,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     base: opt("url", "http://127.0.0.1:4173/"),
     runs: Number(opt("runs", "3")),
     only: opt("only", "clay,video,timers,sliders").split(","),
-    out: opt("out", null),
+    out: opt("out", ".cache/lifecycle/full.json"),
   });
   const json = JSON.stringify(result, null, 2) + "\n";
-  if (opt("out", null)) await fs.writeFile(opt("out"), json);
-  else process.stdout.write(json);
+  await fs.writeFile(opt("out", ".cache/lifecycle/full.json"), json);
 }

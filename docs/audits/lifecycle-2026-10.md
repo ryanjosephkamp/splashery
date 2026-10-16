@@ -3,7 +3,8 @@
 Codex (GPT-6), October 15, 2026. Task:
 [85-lifecycle-measurements](../codex/85-lifecycle-measurements.md).
 
-Raw observations: [lifecycle-2026-10-results.json](lifecycle-2026-10-results.json).
+Checkpoint summary: [lifecycle-2026-10-results.json](lifecycle-2026-10-results.json), 192,393 bytes.
+This audit is the source of truth. Full probe output stays in ignored `.cache/lifecycle/` storage.
 
 ## Scope and method
 
@@ -15,8 +16,8 @@ source for the baseline and supplemental baseline cases.
 
 Before publication, the owner approved recreating 16 unpublished commits with GitHub's noreply email
 after GitHub rejected the initial push for email privacy. File trees, commit messages, names, and
-dates were preserved; commit IDs changed. Raw observations retain the original checkout IDs. Their
-published equivalents have identical trees:
+dates were preserved; commit IDs changed. The approval covered only commits never pushed. Recorded
+observations retain the original checkout IDs. Their published equivalents have identical trees:
 
 | Recorded checkout | Published equivalent |
 | ----------------- | -------------------- |
@@ -36,8 +37,17 @@ benchmarks.
 ```sh
 npm run serve
 SPLASHERY_CHROMIUM=/path/to/chromium node tools/lifecycle-probe.mjs \
-  --runs=3 --out=/tmp/lifecycle.json
+  --runs=3 --out=.cache/lifecycle/full.json
+node tools/lifecycle-results.mjs .cache/lifecycle/full.json .cache/lifecycle/summary.json
 ```
+
+The summary keeps every run, heap sample, edit checkpoint, save/reopen result, and timer ownership
+checkpoint. A shared site table replaces repeated timer-site strings. Hidden samples retain exact
+callback and mutation deltas; recording and retry checkpoints retain their relevant callback totals.
+Unrelated cumulative counters are omitted. Raw slider-frame arrays become first-visible and
+first-correct checkpoints, with the observed incorrect-value interval. Numeric observations are not
+rounded. The committed report combines the original three-run datasets; its full input is retained
+locally as `.cache/lifecycle/lifecycle-2026-10-full.json` and can be summarized with the same tool.
 
 Use `--url=http://127.0.0.1:4174/` to probe a separately served original checkout. `--only=clay`,
 `--only=video`, `--only=timers`, and `--only=sliders` select individual questions. The separately
@@ -270,6 +280,33 @@ fix initializes the generator and controls immediately after the device profile 
 first toy load can yield another paint. The regression holds the first toy's asset response, opens
 Make through the phone controls, and checks all values before releasing the asset.
 
+## Owner screenshots
+
+| Viewport   | Make before                                                         | Make after                                                        | Save omission notice                                              |
+| ---------- | ------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| 390 × 844  | [Before](../../tests/screenshots/cdx-life-make-before-390x844.png)  | [After](../../tests/screenshots/cdx-life-make-after-390x844.png)  | [Toast](../../tests/screenshots/cdx-life-save-toast-390x844.png)  |
+| 1440 × 900 | [Before](../../tests/screenshots/cdx-life-make-before-1440x900.png) | [After](../../tests/screenshots/cdx-life-make-after-1440x900.png) | [Toast](../../tests/screenshots/cdx-life-save-toast-1440x900.png) |
+
+The Make shots use the current merged layout and assets, with the low profile and the same 6× CPU
+and network throttling as the slider probe. The first toy's asset response stays held until after
+the screenshot. The phone's normal Fill the screen control exposes all four ranges; all four are
+checked to be inside the viewport. The before variant removes only the startup-initialization hunk
+from the served application module through a Playwright route. Other application code is identical.
+The before values are 120000/50/50/50, with uninitialized readouts; the after values are
+60000/35/30/25, with their readouts initialized.
+
+The toast shots use the save regression's distinct 2,400/4,800 history fixture and the real Save
+scene button. They show the newest 400 clay edits and 800 paint stamps omitted by the caps.
+Screenshot inspection exposed two glyphs outside the original pill-shaped background on the phone.
+The glyph-background regression failed before the layout repair. The toast now uses its available
+width and a corner radius that keeps multiline text on its background.
+
+Reproduce the six shots after starting the local server:
+
+```sh
+SPLASHERY_CHROMIUM=/path/to/chromium node tools/lifecycle-shots.mjs
+```
+
 ## Fixes and verification
 
 | Fixed behavior                       | Run 1          | Run 2          | Run 3          |
@@ -320,6 +357,15 @@ repository's standard screenshots were restored. `npx prettier --check .`,
 
 No requested measurement was cut. The full repository suite was not run locally; task 85 reserves it
 for the Operator's merge PR or the `full-suite` label.
+
+The October 16 Operator follow-up merged `main` at `5a55f5cc` through merge `8170dbcb`. The compact
+report was compared with the original full output: 492 timer snapshots, 36 hidden samples, all six
+baseline/fixed slider runs, and every remaining run and checkpoint value matched. All six owner
+screenshots were captured at their named dimensions and inspected. The slider regression now derives
+its expected values and count label from the profile, generator defaults, and `formatCount()`. After
+the toast layout repair, all five lifecycle regressions and the scene-swap check passed in 55.8
+seconds; the isolated 360-pixel phone check passed in 9.6 seconds. Formatting, American English, and
+diff checks were repeated before the follow-up push.
 
 Rule check: E1 — the owner approved recreating the 16 unpublished commits solely to replace the
 private email with the GitHub noreply email. No force-push.
