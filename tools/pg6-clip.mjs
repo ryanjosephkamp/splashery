@@ -20,12 +20,14 @@
 // --profile=low and --width=390 match a phone; preparation waits are omitted.
 // --frames=1 also saves full-color PNG frames and their variable-duration concat list.
 // --draws=1 uses two animation-frame waits per draw, before and after sheet readiness.
+// New scenes use 8 steps/s and canvas views; --fps and --capture=page override these. Legacy defaults stay 12.
 // <out-dir>/pg6-<scene>.gif and a strip of six frames. The test PDF is made
 // by tests/fixtures/pg6/make-pdf.mjs.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { PNG } from "pngjs";
 import { GIFEncoder, quantize, applyPalette } from "../vendor/gifenc/gifenc.esm.js";
 
@@ -40,7 +42,9 @@ if (!outDir) throw new Error("Usage: node tools/pg6-clip.mjs <out-dir> [scene ..
 const ALL = ["two-up", "turn", "tilt", "lab", "terrain", "layers", "album"];
 const list = scenes.length ? scenes : ALL;
 fs.mkdirSync(outDir, { recursive: true });
-const STEP = 1 / 12;
+const RECORDER_SHA256 = createHash("sha256")
+  .update(fs.readFileSync(new URL(import.meta.url)))
+  .digest("hex");
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
@@ -86,6 +90,12 @@ function shrink(png, w) {
 }
 
 async function record(scene) {
+  // Match each revision at the same scene cadence. Legacy scenes retain
+  // 12; round-2 scenes use 8 to keep capture bounded.
+  const stepFPS = Number(opt("fps", scene.startsWith("r2-") ? 8 : 12));
+  if (!(stepFPS >= 1 && stepFPS <= 60)) throw new Error("fps must be between 1 and 60.");
+  const STEP = 1 / stepFPS;
+  const canvasReview = scene.startsWith("r2-") && opt("capture", "canvas") === "canvas";
   const width = Number(opt("width", 360));
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: Number(opt("dpr", 2)) }); // prettier-ignore
   await page.goto(`${base}?renderer=webgl2&adapt=off&profile=${opt("profile", "mid")}&labs=1`);
@@ -108,6 +118,11 @@ async function record(scene) {
     );
   // A couple of real frames, so the stage draws the stepped moment.
   const draw = async () => {
+    if (canvasReview) {
+      for (let i = 0; i < Number(opt("draws", 3)); i++)
+        await run(() => window.__splashery.player.stage.captureFrame().then(() => {}));
+      return;
+    }
     for (let i = 0; i < Number(opt("draws", 3)); i++)
       await run(() => new Promise((r) => {
         window.__splashery.player.stage.requestRender();
@@ -125,10 +140,49 @@ async function record(scene) {
           ),
         ),
       );
-    const png = PNG.sync.read(await page.screenshot({ timeout: 180_000 }));
+    let bytes;
+    if (canvasReview) {
+      const data = await run(
+        async ({ width, scene, stepFPS }) => {
+          const p = window.__splashery.player;
+          const frame = await p.stage.captureFrame();
+          const c = document.createElement("canvas");
+          c.width = width;
+          c.height = Math.round((width * 844) / 390);
+          const g = c.getContext("2d");
+          g.fillStyle = "white";
+          g.fillRect(0, 0, c.width, c.height);
+          const scale = width / 390;
+          const h = (frame.height * width) / frame.width;
+          if (h > c.height - 64 * scale) throw new Error("The canvas exceeds the review frame.");
+          g.drawImage(frame, 0, 44 * scale, width, h);
+          const toy = p.scene.toy.id.replaceAll("-", " ");
+          const input = ["r2-text", "r2-chart", "r2-diagram"].includes(scene)
+            ? ` / ${scene.slice(3)}`
+            : "";
+          g.fillStyle = "#17202a";
+          g.font = `${14 * scale}px sans-serif`;
+          g.fillText(
+            `${toy}${input} · Layers ${p.motion?.state?.layers ? "on" : "off"}`,
+            8 * scale,
+            24 * scale,
+          );
+          g.font = `${11 * scale}px sans-serif`;
+          g.fillText(
+            `Actual canvas · stepped ${stepFPS} fps · UI omitted`,
+            8 * scale,
+            c.height - 12 * scale,
+          );
+          return c.toDataURL("image/png");
+        },
+        { width, scene, stepFPS },
+      );
+      bytes = Buffer.from(data.split(",")[1], "base64");
+    } else bytes = await page.screenshot({ timeout: 180_000 });
+    const png = PNG.sync.read(bytes);
     frames.push({ img: shrink(png, width), delay: holdMs });
   };
-  // Steps the clock `seconds` on, a frame each 1/12 s.
+  // Steps the clock `seconds` on, at the scene's recorded cadence.
   const play = async (seconds) => {
     for (let t = 0; t < seconds - 1e-6; t += STEP) {
       await run((dt) => {
@@ -315,9 +369,12 @@ async function record(scene) {
       await hold(650);
       await raise(n, box);
       observations.push({ frame: frames.length, layers: !!layered, figures: await pops() });
-      await turn(0.45, 0.3, 0.65);
+      // Keep the book's moving view. Other review scenes retain the
+      // oblique view after the first rise, cutting camera-only frames.
+      if (scene === "r2-book") await turn(0.45, 0.3, 0.65);
+      else if (!layered) await turn(0.45, 0.3, STEP);
       await hold(650);
-      await turn(0, 0, 0.5);
+      if (scene === "r2-book") await turn(0, 0, 0.5);
       await run(() => {
         const { app, player } = window.__splashery;
         if (app.popOut) app.togglePopOut();
@@ -541,7 +598,14 @@ async function record(scene) {
           profile: opt("profile", "mid"),
           drawWaits: Number(opt("draws", 3)),
           renderer: process.env.SPLASHERY_GL || "swiftshader",
-          clock: "stepped at 12 fps; preparation waits omitted; not throughput",
+          stepFPS,
+          capture: canvasReview
+            ? "actual canvas at CSS scale; labeled, with UI omitted"
+            : "full browser page",
+          reviewView:
+            scene === "r2-book" ? "moving view" : "front rise, then a retained oblique view",
+          executedRecorderSha256: RECORDER_SHA256,
+          clock: `stepped at ${stepFPS} fps; preparation waits omitted; not throughput`,
           frames: frames.length,
           durationMs: frames.reduce((n, f) => n + f.delay, 0),
           observations,
