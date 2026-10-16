@@ -535,3 +535,54 @@ for (const renderer of ["webgl2", "webgpu"])
     expect(difference.count).toBeGreaterThan(1000);
     expect(difference.mean).toBeLessThan(0.5);
   });
+
+for (const renderer of ["webgl2", "webgpu"])
+  test(`a closed album cover hides its picture faces (${renderer})`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`/?renderer=${renderer}&profile=low&adapt=off&labs=1`);
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+    await page.evaluate(() => window.__splashery.app.chooseToy("photo-album"));
+    await ready(page);
+    const difference = await page.evaluate(async () => {
+      const p = window.__splashery.player;
+      p.frozen = true;
+      p.glide = null;
+      p.camera.interact();
+      for (let i = 0; i < 4; i++) await p.stage.captureFrame();
+      const frame = await p.stage.captureFrame();
+      const a = frame.getContext("2d").getImageData(0, 0, frame.width, frame.height).data;
+      const faces = p.pictures.sheets.map((s) => s.slot?.surface).filter(Boolean);
+      // WebGPU's splat sorting can change coincident cover splats slightly
+      // between identical frames. Measure that floor before hiding any ink.
+      let control;
+      for (let i = 0; i < 4; i++) control = await p.stage.captureFrame();
+      const c = control.getContext("2d").getImageData(0, 0, control.width, control.height).data;
+      for (const f of faces) {
+        f.material.redWrite =
+          f.material.greenWrite =
+          f.material.blueWrite =
+          f.material.alphaWrite =
+            false;
+        f.material.update();
+      }
+      let without;
+      for (let i = 0; i < 4; i++) without = await p.stage.captureFrame();
+      const b = without.getContext("2d").getImageData(0, 0, without.width, without.height).data;
+      let total = 0,
+        noise = 0;
+      for (let i = 0; i < a.length; i += 4)
+        for (let k = 0; k < 3; k++) {
+          total += Math.abs(c[i + k] - b[i + k]);
+          noise += Math.abs(a[i + k] - c[i + k]);
+        }
+      return {
+        mean: total / ((a.length / 4) * 3),
+        noise: noise / ((a.length / 4) * 3),
+        angle: p.motion.out.parts.cover.angle,
+        faces: faces.length,
+      };
+    });
+    expect(difference.angle).toBe(0);
+    expect(difference.faces).toBeGreaterThan(0);
+    expect(difference.mean - difference.noise).toBeLessThan(0.5);
+  });

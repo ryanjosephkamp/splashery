@@ -673,6 +673,7 @@ try {
                 renderer: process.env.SPLASHERY_GL || "swiftshader",
                 isolation: "fresh Chromium process per case and repeat",
                 memoryPoint: "settled page before reference raster and screenshots",
+                motionWindowSeconds: Number(arg("seconds", 5)),
                 inputPreparation:
                   "custom input starts after closing the default sample and drawing the home view",
                 toolSha256,

@@ -17,6 +17,7 @@ const arg = (name, fallback) =>
 const reportOnly = process.argv.includes("--report");
 const mainURL = arg("main-url", "http://127.0.0.1:4180/");
 const candidateURL = arg("candidate-url", "http://127.0.0.1:4173/");
+const motionSeconds = Number(arg("seconds", 10));
 process.chdir(root);
 const work = arg("out", "work/pages-r2");
 fs.mkdirSync(work, { recursive: true });
@@ -39,6 +40,8 @@ if (previous && (previous.candidateRuntimeSha256 !== frozen || previous.toolSha2
   throw Error("Cached measurements used different source. Choose a fresh output directory.");
 const mainRef = arg("main-ref", previous?.baselineCommit);
 if (!mainRef) throw Error("Provide --main-ref with the commit served by the baseline URL.");
+if (previous && previous.motionWindowSeconds !== motionSeconds)
+  throw Error("Cached motion window differs.");
 if (previous && mainRef !== previous.baselineCommit) throw Error("Cached baseline commit differs.");
 const revision =
   previous?.candidateCommit ||
@@ -96,6 +99,7 @@ function read(file, group, label, repeat) {
     "isolation",
     "memoryPoint",
     "inputPreparation",
+    "motionWindowSeconds",
   ];
   if (
     reference &&
@@ -133,7 +137,7 @@ for (const group of groups) {
               `--toys=${toy}`,
               `--cases=${input}`,
               "--repeats=1",
-              "--seconds=15",
+              `--seconds=${motionSeconds}`,
               `--out=${dir}`,
             ],
             { cwd: root, env: process.env, stdio: ["ignore", fd, fd] },
