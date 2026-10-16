@@ -1,0 +1,83 @@
+{
+  "reference": "Checkpoint 58f3d8ed backgroundImage, all 32 BFS passes",
+  "rows": [
+    {
+      "w": 2,
+      "h": 2,
+      "gx": 2,
+      "gy": 2,
+      "kind": "flat",
+      "relief": 0,
+      "hashes": {
+        "depth": "1dc5c8e021c663cd8f7ecf1fb0c6d4112bc8d7f3c9e0095cd26bd7af7b8d7f13",
+        "rgba": "fd9cdde2ccd5470123d00cfaab46e2c31932955cb59276971a5a8a2bbb718b7a",
+        "donor": "baed642339816affb3fe8719792d0e4ce82f12db72b7373d244eaa65445800fe"
+      }
+    },
+    {
+      "w": 37,
+      "h": 23,
+      "gx": 17,
+      "gy": 11,
+      "kind": "flat",
+      "relief": 0.8,
+      "hashes": {
+        "depth": "41e15e605f87d4f5513c73702aaea41b45b745279f9e4325550e57cf296c1809",
+        "rgba": "8998da84c3a9c2a63303c58f28ce0ba9767b5257dc7816a09e2a61d51a5ddeec",
+        "donor": "bd00de8f8a61f0cbcab97098a7d3d6b079cbe50617f622a96d7c622d588551b2"
+      }
+    },
+    {
+      "w": 128,
+      "h": 96,
+      "gx": 32,
+      "gy": 24,
+      "kind": "step",
+      "relief": 0.7,
+      "hashes": {
+        "depth": "c0f01671ed8fe74559d839f230129b1a30a72a4cd99c90768c76e12354d56cd4",
+        "rgba": "556ecc6498bad7b6b21fb7716afb8772f86b05776bd63275abf1ceb2fe2abe0e",
+        "donor": "5a47c637e8f0cab3dbc8a717ea19464d22ff0f3178e6d23fd0d464a503e200b0"
+      }
+    },
+    {
+      "w": 128,
+      "h": 96,
+      "gx": 32,
+      "gy": 24,
+      "kind": "narrow",
+      "relief": 0.7,
+      "hashes": {
+        "depth": "851d6026ffbe027fc01c8b7e87665b45f9989d1e3573f2b647235b1af7627955",
+        "rgba": "73667e0f0a0c98fedd23ca07c47c119fc5e3675950c0123dc7453801b81369fd",
+        "donor": "3fd54eac8597e8696d5868d9009407eb6c6ae534e078bd78ee3e010bbb9e9696"
+      }
+    },
+    {
+      "w": 96,
+      "h": 128,
+      "gx": 24,
+      "gy": 32,
+      "kind": "noise",
+      "relief": 0.7,
+      "hashes": {
+        "depth": "4f456ead9059dd39c3fb00306486033ace0f8ecc1f2e898d25ffdb0527349022",
+        "rgba": "67e1d3d484e383cadce399ed9f80e4eeed5e66c61484a74c0d204a03fe4d67c7",
+        "donor": "2815a0aea191cbf07ca4f1d59d5f2ae4c6b728b8518335827ecff76615f936aa"
+      }
+    },
+    {
+      "w": 96,
+      "h": 128,
+      "gx": 24,
+      "gy": 32,
+      "kind": "ramp",
+      "relief": 0.1,
+      "hashes": {
+        "depth": "87dc300f809019165c8c95d0c321c2b1ce2f8b23e5f0837dfb2d22823b08bac2",
+        "rgba": "884f08d0fc127700308d5cf5d47b429426f94f91175c8da4512f04bca3390c2c",
+        "donor": "7dd1d30f17195a86ad03b41944ae3f7e3f59370025490663524d7e94c7b2a652"
+      }
+    }
+  ]
+}

@@ -802,11 +802,15 @@ const POINT_CLOUDS = {
     const s = c.scan ?? 0;
     out.morph = [s > 0 ? 1.15 * (1 - s) : 0, 0, 0, 0];
     out.glow = [0.35, 1, 0.9, s > 0 ? 1.4 : 0];
+    // Lane Polish: colored by height, a key beside the view (the ramp runs
+    // over the file's lowest to highest point).
+    out.legend = PC.heightKey ? { title: "Height", items: [{ text: PC.heightKey }] } : null;
   },
   build(k, o) {
     k.fitOn = false;
     const v = PC.view;
     PC.distance = null;
+    PC.heightKey = "";
     if (!v?.main) {
       // Nothing to show (an error, or a LAZ sample in the Node tools, which can't read LAZ): an
       // even grid of gray points, like an empty scan.
@@ -827,11 +831,26 @@ const POINT_CLOUDS = {
     const half = Math.max(...[0, 1, 2].map((a) => (f.max[a] - f.min[a]) / 2)) || 1;
     const s = 0.95 / half;
     PC.frameInfo = { c, s };
+    // Lane Polish: framed by the ground's diagonal (a square tile seen
+    // corner on is √2 as wide), so a turned cloud stays on a phone's screen.
+    const diag = Math.hypot(f.max[0] - f.min[0], f.max[2] - f.min[2]) / 2;
+    k.reach([diag * s, 0, 0]);
+    const col = o.color || "height";
+    // (The ramp runs over the whole file's height, in its own units: meters
+    // for the samples, whose heights are kept from their middle, so the key
+    // gives the rise from lowest to highest.)
+    const h = upFor(o) === "y" ? 1 : 2;
+    const B = PC.stats?.bounds;
+    const meters = (x) => `${Math.round(x).toLocaleString("en-US")}${o.source === "custom" ? " (in the file's units)" : " m"}`; // prettier-ignore
+    const byHeight = col === "height" || !PC.stats?.has?.[{ intensity: "intensity", class: "cls", rgb: "color" }[col]]; // prettier-ignore
+    PC.heightKey = byHeight && B ? `Lowest (blue) through green and yellow to highest (white), ${meters(B.max[h] - B.min[h])} apart` : ""; // prettier-ignore
     const m = v.main;
     // An even share when the build asks for fewer points than the preview has (the Node tools).
     const share = Math.min(1, (k.count * 0.95) / Math.max(1, m.count));
     const n = Math.max(1, Math.floor(m.count * share));
-    const size = Math.max(1e-4, (v.spacing / Math.sqrt(share)) * s * 0.65 * (o.size || 1));
+    // (Lane Polish: 0.82 of the spacing, was 0.65, which left pinholes of
+    // the page between the points at phone size.)
+    const size = Math.max(1e-4, (v.spacing / Math.sqrt(share)) * s * 0.82 * (o.size || 1));
     // The scan line sweeps across from west to east, like a lidar pass over the ground.
     const lo = f.min[0];
     const span = f.max[0] - f.min[0] || 1;

@@ -1,0 +1,260 @@
+{
+  "credit": "made by Ryan with Codex (GPT-6)",
+  "license": "CC0-1.0",
+  "source": "tools/studio-truth-generate.py",
+  "date_checked": "2026-10-14",
+  "changes": "original seeded procedural geometry, CPU render, pixel-center BVH depth, and camera calibration",
+  "total_bytes": 20140380,
+  "files": [
+    {
+      "path": "arches/still/poses.json",
+      "bytes": 1054,
+      "sha256": "9bd1b253fff76eda5815b0e16ab55d9d954e4f9895f213466dd09227f1c40789"
+    },
+    {
+      "path": "arches/still/still.depth.f32.gz",
+      "bytes": 1874494,
+      "sha256": "8697ef62925f2d26613c75ace56a37ccaf3ac76e6e009b07cfdc56a06d31d0c6"
+    },
+    {
+      "path": "arches/still/still.jpg",
+      "bytes": 345758,
+      "sha256": "19e0f74710242f032e1be31de49a6b5432f73497092a91179385f2ea3cac5c79"
+    },
+    {
+      "path": "arches/still/still.mask.png",
+      "bytes": 28105,
+      "sha256": "4d016ec51493b6ba599ca7531ad8e2ffe71d5eeff2190b90c85f595b798a11b2"
+    },
+    {
+      "path": "coast/still/poses.json",
+      "bytes": 1026,
+      "sha256": "5277ce5bf1cde99abf83007d8b2a07df0261a7dd5d33a501538f2ef23b15fc7a"
+    },
+    {
+      "path": "coast/still/still.depth.f32.gz",
+      "bytes": 1479987,
+      "sha256": "f1b3db4ba46a3466d05554c1b4852a85bd68193dd7f73ac67e818a5cdf0b294c"
+    },
+    {
+      "path": "coast/still/still.jpg",
+      "bytes": 165895,
+      "sha256": "e5d6cf55f7b47b9347bda772a033ee6c365335429f66357845343b38083b270b"
+    },
+    {
+      "path": "coast/still/still.mask.png",
+      "bytes": 22812,
+      "sha256": "c5daed7ca28be3b333fb6a63a3fd09fff6b8af3db3d508040c910761115729b5"
+    },
+    {
+      "path": "contact-sheet.jpg",
+      "bytes": 196249,
+      "sha256": "645d3725c4ff745c17193e9fd8f5e28c81a990bfeaea0d021fe59d0fa564b9df"
+    },
+    {
+      "path": "desk/still/poses.json",
+      "bytes": 1016,
+      "sha256": "7a5e9d4795a3b1aceffc14110d2611861bc7af20e1ab4ff659a184a30ecc3db3"
+    },
+    {
+      "path": "desk/still/still.depth.f32.gz",
+      "bytes": 991538,
+      "sha256": "918b7964698ec9bdd00f10281d6443c5e0b711376b5015d323e48296551bbabe"
+    },
+    {
+      "path": "desk/still/still.jpg",
+      "bytes": 290938,
+      "sha256": "df87a33f04352ea196ac0a6e880db83c36950ee9133a020cf1264a52a93a390e"
+    },
+    {
+      "path": "desk/still/still.mask.png",
+      "bytes": 19727,
+      "sha256": "b1698945ee788d30f0da0fd20fe0f1281cfc348e0e762fc04ef4f25b2dc73c07"
+    },
+    {
+      "path": "forest/still/poses.json",
+      "bytes": 1042,
+      "sha256": "970326f8a1e55875239562f32927c27e6719cbe0391eff805a26ea4a1b098174"
+    },
+    {
+      "path": "forest/still/still.depth.f32.gz",
+      "bytes": 1878570,
+      "sha256": "3ead333e91572cbf76ea668334e26133e7a9ba5505a6d201586b1ba4c3a0cadf"
+    },
+    {
+      "path": "forest/still/still.jpg",
+      "bytes": 317768,
+      "sha256": "6e302d145a62abbcf2dd716f7419153091a6f6939e2f5521b09a01e5c0b1cab4"
+    },
+    {
+      "path": "forest/still/still.mask.png",
+      "bytes": 22798,
+      "sha256": "183ba5fbf6390956e281afc847bb56db420425ac6fa606366ec6b76e9bd412cd"
+    },
+    {
+      "path": "fur/still/poses.json",
+      "bytes": 1012,
+      "sha256": "bd30dc090187b024c9d2af651c21ae76b9d22e773a85201fcfd4e824920e059e"
+    },
+    {
+      "path": "fur/still/still.depth.f32.gz",
+      "bytes": 850623,
+      "sha256": "fbeb8414e89ca9473cf32160aa13f28adad4df2908dce4fb9f6b7643dc46d0b0"
+    },
+    {
+      "path": "fur/still/still.jpg",
+      "bytes": 225256,
+      "sha256": "287e7886fd7cc08c3e4813b54a10839636e86415146bed62df7f28071f84396b"
+    },
+    {
+      "path": "fur/still/still.mask.png",
+      "bytes": 22780,
+      "sha256": "4c912c4c8fca6c796a4979a541eb394cb0aed9aa1ca4309465447ad422cf1200"
+    },
+    {
+      "path": "lattice/still/poses.json",
+      "bytes": 1011,
+      "sha256": "54e9b9694b03b40c9bac3352404af6b8d87dda3d2843d42fef8b0f92295d502c"
+    },
+    {
+      "path": "lattice/still/still.depth.f32.gz",
+      "bytes": 1615424,
+      "sha256": "8ff1c75946a0f44f09deeddcb12b6c790a14339c6740cbdf2dcda7ef4c5e2c74"
+    },
+    {
+      "path": "lattice/still/still.jpg",
+      "bytes": 355533,
+      "sha256": "9baf2c9e2eca5121227c97c958f461f33bdb995d2c0d21e45dc1039b59b57df9"
+    },
+    {
+      "path": "lattice/still/still.mask.png",
+      "bytes": 22649,
+      "sha256": "4c4464b49190ac29e57bff7681e423a7d3a5e2f1b1377ecd867235436fb1cb95"
+    },
+    {
+      "path": "leaves/still/poses.json",
+      "bytes": 1026,
+      "sha256": "0eeea9c87adc3d7ff5a702347f2b21948151d4d2ac8562f4023850d820843d81"
+    },
+    {
+      "path": "leaves/still/still.depth.f32.gz",
+      "bytes": 905788,
+      "sha256": "b47019e80eb85cddd85b99aca6c938bff58245f84ed6ca37c2f110fe7f05edd9"
+    },
+    {
+      "path": "leaves/still/still.jpg",
+      "bytes": 256410,
+      "sha256": "4ebd5dc4a850e7f247ffe28b5b5bfc70a84beda8811ed3ad1b1e328cee6da8e7"
+    },
+    {
+      "path": "leaves/still/still.mask.png",
+      "bytes": 22683,
+      "sha256": "99869149ef2db2071847c51b01d7d1d468b5493c5d5cc097153e8838637257a1"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 4319,
+      "sha256": "f5e3e120ffa91cd16d9d6640e4b56fc8cd53c6928e3babfa898725973e69b0ea"
+    },
+    {
+      "path": "night/still/poses.json",
+      "bytes": 1036,
+      "sha256": "ca37b83d22b93aacfe2410f63b2486a7ea1295294e4102cb371f7b6c23024b2a"
+    },
+    {
+      "path": "night/still/still.depth.f32.gz",
+      "bytes": 628617,
+      "sha256": "844d01ec79ad6d2c29e4575e4ee3e0d3a1ff4832bca1f7188a2e0bd67858c832"
+    },
+    {
+      "path": "night/still/still.jpg",
+      "bytes": 336673,
+      "sha256": "bf69a1e4c758002068d9de4efb792f4a0a643d2b68d676a988593639dcde5f0a"
+    },
+    {
+      "path": "night/still/still.mask.png",
+      "bytes": 23938,
+      "sha256": "08a7a68886d7e6414ceb1d5ab95743e57c9d3c19dd87d570d79e2d6a6965926c"
+    },
+    {
+      "path": "room/still/poses.json",
+      "bytes": 1042,
+      "sha256": "2bcd3d8f338c7fe19b73233a7148fa7fb2a7c6c736677f480164e68b4d309c00"
+    },
+    {
+      "path": "room/still/still.depth.f32.gz",
+      "bytes": 2642932,
+      "sha256": "d66053700cd695fbfa059c854e0ac66761121902656138d2d064a7bc98ffff56"
+    },
+    {
+      "path": "room/still/still.jpg",
+      "bytes": 349898,
+      "sha256": "a913fb52e8a515455090a325b5151f419a4dd6b4c3a2c9efe1d7d5e4d8e8ae71"
+    },
+    {
+      "path": "room/still/still.mask.png",
+      "bytes": 17815,
+      "sha256": "abc635d6a8a8f2b8addac77e1ce32aeead9fee077a0fcb042fe70b2816c14591"
+    },
+    {
+      "path": "stairs/still/poses.json",
+      "bytes": 1030,
+      "sha256": "008c7e4a774d440a6d77d5b2838855f8d257dee38d0b199c0aa80f181f355b62"
+    },
+    {
+      "path": "stairs/still/still.depth.f32.gz",
+      "bytes": 1424934,
+      "sha256": "f29cfc33ebae4a38af6c04c83fe2a58271eddf7b6ca3964bb77bfa432d89dc38"
+    },
+    {
+      "path": "stairs/still/still.jpg",
+      "bytes": 263559,
+      "sha256": "f85a149718bcceb0a815d1deb96698add211d772c0f52f895aa28fe03561d51c"
+    },
+    {
+      "path": "stairs/still/still.mask.png",
+      "bytes": 28126,
+      "sha256": "92a692c13cfb6e4121792a5bdf4bb94f5831f4f097d741aff4b61875775b4764"
+    },
+    {
+      "path": "steps/still/poses.json",
+      "bytes": 1009,
+      "sha256": "04dcfd3663144ffac60dda54ddbdd81e06d72fd1755f5221c49c133317eaee38"
+    },
+    {
+      "path": "steps/still/still.depth.f32.gz",
+      "bytes": 1354201,
+      "sha256": "e77669eaabc30352bcf3ae0a3f50b83ac367eabbf5c717573db7b92c04dc58bf"
+    },
+    {
+      "path": "steps/still/still.jpg",
+      "bytes": 214686,
+      "sha256": "1c73980d5513ffb4f4380baf52b9013ec06a450831b0756217fc67ba7da643f9"
+    },
+    {
+      "path": "steps/still/still.mask.png",
+      "bytes": 19515,
+      "sha256": "64c6c10b887af9a0cda27f10cb80e41489be53c9f422c91f08ebf72cab490086"
+    },
+    {
+      "path": "still-life/still/poses.json",
+      "bytes": 1026,
+      "sha256": "8e366037d337f6b2b8482b7e838cfefd24bd6376cd22255fd0030a4f605611a5"
+    },
+    {
+      "path": "still-life/still/still.depth.f32.gz",
+      "bytes": 667945,
+      "sha256": "2b3e68d6dbd9a29a0f161a0dbfea7dd3677b3343fcff2f9e64a91776c7631db0"
+    },
+    {
+      "path": "still-life/still/still.jpg",
+      "bytes": 218377,
+      "sha256": "8dd6ef596e67f852d0d2e8cd47909842c8bc42577748d0b7ce7ad1cb70d47e51"
+    },
+    {
+      "path": "still-life/still/still.mask.png",
+      "bytes": 20730,
+      "sha256": "6a36ecbc11e1bc60999c460666688bd52c4feae1d2d647c3a96d31c3f785d126"
+    }
+  ]
+}

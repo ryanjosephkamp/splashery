@@ -87,6 +87,25 @@ merges.
 | 76-photo-3d-r4.md                 | Photo to 3D round 4: better fill behind objects, clean thin parts, faster (a Goal run)              | Photo to 3D, tests, clips                            | yes           |
 | 77-ci-suite.md                    | The test suite on GitHub Actions, sharded, for every PR                                             | a workflow, a short doc                              | no            |
 | 78-portfolio-toys.md              | Four splat toys from the owner's portfolio concepts, in four parallel parts (a to d)                | four labs toys, tests, clips                         | no            |
+| 79-picture-qr-fidelity.md         | Picture QR at its sharpest: a measured Goal run, every code still scanning                          | the QR toys, tools, report                           | yes           |
+| 80-picture-qr-fit.md              | Picture QR: crop your picture, a thinner circle border, round corner eyes                           | the QR toys, tests                                   | no            |
+| 81-powers-of-ten-labels.md        | Powers of ten: two distance labels checked and reworded                                             | labels, evidence, site page                          | yes           |
+| 82-toy-checkpoints.md             | Checkpoints and how-it-works docs for 18 favorite toys, in five parts (a to e)                      | docs only                                            | no            |
+| 83-controls-and-credits.md        | The README's keyboard help, a stale comment, and two broken credit links                            | README, a comment, the Markdown reader, tests        | no            |
+| 84-advisor-route-evidence.md      | Evidence for the demo route: Photo to 3D, Moving photo to 3D, and the QR codes                      | a route runner, a spec, a report                     | no            |
+| 85-lifecycle-measurements.md      | Four memory and lifetime questions measured before any fix                                          | a probe, a report, fixes only for defects            | no            |
+| 86-actions-only-failures.md       | Three tests that fail only on GitHub Actions, and the manual's PDF                                  | tests, a manual workflow, the known list             | no            |
+| 87-photo-3d-failure-gallery.md    | Photo to 3D: where it still fails, measured, ranked, and shown                                      | a tool, a report, a gallery on the clips branch      | yes           |
+| 88-video-3d-real-clips.md         | Video to 3D on 20 real clips, then a Goal run for sharpness                                         | Video to 3D files, a benchmark, a report             | yes           |
+| 89-export-quality.md              | Exports at full quality: the GIF, the video (MP4), and Record, with the effect loop first           | the exporters, a presets table, tests                | no            |
+| 90-batch-export.md                | Batch export: many photos or many toys, one click, one file each (after task 89)                    | a labs panel, a command-line runner, tests           | no            |
+| 91-playground-release-ui.md       | The Playground before the release: the shelf grid, overlaps, Featured, shelf order                  | the app UI, a featured list, smoke tests             | no            |
+| 92-moving-photo-r4.md             | Moving photo to 3D r4: the Sharp view's clip bug, full phone speed, then a Goal run                 | Moving photo files (from #560)                       | yes           |
+| 93-photo-3d-r5.md                 | Photo to 3D r5: fix the failure atlas's worst classes (Goal run, beats the checkpoint)              | Photo to 3D files, tools, a report                   | no            |
+| 94-video-3d-r5.md                 | Video to 3D r5: close task 88's open gates, then sharper (Goal run)                                 | Video to 3D files (from #655)                        | yes           |
+| 95-book-picture-lab-r2.md         | Your book and the Picture lab, sharper and smoother, then the Photo album (Goal run)                | the pages toys, a benchmark, a report                | no            |
+| 96-playtest-small-fixes.md        | Small fixes from the October 15 playtest and walkthrough, and the manual's contents                 | small UI and export fixes, the manual                | no            |
+| 97-math-pickers.md                | One toy for the 4D shapes, one for the attractors; old links keep working (after #197)              | the Math pack, an alias map, tests                   | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.

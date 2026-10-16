@@ -407,6 +407,10 @@ const P3D = {
   info: null, // what the last build made, for shown() and the tests
 };
 
+// A different named file already open in this page must not stand in for the sender's photo.
+const hasOwnPhoto = (o) =>
+  o.source === "custom" && P3D.custom && (!o.photoName || P3D.custom.name === o.photoName);
+
 export const photoState = () => ({ ...P3D.info });
 
 const MAX_SIDE = 2048; // a bigger photo is reduced on the way in (memory)
@@ -543,11 +547,22 @@ export async function openPhoto(file, name) {
   const photo = await decodePhoto(file);
   const { photoPreview } = await import("../photo3d/preview.js");
   const close = photoPreview(photo);
+  const colors =
+    typeof Worker === "undefined"
+      ? Promise.resolve(null)
+      : import("../photo3d/prepare.js")
+          .then(({ prewarmSurface }) => {
+            const pl = globalThis.window?.__splashery?.player;
+            const count = pl?.splatBudget?.(PHOTO_DENSITY) ?? PHOTO_BUDGETS.mid;
+            return prewarmSurface(photo, { count: Math.max(100, Math.floor(count * 0.95)) });
+          })
+          .catch(() => null);
   try {
     const { estimateDepth } = await import("./photo-3d-depth.js");
     const depth = await estimateDepth(photo);
     const p = usePhoto(photo, { w: depth.w, h: depth.h, d: depth.d }, name || "Your photo");
     p.ms = depth.ms;
+    p.colorKey = await colors;
     return p;
   } finally {
     close();
@@ -663,6 +678,8 @@ const PHOTO_3D = {
   sounds: (o) => (o.sound === "custom" && OWN.key ? [ownSpec()] : []),
   input: {
     title: "Your own photo",
+    missingFile: (o) =>
+      o.source === "custom" && o.photoName && !hasOwnPhoto(o) ? o.photoName : null,
     accept:
       ".jpg,.jpeg,.png,.webp,.heic,.heif,image/jpeg,image/png,image/webp,image/heic,image/heif",
     binary: true,
@@ -719,10 +736,9 @@ const PHOTO_3D = {
     const pl = globalThis.window?.__splashery?.player;
     const token = pl?.loadToken;
     const current = () => generation === P3D.preparing && (!pl || token === pl.loadToken);
-    const src =
-      o.source === "custom" && P3D.custom
-        ? P3D.custom
-        : await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source);
+    const src = hasOwnPhoto(o)
+      ? P3D.custom
+      : await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source);
     if (!current()) return;
     P3D.want = src;
     if (typeof window !== "undefined" && typeof Worker !== "undefined" && !liveOn()) {
@@ -753,6 +769,7 @@ const PHOTO_3D = {
             src.depth,
             {
               count: budget,
+              colorKey: src.colorKey,
               depth: o.depth ?? 0.5,
               keepFlat: src === P3D.custom,
               bitmap: P3D.canvasFor !== src.uid || !P3D.canvas,

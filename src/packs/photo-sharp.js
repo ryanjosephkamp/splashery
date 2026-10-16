@@ -32,6 +32,7 @@ import {
   TYPE_FLOAT32,
   BUFFER_DYNAMIC,
 } from "../pc.js"; // clip-only geometry/cache
+import { formatCount } from "../state.js";
 
 const VIEW = { "photo-3d": "sharp", "moving-photo-3d": "sharp" };
 const S = {
@@ -387,8 +388,13 @@ function status(on) {
   if (!pl.psvLabel) {
     pl.psvLabel = true;
     const before = pl.statusLabel;
-    pl.statusLabel = (info) =>
-      S.labelOn ? "Sharp picture" : S.hybrid ? `${before?.(info)} · Hybrid` : before?.(info);
+    pl.statusLabel = (info) => {
+      if (S.labelOn) return "Sharp picture";
+      const label = before?.(info);
+      if (!S.hybrid) return label;
+      const splats = info.splats + (pl.pictures?.splats() || 0) + (pl.chunks?.splats() || 0); // prettier-ignore
+      return `${label || `${formatCount(splats)} splats`} · Hybrid`;
+    };
   }
   const hybrid = !!(backgroundWanted() && S.mesh?.miB.visible && !S.mesh.visible);
   if (S.labelOn === on && S.hybrid === hybrid) return;

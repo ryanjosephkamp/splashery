@@ -6,7 +6,7 @@
     <title>Picture QR · Splashery</title>
     <meta
       name="description"
-      content="A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture."
+      content="A QR reader samples the center of each module. Pick a picture or open your own, then tap to send a ripple through it."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/qr-picture/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Picture QR · Splashery" />
     <meta
       property="og:description"
-      content="A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture."
+      content="A QR reader samples the center of each module. Pick a picture or open your own, then tap to send a ripple through it."
     />
     <meta
       property="og:url"
@@ -220,20 +220,21 @@
         <section class="toy-section" aria-labelledby="h-about">
           <h2 id="h-about">About this toy</h2>
           <p>
-            A QR code reader decides each module from a sample at its center, so the rest of a
-            module can carry a picture. Here every module keeps its bit in a dot at its middle, and
-            the rest is a halftone of the picture: small dark and light dots, spread by error
-            diffusion so they average out to the picture's tones. Only where a module would read
-            wrong do a few of its dots take its color. The eyes, the timing lines, and the format
-            information stay plain, so a reader still finds the code.
+            A QR reader samples the center of each module. Picture QR keeps that bit in a dark or
+            light center dot and uses the surrounding dots for a halftone of your picture. Finder
+            eyes, timing lines, and format information stay clear.
           </p>
           <p>
-            The toy picks the mask that fits the picture best, reads its own code at phone size and
-            smaller, and nudges a few more dots until it scans. A bigger code size shows more
-            detail. If it still won't scan, Make it scan finds the closest version that does: more
-            contrast, a bigger center dot, or a higher error correction level. Your picture never
-            leaves your device.
+            Open your own picture, then drag and zoom its crop. Fit the square code keeps the whole
+            picture with light padding. Fill the whole circle carries it across the disc. Only crop
+            settings enter saved scenes and links; your picture stays on your device.
           </p>
+          <p>
+            The toy checks its code at phone size and smaller before showing it. Make it scan finds
+            a nearby version with more contrast, a bigger center dot, or stronger error correction.
+            New border choices use a pale band, and Eyes changes the finder shape.
+          </p>
+          <p>Crop, border, and eye controls made by Ryan with Codex (GPT-6), MIT.</p>
         </section>
 
         <section class="toy-section" aria-labelledby="h-credits">
@@ -312,6 +313,22 @@
                 >A forest path (a sample picture)</a
               >
               by Seaq68 (from Pixabay, 2017),
+              <a
+                href="https://creativecommons.org/publicdomain/zero/1.0/"
+                target="_blank"
+                rel="noopener"
+                >CC0 1.0</a
+              >.
+            </li>
+            <li>
+              <b>Picture QR</b>:
+              <a
+                href="https://github.com/ryanjosephkamp/splashery/blob/main/tools/cdx-qr-themes-art.mjs"
+                target="_blank"
+                rel="noopener"
+                >Summer sun · soft (code-made, CC0) (a sample picture)</a
+              >
+              by Made by Ryan with Codex (GPT-6),
               <a
                 href="https://creativecommons.org/publicdomain/zero/1.0/"
                 target="_blank"

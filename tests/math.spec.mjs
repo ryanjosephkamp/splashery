@@ -378,6 +378,11 @@ test("the surface plotter plots a typed surface", async ({ page }) => {
   await expect
     .poll(() => page.evaluate(() => window.__splashery.player.scene.toy.options))
     .toMatchObject({ surface: "custom", eq: "z = sin(x)*cos(y)*a" });
+  // The surface is plotted: the toy has rebuilt, with a new input panel (lane
+  // Fix13: the options change at once, but the old panel stays up until the
+  // rebuild replaces it, 10 to 25 s on a slow runner; text typed into it
+  // then was lost, and Plot it read an empty box).
+  await expect(page.locator("#toy-input .input-shown")).toHaveText(/Your surface: z = sin\(x\)\*cos\(y\)\*a/, { timeout: 60_000 }); // prettier-ignore
   await page.locator("#toy-input-text").fill("z = t");
   await page.locator("#toy-input-go").click();
   await expect(page.locator("#toy-input .warning")).toHaveText(/^That can't be drawn: “t” can't be used here/); // prettier-ignore

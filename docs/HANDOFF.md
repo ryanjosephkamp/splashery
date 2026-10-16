@@ -4,12 +4,73 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## Now (October 14, 2026, about 06:50 UTC)
+## Now (October 16, 2026, about 00:30 UTC)
 
-The Operator is handing over on schedule from `session_011WeiHJ3ygHhoTrrJiThHzX` (Opus 5.5, since
-October 12, 08:47 UTC) to a fresh Opus 5.5 session, which updates this line with its id in its first
-Ops PR. Its own handover is due two days after it takes over, or sooner at about 400k tokens. This
-section is current. The sections below it are history. The runbook is [OPERATOR.md](OPERATOR.md).
+The Operator is `session_01R85mwsFf138ohESofkyPJu` (Opus 5.5), since October 15, 2026, 18:00 UTC,
+one session deep. Main is `d4df5998` (Ops #666: #664, #658, #641, and the manual's PDF edition
+`9dff70c3`; `man5:201` is off the known list). Ops #668 (Fix13 #665 and Codex 71 #601) is in its
+full suite. Codex task files 91 to 97 are in this PR; the October 15 walkthrough's triage is in
+[reviews/2026-10-15-walkthrough/triage.md](reviews/2026-10-15-walkthrough/triage.md). No Claude lane
+runs once Fix13 merges. The section below is the October 15 morning state.
+
+## Now (October 15, 2026, about 14:00 UTC)
+
+The Operator is `session_01UFMfX9RBAFMSqMHSrisZuo` (Opus 5.5), since October 14, 2026, 07:33 UTC.
+Its handover is due now: its context passed about 400k tokens, and it was compacted once. It is
+seven sessions deep, one short of the limit, so a new Operator it started could not start lanes; the
+owner starts the next one himself ([OPERATOR.md](OPERATOR.md), "Rotation"). This section is current.
+The sections below it are history.
+
+**Main** is `15ec7b606` (Ops #660). Merged October 15, 2026:
+
+- Codex: tasks 52 (#594), 58 (#619), 66 (#599), 72 (#600), 75e (#609), 76 (#622, Photo to 3D round
+  4, and its follow-up #657: the cover matches the 3D view's background, and the Splats line no
+  longer says "undefined"), 81 (labels), 82a to 82e (the toy checkpoint docs), 83 (#646), 84 (#650,
+  the advisor demo route evidence), and 86 (#645, the Actions-only failures and the manual PDF
+  workflow).
+- Claude lanes: Fix12 (#635: kit:87, the smoke rigs, tpg:205), Share (#653: the tab order, Clap to
+  tap on Tools, the Share tab with Record first, and a preview after Record), and Polish (#643,
+  #636: the favorites at their best).
+- Ops: the full suite runs only on the Operator's merge PRs, on main, and on PRs labeled
+  `full-suite` (#644); the Codex task files 83 to 90 (#638, #647, #652).
+
+**How main moves:** `tools/op-merge.mjs` builds `claude/operator-merge-<topic>`, the full suite runs
+on it on GitHub Actions, and the batch merges when every failure is known on main or passes alone
+(the Summary comment marks each one). See [CI.md](CI.md).
+
+**Known red on main (Actions):** `man5:201` until the PDF from `manual-pdf.yml` is committed (run it
+from main, then an Ops PR, as CI.md says). `ops-text:41` and `ui2:361` failed alone on main before
+#645 and passed in #660's runs; check them on main's next run. These often fail in a full run and
+pass alone: `cdx-adv:19`, `cdx-mir:294` and `:329`, `fx4-engine:79` and `img-engine:85` (WebGPU),
+`hh3-engine2:122`, `live5:63`, `phf-engine:200`, `qrc-picture:119`, `shr:202`, and `ui4-engine:71`.
+
+**Codex** (the owner runs these from the private Codex Board; tasks in `docs/codex/`):
+
+- Follow-ups for the owner to send: 79 (#656, Picture QR Most detail), 80 (#641, Picture QR fit;
+  then his look at the phone screenshots), 87 (#658, the Photo to 3D failure atlas), and 89 (#654,
+  the exports; then his look at the clips).
+- Running: 48 (#560, Moving photo smoothness), 85, and 88 (#655, Video to 3D real clips).
+- Waiting: 90 (the batch export), after 89 merges.
+- After #660: `spg:138`'s rewrite in #645 hangs closing the browser on main since #653, so Ops #660
+  kept main's version of that test; the fix goes back to task 86.
+- Task 84's evidence run on main found that a shared link to a scene made from the sender's own
+  photo doesn't clearly ask the person opening it for that photo. Not assigned yet.
+
+**The repository is about 4.9 GB**, near GitHub's limit. Most of it is clips branches (task 87's
+alone adds about 2.2 GB). A cleanup and a size rule for clips branches wait on the owner.
+
+**Next for the Operator:** the handover; the manual PDF; the Share lane's leftovers
+([handoff/Share.md](handoff/Share.md), "For the Operator": "Save JSON" and "Load JSON" renamed where
+they still show); review each Codex PR as it reports done (a Sonnet helper, one comment); merge labs
+work after its tests; send public changes to the owner first.
+
+## October 14, 2026, about 06:50 UTC (history)
+
+The Operator is `session_01UFMfX9RBAFMSqMHSrisZuo` (Opus 5.5), since October 14, 2026, 07:33 UTC. It
+took over from `session_011WeiHJ3ygHhoTrrJiThHzX` (October 12, 08:47 UTC, to October 14), which
+stands by for a day. Its own handover is due by October 16, 2026, about 07:30 UTC, or sooner at
+about 400k tokens. This section is current. The sections below it are history. The runbook is
+[OPERATOR.md](OPERATOR.md).
 
 **Main** is `236f29bb4` (Ops #617). Merged October 13 and 14: tasks 57 (#586), 39 and 53 (#590), 70
 (#593), 54 (#598), 69, the circular QR codes (#603), 73, the manual PDF per edition (#615), and
@@ -23,6 +84,9 @@ Every later change to it must beat the checkpoint branch or be reverted.
 
 - `kit.spec.mjs:87` since #603: a circular QR recipe stops with "too much detail for a circular
   picture on this device" in the cloud browser. A fix task is offered to the owner.
+- `smoke.spec.mjs:734` (rigs) and `tpg.spec.mjs:205` (25 toy pages) fail alone on plain main in the
+  Operator's container every time since October 14, 2026 (found during #562's merge tests); they
+  were on the known-flake list before. To be investigated.
 - `man5.spec.mjs:201` only where Chromium's sandbox can't start (Claude cloud containers run as
   root): since #615 the PDF tool keeps the sandbox on. Keep it on; the owner chose to merge as is.
   Task 77's GitHub Actions run should cover it.
@@ -35,6 +99,11 @@ Splash Shop: 42 to 46, 49, 59 to 64, 67, and 68.
 
 **The Splash Shop** (`ryanjosephkamp/splashdot`) is read-only for Splashery sessions. Work comes
 back only through a promotion note the owner brings, then an Operator-written port.
+
+**Merged October 14 (this Operator):** #620 (Codex 75a to 75d, the depth lab pictures), #621 (#562,
+Video to 3D, sharper samples, labs, the owner's tentative good so he can try it), #624 (#611, Photo
+to 3D explained, and #602, the calibrated Studio scenes). Codex task files 79 to 82 (Picture QR
+fidelity and fit, Powers of ten labels, toy checkpoints) in this PR.
 
 **Next for the Operator:** review each Codex PR as it reports done (a Sonnet helper, one comment);
 merge labs work after its tests; send public changes to the owner first; write docs/STATUS.md after

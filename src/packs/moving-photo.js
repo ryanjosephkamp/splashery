@@ -91,6 +91,10 @@ export const MOVING = {
   status: "",
 };
 
+// Match the saved display name too, so a different open clip cannot stand in for it.
+const hasOwnClip = (o) =>
+  o.clip === "custom" && MOVING.custom && (!o.clipName || MOVING.custom.name === o.clipName);
+
 export const movingState = () => ({
   clip: MOVING.clip ? { name: MOVING.clip.name, n: MOVING.clip.n, w: MOVING.clip.w, h: MOVING.clip.h } : null, // prettier-ignore
   frame: MOVING.frame,
@@ -2310,6 +2314,7 @@ export const MOVING_PHOTO = {
   },
   input: {
     title: "Your GIF or video",
+    missingFile: (o) => (o.clip === "custom" && o.clipName && !hasOwnClip(o) ? o.clipName : null),
     accept: "image/gif,.gif,video/*,.mp4,.webm,.mov,.m4v",
     binary: true,
     maxBytes: 200e6,
@@ -2453,7 +2458,7 @@ export const MOVING_PHOTO = {
     const release = holdOpening(pl, () => pl?.scene?.toy?.id === "moving-photo-3d" && (pl.scene.toy.options?.clip || "sample") === (o.clip || "sample")); // prettier-ignore
     try {
       MOVING.want =
-        o.clip === "custom" && MOVING.custom ? MOVING.custom : await loadSample(id, preview);
+        hasOwnClip(o) ? MOVING.custom : await loadSample(id, preview);
     } finally {
       release();
     }
@@ -2499,6 +2504,12 @@ export const MOVING_PHOTO = {
         MOVING.t = 0;
       } else MOVING.t = tr.time();
       MOVING.anchor = null;
+    } else if (tr?.el.ended && !tr.blocked) {
+      // A slow frame can miss the sound's end entirely. Start the next loop,
+      // rather than seeking back to the last displayed time and replaying its tail.
+      MOVING.t = 0;
+      MOVING.anchor = null;
+      tr.play(MOVING.sound);
     } else {
       // Silent (a GIF, or a browser that wants a tap before sound): real
       // time, so the clip keeps its speed however few frames are drawn (r6:

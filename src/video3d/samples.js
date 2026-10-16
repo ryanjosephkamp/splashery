@@ -1,26 +1,18 @@
-// Video to 3D (lane Video 3D): the sample scenes (a walk around a statue, a street), each trained from a CC BY video by
-// tools/v3d-sample.mjs (assets/toys/video-3d/<id>.ply and <id>.json): the trained splats and the
-// solved camera path. The videos themselves are not shipped. Credits are in CREDITS.md and
-// tools/assets.json too; each license was checked on its live Wikimedia Commons page on September
-// 30, 2026.
-
-const CC_BY_3 = {
-  license: "CC BY 3.0",
-  licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
-};
-
+// Real video captures. BKD1 manifests and camera JSON retain each source license.
 export const SAMPLES = [
   {
     id: "liberty",
     label: "Statue, flown around",
     title: "Statue Of Liberty 4k Drone (14 s from 3:24)",
-    // The source's own length, and the span the sample was made from (the original's file,
-    // assets/toys/video-3d/<id>-source.mp4 and .webm, is that span at 480p).
     length: 228.2,
     span: { start: 204, length: 14 },
     author: "the Dronalist",
     source: "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
-    ...CC_BY_3,
+    license: "CC BY 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
+    baked: "liberty-baked/manifest.json",
+    bakedSha256: "affef579005c319f4ae0f10a81c87589217a62a0b26536b6ef30684f1af61ea1",
+    sha256: "48c6b065a40b341dd3444f0f287d0e7932235bd740f019edb2736d3ed4900e7b",
   },
   {
     id: "edinburgh",
@@ -31,6 +23,77 @@ export const SAMPLES = [
     author: "POPtravel",
     source:
       "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
-    ...CC_BY_3,
+    license: "CC BY 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
+    baked: "edinburgh-baked/manifest.json",
+    bakedSha256: "097b8b56c8633389ddad1d05d79ea9ecee10932f7211c1f17076e05b190b906f",
+    sha256: "6c0a5dd2f3a49567ad61fa5c9f8f736c76c8c709214fff55a6b2e4ec3ede8c2a",
+  },
+  {
+    id: "adjara",
+    label: "Forest path, walked",
+    transformationCredit: "Made by Ryan with Codex (GPT-6).",
+    title: "Adjara2025walking-summer-forest (20 seconds from 0 seconds)",
+    length: 118.919,
+    span: { start: 0, length: 20 },
+    author: "Vitaly Zdanevich",
+    source: "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
+    license: "CC BY 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    checked: "October 12, 2026",
+    sha256: "e1e265a27914ebcc25012f47218856f7c77b871d30581e654e0f6a4978ac4c54",
+    baked: "adjara-baked/manifest.json",
+    bakedSha256: "03c49fa897ebea7764b8a7e396e4f683475c5081e93fbac734cfceb856103816",
+  },
+  {
+    id: "lihula",
+    label: "Ruined courtyard, flown over",
+    transformationCredit: "Made by Ryan with Codex (GPT-6).",
+    title:
+      "Drone video of ruins of Lihula stronghold, the manor and town (august 2021) (20 seconds from 18 seconds)",
+    length: 52.152,
+    span: { start: 18, length: 20 },
+    author: "Sillerkiil",
+    source:
+      "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+    checked: "October 12, 2026",
+    sha256: "7681562565846cedf4bf1b4db02620d80c84675aaaa5f183d3d63bab337dd07e",
+    baked: "lihula-baked/manifest.json",
+    bakedSha256: "e3f13b07da507a57b67f9adbf13b2c76b57149c9445d6f44ae494d90e4b95933",
+  },
+  {
+    id: "toolse",
+    label: "Coastal ruins, drone pass",
+    transformationCredit: "Made by Ryan with Codex (GPT-6).",
+    title: "Toolse castle in Estonia (Fall 2021) (20 seconds from 14 seconds)",
+    length: 114.284,
+    span: { start: 14, length: 20 },
+    author: "Sillerkiil",
+    source: "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    checked: "October 12, 2026",
+    sha256: "87cb7ab74f1bb587492096666ead8fddb38e9de5def3863ceaf1719c6d03a4d9",
+    baked: "toolse-baked/manifest.json",
+    bakedSha256: "4354a0050ed94b526e0cb3ebf9d043eff2630ae1b7ed8a5585b81f86f2a24d09",
+  },
+  {
+    id: "poltsamaa",
+    label: "Castle courtyard, orbited",
+    transformationCredit: "Made by Ryan with Codex (GPT-6).",
+    title: "Drone video of Põltsamaa river and castle in Estonia (20 seconds from 24 seconds)",
+    length: 50.44,
+    span: { start: 24, length: 20 },
+    author: "Sillerkiil",
+    source:
+      "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    checked: "October 12, 2026",
+    sha256: "b3c9fa31bd629d0f75f28c9fca07bc2609ffea7198b632bc12e2ad442d21c583",
+    baked: "poltsamaa-baked/manifest.json",
+    bakedSha256: "944615f83d5fd5d22d610d59e9b25cddabfce5593e746d9cdadafc7de4ec96fa",
   },
 ];

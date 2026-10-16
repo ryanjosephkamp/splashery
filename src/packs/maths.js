@@ -2721,10 +2721,15 @@ function textCloud(k, pixels, opts, look) {
   // opts.exact (lane Sharpness B): the four dots of a pixel sit on a 2 x 2
   // grid inside it, with exact sizes, so the letter is crisp.
   const { exact, ...rest } = opts;
-  k.cloud({ count: pixels.length * per, pattern: false, ...rest }, (rand, i) => {
+  // Every bitmap pixel needs all four samples. Kit count scales from a
+  // 160k reference; an absolute share keeps Low from truncating the text.
+  k.cloud({ share: (pixels.length * per) / k.count, pattern: false, ...rest }, (rand, i) => {
     const px = pixels[Math.floor(i / per)];
     if (!px) return null;
     const j = px.px * 0.45;
+    // The board's base size changes with its tier. Keep text strokes tied
+    // to their bitmap cells so Low does not merge letters into blobs.
+    const size = (px.px * (exact ? 0.3 : 0.42)) / (k.baseSize || 0.01);
     if (exact) {
       const q = i % per;
       const d = px.px * 0.25;
@@ -2733,7 +2738,7 @@ function textCloud(k, pixels, opts, look) {
         n: [0, 0, 1],
         flat: 0.4,
         jitter: 0,
-        size: Math.max(0.6, (px.px / 0.014) * 0.6),
+        size,
         ...look(px, rand),
       };
     }
@@ -2741,7 +2746,8 @@ function textCloud(k, pixels, opts, look) {
       p: [px.p[0] + (rand() - 0.5) * j, px.p[1] + (rand() - 0.5) * j, px.p[2]],
       n: [0, 0, 1],
       flat: 0.4,
-      size: Math.max(0.9, (px.px / 0.014) * 1.05),
+      jitter: 0,
+      size,
       ...look(px, rand),
     };
   });
