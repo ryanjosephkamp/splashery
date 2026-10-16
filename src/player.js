@@ -1464,9 +1464,59 @@ export class Player {
     if (!keyboard) return;
     if (keyboard.items().find((item) => item.id === id)?.disabled) return;
     if (keyboard.pause) this.setControl(keyboard.pause, 0);
-    this.actControl(keyboard.activate(id, this.time));
+    const hit = keyboard.activate(id, this.time);
+    if (!this.toyExtra(hit)) this.actControl(hit);
     this.interact();
     this.stage.requestRender();
+  }
+
+  // Lane PT1 (engine): a toy's own tool row over the stage (recipe.toolbar,
+  // `{ label, items(), activate(id, time) }`, items `{ id, text, label,
+  // pressed, color, hidden, disabled }`). activate returns what a keyboard
+  // item does: taps to fire, or one of toyExtra's results.
+  playTool(id) {
+    const bar = this.toyInfo?.recipe?.toolbar;
+    if (!bar) return;
+    if (bar.items().find((item) => item.id === id)?.disabled) return;
+    const hit = bar.activate(id, this.time);
+    if (!this.toyExtra(hit)) this.actControl(hit);
+    this.interact();
+    this.stage.requestRender();
+  }
+
+  // Lane PT1 (engine): results a toy's drag, keyboard or tool row may hand
+  // back besides taps. { options, key, pick } rebuilds the toy with those
+  // options (as a tap's action.at may); { paint: { at, radius, color,
+  // opacity } } paints one stamp at a point in recipe coordinates (radius in
+  // recipe units) with the site's painter, kept in the scene like the Paint
+  // tool's; { clearPaint: true } washes the paint off. Returns true when it
+  // took the result.
+  toyExtra(hit) {
+    if (!hit || typeof hit !== "object" || Array.isArray(hit)) return false;
+    if (hit.options) {
+      this.switchTo({ key: hit.key, pick: hit.pick ?? null, value: 1, options: hit.options });
+      return true;
+    }
+    if (hit.clearPaint) {
+      this.clearPaint();
+      this.stage.requestRender();
+      return true;
+    }
+    if (hit.paint) {
+      const p = hit.paint;
+      const tf = this.motion.ctx?.transform;
+      if (!tf || !Array.isArray(p.at)) return true;
+      const q = (v) => Math.round(v * 1000) / 1000;
+      const m = this.stage.worldToModel(this.fromRecipe(p.at));
+      const r = Math.max(0.002, (p.radius ?? 0.1) * tf.scale);
+      const stamp = [q(m[0]), q(m[1]), q(m[2]), q(r), p.color || "#ff3d8b", p.opacity ?? 1];
+      this.painter.apply(stamp);
+      this.scene.paint.stamps.push(stamp);
+      this.emit("paint", this.scene.paint.stamps.length);
+      this.stage.requestRender();
+      return true;
+    }
+    return false;
   }
 
   actControl(hit) {
@@ -1963,6 +2013,10 @@ export class Player {
   fireDrag(taps) {
     if (!taps) return;
     for (const t of Array.isArray(taps) ? taps : [taps]) {
+      if (this.toyExtra(t)) {
+        this.dragFired = true; // lane PT1: a drag that painted is not also a tap
+        continue;
+      }
       if (t?.control && this.motion.controlDef(t.control)?.type === "slider") {
         this.setControl(t.control, Math.min(1, Math.max(0, Number(t.value) || 0)));
         this.dragFired = true;

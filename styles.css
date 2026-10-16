@@ -3342,6 +3342,105 @@ body.focus #pop-toggle {
 
 /* /Lane Pages r6 */
 
+/* Lane PT1: a toy's own tool row over the stage (recipe.toolbar): chips for
+   its tools, and round color swatches (items with a color). */
+.toy-toolbar {
+  position: fixed;
+  left: calc((100% - var(--panel-w) - 24px) / 2);
+  bottom: 40px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  width: min(560px, calc(100% - var(--panel-w) - 220px));
+  transform: translateX(-50%);
+}
+
+.toy-toolbar[hidden] {
+  display: none;
+}
+
+.toy-toolbar button {
+  min-height: 36px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.toy-toolbar button[hidden] {
+  display: none;
+}
+
+.toy-toolbar button[aria-pressed="true"] {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.toy-toolbar button[aria-disabled="true"] {
+  opacity: 0.45;
+}
+
+.toy-toolbar button.swatch-tool {
+  box-sizing: border-box;
+  flex: none;
+  width: 32px;
+  min-width: 0;
+  height: 32px;
+  min-height: 0;
+  padding: 0;
+  font-size: 0;
+  background: var(--tool-color);
+  border: 2px solid color-mix(in srgb, var(--ink) 25%, transparent);
+}
+
+.toy-toolbar button.swatch-tool[aria-pressed="true"] {
+  background: var(--tool-color);
+  border-color: var(--ink);
+  box-shadow:
+    0 0 0 2px var(--paper),
+    0 0 0 4px var(--ink);
+}
+
+@media (max-width: 760px) {
+  /* At the top of the stage, under the status line, where it covers
+     neither the toy nor the buttons along the stage's lower edge. */
+  .toy-toolbar {
+    left: 50%;
+    top: 118px;
+    bottom: auto;
+    width: calc(100vw - 20px);
+    gap: 5px;
+  }
+
+  .toy-toolbar button {
+    min-height: 34px;
+    padding: 0 11px;
+    font-size: 13.5px;
+  }
+
+  .toy-toolbar button.swatch-tool {
+    width: 28px;
+    height: 28px;
+  }
+
+  body.sheet-open .toy-toolbar,
+  body.shelf-grid .toy-toolbar {
+    display: none;
+  }
+}
+
+body.focus .toy-toolbar {
+  display: none;
+}
+
 /* Live r8: a toy's depth slider over the stage's right edge (page controls,
    not splats), with a × to hide it and a small button to bring it back. */
 .stage-dial,
