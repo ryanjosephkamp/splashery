@@ -479,7 +479,10 @@ export class Pictures {
       cap = Math.min(b.width, Math.sqrt(4 * b.pixels * aspect));
     else cap = Math.sqrt((method === "screen" ? b.screen : b.pixels) * aspect);
     if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width * share); // prettier-ignore
-    const target = Math.min(cap, Math.max(64, px * (this.solid && method === "ink" ? 1.5 : 1)));
+    const target = Math.min(
+      cap,
+      Math.max(64, px * (this.solid && method === "ink" && sheet.shown ? 1.5 : 1)),
+    );
     let level = LADDER.find((w) => w >= target) ?? LADDER[LADDER.length - 1];
     level = Math.min(level, Math.floor(cap));
     return Math.max(32, level);
