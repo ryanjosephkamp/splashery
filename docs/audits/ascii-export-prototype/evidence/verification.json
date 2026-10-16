@@ -1,0 +1,52 @@
+{
+  "date": "October 6, 2026",
+  "model": "GPT-6.1 Sol",
+  "effort": "Extra High",
+  "branch": "codex/ascii-export-prototype",
+  "packageBase": "dc03d880ef9425eba71ee5dc5f0f97c79ec3d15d",
+  "browser": "Google Chrome 154.0.8037.98, automated Chromium launch",
+  "playwright": "1.56.1",
+  "port": 47832,
+  "tests": {
+    "command": "SPLASHERY_PORT=47832 SPLASHERY_CHROMIUM=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" npx playwright test tests/ascii-export.spec.js --config=docs/audits/ascii-export-prototype/playwright.config.js",
+    "passed": 7,
+    "failed": 0,
+    "seconds": 11.1
+  },
+  "checks": {
+    "prettier": "npx prettier --check .: passed",
+    "americanEnglish": "node tools/us-english.mjs --diff: passed",
+    "stagedWhitespace": "git diff --cached --check: passed",
+    "scope": "Only the approved two file paths and audit directory",
+    "sampleCopies": "118 JPEG/GIF/MP4 files match SHA-256 manifest",
+    "originalArchive": "SHA-256 equals the original archive receipt; unchanged"
+  },
+  "sourceHashes": {
+    "src/export/ascii.js": "04e436ddca7b011cc33f0233178b5048b6a369c7d2504faa74664f4487209950",
+    "tests/ascii-export.spec.js": "64bff69bbb68821be0eea7162f42887e654eb1fedf6c4d6d11441265d52ff497",
+    "docs/audits/ascii-export-prototype/demo.js": "6fa3f3a194032697ec0ff53ecb9fb33b491419ab845a9b72c28acfb82f4fbdfd",
+    "docs/audits/ascii-export-prototype/build-handback.mjs": "9b510de1df6544205f22597b7cf8b2873b750625047ea2dd2ec55e6706b2c8a6"
+  },
+  "offlineHandback": {
+    "bytes": 5021422,
+    "sha256": "f4a462a9696439e706a436de3cbc1273bd4a65ff7d22824b7cf63fac25f46480",
+    "network": "No sibling-file or network requests in the automated offline test"
+  },
+  "screenshots": {
+    "mobile": "390 x 844 viewport, full page",
+    "desktop": "1440 x 900 viewport, full page",
+    "review": "Both images visually inspected"
+  },
+  "limitations": [
+    "No physical-phone ASCII acceptance claimed",
+    "Full toy/engine suite not run",
+    "Captured samples retain earlier toy revisions; no current-main recapture",
+    "Existing GIF/MP4 clips are fixed artifacts, not newly encoded from changed controls",
+    "Shared Playwright config does not discover the requested .spec.js; use the scoped config"
+  ],
+  "preservation": {
+    "originalCheckout": "codex/pdf-motion at f95ceca357798aeaba7ac31801187f81b616c4b7, clean",
+    "originalArchiveSha256": "490bb975207d3459bb5cb29cb8d5afd9d280ee879040560ad654435ec586b04d",
+    "qrAndPDF": "No experiment files copied or edited in this package; owner observations retained separately"
+  }
+}

@@ -1,0 +1,6 @@
+Strawberry by Dany Bittel
+Source: https://superspl.at/scene/84df8849
+License: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+Splashery: converted and decimated splats, SH removed, recentered and scaled.
+Prototype: fixed-view capture, downsampled and converted to characters.
+This package preserves those JPEG/GIF/MP4 derivatives and reconverts JPEG frames in the demo.
