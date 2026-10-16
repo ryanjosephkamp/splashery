@@ -358,12 +358,10 @@ export function buildSheet(job) {
 
   const finePaperEdge = job.backingOnly && method === "pixels" && !job.relief?.keep;
   const cap =
-    sheetCount(w, h, method, inkCount) -
-    (job.backingOnly && method !== "ink"
-      ? w * h
-      : job.sparse && method !== "ink"
-        ? Math.floor((w * h) / 2)
-        : 0) +
+    (job.backingOnly
+      ? sheetCount(w, h, "pixels") - w * h
+      : sheetCount(w, h, method, inkCount) -
+        (job.sparse && method !== "ink" ? Math.floor((w * h) / 2) : 0)) +
     (finePaperEdge ? 2 * (Math.ceil(w / EDGE_STEP) + Math.ceil(h / EDGE_STEP) + 2) : 0);
   const center = new Float32Array(cap * 4);
   const centers = new Float32Array(cap * 3);
@@ -463,8 +461,10 @@ export function buildSheet(job) {
       }
   }
 
-  // The paper's edge rows ("ink" only).
-  if (method === "ink" && !(job.backingOnly && kr)) {
+  // The continuous face supplies its hard perimeter. Coarse edge strips
+  // otherwise protrude beyond that face at the corners. Legacy ink keeps
+  // its fine rows; connected pages retain only the inset paper lattice.
+  if (method === "ink" && !job.backingOnly) {
     const edges = [
       // start, direction along, direction inwards, length
       [[0, 0], [1, 0], [0, 1], w],
