@@ -421,7 +421,15 @@ test.describe("in the browser", () => {
     page.on("request", (r) => asked.push(r.url()));
     await page.goto(APP);
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-    expect(asked.filter((u) => /molview|molecule-viewer|rcsb/.test(u))).toEqual([]);
+    // The reordered shelf may load the viewer's card thumbnail. Its code and
+    // molecular data must still wait until the toy opens.
+    expect(
+      asked.filter(
+        (u) =>
+          /molview|molecule-viewer|rcsb/.test(u) &&
+          !/\/assets\/toys\/[^/]+\/thumb\.webp(?:\?|$)/.test(u),
+      ),
+    ).toEqual([]);
   });
 
   test("Fetch by code (RCSB mocked), a tap's measurement, and the screenshots", async ({

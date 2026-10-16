@@ -49,9 +49,10 @@ function play(id, options = {}, fps = 30) {
   return { rest, frames, kit };
 }
 
-test("the computing shelf: after Maths, with its twelve toys, sounds and plan entries", () => {
+test("the computing shelf: between Pictures and pages and Science, with its twelve toys, sounds, and plan entries", () => {
   const ids = CATEGORIES.map((c) => c.id);
-  expect(ids.indexOf("computing")).toBe(ids.indexOf("maths") + 1);
+  expect(ids.indexOf("computing")).toBe(ids.indexOf("pictures") + 1);
+  expect(ids.indexOf("science")).toBe(ids.indexOf("computing") + 1);
   expect(CATEGORIES.find((c) => c.id === "computing").label).toBe("AI and computing");
   for (const id of IDS) {
     const t = TOYS.find((x) => x.id === id);

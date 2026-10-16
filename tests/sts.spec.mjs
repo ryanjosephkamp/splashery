@@ -133,9 +133,10 @@ test.describe("the Chladni plate", () => {
 test.describe("the Studio shelf", () => {
   test.describe.configure({ timeout: 300_000 });
 
-  test("both toys are labs toys on a Studio shelf after Pictures and pages", () => {
+  test("both toys are labs toys on the first shelf, Studio, before Pictures and pages", () => {
     const ids = CATEGORIES.map((c) => c.id);
-    expect(ids.indexOf("studio")).toBe(ids.indexOf("pictures") + 1);
+    expect(ids.indexOf("studio")).toBe(0);
+    expect(ids.indexOf("pictures")).toBe(ids.indexOf("studio") + 1);
     for (const id of ["song-landscape", "chladni-plate"]) {
       const t = TOYS.find((x) => x.id === id);
       expect(t.labs).toBe(true);

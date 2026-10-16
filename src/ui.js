@@ -5,6 +5,7 @@
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
 import { TOYS, thumbURL, shelfCategories, searchToys, onShelf, holdsStill } from "./toys.js";
+import { featuredToys } from "./featured.js";
 import { labsOn } from "./toys.js"; // lane PDF lab
 import { IDLE_EFFECTS, formatCount, formatBytes } from "./state.js";
 import { MOVES } from "./motion.js";
@@ -302,12 +303,18 @@ export function createUI(app) {
 
   const categories = shelfCategories();
   const order = new Map(categories.map((c, i) => [c.id, i]));
-  const allToys = TOYS.map((t, i) => ({ t, i }))
+  const allToys = TOYS.filter(onShelf)
+    .map((t, i) => ({ t, i }))
     .sort((a, b) => (order.get(a.t.category) ?? 99) - (order.get(b.t.category) ?? 99) || a.i - b.i)
     .map((x) => x.t);
   const shelf = { category: "all", query: "", list: allToys, current: null };
+  const featured = featuredToys();
   const chips = new Map();
-  for (const c of [{ id: "all", label: "All" }, ...categories]) {
+  for (const c of [
+    { id: "all", label: "All" },
+    { id: "featured", label: "Featured" },
+    ...categories,
+  ]) {
     const b = document.createElement("button");
     b.type = "button";
     b.className = "chip";
@@ -368,7 +375,9 @@ export function createUI(app) {
       ? searchToys(q, allToys)
       : shelf.category === "all"
         ? allToys
-        : allToys.filter((t) => t.category === shelf.category);
+        : shelf.category === "featured"
+          ? featured
+          : allToys.filter((t) => t.category === shelf.category);
     shelf.list = list;
     els.shelf.replaceChildren(...list.map((t) => cards.get(t.id)));
     els.shelf.scrollLeft = 0;
@@ -2605,6 +2614,12 @@ export function createUI(app) {
     }
     const h = els.panel.getBoundingClientRect().height;
     document.documentElement.style.setProperty("--dock-h", `${Math.round(h)}px`);
+    const chrome = [
+      els.toyStatus,
+      ...document.querySelectorAll(".brand, .view-button, .sound-toggle, .help-toggle"),
+    ].filter((el) => el.checkVisibility());
+    const bottom = Math.max(0, ...chrome.map((el) => el.getBoundingClientRect().bottom));
+    document.documentElement.style.setProperty("--stage-chrome-h", `${Math.ceil(bottom + 8)}px`);
   }
   const applySheet = () => {
     const m = narrow.matches ? mode : "row";
@@ -2634,11 +2649,17 @@ export function createUI(app) {
     full = f;
     const focused = document.activeElement;
     applySheet();
-    if (narrow.matches && els.panel.contains(focused) && !focused.checkVisibility())
+    if (
+      narrow.matches &&
+      (els.panel.contains(focused) ||
+        focused.matches(".view-button, .sound-toggle, .help-toggle")) &&
+      !focused.checkVisibility()
+    )
       (m === "hidden" ? els.galleryOpen : els.sheetToggle).focus({ preventScroll: true });
     if (m !== "panel") revealCurrent();
   }
   new ResizeObserver(refreshDock).observe(els.panel);
+  new ResizeObserver(refreshDock).observe(els.toyStatus);
   els.sheetToggle.addEventListener("click", () =>
     mode === "panel" ? setMode("row") : (setMode("panel", bigInput()), fitInput()),
   );
@@ -2684,6 +2705,15 @@ export function createUI(app) {
     els.sheetHandle,
     () => (mode === "panel" ? "panel" : "grid"),
     () => (mode === "row" ? "grid" : "row"),
+  );
+  // This handle owns the drag. Stop a native fling from swallowing the next
+  // button tap; pointer events still drive the handle's swipes and taps.
+  els.sheetHandle.addEventListener(
+    "touchstart",
+    (e) => {
+      if (narrow.matches) e.preventDefault();
+    },
+    { passive: false },
   );
   bindSwipe(els.tabs, () => "panel", null);
 
@@ -3294,6 +3324,7 @@ export function createUI(app) {
     cam.cur = cur;
     const W = canvas.clientWidth;
     const H = canvas.clientHeight;
+    const origin = canvas.getBoundingClientRect();
     const f = H / 2 / Math.tan((19 * Math.PI) / 180);
     const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
     const box = { left: Infinity, right: -Infinity, top: Infinity, bottom: -Infinity };
@@ -3301,8 +3332,8 @@ export function createUI(app) {
       const c = [0, 1, 2].map((k) => info.center[k] + ((i >> k) & 1 ? 1 : -1) * info.half[k] - pose.position[k]); // prettier-ignore
       const z = dot(c, pose.forward);
       if (z < 0.01) return null;
-      const x = W / 2 + (dot(c, pose.right) / z) * f;
-      const y = H / 2 - (dot(c, pose.up) / z) * f;
+      const x = origin.left + W / 2 + (dot(c, pose.right) / z) * f;
+      const y = origin.top + H / 2 - (dot(c, pose.up) / z) * f;
       box.left = Math.min(box.left, x);
       box.right = Math.max(box.right, x);
       box.top = Math.min(box.top, y);
