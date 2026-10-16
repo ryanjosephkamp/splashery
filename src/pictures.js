@@ -684,21 +684,28 @@ export class Pictures {
       const monochrome =
         solid && (opaqueGray(pixels) || (want.method === "ink" && !!rampPixels(pixels, false)));
       const geom = this.geometry(sheet, media.aspect(want.page), bw, bh);
-      let data = await buildOffThread({
-        pixels,
-        w: bw,
-        h: bh,
-        method: want.method,
-        backingOnly: solid && !sparse,
-        sparse,
-        ...geom,
-      });
-      if (solid && backing !== canvas) backing.width = backing.height = 1;
+      let surface = null;
       if (solid) {
         const face = this.geometry(sheet, media.aspect(want.page), w, h);
         face.lift = (sparse ? Math.hypot(...geom.right) * 6 : 0) + Math.hypot(...face.right) * 0.3;
-        data.surface = { source: canvas, geom: face, w, h };
+        surface = { source: canvas, geom: face, w, h };
       }
+      // The worker owns a separate pixel buffer. Compact the face while it
+      // builds the paper, rather than putting both jobs on the loading path.
+      let [data] = await Promise.all([
+        buildOffThread({
+          pixels,
+          w: bw,
+          h: bh,
+          method: want.method,
+          backingOnly: solid && !sparse,
+          sparse,
+          ...geom,
+        }),
+        Promise.resolve().then(() => this.compactSurface({ surface }, monochrome)),
+      ]);
+      if (solid && backing !== canvas) backing.width = backing.height = 1;
+      if (surface) data.surface = surface;
       // A page with more ink than the budget is built again, smaller.
       if (want.method === "ink" && data.count > this.budget.ink && canvas) {
         const f = Math.sqrt(this.budget.ink / data.count) * 0.95;
@@ -713,7 +720,6 @@ export class Pictures {
         h = h2;
       }
       if (this.destroyed || media !== this.media) return null;
-      this.compactSurface(data, monochrome);
       data.w = w;
       data.h = h;
       data.drawMs = t1 - t0;
