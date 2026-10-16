@@ -1,0 +1,342 @@
+{
+  "createdUTC": "2026-10-16T05:22:15.257226+00:00",
+  "scope": "Selected public-corpus research rejections. Calibration, source membership, and thresholds stay fixed. No quality or cost acceptance is implied by these bounded screens.",
+  "records": [
+    {
+      "name": "fine-clip",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "7ac31c7d7ea3012002344850f1ad5c3ad529290da551d70fac0220fc58cefed6",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringes",
+            "before": 0.7532050788339201,
+            "after": 0.7710860122315996
+          }
+        ]
+      }
+    },
+    {
+      "name": "fine-clip-halfaa",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "61494b177850e394e11e1cb1431dce85640f4c5e7906479cae5659a2423e9ff0",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringes",
+            "before": 0.7532050788339201,
+            "after": 0.7539139776046586
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.8238882773742713
+          }
+        ]
+      }
+    },
+    {
+      "name": "fine-clip-raw-halfaa-discard",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "fa9e9165fbaf80ace6ca16b2ae8cac738f05ecfbd94577395cf091cccb8a6944",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringes",
+            "before": 0.7532050788339201,
+            "after": 0.7578276198932515
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 3.1306055134151602
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.830625006927538
+          }
+        ]
+      }
+    },
+    {
+      "name": "continuation-fine-clip",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "c2e3ce461b1a16fcbe1c3d7fe08d1ca02264606eab075abd1f833b40b8db555f",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringes",
+            "before": 0.7532050788339201,
+            "after": 0.7580723620235069
+          }
+        ]
+      }
+    },
+    {
+      "name": "continuation-fine-clip-halfaa",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "37b6b0071227aed864f39c6add649161f7e2f87b457dbed08be92461614a6086",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.8238882773742713
+          }
+        ]
+      }
+    },
+    {
+      "name": "continuation-fine-clip-raw-halfaa-discard",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "77032684c65badba9082862ab11905a76017bbe67b28877f4b14b649406d1cf4",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringes",
+            "before": 0.7532050788339201,
+            "after": 0.7578276198932515
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 3.1306055134151602
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.830625006927538
+          }
+        ]
+      }
+    },
+    {
+      "name": "nearest-surface-color-1",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 2,
+      "sourceSha256": "9b73017886204385d768c923c2aea53c04dcf9adce644c0a4f4d401998321ed6",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "textureLoss",
+            "before": 0.6343239912774521,
+            "after": 0.6455952674880601
+          },
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07242594815142066
+          }
+        ]
+      }
+    },
+    {
+      "name": "nearest-surface-color-2",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 2,
+      "sourceSha256": "04a5446a8ba58e08c7f0507bc41e56b0ee58048088b8987015fdce9420d03e64",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "textureLoss",
+            "before": 0.6343239912774521,
+            "after": 0.645426068141522
+          },
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07242594815142066
+          },
+          {
+            "metric": "paletteExcess",
+            "before": 0.00853645188567508,
+            "after": 0.008867721239471441
+          }
+        ]
+      }
+    },
+    {
+      "name": "thin-source-clip-1",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "c7935ea4627350d32ee8b78f01f5593ce5f3e0825165672fbd55860a8e79c50e",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "streaks",
+            "before": 0.5743608711366746,
+            "after": 0.5759487276114867
+          },
+          {
+            "metric": "textureLoss",
+            "before": 0.5424212701455193,
+            "after": 0.5490376375228064
+          }
+        ]
+      }
+    },
+    {
+      "name": "thin-source-clip-2",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 2,
+      "sourceSha256": "e0e6bd9b9bf4556b21af552247d3a5835f331e57f095d4130a3eff6c0e3f675d",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "textureLoss",
+            "before": 0.6343239912774521,
+            "after": 0.6351357576626557
+          }
+        ]
+      }
+    },
+    {
+      "name": "thin-source-raw-clip",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "5c949aced634e2c05f59b93644c31b268f9d6f63af2e260e36bf7a732aa51c9a",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "streaks",
+            "before": 0.5743608711366746,
+            "after": 0.5759487276114867
+          },
+          {
+            "metric": "textureLoss",
+            "before": 0.5424212701455193,
+            "after": 0.5490376375228064
+          }
+        ]
+      }
+    }
+  ]
+}

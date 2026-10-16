@@ -64,6 +64,20 @@ test("unchanged quality fails the requested 25 percent class improvement", () =>
   expect(result.qualityPassed).toBe(false);
 });
 
+test("lower scores cannot hide a lost foreground fit or thin-line depth support", () => {
+  const a = atlas(),
+    b = atlas({ halos: 0.06, streaks: 0.2, textureLoss: 0.4 });
+  b.inputs[0].profiles.phone.frozenProbe = {
+    projection: { invalidEdgeFits: 1, lostThinSupport: 2 },
+  };
+  const result = compare(a, b);
+  expect(result.regressions.map((r) => r.metric).sort()).toEqual([
+    "badProjectionFits",
+    "lostProjectedThinSupport",
+  ]);
+  expect(result.qualityPassed).toBe(false);
+});
+
 test("measured noise belongs to its input, profile, and metric, and source must match", () => {
   const a = atlas(),
     repeated = atlas();

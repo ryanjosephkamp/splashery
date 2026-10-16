@@ -6,6 +6,7 @@ import path from "node:path";
 import zlib from "node:zlib";
 import { fileURLToPath } from "node:url";
 import { hash } from "./p3df/inputs.mjs";
+import { followSourceProbes } from "./cdx-p3d5-projection.mjs";
 
 let baseline, folder, implementation;
 const proofs = new Map();
@@ -17,7 +18,7 @@ export function configureFrozenProbes(root) {
   proofs.clear();
 }
 
-export function frozenProbes(entry, profile) {
+export function frozenProbes(entry, profile, field = null, photo = field) {
   if (!baseline) throw new Error("Configure frozen baseline probes first.");
   const row = baseline.inputs.find((r) => r.id === entry.id);
   if (
@@ -35,10 +36,11 @@ export function frozenProbes(entry, profile) {
   const old = proofs.get(name);
   if (old && old.sha256 !== sha256) throw new Error("A frozen source probe changed.");
   proofs.set(name, { name, file, sha256 });
-  return {
+  const frozen = {
     ...JSON.parse(zlib.gunzipSync(bytes)),
     proof: { name, sha256, atlasSource: baseline.source.sha256 },
   };
+  return field ? followSourceProbes(frozen, field, photo) : frozen;
 }
 
 export function verifyFrozenProbes() {
@@ -63,23 +65,13 @@ async function adaptedBrowser() {
       step = Math.max(1, Math.ceil(allEdges.anchors.length / 200)),
       edges = allEdges.anchors.filter((_, i) => i % step === 0),
       quads = revealQuads(field);`,
-    `const frozen = frozenProbes(entry, name),
+    `const frozen = frozenProbes(entry, name, field, source),
       thin = frozen.thin,
       allEdges = { candidates: frozen.edgeCandidates, anchors: { length: frozen.edgeSupported } },
       edges = frozen.edges,
       quads = revealQuads(frozen.field);
     if (field.width !== frozen.field.width || field.height !== frozen.field.height || field.data.some((v, i) => v !== frozen.field.data[i]))
       for (const quad of revealQuads(field)) quads.push(quad);`,
-  );
-  replace(
-    `Float32Array.from(field.data, (v) => v / 255),
-      field.width,
-      field.height,
-      Math.ceil(0.471 * field.height),`,
-    `Float32Array.from(frozen.field.data, (v) => v / 255),
-      frozen.field.width,
-      frozen.field.height,
-      Math.ceil(0.471 * frozen.field.height),`,
   );
   replace(
     `quads: quads.length,
@@ -90,18 +82,10 @@ async function adaptedBrowser() {
         frozenProbe: frozen.proof,`,
   );
   replace(
-    `uv,
-          field,
-          minimum,`,
-    `uv,
-          field: frozen.field,
-          minimum,`,
-  );
-  replace(
     `...state,
       timing,`,
     `...state,
-      frozenProbe: frozen.proof,
+      frozenProbe: { ...frozen.proof, projection: frozen.projection },
       timing,`,
   );
   source = source.replace(/from "([^"]+)"/g, (whole, specifier) => {
@@ -127,9 +111,12 @@ export async function measureFrozenProfile(entry, name, options) {
 
 export function methodSources() {
   return Object.fromEntries(
-    ["cdx-p3d5-browser.mjs", "cdx-p3d5-fast-metrics.mjs", "p3df/browser.mjs"].map((name) => [
-      "tools/" + name,
-      hash(fs.readFileSync(new URL(name, import.meta.url))),
-    ]),
+    [
+      "cdx-p3d5-browser.mjs",
+      "cdx-p3d5-projection.mjs",
+      "cdx-p3d5-fast-metrics.mjs",
+      "cdx-p3d5-compare.mjs",
+      "p3df/browser.mjs",
+    ].map((name) => ["tools/" + name, hash(fs.readFileSync(new URL(name, import.meta.url)))]),
   );
 }

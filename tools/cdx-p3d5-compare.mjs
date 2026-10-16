@@ -25,7 +25,7 @@ const calibrationFiles = [
   "tools/studio-truth/sampling.mjs",
 ];
 
-function qualityValues(profile) {
+export function qualityValues(profile) {
   const maximum = (read) => {
     const values = profile.rows.map(read).filter(finite);
     return values.length ? Math.max(...values) : null;
@@ -38,6 +38,8 @@ function qualityValues(profile) {
     lostTransitions: maximum((r) => r.halo?.missingTransitionProfiles),
     fringeMaximum: maximum((r) => r.fringe?.fringeMax),
     thinWidthError: maximum((r) => r.fringe?.widthErrorMean),
+    badProjectionFits: profile.frozenProbe?.projection?.invalidEdgeFits || 0,
+    lostProjectedThinSupport: profile.frozenProbe?.projection?.lostThinSupport || 0,
     flatDepth: maximum((r) =>
       r.depth?.kind?.startsWith("T-junction") ? r.depth.flattenedFraction : null,
     ),
