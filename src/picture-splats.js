@@ -356,13 +356,15 @@ export function buildSheet(job) {
     } else blocks = meanBlocks(px, w, h);
   }
 
+  const finePaperEdge = job.backingOnly && method === "pixels" && !job.relief?.keep;
   const cap =
     sheetCount(w, h, method, inkCount) -
     (job.backingOnly && method !== "ink"
       ? w * h
       : job.sparse && method !== "ink"
         ? Math.floor((w * h) / 2)
-        : 0);
+        : 0) +
+    (finePaperEdge ? 2 * (Math.ceil(w / EDGE_STEP) + Math.ceil(h / EDGE_STEP) + 2) : 0);
   const center = new Float32Array(cap * 4);
   const centers = new Float32Array(cap * 3);
   const color = new Uint16Array(cap * 4);
@@ -484,6 +486,25 @@ export function buildSheet(job) {
           emit(x, y, 0, sx, sy, c[0], c[1], c[2]);
         }
       }
+  }
+
+  // An opaque crop still has physical paper all the way to its perimeter.
+  // Keep a fine edge under the connected face; masked cutouts have none.
+  if (finePaperEdge) {
+    const edge = (x, y, horizontal) => {
+      blockColor(blocks, x, y, c);
+      emit(x, y, 0, horizontal ? EDGE_ALONG : 0.6, horizontal ? 0.6 : EDGE_ALONG, c[0], c[1], c[2]);
+    };
+    for (let k = 0; k <= Math.ceil(w / EDGE_STEP); k++) {
+      const x = Math.min(w - 0.5, 0.5 + k * EDGE_STEP);
+      edge(x, 0.5, true);
+      edge(x, h - 0.5, true);
+    }
+    for (let k = 0; k <= Math.ceil(h / EDGE_STEP); k++) {
+      const y = Math.min(h - 0.5, 0.5 + k * EDGE_STEP);
+      edge(0.5, y, false);
+      edge(w - 0.5, y, false);
+    }
   }
 
   // The detail: one splat per pixel (every pixel, or the ink).
