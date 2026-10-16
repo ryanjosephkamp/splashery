@@ -98,9 +98,10 @@ function buildOffThread(job) {
 export class Pictures {
   // defs: the recipe's sheets (k.sheets), transform: the kit's fit
   // ({ center, scale }), spine: k.spineDef or null.
-  constructor(player, { defs, transform, spine, profile, decorate = null, solid = false }) {
+  constructor(player, { defs, transform, spine, profile, decorate = null, solid = false, backing = "sampled" }) {
     this.player = player;
     this.solid = solid;
+    this.backing = backing;
     this.decorate = decorate;
     this.stage = player.stage;
     this.profile = profile;
@@ -647,7 +648,7 @@ export class Pictures {
       this.decorateCanvas(canvas, sheet, want.page, media, want.variant, links);
       const t1 = performance.now();
       const solid = this.solid && want.method !== "screen";
-      const sparse = solid && want.method === "pixels";
+      const sparse = solid && want.method === "pixels" && this.backing !== "paper";
       // The sharp face can use more source pixels without increasing the
       // Gaussian backing's original pixel budget.
       const bw = sparse
