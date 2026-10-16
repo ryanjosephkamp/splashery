@@ -476,7 +476,7 @@ export class Pictures {
     let cap;
     if (method === "ink") cap = b.width;
     else if (this.solid && method !== "screen")
-      cap = Math.min(b.width, Math.sqrt(4 * b.pixels * aspect));
+      cap = Math.min(b.width, Math.sqrt((sheet.shown ? 4 : 1) * b.pixels * aspect));
     else cap = Math.sqrt((method === "screen" ? b.screen : b.pixels) * aspect);
     if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width * share); // prettier-ignore
     const target = Math.min(

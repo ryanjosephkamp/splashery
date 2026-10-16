@@ -401,26 +401,27 @@ export function warmPictureShaders(stage, curved = false) {
   };
   stage.pictureWarmup = warmup;
   for (const bend of needed) {
-    faces.push(
-      new PictureSurface(
-        stage,
-        { entity },
-        {
-          warmup: true,
-          w: 1,
-          h: 1,
-          pixels: new Uint8Array([255]),
-          channels: 1,
-          geom: {
-            origin: [100000, 100000, 100000],
-            right: [1, 0, 0],
-            down: [0, 1, 0],
-            normal: [0, 0, 1],
-            leaf: bend ? { slot: 0 } : null,
+    for (const channels of [1, 4])
+      faces.push(
+        new PictureSurface(
+          stage,
+          { entity },
+          {
+            warmup: true,
+            w: 16,
+            h: 16,
+            pixels: new Uint8Array(16 * 16 * channels).fill(255),
+            channels,
+            geom: {
+              origin: [100000, 100000, 100000],
+              right: [1, 0, 0],
+              down: [0, 1, 0],
+              normal: [0, 0, 1],
+              leaf: bend ? { slot: 0 } : null,
+            },
           },
-        },
-      ),
-    );
+        ),
+      );
     stage.pictureProgramsWarmed.add(bend);
   }
   // Run after the frame finishes submitting, including for moving media
