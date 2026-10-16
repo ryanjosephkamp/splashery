@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 import config from "../playwright.config.mjs";
+import { DEFAULT_GENERATOR, PROFILES } from "../src/generators.js";
+import { formatCount } from "../src/state.js";
 import {
   choose,
   hiddenSample,
@@ -30,6 +32,7 @@ async function ready(page) {
 test("JSON saving reports the newest clay edits and paint stamps excluded by the caps", async ({
   page,
 }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   await ready(page);
   const expected = await page.evaluate(async () => {
     const { app, player } = window.__splashery;
@@ -62,6 +65,32 @@ test("JSON saving reports the newest clay edits and paint stamps excluded by the
   await expect(page.locator("#toast")).toContainText("800 paint stamps");
   await expect(page.locator("#toast")).toContainText("newest");
   await expect(page.locator("#toast")).toContainText("not included");
+  // A multiline warning needs a background behind every glyph, including its corner lines.
+  expect(
+    await page.locator("#toast").evaluate((toast) => {
+      const box = toast.getBoundingClientRect();
+      const radius = Math.min(
+        parseFloat(getComputedStyle(toast).borderTopLeftRadius),
+        box.width / 2,
+        box.height / 2,
+      );
+      const text = toast.firstChild;
+      const outside = [];
+      for (let i = 0; i < text.length; i++) {
+        if (!text.textContent[i].trim()) continue;
+        const range = document.createRange();
+        range.setStart(text, i);
+        range.setEnd(text, i + 1);
+        const r = range.getBoundingClientRect();
+        const x = (r.left + r.right) / 2,
+          y = (r.top + r.bottom) / 2;
+        const cx = Math.max(box.left + radius, Math.min(x, box.right - radius));
+        const cy = Math.max(box.top + radius, Math.min(y, box.bottom - radius));
+        if (Math.hypot(x - cx, y - cy) > radius + 0.5) outside.push(text.textContent[i]);
+      }
+      return outside;
+    }),
+  ).toEqual([]);
   expect(
     await page.evaluate(() => [
       window.__splashery.player.proc.clay.length,
@@ -127,12 +156,19 @@ test("generator sliders have the correct values when Make first opens before the
     await expect(page.locator("#gen-count")).toBeVisible();
     // Hold the asset, not a guessed timeout: late onToy initialization cannot mask the flash.
     expect(await page.evaluate(() => window.__splashery.ready)).toBe(false);
+    const count = PROFILES.low.defaultCount;
+    const expected = [
+      count,
+      ...["sizeJitter", "roughness", "colorNoise"].map((key) =>
+        Math.round(DEFAULT_GENERATOR[key] * 100),
+      ),
+    ].map(String);
     expect(
       await page
         .locator("#pane-make input[type=range]")
         .evaluateAll((inputs) => inputs.map((e) => e.value)),
-    ).toEqual(["60000", "35", "30", "25"]);
-    await expect(page.locator("#gen-count-value")).toHaveText("60k");
+    ).toEqual(expected);
+    await expect(page.locator("#gen-count-value")).toHaveText(formatCount(count));
   } finally {
     release();
     await page.unrouteAll({ behavior: "wait" });
