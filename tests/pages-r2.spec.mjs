@@ -195,6 +195,37 @@ test.describe("sharp pages in the real renderer", () => {
     console.log("Masked card renderer:", JSON.stringify(state));
     expect(state.count).toBeGreaterThanOrEqual(3);
     await page.screenshot({ path: "tests/screenshots/pages-r2-webgpu-layers-390x844.png" });
+    await page.evaluate(async () => {
+      const { twoFigurePDF } = await import("/tests/fixtures/pg6/make-pdf.mjs");
+      await window.__splashery.app.openMedia(
+        new File([twoFigurePDF()], "mono.pdf", { type: "application/pdf" }),
+      );
+    });
+    await ready(page);
+    const mono = await page.evaluate(async () => {
+      const p = window.__splashery.player;
+      let frame;
+      for (let i = 0; i < 3; i++) frame = await p.stage.captureFrame();
+      const s = p.pictures.sheets.find((s) => s.slot?.surface?.instance.visible);
+      const face = s.shown.data.surface;
+      const b = (await import("/src/packs/pictures.js")).BOOKS_R5;
+      const point = p.stage.toScreen(p.fromRecipe(b.point(0, [0.5, 0.5])));
+      const ratio = frame.width / p.canvas.clientWidth;
+      return {
+        bytes: face.pixels?.byteLength,
+        expected: face.w * face.h,
+        white: Array.from(
+          frame
+            .getContext("2d")
+            .getImageData(Math.floor(point[0] * ratio), Math.floor(point[1] * ratio), 1, 1).data,
+        ),
+        errors: window.__pagesR2GpuErrors,
+      };
+    });
+    expect(mono.bytes).toBe(mono.expected);
+    expect(mono.white.slice(0, 3).every((x) => x > 240)).toBe(true);
+    expect(mono.errors).toEqual([]);
+    await page.screenshot({ path: "tests/screenshots/pages-r2-webgpu-mono-390x844.png" });
   });
 
   test("still pages own continuous faces, moving media and the neighboring frame retain their splats", async ({
@@ -222,7 +253,10 @@ test.describe("sharp pages in the real renderer", () => {
     expect(
       await page.evaluate(() => {
         const d = window.__splashery.player.pictures.sheets[0].shown.data;
-        return d.surface.source.width === d.w && d.surface.source.height === d.h;
+        const f = d.surface;
+        return f.pixels
+          ? f.pixels.byteLength === d.w * d.h
+          : f.source.width === d.w && f.source.height === d.h;
       }),
     ).toBe(true);
     const before = await page.evaluate(

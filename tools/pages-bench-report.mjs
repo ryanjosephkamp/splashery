@@ -6,6 +6,8 @@ const [mainFile, candidateFile, out] = process.argv.slice(2);
 if (!mainFile || !candidateFile) throw new Error("Provide main and candidate results.json files.");
 const main = JSON.parse(fs.readFileSync(mainFile, "utf8")),
   candidate = JSON.parse(fs.readFileSync(candidateFile, "utf8"));
+for (const field of ["isolation", "memoryPoint", "toolSha256"])
+  if (main[field] !== candidate[field]) throw new Error(`Benchmark ${field} differs.`);
 if (JSON.stringify(main.profiles) !== JSON.stringify(candidate.profiles))
   throw new Error("Benchmark profiles differ.");
 if (

@@ -327,7 +327,9 @@ async function run(toy, input, profile, repeat) {
           Object.values(d)
             .filter((x) => ArrayBuffer.isView(x))
             .reduce((s, x) => s + x.byteLength, 0) +
-          (d.surface ? d.w * d.h * 4 + (d.surface.relief?.d?.byteLength || 0) : 0),
+          (d.surface
+            ? (d.surface.sourceBytes ?? d.w * d.h * 4) + (d.surface.relief?.d?.byteLength || 0)
+            : 0),
         0,
       ),
       gpuBytes: Object.values(pl.stage.device._vram || {}).reduce(

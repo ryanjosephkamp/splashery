@@ -1,7 +1,7 @@
 // Task 95: opt-in hybrid sheets retain the original splat path and bounded backing.
 import { test, expect } from "@playwright/test";
 import { buildSheet } from "../src/picture-splats.js";
-import { surfaceGrid } from "../src/picture-surface.js";
+import { surfaceGrid, grayPixels } from "../src/picture-surface.js";
 import { Pictures } from "../src/pictures.js";
 
 const job = (w = 128, h = 160) => ({
@@ -13,6 +13,17 @@ const job = (w = 128, h = 160) => ({
   right: [2 / w, 0, 0],
   down: [0, -2 / h, 0],
   normal: [0, 0, 1],
+});
+
+test("monochrome storage preserves every opaque gray value and rejects color or transparency", () => {
+  const rgba = new Uint8ClampedArray(256 * 4);
+  for (let i = 0; i < 256; i++) rgba.set([i, i, i, 255], i * 4);
+  expect([...grayPixels(rgba)]).toEqual(Array.from({ length: 256 }, (_, i) => i));
+  rgba[1] = 1;
+  expect(grayPixels(rgba)).toBe(null);
+  rgba[1] = 0;
+  rgba[3] = 254;
+  expect(grayPixels(rgba)).toBe(null);
 });
 
 test("an immediately evicted prefetch is not rebuilt on every frame", () => {
