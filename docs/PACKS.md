@@ -1348,6 +1348,36 @@ From lanes Math and Fix3 (September 27–28, 2026):
 - **A sound that follows the effect**: `out.cues` from `drive()` can push short tones whose pitch
   follows what the toy is doing, so the sound fits any typed input (the graph plotter's pen).
 
+## 6b. Where a kit item's splats are (the provenance API)
+
+Since lane SE1 (October 16, 2026), this is a stable API: specs, tools, and other projects (the
+Shop's bench) may rely on it. Nothing here is new data; this section documents what the kit already
+keeps.
+
+Every `k.add(shape, opts)` and `k.cloud(opts, sample)` returns an item and appends it to `k.items`,
+in the order the recipe called them. After the build, the same kit is `ctx.kit` (from
+`buildRecipe()` in `src/kit.js`, and `player.proc.ctx.kit` in the app), and each item carries:
+
+| Field            | What it is                                                                                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `kind`           | The item's kind: `"surface"` (from `add()`) or `"cloud"` (from `cloud()`).                                                                             |
+| `start`/`end`    | Its splats in `ctx.buf`: indices `start` to `end - 1`. Items are contiguous in call order, so item 0 starts at 0 and each starts where the last ended. |
+| `opts`           | The options object the recipe passed, as passed (`part`, `kind` as a behavior name, `fit`, `color`, and so on; functions stay functions).              |
+| `shape`          | Surfaces only: the shape object (`area`, `thick`, `dims`, `sample`).                                                                                   |
+| `pos`, `q`, `sc` | Surfaces only: the placement (position, rotation `[x, y, z, w]`, and scale `[x, y, z]`) in recipe coordinates, before the fit.                         |
+| `n`              | The splats the budget gave the item. `end - start` can be fewer (a color function that returns `null` leaves a hole), so use the range.                |
+
+Right after the build, the last item's `end` is `ctx.buf.count`: the items cover every splat. Clay
+(`scene.clay`) pushes its splats after that, so splats from `end` of the last item onward are clay.
+A splat's part and behavior are in `ctx.buf.anim` (four floats a splat: x the part index, plus 16
+when the pattern layer skips it; y its `KINDS` value; z and w its behavior's two values), because
+these can differ inside one item (`opts.part` may be a function, a `to` or `skin` changes the
+behavior, and a cloud's `sample()` gives each splat its own). `KINDS`, `MORPH_RANGE`, `MAX_LEVERS`,
+and `MAX_LEVER_GROUPS` are in `src/kit-tables.js`, and the file parsers (`parseSplat`, `parseSpz`,
+`readPlyHeader`, `decimatePly`, and the limits) are in `src/splat-parsers.js`. Both import in plain
+Node with no engine and no DOM; `src/effects.js` and `src/loaders.js` re-export them.
+`tests/se1.spec.mjs` checks the ranges, the imports, and the re-exports.
+
 ## 7. House rules
 
 - **Deterministic**: only `k.rand()`, `c.rand()` and the kit's noise. No `Math.random`, no dates.
