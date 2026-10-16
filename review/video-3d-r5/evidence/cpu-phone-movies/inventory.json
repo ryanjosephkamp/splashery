@@ -1,0 +1,2924 @@
+{
+  "at": "2026-10-16T12:37:51.311545+00:00",
+  "movies": 10,
+  "ranked": false,
+  "rankLimitation": [
+    "The selected-profile corpus is incomplete; best/worst ranks are withheld.",
+    "Explicitly selected clips are unranked diagnostic captures."
+  ],
+  "validation": [
+    {
+      "id": "cat-plays",
+      "sourceBoundFilesVerified": true,
+      "savedHeldoutPixelsVerifiedPerVersion": [4, 4],
+      "synchronizedFrames": 51,
+      "distinctFrameHashes": {
+        "main": 51,
+        "candidate": 51
+      },
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 784,
+            "height": 1004,
+            "r_frame_rate": "10/1",
+            "nb_read_frames": "51"
+          }
+        ],
+        "format": {
+          "duration": "5.100000"
+        }
+      }
+    },
+    {
+      "id": "chameleon-flowers",
+      "sourceBoundFilesVerified": true,
+      "savedHeldoutPixelsVerifiedPerVersion": [4, 4],
+      "synchronizedFrames": 51,
+      "distinctFrameHashes": {
+        "main": 51,
+        "candidate": 51
+      },
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 784,
+            "height": 1004,
+            "r_frame_rate": "10/1",
+            "nb_read_frames": "51"
+          }
+        ],
+        "format": {
+          "duration": "5.100000"
+        }
+      }
+    },
+    {
+      "id": "dianthus",
+      "sourceBoundFilesVerified": true,
+      "savedHeldoutPixelsVerifiedPerVersion": [4, 4],
+      "synchronizedFrames": 51,
+      "distinctFrameHashes": {
+        "main": 51,
+        "candidate": 51
+      },
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 784,
+            "height": 1004,
+            "r_frame_rate": "10/1",
+            "nb_read_frames": "51"
+          }
+        ],
+        "format": {
+          "duration": "5.100000"
+        }
+      }
+    },
+    {
+      "id": "pisac",
+      "sourceBoundFilesVerified": true,
+      "savedHeldoutPixelsVerifiedPerVersion": [4, 4],
+      "synchronizedFrames": 51,
+      "distinctFrameHashes": {
+        "main": 51,
+        "candidate": 51
+      },
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 784,
+            "height": 1004,
+            "r_frame_rate": "10/1",
+            "nb_read_frames": "51"
+          }
+        ],
+        "format": {
+          "duration": "5.100000"
+        }
+      }
+    },
+    {
+      "id": "palace-statue",
+      "sourceBoundFilesVerified": true,
+      "savedHeldoutPixelsVerifiedPerVersion": [4, 4],
+      "synchronizedFrames": 46,
+      "distinctFrameHashes": {
+        "main": 46,
+        "candidate": 46
+      },
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 784,
+            "height": 1004,
+            "r_frame_rate": "10/1",
+            "nb_read_frames": "46"
+          }
+        ],
+        "format": {
+          "duration": "4.600000"
+        }
+      }
+    },
+    {
+      "id": "ullard",
+      "sourceBoundFilesVerified": true,
+      "savedHeldoutPixelsVerifiedPerVersion": [4, 4],
+      "synchronizedFrames": 51,
+      "distinctFrameHashes": {
+        "main": 51,
+        "candidate": 51
+      },
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 784,
+            "height": 1004,
+            "r_frame_rate": "10/1",
+            "nb_read_frames": "51"
+          }
+        ],
+        "format": {
+          "duration": "5.100000"
+        }
+      }
+    },
+    {
+      "id": "snaefell",
+      "sourceBoundFilesVerified": true,
+      "savedHeldoutPixelsVerifiedPerVersion": [4, 4],
+      "synchronizedFrames": 51,
+      "distinctFrameHashes": {
+        "main": 51,
+        "candidate": 51
+      },
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 784,
+            "height": 1004,
+            "r_frame_rate": "10/1",
+            "nb_read_frames": "51"
+          }
+        ],
+        "format": {
+          "duration": "5.100000"
+        }
+      }
+    },
+    {
+      "id": "fremantle-orbit",
+      "sourceBoundFilesVerified": true,
+      "savedHeldoutPixelsVerifiedPerVersion": [2, 2],
+      "synchronizedFrames": 51,
+      "distinctFrameHashes": {
+        "main": 51,
+        "candidate": 51
+      },
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 784,
+            "height": 1004,
+            "r_frame_rate": "10/1",
+            "nb_read_frames": "51"
+          }
+        ],
+        "format": {
+          "duration": "5.100000"
+        }
+      }
+    },
+    {
+      "id": "ihasalu-orbit",
+      "sourceBoundFilesVerified": true,
+      "savedHeldoutPixelsVerifiedPerVersion": [4, 4],
+      "synchronizedFrames": 51,
+      "distinctFrameHashes": {
+        "main": 51,
+        "candidate": 51
+      },
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 784,
+            "height": 1004,
+            "r_frame_rate": "10/1",
+            "nb_read_frames": "51"
+          }
+        ],
+        "format": {
+          "duration": "5.100000"
+        }
+      }
+    },
+    {
+      "id": "fresnel-lens",
+      "sourceBoundFilesVerified": true,
+      "savedHeldoutPixelsVerifiedPerVersion": [4, 4],
+      "synchronizedFrames": 51,
+      "distinctFrameHashes": {
+        "main": 51,
+        "candidate": 51
+      },
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 784,
+            "height": 1004,
+            "r_frame_rate": "10/1",
+            "nb_read_frames": "51"
+          }
+        ],
+        "format": {
+          "duration": "5.100000"
+        }
+      }
+    }
+  ],
+  "files": [
+    {
+      "source": "final-run/cpu-matcher-phone-review/cat-plays-phone/attribution.txt",
+      "file": "cat-plays-phone/attribution.txt.gz",
+      "originalBytes": 786,
+      "originalSha256": "ae045e86e104ddab1d5f3f36d622d2ce444e8f6750dff17d5ae4e57c645e3854",
+      "storedSha256": "6612e839b648755129a30e7bc5fd8c1f96ed2a54721f08916d9985c9d872a0fd",
+      "credit": {
+        "id": "cat-plays",
+        "label": "Cat playing outside, handheld tablet",
+        "category": ["pet", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Riverarvi",
+        "duration": 8,
+        "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+        "file": "cat-plays.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Cat_Plays.webm",
+        "captureSha256": "3258309e1d573fda6595fee0c02e3f055931a06c01bac24d986a5aff28297b32",
+        "captureDuration": 8.336,
+        "span": {
+          "start": 0,
+          "length": 8
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20138 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/cat-plays-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/cat-plays.jpg",
+          "commonsMetadata": "evidence/cat-plays-commons-metadata.json",
+          "sourcePageSha256": "38535c97b6bbc487bfddca42357b3aa13f7498f7f96507f7e75d349610e69b59",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ede0e5b6aed06fe2fa6b3385318347cbaadc7bb22dbedb2bab4a6f1e3a6b215e",
+          "commonsMetadataSha256": "f97d3c283fe10a29edb6e48968ebd4b8a303254fd808023b82cc2b85d9089a8a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 616920
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/cat-plays-phone/comparison.mp4",
+      "file": "cat-plays-phone/comparison.mp4",
+      "originalBytes": 585482,
+      "originalSha256": "e3cb88a94201d834c54b710732ca2aa5d245e7516446271320ceefbe288a83b3",
+      "storedSha256": "e3cb88a94201d834c54b710732ca2aa5d245e7516446271320ceefbe288a83b3",
+      "credit": {
+        "id": "cat-plays",
+        "label": "Cat playing outside, handheld tablet",
+        "category": ["pet", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Riverarvi",
+        "duration": 8,
+        "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+        "file": "cat-plays.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Cat_Plays.webm",
+        "captureSha256": "3258309e1d573fda6595fee0c02e3f055931a06c01bac24d986a5aff28297b32",
+        "captureDuration": 8.336,
+        "span": {
+          "start": 0,
+          "length": 8
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20138 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/cat-plays-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/cat-plays.jpg",
+          "commonsMetadata": "evidence/cat-plays-commons-metadata.json",
+          "sourcePageSha256": "38535c97b6bbc487bfddca42357b3aa13f7498f7f96507f7e75d349610e69b59",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ede0e5b6aed06fe2fa6b3385318347cbaadc7bb22dbedb2bab4a6f1e3a6b215e",
+          "commonsMetadataSha256": "f97d3c283fe10a29edb6e48968ebd4b8a303254fd808023b82cc2b85d9089a8a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 616920
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/cat-plays-phone/poster.jpg",
+      "file": "cat-plays-phone/poster.jpg",
+      "originalBytes": 44227,
+      "originalSha256": "a53a176fd78221931fdf9475f6e6cf0269c8f7d3c52427963f427b5ec9123530",
+      "storedSha256": "a53a176fd78221931fdf9475f6e6cf0269c8f7d3c52427963f427b5ec9123530",
+      "credit": {
+        "id": "cat-plays",
+        "label": "Cat playing outside, handheld tablet",
+        "category": ["pet", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Riverarvi",
+        "duration": 8,
+        "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+        "file": "cat-plays.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Cat_Plays.webm",
+        "captureSha256": "3258309e1d573fda6595fee0c02e3f055931a06c01bac24d986a5aff28297b32",
+        "captureDuration": 8.336,
+        "span": {
+          "start": 0,
+          "length": 8
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20138 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/cat-plays-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/cat-plays.jpg",
+          "commonsMetadata": "evidence/cat-plays-commons-metadata.json",
+          "sourcePageSha256": "38535c97b6bbc487bfddca42357b3aa13f7498f7f96507f7e75d349610e69b59",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ede0e5b6aed06fe2fa6b3385318347cbaadc7bb22dbedb2bab4a6f1e3a6b215e",
+          "commonsMetadataSha256": "f97d3c283fe10a29edb6e48968ebd4b8a303254fd808023b82cc2b85d9089a8a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 616920
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/cat-plays-phone/receipt.json",
+      "file": "cat-plays-phone/receipt.json.gz",
+      "originalBytes": 19211,
+      "originalSha256": "904c7777fc27e42b6373172185ef58f97e972448f15ae7abb47104e535673584",
+      "storedSha256": "8d404be959d75339f98dc100072e2df8aa8c46562de32883ea848c54f77b8cda",
+      "credit": {
+        "id": "cat-plays",
+        "label": "Cat playing outside, handheld tablet",
+        "category": ["pet", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Riverarvi",
+        "duration": 8,
+        "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+        "file": "cat-plays.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Cat_Plays.webm",
+        "captureSha256": "3258309e1d573fda6595fee0c02e3f055931a06c01bac24d986a5aff28297b32",
+        "captureDuration": 8.336,
+        "span": {
+          "start": 0,
+          "length": 8
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20138 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/cat-plays-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/cat-plays.jpg",
+          "commonsMetadata": "evidence/cat-plays-commons-metadata.json",
+          "sourcePageSha256": "38535c97b6bbc487bfddca42357b3aa13f7498f7f96507f7e75d349610e69b59",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ede0e5b6aed06fe2fa6b3385318347cbaadc7bb22dbedb2bab4a6f1e3a6b215e",
+          "commonsMetadataSha256": "f97d3c283fe10a29edb6e48968ebd4b8a303254fd808023b82cc2b85d9089a8a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 616920
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/cat-plays-phone/verification.json",
+      "file": "cat-plays-phone/verification.json.gz",
+      "originalBytes": 3222,
+      "originalSha256": "6aad774ada8993a695b547780da1d06137287574f970f474cc5d13110e130393",
+      "storedSha256": "81fc14eb74702048c1c227e128d0c6f1c5d86ad7050fc5e3ac1be90a02268ee5",
+      "credit": {
+        "id": "cat-plays",
+        "label": "Cat playing outside, handheld tablet",
+        "category": ["pet", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Riverarvi",
+        "duration": 8,
+        "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+        "file": "cat-plays.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Cat_Plays.webm",
+        "captureSha256": "3258309e1d573fda6595fee0c02e3f055931a06c01bac24d986a5aff28297b32",
+        "captureDuration": 8.336,
+        "span": {
+          "start": 0,
+          "length": 8
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20138 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/cat-plays-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/cat-plays.jpg",
+          "commonsMetadata": "evidence/cat-plays-commons-metadata.json",
+          "sourcePageSha256": "38535c97b6bbc487bfddca42357b3aa13f7498f7f96507f7e75d349610e69b59",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ede0e5b6aed06fe2fa6b3385318347cbaadc7bb22dbedb2bab4a6f1e3a6b215e",
+          "commonsMetadataSha256": "f97d3c283fe10a29edb6e48968ebd4b8a303254fd808023b82cc2b85d9089a8a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 616920
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/chameleon-flowers-phone/attribution.txt",
+      "file": "chameleon-flowers-phone/attribution.txt.gz",
+      "originalBytes": 791,
+      "originalSha256": "345139cc8938b053775d420f9f7633816d1b60dbb868d39da6663c0803320f03",
+      "storedSha256": "4dd06c3a5b044e9ee7be9c9431d45c0eb497e11dee4a0f50b44db2fef5753179",
+      "credit": {
+        "id": "chameleon-flowers",
+        "label": "Chameleon among flowering branches",
+        "category": ["plant", "animal", "still-held"],
+        "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Ventrovert",
+        "duration": 10,
+        "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+        "file": "chameleon-flowers.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Chameleon_on_ixora_flowers.webm/Chameleon_on_ixora_flowers.webm.480p.vp9.webm",
+        "captureSha256": "7dfad884aaf47b960d93856c8232a83a191a1b6f7b09e651d43930058539fc1b",
+        "captureDuration": 13,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/chameleon-flowers-source.html",
+          "licensePage": "evidence/cc-by-4-0.html",
+          "contactSheet": "contact-sheets/chameleon-flowers.jpg",
+          "commonsMetadata": "evidence/chameleon-flowers-commons-metadata.json",
+          "sourcePageSha256": "08ac501290aadc4ec4dc9996d9102b5d2983f43fa0158b54113dbffd672b8e7d",
+          "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+          "contactSheetSha256": "37a3323f755ef7b2c5ec6accd099f6e49aa44da546537650d8ffd85186442f09",
+          "commonsMetadataSha256": "076b2a179db38b7a7e6a20f07fd17f8457fadcc99ee995ba7389acbbb0e24f97"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 736318
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/chameleon-flowers-phone/comparison.mp4",
+      "file": "chameleon-flowers-phone/comparison.mp4",
+      "originalBytes": 498405,
+      "originalSha256": "38d86a8880a778e016396539c195f9650689d6f588fe212de6dba9c4577bf1c7",
+      "storedSha256": "38d86a8880a778e016396539c195f9650689d6f588fe212de6dba9c4577bf1c7",
+      "credit": {
+        "id": "chameleon-flowers",
+        "label": "Chameleon among flowering branches",
+        "category": ["plant", "animal", "still-held"],
+        "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Ventrovert",
+        "duration": 10,
+        "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+        "file": "chameleon-flowers.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Chameleon_on_ixora_flowers.webm/Chameleon_on_ixora_flowers.webm.480p.vp9.webm",
+        "captureSha256": "7dfad884aaf47b960d93856c8232a83a191a1b6f7b09e651d43930058539fc1b",
+        "captureDuration": 13,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/chameleon-flowers-source.html",
+          "licensePage": "evidence/cc-by-4-0.html",
+          "contactSheet": "contact-sheets/chameleon-flowers.jpg",
+          "commonsMetadata": "evidence/chameleon-flowers-commons-metadata.json",
+          "sourcePageSha256": "08ac501290aadc4ec4dc9996d9102b5d2983f43fa0158b54113dbffd672b8e7d",
+          "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+          "contactSheetSha256": "37a3323f755ef7b2c5ec6accd099f6e49aa44da546537650d8ffd85186442f09",
+          "commonsMetadataSha256": "076b2a179db38b7a7e6a20f07fd17f8457fadcc99ee995ba7389acbbb0e24f97"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 736318
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/chameleon-flowers-phone/poster.jpg",
+      "file": "chameleon-flowers-phone/poster.jpg",
+      "originalBytes": 48064,
+      "originalSha256": "6ff1036485289f4172ea2b1db7c8a48ef397781a60f964bb19ff4e1924008a3d",
+      "storedSha256": "6ff1036485289f4172ea2b1db7c8a48ef397781a60f964bb19ff4e1924008a3d",
+      "credit": {
+        "id": "chameleon-flowers",
+        "label": "Chameleon among flowering branches",
+        "category": ["plant", "animal", "still-held"],
+        "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Ventrovert",
+        "duration": 10,
+        "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+        "file": "chameleon-flowers.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Chameleon_on_ixora_flowers.webm/Chameleon_on_ixora_flowers.webm.480p.vp9.webm",
+        "captureSha256": "7dfad884aaf47b960d93856c8232a83a191a1b6f7b09e651d43930058539fc1b",
+        "captureDuration": 13,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/chameleon-flowers-source.html",
+          "licensePage": "evidence/cc-by-4-0.html",
+          "contactSheet": "contact-sheets/chameleon-flowers.jpg",
+          "commonsMetadata": "evidence/chameleon-flowers-commons-metadata.json",
+          "sourcePageSha256": "08ac501290aadc4ec4dc9996d9102b5d2983f43fa0158b54113dbffd672b8e7d",
+          "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+          "contactSheetSha256": "37a3323f755ef7b2c5ec6accd099f6e49aa44da546537650d8ffd85186442f09",
+          "commonsMetadataSha256": "076b2a179db38b7a7e6a20f07fd17f8457fadcc99ee995ba7389acbbb0e24f97"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 736318
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/chameleon-flowers-phone/receipt.json",
+      "file": "chameleon-flowers-phone/receipt.json.gz",
+      "originalBytes": 19209,
+      "originalSha256": "8ad3153ffe8e35764aa82dea40b7f2468e0116acb15570ff7bb71783d814edb8",
+      "storedSha256": "67741ce97dc4b69c47eeea73ff47a0be038525c9285c853f3d01fc93c78cdf06",
+      "credit": {
+        "id": "chameleon-flowers",
+        "label": "Chameleon among flowering branches",
+        "category": ["plant", "animal", "still-held"],
+        "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Ventrovert",
+        "duration": 10,
+        "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+        "file": "chameleon-flowers.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Chameleon_on_ixora_flowers.webm/Chameleon_on_ixora_flowers.webm.480p.vp9.webm",
+        "captureSha256": "7dfad884aaf47b960d93856c8232a83a191a1b6f7b09e651d43930058539fc1b",
+        "captureDuration": 13,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/chameleon-flowers-source.html",
+          "licensePage": "evidence/cc-by-4-0.html",
+          "contactSheet": "contact-sheets/chameleon-flowers.jpg",
+          "commonsMetadata": "evidence/chameleon-flowers-commons-metadata.json",
+          "sourcePageSha256": "08ac501290aadc4ec4dc9996d9102b5d2983f43fa0158b54113dbffd672b8e7d",
+          "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+          "contactSheetSha256": "37a3323f755ef7b2c5ec6accd099f6e49aa44da546537650d8ffd85186442f09",
+          "commonsMetadataSha256": "076b2a179db38b7a7e6a20f07fd17f8457fadcc99ee995ba7389acbbb0e24f97"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 736318
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/chameleon-flowers-phone/verification.json",
+      "file": "chameleon-flowers-phone/verification.json.gz",
+      "originalBytes": 3254,
+      "originalSha256": "419a396c68eec82a834bb8d414bffc650b931b0251b0bf88d7cef9e7b09ca85a",
+      "storedSha256": "43edba89169318a9d8843f04d2677b281f0f0f97536ef568db7fcbd83e311881",
+      "credit": {
+        "id": "chameleon-flowers",
+        "label": "Chameleon among flowering branches",
+        "category": ["plant", "animal", "still-held"],
+        "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Ventrovert",
+        "duration": 10,
+        "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+        "file": "chameleon-flowers.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Chameleon_on_ixora_flowers.webm/Chameleon_on_ixora_flowers.webm.480p.vp9.webm",
+        "captureSha256": "7dfad884aaf47b960d93856c8232a83a191a1b6f7b09e651d43930058539fc1b",
+        "captureDuration": 13,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/chameleon-flowers-source.html",
+          "licensePage": "evidence/cc-by-4-0.html",
+          "contactSheet": "contact-sheets/chameleon-flowers.jpg",
+          "commonsMetadata": "evidence/chameleon-flowers-commons-metadata.json",
+          "sourcePageSha256": "08ac501290aadc4ec4dc9996d9102b5d2983f43fa0158b54113dbffd672b8e7d",
+          "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+          "contactSheetSha256": "37a3323f755ef7b2c5ec6accd099f6e49aa44da546537650d8ffd85186442f09",
+          "commonsMetadataSha256": "076b2a179db38b7a7e6a20f07fd17f8457fadcc99ee995ba7389acbbb0e24f97"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 736318
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/dianthus-phone/attribution.txt",
+      "file": "dianthus-phone/attribution.txt.gz",
+      "originalBytes": 828,
+      "originalSha256": "2682736b247d03ffa4e6a761ef5251930e93210b2a95b629095031d25d91cea7",
+      "storedSha256": "a12b93fe555b2fe41f956434e693e9b1dcc5ef224b5bed8802ec6ebe01743dcd",
+      "credit": {
+        "id": "dianthus",
+        "label": "Potted flowering plants, handheld",
+        "category": ["plant", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Tanvir Rahat",
+        "duration": 5.916667,
+        "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+        "file": "dianthus.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/15/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm.480p.vp9.webm",
+        "captureSha256": "f336359c8594d75ba34f40b7d107ff27cb6d45881442126e1f487aa43b5569b6",
+        "captureDuration": 7,
+        "span": {
+          "start": 0,
+          "length": 6
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20136 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/dianthus-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/dianthus.jpg",
+          "commonsMetadata": "evidence/dianthus-commons-metadata.json",
+          "sourcePageSha256": "31d20fbd74e7495d0ec3f929fa033669e1af6f21d1d7871711bf1721e2a06ea4",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "517b413a7126b2eebb46b6188bfde207012bf727ed988cb0cafa4dc079d8207f",
+          "commonsMetadataSha256": "c318cb30a418eb70ae752927811d4d6cf2c80770a1b25dbc80786b4acfcadeeb"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1443894
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/dianthus-phone/comparison.mp4",
+      "file": "dianthus-phone/comparison.mp4",
+      "originalBytes": 688202,
+      "originalSha256": "8b901d068fff69ab4b0f0f303eba1629c82734a157194e606a43db070e8b7190",
+      "storedSha256": "8b901d068fff69ab4b0f0f303eba1629c82734a157194e606a43db070e8b7190",
+      "credit": {
+        "id": "dianthus",
+        "label": "Potted flowering plants, handheld",
+        "category": ["plant", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Tanvir Rahat",
+        "duration": 5.916667,
+        "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+        "file": "dianthus.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/15/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm.480p.vp9.webm",
+        "captureSha256": "f336359c8594d75ba34f40b7d107ff27cb6d45881442126e1f487aa43b5569b6",
+        "captureDuration": 7,
+        "span": {
+          "start": 0,
+          "length": 6
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20136 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/dianthus-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/dianthus.jpg",
+          "commonsMetadata": "evidence/dianthus-commons-metadata.json",
+          "sourcePageSha256": "31d20fbd74e7495d0ec3f929fa033669e1af6f21d1d7871711bf1721e2a06ea4",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "517b413a7126b2eebb46b6188bfde207012bf727ed988cb0cafa4dc079d8207f",
+          "commonsMetadataSha256": "c318cb30a418eb70ae752927811d4d6cf2c80770a1b25dbc80786b4acfcadeeb"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1443894
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/dianthus-phone/poster.jpg",
+      "file": "dianthus-phone/poster.jpg",
+      "originalBytes": 80814,
+      "originalSha256": "81b44146cfda25b6d4ec45cd6cf000193f73247817dd5268404eb280ecc5a8f0",
+      "storedSha256": "81b44146cfda25b6d4ec45cd6cf000193f73247817dd5268404eb280ecc5a8f0",
+      "credit": {
+        "id": "dianthus",
+        "label": "Potted flowering plants, handheld",
+        "category": ["plant", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Tanvir Rahat",
+        "duration": 5.916667,
+        "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+        "file": "dianthus.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/15/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm.480p.vp9.webm",
+        "captureSha256": "f336359c8594d75ba34f40b7d107ff27cb6d45881442126e1f487aa43b5569b6",
+        "captureDuration": 7,
+        "span": {
+          "start": 0,
+          "length": 6
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20136 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/dianthus-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/dianthus.jpg",
+          "commonsMetadata": "evidence/dianthus-commons-metadata.json",
+          "sourcePageSha256": "31d20fbd74e7495d0ec3f929fa033669e1af6f21d1d7871711bf1721e2a06ea4",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "517b413a7126b2eebb46b6188bfde207012bf727ed988cb0cafa4dc079d8207f",
+          "commonsMetadataSha256": "c318cb30a418eb70ae752927811d4d6cf2c80770a1b25dbc80786b4acfcadeeb"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1443894
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/dianthus-phone/receipt.json",
+      "file": "dianthus-phone/receipt.json.gz",
+      "originalBytes": 19337,
+      "originalSha256": "12c6c73ab631fce917170313d171846d474cd5306ce751d63c4d7b75e4796ff1",
+      "storedSha256": "ea86f52bf68859d6f7b3181ac6c4a463d792b1f58b7f6ea7bd9756f4aef9c5e5",
+      "credit": {
+        "id": "dianthus",
+        "label": "Potted flowering plants, handheld",
+        "category": ["plant", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Tanvir Rahat",
+        "duration": 5.916667,
+        "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+        "file": "dianthus.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/15/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm.480p.vp9.webm",
+        "captureSha256": "f336359c8594d75ba34f40b7d107ff27cb6d45881442126e1f487aa43b5569b6",
+        "captureDuration": 7,
+        "span": {
+          "start": 0,
+          "length": 6
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20136 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/dianthus-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/dianthus.jpg",
+          "commonsMetadata": "evidence/dianthus-commons-metadata.json",
+          "sourcePageSha256": "31d20fbd74e7495d0ec3f929fa033669e1af6f21d1d7871711bf1721e2a06ea4",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "517b413a7126b2eebb46b6188bfde207012bf727ed988cb0cafa4dc079d8207f",
+          "commonsMetadataSha256": "c318cb30a418eb70ae752927811d4d6cf2c80770a1b25dbc80786b4acfcadeeb"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1443894
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/dianthus-phone/verification.json",
+      "file": "dianthus-phone/verification.json.gz",
+      "originalBytes": 3262,
+      "originalSha256": "a50d59f71c4dd1e52119edcc1e456a48f1ccfdfc1a9b869de6bd6dfd86dd7efc",
+      "storedSha256": "a8bcb75b4c83a0e5d8ee4c4eb8cefce592bbcef95a2f112571f699e6d7dbc0f9",
+      "credit": {
+        "id": "dianthus",
+        "label": "Potted flowering plants, handheld",
+        "category": ["plant", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Tanvir Rahat",
+        "duration": 5.916667,
+        "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+        "file": "dianthus.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/15/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm.480p.vp9.webm",
+        "captureSha256": "f336359c8594d75ba34f40b7d107ff27cb6d45881442126e1f487aa43b5569b6",
+        "captureDuration": 7,
+        "span": {
+          "start": 0,
+          "length": 6
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20136 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/dianthus-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/dianthus.jpg",
+          "commonsMetadata": "evidence/dianthus-commons-metadata.json",
+          "sourcePageSha256": "31d20fbd74e7495d0ec3f929fa033669e1af6f21d1d7871711bf1721e2a06ea4",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "517b413a7126b2eebb46b6188bfde207012bf727ed988cb0cafa4dc079d8207f",
+          "commonsMetadataSha256": "c318cb30a418eb70ae752927811d4d6cf2c80770a1b25dbc80786b4acfcadeeb"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1443894
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/pisac-phone/attribution.txt",
+      "file": "pisac-phone/attribution.txt.gz",
+      "originalBytes": 811,
+      "originalSha256": "6646d38d47c2405e207d041e65e3921bc06f9483d1caf415682073ff138ff571",
+      "storedSha256": "7bad34110452beeb7484ee0ef4a5ddca6500001fc1f646bedf58967cb7647f8a",
+      "credit": {
+        "id": "pisac",
+        "label": "Stone ruins, handheld panorama",
+        "category": ["landscape", "pan", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Panorama_of_P%C3%ADsac_Ruins,_Peru_2024.webm",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "MorePix",
+        "duration": 10,
+        "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+        "file": "pisac.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a0/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm.480p.vp9.webm",
+        "captureSha256": "e25d3d3c6182dbce30368693e537a944cd743d031b3daa7757d69b7c109ab8a0",
+        "captureDuration": 15,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/pisac-source.html",
+          "licensePage": "evidence/cc0.html",
+          "contactSheet": "contact-sheets/pisac.jpg",
+          "sourcePageSha256": "8f51f118b230f85aecfeae8e04d6c64503bf21f39830ba2aeee4bf157f5cc45b",
+          "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+          "contactSheetSha256": "5ef1286874a60306e8f9c4cc91119edb0509044ce2ece3e2e5edb18d184a198e"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 403116
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/pisac-phone/comparison.mp4",
+      "file": "pisac-phone/comparison.mp4",
+      "originalBytes": 447054,
+      "originalSha256": "a77691a01b65afd1f04af402e9a7cbb716a054e33a72652ce050744526f3ab68",
+      "storedSha256": "a77691a01b65afd1f04af402e9a7cbb716a054e33a72652ce050744526f3ab68",
+      "credit": {
+        "id": "pisac",
+        "label": "Stone ruins, handheld panorama",
+        "category": ["landscape", "pan", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Panorama_of_P%C3%ADsac_Ruins,_Peru_2024.webm",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "MorePix",
+        "duration": 10,
+        "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+        "file": "pisac.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a0/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm.480p.vp9.webm",
+        "captureSha256": "e25d3d3c6182dbce30368693e537a944cd743d031b3daa7757d69b7c109ab8a0",
+        "captureDuration": 15,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/pisac-source.html",
+          "licensePage": "evidence/cc0.html",
+          "contactSheet": "contact-sheets/pisac.jpg",
+          "sourcePageSha256": "8f51f118b230f85aecfeae8e04d6c64503bf21f39830ba2aeee4bf157f5cc45b",
+          "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+          "contactSheetSha256": "5ef1286874a60306e8f9c4cc91119edb0509044ce2ece3e2e5edb18d184a198e"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 403116
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/pisac-phone/poster.jpg",
+      "file": "pisac-phone/poster.jpg",
+      "originalBytes": 64212,
+      "originalSha256": "e65ffbd076611358a95f65c38034d10a4dfbbf39e5de8f005c6a52226676e45e",
+      "storedSha256": "e65ffbd076611358a95f65c38034d10a4dfbbf39e5de8f005c6a52226676e45e",
+      "credit": {
+        "id": "pisac",
+        "label": "Stone ruins, handheld panorama",
+        "category": ["landscape", "pan", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Panorama_of_P%C3%ADsac_Ruins,_Peru_2024.webm",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "MorePix",
+        "duration": 10,
+        "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+        "file": "pisac.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a0/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm.480p.vp9.webm",
+        "captureSha256": "e25d3d3c6182dbce30368693e537a944cd743d031b3daa7757d69b7c109ab8a0",
+        "captureDuration": 15,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/pisac-source.html",
+          "licensePage": "evidence/cc0.html",
+          "contactSheet": "contact-sheets/pisac.jpg",
+          "sourcePageSha256": "8f51f118b230f85aecfeae8e04d6c64503bf21f39830ba2aeee4bf157f5cc45b",
+          "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+          "contactSheetSha256": "5ef1286874a60306e8f9c4cc91119edb0509044ce2ece3e2e5edb18d184a198e"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 403116
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/pisac-phone/receipt.json",
+      "file": "pisac-phone/receipt.json.gz",
+      "originalBytes": 19014,
+      "originalSha256": "a4f71743ef83c7ddfb06417fdebd2542df0c728bc3220b376e9c37da4190c55d",
+      "storedSha256": "7dcd7efc1ca8b756ce082d4150779ced7f1d24267b9b74ed741b74b569a26ef2",
+      "credit": {
+        "id": "pisac",
+        "label": "Stone ruins, handheld panorama",
+        "category": ["landscape", "pan", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Panorama_of_P%C3%ADsac_Ruins,_Peru_2024.webm",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "MorePix",
+        "duration": 10,
+        "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+        "file": "pisac.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a0/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm.480p.vp9.webm",
+        "captureSha256": "e25d3d3c6182dbce30368693e537a944cd743d031b3daa7757d69b7c109ab8a0",
+        "captureDuration": 15,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/pisac-source.html",
+          "licensePage": "evidence/cc0.html",
+          "contactSheet": "contact-sheets/pisac.jpg",
+          "sourcePageSha256": "8f51f118b230f85aecfeae8e04d6c64503bf21f39830ba2aeee4bf157f5cc45b",
+          "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+          "contactSheetSha256": "5ef1286874a60306e8f9c4cc91119edb0509044ce2ece3e2e5edb18d184a198e"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 403116
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/pisac-phone/verification.json",
+      "file": "pisac-phone/verification.json.gz",
+      "originalBytes": 3262,
+      "originalSha256": "e726536b8c47743bf82c11fc608223b132ebecfcecf991de934ccf2e229b7d18",
+      "storedSha256": "ec8e3ed1d38219f582646d63297f978542c0448b606ce3b764d03ec2637ab2a0",
+      "credit": {
+        "id": "pisac",
+        "label": "Stone ruins, handheld panorama",
+        "category": ["landscape", "pan", "shaky"],
+        "source": "https://commons.wikimedia.org/wiki/File:Panorama_of_P%C3%ADsac_Ruins,_Peru_2024.webm",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "MorePix",
+        "duration": 10,
+        "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+        "file": "pisac.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a0/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm.480p.vp9.webm",
+        "captureSha256": "e25d3d3c6182dbce30368693e537a944cd743d031b3daa7757d69b7c109ab8a0",
+        "captureDuration": 15,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/pisac-source.html",
+          "licensePage": "evidence/cc0.html",
+          "contactSheet": "contact-sheets/pisac.jpg",
+          "sourcePageSha256": "8f51f118b230f85aecfeae8e04d6c64503bf21f39830ba2aeee4bf157f5cc45b",
+          "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+          "contactSheetSha256": "5ef1286874a60306e8f9c4cc91119edb0509044ce2ece3e2e5edb18d184a198e"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 403116
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/palace-statue-phone/attribution.txt",
+      "file": "palace-statue-phone/attribution.txt.gz",
+      "originalBytes": 852,
+      "originalSha256": "5180c0e6b654c415c5d57fa16916e763c0a4655488d8b3065d17b2369f1f9e86",
+      "storedSha256": "cc7c6d7e7c54ffc52b9489d5d1bc90b90455903fbc4fbdd363bf4e7780cc9125",
+      "credit": {
+        "id": "palace-statue",
+        "label": "Palace entrance statue, handheld approach",
+        "category": ["statue", "shaky", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Sayvhior",
+        "duration": 5,
+        "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+        "file": "palace-statue.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+        "captureSha256": "e22b8a7fd5886ebad610e34d80b06ae797406f715adc04bbb4e4e11a9cbcd098",
+        "captureDuration": 10.241,
+        "span": {
+          "start": 0,
+          "length": 5
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20135 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/palace-statue-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/palace-statue.jpg",
+          "commonsMetadata": "evidence/palace-statue-commons-metadata.json",
+          "sourcePageSha256": "568112cbe48562ed643b7c37c9f1f53007031e04dddb9cba6a34f3cb78543f71",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "1f4044b1f5acfd792e36e6ae2f851d02fb7c5e2fe244ecd254583f793e20f549",
+          "commonsMetadataSha256": "5428267c98d6fe6344d2f8d2bb182ada8f3260e247d3bb248f4c5987ca44d46a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 700939
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/palace-statue-phone/comparison.mp4",
+      "file": "palace-statue-phone/comparison.mp4",
+      "originalBytes": 752905,
+      "originalSha256": "c5e7d94f2c68f71d94b6117400edddf52a089a1e027e807d798723f753857ffd",
+      "storedSha256": "c5e7d94f2c68f71d94b6117400edddf52a089a1e027e807d798723f753857ffd",
+      "credit": {
+        "id": "palace-statue",
+        "label": "Palace entrance statue, handheld approach",
+        "category": ["statue", "shaky", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Sayvhior",
+        "duration": 5,
+        "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+        "file": "palace-statue.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+        "captureSha256": "e22b8a7fd5886ebad610e34d80b06ae797406f715adc04bbb4e4e11a9cbcd098",
+        "captureDuration": 10.241,
+        "span": {
+          "start": 0,
+          "length": 5
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20135 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/palace-statue-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/palace-statue.jpg",
+          "commonsMetadata": "evidence/palace-statue-commons-metadata.json",
+          "sourcePageSha256": "568112cbe48562ed643b7c37c9f1f53007031e04dddb9cba6a34f3cb78543f71",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "1f4044b1f5acfd792e36e6ae2f851d02fb7c5e2fe244ecd254583f793e20f549",
+          "commonsMetadataSha256": "5428267c98d6fe6344d2f8d2bb182ada8f3260e247d3bb248f4c5987ca44d46a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 700939
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/palace-statue-phone/poster.jpg",
+      "file": "palace-statue-phone/poster.jpg",
+      "originalBytes": 67414,
+      "originalSha256": "7b970eed7c30f7a22b6a09f027b75338f6c0ee7c5ef52e5e768e7ac07c1459e9",
+      "storedSha256": "7b970eed7c30f7a22b6a09f027b75338f6c0ee7c5ef52e5e768e7ac07c1459e9",
+      "credit": {
+        "id": "palace-statue",
+        "label": "Palace entrance statue, handheld approach",
+        "category": ["statue", "shaky", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Sayvhior",
+        "duration": 5,
+        "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+        "file": "palace-statue.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+        "captureSha256": "e22b8a7fd5886ebad610e34d80b06ae797406f715adc04bbb4e4e11a9cbcd098",
+        "captureDuration": 10.241,
+        "span": {
+          "start": 0,
+          "length": 5
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20135 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/palace-statue-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/palace-statue.jpg",
+          "commonsMetadata": "evidence/palace-statue-commons-metadata.json",
+          "sourcePageSha256": "568112cbe48562ed643b7c37c9f1f53007031e04dddb9cba6a34f3cb78543f71",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "1f4044b1f5acfd792e36e6ae2f851d02fb7c5e2fe244ecd254583f793e20f549",
+          "commonsMetadataSha256": "5428267c98d6fe6344d2f8d2bb182ada8f3260e247d3bb248f4c5987ca44d46a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 700939
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/palace-statue-phone/receipt.json",
+      "file": "palace-statue-phone/receipt.json.gz",
+      "originalBytes": 18208,
+      "originalSha256": "1dc7327e895a5b15f91805460b3b2e0b9ae338d3dd0e15d0f98dfda38ae1400d",
+      "storedSha256": "4681d127eb3aacd98b232e4e6fa9eabdc9fb227177b1d79bb3b2abeb8cfd6877",
+      "credit": {
+        "id": "palace-statue",
+        "label": "Palace entrance statue, handheld approach",
+        "category": ["statue", "shaky", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Sayvhior",
+        "duration": 5,
+        "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+        "file": "palace-statue.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+        "captureSha256": "e22b8a7fd5886ebad610e34d80b06ae797406f715adc04bbb4e4e11a9cbcd098",
+        "captureDuration": 10.241,
+        "span": {
+          "start": 0,
+          "length": 5
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20135 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/palace-statue-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/palace-statue.jpg",
+          "commonsMetadata": "evidence/palace-statue-commons-metadata.json",
+          "sourcePageSha256": "568112cbe48562ed643b7c37c9f1f53007031e04dddb9cba6a34f3cb78543f71",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "1f4044b1f5acfd792e36e6ae2f851d02fb7c5e2fe244ecd254583f793e20f549",
+          "commonsMetadataSha256": "5428267c98d6fe6344d2f8d2bb182ada8f3260e247d3bb248f4c5987ca44d46a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 700939
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/palace-statue-phone/verification.json",
+      "file": "palace-statue-phone/verification.json.gz",
+      "originalBytes": 3262,
+      "originalSha256": "ce807a58cdbbe2bb07ab81321993328bc6c4de993213e38dcc2b3a5d58f6084b",
+      "storedSha256": "2e89658c163996364cb1757f14d6e84b8258fe8741fa1b8b3105339c9eb80141",
+      "credit": {
+        "id": "palace-statue",
+        "label": "Palace entrance statue, handheld approach",
+        "category": ["statue", "shaky", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Sayvhior",
+        "duration": 5,
+        "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+        "file": "palace-statue.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+        "captureSha256": "e22b8a7fd5886ebad610e34d80b06ae797406f715adc04bbb4e4e11a9cbcd098",
+        "captureDuration": 10.241,
+        "span": {
+          "start": 0,
+          "length": 5
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u20135 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/palace-statue-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/palace-statue.jpg",
+          "commonsMetadata": "evidence/palace-statue-commons-metadata.json",
+          "sourcePageSha256": "568112cbe48562ed643b7c37c9f1f53007031e04dddb9cba6a34f3cb78543f71",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "1f4044b1f5acfd792e36e6ae2f851d02fb7c5e2fe244ecd254583f793e20f549",
+          "commonsMetadataSha256": "5428267c98d6fe6344d2f8d2bb182ada8f3260e247d3bb248f4c5987ca44d46a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 700939
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/ullard-phone/attribution.txt",
+      "file": "ullard-phone/attribution.txt.gz",
+      "originalBytes": 807,
+      "originalSha256": "f00603c5cfff2f5383fb3c6d30b8152fbddc54cf88a05af257685c028d4a1b53",
+      "storedSha256": "af274dcf36ac50fe36919acc3af914e8144d3ef676142b9d3082746b8ac3694d",
+      "credit": {
+        "id": "ullard",
+        "label": "Old stone handball court, camera walks inside",
+        "category": ["room", "shaky", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:Ullard_handball_alley.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "A.-K. D.",
+        "duration": 10,
+        "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b",
+        "file": "ullard.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fe/Ullard_handball_alley.webm/Ullard_handball_alley.webm.480p.vp9.webm",
+        "captureSha256": "be02ca3cb887e487c8b9dab84b11df360482c0a641c7dc98030c56b60ebce101",
+        "captureDuration": 37.44,
+        "span": {
+          "start": 8,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 8\u201318 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/ullard-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/ullard.jpg",
+          "commonsMetadata": "evidence/ullard-commons-metadata.json",
+          "sourcePageSha256": "a493b3f95a83996f8ab0a780dfd3569709cbb390b1911fb50d216cf4f22777d1",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ef321c7fb0cede79e412995f338f1a876260b73a94d69a3331afe0a566742198",
+          "commonsMetadataSha256": "c07503afa355b7d89384b37903fada4b98996a147fa7ded23ece61d018ff1dcb"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 2074008
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/ullard-phone/comparison.mp4",
+      "file": "ullard-phone/comparison.mp4",
+      "originalBytes": 538117,
+      "originalSha256": "8ab88ee7018cb37f122afbaec09ce22e816d88043fea8b55b293f6b9ca5a86d3",
+      "storedSha256": "8ab88ee7018cb37f122afbaec09ce22e816d88043fea8b55b293f6b9ca5a86d3",
+      "credit": {
+        "id": "ullard",
+        "label": "Old stone handball court, camera walks inside",
+        "category": ["room", "shaky", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:Ullard_handball_alley.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "A.-K. D.",
+        "duration": 10,
+        "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b",
+        "file": "ullard.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fe/Ullard_handball_alley.webm/Ullard_handball_alley.webm.480p.vp9.webm",
+        "captureSha256": "be02ca3cb887e487c8b9dab84b11df360482c0a641c7dc98030c56b60ebce101",
+        "captureDuration": 37.44,
+        "span": {
+          "start": 8,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 8\u201318 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/ullard-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/ullard.jpg",
+          "commonsMetadata": "evidence/ullard-commons-metadata.json",
+          "sourcePageSha256": "a493b3f95a83996f8ab0a780dfd3569709cbb390b1911fb50d216cf4f22777d1",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ef321c7fb0cede79e412995f338f1a876260b73a94d69a3331afe0a566742198",
+          "commonsMetadataSha256": "c07503afa355b7d89384b37903fada4b98996a147fa7ded23ece61d018ff1dcb"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 2074008
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/ullard-phone/poster.jpg",
+      "file": "ullard-phone/poster.jpg",
+      "originalBytes": 46358,
+      "originalSha256": "c139027725bf065eb0ba99b03dffd642d77457b792df5f98a0a1cb97b54f169e",
+      "storedSha256": "c139027725bf065eb0ba99b03dffd642d77457b792df5f98a0a1cb97b54f169e",
+      "credit": {
+        "id": "ullard",
+        "label": "Old stone handball court, camera walks inside",
+        "category": ["room", "shaky", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:Ullard_handball_alley.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "A.-K. D.",
+        "duration": 10,
+        "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b",
+        "file": "ullard.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fe/Ullard_handball_alley.webm/Ullard_handball_alley.webm.480p.vp9.webm",
+        "captureSha256": "be02ca3cb887e487c8b9dab84b11df360482c0a641c7dc98030c56b60ebce101",
+        "captureDuration": 37.44,
+        "span": {
+          "start": 8,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 8\u201318 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/ullard-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/ullard.jpg",
+          "commonsMetadata": "evidence/ullard-commons-metadata.json",
+          "sourcePageSha256": "a493b3f95a83996f8ab0a780dfd3569709cbb390b1911fb50d216cf4f22777d1",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ef321c7fb0cede79e412995f338f1a876260b73a94d69a3331afe0a566742198",
+          "commonsMetadataSha256": "c07503afa355b7d89384b37903fada4b98996a147fa7ded23ece61d018ff1dcb"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 2074008
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/ullard-phone/receipt.json",
+      "file": "ullard-phone/receipt.json.gz",
+      "originalBytes": 19164,
+      "originalSha256": "f093a23240f306527d6a627a63d49af2187a833c624d2e79f6325954d73b38de",
+      "storedSha256": "f766b9c9f2213a40c3f28dc4208764fcba363a24062bc23209a6dca64ab1ddf6",
+      "credit": {
+        "id": "ullard",
+        "label": "Old stone handball court, camera walks inside",
+        "category": ["room", "shaky", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:Ullard_handball_alley.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "A.-K. D.",
+        "duration": 10,
+        "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b",
+        "file": "ullard.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fe/Ullard_handball_alley.webm/Ullard_handball_alley.webm.480p.vp9.webm",
+        "captureSha256": "be02ca3cb887e487c8b9dab84b11df360482c0a641c7dc98030c56b60ebce101",
+        "captureDuration": 37.44,
+        "span": {
+          "start": 8,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 8\u201318 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/ullard-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/ullard.jpg",
+          "commonsMetadata": "evidence/ullard-commons-metadata.json",
+          "sourcePageSha256": "a493b3f95a83996f8ab0a780dfd3569709cbb390b1911fb50d216cf4f22777d1",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ef321c7fb0cede79e412995f338f1a876260b73a94d69a3331afe0a566742198",
+          "commonsMetadataSha256": "c07503afa355b7d89384b37903fada4b98996a147fa7ded23ece61d018ff1dcb"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 2074008
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/ullard-phone/verification.json",
+      "file": "ullard-phone/verification.json.gz",
+      "originalBytes": 3262,
+      "originalSha256": "788cf7c1724100136fa8206ca8d61a72a19911b4cfc298a7bd2cb794ba771bd0",
+      "storedSha256": "53bb07b29751553dd451ab3f7b85a07d19929bef322bc21c73056030316c31ee",
+      "credit": {
+        "id": "ullard",
+        "label": "Old stone handball court, camera walks inside",
+        "category": ["room", "shaky", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:Ullard_handball_alley.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "A.-K. D.",
+        "duration": 10,
+        "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b",
+        "file": "ullard.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fe/Ullard_handball_alley.webm/Ullard_handball_alley.webm.480p.vp9.webm",
+        "captureSha256": "be02ca3cb887e487c8b9dab84b11df360482c0a641c7dc98030c56b60ebce101",
+        "captureDuration": 37.44,
+        "span": {
+          "start": 8,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 8\u201318 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/ullard-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/ullard.jpg",
+          "commonsMetadata": "evidence/ullard-commons-metadata.json",
+          "sourcePageSha256": "a493b3f95a83996f8ab0a780dfd3569709cbb390b1911fb50d216cf4f22777d1",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ef321c7fb0cede79e412995f338f1a876260b73a94d69a3331afe0a566742198",
+          "commonsMetadataSha256": "c07503afa355b7d89384b37903fada4b98996a147fa7ded23ece61d018ff1dcb"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 2074008
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/snaefell-phone/attribution.txt",
+      "file": "snaefell-phone/attribution.txt.gz",
+      "originalBytes": 784,
+      "originalSha256": "94c1a71e7f2a6f3339be5d59cec9ded3c38aba950aa98cc30be027e163563b42",
+      "storedSha256": "10af1ceb7db8dc9e7a868c29b5b42d50792f30ce08f45055ce9619af0babc0c1",
+      "credit": {
+        "id": "snaefell",
+        "label": "Mountain panorama, handheld sweep",
+        "category": ["landscape", "pan"],
+        "source": "https://commons.wikimedia.org/wiki/File:Panorama_on_Snaefell.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Tiny Toast",
+        "duration": 10,
+        "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6",
+        "file": "snaefell.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/62/Panorama_on_Snaefell.webm/Panorama_on_Snaefell.webm.480p.vp9.webm",
+        "captureSha256": "81e80ed64101b81ee0c7874f498aa38b521984939fba1eee87be784119844d05",
+        "captureDuration": 46.169,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/snaefell-source.html",
+          "licensePage": "evidence/cc-by-4-0.html",
+          "contactSheet": "contact-sheets/snaefell.jpg",
+          "sourcePageSha256": "3780138d6d3ec1e5425059ebec95ff8a8bdd580827d307e4be7f2eeb04efde35",
+          "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+          "contactSheetSha256": "984d289839c5db9ea726d8a3967cd29f327a8b32682beaef36f3ca10696d33e0"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1224471
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/snaefell-phone/comparison.mp4",
+      "file": "snaefell-phone/comparison.mp4",
+      "originalBytes": 378464,
+      "originalSha256": "4611ede716ac7c0cb8ac2ee2f92d5daeebd22f97c3f9586a4d3f1fcb65ef22a1",
+      "storedSha256": "4611ede716ac7c0cb8ac2ee2f92d5daeebd22f97c3f9586a4d3f1fcb65ef22a1",
+      "credit": {
+        "id": "snaefell",
+        "label": "Mountain panorama, handheld sweep",
+        "category": ["landscape", "pan"],
+        "source": "https://commons.wikimedia.org/wiki/File:Panorama_on_Snaefell.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Tiny Toast",
+        "duration": 10,
+        "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6",
+        "file": "snaefell.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/62/Panorama_on_Snaefell.webm/Panorama_on_Snaefell.webm.480p.vp9.webm",
+        "captureSha256": "81e80ed64101b81ee0c7874f498aa38b521984939fba1eee87be784119844d05",
+        "captureDuration": 46.169,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/snaefell-source.html",
+          "licensePage": "evidence/cc-by-4-0.html",
+          "contactSheet": "contact-sheets/snaefell.jpg",
+          "sourcePageSha256": "3780138d6d3ec1e5425059ebec95ff8a8bdd580827d307e4be7f2eeb04efde35",
+          "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+          "contactSheetSha256": "984d289839c5db9ea726d8a3967cd29f327a8b32682beaef36f3ca10696d33e0"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1224471
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/snaefell-phone/poster.jpg",
+      "file": "snaefell-phone/poster.jpg",
+      "originalBytes": 31021,
+      "originalSha256": "713bcaadffe372ca7b44c76d40a06643e1ceaa7ddd5980628adad2b7290e9f38",
+      "storedSha256": "713bcaadffe372ca7b44c76d40a06643e1ceaa7ddd5980628adad2b7290e9f38",
+      "credit": {
+        "id": "snaefell",
+        "label": "Mountain panorama, handheld sweep",
+        "category": ["landscape", "pan"],
+        "source": "https://commons.wikimedia.org/wiki/File:Panorama_on_Snaefell.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Tiny Toast",
+        "duration": 10,
+        "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6",
+        "file": "snaefell.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/62/Panorama_on_Snaefell.webm/Panorama_on_Snaefell.webm.480p.vp9.webm",
+        "captureSha256": "81e80ed64101b81ee0c7874f498aa38b521984939fba1eee87be784119844d05",
+        "captureDuration": 46.169,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/snaefell-source.html",
+          "licensePage": "evidence/cc-by-4-0.html",
+          "contactSheet": "contact-sheets/snaefell.jpg",
+          "sourcePageSha256": "3780138d6d3ec1e5425059ebec95ff8a8bdd580827d307e4be7f2eeb04efde35",
+          "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+          "contactSheetSha256": "984d289839c5db9ea726d8a3967cd29f327a8b32682beaef36f3ca10696d33e0"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1224471
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/snaefell-phone/receipt.json",
+      "file": "snaefell-phone/receipt.json.gz",
+      "originalBytes": 18947,
+      "originalSha256": "b9df528faca6474d0bd6674121776fad36684c5198b072392ff22a02ac55431a",
+      "storedSha256": "210e138de84b78aa0769d4abf8735059dd9855767fa37bdf18ad75bb82f98ca4",
+      "credit": {
+        "id": "snaefell",
+        "label": "Mountain panorama, handheld sweep",
+        "category": ["landscape", "pan"],
+        "source": "https://commons.wikimedia.org/wiki/File:Panorama_on_Snaefell.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Tiny Toast",
+        "duration": 10,
+        "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6",
+        "file": "snaefell.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/62/Panorama_on_Snaefell.webm/Panorama_on_Snaefell.webm.480p.vp9.webm",
+        "captureSha256": "81e80ed64101b81ee0c7874f498aa38b521984939fba1eee87be784119844d05",
+        "captureDuration": 46.169,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/snaefell-source.html",
+          "licensePage": "evidence/cc-by-4-0.html",
+          "contactSheet": "contact-sheets/snaefell.jpg",
+          "sourcePageSha256": "3780138d6d3ec1e5425059ebec95ff8a8bdd580827d307e4be7f2eeb04efde35",
+          "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+          "contactSheetSha256": "984d289839c5db9ea726d8a3967cd29f327a8b32682beaef36f3ca10696d33e0"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1224471
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/snaefell-phone/verification.json",
+      "file": "snaefell-phone/verification.json.gz",
+      "originalBytes": 3246,
+      "originalSha256": "6255fc8589369bce9f8c1676d4857fa4a9c54b9380107f8691ec35ee824314ec",
+      "storedSha256": "7375e582eb03b8fe46dfc54f40765eaeb4f7b79db196c821ee53a1e2545fab43",
+      "credit": {
+        "id": "snaefell",
+        "label": "Mountain panorama, handheld sweep",
+        "category": ["landscape", "pan"],
+        "source": "https://commons.wikimedia.org/wiki/File:Panorama_on_Snaefell.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Tiny Toast",
+        "duration": 10,
+        "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6",
+        "file": "snaefell.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/62/Panorama_on_Snaefell.webm/Panorama_on_Snaefell.webm.480p.vp9.webm",
+        "captureSha256": "81e80ed64101b81ee0c7874f498aa38b521984939fba1eee87be784119844d05",
+        "captureDuration": 46.169,
+        "span": {
+          "start": 0,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/snaefell-source.html",
+          "licensePage": "evidence/cc-by-4-0.html",
+          "contactSheet": "contact-sheets/snaefell.jpg",
+          "sourcePageSha256": "3780138d6d3ec1e5425059ebec95ff8a8bdd580827d307e4be7f2eeb04efde35",
+          "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+          "contactSheetSha256": "984d289839c5db9ea726d8a3967cd29f327a8b32682beaef36f3ca10696d33e0"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1224471
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/fremantle-orbit-phone/attribution.txt",
+      "file": "fremantle-orbit-phone/attribution.txt.gz",
+      "originalBytes": 850,
+      "originalSha256": "99b4a8fc524c3ae36009986339027c1f180e3aaf7f46bbdcd247c5b0024a3ab1",
+      "storedSha256": "9590b4c348e885657cf5a4db6bf097edef83fac84fa932447b7ce4ab9638d5a4",
+      "credit": {
+        "id": "fremantle-orbit",
+        "label": "Lighthouse at sunset, camera orbits the tower",
+        "category": ["object-orbit", "camera-translation", "low-light"],
+        "source": "https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "JamesBromberger",
+        "duration": 12,
+        "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+        "file": "fremantle-orbit.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm.480p.vp9.webm",
+        "captureSha256": "44b5478f7a44f3791ff66be401e9810ddefc4f6b19c0a2fd25f49a442da57358",
+        "captureDuration": 111,
+        "span": {
+          "start": 10,
+          "length": 12
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/fremantle-orbit-source.html",
+          "licensePage": "evidence/cc0.html",
+          "contactSheet": "contact-sheets/fremantle-orbit.jpg",
+          "commonsMetadata": "evidence/fremantle-orbit-commons-metadata.json",
+          "sourcePageSha256": "b889054a0b36e8be4138ad4260088d82ab2bf164ced1d2c53f08f70b1bad54cb",
+          "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+          "contactSheetSha256": "92516c89fefb8fe623c1ad0b3ce686e496bc4e7e41414eb5b2dfc3c79df3ed38",
+          "commonsMetadataSha256": "6802a49fbeebdf75bef08bc9104d58a194ee3844daf29c12b84bb7380f63fc00"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1146265
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/fremantle-orbit-phone/comparison.mp4",
+      "file": "fremantle-orbit-phone/comparison.mp4",
+      "originalBytes": 309355,
+      "originalSha256": "0e43dc85a75a6ea07dee7f396a2a440ae4a3fdbb2eee8633fef5df148d8d44b0",
+      "storedSha256": "0e43dc85a75a6ea07dee7f396a2a440ae4a3fdbb2eee8633fef5df148d8d44b0",
+      "credit": {
+        "id": "fremantle-orbit",
+        "label": "Lighthouse at sunset, camera orbits the tower",
+        "category": ["object-orbit", "camera-translation", "low-light"],
+        "source": "https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "JamesBromberger",
+        "duration": 12,
+        "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+        "file": "fremantle-orbit.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm.480p.vp9.webm",
+        "captureSha256": "44b5478f7a44f3791ff66be401e9810ddefc4f6b19c0a2fd25f49a442da57358",
+        "captureDuration": 111,
+        "span": {
+          "start": 10,
+          "length": 12
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/fremantle-orbit-source.html",
+          "licensePage": "evidence/cc0.html",
+          "contactSheet": "contact-sheets/fremantle-orbit.jpg",
+          "commonsMetadata": "evidence/fremantle-orbit-commons-metadata.json",
+          "sourcePageSha256": "b889054a0b36e8be4138ad4260088d82ab2bf164ced1d2c53f08f70b1bad54cb",
+          "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+          "contactSheetSha256": "92516c89fefb8fe623c1ad0b3ce686e496bc4e7e41414eb5b2dfc3c79df3ed38",
+          "commonsMetadataSha256": "6802a49fbeebdf75bef08bc9104d58a194ee3844daf29c12b84bb7380f63fc00"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1146265
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/fremantle-orbit-phone/poster.jpg",
+      "file": "fremantle-orbit-phone/poster.jpg",
+      "originalBytes": 31710,
+      "originalSha256": "f6d62c55e6956cacd3ab59703b4f9f1eb5401f5f1fbcbe55d899c731b4458e1a",
+      "storedSha256": "f6d62c55e6956cacd3ab59703b4f9f1eb5401f5f1fbcbe55d899c731b4458e1a",
+      "credit": {
+        "id": "fremantle-orbit",
+        "label": "Lighthouse at sunset, camera orbits the tower",
+        "category": ["object-orbit", "camera-translation", "low-light"],
+        "source": "https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "JamesBromberger",
+        "duration": 12,
+        "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+        "file": "fremantle-orbit.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm.480p.vp9.webm",
+        "captureSha256": "44b5478f7a44f3791ff66be401e9810ddefc4f6b19c0a2fd25f49a442da57358",
+        "captureDuration": 111,
+        "span": {
+          "start": 10,
+          "length": 12
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/fremantle-orbit-source.html",
+          "licensePage": "evidence/cc0.html",
+          "contactSheet": "contact-sheets/fremantle-orbit.jpg",
+          "commonsMetadata": "evidence/fremantle-orbit-commons-metadata.json",
+          "sourcePageSha256": "b889054a0b36e8be4138ad4260088d82ab2bf164ced1d2c53f08f70b1bad54cb",
+          "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+          "contactSheetSha256": "92516c89fefb8fe623c1ad0b3ce686e496bc4e7e41414eb5b2dfc3c79df3ed38",
+          "commonsMetadataSha256": "6802a49fbeebdf75bef08bc9104d58a194ee3844daf29c12b84bb7380f63fc00"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1146265
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/fremantle-orbit-phone/receipt.json",
+      "file": "fremantle-orbit-phone/receipt.json.gz",
+      "originalBytes": 17569,
+      "originalSha256": "a1eb4bec4c6bf71c503529a207c5618e0fa7f714b058c0e53d850fea8f8e315b",
+      "storedSha256": "06cce71225b719959a5cc6558e4e732745b19fed136adc92db22f43511044b74",
+      "credit": {
+        "id": "fremantle-orbit",
+        "label": "Lighthouse at sunset, camera orbits the tower",
+        "category": ["object-orbit", "camera-translation", "low-light"],
+        "source": "https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "JamesBromberger",
+        "duration": 12,
+        "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+        "file": "fremantle-orbit.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm.480p.vp9.webm",
+        "captureSha256": "44b5478f7a44f3791ff66be401e9810ddefc4f6b19c0a2fd25f49a442da57358",
+        "captureDuration": 111,
+        "span": {
+          "start": 10,
+          "length": 12
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/fremantle-orbit-source.html",
+          "licensePage": "evidence/cc0.html",
+          "contactSheet": "contact-sheets/fremantle-orbit.jpg",
+          "commonsMetadata": "evidence/fremantle-orbit-commons-metadata.json",
+          "sourcePageSha256": "b889054a0b36e8be4138ad4260088d82ab2bf164ced1d2c53f08f70b1bad54cb",
+          "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+          "contactSheetSha256": "92516c89fefb8fe623c1ad0b3ce686e496bc4e7e41414eb5b2dfc3c79df3ed38",
+          "commonsMetadataSha256": "6802a49fbeebdf75bef08bc9104d58a194ee3844daf29c12b84bb7380f63fc00"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1146265
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/fremantle-orbit-phone/verification.json",
+      "file": "fremantle-orbit-phone/verification.json.gz",
+      "originalBytes": 1786,
+      "originalSha256": "b3770169108b0817b345a19d3f77cc263cad80deb90986b746683c3d4dbbffed",
+      "storedSha256": "c1c5f2e6b14114e7a51766662adf8ba3959cc3beb31a73992b8c1ea9fbe708c9",
+      "credit": {
+        "id": "fremantle-orbit",
+        "label": "Lighthouse at sunset, camera orbits the tower",
+        "category": ["object-orbit", "camera-translation", "low-light"],
+        "source": "https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "JamesBromberger",
+        "duration": 12,
+        "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+        "file": "fremantle-orbit.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm.480p.vp9.webm",
+        "captureSha256": "44b5478f7a44f3791ff66be401e9810ddefc4f6b19c0a2fd25f49a442da57358",
+        "captureDuration": 111,
+        "span": {
+          "start": 10,
+          "length": 12
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/fremantle-orbit-source.html",
+          "licensePage": "evidence/cc0.html",
+          "contactSheet": "contact-sheets/fremantle-orbit.jpg",
+          "commonsMetadata": "evidence/fremantle-orbit-commons-metadata.json",
+          "sourcePageSha256": "b889054a0b36e8be4138ad4260088d82ab2bf164ced1d2c53f08f70b1bad54cb",
+          "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+          "contactSheetSha256": "92516c89fefb8fe623c1ad0b3ce686e496bc4e7e41414eb5b2dfc3c79df3ed38",
+          "commonsMetadataSha256": "6802a49fbeebdf75bef08bc9104d58a194ee3844daf29c12b84bb7380f63fc00"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1146265
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/ihasalu-orbit-phone/attribution.txt",
+      "file": "ihasalu-orbit-phone/attribution.txt.gz",
+      "originalBytes": 883,
+      "originalSha256": "7db4de6212fade0732c94f0b0abc8198e7a2b54c1eabf6c41f1deb65bdac8c62",
+      "storedSha256": "840d1891fec367983102db7586140daa7071547a21263259ecc69f2c313975d0",
+      "credit": {
+        "id": "ihasalu-orbit",
+        "label": "Abandoned lighthouse and textured ground, aerial orbit",
+        "category": ["object-orbit", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_(July_2022).webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Sillerkiil",
+        "duration": 12,
+        "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d",
+        "file": "ihasalu-orbit.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/59/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm.480p.vp9.webm",
+        "captureSha256": "2121ead346d0cbf495cbb1b0c649a8054a9862c692b47067ed81554b49341310",
+        "captureDuration": 57.124,
+        "span": {
+          "start": 10,
+          "length": 12
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/ihasalu-orbit-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/ihasalu-orbit.jpg",
+          "commonsMetadata": "evidence/ihasalu-orbit-commons-metadata.json",
+          "sourcePageSha256": "72f73beba8bd77b6a217bcf4a5e298c26716ce9ad66987c9a648cd4e7c619674",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "c0731fdaa2a599846efcf722856629c667a97f483e4c64b89e0fe495993da951",
+          "commonsMetadataSha256": "04d3da9ad2fad70bc2777265a206d71508c6b1fcc3c52944c40e63da84086af6"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1464394
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/ihasalu-orbit-phone/comparison.mp4",
+      "file": "ihasalu-orbit-phone/comparison.mp4",
+      "originalBytes": 366415,
+      "originalSha256": "0db3079b3ade965ae8dc2d9e55300c9171838403a5850d05fa36271872bfba12",
+      "storedSha256": "0db3079b3ade965ae8dc2d9e55300c9171838403a5850d05fa36271872bfba12",
+      "credit": {
+        "id": "ihasalu-orbit",
+        "label": "Abandoned lighthouse and textured ground, aerial orbit",
+        "category": ["object-orbit", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_(July_2022).webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Sillerkiil",
+        "duration": 12,
+        "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d",
+        "file": "ihasalu-orbit.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/59/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm.480p.vp9.webm",
+        "captureSha256": "2121ead346d0cbf495cbb1b0c649a8054a9862c692b47067ed81554b49341310",
+        "captureDuration": 57.124,
+        "span": {
+          "start": 10,
+          "length": 12
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/ihasalu-orbit-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/ihasalu-orbit.jpg",
+          "commonsMetadata": "evidence/ihasalu-orbit-commons-metadata.json",
+          "sourcePageSha256": "72f73beba8bd77b6a217bcf4a5e298c26716ce9ad66987c9a648cd4e7c619674",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "c0731fdaa2a599846efcf722856629c667a97f483e4c64b89e0fe495993da951",
+          "commonsMetadataSha256": "04d3da9ad2fad70bc2777265a206d71508c6b1fcc3c52944c40e63da84086af6"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1464394
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/ihasalu-orbit-phone/poster.jpg",
+      "file": "ihasalu-orbit-phone/poster.jpg",
+      "originalBytes": 49270,
+      "originalSha256": "bbf78a5e8ac7650aaac803b9a1646703909326b947ce41d8660ef9e0b05d7ddd",
+      "storedSha256": "bbf78a5e8ac7650aaac803b9a1646703909326b947ce41d8660ef9e0b05d7ddd",
+      "credit": {
+        "id": "ihasalu-orbit",
+        "label": "Abandoned lighthouse and textured ground, aerial orbit",
+        "category": ["object-orbit", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_(July_2022).webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Sillerkiil",
+        "duration": 12,
+        "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d",
+        "file": "ihasalu-orbit.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/59/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm.480p.vp9.webm",
+        "captureSha256": "2121ead346d0cbf495cbb1b0c649a8054a9862c692b47067ed81554b49341310",
+        "captureDuration": 57.124,
+        "span": {
+          "start": 10,
+          "length": 12
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/ihasalu-orbit-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/ihasalu-orbit.jpg",
+          "commonsMetadata": "evidence/ihasalu-orbit-commons-metadata.json",
+          "sourcePageSha256": "72f73beba8bd77b6a217bcf4a5e298c26716ce9ad66987c9a648cd4e7c619674",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "c0731fdaa2a599846efcf722856629c667a97f483e4c64b89e0fe495993da951",
+          "commonsMetadataSha256": "04d3da9ad2fad70bc2777265a206d71508c6b1fcc3c52944c40e63da84086af6"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1464394
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/ihasalu-orbit-phone/receipt.json",
+      "file": "ihasalu-orbit-phone/receipt.json.gz",
+      "originalBytes": 19171,
+      "originalSha256": "8f1d9c7c33a68baa53852b96d512a4afb281eaffa987e0c212d091d8a7c7c95a",
+      "storedSha256": "d7e6e843579daf5c86313028c57f983d92cf1d316b5ca3af131253b253410e0d",
+      "credit": {
+        "id": "ihasalu-orbit",
+        "label": "Abandoned lighthouse and textured ground, aerial orbit",
+        "category": ["object-orbit", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_(July_2022).webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Sillerkiil",
+        "duration": 12,
+        "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d",
+        "file": "ihasalu-orbit.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/59/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm.480p.vp9.webm",
+        "captureSha256": "2121ead346d0cbf495cbb1b0c649a8054a9862c692b47067ed81554b49341310",
+        "captureDuration": 57.124,
+        "span": {
+          "start": 10,
+          "length": 12
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/ihasalu-orbit-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/ihasalu-orbit.jpg",
+          "commonsMetadata": "evidence/ihasalu-orbit-commons-metadata.json",
+          "sourcePageSha256": "72f73beba8bd77b6a217bcf4a5e298c26716ce9ad66987c9a648cd4e7c619674",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "c0731fdaa2a599846efcf722856629c667a97f483e4c64b89e0fe495993da951",
+          "commonsMetadataSha256": "04d3da9ad2fad70bc2777265a206d71508c6b1fcc3c52944c40e63da84086af6"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1464394
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/ihasalu-orbit-phone/verification.json",
+      "file": "ihasalu-orbit-phone/verification.json.gz",
+      "originalBytes": 3254,
+      "originalSha256": "fcdc00e3cfdd897477b4ff36a810453aca7f32aafbcf00b6addf7a06c5318c94",
+      "storedSha256": "135d596e9a743cd01dde27c8361ccd3cc78e291aef25712a175ef86e674cf081",
+      "credit": {
+        "id": "ihasalu-orbit",
+        "label": "Abandoned lighthouse and textured ground, aerial orbit",
+        "category": ["object-orbit", "camera-translation"],
+        "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_(July_2022).webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Sillerkiil",
+        "duration": 12,
+        "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d",
+        "file": "ihasalu-orbit.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/59/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm.480p.vp9.webm",
+        "captureSha256": "2121ead346d0cbf495cbb1b0c649a8054a9862c692b47067ed81554b49341310",
+        "captureDuration": 57.124,
+        "span": {
+          "start": 10,
+          "length": 12
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/ihasalu-orbit-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/ihasalu-orbit.jpg",
+          "commonsMetadata": "evidence/ihasalu-orbit-commons-metadata.json",
+          "sourcePageSha256": "72f73beba8bd77b6a217bcf4a5e298c26716ce9ad66987c9a648cd4e7c619674",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "c0731fdaa2a599846efcf722856629c667a97f483e4c64b89e0fe495993da951",
+          "commonsMetadataSha256": "04d3da9ad2fad70bc2777265a206d71508c6b1fcc3c52944c40e63da84086af6"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 854,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 1464394
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/fresnel-lens-phone/attribution.txt",
+      "file": "fresnel-lens-phone/attribution.txt.gz",
+      "originalBytes": 828,
+      "originalSha256": "89414aa20a97598a9b2a9769b2b469c4957bef3486f67cecb4944482bf4e7228",
+      "storedSha256": "011f23e851fb402bf0c9b079f8d71758c7767d501bb4360db6b785e9f6742eab",
+      "credit": {
+        "id": "fresnel-lens",
+        "label": "Rotating Fresnel lens inside a lighthouse",
+        "category": ["object", "room", "low-light", "still-held"],
+        "source": "https://commons.wikimedia.org/wiki/File:Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Myotus",
+        "duration": 10,
+        "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+        "file": "fresnel-lens.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b1/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm.480p.vp9.webm",
+        "captureSha256": "a0a292ef32e856df5e9338614d5cc8b56e6c0cc62e0393c1c71fa95a7738d053",
+        "captureDuration": 24.057,
+        "span": {
+          "start": 4,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 4\u201314 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/fresnel-lens-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/fresnel-lens.jpg",
+          "commonsMetadata": "evidence/fresnel-lens-commons-metadata.json",
+          "sourcePageSha256": "889c1a73883621fcf47f26e5c34f7a3c6735043e3db0e8023357ee4f1fd78fad",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "a361bcd6e156eaf894c99de754a0dca94ea7c87b77c5a7d84ecec01f909f75b3",
+          "commonsMetadataSha256": "6316597b9342bd9d6fb142eb873aeac264d24ba4143fe0ac481ce2c6a50ec779"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 467080
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/fresnel-lens-phone/comparison.mp4",
+      "file": "fresnel-lens-phone/comparison.mp4",
+      "originalBytes": 403502,
+      "originalSha256": "3655b529f43cb12c9f95e4c8f585a920c75604522770760a71c2c3faa692232c",
+      "storedSha256": "3655b529f43cb12c9f95e4c8f585a920c75604522770760a71c2c3faa692232c",
+      "credit": {
+        "id": "fresnel-lens",
+        "label": "Rotating Fresnel lens inside a lighthouse",
+        "category": ["object", "room", "low-light", "still-held"],
+        "source": "https://commons.wikimedia.org/wiki/File:Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Myotus",
+        "duration": 10,
+        "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+        "file": "fresnel-lens.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b1/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm.480p.vp9.webm",
+        "captureSha256": "a0a292ef32e856df5e9338614d5cc8b56e6c0cc62e0393c1c71fa95a7738d053",
+        "captureDuration": 24.057,
+        "span": {
+          "start": 4,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 4\u201314 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/fresnel-lens-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/fresnel-lens.jpg",
+          "commonsMetadata": "evidence/fresnel-lens-commons-metadata.json",
+          "sourcePageSha256": "889c1a73883621fcf47f26e5c34f7a3c6735043e3db0e8023357ee4f1fd78fad",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "a361bcd6e156eaf894c99de754a0dca94ea7c87b77c5a7d84ecec01f909f75b3",
+          "commonsMetadataSha256": "6316597b9342bd9d6fb142eb873aeac264d24ba4143fe0ac481ce2c6a50ec779"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 467080
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/fresnel-lens-phone/poster.jpg",
+      "file": "fresnel-lens-phone/poster.jpg",
+      "originalBytes": 33345,
+      "originalSha256": "4a5fcf92c7143817c269945c4e907eee91ef622dc399c9e23182f2626497ab5e",
+      "storedSha256": "4a5fcf92c7143817c269945c4e907eee91ef622dc399c9e23182f2626497ab5e",
+      "credit": {
+        "id": "fresnel-lens",
+        "label": "Rotating Fresnel lens inside a lighthouse",
+        "category": ["object", "room", "low-light", "still-held"],
+        "source": "https://commons.wikimedia.org/wiki/File:Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Myotus",
+        "duration": 10,
+        "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+        "file": "fresnel-lens.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b1/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm.480p.vp9.webm",
+        "captureSha256": "a0a292ef32e856df5e9338614d5cc8b56e6c0cc62e0393c1c71fa95a7738d053",
+        "captureDuration": 24.057,
+        "span": {
+          "start": 4,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 4\u201314 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/fresnel-lens-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/fresnel-lens.jpg",
+          "commonsMetadata": "evidence/fresnel-lens-commons-metadata.json",
+          "sourcePageSha256": "889c1a73883621fcf47f26e5c34f7a3c6735043e3db0e8023357ee4f1fd78fad",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "a361bcd6e156eaf894c99de754a0dca94ea7c87b77c5a7d84ecec01f909f75b3",
+          "commonsMetadataSha256": "6316597b9342bd9d6fb142eb873aeac264d24ba4143fe0ac481ce2c6a50ec779"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 467080
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/fresnel-lens-phone/receipt.json",
+      "file": "fresnel-lens-phone/receipt.json.gz",
+      "originalBytes": 19271,
+      "originalSha256": "5d15289e2bbdf8586c3531a569e6c4ffcddee1ee9bb9055b77f5d0b46923cde1",
+      "storedSha256": "fbc9b32ad56343595f1c30f6da5000dfa566e0d32d8548bf6f5c86e24d2ea4db",
+      "credit": {
+        "id": "fresnel-lens",
+        "label": "Rotating Fresnel lens inside a lighthouse",
+        "category": ["object", "room", "low-light", "still-held"],
+        "source": "https://commons.wikimedia.org/wiki/File:Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Myotus",
+        "duration": 10,
+        "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+        "file": "fresnel-lens.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b1/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm.480p.vp9.webm",
+        "captureSha256": "a0a292ef32e856df5e9338614d5cc8b56e6c0cc62e0393c1c71fa95a7738d053",
+        "captureDuration": 24.057,
+        "span": {
+          "start": 4,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 4\u201314 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/fresnel-lens-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/fresnel-lens.jpg",
+          "commonsMetadata": "evidence/fresnel-lens-commons-metadata.json",
+          "sourcePageSha256": "889c1a73883621fcf47f26e5c34f7a3c6735043e3db0e8023357ee4f1fd78fad",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "a361bcd6e156eaf894c99de754a0dca94ea7c87b77c5a7d84ecec01f909f75b3",
+          "commonsMetadataSha256": "6316597b9342bd9d6fb142eb873aeac264d24ba4143fe0ac481ce2c6a50ec779"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 467080
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/fresnel-lens-phone/verification.json",
+      "file": "fresnel-lens-phone/verification.json.gz",
+      "originalBytes": 3246,
+      "originalSha256": "12cd954f5a1ddddf387bfa465b635fa14ee41043fe15643276b1a1b9e8d550d8",
+      "storedSha256": "f0db041b68b972c0daf72a78bb4962a5f1745079feb8527f19640be44bf62d08",
+      "credit": {
+        "id": "fresnel-lens",
+        "label": "Rotating Fresnel lens inside a lighthouse",
+        "category": ["object", "room", "low-light", "still-held"],
+        "source": "https://commons.wikimedia.org/wiki/File:Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Myotus",
+        "duration": 10,
+        "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+        "file": "fresnel-lens.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b1/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm.480p.vp9.webm",
+        "captureSha256": "a0a292ef32e856df5e9338614d5cc8b56e6c0cc62e0393c1c71fa95a7738d053",
+        "captureDuration": 24.057,
+        "span": {
+          "start": 4,
+          "length": 10
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 4\u201314 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/fresnel-lens-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/fresnel-lens.jpg",
+          "commonsMetadata": "evidence/fresnel-lens-commons-metadata.json",
+          "sourcePageSha256": "889c1a73883621fcf47f26e5c34f7a3c6735043e3db0e8023357ee4f1fd78fad",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "a361bcd6e156eaf894c99de754a0dca94ea7c87b77c5a7d84ecec01f909f75b3",
+          "commonsMetadataSha256": "6316597b9342bd9d6fb142eb873aeac264d24ba4143fe0ac481ce2c6a50ec779"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 467080
+      }
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/review.json",
+      "file": "review.json.gz",
+      "originalBytes": 219089,
+      "originalSha256": "8c9a2f80f44dba55eb09d1ad3806a4c1dc6329e350442c786cfe5abb48a57904",
+      "storedSha256": "c6881d4a33b99f5a6f02a0331cd3dc7c52d3837cc4cb101f229e3eee41e99b42"
+    },
+    {
+      "source": "final-run/cpu-matcher-phone-review/index.html",
+      "file": "index.html.gz",
+      "originalBytes": 8051,
+      "originalSha256": "f8dc33c0e13cfa02cfe2a44a74f8244ec530d929f68f566fae91eae9ce17e976",
+      "storedSha256": "c5b36e45ce13452589eb38138d894738f3b5ef3adbe2dd604363790c2af819ce"
+    },
+    {
+      "source": "evaluator-protocol5/tools/v3d-review.mjs",
+      "file": "controls/v3d-review.mjs.gz",
+      "originalBytes": 37768,
+      "originalSha256": "35ec88c4c384dd1e845760fd0e0e8c5c561aae2021cd28ecd2eb8868d4e2b7c7",
+      "storedSha256": "7fc6a7568b57f92de5ac4948ab0ba0d9fe6f72463bfe5050d5a33e7595dfa50e"
+    },
+    {
+      "source": "session/export-verified-phone-movies.py",
+      "file": "controls/export-verified-phone-movies.py.gz",
+      "originalBytes": 10442,
+      "originalSha256": "f06db2849d1848c2f8479aa232dd24c1339b4e6d76d77d5c4878b7ab58282dbc",
+      "storedSha256": "5acd5293ee6901616fe80ad383410f9d499474f1bafe24b12ce7a7653242a19c"
+    },
+    {
+      "source": "final-run/session-cpu-adaptive/review-plan.json",
+      "file": "controls/review-plan.json.gz",
+      "originalBytes": 8070,
+      "originalSha256": "830834250bcb9343d61cb6ba53af20df94e8fedf6ffd03891732e71057dda3c9",
+      "storedSha256": "baec84622b5afa26ade8ed9b9f15669f9a9a8a4f74981ba580a5429a3b77e105"
+    },
+    {
+      "source": "final-run/session-cpu-adaptive/phone-review.log",
+      "file": "controls/phone-review.log.gz",
+      "originalBytes": 216,
+      "originalSha256": "a39e73eb2a0cf65ed28e5d8f826f3e7c2059e184c71603e0b43aa9989fed1f34",
+      "storedSha256": "d1ac2504d3864727983953806685a997c86c855990b0f5474aa7e1229fb6509d"
+    },
+    {
+      "source": "session/phone-movie-poster-review.json",
+      "file": "controls/phone-movie-poster-review.json.gz",
+      "originalBytes": 3108,
+      "originalSha256": "9894dabd0b4155d4e960b7fe64b98f952ff31f839f94b2f9f06fbf47e6531083",
+      "storedSha256": "50e0b8d3f4c4188e8401217fbef1541b0916b742a2f1fce169a9bf08eca4b250"
+    },
+    {
+      "source": "session/movie-media-file-controls/cat-plays.json",
+      "file": "controls/independent-media-file-checks/cat-plays.json.gz",
+      "originalBytes": 522,
+      "originalSha256": "be8c8fcd86d9c226916ebff691b9cd5b43f03843c7c9099efe734ace2cd549de",
+      "storedSha256": "06e9483eef51b54b25b51bf35018e99ea75edce6d24e7c646219be4cb5f8a281"
+    },
+    {
+      "source": "session/movie-media-file-controls/chameleon-flowers.json",
+      "file": "controls/independent-media-file-checks/chameleon-flowers.json.gz",
+      "originalBytes": 530,
+      "originalSha256": "eb2169cef9445e3003700f7574124b772b5ab85cb630cd44998b75daa054dd59",
+      "storedSha256": "89e90954f23c60c83ad1914278cc07c0c48a9893d6899d81c2eb29854797c535"
+    },
+    {
+      "source": "session/movie-media-file-controls/dianthus.json",
+      "file": "controls/independent-media-file-checks/dianthus.json.gz",
+      "originalBytes": 521,
+      "originalSha256": "00f6f43ee3e7bd8c331879d4110b899b1706299fd5d74c7defaca23ee265d4d1",
+      "storedSha256": "113092e811a944abd454811e1fc0ffda7fc7edd3d1cac5277f342d2037f0bff4"
+    },
+    {
+      "source": "session/movie-media-file-controls/fremantle-orbit.json",
+      "file": "controls/independent-media-file-checks/fremantle-orbit.json.gz",
+      "originalBytes": 528,
+      "originalSha256": "9c675bd03231d3b18ce2758f84b90c7292e608682d682934c8a5fb6684e3669b",
+      "storedSha256": "382da4270c634118efe39bb95cb0a3662928e99df7856f9260f546e9dc1b189c"
+    },
+    {
+      "source": "session/movie-media-file-controls/fresnel-lens.json",
+      "file": "controls/independent-media-file-checks/fresnel-lens.json.gz",
+      "originalBytes": 525,
+      "originalSha256": "36aee925b8143ec3f8c088ceb87861921fe3e542575b770243e0eec4f6ccaf4e",
+      "storedSha256": "e5a6ea4288caffe830383bc42315ac9b1631d184ea5489d019e0aac7e6e5e382"
+    },
+    {
+      "source": "session/movie-media-file-controls/ihasalu-orbit.json",
+      "file": "controls/independent-media-file-checks/ihasalu-orbit.json.gz",
+      "originalBytes": 526,
+      "originalSha256": "43d327fa7c8d87427bf8f83111067470b75fe883e07cd85c6c9cb6b5d3ff49cd",
+      "storedSha256": "28fd8571b3a30f7198e1f9783aee441c128bf24660c5daf47831b575c96def18"
+    },
+    {
+      "source": "session/movie-media-file-controls/palace-statue.json",
+      "file": "controls/independent-media-file-checks/palace-statue.json.gz",
+      "originalBytes": 526,
+      "originalSha256": "e501deae0b06dec851c84531241cbfda2f73ea2be8068073fa13e3bf0db33085",
+      "storedSha256": "39d6a96e71ce3f3166442e06e3a331673e7e444c809723f93d54f7e8c938af48"
+    },
+    {
+      "source": "session/movie-media-file-controls/pisac.json",
+      "file": "controls/independent-media-file-checks/pisac.json.gz",
+      "originalBytes": 518,
+      "originalSha256": "676ca80a6428ef3e7beb09107736d3b368b88283c3f2eece6a878ec9bc8b3b1b",
+      "storedSha256": "18e3ae54e1357844318d5f991efe756df8ef3d0278dae90c088483a8f1b712b8"
+    },
+    {
+      "source": "session/movie-media-file-controls/snaefell.json",
+      "file": "controls/independent-media-file-checks/snaefell.json.gz",
+      "originalBytes": 521,
+      "originalSha256": "f6d7662a7d37496c903aa18243649a031fcfd2092ce4f3662fbc80937f287171",
+      "storedSha256": "ae970b5899d617e986f18c3ebd2237917b8e1d811428986bd73f1855c2b84fb4"
+    },
+    {
+      "source": "session/movie-media-file-controls/ullard.json",
+      "file": "controls/independent-media-file-checks/ullard.json.gz",
+      "originalBytes": 519,
+      "originalSha256": "79be5410093a083a278c55ca7511b18559197d2c8401b8dd1333b5cf48eff1bb",
+      "storedSha256": "abe49b2649bcad4d7b06b24f3a7bfd1b3d801d986da6fdea6e636db2de39b28a"
+    },
+    {
+      "source": "session/movie-export-fixed-four-views/receipt.json",
+      "file": "controls/original-exporter-assertion-failure/receipt.json.gz",
+      "originalBytes": 366,
+      "originalSha256": "ba9ae3c0c7f57e225f5658fd75eae838b0ba07fba2f589df90159a8b2a600ede",
+      "storedSha256": "ffcd5bf8714b26df137bf27997ca1bb9a3e2aebd79802373358061ddf6bc0321"
+    },
+    {
+      "source": "session/movie-export-fixed-four-views/failure.log",
+      "file": "controls/original-exporter-assertion-failure/failure.log.gz",
+      "originalBytes": 280,
+      "originalSha256": "db4379c4c0ebf8e069527b7a95c0f1357d517304f61d1b39bc019a2e1ca962db",
+      "storedSha256": "7f7e5cf647112accd3e1e96db715962a71a50881e12867b66036bea152e7082d"
+    },
+    {
+      "source": "session/movie-export-fixed-four-views/export-verified-phone-movies.py",
+      "file": "controls/original-exporter-assertion-failure/export-verified-phone-movies.py.gz",
+      "originalBytes": 8899,
+      "originalSha256": "3ef266b893236eee4e49438bf757e46e5f26ead2ab3deff5cf3e33e772352172",
+      "storedSha256": "9633d38883ece07d0747deb7cc8cc3aa4f5d5b89e6a7c09e48d15c26072b7c77"
+    },
+    {
+      "source": "session/video-3d-r5-phone-review.zip",
+      "file": "video-3d-r5-phone-review.zip",
+      "originalBytes": 5631059,
+      "originalSha256": "af0f7c4566a783cda48d66822ed02e0bd1bdf693f4db5c0f9b59dd9c33dbcba6",
+      "storedSha256": "af0f7c4566a783cda48d66822ed02e0bd1bdf693f4db5c0f9b59dd9c33dbcba6",
+      "credits": [
+        {
+          "id": "cat-plays",
+          "label": "Cat playing outside, handheld tablet",
+          "category": ["pet", "shaky"],
+          "source": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "author": "Riverarvi",
+          "duration": 8,
+          "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+          "file": "cat-plays.mp4",
+          "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Cat_Plays.webm",
+          "captureSha256": "3258309e1d573fda6595fee0c02e3f055931a06c01bac24d986a5aff28297b32",
+          "captureDuration": 8.336,
+          "span": {
+            "start": 0,
+            "length": 8
+          },
+          "checked": "October 15, 2026",
+          "transformation": "Trimmed 0\u20138 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+          "evidence": {
+            "sourcePage": "evidence/cat-plays-source.html",
+            "licensePage": "evidence/cc-by-sa-4-0.html",
+            "contactSheet": "contact-sheets/cat-plays.jpg",
+            "commonsMetadata": "evidence/cat-plays-commons-metadata.json",
+            "sourcePageSha256": "38535c97b6bbc487bfddca42357b3aa13f7498f7f96507f7e75d349610e69b59",
+            "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+            "contactSheetSha256": "ede0e5b6aed06fe2fa6b3385318347cbaadc7bb22dbedb2bab4a6f1e3a6b215e",
+            "commonsMetadataSha256": "f97d3c283fe10a29edb6e48968ebd4b8a303254fd808023b82cc2b85d9089a8a"
+          },
+          "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+          "width": 270,
+          "height": 480,
+          "fps": "24/1",
+          "bytes": 616920
+        },
+        {
+          "id": "chameleon-flowers",
+          "label": "Chameleon among flowering branches",
+          "category": ["plant", "animal", "still-held"],
+          "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+          "author": "Ventrovert",
+          "duration": 10,
+          "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+          "file": "chameleon-flowers.mp4",
+          "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Chameleon_on_ixora_flowers.webm/Chameleon_on_ixora_flowers.webm.480p.vp9.webm",
+          "captureSha256": "7dfad884aaf47b960d93856c8232a83a191a1b6f7b09e651d43930058539fc1b",
+          "captureDuration": 13,
+          "span": {
+            "start": 0,
+            "length": 10
+          },
+          "checked": "October 15, 2026",
+          "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+          "evidence": {
+            "sourcePage": "evidence/chameleon-flowers-source.html",
+            "licensePage": "evidence/cc-by-4-0.html",
+            "contactSheet": "contact-sheets/chameleon-flowers.jpg",
+            "commonsMetadata": "evidence/chameleon-flowers-commons-metadata.json",
+            "sourcePageSha256": "08ac501290aadc4ec4dc9996d9102b5d2983f43fa0158b54113dbffd672b8e7d",
+            "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+            "contactSheetSha256": "37a3323f755ef7b2c5ec6accd099f6e49aa44da546537650d8ffd85186442f09",
+            "commonsMetadataSha256": "076b2a179db38b7a7e6a20f07fd17f8457fadcc99ee995ba7389acbbb0e24f97"
+          },
+          "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+          "width": 854,
+          "height": 480,
+          "fps": "24/1",
+          "bytes": 736318
+        },
+        {
+          "id": "dianthus",
+          "label": "Potted flowering plants, handheld",
+          "category": ["plant", "shaky"],
+          "source": "https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "author": "Tanvir Rahat",
+          "duration": 5.916667,
+          "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+          "file": "dianthus.mp4",
+          "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/15/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm/Dianthus_plants_and_flowers_%2C_Rajshahi_%2C_Bangladesh.webm.480p.vp9.webm",
+          "captureSha256": "f336359c8594d75ba34f40b7d107ff27cb6d45881442126e1f487aa43b5569b6",
+          "captureDuration": 7,
+          "span": {
+            "start": 0,
+            "length": 6
+          },
+          "checked": "October 15, 2026",
+          "transformation": "Trimmed 0\u20136 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+          "evidence": {
+            "sourcePage": "evidence/dianthus-source.html",
+            "licensePage": "evidence/cc-by-sa-4-0.html",
+            "contactSheet": "contact-sheets/dianthus.jpg",
+            "commonsMetadata": "evidence/dianthus-commons-metadata.json",
+            "sourcePageSha256": "31d20fbd74e7495d0ec3f929fa033669e1af6f21d1d7871711bf1721e2a06ea4",
+            "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+            "contactSheetSha256": "517b413a7126b2eebb46b6188bfde207012bf727ed988cb0cafa4dc079d8207f",
+            "commonsMetadataSha256": "c318cb30a418eb70ae752927811d4d6cf2c80770a1b25dbc80786b4acfcadeeb"
+          },
+          "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+          "width": 854,
+          "height": 480,
+          "fps": "24/1",
+          "bytes": 1443894
+        },
+        {
+          "id": "pisac",
+          "label": "Stone ruins, handheld panorama",
+          "category": ["landscape", "pan", "shaky"],
+          "source": "https://commons.wikimedia.org/wiki/File:Panorama_of_P%C3%ADsac_Ruins,_Peru_2024.webm",
+          "license": "CC0",
+          "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "author": "MorePix",
+          "duration": 10,
+          "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+          "file": "pisac.mp4",
+          "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a0/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm/Panorama_of_P%C3%ADsac_Ruins%2C_Peru_2024.webm.480p.vp9.webm",
+          "captureSha256": "e25d3d3c6182dbce30368693e537a944cd743d031b3daa7757d69b7c109ab8a0",
+          "captureDuration": 15,
+          "span": {
+            "start": 0,
+            "length": 10
+          },
+          "checked": "October 15, 2026",
+          "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+          "evidence": {
+            "sourcePage": "evidence/pisac-source.html",
+            "licensePage": "evidence/cc0.html",
+            "contactSheet": "contact-sheets/pisac.jpg",
+            "sourcePageSha256": "8f51f118b230f85aecfeae8e04d6c64503bf21f39830ba2aeee4bf157f5cc45b",
+            "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+            "contactSheetSha256": "5ef1286874a60306e8f9c4cc91119edb0509044ce2ece3e2e5edb18d184a198e"
+          },
+          "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+          "width": 270,
+          "height": 480,
+          "fps": "24/1",
+          "bytes": 403116
+        },
+        {
+          "id": "palace-statue",
+          "label": "Palace entrance statue, handheld approach",
+          "category": ["statue", "shaky", "camera-translation"],
+          "source": "https://commons.wikimedia.org/wiki/File:A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "author": "Sayvhior",
+          "duration": 5,
+          "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+          "file": "palace-statue.mp4",
+          "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+          "captureSha256": "e22b8a7fd5886ebad610e34d80b06ae797406f715adc04bbb4e4e11a9cbcd098",
+          "captureDuration": 10.241,
+          "span": {
+            "start": 0,
+            "length": 5
+          },
+          "checked": "October 15, 2026",
+          "transformation": "Trimmed 0\u20135 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+          "evidence": {
+            "sourcePage": "evidence/palace-statue-source.html",
+            "licensePage": "evidence/cc-by-sa-4-0.html",
+            "contactSheet": "contact-sheets/palace-statue.jpg",
+            "commonsMetadata": "evidence/palace-statue-commons-metadata.json",
+            "sourcePageSha256": "568112cbe48562ed643b7c37c9f1f53007031e04dddb9cba6a34f3cb78543f71",
+            "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+            "contactSheetSha256": "1f4044b1f5acfd792e36e6ae2f851d02fb7c5e2fe244ecd254583f793e20f549",
+            "commonsMetadataSha256": "5428267c98d6fe6344d2f8d2bb182ada8f3260e247d3bb248f4c5987ca44d46a"
+          },
+          "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+          "width": 270,
+          "height": 480,
+          "fps": "24/1",
+          "bytes": 700939
+        },
+        {
+          "id": "ullard",
+          "label": "Old stone handball court, camera walks inside",
+          "category": ["room", "shaky", "camera-translation"],
+          "source": "https://commons.wikimedia.org/wiki/File:Ullard_handball_alley.webm",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "author": "A.-K. D.",
+          "duration": 10,
+          "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b",
+          "file": "ullard.mp4",
+          "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fe/Ullard_handball_alley.webm/Ullard_handball_alley.webm.480p.vp9.webm",
+          "captureSha256": "be02ca3cb887e487c8b9dab84b11df360482c0a641c7dc98030c56b60ebce101",
+          "captureDuration": 37.44,
+          "span": {
+            "start": 8,
+            "length": 10
+          },
+          "checked": "October 15, 2026",
+          "transformation": "Trimmed 8\u201318 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+          "evidence": {
+            "sourcePage": "evidence/ullard-source.html",
+            "licensePage": "evidence/cc-by-sa-4-0.html",
+            "contactSheet": "contact-sheets/ullard.jpg",
+            "commonsMetadata": "evidence/ullard-commons-metadata.json",
+            "sourcePageSha256": "a493b3f95a83996f8ab0a780dfd3569709cbb390b1911fb50d216cf4f22777d1",
+            "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+            "contactSheetSha256": "ef321c7fb0cede79e412995f338f1a876260b73a94d69a3331afe0a566742198",
+            "commonsMetadataSha256": "c07503afa355b7d89384b37903fada4b98996a147fa7ded23ece61d018ff1dcb"
+          },
+          "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+          "width": 854,
+          "height": 480,
+          "fps": "24/1",
+          "bytes": 2074008
+        },
+        {
+          "id": "snaefell",
+          "label": "Mountain panorama, handheld sweep",
+          "category": ["landscape", "pan"],
+          "source": "https://commons.wikimedia.org/wiki/File:Panorama_on_Snaefell.webm",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+          "author": "Tiny Toast",
+          "duration": 10,
+          "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6",
+          "file": "snaefell.mp4",
+          "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/62/Panorama_on_Snaefell.webm/Panorama_on_Snaefell.webm.480p.vp9.webm",
+          "captureSha256": "81e80ed64101b81ee0c7874f498aa38b521984939fba1eee87be784119844d05",
+          "captureDuration": 46.169,
+          "span": {
+            "start": 0,
+            "length": 10
+          },
+          "checked": "October 15, 2026",
+          "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+          "evidence": {
+            "sourcePage": "evidence/snaefell-source.html",
+            "licensePage": "evidence/cc-by-4-0.html",
+            "contactSheet": "contact-sheets/snaefell.jpg",
+            "sourcePageSha256": "3780138d6d3ec1e5425059ebec95ff8a8bdd580827d307e4be7f2eeb04efde35",
+            "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+            "contactSheetSha256": "984d289839c5db9ea726d8a3967cd29f327a8b32682beaef36f3ca10696d33e0"
+          },
+          "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+          "width": 854,
+          "height": 480,
+          "fps": "24/1",
+          "bytes": 1224471
+        },
+        {
+          "id": "fremantle-orbit",
+          "label": "Lighthouse at sunset, camera orbits the tower",
+          "category": ["object-orbit", "camera-translation", "low-light"],
+          "source": "https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm",
+          "license": "CC0",
+          "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "author": "JamesBromberger",
+          "duration": 12,
+          "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+          "file": "fremantle-orbit.mp4",
+          "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm.480p.vp9.webm",
+          "captureSha256": "44b5478f7a44f3791ff66be401e9810ddefc4f6b19c0a2fd25f49a442da57358",
+          "captureDuration": 111,
+          "span": {
+            "start": 10,
+            "length": 12
+          },
+          "checked": "October 15, 2026",
+          "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+          "evidence": {
+            "sourcePage": "evidence/fremantle-orbit-source.html",
+            "licensePage": "evidence/cc0.html",
+            "contactSheet": "contact-sheets/fremantle-orbit.jpg",
+            "commonsMetadata": "evidence/fremantle-orbit-commons-metadata.json",
+            "sourcePageSha256": "b889054a0b36e8be4138ad4260088d82ab2bf164ced1d2c53f08f70b1bad54cb",
+            "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+            "contactSheetSha256": "92516c89fefb8fe623c1ad0b3ce686e496bc4e7e41414eb5b2dfc3c79df3ed38",
+            "commonsMetadataSha256": "6802a49fbeebdf75bef08bc9104d58a194ee3844daf29c12b84bb7380f63fc00"
+          },
+          "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+          "width": 854,
+          "height": 480,
+          "fps": "24/1",
+          "bytes": 1146265
+        },
+        {
+          "id": "ihasalu-orbit",
+          "label": "Abandoned lighthouse and textured ground, aerial orbit",
+          "category": ["object-orbit", "camera-translation"],
+          "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_(July_2022).webm",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "author": "Sillerkiil",
+          "duration": 12,
+          "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d",
+          "file": "ihasalu-orbit.mp4",
+          "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/59/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm/Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_%28July_2022%29.webm.480p.vp9.webm",
+          "captureSha256": "2121ead346d0cbf495cbb1b0c649a8054a9862c692b47067ed81554b49341310",
+          "captureDuration": 57.124,
+          "span": {
+            "start": 10,
+            "length": 12
+          },
+          "checked": "October 15, 2026",
+          "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+          "evidence": {
+            "sourcePage": "evidence/ihasalu-orbit-source.html",
+            "licensePage": "evidence/cc-by-sa-4-0.html",
+            "contactSheet": "contact-sheets/ihasalu-orbit.jpg",
+            "commonsMetadata": "evidence/ihasalu-orbit-commons-metadata.json",
+            "sourcePageSha256": "72f73beba8bd77b6a217bcf4a5e298c26716ce9ad66987c9a648cd4e7c619674",
+            "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+            "contactSheetSha256": "c0731fdaa2a599846efcf722856629c667a97f483e4c64b89e0fe495993da951",
+            "commonsMetadataSha256": "04d3da9ad2fad70bc2777265a206d71508c6b1fcc3c52944c40e63da84086af6"
+          },
+          "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+          "width": 854,
+          "height": 480,
+          "fps": "24/1",
+          "bytes": 1464394
+        },
+        {
+          "id": "fresnel-lens",
+          "label": "Rotating Fresnel lens inside a lighthouse",
+          "category": ["object", "room", "low-light", "still-held"],
+          "source": "https://commons.wikimedia.org/wiki/File:Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "author": "Myotus",
+          "duration": 10,
+          "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+          "file": "fresnel-lens.mp4",
+          "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b1/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm/Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm.480p.vp9.webm",
+          "captureSha256": "a0a292ef32e856df5e9338614d5cc8b56e6c0cc62e0393c1c71fa95a7738d053",
+          "captureDuration": 24.057,
+          "span": {
+            "start": 4,
+            "length": 10
+          },
+          "checked": "October 15, 2026",
+          "transformation": "Trimmed 4\u201314 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+          "evidence": {
+            "sourcePage": "evidence/fresnel-lens-source.html",
+            "licensePage": "evidence/cc-by-sa-4-0.html",
+            "contactSheet": "contact-sheets/fresnel-lens.jpg",
+            "commonsMetadata": "evidence/fresnel-lens-commons-metadata.json",
+            "sourcePageSha256": "889c1a73883621fcf47f26e5c34f7a3c6735043e3db0e8023357ee4f1fd78fad",
+            "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+            "contactSheetSha256": "a361bcd6e156eaf894c99de754a0dca94ea7c87b77c5a7d84ecec01f909f75b3",
+            "commonsMetadataSha256": "6316597b9342bd9d6fb142eb873aeac264d24ba4143fe0ac481ce2c6a50ec779"
+          },
+          "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+          "width": 270,
+          "height": 480,
+          "fps": "24/1",
+          "bytes": 467080
+        }
+      ],
+      "transformation": "Lossless ZIP of all original comparison movies, posters, index, attributions, and verification records; no media re-encoding."
+    },
+    {
+      "source": "session/bundle-verified-phone-movies.py",
+      "file": "controls/bundle-verified-phone-movies.py.gz",
+      "originalBytes": 4704,
+      "originalSha256": "f89366190f6946a4be72071eee328571db8a1e450e0b2f459b7da6bf3f518956",
+      "storedSha256": "2dd493d32f12cf6f682029e3a53f6a388dffaf02b5d3d47f1a0c48e363794ed2"
+    },
+    {
+      "source": "session/movie-export-corrected.log",
+      "file": "controls/output-path-packaging-error.log.gz",
+      "originalBytes": 2356,
+      "originalSha256": "e4ba9b5b03b7fa078e24bc8286cc27e411880865b253bc74a2a3e6bcefec0643",
+      "storedSha256": "c75952ebd418afb618dc6e243717365cb85f20a5b7cba2f376c3a3383a52d9de"
+    }
+  ],
+  "bundle": {
+    "at": "2026-10-16T12:41:51.243358+00:00",
+    "movies": 10,
+    "allMediaFileChecksPassed": true,
+    "savedViewMatches": 76,
+    "archiveMembersVerified": true,
+    "bundleBytes": 5631059,
+    "bundleSha256": "af0f7c4566a783cda48d66822ed02e0bd1bdf693f4db5c0f9b59dd9c33dbcba6",
+    "localOutputUnavailable": "/codex is not writable in this execution environment, and sudo is unavailable. The same downloadable gallery is delivered on the explicitly requested clips branch.",
+    "noNativeResultOrOriginalThresholdChanged": true
+  }
+}
