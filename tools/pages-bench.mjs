@@ -210,6 +210,19 @@ async function run(toy, input, profile, repeat) {
       const { app, player } = window.__splashery;
       const toyStart = performance.now();
       await app.chooseToy(toy);
+      if (input !== "sample") {
+        // A faster default sample can already have moved its reading camera
+        // before the custom input opens. Start both revisions from the same
+        // empty home view, outside the custom input's clock.
+        await player.pictureMedia?.ready;
+        player.closeMedia();
+        player.glide = null;
+        player.camera.reset();
+        player.camera.cur = { ...player.camera.tgt };
+        player.camera.setPan(null, true);
+        await player.stage.captureFrame();
+      }
+      const initialView = player.camera.getState();
       const start = input === "sample" ? toyStart : performance.now();
       if (input !== "sample") {
         const ext =
@@ -226,7 +239,7 @@ async function run(toy, input, profile, repeat) {
       if (toy === "photo-album") player.act();
       player.stage.requestRender(2000);
       window.__benchStart = start;
-      return { name: player.pictures.media?.name };
+      return { name: player.pictures.media?.name, initialView };
     },
     { toy, input, base, fixtures },
   );
@@ -625,6 +638,8 @@ try {
                 renderer: process.env.SPLASHERY_GL || "swiftshader",
                 isolation: "fresh Chromium process per case and repeat",
                 memoryPoint: "settled page before reference raster and screenshots",
+                inputPreparation:
+                  "custom input starts after closing the default sample and drawing the home view",
                 toolSha256,
                 protocolSha256,
                 fixtures: Object.fromEntries(
