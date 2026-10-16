@@ -69,6 +69,7 @@ for (const [k, v] of a) {
       Math.abs(y.height / x.height - 1) < 0.02);
   const [profile, toy, input] = k.split("/");
   const edgeGain = x.edgePreservation > 0 ? y.edgePreservation / x.edgePreservation - 1 : null,
+    rawEdgeGain = x.sharpness > 0 ? y.sharpness / x.sharpness - 1 : null,
     ssimGain = y.ssim !== null && x.ssim !== null ? y.ssim - x.ssim : null;
   const checks = {
     firstPage: y.firstPageMs <= x.firstPageMs,
@@ -77,7 +78,8 @@ for (const [k, v] of a) {
     registered,
     errors: y.errors.length === 0,
   };
-  if (input === "text" && profile === "phone") checks.text = edgeGain >= 0.3 && ssimGain >= 0.03;
+  if (input === "text" && profile === "phone")
+    checks.text = edgeGain >= 0.3 && rawEdgeGain >= 0.3 && ssimGain >= 0.03;
   rows.push({
     profile,
     toy,
@@ -85,6 +87,7 @@ for (const [k, v] of a) {
     main: x,
     candidate: y,
     edgeGain,
+    rawEdgeGain,
     ssimGain,
     checks,
     pass: Object.values(checks).every(Boolean),
@@ -119,7 +122,7 @@ const result = {
 };
 const md =
   lines.join("\n") +
-  "\n\nMemory uses proportional resident size when both runs include it; otherwise it uses the same JavaScript estimate plus renderer resource counters. Values are medians. Edge preservation is rendered Laplacian variance divided by the source's variance at the displayed size. Phone text inputs require at least 30% more edge preservation and 0.03 more SSIM. Registration must match within 2% in both dimensions. Motion inspection and the regression suite are separate requirements.\n";
+  "\n\nMemory uses proportional resident size when both runs include it; otherwise it uses the same JavaScript estimate plus renderer resource counters. Values are medians. Edge preservation is rendered Laplacian variance divided by the source's variance at the displayed size. Phone text inputs require at least 30% more edge preservation, at least 30% more raw Laplacian variance, and 0.03 more SSIM. Registration must match within 2% in both dimensions. Motion inspection and the regression suite are separate requirements.\n";
 if (out) {
   fs.writeFileSync(out, md);
   fs.writeFileSync(out.replace(/\.md$/, ".json"), JSON.stringify(result, null, 2) + "\n");
