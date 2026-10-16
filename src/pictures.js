@@ -514,8 +514,12 @@ export class Pictures {
       if (same && settled) {
         const r = level / shown.level;
         // Rebuild when the view is much closer (sharper) or much further
-        // (splats would fall under a pixel).
-        if (r > 1.3 || r < 0.6) useLevel = level;
+        // (splats would fall under a pixel). A supersampled solid page can
+        // reach its final cap in a smaller step; keep that detail available
+        // when zooming instead of waiting for an impossible larger step.
+        const atCap =
+          this.solid && r > 1 && level === this.levelFor(sh, aspect, Infinity, page, cw, method);
+        if (r > 1.3 || r < 0.6 || atCap) useLevel = level;
       }
       if (!same) useLevel = level;
       // Frames keep coming while a new level waits to settle.
