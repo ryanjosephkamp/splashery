@@ -840,7 +840,202 @@
           ]
         }
       ]
+    },
+    {
+      "name": "nearest-depth-ownership",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result. Only color interpolation ownership sampling changes; geometry and original R8 fields stay unchanged.",
+      "completedProfiles": 1,
+      "sourceSha256": "63b1f444a3121b82a43890374bc0785fb116938da57cb30febb0fb5554ee0b17",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "ca2092cf15fe7cd5f028f50274ebaeb3192095386431a7bee0d9e136f9223c3f",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringeMaximum",
+            "before": 0.933622938336588,
+            "after": 0.9358030306582924
+          }
+        ]
+      }
+    },
+    {
+      "name": "nearest-depth-band-ownership",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result. Only color interpolation ownership sampling changes; geometry and original R8 fields stay unchanged.",
+      "completedProfiles": 1,
+      "sourceSha256": "bb9a14c1eda543c0a61b48a89697d7ab22dedabd9ebb4c83161cc3e9c9f22d46",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "98006f24f7549785a8099ceb2856750679ae41ced4faaf1be5fb381ce2a156c5",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringeMaximum",
+            "before": 0.933622938336588,
+            "after": 0.9358030306582924
+          }
+        ]
+      }
+    },
+    {
+      "name": "depth-protected-fill-world",
+      "kind": "Bounded native-rendered rejection of a post-foreground reflected fill using the existing depth buffer; not full-corpus, memory, or phone-cost acceptance. All color-bearing materials use the original World-layer finder path.",
+      "completedProfiles": 1,
+      "sourceSha256": "a5956f8ff4644cc80fad469287259b125eeb1c4baf2fa0cfa500b4358a5af541",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "c357d5690959cf358c0a0969f754c4a5ea50b17e6452b99ac758565fc67a9388",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.103067897700517,
+            "after": 0.1143655406635074
+          },
+          {
+            "metric": "paletteExcess",
+            "before": 0.010966693098519671,
+            "after": 0.028124047719201444
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 2.4400665896853244
+          },
+          {
+            "metric": "transitionWidth",
+            "before": 3.4302521661950673,
+            "after": 3.578541257162145
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.9560975846892459
+          }
+        ]
+      },
+      "backendScope": "Both shader-language source paths changed, but only WebGL measured."
+    },
+    {
+      "name": "depth-guard-fill",
+      "kind": "Bounded native-rendered rejection of a post-foreground reflected fill using the existing depth buffer; not full-corpus, memory, or phone-cost acceptance. All color-bearing materials use the original World-layer finder path.",
+      "completedProfiles": 2,
+      "sourceSha256": "c8309b701cfb06ee679a35d1278bca179f4291579a9bee6287d567d0869941c4",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "b59bc3dcf25e0f873ac1358d57c3911ce9a44f10b59b803dbd36c0f7ebabe78e",
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133433556239935
+          }
+        ]
+      },
+      "backendScope": "Both shader-language source paths changed, but only WebGL measured."
+    },
+    {
+      "name": "depth-guard-palette",
+      "kind": "Bounded native-rendered rejection of a post-foreground reflected fill using the existing depth buffer; not full-corpus, memory, or phone-cost acceptance. All color-bearing materials use the original World-layer finder path.",
+      "completedProfiles": 3,
+      "sourceSha256": "913c23959dc837bd40418f2243122a37819546a615489686b6d0a3b9ed3aa7a2",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "9edb3980eceb4eac2bf44c8fbad974bb479e0bb0d8e43e278520ca0a16d44d52",
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133433556239935
+          }
+        ]
+      },
+      "backendScope": "Both shader-language source paths changed, but only WebGL measured."
+    },
+    {
+      "name": "projected-edge-guard",
+      "kind": "Bounded native-rendered rejection of a post-foreground reflected fill using the existing depth buffer; not full-corpus, memory, or phone-cost acceptance. All color-bearing materials use the original World-layer finder path.",
+      "completedProfiles": 2,
+      "sourceSha256": "a36fd5b66a22d7d6284eec067ecc371b141952b81f3918e30419c645f8dd719d",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "59d49b72a29ffd88a114febd207524fb92809394f48e10456054cd40c37fc488",
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133005121645489
+          }
+        ]
+      },
+      "backendScope": "Only WebGL measured; projected-edge-guard is a GLSL-only research prototype."
     }
   ],
-  "updatedUTC": "2026-10-16T09:08:05.702Z"
+  "updatedUTC": "2026-10-16T09:08:05.702Z",
+  "incompatibleAttempts": [
+    {
+      "kind": "Invalid diagnostic integration, not a calibrated algorithm counterexample. Extra continuation material was outside the World layer inspected and patched by the unchanged finder. Raw first attempt retained; no quality, hole, or cost result accepted.",
+      "createdUTC": "2026-10-16T11:03:00.940855+00:00",
+      "prototypeSha256": "ac16950bf0f443c8e1bf4cee7e742dc59ea12a1784b7595c864eb9873b31fa2c",
+      "rawAttemptSha256": "b458250dd807fabd918926f87a67f4ab659a40b911ab1ad28bb2a97d40dc4d09",
+      "correctedPrototypeSha256": "ce77d0fea3fabaf0bcb618c17b4134c63c45e71dafbb8dea048f1679ffe0f7bb"
+    }
+  ]
 }
