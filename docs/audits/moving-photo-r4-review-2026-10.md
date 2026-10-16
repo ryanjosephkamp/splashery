@@ -161,4 +161,69 @@ limit change. The clips branch also passes whole-branch Prettier and the primary
 prose rules. No pushed history, checkpoint branch, existing threshold, or `known` entry is
 rewritten.
 
+### The full-suite reconstruction and refinement failures
+
+The completed
+[Actions run on 1299a32b](https://github.com/ryanjosephkamp/splashery/actions/runs/38941184339)
+reports **332/332 files, 2,915 passed, five failed, and one existing skip**. Four initial failures
+pass alone: man7a:67, img-engine:85, hh1-toys:258, and phy:64. The remaining failure is the legacy
+Sintel reconstruction: height jitter is 0.0168414 against the unchanged 0.0152188 ceiling, including
+its isolated recheck. The other 70 Moving photo cases pass. Every original report is retained.
+
+The test-video generator omitted its color matrix and output frame clock. Native Chromium 151
+interprets the exact CI video as BT.709. The explicit BT.601 reconstruction preserves the original
+sheet colors more closely. Six decoded CI pictures differ from their source tiles by mean RGB errors
+of 1.634–3.843 levels. Explicit output frame rate, limited range, and BT.601 bring those errors to
+0.828–0.910. The corrected video retains 96 source pictures and 72 phone depth answers. The old
+local encoder default gave 5.938 seconds and only 71 answers; the corrected clock gives 6.001
+seconds. The [fixture proof](moving-photo-r4-fixture-2026-10.json) retains the browser color spaces
+and raw results.
+
+A new browser regression compares six decoded pictures with their original sheet tiles and checks
+the intended duration and number of phone answers. It fails before the encoding correction and
+passes afterward. The original upload regression also checks that it retains the intended answer
+count. Corrected Sintel passes its original bounds on the earlier application source, without a
+geometry change. YUV420 color conversion remains approximate; the four gzip depth caches remain a
+separate, exact byte-equality proof.
+
+The complete regression then exposes Bridge's 72-answer edge flips: **4.04214 per thousand** against
+the unchanged **3.73191** limit. Its mean-jitter calibration score overlooks rare large pops and
+samples only every fourth row and column. It can also carry a rejected fitted reference into the
+next pass after selecting whole-clip normalization. The retained correction evaluates RMS jitter at
+every pixel, including the border, and carries the selected calibration and its range forward. It
+selects between the same two real model calibrations, with the existing cut penalty. It adds no
+depth averaging, source crop, reduced precision, dropped answer, or motion reduction. The reported
+mean-jitter and edge-flip measures and their test thresholds are unchanged.
+
+The rare-pop regression fails with the old selector and passes with the new one. The complete legacy
+file passes **16/16**, including the unchanged Bunny, Machine, Bridge, Sintel, and Horse bounds.
+Bridge's measured mean jitter is **0.0114675** and cut share is **0.0727106**, within its original
+bounds. Its existing flip assertion passes. Sintel retains **0.0142369** mean jitter and
+**0.00481516** cut share. The other seven Moving photo files pass **57/57**: **73/73 total**, with
+no failures, skips, or flaky outcomes. Each complete file runs alone, through the default range
+server with no measurement URL override. The schedule records their actual whole-file times; known
+is unchanged.
+
+The frozen application hash is 9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4.
+This differs from 3cb44054, used by the earlier compressed-cache startup and color diagnostics. Only
+the opened-clip calibration choice changes; sample depth bytes, picture binding, decoder ownership,
+and mesh-construction code keep their existing paths. The full paired quality and performance sweep
+is not repeated. Its original source pins, reconstruction hashes, and remaining cadence and
+stability deficits remain explicit.
+
+Native-grid averaging, alternate point fits, and overlapping range fits missed the existing bounds
+and were discarded. Their negative measurements remain separate from retained-source verification.
+
+Main advanced again during verification. A normal merge brings 0b6f4bf26 into this branch in
+f05ff3c52, including its Photo research tests and Shape morph integration. This main merge changes
+no Photo or Moving photo reconstruction module. The complete 73-test local rerun follows that merge.
+Neither Photo checkpoint branch is touched. A fresh full-suite run verifies the published head; the
+final outcome is recorded in PR #677.
+
+The
+[first follow-up CI evidence](https://github.com/ryanjosephkamp/splashery/tree/codex/moving-photo-r4-clips/ledgers/operator-review/actions-1299a32b)
+keeps all initial reports and rechecks. The
+[color and calibration evidence](https://github.com/ryanjosephkamp/splashery/tree/codex/moving-photo-r4-clips/ledgers/operator-review/color-and-calibration)
+keeps the RGB proof, frozen-source local runs, and discarded trials under separate roles.
+
 Rule check: none.

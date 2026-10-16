@@ -477,8 +477,9 @@ async function refinedNear(raw, frames, clip, cancelled, range = null) {
 // Two valid calibrations of relative model depth can differ greatly after
 // cuts or exposure changes. Choose once for the complete pass, retaining
 // real model geometry in both candidates. Never change units frame by frame
-// to win the still-pixel score or remove a contour.
-async function refinementScore(near, frames, w, h, cancelled) {
+// to win the still-pixel score or remove a contour. Score every pixel,
+// including the border; RMS gives rare large pops their visible cost.
+export async function refinementScore(near, frames, w, h, cancelled) {
   let jitter = 0,
     still = 0,
     cuts = 0,
@@ -486,8 +487,8 @@ async function refinementScore(near, frames, w, h, cancelled) {
   for (let f = 0; f < near.length; f++) {
     if (cancelled()) throw new Error("The depth refinement was canceled.");
     const d = near[f];
-    for (let y = 0; y + 1 < h; y += 4)
-      for (let x = 0; x + 1 < w; x += 4) {
+    for (let y = 0; y + 1 < h; y++)
+      for (let x = 0; x + 1 < w; x++) {
         const i = y * w + x;
         const a = d[i],
           b = d[i + 1],
@@ -496,18 +497,20 @@ async function refinementScore(near, frames, w, h, cancelled) {
         cuts += Math.max(a, b, c) - Math.min(a, b, c) > 255 * CLIP_CUT;
         cuts += Math.max(b, c, e) - Math.min(b, c, e) > 255 * CLIP_CUT;
         triangles += 2;
-        if (!f) continue;
+      }
+    if (f)
+      for (let i = 0; i < d.length; i++) {
         let color = 0;
         for (let k = 0; k < 3; k++)
           color += (frames[f].data[i * 4 + k] - frames[f - 1].data[i * 4 + k]) ** 2;
         if (color <= 3 * 64) {
-          jitter += Math.abs(d[i] - near[f - 1][i]) / 255;
+          jitter += ((d[i] - near[f - 1][i]) / 255) ** 2;
           still++;
         }
       }
     await yieldPage();
   }
-  return jitter / Math.max(1, still) + (0.1 * cuts) / Math.max(1, triangles);
+  return Math.sqrt(jitter / Math.max(1, still)) + (0.1 * cuts) / Math.max(1, triangles);
 }
 
 function refineClip(clip, frames, raw, worker, onStatus, readFrames = null) {
@@ -614,6 +617,12 @@ function refineClip(clip, frames, raw, worker, onStatus, readFrames = null) {
           next = wholeScore < fitScore ? whole : fitted;
           job.normalization = wholeScore < fitScore ? "whole-clip" : "range-fit";
           job.scores = { fitted: fitScore, whole: wholeScore };
+          // The next pass must fit the calibration actually shown, including
+          // its range, rather than carrying the rejected candidate forward.
+          if (wholeScore < fitScore) {
+            anchor = result;
+            coarseRange = depthRange(result.map((d) => d.d));
+          }
         }
         // Finish the previous ease before starting the next pass.
         if (clip.transition) await new Promise((r) => setTimeout(r, 500));

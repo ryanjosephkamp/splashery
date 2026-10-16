@@ -1,0 +1,548 @@
+{
+  "retainedApplicationSource": {
+    "sourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+    "main": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+    "headBeforeFixCommit": "f05ff3c5281f363c4482eba6863f849f872e447b",
+    "uncommittedWorkingTree": true,
+    "files": [
+      {
+        "file": "src/packs/moving-photo.js",
+        "sha256": "1abd4df867f075a944abe4331d2457fdc7b9b34122a0c6153e3ecfb80678d9f2"
+      },
+      {
+        "file": "src/packs/photo-sharp.js",
+        "sha256": "8f6e2f1f231f4b061e383a41c9af76d777308651189481f0af6e8ed1ddbde2f4"
+      },
+      {
+        "file": "src/packs/song-stream.js",
+        "sha256": "565fe32bf7b3e5b949c744e77909c32182eb6397817a805642f3e760c2fd2988"
+      },
+      {
+        "file": "src/live/clip-stabilize.js",
+        "sha256": "b8e36c26439d53cf88275995d8dc035f40ed6af4e5fa6e05f44b78676ec462d4"
+      },
+      {
+        "file": "src/packs/moving-photo-raster.js",
+        "sha256": "047eb8fb9cb4015b46a6f542da63caa8e6e729a4df93bf5c5d88ce0242a70bcb"
+      },
+      {
+        "file": "src/packs/moving-photo-depth.js",
+        "sha256": "05711cedd8a63c07d62e3e455171dc7cc09bd851a77672dc3cf3178ec6346cb6"
+      },
+      {
+        "file": "src/packs/moving-photo-geometry.js",
+        "sha256": "4c8a49842a2a5b363548e55cffa6d69e4783441b366ee01cf4af6cd421a98e48"
+      },
+      {
+        "file": "src/packs/moving-photo-geometry-worker.js",
+        "sha256": "2dc3954e65bba53c060c161bbafcc391bf95acd6fe3e07eca0d5c03fde2abc8d"
+      },
+      {
+        "file": "src/packs/moving-photo-video-worker.js",
+        "sha256": "2d60cb9b62060fcd2013dccf059cc9fcf21a82f772a9b4bec8bb4c652e76c59d"
+      },
+      {
+        "file": "assets/toys/moving-photo-3d/clip-geometry.wasm",
+        "sha256": "9d58b05be2ba092abaaf166062080e50fb1282ccdba5a01a5973d1cf27192bbc"
+      },
+      {
+        "file": "tools/cdx-mp2-measure.mjs",
+        "sha256": "346c1d24a06fbaa3f5d9cc40810e7b5122871e67e43f7ee10423edfef26d2766"
+      },
+      {
+        "file": "tools/cdx-mp2-render.mjs",
+        "sha256": "39dbd328c9e070fd4c31488239ec559c2f9dcdb30ee7acb5979212fda26b0cd1"
+      },
+      {
+        "file": "playwright.config.mjs",
+        "sha256": "7891116df5fe3237546df329cb8f6462d7e569f4f931f2447ca0735ad44426a2"
+      },
+      {
+        "file": "tests/cdx-mp2-cache.spec.mjs",
+        "sha256": "c9b23d61be6efe76777cf922db4893490febc49abb97c8361e42e4f749e35328"
+      },
+      {
+        "file": "tests/cdx-mp2-decode.spec.mjs",
+        "sha256": "8e46ef299acc8380ece0b5b736a6a8fafa5104694c9d2bc0b3ae5e5ca149a66c"
+      },
+      {
+        "file": "tests/cdx-mp2-mobile.spec.mjs",
+        "sha256": "c1a565e602581b61e1ddd182fab105981abaff61418ea3dadb043b3187dc91b5"
+      },
+      {
+        "file": "tests/cdx-mp2-pixels.spec.mjs",
+        "sha256": "3bf2aaa3f35f824afb4cfd762a2add51eb30b718d93992350060f19499ba59c2"
+      },
+      {
+        "file": "tests/cdx-mp2-r3.spec.mjs",
+        "sha256": "25e1ae1aaf512a26c8f7019fa571e93b6fac52f48bbace484489e33673e7cc62"
+      },
+      {
+        "file": "tests/cdx-mp2-r4-raster.spec.mjs",
+        "sha256": "2cfc3072fccbd9d05de160b03bcaf6ca8975bbc9ba7c9ee378ab7109b72d053f"
+      },
+      {
+        "file": "tests/cdx-mp2-r4.spec.mjs",
+        "sha256": "f38e5ae1dad6505d24c32f291d2cd286558901cd1137f03bfcc904013260680c"
+      },
+      {
+        "file": "tests/cdx-mp2.spec.mjs",
+        "sha256": "1d0558537bee0bb8a830316d2d6930580ab12682316dad807aa0ae25a7e8e6e0"
+      }
+    ]
+  },
+  "earlierApplicationSourceHash": "3cb44054172a73cc811a8ffe75daa4bfe610c372d2267690f4902d11e0a9cd7a",
+  "firstFollowUpCi": {
+    "files": 332,
+    "tests": 2921,
+    "totals": {
+      "expected": 2915,
+      "unexpected": 5,
+      "skipped": 1,
+      "flaky": 0
+    },
+    "head": "1299a32bf8c7937586593d8b2dea0530f9306cdb",
+    "note": "Original first attempt; rechecks remain in separate nested reports."
+  },
+  "colorProof": {
+    "browser": "151.0.7922.173",
+    "note": "Actual browser seeks the same six source pictures, inside each coded frame, and compares RGB with the original sheet tiles.",
+    "results": [
+      {
+        "path": ".cache/cdx-mp2/sources/dragon.webm",
+        "duration": 5.938,
+        "rows": [
+          {
+            "index": 0,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.8952646292892157,
+            "rmse": 1.1797257452247445,
+            "max": 27
+          },
+          {
+            "index": 16,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.9505897671568627,
+            "rmse": 1.4819016416382687,
+            "max": 31
+          },
+          {
+            "index": 32,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.8392003676470589,
+            "rmse": 1.1424973720311304,
+            "max": 17
+          },
+          {
+            "index": 48,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.8658432904411765,
+            "rmse": 1.0374497979822124,
+            "max": 10
+          },
+          {
+            "index": 64,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.8983283547794118,
+            "rmse": 1.2375211983230912,
+            "max": 20
+          },
+          {
+            "index": 80,
+            "colorSpace": {
+              "fullRange": true,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.9001072303921569,
+            "rmse": 1.2686989871904364,
+            "max": 20
+          }
+        ]
+      },
+      {
+        "path": "work/r4-ci-inputs/dragon.webm",
+        "duration": 6.001,
+        "rows": [
+          {
+            "index": 0,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "bt709",
+              "primaries": "bt709",
+              "transfer": "bt709"
+            },
+            "mae": 3.7846086090686275,
+            "rmse": 4.301925619052792,
+            "max": 32
+          },
+          {
+            "index": 16,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "bt709",
+              "primaries": "bt709",
+              "transfer": "bt709"
+            },
+            "mae": 3.216536458333333,
+            "rmse": 4.077752288392491,
+            "max": 42
+          },
+          {
+            "index": 32,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "bt709",
+              "primaries": "bt709",
+              "transfer": "bt709"
+            },
+            "mae": 2.782113587622549,
+            "rmse": 3.3393768933967247,
+            "max": 28
+          },
+          {
+            "index": 48,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "bt709",
+              "primaries": "bt709",
+              "transfer": "bt709"
+            },
+            "mae": 1.6339211856617648,
+            "rmse": 1.980495716039295,
+            "max": 11
+          },
+          {
+            "index": 64,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "bt709",
+              "primaries": "bt709",
+              "transfer": "bt709"
+            },
+            "mae": 3.842501531862745,
+            "rmse": 4.4668419414780125,
+            "max": 31
+          },
+          {
+            "index": 80,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "bt709",
+              "primaries": "bt709",
+              "transfer": "bt709"
+            },
+            "mae": 3.358963311887255,
+            "rmse": 3.9300692898677707,
+            "max": 26
+          }
+        ]
+      },
+      {
+        "path": "work/r4-canonical/dragon.webm",
+        "duration": 6.001,
+        "rows": [
+          {
+            "index": 0,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.8896541819852941,
+            "rmse": 1.2304530179121898,
+            "max": 27
+          },
+          {
+            "index": 16,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.9096583946078431,
+            "rmse": 1.4904028151713173,
+            "max": 31
+          },
+          {
+            "index": 32,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.8331437653186274,
+            "rmse": 1.1812358970524448,
+            "max": 17
+          },
+          {
+            "index": 48,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.8280369178921568,
+            "rmse": 1.0861923764584571,
+            "max": 10
+          },
+          {
+            "index": 64,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.8505572150735294,
+            "rmse": 1.2549633385102936,
+            "max": 20
+          },
+          {
+            "index": 80,
+            "colorSpace": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            },
+            "mae": 0.8678174785539216,
+            "rmse": 1.3023703115123684,
+            "max": 19
+          }
+        ]
+      }
+    ]
+  },
+  "correctedFixtureBeforeCalibrationFix": {
+    "browser": "151.0.7922.173",
+    "sample": {
+      "id": "dragon",
+      "path": null,
+      "profile": "low",
+      "w": 480,
+      "h": 204,
+      "frames": 96,
+      "fps": 16,
+      "openMs": 1717,
+      "finishedMs": 1921.8000000044703,
+      "first": {
+        "heightJitter": 0.011706759820668516,
+        "edgeFlipsPer1000": 6.1107357883852655,
+        "globalShare": 0.7806143189667699,
+        "stillShare": 0.560265200378397,
+        "surfaceCutShare": 0.001693135500546774
+      },
+      "heightJitter": 0.011706759820668516,
+      "edgeFlipsPer1000": 6.1107357883852655,
+      "globalShare": 0.7806143189667699,
+      "stillShare": 0.560265200378397,
+      "surfaceCutShare": 0.001693135500546774,
+      "refinement": null
+    },
+    "upload": {
+      "id": "dragon",
+      "path": "work/r4-canonical/dragon.webm",
+      "profile": "low",
+      "w": 376,
+      "h": 160,
+      "frames": 72,
+      "fps": 11.998000333277773,
+      "openMs": 971,
+      "finishedMs": 44025.10000000149,
+      "first": {
+        "heightJitter": 0,
+        "edgeFlipsPer1000": 0,
+        "globalShare": 0,
+        "stillShare": 1,
+        "surfaceCutShare": 0
+      },
+      "heightJitter": 0.014236943931906425,
+      "edgeFlipsPer1000": 0.5268660824509084,
+      "globalShare": 0.47219555854421064,
+      "stillShare": 0.5154559671860953,
+      "surfaceCutShare": 0.0048151642208245984,
+      "refinement": {
+        "done": true,
+        "measured": 72,
+        "side": 196,
+        "normalization": "range-fit",
+        "scores": {
+          "fitted": 0.014712758968702722,
+          "whole": 0.016026402362799345
+        }
+      }
+    }
+  },
+  "fullLocalRegression": {
+    "sourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+    "phases": [
+      {
+        "folder": "r4-operator-final-legacy-2",
+        "exitCode": 0,
+        "wallSeconds": 324.73137641899666,
+        "reports": [
+          {
+            "file": "cdx-mp2.json",
+            "stats": {
+              "startTime": "2026-10-16T19:13:09.973Z",
+              "duration": 323576.919,
+              "expected": 16,
+              "skipped": 0,
+              "unexpected": 0,
+              "flaky": 0
+            }
+          }
+        ]
+      },
+      {
+        "folder": "r4-operator-score-other-tests",
+        "exitCode": 0,
+        "wallSeconds": 1088.0619225379996,
+        "reports": [
+          {
+            "file": "cdx-mp2-r4-raster.json",
+            "stats": {
+              "startTime": "2026-10-16T19:26:49.852Z",
+              "duration": 317212.95399999997,
+              "expected": 7,
+              "skipped": 0,
+              "unexpected": 0,
+              "flaky": 0
+            }
+          },
+          {
+            "file": "cdx-mp2-decode.json",
+            "stats": {
+              "startTime": "2026-10-16T19:36:38.640Z",
+              "duration": 1411.0719999999997,
+              "expected": 7,
+              "skipped": 0,
+              "unexpected": 0,
+              "flaky": 0
+            }
+          },
+          {
+            "file": "cdx-mp2-cache.json",
+            "stats": {
+              "startTime": "2026-10-16T19:36:27.696Z",
+              "duration": 9927.21,
+              "expected": 5,
+              "skipped": 0,
+              "unexpected": 0,
+              "flaky": 0
+            }
+          },
+          {
+            "file": "cdx-mp2-pixels.json",
+            "stats": {
+              "startTime": "2026-10-16T19:36:40.932Z",
+              "duration": 690.052,
+              "expected": 7,
+              "skipped": 0,
+              "unexpected": 0,
+              "flaky": 0
+            }
+          },
+          {
+            "file": "cdx-mp2-r3.json",
+            "stats": {
+              "startTime": "2026-10-16T19:34:29.572Z",
+              "duration": 116995.784,
+              "expected": 16,
+              "skipped": 0,
+              "unexpected": 0,
+              "flaky": 0
+            }
+          },
+          {
+            "file": "cdx-mp2-mobile.json",
+            "stats": {
+              "startTime": "2026-10-16T19:32:07.947Z",
+              "duration": 140744.13400000002,
+              "expected": 2,
+              "skipped": 0,
+              "unexpected": 0,
+              "flaky": 0
+            }
+          },
+          {
+            "file": "cdx-mp2-r4.json",
+            "stats": {
+              "startTime": "2026-10-16T19:18:34.684Z",
+              "duration": 494278.952,
+              "expected": 13,
+              "skipped": 0,
+              "unexpected": 0,
+              "flaky": 0
+            }
+          }
+        ]
+      }
+    ],
+    "complete": true
+  },
+  "currentUploadComparisons": [
+    {
+      "id": "machine",
+      "jitter": 0.005428912539715048,
+      "cuts": 0.0005890054793806176,
+      "normalization": "range-fit"
+    },
+    {
+      "id": "bridge",
+      "jitter": 0.011467490582810226,
+      "cuts": 0.07271062628833375,
+      "normalization": "range-fit"
+    },
+    {
+      "id": "dragon",
+      "jitter": 0.014236943931906425,
+      "cuts": 0.0048151642208245984,
+      "normalization": "range-fit"
+    },
+    {
+      "id": "horse",
+      "jitter": 0.009273013442539961,
+      "cuts": 0.0012711270959031502,
+      "normalization": "range-fit"
+    }
+  ],
+  "notes": [
+    "The original CI video has no declared color matrix; native Chromium 151 decodes it as BT.709. The corrected generator declares BT.601 and preserves the intended frame clock.",
+    "Color probes and the corrected Sintel baseline use earlier application source 3cb44054. They are not relabeled as measurements of the new calibration selector.",
+    "The current application uses full-grid RMS jitter in calibration selection and carries the selected calibration reference forward. The published mean-height-jitter and flip definitions and all original thresholds stay unchanged.",
+    "All eight local regression files use the retained frozen source. Its measurement-time HEAD precedes the fix commit; exact application and test hashes identify the tested working tree.",
+    "Existing quality, cadence, and startup reports retain their original source pins and input hashes. The complete paired sweep was not repeated after this correction."
+  ]
+}

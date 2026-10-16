@@ -297,6 +297,23 @@ test("color-guided interpolation follows a moving solid edge rather than leaving
   expect(error(guided)).toBeLessThan(error(linear) / 10);
 });
 
+test("normalization penalizes rare depth pops, including at the picture border", async () => {
+  const { refinementScore } = await import("../src/packs/moving-photo.js");
+  const w = 32,
+    h = 32;
+  const colors = new Uint8ClampedArray(w * h * 4).fill(128);
+  const frames = [{ data: colors }, { data: colors }];
+  const first = new Uint8Array(w * h).fill(64);
+  const gentle = new Uint8Array(w * h).fill(66);
+  const smooth = await refinementScore([first, gentle], frames, w, h, () => false);
+  for (const index of [15 * w + 15, w * h - 1]) {
+    const popped = first.slice();
+    popped[index] = 192;
+    const score = await refinementScore([first, popped], frames, w, h, () => false);
+    expect(score).toBeGreaterThan(smooth);
+  }
+});
+
 test("a real uploaded bunny refines every depth frame and closes the measured low-tier sample gap", async ({
   page,
 }) => {
@@ -310,6 +327,75 @@ test("a real uploaded bunny refines every depth frame and closes the measured lo
   expect(upload.heightJitter).toBeLessThan(sample.heightJitter * 1.2);
   expect(upload.edgeFlipsPer1000).toBeLessThan(sample.edgeFlipsPer1000 * 1.2);
   expect(upload.surfaceCutShare).toBeLessThan(sample.surfaceCutShare * 1.2);
+});
+
+test("a reconstructed sample preserves its original colors and six-second frame clock", async ({
+  page,
+}) => {
+  const sources = await reconstructedSources(".cache/cdx-mp2/color-fixture", ["dragon"]);
+  await page.goto("/LICENSES.md");
+  const result = await page.evaluate(async (path) => {
+    const { seekClipFrame } = await import("/src/packs/moving-photo.js");
+    const video = document.createElement("video");
+    video.muted = true;
+    video.playsInline = true;
+    const ready = new Promise((resolve, reject) => {
+      video.addEventListener("loadeddata", resolve, { once: true });
+      video.addEventListener("error", () => reject(new Error("The reconstructed video failed.")), {
+        once: true,
+      });
+    });
+    video.src = `/${path}`;
+    try {
+      await ready;
+      const context = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = 640;
+        canvas.height = 272;
+        return canvas.getContext("2d", { willReadFrequently: true });
+      };
+      const reference = context(),
+        actual = context(),
+        images = new Map(),
+        errors = [];
+      for (const index of [0, 16, 32, 48, 64, 80]) {
+        const sheet = 1 + Math.floor(index / 21);
+        if (!images.has(sheet)) {
+          const image = new Image();
+          image.src = `/assets/toys/moving-photo-3d/sintel-sheet-${sheet}.jpg`;
+          await image.decode();
+          images.set(sheet, image);
+        }
+        const tile = index % 21;
+        reference.drawImage(
+          images.get(sheet),
+          (tile % 3) * 640,
+          Math.floor(tile / 3) * 272,
+          640,
+          272,
+          0,
+          0,
+          640,
+          272,
+        );
+        await seekClipFrame(video, (index + 0.25) / 16);
+        actual.drawImage(video, 0, 0);
+        const a = reference.getImageData(0, 0, 640, 272).data;
+        const b = actual.getImageData(0, 0, 640, 272).data;
+        let error = 0;
+        for (let i = 0; i < a.length; i++) if (i % 4 !== 3) error += Math.abs(a[i] - b[i]);
+        errors.push(error / (640 * 272 * 3));
+      }
+      return { duration: video.duration, errors };
+    } finally {
+      video.removeAttribute("src");
+      video.load();
+    }
+  }, sources.dragon);
+  expect(result.duration).toBeCloseTo(6, 2);
+  expect(Math.round(result.duration * 12)).toBe(72);
+  expect(result.errors).toHaveLength(6);
+  for (const error of result.errors) expect(error).toBeLessThan(2);
 });
 
 test("upload refinement reduces machine and bridge regressions without losing horse and Sintel stability", async ({
@@ -326,6 +412,7 @@ test("upload refinement reduces machine and bridge regressions without losing ho
   for (const id of ["machine", "bridge", "dragon", "horse"]) {
     const sample = await measure(page, { id });
     const upload = await measure(page, { id, path: sources[id] });
+    if (id !== "horse") expect(upload.frames).toBe(Math.round((sample.frames / sample.fps) * 12));
     console.log(
       JSON.stringify({
         id,

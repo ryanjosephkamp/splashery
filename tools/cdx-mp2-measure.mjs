@@ -109,7 +109,13 @@ export async function reconstructedSources(dir, ids = null) {
         "-i",
         `assets/toys/moving-photo-3d/${s.file}-sheet-%d.jpg`,
         "-vf",
-        `format=rgb24,untile=${s.cols}x${s.rows},setpts=N/(${s.fps}*TB),pad=ceil(iw/2)*2:ceil(ih/2)*2`,
+        // Keep the reconstructed pictures' clock and color range independent
+        // of the encoder version's defaults for untiled JPEG frames.
+        `format=rgb24,untile=${s.cols}x${s.rows},setpts=N/(${s.fps}*TB),pad=ceil(iw/2)*2:ceil(ih/2)*2,scale=in_range=pc:out_range=tv:out_color_matrix=bt601,format=yuv420p`,
+        "-r",
+        String(s.fps),
+        "-fps_mode",
+        "cfr",
         "-frames:v",
         String(s.frames),
         "-c:v",
@@ -118,6 +124,10 @@ export async function reconstructedSources(dir, ids = null) {
         "1",
         "-pix_fmt",
         "yuv420p",
+        "-color_range",
+        "tv",
+        "-colorspace",
+        "bt470bg",
         path,
       ]);
       sources[s.id] = path;
