@@ -55,3 +55,11 @@
 {"v":1,"t":"2026-10-16T21:40:34.323Z","harness":"claude-code","event":"session-end","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","cwd":"splashery"}
 {"v":1,"t":"2026-10-16T22:21:26.562Z","harness":"claude-code","event":"session-start","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","cwd":"splashery"}
 {"v":1,"t":"2026-10-16T22:21:26.669Z","harness":"claude-code","event":"turn-start","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T22:21:33.983Z","harness":"claude-code","event":"tool","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T22:21:41.747Z","harness":"claude-code","event":"tool","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","tool":"mcp__085e0134-733f-4755-8624-b4ed2eb306bd__search_files","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T22:21:45.822Z","harness":"claude-code","event":"tool","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","tool":"mcp__085e0134-733f-4755-8624-b4ed2eb306bd__read_file_content","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T22:21:46.232Z","harness":"claude-code","event":"tool","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","tool":"mcp__085e0134-733f-4755-8624-b4ed2eb306bd__read_file_content","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T22:22:24.922Z","harness":"claude-code","event":"tool","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","tool":"mcp__085e0134-733f-4755-8624-b4ed2eb306bd__create_file","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T22:22:38.135Z","harness":"claude-code","event":"tool","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","tool":"mcp__085e0134-733f-4755-8624-b4ed2eb306bd__create_file","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T22:22:50.688Z","harness":"claude-code","event":"tool","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","tool":"mcp__claude-code-remote__send_message","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T22:23:02.646Z","harness":"claude-code","event":"turn-end","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","cwd":"splashery"}
