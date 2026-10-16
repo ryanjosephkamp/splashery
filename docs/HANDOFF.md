@@ -4,6 +4,26 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
+## Now (October 16, 2026, about 11:30 UTC)
+
+The Operator is `session_01JxfPsHRiWi93aHfLeqd8Jt` (Opus 5.5), since October 16, 2026, 00:45 UTC,
+two sessions deep; its handover is due October 18, about 00:45 UTC, or at 400k tokens. Main is
+`cc297c89` (Ops #675: Codex 85 #667, 78a #616, 78d #614). No Claude lane runs.
+
+**The owner's calls of October 16:** every labs toy goes public at the release (task file 98 does
+the readiness check first); the Featured order with the Studio first stays; the release is named
+v1.0; Shop plan v2 is approved (on the private Alignment page), with an AI-led research lab for the
+Shop after its foundation; after a Codex PR passes the Operator's review, its own full suite runs
+(the `full-suite` label) before it joins a batch, so its failures go straight back to Codex.
+
+**In flight:** #671 (task 91, the shelf, Featured, and layouts) is back with Codex for five tests
+its layout breaks; Ops #676 carries it once fixed. #612 (78c) needs Shape morph's evidence file.
+Goal runs open: #672 (93), #673 (94, replaces #655), #677 (92, replaces #560), #678 (95). #670 (96)
+is finishing. 97 waits on #197 (after engine #623); 90 waits on #654.
+
+**Since #671:** automated browsers start on the shelf's first toy unless `?first-toy=featured` (a
+fresh visit picks a random Featured toy), so unpinned specs stay deterministic.
+
 ## Now (October 16, 2026, about 00:30 UTC)
 
 The Operator is `session_01R85mwsFf138ohESofkyPJu` (Opus 5.5), since October 15, 2026, 18:00 UTC,
