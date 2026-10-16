@@ -25,8 +25,8 @@
 //     shapes, not edges), so it is sampled smoothly up to the frame's size
 //     and its edges are cut clean (sharpenEdges); the depth is worked out
 //     on at most DEPTH_FRAMES[profile] frames, evenly spread, and the frames
-//     between blend their neighbors' (r6; the colors carry the motion, and
-//     the wait stays about what it was);
+//     between use four-answer cubic interpolation, guided by their colors;
+//     alignment and a symmetric temporal filter steady the model's guesses;
 //   - a video plays with its own sound, and its frames follow that sound's
 //     clock (pause and scrub with them).
 //   - each frame's colors are sharpened a little (SHARPEN), to make up for
@@ -37,15 +37,37 @@
 // over the clip and moves from there by a signed offset (relief axis 3), so
 // the splats sort the way they show (the mirror's flashing, fixed in r3).
 
+import {
+  alignDepth,
+  depthRange,
+  filterDepths,
+  stableEdges,
+  streamDepth,
+  cubicDepth,
+  motionDepth,
+} from "../live/clip-stabilize.js";
+import { shrink, guidedDepth, nearAt } from "./moving-photo-depth.js";
+export { shrink, guidedDepth, nearAt } from "./moving-photo-depth.js";
 import { songTransport } from "./song-record.js";
 import { FILL, reliefScale } from "./photo-3d-core.js";
-import { sharpEntry, sharpClip, sharpDrive } from "./photo-sharp.js"; // lane Photo sharp view
+import {
+  sharpEntry,
+  sharpClip,
+  sharpDrive,
+  sharpClipDrive,
+  sharpClipOnly,
+  sharpView,
+  presentSharpClip,
+  holdSharpClip,
+  CLIP_CUT,
+} from "./photo-sharp.js"; // lane Photo sharp view
 
 export const MAX_SECONDS = 8;
 export const CLIP_FPS = { low: 12, mid: 15, high: 24, max: 24 };
 export const DEPTH_FRAMES = { low: 24, mid: 32, high: 48, max: 48 };
 export const CLIP_AREAS = { low: 60000, mid: 140000, high: 200000, max: 640 * 360 };
 export const DEPTH_SIDES = { low: 196, mid: 196, high: 294, max: 294 };
+export const REFINE_SIDES = { low: 196, mid: 294, high: 294, max: 294 };
 const profile = () => globalThis.window?.__splashery?.player?.profile || "mid";
 export const clipArea = () => CLIP_AREAS[profile()] || CLIP_AREAS.mid;
 export const depthSide = () => DEPTH_SIDES[profile()] || DEPTH_SIDES.mid;
@@ -53,10 +75,13 @@ export const clipFps = () => CLIP_FPS[profile()] || CLIP_FPS.mid;
 export const maxFrames = () => Math.round(MAX_SECONDS * clipFps());
 export const DEPTH_SIDE = DEPTH_SIDES.low;
 const LIFT = 0.9; // recipe units at full depth
+const PREVIEW_SIDE = 160; // first estimate's geometry; native color and final depth stay full size
 
 export const MOVING = {
   samples: new Map(), // sample id -> its clip, once loaded
   custom: null, // a clip the person opened
+  pending: null, // a visible first-answer preview whose opening is still running
+  opening: false,
   want: null, // the clip the next build shows
   clip: null, // the clip on show
   t: 0, // seconds into the clip
@@ -123,38 +148,6 @@ export function thin(frames, max = maxFrames()) {
   return out;
 }
 
-// RGBA (w by h) to a smaller w2 by h2, by averaging boxes; transparent parts
-// as white paper.
-export function shrink(data, w, h, w2, h2) {
-  const out = new Uint8ClampedArray(w2 * h2 * 4);
-  for (let y = 0; y < h2; y++)
-    for (let x = 0; x < w2; x++) {
-      const x0 = Math.floor((x * w) / w2);
-      const x1 = Math.max(x0 + 1, Math.floor(((x + 1) * w) / w2));
-      const y0 = Math.floor((y * h) / h2);
-      const y1 = Math.max(y0 + 1, Math.floor(((y + 1) * h) / h2));
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      let n = 0;
-      for (let yy = y0; yy < y1; yy++)
-        for (let xx = x0; xx < x1; xx++) {
-          const o = (yy * w + xx) * 4;
-          const a = data[o + 3] / 255;
-          r += data[o] * a + 255 * (1 - a);
-          g += data[o + 1] * a + 255 * (1 - a);
-          b += data[o + 2] * a + 255 * (1 - a);
-          n++;
-        }
-      const o = (y * w2 + x) * 4;
-      out[o] = r / n;
-      out[o + 1] = g / n;
-      out[o + 2] = b / n;
-      out[o + 3] = 255;
-    }
-  return out;
-}
-
 // The frame's size: `area` pixels in all, never larger than the source.
 const sizeFor = (w, h, area) => {
   const s = Math.min(1, Math.sqrt(area / (w * h)));
@@ -168,135 +161,64 @@ const modelSize = (w, h, side = DEPTH_SIDE) => {
 
 // ---- Depth -------------------------------------------------------------------------
 
-// A frame's depth as 0 (far) .. 1 (near) at the clip's size: the model's
-// output scaled by its 2nd and 98th percentiles, those eased across
-// neighboring frames so the depth doesn't pump from frame to frame.
-// Lane Photo fidelity r2: with the frames' colors (`frames`, RGBA at w by h),
-// the depth is enlarged edge-aware (guidedDepth). Measured against the
-// model's own depth at 518 (tools/phf-depth-edges.mjs), it moves the edges
-// too little to be worth its time, so the toy doesn't use it; the tool does.
-export function normalizeDepths(raw, w, h, keepFlat = false, frames = null) {
-  const ranges = raw.map((d) => {
-    const s = Float32Array.from(d.d).sort();
-    return [s[Math.floor(s.length * 0.02)], s[Math.floor(s.length * 0.98)]];
+// Align model answers on still colors before applying one range and one
+// relief scale to the whole clip. Filtering is symmetric, so it adds no lag.
+export function normalizeDepths(
+  raw,
+  w,
+  h,
+  keepFlat = false,
+  frames = null,
+  guide = !!frames,
+  range = null,
+  smoothing = null,
+) {
+  const colors = frames?.map((f, i) => shrink(f.data, w, h, raw[i].w, raw[i].h));
+  let previous = null;
+  const aligned = raw.map((d, i) => {
+    const values = raw.aligned ? d.d : alignDepth(d.d, previous, colors?.[i], colors?.[i - 1]);
+    previous = values;
+    return { ...d, d: values };
   });
-  return raw.map((d, i) => {
-    let lo = 0;
-    let hi = 0;
-    let n = 0;
-    for (let j = Math.max(0, i - 2); j <= Math.min(raw.length - 1, i + 2); j++) {
-      lo += ranges[j][0];
-      hi += ranges[j][1];
-      n++;
-    }
-    lo /= n;
-    hi /= n;
-    const span = Math.max(1e-6, hi - lo);
-    const f = keepFlat ? reliefScale(lo, hi) : 1; // lane Photo fidelity: a flat picture stays flat
-    if (frames?.[i]) {
-      const dn = new Float32Array(d.w * d.h);
+  const [lo, hi] = range || depthRange(aligned.map((d) => d.d));
+  const span = Math.max(1e-6, hi - lo);
+  const scale = keepFlat ? reliefScale(lo, hi) : 1;
+  const small = filterDepths(
+    aligned.map((d) => {
+      const dn = new Float32Array(d.d.length);
       for (let k = 0; k < dn.length; k++)
-        dn[k] = 0.5 + (Math.max(0, Math.min(1, (d.d[k] - lo) / span)) - 0.5) * f;
-      return guidedDepth(dn, d.w, d.h, frames[i].data, w, h);
-    }
+        dn[k] = 0.5 + (Math.max(0, Math.min(1, (d.d[k] - lo) / span)) - 0.5) * scale;
+      return dn;
+    }),
+    colors,
+    smoothing?.radius ?? 3,
+    smoothing?.rejectDepth ?? true,
+  );
+  const normalized = aligned.map((d, i) => {
+    if (smoothing?.only && (i < smoothing.only[0] || i >= smoothing.only[1])) return null;
+    const dn = small[i];
+    // Use the same spatial filter on worked-out and interpolated answers;
+    // alternating bilinear and guided sampling would itself introduce jitter.
+    if (guide && frames?.[i]) return guidedDepth(dn, d.w, d.h, frames[i].data, w, h);
     const out = new Float32Array(w * h);
-    for (let y = 0; y < h; y++)
+    for (let y = 0; y < h; y++) {
+      const fy = Math.max(0, Math.min(d.h - 1, ((y + 0.5) / h) * d.h - 0.5));
+      const y0 = Math.floor(fy),
+        y1 = Math.min(d.h - 1, y0 + 1),
+        ay = fy - y0;
       for (let x = 0; x < w; x++) {
-        // Bilinear (r5): the depth is smaller than the frame; nearest
-        // sampling left it in blocks.
         const fx = Math.max(0, Math.min(d.w - 1, ((x + 0.5) / w) * d.w - 0.5));
-        const fy = Math.max(0, Math.min(d.h - 1, ((y + 0.5) / h) * d.h - 0.5));
-        const x0 = Math.floor(fx);
-        const y0 = Math.floor(fy);
-        const x1 = Math.min(d.w - 1, x0 + 1);
-        const y1 = Math.min(d.h - 1, y0 + 1);
-        const ax = fx - x0;
-        const ay = fy - y0;
-        const top = d.d[y0 * d.w + x0] * (1 - ax) + d.d[y0 * d.w + x1] * ax;
-        const bot = d.d[y1 * d.w + x0] * (1 - ax) + d.d[y1 * d.w + x1] * ax;
-        const v = top * (1 - ay) + bot * ay;
-        out[y * w + x] = 0.5 + (Math.max(0, Math.min(1, (v - lo) / span)) - 0.5) * f;
+        const x0 = Math.floor(fx),
+          x1 = Math.min(d.w - 1, x0 + 1),
+          ax = fx - x0;
+        const top = dn[y0 * d.w + x0] * (1 - ax) + dn[y0 * d.w + x1] * ax;
+        const bot = dn[y1 * d.w + x0] * (1 - ax) + dn[y1 * d.w + x1] * ax;
+        out[y * w + x] = top * (1 - ay) + bot * ay;
       }
+    }
     return out;
   });
-}
-
-// Lane Photo fidelity r2: the depth (dw by dh, 0..1) enlarged to the frame (w by h) with the
-// frame's colors as the guide (a joint bilateral filter, as Photo to 3D's upsampleDepth): each
-// pixel takes the depths of the 3 by 3 depth cells around it, weighted by how near they lie and by
-// how alike the frame's color there (averaged over the cell) is to the pixel's own, so a near
-// thing's outline in the depth snaps to its outline in the picture. Where no cell's color is near
-// the pixel's, it falls back to the plain depth. Tables stand in for the exponentials:
-// a frame takes a few milliseconds per 100,000 pixels.
-const GUIDE_SIGMA = 0.09; // how alike two colors (0..1, summed squares of r, g, b) must be
-const GUIDE_LUT = 1024;
-const GUIDE_MAX = 0.25; // a color difference (squared) beyond this weighs nothing
-const rangeLut = (() => {
-  const t = new Float32Array(GUIDE_LUT + 1);
-  for (let i = 0; i <= GUIDE_LUT; i++)
-    t[i] = i === GUIDE_LUT ? 0 : Math.exp(-((i / GUIDE_LUT) * GUIDE_MAX) / (2 * GUIDE_SIGMA * GUIDE_SIGMA)); // prettier-ignore
-  return t;
-})();
-export function guidedDepth(dn, dw, dh, rgba, w, h) {
-  // the frame's colors averaged over each depth cell (0..1)
-  const lo = shrink(rgba, w, h, dw, dh);
-  const gl = new Float32Array(dw * dh * 3);
-  for (let k = 0; k < dw * dh; k++) {
-    gl[k * 3] = lo[k * 4] / 255;
-    gl[k * 3 + 1] = lo[k * 4 + 1] / 255;
-    gl[k * 3 + 2] = lo[k * 4 + 2] / 255;
-  }
-  const out = new Float32Array(w * h);
-  const sp = 1 / (2 * 0.8 * 0.8);
-  const scale = GUIDE_LUT / GUIDE_MAX;
-  // the 3 by 3 depth cells around the nearest one, and their distance weights along each axis
-  const ex = new Float32Array(3);
-  const ey = new Float32Array(3);
-  const cx = new Int32Array(3);
-  const cy = new Int32Array(3);
-  for (let y = 0; y < h; y++) {
-    const v = ((y + 0.5) * dh) / h - 0.5;
-    const jc = Math.round(v);
-    for (let a = 0; a < 3; a++) {
-      const jj = jc - 1 + a;
-      cy[a] = (jj < 0 ? 0 : jj >= dh ? dh - 1 : jj) * dw;
-      ey[a] = Math.exp(-((v - jj) ** 2) * sp);
-    }
-    for (let x = 0; x < w; x++) {
-      const u = ((x + 0.5) * dw) / w - 0.5;
-      const ic = Math.round(u);
-      for (let a = 0; a < 3; a++) {
-        const ii = ic - 1 + a;
-        cx[a] = ii < 0 ? 0 : ii >= dw ? dw - 1 : ii;
-        ex[a] = Math.exp(-((u - ii) ** 2) * sp);
-      }
-      const o = (y * w + x) * 4;
-      const r = rgba[o] / 255;
-      const g = rgba[o + 1] / 255;
-      const b = rgba[o + 2] / 255;
-      let sum = 0;
-      let wsum = 0;
-      let plain = 0;
-      let psum = 0;
-      for (let bj = 0; bj < 3; bj++)
-        for (let a = 0; a < 3; a++) {
-          const c = cy[bj] + cx[a];
-          const dr = gl[c * 3] - r;
-          const dg = gl[c * 3 + 1] - g;
-          const db = gl[c * 3 + 2] - b;
-          const q = (dr * dr + dg * dg + db * db) * scale;
-          const s = ex[a] * ey[bj];
-          const ws = s * rangeLut[q >= GUIDE_LUT ? GUIDE_LUT : q | 0];
-          sum += ws * dn[c];
-          wsum += ws;
-          plain += s * dn[c];
-          psum += s;
-        }
-      // where no cell's color is near the pixel's: the plain (distance-weighted) depth
-      out[y * w + x] = wsum > 1e-3 * psum ? sum / wsum : plain / psum;
-    }
-  }
-  return out;
+  return normalized;
 }
 
 // The packed depths of a clip's frames (the sample's file): a count, then
@@ -329,28 +251,28 @@ export function unpackDepths(bytes, unpack) {
 }
 
 // The depth model, in its worker, one frame at a time.
-export async function depthOf(frames, w, h, onStatus, side = DEPTH_SIDE) {
-  const worker = new Worker(new URL("../live/depth-worker.js", import.meta.url), { type: "module" }); // prettier-ignore
+export async function depthOf(frames, w, h, onStatus, side = DEPTH_SIDE, options = {}) {
+  const worker = options.worker || new Worker(new URL("../live/depth-worker.js", import.meta.url), { type: "module" }); // prettier-ignore
+  if (worker.openingError) throw worker.openingError;
   const ms = modelSize(w, h, side);
-  const out = [];
+  const out = options.raw || new Array(frames.length).fill(null);
   // r6: the depth on at most DEPTH_FRAMES[profile] frames, evenly spread
   // (with the first and the last); the frames between blend their
   // neighbors' (r5 took every other frame).
-  const cap = Math.max(2, DEPTH_FRAMES[profile()] || DEPTH_FRAMES.mid);
+  const cap = Math.max(2, options.cap || DEPTH_FRAMES[profile()] || DEPTH_FRAMES.mid);
   const want = frames.map(() => false);
   const m = Math.min(frames.length, cap);
   for (let k = 0; k < m; k++)
     want[Math.round((k * (frames.length - 1)) / Math.max(1, m - 1))] = true;
-  const total = want.filter(Boolean).length;
+  const total = want.filter((wanted, i) => wanted && !out[i]).length;
   let done = 0;
   try {
     for (let i = 0; i < frames.length; i++) {
-      if (!want[i]) {
-        out.push(null);
-        continue;
-      }
+      if (options.cancelled?.()) throw new Error("The depth refinement was canceled.");
+      if (!want[i] || out[i]) continue;
       const data = shrink(frames[i].data, w, h, ms.w, ms.h);
       const d = await new Promise((resolve, reject) => {
+        options.onPending?.(reject);
         worker.onmessage = (e) => {
           const m = e.data;
           if (m.type === "status") return m.text && onStatus?.(m.text);
@@ -360,25 +282,110 @@ export async function depthOf(frames, w, h, onStatus, side = DEPTH_SIDE) {
         worker.onerror = () => reject(new Error("The depth model couldn't start in this browser."));
         worker.postMessage({ type: "frame", id: i, w: ms.w, h: ms.h, data }, [data.buffer]);
       });
-      out.push(d);
+      options.onPending?.(null);
+      out[i] = d;
       onStatus?.(`Working out the depth: ${++done} of ${total}…`);
     }
   } finally {
-    worker.terminate();
+    if (!options.worker) worker.terminate();
   }
-  const done2 = out.map((d) => !!d);
-  for (let i = 0; i < out.length; i++) {
-    if (done2[i]) continue;
-    let ia = i - 1;
-    while (!done2[ia]) ia--;
-    let ib = i + 1;
-    while (!done2[ib]) ib++;
-    const a = out[ia];
-    const b = out[ib];
-    const f = (i - ia) / (ib - ia);
-    const d = new Float32Array(a.d.length);
-    for (let j = 0; j < d.length; j++) d[j] = a.d[j] * (1 - f) + b.d[j] * f;
-    out[i] = { w: a.w, h: a.h, d };
+  return completeDepths(
+    out,
+    frames,
+    w,
+    h,
+    options.motion !== false,
+    options.anchor,
+    options.cancelled,
+  );
+}
+
+// Preserve the unaligned model cache: a new pass must not align an answer
+// that has already been aligned against a different set of neighbors.
+const yieldPage = () => new Promise((resolve) => setTimeout(resolve, 0));
+async function completeDepths(
+  raw,
+  frames,
+  w,
+  h,
+  followMotion = true,
+  reference = null,
+  cancelled = () => false,
+) {
+  const out = raw.map((d) => (d ? { ...d, d: d.d.slice() } : null));
+  const keys = out.flatMap((d, i) => (d ? [i] : []));
+  let previous = null,
+    previousColors = null;
+  for (const i of keys) {
+    if (cancelled()) throw new Error("The depth refinement was canceled.");
+    const colors = shrink(frames[i].data, w, h, out[i].w, out[i].h);
+    // A refinement fits to the preceding pass at the SAME source time.
+    // This preserves the established clip range without compounding fits
+    // across hundreds of newly inserted frames or matching a different scene.
+    const anchor = reference?.[i];
+    if (anchor) {
+      const target = new Float32Array(out[i].d.length);
+      for (let y = 0; y < out[i].h; y++)
+        for (let x = 0; x < out[i].w; x++)
+          target[y * out[i].w + x] =
+            anchor.d[
+              Math.min(anchor.h - 1, Math.floor((y * anchor.h) / out[i].h)) * anchor.w +
+                Math.min(anchor.w - 1, Math.floor((x * anchor.w) / out[i].w))
+            ];
+      // A low-correlation fit must still stay in the established units.
+      // Matching robust endpoint ranges is bounded and follows the preceding
+      // pass's smooth range; it cannot return an unrelated model scale at a cut.
+      const [lo, hi] = depthRange([out[i].d]);
+      const [a, b] = depthRange([target]);
+      const scale = (b - a) / Math.max(1e-6, hi - lo);
+      out[i].d = Float32Array.from(out[i].d, (v) => a + (v - lo) * scale);
+    } else out[i].d = alignDepth(out[i].d, previous, colors, previousColors);
+    previous = out[i].d;
+    previousColors = colors;
+    await yieldPage();
+  }
+  out.aligned = true;
+  out.interpolated = frames.map(() => false);
+  const times = [];
+  const colors = [];
+  for (const frame of frames) {
+    if (cancelled()) throw new Error("The depth refinement was canceled.");
+    colors.push(shrink(frame.data, w, h, out[keys[0]].w, out[keys[0]].h));
+    await yieldPage();
+  }
+  let clock = 0;
+  for (const frame of frames) {
+    times.push(clock);
+    clock += Math.max(1, frame.delay || 1);
+  }
+  for (let k = 0; k + 1 < keys.length; k++) {
+    const ia = keys[k],
+      ib = keys[k + 1];
+    const ip = keys[Math.max(0, k - 1)],
+      next = keys[Math.min(keys.length - 1, k + 2)];
+    const a = out[ip],
+      b = out[ia];
+    const c = out[ib],
+      d = out[next];
+    const before = times[ia] - times[ip],
+      span = times[ib] - times[ia],
+      after = times[next] - times[ib];
+    for (let i = ia + 1; i < ib; i++) {
+      if (cancelled()) throw new Error("The depth refinement was canceled.");
+      const f = (times[i] - times[ia]) / span;
+      const values = new Float32Array(b.d.length);
+      for (let j = 0; j < values.length; j++)
+        values[j] = cubicDepth(a.d[j], b.d[j], c.d[j], d.d[j], f, before, span, after);
+      out[i] = {
+        w: b.w,
+        h: b.h,
+        d: followMotion
+          ? motionDepth(b.d, c.d, colors[ia], colors[ib], colors[i], b.w, b.h, f, values)
+          : values,
+      };
+      out.interpolated[i] = true;
+      await yieldPage();
+    }
   }
   return out;
 }
@@ -388,33 +395,20 @@ export async function depthOf(frames, w, h, onStatus, side = DEPTH_SIDE) {
 // Where the depth jumps (a near bunny before a far meadow), the model's
 // depth, smaller than the frame and blurred, ramps across a few pixels, and
 // those pixels would hang as dots between the two. Each pixel whose 5 by 5
-// neighborhood spans more than EDGE goes with the nearer or farther side,
-// whichever it is closer to, so the edge is a clean cut.
-const EDGE = 0.15;
-export function sharpenEdges(d, w, h) {
-  const out = new Float32Array(d.length);
-  for (let y = 0; y < h; y++)
-    for (let x = 0; x < w; x++) {
-      let lo = Infinity;
-      let hi = -Infinity;
-      for (let j = Math.max(0, y - 2); j <= Math.min(h - 1, y + 2); j++)
-        for (let i = Math.max(0, x - 2); i <= Math.min(w - 1, x + 2); i++) {
-          const v = d[j * w + i];
-          if (v < lo) lo = v;
-          if (v > hi) hi = v;
-        }
-      const v = d[y * w + x];
-      out[y * w + x] = hi - lo > EDGE ? (v - lo < hi - v ? lo : hi) : v;
-    }
-  return out;
+// neighborhood spans more than 0.15 goes with the nearer or farther side,
+// picked by color when possible. Still pixels hold a contrary side for
+// three consecutive frames before accepting it.
+export function sharpenEdges(d, w, h, colors = null, state = null) {
+  return stableEdges(d, w, h, colors, state);
 }
 
 export function makeClip(name, w, h, frames, near) {
   // r6: each frame's nearness kept as bytes (0..255; a quarter of the
   // memory, for a clip at its own frame rate).
   const mean = new Float32Array(w * h);
-  near = near.map((d) => {
-    const e = sharpenEdges(d, w, h);
+  const edgeState = {};
+  near = near.map((d, f) => {
+    const e = sharpenEdges(d, w, h, frames[f].data, edgeState);
     const q = new Uint8Array(e.length);
     for (let i = 0; i < e.length; i++) {
       q[i] = Math.round(255 * e[i]);
@@ -435,56 +429,374 @@ export function makeClip(name, w, h, frames, near) {
   };
 }
 
+// A refinement is visible without rebuilding the splat grid. Keep its resting
+// mean and its normalization range fixed, and ease each displayed answer over
+// half a second; paused pictures refine too.
+export function shownDepth(clip, f) {
+  const next = clip.near[f];
+  const tr = clip.transition;
+  if (!tr) return next;
+  const t = Math.min(1, Math.max(0, (performance.now() - tr.at) / 500));
+  if (t >= 1) {
+    clip.transition = null;
+    return next;
+  }
+  const ease = t * t * (3 - 2 * t);
+  const out = (tr.bytes ||= new Uint8Array(next.length));
+  const previous = tr.from[f];
+  for (let i = 0; i < out.length; i++)
+    out[i] = Math.round(previous[i] + (next[i] - previous[i]) * ease);
+  liveWake();
+  return out;
+}
+
+// Normalize in overlapping temporal windows, retaining the full clip's range
+// and the edge history across batches. A pass never holds the page for all
+// of its frames at once: sound, decoding, and the loop clock keep advancing.
+async function refinedNear(raw, frames, clip, cancelled, range = null) {
+  range ||= depthRange(raw.map((d) => d.d));
+  const radius = Math.max(3, Math.round(clip.n / clip.duration / 2));
+  const near = [];
+  const edges = {};
+  for (let first = 0; first < raw.length; first += 2) {
+    if (cancelled()) throw new Error("The depth refinement was canceled.");
+    const from = Math.max(0, first - radius);
+    const to = Math.min(raw.length, first + 2 + radius);
+    const slice = raw.slice(from, to);
+    slice.aligned = true;
+    const normalized = normalizeDepths(slice, clip.w, clip.h, true, frames.slice(from, to), true, range, { radius, rejectDepth: false, only: [first - from, first - from + 2] }); // prettier-ignore
+    for (let f = first; f < Math.min(raw.length, first + 2); f++) {
+      const d = sharpenEdges(normalized[f - from], clip.w, clip.h, frames[f].data, edges);
+      near.push(Uint8Array.from(d, (v) => Math.round(255 * v)));
+    }
+    await yieldPage();
+  }
+  return near;
+}
+
+// Two valid calibrations of relative model depth can differ greatly after
+// cuts or exposure changes. Choose once for the complete pass, retaining
+// real model geometry in both candidates. Never change units frame by frame
+// to win the still-pixel score or remove a contour. Score every pixel,
+// including the border; RMS gives rare large pops their visible cost.
+export async function refinementScore(near, frames, w, h, cancelled) {
+  let jitter = 0,
+    still = 0,
+    cuts = 0,
+    triangles = 0;
+  for (let f = 0; f < near.length; f++) {
+    if (cancelled()) throw new Error("The depth refinement was canceled.");
+    const d = near[f];
+    for (let y = 0; y + 1 < h; y++)
+      for (let x = 0; x + 1 < w; x++) {
+        const i = y * w + x;
+        const a = d[i],
+          b = d[i + 1],
+          c = d[i + w],
+          e = d[i + w + 1];
+        cuts += Math.max(a, b, c) - Math.min(a, b, c) > 255 * CLIP_CUT;
+        cuts += Math.max(b, c, e) - Math.min(b, c, e) > 255 * CLIP_CUT;
+        triangles += 2;
+      }
+    if (f)
+      for (let i = 0; i < d.length; i++) {
+        let color = 0;
+        for (let k = 0; k < 3; k++)
+          color += (frames[f].data[i * 4 + k] - frames[f - 1].data[i * 4 + k]) ** 2;
+        if (color <= 3 * 64) {
+          jitter += ((d[i] - near[f - 1][i]) / 255) ** 2;
+          still++;
+        }
+      }
+    await yieldPage();
+  }
+  return Math.sqrt(jitter / Math.max(1, still)) + (0.1 * cuts) / Math.max(1, triangles);
+}
+
+function refineClip(clip, frames, raw, worker, onStatus, readFrames = null) {
+  let finish;
+  const job = {
+    done: false,
+    cancelled: false,
+    measured: 1,
+    side: DEPTH_SIDE,
+    finished: new Promise((r) => (finish = r)),
+  };
+  job.cancel = () => {
+    job.cancelled = true;
+    job.done = true;
+    worker.terminate();
+    job.reject?.(new Error("The depth refinement was canceled."));
+    finish();
+  };
+  const say = (text) => {
+    job.status = text;
+    if (
+      MOVING.clip === clip &&
+      globalThis.window?.__splashery?.player?.scene?.toy?.id === "moving-photo-3d"
+    )
+      onStatus?.(text);
+  };
+  // Let the caller show the first answer before doing more main-thread work.
+  setTimeout(async () => {
+    try {
+      if (readFrames) {
+        const firstPicture = frames[0].data;
+        frames = (await readFrames(say, () => job.cancelled)).frames;
+        if (job.cancelled) return;
+        // A playback callback may arrive on frame 1 at 60 fps. Retain the
+        // exact time-zero picture used by the cached preview answer, so
+        // depth and color never describe different first pictures.
+        frames[0].data = firstPicture;
+        clip.colors = frames.map((f) => f.data);
+        clip.version = (clip.version || 0) + 1;
+      }
+      job.framesReady = true;
+      const fullSide = REFINE_SIDES[profile()] || REFINE_SIDES.mid;
+      const passes = [
+        { cap: Math.min(frames.length, 4), side: DEPTH_SIDE },
+        { cap: Math.min(frames.length, DEPTH_FRAMES[profile()] || 32), side: DEPTH_SIDE },
+        { cap: frames.length, side: DEPTH_SIDE },
+      ];
+      if (fullSide > DEPTH_SIDE) passes.push({ cap: frames.length, side: fullSide });
+      let cache = raw;
+      let anchor = null,
+        coarseRange = null;
+      for (const pass of passes) {
+        if (job.cancelled) break;
+        if (pass.side !== job.side) cache = new Array(frames.length).fill(null);
+        // Reuse one worker and model session for every pass, including larger inputs.
+        const result = await depthOf(
+          frames,
+          clip.w,
+          clip.h,
+          (text) => say(`Refining your clip. ${text}`),
+          pass.side,
+          {
+            cap: pass.cap,
+            raw: cache,
+            worker,
+            cancelled: () => job.cancelled,
+            onPending: (reject) => (job.reject = reject),
+            motion: !!anchor,
+          },
+        );
+        if (job.cancelled) break;
+        let next;
+        if (!anchor) {
+          anchor = result;
+          coarseRange = depthRange(result.map((d) => d.d));
+          next = await refinedNear(result, frames, clip, () => job.cancelled, coarseRange);
+          job.normalization = "range-fit";
+        } else {
+          anchor = await completeDepths(
+            cache,
+            frames,
+            clip.w,
+            clip.h,
+            true,
+            anchor,
+            () => job.cancelled,
+          );
+          const fitted = await refinedNear(anchor, frames, clip, () => job.cancelled, coarseRange);
+          const whole = await refinedNear(result, frames, clip, () => job.cancelled);
+          const fitScore = await refinementScore(
+            fitted,
+            frames,
+            clip.w,
+            clip.h,
+            () => job.cancelled,
+          );
+          const wholeScore = await refinementScore(
+            whole,
+            frames,
+            clip.w,
+            clip.h,
+            () => job.cancelled,
+          );
+          next = wholeScore < fitScore ? whole : fitted;
+          job.normalization = wholeScore < fitScore ? "whole-clip" : "range-fit";
+          job.scores = { fitted: fitScore, whole: wholeScore };
+          // The next pass must fit the calibration actually shown, including
+          // its range, rather than carrying the rejected candidate forward.
+          if (wholeScore < fitScore) {
+            anchor = result;
+            coarseRange = depthRange(result.map((d) => d.d));
+          }
+        }
+        // Finish the previous ease before starting the next pass.
+        if (clip.transition) await new Promise((r) => setTimeout(r, 500));
+        if (job.cancelled) break;
+        clip.transition = { from: clip.near, at: performance.now() };
+        clip.near = next;
+        clip.version = (clip.version || 0) + 1;
+        job.measured = cache.filter(Boolean).length;
+        job.side = pass.side;
+        liveWake();
+      }
+      say(job.cancelled ? "Depth refinement canceled; your clip still plays." : "");
+    } catch (e) {
+      if (!job.cancelled) {
+        job.error = e.message;
+        say(`Your clip plays with its first depth. ${e.message}`);
+      }
+    } finally {
+      worker.terminate();
+      job.done = true;
+      finish();
+      liveWake();
+    }
+  }, 0);
+  return job;
+}
+
 // A GIF or video the person opened: its frames at the clip's size, then the
 // depth of each.
-export async function openClip(file, name, onStatus) {
-  let w;
-  let h;
-  let frames;
-  let audio = null;
-  let source = 0; // the file's own length (s)
-  const side = clipArea();
-  const isGif = /\.gif$/i.test(name) || file.type === "image/gif";
-  if (isGif) {
-    onStatus?.("Reading the GIF…");
-    let g;
+export async function openClip(file, name, onStatus, onPreview = null) {
+  // The existing worker's init message loads exactly the same model/session
+  // as a frame request. Overlap that work with local media decoding.
+  const worker = new Worker(new URL("../live/depth-worker.js", import.meta.url), { type: "module" }); // prettier-ignore
+  worker.onmessage = ({ data }) => {
+    if (data.type === "status" && data.text) onStatus?.(data.text);
+    if (data.type === "error")
+      worker.openingError = new Error(data.text || "The depth model stopped.");
+  };
+  worker.onerror = () => {
+    worker.openingError = new Error("The depth model couldn't start in this browser.");
+  };
+  worker.postMessage({ type: "init", id: "moving-opening" });
+  let handedOff = false;
+  try {
+    let w;
+    let h;
+    let frames;
+    let audio = null;
+    let copy = null;
+    let readFrames = null;
+    let source = 0; // the file's own length (s)
+    const side = clipArea();
+    const isGif = /\.gif$/i.test(name) || file.type === "image/gif";
+    if (isGif) {
+      onStatus?.("Reading the GIF…");
+      let g;
+      try {
+        g = await gifFrames(new Uint8Array(await file.arrayBuffer()));
+      } catch {
+        throw new Error("That GIF couldn't be read. Try another GIF, or an MP4 or WebM video.");
+      }
+      ({ w, h } = sizeFor(g.w, g.h, side));
+      source = g.frames.reduce((t, f) => t + f.delay, 0) / 1000;
+      // Its first MAX_SECONDS, at up to clipFps() frames a second.
+      let kept = [];
+      let at = 0;
+      for (const f of g.frames) {
+        if (at >= MAX_SECONDS * 1000) break;
+        kept.push(f);
+        at += f.delay;
+      }
+      kept = thin(kept, Math.max(2, Math.min(maxFrames(), Math.round((at / 1000) * clipFps()))));
+      frames = kept.map((f) => ({ data: shrink(f.data, g.w, g.h, w, h), delay: f.delay }));
+    } else {
+      // Live r7: a video longer than MAX_SECONDS plays whole (openLong).
+      const len = await videoLength(file);
+      if (len > MAX_SECONDS + 0.05) {
+        const clip = await openLong(file, name, onStatus, len, onPreview, worker);
+        handedOff = true;
+        return clip;
+      }
+      if (!(len > 0.2)) throw new Error("That video is too short.");
+      onStatus?.("Opening the first picture…");
+      copy = await keepCopy(file);
+      if (!copy) throw new Error("This browser can't read the video's first picture.");
+      ({ w, h } = sizeFor(copy.video.videoWidth, copy.video.videoHeight, side));
+      source = len;
+      const n = Math.max(2, Math.min(maxFrames(), Math.round(len * clipFps())));
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      const g = canvas.getContext("2d", { willReadFrequently: true });
+      g.drawImage(copy.video, 0, 0, w, h);
+      const data = g.getImageData(0, 0, w, h).data;
+      frames = Array.from({ length: n }, () => ({ data, delay: (len * 1000) / n }));
+      readFrames = (say, cancelled) => videoFrames(file, side, say, cancelled);
+      audio = await soundOf(copy.url, false, copy.video);
+    }
+    if (frames.length < 2) throw new Error("That file has only one picture. Open a GIF or a video that moves."); // prettier-ignore
+    const cache = new Array(frames.length).fill(null);
+    let raw;
     try {
-      g = await gifFrames(new Uint8Array(await file.arrayBuffer()));
-    } catch {
-      throw new Error("That GIF couldn't be read. Try another GIF, or an MP4 or WebM video.");
+      raw = await depthOf([frames[0]], w, h, onStatus, DEPTH_SIDE, {
+        worker,
+        raw: cache.slice(0, 1),
+        motion: false,
+      });
+    } catch (e) {
+      worker.terminate();
+      closeSound(audio);
+      copy?.video.pause();
+      if (copy?.url) URL.revokeObjectURL(copy.url);
+      throw e;
     }
-    ({ w, h } = sizeFor(g.w, g.h, side));
-    source = g.frames.reduce((t, f) => t + f.delay, 0) / 1000;
-    // Its first MAX_SECONDS, at up to clipFps() frames a second.
-    let kept = [];
-    let at = 0;
-    for (const f of g.frames) {
-      if (at >= MAX_SECONDS * 1000) break;
-      kept.push(f);
-      at += f.delay;
+    const range = depthRange(raw.map((d) => d.d));
+    let preview;
+    if (onPreview) {
+      const scale = Math.min(1, PREVIEW_SIDE / Math.max(w, h));
+      const pw = Math.max(2, Math.round(w * scale)),
+        ph = Math.max(2, Math.round(h * scale));
+      const picture = [{ data: shrink(frames[0].data, w, h, pw, ph), delay: frames[0].delay }];
+      preview = {
+        ...makeClip(
+          name,
+          pw,
+          ph,
+          picture,
+          normalizeDepths(raw, pw, ph, true, picture, true, range),
+        ),
+        ...copy,
+        audio,
+        source,
+        pictureAspect: h / w,
+        previewColor: { w, h, data: frames[0].data },
+        n: frames.length,
+        duration: frames.reduce((sum, f) => sum + f.delay, 0) / 1000,
+        delays: frames.map((f) => f.delay),
+      };
+      try {
+        await onPreview(preview);
+      } catch (error) {
+        closeClip(preview);
+        throw error;
+      }
     }
-    kept = thin(kept, Math.max(2, Math.min(maxFrames(), Math.round((at / 1000) * clipFps()))));
-    frames = kept.map((f) => ({ data: shrink(f.data, g.w, g.h, w, h), delay: f.delay }));
-  } else {
-    // Live r7: a video longer than MAX_SECONDS plays whole (openLong).
-    const len = await videoLength(file);
-    if (len > MAX_SECONDS + 0.05) return openLong(file, name, onStatus, len);
-    onStatus?.("Reading the video…");
-    ({ w, h, frames, source } = await videoFrames(file, side, onStatus));
-    audio = await soundOf(URL.createObjectURL(file), true);
+    // Lane Photo fidelity: a video keeps a muted copy on the clip's clock, whose picture at its own
+    // full size is what the splats show (photoSource); the frames above are the depth's and the
+    // plain splats' colors.
+    const first = makeClip(name, w, h, [frames[0]], normalizeDepths(raw, w, h, true, [frames[0]], true, range)); // prettier-ignore
+    cache[0] = raw[0];
+    const clip = {
+      ...first,
+      n: frames.length,
+      duration: frames.reduce((sum, f) => sum + f.delay, 0) / 1000,
+      delays: frames.map((f) => f.delay),
+      colors: frames.map((f) => f.data),
+      near: frames.map(() => first.near[0]),
+      audio,
+      source,
+      ...copy,
+    };
+    clip.shownDepth = (f) => shownDepth(clip, f);
+    if (preview?.firstPresentedAt) clip.firstPresentedAt = preview.firstPresentedAt;
+    clip.refinement = refineClip(clip, frames, cache, worker, onStatus, readFrames);
+    handedOff = true;
+    return clip;
+  } finally {
+    if (!handedOff) worker.terminate();
   }
-  if (frames.length < 2) throw new Error("That file has only one picture. Open a GIF or a video that moves."); // prettier-ignore
-  const raw = await depthOf(frames, w, h, onStatus, depthSide());
-  // Lane Photo fidelity: a video keeps a muted copy on the clip's clock, whose picture at its own
-  // full size is what the splats show (photoSource); the frames above are the depth's and the
-  // plain splats' colors.
-  const copy = isGif ? null : await keepCopy(file);
-  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h, true)), audio, source, ...copy }; // prettier-ignore
 }
 
 // A video's first MAX_SECONDS, at clipFps() frames a second, each drawn
 // after a seek (its length is the video's own, so it plays at its speed).
-async function videoFrames(file, side, onStatus) {
+async function videoFrames(file, side, onStatus, cancelled = () => false) {
   const v = document.createElement("video");
   v.muted = true;
   v.playsInline = true;
@@ -506,32 +818,15 @@ async function videoFrames(file, side, onStatus) {
     const g = c.getContext("2d", { willReadFrequently: true });
     const frames = [];
     const grab = () => frames.push({ data: g.getImageData(0, 0, w, h).data, delay: (len * 1000) / n }); // prettier-ignore
-    // r6: played through once, muted, each frame taken as it shows
-    // (requestVideoFrameCallback): about the clip's own length. A seek to
-    // each frame decodes from the last key frame every time, which took
-    // minutes for a phone's video at 24 frames a second.
-    if (
-      v.requestVideoFrameCallback &&
-      (await playedFrames(
-        v,
-        n,
-        len,
-        () => {
-          g.drawImage(v, 0, 0, w, h);
-          grab();
-        },
-        onStatus,
-      ))
-    )
-      // prettier-ignore
-      return { w, h, frames, source: v.duration || len };
-    frames.length = 0;
+    // Reading no longer blocks the first preview. Exact background seeks
+    // give the model the frame actually shown at each retained source time,
+    // rather than whichever frame a busy page's playback callback reached.
+    READ.lead = 0;
+    READ.slowed = 1;
     for (let i = 0; i < n; i++) {
+      if (cancelled()) throw new Error("The depth refinement was canceled.");
       const at = (i * len) / n;
-      await new Promise((resolve) => {
-        v.addEventListener("seeked", resolve, { once: true });
-        v.currentTime = at;
-      });
+      await seekClipFrame(v, at, cancelled);
       g.drawImage(v, 0, 0, w, h);
       grab();
       if (i % 12 === 11) onStatus?.(`Reading the video: frame ${i + 1} of ${n}…`);
@@ -544,74 +839,16 @@ async function videoFrames(file, side, onStatus) {
   }
 }
 
-// Plays v (muted) from the start and calls take() for frame i at (i * len /
-// n) seconds, as the frame on show reaches it (a frame the browser skipped
-// takes the next one shown). False if it can't play here (the caller seeks
-// instead).
-export const READ = { lead: 0, slowed: 1 }; // (how the last video read went; tests)
-async function playedFrames(v, n, len, take, onStatus) {
-  READ.lead = 0;
-  READ.slowed = 1;
-  v.currentTime = 0;
-  await new Promise((r) => v.addEventListener("seeked", r, { once: true }));
-  let i = 0;
-  const done = new Promise((resolve) => {
-    const end = () => {
-      if (i === 0) return resolve(false);
-      while (i < n) {
-        take();
-        i++;
-      }
-      v.pause();
-      resolve(true);
-    };
-    const watchdog = setInterval(() => {
-      if (v.paused || v.ended) {
-        clearInterval(watchdog);
-        end();
-      }
-    }, 500);
-    const half = len / n / 2;
-    const step = (_now, meta) => {
-      const at = meta.mediaTime;
-      // A frame the browser skipped (it couldn't decode that fast): back to
-      // it, at half the speed (a phone decodes in hardware and rarely
-      // needs this).
-      if (i < n && (i * len) / n < at - half && v.playbackRate > 1 / 16) {
-        v.playbackRate /= 2;
-        READ.slowed = v.playbackRate;
-        v.currentTime = (i * len) / n;
-        v.requestVideoFrameCallback(step);
-        return;
-      }
-      while (i < n && (i * len) / n <= at + half) {
-        READ.lead = Math.max(READ.lead, at - (i * len) / n);
-        take();
-        i++;
-      }
-      if (i % 24 < 2) onStatus?.(`Reading the video: frame ${i} of ${n}…`);
-      if (i >= n || at >= len) {
-        clearInterval(watchdog);
-        end();
-      } else v.requestVideoFrameCallback(step);
-    };
-    v.requestVideoFrameCallback(step);
-  });
-  try {
-    await v.play();
-  } catch {
-    return false;
-  }
-  return done;
-}
+// Retained read diagnostics for tools that used the earlier playback reader.
+export const READ = { lead: 0, slowed: 1, mode: "seek" };
 
 // A video's own sound (r5): a Track (song-stream.js) playing the file,
 // routed to the site's speaker button; its clock drives the frames. Null if
 // the browser can't play it (the clip then plays silently on its own clock).
-async function soundOf(url, own) {
+async function soundOf(url, own, media = null) {
   if (typeof Audio === "undefined") return null;
   const { Track } = await import("./song-stream.js");
-  const track = new Track(url);
+  const track = new Track(url, media);
   try {
     await track.ready;
   } catch {
@@ -696,26 +933,68 @@ async function keepCopy(file) {
   }
 }
 
-const loadedVideo = async (url) => {
-  const v = document.createElement("video");
+const loadedVideo = async (url, existing = null) => {
+  const v = existing || document.createElement("video");
   v.muted = true;
   v.playsInline = true;
   v.preload = "auto";
-  v.src = url;
   await new Promise((resolve, reject) => {
-    v.addEventListener("loadeddata", resolve, { once: true });
-    v.addEventListener("error", () => reject(new Error("This browser can't play that video. MP4 (H.264) and WebM play almost everywhere.")), { once: true }); // prettier-ignore
+    const clear = () => {
+      v.removeEventListener("loadeddata", loaded);
+      v.removeEventListener("error", failed);
+    };
+    const loaded = () => {
+      clear();
+      resolve();
+    };
+    const failed = () => {
+      clear();
+      reject(
+        new Error(
+          "This browser can't play that video. MP4 (H.264) and WebM play almost everywhere.",
+        ),
+      );
+    };
+    v.addEventListener("loadeddata", loaded);
+    v.addEventListener("error", failed);
+    v.src = url;
   });
   return v;
 };
 
+// Cached depth and pictures need no inactive hardware decoder. Preserve the
+// same media element and its sound route, and reopen it only when selected.
+function parkOtherVideos(chosen) {
+  const clips = new Set([...MOVING.samples.values(), MOVING.custom]);
+  for (const clip of clips) {
+    if (!clip?.video || clip === chosen || clip.parkedURL) continue;
+    clip.video.pause();
+    clip.parkedURL = clip.video.currentSrc || clip.video.src;
+    clip.video.removeAttribute("src");
+    clip.video.load();
+  }
+}
+async function restoreClipVideo(clip) {
+  if (!clip?.parkedURL) return clip;
+  const url = clip.parkedURL;
+  await loadedVideo(url, clip.video);
+  delete clip.parkedURL;
+  return clip;
+}
+
 // Opens a long video: its picture's size, the plan for its depth, its
 // sound, and the first LONG_FIRST depth pictures; the rest are worked out
 // after it opens (longDepth).
-async function openLong(file, name, onStatus, duration) {
+async function openLong(file, name, onStatus, duration, onPreview, worker) {
   onStatus?.("Opening the video…");
   const url = URL.createObjectURL(file);
-  const v = await loadedVideo(url);
+  let v;
+  try {
+    v = await loadedVideo(url);
+  } catch (error) {
+    URL.revokeObjectURL(url);
+    throw error;
+  }
   const { w, h } = sizeFor(v.videoWidth, v.videoHeight, longArea());
   const plan = longPlan(duration, w, h);
   const fps = clipFps();
@@ -732,40 +1011,59 @@ async function openLong(file, name, onStatus, duration) {
     url,
     mean: new Float32Array(w * h),
     depth: { ...plan, frames: new Array(plan.n).fill(null), ready: 0, done: 0, lo: null, hi: null },
-    audio: await soundOf(URL.createObjectURL(file), true),
+    audio: await soundOf(url, false, v),
     job: null,
   };
-  clip.job = longDepth(clip, file, onStatus);
-  await clip.job.first;
-  // Each pixel rests at its average nearness over the first depth pictures.
-  const D = clip.depth;
-  const k = Math.max(1, D.ready);
-  const one = new Float32Array(w * h);
-  for (let i = 0; i < k; i++) {
-    nearAt(D, i, i, 0, w, h, one);
-    for (let p = 0; p < w * h; p++) clip.mean[p] += one[p] / k;
+  clip.shownDepth = (t = 0) => longFrame(clip, t, false).near[0];
+  const firstDepth = clip.depth;
+  try {
+    if (worker.openingError) throw worker.openingError;
+    clip.job = longDepth(clip, file, onStatus, worker);
+    if (onPreview) {
+      await clip.job.preview;
+      if (clip.depth.ready) {
+        nearAt(clip.depth, 0, 0, 0, w, h, clip.mean);
+        await onPreview(clip);
+      }
+    }
+    await clip.job.first;
+    if (!clip.depth.ready)
+      throw new Error(clip.job.error || "The depth model couldn't start in this browser.");
+    // Each pixel rests at its average nearness over the first depth pictures.
+    const D = firstDepth;
+    const k = Math.max(1, Math.min(D.ready, LONG_FIRST));
+    const one = new Float32Array(w * h);
+    clip.mean.fill(0);
+    for (let i = 0; i < k; i++) {
+      nearAt(D, i, i, 0, w, h, one);
+      for (let p = 0; p < w * h; p++) clip.mean[p] += one[p] / k;
+    }
+    return clip;
+  } catch (error) {
+    closeClip(clip);
+    throw error;
   }
-  return clip;
 }
 
 // Works out the long clip's depth pictures in order (a second copy of the
 // video, seeked to each one's time; the model in its worker). Returns
 // { first (a promise: the first LONG_FIRST are in), cancel(), done }.
-function longDepth(clip, file, onStatus) {
+function longDepth(clip, file, onStatus, worker) {
   const D = clip.depth;
   const job = { cancelled: false, done: false, started: performance.now() };
   let firstDone;
   job.first = new Promise((r) => (firstDone = r));
+  let previewDone;
+  job.preview = new Promise((r) => (previewDone = r));
   job.cancel = () => {
     job.cancelled = true;
   };
   const say = (text) => {
-    MOVING.longStatus = text;
+    if (MOVING.clip === clip || MOVING.pending === clip) MOVING.longStatus = text;
     onStatus?.(text);
   };
   (async () => {
     const url = URL.createObjectURL(file);
-    const worker = new Worker(new URL("../live/depth-worker.js", import.meta.url), { type: "module" }); // prettier-ignore
     let v = null;
     try {
       v = await loadedVideo(url);
@@ -785,6 +1083,7 @@ function longDepth(clip, file, onStatus) {
         g.drawImage(v, 0, 0, D.ms.w, D.ms.h);
         const data = g.getImageData(0, 0, D.ms.w, D.ms.h).data;
         const m = await new Promise((resolve, reject) => {
+          if (worker.openingError) return reject(worker.openingError);
           worker.onmessage = (e) => {
             const x = e.data;
             if (x.type === "status") return x.text && say(x.text);
@@ -793,21 +1092,94 @@ function longDepth(clip, file, onStatus) {
           };
           worker.onerror = () =>
             reject(new Error("The depth model couldn't start in this browser."));
-          worker.postMessage({ type: "frame", id: i, w: D.ms.w, h: D.ms.h, data }, [data.buffer]);
+          const sent = data.slice();
+          worker.postMessage({ type: "frame", id: i, w: D.ms.w, h: D.ms.h, data: sent }, [
+            sent.buffer,
+          ]);
         });
-        D.frames[i] = depthBytes(D, m);
+        D.frames[i] = depthBytes(D, m, data);
         D.done = i + 1;
         D.ready = i + 1;
+        if (i === 0) previewDone();
         if (i + 1 === Math.min(D.n, LONG_FIRST)) firstDone();
         const each = (performance.now() - t0) / (i + 1);
         const left = ((D.n - i - 1) * each) / 1000;
         say(`Working out the depth: ${i + 1} of ${D.n} (about ${left < 90 ? `${Math.ceil(left)} s` : `${Math.ceil(left / 60)} min`} left). It plays as it goes.`); // prettier-ignore
       }
+      // Once the whole video has a first answer, fill the time gaps at the
+      // playback sampling rate. Account for BOTH caches while this pass runs;
+      // hour-long clips may already fill the budget and keep the first pass.
+      const per = D.ms.w * D.ms.h;
+      const n = Math.min(
+        Math.round(clip.duration * clip.fps),
+        Math.floor((D.budget - D.n * per) / per),
+      );
+      if (!job.cancelled && n > D.n) {
+        const next = {
+          ms: D.ms,
+          n,
+          rate: n / clip.duration,
+          budget: D.budget,
+          frames: new Array(n).fill(null),
+          ready: 0,
+          done: 0,
+          colorGuide: true,
+        };
+        const state = D.stability;
+        const span = Math.max(1e-6, state.hi - state.lo);
+        const colors = new Uint8ClampedArray(per * 4);
+        for (let i = 0; i < n && !job.cancelled; i++) {
+          const at = Math.min(clip.duration - 0.05, (i + 0.5) / next.rate);
+          await new Promise((resolve) => {
+            v.onseeked = resolve;
+            v.currentTime = at;
+          });
+          if (job.cancelled) break;
+          g.drawImage(v, 0, 0, D.ms.w, D.ms.h);
+          colors.set(g.getImageData(0, 0, D.ms.w, D.ms.h).data);
+          const raw = await new Promise((resolve, reject) => {
+            worker.onmessage = (e) => {
+              if (e.data.type === "depth") resolve(e.data);
+              if (e.data.type === "error") reject(new Error(e.data.text));
+            };
+            worker.onerror = () => reject(new Error("The depth refinement stopped."));
+            const data = colors.slice();
+            worker.postMessage({ type: "frame", id: i, w: D.ms.w, h: D.ms.h, data }, [data.buffer]);
+          });
+          const position = Math.max(0, at * D.rate - 0.5);
+          const referenceBytes = D.frames[Math.min(D.n - 1, Math.round(position))];
+          const reference = Float32Array.from(
+            referenceBytes,
+            (x) => state.lo + ((x / 255 - 0.5) / state.scale + 0.5) * span,
+          );
+          const [lo, hi] = depthRange([raw.d]),
+            [a, b] = depthRange([reference]);
+          const aligned = Float32Array.from(
+            raw.d,
+            (x) => a + ((x - lo) * (b - a)) / Math.max(1e-6, hi - lo),
+          );
+          const values = Float32Array.from(
+            aligned,
+            (x) => 0.5 + (Math.max(0, Math.min(1, (x - state.lo) / span)) - 0.5) * state.scale,
+          );
+          const smooth = stableEdges(values, D.ms.w, D.ms.h, colors, (next.edges ||= {}));
+          next.frames[i] = Uint8Array.from(smooth, (x) => Math.round(x * 255));
+          next.ready = next.done = i + 1;
+          say(`Refining the video: ${i + 1} of ${n}. It plays as it goes.`);
+        }
+        if (!job.cancelled) {
+          clip.depthEase = { from: D, at: performance.now() };
+          clip.depth = next;
+          clip.version = (clip.version || 0) + 1;
+        }
+      }
       say(job.cancelled ? `Stopped: the depth reaches ${clock(D.done / D.rate)} of ${clock(clip.duration)}; it plays on with the last depth after that.` : ""); // prettier-ignore
     } catch (e) {
+      job.error = e.message;
       say(e.message || "The depth model stopped.");
     } finally {
       job.done = true;
+      previewDone();
       firstDone();
       worker.terminate();
       if (v) {
@@ -823,58 +1195,22 @@ function longDepth(clip, file, onStatus) {
 
 const clock = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 
-// A depth answer as bytes (0 far .. 255 near) at its own size: scaled by its
-// 2nd and 98th percentiles, those eased from picture to picture (so the
-// depth doesn't pump), and its edges cut clean (sharpenEdges).
-function depthBytes(D, m) {
-  const s = Float32Array.from(m.d).sort();
-  const lo = s[Math.floor(s.length * 0.02)];
-  const hi = s[Math.floor(s.length * 0.98)];
-  D.lo = D.lo === null ? lo : D.lo + (lo - D.lo) * 0.3;
-  D.hi = D.hi === null ? hi : D.hi + (hi - D.hi) * 0.3;
-  const span = Math.max(1e-6, D.hi - D.lo);
-  const f = reliefScale(D.lo, D.hi); // lane Photo fidelity: a flat picture stays flat
-  // (The model's own size can differ a little from what was asked.)
-  const out = new Float32Array(D.ms.w * D.ms.h);
+// Long-video answers use the same alignment and color-guided edge hold,
+// keeping only the previous raw map, colors, and filter state beyond the byte cache.
+function depthBytes(D, m, colors) {
+  const raw = new Float32Array(D.ms.w * D.ms.h);
   for (let y = 0; y < D.ms.h; y++)
     for (let x = 0; x < D.ms.w; x++) {
       const sx = Math.min(m.w - 1, Math.floor(((x + 0.5) / D.ms.w) * m.w));
       const sy = Math.min(m.h - 1, Math.floor(((y + 0.5) / D.ms.h) * m.h));
-      out[y * D.ms.w + x] = 0.5 + (Math.max(0, Math.min(1, (m.d[sy * m.w + sx] - D.lo) / span)) - 0.5) * f; // prettier-ignore
+      raw[y * D.ms.w + x] = m.d[sy * m.w + sx];
     }
-  const e = sharpenEdges(out, D.ms.w, D.ms.h);
+  const state = (D.stability ||= {});
+  const smooth = streamDepth(state, raw, colors, reliefScale);
+  const e = stableEdges(smooth, D.ms.w, D.ms.h, colors, (state.edges ||= {}));
   const b = new Uint8Array(e.length);
   for (let i = 0; i < e.length; i++) b[i] = Math.round(255 * e[i]);
   return b;
-}
-
-// The nearness (0..1) at the picture's size (w by h) into `out`: depth
-// pictures a and b blended by f (0 a .. 1 b), each the last one worked out
-// at or before it.
-function nearAt(D, a, b, f, w, h, out) {
-  const back = (i) => {
-    for (let j = Math.min(i, D.n - 1); j >= 0; j--) if (D.frames[j]) return D.frames[j];
-    return null;
-  };
-  const A = back(a);
-  const B = back(b) || A;
-  if (!A) return out.fill(0.5);
-  const { w: dw, h: dh } = D.ms;
-  for (let y = 0; y < h; y++) {
-    const fy = Math.max(0, Math.min(dh - 1, ((y + 0.5) / h) * dh - 0.5));
-    const y0 = Math.floor(fy);
-    const y1 = Math.min(dh - 1, y0 + 1);
-    const ay = fy - y0;
-    for (let x = 0; x < w; x++) {
-      const fx = Math.max(0, Math.min(dw - 1, ((x + 0.5) / w) * dw - 0.5));
-      const x0 = Math.floor(fx);
-      const x1 = Math.min(dw - 1, x0 + 1);
-      const ax = fx - x0;
-      const at = (F) => ((F[y0 * dw + x0] * (1 - ax) + F[y0 * dw + x1] * ax) * (1 - ay) + (F[y1 * dw + x0] * (1 - ax) + F[y1 * dw + x1] * ax) * ay) / 255; // prettier-ignore
-      out[y * w + x] = B === A || f <= 0 ? at(A) : at(A) * (1 - f) + at(B) * f;
-    }
-  }
-  return out;
 }
 
 // The long clip's frame at t, as a one-frame clip frameImage can draw: the
@@ -885,7 +1221,7 @@ function longFrame(clip, t, colorsToo = true) {
   // (Lane Photo fidelity: when its colors aren't read back each frame, the picture is drawn into a
   // canvas kept on the GPU, a copy instead of a decode into memory; a canvas's kind is fixed when
   // its context is made, so a change makes a new one.)
-  const reads = !!colorsToo;
+  const reads = !!colorsToo || !!clip.depth.colorGuide;
   if (L.c.width !== w || L.c.height !== h || L.reads !== reads) {
     if (L.reads !== undefined && L.reads !== reads) L.c = document.createElement("canvas");
     L.c.width = w;
@@ -898,21 +1234,50 @@ function longFrame(clip, t, colorsToo = true) {
   // (Lane Photo fidelity: photo-textured splats read the video itself, so its colors aren't read
   // back here, unless the original's card shows them: the readback was most of a frame's work.)
   let colors = null;
-  if (colorsToo) {
+  if (reads) {
     colors = L.g.getImageData(0, 0, w, h).data;
     L.colors = colors; // (the original's card shows it too)
   }
   const D = clip.depth;
-  const k = Math.max(0, t * D.rate - 0.5);
+  const k = Math.max(0, t * D.rate - (D.offset ?? 0.5));
   const a = Math.min(D.n - 1, Math.floor(k));
   nearAt(D, a, Math.min(D.n - 1, a + 1), k - a, w, h, L.near);
+  if (D.colorGuide && colors) {
+    // Cut edges at the display grid after color-guided enlargement. A coarse
+    // model edge must not tear a wide strip out of a face or a moving part.
+    const guided = guidedDepth(D.blend, D.ms.w, D.ms.h, colors, w, h);
+    // The offline cache already has stabilized edges. Snapping it a second
+    // time invents additional steps inside smooth surfaces, which the mesh
+    // then cuts (visible holes through a face). Keep the guided enlargement.
+    L.near.set(guided);
+  }
+  if (clip.depthEase) {
+    const ease = clip.depthEase;
+    const f = Math.min(1, (performance.now() - ease.at) / 500);
+    if (f >= 1) clip.depthEase = null;
+    else {
+      const old = ease.from;
+      const position = Math.max(0, t * old.rate - 0.5),
+        a = Math.min(old.n - 1, Math.floor(position));
+      const previous = (L.previous ||= new Float32Array(w * h));
+      nearAt(old, a, Math.min(old.n - 1, a + 1), position - a, w, h, previous);
+      const weight = f * f * (3 - 2 * f);
+      for (let i = 0; i < L.near.length; i++)
+        L.near[i] = previous[i] + (L.near[i] - previous[i]) * weight;
+      liveWake();
+    }
+  }
   for (let i = 0; i < w * h; i++) L.bytes[i] = Math.round(255 * L.near[i]);
+  L.time = t;
+  L.depth = D;
+  L.ready = D.ready;
+  L.easeTick = clip.depthEase ? Math.floor(performance.now() / 16) : null;
   return { w, h, colors: [colors], near: [L.bytes], mean: clip.mean };
 }
 
 // What a long clip's shown picture depends on beyond its frame: whether its
 // copy has a picture, the copy's own frame and how much depth is in.
-const longVersion = (clip) => (clip?.long ? `${clip.video.readyState >= 2 ? 1 : 0}|${Math.round(clip.video.currentTime * clip.fps)}|${clip.depth.ready}` : ""); // prettier-ignore
+const longVersion = (clip) => (clip?.long ? `${clip.video.readyState >= 2 ? 1 : 0}|${Math.round(clip.video.currentTime * clip.fps)}|${clip.depth.ready}|${clip.depthEase ? Math.floor(performance.now() / 16) : ""}` : ""); // prettier-ignore
 
 // Keeps the muted copy on the clip's clock: playing with it, or paused at it.
 function syncVideo(clip, playing, t, rate = 1) {
@@ -932,8 +1297,9 @@ function syncVideo(clip, playing, t, rate = 1) {
 function closeClip(clip) {
   if (!clip) return;
   closeSound(clip.audio);
-  if (!clip.video) return; // (lane Photo fidelity: a short video keeps a copy too)
+  clip.refinement?.cancel();
   clip.job?.cancel();
+  if (!clip.video) return; // (lane Photo fidelity: a short video keeps a copy too)
   clip.video.pause();
   clip.video.removeAttribute("src");
   clip.video.load();
@@ -950,10 +1316,14 @@ function longControls() {
   cancel.type = "button";
   cancel.id = "moving-long-cancel";
   cancel.textContent = "Cancel the depth";
-  cancel.addEventListener("click", () => MOVING.clip?.job?.cancel());
+  const work = () => {
+    const clip = MOVING.pending || MOVING.clip;
+    return clip?.job || clip?.refinement;
+  };
+  cancel.addEventListener("click", () => work()?.cancel());
   box.append(cancel);
   const sync = () => {
-    const j = MOVING.clip?.job;
+    const j = work();
     box.hidden = !j || j.done || j.cancelled;
   };
   sync();
@@ -1026,7 +1396,7 @@ export function frameImage(clip, cols, rows, f, sharpen = SHARPEN, out = null, c
   const px = out || new Uint8ClampedArray(W * rows * 4);
   const { x0, x1, xm, y0, y1, ym, same } = spans(clip, cols, rows);
   if (!colors) {
-    const near = clip.near[f];
+    const near = shownDepth(clip, f);
     const mean = clip.mean;
     for (let j = 0; j < rows; j++) {
       const row = ym[j] * clip.w;
@@ -1046,7 +1416,7 @@ export function frameImage(clip, cols, rows, f, sharpen = SHARPEN, out = null, c
   const avg = SCRATCH.avg;
   const hs = SCRATCH.hs;
   const col = clip.colors[f];
-  const near = clip.near[f];
+  const near = shownDepth(clip, f);
   const mean = clip.mean;
   const cw = clip.w;
   for (let j = 0; j < rows; j++) {
@@ -1230,7 +1600,7 @@ export const SAMPLES = [
     fps: 16, // prettier-ignore
     title: "Elephants Dream (six seconds from 5:29.7)",
     source: "https://orange.blender.org/",
-    author: "Blender Foundation",
+    author: "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
     license: "CC BY 2.5",
     licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
     sound: "elephants",
@@ -1238,6 +1608,70 @@ export const SAMPLES = [
   },
 ];
 export const SAMPLE = SAMPLES[0];
+// Longer films are explicitly picked. Their video and per-frame depth are
+// fetched only then; opening the toy still fetches the original short bunny.
+export const LONG_SAMPLES = [
+  {
+    id: "sample-long",
+    label: "Big Buck Bunny: 30 seconds",
+    file: "bunny-long",
+    fps: 24,
+    frames: 720,
+    title: "Big Buck Bunny (1:44.5 to 2:14.5)",
+    source: "https://archive.org/details/BigBuckBunny_328",
+    ...BLENDER,
+    license: "CC BY 3.0 US",
+    licenseUrl: "https://creativecommons.org/licenses/by/3.0/us/",
+    cut: { src: ".cache/smd/bunny-full.mp4", ss: 104.5, t: 30 },
+  },
+  {
+    id: "dragon-long",
+    label: "Sintel: 30 seconds",
+    file: "sintel-long",
+    fps: 24,
+    frames: 720,
+    title: "Sintel (2:15 to 2:45)",
+    source: "https://archive.org/details/Sintel",
+    ...BLENDER,
+    cut: { src: ".cache/smd/sintel-full.mp4", ss: 135, t: 30 },
+  },
+  {
+    id: "machine-long",
+    label: "Inside the machine: 30 seconds",
+    file: "elephants-long",
+    fps: 24,
+    frames: 720,
+    title: "Elephants Dream (5:29.7 to 5:59.7)",
+    source: "https://orange.blender.org/blog/creative-commons-license-2/",
+    ...BLENDER,
+    author: "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+    license: "CC BY 2.5",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
+    cut: { src: ".cache/smd/elephants-full.mp4", ss: 329.7, t: 30 },
+  },
+  {
+    id: "bridge-long",
+    label: "The bridge and the robot: 27-second city montage",
+    file: "tears-long",
+    fps: 24,
+    frames: 648,
+    title: "Tears of Steel (a 27-second city montage)",
+    source: "https://archive.org/details/Tears-of-Steel",
+    ...BLENDER,
+    cut: {
+      src: ".cache/smd/tears-full.mp4",
+      t: 27,
+      segments: [
+        [70, 76],
+        [90, 92],
+        [96, 98],
+        [103, 105],
+        [521, 528],
+        [580, 588],
+      ],
+    },
+  },
+];
 export const SAMPLE_SIDES = { low: 480, mid: 480, high: 640, max: 640 };
 // The bunny's sound (the Screen toy's files): MP4, or WebM where the browser can't play MP4 (some
 // Chromium builds). The others have an MP3 of their own.
@@ -1286,21 +1720,172 @@ function scaledSheet(photo, w, h) {
   return { w, h, data: g.getImageData(0, 0, w, h).data };
 }
 
-export async function loadSample(id = "sample") {
+export async function loadSample(id = "sample", onPreview = null) {
+  const long = LONG_SAMPLES.find((s) => s.id === id);
+  if (long) return loadLongSample(long, onPreview);
   const s = SAMPLES.find((x) => x.id === id) || SAMPLE;
-  if (MOVING.samples.has(s.id)) return MOVING.samples.get(s.id);
+  if (MOVING.samples.has(s.id)) {
+    const cached = MOVING.samples.get(s.id);
+    await restoreClipVideo(cached);
+    await onPreview?.(cached);
+    return cached;
+  }
   const { decodePhoto, unpackDepth } = await import("./photo-3d.js");
-  const sheets = await Promise.all(Array.from({ length: s.sheets }, (_, i) => readBytes(`../../assets/toys/moving-photo-3d/${s.file}-sheet-${i + 1}.jpg`).then(decodePhoto))); // prettier-ignore
-  const dep = await readBytes(`../../assets/toys/moving-photo-3d/${s.file}.depth`);
+  const previewing = onPreview && typeof document !== "undefined";
+  const readSheet = (i) => readBytes(`../../assets/toys/moving-photo-3d/${s.file}-sheet-${i + 1}.jpg`); // prettier-ignore
+  const [sheets, dep] = await Promise.all([
+    Promise.all(Array.from({ length: previewing ? 1 : s.sheets }, (_, i) => previewing ? readSheet(i) : readSheet(i).then(decodePhoto))), // prettier-ignore
+    readBytes(`../../assets/toys/moving-photo-3d/${s.file}.depth`),
+  ]);
   // (Node, building toys for the tests, has no canvas to scale with.)
   const w = typeof document === "undefined" ? s.w : Math.min(s.w, SAMPLE_SIDES[profile()] || SAMPLE_SIDES.mid); // prettier-ignore
   const h = Math.round((s.h * w) / s.w);
-  const frames = sheetFrames(sheets, w, s);
   const raw = unpackDepths(dep, unpackDepth);
-  const clip = makeClip(s.name || s.title, w, h, frames, normalizeDepths(raw, w, h));
+  let preview;
+  if (previewing) {
+    // Decode just the first cell of the contact sheet for the preview.
+    // Reading and resizing the entire sheet twice delays its first picture.
+    const first = await firstSheetFrame(sheets[0], w, h, s);
+    const scale = Math.min(1, PREVIEW_SIDE / Math.max(w, h));
+    const pw = Math.max(2, Math.round(w * scale)),
+      ph = Math.max(2, Math.round(h * scale));
+    const picture = [{ data: shrink(first[0].data, w, h, pw, ph), delay: first[0].delay }];
+    preview = makeClip(
+      s.name || s.title,
+      pw,
+      ph,
+      picture,
+      normalizeDepths(
+        raw.slice(0, 1),
+        pw,
+        ph,
+        false,
+        picture,
+        false,
+        depthRange(raw.map((d) => d.d)),
+      ),
+    );
+    preview.previewColor = { w, h, data: first[0].data };
+    preview.pictureAspect = h / w;
+    preview.sample = s.id;
+    await onPreview(preview);
+    const complete = await Promise.all([decodePhoto(sheets[0]), ...Array.from({ length: s.sheets - 1 }, (_, i) => readSheet(i + 1).then(decodePhoto))]); // prettier-ignore
+    sheets.splice(0, 1, ...complete);
+  }
+  const frames = sheetFrames(sheets, w, s);
+  const clip = makeClip(
+    s.name || s.title,
+    w,
+    h,
+    frames,
+    normalizeDepths(raw, w, h, false, frames, false),
+  );
   clip.sample = s.id;
-  clip.audio = typeof Audio === "undefined" || s.gif ? null : await soundOf(new URL(sampleSound(s), import.meta.url).href, false); // prettier-ignore
+  if (preview?.firstPresentedAt) clip.firstPresentedAt = preview.firstPresentedAt;
+  if (typeof Audio !== "undefined" && !s.gif) {
+    const url = new URL(sampleSound(s), import.meta.url).href;
+    if (!s.sound) clip.video = await loadedVideo(url);
+    clip.audio = await soundOf(url, false, clip.video);
+  }
   MOVING.samples.set(s.id, clip);
+  return clip;
+}
+
+async function firstSheetFrame(bytes, w, h, sample) {
+  const bitmap = await createImageBitmap(new Blob([bytes]), 0, 0, sample.w, sample.h, {
+    resizeWidth: w,
+    resizeHeight: h,
+    resizeQuality: "high",
+  });
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const g = canvas.getContext("2d", { willReadFrequently: true });
+  g.drawImage(bitmap, 0, 0);
+  bitmap.close();
+  return [{ data: g.getImageData(0, 0, w, h).data, delay: 1000 / sample.fps }];
+}
+
+// Standard gzip keeps every MP2D byte, including every source-frame answer.
+// Accept raw caches too, so older offline bakes and comparison fixtures still load.
+export async function unpackSampleDepth(bytes) {
+  if (bytes[0] !== 0x1f || bytes[1] !== 0x8b) return bytes;
+  return new Uint8Array(
+    await new Response(
+      new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip")),
+    ).arrayBuffer(),
+  );
+}
+
+async function loadLongSample(s, onPreview) {
+  if (MOVING.samples.has(s.id)) {
+    const cached = MOVING.samples.get(s.id);
+    await restoreClipVideo(cached);
+    await onPreview?.(cached);
+    return cached;
+  }
+  const root = `../../assets/toys/moving-photo-3d/${s.file}`;
+  const [bytes, video] = await Promise.all([
+    readBytes(`${root}.mp2depth`).then(unpackSampleDepth),
+    // Node recipe builders need the actual baked geometry, without a DOM
+    // media decoder. Browser scenes always open the selected film itself.
+    typeof document === "undefined"
+      ? null
+      : loadedVideo(new URL(`${root}.webm`, import.meta.url).href),
+  ]);
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const dw = view.getUint16(4, true),
+    dh = view.getUint16(6, true),
+    n = view.getUint32(8, true);
+  if (
+    String.fromCharCode(...bytes.subarray(0, 4)) !== "MP2D" ||
+    n !== s.frames ||
+    bytes.length !== 12 + dw * dh * n
+  )
+    throw new Error("The sample depth file is incomplete.");
+  const { w, h } = video
+    ? sizeFor(video.videoWidth, video.videoHeight, longArea())
+    : { w: dw, h: dh };
+  const frames = Array.from({ length: n }, (_, i) =>
+    bytes.subarray(12 + i * dw * dh, 12 + (i + 1) * dw * dh),
+  );
+  const duration = n / s.fps;
+  const clip = {
+    name: s.title,
+    sample: s.id,
+    long: true,
+    w,
+    h,
+    n,
+    fps: s.fps,
+    duration,
+    video,
+    mean: new Float32Array(w * h),
+    // The baker seeks i / fps. Inferred upload maps instead use (i + 0.5) / rate.
+    depth: {
+      ms: { w: dw, h: dh },
+      n,
+      rate: s.fps,
+      offset: 0,
+      frames,
+      ready: n,
+      done: n,
+      colorGuide: true,
+    },
+    audio: video ? await soundOf(video.src, false, video) : null,
+  };
+  clip.shownDepth = (t = 0) => longFrame(clip, t, false).near[0];
+  const mean = new Float32Array(dw * dh);
+  for (const frame of frames) for (let i = 0; i < mean.length; i++) mean[i] += frame[i] / 255 / n;
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++)
+      clip.mean[y * w + x] =
+        mean[
+          Math.min(dh - 1, Math.floor((y * dh) / h)) * dw +
+            Math.min(dw - 1, Math.floor((x * dw) / w))
+        ];
+  MOVING.samples.set(s.id, clip);
+  await onPreview?.(clip);
   return clip;
 }
 
@@ -1313,6 +1898,7 @@ export function clipLine(c) {
 }
 
 function setShown(text) {
+  if (MOVING.status === text) return;
   MOVING.status = text;
   if (typeof document === "undefined") return;
   const el = document.querySelector("#toy-input .input-shown");
@@ -1323,6 +1909,7 @@ function setShown(text) {
 
 // The clip's sound (r5), if it has one.
 const track = () => MOVING.clip?.audio?.track ?? null;
+const clipPosition = (t) => (MOVING.clip?.video === t.el ? t.el.currentTime : t.time());
 
 // Smd: the Toy tab's Speed slider (0 to 1, the middle is the clip's own speed) sets how fast the
 // clip plays, as it does the turntable on other toys: 0.25 to 1.75 times, its sound with it.
@@ -1345,7 +1932,7 @@ function soundTo(on) {
     if (Math.abs(t.el.currentTime - MOVING.t) > 0.03) t.el.currentTime = MOVING.t;
     t.play(MOVING.sound);
   } else if (!on && t.playing) {
-    MOVING.t = Math.min(MOVING.clip?.duration ?? Infinity, t.time());
+    MOVING.t = Math.min(MOVING.clip?.duration ?? Infinity, clipPosition(t));
     t.pause();
   }
 }
@@ -1358,6 +1945,105 @@ function playClip(on) {
   liveWake();
 }
 const liveWake = () => globalThis.window?.__splashery?.player?.stage?.requestRender?.();
+
+// A long upload can present answer one without changing its four-answer
+// opening contract, calibration, or resting mean. The preview owns a stopped
+// clock until the regular build commits, just as the short-upload preview does.
+let openingSerial = 0;
+let openingChoice = null;
+const openingHolds = new WeakMap();
+function holdOpening(pl, valid, onInvalid = () => {}) {
+  if (!pl?.stage) return () => {};
+  let held = openingHolds.get(pl);
+  if (!held) {
+    held = { count: 0, paused: pl.paused, releaseSharp: holdSharpClip() };
+    openingHolds.set(pl, held);
+    pl.setPaused(true);
+    track()?.pause();
+    MOVING.clip?.video?.pause();
+    pl.stage.aliveUntil = 0;
+    pl.stage.app.renderNextFrame = false;
+  }
+  held.count++;
+  let released = false;
+  const release = () => {
+    if (released) return;
+    released = true;
+    const at = pl.stage.updateHandlers.indexOf(watch);
+    if (at >= 0) pl.stage.updateHandlers.splice(at, 1);
+    if (--held.count === 0) {
+      openingHolds.delete(pl);
+      held.releaseSharp();
+      pl.setPaused(held.paused);
+    }
+  };
+  const watch = () => {
+    if (!valid()) {
+      onInvalid();
+      release();
+    }
+  };
+  pl.stage.onUpdate(watch);
+  return release;
+}
+async function presentClip(clip, { full = MOVING.full, valid = () => true } = {}) {
+  const pl = globalThis.window?.__splashery?.player;
+  const current = () =>
+    valid() &&
+    pl === globalThis.window?.__splashery?.player &&
+    pl?.scene?.toy?.id === "moving-photo-3d" &&
+    sharpView("moving-photo-3d") === "sharp" &&
+    (!clip.sample || clip.sample === (pl.scene.toy.options?.clip || "sample"));
+  if (!current()) return;
+  const preview = {
+    ...MOVING,
+    clip: openingPreview(clip),
+    frame: 0,
+    t: 0,
+    anchor: null,
+    opening: true,
+  };
+  const shown = await presentSharpClip(
+    preview,
+    { width: 2, height: 2 * (clip.pictureAspect || clip.h / clip.w), full },
+    current,
+  );
+  if (shown && pl.stage.toy?.entity?.gsplat?.enabled === false)
+    await new Promise((resolve) => {
+      pl.stage.app.once("frameend", () => {
+        if (current()) clip.firstPresentedAt = performance.now();
+        resolve();
+      });
+      pl.stage.requestRender();
+    });
+}
+
+// Present the real first estimate at its model-scale geometry, with the
+// full native picture. The regular clip keeps all of its original depth,
+// colors, and refinement; only this brief opening view uses fewer cells.
+function openingPreview(clip) {
+  const scale = Math.min(1, PREVIEW_SIDE / Math.max(clip.w, clip.h));
+  if (scale === 1) return clip;
+  const w = Math.max(2, Math.round(clip.w * scale)),
+    h = Math.max(2, Math.round(clip.h * scale));
+  const shown = { ...clip, w, h, colors: [], near: [], scratch: null };
+  shown.previewColor =
+    clip.previewColor || (clip.colors?.[0] ? { w: clip.w, h: clip.h, data: clip.colors[0] } : null);
+  shown.shownDepth = (time = 0) => {
+    const source = clip.shownDepth?.(time) || clip.near[0];
+    const bytes = new Uint8Array(w * h);
+    for (let y = 0; y < h; y++)
+      for (let x = 0; x < w; x++) {
+        const xx = Math.min(clip.w - 1, Math.floor(((x + 0.5) * clip.w) / w));
+        const yy = Math.min(clip.h - 1, Math.floor(((y + 0.5) * clip.h) / h));
+        bytes[y * w + x] = source[yy * clip.w + xx];
+      }
+    shown.scratch = { bytes };
+    return bytes;
+  };
+  if (!clip.long) shown.near = [shown.shownDepth(0)];
+  return shown;
+}
 
 export const movingTransport = {
   prefix: "moving",
@@ -1471,7 +2157,10 @@ function showOriginal(clip) {
 function photoSource() {
   const clip = MOVING.clip;
   if (!clip || typeof document === "undefined") return null;
-  if (clip.video) return clip.video.readyState >= 2 ? clip.video : null;
+  // Bundled short samples keep the tier's retained picture in Splats. Their
+  // shared native video still supplies Sharp and sound without another decoder.
+  if (clip.video && (!clip.sample || clip.long))
+    return clip.video.readyState >= 2 ? clip.video : null;
   const P = (MOVING.photoCanvas ||= document.createElement("canvas"));
   if (P.width !== clip.w || P.height !== clip.h) {
     P.width = clip.w;
@@ -1485,12 +2174,13 @@ const photoVersion = () => {
   const clip = MOVING.clip;
   if (!clip) return "";
   clip.photoUid ||= ++photoUid;
+  if (!MOVING.original && sharpClipOnly(clip)) return `sharp|${clip.photoUid}`;
   const v = clip.video;
   return v ? `${clip.photoUid}|${v.readyState >= 2 ? 1 : 0}|${v.currentTime.toFixed(3)}` : `${clip.photoUid}|${MOVING.frame}`; // prettier-ignore
 };
 
 export const MOVING_PHOTO = {
-  alive: (c) => (c.play ?? 1) > 0.5 && !!MOVING.clip,
+  alive: (c) => (c.play ?? 1) > 0.5 && !!MOVING.clip && !MOVING.opening,
   photo: {
     on: (o) => o.detail !== "splats",
     rect: () => {
@@ -1527,6 +2217,7 @@ export const MOVING_PHOTO = {
       default: "sample",
       choices: [
         ...SAMPLES.map((s) => ({ id: s.id, label: s.label })),
+        ...LONG_SAMPLES.map((s) => ({ id: s.id, label: s.label })),
         { id: "custom", label: "Your clip (open one below)" },
       ],
     },
@@ -1571,27 +2262,125 @@ export const MOVING_PHOTO = {
     binary: true,
     maxBytes: 200e6,
     fileButton: "Open a GIF or video…",
-    note: `Open a GIF or a video. A clip up to ${MAX_SECONDS} seconds is read whole on this device, at its own speed and up to ${CLIP_FPS.high} frames a second (fewer on a phone), and the depth model (about 27 MB, loaded the first time) works out how near each part of every frame is. A longer video plays whole: its depth is worked out a few times a second, in order, and it plays as that goes, with a line saying how long is left (a long video takes a while, longer on a phone). A GIF plays its first ${MAX_SECONDS} seconds. It plays back in 3D, a video with its own sound. Nothing is uploaded. Tap to pause or play.`, // prettier-ignore
+    note: `Open a GIF or a video. A clip up to ${MAX_SECONDS} seconds opens with a first depth preview, then refines every depth frame while it plays, with larger depth answers on stronger devices. The picture keeps its own size and speed; depth is sampled up to ${CLIP_FPS.high} times a second (fewer on a phone). The depth model (about 27 MB) loads the first time. You can cancel the refinement and keep playing. A longer video plays whole: its depth is worked out a few times a second, in order, and it plays as that goes, with a line saying how long is left (a long video takes a while, longer on a phone). A GIF plays its first ${MAX_SECONDS} seconds. It plays back in 3D, a video with its own sound. Nothing is uploaded. Tap to pause or play.`, // prettier-ignore
     live: [{ render: () => songTransport(movingTransport) }, { render: () => longControls() }, sharpEntry("moving-photo-3d")], // prettier-ignore
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a GIF or a video.");
-      const clip = await openClip(file, fileName.replace(/\.[^.]+$/, ""), setShown);
+      const serial = ++openingSerial;
+      const pl = globalThis.window?.__splashery?.player;
+      const selected = pl?.scene?.toy;
+      let canceled = false;
+      const choice = (openingChoice = selected?.options?.clip || "sample");
+      const valid = () =>
+        !canceled &&
+        serial === openingSerial &&
+        pl === globalThis.window?.__splashery?.player &&
+        pl?.scene?.toy === selected &&
+        pl?.scene?.toy?.id === "moving-photo-3d" &&
+        (pl.scene.toy.options?.clip || "sample") === choice;
+      const aborted = () =>
+        new DOMException("Opening canceled because another clip was selected.", "AbortError");
+      if (MOVING.pending && MOVING.pending !== MOVING.custom) closeClip(MOVING.pending);
+      MOVING.pending = null;
+      // A newly opened file gets the model's time and memory. The previous
+      // picture stays visible while its replacement is read.
+      MOVING.custom?.refinement?.cancel();
+      MOVING.custom?.job?.cancel();
+      // Hold the previous picture while the first answer loads. Rendering
+      // its animated relief continuously otherwise competes with inference
+      // on devices using a software graphics driver.
+      MOVING.opening = true;
       track()?.pause();
-      if (MOVING.custom) closeClip(MOVING.custom);
-      MOVING.custom = clip;
-      setShown("");
-      return { clip: "custom", clipName: clip.name };
+      MOVING.clip?.video?.pause();
+      liveWake();
+      let ownedPreview = null;
+      const invalidate = () => {
+        canceled = true;
+        if (MOVING.pending === ownedPreview && ownedPreview) {
+          closeClip(ownedPreview);
+          MOVING.pending = null;
+        }
+        if (serial === openingSerial) {
+          MOVING.opening = false;
+          setShown("");
+        }
+      };
+      const release = holdOpening(pl, valid, invalidate);
+      try {
+        let clip;
+        try {
+          clip = await openClip(
+            file,
+            fileName.replace(/\.[^.]+$/, ""),
+            (text) => {
+              if (valid()) setShown(text);
+            },
+            async (preview) => {
+              if (!valid()) return closeClip(preview);
+              MOVING.pending = ownedPreview = preview;
+              await presentClip(preview, { valid });
+            },
+          );
+        } catch (error) {
+          if (!valid()) throw aborted();
+          if (MOVING.pending && MOVING.pending !== MOVING.custom) closeClip(MOVING.pending);
+          MOVING.pending = null;
+          MOVING.opening = false;
+          liveWake();
+          throw error;
+        }
+        if (!valid()) {
+          closeClip(clip);
+          throw aborted();
+        }
+        // Paint the first relief on the existing Sharp stage before the
+        // regular splat build. Its hidden splats can take seconds to rebuild
+        // on a software renderer; the new picture need not wait for them.
+        if (!clip.firstPresentedAt) await presentClip(clip, { valid });
+        if (!valid()) {
+          closeClip(clip);
+          throw aborted();
+        }
+        track()?.pause();
+        if (MOVING.custom) closeClip(MOVING.custom);
+        MOVING.custom = clip;
+        MOVING.pending = null;
+        setShown("");
+        return { clip: "custom", clipName: clip.name };
+      } finally {
+        if (serial === openingSerial) MOVING.opening = false;
+        release();
+      }
     },
     shown: () => MOVING.status || (MOVING.clip?.long && MOVING.longStatus) || (MOVING.clip ? clipLine(MOVING.clip) : ""), // prettier-ignore
   },
-  credits: SAMPLES.map((s) => ({
-    label: s.label,
-    title: s.title,
-    source: s.source,
-    author: s.author,
-    license: s.license,
-    licenseUrl: s.licenseUrl,
-  })),
+  credits: [
+    {
+      label: "Clip playback and solid geometry",
+      title: "Moving photo to 3D, round 4",
+      source: "https://github.com/ryanjosephkamp/splashery",
+      author: "Made by Ryan with Codex (GPT-6)",
+      license: "MIT",
+      licenseUrl: "https://github.com/ryanjosephkamp/splashery/blob/main/LICENSE",
+    },
+    {
+      label: "Original round 4 test clips",
+      title: "Blocks, gate, wheel, orbit, and fast motion",
+      source:
+        "https://github.com/ryanjosephkamp/splashery/blob/b442876fa4ceb61202da77633eb91b6cc20e676e/tools/cdx-mp2-r4-inputs.mjs",
+      author: "Made by Ryan with Codex (GPT-6)",
+      license: "CC0 1.0",
+      licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+    },
+    ...[...SAMPLES, ...LONG_SAMPLES].map((s) => ({
+      label: s.label,
+      title: s.title,
+      source: s.source,
+      author: s.author,
+      license: s.license,
+      licenseUrl: s.licenseUrl,
+    })),
+  ],
   screen: {
     get width() {
       return (MOVING.grid?.cols || 16) * 2;
@@ -1601,7 +2390,9 @@ export const MOVING_PHOTO = {
     },
     // (Live r7: a long clip's picture also changes as its copy gets a frame
     // and its depth arrives.)
-    version: () => `${MOVING.clip?.name}|${MOVING.frame}|${MOVING.grid?.cols}|${longVersion(MOVING.clip)}`, // prettier-ignore
+    version: () => !MOVING.original && sharpClipOnly(MOVING.clip)
+      ? `sharp|${MOVING.clip?.photoUid}|${MOVING.grid?.cols}`
+      : `${MOVING.clip?.name}|${MOVING.clip?.version || 0}|${MOVING.clip?.transition ? Math.floor(performance.now() / 16) : ""}|${MOVING.frame}|${MOVING.grid?.cols}|${longVersion(MOVING.clip)}`, // prettier-ignore
     draw(g) {
       const clip = MOVING.clip;
       if (!clip || !MOVING.grid) return;
@@ -1616,7 +2407,26 @@ export const MOVING_PHOTO = {
     },
   },
   async prepare(o) {
-    MOVING.want = hasOwnClip(o) ? MOVING.custom : await loadSample(o.clip === "custom" ? "sample" : o.clip); // prettier-ignore
+    if ((MOVING.opening || MOVING.pending) && (o.clip || "sample") !== openingChoice) {
+      openingSerial++;
+      if (MOVING.pending) closeClip(MOVING.pending);
+      MOVING.pending = null;
+      MOVING.opening = false;
+    }
+    const id = o.clip === "custom" ? "sample" : o.clip || "sample";
+    const preview = (clip) =>
+      MOVING.clip?.sample !== id
+        ? presentClip(clip, { full: LIFT * Math.max(0, o.depth ?? 0.6) })
+        : undefined;
+    const pl = globalThis.window?.__splashery?.player;
+    const release = holdOpening(pl, () => pl?.scene?.toy?.id === "moving-photo-3d" && (pl.scene.toy.options?.clip || "sample") === (o.clip || "sample")); // prettier-ignore
+    try {
+      MOVING.want = hasOwnClip(o)
+        ? await restoreClipVideo(MOVING.custom)
+        : await loadSample(id, preview);
+    } finally {
+      release();
+    }
   },
   drive(t, c, out, info) {
     const time = info?.time ?? t;
@@ -1624,26 +2434,45 @@ export const MOVING_PHOTO = {
     if (info?.sound) MOVING.sound = info.sound;
     const clip = MOVING.clip;
     if (!clip) return;
+    if (MOVING.opening) {
+      sharpDrive(out);
+      return;
+    }
     // r6: the control's target, not its eased value (see playTarget).
     const on = globalThis.window?.__splashery?.player?.motion ? playTarget() : (c.play ?? 1) > 0.5;
     const tr = track();
     const rate = clipRate();
     if (tr) tr.el.playbackRate = rate;
+    // A slow frame can land after the element has ended. Restart at the
+    // beginning in that very frame; entering the silent fallback first
+    // used to hold the last picture, then resume partway into the next loop.
+    if (on && tr?.el.ended && Math.abs(tr.duration - clip.duration) < 0.15) {
+      tr.el.currentTime = 0;
+      tr.anchor = null;
+      MOVING.anchor = null;
+      MOVING.t = 0;
+      tr.play(MOVING.sound);
+    }
+    // A shared video already supplies the native picture. Subtracting the
+    // audio output delay from its clock shifts depth behind that picture and
+    // can seek the same element backward when paused. Separate audio tracks
+    // still use their audible clock for retained sample pictures.
+    const position = tr?.playing ? clipPosition(tr) : MOVING.t;
     if (!on) {
       if (tr?.playing) {
         // (Live r7: the picture stops where the sound stops, though the last
         // frame drawn may be a moment behind it.)
-        MOVING.t = Math.min(clip.duration - 0.02, Math.max(0, tr.time()));
+        MOVING.t = Math.min(clip.duration - 0.02, Math.max(0, position));
         soundTo(false);
       }
       MOVING.anchor = null;
     } else if (tr?.playing) {
       // r5: the frames follow the sound's clock (looping at the clip's end).
-      if (tr.time() >= clip.duration - 0.02) {
+      if (position >= clip.duration - 0.02) {
         tr.el.currentTime = 0;
         tr.anchor = null;
         MOVING.t = 0;
-      } else MOVING.t = tr.time();
+      } else MOVING.t = position;
       MOVING.anchor = null;
     } else if (tr?.el.ended && !tr.blocked) {
       // A slow frame can miss the sound's end entirely. Start the next loop,
@@ -1681,7 +2510,7 @@ export const MOVING_PHOTO = {
     MOVING.frame = frameAt(clip, MOVING.t);
     if (clip.video) syncVideo(clip, on, MOVING.t, rate); // Live r7 (and lane Photo fidelity: a short video's copy)
     showOriginal(clip);
-    sharpDrive(out); // lane Photo sharp view
+    sharpClipDrive(out); // same-frame clip geometry, after the media-clock drive
   },
   build(k, o) {
     MOVING.original = o.original === "on";
@@ -1693,6 +2522,7 @@ export const MOVING_PHOTO = {
       MOVING.t = 0;
     }
     MOVING.clip = clip;
+    MOVING.opening = false;
     MOVING.last = null;
     MOVING.anchor = null;
     const { cols, rows } = clipGrid(clip, k.count);
@@ -1759,5 +2589,105 @@ export const MOVING_PHOTO = {
     k.reach([0, 0, 0.9]);
     k.data = { moving: { cols, rows, n: clip.n } };
     sharpClip(MOVING, { width, height, full }); // lane Photo sharp view
+    parkOtherVideos(clip);
   },
 };
+
+// A seek is readable only once the decoder has presented the new picture.
+export async function seekClipFrame(video, at, cancelled = () => false) {
+  if (cancelled()) throw new Error("The depth refinement was canceled.");
+  if (!video.seeking && Math.abs(video.currentTime - at) <= 1e-5) return;
+  await new Promise((resolve, reject) => {
+    let seeked = false,
+      presented = false,
+      painted = false,
+      callback = 0,
+      raf = 0,
+      settled = false;
+    const started = performance.now();
+    const schedule = globalThis.requestAnimationFrame || ((f) => setTimeout(f, 16));
+    const unschedule = globalThis.cancelAnimationFrame || clearTimeout;
+    const cleanup = () => {
+      clearTimeout(timeout);
+      clearInterval(watch);
+      video.removeEventListener("seeked", onSeeked);
+      video.removeEventListener("error", onError);
+      video.removeEventListener("abort", onAbort);
+      if (callback) video.cancelVideoFrameCallback?.(callback);
+      if (raf) unschedule(raf);
+    };
+    const finish = (error) => {
+      if (settled) return;
+      if (cancelled()) error = new Error("The depth refinement was canceled.");
+      if (
+        !error &&
+        (!seeked ||
+          !presented ||
+          !painted ||
+          video.seeking ||
+          Math.abs(video.currentTime - at) > 1e-5)
+      )
+        return;
+      settled = true;
+      cleanup();
+      if (error) reject(error);
+      else resolve();
+    };
+    const onSeeked = () => {
+      if (settled) return;
+      if (cancelled()) {
+        onAbort();
+        return;
+      }
+      if (video.seeking || Math.abs(video.currentTime - at) > 1e-5) return;
+      seeked = true;
+      if (raf) unschedule(raf);
+      // Paused hidden videos may present while seeking, with no later RVFC.
+      // Two paint cycles also flush that decoded picture for canvas extraction.
+      raf = schedule(() => {
+        raf = schedule(() => {
+          presented = true;
+          painted = true;
+          finish();
+        });
+      });
+      finish();
+    };
+    const onFrame = (_, metadata) => {
+      callback = 0;
+      if (settled) return;
+      if (cancelled()) {
+        onAbort();
+        return;
+      }
+      if (video.seeking || metadata.presentationTime < started) {
+        try {
+          callback = video.requestVideoFrameCallback(onFrame);
+        } catch (error) {
+          finish(error);
+        }
+        return;
+      }
+      presented = true;
+      finish();
+    };
+    const onError = () => finish(new Error("This browser couldn't decode the video's picture."));
+    const onAbort = () => finish(new Error("The depth refinement was canceled."));
+    const timeout = setTimeout(
+      () => finish(new Error("The video didn't finish decoding its picture.")),
+      10000,
+    );
+    const watch = setInterval(() => {
+      if (cancelled()) onAbort();
+    }, 50);
+    try {
+      video.addEventListener("seeked", onSeeked);
+      video.addEventListener("error", onError);
+      video.addEventListener("abort", onAbort);
+      if (video.requestVideoFrameCallback) callback = video.requestVideoFrameCallback(onFrame);
+      video.currentTime = at;
+    } catch (error) {
+      finish(error);
+    }
+  });
+}

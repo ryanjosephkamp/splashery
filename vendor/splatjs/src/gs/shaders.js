@@ -30,6 +30,22 @@
 
 export const STRIDE = 16;
 export const TILE = 16;
+
+// The established tile16 kernels stay byte-identical by default. Direct-gradient software
+// rasterization can use tile8 to avoid testing so many irrelevant splats at each pixel.
+// Image-wide SSIM/SSAA kernels keep their own workgroup dimensions; only tile rasters change.
+export function tileShaderSource(source, tileSize = TILE, raster = false) {
+  if (tileSize === TILE) return source;
+  if (tileSize !== 8) throw new RangeError('Raster tile size must be 8 or 16');
+  const marker = `const TILEF = ${TILE}.0;`;
+  if (raster && !source.includes(marker)) throw new Error('Raster tile constant is missing');
+  const result = source.replace(marker, `const TILEF = ${tileSize}.0;`);
+  if (!raster) return result;
+  const workgroup = '@compute @workgroup_size(16, 16)';
+  if (result.split(workgroup).length !== 2) throw new Error('Raster workgroup is ambiguous');
+  return result.replace(workgroup, `@compute @workgroup_size(${tileSize}, ${tileSize})`);
+}
+
 export const SHARED_SORT = 2048;    // shared-memory sort fast path (16KB workgroup mem)
 export const ENTRIES_CAP = 12000000; // global (key,id) pair budget across all tiles (96MB)
 export const FIXED = 16384.0;
@@ -563,6 +579,73 @@ fn main(@builtin(workgroup_id) wg: vec3u,
 }
 `;
 
+// Exact serial alternative for explicitly selected software adapters. The default
+// parallel SORT_SRC stays unchanged; each invocation owns one disjoint tile.
+export const SERIAL_SORT_SRC = /* wgsl */ `
+@group(0) @binding(0) var<storage, read> tileStart: array<u32>;
+@group(0) @binding(1) var<storage, read> tileCursor: array<u32>;
+@group(0) @binding(2) var<storage, read_write> entries: array<u32>;
+
+fn greater(a: u32, b: u32) -> bool {
+  let ak = entries[2u * a];
+  let bk = entries[2u * b];
+  return ak > bk || (ak == bk && entries[2u * a + 1u] > entries[2u * b + 1u]);
+}
+fn exchangePair(a: u32, b: u32) {
+  let key = entries[2u * a];
+  let id = entries[2u * a + 1u];
+  entries[2u * a] = entries[2u * b];
+  entries[2u * a + 1u] = entries[2u * b + 1u];
+  entries[2u * b] = key;
+  entries[2u * b + 1u] = id;
+}
+fn siftDown(base: u32, initialRoot: u32, size: u32) {
+  var root = initialRoot;
+  loop {
+    let left = root * 2u + 1u;
+    if (left >= size) { break; }
+    var child = left;
+    if (left + 1u < size && greater(base + left + 1u, base + left)) {
+      child = left + 1u;
+    }
+    if (!greater(base + child, base + root)) { break; }
+    exchangePair(base + root, base + child);
+    root = child;
+  }
+}
+@compute @workgroup_size(1)
+fn main(@builtin(workgroup_id) wg: vec3u) {
+  let tile = wg.x;
+  let base = tileStart[tile];
+  let segCap = tileStart[tile + 1u] - base;
+  if (segCap == 0u) { return; }
+  let count = tileCursor[tile] - base;
+  // Scan guarantees count <= segCap. Do not truncate a segment or drop rows.
+  // The large bitonic path materializes this exact sentinel tail.
+  for (var i = count; i < segCap; i += 1u) {
+    entries[2u * (base + i)] = 0xFFFFFFFFu;
+    entries[2u * (base + i) + 1u] = 0xFFFFFFFFu;
+  }
+  if (count < 2u) { return; }
+  // Build a max heap. Decrement only after checking to avoid u32 underflow.
+  var parent = count / 2u;
+  loop {
+    if (parent == 0u) { break; }
+    parent -= 1u;
+    siftDown(base, parent, count);
+  }
+  // Move the maximum to the sorted suffix, preserving each pair atomically
+  // with respect to this single invocation. Tiles own disjoint segments.
+  var end = count;
+  loop {
+    if (end <= 1u) { break; }
+    end -= 1u;
+    exchangePair(base, base + end);
+    siftDown(base, 0u, end);
+  }
+}
+`;
+
 // The render pass comes in two gradient-accumulation flavours:
 //   tileGrad=false  every pixel atomicAdds its 10 gradient slots straight to
 //                   global memory — fastest on desktop GPUs (L2-side atomics)
@@ -726,7 +809,7 @@ fn main(@builtin(global_invocation_id) g: vec3u,
 ${tileGrad ? `  sgPart = li % ${P}u;` : ''}${K > 1 ? '  sgBase = 0u;' : ''}
   let W = u32(cam.size.x);
   let H = u32(cam.size.y);
-${camGrad ? '' : `  // camera gradients compiled out: keep gradCam statically referenced so the
+${camGrad || mode === 2 ? '' : `  // camera gradients compiled out: keep gradCam statically referenced so the
   // 'auto' pipeline layout still has binding 8 (the bind groups pass it)
   if (cam.size.x < 0.0) { camAdd(0u, 0.0); }`}
 ${tileGrad ? '  let pxOk = g.x < W && g.y < H;' : '  if (g.x >= W || g.y >= H) { return; }'}
