@@ -5,8 +5,8 @@ import { buildRecipe } from "../src/kit.js";
 import { resolveOptions } from "../src/player.js";
 import { hash32 } from "../src/noise.js";
 
-// Task 44 owns these worlds. The other prototype tasks have no catalog
-// entries in the task's baseline; do not add their branches to this audit.
+// Task 44 owns these worlds. Later prototypes, including task 78a, were
+// outside task 66's baseline; keep them out of this audit.
 export const EXCLUDED = [
   "real-moon",
   "real-mars",
@@ -15,6 +15,7 @@ export const EXCLUDED = [
   "real-venus",
   "real-moons",
   "real-small-worlds",
+  "one-splat",
 ];
 export const TIERS = ["low", "mid", "high", "max"];
 export const TOYS_T2 = TOYS.filter(

@@ -618,7 +618,10 @@ function soundLabPanel() {
     note.hidden = !note.textContent;
   };
   sync();
-  const timer = setInterval(() => (box.isConnected ? sync() : clearInterval(timer)), 250);
+  const timer = setInterval(() => {
+    if (!box.isConnected) return clearInterval(timer);
+    if (!document.hidden) sync();
+  }, 250);
   return box;
 }
 
