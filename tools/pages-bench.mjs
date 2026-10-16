@@ -277,6 +277,10 @@ async function run(toy, input, profile, repeat) {
     async ({ input }) => {
       const pl = window.__splashery.player,
         p = pl.pictures;
+      // Flush the front-facing camera into the actual stage before projecting
+      // the source. On a slow software GPU, a timed wait can expire before
+      // even one draw updates its camera matrix.
+      await pl.stage.captureFrame();
       const sh = p.sheets.find((s) => s.slot?.entity.enabled && s.shown && s.n[2] > 0.5);
       if (!sh) return null;
       const source = await p.media.draw(
@@ -552,7 +556,13 @@ async function run(toy, input, profile, repeat) {
     cdpHeap: mem.find((x) => x.name === "JSHeapUsedSize")?.value || null,
     quality,
     motion,
-    registration: crop && { pts: crop.pts, W: crop.W, H: crop.H, box: crop.box },
+    registration: crop && {
+      pts: crop.pts,
+      W: crop.W,
+      H: crop.H,
+      box: crop.box,
+      method: crop.registration || "rectified",
+    },
     errors,
   };
 }
