@@ -200,6 +200,53 @@ textarea {
   text-shadow: 0 1px 0 var(--page);
 }
 
+/* A shared scene carries local-file metadata, never the photo or clip itself. */
+.missing-file-notice {
+  position: fixed;
+  top: 86px;
+  left: 18px;
+  z-index: 5;
+  box-sizing: border-box;
+  width: min(28rem, calc(100% - var(--panel-w) - 60px));
+  padding: 14px 16px;
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--page);
+  box-shadow: var(--shadow);
+  overflow-wrap: anywhere;
+}
+
+.missing-file-notice h2 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.missing-file-notice p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.missing-file-notice button {
+  min-height: 44px;
+}
+
+.missing-file-notice .missing-file-error {
+  margin-top: 8px;
+  color: var(--warn);
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .missing-file-notice {
+    top: 128px;
+    left: 14px;
+    /* Leave the existing depth slider usable beside the notice. */
+    width: calc(100% - 84px);
+  }
+}
+
 /* A toy's labels (lane Anatomy): a list of names beside the stage, set by
    the toy's drive() as out.legend. Taps pass through it to the stage. */
 

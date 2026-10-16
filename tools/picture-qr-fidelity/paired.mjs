@@ -6,7 +6,7 @@ import { execFileSync } from "node:child_process";
 import { chromium } from "@playwright/test";
 import { SAMPLES } from "../../src/qr-craft/samples.js";
 import { LINKS } from "../cdx-circle-study.mjs";
-import { sourcePicture, qualifyCapture } from "./qualify.mjs";
+import { sourcePicture, qualifyCapture } from "./qualify-parallel.mjs";
 const arg = (key, fallback) =>
   process.argv.find((s) => s.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
 const root = ".cache/picture-qr-fidelity",
@@ -38,6 +38,9 @@ const resumeFrom = arg("resume-from", "");
 if (resumeFrom && (modes.length !== 1 || modes[0] !== "main"))
   throw Error("Only unchanged frozen-main measurements may be inherited");
 const casesFile = arg("cases", "");
+const payloadsFile = arg("payloads", "");
+const payloads = payloadsFile ? JSON.parse(fs.readFileSync(payloadsFile)) : LINKS;
+if (links.some((link) => typeof payloads[link] !== "string")) throw Error("Missing fixed payload");
 const selectedCases = casesFile ? new Set(JSON.parse(fs.readFileSync(casesFile))) : null;
 if (
   selectedCases &&
@@ -60,14 +63,14 @@ const files = (directory) =>
     );
 const hashes = Object.fromEntries(
   [
-    ...files("src/qr-craft"),
-    ...files("src/qr"),
-    "src/packs/qr-craft.js",
-    "src/player.js",
-    "src/stage.js",
-    "src/photo-splats.js",
+    ...files("src"),
+    "index.html",
+    "styles.css",
     "tools/picture-qr-fidelity/paired.mjs",
     "tools/picture-qr-fidelity/qualify.mjs",
+    "tools/picture-qr-fidelity/qualify-parallel.mjs",
+    "tools/picture-qr-fidelity/qualify-worker.mjs",
+    "tools/picture-qr-fidelity/results/review-pass/qualification-equivalence.json",
     "tools/picture-qr-fidelity/metrics.mjs",
     "tools/picture-qr-fidelity/captures.mjs",
     "tools/qrs-study/readers.mjs",
@@ -76,6 +79,7 @@ const hashes = Object.fromEntries(
     "vendor/jsqr/jsQR.js",
     "package-lock.json",
     ...(casesFile ? [casesFile] : []),
+    ...(payloadsFile ? [payloadsFile] : []),
     ...(corpusFile ? [corpusFile] : []),
     ...corpus.flatMap((picture) => [
       picture.file,
@@ -295,7 +299,7 @@ for (let repeat = 0; repeat < Number(arg("repeats", "3")); repeat++)
             a.player.setPaused(false);
           });
           const options = {
-            text: LINKS[link],
+            text: payloads[link],
             picture: "own",
             fidelity: mode === "main" ? "standard" : "detail",
             shape,
@@ -304,6 +308,13 @@ for (let repeat = 0; repeat < Number(arg("repeats", "3")); repeat++)
             contrast: 0.5,
             style: "color",
             size: "more",
+            pictureFit: "legacy",
+            cropX: 0.5,
+            cropY: 0.5,
+            cropZoom: 1,
+            circleBorder: "legacy",
+            eyeShape: "style",
+            simpleFallback: false,
           };
           const profiler =
             arg("profile", "0") === "1" && mode === "detail"
@@ -427,7 +438,7 @@ for (let repeat = 0; repeat < Number(arg("repeats", "3")); repeat++)
           });
           let qualifiedReads = null;
           if (qualify) {
-            const assessment = await qualifyCapture(source, result, LINKS[link], shape);
+            const assessment = await qualifyCapture(source, result, payloads[link], shape);
             qualifiedReads = assessment.scans.reduce(
               (sum, scan) => sum + Number(scan.jsqr) + Number(scan.zxingcpp),
               0,

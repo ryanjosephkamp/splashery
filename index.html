@@ -56,6 +56,21 @@
 
     <p id="toy-status" class="toy-status" aria-live="polite"></p>
 
+    <section
+      id="missing-file-notice"
+      class="missing-file-notice"
+      aria-labelledby="missing-file-title"
+      hidden
+    >
+      <h2 id="missing-file-title">Open the shared file</h2>
+      <p id="missing-file-message" role="status" aria-live="polite" aria-atomic="true"></p>
+      <p id="missing-file-error" class="missing-file-error" role="alert" hidden></p>
+      <div class="button-row">
+        <button type="button" id="missing-file-open" class="primary">Open the file</button>
+        <button type="button" id="missing-file-keep">Keep the sample</button>
+      </div>
+    </section>
+
     <div id="toy-legend" class="toy-legend" aria-label="Labels" hidden></div>
 
     <!-- Lane Pages r6: a slider over the stage, set by the toy (a risen figure's depth). -->

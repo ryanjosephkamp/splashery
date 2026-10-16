@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
+import assert from "node:assert/strict";
 import { chromium } from "@playwright/test";
 import { LINKS } from "../cdx-circle-study.mjs";
 const arg = (key, fallback) =>
@@ -109,6 +110,13 @@ for (const mode of ["main", "detail"]) {
         center: "small",
         size: "more",
         style: "color",
+        pictureFit: "legacy",
+        cropX: 0.5,
+        cropY: 0.5,
+        cropZoom: 1,
+        circleBorder: "legacy",
+        eyeShape: "style",
+        simpleFallback: false,
       },
     );
     await page.waitForFunction(
@@ -128,6 +136,16 @@ for (const mode of ["main", "detail"]) {
       { picture, shape },
       { timeout: 180000 },
     );
+    const gate = await page.evaluate(() => {
+      const p = window.__splashery.qrCraft.picture();
+      return { fidelity: p.options.fidelity, check: p.check };
+    });
+    assert.equal(gate.check?.ok, true, `${mode}/${picture}/${shape} scan gate`);
+    assert(gate.check.stage.every((s) => s.ok));
+    if (mode === "detail") {
+      assert.equal(gate.fidelity, "detail");
+      assert.equal(gate.check.stress?.ok, true, "Wait for the complete dual-reader gate");
+    }
     if (mode === "detail") {
       fs.mkdirSync(path.join(out, "screenshots"), { recursive: true });
       for (const size of [

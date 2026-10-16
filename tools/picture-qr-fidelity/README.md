@@ -7,28 +7,66 @@ Use Node 22, the CI runtime. The review pass freezes 100 pictures and ten payloa
 candidate against merged main `cb8a8315`. The report separates these measurements from the
 historical 52-picture pass below.
 
+The recorded evidence spans four frozen runtime revisions and a merge. Use a separate run name
+whenever the source or protocol changes; replaying all commands at one head does not reproduce the
+historical measurements.
+
 ```sh
-mkdir -p .cache/picture-qr-fidelity/review-main
-git archive cb8a8315 src | tar -x -C .cache/picture-qr-fidelity/review-main
+mkdir -p .cache/picture-qr-fidelity/review-pass
+git archive cb8a8315 src | tar -x -C .cache/picture-qr-fidelity/review-pass
 node tools/picture-qr-fidelity/sources.mjs
-node tools/picture-qr-fidelity/paired.mjs --name=review-full --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-main --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --photos=all --links=all --repeats=1 --qualify=1
-node tools/picture-qr-fidelity/summarize.mjs --baseline=cb8a8315 --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --main=browser-review-full-main-low --detail=browser-review-full-detail-low --out=tools/picture-qr-fidelity/results/review-pass
-node tools/picture-qr-fidelity/timing.mjs --name=review-full --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --out=tools/picture-qr-fidelity/results/review-pass/timing.json
-node tools/picture-qr-fidelity/clips.mjs --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-main --out=.cache/picture-qr-fidelity/review-export/clips
-node tools/picture-qr-fidelity/review.mjs --main=review-full-main --detail=review-full-detail --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --summary=tools/picture-qr-fidelity/results/review-pass/summary.json --out=.cache/picture-qr-fidelity/review-export
+# Original partial capture: runtime 50d19091.
+node tools/picture-qr-fidelity/paired.mjs --name=review-full --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-pass --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --photos=all --links=all --repeats=1 --qualify=1
+# First Circle repair: runtime c535bfd6.
+node tools/picture-qr-fidelity/paired.mjs --name=review-edge-recheck --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-pass --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --photos=all --links=all --repeats=1 --qualify=1 --modes=detail --cases=tools/picture-qr-fidelity/results/review-pass/finder-edge-recheck-cases.json
+node tools/picture-qr-fidelity/paired.mjs --name=review-remaining --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-pass --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --photos=all --links=all --repeats=1 --qualify=1 --cases=tools/picture-qr-fidelity/results/review-pass/remaining-cases.json
+node tools/picture-qr-fidelity/assemble-review.mjs --partial --name=review-frozen
+# Second repair and merged main: runtime 8abc68ff; test-only head 9b7cf7b6.
+node tools/picture-qr-fidelity/paired.mjs --name=review-repair-recheck --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-pass --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --payloads=tools/picture-qr-fidelity/results/review-pass/payloads.json --photos=all --links=all --repeats=1 --qualify=1 --modes=detail --cases=tools/picture-qr-fidelity/results/review-pass/repair-recheck-cases.json --save=cdx-theme-seasons-11-2/9/square
+node tools/picture-qr-fidelity/paired.mjs --name=review-repaired --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-pass --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --payloads=tools/picture-qr-fidelity/results/review-pass/payloads.json --photos=all --links=all --repeats=1 --qualify=1 --cases=tools/picture-qr-fidelity/results/review-pass/repair-remaining-cases.json
+node tools/picture-qr-fidelity/assemble-repair.mjs --partial
+# The immutable review-pre-third snapshot is supplied in repair-evidence/manifest.json.
+# Third repair: runtime c696317e; recheck every completed very-flat Square and three controls.
+node tools/picture-qr-fidelity/paired.mjs --name=review-third-recheck --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-pass --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --payloads=tools/picture-qr-fidelity/results/review-pass/payloads.json --photos=all --links=all --repeats=1 --qualify=1 --modes=detail --cases=tools/picture-qr-fidelity/results/review-pass/third-recheck-cases.json --save=cdx-theme-space-art-2-1/9/square
+node tools/picture-qr-fidelity/paired.mjs --name=review-third-remaining --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-pass --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --payloads=tools/picture-qr-fidelity/results/review-pass/payloads.json --photos=all --links=all --repeats=1 --qualify=1 --cases=tools/picture-qr-fidelity/results/review-pass/third-remaining-cases.json
+node tools/picture-qr-fidelity/assemble-third.mjs
+node tools/picture-qr-fidelity/summarize.mjs --baseline=cb8a8315 --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --main=browser-review-final-main-low --detail=browser-review-final-detail-low --out=tools/picture-qr-fidelity/results/review-pass --bundle=1
+node tools/picture-qr-fidelity/timing.mjs --name=review-final --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --out=tools/picture-qr-fidelity/results/review-pass/timing.json
+node tools/picture-qr-fidelity/report-review.mjs
+node tools/picture-qr-fidelity/review.mjs --main=review-final-main --detail=review-final-detail --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --summary=tools/picture-qr-fidelity/results/review-pass/summary.json --out=.cache/picture-qr-fidelity/review-export
+node tools/picture-qr-fidelity/bundle-review.mjs
+node tools/picture-qr-fidelity/clips.mjs --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-pass --out=.cache/picture-qr-fidelity/review-export/clips
 ```
 
 Serve the repository on port 4173 before starting. Stop all other study and test workers during
 timing. The harness checks every served main module against its Git blob, preserves the exact source
-hashes and arguments, reports four cores, balances mode order, and rejects inactive-page drawing. An
-explicit corpus file keeps later sample additions from changing the fixed test set. Use a new run
-name after a source or protocol change.
+hashes and arguments, reports four cores, balances mode order within each new paired segment, and
+rejects inactive-page drawing. The explicit corpus and payload files freeze the inputs.
 
-The normal recipe starts at a 40% correction share and retains the original finder guard. The
-50%/60% and narrow-guard pilots are diagnostics, not production defaults. Their complete captured
-rows, including slower cases and the narrow-guard fallback, are retained in
-`results/review-pass/diagnostic-manifest.json`. Source-only probes are labeled separately. Frozen
-source archives live on the clips branch, linked by `results/revision-sources/manifest.json`.
+The first partial run stopped after 668 detail codes to repair four Sun Circles. The first
+continuation stopped after 196 more detail codes to repair one Ocean Circle and Winter fir's Square
+mean. The two assemblers preserve every original failure, interruption, and duplicate baseline
+observation. The second plan retains 736 unchanged detail captures, rechecks 128 completed cases,
+and initially selected 1,136 missing pairs. That continuation stopped after 319 detail observations
+when Crescent moon lost a small mean print SSIM. The third plan rechecks 15 completed cases,
+including three controls, and selects 818 keys with either mode missing. One fresh detail replicate
+is retained with recheck priority fixed before timing. All nine control observations across the two
+repairs must match their earlier capture pixels exactly. The assembler verifies source proofs, the
+complete affected-key selection, and the unchanged input and independent assessment hashes.
+`--partial` is for progress inspection and labels the result incomplete.
+
+The final comparison is segmented across runtime revisions, including the merge of main after #641.
+Its retained timings were not freshly measured on the merged UI. This limitation remains even when
+all keys are present. Per-code results identify the actual measurement run; timing output includes
+every slower case and cold start. Source archives live only on the clips branch, linked by
+`results/revision-sources/manifest.json`.
+
+Most pictures start at a 40% correction share. Low-contrast Square pictures start at 60% when each
+RGB channel's population standard deviation is at most 0.1, and at 65% when each is at most 0.05.
+All Circles remain at 40%. The original preclassification proposal, the later very-flat policy
+decision, all 100 source classifications, and affected-case lists are preserved. This policy was
+selected on the fixed study corpus and has no held-out validation. Other 50%/60% and narrow-guard
+pilots remain diagnostics, with unsuccessful attempts retained in the evidence.
 
 ## Historical first-pass commands
 
@@ -147,3 +185,21 @@ rows. `review.mjs` assembles native 390×844 before-and-after pairs, and `clips.
 deterministic tap motion. Review media belongs on `codex/picture-qr-fidelity-clips`, which is never
 merged. Study code and review renders are made by Ryan with Codex (GPT-6); original picture credits
 remain in the corpus manifest and CREDITS.
+
+For a new single-revision comparison, check out the final runtime, choose a new run name, and run
+`paired.mjs` with the frozen corpus and payload files and without `--cases`. The historical commands
+above document recorded segments, including intentional interruptions; running each to completion
+does not recreate the recorded boundaries. Extract the immutable raw series and pre-third snapshot
+from `results/review-pass/repair-evidence/manifest.json` before reassembling the published series.
+
+The final segment partitions independent post-capture assessment across four local Node workers.
+Every original condition runs with both readers, and all jobs finish before another appearance clock
+starts. Run `node tools/picture-qr-fidelity/verify-qualification.mjs` before a fresh study to
+regenerate the exact serial/parallel comparison recorded in `qualification-equivalence.json`. The
+paired harness hashes the worker source and verification file. This speeds study throughput only.
+
+After assembly, independently check every CSV key, SSIM difference, picture mean, reader total,
+timing difference, and native phone screenshot with
+`python3 tools/picture-qr-fidelity/verify-results.py --out=tools/picture-qr-fidelity/results/review-pass/independent-checks.json`.
+Use `--gallery=tools/picture-qr-fidelity/review` when checking the published clips branch. The check
+uses Python's standard library and does not run the renderer or alter any primary observation.

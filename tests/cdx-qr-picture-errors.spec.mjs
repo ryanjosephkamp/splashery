@@ -3,7 +3,7 @@ import { encodeQR } from "../src/qr/encode.js";
 import { fitPictureErrors } from "../src/qr/picture-errors.js";
 import { rotateCode } from "../src/qr-craft/orientation.js";
 import { rasterize } from "../src/qr-craft/picture.js";
-import { read } from "../tools/qrc-picture.mjs";
+import { read, loadPicture } from "../tools/qrc-picture.mjs";
 import { readZxingCpp } from "../tools/qrs-study/readers.mjs";
 
 // Uneven block sizes and rotated grids exercise the interleaved codeword map.
@@ -37,4 +37,23 @@ test("Picture errors preserve function modules, reserve correction margin, and d
 test("Picture errors leave other correction levels untouched", () => {
   const code = encodeQR("https://example.org/", "M", { boost: false });
   expect(fitPictureErrors(code, { w: 1, h: 1, data: new Float32Array(3) })).toBe(code);
+});
+
+test("The larger picture budget is explicit and its changed code still decodes", async () => {
+  const text = "https://example.org/a/1";
+  const source = loadPicture("assets/toys/qr-picture/themes/cdx-theme-space-art-2-1.jpg");
+  const code = encodeQR(text, "H", { min: 7, boost: false });
+  const ordinary = fitPictureErrors(code, source, 0.9);
+  const enlarged = fitPictureErrors(code, source, 0.65, 0.65);
+  expect(ordinary.intentionalErrors.fraction).toBe(0.6);
+  expect(enlarged.intentionalErrors.fraction).toBe(0.65);
+  expect(enlarged.intentionalErrors.limit).toBeGreaterThan(ordinary.intentionalErrors.limit);
+  expect(enlarged.dark).not.toEqual(ordinary.dark);
+  const cells = new Float32Array(code.size * code.size * 3);
+  for (let m = 0; m < code.dark.length; m++) cells.fill(enlarged.dark[m] ? 0 : 1, m * 3, m * 3 + 3);
+  for (const ppm of [8, 4]) {
+    const image = rasterize({ code: enlarged, G: code.size, k: 1, cells }, ppm, { blur: 0.3 });
+    expect(read(image.data, image.width, image.height)).toBe(text);
+    expect(await readZxingCpp(image)).toBe(text);
+  }
 });

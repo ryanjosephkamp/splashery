@@ -24,7 +24,8 @@ if (mainRuns.length) {
         .split("\n")
         .filter(Boolean)
         .map(JSON.parse)
-        .filter((row) => row.mode === "main"),
+        .filter((row) => row.mode === "main")
+        .map((row) => ({ ...row, measurementRun: row.measurementRun || run })),
     );
 }
 const grouped = new Map();
@@ -50,6 +51,13 @@ const pairs = [...grouped]
     difference: p.detail.ms - p.main.ms,
     ratio: p.detail.ms / p.main.ms,
     order: p.main.order,
+    mainMeasurementRun: p.main.measurementRun || name,
+    detailMeasurementRun: p.detail.measurementRun || name,
+    detailOrder: p.detail.order,
+    lastPreparationMs: p.detail.check?.detail?.preparationMs,
+    lastPreparationCandidates: p.detail.check?.detail?.candidates,
+    acceptedModelMatrixMs: p.detail.check?.detail?.ms,
+    acceptedCaptureMatrixMs: p.detail.check?.stress?.ms,
   }));
 const stats = (selected) => ({
   pairs: selected.length,
@@ -136,7 +144,42 @@ const summary = {
   pairs,
 };
 const out = arg("out", `${root}/timing-${name}.json`);
+// Composite runs carry their segment boundaries, source proof, and retained
+// observations explicitly; do not label that evidence as a fresh balanced run.
+if (!mainRuns.length && summary.provenance.series) summary.series = summary.provenance.series;
+summary.interruptions = summary.provenance.interruptions || [];
+summary.duplicateMainObservations = summary.provenance.duplicateMainObservations || [];
+summary.duplicateFreshObservations = summary.provenance.duplicateFreshObservations || [];
+summary.replacedDetailObservations = summary.provenance.replacedDetailObservations || [];
 fs.writeFileSync(out, JSON.stringify(summary, null, 2) + "\n");
+const csvColumns = [
+  "key",
+  "picture",
+  "shape",
+  "link",
+  "main",
+  "detail",
+  "difference",
+  "ratio",
+  "order",
+  "detailOrder",
+  "mainMeasurementRun",
+  "detailMeasurementRun",
+  "lastPreparationMs",
+  "lastPreparationCandidates",
+  "acceptedModelMatrixMs",
+  "acceptedCaptureMatrixMs",
+];
+const csvCell = (value) => {
+  const text = String(value ?? "");
+  return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+};
+fs.writeFileSync(
+  out.replace(/\.json$/, "") + ".csv",
+  [csvColumns, ...pairs.map((pair) => csvColumns.map((column) => pair[column]))]
+    .map((row) => row.map(csvCell).join(","))
+    .join("\n") + "\n",
+);
 console.log(
   JSON.stringify(
     {

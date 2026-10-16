@@ -24,6 +24,7 @@ import { cropCirclePicture } from "./frame.js";
 import { shapeHalf } from "../qr/circle.js";
 import { fastBlur } from "./fast-blur.js";
 import { fastRaster } from "./fast-raster.js";
+import { detailFraction } from "./detail-policy.js";
 
 import { encodeQR, ROLE, QUIET } from "../qr/encode.js";
 
@@ -678,7 +679,13 @@ export function* detailCandidates(pic, o) {
     if (o.preferContinuous) {
       let fraction =
         o.preferCorrection && o.texture === "tiles" && code.ecc === "H"
-          ? Math.max(0, Math.min(0.6, Number.isFinite(o.errorFraction) ? o.errorFraction : 0.4))
+          ? Math.max(
+              0,
+              Math.min(
+                o.errorFraction === 0.65 && detailFraction(pic, t.shape) === 0.65 ? 0.65 : 0.6,
+                Number.isFinite(o.errorFraction) ? o.errorFraction : 0.4,
+              ),
+            )
           : 0;
       // Restore more correction reserve after an actual failure of this family,
       // before spending another capture on finder-tone changes.
@@ -704,10 +711,14 @@ export function* detailCandidates(pic, o) {
       )
         fraction = 0.4;
       const method = fraction ? "correction" : "continuous";
-      const base = weaveDetail(fraction ? fitPictureErrors(code, pic, fraction) : code, pic, {
-        ...options,
-        method,
-      });
+      const base = weaveDetail(
+        fraction ? fitPictureErrors(code, pic, fraction, fraction === 0.65 ? 0.65 : 0.6) : code,
+        pic,
+        {
+          ...options,
+          method,
+        },
+      );
       const tones =
         o.texture === "tiles" ? [finderEdge, 0.32, 0.16, 0.08, 0.2, 0.28] : [finderEdge];
       const continuous = [];
@@ -833,6 +844,45 @@ export function* detailCandidates(pic, o) {
             ? [opposite, backup]
             : [backup, opposite]
           : [opposite];
+        if (t.shape === "circle")
+          for (const edge of [0.4, 0.42])
+            alternatives.push(() => {
+              const fraction = w.rendering.fraction || 0;
+              const candidate = decorate(
+                weaveDetail(fraction ? fitPictureErrors(code, pic, fraction) : code, pic, {
+                  ...initialOptions,
+                  finderEdge: edge,
+                  method: fraction ? "correction" : "continuous",
+                }),
+                false,
+              );
+              if (fraction) candidate.rendering.fraction = fraction;
+              return candidate;
+            });
+        if (t.shape === "circle")
+          for (const mask of [0, 1, 2, 3, 4, 5, 6, 7])
+            for (const edge of [0.4, 0.42])
+              alternatives.push(() => {
+                const fraction = w.rendering.fraction || 0;
+                const alternateCode = fitPadding(
+                  encodeQR(t.text, t.level, { boost: false, min: code.version, mask }),
+                  pic,
+                );
+                const candidate = decorate(
+                  weaveDetail(
+                    fraction ? fitPictureErrors(alternateCode, pic, fraction) : alternateCode,
+                    pic,
+                    {
+                      ...initialOptions,
+                      finderEdge: edge,
+                      method: fraction ? "correction" : "continuous",
+                    },
+                  ),
+                  false,
+                );
+                if (fraction) candidate.rendering.fraction = fraction;
+                return candidate;
+              });
         for (const build of alternatives) {
           const alternative = build(),
             alternativeKey = renderingKey(alternative);
