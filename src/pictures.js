@@ -705,7 +705,7 @@ export class Pictures {
             ),
           )
         : solid
-          ? Math.max(64, Math.ceil(w / 4))
+          ? 128
           : w;
       const bh = bw === w ? h : Math.max(8, Math.round(bw / media.aspect(want.page)));
       let backing = canvas;
