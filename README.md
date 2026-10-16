@@ -1,5 +1,12 @@
 # Moving photo to 3D: round 4 evidence
 
+The [current review-head Actions evidence](ledgers/operator-review/actions-628b265d/manifest.json)
+preserves the full-suite and embed results for source head 628b265d. Earlier runs remain separate.
+
+[Four new calibration comparison movies](ledgers/operator-review/color-and-calibration/movies/README.md)
+show the prior review head and the correction at phone and desktop profiles. Their gains and
+tradeoffs remain explicit; these source-clock captures do not measure live speed.
+
 The [color and calibration review](ledgers/operator-review/color-and-calibration/manifest.json)
 retains the reconstruction proof, full local regressions, and discarded diagnostics under separate
 source roles.

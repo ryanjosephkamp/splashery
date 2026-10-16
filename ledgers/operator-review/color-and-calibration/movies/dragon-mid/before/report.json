@@ -1,0 +1,990 @@
+{
+  "version": "before",
+  "browser": "151.0.7922.173",
+  "sourceHash": "3cb44054172a73cc811a8ffe75daa4bfe610c372d2267690f4902d11e0a9cd7a",
+  "revision": "1299a32bf8c7937586593d8b2dea0530f9306cdb",
+  "metrics": {
+    "heightJitter": 0.011883448840957649,
+    "edgeFlipsPer1000": 0.24148847678088295,
+    "globalShare": 0.3270412521847519,
+    "stillShare": 0.5514675349763787,
+    "surfaceCutShare": 0.004019108630963069,
+    "frames": 90,
+    "normalization": "range-fit",
+    "scores": {
+      "fitted": 0.012281603819734754,
+      "whole": 0.024170935625234858
+    }
+  },
+  "rows": [
+    {
+      "frame": 0,
+      "pixels": 238981,
+      "holes": 0,
+      "holeShare": 0,
+      "edgeSpecks": 0,
+      "screenEdgeSpecks": null,
+      "unwitnessedSpecks": 0,
+      "time": 0.015625,
+      "sourceTime": 0.015625,
+      "sourcePixelsVerified": true,
+      "sourceRasterPath": "read-frequent canvas",
+      "depthPixelsVerified": true,
+      "temporalDepth": "displayed R8",
+      "jitter": 0,
+      "flips": 0,
+      "still": 0,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "521c1eb44ce3440a0c4ae2821a43406f6b9454f608ae0787603e5fd69cfbd2a6",
+      "pixelOracle": true
+    },
+    {
+      "frame": 1,
+      "time": 0.078125,
+      "sourceTime": 0.078125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "277a88593a926dae45076bd6346e4183caba3b34efedf1e3c7a43460ac863561",
+      "pixelOracle": false
+    },
+    {
+      "frame": 2,
+      "time": 0.140625,
+      "sourceTime": 0.140625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "04f0454724e682acf4761de06237b528895a4b246e5b746cdc03c6f9c7e22f03",
+      "pixelOracle": false
+    },
+    {
+      "frame": 3,
+      "time": 0.203125,
+      "sourceTime": 0.203125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "4f51bc4a08ba03f22a7284cb430154745efc93f5f7d9317beb4d76c6e4acbabe",
+      "pixelOracle": false
+    },
+    {
+      "frame": 4,
+      "time": 0.265625,
+      "sourceTime": 0.265625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "6bb036b211e6f1476108ea71dc88e6bf01f286c96f81551091378ea1d2d3e0dc",
+      "pixelOracle": false
+    },
+    {
+      "frame": 5,
+      "time": 0.328125,
+      "sourceTime": 0.328125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "d02ba6ab0fcace086deb3a0ff7290993b6af2b012174cdc92780ae9e873e62f4",
+      "pixelOracle": false
+    },
+    {
+      "frame": 6,
+      "time": 0.390625,
+      "sourceTime": 0.390625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "aff2c2cdc8ff7fb8708913e9375c5885c17386c5d273ab57bda7203c00b1bb14",
+      "pixelOracle": false
+    },
+    {
+      "frame": 7,
+      "time": 0.453125,
+      "sourceTime": 0.453125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "a3380414842c79fa357a83cb75916bd1eeb4dcc5fd1fe2058833e2b8634fb523",
+      "pixelOracle": false
+    },
+    {
+      "frame": 8,
+      "time": 0.515625,
+      "sourceTime": 0.515625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "ddecfb521ca840aec8333c822cffb77d84db5e7d08db0bdf082b725c031c2282",
+      "pixelOracle": false
+    },
+    {
+      "frame": 9,
+      "time": 0.578125,
+      "sourceTime": 0.578125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "810eb8e5671f6473e20105c2662333b6f144fe3a27e4d3b275be9235fd51f732",
+      "pixelOracle": false
+    },
+    {
+      "frame": 10,
+      "time": 0.640625,
+      "sourceTime": 0.640625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "f0faff9aa9fb9f5ae61fe34e8769ffe5109146e55d78becf726276662dbf9921",
+      "pixelOracle": false
+    },
+    {
+      "frame": 11,
+      "time": 0.703125,
+      "sourceTime": 0.703125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "34df752c5fd94862b1112689e350603ae451b783ac8a72e1be8a30a26b524ab2",
+      "pixelOracle": false
+    },
+    {
+      "frame": 11,
+      "pixels": 226180,
+      "holes": 0,
+      "holeShare": 0,
+      "edgeSpecks": 0,
+      "screenEdgeSpecks": null,
+      "unwitnessedSpecks": 0,
+      "time": 0.765625,
+      "sourceTime": 0.765625,
+      "sourcePixelsVerified": true,
+      "sourceRasterPath": "read-frequent canvas",
+      "depthPixelsVerified": true,
+      "temporalDepth": "displayed R8",
+      "jitter": 1133.6352941177352,
+      "flips": 1607,
+      "still": 9218,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "5afb282d0999c9f46155139fc2f6035fe63096e5772f38d1ffb2664935761e94",
+      "pixelOracle": true
+    },
+    {
+      "frame": 13,
+      "time": 0.828125,
+      "sourceTime": 0.828125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "2217b838b8cd5fb2957aeccc235dae99cba3c46cc693dfc88717fee309dcda30",
+      "pixelOracle": false
+    },
+    {
+      "frame": 14,
+      "time": 0.890625,
+      "sourceTime": 0.890625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "aa1a0ebcf11cc65e91b29d9d9345765813baf675c7238d6404472774788d22b3",
+      "pixelOracle": false
+    },
+    {
+      "frame": 15,
+      "time": 0.953125,
+      "sourceTime": 0.953125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "e9089e1222e759e26a247ad5a220959b0db6a53ce483baf07ca46a151b2e7583",
+      "pixelOracle": false
+    },
+    {
+      "frame": 16,
+      "time": 1.015625,
+      "sourceTime": 1.015625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "b4fed0a234ef7b009e56f9bd5a749c10b267ce6594a8c967326c95dfda48e02f",
+      "pixelOracle": false
+    },
+    {
+      "frame": 17,
+      "time": 1.078125,
+      "sourceTime": 1.078125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "33717c32ed9dc0ea897e1ed210dd4ce6f619df75fd05b3af93270e9f231cdd60",
+      "pixelOracle": false
+    },
+    {
+      "frame": 18,
+      "time": 1.140625,
+      "sourceTime": 1.140625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "465466d5cde65a4011d26d08ba2f19e0a3160a99381a9ffa9c7e90bbda342da4",
+      "pixelOracle": false
+    },
+    {
+      "frame": 19,
+      "time": 1.203125,
+      "sourceTime": 1.203125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "f02042713a9d96212b1f5f2d5e92d2e2769cfa86b50e663c462ab979b54bcf0a",
+      "pixelOracle": false
+    },
+    {
+      "frame": 20,
+      "time": 1.265625,
+      "sourceTime": 1.265625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "66402eca6a9750b2100602e2016fdaa1943757991c7a69592b968e46ec42d965",
+      "pixelOracle": false
+    },
+    {
+      "frame": 21,
+      "time": 1.328125,
+      "sourceTime": 1.328125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "34992a7feebeffb0ba0646a77cfcfb7f6b035327677416d80ad09f0a530df971",
+      "pixelOracle": false
+    },
+    {
+      "frame": 22,
+      "time": 1.390625,
+      "sourceTime": 1.390625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "bb197c2cb2952d4f10a94a360ff028706e5cad51515e3205ef14981a87040bac",
+      "pixelOracle": false
+    },
+    {
+      "frame": 23,
+      "time": 1.453125,
+      "sourceTime": 1.453125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "e5a95ab36660417ed8b2bf1d731b01f416652725dd9f120712ab4ef5361a2432",
+      "pixelOracle": false
+    },
+    {
+      "frame": 22,
+      "pixels": 215230,
+      "holes": 0,
+      "holeShare": 0,
+      "edgeSpecks": 0,
+      "screenEdgeSpecks": null,
+      "unwitnessedSpecks": 0,
+      "time": 1.515625,
+      "sourceTime": 1.515625,
+      "sourcePixelsVerified": true,
+      "sourceRasterPath": "read-frequent canvas",
+      "depthPixelsVerified": true,
+      "temporalDepth": "displayed R8",
+      "jitter": 707.6784313725511,
+      "flips": 2300,
+      "still": 3784,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "1acfe71e346dfe342d076103c16aa8e9281e892990284643e0cd6a690ec64990",
+      "pixelOracle": true
+    },
+    {
+      "frame": 25,
+      "time": 1.578125,
+      "sourceTime": 1.578125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "63c0f60b2e6c6d335e791510ae58459f81da3924e535ac47cb007aa4a5fdff5c",
+      "pixelOracle": false
+    },
+    {
+      "frame": 26,
+      "time": 1.640625,
+      "sourceTime": 1.640625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "ccdb9ec0f2de7a0bd47e27f3b679a631a75e39f34bbb1c684e635028ec18b8a3",
+      "pixelOracle": false
+    },
+    {
+      "frame": 27,
+      "time": 1.703125,
+      "sourceTime": 1.703125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "b61155a2e2918d7f02dbedf040f1e39cb8ee4124edb2f1440c97c628001799fa",
+      "pixelOracle": false
+    },
+    {
+      "frame": 28,
+      "time": 1.765625,
+      "sourceTime": 1.765625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "b3d8cea1ca8518da4294a48b8296eff451cf1fd8189792e70a146fb54820bc1a",
+      "pixelOracle": false
+    },
+    {
+      "frame": 29,
+      "time": 1.828125,
+      "sourceTime": 1.828125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "cc1cdf8ab1b5b18181dbf295c4be992663fc4ac86e6079788bd5ebf74fe9d153",
+      "pixelOracle": false
+    },
+    {
+      "frame": 30,
+      "time": 1.890625,
+      "sourceTime": 1.890625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "38fb8e183caa3f707bd2c74003b9e8da348a9071298cd0b6146f6f7393c84f93",
+      "pixelOracle": false
+    },
+    {
+      "frame": 31,
+      "time": 1.953125,
+      "sourceTime": 1.953125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "52fd4305da325656d00451e52df588335228e1dba45aa2c12aed3a38d241da8c",
+      "pixelOracle": false
+    },
+    {
+      "frame": 32,
+      "time": 2.015625,
+      "sourceTime": 2.015625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "8d24b9a0e324881b6841fd60585f858df95ade8400929bf15af8e132aea03377",
+      "pixelOracle": false
+    },
+    {
+      "frame": 33,
+      "time": 2.078125,
+      "sourceTime": 2.078125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "e72f62a49cd0301bdbb5fe9f0b2f0a93b1cce6a6fc50dc56d90a8695701addd2",
+      "pixelOracle": false
+    },
+    {
+      "frame": 34,
+      "time": 2.140625,
+      "sourceTime": 2.140625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "da785b01e6eb578b1b952370e1ca88c9b40e9711828bc4e1e8a9327827a1f206",
+      "pixelOracle": false
+    },
+    {
+      "frame": 35,
+      "time": 2.203125,
+      "sourceTime": 2.203125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "aca727014fdc1c8ee9913f609b9ecc4abebe3de3670427a987cb76c0100a44dd",
+      "pixelOracle": false
+    },
+    {
+      "frame": 33,
+      "pixels": 203865,
+      "holes": 0,
+      "holeShare": 0,
+      "edgeSpecks": 0,
+      "screenEdgeSpecks": null,
+      "unwitnessedSpecks": 0,
+      "time": 2.265625,
+      "sourceTime": 2.265625,
+      "sourcePixelsVerified": true,
+      "sourceRasterPath": "read-frequent canvas",
+      "depthPixelsVerified": true,
+      "temporalDepth": "displayed R8",
+      "jitter": 550.9254901960709,
+      "flips": 1067,
+      "still": 3150,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "74b8e8938da3c602ab547da9ed4e256fd1f25af9a3f23400c1765b20f97aa841",
+      "pixelOracle": true
+    },
+    {
+      "frame": 37,
+      "time": 2.328125,
+      "sourceTime": 2.328125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "fbcdddb16cd8178cc6907658ebe93e5ec7e065f106283977a9d3377e94b5064c",
+      "pixelOracle": false
+    },
+    {
+      "frame": 38,
+      "time": 2.390625,
+      "sourceTime": 2.390625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "18819d9ba88e0b9428f95fec2651efb761c3e358a75f3f50edbc58662b7e8af4",
+      "pixelOracle": false
+    },
+    {
+      "frame": 39,
+      "time": 2.453125,
+      "sourceTime": 2.453125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "5ec2738416492990be9107157f576250bcb74ef1a472b6215fadc77e4b1db46b",
+      "pixelOracle": false
+    },
+    {
+      "frame": 40,
+      "time": 2.515625,
+      "sourceTime": 2.515625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "f162c5579dbe49ccbba167645a83128481a187da87de955d9f4e4533ce10c990",
+      "pixelOracle": false
+    },
+    {
+      "frame": 41,
+      "time": 2.578125,
+      "sourceTime": 2.578125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "53d937c8585ff8d8d98e15a479ff13774c34a58f46ce3b8184342480fd7a7fcc",
+      "pixelOracle": false
+    },
+    {
+      "frame": 42,
+      "time": 2.640625,
+      "sourceTime": 2.640625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "ad8762038ad2ec3389cf90708767daa12ec05575816503990806dda9a4c3a317",
+      "pixelOracle": false
+    },
+    {
+      "frame": 43,
+      "time": 2.703125,
+      "sourceTime": 2.703125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "0089eae267433d240ccbdfc670a7576920b5b66a0fe4928d2b5b30225071afc8",
+      "pixelOracle": false
+    },
+    {
+      "frame": 44,
+      "time": 2.765625,
+      "sourceTime": 2.765625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "f2e0c4539d055a3aa59ba5f77abd7a9e0e0635073990dcf2bc7af1c2ddc5e96b",
+      "pixelOracle": false
+    },
+    {
+      "frame": 45,
+      "time": 2.828125,
+      "sourceTime": 2.828125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "ec39b3d606f41fddf88453fb1e0fe828a04290e4e3258149c082f3a0f8c3c3fe",
+      "pixelOracle": false
+    },
+    {
+      "frame": 46,
+      "time": 2.890625,
+      "sourceTime": 2.890625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "dfdf08e317dbc1c840aacc43461199169b4c536fa583de33139186b850293180",
+      "pixelOracle": false
+    },
+    {
+      "frame": 47,
+      "time": 2.953125,
+      "sourceTime": 2.953125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "26639155a577b5d90ec0f5d2138ca76fe4d014c04f8a877189af5d3f37fb5f72",
+      "pixelOracle": false
+    },
+    {
+      "frame": 45,
+      "pixels": 190583,
+      "holes": 0,
+      "holeShare": 0,
+      "edgeSpecks": 0,
+      "screenEdgeSpecks": null,
+      "unwitnessedSpecks": 0,
+      "time": 3.015625,
+      "sourceTime": 3.015625,
+      "sourcePixelsVerified": true,
+      "sourceRasterPath": "read-frequent canvas",
+      "depthPixelsVerified": true,
+      "temporalDepth": "displayed R8",
+      "jitter": 924.0117647058859,
+      "flips": 2595,
+      "still": 4938,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "cb224ff670acf721f5deb26085ed9b69258b24699d296293ef6e79c14d77296f",
+      "pixelOracle": true
+    },
+    {
+      "frame": 49,
+      "time": 3.078125,
+      "sourceTime": 3.078125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "b2216506f74071c203222c3d01aef485ac40ec28cf1146bbf9a02bbe3816b90c",
+      "pixelOracle": false
+    },
+    {
+      "frame": 50,
+      "time": 3.140625,
+      "sourceTime": 3.140625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "edfbd23db613621f7d8865ad5778bc9e5f1f80f76ac354e0fe037def41580fac",
+      "pixelOracle": false
+    },
+    {
+      "frame": 51,
+      "time": 3.203125,
+      "sourceTime": 3.203125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "694766f728d543f3bf5af353e3235554913d67ea78d072f65b34d706e36c4268",
+      "pixelOracle": false
+    },
+    {
+      "frame": 52,
+      "time": 3.265625,
+      "sourceTime": 3.265625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "ad99b9944bbbee3082b8012d568ba471efa606fb702f588aad5a66e7b000faa1",
+      "pixelOracle": false
+    },
+    {
+      "frame": 53,
+      "time": 3.328125,
+      "sourceTime": 3.328125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "c4f83aff97bf005c5ae1a068eefcd483a1e538e8b9cb268f234713511c93bbc7",
+      "pixelOracle": false
+    },
+    {
+      "frame": 54,
+      "time": 3.390625,
+      "sourceTime": 3.390625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "b776baa51f8df22b2fa48c35f14ac0870f14c667f8d431e52ba5b912328929a1",
+      "pixelOracle": false
+    },
+    {
+      "frame": 55,
+      "time": 3.453125,
+      "sourceTime": 3.453125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "6b40833f191a70ae15efcca696b45f9ed7311122667586ea49a332cf30d9227e",
+      "pixelOracle": false
+    },
+    {
+      "frame": 56,
+      "time": 3.515625,
+      "sourceTime": 3.515625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "e8acffaf99411596d8910a0ac31f68f0c041c00c24eeda7107d2f86ee451cddd",
+      "pixelOracle": false
+    },
+    {
+      "frame": 57,
+      "time": 3.578125,
+      "sourceTime": 3.578125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "672f868f2dd1d0b1da3ba02ab8722934a0f9ae905425328a4ba46609d4f169b6",
+      "pixelOracle": false
+    },
+    {
+      "frame": 58,
+      "time": 3.640625,
+      "sourceTime": 3.640625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "901473b03549dd408a8fb9b350dbbf63764511dc8b4f7045a1de4239228e3bb1",
+      "pixelOracle": false
+    },
+    {
+      "frame": 59,
+      "time": 3.703125,
+      "sourceTime": 3.703125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "3a95a9709036b5b9e441854f934c435134712fd3b85aa7b18c6207fb0d9ab3fb",
+      "pixelOracle": false
+    },
+    {
+      "frame": 56,
+      "pixels": 187948,
+      "holes": 0,
+      "holeShare": 0,
+      "edgeSpecks": 0,
+      "screenEdgeSpecks": null,
+      "unwitnessedSpecks": 0,
+      "time": 3.765625,
+      "sourceTime": 3.765625,
+      "sourcePixelsVerified": true,
+      "sourceRasterPath": "read-frequent canvas",
+      "depthPixelsVerified": true,
+      "temporalDepth": "displayed R8",
+      "jitter": 310.84705882353876,
+      "flips": 251,
+      "still": 3658,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "b6a436b184240cb2302cae98e22d546891ec9a2d2e8d7b4fa1fb2d0320199c8a",
+      "pixelOracle": true
+    },
+    {
+      "frame": 61,
+      "time": 3.828125,
+      "sourceTime": 3.828125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "79da07ef23f7ce6fa2e53822a1d41702eeae00cf86f1a3abeb9ddff8b5fcc11d",
+      "pixelOracle": false
+    },
+    {
+      "frame": 62,
+      "time": 3.890625,
+      "sourceTime": 3.890625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "19893a72fbf8954a7bc990474f0db8c00b62d30253db35d29a4eac4feab02161",
+      "pixelOracle": false
+    },
+    {
+      "frame": 63,
+      "time": 3.953125,
+      "sourceTime": 3.953125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "156beb7d233ce94ee03d9e8778900ed33925d17e8a27201f3d2136efe7f3bf58",
+      "pixelOracle": false
+    },
+    {
+      "frame": 64,
+      "time": 4.015625,
+      "sourceTime": 4.015625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "622fa5eac8caff44a5a9465893844420efac6b5b734d0673d26d58f96a4b9419",
+      "pixelOracle": false
+    },
+    {
+      "frame": 65,
+      "time": 4.078125,
+      "sourceTime": 4.078125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "5b92b45d46e2f1bdf06d72a736b056b6bcbaff288b86ec917f4846673485e7cc",
+      "pixelOracle": false
+    },
+    {
+      "frame": 66,
+      "time": 4.140625,
+      "sourceTime": 4.140625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "9aba35b42d6aeabb5d05b2b259c841ef3947e81f908b5ced0551724be7de04ce",
+      "pixelOracle": false
+    },
+    {
+      "frame": 67,
+      "time": 4.203125,
+      "sourceTime": 4.203125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "de0549dbe55d2d126cc39faa9bb0cd0d36c6151ccf19ad1341bbdd954180a205",
+      "pixelOracle": false
+    },
+    {
+      "frame": 68,
+      "time": 4.265625,
+      "sourceTime": 4.265625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "b549b8a795bc602f9fef8c0da971e0b2b3e99b158e0f964e321272cacd58ff48",
+      "pixelOracle": false
+    },
+    {
+      "frame": 69,
+      "time": 4.328125,
+      "sourceTime": 4.328125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "97c3714667a2ebaaf0edd06745c195b472df4b83f44daa7f06d6d06904ec3304",
+      "pixelOracle": false
+    },
+    {
+      "frame": 70,
+      "time": 4.390625,
+      "sourceTime": 4.390625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "1723ccfb3d391c96eec203a96461ef8cee94ec219666e2a4d28c6f647f9d3d6d",
+      "pixelOracle": false
+    },
+    {
+      "frame": 71,
+      "time": 4.453125,
+      "sourceTime": 4.453125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "7a62a01970f052de0e9fac8f624363cdcc196ac470521ce48094285fee085a44",
+      "pixelOracle": false
+    },
+    {
+      "frame": 67,
+      "pixels": 191706,
+      "holes": 0,
+      "holeShare": 0,
+      "edgeSpecks": 0,
+      "screenEdgeSpecks": null,
+      "unwitnessedSpecks": 0,
+      "time": 4.515625,
+      "sourceTime": 4.515625,
+      "sourcePixelsVerified": true,
+      "sourceRasterPath": "read-frequent canvas",
+      "depthPixelsVerified": true,
+      "temporalDepth": "displayed R8",
+      "jitter": 4015.96862744889,
+      "flips": 1245,
+      "still": 55154,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "82dc4bcdb5a06e11fac831273d16456c4155b2f33f8f0fde81c2c7396cf181ce",
+      "pixelOracle": true
+    },
+    {
+      "frame": 73,
+      "time": 4.578125,
+      "sourceTime": 4.578125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "83cb58bfe68f869d84731d67fb616a2d11b83c9fcbadc22a9d9d9fb5a5c954e1",
+      "pixelOracle": false
+    },
+    {
+      "frame": 74,
+      "time": 4.640625,
+      "sourceTime": 4.640625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "a3549cc01b52576ba5593d490e819d8de17fbb700977dcd0410318feae45527e",
+      "pixelOracle": false
+    },
+    {
+      "frame": 75,
+      "time": 4.703125,
+      "sourceTime": 4.703125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "b12cf8ee7b3bc41acfa03481630485b44d2f64cd79a0b8251498dde5a1a48d79",
+      "pixelOracle": false
+    },
+    {
+      "frame": 76,
+      "time": 4.765625,
+      "sourceTime": 4.765625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "9b37bb0aa823492bcb1aeb78c70d95a681e8aab955b594c1887b7ee0b0f232de",
+      "pixelOracle": false
+    },
+    {
+      "frame": 77,
+      "time": 4.828125,
+      "sourceTime": 4.828125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "d4677018753ff9f63b0397696c45a6a069e876d7ac37ef37ddedcbcb898dd9b3",
+      "pixelOracle": false
+    },
+    {
+      "frame": 78,
+      "time": 4.890625,
+      "sourceTime": 4.890625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "edbfefe8c32df5353c706cdab074c50314b097cde0c41de7fea529d834cc7c7b",
+      "pixelOracle": false
+    },
+    {
+      "frame": 79,
+      "time": 4.953125,
+      "sourceTime": 4.953125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "9612576e9cabbde7740d88cdd4256656dac8bc7edc181bdc35dae892982fb371",
+      "pixelOracle": false
+    },
+    {
+      "frame": 80,
+      "time": 5.015625,
+      "sourceTime": 5.015625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "d3fb84193ef9218b995675236ebbd89d667a32956eccaa75d7a5c48db6532b95",
+      "pixelOracle": false
+    },
+    {
+      "frame": 81,
+      "time": 5.078125,
+      "sourceTime": 5.078125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "05f5156b8b63f5edf5270753f7b0c45854117b0b1aae0c6ea1d70056b36242f2",
+      "pixelOracle": false
+    },
+    {
+      "frame": 82,
+      "time": 5.140625,
+      "sourceTime": 5.140625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "097f11c4d3fe32f9a1a38caf6f043d7df65b7d0371d8778704242b031ea17b49",
+      "pixelOracle": false
+    },
+    {
+      "frame": 83,
+      "time": 5.203125,
+      "sourceTime": 5.203125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "c2ea0eeef13d24110eee32a80d22ba463533a80ae5803ceeaa40d4518df33111",
+      "pixelOracle": false
+    },
+    {
+      "frame": 78,
+      "pixels": 196205,
+      "holes": 0,
+      "holeShare": 0,
+      "edgeSpecks": 0,
+      "screenEdgeSpecks": null,
+      "unwitnessedSpecks": 0,
+      "time": 5.265625,
+      "sourceTime": 5.265625,
+      "sourcePixelsVerified": true,
+      "sourceRasterPath": "read-frequent canvas",
+      "depthPixelsVerified": true,
+      "temporalDepth": "displayed R8",
+      "jitter": 33.08627450980386,
+      "flips": 8,
+      "still": 326,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "62319bf8777b8a47fd2d4e3bf43ca5146f35fe752451e2d8d2a4532628fcd9b1",
+      "pixelOracle": true
+    },
+    {
+      "frame": 85,
+      "time": 5.328125,
+      "sourceTime": 5.328125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "ffba6efffe93f46a58ef39dc1f38a6183bd54820aa3d5fef719447ead1065046",
+      "pixelOracle": false
+    },
+    {
+      "frame": 86,
+      "time": 5.390625,
+      "sourceTime": 5.390625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "b8cd2078213ad74c061123be6aeb0d9bfc35437709516782fdb927952a12279c",
+      "pixelOracle": false
+    },
+    {
+      "frame": 87,
+      "time": 5.453125,
+      "sourceTime": 5.453125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "7420495bd4e3cdf0b29414f5c258806f2b702718068d7b4d75cc918863459c8f",
+      "pixelOracle": false
+    },
+    {
+      "frame": 88,
+      "time": 5.515625,
+      "sourceTime": 5.515625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "cbab29af29c71bb06995f51db328e59c26ad5b260e9ec4b92f2a02fec62027b5",
+      "pixelOracle": false
+    },
+    {
+      "frame": 89,
+      "time": 5.578125,
+      "sourceTime": 5.578125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "37f9ff034aa8e5c1119088faf4e5777dc3c785232212adf98d07c88c3a89857a",
+      "pixelOracle": false
+    },
+    {
+      "frame": 90,
+      "time": 5.640625,
+      "sourceTime": 5.640625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "d39031b1d43ad135611a047ddf01a20068cf58dede637d7aee50059f3ab7d685",
+      "pixelOracle": false
+    },
+    {
+      "frame": 91,
+      "time": 5.703125,
+      "sourceTime": 5.703125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "832939c662e014654103d6274e19e7339c956100ac44066fec066324dd8d4c7a",
+      "pixelOracle": false
+    },
+    {
+      "frame": 92,
+      "time": 5.765625,
+      "sourceTime": 5.765625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "e4a424ec1db97596325e26e209fa08851065e6e7fa67128583e1127953d4fbf1",
+      "pixelOracle": false
+    },
+    {
+      "frame": 93,
+      "time": 5.828125,
+      "sourceTime": 5.828125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "c8375559ed6a7cc279087b7d36a209d4df94074bcde791d6796fa183d0402957",
+      "pixelOracle": false
+    },
+    {
+      "frame": 94,
+      "time": 5.890625,
+      "sourceTime": 5.890625,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "61e8d43fff9cda21615bdbc2e2c03f020026dab5328a36e54db0b9898484f760",
+      "pixelOracle": false
+    },
+    {
+      "frame": 95,
+      "time": 5.953125,
+      "sourceTime": 5.953125,
+      "canvas": [1072, 900],
+      "dpr": 1,
+      "pngSha256": "af493f7dc54b7a097abbbc7909a14d5844aa1b5f93ff162f116149fdeb5929d2",
+      "pixelOracle": false
+    }
+  ],
+  "errors": []
+}
