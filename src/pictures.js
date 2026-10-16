@@ -454,7 +454,7 @@ export class Pictures {
       cap = Math.min(b.width, Math.sqrt(4 * b.pixels * aspect));
     else cap = Math.sqrt((method === "screen" ? b.screen : b.pixels) * aspect);
     if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width * share); // prettier-ignore
-    const target = Math.min(cap, Math.max(64, px));
+    const target = Math.min(cap, Math.max(64, px * (this.solid && method === "ink" ? 1.5 : 1)));
     let level = LADDER.find((w) => w >= target) ?? LADDER[LADDER.length - 1];
     level = Math.min(level, Math.floor(cap));
     return Math.max(32, level);
@@ -648,7 +648,9 @@ export class Pictures {
       // Gaussian backing's original pixel budget.
       const bw = sparse
         ? Math.min(w, Math.floor(Math.sqrt(this.budget.pixels * media.aspect(want.page))))
-        : w;
+        : solid
+          ? Math.max(64, Math.ceil(w / 2))
+          : w;
       const bh = bw === w ? h : Math.max(8, Math.round(bw / media.aspect(want.page)));
       let backing = canvas;
       if (canvas && bw !== w) {

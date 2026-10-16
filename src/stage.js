@@ -561,6 +561,7 @@ export class Stage {
   setUniforms(u) {
     const g = this.toy?.entity.gsplat;
     if (!g) return;
+    this.sheetUniforms = u;
     // Custom GPU fields may use the token uniform for data other than poses.
     if (this.device.isWebGPU && this.toy.kit && !this.toy.customModifier) {
       updateTokenBounds(this.toy.resource, u["uSpTokens[0]"], g);

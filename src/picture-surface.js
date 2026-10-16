@@ -36,16 +36,19 @@ void main(void) {
   vUv = aUv;
 }`;
 const FS = `
+// The source raster already antialiases glyphs. Avoid averaging another
+// half-resolution level into them; foreshortened pages still use mipmaps.
 uniform sampler2D uColor;
 uniform sampler2D uMask;
 uniform vec4 uKeep;
 varying vec2 vUv;
 void main(void) {
+  vec4 color = texture2D(uColor, vUv, -1.0);
   if (uKeep.z > 0.5) {
     float d = texture2D(uMask, vUv).r;
     if (d < uKeep.x || d > uKeep.y) discard;
   }
-  gl_FragColor = texture2D(uColor, vUv);
+  gl_FragColor = color;
 }`;
 const VSW = `
 attribute aPosition: vec3f;
@@ -94,11 +97,12 @@ uniform uKeep: vec4f;
 varying vUv: vec2f;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
+  let color = textureSampleBias(uColor,uColorSampler,input.vUv,-1.0);
   if (uniform.uKeep.z > 0.5) {
     let d = textureSample(uMask,uMaskSampler,input.vUv).r;
     if (d < uniform.uKeep.x || d > uniform.uKeep.y) { discard; }
   }
-  output.color = textureSample(uColor,uColorSampler,input.vUv);
+  output.color = color;
   return output;
 }`;
 
@@ -212,7 +216,7 @@ export class PictureSurface {
     this.instance.cull = false;
     this.layer = stage.app.scene.layers.getLayerByName("World");
     this.layer.addMeshInstances([this.instance]);
-    this.setUniforms({});
+    this.setUniforms(stage.sheetUniforms || {});
   }
 
   setUniforms(u) {
