@@ -23,6 +23,7 @@ export const GRAPHICS_ARGS = [
 ];
 export const GRAPHICS_LAUNCH = {
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
+  channel: process.env.SPLASHERY_CHROMIUM ? undefined : "chrome",
   ...(process.env.SPLASHERY_GL === "llvmpipe" ? { headless: false } : {}),
   args: GRAPHICS_ARGS,
 };
@@ -39,9 +40,9 @@ export async function openRender(
     bindNativePicture = false,
   } = {},
 ) {
-  await page.goto(
-    `${process.env.SPLASHERY_URL || "http://127.0.0.1:4388/"}?renderer=${renderer}&adapt=off&profile=${tier}&labs=1`,
-  );
+  const url =
+    process.env.SPLASHERY_URL || `http://127.0.0.1:${Number(process.env.SPLASHERY_PORT) || 4173}/`;
+  await page.goto(`${url}?renderer=${renderer}&adapt=off&profile=${tier}&labs=1`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   if (bindNativePicture)
     await page.evaluate(async () => {

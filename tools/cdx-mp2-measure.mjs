@@ -155,6 +155,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       : await reconstructedSources(".cache/cdx-mp2/sources");
     const browser = await chromium.launch({
       executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
+      channel: process.env.SPLASHERY_CHROMIUM ? undefined : "chrome",
       // Match the browser regression suite. Native video/canvas conversion
       // and upload metrics can differ with plain headless Chromium's GPU setup.
       args: [

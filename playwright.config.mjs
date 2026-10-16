@@ -7,6 +7,9 @@ import { defineConfig } from "@playwright/test";
 // it. WebGL2 tests force ?renderer=webgl2; WebGPU tests skip themselves with a
 // message when no adapter is available.
 const executablePath = process.env.SPLASHERY_CHROMIUM || undefined;
+// The upload regressions exercise H.264/AAC. Playwright's bundled Chromium
+// omits those codecs; Chrome is preinstalled on the Actions Ubuntu runner.
+const movingMedia = /cdx-mp2.*\.spec\.mjs$/;
 // SPLASHERY_PORT gives each local lane on one computer its own server (OPERATING.md, "Local
 // lanes"); everyone else keeps 4173.
 const port = Number(process.env.SPLASHERY_PORT) || 4173;
@@ -49,10 +52,17 @@ export default defineConfig({
     },
   },
   webServer: {
-    command: `python3 -m http.server ${port} --bind 127.0.0.1`,
+    command: `node tools/cdx-mp2-server.mjs ${port}`,
     url: `http://127.0.0.1:${port}/`,
     reuseExistingServer: true,
     timeout: 60_000,
   },
-  projects: [{ name: "chromium", use: { browserName: "chromium" } }],
+  projects: [
+    { name: "chromium", testIgnore: movingMedia, use: { browserName: "chromium" } },
+    {
+      name: "chromium-media",
+      testMatch: movingMedia,
+      use: { browserName: "chromium", ...(executablePath ? {} : { channel: "chrome" }) },
+    },
+  ],
 });
