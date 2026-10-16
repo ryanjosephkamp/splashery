@@ -6,7 +6,7 @@ const [mainFile, candidateFile, out] = process.argv.slice(2);
 if (!mainFile || !candidateFile) throw new Error("Provide main and candidate results.json files.");
 const main = JSON.parse(fs.readFileSync(mainFile, "utf8")),
   candidate = JSON.parse(fs.readFileSync(candidateFile, "utf8"));
-for (const field of ["browser", "isolation", "memoryPoint"])
+for (const field of ["browser", "renderer", "isolation", "memoryPoint"])
   if (main[field] !== candidate[field]) throw new Error(`Benchmark ${field} differs.`);
 const protocolField =
   main.protocolSha256 && candidate.protocolSha256 ? "protocolSha256" : "toolSha256";

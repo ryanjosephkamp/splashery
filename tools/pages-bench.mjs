@@ -40,8 +40,11 @@ let startingBrowser = null;
 async function launchBrowser() {
   startingBrowser = chromium.launch({
     executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
+    ...(process.env.SPLASHERY_GL === "llvmpipe" ? { headless: false } : {}),
     args: [
-      "--use-angle=swiftshader",
+      ...(process.env.SPLASHERY_GL === "llvmpipe"
+        ? ["--use-gl=angle", "--use-angle=gl", "--hide-scrollbars"]
+        : ["--use-angle=swiftshader"]),
       "--enable-unsafe-swiftshader",
       "--ignore-gpu-blocklist",
       "--enable-webgl",
@@ -613,6 +616,7 @@ try {
             JSON.stringify(
               {
                 browser: browser.version(),
+                renderer: process.env.SPLASHERY_GL || "swiftshader",
                 isolation: "fresh Chromium process per case and repeat",
                 memoryPoint: "settled page before reference raster and screenshots",
                 toolSha256,
