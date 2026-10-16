@@ -38,9 +38,11 @@ test("a frame after the audio has ended restarts at frame zero instead of waitin
   }
 });
 
-test("long depth assets contain changing per-frame answers, not repeated first-frame estimates", () => {
+test("long depth assets contain changing per-frame answers, not repeated first-frame estimates", async () => {
+  const { unpackSampleDepth } = await import("../src/packs/moving-photo.js");
   for (const stem of ["bunny", "sintel", "elephants", "tears"]) {
-    const bytes = fs.readFileSync(`assets/toys/moving-photo-3d/${stem}-long.mp2depth`);
+    const encoded = fs.readFileSync(`assets/toys/moving-photo-3d/${stem}-long.mp2depth`),
+      bytes = Buffer.from(await unpackSampleDepth(encoded));
     const per = bytes.readUInt16LE(4) * bytes.readUInt16LE(6);
     const n = bytes.readUInt32LE(8);
     const unique = new Set(
@@ -53,6 +55,7 @@ test("long depth assets contain changing per-frame answers, not repeated first-f
     );
     expect(unique.size, stem).toBeGreaterThan(n / 10);
     expect(bytes.length).toBeLessThan(20e6);
+    expect(encoded.length).toBeLessThan(20e6);
   }
 });
 test.use({ viewport: { width: 390, height: 844 } });

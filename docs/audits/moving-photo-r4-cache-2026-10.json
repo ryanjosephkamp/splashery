@@ -1,0 +1,46 @@
+{
+  "encoding": "gzip (lossless MP2D)",
+  "node": "v22.14.0",
+  "caches": [
+    {
+      "file": "assets/toys/moving-photo-3d/bunny-long.mp2depth",
+      "beforeBytes": 15805452,
+      "beforeSha256": "35a28dad3862207772d1af8dc153bb7782c3ba7e3dd1bb506ad06f028ca30038",
+      "afterBytes": 4451116,
+      "afterSha256": "bcface9934e79b0a39554db8ca03fbe20d694630f4a1121c1fc302534e5d58c8",
+      "decodedBytes": 15805452,
+      "decodedSha256": "35a28dad3862207772d1af8dc153bb7782c3ba7e3dd1bb506ad06f028ca30038",
+      "changedDepthBytes": 0
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/sintel-long.mp2depth",
+      "beforeBytes": 11854092,
+      "beforeSha256": "8416f05db894338d612cffe70a15fb304331e18f6855460cb090f7febf5b1844",
+      "afterBytes": 2521449,
+      "afterSha256": "32cfeb53a9e9467176427fe81f96f74090864dcdf1396223489868fdcce7be43",
+      "decodedBytes": 11854092,
+      "decodedSha256": "8416f05db894338d612cffe70a15fb304331e18f6855460cb090f7febf5b1844",
+      "changedDepthBytes": 0
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+      "beforeBytes": 15805452,
+      "beforeSha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f",
+      "afterBytes": 6871822,
+      "afterSha256": "815ee09ad385e69c89ee5da88fcd052b45f86838d5491b3d02f534ff8441f894",
+      "decodedBytes": 15805452,
+      "decodedSha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f",
+      "changedDepthBytes": 0
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/tears-long.mp2depth",
+      "beforeBytes": 10668684,
+      "beforeSha256": "c9151c3b37f5eb8bb4550d3fe9d74099cea1135234bdfb4b7494aacf2273f834",
+      "afterBytes": 4070112,
+      "afterSha256": "4524c581380c305ac154d513f62a94152389610753e6c3b631d22bbecf422b00",
+      "decodedBytes": 10668684,
+      "decodedSha256": "c9151c3b37f5eb8bb4550d3fe9d74099cea1135234bdfb4b7494aacf2273f834",
+      "changedDepthBytes": 0
+    }
+  ]
+}

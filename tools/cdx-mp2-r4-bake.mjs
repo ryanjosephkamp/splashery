@@ -2,6 +2,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { gzipSync } from "node:zlib";
 import { chromium } from "@playwright/test";
 import * as moving from "../src/packs/moving-photo.js";
 import { sourceTimeline } from "./cdx-mp2-r4-clock.mjs";
@@ -159,12 +160,16 @@ for (const sample of moving.LONG_SAMPLES.filter(
   view.setUint32(8, metadata.n, true);
   for (let i = 0; i < clip.n; i++) bytes.set(clip.near[i], 12 + i * metadata.w * metadata.h);
   const output = path.join(out, `${sample.file}.mp2depth`),
+    packed = gzipSync(bytes, { level: 9 }),
     record = {
       source,
       sourceSha256,
       output,
-      bytes: bytes.length,
-      sha256: sha(bytes),
+      bytes: packed.length,
+      sha256: sha(packed),
+      decodedBytes: bytes.length,
+      decodedSha256: sha(bytes),
+      encoding: "gzip (lossless MP2D)",
       modelAnswers: metadata.n,
       modelGrid: [metadata.rawWidth, metadata.rawHeight],
       fps: sample.fps,
@@ -177,7 +182,10 @@ for (const sample of moving.LONG_SAMPLES.filter(
       browser: metadata.browser || "See reused raw model-answer run",
       date: new Date().toISOString(),
     };
-  await fs.writeFile(output, bytes);
+  // The quality runner may be waiting for this cache. Publish complete gzip
+  // bytes together, so its decoder never sees a partially written stream.
+  await fs.writeFile(`${output}.tmp`, packed);
+  await fs.rename(`${output}.tmp`, output);
   await fs.writeFile(path.join(out, `${sample.file}.json`), JSON.stringify(record, null, 2) + "\n");
   console.log(JSON.stringify({ id: sample.id, done: true, ...record }));
 }

@@ -7,7 +7,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { GRAPHICS_LAUNCH, openRender, renderFrame } from "./cdx-mp2-render.mjs";
-import { SAMPLES, LONG_SAMPLES } from "../src/packs/moving-photo.js";
+import { SAMPLES, LONG_SAMPLES, unpackSampleDepth } from "../src/packs/moving-photo.js";
 
 import { R4_CASES } from "./cdx-mp2-r4-cases.mjs";
 import { sourceTimeline } from "./cdx-mp2-r4-clock.mjs";
@@ -168,7 +168,8 @@ try {
           let bytes;
           while (Date.now() < cacheDeadline) {
             try {
-              const data = await fs.readFile(candidate),
+              const encoded = await fs.readFile(candidate),
+                data = Buffer.from(await unpackSampleDepth(encoded)),
                 view = new DataView(data.buffer, data.byteOffset, data.byteLength);
               if (
                 data.length >= 12 &&
@@ -177,7 +178,7 @@ try {
                 data.length ===
                   12 + view.getUint16(4, true) * view.getUint16(6, true) * sample.frames
               ) {
-                bytes = data;
+                bytes = encoded;
                 break;
               }
             } catch (error) {

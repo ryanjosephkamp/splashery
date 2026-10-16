@@ -3819,11 +3819,13 @@
         },
         {
           "file": "assets/toys/moving-photo-3d/bunny-long.mp2depth",
-          "bytes": 15805452,
-          "sha256": "35a28dad3862207772d1af8dc153bb7782c3ba7e3dd1bb506ad06f028ca30038"
+          "bytes": 4451116,
+          "sha256": "bcface9934e79b0a39554db8ca03fbe20d694630f4a1121c1fc302534e5d58c8",
+          "decodedBytes": 15805452,
+          "decodedSha256": "35a28dad3862207772d1af8dc153bb7782c3ba7e3dd1bb506ad06f028ca30038"
         }
       ],
-      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Archive live record declares CC BY; original Blender pages returned HTTP 403 in this environment. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license.",
+      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Archive live record declares CC BY; original Blender pages returned HTTP 403 in this environment. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
       "depthFrames": 720,
       "distinctDepthFrames": 720
     },
@@ -3845,11 +3847,13 @@
         },
         {
           "file": "assets/toys/moving-photo-3d/sintel-long.mp2depth",
-          "bytes": 11854092,
-          "sha256": "8416f05db894338d612cffe70a15fb304331e18f6855460cb090f7febf5b1844"
+          "bytes": 2521449,
+          "sha256": "32cfeb53a9e9467176427fe81f96f74090864dcdf1396223489868fdcce7be43",
+          "decodedBytes": 11854092,
+          "decodedSha256": "8416f05db894338d612cffe70a15fb304331e18f6855460cb090f7febf5b1844"
         }
       ],
-      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Archive live record declares CC BY; original Blender pages returned HTTP 403 in this environment. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license.",
+      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Archive live record declares CC BY; original Blender pages returned HTTP 403 in this environment. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
       "depthFrames": 720,
       "distinctDepthFrames": 708
     },
@@ -3871,11 +3875,13 @@
         },
         {
           "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
-          "bytes": 15805452,
-          "sha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f"
+          "bytes": 6871822,
+          "sha256": "815ee09ad385e69c89ee5da88fcd052b45f86838d5491b3d02f534ff8441f894",
+          "decodedBytes": 15805452,
+          "decodedSha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f"
         }
       ],
-      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Downloaded from https://archive.org/details/ElephantsDream. The film’s own copyright page, checked October 12, 2026, declares CC BY 2.5; this agrees with the short sample and supersedes the archive’s 3.0 US descriptor. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license.",
+      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Downloaded from https://archive.org/details/ElephantsDream. The film’s own copyright page, checked October 12, 2026, declares CC BY 2.5; this agrees with the short sample and supersedes the archive’s 3.0 US descriptor. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
       "depthFrames": 720,
       "distinctDepthFrames": 720
     },
@@ -3902,7 +3908,7 @@
       "page": "https://archive.org/details/Tears-of-Steel",
       "license": "CC BY 3.0",
       "checked": "October 16, 2026",
-      "note": "27-second montage of selected city and robot shots: 1:10-1:16, 1:30-1:32, 1:36-1:38, 1:43-1:45, 8:41-8:48, and 9:40-9:48. Identifiable live-action faces and modern firearms are excluded. VP9 and Opus at 24 fps; depth on all 648 frames, aligned, filtered, and stabilized offline. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film under CC BY. Generated by tools/cdx-mp2-samples.mjs; neither file is fetched by default. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license.",
+      "note": "27-second montage of selected city and robot shots: 1:10-1:16, 1:30-1:32, 1:36-1:38, 1:43-1:45, 8:41-8:48, and 9:40-9:48. Identifiable live-action faces and modern firearms are excluded. VP9 and Opus at 24 fps; depth on all 648 frames, aligned, filtered, and stabilized offline. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film under CC BY. Generated by tools/cdx-mp2-samples.mjs; neither file is fetched by default. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
       "files": [
         {
           "file": "assets/toys/moving-photo-3d/tears-long.webm",
@@ -3911,8 +3917,10 @@
         },
         {
           "file": "assets/toys/moving-photo-3d/tears-long.mp2depth",
-          "bytes": 10668684,
-          "sha256": "c9151c3b37f5eb8bb4550d3fe9d74099cea1135234bdfb4b7494aacf2273f834"
+          "bytes": 4070112,
+          "sha256": "4524c581380c305ac154d513f62a94152389610753e6c3b631d22bbecf422b00",
+          "decodedBytes": 10668684,
+          "decodedSha256": "c9151c3b37f5eb8bb4550d3fe9d74099cea1135234bdfb4b7494aacf2273f834"
         }
       ],
       "depthFrames": 648,

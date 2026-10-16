@@ -1797,6 +1797,17 @@ async function firstSheetFrame(bytes, w, h, sample) {
   return [{ data: g.getImageData(0, 0, w, h).data, delay: 1000 / sample.fps }];
 }
 
+// Standard gzip keeps every MP2D byte, including every source-frame answer.
+// Accept raw caches too, so older offline bakes and comparison fixtures still load.
+export async function unpackSampleDepth(bytes) {
+  if (bytes[0] !== 0x1f || bytes[1] !== 0x8b) return bytes;
+  return new Uint8Array(
+    await new Response(
+      new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip")),
+    ).arrayBuffer(),
+  );
+}
+
 async function loadLongSample(s, onPreview) {
   if (MOVING.samples.has(s.id)) {
     const cached = MOVING.samples.get(s.id);
@@ -1806,7 +1817,7 @@ async function loadLongSample(s, onPreview) {
   }
   const root = `../../assets/toys/moving-photo-3d/${s.file}`;
   const [bytes, video] = await Promise.all([
-    readBytes(`${root}.mp2depth`),
+    readBytes(`${root}.mp2depth`).then(unpackSampleDepth),
     // Node recipe builders need the actual baked geometry, without a DOM
     // media decoder. Browser scenes always open the selected film itself.
     typeof document === "undefined"
