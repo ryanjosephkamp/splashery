@@ -1,0 +1,5827 @@
+{
+  "kind": "Complete measured 118-input ranking of the retained unchanged reconstruction; all inputs tie, and none is called an actual improvement.",
+  "createdUTC": "2026-10-16T10:34:14.589Z",
+  "methodSha256": "afd13888d3516bdf384ee8289dd6094b14e924e23b5e854c0fc827194eb6b0d8",
+  "baselineAtlasSha256": "f939791c31e0372b39d698d48aa7054c64cb3c550ae329d856179154ac387f48",
+  "currentAtlasSha256": "24e20d6be88b14c4e5589ec50f9ba36b549a951c4f868727a649d6ad2aec530c",
+  "comparisonSha256": "33ac9aa97ecb84d0d4b0b276d27645a7619a69cdc3c5df0877b456e3cd3a628f",
+  "currentSourceSha256": "58307232c89018087aaf1b4c516407c8d6bb37666e5b00c154ce1c0f32a96728",
+  "policy": "Sum supported chosen-class scores divided by their frozen review levels across both profiles; relative reduction of that sum. A measured stable zero remains zero. Sort decreasing reduction, then original manifest order; first ten and last five fill the required distinct slots.",
+  "complete": true,
+  "rows": [
+    {
+      "id": "forest",
+      "manifestOrder": 0,
+      "normalizedSeverityBefore": 19.14535335852185,
+      "normalizedSeverityAfter": 19.14535335852185,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.103067897700517,
+          "after": 0.103067897700517,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6171617161716172,
+          "after": 0.6171617161716172,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5743608711366746,
+          "after": 0.5743608711366746,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10104782695665791,
+          "after": 0.10104782695665791,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6931567328918322,
+          "after": 0.6931567328918322,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.54926932837961,
+          "after": 0.54926932837961,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "street",
+      "manifestOrder": 1,
+      "normalizedSeverityBefore": 16.144198854362465,
+      "normalizedSeverityAfter": 16.144198854362465,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.07126997488088535,
+          "after": 0.07126997488088535,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6348195329087049,
+          "after": 0.6348195329087049,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4830079927193839,
+          "after": 0.4830079927193839,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.07138960121967497,
+          "after": 0.07138960121967497,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6733001658374793,
+          "after": 0.6733001658374793,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.4225586509982463,
+          "after": 0.4225586509982463,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "still-life",
+      "manifestOrder": 2,
+      "normalizedSeverityBefore": 19.367618615870214,
+      "normalizedSeverityAfter": 19.367618615870214,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.12341780015609168,
+          "after": 0.12341780015609168,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5316455696202531,
+          "after": 0.5316455696202531,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.6067031910761116,
+          "after": 0.6067031910761116,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10672344054162938,
+          "after": 0.10672344054162938,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5569620253164557,
+          "after": 0.5569620253164557,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.618954252485435,
+          "after": 0.618954252485435,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "spiral-stairs",
+      "manifestOrder": 3,
+      "normalizedSeverityBefore": 16.496887257191204,
+      "normalizedSeverityAfter": 16.496887257191204,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11450124110856619,
+          "after": 0.11450124110856619,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5193050193050193,
+          "after": 0.5193050193050193,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.45597027468162477,
+          "after": 0.45597027468162477,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10686756238293284,
+          "after": 0.10686756238293284,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5193050193050193,
+          "after": 0.5193050193050193,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.4094722718464058,
+          "after": 0.4094722718464058,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "palace-stairs",
+      "manifestOrder": 4,
+      "normalizedSeverityBefore": 20.70862530856303,
+      "normalizedSeverityAfter": 20.70862530856303,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.18887963046402262,
+          "after": 0.18887963046402262,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5475285171102662,
+          "after": 0.5475285171102662,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4209571138742423,
+          "after": 0.4209571138742423,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.17824318603182115,
+          "after": 0.17824318603182115,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5991561181434599,
+          "after": 0.5991561181434599,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.44861264411050306,
+          "after": 0.44861264411050306,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "wildflowers",
+      "manifestOrder": 5,
+      "normalizedSeverityBefore": 15.162000573851014,
+      "normalizedSeverityAfter": 15.162000573851014,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1334799596024109,
+          "after": 0.1334799596024109,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4510166358595194,
+          "after": 0.4510166358595194,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3389637843131553,
+          "after": 0.3389637843131553,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1136603269286173,
+          "after": 0.1136603269286173,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.45584415584415583,
+          "after": 0.45584415584415583,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3284146334953847,
+          "after": 0.3284146334953847,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-train",
+      "manifestOrder": 6,
+      "normalizedSeverityBefore": 18.2528491867457,
+      "normalizedSeverityAfter": 18.2528491867457,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11444865266082678,
+          "after": 0.11444865266082678,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.7010050251256281,
+          "after": 0.7010050251256281,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3575041732153,
+          "after": 0.3575041732153,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.13534019094233007,
+          "after": 0.13534019094233007,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7457943925233644,
+          "after": 0.7457943925233644,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3586154780479722,
+          "after": 0.3586154780479722,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-oasis",
+      "manifestOrder": 7,
+      "normalizedSeverityBefore": 13.927527500390728,
+      "normalizedSeverityAfter": 13.927527500390728,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.14702533835147322,
+          "after": 0.14702533835147322,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5528255528255528,
+          "after": 0.5528255528255528,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.02565875523639527,
+          "after": 0.02565875523639527,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.15496523421207195,
+          "after": 0.15496523421207195,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6068376068376068,
+          "after": 0.6068376068376068,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.0612583529615498,
+          "after": 0.0612583529615498,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-castle",
+      "manifestOrder": 8,
+      "normalizedSeverityBefore": 17.00457993662346,
+      "normalizedSeverityAfter": 17.00457993662346,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.14716147466765953,
+          "after": 0.14716147466765953,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6298342541436464,
+          "after": 0.6298342541436464,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.26076360951750255,
+          "after": 0.26076360951750255,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1400033440391316,
+          "after": 0.1400033440391316,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6621621621621622,
+          "after": 0.6621621621621622,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.24405799859619381,
+          "after": 0.24405799859619381,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cove",
+      "manifestOrder": 9,
+      "normalizedSeverityBefore": 15.29375261462648,
+      "normalizedSeverityAfter": 15.29375261462648,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.0638142845362163,
+          "after": 0.0638142845362163,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.7456521739130435,
+          "after": 0.7456521739130435,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3395967901317427,
+          "after": 0.3395967901317427,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.061067281488223206,
+          "after": 0.061067281488223206,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.8164794007490637,
+          "after": 0.8164794007490637,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3145615484740013,
+          "after": 0.3145615484740013,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-harbor",
+      "manifestOrder": 10,
+      "normalizedSeverityBefore": 14.240699106100685,
+      "normalizedSeverityAfter": 14.240699106100685,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.09890837029080517,
+          "after": 0.09890837029080517,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.573170731707317,
+          "after": 0.573170731707317,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.27023842505345885,
+          "after": 0.27023842505345885,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.08826936257133455,
+          "after": 0.08826936257133455,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5612998522895125,
+          "after": 0.5612998522895125,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3130970046309979,
+          "after": 0.3130970046309979,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-paper-valley",
+      "manifestOrder": 11,
+      "normalizedSeverityBefore": 16.73353249540719,
+      "normalizedSeverityAfter": 16.73353249540719,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.12211935138838624,
+          "after": 0.12211935138838624,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6770334928229665,
+          "after": 0.6770334928229665,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.22281763085905382,
+          "after": 0.22281763085905382,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.12488357174190585,
+          "after": 0.12488357174190585,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6642512077294686,
+          "after": 0.6642512077294686,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.35498775629910273,
+          "after": 0.35498775629910273,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-farm",
+      "manifestOrder": 12,
+      "normalizedSeverityBefore": 14.259435827904806,
+      "normalizedSeverityAfter": 14.259435827904806,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.09594106316793044,
+          "after": 0.09594106316793044,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5673469387755102,
+          "after": 0.5673469387755102,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.25530448918611026,
+          "after": 0.25530448918611026,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.08999991640986513,
+          "after": 0.08999991640986513,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6160267111853088,
+          "after": 0.6160267111853088,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.2988019741122627,
+          "after": 0.2988019741122627,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-treehouses",
+      "manifestOrder": 13,
+      "normalizedSeverityBefore": 19.263608525774583,
+      "normalizedSeverityAfter": 19.263608525774583,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6169354838709677,
+          "after": 0.6169354838709677,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5133497916644888,
+          "after": 0.5133497916644888,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.25348340233019223,
+          "after": 0.25348340233019223,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6763888888888889,
+          "after": 0.6763888888888889,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.45563544889358515,
+          "after": 0.45563544889358515,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-library",
+      "manifestOrder": 14,
+      "normalizedSeverityBefore": 22.07852871973278,
+      "normalizedSeverityAfter": 22.07852871973278,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1848049575857746,
+          "after": 0.1848049575857746,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.7802197802197802,
+          "after": 0.7802197802197802,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.38507384085525,
+          "after": 0.38507384085525,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.19579462468609038,
+          "after": 0.19579462468609038,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7719298245614035,
+          "after": 0.7719298245614035,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3353448299992854,
+          "after": 0.3353448299992854,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-workshop",
+      "manifestOrder": 15,
+      "normalizedSeverityBefore": 18.810092813589236,
+      "normalizedSeverityAfter": 18.810092813589236,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11576972732344748,
+          "after": 0.11576972732344748,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6037735849056604,
+          "after": 0.6037735849056604,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4955065735907377,
+          "after": 0.4955065735907377,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1165615895155971,
+          "after": 0.1165615895155971,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6415584415584416,
+          "after": 0.6415584415584416,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5207658904531542,
+          "after": 0.5207658904531542,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cloister",
+      "manifestOrder": 16,
+      "normalizedSeverityBefore": 18.16422597450075,
+      "normalizedSeverityAfter": 18.16422597450075,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.18998841712715472,
+          "after": 0.18998841712715472,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4684385382059801,
+          "after": 0.4684385382059801,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.35212987936095297,
+          "after": 0.35212987936095297,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.14506249734434742,
+          "after": 0.14506249734434742,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5367847411444142,
+          "after": 0.5367847411444142,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.36214562803323047,
+          "after": 0.36214562803323047,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-greenhouse",
+      "manifestOrder": 17,
+      "normalizedSeverityBefore": 20.811959042579524,
+      "normalizedSeverityAfter": 20.811959042579524,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.16723892048060596,
+          "after": 0.16723892048060596,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4928909952606635,
+          "after": 0.4928909952606635,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.46853346373170623,
+          "after": 0.46853346373170623,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.19849531162867864,
+          "after": 0.19849531162867864,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5854978354978355,
+          "after": 0.5854978354978355,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.4729653991765306,
+          "after": 0.4729653991765306,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-attic",
+      "manifestOrder": 18,
+      "normalizedSeverityBefore": 14.56636338110973,
+      "normalizedSeverityAfter": 14.56636338110973,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11072041738257242,
+          "after": 0.11072041738257242,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.3836477987421384,
+          "after": 0.3836477987421384,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4064419638858968,
+          "after": 0.4064419638858968,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.09311796465714947,
+          "after": 0.09311796465714947,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.4908616187989556,
+          "after": 0.4908616187989556,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.35823654747578515,
+          "after": 0.35823654747578515,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-bamboo",
+      "manifestOrder": 19,
+      "normalizedSeverityBefore": 19.61717034847542,
+      "normalizedSeverityAfter": 19.61717034847542,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.15997252429326955,
+          "after": 0.15997252429326955,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.33281972265023113,
+          "after": 0.33281972265023113,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5770004785803504,
+          "after": 0.5770004785803504,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.18103519416026095,
+          "after": 0.18103519416026095,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.3890020366598778,
+          "after": 0.3890020366598778,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5454298100076411,
+          "after": 0.5454298100076411,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-terraces",
+      "manifestOrder": 20,
+      "normalizedSeverityBefore": 13.542647475269082,
+      "normalizedSeverityAfter": 13.542647475269082,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.08887055231298523,
+          "after": 0.08887055231298523,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5178571428571429,
+          "after": 0.5178571428571429,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.2429375529702359,
+          "after": 0.2429375529702359,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.0802045677868403,
+          "after": 0.0802045677868403,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5803108808290155,
+          "after": 0.5803108808290155,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.33080185018116204,
+          "after": 0.33080185018116204,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-canyon",
+      "manifestOrder": 21,
+      "normalizedSeverityBefore": 16.498525854506706,
+      "normalizedSeverityAfter": 16.498525854506706,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.132209561793448,
+          "after": 0.132209561793448,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.481981981981982,
+          "after": 0.481981981981982,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.21217615524480216,
+          "after": 0.21217615524480216,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10075964652678604,
+          "after": 0.10075964652678604,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5,
+          "after": 0.5,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.6524817052438394,
+          "after": 0.6524817052438394,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-arch",
+      "manifestOrder": 22,
+      "normalizedSeverityBefore": 12.925384693968862,
+      "normalizedSeverityAfter": 12.925384693968862,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.06288724909085806,
+          "after": 0.06288724909085806,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5549132947976878,
+          "after": 0.5549132947976878,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.2795113944444938,
+          "after": 0.2795113944444938,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.0543010372678373,
+          "after": 0.0543010372678373,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6413502109704642,
+          "after": 0.6413502109704642,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.32264260647961407,
+          "after": 0.32264260647961407,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-fallen-log",
+      "manifestOrder": 23,
+      "normalizedSeverityBefore": 13.818306014760594,
+      "normalizedSeverityAfter": 13.818306014760594,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.04912176219745531,
+          "after": 0.04912176219745531,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4450704225352113,
+          "after": 0.4450704225352113,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.41454272063901143,
+          "after": 0.41454272063901143,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.057086203677354785,
+          "after": 0.057086203677354785,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5364963503649635,
+          "after": 0.5364963503649635,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5237482298694087,
+          "after": 0.5237482298694087,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-alpine-lake",
+      "manifestOrder": 24,
+      "normalizedSeverityBefore": 15.756831988760005,
+      "normalizedSeverityAfter": 15.756831988760005,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.06751323877662713,
+          "after": 0.06751323877662713,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6985559566787004,
+          "after": 0.6985559566787004,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.2546924681287568,
+          "after": 0.2546924681287568,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.11360606440454846,
+          "after": 0.11360606440454846,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7544117647058823,
+          "after": 0.7544117647058823,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3399091522173985,
+          "after": 0.3399091522173985,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-ice-falls",
+      "manifestOrder": 25,
+      "normalizedSeverityBefore": 19.082318651978785,
+      "normalizedSeverityAfter": 19.082318651978785,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.09977341744447239,
+          "after": 0.09977341744447239,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.7936842105263158,
+          "after": 0.7936842105263158,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.46008378994444443,
+          "after": 0.46008378994444443,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10224458854609873,
+          "after": 0.10224458854609873,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.8663522012578616,
+          "after": 0.8663522012578616,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.39966917654959844,
+          "after": 0.39966917654959844,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-floating-isles",
+      "manifestOrder": 26,
+      "normalizedSeverityBefore": 15.629858693190933,
+      "normalizedSeverityAfter": 15.629858693190933,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.10880327043298497,
+          "after": 0.10880327043298497,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5161290322580645,
+          "after": 0.5161290322580645,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.299465778207907,
+          "after": 0.299465778207907,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1277489260719929,
+          "after": 0.1277489260719929,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5265017667844523,
+          "after": 0.5265017667844523,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3759691895951782,
+          "after": 0.3759691895951782,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-wave",
+      "manifestOrder": 27,
+      "normalizedSeverityBefore": 12.83725171069951,
+      "normalizedSeverityAfter": 12.83725171069951,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.06004787796546768,
+          "after": 0.06004787796546768,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.46255506607929514,
+          "after": 0.46255506607929514,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.40699888793510475,
+          "after": 0.40699888793510475,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.049909789555614405,
+          "after": 0.049909789555614405,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.4915254237288136,
+          "after": 0.4915254237288136,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.39068724810968214,
+          "after": 0.39068724810968214,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-explorer-desk",
+      "manifestOrder": 28,
+      "normalizedSeverityBefore": 15.727989538889455,
+      "normalizedSeverityAfter": 15.727989538889455,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.12981439050609664,
+          "after": 0.12981439050609664,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.47474747474747475,
+          "after": 0.47474747474747475,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.32015263109829395,
+          "after": 0.32015263109829395,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1368526372700059,
+          "after": 0.1368526372700059,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.4952978056426332,
+          "after": 0.4952978056426332,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.31151048528215874,
+          "after": 0.31151048528215874,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-watchmaker",
+      "manifestOrder": 29,
+      "normalizedSeverityBefore": 16.198410952166608,
+      "normalizedSeverityAfter": 16.198410952166608,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.13220355824214125,
+          "after": 0.13220355824214125,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.49786324786324787,
+          "after": 0.49786324786324787,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.329365878710154,
+          "after": 0.329365878710154,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.15181438339528552,
+          "after": 0.15181438339528552,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5096899224806202,
+          "after": 0.5096899224806202,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.27966360521658573,
+          "after": 0.27966360521658573,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-dragonfly",
+      "manifestOrder": 30,
+      "normalizedSeverityBefore": 19.73552874971173,
+      "normalizedSeverityAfter": 19.73552874971173,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.23799247846254876,
+          "after": 0.23799247846254876,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.3821656050955414,
+          "after": 0.3821656050955414,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3125378791642449,
+          "after": 0.3125378791642449,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.2280467309901096,
+          "after": 0.2280467309901096,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.4020618556701031,
+          "after": 0.4020618556701031,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3119738022708125,
+          "after": 0.3119738022708125,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-mushrooms",
+      "manifestOrder": 31,
+      "normalizedSeverityBefore": 15.921384838753928,
+      "normalizedSeverityAfter": 15.921384838753928,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11671991641412353,
+          "after": 0.11671991641412353,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4959677419354839,
+          "after": 0.4959677419354839,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.35985022039115255,
+          "after": 0.35985022039115255,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1183145897632008,
+          "after": 0.1183145897632008,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.52,
+          "after": 0.52,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3850023008053576,
+          "after": 0.3850023008053576,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-market",
+      "manifestOrder": 32,
+      "normalizedSeverityBefore": 17.093510710908088,
+      "normalizedSeverityAfter": 17.093510710908088,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.08334556480264572,
+          "after": 0.08334556480264572,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5884615384615385,
+          "after": 0.5884615384615385,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4824558217448268,
+          "after": 0.4824558217448268,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10460938870091353,
+          "after": 0.10460938870091353,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6293604651162791,
+          "after": 0.6293604651162791,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.46337320656967623,
+          "after": 0.46337320656967623,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-gears",
+      "manifestOrder": 33,
+      "normalizedSeverityBefore": 17.137695334603404,
+      "normalizedSeverityAfter": 17.137695334603404,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.08784959546071992,
+          "after": 0.08784959546071992,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5246913580246914,
+          "after": 0.5246913580246914,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5232620213659172,
+          "after": 0.5232620213659172,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.09326056537513205,
+          "after": 0.09326056537513205,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6194225721784777,
+          "after": 0.6194225721784777,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5101437280377719,
+          "after": 0.5101437280377719,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-chess",
+      "manifestOrder": 34,
+      "normalizedSeverityBefore": 17.91918456499886,
+      "normalizedSeverityAfter": 17.91918456499886,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.16403240506997804,
+          "after": 0.16403240506997804,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5101351351351351,
+          "after": 0.5101351351351351,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.42002888524752713,
+          "after": 0.42002888524752713,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1455596109592612,
+          "after": 0.1455596109592612,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5294117647058824,
+          "after": 0.5294117647058824,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.327218564511892,
+          "after": 0.327218564511892,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-book-city",
+      "manifestOrder": 35,
+      "normalizedSeverityBefore": 16.368410948679372,
+      "normalizedSeverityAfter": 16.368410948679372,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.10917993930505754,
+          "after": 0.10917993930505754,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5063063063063064,
+          "after": 0.5063063063063064,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4666965760019622,
+          "after": 0.4666965760019622,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10681112093556983,
+          "after": 0.10681112093556983,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5073260073260073,
+          "after": 0.5073260073260073,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.41837435517335575,
+          "after": 0.41837435517335575,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "manifestOrder": 36,
+      "normalizedSeverityBefore": 11.114676074624118,
+      "normalizedSeverityAfter": 11.114676074624118,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1215480194518005,
+          "after": 0.1215480194518005,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.30201342281879195,
+          "after": 0.30201342281879195,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.16669645193045302,
+          "after": 0.16669645193045302,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10875794211920606,
+          "after": 0.10875794211920606,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.25862068965517243,
+          "after": 0.25862068965517243,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.21638201901641707,
+          "after": 0.21638201901641707,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "manifestOrder": 37,
+      "normalizedSeverityBefore": 14.664942981219635,
+      "normalizedSeverityAfter": 14.664942981219635,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.06588481704316948,
+          "after": 0.06588481704316948,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4799054373522459,
+          "after": 0.4799054373522459,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.40168506703777856,
+          "after": 0.40168506703777856,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.0909371414475396,
+          "after": 0.0909371414475396,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5123674911660777,
+          "after": 0.5123674911660777,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.46576933941626486,
+          "after": 0.46576933941626486,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "manifestOrder": 38,
+      "normalizedSeverityBefore": 13.00783386481768,
+      "normalizedSeverityAfter": 13.00783386481768,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1257535178034271,
+          "after": 0.1257535178034271,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.24770642201834864,
+          "after": 0.24770642201834864,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3836409618849538,
+          "after": 0.3836409618849538,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.11183618209227018,
+          "after": 0.11183618209227018,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.31092436974789917,
+          "after": 0.31092436974789917,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.25759964940414737,
+          "after": 0.25759964940414737,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "manifestOrder": 39,
+      "normalizedSeverityBefore": 17.82751404514798,
+      "normalizedSeverityAfter": 17.82751404514798,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.14587749629515692,
+          "after": 0.14587749629515692,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5890909090909091,
+          "after": 0.5890909090909091,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.43164322011928624,
+          "after": 0.43164322011928624,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1370034744511067,
+          "after": 0.1370034744511067,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6071428571428571,
+          "after": 0.6071428571428571,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.28450492167909736,
+          "after": 0.28450492167909736,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "manifestOrder": 40,
+      "normalizedSeverityBefore": 14.4607098493256,
+      "normalizedSeverityAfter": 14.4607098493256,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.10569868088789372,
+          "after": 0.10569868088789372,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.3641025641025641,
+          "after": 0.3641025641025641,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3974091188700275,
+          "after": 0.3974091188700275,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10715267783027513,
+          "after": 0.10715267783027513,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.42857142857142855,
+          "after": 0.42857142857142855,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.37899926883018475,
+          "after": 0.37899926883018475,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "manifestOrder": 41,
+      "normalizedSeverityBefore": 16.124636707768246,
+      "normalizedSeverityAfter": 16.124636707768246,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.10877027699475933,
+          "after": 0.10877027699475933,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.41605839416058393,
+          "after": 0.41605839416058393,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4618181605760465,
+          "after": 0.4618181605760465,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.11108890387765251,
+          "after": 0.11108890387765251,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.45962732919254656,
+          "after": 0.45962732919254656,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.47564112480279797,
+          "after": 0.47564112480279797,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "manifestOrder": 42,
+      "normalizedSeverityBefore": 14.993398456713273,
+      "normalizedSeverityAfter": 14.993398456713273,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1278428455358411,
+          "after": 0.1278428455358411,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.2911694510739857,
+          "after": 0.2911694510739857,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4882000848209675,
+          "after": 0.4882000848209675,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.12302921680129476,
+          "after": 0.12302921680129476,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.2789115646258503,
+          "after": 0.2789115646258503,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.39247868814688724,
+          "after": 0.39247868814688724,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "manifestOrder": 43,
+      "normalizedSeverityBefore": 20.169404565265445,
+      "normalizedSeverityAfter": 20.169404565265445,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.12960385310472003,
+          "after": 0.12960385310472003,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6152019002375297,
+          "after": 0.6152019002375297,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5663521220422081,
+          "after": 0.5663521220422081,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.12121802663724535,
+          "after": 0.12121802663724535,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7032967032967034,
+          "after": 0.7032967032967034,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5296025610645636,
+          "after": 0.5296025610645636,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "manifestOrder": 44,
+      "normalizedSeverityBefore": 13.372801545930606,
+      "normalizedSeverityAfter": 13.372801545930606,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.07995429643098986,
+          "after": 0.07995429643098986,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6290322580645161,
+          "after": 0.6290322580645161,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.21713420113678095,
+          "after": 0.21713420113678095,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.0627608006092162,
+          "after": 0.0627608006092162,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6496350364963503,
+          "after": 0.6496350364963503,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.2946039459313873,
+          "after": 0.2946039459313873,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "manifestOrder": 45,
+      "normalizedSeverityBefore": 18.985539577974308,
+      "normalizedSeverityAfter": 18.985539577974308,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.10022200273245119,
+          "after": 0.10022200273245119,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.570281124497992,
+          "after": 0.570281124497992,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5345214459811517,
+          "after": 0.5345214459811517,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10701200490675236,
+          "after": 0.10701200490675236,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6888260254596889,
+          "after": 0.6888260254596889,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5918515995997204,
+          "after": 0.5918515995997204,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "manifestOrder": 46,
+      "normalizedSeverityBefore": 18.24999598686903,
+      "normalizedSeverityAfter": 18.24999598686903,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1075987910977974,
+          "after": 0.1075987910977974,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5411392405063291,
+          "after": 0.5411392405063291,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5434470335651996,
+          "after": 0.5434470335651996,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10430639968296586,
+          "after": 0.10430639968296586,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6212121212121212,
+          "after": 0.6212121212121212,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5276443777484554,
+          "after": 0.5276443777484554,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "manifestOrder": 47,
+      "normalizedSeverityBefore": 20.43852579479718,
+      "normalizedSeverityAfter": 20.43852579479718,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.14289766530110679,
+          "after": 0.14289766530110679,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6619718309859155,
+          "after": 0.6619718309859155,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5227888283464428,
+          "after": 0.5227888283464428,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1406799838435586,
+          "after": 0.1406799838435586,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6948356807511737,
+          "after": 0.6948356807511737,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.46196822277782157,
+          "after": 0.46196822277782157,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "manifestOrder": 48,
+      "normalizedSeverityBefore": 15.70247021155634,
+      "normalizedSeverityAfter": 15.70247021155634,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1447317041876602,
+          "after": 0.1447317041876602,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5658362989323843,
+          "after": 0.5658362989323843,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5311709896230126,
+          "after": 0.5311709896230126,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5209790209790209,
+          "after": 0.5209790209790209,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.4663441614731588,
+          "after": 0.4663441614731588,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "manifestOrder": 49,
+      "normalizedSeverityBefore": 15.434039819072995,
+      "normalizedSeverityAfter": 15.434039819072995,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11492239247572426,
+          "after": 0.11492239247572426,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4968152866242038,
+          "after": 0.4968152866242038,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3117837021683293,
+          "after": 0.3117837021683293,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.11487816749803782,
+          "after": 0.11487816749803782,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5433526011560693,
+          "after": 0.5433526011560693,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.36144425495580723,
+          "after": 0.36144425495580723,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "manifestOrder": 50,
+      "normalizedSeverityBefore": 14.388998131046545,
+      "normalizedSeverityAfter": 14.388998131046545,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.08308776778947906,
+          "after": 0.08308776778947906,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.33653846153846156,
+          "after": 0.33653846153846156,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.539830194162328,
+          "after": 0.539830194162328,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.08605519823539327,
+          "after": 0.08605519823539327,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.41796200345423146,
+          "after": 0.41796200345423146,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.4183580541568631,
+          "after": 0.4183580541568631,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "manifestOrder": 51,
+      "normalizedSeverityBefore": 13.245261970586474,
+      "normalizedSeverityAfter": 13.245261970586474,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.07035958486859059,
+          "after": 0.07035958486859059,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5333333333333333,
+          "after": 0.5333333333333333,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.36842236483581936,
+          "after": 0.36842236483581936,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.06306731293214164,
+          "after": 0.06306731293214164,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.44155844155844154,
+          "after": 0.44155844155844154,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.38684723283057465,
+          "after": 0.38684723283057465,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "manifestOrder": 52,
+      "normalizedSeverityBefore": 21.42106703283942,
+      "normalizedSeverityAfter": 21.42106703283942,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.13570638197692952,
+          "after": 0.13570638197692952,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.7013698630136986,
+          "after": 0.7013698630136986,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5423007811642401,
+          "after": 0.5423007811642401,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.14070517479965725,
+          "after": 0.14070517479965725,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7448559670781894,
+          "after": 0.7448559670781894,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5496465632805566,
+          "after": 0.5496465632805566,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "manifestOrder": 53,
+      "normalizedSeverityBefore": 16.629893522085098,
+      "normalizedSeverityAfter": 16.629893522085098,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.10330363060228073,
+          "after": 0.10330363060228073,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6092436974789915,
+          "after": 0.6092436974789915,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.37917287808272765,
+          "after": 0.37917287808272765,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10114050247889741,
+          "after": 0.10114050247889741,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.629746835443038,
+          "after": 0.629746835443038,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.4194027514840968,
+          "after": 0.4194027514840968,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "manifestOrder": 54,
+      "normalizedSeverityBefore": 12.655985550524974,
+      "normalizedSeverityAfter": 12.655985550524974,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.07266041604922038,
+          "after": 0.07266041604922038,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6859504132231405,
+          "after": 0.6859504132231405,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.1387846444700681,
+          "after": 0.1387846444700681,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.06867709446103196,
+          "after": 0.06867709446103196,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6640625,
+          "after": 0.6640625,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.21708783877787607,
+          "after": 0.21708783877787607,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "manifestOrder": 55,
+      "normalizedSeverityBefore": 16.25677260501136,
+      "normalizedSeverityAfter": 16.25677260501136,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1146989419469249,
+          "after": 0.1146989419469249,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.618421052631579,
+          "after": 0.618421052631579,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.30743953594433404,
+          "after": 0.30743953594433404,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.11529347379054845,
+          "after": 0.11529347379054845,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5950413223140496,
+          "after": 0.5950413223140496,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.35850801458262305,
+          "after": 0.35850801458262305,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "manifestOrder": 56,
+      "normalizedSeverityBefore": 20.33771885268021,
+      "normalizedSeverityAfter": 20.33771885268021,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.14280787132511696,
+          "after": 0.14280787132511696,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5319548872180451,
+          "after": 0.5319548872180451,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5641871299102454,
+          "after": 0.5641871299102454,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.15284743779610432,
+          "after": 0.15284743779610432,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5806938159879337,
+          "after": 0.5806938159879337,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5432767613827224,
+          "after": 0.5432767613827224,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "manifestOrder": 57,
+      "normalizedSeverityBefore": 15.985904668321817,
+      "normalizedSeverityAfter": 15.985904668321817,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.07806268197101218,
+          "after": 0.07806268197101218,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.802610114192496,
+          "after": 0.802610114192496,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4372451784636962,
+          "after": 0.4372451784636962,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.8690228690228691,
+          "after": 0.8690228690228691,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.414180726981757,
+          "after": 0.414180726981757,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "manifestOrder": 58,
+      "normalizedSeverityBefore": 15.292947426193889,
+      "normalizedSeverityAfter": 15.292947426193889,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.07924449225624093,
+          "after": 0.07924449225624093,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5845824411134903,
+          "after": 0.5845824411134903,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4170354145785121,
+          "after": 0.4170354145785121,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.08159658660084364,
+          "after": 0.08159658660084364,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6255707762557078,
+          "after": 0.6255707762557078,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3661377406096058,
+          "after": 0.3661377406096058,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "manifestOrder": 59,
+      "normalizedSeverityBefore": 17.73192646231707,
+      "normalizedSeverityAfter": 17.73192646231707,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1467826872531371,
+          "after": 0.1467826872531371,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5428571428571428,
+          "after": 0.5428571428571428,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3658517155969536,
+          "after": 0.3658517155969536,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1374038629563408,
+          "after": 0.1374038629563408,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5431754874651811,
+          "after": 0.5431754874651811,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.4137132177233215,
+          "after": 0.4137132177233215,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "manifestOrder": 60,
+      "normalizedSeverityBefore": 17.80788935908687,
+      "normalizedSeverityAfter": 17.80788935908687,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5149863760217984,
+          "after": 0.5149863760217984,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5675776419295975,
+          "after": 0.5675776419295975,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.20291269262661943,
+          "after": 0.20291269262661943,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5150250417362271,
+          "after": 0.5150250417362271,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5701746012650912,
+          "after": 0.5701746012650912,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "manifestOrder": 61,
+      "normalizedSeverityBefore": 18.800107150763644,
+      "normalizedSeverityAfter": 18.800107150763644,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.16908350009045917,
+          "after": 0.16908350009045917,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.43037974683544306,
+          "after": 0.43037974683544306,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5529418482993277,
+          "after": 0.5529418482993277,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.16378843480798572,
+          "after": 0.16378843480798572,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.42295760082730094,
+          "after": 0.42295760082730094,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.37880145769899265,
+          "after": 0.37880145769899265,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "manifestOrder": 62,
+      "normalizedSeverityBefore": 18.021225063518443,
+      "normalizedSeverityAfter": 18.021225063518443,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.22398798705273074,
+          "after": 0.22398798705273074,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.7503828483920367,
+          "after": 0.7503828483920367,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.17588280646533738,
+          "after": 0.17588280646533738,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.8545081967213115,
+          "after": 0.8545081967213115,
+          "reviewLevel": 0.2
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "manifestOrder": 63,
+      "normalizedSeverityBefore": 19.181184277636813,
+      "normalizedSeverityAfter": 19.181184277636813,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.09750155231333653,
+          "after": 0.09750155231333653,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5728643216080402,
+          "after": 0.5728643216080402,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5980356905781905,
+          "after": 0.5980356905781905,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10271259361966412,
+          "after": 0.10271259361966412,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.624113475177305,
+          "after": 0.624113475177305,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.63060555622957,
+          "after": 0.63060555622957,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "manifestOrder": 64,
+      "normalizedSeverityBefore": 22.548349548438154,
+      "normalizedSeverityAfter": 22.548349548438154,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.15095494651321564,
+          "after": 0.15095494651321564,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6852589641434262,
+          "after": 0.6852589641434262,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.40205925995108444,
+          "after": 0.40205925995108444,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.2265059432468165,
+          "after": 0.2265059432468165,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7985611510791367,
+          "after": 0.7985611510791367,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.45184974929759636,
+          "after": 0.45184974929759636,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "manifestOrder": 65,
+      "normalizedSeverityBefore": 15.385393883352252,
+      "normalizedSeverityAfter": 15.385393883352252,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.08302227633368085,
+          "after": 0.08302227633368085,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.42857142857142855,
+          "after": 0.42857142857142855,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4285288715657086,
+          "after": 0.4285288715657086,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.13648525858081265,
+          "after": 0.13648525858081265,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5107296137339056,
+          "after": 0.5107296137339056,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.35165117327877815,
+          "after": 0.35165117327877815,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "manifestOrder": 66,
+      "normalizedSeverityBefore": 14.814941473813704,
+      "normalizedSeverityAfter": 14.814941473813704,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.06106866775774181,
+          "after": 0.06106866775774181,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.387434554973822,
+          "after": 0.387434554973822,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5393692702908707,
+          "after": 0.5393692702908707,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.07200755810257378,
+          "after": 0.07200755810257378,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.546875,
+          "after": 0.546875,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.4831039375746352,
+          "after": 0.4831039375746352,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "manifestOrder": 67,
+      "normalizedSeverityBefore": 11.637438239967658,
+      "normalizedSeverityAfter": 11.637438239967658,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.09854364518746908,
+          "after": 0.09854364518746908,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.1836734693877551,
+          "after": 0.1836734693877551,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3729803782589326,
+          "after": 0.3729803782589326,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.08691567457110765,
+          "after": 0.08691567457110765,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.28,
+          "after": 0.28,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3294078066007369,
+          "after": 0.3294078066007369,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "manifestOrder": 68,
+      "normalizedSeverityBefore": 15.807525728563535,
+      "normalizedSeverityAfter": 15.807525728563535,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.08499031107022215,
+          "after": 0.08499031107022215,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.48046875,
+          "after": 0.48046875,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5032292802017049,
+          "after": 0.5032292802017049,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.09177724472082832,
+          "after": 0.09177724472082832,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.4634146341463415,
+          "after": 0.4634146341463415,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.49710870675663016,
+          "after": 0.49710870675663016,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "manifestOrder": 69,
+      "normalizedSeverityBefore": 11.159895069257411,
+      "normalizedSeverityAfter": 11.159895069257411,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.06724519940860103,
+          "after": 0.06724519940860103,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.36492890995260663,
+          "after": 0.36492890995260663,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3309471867839143,
+          "after": 0.3309471867839143,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.07010052704598034,
+          "after": 0.07010052704598034,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.32857142857142857,
+          "after": 0.32857142857142857,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.30786534550699074,
+          "after": 0.30786534550699074,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "manifestOrder": 70,
+      "normalizedSeverityBefore": 15.314768300222166,
+      "normalizedSeverityAfter": 15.314768300222166,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.07500597077456032,
+          "after": 0.07500597077456032,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.3789954337899543,
+          "after": 0.3789954337899543,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.515523421317682,
+          "after": 0.515523421317682,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.08939818747438727,
+          "after": 0.08939818747438727,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.45864661654135336,
+          "after": 0.45864661654135336,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5369446925336088,
+          "after": 0.5369446925336088,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "manifestOrder": 71,
+      "normalizedSeverityBefore": 14.916156542476717,
+      "normalizedSeverityAfter": 14.916156542476717,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.07620956842035066,
+          "after": 0.07620956842035066,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6113989637305699,
+          "after": 0.6113989637305699,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3408432132448844,
+          "after": 0.3408432132448844,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.08986523141399026,
+          "after": 0.08986523141399026,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7336683417085427,
+          "after": 0.7336683417085427,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.2649992896685103,
+          "after": 0.2649992896685103,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "manifestOrder": 72,
+      "normalizedSeverityBefore": 12.903361778362992,
+      "normalizedSeverityAfter": 12.903361778362992,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.7647058823529411,
+          "after": 0.7647058823529411,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.349947953484099,
+          "after": 0.349947953484099,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.11268534199894914,
+          "after": 0.11268534199894914,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7859424920127795,
+          "after": 0.7859424920127795,
+          "reviewLevel": 0.2
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "manifestOrder": 73,
+      "normalizedSeverityBefore": 15.131205232376526,
+      "normalizedSeverityAfter": 15.131205232376526,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.12019865221017603,
+          "after": 0.12019865221017603,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.46421663442940037,
+          "after": 0.46421663442940037,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.31408696089516375,
+          "after": 0.31408696089516375,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1288439565847352,
+          "after": 0.1288439565847352,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5058236272878536,
+          "after": 0.5058236272878536,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.29415384469245787,
+          "after": 0.29415384469245787,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "manifestOrder": 74,
+      "normalizedSeverityBefore": 21.537545678556572,
+      "normalizedSeverityAfter": 21.537545678556572,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1786176305762507,
+          "after": 0.1786176305762507,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4970414201183432,
+          "after": 0.4970414201183432,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.6395993142420995,
+          "after": 0.6395993142420995,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.11770010040042359,
+          "after": 0.11770010040042359,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6068965517241379,
+          "after": 0.6068965517241379,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.6518875674969971,
+          "after": 0.6518875674969971,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "manifestOrder": 75,
+      "normalizedSeverityBefore": 14.727160978001638,
+      "normalizedSeverityAfter": 14.727160978001638,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11062987311115602,
+          "after": 0.11062987311115602,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4783950617283951,
+          "after": 0.4783950617283951,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.32859416599966285,
+          "after": 0.32859416599966285,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.11634284640316837,
+          "after": 0.11634284640316837,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.4540059347181009,
+          "after": 0.4540059347181009,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.33003153518699435,
+          "after": 0.33003153518699435,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-still-life",
+      "manifestOrder": 76,
+      "normalizedSeverityBefore": 10.336598464863123,
+      "normalizedSeverityAfter": 10.336598464863123,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.16261177793909978,
+          "after": 0.16261177793909978,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0,
+          "after": 0,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.15260964683687364,
+          "after": 0.15260964683687364,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3684094268195679,
+          "after": 0.3684094268195679,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-room",
+      "manifestOrder": 77,
+      "normalizedSeverityBefore": 16.400150574943265,
+      "normalizedSeverityAfter": 16.400150574943265,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.13406495391767162,
+          "after": 0.13406495391767162,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.7081197582080332,
+          "after": 0.7081197582080332,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1264254109309362,
+          "after": 0.1264254109309362,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.7750639598511773,
+          "after": 0.7750639598511773,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-forest",
+      "manifestOrder": 78,
+      "normalizedSeverityBefore": 7.371511199852996,
+      "normalizedSeverityAfter": 7.371511199852996,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11501989804554942,
+          "after": 0.11501989804554942,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.11559522621392859,
+          "after": 0.11559522621392859,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.0785636846309791,
+          "after": 0.0785636846309791,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.26419301872703893,
+          "after": 0.26419301872703893,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-stairs",
+      "manifestOrder": 79,
+      "normalizedSeverityBefore": 10.402168301025544,
+      "normalizedSeverityAfter": 10.402168301025544,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.14944914010306837,
+          "after": 0.14944914010306837,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.18151128572538766,
+          "after": 0.18151128572538766,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1550289659375379,
+          "after": 0.1550289659375379,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.23702106177617022,
+          "after": 0.23702106177617022,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-coast",
+      "manifestOrder": 80,
+      "normalizedSeverityBefore": 12.645709065236218,
+      "normalizedSeverityAfter": 12.645709065236218,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.18453306569210412,
+          "after": 0.18453306569210412,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.21069411727926168,
+          "after": 0.21069411727926168,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.19328479521391959,
+          "after": 0.19328479521391959,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.26934526410858206,
+          "after": 0.26934526410858206,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-desk",
+      "manifestOrder": 81,
+      "normalizedSeverityBefore": 6.304777668187711,
+      "normalizedSeverityAfter": 6.304777668187711,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 3,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.12114443674026008,
+          "after": 0.12114443674026008,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0,
+          "after": 0,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.13104666998724834,
+          "after": 0.13104666998724834,
+          "reviewLevel": 0.04
+        }
+      ]
+    },
+    {
+      "id": "truth-fur",
+      "manifestOrder": 82,
+      "normalizedSeverityBefore": 13.804239673025943,
+      "normalizedSeverityAfter": 13.804239673025943,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.15126366768163613,
+          "after": 0.15126366768163613,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.27250305245530726,
+          "after": 0.27250305245530726,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.23757968500426224,
+          "after": 0.23757968500426224,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.33997032592646537,
+          "after": 0.33997032592646537,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-night",
+      "manifestOrder": 83,
+      "normalizedSeverityBefore": 13.23470228988856,
+      "normalizedSeverityAfter": 13.23470228988856,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.21353140909426266,
+          "after": 0.21353140909426266,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.20049424550695727,
+          "after": 0.20049424550695727,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.17572708331868378,
+          "after": 0.17572708331868378,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3249917514277777,
+          "after": 0.3249917514277777,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-lattice",
+      "manifestOrder": 84,
+      "normalizedSeverityBefore": 13.957462890879961,
+      "normalizedSeverityAfter": 13.957462890879961,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.21520656166786448,
+          "after": 0.21520656166786448,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.25622274577054094,
+          "after": 0.25622274577054094,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.22546278740050807,
+          "after": 0.22546278740050807,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.18488662885505625,
+          "after": 0.18488662885505625,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-arches",
+      "manifestOrder": 85,
+      "normalizedSeverityBefore": 9.597024751929741,
+      "normalizedSeverityAfter": 9.597024751929741,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.12825724751134526,
+          "after": 0.12825724751134526,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.15412939019409155,
+          "after": 0.15412939019409155,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.12748110526558087,
+          "after": 0.12748110526558087,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3264054996818966,
+          "after": 0.3264054996818966,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-leaves",
+      "manifestOrder": 86,
+      "normalizedSeverityBefore": 9.068748403926424,
+      "normalizedSeverityAfter": 9.068748403926424,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11981390352881184,
+          "after": 0.11981390352881184,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.18673173135925858,
+          "after": 0.18673173135925858,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.13106916407155367,
+          "after": 0.13106916407155367,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.23276902572833436,
+          "after": 0.23276902572833436,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "truth-steps",
+      "manifestOrder": 87,
+      "normalizedSeverityBefore": 8.62585105570928,
+      "normalizedSeverityAfter": 8.62585105570928,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1261249621012491,
+          "after": 0.1261249621012491,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.04544247043137173,
+          "after": 0.04544247043137173,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1584288491303494,
+          "after": 0.1584288491303494,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.18135839580652602,
+          "after": 0.18135839580652602,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-00-147167228",
+      "manifestOrder": 88,
+      "normalizedSeverityBefore": 18.341289668093566,
+      "normalizedSeverityAfter": 18.341289668093566,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11026606528561694,
+          "after": 0.11026606528561694,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6438356164383562,
+          "after": 0.6438356164383562,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4369915161161836,
+          "after": 0.4369915161161836,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10799329636319514,
+          "after": 0.10799329636319514,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6417910447761194,
+          "after": 0.6417910447761194,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5315093320039493,
+          "after": 0.5315093320039493,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-01-131641833",
+      "manifestOrder": 89,
+      "normalizedSeverityBefore": 24.162522097716778,
+      "normalizedSeverityAfter": 24.162522097716778,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.35449762662715617,
+          "after": 0.35449762662715617,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.24074074074074073,
+          "after": 0.24074074074074073,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.21478285238110417,
+          "after": 0.21478285238110417,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.33577082897613286,
+          "after": 0.33577082897613286,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.22857142857142856,
+          "after": 0.22857142857142856,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.4691046267799521,
+          "after": 0.4691046267799521,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-02-104101424",
+      "manifestOrder": 90,
+      "normalizedSeverityBefore": 23.63718589675428,
+      "normalizedSeverityAfter": 23.63718589675428,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.31142998268061023,
+          "after": 0.31142998268061023,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6460176991150443,
+          "after": 0.6460176991150443,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.11501538542526912,
+          "after": 0.11501538542526912,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.28565120493312873,
+          "after": 0.28565120493312873,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6431535269709544,
+          "after": 0.6431535269709544,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.224629625971853,
+          "after": 0.224629625971853,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-02-88494704",
+      "manifestOrder": 91,
+      "normalizedSeverityBefore": 13.505148512053019,
+      "normalizedSeverityAfter": 13.505148512053019,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1202002577751141,
+          "after": 0.1202002577751141,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6538461538461539,
+          "after": 0.6538461538461539,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.17223232942179,
+          "after": 0.17223232942179,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.11939478728037102,
+          "after": 0.11939478728037102,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6195652173913043,
+          "after": 0.6195652173913043,
+          "reviewLevel": 0.2
+        }
+      ]
+    },
+    {
+      "id": "new-03-25399041",
+      "manifestOrder": 92,
+      "normalizedSeverityBefore": 18.28154869710133,
+      "normalizedSeverityAfter": 18.28154869710133,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.09459472862730738,
+          "after": 0.09459472862730738,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.41935483870967744,
+          "after": 0.41935483870967744,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.6753785144357592,
+          "after": 0.6753785144357592,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.08952336396364192,
+          "after": 0.08952336396364192,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.47150259067357514,
+          "after": 0.47150259067357514,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.708267870875941,
+          "after": 0.708267870875941,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-03-35525184",
+      "manifestOrder": 93,
+      "normalizedSeverityBefore": 22.240915806033705,
+      "normalizedSeverityAfter": 22.240915806033705,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.10447633005737167,
+          "after": 0.10447633005737167,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.9405940594059405,
+          "after": 0.9405940594059405,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5043583056571899,
+          "after": 0.5043583056571899,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.10602570562024936,
+          "after": 0.10602570562024936,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.9484536082474226,
+          "after": 0.9484536082474226,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.6256106807167647,
+          "after": 0.6256106807167647,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-19-159668739",
+      "manifestOrder": 94,
+      "normalizedSeverityBefore": 17.22066246489372,
+      "normalizedSeverityAfter": 17.22066246489372,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.12986595750805766,
+          "after": 0.12986595750805766,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6303448275862069,
+          "after": 0.6303448275862069,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.33129902226987995,
+          "after": 0.33129902226987995,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.13258374286865665,
+          "after": 0.13258374286865665,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.644474034620506,
+          "after": 0.644474034620506,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.31149982439646473,
+          "after": 0.31149982439646473,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-20-160820542",
+      "manifestOrder": 95,
+      "normalizedSeverityBefore": 18.65703647093069,
+      "normalizedSeverityAfter": 18.65703647093069,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.15763418750613467,
+          "after": 0.15763418750613467,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.8522167487684729,
+          "after": 0.8522167487684729,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.23571791362415961,
+          "after": 0.23571791362415961,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.14141846489348714,
+          "after": 0.14141846489348714,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.8407960199004975,
+          "after": 0.8407960199004975,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.17163053401513484,
+          "after": 0.17163053401513484,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-07-198117086",
+      "manifestOrder": 96,
+      "normalizedSeverityBefore": 19.503890399640273,
+      "normalizedSeverityAfter": 19.503890399640273,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11570121045175896,
+          "after": 0.11570121045175896,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5277777777777778,
+          "after": 0.5277777777777778,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5447475582361259,
+          "after": 0.5447475582361259,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.13182384212326986,
+          "after": 0.13182384212326986,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5471698113207547,
+          "after": 0.5471698113207547,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.6464063627296575,
+          "after": 0.6464063627296575,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-07-131897774",
+      "manifestOrder": 97,
+      "normalizedSeverityBefore": 24.751717702986337,
+      "normalizedSeverityAfter": 24.751717702986337,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.4422904451509634,
+          "after": 0.4422904451509634,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.1951219512195122,
+          "after": 0.1951219512195122,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.15829155363599312,
+          "after": 0.15829155363599312,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.408192163501267,
+          "after": 0.408192163501267,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.13513513513513514,
+          "after": 0.13513513513513514,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.11746350460010746,
+          "after": 0.11746350460010746,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-07-27184681",
+      "manifestOrder": 98,
+      "normalizedSeverityBefore": 21.0449735569736,
+      "normalizedSeverityAfter": 21.0449735569736,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.19713112293704654,
+          "after": 0.19713112293704654,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4880952380952381,
+          "after": 0.4880952380952381,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4576707161367465,
+          "after": 0.4576707161367465,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1956229324202363,
+          "after": 0.1956229324202363,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.45121951219512196,
+          "after": 0.45121951219512196,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5217615471017124,
+          "after": 0.5217615471017124,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-08-151156803",
+      "manifestOrder": 99,
+      "normalizedSeverityBefore": 22.850768238932247,
+      "normalizedSeverityAfter": 22.850768238932247,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.2589939510739993,
+          "after": 0.2589939510739993,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.56,
+          "after": 0.56,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.26501696977495404,
+          "after": 0.26501696977495404,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.2627962111435094,
+          "after": 0.2627962111435094,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.63125,
+          "after": 0.63125,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3124476577492259,
+          "after": 0.3124476577492259,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-08-185005362",
+      "manifestOrder": 100,
+      "normalizedSeverityBefore": 21.97080504742453,
+      "normalizedSeverityAfter": 21.97080504742453,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.22807815474894177,
+          "after": 0.22807815474894177,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5157680569684638,
+          "after": 0.5157680569684638,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.39238982087131713,
+          "after": 0.39238982087131713,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.20298135017212482,
+          "after": 0.20298135017212482,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6258158085569253,
+          "after": 0.6258158085569253,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.43056989364432097,
+          "after": 0.43056989364432097,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-19-62150806",
+      "manifestOrder": 101,
+      "normalizedSeverityBefore": 23.202505680416486,
+      "normalizedSeverityAfter": 23.202505680416486,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.29192343217744837,
+          "after": 0.29192343217744837,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.35,
+          "after": 0.35,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.1874275473890602,
+          "after": 0.1874275473890602,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.32832897998129157,
+          "after": 0.32832897998129157,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5669291338582677,
+          "after": 0.5669291338582677,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.2793049086844377,
+          "after": 0.2793049086844377,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-09-66685155",
+      "manifestOrder": 102,
+      "normalizedSeverityBefore": 12.850550403276749,
+      "normalizedSeverityAfter": 12.850550403276749,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.0964794267328591,
+          "after": 0.0964794267328591,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.39805825242718446,
+          "after": 0.39805825242718446,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.32223732825429063,
+          "after": 0.32223732825429063,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.11500821646937663,
+          "after": 0.11500821646937663,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5300546448087432,
+          "after": 0.5300546448087432,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.11618189730189232,
+          "after": 0.11618189730189232,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-11-159259312",
+      "manifestOrder": 103,
+      "normalizedSeverityBefore": 17.8571090518867,
+      "normalizedSeverityAfter": 17.8571090518867,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.16831412813227373,
+          "after": 0.16831412813227373,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.8865671641791045,
+          "after": 0.8865671641791045,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.2020518491568154,
+          "after": 0.2020518491568154,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.13677630799888918,
+          "after": 0.13677630799888918,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.89,
+          "after": 0.89,
+          "reviewLevel": 0.2
+        }
+      ]
+    },
+    {
+      "id": "new-11-71852781",
+      "manifestOrder": 104,
+      "normalizedSeverityBefore": 16.18100847072995,
+      "normalizedSeverityAfter": 16.18100847072995,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.17741047116786873,
+          "after": 0.17741047116786873,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.4555765595463138,
+          "after": 0.4555765595463138,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.5440959109955807,
+          "after": 0.5440959109955807,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.46826625386996906,
+          "after": 0.46826625386996906,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5248839826721916,
+          "after": 0.5248839826721916,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-11-89189482",
+      "manifestOrder": 105,
+      "normalizedSeverityBefore": 13.575703068579053,
+      "normalizedSeverityAfter": 13.575703068579053,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.06702092805344037,
+          "after": 0.06702092805344037,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.35294117647058826,
+          "after": 0.35294117647058826,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.3092343595046738,
+          "after": 0.3092343595046738,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1519793734601529,
+          "after": 0.1519793734601529,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.43478260869565216,
+          "after": 0.43478260869565216,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3150771312315289,
+          "after": 0.3150771312315289,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-12-201484048",
+      "manifestOrder": 106,
+      "normalizedSeverityBefore": 16.384680363721614,
+      "normalizedSeverityAfter": 16.384680363721614,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 4,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.18759353719089222,
+          "after": 0.18759353719089222,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.717391304347826,
+          "after": 0.717391304347826,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1706922280826101,
+          "after": 0.1706922280826101,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7681159420289855,
+          "after": 0.7681159420289855,
+          "reviewLevel": 0.2
+        }
+      ]
+    },
+    {
+      "id": "new-12-201342968",
+      "manifestOrder": 107,
+      "normalizedSeverityBefore": 4.526143790849673,
+      "normalizedSeverityAfter": 4.526143790849673,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 2,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.46078431372549017,
+          "after": 0.46078431372549017,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.4444444444444444,
+          "after": 0.4444444444444444,
+          "reviewLevel": 0.2
+        }
+      ]
+    },
+    {
+      "id": "new-12-201385356",
+      "manifestOrder": 108,
+      "normalizedSeverityBefore": 14.758732907072861,
+      "normalizedSeverityAfter": 14.758732907072861,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.17261936947374967,
+          "after": 0.17261936947374967,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.34328358208955223,
+          "after": 0.34328358208955223,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4016012266287785,
+          "after": 0.4016012266287785,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.15309068106802456,
+          "after": 0.15309068106802456,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.4444444444444444,
+          "after": 0.4444444444444444,
+          "reviewLevel": 0.2
+        }
+      ]
+    },
+    {
+      "id": "new-13-61309178",
+      "manifestOrder": 109,
+      "normalizedSeverityBefore": 14.308619142233617,
+      "normalizedSeverityAfter": 14.308619142233617,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.09193873158881138,
+          "after": 0.09193873158881138,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.2517482517482518,
+          "after": 0.2517482517482518,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.49397402681729163,
+          "after": 0.49397402681729163,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.07637130038706126,
+          "after": 0.07637130038706126,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.30039525691699603,
+          "after": 0.30039525691699603,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.6070485931092926,
+          "after": 0.6070485931092926,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-13-60172881",
+      "manifestOrder": 110,
+      "normalizedSeverityBefore": 21.89947874436991,
+      "normalizedSeverityAfter": 21.89947874436991,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.14400387172239193,
+          "after": 0.14400387172239193,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.5471698113207547,
+          "after": 0.5471698113207547,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.7197099653469895,
+          "after": 0.7197099653469895,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.13700302062437572,
+          "after": 0.13700302062437572,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5471698113207547,
+          "after": 0.5471698113207547,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.6906812830269868,
+          "after": 0.6906812830269868,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-13-105399732",
+      "manifestOrder": 111,
+      "normalizedSeverityBefore": 20.69747532246148,
+      "normalizedSeverityAfter": 20.69747532246148,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.17635866063529737,
+          "after": 0.17635866063529737,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.711864406779661,
+          "after": 0.711864406779661,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.2887041627889828,
+          "after": 0.2887041627889828,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.17824973727560295,
+          "after": 0.17824973727560295,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.6602564102564102,
+          "after": 0.6602564102564102,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.45704503063730884,
+          "after": 0.45704503063730884,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-14-76271548",
+      "manifestOrder": 112,
+      "normalizedSeverityBefore": 13.398070773616121,
+      "normalizedSeverityAfter": 13.398070773616121,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1144106957417109,
+          "after": 0.1144106957417109,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.6774193548387096,
+          "after": 0.6774193548387096,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.0810316139030115,
+          "after": 0.0810316139030115,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1104629993286815,
+          "after": 0.1104629993286815,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7697841726618705,
+          "after": 0.7697841726618705,
+          "reviewLevel": 0.2
+        }
+      ]
+    },
+    {
+      "id": "new-14-16503745",
+      "manifestOrder": 113,
+      "normalizedSeverityBefore": 18.712117012294453,
+      "normalizedSeverityAfter": 18.712117012294453,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.1993472221854231,
+          "after": 0.1993472221854231,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.7524509803921569,
+          "after": 0.7524509803921569,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.47306376797207345,
+          "after": 0.47306376797207345,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.7897526501766784,
+          "after": 0.7897526501766784,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.4295489777501311,
+          "after": 0.4295489777501311,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-15-152970382",
+      "manifestOrder": 114,
+      "normalizedSeverityBefore": 17.2625719209857,
+      "normalizedSeverityAfter": 17.2625719209857,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.06406213866742035,
+          "after": 0.06406213866742035,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.8214285714285714,
+          "after": 0.8214285714285714,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.39758098873846204,
+          "after": 0.39758098873846204,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.04629521966134932,
+          "after": 0.04629521966134932,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.84,
+          "after": 0.84,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5318932771050783,
+          "after": 0.5318932771050783,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-17-199401836",
+      "manifestOrder": 115,
+      "normalizedSeverityBefore": 13.627704123125824,
+      "normalizedSeverityAfter": 13.627704123125824,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 5,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.15952490696487562,
+          "after": 0.15952490696487562,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.49624060150375937,
+          "after": 0.49624060150375937,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.10285409482332053,
+          "after": 0.10285409482332053,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.15199828813076247,
+          "after": 0.15199828813076247,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.5345454545454545,
+          "after": 0.5345454545454545,
+          "reviewLevel": 0.2
+        }
+      ]
+    },
+    {
+      "id": "new-17-27586242",
+      "manifestOrder": 116,
+      "normalizedSeverityBefore": 20.195484449655474,
+      "normalizedSeverityAfter": 20.195484449655474,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.20505739102635695,
+          "after": 0.20505739102635695,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.32796780684104626,
+          "after": 0.32796780684104626,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.4900406048387569,
+          "after": 0.4900406048387569,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.1814950892173043,
+          "after": 0.1814950892173043,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.3711111111111111,
+          "after": 0.3711111111111111,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.5654010732317165,
+          "after": 0.5654010732317165,
+          "reviewLevel": 0.15
+        }
+      ]
+    },
+    {
+      "id": "new-18-51440683",
+      "manifestOrder": 117,
+      "normalizedSeverityBefore": 13.65771864184155,
+      "normalizedSeverityAfter": 13.65771864184155,
+      "classScoreReduction": 0,
+      "supportedMetricProfiles": 6,
+      "rows": [
+        {
+          "profile": "phone",
+          "metric": "halos",
+          "before": 0.11409235143311948,
+          "after": 0.11409235143311948,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "phone",
+          "metric": "flatDepth",
+          "before": 0.3377926421404682,
+          "after": 0.3377926421404682,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "phone",
+          "metric": "streaks",
+          "before": 0.24946102326145447,
+          "after": 0.24946102326145447,
+          "reviewLevel": 0.15
+        },
+        {
+          "profile": "desktop",
+          "metric": "halos",
+          "before": 0.115027076152828,
+          "after": 0.115027076152828,
+          "reviewLevel": 0.04
+        },
+        {
+          "profile": "desktop",
+          "metric": "flatDepth",
+          "before": 0.3993610223642173,
+          "after": 0.3993610223642173,
+          "reviewLevel": 0.2
+        },
+        {
+          "profile": "desktop",
+          "metric": "streaks",
+          "before": 0.3871336711889608,
+          "after": 0.3871336711889608,
+          "reviewLevel": 0.15
+        }
+      ]
+    }
+  ]
+}

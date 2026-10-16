@@ -1,0 +1,23 @@
+from pathlib import Path
+import json,hashlib,subprocess,datetime,os,re
+w=Path('/workspace/work/p3d-r5');root=Path('/workspace/splashery');commit='004e10f3ae4003616fe3e1aea54189984b52f91e';metadata='docs/audits/photo-3d-r3/clips.json';raw=subprocess.check_output(['git','show',commit+':'+metadata],cwd=root);old=json.loads(raw);freshBytes=(w/'checkpoint-current-clips/clips.json').read_bytes();fresh=json.loads(freshBytes);manifest=json.loads((w/'checkpoint-review-manifest.json').read_text());hash=lambda b:hashlib.sha256(b).hexdigest()
+a={(r['id'],r['view']):r for r in old['rows']};b={(r['id'],r['view']):r for r in fresh['rows']};assert len(a)==len(b)==49 and set(a)==set(b)
+proof={'kind':'Exact protected-checkpoint input/view roster, review-setting, and protected photo/depth asset-byte verification. Encoded duration may be longer in the fresh recordings; this does not claim identical frame timestamps.','createdUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'methodSha256':hash(Path(__file__).read_bytes()),'protectedClipsCommit':commit,'protectedApplicationCommit':'58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492','originalMetadataPath':metadata,'originalMetadataSha256':hash(raw),'freshRecordingSha256':hash(freshBytes),'pairsChecked':0,'protectedAssetHashesChecked':0,'rows':[]}
+for key,r in a.items():
+ q=b[key];e=next(e for e in manifest if e['id']==r['id']);assert e['kind'] in ['builtin','review'];assert r['file']==q['file']
+ for setting in ['view','deviceScaleFactor','profile','nativeBuffer','size']:assert r[setting]==q[setting],(key,setting)
+ assert q['fps']>=r['fps'] and q['frames']/q['fps']>=r['frames']/r['fps']
+ assert re.search(r'Depth 1(?:\b|$)',r['label']) and re.search(r'Depth 1(?:\b|$)',q['label']);assert fresh['depth']==1
+ assets={}
+ for name,field in [('photo','file'),('depth','depthFile')]:
+  f=Path(e[field]);f=f if f.is_absolute() else root/f;actual=hash(f.read_bytes())
+  if e['kind']=='builtin':
+   relative=f.relative_to(root);expected=w/'checkpoint'/relative;originalBytes=expected.read_bytes();assetSource='protected application checkpoint'
+  else:
+   relative=f.relative_to(w);assert str(relative).startswith('docs/audits/photo-3d-r3/sources/');originalBytes=subprocess.check_output(['git','show',commit+':'+str(relative)],cwd=root);assetSource='protected original clip-review branch'
+  assert hash(originalBytes)==actual,(key,name)
+  if name=='photo':assert actual==e['sha256']
+  if name=='depth'and e.get('depthSha256'):assert actual==e['depthSha256']
+  assets[name+'Sha256']=actual;proof['protectedAssetHashesChecked']+=1
+ proof['rows'].append({'id':r['id'],'view':r['view'],'originalFrames':r['frames'],'freshFrames':q['frames'],'originalFps':r['fps'],'freshFps':q['fps'],'originalSeconds':r['frames']/r['fps'],'freshSeconds':q['frames']/q['fps'],'deviceScaleFactor':q['deviceScaleFactor'],'nativeBuffer':q['nativeBuffer'],'encodedSize':q['size'],'depth':1,'protectedAssetSource':assetSource,**assets});proof['pairsChecked']+=1
+assert proof['pairsChecked']==49 and proof['protectedAssetHashesChecked']==98;proof['protectedApplicationAssetHashesChecked']=72;proof['protectedReviewAssetHashesChecked']=26;proof['complete']=True;proof['finishedUTC']=datetime.datetime.now(datetime.timezone.utc).isoformat();(w/'checkpoint-roster-verification.json').write_text(json.dumps(proof,indent=2)+'\n');print(json.dumps({'complete':True,'exactInputViewPairs':49,'protectedAssetHashChecks':98,'originalFrameCounts':sorted(set(r['frames'] for r in a.values())),'originalFpsValues':sorted(set(r['fps'] for r in a.values())),'freshFrameCounts':sorted(set(r['frames'] for r in b.values())),'sameSettings':['Sharp','DPR 3','585x1266 native per side','780x844 encoded','Depth 1']}))

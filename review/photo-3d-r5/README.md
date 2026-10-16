@@ -7,10 +7,10 @@ zero changed pixels. The phone viewport is 390×844 per side, with a 585×1266 d
 pair is encoded at 780×844. Sharp is on, and Depth is 1.
 
 No reconstruction change qualified. These clips establish preservation, not a 25% improvement. The
-15-input selection is provisional: original manifest order breaks ties while the full current
-118-input quality comparison finishes. No unmeasured score is assigned zero. The first ten selection
-inputs reuse their actual checkpoint-pair recordings; the last five have extra recordings. No ten
-actual improvements are claimed.
+complete 118-input comparison measures zero reduction on every input. Original manifest order breaks
+these measured ties for the 15-input selection. The first ten selection inputs reuse their actual
+checkpoint-pair recordings; the last five have extra recordings. No ten actual improvements are
+claimed.
 
 Left: protected checkpoint `58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492`. Right: the application
 synchronized with main `cc297c89ef4fa4bf04e43196ca3b37e39c97a372`, with unchanged Photo to 3D
@@ -23,10 +23,10 @@ source. Conversion costs are measured separately; cached review depths are not c
 
 ## Fifteen selected inputs
 
-The group names below identify the task's requested slots. All are provisional ties; the full
-quantitative ranking is pending. [Selection metadata](selection.json) preserves that limitation.
+The group names below identify the task's requested slots. All are measured ties at zero reduction.
+[Selection metadata](selection.json) links the complete 118-input ranking and its source hashes.
 
-### Ten most-improved slots: provisional ties
+### Ten most-improved slots: measured ties
 
 - [forest | CC0 photo | Sharp | Depth 1](checkpoint/forest-sharp-before-after.mp4)
 - [street | CC0 photo | Sharp | Depth 1](checkpoint/street-sharp-before-after.mp4)
@@ -39,7 +39,7 @@ quantitative ranking is pending. [Selection metadata](selection.json) preserves 
 - [dot-castle | AI-made | Sharp | Depth 1](checkpoint/dot-castle-sharp-before-after.mp4)
 - [dot-cove | AI-made | Sharp | Depth 1](checkpoint/dot-cove-sharp-before-after.mp4)
 
-### Five least-improved slots: provisional ties
+### Five least-improved slots: measured ties
 
 - [new-14-16503745 | CC0 photo | Sharp | Depth 1](selection-extra/new-14-16503745-sharp-before-after.mp4)
 - [new-15-152970382 | CC0 photo | Sharp | Depth 1](selection-extra/new-15-152970382-sharp-before-after.mp4)

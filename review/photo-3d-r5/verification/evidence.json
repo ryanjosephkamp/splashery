@@ -40,6 +40,26 @@
       "bytes": 34437,
       "completeCorpus": false,
       "inputProfileCount": 2
+    },
+    {
+      "name": "current",
+      "file": "current-atlas.json.gz",
+      "uncompressedSha256": "24e20d6be88b14c4e5589ec50f9ba36b549a951c4f868727a649d6ad2aec530c",
+      "sha256": "ed867311086c1308486ec4f028113331905d641559508131fbd5f89b940e8e26",
+      "bytes": 1667622,
+      "completeCorpus": true,
+      "inputProfileCount": 236,
+      "scope": "All original 118 inputs at both profiles."
+    },
+    {
+      "name": "legacy-checkpoint-sharp",
+      "file": "legacy-review-sharp-atlas.json.gz",
+      "uncompressedSha256": "35fe552941da821f6f3e9e4160e8f8d5731e92b2dcf0d0ebb9e9e60867c958c5",
+      "sha256": "1dbd9426a4d8565f39d542f536daa54090c5228905b06d03ea631ab09ab74436",
+      "bytes": 207066,
+      "completeCorpus": false,
+      "inputProfileCount": 26,
+      "scope": "Separate 13 legacy checkpoint review inputs at both profiles; not merged into the frozen target corpus."
     }
   ],
   "methods": [
@@ -54,8 +74,56 @@
     {
       "file": "method-source/verify-completed-baseline.mjs.txt",
       "sha256": "acbbf49039bed5211eba9da34179724eb62b2d76c1836fbb1ad6ba10867c5ba0"
+    },
+    {
+      "file": "verify-completed-current.mjs.txt",
+      "sha256": "7438a9fa80604cf53e0e2580ad8cf41c8dcb7c7df8f3f0254f4187bf4f6848be"
+    },
+    {
+      "file": "verify-legacy-review-sharp.mjs.txt",
+      "sha256": "b138e96941a9a79671c648a72bb909ef72d5c218803f77609a6afcd8d84eb834"
+    },
+    {
+      "file": "finalize-current-review.mjs.txt",
+      "sha256": "afd13888d3516bdf384ee8289dd6094b14e924e23b5e854c0fc827194eb6b0d8"
+    },
+    {
+      "file": "verify-checkpoint-roster.py.txt",
+      "sha256": "d908fcf64b8721560d8531144dda8f6c47b582debacbe3b62692712f5488b468"
     }
   ],
   "repeatPolicy": "72 actual paired profiles across 36 inputs; one repeat each. All measured quality differences are zero. The remaining 164 profiles have zero acceptance tolerance. This is not complete-corpus repeat-noise coverage.",
-  "history": "The baseline preserves one browser attempt interrupted during an operator-requested shutdown, followed by a successful retry. All 236 saved final profiles have clean Sharp captures."
+  "history": "The baseline preserves one browser attempt interrupted during an operator-requested shutdown, followed by a successful retry. All 236 saved final profiles have clean Sharp captures.",
+  "checkpointRecording": {
+    "file": "checkpoint-recording-original.json.gz",
+    "uncompressedSha256": "e7661d24c503c4b567c0bdf2e23c6809e36895daf1683aedd75e09d0149fa1f5",
+    "sha256": "86f657e2f2466d0c3790799656ee60792bc491310bd91bcb73cddf53534ebf73",
+    "bytes": 105951
+  },
+  "currentQuality": {
+    "complete": true,
+    "profiles": 236,
+    "poses": 2124,
+    "qualityRegressions": 0,
+    "colorPixelMismatches": 0,
+    "targetReductions": {
+      "halos": 0,
+      "flatDepth": 0,
+      "streaks": 0
+    }
+  },
+  "extraLegacySharp": {
+    "complete": true,
+    "inputs": 13,
+    "profiles": 26,
+    "poses": 234
+  },
+  "updatedUTC": "2026-10-16T10:34:15.060Z",
+  "currentComparison": {
+    "file": "current-comparison-original.json.gz",
+    "sha256": "e2856d72da4da22db2916c074f07b06a2b3d5ba66fa98a825f7baab1004afb04",
+    "uncompressedSha256": "33ac9aa97ecb84d0d4b0b276d27645a7619a69cdc3c5df0877b456e3cd3a628f",
+    "bytes": 48354,
+    "formattedCopy": "current-comparison.json"
+  }
 }

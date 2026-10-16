@@ -1,8 +1,8 @@
 {
-  "kind": "Provisional 15-input review selection; no accepted reconstruction improvement exists.",
-  "rankingComplete": false,
+  "kind": "Complete measured 15-input review selection; all selected inputs tie at zero quality improvement.",
+  "rankingComplete": true,
   "completeClips": true,
-  "policy": "Original 118-input manifest order breaks provisional ties: first ten and last five, with no overlap. The final full-corpus quality comparison is still running; no unmeasured class score is assigned zero and no recording is called an improvement.",
+  "policy": "Sum supported chosen-class scores divided by their frozen review levels across both profiles; relative reduction of that sum. A measured stable zero remains zero. Sort decreasing reduction, then original manifest order; first ten and last five fill the required distinct slots.",
   "mostImprovedGroup": [
     {
       "elapsedMs": 73819.584985,
@@ -892,8 +892,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "checkpoint/forest-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 73227.34291,
@@ -1783,8 +1784,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "checkpoint/street-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 75618.911887,
@@ -2674,8 +2676,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "checkpoint/still-life-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 84334.93436900002,
@@ -3565,8 +3568,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "checkpoint/spiral-stairs-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 95686.20087400003,
@@ -4456,8 +4460,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "checkpoint/palace-stairs-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 106504.93393,
@@ -5347,8 +5352,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "checkpoint/wildflowers-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 98646.07670199999,
@@ -6238,8 +6244,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "checkpoint/dot-train-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 210694.675008,
@@ -7129,8 +7136,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "checkpoint/dot-oasis-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 152524.83018100006,
@@ -8020,8 +8028,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "checkpoint/dot-castle-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 117377.295622,
@@ -8911,8 +8920,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "checkpoint/dot-cove-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     }
   ],
   "leastImprovedGroup": [
@@ -9804,8 +9814,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "selection-extra/new-14-16503745-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 5
     },
     {
       "elapsedMs": 73629.09137000001,
@@ -10695,8 +10706,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "selection-extra/new-15-152970382-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 63829.74409699999,
@@ -11586,8 +11598,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "selection-extra/new-17-199401836-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 5
     },
     {
       "elapsedMs": 137848.51442199998,
@@ -12477,8 +12490,9 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "selection-extra/new-17-27586242-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     },
     {
       "elapsedMs": 178087.93339999998,
@@ -13368,8 +13382,12 @@
       },
       "recordingLicense": "CC0 1.0, subject to the source image license",
       "reviewFile": "selection-extra/new-18-51440683-sharp-before-after.mp4",
-      "classScoreReduction": null,
-      "ranking": "Provisional tie; complete-corpus ranking pending"
+      "classScoreReduction": 0,
+      "ranking": "Measured tie; original manifest order",
+      "supportedMetricProfiles": 6
     }
-  ]
+  ],
+  "rankingEvidence": "verification/current-input-ranking.json",
+  "currentAtlasSha256": "24e20d6be88b14c4e5589ec50f9ba36b549a951c4f868727a649d6ad2aec530c",
+  "finalizedUTC": "2026-10-16T10:34:14.589Z"
 }
