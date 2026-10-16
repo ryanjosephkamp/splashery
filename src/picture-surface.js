@@ -335,7 +335,7 @@ export class PictureSurface {
     this.instance = new pc.MeshInstance(this.mesh, this.material, slot.entity);
     this.instance.pick = !data.warmup;
     this.instance.cull = false;
-    this.layer = stage.app.scene.layers.getLayerByName("World");
+    this.layer = data.layer || stage.app.scene.layers.getLayerByName("World");
     this.layer.addMeshInstances([this.instance]);
     this.setUniforms(stage.sheetUniforms || {});
   }
@@ -375,9 +375,9 @@ export class PictureSurface {
   }
 }
 
-// Prepare the same material programs while media loads. The clipped geometry
-// contributes no picture pixels, and its temporary resources leave before the
-// first real face or when the toy closes. Programs remain in the device cache.
+// Prepare the same material programs while media loads. A tiny private target
+// executes their fragments too; clipped triangles leave that compilation until
+// the first visible page on software GPUs. Nothing reaches the visitor canvas.
 export function warmPictureShaders(stage, curved = false) {
   if (!stage.device || !stage.app?.root) return;
   stage.pictureProgramsWarmed ||= new Set();
@@ -388,6 +388,30 @@ export function warmPictureShaders(stage, curved = false) {
   stage.pictureWarmup?.destroy();
   const entity = new pc.Entity("Picture shader preparation");
   stage.app.root.addChild(entity);
+  const layer = new pc.Layer({ name: "Picture shader preparation" });
+  stage.app.scene.layers.push(layer);
+  const color = new pc.Texture(stage.device, {
+    name: "picture-preparation-target",
+    width: 16,
+    height: 16,
+    format: pc.PIXELFORMAT_RGBA8,
+    mipmaps: false,
+    minFilter: pc.FILTER_NEAREST,
+    magFilter: pc.FILTER_NEAREST,
+  });
+  const target = new pc.RenderTarget({ colorBuffer: color, depth: true });
+  const camera = new pc.Entity("Picture preparation camera");
+  stage.app.root.addChild(camera);
+  camera.addComponent("camera", {
+    layers: [layer.id],
+    renderTarget: target,
+    projection: pc.PROJECTION_ORTHOGRAPHIC,
+    orthoHeight: 1,
+    nearClip: 0.1,
+    farClip: 4,
+    priority: -100,
+  });
+  camera.setPosition(0, 0, 2);
   const faces = [];
   let live = true;
   const warmup = {
@@ -396,6 +420,10 @@ export function warmPictureShaders(stage, curved = false) {
       live = false;
       for (const face of faces) face.destroy();
       entity.destroy();
+      camera.destroy();
+      stage.app.scene.layers.remove(layer);
+      target.destroy();
+      color.destroy();
       if (stage.pictureWarmup === warmup) stage.pictureWarmup = null;
     },
   };
@@ -408,24 +436,32 @@ export function warmPictureShaders(stage, curved = false) {
           { entity },
           {
             warmup: true,
+            layer,
             w: 16,
             h: 16,
             pixels: new Uint8Array(16 * 16 * channels).fill(255),
             channels,
             geom: {
-              origin: [100000, 100000, 100000],
-              right: [1, 0, 0],
-              down: [0, 1, 0],
+              origin: [-0.8, 0.8, 0],
+              right: [0.1, 0, 0],
+              down: [0, -0.1, 0],
               normal: [0, 0, 1],
               leaf: bend ? { slot: 0 } : null,
             },
           },
         ),
       );
-    stage.pictureProgramsWarmed.add(bend);
   }
-  // Run after the frame finishes submitting, including for moving media
-  // and failed inputs that never create a continuous face.
-  stage.app.once("postrender", () => setTimeout(() => warmup.destroy(), 0));
+  for (const face of faces) {
+    face.setUniforms({});
+    face.material.setParameter("uAxis", [0, 1, 0]);
+    face.material.setParameter("uDir", [1, 0, 0]);
+  }
+  // Mark programs warm only after a submitted draw. Closing a toy before
+  // that draw must leave the next opening free to prepare them again.
+  stage.app.once("postrender", () => {
+    if (live) for (const bend of needed) stage.pictureProgramsWarmed.add(bend);
+    setTimeout(() => warmup.destroy(), 0);
+  });
   stage.requestRender();
 }
