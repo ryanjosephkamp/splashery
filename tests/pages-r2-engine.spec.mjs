@@ -134,6 +134,15 @@ test("the initial ink raster matches display detail and keeps its supersampled u
   expect(p.levelFor(sheet, 0.75, Infinity, 0, 1, "ink")).toBe(1100);
 });
 
+test("native images install within the old raster allowance before upgrading", () => {
+  const p = Object.create(Pictures.prototype);
+  Object.assign(p, { solid: true, budget: { width: 1100, pixels: 90000 } });
+  const sheet = { shown: null };
+  expect(p.levelFor(sheet, 1, Infinity, 0, 1, "pixels")).toBe(300);
+  sheet.shown = { level: 300 };
+  expect(p.levelFor(sheet, 1, Infinity, 0, 1, "pixels")).toBe(600);
+});
+
 test("cached source canvases and relief maps share the original memory allowance", () => {
   const p = Object.create(Pictures.prototype);
   Object.assign(p, { budget: { ink: 220000 }, cache: new Map(), sheets: [] });

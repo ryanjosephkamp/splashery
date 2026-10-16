@@ -42,7 +42,11 @@ if (previous && mainRef !== previous.baselineCommit) throw Error("Cached baselin
 const revision =
   previous?.candidateCommit ||
   execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
-const groups = [["phone", "picture-lab", "text"]];
+const groups = [
+  ["phone", "picture-lab", "photo"],
+  ["phone", "picture-lab", "chart"],
+  ["phone", "picture-lab", "text"],
+];
 for (const profile of ["phone", "desktop"])
   for (const toy of ["picture-lab", "your-book", "photo-album"])
     for (const input of ["sample", "text", "photo", "chart"])

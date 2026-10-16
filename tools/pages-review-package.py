@@ -55,6 +55,87 @@ def encode(label, scene):
         raise ValueError('Frame durations do not match recorder metadata')
     return movie, raw, entries, meta
 
+# Archive the exact quantitative inputs and crops beside the motion evidence.
+import hashlib
+import shutil
+
+bench = out / 'benchmark'
+crops = bench / 'crops'
+stills = out / 'stills'
+for directory in [bench, crops, stills]:
+    directory.mkdir(parents=True, exist_ok=True)
+data = {}
+artifacts = {}
+for revision in ['main', 'round2']:
+    data[revision] = json.loads((work / f'paired-{revision}.json').read_text())
+    if len(data[revision]['records']) != 72:
+        raise ValueError('A final matrix needs 72 records per revision')
+    shutil.copyfile(work / f'paired-{revision}.json', bench / f'{revision}.json')
+    for record in data[revision]['records']:
+        profile, toy, case = [record[k] for k in ['profile', 'toy', 'input']]
+        repeat = record['comparisonRepeat']
+        original = root / record['artifactDirectory']
+        stem = f'{profile}-{toy}-{case}-{record["repeat"]}'
+        name = f'{profile}-{toy}-{case}-{repeat}-{revision}'
+        artifacts[name] = {}
+        for kind in ['source', 'render']:
+            target = crops / f'{name}-{kind}.png'
+            shutil.copyfile(original / f'{stem}-{kind}.png', target)
+            if target.stat().st_size > 1_000_000:
+                raise ValueError(f'A review image exceeds 1 MB: {target}')
+            artifacts[name][kind] = {'file': str(target.relative_to(out)), 'sha256': hashlib.sha256(target.read_bytes()).hexdigest()}
+        if revision == 'round2' and case == 'sample' and repeat == 1:
+            image = Image.open(original / f'{stem}.png').convert('RGB')
+            target = stills / f'{profile}-{toy}.jpg'
+            for quality in [95, 90, 85, 80]:
+                image.save(target, quality=quality, optimize=True, progressive=True)
+                if target.stat().st_size <= 1_000_000:
+                    break
+            if target.stat().st_size > 1_000_000:
+                raise ValueError('A whole-page review screenshot exceeds 1 MB')
+for suffix in ['md', 'json']:
+    shutil.copyfile(work / f'paired-comparison.{suffix}', bench / f'comparison.{suffix}')
+(bench / 'artifacts.json').write_text(json.dumps(artifacts, indent=2) + '\n')
+comparison = json.loads((bench / 'comparison.json').read_text())
+for toy in ['picture-lab', 'your-book', 'photo-album']:
+    name = f'phone-{toy}-text-1'
+    paths = [crops / f'{name}-main-source.png', crops / f'{name}-main-render.png', crops / f'{name}-round2-render.png']
+    images = [Image.open(p).convert('RGB') for p in paths]
+    row = next(r for r in comparison['rows'] if r['profile'] == 'phone' and r['toy'] == toy and r['input'] == 'text')
+    width = max(440, *(im.width for im in images))
+    height = sum(im.height + 30 for im in images) + 90
+    sheet = Image.new('RGB', (width, height), 'white')
+    draw = ImageDraw.Draw(sheet)
+    font_small = ImageFont.truetype(font_path, 14)
+    draw.text((8, 4), f'{toy}: phone body text', font=font_small, fill='black')
+    draw.text((8, 24), 'Native pixels, no crop resizing; repeat 1', font=font_small, fill='black')
+    draw.text((8, 44), f'Medians: sharpness +{row["rawEdgeGain"] * 100:.1f}%, SSIM {row["ssimGain"]:+.4f}', font=font_small, fill='black')
+    y = 90
+    for label, im in zip(['Independent source', 'Main', 'Round 2'], images):
+        draw.text((8, y + 3), label, font=font_small, fill='black')
+        sheet.paste(im, (0, y + 30))
+        y += im.height + 30
+    target = stills / f'phone-{toy}-text.png'
+    sheet.save(target, optimize=True)
+    if target.stat().st_size > 1_000_000:
+        raise ValueError('A body-text comparison exceeds 1 MB')
+(stills / 'README.md').write_text('''# Still comparisons
+
+These body-text images retain their native framebuffer crop pixels without resizing. All use repeat 1, rather than selecting the best run. Caption scores are three-repeat medians. The independent reference was rendered at width 2,048 and sampled at the displayed pixel grid. The separate main and round 2 reference crops are in the benchmark archive.
+
+Whole-page images are JPEG review copies of repeat 1 of each toy's sample at 390×844 and 1440×900; quantitative crops remain PNG. All images are below 1 MB. Recording and original comparison contributions are CC0, made by Ryan with Codex (GPT-6); existing photo credits remain in CREDITS.md.
+
+| Toy | Body text | Phone sample | Desktop sample |
+| --- | --- | --- | --- |
+''' + '\n'.join(f'| {toy} | [PNG](phone-{toy}-text.png) | [JPEG](phone-{toy}.jpg) | [JPEG](desktop-{toy}.jpg) |' for toy in ['your-book', 'picture-lab', 'photo-album']) + '\n')
+(bench / 'README.md').write_text('''# Matched benchmark evidence
+
+The raw [main records](main.json), [round 2 records](round2.json), [comparison table](comparison.md), and [comparison checks](comparison.json) contain the final three-repeat measurements for all 24 input/toy/profile groups. Renderer, fixture, tool, protocol, source commit, and runtime hashes are retained. The [artifact manifest](artifacts.json) maps each case and repeat to its exact source and rendered crop and their SHA-256 hashes.
+
+See the implementation branch's [audit](https://github.com/ryanjosephkamp/splashery/blob/codex/book-picture-lab-r2/docs/audits/pages-r2-2026-10.md) for definitions, commands, exploratory exclusions, and limits. Copy the archived fixtures into work/pages-r2/fixtures before reproducing the matrix. These are software-renderer browser measurements, not physical-phone measurements. Stepped clips are separate motion evidence.
+''')
+print('Archived 144 raw records, 288 exact crops, and nine still comparisons.', flush=True)
+
 all_metadata = {}
 for scene, name in scenes.items():
     main, raw_main, frames_main, meta_main = encode('main', scene)

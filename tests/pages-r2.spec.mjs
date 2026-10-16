@@ -284,9 +284,9 @@ test.describe("sharp pages in the real renderer", () => {
   test("still pages own continuous faces, moving media and the neighboring frame retain their splats", async ({
     page,
   }) => {
-    // Open small, then enlarge the same viewer: the backing really must
-    // grow, rather than fitting inside an earlier full-size allocation.
-    await page.setViewportSize({ width: 130, height: 282 });
+    // A real photo's sampled backing grows with this viewer. Fixed paper
+    // geometry can reuse its slot, so it does not force this allocation.
+    await page.setViewportSize({ width: 80, height: 173 });
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("console", (m) => {
@@ -296,6 +296,11 @@ test.describe("sharp pages in the real renderer", () => {
     await page.goto("/?renderer=webgl2&profile=low&adapt=off&labs=1");
     await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
     await page.evaluate(() => window.__splashery.app.chooseToy("picture-lab"));
+    await page.evaluate(() =>
+      window.__splashery.app.openMedia(
+        new URL("/assets/toys/picture-frame/islands.jpg", location.href).href,
+      ),
+    );
     await ready(page);
     const old = await page.evaluateHandle(
       () => window.__splashery.player.pictures.sheets[0].slot.surface,
@@ -332,11 +337,14 @@ test.describe("sharp pages in the real renderer", () => {
       window.__pagesR2Replacements = [];
       p.show = function (...args) {
         const previous = args[0].slot;
+        const face = previous?.surface;
         const result = show.apply(this, args);
-        if (args[2].surface && previous?.surface && previous !== args[0].slot)
+        if (face && face !== args[0].slot?.surface)
           window.__pagesR2Replacements.push({
-            backing: previous.entity.enabled,
-            face: previous.surface.instance.visible,
+            containerChanged: previous !== args[0].slot,
+            backing: previous !== args[0].slot && previous.entity.enabled,
+            face: face.instance.mesh !== null && face.instance.visible,
+            oldFace: face,
           });
         return result;
       };
@@ -366,9 +374,16 @@ test.describe("sharp pages in the real renderer", () => {
     expect(
       await old.evaluate((s) => s.instance.mesh === null && s.instance.material === null),
     ).toBe(true);
-    const replacements = await page.evaluate(() => window.__pagesR2Replacements);
+    const replacements = await page.evaluate(() =>
+      window.__pagesR2Replacements.map(({ oldFace, ...state }) => ({
+        ...state,
+        disposed: oldFace.instance.mesh === null && oldFace.instance.material === null,
+        inLayer: oldFace.layer.meshInstances.includes(oldFace.instance),
+      })),
+    );
     expect(replacements.length).toBeGreaterThan(0);
-    expect(replacements.every((r) => !r.backing && !r.face)).toBe(true);
+    expect(replacements.some((r) => r.containerChanged)).toBe(true);
+    expect(replacements.every((r) => !r.backing && !r.face && !r.inLayer && r.disposed)).toBe(true);
     expect(await old.evaluate((s) => s.layer.meshInstances.includes(s.instance))).toBe(false);
     await old.dispose();
     await page.evaluate(() => window.__splashery.app.chooseToy("picture-frame"));

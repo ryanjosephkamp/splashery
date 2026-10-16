@@ -1048,6 +1048,9 @@ function pgReset() {
 function bk5Start(F, pics) {
   const T = F.target;
   const live = () => PG.pops.includes(F) && F.phase !== "idle";
+  // Native pictures already have a usable flat card. Keep that immediate
+  // contract while classification prepares graphic cuts or photo relief.
+  if (T.photo) Object.assign(F, { kind: "photo", known: true });
   (async () => {
     let photo = T.photo;
     let detail = null;
@@ -3254,3 +3257,24 @@ export const RECIPES = {
   "photo-album": ALBUM_RECIPE,
   "picture-frame": FRAME_RECIPE,
 };
+
+// Credit this opt-in rendering contribution in the same drawer as each toy's
+// existing sample records. The neighboring frame and Storybook keep theirs.
+for (const [id, label] of [
+  ["your-book", "Your book"],
+  ["picture-lab", "Picture lab"],
+  ["photo-album", "Photo album"],
+]) {
+  RECIPES[id].credits = [
+    ...(RECIPES[id].credits || []),
+    {
+      label,
+      title: "Sharp hybrid picture faces",
+      source:
+        "https://github.com/ryanjosephkamp/splashery/blob/codex/book-picture-lab-r2/src/picture-surface.js",
+      author: "Ryan with Codex (GPT-6)",
+      license: "MIT",
+      licenseUrl: "https://github.com/ryanjosephkamp/splashery/blob/main/LICENSE",
+    },
+  ];
+}

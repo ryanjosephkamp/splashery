@@ -115,8 +115,8 @@
     "your-book": {
       "kind": "kit",
       "recipeFile": "src/packs/pictures.js",
-      "recipeKB": 140.2,
-      "recipeGzipKB": 45.6,
+      "recipeKB": 142.3,
+      "recipeGzipKB": 46.3,
       "sharedBy": 5
     },
     "model-splats": {

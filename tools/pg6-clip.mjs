@@ -19,6 +19,7 @@
 // Pop out with layers off and on, and the original text/diagram inputs.
 // --profile=low and --width=390 match a phone; preparation waits are omitted.
 // --frames=1 also saves full-color PNG frames and their variable-duration concat list.
+// --draws=1 uses two animation-frame waits per draw, before and after sheet readiness.
 // <out-dir>/pg6-<scene>.gif and a strip of six frames. The test PDF is made
 // by tests/fixtures/pg6/make-pdf.mjs.
 
@@ -107,7 +108,7 @@ async function record(scene) {
     );
   // A couple of real frames, so the stage draws the stepped moment.
   const draw = async () => {
-    for (let i = 0; i < 3; i++)
+    for (let i = 0; i < Number(opt("draws", 3)); i++)
       await run(() => new Promise((r) => {
         window.__splashery.player.stage.requestRender();
         requestAnimationFrame(() => requestAnimationFrame(r));
@@ -538,6 +539,7 @@ async function record(scene) {
           viewport: [390, 844],
           dpr: Number(opt("dpr", 2)),
           profile: opt("profile", "mid"),
+          drawWaits: Number(opt("draws", 3)),
           renderer: process.env.SPLASHERY_GL || "swiftshader",
           clock: "stepped at 12 fps; preparation waits omitted; not throughput",
           frames: frames.length,
