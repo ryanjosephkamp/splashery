@@ -3388,6 +3388,19 @@ body.focus #pop-toggle {
   opacity: 0.45;
 }
 
+.toy-toolbar button.tinted-tool {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--tool-tint) 32%, var(--paper));
+  border-color: color-mix(in srgb, var(--tool-tint) 70%, var(--ink));
+}
+
+.toy-toolbar button.tinted-tool[aria-pressed="true"] {
+  color: #14101e;
+  background: var(--tool-tint);
+  border-color: color-mix(in srgb, var(--tool-tint) 55%, #000);
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
 .toy-toolbar button.swatch-tool {
   box-sizing: border-box;
   flex: none;
