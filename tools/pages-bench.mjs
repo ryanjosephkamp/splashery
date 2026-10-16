@@ -326,11 +326,17 @@ async function run(toy, input, profile, repeat) {
   const state = await page.evaluate(() => {
     const pl = window.__splashery.player,
       p = pl.pictures;
+    const gl = pl.stage.device.gl;
+    const debug = gl?.getExtension("WEBGL_debug_renderer_info");
     const unique = new Set([
       ...p.cache.values(),
       ...p.sheets.map((s) => s.shown?.data).filter(Boolean),
     ]);
     return {
+      graphicsBackend: pl.stage.device.deviceType,
+      graphicsRenderer: debug
+        ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)
+        : gl?.getParameter(gl.RENDERER),
       splats: p.splats(),
       kitSplats: pl.proc.ctx.buf.count,
       sheetBytes: [...unique].reduce(
