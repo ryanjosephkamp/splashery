@@ -217,7 +217,7 @@ browser from a seed by `src/generators.js`. The toys from packs (`src/packs/*.js
 beating heart, the campfire and the treasure chest) are built in the browser by the toy kit
 (`src/kit.js`) from recipes written for Splashery. None of them use external assets.
 
-### Shape morph (Codex task 78c; lane PT1)
+### Shape morph (Codex task 78c)
 
 From a concept by Ryan Kamp. The six forms are ported from his Overprint concept, with the Klein
 bottle using Splashery's existing Splat equation preset. No reference renderer, font files, or QR
@@ -237,7 +237,7 @@ Ryan with Codex (GPT-6), October 14, 2026. The port's code is MIT, and its proce
 thumbnail are CC0. Text uses the device's system font (the existing bitmap font in Node tools).
 Visitor pictures are processed locally and are not shipped assets.
 
-### Your name in splats (Codex task 78d; lane PT1)
+### Your name in splats (Codex task 78d)
 
 From Ryan Kamp's Toy Box name toy. Rebuilt by lane PT1 (made by Ryan with Claude, Opus 5.5, October
 16, 2026): letters drawn with the device's own fonts (emoji included) by `src/text-splats.js`, Toy
