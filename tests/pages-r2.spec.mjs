@@ -219,6 +219,13 @@ test.describe("sharp pages in the real renderer", () => {
     expect(await old.evaluate((s) => !!s && s.instance.visible && s.material.depthWrite)).toBe(
       true,
     );
+    expect(
+      await page.evaluate(
+        () =>
+          window.__splashery.player.pictures.sheets[0].shown.data.surface.source instanceof
+          ImageBitmap,
+      ),
+    ).toBe(true);
     const before = await page.evaluate(
       () =>
         window.__splashery.player.stage.app.scene.layers.getLayerByName("World").meshInstances
