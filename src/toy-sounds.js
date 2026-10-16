@@ -1912,8 +1912,8 @@ export const TOY_SOUNDS = {
   "splat-equation": { voice: "rustle", f: 2600, n: 30, decay: 2.6, bright: 0.3, vol: 0.3 },
   "shape-morph": { voice: "rustle", f: 1400, n: 18, decay: 2.4, bright: 0.16, vol: 0.18 },
   // Lane PT2 (the owner's review of October 16, 2026): one soft, clean sine per split or merge,
-  // pitched by the level it lands on (src/packs/one-splat.js plays it as a cue; this is level 4).
-  "one-splat": { voice: "tone", f: "E4", decay: 2, vol: 0.45 },
+  // pitched by the level it lands on (src/packs/one-splat.js plays it as a cue; this is level 7, a first tap's).
+  "one-splat": { voice: "tone", f: "C5", decay: 2, vol: 0.45 },
   // Three hushing waves, each at its loudest as a swell reaches the mouth
   // (0.7, 1.8, 2.9 s).
   "seashell-spiral": [

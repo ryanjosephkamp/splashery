@@ -359,8 +359,35 @@ function prepareWord(o) {
   return CACHE.get(key);
 }
 
+// The app's tap point is a depth pick, which can land well off the flat
+// picture (or, when it misses a faint splat, on the toy's tap box), so its
+// x and y miss the finger; a pick can take most of a second on a slow
+// device. The recipe keeps the pointer's last place on the screen, and a
+// tap or a hold casts the camera's ray through it onto the picture (z = 0),
+// so it acts on the splat under the finger. Taps made in code (clips,
+// tests) keep their point.
+let pointer = null;
+function watchPointer() {
+  if (typeof document === "undefined" || watchPointer.on) return;
+  watchPointer.on = true;
+  const keep = (e) => (pointer = { x: e.clientX, y: e.clientY, time: performance.now() });
+  document.addEventListener("pointerdown", keep, true);
+  document.addEventListener("pointerup", keep, true);
+}
+
+function onPicture(point) {
+  const player = globalThis.__splashery?.player;
+  if (!pointer || !player?.recipeRay || performance.now() - pointer.time > 4000) return point;
+  const [x, y] = player.canvasPoint({ clientX: pointer.x, clientY: pointer.y });
+  const ray = player.recipeRay(x, y);
+  const t = -ray.origin[2] / ray.dir[2];
+  if (!Number.isFinite(t) || t <= 0) return point;
+  return [0, 1, 2].map((k) => ray.origin[k] + ray.dir[k] * t);
+}
+
 function nearest(point) {
   if (!current) return null;
+  point = onPicture(point);
   let best = null,
     score = Infinity;
   for (const i of current.ids) {
@@ -441,9 +468,9 @@ export const RECIPES = {
         min: 0,
         max: 14,
         step: 1,
-        // Lane PT2: a coarse start (16 splats), so a tap visibly splits
-        // the part it lands on.
-        default: 4,
+        // Lane PT2: a coarse start (64 splats, chosen from clips at
+        // phone size): the word reads, and a tap's split is clearly seen.
+        default: 6,
         stage: true,
       },
       { key: "splits", type: "text", default: "", hidden: true },
@@ -566,6 +593,7 @@ export const RECIPES = {
       },
     },
     prepare(o) {
+      watchPointer();
       release();
       prepareWord(o);
     },

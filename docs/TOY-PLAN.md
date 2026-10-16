@@ -2719,10 +2719,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Exact principal-axis median pixel tree, levels from 1 to 16,384 splats, custom words,
     local pictures with mean color, individual refinements, and a hold readout. Existing Kit clouds,
     morphs, options, and drag hooks; no engine changes. Lane PT2 (the owner's review of October 16,
-    2026: an awful sound, and a tap that did nothing meaningful where it landed): opens at 16
-    splats, a tap splits the touched splat finer each time, a hold or a tap at the finest level
-    merges it back, the readout on every tap, and a new soft sine pitched by level. Built by Opus
-    5.5.
+    2026: an awful sound, and a tap that did nothing meaningful where it landed): opens at 64 splats
+    (the word reads, and a split shows), a tap splits the touched splat finer each time, a hold or a
+    tap at the finest level merges it back, the readout on every tap, and a new soft sine pitched by
+    level. Built by Opus 5.5.
   - Sound: One soft, clean sine per split or merge, pitched by the level it lands on (finer is
     higher).
 - **Splat equation** (`splat-equation`). Now: tap: Play t. Plan: keep.

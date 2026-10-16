@@ -135,7 +135,20 @@ test("every kit toy has a recipe that builds deterministically and fits the unit
         if (!kinds.has(buf.anim[i * 4 + 1])) bad++;
         if ((buf.anim[i * 4] & 15) >= a.parts.length) bad++;
       }
-      expect({ id: def.id, given, same, bad, far, enough: buf.count > 4000 }).toEqual({
+      // Lane PT2 (the Operator's call of October 16, 2026): One splat, many splats is about few
+      // splats at coarse levels (its dial reaches one splat), so it opens at 2^level of them. Its
+      // own check is as strict: exactly 2^level at the default level, and the full 8,192 at 13.
+      const count = (opts) => {
+        const it = buildRecipe(recipe, { seed: 3, count: 8000, options: opts }, applyClay);
+        let r = it.next();
+        while (!r.done) r = it.next();
+        return r.value.buf.count;
+      };
+      const enough =
+        def.id === "one-splat"
+          ? buf.count === 2 ** options.level && count({ ...options, level: 13 }) === 8192
+          : buf.count > 4000;
+      expect({ id: def.id, given, same, bad, far, enough }).toEqual({
         id: def.id,
         given,
         same: true,

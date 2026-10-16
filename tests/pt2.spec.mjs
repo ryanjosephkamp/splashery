@@ -88,18 +88,12 @@ async function open(page, size, hash = "") {
 async function screenOf(page, id) {
   return page.evaluate(async (id) => {
     const { player } = window.__splashery;
-    const ctx = player.motion.ctx;
-    const index = ctx.kit.data.ids.indexOf(id);
-    const world = Array.from(ctx.buf.pos.slice(index * 3, index * 3 + 3));
+    const { tree, width, height } = player.motion.ctx.kit.data;
+    const world = player.fromRecipe([tree.mx[id] - width / 2, tree.my[id] + height / 2, 0]);
     const pc = await import("/src/pc.js");
-    const cam = player.stage.cameraEntity.camera;
-    const vp = new pc.Mat4().mul2(cam.projectionMatrix, cam.viewMatrix);
-    const q = vp.transformVec4(new pc.Vec4(...world, 1), new pc.Vec4());
-    const box = document.querySelector("#stage").getBoundingClientRect();
-    return {
-      x: box.x + ((q.x / q.w + 1) * box.width) / 2,
-      y: box.y + ((1 - q.y / q.w) * box.height) / 2,
-    };
+    const at = player.stage.cameraEntity.camera.worldToScreen(new pc.Vec3(...world));
+    const box = player.canvas.getBoundingClientRect();
+    return { x: box.left + at.x, y: box.top + at.y };
   }, id);
 }
 
@@ -119,21 +113,27 @@ for (const size of [
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await open(page, size);
-    expect(await ids(page)).toHaveLength(16);
+    expect(await ids(page)).toHaveLength(64);
     // Tap the splat nearest the middle (the level dial covers the right edge on a phone).
     const big = await page.evaluate(() => {
       const { ids, tree, width } = window.__splashery.player.motion.ctx.kit.data;
       const off = (i) => Math.abs(tree.mx[i] - width / 2);
       return ids.reduce((a, b) => (off(b) < off(a) ? b : a));
     });
+    // The camera glides to its front view for a few seconds after a toy opens; read where the
+    // splat is once it has arrived.
+    await page.waitForFunction(() => {
+      const p = window.__splashery.player.stage.cameraEntity.getPosition();
+      return Math.hypot(p.x, p.y) < 1e-3;
+    });
     let at = await screenOf(page, big);
     await page.mouse.click(at.x, at.y);
     await expect.poll(() => ids(page)).toContain(big * 2);
-    expect(await ids(page)).toHaveLength(17);
+    expect(await ids(page)).toHaveLength(65);
     expect(await ids(page)).not.toContain(big);
     await expect(page.locator("#one-splat-readout")).toContainText("Split into its two halves");
     await expect(page.locator("#one-splat-readout")).toContainText("Center:");
-    await expect.poll(() => page.evaluate(() => window.__cues.map((c) => c.f))).toEqual(["G4"]);
+    await expect.poll(() => page.evaluate(() => window.__cues.map((c) => c.f))).toEqual(["C5"]);
     // The children start at their parent's center and move apart.
     expect(
       await page.evaluate(() => window.__splashery.player.motion.out?.morph?.[0] ?? 1),
@@ -143,10 +143,10 @@ for (const size of [
     at = await screenOf(page, big * 2);
     await page.mouse.click(at.x, at.y);
     await expect.poll(() => ids(page)).toContain(big * 4);
-    expect(await ids(page)).toHaveLength(18);
+    expect(await ids(page)).toHaveLength(66);
     await expect
       .poll(() => page.evaluate(() => window.__cues.map((c) => c.f)))
-      .toEqual(["G4", "A4"]);
+      .toEqual(["C5", "D5"]);
     await page.waitForTimeout(500);
     await page.screenshot({ path: `tests/screenshots/pt2-one-splat-${size.width}x${size.height}.png` }); // prettier-ignore
     await settled(page);
@@ -157,18 +157,18 @@ for (const size of [
     await expect.poll(() => ids(page)).toContain(big * 2);
     await expect(page.locator("#one-splat-readout")).toContainText("Merged its two halves back");
     await page.mouse.up();
-    expect(await ids(page)).toHaveLength(17);
+    expect(await ids(page)).toHaveLength(65);
     await expect
       .poll(() => page.evaluate(() => window.__cues.map((c) => c.f)))
-      .toEqual(["G4", "A4", "G4"]);
+      .toEqual(["C5", "D5", "C5"]);
     // The press was not also a tap.
     await page.waitForTimeout(300);
-    expect(await ids(page)).toHaveLength(17);
+    expect(await ids(page)).toHaveLength(65);
     // The readout clears after a few seconds.
     await expect(page.locator("#one-splat-readout")).toHaveCount(0, { timeout: 9000 });
     // The level dial still works and clears the taps.
-    await page.evaluate(() => window.__splashery.app.setToyOption("level", 6));
-    await expect.poll(() => ids(page)).toHaveLength(64);
+    await page.evaluate(() => window.__splashery.app.setToyOption("level", 8));
+    await expect.poll(() => ids(page)).toHaveLength(256);
     expect(errors).toEqual([]);
   });
 }
