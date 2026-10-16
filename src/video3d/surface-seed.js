@@ -68,6 +68,26 @@ function sample(c, u, v) {
   return out.every(Number.isFinite) ? out : null;
 }
 
+// Triangle selection consumes only the first eight points. Keep that stable prefix while
+// visiting the same cells, avoiding a full sort and copies of every rejected neighbor.
+export function nearestSurfacePoints(grid, u, v, cell) {
+  const nearest = [],
+    gx = Math.floor(u / cell),
+    gy = Math.floor(v / cell);
+  for (let y = -2; y <= 2; y++)
+    for (let x = -2; x <= 2; x++)
+      for (const point of grid.get(`${gx + x},${gy + y}`) || []) {
+        const distance = (point.u - u) ** 2 + (point.v - v) ** 2;
+        if (nearest.length === 8 && distance >= nearest[7].distance) continue;
+        let at = nearest.length;
+        // Equal distances retain encounter order, matching the original stable sort.
+        while (at > 0 && distance < nearest[at - 1].distance) at--;
+        nearest.splice(at, 0, { ...point, distance });
+        if (nearest.length > 8) nearest.pop();
+      }
+  return nearest;
+}
+
 function triangleAt(nearest, u, v, maxEdge) {
   const n = Math.min(8, nearest.length);
   for (let a = 0; a < n - 2; a++)
@@ -137,14 +157,7 @@ export function surfaceSeed(recon, frames, { maxPoints = 10000, stride = null } 
     }
     for (let v = step / 2 + 0.5; v < height - 1; v += step)
       for (let u = step / 2 + 0.5; u < width - 1; u += step) {
-        const near = [],
-          gx = Math.floor(u / cell),
-          gy = Math.floor(v / cell);
-        for (let y = -2; y <= 2; y++)
-          for (let x = -2; x <= 2; x++)
-            for (const point of grid.get(`${gx + x},${gy + y}`) || [])
-              near.push({ ...point, distance: (point.u - u) ** 2 + (point.v - v) ** 2 });
-        near.sort((a, b) => a.distance - b.distance);
+        const near = nearestSurfacePoints(grid, u, v, cell);
         const triangle = triangleAt(near, u, v, Math.max(width, height) * 0.25);
         if (!triangle) continue;
         candidates++;
