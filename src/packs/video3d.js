@@ -213,7 +213,7 @@ async function trainVideo(o, key) {
       V3D.checkKey = checkKey;
     }
     card.assessment(V3D.suitability);
-    const gpu = await webgpuStatus();
+    const gpu = await webgpuStatus({ signal: ctrl.signal });
     if (!current()) return null;
     if (!gpu.ok) {
       V3D.error = gpu.reason;

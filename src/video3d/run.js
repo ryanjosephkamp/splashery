@@ -17,14 +17,24 @@ let splatjs = null;
 export const splatjsLoaded = () => !!splatjs;
 
 // Whether this browser has WebGPU and an adapter: { ok, adapter, reason }.
-export async function webgpuStatus() {
+export async function webgpuStatus({ signal, timeoutMs = 10000 } = {}) {
+  if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
   if (typeof navigator === "undefined" || !navigator.gpu)
     return { ok: false, adapter: "", reason: "This browser has no WebGPU." };
   try {
-    const a = await navigator.gpu.requestAdapter({ powerPreference: "high-performance" });
+    const a = await runWithDeadline(
+      () => navigator.gpu.requestAdapter({ powerPreference: "high-performance" }),
+      {
+        signal,
+        timeoutMs,
+        message:
+          "The graphics card did not answer in time. Try reopening this tab, or use a current browser with WebGPU.",
+      },
+    );
     if (!a) return { ok: false, adapter: "", reason: "WebGPU is here but found no graphics adapter." }; // prettier-ignore
     return { ok: true, adapter: adapterName(a.info), reason: "" };
   } catch (e) {
+    if (e?.name === "AbortError") throw e;
     return { ok: false, adapter: "", reason: `WebGPU failed to start (${e?.message || e}).` };
   }
 }
@@ -119,7 +129,7 @@ export async function videoTo3D(file, opts = {}) {
     timings[k] = Math.round((now - lap) / 100) / 10;
     lap = now;
   };
-  const gpu = await webgpuStatus();
+  const gpu = await webgpuStatus({ signal: opts.signal });
   if (!gpu.ok) throw new Error(`${gpu.reason} Video to 3D trains on the graphics card through WebGPU: try a current Chrome, Edge, Safari or Firefox.`); // prettier-ignore
   const software = /swiftshader|llvmpipe|lavapipe|software/i.test(gpu.adapter);
 
