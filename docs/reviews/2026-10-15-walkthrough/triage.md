@@ -46,6 +46,8 @@ real graphics card should log crashes.
 
 ## For the owner
 
-- Which labs toys go public at the release: the Featured list has 62 toys, 23 of them public today.
+- Which labs toys go public at the release: all of them (his answer of October 16, 2026), after a
+  readiness check (Codex task 98). The Featured order with the Studio first stays; the release is
+  v1.0.
 - Whether a shared link may load a picture from a web address without asking the person opening it
   (the scene format allows it today): folded into a later task on shared links, as he asked.
