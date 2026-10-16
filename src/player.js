@@ -43,6 +43,11 @@ import { mulberry32, mixSeed, hash32 } from "./noise.js";
 import { Pictures } from "./pictures.js"; // Pictures
 import { ChunkHost } from "./chunks.js"; // lane Powers of ten
 import { HandsOn } from "./physics/hands-on.js"; // lane Physics
+import {
+  beginRendererDiagnostics,
+  setStartupState,
+  watchFirstToyFrame,
+} from "./renderer-diagnostics.js";
 
 export { NoGPUError };
 
@@ -215,12 +220,27 @@ export class Player {
   async init() {
     const params = new URLSearchParams(location.search);
     const prefer = this.opts.prefer || params.get("renderer") || "auto";
-    this.stage = await Stage.create(this.canvas, {
-      prefer,
-      weak: this.profile === "low",
-      pixelRatio: pixelCap(this.profile),
-      adaptive: this.adaptive,
-    });
+    setStartupState(this.canvas, "rendererReady", false);
+    setStartupState(this.canvas, "firstToyFrame", false);
+    const diagnostics = beginRendererDiagnostics(this.canvas, prefer);
+    this.rendererDiagnostics = diagnostics;
+    try {
+      this.stage = await Stage.create(this.canvas, {
+        prefer,
+        weak: this.profile === "low",
+        pixelRatio: pixelCap(this.profile),
+        adaptive: this.adaptive,
+      });
+    } catch (error) {
+      // Stage's NoGPUError keeps its friendly identity; restore the underlying
+      // exception and its cause captured at the pc.js boundary.
+      if (diagnostics.originalError && diagnostics.originalError !== error && !error.cause) {
+        error.cause = diagnostics.originalError;
+      }
+      diagnostics.finish(error);
+      throw error;
+    }
+    diagnostics.finish();
     this.stage.onSlow = () => this.stepDown();
     this.camera = new OrbitCamera({ reducedMotion: this.reducedMotion });
     this.driver = new EffectDriver();
@@ -250,6 +270,9 @@ export class Player {
     }
     this.applyLook();
     this.watchDeviceShake();
+    setStartupState(this.canvas, "rendererReady", true);
+    this.stopFirstToyFrame = watchFirstToyFrame(this);
+    this.emit("renderer-ready", this.deviceType);
     return this;
   }
 
@@ -2066,6 +2089,7 @@ export class Player {
   destroy() {
     this.loadToken++;
     this.lifetime?.abort();
+    this.stopFirstToyFrame?.();
     this.pictures?.destroy(); // Pictures
     this.closeMedia();
     this.painter?.detach();

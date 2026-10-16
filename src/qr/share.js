@@ -113,7 +113,7 @@ export async function openShareQR(app) {
       el("p", { id: "sqr-info", text: `Version ${code.version} (${code.size} × ${code.size} modules), error correction ${level}. The link is ${made.bytes.toLocaleString("en-US")} characters.` }), // prettier-ignore
     );
     const save = el("button", { type: "button", class: "primary", id: "sqr-save", text: "Save PNG" }); // prettier-ignore
-    const json = el("button", { type: "button", id: "sqr-json", text: "Save JSON", hidden: true }); // prettier-ignore
+    const json = el("button", { type: "button", id: "sqr-json", text: "Save scene", hidden: true }); // prettier-ignore
     json.addEventListener("click", () => {
       dialog.close();
       app.exportJSON();
@@ -128,7 +128,7 @@ export async function openShareQR(app) {
         const result = await shareExport(url, made);
         last.export = { ok: result.ok, mask: result.mask ?? null, attempts: result.attempts };
         if (!result.ok) {
-          check.textContent = "This link's QR code couldn't be read reliably at phone size. Save JSON instead."; // prettier-ignore
+          check.textContent = "This link's QR code couldn't be read reliably at phone size. Use Save scene instead."; // prettier-ignore
           json.hidden = false;
           return;
         }
@@ -138,7 +138,7 @@ export async function openShareQR(app) {
         app.ui?.toast?.("QR code saved.");
       } catch {
         last.export = { ok: false, error: "QR reader or PNG export failed." };
-        check.textContent = "The QR readers couldn't finish. Try again, or save JSON.";
+        check.textContent = "The QR readers couldn't finish. Try again, or use Save scene.";
         json.hidden = false;
       } finally {
         saving = false;
@@ -162,7 +162,7 @@ export async function openShareQR(app) {
         if (!saving && !last.export)
           check.textContent = ok
             ? "✓ It scans."
-            : "This code didn't read back here. Save JSON to keep the scene.";
+            : "This code didn't read back here. Use Save scene to keep the scene.";
       })
       .catch(() => {
         if (!saving && !last.export) check.textContent = "";
@@ -170,9 +170,9 @@ export async function openShareQR(app) {
   } else {
     const n = (made.bytes || res.bytes || 0).toLocaleString("en-US");
     body.push(
-      el("p", { id: "sqr-long", text: res.ok ? `This scene's link is ${n} characters, more than one QR code can hold (about 2,900). Save the scene as a file instead, and open it with Load JSON.` : "This scene is too big for a link, so it can't be a QR code either. Save the scene as a file instead, and open it with Load JSON." }), // prettier-ignore
+      el("p", { id: "sqr-long", text: res.ok ? `This scene's link is ${n} characters, more than one QR code can hold (about 2,900). Save the scene as a file instead, and open it with Open a scene.` : "This scene is too big for a link, so it can't be a QR code either. Save the scene as a file instead, and open it with Open a scene." }), // prettier-ignore
     );
-    const json = el("button", { type: "button", class: "primary", id: "sqr-json", text: "Save JSON" }); // prettier-ignore
+    const json = el("button", { type: "button", class: "primary", id: "sqr-json", text: "Save scene" }); // prettier-ignore
     json.addEventListener("click", () => {
       dialog.close();
       app.exportJSON();
