@@ -676,7 +676,7 @@ export class Pictures {
         backing = document.createElement("canvas");
         backing.width = bw;
         backing.height = bh;
-        backing.getContext("2d").drawImage(canvas, 0, 0, bw, bh);
+        backing.getContext("2d", { willReadFrequently: true }).drawImage(canvas, 0, 0, bw, bh);
       }
       const pixels = backing
         ? backing.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, bw, bh).data
