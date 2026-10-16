@@ -20,6 +20,8 @@ test("every text option shipped before this change stays hidden", async () => {
       if (!/key: /.test(block) || !/label: /.test(block)) continue;
       if (/hidden: true/.test(block)) continue;
       if (/key: "plugs"/.test(block) || (f === "volume-viewer.js" && /key: "spacing"/.test(block))) continue; // prettier-ignore
+      // Codex task 78a: One splat's word is shown on purpose (type your own word to split).
+      if (f === "one-splat.js" && /key: "word"/.test(block)) continue;
       shown.push(`${f}: ${block}`);
     }
   }

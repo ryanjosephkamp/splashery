@@ -217,6 +217,21 @@ browser from a seed by `src/generators.js`. The toys from packs (`src/packs/*.js
 beating heart, the campfire and the treasure chest) are built in the browser by the toy kit
 (`src/kit.js`) from recipes written for Splashery. None of them use external assets.
 
+### One splat, many splats (Codex task 78a)
+
+From a concept by Ryan Kamp. The pixel-tree math was ported from the owner's read-only
+`claude/portfolio-ref` branch onto Splashery's Kit; its renderer and fonts are not shipped. Made by
+Ryan with Codex (GPT-6), October 14, 2026. The port's code is MIT, and its procedural splats and
+thumbnail are CC0. Text uses the device's system font (the existing bitmap font in Node tools).
+Visitor pictures are processed locally and are not shipped assets.
+
+### Your name in splats (Codex task 78d)
+
+From a concept by Ryan Kamp. The procedural letters, paint colors, and synthesized notes are made by
+Ryan with Codex (GPT-6), CC0 1.0; the recipe code is MIT. It reuses the Fourier circles toy's Your
+words paths, rendered through Splashery's kit and PlayCanvas. No concept fonts, renderers, or
+external assets ship with the toy. Checked October 14, 2026.
+
 ### Baked assets (lane Baked engine)
 
 The Baked chest (labs) is original: built with Splashery's kit by `tools/bkd-bake-chest.mjs`, baked

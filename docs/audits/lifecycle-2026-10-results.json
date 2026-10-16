@@ -1,0 +1,6752 @@
+{
+  "schema": "lifecycle-checkpoints-v1",
+  "notes": [
+    "The audit document is the source of truth. All runs and per-run checkpoints are retained.",
+    "Timer maps use indexes into sites. Omitted timer maps and scrub counters are zero.",
+    "Callback totals cover hidden samples and relevant recording/retry sites; unrelated cumulative totals are omitted.",
+    "Hidden counterDeltas use counterColumns; omitted sites have zero activity during the sample.",
+    "Raw slider-frame arrays are replaced by first-visible and first-correct checkpoints."
+  ],
+  "counterColumns": ["site", "calls", "hiddenCalls", "mutations", "hiddenMutations", "created"],
+  "scrubColumns": ["pending", "calls"],
+  "sites": [
+    "at createUI (http://127.0.0.1:4174/src/ui.js:1719:3)",
+    "at renderLive (http://127.0.0.1:4174/src/live/panel.js:233:17)",
+    "at Object.soundLabPanel [as render] (http://127.0.0.1:4174/src/packs/sound-lab.js:621:17)",
+    "at songTransport (http://127.0.0.1:4174/src/packs/song-record.js:201:17)",
+    "at progressCard (http://127.0.0.1:4174/src/video3d/panel.js:112:20)",
+    "at makeFlight (http://127.0.0.1:4174/src/video3d/flight.js:285:17)",
+    "at mountWalk (http://127.0.0.1:4174/src/video3d/walk.js:349:17)",
+    "at mountSceneCredit (http://127.0.0.1:4174/src/video3d/credit.js:26:17)",
+    "at startRecording (http://127.0.0.1:4174/src/exports.js:252:11)",
+    "at finish (http://127.0.0.1:4174/src/exports.js:225:29)",
+    "at go (http://127.0.0.1:4174/src/packs/qr.js:317:34)",
+    "at new StageRecorder (http://127.0.0.1:4174/src/live/record.js:52:19)",
+    "at go (http://127.0.0.1:4174/src/packs/qr-lab.js:974:34)",
+    "at createUI (http://127.0.0.1:4173/src/ui.js:1719:3)",
+    "at startRecording (http://127.0.0.1:4173/src/exports.js:252:11)",
+    "at finish (http://127.0.0.1:4173/src/exports.js:225:29)",
+    "at Object.soundLabPanel [as render] (http://127.0.0.1:4173/src/packs/sound-lab.js:621:17)",
+    "at renderLive (http://127.0.0.1:4173/src/live/panel.js:233:17)"
+  ],
+  "measurements": {
+    "baselineSourceCommit": "95da2ddb",
+    "baseline": {
+      "commit": "f99abb911aeb41d556c8f4ff0d6841f16ae990aa",
+      "date": "2026-10-15T04:50:32.438Z",
+      "browser": "151.0.7922.173",
+      "viewport": [390, 844],
+      "visibility": "simulated document.hidden; native background throttling not measured",
+      "runs": [
+        {
+          "run": 1,
+          "clay": {
+            "samples": [
+              {
+                "clay": 0,
+                "paint": 0,
+                "clayTiming": {
+                  "frames": null,
+                  "batchMs": null
+                },
+                "paintTiming": {
+                  "frames": null,
+                  "batchMs": null
+                },
+                "repaintMs": 0,
+                "heap": {
+                  "used": 11313036,
+                  "backing": 12119482,
+                  "embedder": 7330768
+                }
+              },
+              {
+                "clay": 1900,
+                "paint": 3800,
+                "clayTiming": {
+                  "frames": {
+                    "median": 34.09999999997672,
+                    "p95": 67.79999999993015
+                  },
+                  "batchMs": {
+                    "median": 1.599999999976717,
+                    "p95": 33.90000000002328
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 57.199999999953434,
+                    "p95": 89.40000000002328
+                  },
+                  "batchMs": {
+                    "median": 0.40000000002328306,
+                    "p95": 3.700000000069849
+                  }
+                },
+                "repaintMs": 0,
+                "heap": {
+                  "used": 12512572,
+                  "backing": 14704907,
+                  "embedder": 7922136
+                }
+              },
+              {
+                "clay": 2000,
+                "paint": 4000,
+                "clayTiming": {
+                  "frames": {
+                    "median": 35,
+                    "p95": 59.800000000046566
+                  },
+                  "batchMs": {
+                    "median": 1.6000000000931323,
+                    "p95": 1.900000000023283
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 60,
+                    "p95": 1213.5
+                  },
+                  "batchMs": {
+                    "median": 0.2999999999301508,
+                    "p95": 0.40000000002328306
+                  }
+                },
+                "repaintMs": 58.199999999953434,
+                "heap": {
+                  "used": 12588076,
+                  "backing": 14704907,
+                  "embedder": 7889752
+                }
+              },
+              {
+                "clay": 2400,
+                "paint": 4800,
+                "clayTiming": {
+                  "frames": {
+                    "median": 41.300000000046566,
+                    "p95": 100.20000000006985
+                  },
+                  "batchMs": {
+                    "median": 2.299999999930151,
+                    "p95": 39.5
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 57.90000000002328,
+                    "p95": 1406.4000000000233
+                  },
+                  "batchMs": {
+                    "median": 0.30000000004656613,
+                    "p95": 0.5
+                  }
+                },
+                "repaintMs": 26.79999999993015,
+                "heap": {
+                  "used": 12790924,
+                  "backing": 14704907,
+                  "embedder": 7895528
+                }
+              },
+              {
+                "clay": 4000,
+                "paint": 8000,
+                "clayTiming": {
+                  "frames": {
+                    "median": 39.09999999997672,
+                    "p95": 72.19999999995343
+                  },
+                  "batchMs": {
+                    "median": 1.599999999976717,
+                    "p95": 40.699999999953434
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 59.39999999990687,
+                    "p95": 110.20000000006985
+                  },
+                  "batchMs": {
+                    "median": 0.40000000002328306,
+                    "p95": 0.8000000000465661
+                  }
+                },
+                "repaintMs": 29.400000000023283,
+                "heap": {
+                  "used": 13349600,
+                  "backing": 14704907,
+                  "embedder": 7988944
+                }
+              },
+              {
+                "clay": 8000,
+                "paint": 16000,
+                "clayTiming": {
+                  "frames": {
+                    "median": 35.5,
+                    "p95": 66.5
+                  },
+                  "batchMs": {
+                    "median": 1.8000000000465661,
+                    "p95": 41.79999999993015
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 55,
+                    "p95": 100.69999999995343
+                  },
+                  "batchMs": {
+                    "median": 0.30000000004656613,
+                    "p95": 0.7000000001862645
+                  }
+                },
+                "repaintMs": 73.89999999990687,
+                "heap": {
+                  "used": 14902636,
+                  "backing": 14704907,
+                  "embedder": 7938472
+                }
+              }
+            ],
+            "saved": [
+              {
+                "input": [1900, 3800],
+                "saved": [1900, 3800],
+                "reopened": [1900, 3800],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              },
+              {
+                "input": [2000, 4000],
+                "saved": [2000, 4000],
+                "reopened": [2000, 4000],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              },
+              {
+                "input": [2400, 4800],
+                "saved": [2000, 4000],
+                "reopened": [2000, 4000],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              },
+              {
+                "input": [8000, 16000],
+                "saved": [2000, 4000],
+                "reopened": [2000, 4000],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              }
+            ],
+            "releases": [
+              {
+                "action": "reset",
+                "before": {
+                  "used": 14944156,
+                  "backing": 7798523,
+                  "embedder": 8282856
+                },
+                "after": {
+                  "used": 12752060,
+                  "backing": 14704957,
+                  "embedder": 7945336
+                },
+                "retainedArraysAndEdits": [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "remaining": [0, 0]
+              },
+              {
+                "action": "toy",
+                "before": {
+                  "used": 15038428,
+                  "backing": 14704957,
+                  "embedder": 7954536
+                },
+                "after": {
+                  "used": 13467936,
+                  "backing": 24022774,
+                  "embedder": 8005344
+                },
+                "retainedArraysAndEdits": [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "remaining": [0, 0]
+              },
+              {
+                "action": "source",
+                "before": {
+                  "used": 15695400,
+                  "backing": 14810118,
+                  "embedder": 8006664
+                },
+                "after": {
+                  "used": 13600260,
+                  "backing": 14810114,
+                  "embedder": 8201080
+                },
+                "retainedArraysAndEdits": [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "remaining": [0, 0]
+              }
+            ]
+          },
+          "video": {
+            "open": {
+              "intervals": {
+                "0": 1,
+                "1": 1
+              },
+              "scrub": [1, 13]
+            },
+            "before": {
+              "used": 12584988,
+              "backing": 24077338,
+              "embedder": 8268120
+            },
+            "checkpoints": [
+              {
+                "intervals": {
+                  "0": 1
+                },
+                "scrub": [0, 29],
+                "cycles": 1,
+                "heap": {
+                  "used": 12959076,
+                  "backing": 30983722,
+                  "embedder": 8032968
+                },
+                "retainedScrubs": 1
+              },
+              {
+                "intervals": {
+                  "0": 1
+                },
+                "scrub": [0, 151],
+                "cycles": 10,
+                "heap": {
+                  "used": 13927424,
+                  "backing": 30983722,
+                  "embedder": 8185552
+                },
+                "retainedScrubs": 1
+              },
+              {
+                "intervals": {
+                  "0": 1
+                },
+                "scrub": [0, 286],
+                "cycles": 20,
+                "heap": {
+                  "used": 14173760,
+                  "backing": 30983722,
+                  "embedder": 8271368
+                },
+                "retainedScrubs": 1
+              }
+            ]
+          },
+          "timers": {
+            "toys": [
+              {
+                "id": "sound-lab",
+                "before": {
+                  "used": 29246956,
+                  "backing": 33658755,
+                  "embedder": 8648872
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "2": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "2": 1
+                    }
+                  },
+                  "counterDeltas": [
+                    [0, 4, 4, 0, 0, 0],
+                    [2, 4, 4, 16, 16, 0],
+                    [1, 4, 4, 0, 0, 0]
+                  ]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 13922756,
+                  "backing": 31154750,
+                  "embedder": 8504624
+                }
+              },
+              {
+                "id": "song-landscape",
+                "before": {
+                  "used": 20997660,
+                  "backing": 31353431,
+                  "embedder": 8628632
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "3": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "3": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "3": 1
+                    }
+                  },
+                  "counterDeltas": [
+                    [0, 5, 5, 0, 0, 0],
+                    [1, 4, 4, 0, 0, 0],
+                    [3, 4, 4, 0, 0, 0]
+                  ]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "3": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 17827532,
+                  "backing": 33843356,
+                  "embedder": 8416664
+                }
+              },
+              {
+                "id": "chess-set",
+                "before": {
+                  "used": 18171020,
+                  "backing": 33347750,
+                  "embedder": 8268072
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 4, 4, 0, 0, 0]]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 18353984,
+                  "backing": 33892162,
+                  "embedder": 8273472
+                }
+              },
+              {
+                "id": "toy-piano",
+                "before": {
+                  "used": 18806744,
+                  "backing": 26379488,
+                  "embedder": 8713856
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 4, 4, 0, 0, 0]]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 18630840,
+                  "backing": 33942706,
+                  "embedder": 8248776
+                }
+              }
+            ],
+            "helpers": [
+              {
+                "cycle": 1,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 2,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 3,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 4,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 5,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 6,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 7,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 8,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 9,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 10,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 11,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 12,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 13,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 14,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 15,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 16,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 17,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 18,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 19,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "open": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1,
+                    "5": 1,
+                    "6": 1,
+                    "7": 1
+                  }
+                }
+              },
+              {
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1,
+                      "4": 1,
+                      "5": 1,
+                      "6": 1,
+                      "7": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1,
+                      "4": 1,
+                      "5": 1,
+                      "6": 1,
+                      "7": 1
+                    }
+                  },
+                  "counterDeltas": [
+                    [0, 4, 4, 0, 0, 0],
+                    [5, 4, 4, 0, 0, 0],
+                    [6, 4, 4, 0, 0, 0],
+                    [7, 4, 4, 0, 0, 0],
+                    [4, 4, 4, 0, 0, 0]
+                  ]
+                }
+              },
+              {
+                "cycle": 20,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              }
+            ],
+            "helperHidden": {
+              "before": {
+                "intervals": {
+                  "0": 1,
+                  "4": 1,
+                  "5": 1,
+                  "6": 1,
+                  "7": 1
+                }
+              },
+              "after": {
+                "intervals": {
+                  "0": 1,
+                  "4": 1,
+                  "5": 1,
+                  "6": 1,
+                  "7": 1
+                }
+              },
+              "counterDeltas": [
+                [0, 4, 4, 0, 0, 0],
+                [5, 4, 4, 0, 0, 0],
+                [6, 4, 4, 0, 0, 0],
+                [7, 4, 4, 0, 0, 0],
+                [4, 4, 4, 0, 0, 0]
+              ]
+            },
+            "helperClosed": {
+              "intervals": {
+                "0": 1
+              }
+            },
+            "recording": [
+              {
+                "cycle": 1,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 1, 0, 0, 0, 1],
+                    [9, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 2,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 2, 0, 0, 0, 2],
+                    [9, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 3,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 3, 0, 0, 0, 3],
+                    [9, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 4,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 4, 0, 0, 0, 4],
+                    [9, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 5,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 5, 0, 0, 0, 5],
+                    [9, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 6,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 6, 0, 0, 0, 6],
+                    [9, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 7,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 7, 0, 0, 0, 7],
+                    [9, 16, 0, 0, 0, 16]
+                  ]
+                }
+              },
+              {
+                "cycle": 8,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 8, 0, 0, 0, 8],
+                    [9, 16, 0, 0, 0, 16]
+                  ]
+                }
+              },
+              {
+                "cycle": 9,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 9, 0, 0, 0, 9],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 10,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 10, 0, 0, 0, 10],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 11,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 11, 0, 0, 0, 11],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 12,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 12, 0, 0, 0, 12],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 13,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 13, 0, 0, 0, 13],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 14,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 14, 0, 0, 0, 14],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 15,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 15, 0, 0, 0, 15],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 16,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 16, 0, 0, 0, 16],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 17,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 17, 0, 0, 0, 17],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 18,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 18, 0, 0, 0, 18],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 19,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 19, 0, 0, 0, 19],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "open": {
+                  "intervals": {
+                    "0": 1,
+                    "8": 1
+                  },
+                  "counters": [
+                    [8, 20, 1, 0, 0, 20],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 20,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 20, 1, 0, 0, 20],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              }
+            ],
+            "retries": [
+              {
+                "id": "qr-code",
+                "checkpoints": [
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 0, 0, 0, 0, 1]],
+                    "cycle": 1
+                  },
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 2, 0, 0, 0, 20]],
+                    "cycle": 20
+                  }
+                ],
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 5, 5, 0, 0, 0]]
+                },
+                "expired": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[10, 2, 0, 0, 0, 20]]
+                }
+              },
+              {
+                "id": "qr-damage",
+                "checkpoints": [
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 2, 0, 0, 0, 20]],
+                    "cycle": 1
+                  },
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 2, 0, 0, 0, 20]],
+                    "cycle": 20
+                  }
+                ],
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 4, 4, 0, 0, 0]]
+                },
+                "expired": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[10, 2, 0, 0, 0, 20]]
+                }
+              }
+            ],
+            "activeLive": {
+              "source": "Chromium fake microphone; no real device",
+              "before": {
+                "used": 64114532,
+                "backing": 47111250,
+                "embedder": 9204728
+              },
+              "hidden": {
+                "before": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "after": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "counterDeltas": [
+                  [0, 4, 4, 0, 0, 0],
+                  [2, 4, 4, 16, 16, 0],
+                  [1, 4, 4, 40, 40, 0]
+                ]
+              },
+              "closed": {
+                "intervals": {
+                  "0": 1
+                }
+              },
+              "after": {
+                "used": 46143100,
+                "backing": 48181907,
+                "embedder": 8725960
+              }
+            },
+            "stageRecording": {
+              "before": {
+                "used": 46143100,
+                "backing": 48181907,
+                "embedder": 8646648
+              },
+              "takes": [
+                {
+                  "cycle": 1,
+                  "bytes": 108008,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 5, 0, 0, 0, 1]]
+                  }
+                },
+                {
+                  "cycle": 2,
+                  "bytes": 90076,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 8, 0, 0, 0, 2]]
+                  }
+                },
+                {
+                  "cycle": 3,
+                  "bytes": 78486,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 10, 0, 0, 0, 3]]
+                  }
+                },
+                {
+                  "cycle": 4,
+                  "bytes": 78322,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 12, 0, 0, 0, 4]]
+                  }
+                },
+                {
+                  "cycle": 5,
+                  "bytes": 78363,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 14, 0, 0, 0, 5]]
+                  }
+                },
+                {
+                  "cycle": 6,
+                  "bytes": 78333,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 16, 0, 0, 0, 6]]
+                  }
+                },
+                {
+                  "cycle": 7,
+                  "bytes": 78279,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 18, 0, 0, 0, 7]]
+                  }
+                },
+                {
+                  "cycle": 8,
+                  "bytes": 78280,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 20, 0, 0, 0, 8]]
+                  }
+                },
+                {
+                  "cycle": 9,
+                  "bytes": 78390,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 22, 0, 0, 0, 9]]
+                  }
+                },
+                {
+                  "cycle": 10,
+                  "bytes": 78340,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 24, 0, 0, 0, 10]]
+                  }
+                },
+                {
+                  "cycle": 11,
+                  "bytes": 78325,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 26, 0, 0, 0, 11]]
+                  }
+                },
+                {
+                  "cycle": 12,
+                  "bytes": 78060,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 28, 0, 0, 0, 12]]
+                  }
+                },
+                {
+                  "cycle": 13,
+                  "bytes": 78607,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 30, 0, 0, 0, 13]]
+                  }
+                },
+                {
+                  "cycle": 14,
+                  "bytes": 78488,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 32, 0, 0, 0, 14]]
+                  }
+                },
+                {
+                  "cycle": 15,
+                  "bytes": 78312,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 34, 0, 0, 0, 15]]
+                  }
+                },
+                {
+                  "cycle": 16,
+                  "bytes": 78299,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 36, 0, 0, 0, 16]]
+                  }
+                },
+                {
+                  "cycle": 17,
+                  "bytes": 78261,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 38, 0, 0, 0, 17]]
+                  }
+                },
+                {
+                  "cycle": 18,
+                  "bytes": 78298,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 40, 0, 0, 0, 18]]
+                  }
+                },
+                {
+                  "cycle": 19,
+                  "bytes": 78185,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 42, 0, 0, 0, 19]]
+                  }
+                },
+                {
+                  "open": {
+                    "intervals": {
+                      "0": 1,
+                      "11": 1
+                    },
+                    "counters": [[11, 44, 2, 0, 0, 20]]
+                  }
+                },
+                {
+                  "cycle": 20,
+                  "bytes": 78323,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 44, 2, 0, 0, 20]]
+                  }
+                }
+              ],
+              "after": {
+                "used": 46227112,
+                "backing": 48181937,
+                "embedder": 8934720
+              }
+            }
+          },
+          "sliders": {
+            "generator": {
+              "shape": "blob",
+              "palette": "candy",
+              "seed": 1,
+              "count": 60000,
+              "sizeJitter": 0.35,
+              "roughness": 0.3,
+              "colorNoise": 0.25
+            },
+            "values": [
+              {
+                "id": "gen-count",
+                "value": "60000",
+                "visible": true
+              },
+              {
+                "id": "gen-jitter",
+                "value": "35",
+                "visible": true
+              },
+              {
+                "id": "gen-rough",
+                "value": "30",
+                "visible": true
+              },
+              {
+                "id": "gen-noise",
+                "value": "25",
+                "visible": true
+              }
+            ],
+            "firstVisible": {
+              "t": 23644.90000000014,
+              "values": ["120000", "50", "50", "50"]
+            },
+            "firstCorrect": {
+              "t": 33628.30000000005,
+              "values": ["60000", "35", "30", "25"]
+            },
+            "incorrectValueWindowMs": 9983.399999999907
+          }
+        },
+        {
+          "run": 2,
+          "clay": {
+            "samples": [
+              {
+                "clay": 0,
+                "paint": 0,
+                "clayTiming": {
+                  "frames": null,
+                  "batchMs": null
+                },
+                "paintTiming": {
+                  "frames": null,
+                  "batchMs": null
+                },
+                "repaintMs": 0.10000000009313226,
+                "heap": {
+                  "used": 11310252,
+                  "backing": 12119596,
+                  "embedder": 7317520
+                }
+              },
+              {
+                "clay": 1900,
+                "paint": 3800,
+                "clayTiming": {
+                  "frames": {
+                    "median": 34.5,
+                    "p95": 72
+                  },
+                  "batchMs": {
+                    "median": 1.5,
+                    "p95": 28.399999999906868
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 55.10000000009313,
+                    "p95": 66.0999999998603
+                  },
+                  "batchMs": {
+                    "median": 0.4000000001396984,
+                    "p95": 1.9000000001396984
+                  }
+                },
+                "repaintMs": 0,
+                "heap": {
+                  "used": 12514884,
+                  "backing": 14704907,
+                  "embedder": 7919952
+                }
+              },
+              {
+                "clay": 2000,
+                "paint": 4000,
+                "clayTiming": {
+                  "frames": {
+                    "median": 45.60000000009313,
+                    "p95": 48.199999999953434
+                  },
+                  "batchMs": {
+                    "median": 0.8000000000465661,
+                    "p95": 0.8000000000465661
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 71.30000000004657,
+                    "p95": 1285.3999999999069
+                  },
+                  "batchMs": {
+                    "median": 0.30000000004656613,
+                    "p95": 0.39999999990686774
+                  }
+                },
+                "repaintMs": 55.300000000046566,
+                "heap": {
+                  "used": 12595788,
+                  "backing": 14704907,
+                  "embedder": 7887456
+                }
+              },
+              {
+                "clay": 2400,
+                "paint": 4800,
+                "clayTiming": {
+                  "frames": {
+                    "median": 40.699999999953434,
+                    "p95": 57.200000000186265
+                  },
+                  "batchMs": {
+                    "median": 1,
+                    "p95": 36
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 58.5,
+                    "p95": 1395.8000000000466
+                  },
+                  "batchMs": {
+                    "median": 0.30000000004656613,
+                    "p95": 0.6999999999534339
+                  }
+                },
+                "repaintMs": 56.200000000186265,
+                "heap": {
+                  "used": 12794248,
+                  "backing": 14704907,
+                  "embedder": 8018152
+                }
+              },
+              {
+                "clay": 4000,
+                "paint": 8000,
+                "clayTiming": {
+                  "frames": {
+                    "median": 35.89999999990687,
+                    "p95": 72.30000000004657
+                  },
+                  "batchMs": {
+                    "median": 1.7000000001862645,
+                    "p95": 38.9000000001397
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 50.699999999953434,
+                    "p95": 103.5
+                  },
+                  "batchMs": {
+                    "median": 0.30000000004656613,
+                    "p95": 0.8000000000465661
+                  }
+                },
+                "repaintMs": 25.100000000093132,
+                "heap": {
+                  "used": 13355840,
+                  "backing": 14704907,
+                  "embedder": 7909816
+                }
+              },
+              {
+                "clay": 8000,
+                "paint": 16000,
+                "clayTiming": {
+                  "frames": {
+                    "median": 37.300000000046566,
+                    "p95": 72.5999999998603
+                  },
+                  "batchMs": {
+                    "median": 1.8000000000465661,
+                    "p95": 42
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 52.10000000009313,
+                    "p95": 96.60000000009313
+                  },
+                  "batchMs": {
+                    "median": 0.39999999990686774,
+                    "p95": 0.8000000000465661
+                  }
+                },
+                "repaintMs": 23.799999999813735,
+                "heap": {
+                  "used": 14909508,
+                  "backing": 14704907,
+                  "embedder": 7937016
+                }
+              }
+            ],
+            "saved": [
+              {
+                "input": [1900, 3800],
+                "saved": [1900, 3800],
+                "reopened": [1900, 3800],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              },
+              {
+                "input": [2000, 4000],
+                "saved": [2000, 4000],
+                "reopened": [2000, 4000],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              },
+              {
+                "input": [2400, 4800],
+                "saved": [2000, 4000],
+                "reopened": [2000, 4000],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              },
+              {
+                "input": [8000, 16000],
+                "saved": [2000, 4000],
+                "reopened": [2000, 4000],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              }
+            ],
+            "releases": [
+              {
+                "action": "reset",
+                "before": {
+                  "used": 14918568,
+                  "backing": 14704907,
+                  "embedder": 7936704
+                },
+                "after": {
+                  "used": 12763472,
+                  "backing": 14704957,
+                  "embedder": 7943296
+                },
+                "retainedArraysAndEdits": [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "remaining": [0, 0]
+              },
+              {
+                "action": "toy",
+                "before": {
+                  "used": 15039604,
+                  "backing": 14704957,
+                  "embedder": 8177304
+                },
+                "after": {
+                  "used": 13468508,
+                  "backing": 24022774,
+                  "embedder": 8183544
+                },
+                "retainedArraysAndEdits": [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "remaining": [0, 0]
+              },
+              {
+                "action": "source",
+                "before": {
+                  "used": 15717436,
+                  "backing": 14810118,
+                  "embedder": 8004048
+                },
+                "after": {
+                  "used": 13619304,
+                  "backing": 14810114,
+                  "embedder": 8157616
+                },
+                "retainedArraysAndEdits": [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "remaining": [0, 0]
+              }
+            ]
+          },
+          "video": {
+            "open": {
+              "intervals": {
+                "0": 1,
+                "1": 1
+              },
+              "scrub": [1, 13]
+            },
+            "before": {
+              "used": 12626892,
+              "backing": 30983714,
+              "embedder": 8279128
+            },
+            "checkpoints": [
+              {
+                "intervals": {
+                  "0": 1
+                },
+                "scrub": [0, 30],
+                "cycles": 1,
+                "heap": {
+                  "used": 12975880,
+                  "backing": 30983722,
+                  "embedder": 8112712
+                },
+                "retainedScrubs": 1
+              },
+              {
+                "intervals": {
+                  "0": 1
+                },
+                "scrub": [0, 152],
+                "cycles": 10,
+                "heap": {
+                  "used": 13996292,
+                  "backing": 30983722,
+                  "embedder": 8242024
+                },
+                "retainedScrubs": 1
+              },
+              {
+                "intervals": {
+                  "0": 1
+                },
+                "scrub": [0, 287],
+                "cycles": 20,
+                "heap": {
+                  "used": 14326940,
+                  "backing": 30983722,
+                  "embedder": 8079992
+                },
+                "retainedScrubs": 1
+              }
+            ]
+          },
+          "timers": {
+            "toys": [
+              {
+                "id": "sound-lab",
+                "before": {
+                  "used": 29321156,
+                  "backing": 29337258,
+                  "embedder": 8179776
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "2": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "2": 1
+                    }
+                  },
+                  "counterDeltas": [
+                    [0, 5, 5, 0, 0, 0],
+                    [2, 4, 4, 16, 16, 0],
+                    [1, 4, 4, 0, 0, 0]
+                  ]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 14029680,
+                  "backing": 24247966,
+                  "embedder": 8763896
+                }
+              },
+              {
+                "id": "song-landscape",
+                "before": {
+                  "used": 20912980,
+                  "backing": 31352983,
+                  "embedder": 8342760
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "3": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "3": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "3": 1
+                    }
+                  },
+                  "counterDeltas": [
+                    [0, 5, 5, 0, 0, 0],
+                    [1, 4, 4, 0, 0, 0],
+                    [3, 4, 4, 0, 0, 0]
+                  ]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "3": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 17745344,
+                  "backing": 33842935,
+                  "embedder": 8261216
+                }
+              },
+              {
+                "id": "chess-set",
+                "before": {
+                  "used": 18169156,
+                  "backing": 26440969,
+                  "embedder": 8639904
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 4, 4, 0, 0, 0]]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 18196796,
+                  "backing": 33891741,
+                  "embedder": 8341992
+                }
+              },
+              {
+                "id": "toy-piano",
+                "before": {
+                  "used": 18684992,
+                  "backing": 33285451,
+                  "embedder": 8722488
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 5, 5, 0, 0, 0]]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 18312084,
+                  "backing": 33941586,
+                  "embedder": 8329800
+                }
+              }
+            ],
+            "helpers": [
+              {
+                "cycle": 1,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 2,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 3,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 4,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 5,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 6,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 7,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 8,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 9,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 10,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 11,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 12,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 13,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 14,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 15,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 16,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 17,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 18,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 19,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "open": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1,
+                    "5": 1,
+                    "6": 1,
+                    "7": 1
+                  }
+                }
+              },
+              {
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1,
+                      "4": 1,
+                      "5": 1,
+                      "6": 1,
+                      "7": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1,
+                      "4": 1,
+                      "5": 1,
+                      "6": 1,
+                      "7": 1
+                    }
+                  },
+                  "counterDeltas": [
+                    [0, 5, 5, 0, 0, 0],
+                    [5, 4, 4, 0, 0, 0],
+                    [6, 4, 4, 0, 0, 0],
+                    [7, 4, 4, 0, 0, 0],
+                    [4, 4, 4, 0, 0, 0]
+                  ]
+                }
+              },
+              {
+                "cycle": 20,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              }
+            ],
+            "helperHidden": {
+              "before": {
+                "intervals": {
+                  "0": 1,
+                  "4": 1,
+                  "5": 1,
+                  "6": 1,
+                  "7": 1
+                }
+              },
+              "after": {
+                "intervals": {
+                  "0": 1,
+                  "4": 1,
+                  "5": 1,
+                  "6": 1,
+                  "7": 1
+                }
+              },
+              "counterDeltas": [
+                [0, 5, 5, 0, 0, 0],
+                [5, 4, 4, 0, 0, 0],
+                [6, 4, 4, 0, 0, 0],
+                [7, 4, 4, 0, 0, 0],
+                [4, 4, 4, 0, 0, 0]
+              ]
+            },
+            "helperClosed": {
+              "intervals": {
+                "0": 1
+              }
+            },
+            "recording": [
+              {
+                "cycle": 1,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 1, 0, 0, 0, 1]]
+                }
+              },
+              {
+                "cycle": 2,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 2, 0, 0, 0, 2]]
+                }
+              },
+              {
+                "cycle": 3,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 3, 0, 0, 0, 3]]
+                }
+              },
+              {
+                "cycle": 4,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 4, 0, 0, 0, 4]]
+                }
+              },
+              {
+                "cycle": 5,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 5, 0, 0, 0, 5]]
+                }
+              },
+              {
+                "cycle": 6,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 6, 0, 0, 0, 6]]
+                }
+              },
+              {
+                "cycle": 7,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 7, 0, 0, 0, 7]]
+                }
+              },
+              {
+                "cycle": 8,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 8, 0, 0, 0, 8]]
+                }
+              },
+              {
+                "cycle": 9,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 9, 0, 0, 0, 9]]
+                }
+              },
+              {
+                "cycle": 10,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 10, 0, 0, 0, 10]]
+                }
+              },
+              {
+                "cycle": 11,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 11, 0, 0, 0, 11]]
+                }
+              },
+              {
+                "cycle": 12,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 12, 0, 0, 0, 12]]
+                }
+              },
+              {
+                "cycle": 13,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 13, 0, 0, 0, 13]]
+                }
+              },
+              {
+                "cycle": 14,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 14, 0, 0, 0, 14]]
+                }
+              },
+              {
+                "cycle": 15,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 15, 0, 0, 0, 15]]
+                }
+              },
+              {
+                "cycle": 16,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 16, 0, 0, 0, 16]]
+                }
+              },
+              {
+                "cycle": 17,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 17, 0, 0, 0, 17]]
+                }
+              },
+              {
+                "cycle": 18,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 18, 0, 0, 0, 18]]
+                }
+              },
+              {
+                "cycle": 19,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 19, 0, 0, 0, 19]]
+                }
+              },
+              {
+                "open": {
+                  "intervals": {
+                    "0": 1,
+                    "8": 1
+                  },
+                  "counters": [[8, 20, 1, 0, 0, 20]]
+                }
+              },
+              {
+                "cycle": 20,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[8, 20, 1, 0, 0, 20]]
+                }
+              }
+            ],
+            "retries": [
+              {
+                "id": "qr-code",
+                "checkpoints": [
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 0, 0, 0, 0, 1]],
+                    "cycle": 1
+                  },
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 0, 0, 0, 0, 20]],
+                    "cycle": 20
+                  }
+                ],
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 5, 5, 0, 0, 0]]
+                },
+                "expired": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[10, 0, 0, 0, 0, 20]]
+                }
+              },
+              {
+                "id": "qr-damage",
+                "checkpoints": [
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 0, 0, 0, 0, 20]],
+                    "cycle": 1
+                  },
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 0, 0, 0, 0, 20]],
+                    "cycle": 20
+                  }
+                ],
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 4, 4, 0, 0, 0]]
+                },
+                "expired": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[10, 0, 0, 0, 0, 20]]
+                }
+              }
+            ],
+            "activeLive": {
+              "source": "Chromium fake microphone; no real device",
+              "before": {
+                "used": 63389636,
+                "backing": 53676394,
+                "embedder": 9084576
+              },
+              "hidden": {
+                "before": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "after": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "counterDeltas": [
+                  [0, 4, 4, 0, 0, 0],
+                  [2, 4, 4, 16, 16, 0],
+                  [1, 4, 4, 40, 40, 0]
+                ]
+              },
+              "closed": {
+                "intervals": {
+                  "0": 1
+                }
+              },
+              "after": {
+                "used": 45608116,
+                "backing": 47924398,
+                "embedder": 8591496
+              }
+            },
+            "stageRecording": {
+              "before": {
+                "used": 45608084,
+                "backing": 47924398,
+                "embedder": 8591496
+              },
+              "takes": [
+                {
+                  "cycle": 1,
+                  "bytes": 81832,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 4, 0, 0, 0, 1]]
+                  }
+                },
+                {
+                  "cycle": 2,
+                  "bytes": 125718,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 8, 0, 0, 0, 2]]
+                  }
+                },
+                {
+                  "cycle": 3,
+                  "bytes": 78436,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 10, 0, 0, 0, 3]]
+                  }
+                },
+                {
+                  "cycle": 4,
+                  "bytes": 78396,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 12, 0, 0, 0, 4]]
+                  }
+                },
+                {
+                  "cycle": 5,
+                  "bytes": 78334,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 14, 0, 0, 0, 5]]
+                  }
+                },
+                {
+                  "cycle": 6,
+                  "bytes": 78271,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 16, 0, 0, 0, 6]]
+                  }
+                },
+                {
+                  "cycle": 7,
+                  "bytes": 78301,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 18, 0, 0, 0, 7]]
+                  }
+                },
+                {
+                  "cycle": 8,
+                  "bytes": 78311,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 20, 0, 0, 0, 8]]
+                  }
+                },
+                {
+                  "cycle": 9,
+                  "bytes": 78240,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 22, 0, 0, 0, 9]]
+                  }
+                },
+                {
+                  "cycle": 10,
+                  "bytes": 78346,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 24, 0, 0, 0, 10]]
+                  }
+                },
+                {
+                  "cycle": 11,
+                  "bytes": 78281,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 26, 0, 0, 0, 11]]
+                  }
+                },
+                {
+                  "cycle": 12,
+                  "bytes": 78114,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 28, 0, 0, 0, 12]]
+                  }
+                },
+                {
+                  "cycle": 13,
+                  "bytes": 78458,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 30, 0, 0, 0, 13]]
+                  }
+                },
+                {
+                  "cycle": 14,
+                  "bytes": 78472,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 32, 0, 0, 0, 14]]
+                  }
+                },
+                {
+                  "cycle": 15,
+                  "bytes": 78240,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 34, 0, 0, 0, 15]]
+                  }
+                },
+                {
+                  "cycle": 16,
+                  "bytes": 78366,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 36, 0, 0, 0, 16]]
+                  }
+                },
+                {
+                  "cycle": 17,
+                  "bytes": 78262,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 38, 0, 0, 0, 17]]
+                  }
+                },
+                {
+                  "cycle": 18,
+                  "bytes": 78317,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 40, 0, 0, 0, 18]]
+                  }
+                },
+                {
+                  "cycle": 19,
+                  "bytes": 78311,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 42, 0, 0, 0, 19]]
+                  }
+                },
+                {
+                  "open": {
+                    "intervals": {
+                      "0": 1,
+                      "11": 1
+                    },
+                    "counters": [[11, 44, 2, 0, 0, 20]]
+                  }
+                },
+                {
+                  "cycle": 20,
+                  "bytes": 78339,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 44, 2, 0, 0, 20]]
+                  }
+                }
+              ],
+              "after": {
+                "used": 45692076,
+                "backing": 47924428,
+                "embedder": 8966440
+              }
+            }
+          },
+          "sliders": {
+            "generator": {
+              "shape": "blob",
+              "palette": "candy",
+              "seed": 1,
+              "count": 60000,
+              "sizeJitter": 0.35,
+              "roughness": 0.3,
+              "colorNoise": 0.25
+            },
+            "values": [
+              {
+                "id": "gen-count",
+                "value": "60000",
+                "visible": true
+              },
+              {
+                "id": "gen-jitter",
+                "value": "35",
+                "visible": true
+              },
+              {
+                "id": "gen-rough",
+                "value": "30",
+                "visible": true
+              },
+              {
+                "id": "gen-noise",
+                "value": "25",
+                "visible": true
+              }
+            ],
+            "firstVisible": {
+              "t": 23790.100000000093,
+              "values": ["120000", "50", "50", "50"]
+            },
+            "firstCorrect": {
+              "t": 33973.60000000009,
+              "values": ["60000", "35", "30", "25"]
+            },
+            "incorrectValueWindowMs": 10183.5
+          }
+        },
+        {
+          "run": 3,
+          "clay": {
+            "samples": [
+              {
+                "clay": 0,
+                "paint": 0,
+                "clayTiming": {
+                  "frames": null,
+                  "batchMs": null
+                },
+                "paintTiming": {
+                  "frames": null,
+                  "batchMs": null
+                },
+                "repaintMs": 0,
+                "heap": {
+                  "used": 11389168,
+                  "backing": 12119514,
+                  "embedder": 8482360
+                }
+              },
+              {
+                "clay": 1900,
+                "paint": 3800,
+                "clayTiming": {
+                  "frames": {
+                    "median": 37.60000000009313,
+                    "p95": 80.10000000009313
+                  },
+                  "batchMs": {
+                    "median": 1.1000000000931323,
+                    "p95": 32.6999999997206
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 56.700000000186265,
+                    "p95": 68.5
+                  },
+                  "batchMs": {
+                    "median": 0.6999999997206032,
+                    "p95": 1.2000000001862645
+                  }
+                },
+                "repaintMs": 0,
+                "heap": {
+                  "used": 12531420,
+                  "backing": 14704907,
+                  "embedder": 8023608
+                }
+              },
+              {
+                "clay": 2000,
+                "paint": 4000,
+                "clayTiming": {
+                  "frames": {
+                    "median": 46.60000000009313,
+                    "p95": 59.200000000186265
+                  },
+                  "batchMs": {
+                    "median": 1.5,
+                    "p95": 1.6999999997206032
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 59.60000000009313,
+                    "p95": 1235.8999999999069
+                  },
+                  "batchMs": {
+                    "median": 0.2999999998137355,
+                    "p95": 9.399999999906868
+                  }
+                },
+                "repaintMs": 47.40000000037253,
+                "heap": {
+                  "used": 12605968,
+                  "backing": 14704907,
+                  "embedder": 7893232
+                }
+              },
+              {
+                "clay": 2400,
+                "paint": 4800,
+                "clayTiming": {
+                  "frames": {
+                    "median": 42.89999999990687,
+                    "p95": 71.3000000002794
+                  },
+                  "batchMs": {
+                    "median": 2.1000000000931323,
+                    "p95": 49.700000000186265
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 50.799999999813735,
+                    "p95": 1483.6000000000931
+                  },
+                  "batchMs": {
+                    "median": 0.5,
+                    "p95": 0.8000000002793968
+                  }
+                },
+                "repaintMs": 32.200000000186265,
+                "heap": {
+                  "used": 12800264,
+                  "backing": 14704907,
+                  "embedder": 8026776
+                }
+              },
+              {
+                "clay": 4000,
+                "paint": 8000,
+                "clayTiming": {
+                  "frames": {
+                    "median": 34.5,
+                    "p95": 58.3000000002794
+                  },
+                  "batchMs": {
+                    "median": 1.7000000001862645,
+                    "p95": 45
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 59,
+                    "p95": 72.29999999981374
+                  },
+                  "batchMs": {
+                    "median": 0.40000000037252903,
+                    "p95": 0.7999999998137355
+                  }
+                },
+                "repaintMs": 16,
+                "heap": {
+                  "used": 13425740,
+                  "backing": 14704907,
+                  "embedder": 8269288
+                }
+              },
+              {
+                "clay": 8000,
+                "paint": 16000,
+                "clayTiming": {
+                  "frames": {
+                    "median": 34.09999999962747,
+                    "p95": 55.5
+                  },
+                  "batchMs": {
+                    "median": 1.8000000002793968,
+                    "p95": 38
+                  }
+                },
+                "paintTiming": {
+                  "frames": {
+                    "median": 52.799999999813735,
+                    "p95": 103.09999999962747
+                  },
+                  "batchMs": {
+                    "median": 0.39999999990686774,
+                    "p95": 1.2000000001862645
+                  }
+                },
+                "repaintMs": 23.199999999720603,
+                "heap": {
+                  "used": 14920192,
+                  "backing": 14704907,
+                  "embedder": 8055680
+                }
+              }
+            ],
+            "saved": [
+              {
+                "input": [1900, 3800],
+                "saved": [1900, 3800],
+                "reopened": [1900, 3800],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              },
+              {
+                "input": [2000, 4000],
+                "saved": [2000, 4000],
+                "reopened": [2000, 4000],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              },
+              {
+                "input": [2400, 4800],
+                "saved": [2000, 4000],
+                "reopened": [2000, 4000],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              },
+              {
+                "input": [8000, 16000],
+                "saved": [2000, 4000],
+                "reopened": [2000, 4000],
+                "prefix": {
+                  "clay": true,
+                  "paint": true
+                },
+                "reopenedMatches": true,
+                "notice": "Scene saved as JSON."
+              }
+            ],
+            "releases": [
+              {
+                "action": "reset",
+                "before": {
+                  "used": 14929228,
+                  "backing": 14704907,
+                  "embedder": 7941184
+                },
+                "after": {
+                  "used": 12780456,
+                  "backing": 14704957,
+                  "embedder": 7947680
+                },
+                "retainedArraysAndEdits": [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "remaining": [0, 0]
+              },
+              {
+                "action": "toy",
+                "before": {
+                  "used": 15062156,
+                  "backing": 14704957,
+                  "embedder": 8140632
+                },
+                "after": {
+                  "used": 13466092,
+                  "backing": 24022774,
+                  "embedder": 8008280
+                },
+                "retainedArraysAndEdits": [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "remaining": [0, 0]
+              },
+              {
+                "action": "source",
+                "before": {
+                  "used": 15711372,
+                  "backing": 14810118,
+                  "embedder": 8006640
+                },
+                "after": {
+                  "used": 13655932,
+                  "backing": 7903730,
+                  "embedder": 8269856
+                },
+                "retainedArraysAndEdits": [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "remaining": [0, 0]
+              }
+            ]
+          },
+          "video": {
+            "open": {
+              "intervals": {
+                "0": 1,
+                "1": 1
+              },
+              "scrub": [1, 14]
+            },
+            "before": {
+              "used": 12700404,
+              "backing": 24077351,
+              "embedder": 8475760
+            },
+            "checkpoints": [
+              {
+                "intervals": {
+                  "0": 1
+                },
+                "scrub": [0, 37],
+                "cycles": 1,
+                "heap": {
+                  "used": 12982892,
+                  "backing": 30983714,
+                  "embedder": 8124192
+                },
+                "retainedScrubs": 1
+              },
+              {
+                "intervals": {
+                  "0": 1
+                },
+                "scrub": [0, 159],
+                "cycles": 10,
+                "heap": {
+                  "used": 13971844,
+                  "backing": 30983722,
+                  "embedder": 8262608
+                },
+                "retainedScrubs": 1
+              },
+              {
+                "intervals": {
+                  "0": 1
+                },
+                "scrub": [0, 303],
+                "cycles": 20,
+                "heap": {
+                  "used": 14221236,
+                  "backing": 30983722,
+                  "embedder": 8311584
+                },
+                "retainedScrubs": 1
+              }
+            ]
+          },
+          "timers": {
+            "toys": [
+              {
+                "id": "sound-lab",
+                "before": {
+                  "used": 30594472,
+                  "backing": 22559668,
+                  "embedder": 8659424
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "2": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "2": 1
+                    }
+                  },
+                  "counterDeltas": [
+                    [0, 5, 5, 0, 0, 0],
+                    [2, 4, 4, 16, 16, 0],
+                    [1, 4, 4, 0, 0, 0]
+                  ]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 14003060,
+                  "backing": 24247966,
+                  "embedder": 8701088
+                }
+              },
+              {
+                "id": "song-landscape",
+                "before": {
+                  "used": 20988224,
+                  "backing": 24446626,
+                  "embedder": 8673008
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "3": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "3": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1,
+                      "1": 1,
+                      "3": 1
+                    }
+                  },
+                  "counterDeltas": [
+                    [0, 5, 5, 0, 0, 0],
+                    [1, 4, 4, 0, 0, 0],
+                    [3, 4, 4, 0, 0, 0]
+                  ]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "3": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 17741360,
+                  "backing": 33842935,
+                  "embedder": 8209352
+                }
+              },
+              {
+                "id": "chess-set",
+                "before": {
+                  "used": 18177276,
+                  "backing": 26440969,
+                  "embedder": 8583640
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 5, 5, 0, 0, 0]]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 18242936,
+                  "backing": 33891741,
+                  "embedder": 8243536
+                }
+              },
+              {
+                "id": "toy-piano",
+                "before": {
+                  "used": 18598076,
+                  "backing": 33285425,
+                  "embedder": 8553880
+                },
+                "rebuilt": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 4, 4, 0, 0, 0]]
+                },
+                "switched": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  }
+                },
+                "after": {
+                  "used": 18339752,
+                  "backing": 33941586,
+                  "embedder": 8384280
+                }
+              }
+            ],
+            "helpers": [
+              {
+                "cycle": 1,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 2,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 3,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 4,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 5,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 6,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 7,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 8,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 9,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 10,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 11,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 12,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 13,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 14,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 15,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 16,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 17,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 18,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "cycle": 19,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              },
+              {
+                "open": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1,
+                    "5": 1,
+                    "6": 1,
+                    "7": 1
+                  }
+                }
+              },
+              {
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1,
+                      "4": 1,
+                      "5": 1,
+                      "6": 1,
+                      "7": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1,
+                      "4": 1,
+                      "5": 1,
+                      "6": 1,
+                      "7": 1
+                    }
+                  },
+                  "counterDeltas": [
+                    [0, 4, 4, 0, 0, 0],
+                    [5, 4, 4, 0, 0, 0],
+                    [6, 4, 4, 0, 0, 0],
+                    [7, 4, 4, 0, 0, 0],
+                    [4, 4, 4, 0, 0, 0]
+                  ]
+                }
+              },
+              {
+                "cycle": 20,
+                "closed": {
+                  "intervals": {
+                    "0": 1,
+                    "4": 1
+                  }
+                },
+                "cards": 1
+              }
+            ],
+            "helperHidden": {
+              "before": {
+                "intervals": {
+                  "0": 1,
+                  "4": 1,
+                  "5": 1,
+                  "6": 1,
+                  "7": 1
+                }
+              },
+              "after": {
+                "intervals": {
+                  "0": 1,
+                  "4": 1,
+                  "5": 1,
+                  "6": 1,
+                  "7": 1
+                }
+              },
+              "counterDeltas": [
+                [0, 4, 4, 0, 0, 0],
+                [5, 4, 4, 0, 0, 0],
+                [6, 4, 4, 0, 0, 0],
+                [7, 4, 4, 0, 0, 0],
+                [4, 4, 4, 0, 0, 0]
+              ]
+            },
+            "helperClosed": {
+              "intervals": {
+                "0": 1
+              }
+            },
+            "recording": [
+              {
+                "cycle": 1,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 1, 0, 0, 0, 1],
+                    [9, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 2,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 2, 0, 0, 0, 2],
+                    [9, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 3,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 4, 0, 0, 0, 3],
+                    [9, 16, 0, 0, 0, 16]
+                  ]
+                }
+              },
+              {
+                "cycle": 4,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 5, 0, 0, 0, 4],
+                    [9, 16, 0, 0, 0, 16]
+                  ]
+                }
+              },
+              {
+                "cycle": 5,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 6, 0, 0, 0, 5],
+                    [9, 16, 0, 0, 0, 16]
+                  ]
+                }
+              },
+              {
+                "cycle": 6,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 8, 0, 0, 0, 6],
+                    [9, 16, 0, 0, 0, 16]
+                  ]
+                }
+              },
+              {
+                "cycle": 7,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 10, 0, 0, 0, 7],
+                    [9, 16, 0, 0, 0, 16]
+                  ]
+                }
+              },
+              {
+                "cycle": 8,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 11, 0, 0, 0, 8],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 9,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 13, 0, 0, 0, 9],
+                    [9, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 10,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 14, 0, 0, 0, 10],
+                    [9, 32, 0, 0, 0, 32]
+                  ]
+                }
+              },
+              {
+                "cycle": 11,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 15, 0, 0, 0, 11],
+                    [9, 40, 0, 0, 0, 40]
+                  ]
+                }
+              },
+              {
+                "cycle": 12,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 16, 0, 0, 0, 12],
+                    [9, 48, 0, 0, 0, 48]
+                  ]
+                }
+              },
+              {
+                "cycle": 13,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 18, 0, 0, 0, 13],
+                    [9, 56, 0, 0, 0, 56]
+                  ]
+                }
+              },
+              {
+                "cycle": 14,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 19, 0, 0, 0, 14],
+                    [9, 64, 0, 0, 0, 64]
+                  ]
+                }
+              },
+              {
+                "cycle": 15,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 20, 0, 0, 0, 15],
+                    [9, 72, 0, 0, 0, 72]
+                  ]
+                }
+              },
+              {
+                "cycle": 16,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 21, 0, 0, 0, 16],
+                    [9, 80, 0, 0, 0, 80]
+                  ]
+                }
+              },
+              {
+                "cycle": 17,
+                "bytes": 979,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 22, 0, 0, 0, 17],
+                    [9, 80, 0, 0, 0, 80]
+                  ]
+                }
+              },
+              {
+                "cycle": 18,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 23, 0, 0, 0, 18],
+                    [9, 88, 0, 0, 0, 88]
+                  ]
+                }
+              },
+              {
+                "cycle": 19,
+                "error": "The recording came out empty.",
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 24, 0, 0, 0, 19],
+                    [9, 96, 0, 0, 0, 96]
+                  ]
+                }
+              },
+              {
+                "open": {
+                  "intervals": {
+                    "0": 1,
+                    "8": 1
+                  },
+                  "counters": [
+                    [8, 26, 2, 0, 0, 20],
+                    [9, 96, 0, 0, 0, 96]
+                  ]
+                }
+              },
+              {
+                "cycle": 20,
+                "bytes": 977,
+                "closed": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [8, 26, 2, 0, 0, 20],
+                    [9, 96, 0, 0, 0, 96]
+                  ]
+                }
+              }
+            ],
+            "retries": [
+              {
+                "id": "qr-code",
+                "checkpoints": [
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 1, 0, 0, 0, 2]],
+                    "cycle": 1
+                  },
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 6, 0, 0, 0, 13]],
+                    "cycle": 20
+                  }
+                ],
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 4, 4, 0, 0, 0]]
+                },
+                "expired": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [[10, 6, 0, 0, 0, 13]]
+                }
+              },
+              {
+                "id": "qr-damage",
+                "checkpoints": [
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [
+                      [10, 6, 0, 0, 0, 13],
+                      [12, 0, 0, 0, 0, 1]
+                    ],
+                    "cycle": 1
+                  },
+                  {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [
+                      [10, 6, 0, 0, 0, 13],
+                      [12, 0, 0, 0, 0, 2]
+                    ],
+                    "cycle": 20
+                  }
+                ],
+                "hidden": {
+                  "before": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "after": {
+                    "intervals": {
+                      "0": 1
+                    }
+                  },
+                  "counterDeltas": [[0, 4, 4, 0, 0, 0]]
+                },
+                "expired": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "counters": [
+                    [10, 6, 0, 0, 0, 13],
+                    [12, 0, 0, 0, 0, 2]
+                  ]
+                }
+              }
+            ],
+            "activeLive": {
+              "source": "Chromium fake microphone; no real device",
+              "before": {
+                "used": 63832528,
+                "backing": 53921070,
+                "embedder": 8731368
+              },
+              "hidden": {
+                "before": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "after": {
+                  "intervals": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1
+                  }
+                },
+                "counterDeltas": [
+                  [0, 5, 5, 0, 0, 0],
+                  [2, 5, 5, 20, 20, 0],
+                  [1, 5, 5, 50, 50, 0]
+                ]
+              },
+              "closed": {
+                "intervals": {
+                  "0": 1
+                }
+              },
+              "after": {
+                "used": 46154736,
+                "backing": 48181486,
+                "embedder": 8570616
+              }
+            },
+            "stageRecording": {
+              "before": {
+                "used": 46154704,
+                "backing": 48181486,
+                "embedder": 8570616
+              },
+              "takes": [
+                {
+                  "cycle": 1,
+                  "bytes": 81847,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 5, 0, 0, 0, 1]]
+                  }
+                },
+                {
+                  "cycle": 2,
+                  "bytes": 121444,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 10, 0, 0, 0, 2]]
+                  }
+                },
+                {
+                  "cycle": 3,
+                  "bytes": 78303,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 12, 0, 0, 0, 3]]
+                  }
+                },
+                {
+                  "cycle": 4,
+                  "bytes": 78411,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 14, 0, 0, 0, 4]]
+                  }
+                },
+                {
+                  "cycle": 5,
+                  "bytes": 78371,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 16, 0, 0, 0, 5]]
+                  }
+                },
+                {
+                  "cycle": 6,
+                  "bytes": 78219,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 18, 0, 0, 0, 6]]
+                  }
+                },
+                {
+                  "cycle": 7,
+                  "bytes": 78266,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 20, 0, 0, 0, 7]]
+                  }
+                },
+                {
+                  "cycle": 8,
+                  "bytes": 78342,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 22, 0, 0, 0, 8]]
+                  }
+                },
+                {
+                  "cycle": 9,
+                  "bytes": 78362,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 24, 0, 0, 0, 9]]
+                  }
+                },
+                {
+                  "cycle": 10,
+                  "bytes": 78234,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 26, 0, 0, 0, 10]]
+                  }
+                },
+                {
+                  "cycle": 11,
+                  "bytes": 78158,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 28, 0, 0, 0, 11]]
+                  }
+                },
+                {
+                  "cycle": 12,
+                  "bytes": 78677,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 30, 0, 0, 0, 12]]
+                  }
+                },
+                {
+                  "cycle": 13,
+                  "bytes": 78413,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 32, 0, 0, 0, 13]]
+                  }
+                },
+                {
+                  "cycle": 14,
+                  "bytes": 78351,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 34, 0, 0, 0, 14]]
+                  }
+                },
+                {
+                  "cycle": 15,
+                  "bytes": 78438,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 36, 0, 0, 0, 15]]
+                  }
+                },
+                {
+                  "cycle": 16,
+                  "bytes": 78296,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 38, 0, 0, 0, 16]]
+                  }
+                },
+                {
+                  "cycle": 17,
+                  "bytes": 78289,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 40, 0, 0, 0, 17]]
+                  }
+                },
+                {
+                  "cycle": 18,
+                  "bytes": 78324,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 42, 0, 0, 0, 18]]
+                  }
+                },
+                {
+                  "cycle": 19,
+                  "bytes": 78346,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 44, 0, 0, 0, 19]]
+                  }
+                },
+                {
+                  "open": {
+                    "intervals": {
+                      "0": 1,
+                      "11": 1
+                    },
+                    "counters": [[11, 46, 2, 0, 0, 20]]
+                  }
+                },
+                {
+                  "cycle": 20,
+                  "bytes": 78392,
+                  "empty": false,
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[11, 46, 2, 0, 0, 20]]
+                  }
+                }
+              ],
+              "after": {
+                "used": 46240164,
+                "backing": 48181516,
+                "embedder": 8900808
+              }
+            }
+          },
+          "sliders": {
+            "generator": {
+              "shape": "blob",
+              "palette": "candy",
+              "seed": 1,
+              "count": 60000,
+              "sizeJitter": 0.35,
+              "roughness": 0.3,
+              "colorNoise": 0.25
+            },
+            "values": [
+              {
+                "id": "gen-count",
+                "value": "60000",
+                "visible": true
+              },
+              {
+                "id": "gen-jitter",
+                "value": "35",
+                "visible": true
+              },
+              {
+                "id": "gen-rough",
+                "value": "30",
+                "visible": true
+              },
+              {
+                "id": "gen-noise",
+                "value": "25",
+                "visible": true
+              }
+            ],
+            "firstVisible": {
+              "t": 23440.799999999814,
+              "values": ["120000", "50", "50", "50"]
+            },
+            "firstCorrect": {
+              "t": 33673.799999999814,
+              "values": ["60000", "35", "30", "25"]
+            },
+            "incorrectValueWindowMs": 10233
+          }
+        }
+      ]
+    },
+    "emptyRecording": {
+      "commit": "34cbb2fd5585ac8c14d95eae21b0dedbeab6eb3d",
+      "date": "2026-10-15T04:56:18.000Z",
+      "browser": "151.0.7922.173",
+      "viewport": [390, 844],
+      "visibility": "simulated document.hidden; native background throttling not measured",
+      "runs": [
+        {
+          "run": 1,
+          "emptyRecording": {
+            "before": {
+              "used": 12080920,
+              "backing": 9308627,
+              "embedder": 7402912
+            },
+            "takes": [
+              {
+                "cycle": 1,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 1, 0, 0, 0, 1],
+                    [15, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 2,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 1, 0, 0, 0, 1],
+                    [15, 8, 0, 0, 0, 8]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 2, 0, 0, 0, 2],
+                    [15, 16, 0, 0, 0, 16]
+                  ]
+                }
+              },
+              {
+                "cycle": 3,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 2, 0, 0, 0, 2],
+                    [15, 16, 0, 0, 0, 16]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 3, 0, 0, 0, 3],
+                    [15, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 4,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 3, 0, 0, 0, 3],
+                    [15, 24, 0, 0, 0, 24]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 4, 0, 0, 0, 4],
+                    [15, 32, 0, 0, 0, 32]
+                  ]
+                }
+              },
+              {
+                "cycle": 5,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 4, 0, 0, 0, 4],
+                    [15, 32, 0, 0, 0, 32]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 5, 0, 0, 0, 5],
+                    [15, 40, 0, 0, 0, 40]
+                  ]
+                }
+              },
+              {
+                "cycle": 6,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 5, 0, 0, 0, 5],
+                    [15, 40, 0, 0, 0, 40]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 6, 0, 0, 0, 6],
+                    [15, 48, 0, 0, 0, 48]
+                  ]
+                }
+              },
+              {
+                "cycle": 7,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 6, 0, 0, 0, 6],
+                    [15, 48, 0, 0, 0, 48]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 7, 0, 0, 0, 7],
+                    [15, 56, 0, 0, 0, 56]
+                  ]
+                }
+              },
+              {
+                "cycle": 8,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 7, 0, 0, 0, 7],
+                    [15, 56, 0, 0, 0, 56]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 8, 0, 0, 0, 8],
+                    [15, 64, 0, 0, 0, 64]
+                  ]
+                }
+              },
+              {
+                "cycle": 9,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 8, 0, 0, 0, 8],
+                    [15, 64, 0, 0, 0, 64]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 9, 0, 0, 0, 9],
+                    [15, 72, 0, 0, 0, 72]
+                  ]
+                }
+              },
+              {
+                "cycle": 10,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 9, 0, 0, 0, 9],
+                    [15, 72, 0, 0, 0, 72]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 10, 0, 0, 0, 10],
+                    [15, 80, 0, 0, 0, 80]
+                  ]
+                }
+              },
+              {
+                "cycle": 11,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 10, 0, 0, 0, 10],
+                    [15, 80, 0, 0, 0, 80]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 11, 0, 0, 0, 11],
+                    [15, 88, 0, 0, 0, 88]
+                  ]
+                }
+              },
+              {
+                "cycle": 12,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 11, 0, 0, 0, 11],
+                    [15, 88, 0, 0, 0, 88]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 12, 0, 0, 0, 12],
+                    [15, 96, 0, 0, 0, 96]
+                  ]
+                }
+              },
+              {
+                "cycle": 13,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 12, 0, 0, 0, 12],
+                    [15, 96, 0, 0, 0, 96]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 13, 0, 0, 0, 13],
+                    [15, 104, 0, 0, 0, 104]
+                  ]
+                }
+              },
+              {
+                "cycle": 14,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 13, 0, 0, 0, 13],
+                    [15, 104, 0, 0, 0, 104]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 14, 0, 0, 0, 14],
+                    [15, 112, 0, 0, 0, 112]
+                  ]
+                }
+              },
+              {
+                "cycle": 15,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 14, 0, 0, 0, 14],
+                    [15, 112, 0, 0, 0, 112]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 15, 0, 0, 0, 15],
+                    [15, 120, 0, 0, 0, 120]
+                  ]
+                }
+              },
+              {
+                "cycle": 16,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 15, 0, 0, 0, 15],
+                    [15, 120, 0, 0, 0, 120]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 16, 0, 0, 0, 16],
+                    [15, 128, 0, 0, 0, 128]
+                  ]
+                }
+              },
+              {
+                "cycle": 17,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 16, 0, 0, 0, 16],
+                    [15, 128, 0, 0, 0, 128]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 17, 0, 0, 0, 17],
+                    [15, 136, 0, 0, 0, 136]
+                  ]
+                }
+              },
+              {
+                "cycle": 18,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 17, 0, 0, 0, 17],
+                    [15, 136, 0, 0, 0, 136]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 18, 0, 0, 0, 18],
+                    [15, 144, 0, 0, 0, 144]
+                  ]
+                }
+              },
+              {
+                "cycle": 19,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 18, 0, 0, 0, 18],
+                    [15, 144, 0, 0, 0, 144]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 19, 0, 0, 0, 19],
+                    [15, 152, 0, 0, 0, 152]
+                  ]
+                }
+              },
+              {
+                "cycle": 20,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 19, 0, 0, 0, 19],
+                    [15, 152, 0, 0, 0, 152]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 20, 1, 0, 0, 20],
+                    [15, 160, 8, 0, 0, 160]
+                  ]
+                }
+              }
+            ],
+            "after": {
+              "used": 11459484,
+              "backing": 16213902,
+              "embedder": 8363400
+            }
+          }
+        },
+        {
+          "run": 2,
+          "emptyRecording": {
+            "before": {
+              "used": 10716740,
+              "backing": 16135484,
+              "embedder": 7437752
+            },
+            "takes": [
+              {
+                "cycle": 1,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 1, 0, 0, 0, 1],
+                    [15, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 2,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 1, 0, 0, 0, 1],
+                    [15, 8, 0, 0, 0, 8]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 2, 0, 0, 0, 2],
+                    [15, 16, 0, 0, 0, 16]
+                  ]
+                }
+              },
+              {
+                "cycle": 3,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 2, 0, 0, 0, 2],
+                    [15, 16, 0, 0, 0, 16]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 3, 0, 0, 0, 3],
+                    [15, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 4,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 3, 0, 0, 0, 3],
+                    [15, 24, 0, 0, 0, 24]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 4, 0, 0, 0, 4],
+                    [15, 32, 0, 0, 0, 32]
+                  ]
+                }
+              },
+              {
+                "cycle": 5,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 4, 0, 0, 0, 4],
+                    [15, 32, 0, 0, 0, 32]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 5, 0, 0, 0, 5],
+                    [15, 40, 0, 0, 0, 40]
+                  ]
+                }
+              },
+              {
+                "cycle": 6,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 5, 0, 0, 0, 5],
+                    [15, 40, 0, 0, 0, 40]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 6, 0, 0, 0, 6],
+                    [15, 48, 0, 0, 0, 48]
+                  ]
+                }
+              },
+              {
+                "cycle": 7,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 6, 0, 0, 0, 6],
+                    [15, 48, 0, 0, 0, 48]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 7, 0, 0, 0, 7],
+                    [15, 56, 0, 0, 0, 56]
+                  ]
+                }
+              },
+              {
+                "cycle": 8,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 7, 0, 0, 0, 7],
+                    [15, 56, 0, 0, 0, 56]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 8, 0, 0, 0, 8],
+                    [15, 64, 0, 0, 0, 64]
+                  ]
+                }
+              },
+              {
+                "cycle": 9,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 8, 0, 0, 0, 8],
+                    [15, 64, 0, 0, 0, 64]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 9, 0, 0, 0, 9],
+                    [15, 72, 0, 0, 0, 72]
+                  ]
+                }
+              },
+              {
+                "cycle": 10,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 9, 0, 0, 0, 9],
+                    [15, 72, 0, 0, 0, 72]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 10, 0, 0, 0, 10],
+                    [15, 80, 0, 0, 0, 80]
+                  ]
+                }
+              },
+              {
+                "cycle": 11,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 10, 0, 0, 0, 10],
+                    [15, 80, 0, 0, 0, 80]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 11, 0, 0, 0, 11],
+                    [15, 88, 0, 0, 0, 88]
+                  ]
+                }
+              },
+              {
+                "cycle": 12,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 11, 0, 0, 0, 11],
+                    [15, 88, 0, 0, 0, 88]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 12, 0, 0, 0, 12],
+                    [15, 96, 0, 0, 0, 96]
+                  ]
+                }
+              },
+              {
+                "cycle": 13,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 12, 0, 0, 0, 12],
+                    [15, 96, 0, 0, 0, 96]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 13, 0, 0, 0, 13],
+                    [15, 104, 0, 0, 0, 104]
+                  ]
+                }
+              },
+              {
+                "cycle": 14,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 13, 0, 0, 0, 13],
+                    [15, 104, 0, 0, 0, 104]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 14, 0, 0, 0, 14],
+                    [15, 112, 0, 0, 0, 112]
+                  ]
+                }
+              },
+              {
+                "cycle": 15,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 14, 0, 0, 0, 14],
+                    [15, 112, 0, 0, 0, 112]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 15, 0, 0, 0, 15],
+                    [15, 120, 0, 0, 0, 120]
+                  ]
+                }
+              },
+              {
+                "cycle": 16,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 15, 0, 0, 0, 15],
+                    [15, 120, 0, 0, 0, 120]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 16, 0, 0, 0, 16],
+                    [15, 128, 0, 0, 0, 128]
+                  ]
+                }
+              },
+              {
+                "cycle": 17,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 16, 0, 0, 0, 16],
+                    [15, 128, 0, 0, 0, 128]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 17, 0, 0, 0, 17],
+                    [15, 136, 0, 0, 0, 136]
+                  ]
+                }
+              },
+              {
+                "cycle": 18,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 17, 0, 0, 0, 17],
+                    [15, 136, 0, 0, 0, 136]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 18, 0, 0, 0, 18],
+                    [15, 144, 0, 0, 0, 144]
+                  ]
+                }
+              },
+              {
+                "cycle": 19,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 18, 0, 0, 0, 18],
+                    [15, 144, 0, 0, 0, 144]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 19, 0, 0, 0, 19],
+                    [15, 152, 0, 0, 0, 152]
+                  ]
+                }
+              },
+              {
+                "cycle": 20,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 19, 0, 0, 0, 19],
+                    [15, 152, 0, 0, 0, 152]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 20, 1, 0, 0, 20],
+                    [15, 160, 8, 0, 0, 160]
+                  ]
+                }
+              }
+            ],
+            "after": {
+              "used": 11551868,
+              "backing": 16213902,
+              "embedder": 8393496
+            }
+          }
+        },
+        {
+          "run": 3,
+          "emptyRecording": {
+            "before": {
+              "used": 10701596,
+              "backing": 16135518,
+              "embedder": 7427800
+            },
+            "takes": [
+              {
+                "cycle": 1,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  }
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 1, 0, 0, 0, 1],
+                    [15, 8, 0, 0, 0, 8]
+                  ]
+                }
+              },
+              {
+                "cycle": 2,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 1, 0, 0, 0, 1],
+                    [15, 8, 0, 0, 0, 8]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 2, 0, 0, 0, 2],
+                    [15, 16, 0, 0, 0, 16]
+                  ]
+                }
+              },
+              {
+                "cycle": 3,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 2, 0, 0, 0, 2],
+                    [15, 16, 0, 0, 0, 16]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 3, 0, 0, 0, 3],
+                    [15, 24, 0, 0, 0, 24]
+                  ]
+                }
+              },
+              {
+                "cycle": 4,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 3, 0, 0, 0, 3],
+                    [15, 24, 0, 0, 0, 24]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 4, 0, 0, 0, 4],
+                    [15, 32, 0, 0, 0, 32]
+                  ]
+                }
+              },
+              {
+                "cycle": 5,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 4, 0, 0, 0, 4],
+                    [15, 32, 0, 0, 0, 32]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 5, 0, 0, 0, 5],
+                    [15, 40, 0, 0, 0, 40]
+                  ]
+                }
+              },
+              {
+                "cycle": 6,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 5, 0, 0, 0, 5],
+                    [15, 40, 0, 0, 0, 40]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 6, 0, 0, 0, 6],
+                    [15, 48, 0, 0, 0, 48]
+                  ]
+                }
+              },
+              {
+                "cycle": 7,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 6, 0, 0, 0, 6],
+                    [15, 48, 0, 0, 0, 48]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 7, 0, 0, 0, 7],
+                    [15, 56, 0, 0, 0, 56]
+                  ]
+                }
+              },
+              {
+                "cycle": 8,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 7, 0, 0, 0, 7],
+                    [15, 56, 0, 0, 0, 56]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 8, 0, 0, 0, 8],
+                    [15, 64, 0, 0, 0, 64]
+                  ]
+                }
+              },
+              {
+                "cycle": 9,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 8, 0, 0, 0, 8],
+                    [15, 64, 0, 0, 0, 64]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 9, 0, 0, 0, 9],
+                    [15, 72, 0, 0, 0, 72]
+                  ]
+                }
+              },
+              {
+                "cycle": 10,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 9, 0, 0, 0, 9],
+                    [15, 72, 0, 0, 0, 72]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 10, 0, 0, 0, 10],
+                    [15, 80, 0, 0, 0, 80]
+                  ]
+                }
+              },
+              {
+                "cycle": 11,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 10, 0, 0, 0, 10],
+                    [15, 80, 0, 0, 0, 80]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 11, 0, 0, 0, 11],
+                    [15, 88, 0, 0, 0, 88]
+                  ]
+                }
+              },
+              {
+                "cycle": 12,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 11, 0, 0, 0, 11],
+                    [15, 88, 0, 0, 0, 88]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 12, 0, 0, 0, 12],
+                    [15, 96, 0, 0, 0, 96]
+                  ]
+                }
+              },
+              {
+                "cycle": 13,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 12, 0, 0, 0, 12],
+                    [15, 96, 0, 0, 0, 96]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 13, 0, 0, 0, 13],
+                    [15, 104, 0, 0, 0, 104]
+                  ]
+                }
+              },
+              {
+                "cycle": 14,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 13, 0, 0, 0, 13],
+                    [15, 104, 0, 0, 0, 104]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 14, 0, 0, 0, 14],
+                    [15, 112, 0, 0, 0, 112]
+                  ]
+                }
+              },
+              {
+                "cycle": 15,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 14, 0, 0, 0, 14],
+                    [15, 112, 0, 0, 0, 112]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 15, 0, 0, 0, 15],
+                    [15, 120, 0, 0, 0, 120]
+                  ]
+                }
+              },
+              {
+                "cycle": 16,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 15, 0, 0, 0, 15],
+                    [15, 120, 0, 0, 0, 120]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 16, 0, 0, 0, 16],
+                    [15, 128, 0, 0, 0, 128]
+                  ]
+                }
+              },
+              {
+                "cycle": 17,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 16, 0, 0, 0, 16],
+                    [15, 128, 0, 0, 0, 128]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 17, 0, 0, 0, 17],
+                    [15, 136, 0, 0, 0, 136]
+                  ]
+                }
+              },
+              {
+                "cycle": 18,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 17, 0, 0, 0, 17],
+                    [15, 136, 0, 0, 0, 136]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 18, 0, 0, 0, 18],
+                    [15, 144, 0, 0, 0, 144]
+                  ]
+                }
+              },
+              {
+                "cycle": 19,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 18, 0, 0, 0, 18],
+                    [15, 144, 0, 0, 0, 144]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 19, 0, 0, 0, 19],
+                    [15, 152, 0, 0, 0, 152]
+                  ]
+                }
+              },
+              {
+                "cycle": 20,
+                "error": "The recording came out empty.",
+                "before": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 19, 0, 0, 0, 19],
+                    [15, 152, 0, 0, 0, 152]
+                  ]
+                },
+                "closed": {
+                  "intervals": {
+                    "13": 1
+                  },
+                  "counters": [
+                    [14, 20, 1, 0, 0, 20],
+                    [15, 160, 8, 0, 0, 160]
+                  ]
+                }
+              }
+            ],
+            "after": {
+              "used": 11584520,
+              "backing": 16213936,
+              "embedder": 8381984
+            }
+          }
+        }
+      ]
+    },
+    "fileSource": {
+      "commit": "e0e3e8edfe5c8c48284a07d973d8bca294789f8d",
+      "date": "2026-10-15T05:12:39.759Z",
+      "browser": "151.0.7922.173",
+      "viewport": [390, 844],
+      "visibility": "simulated document.hidden; native background throttling not measured",
+      "runs": [
+        {
+          "run": 1,
+          "fileSource": {
+            "action": "local file source",
+            "before": {
+              "used": 14806980,
+              "backing": 14704943,
+              "embedder": 7959752
+            },
+            "after": {
+              "used": 12749948,
+              "backing": 5053157,
+              "embedder": 8431856
+            },
+            "retainedArraysAndEdits": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "remaining": [0, 0],
+            "toyKind": "file"
+          }
+        },
+        {
+          "run": 2,
+          "fileSource": {
+            "action": "local file source",
+            "before": {
+              "used": 14826528,
+              "backing": 14704943,
+              "embedder": 7959312
+            },
+            "after": {
+              "used": 12698432,
+              "backing": 11959541,
+              "embedder": 8367088
+            },
+            "retainedArraysAndEdits": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "remaining": [0, 0],
+            "toyKind": "file"
+          }
+        },
+        {
+          "run": 3,
+          "fileSource": {
+            "action": "local file source",
+            "before": {
+              "used": 14834284,
+              "backing": 14704943,
+              "embedder": 8195704
+            },
+            "after": {
+              "used": 12704580,
+              "backing": 5053157,
+              "embedder": 8334216
+            },
+            "retainedArraysAndEdits": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "remaining": [0, 0],
+            "toyKind": "file"
+          }
+        }
+      ]
+    },
+    "qrRetries": {
+      "commit": "e0da9c6d72e9a247ed8ffcc4348a106d70fce388",
+      "date": "2026-10-15T05:31:19.514Z",
+      "browser": "151.0.7922.173",
+      "viewport": [390, 844],
+      "visibility": "simulated document.hidden; native background throttling not measured",
+      "runs": [
+        {
+          "run": 1,
+          "retries": [
+            {
+              "id": "qr-code",
+              "checkpoints": [
+                {
+                  "cycle": 1,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "10": 1
+                    },
+                    "counters": [[10, 1, 0, 0, 0, 2]]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 3, 0, 0, 0, 3]]
+                  }
+                },
+                {
+                  "cycle": 20,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "10": 1
+                    },
+                    "counters": [[10, 67, 0, 0, 0, 77]]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 73, 5, 0, 0, 82]]
+                  }
+                }
+              ],
+              "hidden": {
+                "before": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "10": 1
+                  }
+                },
+                "after": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "10": 1
+                  }
+                },
+                "counterDeltas": [
+                  [0, 4, 4, 0, 0, 0],
+                  [10, 5, 5, 0, 0, 5]
+                ]
+              },
+              "pending": {
+                "intervals": {
+                  "0": 1
+                },
+                "timeouts": {
+                  "10": 1
+                },
+                "counters": [[10, 73, 5, 0, 0, 83]]
+              },
+              "expired": {
+                "intervals": {
+                  "0": 1
+                },
+                "counters": [[10, 112, 5, 0, 0, 121]]
+              },
+              "fixture": "Readiness held by app.busy; ordinary toy-switch listeners remain active"
+            },
+            {
+              "id": "qr-damage",
+              "checkpoints": [
+                {
+                  "cycle": 1,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "12": 1
+                    },
+                    "counters": [
+                      [10, 112, 5, 0, 0, 121],
+                      [12, 1, 0, 0, 0, 2]
+                    ]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [
+                      [10, 112, 5, 0, 0, 121],
+                      [12, 2, 0, 0, 0, 3]
+                    ]
+                  }
+                },
+                {
+                  "cycle": 20,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "12": 1
+                    },
+                    "counters": [
+                      [10, 112, 5, 0, 0, 121],
+                      [12, 36, 0, 0, 0, 53]
+                    ]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [
+                      [10, 112, 5, 0, 0, 121],
+                      [12, 42, 4, 0, 0, 58]
+                    ]
+                  }
+                }
+              ],
+              "hidden": {
+                "before": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "12": 1
+                  }
+                },
+                "after": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "12": 1
+                  }
+                },
+                "counterDeltas": [
+                  [0, 5, 5, 0, 0, 0],
+                  [12, 4, 4, 0, 0, 4]
+                ]
+              },
+              "pending": {
+                "intervals": {
+                  "0": 1
+                },
+                "timeouts": {
+                  "12": 1
+                },
+                "counters": [
+                  [10, 112, 5, 0, 0, 121],
+                  [12, 43, 4, 0, 0, 60]
+                ]
+              },
+              "expired": {
+                "intervals": {
+                  "0": 1
+                },
+                "counters": [
+                  [10, 112, 5, 0, 0, 121],
+                  [12, 101, 4, 0, 0, 117]
+                ]
+              },
+              "fixture": "Readiness held by app.busy; ordinary toy-switch listeners remain active"
+            }
+          ]
+        },
+        {
+          "run": 2,
+          "retries": [
+            {
+              "id": "qr-code",
+              "checkpoints": [
+                {
+                  "cycle": 1,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "10": 1
+                    },
+                    "counters": [[10, 2, 0, 0, 0, 3]]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 3, 0, 0, 0, 3]]
+                  }
+                },
+                {
+                  "cycle": 20,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "10": 1
+                    },
+                    "counters": [[10, 63, 0, 0, 0, 70]]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 69, 5, 0, 0, 76]]
+                  }
+                }
+              ],
+              "hidden": {
+                "before": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "10": 1
+                  }
+                },
+                "after": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "10": 1
+                  }
+                },
+                "counterDeltas": [
+                  [0, 4, 4, 0, 0, 0],
+                  [10, 5, 5, 0, 0, 5]
+                ]
+              },
+              "pending": {
+                "intervals": {
+                  "0": 1
+                },
+                "timeouts": {
+                  "10": 1
+                },
+                "counters": [[10, 71, 5, 0, 0, 79]]
+              },
+              "expired": {
+                "intervals": {
+                  "0": 1
+                },
+                "counters": [[10, 108, 5, 0, 0, 115]]
+              },
+              "fixture": "Readiness held by app.busy; ordinary toy-switch listeners remain active"
+            },
+            {
+              "id": "qr-damage",
+              "checkpoints": [
+                {
+                  "cycle": 1,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "12": 1
+                    },
+                    "counters": [
+                      [10, 108, 5, 0, 0, 115],
+                      [12, 1, 0, 0, 0, 2]
+                    ]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [
+                      [10, 108, 5, 0, 0, 115],
+                      [12, 2, 0, 0, 0, 3]
+                    ]
+                  }
+                },
+                {
+                  "cycle": 20,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "12": 1
+                    },
+                    "counters": [
+                      [10, 108, 5, 0, 0, 115],
+                      [12, 45, 0, 0, 0, 61]
+                    ]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [
+                      [10, 108, 5, 0, 0, 115],
+                      [12, 50, 4, 0, 0, 66]
+                    ]
+                  }
+                }
+              ],
+              "hidden": {
+                "before": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "12": 1
+                  }
+                },
+                "after": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "12": 1
+                  }
+                },
+                "counterDeltas": [
+                  [0, 4, 4, 0, 0, 0],
+                  [12, 4, 4, 0, 0, 4]
+                ]
+              },
+              "pending": {
+                "intervals": {
+                  "0": 1
+                },
+                "timeouts": {
+                  "12": 1
+                },
+                "counters": [
+                  [10, 108, 5, 0, 0, 115],
+                  [12, 51, 4, 0, 0, 68]
+                ]
+              },
+              "expired": {
+                "intervals": {
+                  "0": 1
+                },
+                "counters": [
+                  [10, 108, 5, 0, 0, 115],
+                  [12, 109, 4, 0, 0, 125]
+                ]
+              },
+              "fixture": "Readiness held by app.busy; ordinary toy-switch listeners remain active"
+            }
+          ]
+        },
+        {
+          "run": 3,
+          "retries": [
+            {
+              "id": "qr-code",
+              "checkpoints": [
+                {
+                  "cycle": 1,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "10": 1
+                    },
+                    "counters": [[10, 2, 0, 0, 0, 3]]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 4, 0, 0, 0, 5]]
+                  }
+                },
+                {
+                  "cycle": 20,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "10": 1
+                    },
+                    "counters": [[10, 60, 0, 0, 0, 67]]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [[10, 66, 4, 0, 0, 73]]
+                  }
+                }
+              ],
+              "hidden": {
+                "before": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "10": 1
+                  }
+                },
+                "after": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "10": 1
+                  }
+                },
+                "counterDeltas": [
+                  [0, 5, 5, 0, 0, 0],
+                  [10, 4, 4, 0, 0, 4]
+                ]
+              },
+              "pending": {
+                "intervals": {
+                  "0": 1
+                },
+                "timeouts": {
+                  "10": 1
+                },
+                "counters": [[10, 68, 4, 0, 0, 76]]
+              },
+              "expired": {
+                "intervals": {
+                  "0": 1
+                },
+                "counters": [[10, 105, 4, 0, 0, 112]]
+              },
+              "fixture": "Readiness held by app.busy; ordinary toy-switch listeners remain active"
+            },
+            {
+              "id": "qr-damage",
+              "checkpoints": [
+                {
+                  "cycle": 1,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "12": 1
+                    },
+                    "counters": [
+                      [10, 105, 4, 0, 0, 112],
+                      [12, 1, 0, 0, 0, 2]
+                    ]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [
+                      [10, 105, 4, 0, 0, 112],
+                      [12, 2, 0, 0, 0, 3]
+                    ]
+                  }
+                },
+                {
+                  "cycle": 20,
+                  "open": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "timeouts": {
+                      "12": 1
+                    },
+                    "counters": [
+                      [10, 105, 4, 0, 0, 112],
+                      [12, 40, 0, 0, 0, 58]
+                    ]
+                  },
+                  "closed": {
+                    "intervals": {
+                      "0": 1
+                    },
+                    "counters": [
+                      [10, 105, 4, 0, 0, 112],
+                      [12, 46, 5, 0, 0, 64]
+                    ]
+                  }
+                }
+              ],
+              "hidden": {
+                "before": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "12": 1
+                  }
+                },
+                "after": {
+                  "intervals": {
+                    "0": 1
+                  },
+                  "timeouts": {
+                    "12": 1
+                  }
+                },
+                "counterDeltas": [
+                  [0, 5, 5, 0, 0, 0],
+                  [12, 5, 5, 0, 0, 5]
+                ]
+              },
+              "pending": {
+                "intervals": {
+                  "0": 1
+                },
+                "timeouts": {
+                  "12": 1
+                },
+                "counters": [
+                  [10, 105, 4, 0, 0, 112],
+                  [12, 46, 5, 0, 0, 65]
+                ]
+              },
+              "expired": {
+                "intervals": {
+                  "0": 1
+                },
+                "counters": [
+                  [10, 105, 4, 0, 0, 112],
+                  [12, 105, 5, 0, 0, 123]
+                ]
+              },
+              "fixture": "Readiness held by app.busy; ordinary toy-switch listeners remain active"
+            }
+          ]
+        }
+      ]
+    },
+    "fixed": {
+      "commit": "769fa45ffa2383da6298909f93740489ed143980",
+      "date": "2026-10-15T05:05:11.761Z",
+      "browser": "151.0.7922.173",
+      "viewport": [390, 844],
+      "visibility": "simulated document.hidden; native background throttling not measured",
+      "runs": [
+        {
+          "run": 1,
+          "sliders": {
+            "generator": {
+              "shape": "blob",
+              "palette": "candy",
+              "seed": 1,
+              "count": 60000,
+              "sizeJitter": 0.35,
+              "roughness": 0.3,
+              "colorNoise": 0.25
+            },
+            "values": [
+              {
+                "id": "gen-count",
+                "value": "60000",
+                "visible": true
+              },
+              {
+                "id": "gen-jitter",
+                "value": "35",
+                "visible": true
+              },
+              {
+                "id": "gen-rough",
+                "value": "30",
+                "visible": true
+              },
+              {
+                "id": "gen-noise",
+                "value": "25",
+                "visible": true
+              }
+            ],
+            "firstVisible": {
+              "t": 25033,
+              "values": ["60000", "35", "30", "25"]
+            },
+            "firstCorrect": {
+              "t": 25033,
+              "values": ["60000", "35", "30", "25"]
+            },
+            "incorrectValueWindowMs": 0
+          },
+          "live": {
+            "source": "Chromium fake microphone; no real device",
+            "before": {
+              "used": 29779620,
+              "backing": 29915431,
+              "embedder": 8707912
+            },
+            "hidden": {
+              "before": {
+                "intervals": {
+                  "13": 1,
+                  "16": 1,
+                  "17": 1
+                }
+              },
+              "after": {
+                "intervals": {
+                  "13": 1,
+                  "16": 1,
+                  "17": 1
+                }
+              },
+              "counterDeltas": [
+                [13, 4, 4, 0, 0, 0],
+                [16, 4, 4, 0, 0, 0],
+                [17, 4, 4, 0, 0, 0]
+              ]
+            },
+            "closed": {
+              "intervals": {
+                "13": 1
+              }
+            },
+            "after": {
+              "used": 12607012,
+              "backing": 24268474,
+              "embedder": 8299144
+            }
+          }
+        },
+        {
+          "run": 2,
+          "sliders": {
+            "generator": {
+              "shape": "blob",
+              "palette": "candy",
+              "seed": 1,
+              "count": 60000,
+              "sizeJitter": 0.35,
+              "roughness": 0.3,
+              "colorNoise": 0.25
+            },
+            "values": [
+              {
+                "id": "gen-count",
+                "value": "60000",
+                "visible": true
+              },
+              {
+                "id": "gen-jitter",
+                "value": "35",
+                "visible": true
+              },
+              {
+                "id": "gen-rough",
+                "value": "30",
+                "visible": true
+              },
+              {
+                "id": "gen-noise",
+                "value": "25",
+                "visible": true
+              }
+            ],
+            "firstVisible": {
+              "t": 24852.59999999986,
+              "values": ["60000", "35", "30", "25"]
+            },
+            "firstCorrect": {
+              "t": 24852.59999999986,
+              "values": ["60000", "35", "30", "25"]
+            },
+            "incorrectValueWindowMs": 0
+          },
+          "live": {
+            "source": "Chromium fake microphone; no real device",
+            "before": {
+              "used": 29888244,
+              "backing": 29923862,
+              "embedder": 8482648
+            },
+            "hidden": {
+              "before": {
+                "intervals": {
+                  "13": 1,
+                  "16": 1,
+                  "17": 1
+                }
+              },
+              "after": {
+                "intervals": {
+                  "13": 1,
+                  "16": 1,
+                  "17": 1
+                }
+              },
+              "counterDeltas": [
+                [13, 4, 4, 0, 0, 0],
+                [16, 5, 5, 0, 0, 0],
+                [17, 5, 5, 0, 0, 0]
+              ]
+            },
+            "closed": {
+              "intervals": {
+                "13": 1
+              }
+            },
+            "after": {
+              "used": 12609768,
+              "backing": 24268481,
+              "embedder": 8208416
+            }
+          }
+        },
+        {
+          "run": 3,
+          "sliders": {
+            "generator": {
+              "shape": "blob",
+              "palette": "candy",
+              "seed": 1,
+              "count": 60000,
+              "sizeJitter": 0.35,
+              "roughness": 0.3,
+              "colorNoise": 0.25
+            },
+            "values": [
+              {
+                "id": "gen-count",
+                "value": "60000",
+                "visible": true
+              },
+              {
+                "id": "gen-jitter",
+                "value": "35",
+                "visible": true
+              },
+              {
+                "id": "gen-rough",
+                "value": "30",
+                "visible": true
+              },
+              {
+                "id": "gen-noise",
+                "value": "25",
+                "visible": true
+              }
+            ],
+            "firstVisible": {
+              "t": 24678.5,
+              "values": ["60000", "35", "30", "25"]
+            },
+            "firstCorrect": {
+              "t": 24678.5,
+              "values": ["60000", "35", "30", "25"]
+            },
+            "incorrectValueWindowMs": 0
+          },
+          "live": {
+            "source": "Chromium fake microphone; no real device",
+            "before": {
+              "used": 29531628,
+              "backing": 29903447,
+              "embedder": 8481328
+            },
+            "hidden": {
+              "before": {
+                "intervals": {
+                  "13": 1,
+                  "16": 1,
+                  "17": 1
+                }
+              },
+              "after": {
+                "intervals": {
+                  "13": 1,
+                  "16": 1,
+                  "17": 1
+                }
+              },
+              "counterDeltas": [
+                [13, 2, 2, 0, 0, 0],
+                [16, 1, 1, 0, 0, 0],
+                [17, 1, 1, 0, 0, 0]
+              ]
+            },
+            "closed": {
+              "intervals": {
+                "13": 1
+              }
+            },
+            "after": {
+              "used": 12611712,
+              "backing": 24268895,
+              "embedder": 8301136
+            }
+          }
+        }
+      ]
+    }
+  }
+}
