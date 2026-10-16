@@ -119,6 +119,7 @@ const ledgers = [
   "r4-input-transform-flags.json",
   "r4-orientation-copy-probe.json",
   "r4-worker-transform-before-after.json",
+  "r4-rotated-container-probe.json",
   "r4-node22-runtime.json",
   "r4-publication.json",
   "r4-measurements.md",

@@ -480,7 +480,8 @@ export function geometryRaster(module) {
 // only for the exact retained depth array and grid that requested them.
 export function geometryCache(clip, cols, rows, aspect) {
   const entries = new Map(),
-    pending = new Map();
+    pending = new Map(),
+    deferred = new Map();
   const limit = 24 * 1024 * 1024;
   const stats = {
     hits: 0,
@@ -528,7 +529,10 @@ export function geometryCache(clip, cols, rows, aspect) {
       // get() still accepts only the exact current depth-array identity.
       const ahead = lead();
       stats.aheadFrames = ahead;
-      for (const step of new Set([ahead, ahead + 1, ahead + 2, 0, 1])) {
+      const order = clip.video
+        ? [ahead, ahead + 1, ahead + 2, 0, 1]
+        : [ahead, 1, 0, ahead + 1, ahead + 2];
+      for (const step of new Set(order)) {
         const frame = (latest.frame + step) % clip.n,
           source = clip.near[frame],
           cached = entries.get(source),
@@ -537,6 +541,7 @@ export function geometryCache(clip, cols, rows, aspect) {
           !source ||
           source === consumed ||
           cached ||
+          deferred.get(source) === latest.frame ||
           [...pending.values()].some((r) => r.source === source && r.rasterKey === raster?.key)
         )
           continue;
@@ -566,7 +571,7 @@ export function geometryCache(clip, cols, rows, aspect) {
           : lastRoundTrip;
       }
       if (request && clip.near[request.frame] === request.source) {
-        const result = { ...data, source: request.source };
+        const result = { ...data, source: request.source, frame: request.frame };
         stats.completed++;
         stats.workMs += data.workMs;
         result.bytes =
@@ -584,9 +589,29 @@ export function geometryCache(clip, cols, rows, aspect) {
         entries.set(request.source, result);
         bytes += result.bytes;
         while (bytes > limit && entries.size > 1) {
-          const first = entries.keys().next().value;
-          bytes -= entries.get(first).bytes;
-          entries.delete(first);
+          // Live video retains its existing freshness policy. Retained RGB
+          // pictures need their nearest ordered display deadlines instead.
+          if (clip.video) {
+            const first = entries.keys().next().value;
+            bytes -= entries.get(first).bytes;
+            entries.delete(first);
+            stats.evictions++;
+            continue;
+          }
+          // Keep the nearest display deadlines. FIFO can evict the next
+          // needed frame while filling a farther lookahead under this bound.
+          let farthest = null,
+            distance = -1;
+          for (const [source, packet] of entries) {
+            const ahead = (packet.frame - latest.frame + clip.n) % clip.n;
+            if (ahead > distance) {
+              distance = ahead;
+              farthest = source;
+            }
+          }
+          bytes -= entries.get(farthest).bytes;
+          entries.delete(farthest);
+          deferred.set(farthest, latest.frame);
           stats.evictions++;
         }
       }
@@ -618,9 +643,11 @@ export function geometryCache(clip, cols, rows, aspect) {
       consumed = source;
       entries.delete(source);
       bytes -= result.bytes;
+      deferred.clear();
       return result;
     },
     ahead(frame, raster) {
+      if (latest?.frame !== frame) deferred.clear();
       latest = { frame, raster, at: performance.now() };
       const horizon = Math.min(clip.n - 1, lead() + 2),
         useful = new Set(
@@ -638,6 +665,7 @@ export function geometryCache(clip, cols, rows, aspect) {
       for (const slot of slots) slot.worker.terminate();
       entries.clear();
       pending.clear();
+      deferred.clear();
     },
   };
 }

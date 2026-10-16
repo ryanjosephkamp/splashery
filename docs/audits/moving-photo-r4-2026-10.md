@@ -12,14 +12,14 @@ entries below before handback. An incomplete target is not a pass.
 
 ## Goal status
 
-| Target                                                                           | Result                                                                                                                                                                                  |
-| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sharp shows the chosen sample and local file                                     | All 81 ordered pairs of nine samples, five local formats, and Sharp/Splats transitions passed on the emulated phone.                                                                    |
-| Phone cadence at least main; Operator median ≤50 ms and worst ≤250 ms            | Final isolated measurements pending.                                                                                                                                                    |
+| Target                                                                           | Result                                                                                                                                                                                                             |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Sharp shows the chosen sample and local file                                     | All 81 ordered pairs of nine samples, five local formats, and Sharp/Splats transitions passed on the emulated phone.                                                                                               |
+| Phone cadence at least main; Operator median ≤50 ms and worst ≤250 ms            | Final isolated measurements pending.                                                                                                                                                                               |
 | Sharper and steadier on all nine samples and five original inputs, both profiles | Complete 28-case sweep: 7,102 original source frames, zero holes, edge specks, depth mismatches, or browser errors. Universal sharpness and stability gains are not established; some temporal measures are worse. |
-| First 3D frame no slower than main on phone                                      | Final isolated measurements pending.                                                                                                                                                    |
-| Photo checkpoint and every existing test                                         | Full suite running; 51 Photo scan tests passed. Initial failures and whole-file reruns are preserved in the ledger.                                                                     |
-| Phone comparisons                                                                | Final source-clock films pending on `codex/moving-photo-r4-clips`, which is never merged.                                                                                               |
+| First 3D frame no slower than main on phone                                      | Final isolated measurements pending.                                                                                                                                                                               |
+| Photo checkpoint and every existing test                                         | Full suite running; 51 Photo scan tests passed. Initial failures and whole-file reruns are preserved in the ledger.                                                                                                |
+| Phone comparisons                                                                | Final source-clock films pending on `codex/moving-photo-r4-clips`, which is never merged.                                                                                                                          |
 
 ## Baselines and scope
 
@@ -111,7 +111,11 @@ display canvas. The new semantic regression sends all eight real transformed fra
 actual worker, compares every returned bitmap byte with the browser's transform-aware canvas, and
 checks resource closure and the source clock. It passes all eight. A separately routed before/after
 check reproduces the old mismatches and the fixed zero-difference results without altering an
-existing threshold.
+existing threshold. A real MP4 remuxed with a 180-degree display matrix also retains its encoded
+video packet hash, matches the paused native Sharp texture, and returns zero changed worker bitmap
+channels with the transferred frame closed. Its moving snapshot was taken under contention and
+differs from the advancing media element; that snapshot is not accepted as a live-correspondence or
+cadence proof.
 
 The complete quality sweep is pinned to public `bf58e8c4` (application hash
 `2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4`). The final runtime adds only
@@ -174,11 +178,11 @@ retained-field tables are not substituted for these results.
 
 The complete final sweep covers **28/28 cases and 7,102 original source frames**. Every case has
 zero detected holes, edge specks, and depth-input mismatches, with no browser errors. Its
-application hash is `2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4`; the
-runtime equivalence and Splats-only change are documented above. Against main, both coverage proxies improve in all 28 cases. Average depth jitter improves in
-27 cases and worsens in one; large edge flips improve in 22 cases and worsen in six. This is
-not a universal temporal-stability win. The detailed measurement tables are linked after the
-isolated runs finish.
+application hash is `2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4`; the runtime
+equivalence and Splats-only change are documented above. Against main, both coverage proxies improve
+in all 28 cases. Average depth jitter improves in 27 cases and worsens in one; large edge flips
+improve in 22 cases and worsen in six. This is not a universal temporal-stability win. The detailed
+measurement tables are linked after the isolated runs finish.
 
 ## Playback and startup protocol
 
@@ -333,7 +337,9 @@ to within one millisecond; they demonstrate picture quality, not live frame rate
 timing ledgers measure speed. Every film keeps its source author, license, source page, input hash,
 and transformation record. Author, license, and source links are also embedded in the MP4 metadata;
 a short export pilot verified those tags without changing frame counts, timestamps, or holds.
-Individual PR images stay below 1 MB.
+Individual PR images stay below 1 MB. The final fourteen comparison posters were reviewed as two
+contact sheets: all show the intended subjects, and the solid borders retain the source picture.
+Contact-frame review and timestamp validation do not amount to watching every film continuously.
 
 Final clips branch, manifest, full per-frame ledgers, and test reports: pending.
 

@@ -2,6 +2,56 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 import { PNG } from "pngjs";
 import { openRender, renderFrame } from "../tools/cdx-mp2-render.mjs";
+import { geometryCache } from "../src/packs/moving-photo-geometry.js";
+
+test("bounded lookahead retains the next display deadline when full", () => {
+  const original = globalThis.Worker,
+    requests = [],
+    prepared = [];
+  let cache;
+  globalThis.Worker = class {
+    postMessage(request) {
+      if (!request.init) requests.push({ request, worker: this });
+    }
+    terminate() {}
+  };
+  try {
+    const clip = {
+      w: 2,
+      h: 2,
+      n: 8,
+      delays: Array(8).fill(1000),
+      near: Array.from({ length: 8 }, (_, i) => new Uint8Array(4).fill(i)),
+    };
+    cache = geometryCache(clip, 1, 1, 1);
+    cache.ahead(0, null);
+    // Three completed 10 MiB packets exceed the unchanged 24 MiB target.
+    // The controlled transport tests scheduling, without numerical worker timing.
+    for (let i = 0; i < 3; i++) {
+      const { request, worker } = requests.shift();
+      prepared.push(request.source);
+      worker.onmessage({
+        data: {
+          id: request.id,
+          workMs: 1,
+          instances: new Float32Array((10 * 1024 * 1024) / 4),
+          soft: new Float32Array(),
+          indices: new Uint32Array(),
+        },
+      });
+    }
+    expect(new Set(prepared).size).toBe(3);
+    const ordered = prepared.toSorted((a, b) => clip.near.indexOf(a) - clip.near.indexOf(b));
+    const next = cache.get(clip.near.indexOf(ordered[0]), ordered[0]);
+    expect(next?.source).toBe(ordered[0]);
+    expect(cache.stats.evictions).toBe(1);
+    expect(requests.some(({ request }) => request.source === ordered[2])).toBe(false);
+    expect(cache.get(clip.near.indexOf(ordered[1]), ordered[1])?.source).toBe(ordered[1]);
+  } finally {
+    cache?.close();
+    globalThis.Worker = original;
+  }
+});
 
 test("native worker pictures honor square-frame rotation and flips", async ({ page }) => {
   await page.goto("/LICENSES.md");
