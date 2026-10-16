@@ -1,0 +1,202 @@
+{
+  "createdAt": "2026-10-16T11:45:35.698Z",
+  "protocol": "Two separately recorded live windows, aligned at capture start; 60 fps export duplicates held pictures without interpolation. Each original presentation is quantized by at most one 16.667 ms output tick. Individual VFR recordings preserve the exact capture times",
+  "limitation": "CDP JPEG capture adds overhead. Fixed camera and hidden UI. These are presentation evidence, not the clean natural-camera cadence benchmark",
+  "seconds": 12,
+  "before": {
+    "label": "Round 3",
+    "revision": "49dd8b477aad79f890237401d534ddf9ffea9237",
+    "sourceHash": "f663162bb7f072533c8170c33dc68f2bfb3a629cf0ec586f0195b74f85aceb93"
+  },
+  "after": {
+    "label": "Round 4",
+    "revision": "843a8ea0cdc4e90da5616cc8ca3857325fb05218",
+    "sourceHash": "79ff139b207d8ca57abdddfbd8a59f9c1908cdc81e24737bb36d64cdc18e2109"
+  },
+  "cases": [
+    {
+      "id": "sample",
+      "title": "Big Buck Bunny",
+      "author": "Blender Foundation",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sourcePage": "https://peach.blender.org/",
+      "checked": "October 16, 2026",
+      "before": {
+        "inputHashes": [
+          {
+            "file": "assets/toys/screen/bunny.mp4",
+            "bytes": 377969,
+            "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny.depth",
+            "bytes": 1055234,
+            "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+            "bytes": 243317,
+            "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+            "bytes": 255139,
+            "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+            "bytes": 252771,
+            "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+            "bytes": 254539,
+            "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+            "bytes": 263182,
+            "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+            "bytes": 266757,
+            "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+            "bytes": 124720,
+            "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8"
+          }
+        ],
+        "output": {
+          "file": "sample-live.mp4",
+          "bytes": 297188,
+          "sha256": "3716fb1c7137905300e53e2b3371c632de881977df1aba4d0cd79f22c28641a4",
+          "duration": 11.999978
+        }
+      },
+      "after": {
+        "inputHashes": [
+          {
+            "file": "assets/toys/screen/bunny.mp4",
+            "bytes": 377969,
+            "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny.depth",
+            "bytes": 1055234,
+            "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+            "bytes": 243317,
+            "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+            "bytes": 255139,
+            "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+            "bytes": 252771,
+            "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+            "bytes": 254539,
+            "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+            "bytes": 263182,
+            "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+            "bytes": 266757,
+            "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+            "bytes": 124720,
+            "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8"
+          }
+        ],
+        "output": {
+          "file": "sample-live.mp4",
+          "bytes": 357001,
+          "sha256": "5b06a7b24b9460dd540ecd1b50cdaaef1bd9b7353e1558674dc6939cd62dd3e8",
+          "duration": 11.999944
+        }
+      },
+      "output": {
+        "file": "sample-live-side-by-side.mp4",
+        "poster": "sample-live-poster.jpg",
+        "bytes": 579794,
+        "sha256": "08c26e084fe7d97db5c76a2b851f7e9a98eb9913b12c612ec6264c9776ad889b",
+        "duration": 12
+      },
+      "transformation": "Two silent licensed renderings placed side by side; held pictures duplicated at 60 fps"
+    },
+    {
+      "id": "machine-long",
+      "title": "Inside the machine: 30 seconds",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+      "sourcePage": "https://orange.blender.org/blog/creative-commons-license-2/",
+      "checked": "October 16, 2026",
+      "before": {
+        "inputHashes": [
+          {
+            "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+            "bytes": 1951701,
+            "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+            "bytes": 15805452,
+            "sha256": "bb230caff266efa36fd39ebdabe020244c2719e97c5364a9158964a7f006bd46"
+          }
+        ],
+        "output": {
+          "file": "machine-long-live.mp4",
+          "bytes": 306884,
+          "sha256": "84397a9bb66071f19717eb54200e801d00e49fc6f39af11a9a1662d03223f250",
+          "duration": 11.999989
+        }
+      },
+      "after": {
+        "inputHashes": [
+          {
+            "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+            "bytes": 1951701,
+            "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+          },
+          {
+            "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+            "bytes": 15805452,
+            "sha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f"
+          }
+        ],
+        "output": {
+          "file": "machine-long-live.mp4",
+          "bytes": 471405,
+          "sha256": "8e53cbd04ac5ffc62b416361480f44dc5db32754530bb141f43e0294a731e472",
+          "duration": 11.999956
+        }
+      },
+      "output": {
+        "file": "machine-long-live-side-by-side.mp4",
+        "poster": "machine-long-live-poster.jpg",
+        "bytes": 754859,
+        "sha256": "4532bfce0dddf6c03b1654814e3e879ec61f4e57205962a2299f3c11fd1638f5",
+        "duration": 12
+      },
+      "transformation": "Two silent licensed renderings placed side by side; held pictures duplicated at 60 fps"
+    }
+  ]
+}

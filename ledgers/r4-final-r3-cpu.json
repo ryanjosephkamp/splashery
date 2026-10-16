@@ -1,0 +1,3336 @@
+{
+  "kind": "isolated-measurement",
+  "baseline": "49dd8b47",
+  "instrument": true,
+  "phone": true,
+  "sourceHash": "f663162bb7f072533c8170c33dc68f2bfb3a629cf0ec586f0195b74f85aceb93",
+  "measuredAt": "2026-10-16T11:41:20.334Z",
+  "backend": "llvmpipe",
+  "workerThrottled": false,
+  "warmupMs": 2000,
+  "protocol": "R3 frameend cadence plus separate postrender and changed-picture observations",
+  "pictureClockNote": "Counts changes of the bound-source clock at postrender: native bitmap timestamps, media-element currentTime, or retained frame indices. This is not a pixel-uniqueness or decoder frame-rate measurement",
+  "depthPreparation": "Local-file inference and refinement finish before the unchanged two-second warmup; shelf samples are already complete",
+  "note": "Protocol requires one browser at a time and no competing jobs; CDP page slowdown and software rendering do not measure physical Android",
+  "baselineSourceCorrection": "MP3 picture uses the pinned version's retained selected frames; long films absent from its shelf use its actual upload path",
+  "cases": [
+    {
+      "id": "sample",
+      "depthAtStart": {
+        "pending": false,
+        "completed": null,
+        "total": 96,
+        "rate": null
+      },
+      "depthAtEnd": {
+        "pending": false,
+        "completed": null,
+        "total": 96,
+        "rate": null
+      },
+      "nativeMediaCounters": {
+        "start": {
+          "totalVideoFrames": 55,
+          "droppedVideoFrames": 35
+        },
+        "end": {
+          "totalVideoFrames": 341,
+          "droppedVideoFrames": 251
+        },
+        "note": "Browser media counters, separate from Sharp picture submissions"
+      },
+      "windowMs": 12000,
+      "sourceAdvance": 11.694266000000006,
+      "distinctFrames": 53,
+      "sharpFrames": 68,
+      "title": "Splashery · splats you can play with",
+      "url": "http://127.0.0.1:4173/?renderer=webgl2&adapt=off&profile=low&labs=1",
+      "dimensions": [480, 270],
+      "duration": 6,
+      "renderSize": [585, 900],
+      "pictureCadence": {
+        "n": 67,
+        "total": 12118.5,
+        "median": 179.5,
+        "worst": 289.59999999403954
+      },
+      "pictureSubmissions": 68,
+      "pictureSubmissionFps": 5.666666666666667,
+      "cadence": {
+        "n": 67,
+        "total": 12118.5,
+        "median": 179.5,
+        "worst": 289.59999999403954
+      },
+      "renderedCadence": {
+        "n": 67,
+        "total": 12118.5,
+        "median": 179.5,
+        "worst": 289.59999999403954
+      },
+      "draws": [
+        {
+          "at": 19054.5,
+          "pictureTime": 2.146799
+        },
+        {
+          "at": 19223,
+          "pictureTime": 2.305694
+        },
+        {
+          "at": 19409,
+          "pictureTime": 2.473281
+        },
+        {
+          "at": 19564.60000000149,
+          "pictureTime": 2.659075
+        },
+        {
+          "at": 19744.90000000596,
+          "pictureTime": 2.820068
+        },
+        {
+          "at": 19920.80000000447,
+          "pictureTime": 2.996217
+        },
+        {
+          "at": 20099.40000000596,
+          "pictureTime": 3.174475
+        },
+        {
+          "at": 20263.70000000298,
+          "pictureTime": 3.355538
+        },
+        {
+          "at": 20430.10000000149,
+          "pictureTime": 3.516371
+        },
+        {
+          "at": 20604.30000000447,
+          "pictureTime": 3.683995
+        },
+        {
+          "at": 20772.10000000149,
+          "pictureTime": 3.865094
+        },
+        {
+          "at": 20934.40000000596,
+          "pictureTime": 4.027844
+        },
+        {
+          "at": 21105.5,
+          "pictureTime": 4.191685
+        },
+        {
+          "at": 21284.90000000596,
+          "pictureTime": 4.36629
+        },
+        {
+          "at": 21457.30000000447,
+          "pictureTime": 4.537398
+        },
+        {
+          "at": 21587.30000000447,
+          "pictureTime": 4.708106
+        },
+        {
+          "at": 21726.80000000447,
+          "pictureTime": 4.83547
+        },
+        {
+          "at": 21904.20000000298,
+          "pictureTime": 4.986292
+        },
+        {
+          "at": 22040.5,
+          "pictureTime": 5.15322
+        },
+        {
+          "at": 22220.80000000447,
+          "pictureTime": 5.288102
+        },
+        {
+          "at": 22412.5,
+          "pictureTime": 5.468056
+        },
+        {
+          "at": 22612.30000000447,
+          "pictureTime": 5.659103
+        },
+        {
+          "at": 22816.80000000447,
+          "pictureTime": 5.89947
+        },
+        {
+          "at": 22976.20000000298,
+          "pictureTime": 0
+        },
+        {
+          "at": 23138.30000000447,
+          "pictureTime": 0.123387
+        },
+        {
+          "at": 23310.30000000447,
+          "pictureTime": 0.27375
+        },
+        {
+          "at": 23453.80000000447,
+          "pictureTime": 0.44737
+        },
+        {
+          "at": 23598.80000000447,
+          "pictureTime": 0.595198
+        },
+        {
+          "at": 23783.70000000298,
+          "pictureTime": 0.736463
+        },
+        {
+          "at": 23963.5,
+          "pictureTime": 0.921505
+        },
+        {
+          "at": 24100.30000000447,
+          "pictureTime": 1.093878
+        },
+        {
+          "at": 24252.70000000298,
+          "pictureTime": 1.23474
+        },
+        {
+          "at": 24416.60000000149,
+          "pictureTime": 1.38451
+        },
+        {
+          "at": 24604.40000000596,
+          "pictureTime": 1.547235
+        },
+        {
+          "at": 24785.30000000447,
+          "pictureTime": 1.745021
+        },
+        {
+          "at": 24967.30000000447,
+          "pictureTime": 1.916307
+        },
+        {
+          "at": 25157.5,
+          "pictureTime": 2.095851
+        },
+        {
+          "at": 25309.70000000298,
+          "pictureTime": 2.303799
+        },
+        {
+          "at": 25489.20000000298,
+          "pictureTime": 2.445459
+        },
+        {
+          "at": 25675.60000000149,
+          "pictureTime": 2.634259
+        },
+        {
+          "at": 25856,
+          "pictureTime": 2.815779
+        },
+        {
+          "at": 26044.30000000447,
+          "pictureTime": 2.996218
+        },
+        {
+          "at": 26226.20000000298,
+          "pictureTime": 3.184492
+        },
+        {
+          "at": 26485.80000000447,
+          "pictureTime": 3.377352
+        },
+        {
+          "at": 26635.80000000447,
+          "pictureTime": 3.620239
+        },
+        {
+          "at": 26809.30000000447,
+          "pictureTime": 3.784581
+        },
+        {
+          "at": 26979.90000000596,
+          "pictureTime": 3.937173
+        },
+        {
+          "at": 27161.90000000596,
+          "pictureTime": 4.126375
+        },
+        {
+          "at": 27451.5,
+          "pictureTime": 4.29774
+        },
+        {
+          "at": 27665.80000000447,
+          "pictureTime": 4.504759
+        },
+        {
+          "at": 27910.5,
+          "pictureTime": 4.71422
+        },
+        {
+          "at": 28116.40000000596,
+          "pictureTime": 4.957892
+        },
+        {
+          "at": 28349.40000000596,
+          "pictureTime": 5.161815
+        },
+        {
+          "at": 28545.10000000149,
+          "pictureTime": 5.395962
+        },
+        {
+          "at": 28714.70000000298,
+          "pictureTime": 5.580652
+        },
+        {
+          "at": 28890.20000000298,
+          "pictureTime": 5.755385
+        },
+        {
+          "at": 29080.40000000596,
+          "pictureTime": 5.933153
+        },
+        {
+          "at": 29264.60000000149,
+          "pictureTime": 0
+        },
+        {
+          "at": 29456.90000000596,
+          "pictureTime": 0.138895
+        },
+        {
+          "at": 29654,
+          "pictureTime": 0.326975
+        },
+        {
+          "at": 29852.40000000596,
+          "pictureTime": 0.519161
+        },
+        {
+          "at": 30062.70000000298,
+          "pictureTime": 0.725107
+        },
+        {
+          "at": 30215.90000000596,
+          "pictureTime": 0.918599
+        },
+        {
+          "at": 30387.40000000596,
+          "pictureTime": 1.079406
+        },
+        {
+          "at": 30555.80000000447,
+          "pictureTime": 1.250567
+        },
+        {
+          "at": 30736,
+          "pictureTime": 1.424737
+        },
+        {
+          "at": 30953.20000000298,
+          "pictureTime": 1.604169
+        },
+        {
+          "at": 31173,
+          "pictureTime": 1.822496
+        }
+      ],
+      "costs": {
+        "videoFrameCallback": {
+          "n": 68,
+          "total": 9.999999985098839,
+          "median": 0.04999999701976776,
+          "worst": 1.0999999940395355
+        },
+        "texSubImage2D": {
+          "n": 544,
+          "total": 212.89999998360872,
+          "median": 0.10000000149011612,
+          "worst": 4
+        },
+        "generateMipmap": {
+          "n": 204,
+          "total": 0.9999999925494194,
+          "median": 0,
+          "worst": 0.5999999940395355
+        },
+        "photoFrame": {
+          "n": 68,
+          "total": 132.5999999716878,
+          "median": 1.9500000029802322,
+          "worst": 4.699999995529652
+        },
+        "shownDepth": {
+          "n": 68,
+          "total": 0,
+          "median": 0,
+          "worst": 0
+        },
+        "frameImage": {
+          "n": 68,
+          "total": 185.8000000193715,
+          "median": 2.350000001490116,
+          "worst": 8.399999998509884
+        },
+        "screenUpload": {
+          "n": 68,
+          "total": 17.69999997317791,
+          "median": 0.10000000149011612,
+          "worst": 1.7999999970197678
+        },
+        "playerUpdate": {
+          "n": 68,
+          "total": 499.0000000745058,
+          "median": 7.25,
+          "worst": 14.300000004470348
+        },
+        "setDepth": {
+          "n": 68,
+          "total": 32.299999974668026,
+          "median": 0.10000000149011612,
+          "worst": 4.5
+        },
+        "clipPatches": {
+          "n": 68,
+          "total": 5087.9000000059605,
+          "median": 74.24999999627471,
+          "worst": 109
+        },
+        "bufferSubData": {
+          "n": 68,
+          "total": 22.700000010430813,
+          "median": 0.10000000149011612,
+          "worst": 1.8000000044703484
+        },
+        "clipCutCells": {
+          "n": 68,
+          "total": 5135.799999989569,
+          "median": 75.64999999850988,
+          "worst": 121.19999999552965
+        },
+        "clipCellDepth": {
+          "n": 68,
+          "total": 10227.60000000894,
+          "median": 150.20000000298023,
+          "worst": 214.10000000149012
+        },
+        "texImage2D": {
+          "n": 68,
+          "total": 205.90000000596046,
+          "median": 1.3999999985098839,
+          "worst": 96.90000000596046
+        },
+        "setColor": {
+          "n": 68,
+          "total": 230.30000003427267,
+          "median": 1.7000000029802322,
+          "worst": 97.5
+        },
+        "clipPicture": {
+          "n": 66,
+          "total": 224.50000002235174,
+          "median": 1.699999999254942,
+          "worst": 97.5
+        },
+        "fillClip": {
+          "n": 68,
+          "total": 10506.299999982119,
+          "median": 152.65000000223517,
+          "worst": 257.8999999985099
+        },
+        "sortVisible": {
+          "n": 408,
+          "total": 4.300000004470348,
+          "median": 0,
+          "worst": 0.9000000059604645
+        },
+        "bufferData": {
+          "n": 408,
+          "total": 6.600000008940697,
+          "median": 0,
+          "worst": 1.1999999955296516
+        },
+        "drawElements": {
+          "n": 136,
+          "total": 0.10000000149011612,
+          "median": 0,
+          "worst": 0.10000000149011612
+        },
+        "drawElementsInstanced": {
+          "n": 68,
+          "total": 0.20000000298023224,
+          "median": 0,
+          "worst": 0.10000000149011612
+        }
+      },
+      "gpuDraw": {
+        "supported": false,
+        "elapsedMs": {
+          "n": 0,
+          "total": 0,
+          "median": null
+        },
+        "disjointQueries": 0,
+        "externalQueries": 0,
+        "note": "Nonblocking GPU timer queries span prerender through postrender. They measure GPU elapsed time, separately from inclusive JavaScript submission costs; unavailable tail queries are omitted"
+      },
+      "sourceKind": "HTMLVideoElement",
+      "faces": 33334,
+      "rows": [
+        {
+          "at": 19054.60000000149,
+          "time": 2.124684,
+          "frame": 33,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19054.5
+        },
+        {
+          "at": 19223,
+          "time": 2.288097,
+          "frame": 36,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19223
+        },
+        {
+          "at": 19409.10000000149,
+          "time": 2.456097,
+          "frame": 39,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19409.10000000149
+        },
+        {
+          "at": 19564.60000000149,
+          "time": 2.642753,
+          "frame": 42,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19564.60000000149
+        },
+        {
+          "at": 19744.90000000596,
+          "time": 2.801839,
+          "frame": 44,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19744.90000000596
+        },
+        {
+          "at": 19920.80000000447,
+          "time": 2.981507,
+          "frame": 47,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19920.80000000447
+        },
+        {
+          "at": 20099.40000000596,
+          "time": 3.157482,
+          "frame": 50,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20099.40000000596
+        },
+        {
+          "at": 20263.70000000298,
+          "time": 3.340202,
+          "frame": 53,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20263.70000000298
+        },
+        {
+          "at": 20430.20000000298,
+          "time": 3.500257,
+          "frame": 56,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20430.20000000298
+        },
+        {
+          "at": 20604.30000000447,
+          "time": 3.666129,
+          "frame": 58,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20604.30000000447
+        },
+        {
+          "at": 20772.20000000298,
+          "time": 3.844299,
+          "frame": 61,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20772.10000000149
+        },
+        {
+          "at": 20934.40000000596,
+          "time": 4.008497,
+          "frame": 64,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20934.40000000596
+        },
+        {
+          "at": 21106.30000000447,
+          "time": 4.17233,
+          "frame": 66,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21105.5
+        },
+        {
+          "at": 21284.90000000596,
+          "time": 4.347076,
+          "frame": 69,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21284.90000000596
+        },
+        {
+          "at": 21457.40000000596,
+          "time": 4.52138600000596,
+          "frame": 72,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21457.40000000596
+        },
+        {
+          "at": 21587.30000000447,
+          "time": 4.689345,
+          "frame": 75,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21587.30000000447
+        },
+        {
+          "at": 21728.40000000596,
+          "time": 4.821304,
+          "frame": 77,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21726.80000000447
+        },
+        {
+          "at": 21904.20000000298,
+          "time": 4.966922,
+          "frame": 79,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21904.20000000298
+        },
+        {
+          "at": 22040.5,
+          "time": 5.139235,
+          "frame": 82,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22040.5
+        },
+        {
+          "at": 22220.80000000447,
+          "time": 5.2717830000014905,
+          "frame": 84,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22220.80000000447
+        },
+        {
+          "at": 22412.5,
+          "time": 5.457115,
+          "frame": 87,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22412.5
+        },
+        {
+          "at": 22612.30000000447,
+          "time": 5.646892,
+          "frame": 90,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22612.30000000447
+        },
+        {
+          "at": 22816.80000000447,
+          "time": 5.88191000000149,
+          "frame": 94,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22816.80000000447
+        },
+        {
+          "at": 22976.20000000298,
+          "time": 0,
+          "frame": 0,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22976.20000000298
+        },
+        {
+          "at": 23138.30000000447,
+          "time": 0.120904,
+          "frame": 1,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23138.30000000447
+        },
+        {
+          "at": 23310.30000000447,
+          "time": 0.27472,
+          "frame": 4,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23310.30000000447
+        },
+        {
+          "at": 23454.40000000596,
+          "time": 0.448377,
+          "frame": 7,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23453.80000000447
+        },
+        {
+          "at": 23598.80000000447,
+          "time": 0.594296,
+          "frame": 9,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23598.80000000447
+        },
+        {
+          "at": 23783.70000000298,
+          "time": 0.738206,
+          "frame": 11,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23783.70000000298
+        },
+        {
+          "at": 23963.5,
+          "time": 0.922159,
+          "frame": 14,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23963.5
+        },
+        {
+          "at": 24100.30000000447,
+          "time": 1.094752,
+          "frame": 17,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24100.30000000447
+        },
+        {
+          "at": 24252.70000000298,
+          "time": 1.237294,
+          "frame": 19,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24252.70000000298
+        },
+        {
+          "at": 24416.60000000149,
+          "time": 1.389338,
+          "frame": 22,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24416.60000000149
+        },
+        {
+          "at": 24604.40000000596,
+          "time": 1.552101,
+          "frame": 24,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24604.40000000596
+        },
+        {
+          "at": 24785.40000000596,
+          "time": 1.744737,
+          "frame": 27,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24785.30000000447
+        },
+        {
+          "at": 24967.40000000596,
+          "time": 1.916749,
+          "frame": 30,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24967.30000000447
+        },
+        {
+          "at": 25157.5,
+          "time": 2.095399,
+          "frame": 33,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25157.5
+        },
+        {
+          "at": 25309.70000000298,
+          "time": 2.303543,
+          "frame": 36,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25309.70000000298
+        },
+        {
+          "at": 25489.20000000298,
+          "time": 2.445931,
+          "frame": 39,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25489.20000000298
+        },
+        {
+          "at": 25675.70000000298,
+          "time": 2.634448,
+          "frame": 42,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25675.60000000149
+        },
+        {
+          "at": 25856.80000000447,
+          "time": 2.812766,
+          "frame": 45,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25856
+        },
+        {
+          "at": 26044.30000000447,
+          "time": 2.994598,
+          "frame": 47,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26044.30000000447
+        },
+        {
+          "at": 26226.20000000298,
+          "time": 3.182874,
+          "frame": 50,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26226.20000000298
+        },
+        {
+          "at": 26485.80000000447,
+          "time": 3.376414,
+          "frame": 54,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26485.80000000447
+        },
+        {
+          "at": 26635.80000000447,
+          "time": 3.621522,
+          "frame": 57,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26635.80000000447
+        },
+        {
+          "at": 26809.30000000447,
+          "time": 3.78461,
+          "frame": 60,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26809.30000000447
+        },
+        {
+          "at": 26979.90000000596,
+          "time": 3.94252,
+          "frame": 63,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26979.90000000596
+        },
+        {
+          "at": 27161.90000000596,
+          "time": 4.126875,
+          "frame": 66,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27161.90000000596
+        },
+        {
+          "at": 27451.5,
+          "time": 4.299546,
+          "frame": 68,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27451.5
+        },
+        {
+          "at": 27666.80000000447,
+          "time": 4.482219,
+          "frame": 71,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27665.80000000447
+        },
+        {
+          "at": 27910.5,
+          "time": 4.689411,
+          "frame": 75,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27910.5
+        },
+        {
+          "at": 28116.40000000596,
+          "time": 4.937445,
+          "frame": 78,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28116.40000000596
+        },
+        {
+          "at": 28349.40000000596,
+          "time": 5.13556,
+          "frame": 82,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28349.40000000596
+        },
+        {
+          "at": 28545.10000000149,
+          "time": 5.374276,
+          "frame": 85,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28545.10000000149
+        },
+        {
+          "at": 28714.70000000298,
+          "time": 5.560398,
+          "frame": 88,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28714.70000000298
+        },
+        {
+          "at": 28890.30000000447,
+          "time": 5.733443,
+          "frame": 91,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28890.20000000298
+        },
+        {
+          "at": 29080.5,
+          "time": 5.912638,
+          "frame": 94,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29080.40000000596
+        },
+        {
+          "at": 29264.70000000298,
+          "time": 0,
+          "frame": 0,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29264.60000000149
+        },
+        {
+          "at": 29456.90000000596,
+          "time": 0.140711,
+          "frame": 2,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29456.90000000596
+        },
+        {
+          "at": 29654,
+          "time": 0.327861,
+          "frame": 5,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29654
+        },
+        {
+          "at": 29852.5,
+          "time": 0.51869,
+          "frame": 8,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29852.5
+        },
+        {
+          "at": 30062.70000000298,
+          "time": 0.731855,
+          "frame": 11,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 30062.70000000298
+        },
+        {
+          "at": 30215.90000000596,
+          "time": 0.924941,
+          "frame": 14,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 30215.90000000596
+        },
+        {
+          "at": 30387.40000000596,
+          "time": 1.078703,
+          "frame": 17,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 30387.40000000596
+        },
+        {
+          "at": 30555.80000000447,
+          "time": 1.2512710000014902,
+          "frame": 20,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 30555.80000000447
+        },
+        {
+          "at": 30736.10000000149,
+          "time": 1.426451,
+          "frame": 22,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 30736.10000000149
+        },
+        {
+          "at": 30953.20000000298,
+          "time": 1.604141,
+          "frame": 25,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 30953.20000000298
+        },
+        {
+          "at": 31173.10000000149,
+          "time": 1.81895,
+          "frame": 29,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 31173
+        }
+      ],
+      "nativeMediaTrace": {
+        "file": "work/r4-final-r3-cpu.json.sample.trace.json",
+        "includesWarmupMs": 2000,
+        "note": "Native trace event durations are wall durations and can overlap; they are not additive decoder CPU costs",
+        "counts": {
+          "VideoFrameSubmitter::OnBeginFrame": 451,
+          "FrameExpectedDisplayTime": 451,
+          "WebMediaPlayerImpl:paint": 1,
+          "WebMediaPlayerImpl::GetCurrentFrameFromCompositor": 79,
+          "VideoFrameCompositor::UpdateCurrentFrameIfStale": 79,
+          "WebMediaPlayerImpl::DoSeek": 5,
+          "RendererImpl::PausePlayback": 5,
+          "RendererImpl::OnBufferingStateChange": 22,
+          "RendererImpl::SetPlaybackRate": 90,
+          "RendererImpl::StartPlayingFrom": 5,
+          "DecodeStreamRead": 1923,
+          "VideoRendererImpl::Render": 463,
+          "AudioRendererImpl::Render": 1434,
+          "CopyRowsToNV12Buffer": 677,
+          "VideoFrameCompositor::SetCurrentFrame": 247,
+          "VideoFrameSubmitter::SubmitFrame": 252,
+          "RendererImpl::StartPlayback": 5,
+          "WebMediaPlayerImpl::OnPipelineSeeked": 5,
+          "WebMediaPlayerImpl::BufferingHaveEnough": 5,
+          "VideoFrameCompositor::UpdateCurrentFrame": 397,
+          "VideoFramesDropped": 124,
+          "RendererImpl::OnRendererEnded": 7,
+          "WebMediaPlayerImpl::OnEnded": 3,
+          "RendererImpl::Flush": 10,
+          "AudioRendererImpl::Flush": 10,
+          "VideoRendererImpl::Flush": 10,
+          "FFmpegDemuxer::Seek": 10,
+          "AudioDecoderStream::Read": 2465,
+          "AudioDecoderStream::ReadFromDemuxerStream": 2478,
+          "Rendering": 11,
+          "VideoDecoderStream::Read": 1359,
+          "VideoDecoderStream::ReadFromDemuxerStream": 1368,
+          "AudioDecoderStream::Decode": 2478,
+          "VideoDecoderStream::Decode": 1368,
+          "VideoDecoderStream::PrepareOutput": 1354,
+          "CopyVideoFrameToMappableSharedImage": 1354
+        },
+        "durations": {
+          "VideoFrameSubmitter::OnBeginFrame": {
+            "count": 451,
+            "totalMs": 56.338999999999984,
+            "worstMs": 1.948
+          },
+          "WebMediaPlayerImpl:paint": {
+            "count": 1,
+            "totalMs": 1.053,
+            "worstMs": 1.053
+          },
+          "WebMediaPlayerImpl::GetCurrentFrameFromCompositor": {
+            "count": 79,
+            "totalMs": 11.575999999999995,
+            "worstMs": 1.254
+          },
+          "VideoFrameCompositor::UpdateCurrentFrameIfStale": {
+            "count": 79,
+            "totalMs": 5.331999999999995,
+            "worstMs": 4.745
+          },
+          "WebMediaPlayerImpl::DoSeek": {
+            "count": 5,
+            "totalMs": 2.735,
+            "worstMs": 1.071
+          },
+          "RendererImpl::PausePlayback": {
+            "count": 5,
+            "totalMs": 0.031,
+            "worstMs": 0.017
+          },
+          "RendererImpl::OnBufferingStateChange": {
+            "count": 22,
+            "totalMs": 0.18000000000000002,
+            "worstMs": 0.089
+          },
+          "RendererImpl::SetPlaybackRate": {
+            "count": 88,
+            "totalMs": 0.7800000000000005,
+            "worstMs": 0.177
+          },
+          "RendererImpl::StartPlayingFrom": {
+            "count": 5,
+            "totalMs": 0.163,
+            "worstMs": 0.043
+          },
+          "DecodeStreamRead": {
+            "count": 1912,
+            "totalMs": 44.81300000000021,
+            "worstMs": 3.146
+          },
+          "VideoRendererImpl::Render": {
+            "count": 463,
+            "totalMs": 31.212999999999987,
+            "worstMs": 1.064
+          },
+          "AudioRendererImpl::Render": {
+            "count": 1434,
+            "totalMs": 29.965999999999934,
+            "worstMs": 0.642
+          },
+          "CopyRowsToNV12Buffer": {
+            "count": 677,
+            "totalMs": 34.510000000000026,
+            "worstMs": 2.792
+          },
+          "VideoFrameCompositor::SetCurrentFrame": {
+            "count": 242,
+            "totalMs": 1.8569999999999947,
+            "worstMs": 0.07
+          },
+          "VideoFrameSubmitter::SubmitFrame": {
+            "count": 233,
+            "totalMs": 0.6470000000000004,
+            "worstMs": 0.111
+          },
+          "RendererImpl::StartPlayback": {
+            "count": 5,
+            "totalMs": 0.132,
+            "worstMs": 0.087
+          },
+          "WebMediaPlayerImpl::OnPipelineSeeked": {
+            "count": 5,
+            "totalMs": 0.9249999999999999,
+            "worstMs": 0.486
+          },
+          "WebMediaPlayerImpl::BufferingHaveEnough": {
+            "count": 5,
+            "totalMs": 1.756,
+            "worstMs": 1.109
+          },
+          "VideoFrameCompositor::UpdateCurrentFrame": {
+            "count": 397,
+            "totalMs": 41.17699999999999,
+            "worstMs": 1.85
+          },
+          "RendererImpl::OnRendererEnded": {
+            "count": 7,
+            "totalMs": 0.134,
+            "worstMs": 0.049
+          },
+          "WebMediaPlayerImpl::OnEnded": {
+            "count": 3,
+            "totalMs": 1.4659999999999997,
+            "worstMs": 1.4
+          }
+        }
+      },
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/bunny.mp4",
+          "bytes": 377969,
+          "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny.depth",
+          "bytes": 1055234,
+          "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+          "bytes": 243317,
+          "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+          "bytes": 255139,
+          "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+          "bytes": 252771,
+          "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+          "bytes": 254539,
+          "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+          "bytes": 263182,
+          "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+          "bytes": 266757,
+          "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+          "bytes": 124720,
+          "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8"
+        }
+      ]
+    },
+    {
+      "id": "machine-long",
+      "depthAtStart": {
+        "pending": false,
+        "completed": 720,
+        "total": 720,
+        "rate": 24
+      },
+      "depthAtEnd": {
+        "pending": false,
+        "completed": 720,
+        "total": 720,
+        "rate": 24
+      },
+      "nativeMediaCounters": {
+        "start": {
+          "totalVideoFrames": 56,
+          "droppedVideoFrames": 40
+        },
+        "end": {
+          "totalVideoFrames": 779,
+          "droppedVideoFrames": 589
+        },
+        "note": "Browser media counters, separate from Sharp picture submissions"
+      },
+      "windowMs": 30000,
+      "sourceAdvance": 29.855404,
+      "distinctFrames": 112,
+      "sharpFrames": 112,
+      "title": "Splashery · splats you can play with",
+      "url": "http://127.0.0.1:4173/?renderer=webgl2&adapt=off&profile=low&labs=1",
+      "dimensions": [358, 201],
+      "duration": 30,
+      "renderSize": [585, 900],
+      "pictureCadence": {
+        "n": 110,
+        "total": 30110,
+        "median": 270.55000000074506,
+        "worst": 462.80000000447035
+      },
+      "pictureSubmissions": 111,
+      "pictureSubmissionFps": 3.7,
+      "cadence": {
+        "n": 111,
+        "total": 30109.5,
+        "median": 270.3999999985099,
+        "worst": 344.5
+      },
+      "renderedCadence": {
+        "n": 111,
+        "total": 30110,
+        "median": 270.40000000596046,
+        "worst": 344.5
+      },
+      "draws": [
+        {
+          "at": 37027,
+          "pictureTime": 2.188701
+        },
+        {
+          "at": 37280.60000000149,
+          "pictureTime": 2.46096
+        },
+        {
+          "at": 37554.5,
+          "pictureTime": 2.716388
+        },
+        {
+          "at": 37856.90000000596,
+          "pictureTime": 2.98567
+        },
+        {
+          "at": 38118.70000000298,
+          "pictureTime": 3.295437
+        },
+        {
+          "at": 38425.10000000149,
+          "pictureTime": 3.545777
+        },
+        {
+          "at": 38714.40000000596,
+          "pictureTime": 3.861055
+        },
+        {
+          "at": 39058.90000000596,
+          "pictureTime": 4.146297
+        },
+        {
+          "at": 39322.80000000447,
+          "pictureTime": 4.496343
+        },
+        {
+          "at": 39601.80000000447,
+          "pictureTime": 4.754027
+        },
+        {
+          "at": 39868,
+          "pictureTime": 5.035803
+        },
+        {
+          "at": 40125.60000000149,
+          "pictureTime": 5.298521
+        },
+        {
+          "at": 40382.80000000447,
+          "pictureTime": 5.561093
+        },
+        {
+          "at": 40670.30000000447,
+          "pictureTime": 5.807915
+        },
+        {
+          "at": 40917.80000000447,
+          "pictureTime": 6.105808
+        },
+        {
+          "at": 41196.90000000596,
+          "pictureTime": 6.346775
+        },
+        {
+          "at": 41435.90000000596,
+          "pictureTime": 6.632237
+        },
+        {
+          "at": 41690.40000000596,
+          "pictureTime": 6.867602
+        },
+        {
+          "at": 41983.20000000298,
+          "pictureTime": 7.120781
+        },
+        {
+          "at": 42291,
+          "pictureTime": 7.405152
+        },
+        {
+          "at": 42547.30000000447,
+          "pictureTime": 7.723604
+        },
+        {
+          "at": 42846.70000000298,
+          "pictureTime": 7.970704
+        },
+        {
+          "at": 43174.80000000447,
+          "pictureTime": 8.275996
+        },
+        {
+          "at": 43452.30000000447,
+          "pictureTime": 8.61114
+        },
+        {
+          "at": 43731.10000000149,
+          "pictureTime": 8.886929
+        },
+        {
+          "at": 43985.60000000149,
+          "pictureTime": 9.164943
+        },
+        {
+          "at": 44266.10000000149,
+          "pictureTime": 9.419627
+        },
+        {
+          "at": 44545.10000000149,
+          "pictureTime": 9.692829
+        },
+        {
+          "at": 44838.70000000298,
+          "pictureTime": 9.971521
+        },
+        {
+          "at": 45138.70000000298,
+          "pictureTime": 10.267058
+        },
+        {
+          "at": 45418.5,
+          "pictureTime": 10.575633
+        },
+        {
+          "at": 45679.60000000149,
+          "pictureTime": 10.856405
+        },
+        {
+          "at": 46003.5,
+          "pictureTime": 11.116113
+        },
+        {
+          "at": 46309.70000000298,
+          "pictureTime": 11.429838
+        },
+        {
+          "at": 46564.40000000596,
+          "pictureTime": 11.74645
+        },
+        {
+          "at": 46849.20000000298,
+          "pictureTime": 11.993585
+        },
+        {
+          "at": 47119.30000000447,
+          "pictureTime": 12.281164
+        },
+        {
+          "at": 47369.30000000447,
+          "pictureTime": 12.557622
+        },
+        {
+          "at": 47642.40000000596,
+          "pictureTime": 12.79897
+        },
+        {
+          "at": 47974.70000000298,
+          "pictureTime": 13.083771
+        },
+        {
+          "at": 48298.90000000596,
+          "pictureTime": 13.406768
+        },
+        {
+          "at": 48592.70000000298,
+          "pictureTime": 13.735857
+        },
+        {
+          "at": 48880.40000000596,
+          "pictureTime": 14.023815
+        },
+        {
+          "at": 49177.30000000447,
+          "pictureTime": 14.309744
+        },
+        {
+          "at": 49488.80000000447,
+          "pictureTime": 14.615176
+        },
+        {
+          "at": 49734.90000000596,
+          "pictureTime": 14.919422
+        },
+        {
+          "at": 50008.40000000596,
+          "pictureTime": 15.17064
+        },
+        {
+          "at": 50282,
+          "pictureTime": 15.442588
+        },
+        {
+          "at": 50575.20000000298,
+          "pictureTime": 15.721641
+        },
+        {
+          "at": 50864.80000000447,
+          "pictureTime": 16.005535
+        },
+        {
+          "at": 51132.5,
+          "pictureTime": 16.308218
+        },
+        {
+          "at": 51398,
+          "pictureTime": 16.561026
+        },
+        {
+          "at": 51657.30000000447,
+          "pictureTime": 16.828564
+        },
+        {
+          "at": 51918.10000000149,
+          "pictureTime": 17.093089
+        },
+        {
+          "at": 52206.90000000596,
+          "pictureTime": 17.354832
+        },
+        {
+          "at": 52476.10000000149,
+          "pictureTime": 17.642602
+        },
+        {
+          "at": 52719.30000000447,
+          "pictureTime": 17.906896
+        },
+        {
+          "at": 52992.70000000298,
+          "pictureTime": 18.15053
+        },
+        {
+          "at": 53244.60000000149,
+          "pictureTime": 18.423511
+        },
+        {
+          "at": 53500.5,
+          "pictureTime": 18.68003
+        },
+        {
+          "at": 53734.70000000298,
+          "pictureTime": 18.93362
+        },
+        {
+          "at": 53988.60000000149,
+          "pictureTime": 19.167079
+        },
+        {
+          "at": 54258,
+          "pictureTime": 19.419251
+        },
+        {
+          "at": 54554.90000000596,
+          "pictureTime": 19.69427
+        },
+        {
+          "at": 54835.40000000596,
+          "pictureTime": 19.990693
+        },
+        {
+          "at": 55083.5,
+          "pictureTime": 20.26917
+        },
+        {
+          "at": 55364.5,
+          "pictureTime": 20.515278
+        },
+        {
+          "at": 55637.60000000149,
+          "pictureTime": 20.794757
+        },
+        {
+          "at": 55947.60000000149,
+          "pictureTime": 21.074199
+        },
+        {
+          "at": 56213.10000000149,
+          "pictureTime": 21.379656
+        },
+        {
+          "at": 56501.20000000298,
+          "pictureTime": 21.645194
+        },
+        {
+          "at": 56810.70000000298,
+          "pictureTime": 21.93143
+        },
+        {
+          "at": 57087.10000000149,
+          "pictureTime": 22.227396
+        },
+        {
+          "at": 57377,
+          "pictureTime": 22.501233
+        },
+        {
+          "at": 57652.20000000298,
+          "pictureTime": 22.788502
+        },
+        {
+          "at": 57928.90000000596,
+          "pictureTime": 23.060528
+        },
+        {
+          "at": 58206.40000000596,
+          "pictureTime": 23.342173
+        },
+        {
+          "at": 58450,
+          "pictureTime": 23.616313
+        },
+        {
+          "at": 58692.40000000596,
+          "pictureTime": 23.867234
+        },
+        {
+          "at": 58961.5,
+          "pictureTime": 24.104503
+        },
+        {
+          "at": 59214.80000000447,
+          "pictureTime": 24.371306
+        },
+        {
+          "at": 59467.80000000447,
+          "pictureTime": 24.626003
+        },
+        {
+          "at": 59730.5,
+          "pictureTime": 24.885036
+        },
+        {
+          "at": 59959.90000000596,
+          "pictureTime": 25.140352
+        },
+        {
+          "at": 60216.80000000447,
+          "pictureTime": 25.38067
+        },
+        {
+          "at": 60460.30000000447,
+          "pictureTime": 25.624613
+        },
+        {
+          "at": 60709.80000000447,
+          "pictureTime": 25.877817
+        },
+        {
+          "at": 60939.10000000149,
+          "pictureTime": 26.123443
+        },
+        {
+          "at": 61155.10000000149,
+          "pictureTime": 26.354849
+        },
+        {
+          "at": 61396.70000000298,
+          "pictureTime": 26.562717
+        },
+        {
+          "at": 61641.5,
+          "pictureTime": 26.812466
+        },
+        {
+          "at": 61895.10000000149,
+          "pictureTime": 27.048786
+        },
+        {
+          "at": 62142.10000000149,
+          "pictureTime": 27.310115
+        },
+        {
+          "at": 62396.80000000447,
+          "pictureTime": 27.554335
+        },
+        {
+          "at": 62651.5,
+          "pictureTime": 27.815543
+        },
+        {
+          "at": 62913.5,
+          "pictureTime": 28.062672
+        },
+        {
+          "at": 63168.90000000596,
+          "pictureTime": 28.330267
+        },
+        {
+          "at": 63405.10000000149,
+          "pictureTime": 28.586825
+        },
+        {
+          "at": 63666.90000000596,
+          "pictureTime": 28.814549
+        },
+        {
+          "at": 63952,
+          "pictureTime": 29.075528
+        },
+        {
+          "at": 64207.90000000596,
+          "pictureTime": 29.369734
+        },
+        {
+          "at": 64480.5,
+          "pictureTime": 29.623275
+        },
+        {
+          "at": 64745,
+          "pictureTime": 29.890712
+        },
+        {
+          "at": 64920.5,
+          "pictureTime": 29.890712
+        },
+        {
+          "at": 65207.80000000447,
+          "pictureTime": 0.087606
+        },
+        {
+          "at": 65497.10000000149,
+          "pictureTime": 0.37971
+        },
+        {
+          "at": 65746,
+          "pictureTime": 0.668339
+        },
+        {
+          "at": 66040.40000000596,
+          "pictureTime": 0.911773
+        },
+        {
+          "at": 66317,
+          "pictureTime": 1.203726
+        },
+        {
+          "at": 66587.40000000596,
+          "pictureTime": 1.492555
+        },
+        {
+          "at": 66866.30000000447,
+          "pictureTime": 1.751375
+        },
+        {
+          "at": 67137,
+          "pictureTime": 2.043644
+        }
+      ],
+      "costs": {
+        "videoFrameCallback": {
+          "n": 224,
+          "total": 15.200000002980232,
+          "median": 0,
+          "worst": 1
+        },
+        "texImage2D": {
+          "n": 333,
+          "total": 422.70000003278255,
+          "median": 1,
+          "worst": 6.699999995529652
+        },
+        "generateMipmap": {
+          "n": 333,
+          "total": 5.80000002682209,
+          "median": 0,
+          "worst": 3.100000001490116
+        },
+        "photoFrame": {
+          "n": 112,
+          "total": 282.20000004023314,
+          "median": 2.199999999254942,
+          "worst": 7.899999998509884
+        },
+        "canvasDraw": {
+          "n": 111,
+          "total": 11726.500000014901,
+          "median": 101.60000000149012,
+          "worst": 176.5
+        },
+        "canvasRead": {
+          "n": 112,
+          "total": 81.69999999552965,
+          "median": 0.6999999955296516,
+          "worst": 3.899999998509884
+        },
+        "longFrame": {
+          "n": 112,
+          "total": 16444.10000000894,
+          "median": 145.60000000149012,
+          "worst": 217.60000000149012
+        },
+        "shownDepth": {
+          "n": 112,
+          "total": 0.29999998956918716,
+          "median": 0,
+          "worst": 0.10000000149011612
+        },
+        "frameImage": {
+          "n": 112,
+          "total": 270.69999996572733,
+          "median": 2.25,
+          "worst": 5.299999997019768
+        },
+        "texSubImage2D": {
+          "n": 672,
+          "total": 225.5000000819564,
+          "median": 0.10000000149011612,
+          "worst": 4.5
+        },
+        "screenUpload": {
+          "n": 112,
+          "total": 60.69999998062849,
+          "median": 0.5,
+          "worst": 5.800000004470348
+        },
+        "playerUpdate": {
+          "n": 112,
+          "total": 17423.29999998212,
+          "median": 153.44999999925494,
+          "worst": 223.79999999701977
+        },
+        "setDepth": {
+          "n": 112,
+          "total": 25.00000000745058,
+          "median": 0.10000000149011612,
+          "worst": 1.5999999940395355
+        },
+        "clipPatches": {
+          "n": 112,
+          "total": 5464.999999992549,
+          "median": 47.94999999925494,
+          "worst": 84.89999999850988
+        },
+        "bufferSubData": {
+          "n": 112,
+          "total": 32.00000002235174,
+          "median": 0.10000000149011612,
+          "worst": 1.2000000029802322
+        },
+        "clipCutCells": {
+          "n": 112,
+          "total": 4887.000000022352,
+          "median": 43.05000000074506,
+          "worst": 58.20000000298023
+        },
+        "clipCellDepth": {
+          "n": 112,
+          "total": 10358.100000031292,
+          "median": 91.40000000223517,
+          "worst": 123.60000000149012
+        },
+        "setColor": {
+          "n": 111,
+          "total": 215.7000000178814,
+          "median": 1.8000000044703484,
+          "worst": 6
+        },
+        "clipPicture": {
+          "n": 111,
+          "total": 218.1000000089407,
+          "median": 1.8999999985098839,
+          "worst": 6
+        },
+        "fillClip": {
+          "n": 336,
+          "total": 10636.500000067055,
+          "median": 0,
+          "worst": 127.5
+        },
+        "sortVisible": {
+          "n": 672,
+          "total": 7.600000001490116,
+          "median": 0,
+          "worst": 2.899999998509884
+        },
+        "bufferData": {
+          "n": 672,
+          "total": 12.30000001937151,
+          "median": 0,
+          "worst": 3.100000001490116
+        },
+        "drawElements": {
+          "n": 224,
+          "total": 3,
+          "median": 0,
+          "worst": 1
+        },
+        "drawElementsInstanced": {
+          "n": 112,
+          "total": 0.5,
+          "median": 0,
+          "worst": 0.3999999985098839
+        }
+      },
+      "gpuDraw": {
+        "supported": false,
+        "elapsedMs": {
+          "n": 0,
+          "total": 0,
+          "median": null
+        },
+        "disjointQueries": 0,
+        "externalQueries": 0,
+        "note": "Nonblocking GPU timer queries span prerender through postrender. They measure GPU elapsed time, separately from inclusive JavaScript submission costs; unavailable tail queries are omitted"
+      },
+      "sourceKind": "HTMLVideoElement",
+      "faces": 11631,
+      "rows": [
+        {
+          "at": 37027.5,
+          "time": 2.188701,
+          "frame": 52,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 37027.5
+        },
+        {
+          "at": 37280.80000000447,
+          "time": 2.460954,
+          "frame": 59,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 37280.60000000149
+        },
+        {
+          "at": 37554.5,
+          "time": 2.716382,
+          "frame": 65,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 37554.5
+        },
+        {
+          "at": 37856.90000000596,
+          "time": 2.985658,
+          "frame": 71,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 37856.90000000596
+        },
+        {
+          "at": 38118.70000000298,
+          "time": 3.29543,
+          "frame": 79,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 38118.70000000298
+        },
+        {
+          "at": 38425.10000000149,
+          "time": 3.545769,
+          "frame": 85,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 38425.10000000149
+        },
+        {
+          "at": 38714.40000000596,
+          "time": 3.861044,
+          "frame": 92,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 38714.40000000596
+        },
+        {
+          "at": 39058.90000000596,
+          "time": 4.146291,
+          "frame": 99,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 39058.90000000596
+        },
+        {
+          "at": 39323,
+          "time": 4.496333,
+          "frame": 107,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 39323
+        },
+        {
+          "at": 39601.90000000596,
+          "time": 4.75341,
+          "frame": 114,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 39601.80000000447
+        },
+        {
+          "at": 39868.70000000298,
+          "time": 5.035792,
+          "frame": 120,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 39868
+        },
+        {
+          "at": 40125.60000000149,
+          "time": 5.298514,
+          "frame": 127,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 40125.60000000149
+        },
+        {
+          "at": 40382.80000000447,
+          "time": 5.561085,
+          "frame": 133,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 40382.80000000447
+        },
+        {
+          "at": 40670.30000000447,
+          "time": 5.807907,
+          "frame": 139,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 40670.30000000447
+        },
+        {
+          "at": 40917.80000000447,
+          "time": 6.105802,
+          "frame": 146,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 40917.80000000447
+        },
+        {
+          "at": 41197,
+          "time": 6.346767,
+          "frame": 152,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 41196.90000000596
+        },
+        {
+          "at": 41436,
+          "time": 6.632226,
+          "frame": 159,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 41435.90000000596
+        },
+        {
+          "at": 41690.40000000596,
+          "time": 6.866678,
+          "frame": 164,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 41690.40000000596
+        },
+        {
+          "at": 41983.20000000298,
+          "time": 7.120583,
+          "frame": 170,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 41983.20000000298
+        },
+        {
+          "at": 42291,
+          "time": 7.405179,
+          "frame": 177,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 42291
+        },
+        {
+          "at": 42547.30000000447,
+          "time": 7.723598,
+          "frame": 185,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 42547.30000000447
+        },
+        {
+          "at": 42846.70000000298,
+          "time": 7.970698,
+          "frame": 191,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 42846.70000000298
+        },
+        {
+          "at": 43174.80000000447,
+          "time": 8.275991,
+          "frame": 198,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 43174.80000000447
+        },
+        {
+          "at": 43452.30000000447,
+          "time": 8.611132,
+          "frame": 206,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 43452.30000000447
+        },
+        {
+          "at": 43731.10000000149,
+          "time": 8.886993,
+          "frame": 213,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 43731.10000000149
+        },
+        {
+          "at": 43985.60000000149,
+          "time": 9.164151,
+          "frame": 219,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 43985.60000000149
+        },
+        {
+          "at": 44266.10000000149,
+          "time": 9.41966399999553,
+          "frame": 226,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 44266.10000000149
+        },
+        {
+          "at": 44545.10000000149,
+          "time": 9.692823,
+          "frame": 232,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 44545.10000000149
+        },
+        {
+          "at": 44838.80000000447,
+          "time": 9.971517,
+          "frame": 239,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 44838.70000000298
+        },
+        {
+          "at": 45139.5,
+          "time": 10.267049,
+          "frame": 246,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 45138.70000000298
+        },
+        {
+          "at": 45418.90000000596,
+          "time": 10.575628,
+          "frame": 253,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 45418.5
+        },
+        {
+          "at": 45679.60000000149,
+          "time": 10.856397,
+          "frame": 260,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 45679.60000000149
+        },
+        {
+          "at": 46003.5,
+          "time": 11.115274,
+          "frame": 266,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 46003.5
+        },
+        {
+          "at": 46309.80000000447,
+          "time": 11.429831,
+          "frame": 274,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 46309.80000000447
+        },
+        {
+          "at": 46565.30000000447,
+          "time": 11.746438,
+          "frame": 281,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 46564.40000000596
+        },
+        {
+          "at": 46849.20000000298,
+          "time": 11.993557,
+          "frame": 287,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 46849.20000000298
+        },
+        {
+          "at": 47119.30000000447,
+          "time": 12.281161,
+          "frame": 294,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 47119.30000000447
+        },
+        {
+          "at": 47369.30000000447,
+          "time": 12.557613,
+          "frame": 301,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 47369.30000000447
+        },
+        {
+          "at": 47642.40000000596,
+          "time": 12.799065000001491,
+          "frame": 307,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 47642.40000000596
+        },
+        {
+          "at": 47978,
+          "time": 13.08378800000149,
+          "frame": 314,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 47974.70000000298
+        },
+        {
+          "at": 48298.90000000596,
+          "time": 13.406759,
+          "frame": 321,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 48298.90000000596
+        },
+        {
+          "at": 48592.70000000298,
+          "time": 13.735855,
+          "frame": 329,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 48592.70000000298
+        },
+        {
+          "at": 48880.40000000596,
+          "time": 14.023803,
+          "frame": 336,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 48880.40000000596
+        },
+        {
+          "at": 49177.30000000447,
+          "time": 14.309738,
+          "frame": 343,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 49177.30000000447
+        },
+        {
+          "at": 49488.90000000596,
+          "time": 14.61517,
+          "frame": 350,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 49488.90000000596
+        },
+        {
+          "at": 49735,
+          "time": 14.919407,
+          "frame": 358,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 49734.90000000596
+        },
+        {
+          "at": 50010.5,
+          "time": 15.170637,
+          "frame": 364,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 50010.5
+        },
+        {
+          "at": 50282,
+          "time": 15.442579,
+          "frame": 370,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 50282
+        },
+        {
+          "at": 50575.20000000298,
+          "time": 15.72163,
+          "frame": 377,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 50575.20000000298
+        },
+        {
+          "at": 50864.80000000447,
+          "time": 16.005518,
+          "frame": 384,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 50864.80000000447
+        },
+        {
+          "at": 51132.5,
+          "time": 16.308205,
+          "frame": 391,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 51132.5
+        },
+        {
+          "at": 51398,
+          "time": 16.561024,
+          "frame": 397,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 51398
+        },
+        {
+          "at": 51657.30000000447,
+          "time": 16.82852,
+          "frame": 403,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 51657.30000000447
+        },
+        {
+          "at": 51918.10000000149,
+          "time": 17.093084,
+          "frame": 410,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 51918.10000000149
+        },
+        {
+          "at": 52206.90000000596,
+          "time": 17.354829,
+          "frame": 416,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 52206.90000000596
+        },
+        {
+          "at": 52476.20000000298,
+          "time": 17.642342,
+          "frame": 423,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 52476.10000000149
+        },
+        {
+          "at": 52719.30000000447,
+          "time": 17.906365,
+          "frame": 429,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 52719.30000000447
+        },
+        {
+          "at": 52992.80000000447,
+          "time": 18.150535,
+          "frame": 435,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 52992.80000000447
+        },
+        {
+          "at": 53244.70000000298,
+          "time": 18.423511,
+          "frame": 442,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 53244.70000000298
+        },
+        {
+          "at": 53500.5,
+          "time": 18.68003,
+          "frame": 448,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 53500.5
+        },
+        {
+          "at": 53734.90000000596,
+          "time": 18.933611,
+          "frame": 454,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 53734.70000000298
+        },
+        {
+          "at": 53988.60000000149,
+          "time": 19.167079,
+          "frame": 460,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 53988.60000000149
+        },
+        {
+          "at": 54258,
+          "time": 19.419239,
+          "frame": 466,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 54258
+        },
+        {
+          "at": 54554.90000000596,
+          "time": 19.694251,
+          "frame": 472,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 54554.90000000596
+        },
+        {
+          "at": 54835.5,
+          "time": 19.990687,
+          "frame": 479,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 54835.40000000596
+        },
+        {
+          "at": 55083.60000000149,
+          "time": 20.269163,
+          "frame": 486,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 55083.5
+        },
+        {
+          "at": 55364.5,
+          "time": 20.515272,
+          "frame": 492,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 55364.5
+        },
+        {
+          "at": 55637.60000000149,
+          "time": 20.794744,
+          "frame": 499,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 55637.60000000149
+        },
+        {
+          "at": 55947.60000000149,
+          "time": 21.07387,
+          "frame": 505,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 55947.60000000149
+        },
+        {
+          "at": 56213.10000000149,
+          "time": 21.379258,
+          "frame": 513,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 56213.10000000149
+        },
+        {
+          "at": 56501.20000000298,
+          "time": 21.644384,
+          "frame": 519,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 56501.20000000298
+        },
+        {
+          "at": 56810.70000000298,
+          "time": 21.931415,
+          "frame": 526,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 56810.70000000298
+        },
+        {
+          "at": 57087.30000000447,
+          "time": 22.247392,
+          "frame": 533,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 57087.10000000149
+        },
+        {
+          "at": 57377,
+          "time": 22.52122,
+          "frame": 540,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 57377
+        },
+        {
+          "at": 57652.20000000298,
+          "time": 22.808485,
+          "frame": 547,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 57652.20000000298
+        },
+        {
+          "at": 57928.90000000596,
+          "time": 23.080522,
+          "frame": 553,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 57928.90000000596
+        },
+        {
+          "at": 58206.40000000596,
+          "time": 23.362131,
+          "frame": 560,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 58206.40000000596
+        },
+        {
+          "at": 58450,
+          "time": 23.636305,
+          "frame": 567,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 58450
+        },
+        {
+          "at": 58692.40000000596,
+          "time": 23.88724300000447,
+          "frame": 573,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 58692.40000000596
+        },
+        {
+          "at": 58961.5,
+          "time": 24.124498,
+          "frame": 578,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 58961.5
+        },
+        {
+          "at": 59214.80000000447,
+          "time": 24.3913,
+          "frame": 585,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 59214.80000000447
+        },
+        {
+          "at": 59467.90000000596,
+          "time": 24.645999,
+          "frame": 591,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 59467.90000000596
+        },
+        {
+          "at": 59730.5,
+          "time": 24.905028,
+          "frame": 597,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 59730.5
+        },
+        {
+          "at": 59959.90000000596,
+          "time": 25.160346,
+          "frame": 603,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 59959.90000000596
+        },
+        {
+          "at": 60216.80000000447,
+          "time": 25.400607,
+          "frame": 609,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 60216.80000000447
+        },
+        {
+          "at": 60460.30000000447,
+          "time": 25.644605,
+          "frame": 615,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 60460.30000000447
+        },
+        {
+          "at": 60709.80000000447,
+          "time": 25.897811,
+          "frame": 621,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 60709.80000000447
+        },
+        {
+          "at": 60939.10000000149,
+          "time": 26.143437,
+          "frame": 627,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 60939.10000000149
+        },
+        {
+          "at": 61155.10000000149,
+          "time": 26.374838,
+          "frame": 632,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 61155.10000000149
+        },
+        {
+          "at": 61396.70000000298,
+          "time": 26.58252200000149,
+          "frame": 637,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 61396.70000000298
+        },
+        {
+          "at": 61641.5,
+          "time": 26.83246,
+          "frame": 643,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 61641.5
+        },
+        {
+          "at": 61895.10000000149,
+          "time": 27.068785,
+          "frame": 649,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 61895.10000000149
+        },
+        {
+          "at": 62142.10000000149,
+          "time": 27.330069,
+          "frame": 655,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 62142.10000000149
+        },
+        {
+          "at": 62396.90000000596,
+          "time": 27.574332,
+          "frame": 661,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 62396.90000000596
+        },
+        {
+          "at": 62651.5,
+          "time": 27.834804,
+          "frame": 668,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 62651.5
+        },
+        {
+          "at": 62913.5,
+          "time": 28.082671,
+          "frame": 673,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 62913.5
+        },
+        {
+          "at": 63169,
+          "time": 28.350268,
+          "frame": 680,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 63168.90000000596
+        },
+        {
+          "at": 63405.10000000149,
+          "time": 28.606817,
+          "frame": 686,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 63405.10000000149
+        },
+        {
+          "at": 63667,
+          "time": 28.834547,
+          "frame": 692,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 63666.90000000596
+        },
+        {
+          "at": 63953,
+          "time": 29.09565100000149,
+          "frame": 698,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 63953
+        },
+        {
+          "at": 64208,
+          "time": 29.389728,
+          "frame": 705,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 64207.90000000596
+        },
+        {
+          "at": 64480.5,
+          "time": 29.642933,
+          "frame": 711,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 64480.5
+        },
+        {
+          "at": 64745,
+          "time": 29.909809,
+          "frame": 717,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 64745
+        },
+        {
+          "at": 64920.60000000149,
+          "time": 0,
+          "frame": 0,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 64920.5
+        },
+        {
+          "at": 65207.90000000596,
+          "time": 0.087148,
+          "frame": 2,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 65207.80000000447
+        },
+        {
+          "at": 65497.10000000149,
+          "time": 0.380915,
+          "frame": 9,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 65497.10000000149
+        },
+        {
+          "at": 65746,
+          "time": 0.668845,
+          "frame": 16,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 65746
+        },
+        {
+          "at": 66040.40000000596,
+          "time": 0.912122,
+          "frame": 21,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 66040.40000000596
+        },
+        {
+          "at": 66317.10000000149,
+          "time": 1.204224,
+          "frame": 28,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 66317
+        },
+        {
+          "at": 66587.5,
+          "time": 1.492344,
+          "frame": 35,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 66587.5
+        },
+        {
+          "at": 66866.40000000596,
+          "time": 1.751863,
+          "frame": 42,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 66866.30000000447
+        },
+        {
+          "at": 67137,
+          "time": 2.044105,
+          "frame": 49,
+          "sharp": true,
+          "sample": "machine-long",
+          "clipName": "Elephants Dream (5:29.7 to 5:59.7)",
+          "update": 0,
+          "render": 67137
+        }
+      ],
+      "nativeMediaTrace": {
+        "file": "work/r4-final-r3-cpu.json.machine-long.trace.json",
+        "includesWarmupMs": 2000,
+        "note": "Native trace event durations are wall durations and can overlap; they are not additive decoder CPU costs",
+        "counts": {
+          "VideoFrameSubmitter::OnBeginFrame": 1576,
+          "FrameExpectedDisplayTime": 1576,
+          "WebMediaPlayerImpl::DoSeek": 3,
+          "RendererImpl::SetPlaybackRate": 128,
+          "AudioRendererImpl::Render": 3247,
+          "DecodeStreamRead": 4795,
+          "VideoRendererImpl::Render": 1678,
+          "WebMediaPlayerImpl::GetCurrentFrameFromCompositor": 474,
+          "VideoFrameCompositor::UpdateCurrentFrameIfStale": 474,
+          "WebMediaPlayerImpl::BufferingHaveEnough": 3,
+          "VideoFrameCompositor::UpdateCurrentFrame": 1545,
+          "vpx_codec_decode": 1548,
+          "CopyRowsToNV12Buffer": 1548,
+          "WebMediaPlayerImpl:paint": 118,
+          "VideoFrameCompositor::SetCurrentFrame": 792,
+          "VideoFrameSubmitter::SubmitFrame": 793,
+          "VideoFramesDropped": 534,
+          "RendererImpl::OnBufferingStateChange": 10,
+          "RendererImpl::OnRendererEnded": 4,
+          "RendererImpl::PausePlayback": 2,
+          "WebMediaPlayerImpl::OnEnded": 2,
+          "RendererImpl::StartPlayingFrom": 2,
+          "RendererImpl::StartPlayback": 2,
+          "WebMediaPlayerImpl::OnPipelineSeeked": 2,
+          "AudioDecoderStream::Read": 6467,
+          "AudioDecoderStream::ReadFromDemuxerStream": 6490,
+          "AudioDecoderStream::Decode": 6490,
+          "Rendering": 8,
+          "VideoDecoderStream::Read": 3100,
+          "VideoDecoderStream::ReadFromDemuxerStream": 3100,
+          "VideoDecoderStream::Decode": 3100,
+          "VideoDecoderStream::PrepareOutput": 3096,
+          "CopyVideoFrameToMappableSharedImage": 3096,
+          "RendererImpl::Flush": 4,
+          "AudioRendererImpl::Flush": 4,
+          "VideoRendererImpl::Flush": 4,
+          "FFmpegDemuxer::Seek": 4
+        },
+        "durations": {
+          "VideoFrameSubmitter::OnBeginFrame": {
+            "count": 1576,
+            "totalMs": 180.018,
+            "worstMs": 3.283
+          },
+          "WebMediaPlayerImpl::DoSeek": {
+            "count": 3,
+            "totalMs": 1.2209999999999999,
+            "worstMs": 1.154
+          },
+          "RendererImpl::SetPlaybackRate": {
+            "count": 126,
+            "totalMs": 1.2859999999999994,
+            "worstMs": 0.098
+          },
+          "AudioRendererImpl::Render": {
+            "count": 3247,
+            "totalMs": 57.32900000000063,
+            "worstMs": 0.717
+          },
+          "DecodeStreamRead": {
+            "count": 4794,
+            "totalMs": 124.93300000000106,
+            "worstMs": 5.509
+          },
+          "VideoRendererImpl::Render": {
+            "count": 1678,
+            "totalMs": 84.70800000000051,
+            "worstMs": 3.221
+          },
+          "WebMediaPlayerImpl::GetCurrentFrameFromCompositor": {
+            "count": 474,
+            "totalMs": 46.62300000000002,
+            "worstMs": 3.153
+          },
+          "VideoFrameCompositor::UpdateCurrentFrameIfStale": {
+            "count": 458,
+            "totalMs": 2.300999999999987,
+            "worstMs": 0.332
+          },
+          "WebMediaPlayerImpl::BufferingHaveEnough": {
+            "count": 3,
+            "totalMs": 0.73,
+            "worstMs": 0.397
+          },
+          "VideoFrameCompositor::UpdateCurrentFrame": {
+            "count": 1545,
+            "totalMs": 138.86800000000036,
+            "worstMs": 3.251
+          },
+          "vpx_codec_decode": {
+            "count": 1548,
+            "totalMs": 1618.7709999999995,
+            "worstMs": 7.813
+          },
+          "CopyRowsToNV12Buffer": {
+            "count": 1548,
+            "totalMs": 60.70299999999974,
+            "worstMs": 2.617
+          },
+          "WebMediaPlayerImpl:paint": {
+            "count": 118,
+            "totalMs": 102.31699999999998,
+            "worstMs": 5.092
+          },
+          "VideoFrameCompositor::SetCurrentFrame": {
+            "count": 789,
+            "totalMs": 9.540999999999979,
+            "worstMs": 1.592
+          },
+          "VideoFrameSubmitter::SubmitFrame": {
+            "count": 717,
+            "totalMs": 1.2989999999999873,
+            "worstMs": 0.036
+          },
+          "RendererImpl::OnBufferingStateChange": {
+            "count": 9,
+            "totalMs": 0.04800000000000001,
+            "worstMs": 0.021
+          },
+          "RendererImpl::OnRendererEnded": {
+            "count": 4,
+            "totalMs": 0.10700000000000001,
+            "worstMs": 0.039
+          },
+          "RendererImpl::PausePlayback": {
+            "count": 2,
+            "totalMs": 0.008,
+            "worstMs": 0.005
+          },
+          "WebMediaPlayerImpl::OnEnded": {
+            "count": 2,
+            "totalMs": 0.14600000000000002,
+            "worstMs": 0.116
+          },
+          "RendererImpl::StartPlayingFrom": {
+            "count": 2,
+            "totalMs": 0.047,
+            "worstMs": 0.03
+          },
+          "RendererImpl::StartPlayback": {
+            "count": 2,
+            "totalMs": 0.02,
+            "worstMs": 0.017
+          },
+          "WebMediaPlayerImpl::OnPipelineSeeked": {
+            "count": 2,
+            "totalMs": 0.016,
+            "worstMs": 0.012
+          }
+        }
+      },
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+          "bytes": 1951701,
+          "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+          "bytes": 15805452,
+          "sha256": "bb230caff266efa36fd39ebdabe020244c2719e97c5364a9158964a7f006bd46"
+        }
+      ]
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "errors": [],
+  "cpuRate": 4,
+  "graphics": {
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "WebKit WebGL",
+    "unmaskedRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+    "subpixelBits": 4,
+    "maxTextureSize": 16384,
+    "hardwareConcurrency": 5,
+    "devicePixelRatio": 3,
+    "drawingBuffer": [585, 900]
+  }
+}

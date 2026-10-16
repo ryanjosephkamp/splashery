@@ -1,0 +1,129 @@
+{
+  "browser": "151.0.7922.173",
+  "cases": [
+    {
+      "label": "before",
+      "workerSha256": "c501894acdaf0246eba73645e445dfa3c322bf8e845c7ffedae6bd62aa9963bd",
+      "rows": [
+        {
+          "rotation": 0,
+          "flip": false,
+          "changed": 0,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 0,
+          "flip": true,
+          "changed": 640,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 90,
+          "flip": false,
+          "changed": 576,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 90,
+          "flip": true,
+          "changed": 256,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 180,
+          "flip": false,
+          "changed": 384,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 180,
+          "flip": true,
+          "changed": 512,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 270,
+          "flip": false,
+          "changed": 576,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 270,
+          "flip": true,
+          "changed": 128,
+          "frameClosed": true,
+          "time": 0.5
+        }
+      ]
+    },
+    {
+      "label": "after",
+      "workerSha256": "2d60cb9b62060fcd2013dccf059cc9fcf21a82f772a9b4bec8bb4c652e76c59d",
+      "rows": [
+        {
+          "rotation": 0,
+          "flip": false,
+          "changed": 0,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 0,
+          "flip": true,
+          "changed": 0,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 90,
+          "flip": false,
+          "changed": 0,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 90,
+          "flip": true,
+          "changed": 0,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 180,
+          "flip": false,
+          "changed": 0,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 180,
+          "flip": true,
+          "changed": 0,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 270,
+          "flip": false,
+          "changed": 0,
+          "frameClosed": true,
+          "time": 0.5
+        },
+        {
+          "rotation": 270,
+          "flip": true,
+          "changed": 0,
+          "frameClosed": true,
+          "time": 0.5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "browser": "151.0.7922.173",
+  "rows": [
+    {
+      "id": "sample",
+      "rotation": 0,
+      "flip": false,
+      "display": [640, 360],
+      "visible": [640, 360],
+      "file": "assets/toys/screen/bunny.mp4",
+      "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+    },
+    {
+      "id": "sample-long",
+      "rotation": 0,
+      "flip": false,
+      "display": [426, 240],
+      "visible": [416, 240],
+      "file": "assets/toys/moving-photo-3d/bunny-long.webm",
+      "sha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e"
+    },
+    {
+      "id": "dragon-long",
+      "rotation": 0,
+      "flip": false,
+      "display": [564, 240],
+      "visible": [564, 240],
+      "file": "assets/toys/moving-photo-3d/sintel-long.webm",
+      "sha256": "c3d4432e8adb1f9c33bef5656c9a6ff2289b49e448fb6c4b67ed2400a54f3269"
+    },
+    {
+      "id": "machine-long",
+      "rotation": 0,
+      "flip": false,
+      "display": [640, 360],
+      "visible": [640, 360],
+      "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+      "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+    },
+    {
+      "id": "bridge-long",
+      "rotation": 0,
+      "flip": false,
+      "display": [642, 268],
+      "visible": [640, 268],
+      "file": "assets/toys/moving-photo-3d/tears-long.webm",
+      "sha256": "5d16d59945f20504f0998b220fa35d5a78bf6d8d82d874cc338c23634477236b"
+    },
+    {
+      "id": "r4-blocks",
+      "rotation": 0,
+      "flip": false,
+      "display": [256, 144],
+      "visible": [256, 144],
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-blocks.mp4",
+      "sha256": "c15f11bf4d7323a3f4d7c91debbd99d66916d5cde475dc1d1d5ca23cd053913c"
+    },
+    {
+      "id": "r4-gate",
+      "rotation": 0,
+      "flip": false,
+      "display": [256, 144],
+      "visible": [256, 144],
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-gate.webm",
+      "sha256": "25a01d34d0017cf6aac5a0e05a5565bd31bf7c3b01c97ff8480edc2f02a83f0f"
+    },
+    {
+      "id": "r4-wheel",
+      "rotation": 0,
+      "flip": false,
+      "display": [256, 144],
+      "visible": [256, 144],
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-wheel.mov",
+      "sha256": "6c528fdc8f5e7fd62975fcc7059eea82077fba412a176a1175de4c7511871d36"
+    },
+    {
+      "id": "r4-fast",
+      "rotation": 0,
+      "flip": false,
+      "display": [256, 144],
+      "visible": [256, 144],
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-fast.webm",
+      "sha256": "b248f1f23ae95d2167714203ec5703959999f225af94996650a9fe8e64b2d82a"
+    }
+  ]
+}

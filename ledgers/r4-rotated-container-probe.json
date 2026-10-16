@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-10-16T10:30:01.629Z",
+  "browser": "151.0.7922.173",
+  "sourceHash": "f26ec66e827c53b668c68a18598be50c4e8b2e2d6766717e41ef184e16e1833a",
+  "input": {
+    "file": "r4-rotated180.mp4",
+    "sha256": "f4e57168233b27b7ae906d7718c6a15da3b666cc2d0c08aef5b53404b6dbb69e",
+    "source": "Original CC0 blocks clip; stream-copy with a 180-degree display matrix; no encoded video pixels changed",
+    "originalFile": "assets/toys/moving-photo-3d/cdx-mp2-r4-blocks.mp4",
+    "transformationCommand": "ffmpeg -display_rotation:v:0 180 -noautorotate -i SOURCE -c copy OUTPUT",
+    "unchangedEncodedVideoHash": "SHA256=56f9c3cacbcb285d673e9429a6a7e83255a73df2a2e6134d176561d832c237a6",
+    "originalAssetCredit": "Made by Ryan with Codex (GPT-6), CC0 1.0"
+  },
+  "paused": {
+    "name": "r4-rotated180",
+    "own": true,
+    "hash": 2125756117,
+    "sharp": true,
+    "bound": true,
+    "shared": true
+  },
+  "playing": {
+    "name": "r4-rotated180",
+    "own": false,
+    "hash": 2706749174,
+    "sharp": true,
+    "bound": true,
+    "shared": true
+  },
+  "native": {
+    "rotation": 180,
+    "flip": false,
+    "display": [256, 144],
+    "visible": [256, 144],
+    "changed": 0,
+    "frameClosed": true
+  },
+  "errors": [],
+  "interpretation": "Paused Sharp texture matches the native transformed picture exactly. The real worker also matches every transformed native pixel. The playing snapshot was taken under contention; exact pixels differ from the advancing media element, so it is not accepted as a live correspondence or cadence proof. Final isolated live measurements remain separate."
+}

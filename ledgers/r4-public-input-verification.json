@@ -1,0 +1,758 @@
+{
+  "verifiedAt": "2026-10-16T10:37:38.148872+00:00",
+  "records": [
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/screen/bunny.mp4",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 377969,
+      "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny.depth",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 1055234,
+      "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 243317,
+      "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 255139,
+      "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 252771,
+      "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 254539,
+      "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 263182,
+      "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 266757,
+      "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 124720,
+      "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/screen/horse.gif",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 568203,
+      "sha256": "eb40bebc1f039e7c2a121673c3b55d4aa73582f858053dbbcca9ebce9e2b479d",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/horse.depth",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 185462,
+      "sha256": "9899cca71c079192fba917317943d8a0f27b45d70c684af6c189504faa474976",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/horse-sheet-1.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 153008,
+      "sha256": "27bacb5efa0d6de68ce08c6473403be098d6e3b2e8e40dd388d67ae4b4759008",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-1.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 417676,
+      "sha256": "049da88213390aeed34b9c0845b411c8715d699b9df9969d7beb7e66bd297eca",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-2.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 277668,
+      "sha256": "4598c0842d38314ba68232efe35e490acd2d58b01e054fad813901db28db952f",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-3.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 300051,
+      "sha256": "ccda358b06567b61f34ff78797ce2437ac28b6fbecd0b7d3e8c387684b0d6d4a",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-4.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 392133,
+      "sha256": "c31b582f02e97276be496b5d5606caa5b0d7690f0e4ced0b08d25c3841e16a55",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-5.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 161452,
+      "sha256": "9229a320bdc4bd7811955b60892ab1b3a8df5af451bae107edaaa4231c285ff8",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel.depth",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 791810,
+      "sha256": "c6b34e7bdb0b2d5fa8e7418072210261196ecf74c8ce2166bbd868dee155da2c",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-1.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 1083425,
+      "sha256": "30c4751f5f5473914175e022e9735ac73b9796a84921732aa7096d25986ff304",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-2.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 1048191,
+      "sha256": "33c72ad2c90ef5a6fd22c26298e800663d0b03ecab51afbd3b30d25c1116f0b0",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-3.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 1052853,
+      "sha256": "11193b7d89e6531c3df878a92ef9e6f583d2d72a206506d95a2f825df5b92805",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-4.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 1062882,
+      "sha256": "5de7565ee8aab2a9da6fbc99a4d9ec888e70422a27a9905a5f1a6a86f3be7ebd",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-5.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 636335,
+      "sha256": "c91f8a8a195707c8e1770d4886b2e0b5f4ef98ff1a6088801ae1d63aba77fd21",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears.depth",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 791810,
+      "sha256": "e62cc2854cd18d4c8106a847eda4e6b437edc6b7ba6066bb695ea4d7b7d87759",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-1.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 505725,
+      "sha256": "33c2ba4a5543cc2e09187cd5639bfe1a11b7eb11b46fad814dc9d00ffcce7634",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-2.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 414477,
+      "sha256": "a1d1123e5f99316d0ec247c7e099dfce3c70415ec23037bbad41eef17d0824b7",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-3.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 379948,
+      "sha256": "7c60994bb83c226a846e243a70fb5970a4b78967ae8cb5338af805824aa09d41",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-4.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 385765,
+      "sha256": "987dd0dac86c301eee8fddca42301cdc29414480765bd4b99ea56b12d0eb48f0",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-5.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 330527,
+      "sha256": "855e2328f039f7aee38b150446b6010d359f75641b10b3303d075a75f2ef341c",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-6.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 237901,
+      "sha256": "3c5b24a132462b145a3df48a093013c14e3456585f272e7268a9b80a79f487cc",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-7.jpg",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 84087,
+      "sha256": "b87df8343ef9c383bcdb0a3972fa3e005c5feab5f169094e802a9fbb254ed9e0",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants.depth",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 1055234,
+      "sha256": "dc9f6b0865333678e850d18e3d3cfd73402be71ae5caa43e8bc5c6d61f83ed24",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-long.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 1411629,
+      "sha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-long.mp2depth",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 15805452,
+      "sha256": "35a28dad3862207772d1af8dc153bb7782c3ba7e3dd1bb506ad06f028ca30038",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-long.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 975594,
+      "sha256": "c3d4432e8adb1f9c33bef5656c9a6ff2289b49e448fb6c4b67ed2400a54f3269",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-long.mp2depth",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 11854092,
+      "sha256": "8416f05db894338d612cffe70a15fb304331e18f6855460cb090f7febf5b1844",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 1951701,
+      "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 15805452,
+      "sha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-long.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 2176133,
+      "sha256": "5d16d59945f20504f0998b220fa35d5a78bf6d8d82d874cc338c23634477236b",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-long.mp2depth",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 10668684,
+      "sha256": "c9151c3b37f5eb8bb4550d3fe9d74099cea1135234bdfb4b7494aacf2273f834",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-blocks.mp4",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 21496,
+      "sha256": "c15f11bf4d7323a3f4d7c91debbd99d66916d5cde475dc1d1d5ca23cd053913c",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-gate.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 8757,
+      "sha256": "25a01d34d0017cf6aac5a0e05a5565bd31bf7c3b01c97ff8480edc2f02a83f0f",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-wheel.mov",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 31555,
+      "sha256": "6c528fdc8f5e7fd62975fcc7059eea82077fba412a176a1175de4c7511871d36",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-orbit.gif",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 20968,
+      "sha256": "044d3995937eeb3cbe591896a0f28f67a10ab02fdf5dedccf270586077d91914",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-final-quality",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-fast.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 41578,
+      "sha256": "b248f1f23ae95d2167714203ec5703959999f225af94996650a9fe8e64b2d82a",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-r3-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-1.jpg",
+      "revision": "24ec5c14ef7225e2fb2033c7110ca3b8bfcbe51c",
+      "bytes": 1083425,
+      "sha256": "30c4751f5f5473914175e022e9735ac73b9796a84921732aa7096d25986ff304",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-r3-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-2.jpg",
+      "revision": "24ec5c14ef7225e2fb2033c7110ca3b8bfcbe51c",
+      "bytes": 1048191,
+      "sha256": "33c72ad2c90ef5a6fd22c26298e800663d0b03ecab51afbd3b30d25c1116f0b0",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-r3-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-3.jpg",
+      "revision": "24ec5c14ef7225e2fb2033c7110ca3b8bfcbe51c",
+      "bytes": 1052853,
+      "sha256": "11193b7d89e6531c3df878a92ef9e6f583d2d72a206506d95a2f825df5b92805",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-r3-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-4.jpg",
+      "revision": "24ec5c14ef7225e2fb2033c7110ca3b8bfcbe51c",
+      "bytes": 1062882,
+      "sha256": "5de7565ee8aab2a9da6fbc99a4d9ec888e70422a27a9905a5f1a6a86f3be7ebd",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-r3-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-5.jpg",
+      "revision": "24ec5c14ef7225e2fb2033c7110ca3b8bfcbe51c",
+      "bytes": 636335,
+      "sha256": "c91f8a8a195707c8e1770d4886b2e0b5f4ef98ff1a6088801ae1d63aba77fd21",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-r3-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears.depth",
+      "revision": "24ec5c14ef7225e2fb2033c7110ca3b8bfcbe51c",
+      "bytes": 791810,
+      "sha256": "e62cc2854cd18d4c8106a847eda4e6b437edc6b7ba6066bb695ea4d7b7d87759",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-r3-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-long.webm",
+      "revision": "24ec5c14ef7225e2fb2033c7110ca3b8bfcbe51c",
+      "bytes": 1411629,
+      "sha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-r3-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-long.mp2depth",
+      "revision": "24ec5c14ef7225e2fb2033c7110ca3b8bfcbe51c",
+      "bytes": 15805452,
+      "sha256": "170a4000a6ec01d6518dcf08d156e4482b772cd4dcebc3ca5259668af09f5c48",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/screen/bunny.mp4",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 377969,
+      "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny.depth",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 1055234,
+      "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 243317,
+      "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 255139,
+      "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 252771,
+      "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 254539,
+      "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 263182,
+      "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 266757,
+      "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 124720,
+      "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/screen/horse.gif",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 568203,
+      "sha256": "eb40bebc1f039e7c2a121673c3b55d4aa73582f858053dbbcca9ebce9e2b479d",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/horse.depth",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 185462,
+      "sha256": "9899cca71c079192fba917317943d8a0f27b45d70c684af6c189504faa474976",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/horse-sheet-1.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 153008,
+      "sha256": "27bacb5efa0d6de68ce08c6473403be098d6e3b2e8e40dd388d67ae4b4759008",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel.depth",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 791810,
+      "sha256": "c6b34e7bdb0b2d5fa8e7418072210261196ecf74c8ce2166bbd868dee155da2c",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-1.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 417676,
+      "sha256": "049da88213390aeed34b9c0845b411c8715d699b9df9969d7beb7e66bd297eca",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-2.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 277668,
+      "sha256": "4598c0842d38314ba68232efe35e490acd2d58b01e054fad813901db28db952f",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-3.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 300051,
+      "sha256": "ccda358b06567b61f34ff78797ce2437ac28b6fbecd0b7d3e8c387684b0d6d4a",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-4.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 392133,
+      "sha256": "c31b582f02e97276be496b5d5606caa5b0d7690f0e4ced0b08d25c3841e16a55",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-5.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 161452,
+      "sha256": "9229a320bdc4bd7811955b60892ab1b3a8df5af451bae107edaaa4231c285ff8",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears.depth",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 791810,
+      "sha256": "e62cc2854cd18d4c8106a847eda4e6b437edc6b7ba6066bb695ea4d7b7d87759",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-1.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 1083425,
+      "sha256": "30c4751f5f5473914175e022e9735ac73b9796a84921732aa7096d25986ff304",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-2.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 1048191,
+      "sha256": "33c72ad2c90ef5a6fd22c26298e800663d0b03ecab51afbd3b30d25c1116f0b0",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-3.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 1052853,
+      "sha256": "11193b7d89e6531c3df878a92ef9e6f583d2d72a206506d95a2f825df5b92805",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-4.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 1062882,
+      "sha256": "5de7565ee8aab2a9da6fbc99a4d9ec888e70422a27a9905a5f1a6a86f3be7ebd",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-5.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 636335,
+      "sha256": "c91f8a8a195707c8e1770d4886b2e0b5f4ef98ff1a6088801ae1d63aba77fd21",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants.depth",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 1055234,
+      "sha256": "dc9f6b0865333678e850d18e3d3cfd73402be71ae5caa43e8bc5c6d61f83ed24",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-1.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 505725,
+      "sha256": "33c2ba4a5543cc2e09187cd5639bfe1a11b7eb11b46fad814dc9d00ffcce7634",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-2.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 414477,
+      "sha256": "a1d1123e5f99316d0ec247c7e099dfce3c70415ec23037bbad41eef17d0824b7",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-3.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 379948,
+      "sha256": "7c60994bb83c226a846e243a70fb5970a4b78967ae8cb5338af805824aa09d41",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-4.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 385765,
+      "sha256": "987dd0dac86c301eee8fddca42301cdc29414480765bd4b99ea56b12d0eb48f0",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-5.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 330527,
+      "sha256": "855e2328f039f7aee38b150446b6010d359f75641b10b3303d075a75f2ef341c",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-6.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 237901,
+      "sha256": "3c5b24a132462b145a3df48a093013c14e3456585f272e7268a9b80a79f487cc",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-7.jpg",
+      "revision": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+      "bytes": 84087,
+      "sha256": "b87df8343ef9c383bcdb0a3972fa3e005c5feab5f169094e802a9fbb254ed9e0",
+      "baselineFileAbsent": false
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/bunny-long.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 1411629,
+      "sha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e",
+      "baselineFileAbsent": true
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/sintel-long.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 975594,
+      "sha256": "c3d4432e8adb1f9c33bef5656c9a6ff2289b49e448fb6c4b67ed2400a54f3269",
+      "baselineFileAbsent": true
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 1951701,
+      "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367",
+      "baselineFileAbsent": true
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/tears-long.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 2176133,
+      "sha256": "5d16d59945f20504f0998b220fa35d5a78bf6d8d82d874cc338c23634477236b",
+      "baselineFileAbsent": true
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-blocks.mp4",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 21496,
+      "sha256": "c15f11bf4d7323a3f4d7c91debbd99d66916d5cde475dc1d1d5ca23cd053913c",
+      "baselineFileAbsent": true
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-gate.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 8757,
+      "sha256": "25a01d34d0017cf6aac5a0e05a5565bd31bf7c3b01c97ff8480edc2f02a83f0f",
+      "baselineFileAbsent": true
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-wheel.mov",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 31555,
+      "sha256": "6c528fdc8f5e7fd62975fcc7059eea82077fba412a176a1175de4c7511871d36",
+      "baselineFileAbsent": true
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-orbit.gif",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 20968,
+      "sha256": "044d3995937eeb3cbe591896a0f28f67a10ab02fdf5dedccf270586077d91914",
+      "baselineFileAbsent": true
+    },
+    {
+      "ledger": "r4-main-final-quality",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-fast.webm",
+      "revision": "afbbee0d4f6faedb4fea71c91cf09abbe49cc54c",
+      "bytes": 41578,
+      "sha256": "b248f1f23ae95d2167714203ec5703959999f225af94996650a9fe8e64b2d82a",
+      "baselineFileAbsent": true
+    }
+  ],
+  "note": "All measured original inputs and bundled depth assets match accessible public commits. Main lacks long-film shelf inputs and the five new original files; those unchanged native files are identified from the public runtime commit instead. No inferred depth output is represented as a bundled baseline asset."
+}

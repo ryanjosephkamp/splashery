@@ -1,0 +1,58 @@
+{
+  "revision": "6493ef5db653d304e85044e7c342ff1356dce8e6",
+  "sourceHash": "b931bb7b456e8bd45cfa02ab389a54b8564b11ac6de973845855f298331138f1",
+  "files": [
+    {
+      "file": "src/packs/moving-photo.js",
+      "bytes": 105453,
+      "sha256": "1973b82d6e4c77b23955a07b0d2f9e90d3a9f197655e211b00c421a1d0a81d2d"
+    },
+    {
+      "file": "src/packs/photo-sharp.js",
+      "bytes": 67445,
+      "sha256": "1ccb72ccc7943bdb53efde2796eadf73dc959ed1776ef7ee1b4f229ae8f4d2dd"
+    },
+    {
+      "file": "src/packs/song-stream.js",
+      "bytes": 10974,
+      "sha256": "565fe32bf7b3e5b949c744e77909c32182eb6397817a805642f3e760c2fd2988"
+    },
+    {
+      "file": "src/live/clip-stabilize.js",
+      "bytes": 9924,
+      "sha256": "b8e36c26439d53cf88275995d8dc035f40ed6af4e5fa6e05f44b78676ec462d4"
+    },
+    {
+      "file": "src/packs/moving-photo-raster.js",
+      "bytes": 6058,
+      "sha256": "047eb8fb9cb4015b46a6f542da63caa8e6e729a4df93bf5c5d88ce0242a70bcb"
+    },
+    {
+      "file": "src/packs/moving-photo-depth.js",
+      "bytes": 6539,
+      "sha256": "05711cedd8a63c07d62e3e455171dc7cc09bd851a77672dc3cf3178ec6346cb6"
+    },
+    {
+      "file": "src/packs/moving-photo-geometry.js",
+      "bytes": 31196,
+      "sha256": "4c8a49842a2a5b363548e55cffa6d69e4783441b366ee01cf4af6cd421a98e48"
+    },
+    {
+      "file": "src/packs/moving-photo-geometry-worker.js",
+      "bytes": 1980,
+      "sha256": "2dc3954e65bba53c060c161bbafcc391bf95acd6fe3e07eca0d5c03fde2abc8d"
+    },
+    {
+      "file": "src/packs/moving-photo-video-worker.js",
+      "bytes": 5157,
+      "sha256": "2d60cb9b62060fcd2013dccf059cc9fcf21a82f772a9b4bec8bb4c652e76c59d"
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/clip-geometry.wasm",
+      "bytes": 51555,
+      "sha256": "9d58b05be2ba092abaaf166062080e50fb1282ccdba5a01a5973d1cf27192bbc"
+    }
+  ],
+  "measuredSourceHash": "79ff139b207d8ca57abdddfbd8a59f9c1908cdc81e24737bb36d64cdc18e2109",
+  "change": "Explicit clip captures refresh their native picture even if a paused update already uploaded the same clock. No capture request exists in the clean cadence, startup observer, or CDP live windows. Numeric construction, shaders, data, and ordinary playback remain unchanged."
+}

@@ -1,0 +1,6042 @@
+{
+  "kind": "isolated-measurement",
+  "baseline": "working tree",
+  "instrument": false,
+  "phone": true,
+  "sourceHash": "79ff139b207d8ca57abdddfbd8a59f9c1908cdc81e24737bb36d64cdc18e2109",
+  "measuredAt": "2026-10-16T11:02:19.590Z",
+  "backend": "llvmpipe",
+  "workerThrottled": false,
+  "warmupMs": 2000,
+  "protocol": "R3 frameend cadence plus separate postrender and changed-picture observations",
+  "pictureClockNote": "Counts changes of the bound-source clock at postrender: native bitmap timestamps, media-element currentTime, or retained frame indices. This is not a pixel-uniqueness or decoder frame-rate measurement",
+  "depthPreparation": "Local-file inference and refinement finish before the unchanged two-second warmup; shelf samples are already complete",
+  "note": "Protocol requires one browser at a time and no competing jobs; CDP page slowdown and software rendering do not measure physical Android",
+  "baselineSourceCorrection": null,
+  "cases": [
+    {
+      "id": "sample",
+      "depthAtStart": {
+        "pending": false,
+        "completed": null,
+        "total": 96,
+        "rate": null
+      },
+      "depthAtEnd": {
+        "pending": false,
+        "completed": null,
+        "total": 96,
+        "rate": null
+      },
+      "nativeMediaCounters": {
+        "start": {
+          "totalVideoFrames": 50,
+          "droppedVideoFrames": 15
+        },
+        "end": {
+          "totalVideoFrames": 336,
+          "droppedVideoFrames": 137
+        },
+        "note": "Browser media counters, separate from Sharp picture submissions"
+      },
+      "windowMs": 12000,
+      "sourceAdvance": 11.847578999999987,
+      "distinctFrames": 91,
+      "sharpFrames": 208,
+      "title": "Splashery · splats you can play with",
+      "url": "http://127.0.0.1:4173/?renderer=webgl2&adapt=off&profile=low&labs=1",
+      "dimensions": [480, 270],
+      "duration": 6,
+      "renderSize": [585, 900],
+      "pictureCadence": {
+        "n": 140,
+        "total": 11953.60000000149,
+        "median": 73.75000000372529,
+        "worst": 324.29999999701977
+      },
+      "pictureSubmissions": 141,
+      "pictureSubmissionFps": 11.75,
+      "cadence": {
+        "n": 207,
+        "total": 11953.59999999404,
+        "median": 63.70000000298023,
+        "worst": 157.10000000149012
+      },
+      "renderedCadence": {
+        "n": 142,
+        "total": 11953.60000000149,
+        "median": 72.39999999850988,
+        "worst": 324.29999999701977
+      },
+      "draws": [
+        {
+          "at": 17861.60000000149,
+          "pictureTime": 1.977886,
+          "revision": 79
+        },
+        {
+          "at": 17936.29999999702,
+          "pictureTime": 2.053932,
+          "revision": 81
+        },
+        {
+          "at": 18027.70000000298,
+          "pictureTime": 2.155582,
+          "revision": 83
+        },
+        {
+          "at": 18110.5,
+          "pictureTime": 2.22584,
+          "revision": 85
+        },
+        {
+          "at": 18197.10000000149,
+          "pictureTime": 2.316877,
+          "revision": 87
+        },
+        {
+          "at": 18291.5,
+          "pictureTime": 2.400687,
+          "revision": 89
+        },
+        {
+          "at": 18383.10000000149,
+          "pictureTime": 2.492967,
+          "revision": 91
+        },
+        {
+          "at": 18460.39999999851,
+          "pictureTime": 2.584079,
+          "revision": 93
+        },
+        {
+          "at": 18534.20000000298,
+          "pictureTime": 2.654881,
+          "revision": 95
+        },
+        {
+          "at": 18616.89999999851,
+          "pictureTime": 2.736036,
+          "revision": 97
+        },
+        {
+          "at": 18698.70000000298,
+          "pictureTime": 2.819519,
+          "revision": 99
+        },
+        {
+          "at": 18769.10000000149,
+          "pictureTime": 2.893209,
+          "revision": 101
+        },
+        {
+          "at": 18879.5,
+          "pictureTime": 2.989574,
+          "revision": 103
+        },
+        {
+          "at": 18970.70000000298,
+          "pictureTime": 3.095245,
+          "revision": 105
+        },
+        {
+          "at": 19143.79999999702,
+          "pictureTime": 3.251036,
+          "revision": 109
+        },
+        {
+          "at": 19393.10000000149,
+          "pictureTime": 3.512534,
+          "revision": 118
+        },
+        {
+          "at": 19404.20000000298,
+          "pictureTime": 3.537322,
+          "revision": 119
+        },
+        {
+          "at": 19430.70000000298,
+          "pictureTime": 3.555158,
+          "revision": 120
+        },
+        {
+          "at": 19580.10000000149,
+          "pictureTime": 3.711664,
+          "revision": 124
+        },
+        {
+          "at": 19652.39999999851,
+          "pictureTime": 3.76712,
+          "revision": 126
+        },
+        {
+          "at": 19741.5,
+          "pictureTime": 3.859115,
+          "revision": 128
+        },
+        {
+          "at": 19765.5,
+          "pictureTime": 3.886983,
+          "revision": 130
+        },
+        {
+          "at": 19825.5,
+          "pictureTime": 3.947444,
+          "revision": 132
+        },
+        {
+          "at": 20132.20000000298,
+          "pictureTime": 4.255557,
+          "revision": 142
+        },
+        {
+          "at": 20145.29999999702,
+          "pictureTime": 4.274449,
+          "revision": 143
+        },
+        {
+          "at": 20169.79999999702,
+          "pictureTime": 4.293759,
+          "revision": 144
+        },
+        {
+          "at": 20328.60000000149,
+          "pictureTime": 4.444553,
+          "revision": 148
+        },
+        {
+          "at": 20350.29999999702,
+          "pictureTime": 4.47286,
+          "revision": 149
+        },
+        {
+          "at": 20398.89999999851,
+          "pictureTime": 4.516086,
+          "revision": 151
+        },
+        {
+          "at": 20484.20000000298,
+          "pictureTime": 4.597615,
+          "revision": 153
+        },
+        {
+          "at": 20535.39999999851,
+          "pictureTime": 4.659907,
+          "revision": 155
+        },
+        {
+          "at": 20635.10000000149,
+          "pictureTime": 4.750476,
+          "revision": 157
+        },
+        {
+          "at": 20959.39999999851,
+          "pictureTime": 5.060334,
+          "revision": 169
+        },
+        {
+          "at": 20988,
+          "pictureTime": 5.107744,
+          "revision": 170
+        },
+        {
+          "at": 21035.70000000298,
+          "pictureTime": 5.16432,
+          "revision": 172
+        },
+        {
+          "at": 21056.60000000149,
+          "pictureTime": 5.177507,
+          "revision": 173
+        },
+        {
+          "at": 21138.39999999851,
+          "pictureTime": 5.258061,
+          "revision": 175
+        },
+        {
+          "at": 21254.89999999851,
+          "pictureTime": 5.355754,
+          "revision": 177
+        },
+        {
+          "at": 21291.89999999851,
+          "pictureTime": 5.409298,
+          "revision": 179
+        },
+        {
+          "at": 21380.89999999851,
+          "pictureTime": 5.499251,
+          "revision": 181
+        },
+        {
+          "at": 21473.5,
+          "pictureTime": 5.584235,
+          "revision": 183
+        },
+        {
+          "at": 21633.89999999851,
+          "pictureTime": 5.752422,
+          "revision": 187
+        },
+        {
+          "at": 21701.70000000298,
+          "pictureTime": 5.8223,
+          "revision": 189
+        },
+        {
+          "at": 21803.39999999851,
+          "pictureTime": 5.916948,
+          "revision": 191
+        },
+        {
+          "at": 21894.20000000298,
+          "pictureTime": 0,
+          "revision": 193
+        },
+        {
+          "at": 21995.5,
+          "pictureTime": 0.076851,
+          "revision": 195
+        },
+        {
+          "at": 22075.10000000149,
+          "pictureTime": 0.156047,
+          "revision": 197
+        },
+        {
+          "at": 22162.10000000149,
+          "pictureTime": 0.233523,
+          "revision": 199
+        },
+        {
+          "at": 22193.5,
+          "pictureTime": 0.272542,
+          "revision": 201
+        },
+        {
+          "at": 22211.39999999851,
+          "pictureTime": 0.289872,
+          "revision": 202
+        },
+        {
+          "at": 22273.20000000298,
+          "pictureTime": 0.347281,
+          "revision": 204
+        },
+        {
+          "at": 22359.39999999851,
+          "pictureTime": 0.432749,
+          "revision": 206
+        },
+        {
+          "at": 22443.60000000149,
+          "pictureTime": 0.516457,
+          "revision": 208
+        },
+        {
+          "at": 22509.29999999702,
+          "pictureTime": 0.580504,
+          "revision": 210
+        },
+        {
+          "at": 22571.29999999702,
+          "pictureTime": 0.652476,
+          "revision": 212
+        },
+        {
+          "at": 22647.29999999702,
+          "pictureTime": 0.716921,
+          "revision": 214
+        },
+        {
+          "at": 22711.70000000298,
+          "pictureTime": 0.78627,
+          "revision": 216
+        },
+        {
+          "at": 22779.79999999702,
+          "pictureTime": 0.855561,
+          "revision": 218
+        },
+        {
+          "at": 22935.79999999702,
+          "pictureTime": 1.011068,
+          "revision": 224
+        },
+        {
+          "at": 23004.39999999851,
+          "pictureTime": 1.078148,
+          "revision": 226
+        },
+        {
+          "at": 23023.39999999851,
+          "pictureTime": 1.102258,
+          "revision": 227
+        },
+        {
+          "at": 23099.10000000149,
+          "pictureTime": 1.172735,
+          "revision": 229
+        },
+        {
+          "at": 23167.20000000298,
+          "pictureTime": 1.250929,
+          "revision": 231
+        },
+        {
+          "at": 23368.10000000149,
+          "pictureTime": 1.439151,
+          "revision": 237
+        },
+        {
+          "at": 23409.5,
+          "pictureTime": 1.489521,
+          "revision": 238
+        },
+        {
+          "at": 23431.29999999702,
+          "pictureTime": 1.51165,
+          "revision": 240
+        },
+        {
+          "at": 23521.70000000298,
+          "pictureTime": 1.591254,
+          "revision": 242
+        },
+        {
+          "at": 23599.10000000149,
+          "pictureTime": 1.672559,
+          "revision": 244
+        },
+        {
+          "at": 23665.89999999851,
+          "pictureTime": 1.736226,
+          "revision": 246
+        },
+        {
+          "at": 23730.60000000149,
+          "pictureTime": 1.802586,
+          "revision": 248
+        },
+        {
+          "at": 23798.10000000149,
+          "pictureTime": 1.869673,
+          "revision": 250
+        },
+        {
+          "at": 23857,
+          "pictureTime": 1.935495,
+          "revision": 252
+        },
+        {
+          "at": 23950.39999999851,
+          "pictureTime": 2.020352,
+          "revision": 254
+        },
+        {
+          "at": 24007.20000000298,
+          "pictureTime": 2.078376,
+          "revision": 256
+        },
+        {
+          "at": 24079.29999999702,
+          "pictureTime": 2.149534,
+          "revision": 258
+        },
+        {
+          "at": 24153.10000000149,
+          "pictureTime": 2.22907,
+          "revision": 260
+        },
+        {
+          "at": 24244.39999999851,
+          "pictureTime": 2.321289,
+          "revision": 262
+        },
+        {
+          "at": 24561.60000000149,
+          "pictureTime": 2.629353,
+          "revision": 271
+        },
+        {
+          "at": 24584.70000000298,
+          "pictureTime": 2.660704,
+          "revision": 272
+        },
+        {
+          "at": 24735.89999999851,
+          "pictureTime": 2.810724,
+          "revision": 278
+        },
+        {
+          "at": 24773,
+          "pictureTime": 2.83873,
+          "revision": 280
+        },
+        {
+          "at": 24827.29999999702,
+          "pictureTime": 2.908664,
+          "revision": 282
+        },
+        {
+          "at": 24850.29999999702,
+          "pictureTime": 2.932604,
+          "revision": 283
+        },
+        {
+          "at": 24897.20000000298,
+          "pictureTime": 2.978143,
+          "revision": 285
+        },
+        {
+          "at": 24980.10000000149,
+          "pictureTime": 3.051229,
+          "revision": 287
+        },
+        {
+          "at": 25043.89999999851,
+          "pictureTime": 3.11381,
+          "revision": 289
+        },
+        {
+          "at": 25190.5,
+          "pictureTime": 3.266557,
+          "revision": 291
+        },
+        {
+          "at": 25269.10000000149,
+          "pictureTime": 3.342409,
+          "revision": 293
+        },
+        {
+          "at": 25281.39999999851,
+          "pictureTime": 3.367337,
+          "revision": 294
+        },
+        {
+          "at": 25355.10000000149,
+          "pictureTime": 3.427365,
+          "revision": 296
+        },
+        {
+          "at": 25421.89999999851,
+          "pictureTime": 3.500311,
+          "revision": 298
+        },
+        {
+          "at": 25689.10000000149,
+          "pictureTime": 3.757445,
+          "revision": 307
+        },
+        {
+          "at": 25712.39999999851,
+          "pictureTime": 3.791889,
+          "revision": 308
+        },
+        {
+          "at": 25744.20000000298,
+          "pictureTime": 3.791889,
+          "revision": 309
+        },
+        {
+          "at": 25789.60000000149,
+          "pictureTime": 3.861042,
+          "revision": 310
+        },
+        {
+          "at": 25863.89999999851,
+          "pictureTime": 3.938368,
+          "revision": 312
+        },
+        {
+          "at": 25947.29999999702,
+          "pictureTime": 4.022987,
+          "revision": 314
+        },
+        {
+          "at": 26134.89999999851,
+          "pictureTime": 4.204927,
+          "revision": 320
+        },
+        {
+          "at": 26187.60000000149,
+          "pictureTime": 4.270701,
+          "revision": 322
+        },
+        {
+          "at": 26207.79999999702,
+          "pictureTime": 4.284352,
+          "revision": 323
+        },
+        {
+          "at": 26503.79999999702,
+          "pictureTime": 4.577615,
+          "revision": 333
+        },
+        {
+          "at": 26517.70000000298,
+          "pictureTime": 4.605776,
+          "revision": 334
+        },
+        {
+          "at": 26586.60000000149,
+          "pictureTime": 4.659909,
+          "revision": 336
+        },
+        {
+          "at": 26657.60000000149,
+          "pictureTime": 4.731542,
+          "revision": 338
+        },
+        {
+          "at": 26687,
+          "pictureTime": 4.731542,
+          "revision": 339
+        },
+        {
+          "at": 26748.89999999851,
+          "pictureTime": 4.818648,
+          "revision": 341
+        },
+        {
+          "at": 26812.29999999702,
+          "pictureTime": 4.885232,
+          "revision": 343
+        },
+        {
+          "at": 26876,
+          "pictureTime": 4.955097,
+          "revision": 345
+        },
+        {
+          "at": 26958.5,
+          "pictureTime": 5.036359,
+          "revision": 347
+        },
+        {
+          "at": 27009.20000000298,
+          "pictureTime": 5.084006,
+          "revision": 349
+        },
+        {
+          "at": 27078.79999999702,
+          "pictureTime": 5.157618,
+          "revision": 351
+        },
+        {
+          "at": 27157.70000000298,
+          "pictureTime": 5.233028,
+          "revision": 353
+        },
+        {
+          "at": 27233.79999999702,
+          "pictureTime": 5.303856,
+          "revision": 355
+        },
+        {
+          "at": 27306.70000000298,
+          "pictureTime": 5.382645,
+          "revision": 357
+        },
+        {
+          "at": 27405.79999999702,
+          "pictureTime": 5.483085,
+          "revision": 359
+        },
+        {
+          "at": 27529.89999999851,
+          "pictureTime": 5.605864,
+          "revision": 361
+        },
+        {
+          "at": 27606.20000000298,
+          "pictureTime": 5.682892,
+          "revision": 363
+        },
+        {
+          "at": 27684.79999999702,
+          "pictureTime": 5.761491,
+          "revision": 365
+        },
+        {
+          "at": 27836.70000000298,
+          "pictureTime": 5.906626,
+          "revision": 369
+        },
+        {
+          "at": 27898.70000000298,
+          "pictureTime": 5.97707,
+          "revision": 371
+        },
+        {
+          "at": 27923.79999999702,
+          "pictureTime": 0,
+          "revision": 373
+        },
+        {
+          "at": 28080.89999999851,
+          "pictureTime": 0.101873,
+          "revision": 375
+        },
+        {
+          "at": 28131.5,
+          "pictureTime": 0.153508,
+          "revision": 377
+        },
+        {
+          "at": 28181.10000000149,
+          "pictureTime": 0.19259,
+          "revision": 379
+        },
+        {
+          "at": 28432.89999999851,
+          "pictureTime": 0.450866,
+          "revision": 387
+        },
+        {
+          "at": 28455.60000000149,
+          "pictureTime": 0.472791,
+          "revision": 388
+        },
+        {
+          "at": 28538.60000000149,
+          "pictureTime": 0.554986,
+          "revision": 390
+        },
+        {
+          "at": 28559.89999999851,
+          "pictureTime": 0.577419,
+          "revision": 392
+        },
+        {
+          "at": 28632.39999999851,
+          "pictureTime": 0.647985,
+          "revision": 394
+        },
+        {
+          "at": 28814.5,
+          "pictureTime": 0.81184,
+          "revision": 399
+        },
+        {
+          "at": 28881.70000000298,
+          "pictureTime": 0.886313,
+          "revision": 401
+        },
+        {
+          "at": 29054.5,
+          "pictureTime": 1.07463,
+          "revision": 408
+        },
+        {
+          "at": 29076.89999999851,
+          "pictureTime": 1.098293,
+          "revision": 409
+        },
+        {
+          "at": 29182.60000000149,
+          "pictureTime": 1.200429,
+          "revision": 411
+        },
+        {
+          "at": 29213.60000000149,
+          "pictureTime": 1.229503,
+          "revision": 412
+        },
+        {
+          "at": 29270.5,
+          "pictureTime": 1.284487,
+          "revision": 414
+        },
+        {
+          "at": 29325.20000000298,
+          "pictureTime": 1.336888,
+          "revision": 416
+        },
+        {
+          "at": 29391.70000000298,
+          "pictureTime": 1.409897,
+          "revision": 418
+        },
+        {
+          "at": 29474.70000000298,
+          "pictureTime": 1.495328,
+          "revision": 420
+        },
+        {
+          "at": 29718.79999999702,
+          "pictureTime": 1.741199,
+          "revision": 426
+        },
+        {
+          "at": 29746.89999999851,
+          "pictureTime": 1.760964,
+          "revision": 428
+        },
+        {
+          "at": 29766.20000000298,
+          "pictureTime": 1.787602,
+          "revision": 429
+        },
+        {
+          "at": 29815.20000000298,
+          "pictureTime": 1.825465,
+          "revision": 431
+        }
+      ],
+      "costs": {},
+      "gpuDraw": {
+        "supported": false,
+        "elapsedMs": {
+          "n": 0,
+          "total": 0,
+          "median": null
+        },
+        "disjointQueries": 0,
+        "externalQueries": 0,
+        "note": "Nonblocking GPU timer queries span prerender through postrender. They measure GPU elapsed time, separately from inclusive JavaScript submission costs; unavailable tail queries are omitted"
+      },
+      "geometryCache": {
+        "hits": 136,
+        "misses": 98,
+        "completed": 261,
+        "workers": 1,
+        "workMs": 11410.999999910593,
+        "consumed": 136,
+        "evictions": 71,
+        "roundTripMs": 43.439587141460215,
+        "aheadFrames": 2
+      },
+      "raster": {
+        "prepared": 135,
+        "computed": 3
+      },
+      "sourceKind": "HTMLVideoElement",
+      "faces": 18734,
+      "rows": [
+        {
+          "at": 17861.70000000298,
+          "time": 1.977886,
+          "frame": 31,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 17861.60000000149
+        },
+        {
+          "at": 17936.29999999702,
+          "time": 2.053932,
+          "frame": 32,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 17936.29999999702
+        },
+        {
+          "at": 18027.70000000298,
+          "time": 2.155582,
+          "frame": 34,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18027.70000000298
+        },
+        {
+          "at": 18110.60000000149,
+          "time": 2.22584,
+          "frame": 35,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18110.60000000149
+        },
+        {
+          "at": 18197.20000000298,
+          "time": 2.316877,
+          "frame": 37,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18197.20000000298
+        },
+        {
+          "at": 18291.5,
+          "time": 2.400687,
+          "frame": 38,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18291.5
+        },
+        {
+          "at": 18383.79999999702,
+          "time": 2.492967,
+          "frame": 39,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18383.10000000149
+        },
+        {
+          "at": 18460.39999999851,
+          "time": 2.584079,
+          "frame": 41,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18460.39999999851
+        },
+        {
+          "at": 18534.20000000298,
+          "time": 2.654881,
+          "frame": 42,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18534.20000000298
+        },
+        {
+          "at": 18616.89999999851,
+          "time": 2.736036,
+          "frame": 43,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18616.89999999851
+        },
+        {
+          "at": 18698.70000000298,
+          "time": 2.819519,
+          "frame": 45,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18698.70000000298
+        },
+        {
+          "at": 18769.20000000298,
+          "time": 2.893209,
+          "frame": 46,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18769.10000000149
+        },
+        {
+          "at": 18879.60000000149,
+          "time": 2.989574,
+          "frame": 47,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18879.5
+        },
+        {
+          "at": 18970.70000000298,
+          "time": 3.095245,
+          "frame": 49,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18970.70000000298
+        },
+        {
+          "at": 19035.70000000298,
+          "time": 3.166867,
+          "frame": 50,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 18970.70000000298
+        },
+        {
+          "at": 19143.79999999702,
+          "time": 3.251036,
+          "frame": 52,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 19143.79999999702
+        },
+        {
+          "at": 19221.29999999702,
+          "time": 3.35199,
+          "frame": 53,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 19143.79999999702
+        },
+        {
+          "at": 19241.70000000298,
+          "time": 3.367746,
+          "frame": 53,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 19143.79999999702
+        },
+        {
+          "at": 19311.60000000149,
+          "time": 3.437796,
+          "frame": 55,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 19143.79999999702
+        },
+        {
+          "at": 19332.5,
+          "time": 3.457141,
+          "frame": 55,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.5496304035186768,2.5891165733337402],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,1.1229050159454346,327,184],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7281321287155151],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 19143.79999999702
+        },
+        {
+          "at": 19349.60000000149,
+          "time": 3.483058,
+          "frame": 55,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19143.79999999702
+        },
+        {
+          "at": 19363.20000000298,
+          "time": 3.493824,
+          "frame": 55,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19143.79999999702
+        },
+        {
+          "at": 19393.29999999702,
+          "time": 3.512534,
+          "frame": 56,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19393.20000000298
+        },
+        {
+          "at": 19404.20000000298,
+          "time": 3.537322,
+          "frame": 56,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19404.20000000298
+        },
+        {
+          "at": 19430.70000000298,
+          "time": 3.555158,
+          "frame": 56,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19430.70000000298
+        },
+        {
+          "at": 19479.10000000149,
+          "time": 3.605557,
+          "frame": 57,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19430.70000000298
+        },
+        {
+          "at": 19580.10000000149,
+          "time": 3.711664,
+          "frame": 59,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19580.10000000149
+        },
+        {
+          "at": 19593,
+          "time": 3.726367,
+          "frame": 59,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19580.10000000149
+        },
+        {
+          "at": 19652.39999999851,
+          "time": 3.76712,
+          "frame": 60,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19652.39999999851
+        },
+        {
+          "at": 19741.5,
+          "time": 3.859115,
+          "frame": 61,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19741.5
+        },
+        {
+          "at": 19765.5,
+          "time": 3.886983,
+          "frame": 62,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19765.5
+        },
+        {
+          "at": 19825.5,
+          "time": 3.947444,
+          "frame": 63,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19825.5
+        },
+        {
+          "at": 19917.70000000298,
+          "time": 4.045764,
+          "frame": 64,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19825.5
+        },
+        {
+          "at": 20000.20000000298,
+          "time": 4.130842,
+          "frame": 66,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19825.5
+        },
+        {
+          "at": 20017.29999999702,
+          "time": 4.150343,
+          "frame": 66,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19825.5
+        },
+        {
+          "at": 20088.60000000149,
+          "time": 4.221164,
+          "frame": 67,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19825.5
+        },
+        {
+          "at": 20103.89999999851,
+          "time": 4.229256,
+          "frame": 67,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19825.5
+        },
+        {
+          "at": 20114.20000000298,
+          "time": 4.247836,
+          "frame": 67,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19825.5
+        },
+        {
+          "at": 20132.20000000298,
+          "time": 4.255557,
+          "frame": 68,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20132.20000000298
+        },
+        {
+          "at": 20145.29999999702,
+          "time": 4.274449,
+          "frame": 68,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20145.29999999702
+        },
+        {
+          "at": 20169.79999999702,
+          "time": 4.293759,
+          "frame": 68,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20169.79999999702
+        },
+        {
+          "at": 20236.79999999702,
+          "time": 4.365295,
+          "frame": 69,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20169.79999999702
+        },
+        {
+          "at": 20328.60000000149,
+          "time": 4.444553,
+          "frame": 71,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20328.60000000149
+        },
+        {
+          "at": 20350.29999999702,
+          "time": 4.47286,
+          "frame": 71,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20350.29999999702
+        },
+        {
+          "at": 20399,
+          "time": 4.516086,
+          "frame": 72,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20398.89999999851
+        },
+        {
+          "at": 20484.29999999702,
+          "time": 4.597615,
+          "frame": 73,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20484.20000000298
+        },
+        {
+          "at": 20535.39999999851,
+          "time": 4.659907,
+          "frame": 74,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20535.39999999851
+        },
+        {
+          "at": 20635.10000000149,
+          "time": 4.750476,
+          "frame": 76,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20635.10000000149
+        },
+        {
+          "at": 20696.10000000149,
+          "time": 4.824059,
+          "frame": 77,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20635.10000000149
+        },
+        {
+          "at": 20781.60000000149,
+          "time": 4.910447,
+          "frame": 78,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20635.10000000149
+        },
+        {
+          "at": 20797.20000000298,
+          "time": 4.930813,
+          "frame": 78,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20635.10000000149
+        },
+        {
+          "at": 20865.29999999702,
+          "time": 4.996876,
+          "frame": 79,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20635.10000000149
+        },
+        {
+          "at": 20882.20000000298,
+          "time": 5.010209,
+          "frame": 80,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20635.10000000149
+        },
+        {
+          "at": 20898.39999999851,
+          "time": 5.031227,
+          "frame": 80,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20635.10000000149
+        },
+        {
+          "at": 20918.10000000149,
+          "time": 5.049248,
+          "frame": 80,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20635.10000000149
+        },
+        {
+          "at": 20931.10000000149,
+          "time": 5.060334,
+          "frame": 80,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20635.10000000149
+        },
+        {
+          "at": 20959.5,
+          "time": 5.077505,
+          "frame": 81,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20959.39999999851
+        },
+        {
+          "at": 20989.10000000149,
+          "time": 5.107744,
+          "frame": 81,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20988
+        },
+        {
+          "at": 21035.70000000298,
+          "time": 5.16432,
+          "frame": 82,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21035.70000000298
+        },
+        {
+          "at": 21056.60000000149,
+          "time": 5.177507,
+          "frame": 82,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21056.60000000149
+        },
+        {
+          "at": 21138.60000000149,
+          "time": 5.258061,
+          "frame": 84,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21138.39999999851
+        },
+        {
+          "at": 21256.5,
+          "time": 5.355754,
+          "frame": 85,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21256.5
+        },
+        {
+          "at": 21291.89999999851,
+          "time": 5.409298,
+          "frame": 86,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21291.89999999851
+        },
+        {
+          "at": 21380.89999999851,
+          "time": 5.499251,
+          "frame": 87,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21380.89999999851
+        },
+        {
+          "at": 21473.5,
+          "time": 5.584235,
+          "frame": 89,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21473.5
+        },
+        {
+          "at": 21534.60000000149,
+          "time": 5.664691,
+          "frame": 90,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21473.5
+        },
+        {
+          "at": 21633.89999999851,
+          "time": 5.752422,
+          "frame": 92,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21633.89999999851
+        },
+        {
+          "at": 21701.70000000298,
+          "time": 5.8223,
+          "frame": 93,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21701.70000000298
+        },
+        {
+          "at": 21803.39999999851,
+          "time": 5.916948,
+          "frame": 94,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21803.39999999851
+        },
+        {
+          "at": 21894.20000000298,
+          "time": 0,
+          "frame": 0,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21894.20000000298
+        },
+        {
+          "at": 21995.5,
+          "time": 0.076851,
+          "frame": 1,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21995.5
+        },
+        {
+          "at": 22075.10000000149,
+          "time": 0.156047,
+          "frame": 2,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22075.10000000149
+        },
+        {
+          "at": 22162.10000000149,
+          "time": 0.233523,
+          "frame": 3,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22162.10000000149
+        },
+        {
+          "at": 22193.60000000149,
+          "time": 0.272542,
+          "frame": 4,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22193.5
+        },
+        {
+          "at": 22211.39999999851,
+          "time": 0.289872,
+          "frame": 4,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22211.39999999851
+        },
+        {
+          "at": 22273.20000000298,
+          "time": 0.347281,
+          "frame": 5,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22273.20000000298
+        },
+        {
+          "at": 22359.39999999851,
+          "time": 0.432749,
+          "frame": 6,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22359.39999999851
+        },
+        {
+          "at": 22443.60000000149,
+          "time": 0.516457,
+          "frame": 8,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22443.60000000149
+        },
+        {
+          "at": 22509.29999999702,
+          "time": 0.580504,
+          "frame": 9,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22509.29999999702
+        },
+        {
+          "at": 22571.39999999851,
+          "time": 0.652476,
+          "frame": 10,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22571.29999999702
+        },
+        {
+          "at": 22647.29999999702,
+          "time": 0.716921,
+          "frame": 11,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22647.29999999702
+        },
+        {
+          "at": 22711.70000000298,
+          "time": 0.78627,
+          "frame": 12,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22711.70000000298
+        },
+        {
+          "at": 22779.79999999702,
+          "time": 0.855561,
+          "frame": 13,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22779.79999999702
+        },
+        {
+          "at": 22843.79999999702,
+          "time": 0.927082,
+          "frame": 14,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22779.79999999702
+        },
+        {
+          "at": 22910.29999999702,
+          "time": 0.995785,
+          "frame": 15,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22779.79999999702
+        },
+        {
+          "at": 22935.79999999702,
+          "time": 1.011068,
+          "frame": 16,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22935.79999999702
+        },
+        {
+          "at": 23004.39999999851,
+          "time": 1.078148,
+          "frame": 17,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23004.39999999851
+        },
+        {
+          "at": 23024.20000000298,
+          "time": 1.102258,
+          "frame": 17,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23023.39999999851
+        },
+        {
+          "at": 23099.10000000149,
+          "time": 1.172735,
+          "frame": 18,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23099.10000000149
+        },
+        {
+          "at": 23167.20000000298,
+          "time": 1.250929,
+          "frame": 20,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23167.20000000298
+        },
+        {
+          "at": 23261.29999999702,
+          "time": 1.348786,
+          "frame": 21,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23167.20000000298
+        },
+        {
+          "at": 23336.89999999851,
+          "time": 1.415989,
+          "frame": 22,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23167.20000000298
+        },
+        {
+          "at": 23368.20000000298,
+          "time": 1.439151,
+          "frame": 23,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23368.10000000149
+        },
+        {
+          "at": 23409.5,
+          "time": 1.489521,
+          "frame": 23,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23409.5
+        },
+        {
+          "at": 23431.29999999702,
+          "time": 1.51165,
+          "frame": 24,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23431.29999999702
+        },
+        {
+          "at": 23521.70000000298,
+          "time": 1.591254,
+          "frame": 25,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23521.70000000298
+        },
+        {
+          "at": 23599.10000000149,
+          "time": 1.672559,
+          "frame": 26,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23599.10000000149
+        },
+        {
+          "at": 23665.89999999851,
+          "time": 1.736226,
+          "frame": 27,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23665.89999999851
+        },
+        {
+          "at": 23730.60000000149,
+          "time": 1.802586,
+          "frame": 28,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23730.60000000149
+        },
+        {
+          "at": 23799,
+          "time": 1.869673,
+          "frame": 29,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23799
+        },
+        {
+          "at": 23857,
+          "time": 1.935495,
+          "frame": 30,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23857
+        },
+        {
+          "at": 23950.39999999851,
+          "time": 2.020352,
+          "frame": 32,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23950.39999999851
+        },
+        {
+          "at": 24007.20000000298,
+          "time": 2.078376,
+          "frame": 33,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24007.20000000298
+        },
+        {
+          "at": 24079.39999999851,
+          "time": 2.149534,
+          "frame": 34,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24079.29999999702
+        },
+        {
+          "at": 24153.10000000149,
+          "time": 2.22907,
+          "frame": 35,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24153.10000000149
+        },
+        {
+          "at": 24244.39999999851,
+          "time": 2.321289,
+          "frame": 37,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24244.39999999851
+        },
+        {
+          "at": 24328.60000000149,
+          "time": 2.416527,
+          "frame": 38,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24244.39999999851
+        },
+        {
+          "at": 24416.79999999702,
+          "time": 2.503101,
+          "frame": 40,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24244.39999999851
+        },
+        {
+          "at": 24428.70000000298,
+          "time": 2.513982,
+          "frame": 40,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24244.39999999851
+        },
+        {
+          "at": 24514,
+          "time": 2.599484,
+          "frame": 41,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24244.39999999851
+        },
+        {
+          "at": 24527.70000000298,
+          "time": 2.61484,
+          "frame": 41,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24244.39999999851
+        },
+        {
+          "at": 24561.60000000149,
+          "time": 2.629353,
+          "frame": 42,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24561.60000000149
+        },
+        {
+          "at": 24584.70000000298,
+          "time": 2.660704,
+          "frame": 42,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24584.70000000298
+        },
+        {
+          "at": 24640.79999999702,
+          "time": 2.725779,
+          "frame": 43,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24584.70000000298
+        },
+        {
+          "at": 24652.5,
+          "time": 2.740657,
+          "frame": 43,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24584.70000000298
+        },
+        {
+          "at": 24710.89999999851,
+          "time": 2.796864,
+          "frame": 44,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24584.70000000298
+        },
+        {
+          "at": 24736,
+          "time": 2.810724,
+          "frame": 44,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24735.89999999851
+        },
+        {
+          "at": 24773.10000000149,
+          "time": 2.83873,
+          "frame": 45,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24773
+        },
+        {
+          "at": 24827.29999999702,
+          "time": 2.908664,
+          "frame": 46,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24827.29999999702
+        },
+        {
+          "at": 24850.29999999702,
+          "time": 2.932604,
+          "frame": 46,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24850.29999999702
+        },
+        {
+          "at": 24898.60000000149,
+          "time": 2.978143,
+          "frame": 47,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24897.20000000298
+        },
+        {
+          "at": 24980.20000000298,
+          "time": 3.051229,
+          "frame": 48,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24980.10000000149
+        },
+        {
+          "at": 25043.89999999851,
+          "time": 3.11381,
+          "frame": 49,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25043.89999999851
+        },
+        {
+          "at": 25190.5,
+          "time": 3.266557,
+          "frame": 52,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25190.5
+        },
+        {
+          "at": 25269.20000000298,
+          "time": 3.342409,
+          "frame": 53,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25269.10000000149
+        },
+        {
+          "at": 25281.39999999851,
+          "time": 3.367337,
+          "frame": 53,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25281.39999999851
+        },
+        {
+          "at": 25355.20000000298,
+          "time": 3.427365,
+          "frame": 54,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25355.10000000149
+        },
+        {
+          "at": 25421.89999999851,
+          "time": 3.500311,
+          "frame": 56,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25421.89999999851
+        },
+        {
+          "at": 25492.5,
+          "time": 3.580714,
+          "frame": 57,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25421.89999999851
+        },
+        {
+          "at": 25572.60000000149,
+          "time": 3.65896,
+          "frame": 58,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25421.89999999851
+        },
+        {
+          "at": 25590.39999999851,
+          "time": 3.677565,
+          "frame": 58,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25421.89999999851
+        },
+        {
+          "at": 25646.79999999702,
+          "time": 3.733732,
+          "frame": 59,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25421.89999999851
+        },
+        {
+          "at": 25689.10000000149,
+          "time": 3.757445,
+          "frame": 60,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25689.10000000149
+        },
+        {
+          "at": 25712.39999999851,
+          "time": 3.791889,
+          "frame": 60,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25712.39999999851
+        },
+        {
+          "at": 25744.20000000298,
+          "time": 3.812704,
+          "frame": 61,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25744.20000000298
+        },
+        {
+          "at": 25789.60000000149,
+          "time": 3.861042,
+          "frame": 61,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25789.60000000149
+        },
+        {
+          "at": 25863.89999999851,
+          "time": 3.938368,
+          "frame": 63,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25863.89999999851
+        },
+        {
+          "at": 25947.29999999702,
+          "time": 4.022987,
+          "frame": 64,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25947.29999999702
+        },
+        {
+          "at": 26011.60000000149,
+          "time": 4.096034,
+          "frame": 65,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25947.29999999702
+        },
+        {
+          "at": 26099.10000000149,
+          "time": 4.186509,
+          "frame": 66,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25947.29999999702
+        },
+        {
+          "at": 26134.89999999851,
+          "time": 4.204927,
+          "frame": 67,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26134.89999999851
+        },
+        {
+          "at": 26187.60000000149,
+          "time": 4.270701,
+          "frame": 68,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26187.60000000149
+        },
+        {
+          "at": 26207.79999999702,
+          "time": 4.284352,
+          "frame": 68,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26207.79999999702
+        },
+        {
+          "at": 26271.29999999702,
+          "time": 4.358019,
+          "frame": 69,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26207.79999999702
+        },
+        {
+          "at": 26358.89999999851,
+          "time": 4.444565,
+          "frame": 71,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26207.79999999702
+        },
+        {
+          "at": 26373.39999999851,
+          "time": 4.462895,
+          "frame": 71,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26207.79999999702
+        },
+        {
+          "at": 26428,
+          "time": 4.51053,
+          "frame": 72,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26207.79999999702
+        },
+        {
+          "at": 26444,
+          "time": 4.530809,
+          "frame": 72,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26207.79999999702
+        },
+        {
+          "at": 26460.5,
+          "time": 4.548125,
+          "frame": 72,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26207.79999999702
+        },
+        {
+          "at": 26471.89999999851,
+          "time": 4.561513,
+          "frame": 72,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26207.79999999702
+        },
+        {
+          "at": 26504.20000000298,
+          "time": 4.577615,
+          "frame": 73,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26503.79999999702
+        },
+        {
+          "at": 26517.70000000298,
+          "time": 4.605776,
+          "frame": 73,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26517.70000000298
+        },
+        {
+          "at": 26525.39999999851,
+          "time": 4.614689,
+          "frame": 73,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26517.70000000298
+        },
+        {
+          "at": 26586.60000000149,
+          "time": 4.659909,
+          "frame": 74,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26586.60000000149
+        },
+        {
+          "at": 26658,
+          "time": 4.731542,
+          "frame": 75,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26658
+        },
+        {
+          "at": 26687,
+          "time": 4.758952,
+          "frame": 76,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26687
+        },
+        {
+          "at": 26748.89999999851,
+          "time": 4.818648,
+          "frame": 77,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26748.89999999851
+        },
+        {
+          "at": 26812.29999999702,
+          "time": 4.885232,
+          "frame": 78,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26812.29999999702
+        },
+        {
+          "at": 26876,
+          "time": 4.955097,
+          "frame": 79,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26876
+        },
+        {
+          "at": 26958.5,
+          "time": 5.036359,
+          "frame": 80,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26958.5
+        },
+        {
+          "at": 27009.20000000298,
+          "time": 5.084006,
+          "frame": 81,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27009.20000000298
+        },
+        {
+          "at": 27078.79999999702,
+          "time": 5.157618,
+          "frame": 82,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27078.79999999702
+        },
+        {
+          "at": 27157.70000000298,
+          "time": 5.233028,
+          "frame": 83,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27157.70000000298
+        },
+        {
+          "at": 27234.79999999702,
+          "time": 5.303856,
+          "frame": 84,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27233.79999999702
+        },
+        {
+          "at": 27306.70000000298,
+          "time": 5.382645,
+          "frame": 86,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27306.70000000298
+        },
+        {
+          "at": 27406,
+          "time": 5.483085,
+          "frame": 87,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27405.79999999702
+        },
+        {
+          "at": 27529.89999999851,
+          "time": 5.605864,
+          "frame": 89,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27529.89999999851
+        },
+        {
+          "at": 27606.29999999702,
+          "time": 5.682892,
+          "frame": 90,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27606.20000000298
+        },
+        {
+          "at": 27684.79999999702,
+          "time": 5.761491,
+          "frame": 92,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27684.79999999702
+        },
+        {
+          "at": 27750.79999999702,
+          "time": 5.837524,
+          "frame": 93,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27684.79999999702
+        },
+        {
+          "at": 27836.79999999702,
+          "time": 5.906626,
+          "frame": 94,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27836.70000000298
+        },
+        {
+          "at": 27898.70000000298,
+          "time": 5.97707,
+          "frame": 95,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27898.70000000298
+        },
+        {
+          "at": 27923.79999999702,
+          "time": 0,
+          "frame": 0,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27923.79999999702
+        },
+        {
+          "at": 28080.89999999851,
+          "time": 0.101873,
+          "frame": 1,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28080.89999999851
+        },
+        {
+          "at": 28131.5,
+          "time": 0.153508,
+          "frame": 2,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28131.5
+        },
+        {
+          "at": 28181.10000000149,
+          "time": 0.19259,
+          "frame": 3,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28181.10000000149
+        },
+        {
+          "at": 28247.29999999702,
+          "time": 0.274496,
+          "frame": 4,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28181.10000000149
+        },
+        {
+          "at": 28332.5,
+          "time": 0.35899,
+          "frame": 5,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28181.10000000149
+        },
+        {
+          "at": 28351.20000000298,
+          "time": 0.377024,
+          "frame": 6,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28181.10000000149
+        },
+        {
+          "at": 28433,
+          "time": 0.450866,
+          "frame": 7,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28432.89999999851
+        },
+        {
+          "at": 28455.60000000149,
+          "time": 0.472791,
+          "frame": 7,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28455.60000000149
+        },
+        {
+          "at": 28467.60000000149,
+          "time": 0.496698,
+          "frame": 7,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28455.60000000149
+        },
+        {
+          "at": 28538.60000000149,
+          "time": 0.554986,
+          "frame": 8,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28538.60000000149
+        },
+        {
+          "at": 28559.89999999851,
+          "time": 0.577419,
+          "frame": 9,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28559.89999999851
+        },
+        {
+          "at": 28632.39999999851,
+          "time": 0.647985,
+          "frame": 10,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28632.39999999851
+        },
+        {
+          "at": 28714.79999999702,
+          "time": 0.740473,
+          "frame": 11,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28632.39999999851
+        },
+        {
+          "at": 28789.79999999702,
+          "time": 0.81184,
+          "frame": 12,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28632.39999999851
+        },
+        {
+          "at": 28814.60000000149,
+          "time": 0.827507,
+          "frame": 13,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28814.5
+        },
+        {
+          "at": 28881.70000000298,
+          "time": 0.886313,
+          "frame": 14,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28881.70000000298
+        },
+        {
+          "at": 28952,
+          "time": 0.973963,
+          "frame": 15,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28881.70000000298
+        },
+        {
+          "at": 28971.29999999702,
+          "time": 0.997092,
+          "frame": 15,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28881.70000000298
+        },
+        {
+          "at": 29030.39999999851,
+          "time": 1.054524,
+          "frame": 16,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28881.70000000298
+        },
+        {
+          "at": 29057.5,
+          "time": 1.07463,
+          "frame": 17,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29057.5
+        },
+        {
+          "at": 29076.89999999851,
+          "time": 1.098293,
+          "frame": 17,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29076.89999999851
+        },
+        {
+          "at": 29088.89999999851,
+          "time": 1.117929,
+          "frame": 17,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29076.89999999851
+        },
+        {
+          "at": 29182.60000000149,
+          "time": 1.200429,
+          "frame": 19,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29182.60000000149
+        },
+        {
+          "at": 29213.60000000149,
+          "time": 1.229503,
+          "frame": 19,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29213.60000000149
+        },
+        {
+          "at": 29270.5,
+          "time": 1.284487,
+          "frame": 20,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29270.5
+        },
+        {
+          "at": 29325.89999999851,
+          "time": 1.336888,
+          "frame": 21,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29325.20000000298
+        },
+        {
+          "at": 29391.70000000298,
+          "time": 1.409897,
+          "frame": 22,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29391.70000000298
+        },
+        {
+          "at": 29474.70000000298,
+          "time": 1.495328,
+          "frame": 23,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29474.70000000298
+        },
+        {
+          "at": 29537.10000000149,
+          "time": 1.562316,
+          "frame": 24,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29474.70000000298
+        },
+        {
+          "at": 29625.70000000298,
+          "time": 1.654757,
+          "frame": 26,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29474.70000000298
+        },
+        {
+          "at": 29640.70000000298,
+          "time": 1.66846,
+          "frame": 26,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29474.70000000298
+        },
+        {
+          "at": 29718.79999999702,
+          "time": 1.741199,
+          "frame": 27,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29718.79999999702
+        },
+        {
+          "at": 29746.89999999851,
+          "time": 1.760964,
+          "frame": 28,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29746.89999999851
+        },
+        {
+          "at": 29766.20000000298,
+          "time": 1.787602,
+          "frame": 28,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29766.20000000298
+        },
+        {
+          "at": 29815.29999999702,
+          "time": 1.825465,
+          "frame": 29,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29815.20000000298
+        }
+      ],
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/bunny.mp4",
+          "bytes": 377969,
+          "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny.depth",
+          "bytes": 1055234,
+          "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+          "bytes": 243317,
+          "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+          "bytes": 255139,
+          "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+          "bytes": 252771,
+          "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+          "bytes": 254539,
+          "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+          "bytes": 263182,
+          "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+          "bytes": 266757,
+          "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+          "bytes": 124720,
+          "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8"
+        }
+      ]
+    },
+    {
+      "id": "bridge",
+      "depthAtStart": {
+        "pending": false,
+        "completed": null,
+        "total": 96,
+        "rate": null
+      },
+      "depthAtEnd": {
+        "pending": false,
+        "completed": null,
+        "total": 96,
+        "rate": null
+      },
+      "nativeMediaCounters": null,
+      "windowMs": 12000,
+      "sourceAdvance": 11.855800999999992,
+      "distinctFrames": 94,
+      "sharpFrames": 215,
+      "title": "Splashery · splats you can play with",
+      "url": "http://127.0.0.1:4173/?renderer=webgl2&adapt=off&profile=low&labs=1",
+      "dimensions": [480, 200],
+      "duration": 6,
+      "renderSize": [585, 900],
+      "pictureCadence": {
+        "n": 154,
+        "total": 11853.40000000596,
+        "median": 72.25,
+        "worst": 235.39999999850988
+      },
+      "pictureSubmissions": 155,
+      "pictureSubmissionFps": 12.916666666666666,
+      "cadence": {
+        "n": 214,
+        "total": 11961.90000000596,
+        "median": 64.30000000074506,
+        "worst": 169.5
+      },
+      "renderedCadence": {
+        "n": 154,
+        "total": 11853.40000000596,
+        "median": 72.25,
+        "worst": 235.39999999850988
+      },
+      "draws": [
+        {
+          "at": 38643.79999999702,
+          "pictureTime": 33,
+          "revision": 56
+        },
+        {
+          "at": 38725,
+          "pictureTime": 34,
+          "revision": 58
+        },
+        {
+          "at": 38864.5,
+          "pictureTime": 36,
+          "revision": 60
+        },
+        {
+          "at": 38884.79999999702,
+          "pictureTime": 37,
+          "revision": 62
+        },
+        {
+          "at": 39014.39999999851,
+          "pictureTime": 39,
+          "revision": 64
+        },
+        {
+          "at": 39112.5,
+          "pictureTime": 40,
+          "revision": 66
+        },
+        {
+          "at": 39145.29999999702,
+          "pictureTime": 41,
+          "revision": 68
+        },
+        {
+          "at": 39229.70000000298,
+          "pictureTime": 42,
+          "revision": 70
+        },
+        {
+          "at": 39294.10000000149,
+          "pictureTime": 43,
+          "revision": 72
+        },
+        {
+          "at": 39317.20000000298,
+          "pictureTime": 44,
+          "revision": 74
+        },
+        {
+          "at": 39452,
+          "pictureTime": 46,
+          "revision": 76
+        },
+        {
+          "at": 39556.20000000298,
+          "pictureTime": 47,
+          "revision": 78
+        },
+        {
+          "at": 39679.29999999702,
+          "pictureTime": 49,
+          "revision": 80
+        },
+        {
+          "at": 39824.70000000298,
+          "pictureTime": 52,
+          "revision": 84
+        },
+        {
+          "at": 39927.89999999851,
+          "pictureTime": 53,
+          "revision": 86
+        },
+        {
+          "at": 39954,
+          "pictureTime": 54,
+          "revision": 88
+        },
+        {
+          "at": 40030.29999999702,
+          "pictureTime": 55,
+          "revision": 90
+        },
+        {
+          "at": 40120,
+          "pictureTime": 56,
+          "revision": 92
+        },
+        {
+          "at": 40190,
+          "pictureTime": 57,
+          "revision": 94
+        },
+        {
+          "at": 40200.5,
+          "pictureTime": 58,
+          "revision": 96
+        },
+        {
+          "at": 40267.89999999851,
+          "pictureTime": 59,
+          "revision": 98
+        },
+        {
+          "at": 40338.20000000298,
+          "pictureTime": 60,
+          "revision": 100
+        },
+        {
+          "at": 40412.60000000149,
+          "pictureTime": 61,
+          "revision": 102
+        },
+        {
+          "at": 40503.10000000149,
+          "pictureTime": 62,
+          "revision": 104
+        },
+        {
+          "at": 40579.39999999851,
+          "pictureTime": 64,
+          "revision": 106
+        },
+        {
+          "at": 40671.89999999851,
+          "pictureTime": 65,
+          "revision": 108
+        },
+        {
+          "at": 40732.60000000149,
+          "pictureTime": 66,
+          "revision": 110
+        },
+        {
+          "at": 40804.70000000298,
+          "pictureTime": 67,
+          "revision": 112
+        },
+        {
+          "at": 40895.70000000298,
+          "pictureTime": 69,
+          "revision": 114
+        },
+        {
+          "at": 40971.10000000149,
+          "pictureTime": 70,
+          "revision": 116
+        },
+        {
+          "at": 41056.5,
+          "pictureTime": 71,
+          "revision": 118
+        },
+        {
+          "at": 41124.10000000149,
+          "pictureTime": 72,
+          "revision": 120
+        },
+        {
+          "at": 41192.70000000298,
+          "pictureTime": 74,
+          "revision": 122
+        },
+        {
+          "at": 41260.60000000149,
+          "pictureTime": 75,
+          "revision": 124
+        },
+        {
+          "at": 41342.20000000298,
+          "pictureTime": 76,
+          "revision": 126
+        },
+        {
+          "at": 41408.89999999851,
+          "pictureTime": 77,
+          "revision": 128
+        },
+        {
+          "at": 41525.20000000298,
+          "pictureTime": 79,
+          "revision": 130
+        },
+        {
+          "at": 41609.89999999851,
+          "pictureTime": 80,
+          "revision": 132
+        },
+        {
+          "at": 41626.89999999851,
+          "pictureTime": 81,
+          "revision": 134
+        },
+        {
+          "at": 41705.89999999851,
+          "pictureTime": 82,
+          "revision": 136
+        },
+        {
+          "at": 41767.5,
+          "pictureTime": 83,
+          "revision": 138
+        },
+        {
+          "at": 41835.60000000149,
+          "pictureTime": 84,
+          "revision": 140
+        },
+        {
+          "at": 41913.60000000149,
+          "pictureTime": 85,
+          "revision": 142
+        },
+        {
+          "at": 42001.10000000149,
+          "pictureTime": 86,
+          "revision": 144
+        },
+        {
+          "at": 42067.89999999851,
+          "pictureTime": 87,
+          "revision": 146
+        },
+        {
+          "at": 42132.89999999851,
+          "pictureTime": 88,
+          "revision": 148
+        },
+        {
+          "at": 42239.79999999702,
+          "pictureTime": 90,
+          "revision": 150
+        },
+        {
+          "at": 42297.70000000298,
+          "pictureTime": 91,
+          "revision": 152
+        },
+        {
+          "at": 42337.29999999702,
+          "pictureTime": 92,
+          "revision": 154
+        },
+        {
+          "at": 42420.39999999851,
+          "pictureTime": 93,
+          "revision": 156
+        },
+        {
+          "at": 42495.29999999702,
+          "pictureTime": 94,
+          "revision": 158
+        },
+        {
+          "at": 42570.70000000298,
+          "pictureTime": 0,
+          "revision": 160
+        },
+        {
+          "at": 42711.20000000298,
+          "pictureTime": 1,
+          "revision": 162
+        },
+        {
+          "at": 42745.10000000149,
+          "pictureTime": 2,
+          "revision": 164
+        },
+        {
+          "at": 42868.60000000149,
+          "pictureTime": 4,
+          "revision": 166
+        },
+        {
+          "at": 43046.20000000298,
+          "pictureTime": 6,
+          "revision": 168
+        },
+        {
+          "at": 43076.89999999851,
+          "pictureTime": 7,
+          "revision": 170
+        },
+        {
+          "at": 43247.20000000298,
+          "pictureTime": 10,
+          "revision": 174
+        },
+        {
+          "at": 43368.60000000149,
+          "pictureTime": 12,
+          "revision": 178
+        },
+        {
+          "at": 43464,
+          "pictureTime": 13,
+          "revision": 180
+        },
+        {
+          "at": 43558.39999999851,
+          "pictureTime": 15,
+          "revision": 184
+        },
+        {
+          "at": 43652.89999999851,
+          "pictureTime": 16,
+          "revision": 186
+        },
+        {
+          "at": 43681.79999999702,
+          "pictureTime": 17,
+          "revision": 188
+        },
+        {
+          "at": 43754.20000000298,
+          "pictureTime": 18,
+          "revision": 190
+        },
+        {
+          "at": 43809.10000000149,
+          "pictureTime": 19,
+          "revision": 192
+        },
+        {
+          "at": 43921.89999999851,
+          "pictureTime": 20,
+          "revision": 194
+        },
+        {
+          "at": 43939.70000000298,
+          "pictureTime": 21,
+          "revision": 196
+        },
+        {
+          "at": 44019.39999999851,
+          "pictureTime": 22,
+          "revision": 198
+        },
+        {
+          "at": 44089.20000000298,
+          "pictureTime": 23,
+          "revision": 200
+        },
+        {
+          "at": 44107.29999999702,
+          "pictureTime": 24,
+          "revision": 202
+        },
+        {
+          "at": 44171.79999999702,
+          "pictureTime": 25,
+          "revision": 204
+        },
+        {
+          "at": 44284.70000000298,
+          "pictureTime": 26,
+          "revision": 206
+        },
+        {
+          "at": 44370.10000000149,
+          "pictureTime": 27,
+          "revision": 208
+        },
+        {
+          "at": 44421.5,
+          "pictureTime": 28,
+          "revision": 210
+        },
+        {
+          "at": 44443,
+          "pictureTime": 29,
+          "revision": 212
+        },
+        {
+          "at": 44509.60000000149,
+          "pictureTime": 30,
+          "revision": 214
+        },
+        {
+          "at": 44567.39999999851,
+          "pictureTime": 31,
+          "revision": 216
+        },
+        {
+          "at": 44628.29999999702,
+          "pictureTime": 32,
+          "revision": 218
+        },
+        {
+          "at": 44693.39999999851,
+          "pictureTime": 33,
+          "revision": 220
+        },
+        {
+          "at": 44760.20000000298,
+          "pictureTime": 34,
+          "revision": 222
+        },
+        {
+          "at": 44822.39999999851,
+          "pictureTime": 35,
+          "revision": 224
+        },
+        {
+          "at": 44902.5,
+          "pictureTime": 36,
+          "revision": 226
+        },
+        {
+          "at": 44996.39999999851,
+          "pictureTime": 38,
+          "revision": 228
+        },
+        {
+          "at": 45121.20000000298,
+          "pictureTime": 40,
+          "revision": 230
+        },
+        {
+          "at": 45191.79999999702,
+          "pictureTime": 41,
+          "revision": 232
+        },
+        {
+          "at": 45276.20000000298,
+          "pictureTime": 42,
+          "revision": 234
+        },
+        {
+          "at": 45345.39999999851,
+          "pictureTime": 43,
+          "revision": 236
+        },
+        {
+          "at": 45360.70000000298,
+          "pictureTime": 44,
+          "revision": 238
+        },
+        {
+          "at": 45496.29999999702,
+          "pictureTime": 46,
+          "revision": 240
+        },
+        {
+          "at": 45573.10000000149,
+          "pictureTime": 47,
+          "revision": 242
+        },
+        {
+          "at": 45650.20000000298,
+          "pictureTime": 48,
+          "revision": 244
+        },
+        {
+          "at": 45673.79999999702,
+          "pictureTime": 49,
+          "revision": 246
+        },
+        {
+          "at": 45839.29999999702,
+          "pictureTime": 51,
+          "revision": 248
+        },
+        {
+          "at": 46043.39999999851,
+          "pictureTime": 55,
+          "revision": 252
+        },
+        {
+          "at": 46134.10000000149,
+          "pictureTime": 56,
+          "revision": 254
+        },
+        {
+          "at": 46232.70000000298,
+          "pictureTime": 58,
+          "revision": 258
+        },
+        {
+          "at": 46325.70000000298,
+          "pictureTime": 59,
+          "revision": 260
+        },
+        {
+          "at": 46417.60000000149,
+          "pictureTime": 60,
+          "revision": 262
+        },
+        {
+          "at": 46432.89999999851,
+          "pictureTime": 61,
+          "revision": 264
+        },
+        {
+          "at": 46542.29999999702,
+          "pictureTime": 62,
+          "revision": 266
+        },
+        {
+          "at": 46607.29999999702,
+          "pictureTime": 63,
+          "revision": 268
+        },
+        {
+          "at": 46637,
+          "pictureTime": 64,
+          "revision": 270
+        },
+        {
+          "at": 46694.60000000149,
+          "pictureTime": 65,
+          "revision": 272
+        },
+        {
+          "at": 46775.10000000149,
+          "pictureTime": 66,
+          "revision": 274
+        },
+        {
+          "at": 46846.20000000298,
+          "pictureTime": 67,
+          "revision": 276
+        },
+        {
+          "at": 46920.10000000149,
+          "pictureTime": 68,
+          "revision": 278
+        },
+        {
+          "at": 47020.5,
+          "pictureTime": 70,
+          "revision": 280
+        },
+        {
+          "at": 47082.5,
+          "pictureTime": 71,
+          "revision": 282
+        },
+        {
+          "at": 47158.29999999702,
+          "pictureTime": 72,
+          "revision": 284
+        },
+        {
+          "at": 47227.5,
+          "pictureTime": 73,
+          "revision": 286
+        },
+        {
+          "at": 47281.29999999702,
+          "pictureTime": 74,
+          "revision": 288
+        },
+        {
+          "at": 47347.20000000298,
+          "pictureTime": 75,
+          "revision": 290
+        },
+        {
+          "at": 47404.29999999702,
+          "pictureTime": 76,
+          "revision": 292
+        },
+        {
+          "at": 47469.89999999851,
+          "pictureTime": 77,
+          "revision": 294
+        },
+        {
+          "at": 47529.70000000298,
+          "pictureTime": 78,
+          "revision": 296
+        },
+        {
+          "at": 47603,
+          "pictureTime": 79,
+          "revision": 298
+        },
+        {
+          "at": 47669.29999999702,
+          "pictureTime": 80,
+          "revision": 300
+        },
+        {
+          "at": 47741.79999999702,
+          "pictureTime": 82,
+          "revision": 302
+        },
+        {
+          "at": 47804.39999999851,
+          "pictureTime": 83,
+          "revision": 304
+        },
+        {
+          "at": 47880.39999999851,
+          "pictureTime": 84,
+          "revision": 306
+        },
+        {
+          "at": 47943.20000000298,
+          "pictureTime": 85,
+          "revision": 308
+        },
+        {
+          "at": 48019.79999999702,
+          "pictureTime": 86,
+          "revision": 310
+        },
+        {
+          "at": 48070.70000000298,
+          "pictureTime": 87,
+          "revision": 312
+        },
+        {
+          "at": 48155.10000000149,
+          "pictureTime": 88,
+          "revision": 314
+        },
+        {
+          "at": 48227.5,
+          "pictureTime": 89,
+          "revision": 316
+        },
+        {
+          "at": 48292.89999999851,
+          "pictureTime": 90,
+          "revision": 318
+        },
+        {
+          "at": 48360.39999999851,
+          "pictureTime": 92,
+          "revision": 320
+        },
+        {
+          "at": 48495.10000000149,
+          "pictureTime": 94,
+          "revision": 322
+        },
+        {
+          "at": 48555.70000000298,
+          "pictureTime": 95,
+          "revision": 324
+        },
+        {
+          "at": 48613.10000000149,
+          "pictureTime": 0,
+          "revision": 326
+        },
+        {
+          "at": 48717.5,
+          "pictureTime": 1,
+          "revision": 328
+        },
+        {
+          "at": 48796.39999999851,
+          "pictureTime": 2,
+          "revision": 330
+        },
+        {
+          "at": 48866.39999999851,
+          "pictureTime": 3,
+          "revision": 332
+        },
+        {
+          "at": 48944.10000000149,
+          "pictureTime": 4,
+          "revision": 334
+        },
+        {
+          "at": 48966.29999999702,
+          "pictureTime": 5,
+          "revision": 336
+        },
+        {
+          "at": 49027.20000000298,
+          "pictureTime": 6,
+          "revision": 338
+        },
+        {
+          "at": 49138.70000000298,
+          "pictureTime": 7,
+          "revision": 340
+        },
+        {
+          "at": 49186.20000000298,
+          "pictureTime": 8,
+          "revision": 342
+        },
+        {
+          "at": 49231.10000000149,
+          "pictureTime": 9,
+          "revision": 344
+        },
+        {
+          "at": 49297.60000000149,
+          "pictureTime": 10,
+          "revision": 346
+        },
+        {
+          "at": 49396.10000000149,
+          "pictureTime": 11,
+          "revision": 348
+        },
+        {
+          "at": 49459.70000000298,
+          "pictureTime": 13,
+          "revision": 350
+        },
+        {
+          "at": 49695.10000000149,
+          "pictureTime": 16,
+          "revision": 354
+        },
+        {
+          "at": 49759.5,
+          "pictureTime": 17,
+          "revision": 356
+        },
+        {
+          "at": 49858.79999999702,
+          "pictureTime": 19,
+          "revision": 358
+        },
+        {
+          "at": 49953.79999999702,
+          "pictureTime": 20,
+          "revision": 360
+        },
+        {
+          "at": 49988.60000000149,
+          "pictureTime": 21,
+          "revision": 362
+        },
+        {
+          "at": 50062.29999999702,
+          "pictureTime": 22,
+          "revision": 364
+        },
+        {
+          "at": 50154.29999999702,
+          "pictureTime": 23,
+          "revision": 366
+        },
+        {
+          "at": 50180.10000000149,
+          "pictureTime": 24,
+          "revision": 368
+        },
+        {
+          "at": 50234,
+          "pictureTime": 25,
+          "revision": 370
+        },
+        {
+          "at": 50299.20000000298,
+          "pictureTime": 26,
+          "revision": 372
+        },
+        {
+          "at": 50367.70000000298,
+          "pictureTime": 27,
+          "revision": 374
+        },
+        {
+          "at": 50436.5,
+          "pictureTime": 28,
+          "revision": 376
+        },
+        {
+          "at": 50497.20000000298,
+          "pictureTime": 29,
+          "revision": 378
+        }
+      ],
+      "costs": {},
+      "gpuDraw": {
+        "supported": false,
+        "elapsedMs": {
+          "n": 0,
+          "total": 0,
+          "median": null
+        },
+        "disjointQueries": 0,
+        "externalQueries": 0,
+        "note": "Nonblocking GPU timer queries span prerender through postrender. They measure GPU elapsed time, separately from inclusive JavaScript submission costs; unavailable tail queries are omitted"
+      },
+      "geometryCache": {
+        "hits": 177,
+        "misses": 28,
+        "completed": 249,
+        "workers": 1,
+        "workMs": 10577.900000028312,
+        "consumed": 177,
+        "evictions": 29,
+        "roundTripMs": 46.84430248087375,
+        "aheadFrames": 3
+      },
+      "raster": {
+        "prepared": 176,
+        "computed": 3
+      },
+      "faces": 16443,
+      "rows": [
+        {
+          "at": 38535.29999999702,
+          "time": 1.979407,
+          "frame": 31,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 38505.29999999702
+        },
+        {
+          "at": 38644.60000000149,
+          "time": 2.070618,
+          "frame": 33,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 38644.60000000149
+        },
+        {
+          "at": 38655.79999999702,
+          "time": 2.100163,
+          "frame": 33,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 38644.60000000149
+        },
+        {
+          "at": 38725,
+          "time": 2.138968,
+          "frame": 34,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 38725
+        },
+        {
+          "at": 38864.5,
+          "time": 2.287897,
+          "frame": 36,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 38864.5
+        },
+        {
+          "at": 38884.79999999702,
+          "time": 2.319866,
+          "frame": 37,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 38884.79999999702
+        },
+        {
+          "at": 38894.10000000149,
+          "time": 2.339006,
+          "frame": 37,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 38884.79999999702
+        },
+        {
+          "at": 39014.5,
+          "time": 2.445631,
+          "frame": 39,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39014.39999999851
+        },
+        {
+          "at": 39025.29999999702,
+          "time": 2.469359,
+          "frame": 39,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39014.39999999851
+        },
+        {
+          "at": 39039.70000000298,
+          "time": 2.483728,
+          "frame": 39,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39014.39999999851
+        },
+        {
+          "at": 39112.60000000149,
+          "time": 2.538725,
+          "frame": 40,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39112.5
+        },
+        {
+          "at": 39145.39999999851,
+          "time": 2.568882,
+          "frame": 41,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39145.39999999851
+        },
+        {
+          "at": 39157.5,
+          "time": 2.601665,
+          "frame": 41,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39145.39999999851
+        },
+        {
+          "at": 39229.70000000298,
+          "time": 2.657449,
+          "frame": 42,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39229.70000000298
+        },
+        {
+          "at": 39294.20000000298,
+          "time": 2.72288,
+          "frame": 43,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39294.20000000298
+        },
+        {
+          "at": 39317.20000000298,
+          "time": 2.751269,
+          "frame": 44,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39317.20000000298
+        },
+        {
+          "at": 39348.5,
+          "time": 2.79184,
+          "frame": 44,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39317.20000000298
+        },
+        {
+          "at": 39452,
+          "time": 2.877852,
+          "frame": 46,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39452
+        },
+        {
+          "at": 39556.20000000298,
+          "time": 2.98126,
+          "frame": 47,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39556.20000000298
+        },
+        {
+          "at": 39679.29999999702,
+          "time": 3.110866,
+          "frame": 49,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "rasterKey": "[[2.9042108058929443,0,0,0,0,1.8877370357513428,0,0,0,0,-1.0002000331878662,-1,0,0,2.676701784133911,2.7161624431610107],[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],[[2,0.8317307829856873,379,158],[0.5400000214576721,0,-0.019999999552965164,-0.019999999552965164],[0,0,0.4099999964237213,0.7638610005378723],[0,0,0,0],[0,0,0,1],[0,0,0,0]],585,900]",
+          "update": 0,
+          "render": 39679.29999999702
+        },
+        {
+          "at": 39781.29999999702,
+          "time": 3.221752,
+          "frame": 51,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 39679.29999999702
+        },
+        {
+          "at": 39796.60000000149,
+          "time": 3.240107,
+          "frame": 51,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 39679.29999999702
+        },
+        {
+          "at": 39824.70000000298,
+          "time": 3.251197,
+          "frame": 52,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 39824.70000000298
+        },
+        {
+          "at": 39836.20000000298,
+          "time": 3.279642,
+          "frame": 52,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 39824.70000000298
+        },
+        {
+          "at": 39846.60000000149,
+          "time": 3.290421,
+          "frame": 52,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 39824.70000000298
+        },
+        {
+          "at": 39927.89999999851,
+          "time": 3.354293,
+          "frame": 53,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 39927.89999999851
+        },
+        {
+          "at": 39954,
+          "time": 3.384752,
+          "frame": 54,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 39954
+        },
+        {
+          "at": 40030.29999999702,
+          "time": 3.464807,
+          "frame": 55,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40030.29999999702
+        },
+        {
+          "at": 40040,
+          "time": 3.484521,
+          "frame": 55,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40030.29999999702
+        },
+        {
+          "at": 40120,
+          "time": 3.538825,
+          "frame": 56,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40120
+        },
+        {
+          "at": 40190,
+          "time": 3.619474,
+          "frame": 57,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40190
+        },
+        {
+          "at": 40203.60000000149,
+          "time": 3.643486,
+          "frame": 58,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40200.5
+        },
+        {
+          "at": 40267.89999999851,
+          "time": 3.696624,
+          "frame": 59,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40267.89999999851
+        },
+        {
+          "at": 40338.20000000298,
+          "time": 3.772118,
+          "frame": 60,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40338.20000000298
+        },
+        {
+          "at": 40412.89999999851,
+          "time": 3.845258,
+          "frame": 61,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40412.89999999851
+        },
+        {
+          "at": 40503.20000000298,
+          "time": 3.933328,
+          "frame": 62,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40503.10000000149
+        },
+        {
+          "at": 40579.39999999851,
+          "time": 4.008355,
+          "frame": 64,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40579.39999999851
+        },
+        {
+          "at": 40671.89999999851,
+          "time": 4.107921,
+          "frame": 65,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40671.89999999851
+        },
+        {
+          "at": 40732.60000000149,
+          "time": 4.157846,
+          "frame": 66,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40732.60000000149
+        },
+        {
+          "at": 40804.70000000298,
+          "time": 4.234966,
+          "frame": 67,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40804.70000000298
+        },
+        {
+          "at": 40895.70000000298,
+          "time": 4.320481,
+          "frame": 69,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40895.70000000298
+        },
+        {
+          "at": 40971.10000000149,
+          "time": 4.404814,
+          "frame": 70,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 40971.10000000149
+        },
+        {
+          "at": 41056.5,
+          "time": 4.483388,
+          "frame": 71,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41056.5
+        },
+        {
+          "at": 41124.10000000149,
+          "time": 4.557846,
+          "frame": 72,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41124.10000000149
+        },
+        {
+          "at": 41193.5,
+          "time": 4.626804,
+          "frame": 74,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41192.70000000298
+        },
+        {
+          "at": 41260.60000000149,
+          "time": 4.692845,
+          "frame": 75,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41260.60000000149
+        },
+        {
+          "at": 41342.20000000298,
+          "time": 4.765077,
+          "frame": 76,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41342.20000000298
+        },
+        {
+          "at": 41408.89999999851,
+          "time": 4.840445,
+          "frame": 77,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41408.89999999851
+        },
+        {
+          "at": 41525.20000000298,
+          "time": 4.951093,
+          "frame": 79,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41525.20000000298
+        },
+        {
+          "at": 41533.70000000298,
+          "time": 4.979526,
+          "frame": 79,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41525.20000000298
+        },
+        {
+          "at": 41610,
+          "time": 5.042834,
+          "frame": 80,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41609.89999999851
+        },
+        {
+          "at": 41626.89999999851,
+          "time": 5.063685,
+          "frame": 81,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41626.89999999851
+        },
+        {
+          "at": 41705.89999999851,
+          "time": 5.132798,
+          "frame": 82,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41705.89999999851
+        },
+        {
+          "at": 41767.5,
+          "time": 5.201024,
+          "frame": 83,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41767.5
+        },
+        {
+          "at": 41836.20000000298,
+          "time": 5.26809,
+          "frame": 84,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41836.20000000298
+        },
+        {
+          "at": 41913.60000000149,
+          "time": 5.343275,
+          "frame": 85,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 41913.60000000149
+        },
+        {
+          "at": 42001.10000000149,
+          "time": 5.427995,
+          "frame": 86,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42001.10000000149
+        },
+        {
+          "at": 42067.89999999851,
+          "time": 5.497213,
+          "frame": 87,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42067.89999999851
+        },
+        {
+          "at": 42132.89999999851,
+          "time": 5.55995,
+          "frame": 88,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42132.89999999851
+        },
+        {
+          "at": 42239.79999999702,
+          "time": 5.674303,
+          "frame": 90,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42239.79999999702
+        },
+        {
+          "at": 42297.70000000298,
+          "time": 5.730912,
+          "frame": 91,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42297.70000000298
+        },
+        {
+          "at": 42337.29999999702,
+          "time": 5.763177,
+          "frame": 92,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42337.29999999702
+        },
+        {
+          "at": 42420.39999999851,
+          "time": 5.840871,
+          "frame": 93,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42420.39999999851
+        },
+        {
+          "at": 42495.29999999702,
+          "time": 5.920419,
+          "frame": 94,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42495.29999999702
+        },
+        {
+          "at": 42570.70000000298,
+          "time": 0,
+          "frame": 0,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42570.70000000298
+        },
+        {
+          "at": 42621.89999999851,
+          "time": 0.024317,
+          "frame": 0,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42570.70000000298
+        },
+        {
+          "at": 42711.20000000298,
+          "time": 0.098014,
+          "frame": 1,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42711.20000000298
+        },
+        {
+          "at": 42745.20000000298,
+          "time": 0.127067,
+          "frame": 2,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42745.10000000149
+        },
+        {
+          "at": 42777.29999999702,
+          "time": 0.180244,
+          "frame": 2,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42745.10000000149
+        },
+        {
+          "at": 42868.60000000149,
+          "time": 0.261021,
+          "frame": 4,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42868.60000000149
+        },
+        {
+          "at": 42877,
+          "time": 0.280332,
+          "frame": 4,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 42868.60000000149
+        },
+        {
+          "at": 43046.5,
+          "time": 0.436879,
+          "frame": 6,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43046.5
+        },
+        {
+          "at": 43076.89999999851,
+          "time": 0.467057,
+          "frame": 7,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43076.89999999851
+        },
+        {
+          "at": 43085.60000000149,
+          "time": 0.489491,
+          "frame": 7,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43076.89999999851
+        },
+        {
+          "at": 43183.5,
+          "time": 0.585164,
+          "frame": 9,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43076.89999999851
+        },
+        {
+          "at": 43201.5,
+          "time": 0.60455,
+          "frame": 9,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43076.89999999851
+        },
+        {
+          "at": 43221.29999999702,
+          "time": 0.624543,
+          "frame": 9,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43076.89999999851
+        },
+        {
+          "at": 43247.20000000298,
+          "time": 0.63558,
+          "frame": 10,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43247.20000000298
+        },
+        {
+          "at": 43258.10000000149,
+          "time": 0.660953,
+          "frame": 10,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43247.20000000298
+        },
+        {
+          "at": 43266.70000000298,
+          "time": 0.670499,
+          "frame": 10,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43247.20000000298
+        },
+        {
+          "at": 43273.20000000298,
+          "time": 0.677357,
+          "frame": 10,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43247.20000000298
+        },
+        {
+          "at": 43334.29999999702,
+          "time": 0.735938,
+          "frame": 11,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43247.20000000298
+        },
+        {
+          "at": 43345.89999999851,
+          "time": 0.749523,
+          "frame": 11,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43247.20000000298
+        },
+        {
+          "at": 43368.60000000149,
+          "time": 0.758321,
+          "frame": 12,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43368.60000000149
+        },
+        {
+          "at": 43379.20000000298,
+          "time": 0.781575,
+          "frame": 12,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43368.60000000149
+        },
+        {
+          "at": 43389.10000000149,
+          "time": 0.792494,
+          "frame": 12,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43368.60000000149
+        },
+        {
+          "at": 43464,
+          "time": 0.851866,
+          "frame": 13,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43464
+        },
+        {
+          "at": 43475.20000000298,
+          "time": 0.876771,
+          "frame": 14,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43464
+        },
+        {
+          "at": 43488.60000000149,
+          "time": 0.892146,
+          "frame": 14,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43464
+        },
+        {
+          "at": 43494.60000000149,
+          "time": 0.898949,
+          "frame": 14,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43464
+        },
+        {
+          "at": 43558.39999999851,
+          "time": 0.947985,
+          "frame": 15,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43558.39999999851
+        },
+        {
+          "at": 43572,
+          "time": 0.974249,
+          "frame": 15,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43558.39999999851
+        },
+        {
+          "at": 43580.79999999702,
+          "time": 0.984134,
+          "frame": 15,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43558.39999999851
+        },
+        {
+          "at": 43652.89999999851,
+          "time": 1.035478,
+          "frame": 16,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43652.89999999851
+        },
+        {
+          "at": 43681.79999999702,
+          "time": 1.070255,
+          "frame": 17,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43681.79999999702
+        },
+        {
+          "at": 43695.89999999851,
+          "time": 1.099295,
+          "frame": 17,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43681.79999999702
+        },
+        {
+          "at": 43754.20000000298,
+          "time": 1.141952,
+          "frame": 18,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43754.20000000298
+        },
+        {
+          "at": 43809.10000000149,
+          "time": 1.199808,
+          "frame": 19,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43809.10000000149
+        },
+        {
+          "at": 43819.70000000298,
+          "time": 1.22276,
+          "frame": 19,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43809.10000000149
+        },
+        {
+          "at": 43922,
+          "time": 1.310415,
+          "frame": 20,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43922
+        },
+        {
+          "at": 43939.70000000298,
+          "time": 1.332432,
+          "frame": 21,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43939.70000000298
+        },
+        {
+          "at": 43950,
+          "time": 1.353357,
+          "frame": 21,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 43939.70000000298
+        },
+        {
+          "at": 44019.5,
+          "time": 1.410034,
+          "frame": 22,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44019.39999999851
+        },
+        {
+          "at": 44089.20000000298,
+          "time": 1.476905,
+          "frame": 23,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44089.20000000298
+        },
+        {
+          "at": 44107.29999999702,
+          "time": 1.503907,
+          "frame": 24,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44107.29999999702
+        },
+        {
+          "at": 44171.79999999702,
+          "time": 1.565538,
+          "frame": 25,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44171.79999999702
+        },
+        {
+          "at": 44211.79999999702,
+          "time": 1.61538,
+          "frame": 25,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44171.79999999702
+        },
+        {
+          "at": 44284.70000000298,
+          "time": 1.674692,
+          "frame": 26,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44284.70000000298
+        },
+        {
+          "at": 44370.10000000149,
+          "time": 1.747913,
+          "frame": 27,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44370.10000000149
+        },
+        {
+          "at": 44421.5,
+          "time": 1.812181,
+          "frame": 28,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44421.5
+        },
+        {
+          "at": 44443,
+          "time": 1.833306,
+          "frame": 29,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44443
+        },
+        {
+          "at": 44509.60000000149,
+          "time": 1.900579,
+          "frame": 30,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44509.60000000149
+        },
+        {
+          "at": 44567.5,
+          "time": 1.954188,
+          "frame": 31,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44567.39999999851
+        },
+        {
+          "at": 44628.39999999851,
+          "time": 2.015784,
+          "frame": 32,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44628.29999999702
+        },
+        {
+          "at": 44693.39999999851,
+          "time": 2.081162,
+          "frame": 33,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44693.39999999851
+        },
+        {
+          "at": 44760.20000000298,
+          "time": 2.148928,
+          "frame": 34,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44760.20000000298
+        },
+        {
+          "at": 44822.39999999851,
+          "time": 2.218822,
+          "frame": 35,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44822.39999999851
+        },
+        {
+          "at": 44902.5,
+          "time": 2.29069,
+          "frame": 36,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44902.5
+        },
+        {
+          "at": 44996.39999999851,
+          "time": 2.394192,
+          "frame": 38,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44996.39999999851
+        },
+        {
+          "at": 45033.39999999851,
+          "time": 2.436806,
+          "frame": 38,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 44996.39999999851
+        },
+        {
+          "at": 45121.20000000298,
+          "time": 2.506992,
+          "frame": 40,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45121.20000000298
+        },
+        {
+          "at": 45191.89999999851,
+          "time": 2.579692,
+          "frame": 41,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45191.79999999702
+        },
+        {
+          "at": 45201.29999999702,
+          "time": 2.60533,
+          "frame": 41,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45191.79999999702
+        },
+        {
+          "at": 45276.20000000298,
+          "time": 2.662959,
+          "frame": 42,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45276.20000000298
+        },
+        {
+          "at": 45345.39999999851,
+          "time": 2.731076,
+          "frame": 43,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45345.39999999851
+        },
+        {
+          "at": 45360.70000000298,
+          "time": 2.758895,
+          "frame": 44,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45360.70000000298
+        },
+        {
+          "at": 45406.10000000149,
+          "time": 2.810214,
+          "frame": 44,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45360.70000000298
+        },
+        {
+          "at": 45496.29999999702,
+          "time": 2.888735,
+          "frame": 46,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45496.29999999702
+        },
+        {
+          "at": 45504.5,
+          "time": 2.908454,
+          "frame": 46,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45496.29999999702
+        },
+        {
+          "at": 45573.10000000149,
+          "time": 2.96495,
+          "frame": 47,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45573.10000000149
+        },
+        {
+          "at": 45650.29999999702,
+          "time": 3.039305,
+          "frame": 48,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45650.20000000298
+        },
+        {
+          "at": 45673.79999999702,
+          "time": 3.063375,
+          "frame": 49,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45673.79999999702
+        },
+        {
+          "at": 45839.29999999702,
+          "time": 3.212885,
+          "frame": 51,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45839.29999999702
+        },
+        {
+          "at": 45916.10000000149,
+          "time": 3.316069,
+          "frame": 53,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45839.29999999702
+        },
+        {
+          "at": 45928.29999999702,
+          "time": 3.332134,
+          "frame": 53,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 45839.29999999702
+        },
+        {
+          "at": 46043.5,
+          "time": 3.441638,
+          "frame": 55,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46043.39999999851
+        },
+        {
+          "at": 46061.5,
+          "time": 3.464078,
+          "frame": 55,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46043.39999999851
+        },
+        {
+          "at": 46134.10000000149,
+          "time": 3.527435,
+          "frame": 56,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46134.10000000149
+        },
+        {
+          "at": 46143.39999999851,
+          "time": 3.547246,
+          "frame": 56,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46134.10000000149
+        },
+        {
+          "at": 46158.5,
+          "time": 3.562019,
+          "frame": 56,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46134.10000000149
+        },
+        {
+          "at": 46204.29999999702,
+          "time": 3.606263,
+          "frame": 57,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46134.10000000149
+        },
+        {
+          "at": 46219.39999999851,
+          "time": 3.623778,
+          "frame": 57,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46134.10000000149
+        },
+        {
+          "at": 46232.70000000298,
+          "time": 3.625852,
+          "frame": 58,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46232.70000000298
+        },
+        {
+          "at": 46238.39999999851,
+          "time": 3.643384,
+          "frame": 58,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46232.70000000298
+        },
+        {
+          "at": 46256.60000000149,
+          "time": 3.660482,
+          "frame": 58,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46232.70000000298
+        },
+        {
+          "at": 46325.70000000298,
+          "time": 3.713959,
+          "frame": 59,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46325.70000000298
+        },
+        {
+          "at": 46335,
+          "time": 3.738842,
+          "frame": 59,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46325.70000000298
+        },
+        {
+          "at": 46348.10000000149,
+          "time": 3.750922,
+          "frame": 60,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46325.70000000298
+        },
+        {
+          "at": 46417.60000000149,
+          "time": 3.807879,
+          "frame": 60,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46417.60000000149
+        },
+        {
+          "at": 46432.89999999851,
+          "time": 3.83117,
+          "frame": 61,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46432.89999999851
+        },
+        {
+          "at": 46442.39999999851,
+          "time": 3.845639,
+          "frame": 61,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46432.89999999851
+        },
+        {
+          "at": 46542.39999999851,
+          "time": 3.927885,
+          "frame": 62,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46542.29999999702
+        },
+        {
+          "at": 46607.29999999702,
+          "time": 3.994026,
+          "frame": 63,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46607.29999999702
+        },
+        {
+          "at": 46637,
+          "time": 4.023634,
+          "frame": 64,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46637
+        },
+        {
+          "at": 46694.60000000149,
+          "time": 4.080687,
+          "frame": 65,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46694.60000000149
+        },
+        {
+          "at": 46775.70000000298,
+          "time": 4.165838,
+          "frame": 66,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46775.10000000149
+        },
+        {
+          "at": 46846.89999999851,
+          "time": 4.236704,
+          "frame": 67,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46846.89999999851
+        },
+        {
+          "at": 46920.10000000149,
+          "time": 4.307595,
+          "frame": 68,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 46920.10000000149
+        },
+        {
+          "at": 47020.5,
+          "time": 4.409711,
+          "frame": 70,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47020.5
+        },
+        {
+          "at": 47083.39999999851,
+          "time": 4.474213,
+          "frame": 71,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47082.5
+        },
+        {
+          "at": 47158.29999999702,
+          "time": 4.549529,
+          "frame": 72,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47158.29999999702
+        },
+        {
+          "at": 47227.5,
+          "time": 4.617536,
+          "frame": 73,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47227.5
+        },
+        {
+          "at": 47281.29999999702,
+          "time": 4.673729,
+          "frame": 74,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47281.29999999702
+        },
+        {
+          "at": 47347.20000000298,
+          "time": 4.737925,
+          "frame": 75,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47347.20000000298
+        },
+        {
+          "at": 47404.29999999702,
+          "time": 4.796384,
+          "frame": 76,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47404.29999999702
+        },
+        {
+          "at": 47470,
+          "time": 4.860897,
+          "frame": 77,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47469.89999999851
+        },
+        {
+          "at": 47529.70000000298,
+          "time": 4.920368,
+          "frame": 78,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47529.70000000298
+        },
+        {
+          "at": 47603.89999999851,
+          "time": 4.990409,
+          "frame": 79,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47603.89999999851
+        },
+        {
+          "at": 47669.29999999702,
+          "time": 5.060767,
+          "frame": 80,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47669.29999999702
+        },
+        {
+          "at": 47741.79999999702,
+          "time": 5.133392,
+          "frame": 82,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47741.79999999702
+        },
+        {
+          "at": 47804.70000000298,
+          "time": 5.192895,
+          "frame": 83,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47804.39999999851
+        },
+        {
+          "at": 47880.39999999851,
+          "time": 5.267146,
+          "frame": 84,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47880.39999999851
+        },
+        {
+          "at": 47943.20000000298,
+          "time": 5.33543,
+          "frame": 85,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 47943.20000000298
+        },
+        {
+          "at": 48019.79999999702,
+          "time": 5.405951,
+          "frame": 86,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48019.79999999702
+        },
+        {
+          "at": 48070.70000000298,
+          "time": 5.458683,
+          "frame": 87,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48070.70000000298
+        },
+        {
+          "at": 48155.10000000149,
+          "time": 5.547099,
+          "frame": 88,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48155.10000000149
+        },
+        {
+          "at": 48227.5,
+          "time": 5.618486,
+          "frame": 89,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48227.5
+        },
+        {
+          "at": 48292.89999999851,
+          "time": 5.682137,
+          "frame": 90,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48292.89999999851
+        },
+        {
+          "at": 48360.39999999851,
+          "time": 5.750582,
+          "frame": 92,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48360.39999999851
+        },
+        {
+          "at": 48410.20000000298,
+          "time": 5.811429,
+          "frame": 92,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48360.39999999851
+        },
+        {
+          "at": 48495.20000000298,
+          "time": 5.883891,
+          "frame": 94,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48495.20000000298
+        },
+        {
+          "at": 48504.79999999702,
+          "time": 5.9084,
+          "frame": 94,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48495.20000000298
+        },
+        {
+          "at": 48529.70000000298,
+          "time": 5.934836,
+          "frame": 94,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48495.20000000298
+        },
+        {
+          "at": 48555.70000000298,
+          "time": 5.941735,
+          "frame": 95,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48555.70000000298
+        },
+        {
+          "at": 48615.29999999702,
+          "time": 0,
+          "frame": 0,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48613.10000000149
+        },
+        {
+          "at": 48680.60000000149,
+          "time": 0.04906,
+          "frame": 0,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48613.10000000149
+        },
+        {
+          "at": 48718.39999999851,
+          "time": 0.06758,
+          "frame": 1,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48717.5
+        },
+        {
+          "at": 48796.39999999851,
+          "time": 0.1501,
+          "frame": 2,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48796.39999999851
+        },
+        {
+          "at": 48805.60000000149,
+          "time": 0.173939,
+          "frame": 2,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48796.39999999851
+        },
+        {
+          "at": 48866.39999999851,
+          "time": 0.222232,
+          "frame": 3,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48866.39999999851
+        },
+        {
+          "at": 48944.10000000149,
+          "time": 0.299157,
+          "frame": 4,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48944.10000000149
+        },
+        {
+          "at": 48966.29999999702,
+          "time": 0.323309,
+          "frame": 5,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 48966.29999999702
+        },
+        {
+          "at": 49027.20000000298,
+          "time": 0.380832,
+          "frame": 6,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49027.20000000298
+        },
+        {
+          "at": 49138.70000000298,
+          "time": 0.490057,
+          "frame": 7,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49138.70000000298
+        },
+        {
+          "at": 49186.20000000298,
+          "time": 0.544951,
+          "frame": 8,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49186.20000000298
+        },
+        {
+          "at": 49231.20000000298,
+          "time": 0.587056,
+          "frame": 9,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49231.10000000149
+        },
+        {
+          "at": 49297.60000000149,
+          "time": 0.654371,
+          "frame": 10,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49297.60000000149
+        },
+        {
+          "at": 49396.10000000149,
+          "time": 0.748262,
+          "frame": 11,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49396.10000000149
+        },
+        {
+          "at": 49459.70000000298,
+          "time": 0.814966,
+          "frame": 13,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49459.70000000298
+        },
+        {
+          "at": 49620.39999999851,
+          "time": 0.965761,
+          "frame": 15,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49459.70000000298
+        },
+        {
+          "at": 49695.10000000149,
+          "time": 1.039915,
+          "frame": 16,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49695.10000000149
+        },
+        {
+          "at": 49759.5,
+          "time": 1.097217,
+          "frame": 17,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49759.5
+        },
+        {
+          "at": 49858.79999999702,
+          "time": 1.197042,
+          "frame": 19,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49858.79999999702
+        },
+        {
+          "at": 49869.10000000149,
+          "time": 1.218263,
+          "frame": 19,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49858.79999999702
+        },
+        {
+          "at": 49953.79999999702,
+          "time": 1.277441,
+          "frame": 20,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49953.79999999702
+        },
+        {
+          "at": 49988.60000000149,
+          "time": 1.322033,
+          "frame": 21,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 49988.60000000149
+        },
+        {
+          "at": 50062.29999999702,
+          "time": 1.396526,
+          "frame": 22,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 50062.29999999702
+        },
+        {
+          "at": 50064.79999999702,
+          "time": 1.415248,
+          "frame": 22,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 50062.29999999702
+        },
+        {
+          "at": 50154.29999999702,
+          "time": 1.487452,
+          "frame": 23,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 50154.29999999702
+        },
+        {
+          "at": 50180.20000000298,
+          "time": 1.513073,
+          "frame": 24,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 50180.10000000149
+        },
+        {
+          "at": 50234.89999999851,
+          "time": 1.571612,
+          "frame": 25,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 50234.89999999851
+        },
+        {
+          "at": 50299.20000000298,
+          "time": 1.634672,
+          "frame": 26,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 50299.20000000298
+        },
+        {
+          "at": 50367.70000000298,
+          "time": 1.704697,
+          "frame": 27,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 50367.70000000298
+        },
+        {
+          "at": 50436.5,
+          "time": 1.766046,
+          "frame": 28,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 50436.5
+        },
+        {
+          "at": 50497.20000000298,
+          "time": 1.835208,
+          "frame": 29,
+          "sharp": true,
+          "sample": "bridge",
+          "clipName": "Tears of Steel (six seconds from 8:30.5)",
+          "update": 0,
+          "render": 50497.20000000298
+        }
+      ],
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/tears.depth",
+          "bytes": 791810,
+          "sha256": "e62cc2854cd18d4c8106a847eda4e6b437edc6b7ba6066bb695ea4d7b7d87759"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears.mp3",
+          "bytes": 42558,
+          "sha256": "a6a5b47c175b090853d3fd516a44e6c5e9ded6f111b1dff5184b66cb11d463d7"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-1.jpg",
+          "bytes": 1083425,
+          "sha256": "30c4751f5f5473914175e022e9735ac73b9796a84921732aa7096d25986ff304"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-2.jpg",
+          "bytes": 1048191,
+          "sha256": "33c72ad2c90ef5a6fd22c26298e800663d0b03ecab51afbd3b30d25c1116f0b0"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-3.jpg",
+          "bytes": 1052853,
+          "sha256": "11193b7d89e6531c3df878a92ef9e6f583d2d72a206506d95a2f825df5b92805"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-4.jpg",
+          "bytes": 1062882,
+          "sha256": "5de7565ee8aab2a9da6fbc99a4d9ec888e70422a27a9905a5f1a6a86f3be7ebd"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-5.jpg",
+          "bytes": 636335,
+          "sha256": "c91f8a8a195707c8e1770d4886b2e0b5f4ef98ff1a6088801ae1d63aba77fd21"
+        }
+      ]
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "errors": [],
+  "cpuRate": 4,
+  "graphics": {
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "WebKit WebGL",
+    "unmaskedRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+    "subpixelBits": 4,
+    "maxTextureSize": 16384,
+    "hardwareConcurrency": 5,
+    "devicePixelRatio": 3,
+    "drawingBuffer": [585, 900]
+  }
+}

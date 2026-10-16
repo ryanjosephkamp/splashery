@@ -1,0 +1,56 @@
+{
+  "revision": "187b33936754a6dbd1f86f6ac53d6375635dc153",
+  "sourceHash": "2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4",
+  "files": [
+    {
+      "file": "src/packs/moving-photo.js",
+      "bytes": 105260,
+      "sha256": "b35407d69a27a8786512cd9e8fddb12e4f96f851527f71abd5ebee807704f828"
+    },
+    {
+      "file": "src/packs/photo-sharp.js",
+      "bytes": 67171,
+      "sha256": "2237e4698b646205fe091f85fcdafe30300e13e7e0713621e44a84eb7cbed143"
+    },
+    {
+      "file": "src/packs/song-stream.js",
+      "bytes": 10974,
+      "sha256": "565fe32bf7b3e5b949c744e77909c32182eb6397817a805642f3e760c2fd2988"
+    },
+    {
+      "file": "src/live/clip-stabilize.js",
+      "bytes": 9924,
+      "sha256": "b8e36c26439d53cf88275995d8dc035f40ed6af4e5fa6e05f44b78676ec462d4"
+    },
+    {
+      "file": "src/packs/moving-photo-raster.js",
+      "bytes": 6058,
+      "sha256": "047eb8fb9cb4015b46a6f542da63caa8e6e729a4df93bf5c5d88ce0242a70bcb"
+    },
+    {
+      "file": "src/packs/moving-photo-depth.js",
+      "bytes": 6539,
+      "sha256": "05711cedd8a63c07d62e3e455171dc7cc09bd851a77672dc3cf3178ec6346cb6"
+    },
+    {
+      "file": "src/packs/moving-photo-geometry.js",
+      "bytes": 30056,
+      "sha256": "93cb7958adee60f904bcfa5c0006c6902a295ce1c756283dd142e293fb8fd133"
+    },
+    {
+      "file": "src/packs/moving-photo-geometry-worker.js",
+      "bytes": 1980,
+      "sha256": "2dc3954e65bba53c060c161bbafcc391bf95acd6fe3e07eca0d5c03fde2abc8d"
+    },
+    {
+      "file": "src/packs/moving-photo-video-worker.js",
+      "bytes": 5029,
+      "sha256": "c501894acdaf0246eba73645e445dfa3c322bf8e845c7ffedae6bd62aa9963bd"
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/clip-geometry.wasm",
+      "bytes": 51555,
+      "sha256": "9d58b05be2ba092abaaf166062080e50fb1282ccdba5a01a5973d1cf27192bbc"
+    }
+  ]
+}

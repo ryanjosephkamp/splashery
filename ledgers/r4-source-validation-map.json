@@ -1,0 +1,182 @@
+{
+  "qualitySourceHash": "2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4",
+  "qualityInternalRevision": "187b33936754a6dbd1f86f6ac53d6375635dc153",
+  "qualityPublicRevision": "bf58e8c4ac92295f67b8240ad715fe6c096077ab",
+  "runtimeSourceHash": "79ff139b207d8ca57abdddfbd8a59f9c1908cdc81e24737bb36d64cdc18e2109",
+  "runtimeInternalRevision": "843a8ea0cdc4e90da5616cc8ca3857325fb05218",
+  "onlyChanges": "Native rotation/flip guards, original-input credit URL, Splats-only bundled-sample texture guard, and retained-RGB packet request/eviction scheduling. One numeric worker and the 24 MiB target remain. Reconstruction, raster-construction functions, shaders, and data assets are unchanged. The geometry module prefix before geometryCache and suffix from videoGeometryStream are byte-identical to the captured quality pin.",
+  "filesVerified": [
+    "src/packs/moving-photo.js",
+    "src/packs/photo-sharp.js",
+    "src/packs/song-stream.js",
+    "src/live/clip-stabilize.js",
+    "src/packs/moving-photo-raster.js",
+    "src/packs/moving-photo-depth.js",
+    "src/packs/moving-photo-geometry.js",
+    "src/packs/moving-photo-geometry-worker.js",
+    "src/packs/moving-photo-video-worker.js",
+    "assets/toys/moving-photo-3d/clip-geometry.wasm"
+  ],
+  "originalVideoInputs": {
+    "browser": "151.0.7922.173",
+    "rows": [
+      {
+        "id": "sample",
+        "rotation": 0,
+        "flip": false,
+        "display": [640, 360],
+        "visible": [640, 360],
+        "file": "assets/toys/screen/bunny.mp4",
+        "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+      },
+      {
+        "id": "sample-long",
+        "rotation": 0,
+        "flip": false,
+        "display": [426, 240],
+        "visible": [416, 240],
+        "file": "assets/toys/moving-photo-3d/bunny-long.webm",
+        "sha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e"
+      },
+      {
+        "id": "dragon-long",
+        "rotation": 0,
+        "flip": false,
+        "display": [564, 240],
+        "visible": [564, 240],
+        "file": "assets/toys/moving-photo-3d/sintel-long.webm",
+        "sha256": "c3d4432e8adb1f9c33bef5656c9a6ff2289b49e448fb6c4b67ed2400a54f3269"
+      },
+      {
+        "id": "machine-long",
+        "rotation": 0,
+        "flip": false,
+        "display": [640, 360],
+        "visible": [640, 360],
+        "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+        "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+      },
+      {
+        "id": "bridge-long",
+        "rotation": 0,
+        "flip": false,
+        "display": [642, 268],
+        "visible": [640, 268],
+        "file": "assets/toys/moving-photo-3d/tears-long.webm",
+        "sha256": "5d16d59945f20504f0998b220fa35d5a78bf6d8d82d874cc338c23634477236b"
+      },
+      {
+        "id": "r4-blocks",
+        "rotation": 0,
+        "flip": false,
+        "display": [256, 144],
+        "visible": [256, 144],
+        "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-blocks.mp4",
+        "sha256": "c15f11bf4d7323a3f4d7c91debbd99d66916d5cde475dc1d1d5ca23cd053913c"
+      },
+      {
+        "id": "r4-gate",
+        "rotation": 0,
+        "flip": false,
+        "display": [256, 144],
+        "visible": [256, 144],
+        "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-gate.webm",
+        "sha256": "25a01d34d0017cf6aac5a0e05a5565bd31bf7c3b01c97ff8480edc2f02a83f0f"
+      },
+      {
+        "id": "r4-wheel",
+        "rotation": 0,
+        "flip": false,
+        "display": [256, 144],
+        "visible": [256, 144],
+        "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-wheel.mov",
+        "sha256": "6c528fdc8f5e7fd62975fcc7059eea82077fba412a176a1175de4c7511871d36"
+      },
+      {
+        "id": "r4-fast",
+        "rotation": 0,
+        "flip": false,
+        "display": [256, 144],
+        "visible": [256, 144],
+        "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-fast.webm",
+        "sha256": "b248f1f23ae95d2167714203ec5703959999f225af94996650a9fe8e64b2d82a"
+      }
+    ]
+  },
+  "additionalTransformRegression": "Eight real VideoFrame rotation/flip combinations, exact bitmap pixels and closed resources, passed in the unchanged browser API",
+  "regressionLog": "r4-worker-orientation-fix.log",
+  "r3InternalRevision": "49dd8b477aad79f890237401d534ddf9ffea9237",
+  "r3PublicRevision": "24ec5c14ef7225e2fb2033c7110ca3b8bfcbe51c",
+  "previousTransformOnlySourceHash": "5258e5824f3c47013c2fa9c182ff6cc2a8b8b7935546e451e45b7c1e1bdc4f43",
+  "applicationDiffs": [
+    {
+      "file": "src/packs/moving-photo.js",
+      "qualitySha256": "b35407d69a27a8786512cd9e8fddb12e4f96f851527f71abd5ebee807704f828",
+      "runtimeSha256": "1973b82d6e4c77b23955a07b0d2f9e90d3a9f197655e211b00c421a1d0a81d2d",
+      "diff": "diff --git a/src/packs/moving-photo.js b/src/packs/moving-photo.js\nindex c5884bf03..7947b1ce6 100644\n--- a/src/packs/moving-photo.js\n+++ b/src/packs/moving-photo.js\n@@ -2137,7 +2137,10 @@ function showOriginal(clip) {\n function photoSource() {\n   const clip = MOVING.clip;\n   if (!clip || typeof document === \"undefined\") return null;\n-  if (clip.video) return clip.video.readyState >= 2 ? clip.video : null;\n+  // Bundled short samples keep the tier's retained picture in Splats. Their\n+  // shared native video still supplies Sharp and sound without another decoder.\n+  if (clip.video && (!clip.sample || clip.long))\n+    return clip.video.readyState >= 2 ? clip.video : null;\n   const P = (MOVING.photoCanvas ||= document.createElement(\"canvas\"));\n   if (P.width !== clip.w || P.height !== clip.h) {\n     P.width = clip.w;\n@@ -2344,7 +2347,7 @@ export const MOVING_PHOTO = {\n       label: \"Original round 4 test clips\",\n       title: \"Blocks, gate, wheel, orbit, and fast motion\",\n       source:\n-        \"https://github.com/ryanjosephkamp/splashery/blob/892ed8eab6b3eb71c65c976f59da8b60b099a78c/tools/cdx-mp2-r4-inputs.mjs\",\n+        \"https://github.com/ryanjosephkamp/splashery/blob/b442876fa4ceb61202da77633eb91b6cc20e676e/tools/cdx-mp2-r4-inputs.mjs\",\n       author: \"Made by Ryan with Codex (GPT-6)\",\n       license: \"CC0 1.0\",\n       licenseUrl: \"https://creativecommons.org/publicdomain/zero/1.0/\",\n"
+    },
+    {
+      "file": "src/packs/photo-sharp.js",
+      "qualitySha256": "2237e4698b646205fe091f85fcdafe30300e13e7e0713621e44a84eb7cbed143",
+      "runtimeSha256": "888d70b21ebab40f7673b8f78a032c15b73b92c4e5f1cb958d06b37ea8d980f0",
+      "diff": "diff --git a/src/packs/photo-sharp.js b/src/packs/photo-sharp.js\nindex b47fa8394..12b7ccc9a 100644\n--- a/src/packs/photo-sharp.js\n+++ b/src/packs/photo-sharp.js\n@@ -1578,8 +1578,8 @@ function clipSampleMaps(m, w, h) {\n }\n \n // WebGL video uploads may use coded pixels rather than the display-sized\n-// picture (for example, non-square pixels). Use the native display canvas\n-// for those sources and for browsers without transferable decoded frames.\n+// picture (for example, non-square pixels or a display transform). Use the\n+// native display canvas unless an untransformed direct upload is established.\n const clipVideoModes = new WeakMap();\n function directClipVideo(video) {\n   const key = `${video.currentSrc}|${video.videoWidth}|${video.videoHeight}`;\n@@ -1590,6 +1590,8 @@ function directClipVideo(video) {\n   try {\n     frame = new VideoFrame(video);\n     direct =\n+      frame.rotation === 0 &&\n+      frame.flip === false &&\n       frame.visibleRect.width === video.videoWidth &&\n       frame.visibleRect.height === video.videoHeight;\n   } catch {\n"
+    },
+    {
+      "file": "src/packs/song-stream.js",
+      "qualitySha256": "565fe32bf7b3e5b949c744e77909c32182eb6397817a805642f3e760c2fd2988",
+      "runtimeSha256": "565fe32bf7b3e5b949c744e77909c32182eb6397817a805642f3e760c2fd2988",
+      "diff": ""
+    },
+    {
+      "file": "src/live/clip-stabilize.js",
+      "qualitySha256": "b8e36c26439d53cf88275995d8dc035f40ed6af4e5fa6e05f44b78676ec462d4",
+      "runtimeSha256": "b8e36c26439d53cf88275995d8dc035f40ed6af4e5fa6e05f44b78676ec462d4",
+      "diff": ""
+    },
+    {
+      "file": "src/packs/moving-photo-raster.js",
+      "qualitySha256": "047eb8fb9cb4015b46a6f542da63caa8e6e729a4df93bf5c5d88ce0242a70bcb",
+      "runtimeSha256": "047eb8fb9cb4015b46a6f542da63caa8e6e729a4df93bf5c5d88ce0242a70bcb",
+      "diff": ""
+    },
+    {
+      "file": "src/packs/moving-photo-depth.js",
+      "qualitySha256": "05711cedd8a63c07d62e3e455171dc7cc09bd851a77672dc3cf3178ec6346cb6",
+      "runtimeSha256": "05711cedd8a63c07d62e3e455171dc7cc09bd851a77672dc3cf3178ec6346cb6",
+      "diff": ""
+    },
+    {
+      "file": "src/packs/moving-photo-geometry.js",
+      "qualitySha256": "93cb7958adee60f904bcfa5c0006c6902a295ce1c756283dd142e293fb8fd133",
+      "runtimeSha256": "4c8a49842a2a5b363548e55cffa6d69e4783441b366ee01cf4af6cd421a98e48",
+      "diff": "diff --git a/src/packs/moving-photo-geometry.js b/src/packs/moving-photo-geometry.js\nindex 809ea57d9..b7605e548 100644\n--- a/src/packs/moving-photo-geometry.js\n+++ b/src/packs/moving-photo-geometry.js\n@@ -480,7 +480,8 @@ export function geometryRaster(module) {\n // only for the exact retained depth array and grid that requested them.\n export function geometryCache(clip, cols, rows, aspect) {\n   const entries = new Map(),\n-    pending = new Map();\n+    pending = new Map(),\n+    deferred = new Map();\n   const limit = 24 * 1024 * 1024;\n   const stats = {\n     hits: 0,\n@@ -528,7 +529,10 @@ export function geometryCache(clip, cols, rows, aspect) {\n       // get() still accepts only the exact current depth-array identity.\n       const ahead = lead();\n       stats.aheadFrames = ahead;\n-      for (const step of new Set([ahead, ahead + 1, ahead + 2, 0, 1])) {\n+      const order = clip.video\n+        ? [ahead, ahead + 1, ahead + 2, 0, 1]\n+        : [ahead, 1, 0, ahead + 1, ahead + 2];\n+      for (const step of new Set(order)) {\n         const frame = (latest.frame + step) % clip.n,\n           source = clip.near[frame],\n           cached = entries.get(source),\n@@ -537,6 +541,7 @@ export function geometryCache(clip, cols, rows, aspect) {\n           !source ||\n           source === consumed ||\n           cached ||\n+          deferred.get(source) === latest.frame ||\n           [...pending.values()].some((r) => r.source === source && r.rasterKey === raster?.key)\n         )\n           continue;\n@@ -566,7 +571,7 @@ export function geometryCache(clip, cols, rows, aspect) {\n           : lastRoundTrip;\n       }\n       if (request && clip.near[request.frame] === request.source) {\n-        const result = { ...data, source: request.source };\n+        const result = { ...data, source: request.source, frame: request.frame };\n         stats.completed++;\n         stats.workMs += data.workMs;\n         result.bytes =\n@@ -584,9 +589,29 @@ export function geometryCache(clip, cols, rows, aspect) {\n         entries.set(request.source, result);\n         bytes += result.bytes;\n         while (bytes > limit && entries.size > 1) {\n-          const first = entries.keys().next().value;\n-          bytes -= entries.get(first).bytes;\n-          entries.delete(first);\n+          // Live video retains its existing freshness policy. Retained RGB\n+          // pictures need their nearest ordered display deadlines instead.\n+          if (clip.video) {\n+            const first = entries.keys().next().value;\n+            bytes -= entries.get(first).bytes;\n+            entries.delete(first);\n+            stats.evictions++;\n+            continue;\n+          }\n+          // Keep the nearest display deadlines. FIFO can evict the next\n+          // needed frame while filling a farther lookahead under this bound.\n+          let farthest = null,\n+            distance = -1;\n+          for (const [source, packet] of entries) {\n+            const ahead = (packet.frame - latest.frame + clip.n) % clip.n;\n+            if (ahead > distance) {\n+              distance = ahead;\n+              farthest = source;\n+            }\n+          }\n+          bytes -= entries.get(farthest).bytes;\n+          entries.delete(farthest);\n+          deferred.set(farthest, latest.frame);\n           stats.evictions++;\n         }\n       }\n@@ -618,9 +643,11 @@ export function geometryCache(clip, cols, rows, aspect) {\n       consumed = source;\n       entries.delete(source);\n       bytes -= result.bytes;\n+      deferred.clear();\n       return result;\n     },\n     ahead(frame, raster) {\n+      if (latest?.frame !== frame) deferred.clear();\n       latest = { frame, raster, at: performance.now() };\n       const horizon = Math.min(clip.n - 1, lead() + 2),\n         useful = new Set(\n@@ -638,6 +665,7 @@ export function geometryCache(clip, cols, rows, aspect) {\n       for (const slot of slots) slot.worker.terminate();\n       entries.clear();\n       pending.clear();\n+      deferred.clear();\n     },\n   };\n }\n"
+    },
+    {
+      "file": "src/packs/moving-photo-geometry-worker.js",
+      "qualitySha256": "2dc3954e65bba53c060c161bbafcc391bf95acd6fe3e07eca0d5c03fde2abc8d",
+      "runtimeSha256": "2dc3954e65bba53c060c161bbafcc391bf95acd6fe3e07eca0d5c03fde2abc8d",
+      "diff": ""
+    },
+    {
+      "file": "src/packs/moving-photo-video-worker.js",
+      "qualitySha256": "c501894acdaf0246eba73645e445dfa3c322bf8e845c7ffedae6bd62aa9963bd",
+      "runtimeSha256": "2d60cb9b62060fcd2013dccf059cc9fcf21a82f772a9b4bec8bb4c652e76c59d",
+      "diff": "diff --git a/src/packs/moving-photo-video-worker.js b/src/packs/moving-photo-video-worker.js\nindex 5a42d144d..153970c3d 100644\n--- a/src/packs/moving-photo-video-worker.js\n+++ b/src/packs/moving-photo-video-worker.js\n@@ -61,7 +61,14 @@ self.onmessage = ({ data }) => {\n         }\n         let cpuPicture = false;\n         const rect = data.frame.visibleRect;\n-        if (directCopy && rect.width === fw && rect.height === fh && data.frame.copyTo) {\n+        if (\n+          directCopy &&\n+          data.frame.rotation === 0 &&\n+          data.frame.flip === false &&\n+          rect.width === fw &&\n+          rect.height === fh &&\n+          data.frame.copyTo\n+        ) {\n           try {\n             const size = data.frame.allocationSize({ format: \"RGBA\" });\n             if (!rgba || rgba.byteLength !== size) rgba = new Uint8ClampedArray(size);\n"
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/clip-geometry.wasm",
+      "qualitySha256": "9d58b05be2ba092abaaf166062080e50fb1282ccdba5a01a5973d1cf27192bbc",
+      "runtimeSha256": "9d58b05be2ba092abaaf166062080e50fb1282ccdba5a01a5973d1cf27192bbc",
+      "diff": ""
+    }
+  ],
+  "splatsRegression": "Existing phf sample/GIF/video test retains its 480x270, 300x200, and 320x180 expectations; full-file rerun remains queued",
+  "runtimePublicRevision": "92a0140c2625243ab9173adeba9123a3f74210f8",
+  "previousRuntimeSourceHash": "f26ec66e827c53b668c68a18598be50c4e8b2e2d6766717e41ef184e16e1833a",
+  "geometryConstructionByteIdenticalOutsideCache": true,
+  "publishedSourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+  "publishedInternalRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
+  "publishedPublicRevision": "0e15561da5c7d0ddadf2a22587eb800be40c83bc",
+  "captureOnlyDeltaFromMeasuredRuntime": "diff --git a/src/packs/photo-sharp.js b/src/packs/photo-sharp.js\nindex 12b7ccc9a..cf6b3fb01 100644\n--- a/src/packs/photo-sharp.js\n+++ b/src/packs/photo-sharp.js\n@@ -628,6 +628,7 @@ function fillClip(m, src) {\n   if (\n     usable &&\n     (newFrame(video) ||\n+      S.stage?.captureWaiters.length > 0 ||\n       m.colorSrc !== (video.paused || !directClipVideo(video) ? S.clipStill : video))\n   )\n     clipPicture(m, video);\n@@ -1695,6 +1696,8 @@ function watchClipDraws(stage) {\n     ]);\n   };\n   stage.app.on(\"framerender\", () => {\n+    if (stage.captureWaiters.length && S.stage === stage && sharpClipOnly(S.src?.clip))\n+      fillClip(S.mesh, S.src);\n     if (\n       S.mesh?.clipWaitingDepth &&\n       sharpClipOnly(S.src?.clip) &&\n",
+  "publishedOtherNineFilesByteIdentical": true
+}

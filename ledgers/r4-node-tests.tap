@@ -1,0 +1,90 @@
+TAP version 13
+# Subtest: camera-gauge alignment recovers a known scale, rotation, and translation
+ok 1 - camera-gauge alignment recovers a known scale, rotation, and translation
+  ---
+  duration_ms: 1.573294
+  ...
+# Subtest: stationary or collinear camera paths cannot claim an unambiguous similarity calibration
+ok 2 - stationary or collinear camera paths cannot claim an unambiguous similarity calibration
+  ---
+  duration_ms: 0.491992
+  ...
+# Subtest: all 12 committed stills have complete calibrated depth, masks, and verified asset records
+ok 3 - all 12 committed stills have complete calibrated depth, masks, and verified asset records
+  ---
+  duration_ms: 622.644135
+  ...
+# Subtest: the evidence server serves video ranges and denies private paths and symlinks
+ok 4 - the evidence server serves video ranges and denies private paths and symlinks
+  ---
+  duration_ms: 42.945387
+  ...
+# Subtest: median-plane camera calibration preserves the source pinhole projection
+ok 5 - median-plane camera calibration preserves the source pinhole projection
+  ---
+  duration_ms: 1.247202
+  ...
+# Subtest: known world camera motion maps to recipe coordinates without fitting held-out images
+ok 6 - known world camera motion maps to recipe coordinates without fitting held-out images
+  ---
+  duration_ms: 0.263798
+  ...
+# Subtest: camera calibration rejects missing or nonpositive depth scale
+ok 7 - camera calibration rejects missing or nonpositive depth scale
+  ---
+  duration_ms: 0.336898
+  ...
+# Subtest: reference color averages source pixel areas so render sharpness is not compared with aliased noise
+ok 8 - reference color averages source pixel areas so render sharpness is not compared with aliased noise
+  ---
+  duration_ms: 1.448706
+  ...
+# Subtest: lossless browser byte transport preserves every quantized prediction across chunk boundaries
+ok 9 - lossless browser byte transport preserves every quantized prediction across chunk boundaries
+  ---
+  duration_ms: 27.691741
+  ...
+# Subtest: affine inverse-depth calibration is evaluated on held-out pixels
+ok 10 - affine inverse-depth calibration is evaluated on held-out pixels
+  ---
+  duration_ms: 1.348465
+  ...
+# Subtest: invalid and appearance-ambiguous truth cannot improve a depth score
+ok 11 - invalid and appearance-ambiguous truth cannot improve a depth score
+  ---
+  duration_ms: 0.187242
+  ...
+# Subtest: invalid predictions count as holes and a wrong depth ordering is rejected
+ok 12 - invalid predictions count as holes and a wrong depth ordering is rejected
+  ---
+  duration_ms: 0.669931
+  ...
+# Subtest: identical images have zero color error, unit SSIM, and unit sharpness
+ok 13 - identical images have zero color error, unit SSIM, and unit sharpness
+  ---
+  duration_ms: 0.902803
+  ...
+# Subtest: a blurred render loses sharpness without being scored as a hole
+ok 14 - a blurred render loses sharpness without being scored as a hole
+  ---
+  duration_ms: 3.338707
+  ...
+# Subtest: camera motion is removed before temporal depth jitter is counted
+ok 15 - camera motion is removed before temporal depth jitter is counted
+  ---
+  duration_ms: 0.745574
+  ...
+# Subtest: temporal scoring handles a full frame without an argument-stack overflow
+ok 16 - temporal scoring handles a full frame without an argument-stack overflow
+  ---
+  duration_ms: 154.097696
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1191.090931

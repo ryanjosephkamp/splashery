@@ -1,0 +1,46 @@
+{
+  "startedAt": "2026-10-16T11:51:03.735004+00:00",
+  "finishedAt": "2026-10-16T11:51:05.003594+00:00",
+  "nodeVersion": "22.14.0",
+  "isolated": true,
+  "note": "Six existing Node test files are outside Playwright testMatch. The benchmark controller was paused, its active whole-file child finished naturally, and these tests ran before resuming it. No browser speed window or other test overlapped.",
+  "sourceHash": "79ff139b207d8ca57abdddfbd8a59f9c1908cdc81e24737bb36d64cdc18e2109",
+  "sourceRevision": "843a8ea0cdc4e90da5616cc8ca3857325fb05218",
+  "files": [
+    {
+      "file": "tests/studio-truth-alignment.test.mjs",
+      "sha256": "502a81d7b6a9c9088cc6b53b1c8f2ed6973ed118b90f308d84d235c45ff89c0f"
+    },
+    {
+      "file": "tests/studio-truth-fixtures.test.mjs",
+      "sha256": "eec43b3cb8bbd179a151c7e573c6fa03a5184b1ec9b07abfbd1fe6b58e161c95"
+    },
+    {
+      "file": "tests/studio-truth-novel.test.mjs",
+      "sha256": "e7043e06cae2d7f61b1197d1f82b294d7d28d46e789b343fcf1b6a340307471b"
+    },
+    {
+      "file": "tests/studio-truth-sampling.test.mjs",
+      "sha256": "e2d4cfbb8b8284dbbf504f0ea6befb3bda9301cffda59cec132999a85a12699f"
+    },
+    {
+      "file": "tests/studio-truth-transport.test.mjs",
+      "sha256": "a6784aa758663a7c9bfb7044c4656ff5c949f558072a4cdd6f5a07d10cb4e064"
+    },
+    {
+      "file": "tests/studio-truth.test.mjs",
+      "sha256": "74f0dc055c94ea80d1cb52f60a81c92275b17ab3dce44627619e3fd69412cde9"
+    }
+  ],
+  "counts": {
+    "tests": 16,
+    "pass": 16,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0
+  },
+  "exitCode": 0,
+  "tapFile": "r4-node-tests.tap",
+  "tapSha256": "0bf7647b22b686e6957b821ac70d47924960474e742c27704e362b90400f2a46",
+  "unchangedFromMain": true
+}

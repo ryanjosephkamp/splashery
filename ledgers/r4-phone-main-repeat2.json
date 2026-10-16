@@ -1,0 +1,4950 @@
+{
+  "kind": "isolated-measurement",
+  "baseline": "5a55f5ccc25ebfa155e5db2391236558feb551ec",
+  "instrument": false,
+  "phone": true,
+  "sourceHash": "ec1886c50d2cc9181df52cd7965ec63f5ed8f0dcfe8cca4475fa3a863c28fc03",
+  "measuredAt": "2026-10-16T11:17:15.209Z",
+  "backend": "llvmpipe",
+  "workerThrottled": false,
+  "warmupMs": 2000,
+  "protocol": "R3 frameend cadence plus separate postrender and changed-picture observations",
+  "pictureClockNote": "Counts changes of the bound-source clock at postrender: native bitmap timestamps, media-element currentTime, or retained frame indices. This is not a pixel-uniqueness or decoder frame-rate measurement",
+  "depthPreparation": "Local-file inference and refinement finish before the unchanged two-second warmup; shelf samples are already complete",
+  "note": "Protocol requires one browser at a time and no competing jobs; CDP page slowdown and software rendering do not measure physical Android",
+  "baselineSourceCorrection": "MP3 picture uses the pinned version's retained selected frames; long films absent from its shelf use its actual upload path",
+  "cases": [
+    {
+      "id": "sample",
+      "depthAtStart": {
+        "pending": false,
+        "completed": null,
+        "total": 96,
+        "rate": null
+      },
+      "depthAtEnd": {
+        "pending": false,
+        "completed": null,
+        "total": 96,
+        "rate": null
+      },
+      "nativeMediaCounters": {
+        "start": {
+          "totalVideoFrames": 106,
+          "droppedVideoFrames": 30
+        },
+        "end": {
+          "totalVideoFrames": 391,
+          "droppedVideoFrames": 198
+        },
+        "note": "Browser media counters, separate from Sharp picture submissions"
+      },
+      "windowMs": 12000,
+      "sourceAdvance": 11.808263000000004,
+      "distinctFrames": 91,
+      "sharpFrames": 159,
+      "title": "Splashery · splats you can play with",
+      "url": "http://127.0.0.1:4173/?renderer=webgl2&adapt=off&profile=low&labs=1",
+      "dimensions": [480, 270],
+      "duration": 6,
+      "renderSize": [585, 900],
+      "pictureCadence": {
+        "n": 113,
+        "total": 11922.10000000149,
+        "median": 85.70000000298023,
+        "worst": 252.39999999850988
+      },
+      "pictureSubmissions": 114,
+      "pictureSubmissionFps": 9.5,
+      "cadence": {
+        "n": 158,
+        "total": 11922.10000000149,
+        "median": 73.44999999925494,
+        "worst": 122.20000000298023
+      },
+      "renderedCadence": {
+        "n": 158,
+        "total": 11922.10000000149,
+        "median": 73.5,
+        "worst": 122.10000000149012
+      },
+      "draws": [
+        {
+          "at": 17757.60000000149,
+          "pictureTime": 1.953143
+        },
+        {
+          "at": 17826.79999999702,
+          "pictureTime": 2.101348
+        },
+        {
+          "at": 17916.20000000298,
+          "pictureTime": 2.101348
+        },
+        {
+          "at": 17986.29999999702,
+          "pictureTime": 2.255175
+        },
+        {
+          "at": 18108.39999999851,
+          "pictureTime": 2.370177
+        },
+        {
+          "at": 18168.89999999851,
+          "pictureTime": 2.438674
+        },
+        {
+          "at": 18241.39999999851,
+          "pictureTime": 2.513669
+        },
+        {
+          "at": 18339.5,
+          "pictureTime": 2.615051
+        },
+        {
+          "at": 18409.79999999702,
+          "pictureTime": 2.615051
+        },
+        {
+          "at": 18513.70000000298,
+          "pictureTime": 2.780759
+        },
+        {
+          "at": 18585.70000000298,
+          "pictureTime": 2.863874
+        },
+        {
+          "at": 18673.89999999851,
+          "pictureTime": 2.93922
+        },
+        {
+          "at": 18753.70000000298,
+          "pictureTime": 3.02319
+        },
+        {
+          "at": 18823,
+          "pictureTime": 3.02319
+        },
+        {
+          "at": 18900.60000000149,
+          "pictureTime": 3.182346
+        },
+        {
+          "at": 18987.79999999702,
+          "pictureTime": 3.260591
+        },
+        {
+          "at": 19068.60000000149,
+          "pictureTime": 3.342148
+        },
+        {
+          "at": 19147.70000000298,
+          "pictureTime": 3.431801
+        },
+        {
+          "at": 19220.39999999851,
+          "pictureTime": 3.431801
+        },
+        {
+          "at": 19290.79999999702,
+          "pictureTime": 3.564327
+        },
+        {
+          "at": 19358.60000000149,
+          "pictureTime": 3.564327
+        },
+        {
+          "at": 19426.60000000149,
+          "pictureTime": 3.698816
+        },
+        {
+          "at": 19502.89999999851,
+          "pictureTime": 3.698816
+        },
+        {
+          "at": 19568.60000000149,
+          "pictureTime": 3.839495
+        },
+        {
+          "at": 19644.60000000149,
+          "pictureTime": 3.839495
+        },
+        {
+          "at": 19704.70000000298,
+          "pictureTime": 3.971842
+        },
+        {
+          "at": 19771.79999999702,
+          "pictureTime": 4.043407
+        },
+        {
+          "at": 19840.60000000149,
+          "pictureTime": 4.110492
+        },
+        {
+          "at": 19918.39999999851,
+          "pictureTime": 4.110492
+        },
+        {
+          "at": 19986.79999999702,
+          "pictureTime": 4.256834
+        },
+        {
+          "at": 20048.70000000298,
+          "pictureTime": 4.256834
+        },
+        {
+          "at": 20119.79999999702,
+          "pictureTime": 4.390615
+        },
+        {
+          "at": 20181.5,
+          "pictureTime": 4.390615
+        },
+        {
+          "at": 20248.60000000149,
+          "pictureTime": 4.528333
+        },
+        {
+          "at": 20321,
+          "pictureTime": 4.528333
+        },
+        {
+          "at": 20392.60000000149,
+          "pictureTime": 4.673026
+        },
+        {
+          "at": 20458.39999999851,
+          "pictureTime": 4.737776
+        },
+        {
+          "at": 20520.20000000298,
+          "pictureTime": 4.795312
+        },
+        {
+          "at": 20605,
+          "pictureTime": 4.872207
+        },
+        {
+          "at": 20667.29999999702,
+          "pictureTime": 4.941525
+        },
+        {
+          "at": 20742.10000000149,
+          "pictureTime": 5.018582
+        },
+        {
+          "at": 20802.39999999851,
+          "pictureTime": 5.018582
+        },
+        {
+          "at": 20880.70000000298,
+          "pictureTime": 5.16071
+        },
+        {
+          "at": 20955,
+          "pictureTime": 5.16071
+        },
+        {
+          "at": 21020.60000000149,
+          "pictureTime": 5.294396
+        },
+        {
+          "at": 21092,
+          "pictureTime": 5.368398
+        },
+        {
+          "at": 21156.20000000298,
+          "pictureTime": 5.368398
+        },
+        {
+          "at": 21224.10000000149,
+          "pictureTime": 5.502425
+        },
+        {
+          "at": 21296.29999999702,
+          "pictureTime": 5.570296
+        },
+        {
+          "at": 21361.60000000149,
+          "pictureTime": 5.570296
+        },
+        {
+          "at": 21431.70000000298,
+          "pictureTime": 5.704459
+        },
+        {
+          "at": 21512.70000000298,
+          "pictureTime": 5.787535
+        },
+        {
+          "at": 21590.70000000298,
+          "pictureTime": 5.865062
+        },
+        {
+          "at": 21661.20000000298,
+          "pictureTime": 5.865062
+        },
+        {
+          "at": 21760.20000000298,
+          "pictureTime": 5.865062
+        },
+        {
+          "at": 21843.10000000149,
+          "pictureTime": 0.036032
+        },
+        {
+          "at": 21915.39999999851,
+          "pictureTime": 0.096601
+        },
+        {
+          "at": 21984.20000000298,
+          "pictureTime": 0.174765
+        },
+        {
+          "at": 22046.70000000298,
+          "pictureTime": 0.174765
+        },
+        {
+          "at": 22142,
+          "pictureTime": 0.329335
+        },
+        {
+          "at": 22207.29999999702,
+          "pictureTime": 0.329335
+        },
+        {
+          "at": 22276.5,
+          "pictureTime": 0.466156
+        },
+        {
+          "at": 22364.20000000298,
+          "pictureTime": 0.553137
+        },
+        {
+          "at": 22439.79999999702,
+          "pictureTime": 0.616895
+        },
+        {
+          "at": 22510.60000000149,
+          "pictureTime": 0.616895
+        },
+        {
+          "at": 22586.10000000149,
+          "pictureTime": 0.774735
+        },
+        {
+          "at": 22659.5,
+          "pictureTime": 0.774735
+        },
+        {
+          "at": 22726.70000000298,
+          "pictureTime": 0.918878
+        },
+        {
+          "at": 22804.79999999702,
+          "pictureTime": 0.918878
+        },
+        {
+          "at": 22881.70000000298,
+          "pictureTime": 1.07205
+        },
+        {
+          "at": 22957.70000000298,
+          "pictureTime": 1.07205
+        },
+        {
+          "at": 23034.29999999702,
+          "pictureTime": 1.221517
+        },
+        {
+          "at": 23126.10000000149,
+          "pictureTime": 1.221517
+        },
+        {
+          "at": 23194.5,
+          "pictureTime": 1.382916
+        },
+        {
+          "at": 23277.39999999851,
+          "pictureTime": 1.382916
+        },
+        {
+          "at": 23360.70000000298,
+          "pictureTime": 1.546262
+        },
+        {
+          "at": 23428.10000000149,
+          "pictureTime": 1.621096
+        },
+        {
+          "at": 23527.70000000298,
+          "pictureTime": 1.70832
+        },
+        {
+          "at": 23611.39999999851,
+          "pictureTime": 1.799013
+        },
+        {
+          "at": 23693.70000000298,
+          "pictureTime": 1.873341
+        },
+        {
+          "at": 23770.79999999702,
+          "pictureTime": 1.950213
+        },
+        {
+          "at": 23862.39999999851,
+          "pictureTime": 2.046548
+        },
+        {
+          "at": 23926.10000000149,
+          "pictureTime": 2.046548
+        },
+        {
+          "at": 24004.39999999851,
+          "pictureTime": 2.200367
+        },
+        {
+          "at": 24107.89999999851,
+          "pictureTime": 2.293195
+        },
+        {
+          "at": 24173.29999999702,
+          "pictureTime": 2.293195
+        },
+        {
+          "at": 24261.60000000149,
+          "pictureTime": 2.450926
+        },
+        {
+          "at": 24347.5,
+          "pictureTime": 2.450926
+        },
+        {
+          "at": 24413.10000000149,
+          "pictureTime": 2.606402
+        },
+        {
+          "at": 24495.70000000298,
+          "pictureTime": 2.606402
+        },
+        {
+          "at": 24578.60000000149,
+          "pictureTime": 2.760557
+        },
+        {
+          "at": 24643.60000000149,
+          "pictureTime": 2.84346
+        },
+        {
+          "at": 24722.10000000149,
+          "pictureTime": 2.907955
+        },
+        {
+          "at": 24786.70000000298,
+          "pictureTime": 2.907955
+        },
+        {
+          "at": 24889.39999999851,
+          "pictureTime": 3.077755
+        },
+        {
+          "at": 24960,
+          "pictureTime": 3.077755
+        },
+        {
+          "at": 25036.29999999702,
+          "pictureTime": 3.219344
+        },
+        {
+          "at": 25110.79999999702,
+          "pictureTime": 3.219344
+        },
+        {
+          "at": 25179.10000000149,
+          "pictureTime": 3.365021
+        },
+        {
+          "at": 25253.60000000149,
+          "pictureTime": 3.365021
+        },
+        {
+          "at": 25323,
+          "pictureTime": 3.514986
+        },
+        {
+          "at": 25415.39999999851,
+          "pictureTime": 3.603425
+        },
+        {
+          "at": 25491,
+          "pictureTime": 3.677586
+        },
+        {
+          "at": 25558.39999999851,
+          "pictureTime": 3.746539
+        },
+        {
+          "at": 25659.29999999702,
+          "pictureTime": 3.843745
+        },
+        {
+          "at": 25735.20000000298,
+          "pictureTime": 3.918141
+        },
+        {
+          "at": 25808.60000000149,
+          "pictureTime": 3.918141
+        },
+        {
+          "at": 25928.70000000298,
+          "pictureTime": 4.117694
+        },
+        {
+          "at": 26015.10000000149,
+          "pictureTime": 4.117694
+        },
+        {
+          "at": 26090.89999999851,
+          "pictureTime": 4.28523
+        },
+        {
+          "at": 26167.10000000149,
+          "pictureTime": 4.355155
+        },
+        {
+          "at": 26241,
+          "pictureTime": 4.424767
+        },
+        {
+          "at": 26298.29999999702,
+          "pictureTime": 4.495936
+        },
+        {
+          "at": 26398.89999999851,
+          "pictureTime": 4.495936
+        },
+        {
+          "at": 26473.60000000149,
+          "pictureTime": 4.658953
+        },
+        {
+          "at": 26547.20000000298,
+          "pictureTime": 4.735658
+        },
+        {
+          "at": 26618.20000000298,
+          "pictureTime": 4.735658
+        },
+        {
+          "at": 26685.60000000149,
+          "pictureTime": 4.876565
+        },
+        {
+          "at": 26755.10000000149,
+          "pictureTime": 4.947482
+        },
+        {
+          "at": 26830.60000000149,
+          "pictureTime": 4.947482
+        },
+        {
+          "at": 26914.5,
+          "pictureTime": 5.105414
+        },
+        {
+          "at": 26986.70000000298,
+          "pictureTime": 5.175964
+        },
+        {
+          "at": 27044,
+          "pictureTime": 5.234682
+        },
+        {
+          "at": 27111.89999999851,
+          "pictureTime": 5.306306
+        },
+        {
+          "at": 27197.60000000149,
+          "pictureTime": 5.382706
+        },
+        {
+          "at": 27261.89999999851,
+          "pictureTime": 5.460463
+        },
+        {
+          "at": 27351.39999999851,
+          "pictureTime": 5.542041
+        },
+        {
+          "at": 27423.79999999702,
+          "pictureTime": 5.611876
+        },
+        {
+          "at": 27503.10000000149,
+          "pictureTime": 5.69722
+        },
+        {
+          "at": 27579.60000000149,
+          "pictureTime": 5.771981
+        },
+        {
+          "at": 27657.29999999702,
+          "pictureTime": 5.842964
+        },
+        {
+          "at": 27731.10000000149,
+          "pictureTime": 5.918544
+        },
+        {
+          "at": 27786.5,
+          "pictureTime": 5.918544
+        },
+        {
+          "at": 27859.5,
+          "pictureTime": 0.018636
+        },
+        {
+          "at": 27940.89999999851,
+          "pictureTime": 0.091038
+        },
+        {
+          "at": 28007.5,
+          "pictureTime": 0.160837
+        },
+        {
+          "at": 28065.10000000149,
+          "pictureTime": 0.222166
+        },
+        {
+          "at": 28146,
+          "pictureTime": 0.222166
+        },
+        {
+          "at": 28214.5,
+          "pictureTime": 0.363806
+        },
+        {
+          "at": 28303.89999999851,
+          "pictureTime": 0.455437
+        },
+        {
+          "at": 28379.79999999702,
+          "pictureTime": 0.455437
+        },
+        {
+          "at": 28457,
+          "pictureTime": 0.605473
+        },
+        {
+          "at": 28539.79999999702,
+          "pictureTime": 0.693945
+        },
+        {
+          "at": 28617,
+          "pictureTime": 0.693945
+        },
+        {
+          "at": 28684.20000000298,
+          "pictureTime": 0.833398
+        },
+        {
+          "at": 28760.39999999851,
+          "pictureTime": 0.912774
+        },
+        {
+          "at": 28831.70000000298,
+          "pictureTime": 0.987479
+        },
+        {
+          "at": 28915.20000000298,
+          "pictureTime": 1.06324
+        },
+        {
+          "at": 28985.70000000298,
+          "pictureTime": 1.138206
+        },
+        {
+          "at": 29061.39999999851,
+          "pictureTime": 1.214136
+        },
+        {
+          "at": 29134.20000000298,
+          "pictureTime": 1.29199
+        },
+        {
+          "at": 29203.89999999851,
+          "pictureTime": 1.29199
+        },
+        {
+          "at": 29281,
+          "pictureTime": 1.435143
+        },
+        {
+          "at": 29348.39999999851,
+          "pictureTime": 1.435143
+        },
+        {
+          "at": 29402.39999999851,
+          "pictureTime": 1.557591
+        },
+        {
+          "at": 29472.70000000298,
+          "pictureTime": 1.624666
+        },
+        {
+          "at": 29540.10000000149,
+          "pictureTime": 1.624666
+        },
+        {
+          "at": 29609.60000000149,
+          "pictureTime": 1.761092
+        },
+        {
+          "at": 29679.70000000298,
+          "pictureTime": 1.831987
+        }
+      ],
+      "costs": {},
+      "gpuDraw": {
+        "supported": false,
+        "elapsedMs": {
+          "n": 0,
+          "total": 0,
+          "median": null
+        },
+        "disjointQueries": 0,
+        "externalQueries": 0,
+        "note": "Nonblocking GPU timer queries span prerender through postrender. They measure GPU elapsed time, separately from inclusive JavaScript submission costs; unavailable tail queries are omitted"
+      },
+      "sourceKind": "HTMLVideoElement",
+      "faces": 0,
+      "rows": [
+        {
+          "at": 17757.60000000149,
+          "time": 2.022812,
+          "frame": 32,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 17757.60000000149
+        },
+        {
+          "at": 17826.79999999702,
+          "time": 2.090448,
+          "frame": 33,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 17826.79999999702
+        },
+        {
+          "at": 17916.20000000298,
+          "time": 2.177776,
+          "frame": 34,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 17916.20000000298
+        },
+        {
+          "at": 17986.29999999702,
+          "time": 2.243857,
+          "frame": 35,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 17986.29999999702
+        },
+        {
+          "at": 18108.5,
+          "time": 2.361491,
+          "frame": 37,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18108.39999999851
+        },
+        {
+          "at": 18169.20000000298,
+          "time": 2.427238,
+          "frame": 38,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18168.89999999851
+        },
+        {
+          "at": 18241.5,
+          "time": 2.503486,
+          "frame": 40,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18241.5
+        },
+        {
+          "at": 18339.5,
+          "time": 2.604807,
+          "frame": 41,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18339.5
+        },
+        {
+          "at": 18409.79999999702,
+          "time": 2.668752,
+          "frame": 42,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18409.79999999702
+        },
+        {
+          "at": 18513.70000000298,
+          "time": 2.769852,
+          "frame": 44,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18513.70000000298
+        },
+        {
+          "at": 18585.70000000298,
+          "time": 2.84829,
+          "frame": 45,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18585.70000000298
+        },
+        {
+          "at": 18673.89999999851,
+          "time": 2.929042,
+          "frame": 46,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18673.89999999851
+        },
+        {
+          "at": 18753.70000000298,
+          "time": 3.011954,
+          "frame": 48,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18753.70000000298
+        },
+        {
+          "at": 18826.10000000149,
+          "time": 3.096144,
+          "frame": 49,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18826.10000000149
+        },
+        {
+          "at": 18900.60000000149,
+          "time": 3.169566,
+          "frame": 50,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18900.60000000149
+        },
+        {
+          "at": 18987.79999999702,
+          "time": 3.250382,
+          "frame": 52,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 18987.79999999702
+        },
+        {
+          "at": 19068.60000000149,
+          "time": 3.333039,
+          "frame": 53,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19068.60000000149
+        },
+        {
+          "at": 19147.70000000298,
+          "time": 3.421632,
+          "frame": 54,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19147.70000000298
+        },
+        {
+          "at": 19220.39999999851,
+          "time": 3.481895,
+          "frame": 55,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19220.39999999851
+        },
+        {
+          "at": 19290.89999999851,
+          "time": 3.556092,
+          "frame": 56,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19290.79999999702
+        },
+        {
+          "at": 19358.60000000149,
+          "time": 3.623941,
+          "frame": 57,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19358.60000000149
+        },
+        {
+          "at": 19426.60000000149,
+          "time": 3.683617,
+          "frame": 58,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19426.60000000149
+        },
+        {
+          "at": 19502.89999999851,
+          "time": 3.765169,
+          "frame": 60,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19502.89999999851
+        },
+        {
+          "at": 19568.60000000149,
+          "time": 3.829327,
+          "frame": 61,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19568.60000000149
+        },
+        {
+          "at": 19644.60000000149,
+          "time": 3.903968,
+          "frame": 62,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19644.60000000149
+        },
+        {
+          "at": 19704.79999999702,
+          "time": 3.961735,
+          "frame": 63,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19704.79999999702
+        },
+        {
+          "at": 19771.79999999702,
+          "time": 4.033223,
+          "frame": 64,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19771.79999999702
+        },
+        {
+          "at": 19840.70000000298,
+          "time": 4.100314,
+          "frame": 65,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19840.60000000149
+        },
+        {
+          "at": 19918.5,
+          "time": 4.176548,
+          "frame": 66,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19918.5
+        },
+        {
+          "at": 19986.79999999702,
+          "time": 4.245568,
+          "frame": 67,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 19986.79999999702
+        },
+        {
+          "at": 20048.70000000298,
+          "time": 4.315863,
+          "frame": 69,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20048.70000000298
+        },
+        {
+          "at": 20119.79999999702,
+          "time": 4.377498,
+          "frame": 70,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20119.79999999702
+        },
+        {
+          "at": 20181.5,
+          "time": 4.447718,
+          "frame": 71,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20181.5
+        },
+        {
+          "at": 20248.60000000149,
+          "time": 4.518164,
+          "frame": 72,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20248.60000000149
+        },
+        {
+          "at": 20321,
+          "time": 4.590116,
+          "frame": 73,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20321
+        },
+        {
+          "at": 20392.60000000149,
+          "time": 4.663013,
+          "frame": 74,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20392.60000000149
+        },
+        {
+          "at": 20458.89999999851,
+          "time": 4.726286,
+          "frame": 75,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20458.89999999851
+        },
+        {
+          "at": 20520.20000000298,
+          "time": 4.78377,
+          "frame": 76,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20520.20000000298
+        },
+        {
+          "at": 20605.10000000149,
+          "time": 4.864031,
+          "frame": 77,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20605
+        },
+        {
+          "at": 20667.29999999702,
+          "time": 4.931472,
+          "frame": 78,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20667.29999999702
+        },
+        {
+          "at": 20742.10000000149,
+          "time": 5.008391,
+          "frame": 80,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20742.10000000149
+        },
+        {
+          "at": 20803.10000000149,
+          "time": 5.074779,
+          "frame": 81,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20802.39999999851
+        },
+        {
+          "at": 20880.70000000298,
+          "time": 5.150549,
+          "frame": 82,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20880.70000000298
+        },
+        {
+          "at": 20955,
+          "time": 5.219205,
+          "frame": 83,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 20955
+        },
+        {
+          "at": 21020.60000000149,
+          "time": 5.283517,
+          "frame": 84,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21020.60000000149
+        },
+        {
+          "at": 21092,
+          "time": 5.361727,
+          "frame": 85,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21092
+        },
+        {
+          "at": 21156.20000000298,
+          "time": 5.423674,
+          "frame": 86,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21156.20000000298
+        },
+        {
+          "at": 21224.10000000149,
+          "time": 5.49288,
+          "frame": 87,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21224.10000000149
+        },
+        {
+          "at": 21296.29999999702,
+          "time": 5.560116,
+          "frame": 88,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21296.29999999702
+        },
+        {
+          "at": 21361.60000000149,
+          "time": 5.625707,
+          "frame": 90,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21361.60000000149
+        },
+        {
+          "at": 21431.79999999702,
+          "time": 5.694677,
+          "frame": 91,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21431.70000000298
+        },
+        {
+          "at": 21512.70000000298,
+          "time": 5.777742,
+          "frame": 92,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21512.70000000298
+        },
+        {
+          "at": 21590.70000000298,
+          "time": 5.856004,
+          "frame": 93,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21590.70000000298
+        },
+        {
+          "at": 21661.29999999702,
+          "time": 5.931742,
+          "frame": 94,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21661.20000000298
+        },
+        {
+          "at": 21760.20000000298,
+          "time": 0,
+          "frame": 0,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21760.20000000298
+        },
+        {
+          "at": 21843.10000000149,
+          "time": 0.038062,
+          "frame": 0,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21843.10000000149
+        },
+        {
+          "at": 21916.20000000298,
+          "time": 0.098585,
+          "frame": 1,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21915.39999999851
+        },
+        {
+          "at": 21984.20000000298,
+          "time": 0.176792,
+          "frame": 2,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 21984.20000000298
+        },
+        {
+          "at": 22046.79999999702,
+          "time": 0.243487,
+          "frame": 3,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22046.70000000298
+        },
+        {
+          "at": 22142,
+          "time": 0.329292,
+          "frame": 5,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22142
+        },
+        {
+          "at": 22208.20000000298,
+          "time": 0.39906,
+          "frame": 6,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22208.20000000298
+        },
+        {
+          "at": 22276.5,
+          "time": 0.46489,
+          "frame": 7,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22276.5
+        },
+        {
+          "at": 22364.5,
+          "time": 0.555027,
+          "frame": 8,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22364.20000000298
+        },
+        {
+          "at": 22439.89999999851,
+          "time": 0.618923,
+          "frame": 9,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22439.89999999851
+        },
+        {
+          "at": 22510.60000000149,
+          "time": 0.700488,
+          "frame": 11,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22510.60000000149
+        },
+        {
+          "at": 22586.10000000149,
+          "time": 0.77665,
+          "frame": 12,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22586.10000000149
+        },
+        {
+          "at": 22659.5,
+          "time": 0.853853,
+          "frame": 13,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22659.5
+        },
+        {
+          "at": 22726.70000000298,
+          "time": 0.920368,
+          "frame": 14,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22726.70000000298
+        },
+        {
+          "at": 22804.79999999702,
+          "time": 0.998988,
+          "frame": 15,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22804.79999999702
+        },
+        {
+          "at": 22882.29999999702,
+          "time": 1.072066,
+          "frame": 17,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22881.70000000298
+        },
+        {
+          "at": 22957.70000000298,
+          "time": 1.150226,
+          "frame": 18,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 22957.70000000298
+        },
+        {
+          "at": 23034.29999999702,
+          "time": 1.22302,
+          "frame": 19,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23034.29999999702
+        },
+        {
+          "at": 23126.10000000149,
+          "time": 1.312371,
+          "frame": 20,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23126.10000000149
+        },
+        {
+          "at": 23194.5,
+          "time": 1.384782,
+          "frame": 22,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23194.5
+        },
+        {
+          "at": 23277.5,
+          "time": 1.465617,
+          "frame": 23,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23277.39999999851
+        },
+        {
+          "at": 23360.79999999702,
+          "time": 1.5471,
+          "frame": 24,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23360.70000000298
+        },
+        {
+          "at": 23428.29999999702,
+          "time": 1.623076,
+          "frame": 25,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23428.29999999702
+        },
+        {
+          "at": 23527.79999999702,
+          "time": 1.712678,
+          "frame": 27,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23527.70000000298
+        },
+        {
+          "at": 23611.5,
+          "time": 1.801029,
+          "frame": 28,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23611.5
+        },
+        {
+          "at": 23693.70000000298,
+          "time": 1.873752,
+          "frame": 29,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23693.70000000298
+        },
+        {
+          "at": 23770.89999999851,
+          "time": 1.956575,
+          "frame": 31,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23770.79999999702
+        },
+        {
+          "at": 23862.70000000298,
+          "time": 2.04702,
+          "frame": 32,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23862.39999999851
+        },
+        {
+          "at": 23926.10000000149,
+          "time": 2.122634,
+          "frame": 33,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 23926.10000000149
+        },
+        {
+          "at": 24004.39999999851,
+          "time": 2.201999,
+          "frame": 35,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24004.39999999851
+        },
+        {
+          "at": 24107.89999999851,
+          "time": 2.295261,
+          "frame": 36,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24107.89999999851
+        },
+        {
+          "at": 24173.5,
+          "time": 2.360224,
+          "frame": 37,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24173.39999999851
+        },
+        {
+          "at": 24261.60000000149,
+          "time": 2.454122,
+          "frame": 39,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24261.60000000149
+        },
+        {
+          "at": 24347.5,
+          "time": 2.540183,
+          "frame": 40,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24347.5
+        },
+        {
+          "at": 24413.10000000149,
+          "time": 2.605769,
+          "frame": 41,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24413.10000000149
+        },
+        {
+          "at": 24495.70000000298,
+          "time": 2.691916,
+          "frame": 43,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24495.70000000298
+        },
+        {
+          "at": 24578.60000000149,
+          "time": 2.762616,
+          "frame": 44,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24578.60000000149
+        },
+        {
+          "at": 24643.70000000298,
+          "time": 2.845148,
+          "frame": 45,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24643.60000000149
+        },
+        {
+          "at": 24722.10000000149,
+          "time": 2.912193,
+          "frame": 46,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24722.10000000149
+        },
+        {
+          "at": 24787.29999999702,
+          "time": 2.988589,
+          "frame": 47,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24786.70000000298
+        },
+        {
+          "at": 24889.5,
+          "time": 3.080387,
+          "frame": 49,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24889.39999999851
+        },
+        {
+          "at": 24960,
+          "time": 3.15134900000149,
+          "frame": 50,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 24960
+        },
+        {
+          "at": 25036.29999999702,
+          "time": 3.220617,
+          "frame": 51,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25036.29999999702
+        },
+        {
+          "at": 25110.79999999702,
+          "time": 3.301154,
+          "frame": 52,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25110.79999999702
+        },
+        {
+          "at": 25179.10000000149,
+          "time": 3.367068,
+          "frame": 53,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25179.10000000149
+        },
+        {
+          "at": 25253.60000000149,
+          "time": 3.44408,
+          "frame": 55,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25253.60000000149
+        },
+        {
+          "at": 25323,
+          "time": 3.516805,
+          "frame": 56,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25323
+        },
+        {
+          "at": 25415.39999999851,
+          "time": 3.604842,
+          "frame": 57,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25415.39999999851
+        },
+        {
+          "at": 25491.10000000149,
+          "time": 3.67961,
+          "frame": 58,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25491
+        },
+        {
+          "at": 25558.5,
+          "time": 3.749543,
+          "frame": 59,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25558.39999999851
+        },
+        {
+          "at": 25660.10000000149,
+          "time": 3.848171,
+          "frame": 61,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25659.29999999702
+        },
+        {
+          "at": 25735.20000000298,
+          "time": 3.920193,
+          "frame": 62,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25735.20000000298
+        },
+        {
+          "at": 25808.60000000149,
+          "time": 3.99741100000149,
+          "frame": 63,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25808.60000000149
+        },
+        {
+          "at": 25929.20000000298,
+          "time": 4.119498,
+          "frame": 65,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 25928.70000000298
+        },
+        {
+          "at": 26015.10000000149,
+          "time": 4.210688,
+          "frame": 67,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26015.10000000149
+        },
+        {
+          "at": 26090.89999999851,
+          "time": 4.287064,
+          "frame": 68,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26090.89999999851
+        },
+        {
+          "at": 26167.10000000149,
+          "time": 4.357159,
+          "frame": 69,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26167.10000000149
+        },
+        {
+          "at": 26241,
+          "time": 4.42473,
+          "frame": 70,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26241
+        },
+        {
+          "at": 26298.29999999702,
+          "time": 4.497969,
+          "frame": 71,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26298.29999999702
+        },
+        {
+          "at": 26399.5,
+          "time": 4.588422,
+          "frame": 73,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26398.89999999851
+        },
+        {
+          "at": 26473.70000000298,
+          "time": 4.660118,
+          "frame": 74,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26473.60000000149
+        },
+        {
+          "at": 26547.20000000298,
+          "time": 4.735622,
+          "frame": 75,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26547.20000000298
+        },
+        {
+          "at": 26618.20000000298,
+          "time": 4.806697,
+          "frame": 76,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26618.20000000298
+        },
+        {
+          "at": 26685.60000000149,
+          "time": 4.878593,
+          "frame": 78,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26685.60000000149
+        },
+        {
+          "at": 26755.10000000149,
+          "time": 4.950813,
+          "frame": 79,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26755.10000000149
+        },
+        {
+          "at": 26830.60000000149,
+          "time": 5.02546,
+          "frame": 80,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26830.60000000149
+        },
+        {
+          "at": 26915.20000000298,
+          "time": 5.10771,
+          "frame": 81,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26914.5
+        },
+        {
+          "at": 26986.70000000298,
+          "time": 5.177969,
+          "frame": 82,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 26986.70000000298
+        },
+        {
+          "at": 27044,
+          "time": 5.236754,
+          "frame": 83,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27044
+        },
+        {
+          "at": 27111.89999999851,
+          "time": 5.306281,
+          "frame": 84,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27111.89999999851
+        },
+        {
+          "at": 27197.60000000149,
+          "time": 5.38481,
+          "frame": 86,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27197.60000000149
+        },
+        {
+          "at": 27261.89999999851,
+          "time": 5.462485,
+          "frame": 87,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27261.89999999851
+        },
+        {
+          "at": 27351.5,
+          "time": 5.54425,
+          "frame": 88,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27351.39999999851
+        },
+        {
+          "at": 27423.79999999702,
+          "time": 5.613724,
+          "frame": 89,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27423.79999999702
+        },
+        {
+          "at": 27503.10000000149,
+          "time": 5.699264,
+          "frame": 91,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27503.10000000149
+        },
+        {
+          "at": 27579.60000000149,
+          "time": 5.774012,
+          "frame": 92,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27579.60000000149
+        },
+        {
+          "at": 27657.29999999702,
+          "time": 5.845548,
+          "frame": 93,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27657.29999999702
+        },
+        {
+          "at": 27731.10000000149,
+          "time": 5.920575,
+          "frame": 94,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27731.10000000149
+        },
+        {
+          "at": 27786.70000000298,
+          "time": 0,
+          "frame": 0,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27786.5
+        },
+        {
+          "at": 27860.10000000149,
+          "time": 0.018617,
+          "frame": 0,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27859.5
+        },
+        {
+          "at": 27940.89999999851,
+          "time": 0.09112700000149011,
+          "frame": 1,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 27940.89999999851
+        },
+        {
+          "at": 28007.5,
+          "time": 0.16079,
+          "frame": 2,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28007.5
+        },
+        {
+          "at": 28065.60000000149,
+          "time": 0.222138,
+          "frame": 3,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28065.10000000149
+        },
+        {
+          "at": 28146,
+          "time": 0.310978,
+          "frame": 4,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28146
+        },
+        {
+          "at": 28214.5,
+          "time": 0.363784,
+          "frame": 5,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28214.5
+        },
+        {
+          "at": 28303.89999999851,
+          "time": 0.455412,
+          "frame": 7,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28303.89999999851
+        },
+        {
+          "at": 28379.79999999702,
+          "time": 0.525782,
+          "frame": 8,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28379.79999999702
+        },
+        {
+          "at": 28457,
+          "time": 0.60544,
+          "frame": 9,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28457
+        },
+        {
+          "at": 28539.79999999702,
+          "time": 0.693058,
+          "frame": 11,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28539.79999999702
+        },
+        {
+          "at": 28617.10000000149,
+          "time": 0.767253,
+          "frame": 12,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28617
+        },
+        {
+          "at": 28684.5,
+          "time": 0.832469,
+          "frame": 13,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28684.20000000298
+        },
+        {
+          "at": 28760.39999999851,
+          "time": 0.912746,
+          "frame": 14,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28760.39999999851
+        },
+        {
+          "at": 28831.70000000298,
+          "time": 0.987455,
+          "frame": 15,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28831.70000000298
+        },
+        {
+          "at": 28915.20000000298,
+          "time": 1.063205,
+          "frame": 17,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28915.20000000298
+        },
+        {
+          "at": 28985.70000000298,
+          "time": 1.138175,
+          "frame": 18,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 28985.70000000298
+        },
+        {
+          "at": 29061.5,
+          "time": 1.214071,
+          "frame": 19,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29061.39999999851
+        },
+        {
+          "at": 29134.20000000298,
+          "time": 1.291591,
+          "frame": 20,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29134.20000000298
+        },
+        {
+          "at": 29203.89999999851,
+          "time": 1.358377,
+          "frame": 21,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29203.89999999851
+        },
+        {
+          "at": 29281,
+          "time": 1.434512,
+          "frame": 22,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29281
+        },
+        {
+          "at": 29349.20000000298,
+          "time": 1.502553,
+          "frame": 24,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29348.39999999851
+        },
+        {
+          "at": 29402.39999999851,
+          "time": 1.556788,
+          "frame": 24,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29402.39999999851
+        },
+        {
+          "at": 29472.70000000298,
+          "time": 1.624644,
+          "frame": 25,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29472.70000000298
+        },
+        {
+          "at": 29540.20000000298,
+          "time": 1.69204,
+          "frame": 27,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29540.10000000149
+        },
+        {
+          "at": 29609.70000000298,
+          "time": 1.760988,
+          "frame": 28,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29609.60000000149
+        },
+        {
+          "at": 29679.70000000298,
+          "time": 1.831075,
+          "frame": 29,
+          "sharp": true,
+          "sample": "sample",
+          "clipName": "Big Buck Bunny (a six-second scene)",
+          "update": 0,
+          "render": 29679.70000000298
+        }
+      ],
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/bunny.mp4",
+          "bytes": 377969,
+          "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny.depth",
+          "bytes": 1055234,
+          "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+          "bytes": 243317,
+          "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+          "bytes": 255139,
+          "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+          "bytes": 252771,
+          "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+          "bytes": 254539,
+          "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+          "bytes": 263182,
+          "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+          "bytes": 266757,
+          "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+          "bytes": 124720,
+          "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8"
+        }
+      ]
+    },
+    {
+      "id": "horse",
+      "depthAtStart": {
+        "pending": false,
+        "completed": null,
+        "total": 15,
+        "rate": null
+      },
+      "depthAtEnd": {
+        "pending": false,
+        "completed": null,
+        "total": 15,
+        "rate": null
+      },
+      "nativeMediaCounters": null,
+      "windowMs": 12000,
+      "sourceAdvance": 11.951600000001491,
+      "distinctFrames": 15,
+      "sharpFrames": 178,
+      "title": "Splashery · splats you can play with",
+      "url": "http://127.0.0.1:4173/?renderer=webgl2&adapt=off&profile=low&labs=1",
+      "dimensions": [300, 200],
+      "duration": 1.5,
+      "renderSize": [585, 900],
+      "pictureCadence": {
+        "n": 118,
+        "total": 11952.79999999702,
+        "median": 106.05000000074506,
+        "worst": 218.90000000596046
+      },
+      "pictureSubmissions": 119,
+      "pictureSubmissionFps": 9.916666666666666,
+      "cadence": {
+        "n": 177,
+        "total": 11952.70000000298,
+        "median": 65,
+        "worst": 218.90000000596046
+      },
+      "renderedCadence": {
+        "n": 177,
+        "total": 11952.79999999702,
+        "median": 64.89999999850988,
+        "worst": 218.90000000596046
+      },
+      "draws": [
+        {
+          "at": 32495.70000000298,
+          "pictureTime": 5
+        },
+        {
+          "at": 32543.20000000298,
+          "pictureTime": 5
+        },
+        {
+          "at": 32610.39999999851,
+          "pictureTime": 6
+        },
+        {
+          "at": 32681.60000000149,
+          "pictureTime": 7
+        },
+        {
+          "at": 32724.29999999702,
+          "pictureTime": 7
+        },
+        {
+          "at": 32799.39999999851,
+          "pictureTime": 8
+        },
+        {
+          "at": 32876.29999999702,
+          "pictureTime": 8
+        },
+        {
+          "at": 32927.60000000149,
+          "pictureTime": 9
+        },
+        {
+          "at": 33026.70000000298,
+          "pictureTime": 10
+        },
+        {
+          "at": 33089.20000000298,
+          "pictureTime": 11
+        },
+        {
+          "at": 33168.29999999702,
+          "pictureTime": 11
+        },
+        {
+          "at": 33249.89999999851,
+          "pictureTime": 12
+        },
+        {
+          "at": 33319.5,
+          "pictureTime": 13
+        },
+        {
+          "at": 33383.29999999702,
+          "pictureTime": 14
+        },
+        {
+          "at": 33472.39999999851,
+          "pictureTime": 14
+        },
+        {
+          "at": 33557.70000000298,
+          "pictureTime": 0
+        },
+        {
+          "at": 33623.79999999702,
+          "pictureTime": 1
+        },
+        {
+          "at": 33692.20000000298,
+          "pictureTime": 2
+        },
+        {
+          "at": 33835.5,
+          "pictureTime": 3
+        },
+        {
+          "at": 33922.70000000298,
+          "pictureTime": 4
+        },
+        {
+          "at": 33988.5,
+          "pictureTime": 5
+        },
+        {
+          "at": 34050.29999999702,
+          "pictureTime": 5
+        },
+        {
+          "at": 34117.60000000149,
+          "pictureTime": 6
+        },
+        {
+          "at": 34208.70000000298,
+          "pictureTime": 7
+        },
+        {
+          "at": 34259.70000000298,
+          "pictureTime": 7
+        },
+        {
+          "at": 34350.70000000298,
+          "pictureTime": 8
+        },
+        {
+          "at": 34460.39999999851,
+          "pictureTime": 9
+        },
+        {
+          "at": 34535,
+          "pictureTime": 10
+        },
+        {
+          "at": 34614.60000000149,
+          "pictureTime": 11
+        },
+        {
+          "at": 34684,
+          "pictureTime": 12
+        },
+        {
+          "at": 34751.29999999702,
+          "pictureTime": 12
+        },
+        {
+          "at": 34862.39999999851,
+          "pictureTime": 13
+        },
+        {
+          "at": 34967,
+          "pictureTime": 14
+        },
+        {
+          "at": 35071.10000000149,
+          "pictureTime": 0
+        },
+        {
+          "at": 35147.89999999851,
+          "pictureTime": 1
+        },
+        {
+          "at": 35235.20000000298,
+          "pictureTime": 2
+        },
+        {
+          "at": 35306.79999999702,
+          "pictureTime": 3
+        },
+        {
+          "at": 35366.29999999702,
+          "pictureTime": 3
+        },
+        {
+          "at": 35449.70000000298,
+          "pictureTime": 4
+        },
+        {
+          "at": 35535.29999999702,
+          "pictureTime": 5
+        },
+        {
+          "at": 35599,
+          "pictureTime": 6
+        },
+        {
+          "at": 35702.10000000149,
+          "pictureTime": 7
+        },
+        {
+          "at": 35769,
+          "pictureTime": 7
+        },
+        {
+          "at": 35844.10000000149,
+          "pictureTime": 8
+        },
+        {
+          "at": 35928.79999999702,
+          "pictureTime": 9
+        },
+        {
+          "at": 35983.60000000149,
+          "pictureTime": 10
+        },
+        {
+          "at": 36041.39999999851,
+          "pictureTime": 10
+        },
+        {
+          "at": 36108.29999999702,
+          "pictureTime": 11
+        },
+        {
+          "at": 36327.20000000298,
+          "pictureTime": 12
+        },
+        {
+          "at": 36383.29999999702,
+          "pictureTime": 14
+        },
+        {
+          "at": 36394.39999999851,
+          "pictureTime": 14
+        },
+        {
+          "at": 36445.5,
+          "pictureTime": 14
+        },
+        {
+          "at": 36511.89999999851,
+          "pictureTime": 0
+        },
+        {
+          "at": 36557.39999999851,
+          "pictureTime": 0
+        },
+        {
+          "at": 36627.20000000298,
+          "pictureTime": 1
+        },
+        {
+          "at": 36699.39999999851,
+          "pictureTime": 2
+        },
+        {
+          "at": 36737.89999999851,
+          "pictureTime": 2
+        },
+        {
+          "at": 36806.20000000298,
+          "pictureTime": 3
+        },
+        {
+          "at": 36865.60000000149,
+          "pictureTime": 3
+        },
+        {
+          "at": 36932.39999999851,
+          "pictureTime": 4
+        },
+        {
+          "at": 36993.5,
+          "pictureTime": 5
+        },
+        {
+          "at": 37045,
+          "pictureTime": 5
+        },
+        {
+          "at": 37110.20000000298,
+          "pictureTime": 6
+        },
+        {
+          "at": 37161.60000000149,
+          "pictureTime": 6
+        },
+        {
+          "at": 37213.20000000298,
+          "pictureTime": 7
+        },
+        {
+          "at": 37272.5,
+          "pictureTime": 7
+        },
+        {
+          "at": 37338.10000000149,
+          "pictureTime": 8
+        },
+        {
+          "at": 37395.89999999851,
+          "pictureTime": 9
+        },
+        {
+          "at": 37448.20000000298,
+          "pictureTime": 9
+        },
+        {
+          "at": 37510,
+          "pictureTime": 10
+        },
+        {
+          "at": 37559,
+          "pictureTime": 10
+        },
+        {
+          "at": 37616.70000000298,
+          "pictureTime": 11
+        },
+        {
+          "at": 37722.10000000149,
+          "pictureTime": 12
+        },
+        {
+          "at": 37735,
+          "pictureTime": 12
+        },
+        {
+          "at": 37792.29999999702,
+          "pictureTime": 13
+        },
+        {
+          "at": 37855.29999999702,
+          "pictureTime": 13
+        },
+        {
+          "at": 37920.60000000149,
+          "pictureTime": 14
+        },
+        {
+          "at": 37983.5,
+          "pictureTime": 0
+        },
+        {
+          "at": 38037.29999999702,
+          "pictureTime": 0
+        },
+        {
+          "at": 38110,
+          "pictureTime": 1
+        },
+        {
+          "at": 38166,
+          "pictureTime": 1
+        },
+        {
+          "at": 38227.10000000149,
+          "pictureTime": 2
+        },
+        {
+          "at": 38291.29999999702,
+          "pictureTime": 3
+        },
+        {
+          "at": 38340.79999999702,
+          "pictureTime": 3
+        },
+        {
+          "at": 38418.60000000149,
+          "pictureTime": 4
+        },
+        {
+          "at": 38494.60000000149,
+          "pictureTime": 5
+        },
+        {
+          "at": 38552,
+          "pictureTime": 5
+        },
+        {
+          "at": 38666.70000000298,
+          "pictureTime": 6
+        },
+        {
+          "at": 38712.89999999851,
+          "pictureTime": 7
+        },
+        {
+          "at": 38762,
+          "pictureTime": 7
+        },
+        {
+          "at": 38832.70000000298,
+          "pictureTime": 8
+        },
+        {
+          "at": 38893.39999999851,
+          "pictureTime": 9
+        },
+        {
+          "at": 38948.5,
+          "pictureTime": 9
+        },
+        {
+          "at": 39017,
+          "pictureTime": 10
+        },
+        {
+          "at": 39068.5,
+          "pictureTime": 10
+        },
+        {
+          "at": 39129.20000000298,
+          "pictureTime": 11
+        },
+        {
+          "at": 39208.10000000149,
+          "pictureTime": 12
+        },
+        {
+          "at": 39254.70000000298,
+          "pictureTime": 12
+        },
+        {
+          "at": 39324.89999999851,
+          "pictureTime": 13
+        },
+        {
+          "at": 39387.70000000298,
+          "pictureTime": 14
+        },
+        {
+          "at": 39437.39999999851,
+          "pictureTime": 14
+        },
+        {
+          "at": 39513.10000000149,
+          "pictureTime": 0
+        },
+        {
+          "at": 39580,
+          "pictureTime": 1
+        },
+        {
+          "at": 39634.89999999851,
+          "pictureTime": 1
+        },
+        {
+          "at": 39705.70000000298,
+          "pictureTime": 2
+        },
+        {
+          "at": 39750.20000000298,
+          "pictureTime": 2
+        },
+        {
+          "at": 39798,
+          "pictureTime": 3
+        },
+        {
+          "at": 39924,
+          "pictureTime": 4
+        },
+        {
+          "at": 39940.60000000149,
+          "pictureTime": 4
+        },
+        {
+          "at": 40001.79999999702,
+          "pictureTime": 5
+        },
+        {
+          "at": 40061.5,
+          "pictureTime": 5
+        },
+        {
+          "at": 40126.39999999851,
+          "pictureTime": 6
+        },
+        {
+          "at": 40209.29999999702,
+          "pictureTime": 7
+        },
+        {
+          "at": 40320.10000000149,
+          "pictureTime": 8
+        },
+        {
+          "at": 40375.10000000149,
+          "pictureTime": 8
+        },
+        {
+          "at": 40439.5,
+          "pictureTime": 9
+        },
+        {
+          "at": 40492.79999999702,
+          "pictureTime": 10
+        },
+        {
+          "at": 40535.5,
+          "pictureTime": 10
+        },
+        {
+          "at": 40609.20000000298,
+          "pictureTime": 11
+        },
+        {
+          "at": 40674.89999999851,
+          "pictureTime": 11
+        },
+        {
+          "at": 40729.20000000298,
+          "pictureTime": 12
+        },
+        {
+          "at": 40792.39999999851,
+          "pictureTime": 13
+        },
+        {
+          "at": 40844,
+          "pictureTime": 13
+        },
+        {
+          "at": 40922.70000000298,
+          "pictureTime": 14
+        },
+        {
+          "at": 40975.89999999851,
+          "pictureTime": 14
+        },
+        {
+          "at": 41038.29999999702,
+          "pictureTime": 0
+        },
+        {
+          "at": 41105.70000000298,
+          "pictureTime": 1
+        },
+        {
+          "at": 41164.10000000149,
+          "pictureTime": 1
+        },
+        {
+          "at": 41240,
+          "pictureTime": 2
+        },
+        {
+          "at": 41315.70000000298,
+          "pictureTime": 3
+        },
+        {
+          "at": 41358.39999999851,
+          "pictureTime": 3
+        },
+        {
+          "at": 41475.10000000149,
+          "pictureTime": 4
+        },
+        {
+          "at": 41529.29999999702,
+          "pictureTime": 5
+        },
+        {
+          "at": 41586.60000000149,
+          "pictureTime": 6
+        },
+        {
+          "at": 41648.10000000149,
+          "pictureTime": 6
+        },
+        {
+          "at": 41721.39999999851,
+          "pictureTime": 7
+        },
+        {
+          "at": 41776.29999999702,
+          "pictureTime": 7
+        },
+        {
+          "at": 41836.29999999702,
+          "pictureTime": 8
+        },
+        {
+          "at": 41951.5,
+          "pictureTime": 9
+        },
+        {
+          "at": 41964.60000000149,
+          "pictureTime": 9
+        },
+        {
+          "at": 42016.70000000298,
+          "pictureTime": 10
+        },
+        {
+          "at": 42101.20000000298,
+          "pictureTime": 11
+        },
+        {
+          "at": 42115.89999999851,
+          "pictureTime": 11
+        },
+        {
+          "at": 42172,
+          "pictureTime": 11
+        },
+        {
+          "at": 42233.89999999851,
+          "pictureTime": 12
+        },
+        {
+          "at": 42305.79999999702,
+          "pictureTime": 13
+        },
+        {
+          "at": 42357.79999999702,
+          "pictureTime": 13
+        },
+        {
+          "at": 42433.89999999851,
+          "pictureTime": 14
+        },
+        {
+          "at": 42501.70000000298,
+          "pictureTime": 0
+        },
+        {
+          "at": 42566.79999999702,
+          "pictureTime": 0
+        },
+        {
+          "at": 42637.60000000149,
+          "pictureTime": 1
+        },
+        {
+          "at": 42706.70000000298,
+          "pictureTime": 2
+        },
+        {
+          "at": 42746.39999999851,
+          "pictureTime": 2
+        },
+        {
+          "at": 42825.89999999851,
+          "pictureTime": 3
+        },
+        {
+          "at": 42890.20000000298,
+          "pictureTime": 4
+        },
+        {
+          "at": 42953.39999999851,
+          "pictureTime": 4
+        },
+        {
+          "at": 43015.89999999851,
+          "pictureTime": 5
+        },
+        {
+          "at": 43081.60000000149,
+          "pictureTime": 6
+        },
+        {
+          "at": 43142.89999999851,
+          "pictureTime": 6
+        },
+        {
+          "at": 43217,
+          "pictureTime": 7
+        },
+        {
+          "at": 43269.70000000298,
+          "pictureTime": 7
+        },
+        {
+          "at": 43336.70000000298,
+          "pictureTime": 8
+        },
+        {
+          "at": 43398.5,
+          "pictureTime": 9
+        },
+        {
+          "at": 43460.20000000298,
+          "pictureTime": 9
+        },
+        {
+          "at": 43537.20000000298,
+          "pictureTime": 10
+        },
+        {
+          "at": 43606.10000000149,
+          "pictureTime": 11
+        },
+        {
+          "at": 43664.39999999851,
+          "pictureTime": 11
+        },
+        {
+          "at": 43728.79999999702,
+          "pictureTime": 12
+        },
+        {
+          "at": 43791.20000000298,
+          "pictureTime": 13
+        },
+        {
+          "at": 43841,
+          "pictureTime": 13
+        },
+        {
+          "at": 43918.70000000298,
+          "pictureTime": 14
+        },
+        {
+          "at": 44032.39999999851,
+          "pictureTime": 0
+        },
+        {
+          "at": 44049.39999999851,
+          "pictureTime": 0
+        },
+        {
+          "at": 44121.10000000149,
+          "pictureTime": 1
+        },
+        {
+          "at": 44202.10000000149,
+          "pictureTime": 2
+        },
+        {
+          "at": 44243.60000000149,
+          "pictureTime": 2
+        },
+        {
+          "at": 44338.5,
+          "pictureTime": 3
+        },
+        {
+          "at": 44448.5,
+          "pictureTime": 4
+        }
+      ],
+      "costs": {},
+      "gpuDraw": {
+        "supported": false,
+        "elapsedMs": {
+          "n": 0,
+          "total": 0,
+          "median": null
+        },
+        "disjointQueries": 0,
+        "externalQueries": 0,
+        "note": "Nonblocking GPU timer queries span prerender through postrender. They measure GPU elapsed time, separately from inclusive JavaScript submission costs; unavailable tail queries are omitted"
+      },
+      "faces": 0,
+      "rows": [
+        {
+          "at": 32495.79999999702,
+          "time": 0.5117999999970166,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 32495.70000000298
+        },
+        {
+          "at": 32543.29999999702,
+          "time": 0.5683999999985119,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 32543.29999999702
+        },
+        {
+          "at": 32610.39999999851,
+          "time": 0.6288999999985094,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 32610.39999999851
+        },
+        {
+          "at": 32682.29999999702,
+          "time": 0.7017999999970215,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 32681.60000000149
+        },
+        {
+          "at": 32724.29999999702,
+          "time": 0.7481999999955278,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 32724.29999999702
+        },
+        {
+          "at": 32799.39999999851,
+          "time": 0.8177999999970211,
+          "frame": 8,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 32799.39999999851
+        },
+        {
+          "at": 32876.29999999702,
+          "time": 0.8967999999970218,
+          "frame": 8,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 32876.29999999702
+        },
+        {
+          "at": 32927.60000000149,
+          "time": 0.9570999999940426,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 32927.60000000149
+        },
+        {
+          "at": 33026.70000000298,
+          "time": 1.04079999999702,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33026.70000000298
+        },
+        {
+          "at": 33089.20000000298,
+          "time": 1.1039999999999992,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33089.20000000298
+        },
+        {
+          "at": 33168.29999999702,
+          "time": 1.1888999999985117,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33168.29999999702
+        },
+        {
+          "at": 33250,
+          "time": 1.2682999999970193,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33249.89999999851
+        },
+        {
+          "at": 33319.5,
+          "time": 1.337099999994038,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33319.5
+        },
+        {
+          "at": 33383.29999999702,
+          "time": 1.4029999999999987,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33383.29999999702
+        },
+        {
+          "at": 33472.39999999851,
+          "time": 1.4955999999940417,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33472.39999999851
+        },
+        {
+          "at": 33558,
+          "time": 0.07249999999999801,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33557.70000000298
+        },
+        {
+          "at": 33623.79999999702,
+          "time": 0.14389999999851,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33623.79999999702
+        },
+        {
+          "at": 33692.20000000298,
+          "time": 0.2110999999940404,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33692.20000000298
+        },
+        {
+          "at": 33835.5,
+          "time": 0.35619999999553187,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33835.5
+        },
+        {
+          "at": 33922.70000000298,
+          "time": 0.4440999999940374,
+          "frame": 4,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33922.70000000298
+        },
+        {
+          "at": 33988.5,
+          "time": 0.5067999999970212,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 33988.5
+        },
+        {
+          "at": 34050.29999999702,
+          "time": 0.5720000000000027,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34050.29999999702
+        },
+        {
+          "at": 34117.60000000149,
+          "time": 0.6347999999970213,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34117.60000000149
+        },
+        {
+          "at": 34208.70000000298,
+          "time": 0.7235000000000014,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34208.70000000298
+        },
+        {
+          "at": 34259.70000000298,
+          "time": 0.7786999999955313,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34259.70000000298
+        },
+        {
+          "at": 34350.79999999702,
+          "time": 0.8721999999955301,
+          "frame": 8,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34350.70000000298
+        },
+        {
+          "at": 34460.39999999851,
+          "time": 0.9735000000000014,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34460.39999999851
+        },
+        {
+          "at": 34535,
+          "time": 1.0405999999940363,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34535
+        },
+        {
+          "at": 34614.60000000149,
+          "time": 1.1281999999955303,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34614.60000000149
+        },
+        {
+          "at": 34684.89999999851,
+          "time": 1.2043999999985076,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34684
+        },
+        {
+          "at": 34751.29999999702,
+          "time": 1.2743999999985078,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34751.29999999702
+        },
+        {
+          "at": 34862.89999999851,
+          "time": 1.3770000000000024,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34862.39999999851
+        },
+        {
+          "at": 34967,
+          "time": 1.484499999999997,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 34967
+        },
+        {
+          "at": 35071.20000000298,
+          "time": 0.08400000000000318,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35071.10000000149
+        },
+        {
+          "at": 35147.89999999851,
+          "time": 0.1620999999940409,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35147.89999999851
+        },
+        {
+          "at": 35235.20000000298,
+          "time": 0.25109999999403954,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35235.20000000298
+        },
+        {
+          "at": 35306.79999999702,
+          "time": 0.3248999999985074,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35306.79999999702
+        },
+        {
+          "at": 35366.39999999851,
+          "time": 0.38979999999701676,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35366.39999999851
+        },
+        {
+          "at": 35449.70000000298,
+          "time": 0.46659999999403823,
+          "frame": 4,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35449.70000000298
+        },
+        {
+          "at": 35535.29999999702,
+          "time": 0.5420999999940364,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35535.29999999702
+        },
+        {
+          "at": 35599,
+          "time": 0.6161999999955299,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35599
+        },
+        {
+          "at": 35702.10000000149,
+          "time": 0.7235000000000014,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35702.10000000149
+        },
+        {
+          "at": 35769,
+          "time": 0.794399999998511,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35769
+        },
+        {
+          "at": 35845,
+          "time": 0.8630999999940414,
+          "frame": 8,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35844.10000000149
+        },
+        {
+          "at": 35928.79999999702,
+          "time": 0.949799999997019,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35928.79999999702
+        },
+        {
+          "at": 35983.60000000149,
+          "time": 1,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 35983.60000000149
+        },
+        {
+          "at": 36041.39999999851,
+          "time": 1.0675999999940373,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36041.39999999851
+        },
+        {
+          "at": 36108.29999999702,
+          "time": 1.136899999998512,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36108.29999999702
+        },
+        {
+          "at": 36327.20000000298,
+          "time": 1.2995000000000019,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36327.20000000298
+        },
+        {
+          "at": 36383.29999999702,
+          "time": 1.403199999995529,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36383.29999999702
+        },
+        {
+          "at": 36394.39999999851,
+          "time": 1.4217999999970203,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36394.39999999851
+        },
+        {
+          "at": 36445.5,
+          "time": 1.470599999994036,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36445.5
+        },
+        {
+          "at": 36511.89999999851,
+          "time": 0.03349999999999653,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36511.89999999851
+        },
+        {
+          "at": 36557.39999999851,
+          "time": 0.08200000000000074,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36557.39999999851
+        },
+        {
+          "at": 36627.29999999702,
+          "time": 0.1450999999940379,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36627.20000000298
+        },
+        {
+          "at": 36699.39999999851,
+          "time": 0.21699999999999875,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36699.39999999851
+        },
+        {
+          "at": 36737.89999999851,
+          "time": 0.26079999999701897,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36737.89999999851
+        },
+        {
+          "at": 36806.20000000298,
+          "time": 0.3292999999970192,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36806.20000000298
+        },
+        {
+          "at": 36865.60000000149,
+          "time": 0.38819999999552834,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36865.60000000149
+        },
+        {
+          "at": 36932.39999999851,
+          "time": 0.45369999999552846,
+          "frame": 4,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36932.39999999851
+        },
+        {
+          "at": 36993.5,
+          "time": 0.5160999999940401,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 36993.5
+        },
+        {
+          "at": 37045.10000000149,
+          "time": 0.5675000000000026,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37045
+        },
+        {
+          "at": 37110.39999999851,
+          "time": 0.6288999999985094,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37110.20000000298
+        },
+        {
+          "at": 37161.60000000149,
+          "time": 0.688299999997021,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37161.60000000149
+        },
+        {
+          "at": 37213.20000000298,
+          "time": 0.7305999999940411,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37213.20000000298
+        },
+        {
+          "at": 37272.5,
+          "time": 0.7965999999940365,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37272.5
+        },
+        {
+          "at": 37338.60000000149,
+          "time": 0.8543999999985132,
+          "frame": 8,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37338.60000000149
+        },
+        {
+          "at": 37395.89999999851,
+          "time": 0.9167999999970178,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37395.89999999851
+        },
+        {
+          "at": 37448.20000000298,
+          "time": 0.9722999999970199,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37448.20000000298
+        },
+        {
+          "at": 37510,
+          "time": 1.0272999999970196,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37510
+        },
+        {
+          "at": 37559,
+          "time": 1.0838999999985077,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37559
+        },
+        {
+          "at": 37617.5,
+          "time": 1.1347999999970213,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37617.5
+        },
+        {
+          "at": 37722.10000000149,
+          "time": 1.2382999999970181,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37722.10000000149
+        },
+        {
+          "at": 37735,
+          "time": 1.26159999999404,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37735
+        },
+        {
+          "at": 37792.29999999702,
+          "time": 1.3101999999955325,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37792.29999999702
+        },
+        {
+          "at": 37855.29999999702,
+          "time": 1.3780000000000001,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37855.29999999702
+        },
+        {
+          "at": 37920.60000000149,
+          "time": 1.440199999995528,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37920.60000000149
+        },
+        {
+          "at": 37983.5,
+          "time": 0.0008999999985093154,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 37983.5
+        },
+        {
+          "at": 38038.70000000298,
+          "time": 0.06129999999701852,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38037.29999999702
+        },
+        {
+          "at": 38110,
+          "time": 0.1277999999970163,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38110
+        },
+        {
+          "at": 38166.70000000298,
+          "time": 0.1935999999940421,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38166
+        },
+        {
+          "at": 38227.10000000149,
+          "time": 0.24429999999701835,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38227.10000000149
+        },
+        {
+          "at": 38291.39999999851,
+          "time": 0.3110999999940418,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38291.39999999851
+        },
+        {
+          "at": 38340.79999999702,
+          "time": 0.36599999999999966,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38340.79999999702
+        },
+        {
+          "at": 38418.70000000298,
+          "time": 0.4369999999999976,
+          "frame": 4,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38418.60000000149
+        },
+        {
+          "at": 38494.60000000149,
+          "time": 0.5135000000000005,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38494.60000000149
+        },
+        {
+          "at": 38552,
+          "time": 0.5776999999955308,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38552
+        },
+        {
+          "at": 38666.70000000298,
+          "time": 0.6863999999985069,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38666.70000000298
+        },
+        {
+          "at": 38713,
+          "time": 0.7358999999985087,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38712.89999999851
+        },
+        {
+          "at": 38762,
+          "time": 0.785499999999999,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38762
+        },
+        {
+          "at": 38832.70000000298,
+          "time": 0.8506999999955269,
+          "frame": 8,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38832.70000000298
+        },
+        {
+          "at": 38893.39999999851,
+          "time": 0.9121999999955293,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38893.39999999851
+        },
+        {
+          "at": 38948.5,
+          "time": 0.9731999999955292,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 38948.5
+        },
+        {
+          "at": 39017,
+          "time": 1.0349999999999966,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39017
+        },
+        {
+          "at": 39068.5,
+          "time": 1.09879999999702,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39068.5
+        },
+        {
+          "at": 39129.29999999702,
+          "time": 1.1556999999955266,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39129.29999999702
+        },
+        {
+          "at": 39208.10000000149,
+          "time": 1.2310000000000016,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39208.10000000149
+        },
+        {
+          "at": 39255.20000000298,
+          "time": 1.2800000000000011,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39254.70000000298
+        },
+        {
+          "at": 39324.89999999851,
+          "time": 1.3441999999955314,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39324.89999999851
+        },
+        {
+          "at": 39387.70000000298,
+          "time": 1.4065000000000012,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39387.70000000298
+        },
+        {
+          "at": 39437.39999999851,
+          "time": 1.4673999999985128,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39437.39999999851
+        },
+        {
+          "at": 39513.10000000149,
+          "time": 0.035099999994038455,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39513.10000000149
+        },
+        {
+          "at": 39580,
+          "time": 0.10150000000000148,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39580
+        },
+        {
+          "at": 39634.89999999851,
+          "time": 0.155099999994043,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39634.89999999851
+        },
+        {
+          "at": 39705.79999999702,
+          "time": 0.2240999999940385,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39705.79999999702
+        },
+        {
+          "at": 39750.39999999851,
+          "time": 0.2745000000000033,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39750.39999999851
+        },
+        {
+          "at": 39801.10000000149,
+          "time": 0.32759999999404243,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39798
+        },
+        {
+          "at": 39924,
+          "time": 0.440599999994042,
+          "frame": 4,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39924
+        },
+        {
+          "at": 39940.60000000149,
+          "time": 0.4654999999999987,
+          "frame": 4,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 39940.60000000149
+        },
+        {
+          "at": 40001.79999999702,
+          "time": 0.5180000000000007,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40001.79999999702
+        },
+        {
+          "at": 40061.5,
+          "time": 0.5841999999955263,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40061.5
+        },
+        {
+          "at": 40126.5,
+          "time": 0.6415999999940425,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40126.39999999851
+        },
+        {
+          "at": 40209.29999999702,
+          "time": 0.7307999999970178,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40209.29999999702
+        },
+        {
+          "at": 40320.10000000149,
+          "time": 0.8378999999985126,
+          "frame": 8,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40320.10000000149
+        },
+        {
+          "at": 40375.79999999702,
+          "time": 0.89539999999851,
+          "frame": 8,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40375.10000000149
+        },
+        {
+          "at": 40439.60000000149,
+          "time": 0.9603999999985078,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40439.5
+        },
+        {
+          "at": 40492.79999999702,
+          "time": 1.0132999999970167,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40492.79999999702
+        },
+        {
+          "at": 40535.5,
+          "time": 1.0611999999955302,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40535.5
+        },
+        {
+          "at": 40609.20000000298,
+          "time": 1.1240000000000023,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40609.20000000298
+        },
+        {
+          "at": 40675,
+          "time": 1.198999999999998,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40675
+        },
+        {
+          "at": 40729.20000000298,
+          "time": 1.2482999999970232,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40729.20000000298
+        },
+        {
+          "at": 40792.39999999851,
+          "time": 1.3138999999985117,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40792.39999999851
+        },
+        {
+          "at": 40844,
+          "time": 1.3693999999985067,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40844
+        },
+        {
+          "at": 40922.70000000298,
+          "time": 1.4425000000000026,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40922.70000000298
+        },
+        {
+          "at": 40975.89999999851,
+          "time": 1.4997999999970233,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 40975.89999999851
+        },
+        {
+          "at": 41038.29999999702,
+          "time": 0.05719999999553238,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41038.29999999702
+        },
+        {
+          "at": 41105.79999999702,
+          "time": 0.1255000000000024,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41105.70000000298
+        },
+        {
+          "at": 41164.10000000149,
+          "time": 0.18759999999404187,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41164.10000000149
+        },
+        {
+          "at": 41240,
+          "time": 0.25829999999702125,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41240
+        },
+        {
+          "at": 41315.70000000298,
+          "time": 0.3296999999955261,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41315.70000000298
+        },
+        {
+          "at": 41358.79999999702,
+          "time": 0.38239999999851193,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41358.39999999851
+        },
+        {
+          "at": 41475.10000000149,
+          "time": 0.4950999999940393,
+          "frame": 4,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41475.10000000149
+        },
+        {
+          "at": 41529.29999999702,
+          "time": 0.5503999999985112,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41529.29999999702
+        },
+        {
+          "at": 41586.60000000149,
+          "time": 0.6015999999940362,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41586.60000000149
+        },
+        {
+          "at": 41648.10000000149,
+          "time": 0.6756999999955298,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41648.10000000149
+        },
+        {
+          "at": 41721.39999999851,
+          "time": 0.7395999999940415,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41721.39999999851
+        },
+        {
+          "at": 41776.29999999702,
+          "time": 0.7998999999985088,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41776.29999999702
+        },
+        {
+          "at": 41836.39999999851,
+          "time": 0.8543999999985132,
+          "frame": 8,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41836.29999999702
+        },
+        {
+          "at": 41951.5,
+          "time": 0.9696999999955267,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41951.5
+        },
+        {
+          "at": 41964.60000000149,
+          "time": 0.9901999999955322,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 41964.60000000149
+        },
+        {
+          "at": 42016.79999999702,
+          "time": 1.0278999999985103,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42016.79999999702
+        },
+        {
+          "at": 42101.29999999702,
+          "time": 1.1208999999985068,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42101.20000000298
+        },
+        {
+          "at": 42115.89999999851,
+          "time": 1.1401999999955308,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42115.89999999851
+        },
+        {
+          "at": 42172,
+          "time": 1.1980999999940423,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42172
+        },
+        {
+          "at": 42233.89999999851,
+          "time": 1.2535000000000025,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42233.89999999851
+        },
+        {
+          "at": 42305.89999999851,
+          "time": 1.3245999999940423,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42305.79999999702
+        },
+        {
+          "at": 42357.79999999702,
+          "time": 1.3825999999940422,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42357.79999999702
+        },
+        {
+          "at": 42433.89999999851,
+          "time": 1.4602999999970194,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42433.89999999851
+        },
+        {
+          "at": 42501.70000000298,
+          "time": 0.029899999998512783,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42501.70000000298
+        },
+        {
+          "at": 42566.79999999702,
+          "time": 0.08939999999851267,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42566.79999999702
+        },
+        {
+          "at": 42637.60000000149,
+          "time": 0.15619999999552903,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42637.60000000149
+        },
+        {
+          "at": 42706.70000000298,
+          "time": 0.22079999999701982,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42706.70000000298
+        },
+        {
+          "at": 42746.39999999851,
+          "time": 0.2695999999940426,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42746.39999999851
+        },
+        {
+          "at": 42826.79999999702,
+          "time": 0.335599999994038,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42825.89999999851
+        },
+        {
+          "at": 42890.20000000298,
+          "time": 0.41059999999404084,
+          "frame": 4,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42890.20000000298
+        },
+        {
+          "at": 42953.39999999851,
+          "time": 0.47729999999702244,
+          "frame": 4,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 42953.39999999851
+        },
+        {
+          "at": 43015.89999999851,
+          "time": 0.534399999998513,
+          "frame": 5,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43015.89999999851
+        },
+        {
+          "at": 43081.60000000149,
+          "time": 0.6011999999955293,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43081.60000000149
+        },
+        {
+          "at": 43143,
+          "time": 0.6629999999999967,
+          "frame": 6,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43142.89999999851
+        },
+        {
+          "at": 43217,
+          "time": 0.7364999999999995,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43217
+        },
+        {
+          "at": 43269.70000000298,
+          "time": 0.7930999999940411,
+          "frame": 7,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43269.70000000298
+        },
+        {
+          "at": 43336.70000000298,
+          "time": 0.8506999999955269,
+          "frame": 8,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43336.70000000298
+        },
+        {
+          "at": 43398.5,
+          "time": 0.9194999999999993,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43398.5
+        },
+        {
+          "at": 43460.20000000298,
+          "time": 0.9865999999940414,
+          "frame": 9,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43460.20000000298
+        },
+        {
+          "at": 43537.20000000298,
+          "time": 1.047799999997018,
+          "frame": 10,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43537.20000000298
+        },
+        {
+          "at": 43606.10000000149,
+          "time": 1.1193999999985067,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43606.10000000149
+        },
+        {
+          "at": 43664.39999999851,
+          "time": 1.1903999999985118,
+          "frame": 11,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43664.39999999851
+        },
+        {
+          "at": 43728.79999999702,
+          "time": 1.246099999994037,
+          "frame": 12,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43728.79999999702
+        },
+        {
+          "at": 43791.20000000298,
+          "time": 1.3065999999940416,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43791.20000000298
+        },
+        {
+          "at": 43841,
+          "time": 1.3647999999970182,
+          "frame": 13,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43841
+        },
+        {
+          "at": 43918.70000000298,
+          "time": 1.436799999997021,
+          "frame": 14,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 43918.70000000298
+        },
+        {
+          "at": 44032.39999999851,
+          "time": 0.04709999999403891,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 44032.39999999851
+        },
+        {
+          "at": 44049.39999999851,
+          "time": 0.07359999999403755,
+          "frame": 0,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 44049.39999999851
+        },
+        {
+          "at": 44121.10000000149,
+          "time": 0.1347999999970213,
+          "frame": 1,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 44121.10000000149
+        },
+        {
+          "at": 44202.10000000149,
+          "time": 0.2126999999955288,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 44202.10000000149
+        },
+        {
+          "at": 44243.70000000298,
+          "time": 0.26550000000000296,
+          "frame": 2,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 44243.70000000298
+        },
+        {
+          "at": 44338.5,
+          "time": 0.35109999999404096,
+          "frame": 3,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 44338.5
+        },
+        {
+          "at": 44448.5,
+          "time": 0.4633999999985079,
+          "frame": 4,
+          "sharp": true,
+          "sample": "horse",
+          "clipName": "Race horse galloping (Muybridge, 1887, a GIF)",
+          "update": 0,
+          "render": 44448.5
+        }
+      ],
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/horse.gif",
+          "bytes": 568203,
+          "sha256": "eb40bebc1f039e7c2a121673c3b55d4aa73582f858053dbbcca9ebce9e2b479d"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/horse.depth",
+          "bytes": 185462,
+          "sha256": "9899cca71c079192fba917317943d8a0f27b45d70c684af6c189504faa474976"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/horse-sheet-1.jpg",
+          "bytes": 153008,
+          "sha256": "27bacb5efa0d6de68ce08c6473403be098d6e3b2e8e40dd388d67ae4b4759008"
+        }
+      ]
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "errors": [],
+  "cpuRate": 4,
+  "graphics": {
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "WebKit WebGL",
+    "unmaskedRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+    "subpixelBits": 4,
+    "maxTextureSize": 16384,
+    "hardwareConcurrency": 5,
+    "devicePixelRatio": 3,
+    "drawingBuffer": [585, 900]
+  }
+}

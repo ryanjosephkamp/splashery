@@ -1,0 +1,9 @@
+{
+  "version": "22.14.0",
+  "source": "https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz",
+  "checksums": "https://nodejs.org/dist/v22.14.0/SHASUMS256.txt",
+  "sha256": "69b09dba5c8dcb05c4e4273a4340db1005abeafe3927efda2bc5b249e80437ec",
+  "checked": "October 16, 2026",
+  "note": "Temporary test runtime matching CI; not shipped",
+  "focusedHashCheck": "Existing two QR hash assertions pass under Node22; original Node24 failures retained"
+}

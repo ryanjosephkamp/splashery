@@ -1,0 +1,64 @@
+{
+  "baseline": "cc297c89",
+  "functions": [
+    {
+      "name": "sharpPhoto",
+      "identical": true,
+      "sha256": "ce3b4efd16560922bda98af6feb4e73843a2281cb3103528ee457f5f526ba328"
+    },
+    {
+      "name": "prepareSharpPhoto",
+      "identical": true,
+      "sha256": "4e74b7dfa12da95e91773902339d6a8e369c36411d483eec1a6b596bdf311881"
+    },
+    {
+      "name": "sharpEntry",
+      "identical": true,
+      "sha256": "cc1b46cf6e0f5da6a4ea048577a4f4dc067de6cd7274d95544fc8afc9df7fa18"
+    },
+    {
+      "name": "fromScene",
+      "identical": true,
+      "sha256": "76ca01b29d0835c295217cc98b3cffea0922c6c94d4fe901e6b7fa0c773542f4"
+    },
+    {
+      "name": "fillPhoto",
+      "identical": true,
+      "sha256": "8e101776368ae58ee306956924407d4bcfb51df93c4c37a4916d33962398b1db"
+    },
+    {
+      "name": "grid",
+      "identical": true,
+      "sha256": "e1fc4debbdebc57a0b76aecfe825d62d2c1212bfa80e48935fd9b910e5ab2ee9"
+    },
+    {
+      "name": "splatsNeeded",
+      "identical": true,
+      "sha256": "d57c2156aadac1012a81f2e28214fe511460caa539b47cbc4d7f5ae8ce6d741f"
+    },
+    {
+      "name": "splats",
+      "identical": true,
+      "sha256": "a7a770877a634a2def6c4a305ff7f3005b81c4b729c79f7dbd8c09b61f6c5d04"
+    },
+    {
+      "name": "wake",
+      "identical": true,
+      "sha256": "b41c0a904ae311cf17f421f70575ec3d0b7abc527f3cbd06c7f89d968a8f46c7"
+    },
+    {
+      "name": "tapBox",
+      "identical": true,
+      "sha256": "3af3f0d88f4cc85dc000bbe3b85d5e38c487eb39197096cae3152efe2cffccda"
+    },
+    {
+      "name": "status",
+      "identical": true,
+      "sha256": "5b6ebe4b2eea7e2d07f38544ac2864dd0d24da14e16bdc2fa5980215ebe7b82b"
+    }
+  ],
+  "checkedAt": "2026-10-16T12:12:30.867470+00:00",
+  "applicationSourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+  "sharpModuleSha256": "8f6e2f1f231f4b061e383a41c9af76d777308651189481f0af6e8ed1ddbde2f4",
+  "allIdentical": true
+}

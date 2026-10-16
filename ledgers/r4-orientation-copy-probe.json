@@ -1,0 +1,82 @@
+[
+  {
+    "requestedRotation": 0,
+    "requestedFlip": false,
+    "rotation": 0,
+    "flip": false,
+    "width": 16,
+    "height": 16,
+    "changed": 0,
+    "max": 0
+  },
+  {
+    "requestedRotation": 0,
+    "requestedFlip": true,
+    "rotation": 0,
+    "flip": true,
+    "width": 16,
+    "height": 16,
+    "changed": 640,
+    "max": 255
+  },
+  {
+    "requestedRotation": 90,
+    "requestedFlip": false,
+    "rotation": 90,
+    "flip": false,
+    "width": 16,
+    "height": 16,
+    "changed": 576,
+    "max": 255
+  },
+  {
+    "requestedRotation": 90,
+    "requestedFlip": true,
+    "rotation": 90,
+    "flip": true,
+    "width": 16,
+    "height": 16,
+    "changed": 256,
+    "max": 255
+  },
+  {
+    "requestedRotation": 180,
+    "requestedFlip": false,
+    "rotation": 180,
+    "flip": false,
+    "width": 16,
+    "height": 16,
+    "changed": 384,
+    "max": 255
+  },
+  {
+    "requestedRotation": 180,
+    "requestedFlip": true,
+    "rotation": 180,
+    "flip": true,
+    "width": 16,
+    "height": 16,
+    "changed": 512,
+    "max": 255
+  },
+  {
+    "requestedRotation": 270,
+    "requestedFlip": false,
+    "rotation": 270,
+    "flip": false,
+    "width": 16,
+    "height": 16,
+    "changed": 576,
+    "max": 255
+  },
+  {
+    "requestedRotation": 270,
+    "requestedFlip": true,
+    "rotation": 270,
+    "flip": true,
+    "width": 16,
+    "height": 16,
+    "changed": 128,
+    "max": 255
+  }
+]

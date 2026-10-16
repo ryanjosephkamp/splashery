@@ -1,0 +1,10 @@
+{
+  "startedAt": 1792152628.7660954,
+  "reason": "Restrict explicit capture refresh to the active Sharp clip, so hidden clip meshes do not do work during other views captures.",
+  "drainedAt": 1792152659.5768833,
+  "focusedExit": 0,
+  "publishedSourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+  "publishedRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
+  "publicTip": "0e15561da5c7d0ddadf2a22587eb800be40c83bc",
+  "finishedAt": 1792152668.845953
+}

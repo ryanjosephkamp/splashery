@@ -1,0 +1,1409 @@
+{
+  "sourceHash": "79ff139b207d8ca57abdddfbd8a59f9c1908cdc81e24737bb36d64cdc18e2109",
+  "baseline": null,
+  "baselineSourceCorrection": null,
+  "measuredAt": "2026-10-16T11:32:35.359Z",
+  "cpuRate": 4,
+  "phone": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 3,
+    "isMobile": true,
+    "hasTouch": true,
+    "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+  },
+  "workerThrottled": false,
+  "protocol": "Selection to first completed 3D front-surface draw, with a single WebGL finish fence; submission time and completion wait are separate. Opening the toy starts before observer module imports, including their preparation overhead in both versions; other clips start from the already open default toy. Fresh browser context per repeat",
+  "results": [
+    {
+      "id": "sample",
+      "repeat": 0,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/bunny.mp4",
+          "bytes": 377969,
+          "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny.depth",
+          "bytes": 1055234,
+          "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+          "bytes": 243317,
+          "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+          "bytes": 255139,
+          "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+          "bytes": 252771,
+          "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+          "bytes": 254539,
+          "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+          "bytes": 263182,
+          "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+          "bytes": 266757,
+          "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+          "bytes": 124720,
+          "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8"
+        }
+      ],
+      "ms": 1128.3999999985099,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Big Buck Bunny (a six-second scene)",
+      "sample": "sample",
+      "picture": [480, 270],
+      "depth": [160, 90],
+      "submittedMs": 1125.3999999985099,
+      "submittedIndices": 56835,
+      "errors": []
+    },
+    {
+      "id": "sample",
+      "repeat": 1,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/bunny.mp4",
+          "bytes": 377969,
+          "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny.depth",
+          "bytes": 1055234,
+          "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+          "bytes": 243317,
+          "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+          "bytes": 255139,
+          "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+          "bytes": 252771,
+          "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+          "bytes": 254539,
+          "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+          "bytes": 263182,
+          "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+          "bytes": 266757,
+          "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+          "bytes": 124720,
+          "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8"
+        }
+      ],
+      "ms": 952.3999999985099,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "Big Buck Bunny (a six-second scene)",
+      "sample": "sample",
+      "picture": [480, 270],
+      "depth": [160, 90],
+      "submittedMs": 948.5,
+      "submittedIndices": 56835,
+      "errors": []
+    },
+    {
+      "id": "sample",
+      "repeat": 2,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/bunny.mp4",
+          "bytes": 377969,
+          "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny.depth",
+          "bytes": 1055234,
+          "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+          "bytes": 243317,
+          "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+          "bytes": 255139,
+          "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+          "bytes": 252771,
+          "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+          "bytes": 254539,
+          "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+          "bytes": 263182,
+          "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+          "bytes": 266757,
+          "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+          "bytes": 124720,
+          "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8"
+        }
+      ],
+      "ms": 1059.5,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Big Buck Bunny (a six-second scene)",
+      "sample": "sample",
+      "picture": [480, 270],
+      "depth": [160, 90],
+      "submittedMs": 1053.6999999955297,
+      "submittedIndices": 56835,
+      "errors": []
+    },
+    {
+      "id": "horse",
+      "repeat": 0,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/horse.gif",
+          "bytes": 568203,
+          "sha256": "eb40bebc1f039e7c2a121673c3b55d4aa73582f858053dbbcca9ebce9e2b479d"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/horse.depth",
+          "bytes": 185462,
+          "sha256": "9899cca71c079192fba917317943d8a0f27b45d70c684af6c189504faa474976"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/horse-sheet-1.jpg",
+          "bytes": 153008,
+          "sha256": "27bacb5efa0d6de68ce08c6473403be098d6e3b2e8e40dd388d67ae4b4759008"
+        }
+      ],
+      "ms": 316.59999999403954,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Race horse galloping (Muybridge, 1887, a GIF)",
+      "sample": "horse",
+      "picture": [300, 200],
+      "depth": [160, 107],
+      "submittedMs": 316,
+      "submittedIndices": 102480,
+      "errors": []
+    },
+    {
+      "id": "horse",
+      "repeat": 1,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/horse.gif",
+          "bytes": 568203,
+          "sha256": "eb40bebc1f039e7c2a121673c3b55d4aa73582f858053dbbcca9ebce9e2b479d"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/horse.depth",
+          "bytes": 185462,
+          "sha256": "9899cca71c079192fba917317943d8a0f27b45d70c684af6c189504faa474976"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/horse-sheet-1.jpg",
+          "bytes": 153008,
+          "sha256": "27bacb5efa0d6de68ce08c6473403be098d6e3b2e8e40dd388d67ae4b4759008"
+        }
+      ],
+      "ms": 225,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "Race horse galloping (Muybridge, 1887, a GIF)",
+      "sample": "horse",
+      "picture": [300, 200],
+      "depth": [160, 107],
+      "submittedMs": 223.79999999701977,
+      "submittedIndices": 102480,
+      "errors": []
+    },
+    {
+      "id": "horse",
+      "repeat": 2,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/horse.gif",
+          "bytes": 568203,
+          "sha256": "eb40bebc1f039e7c2a121673c3b55d4aa73582f858053dbbcca9ebce9e2b479d"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/horse.depth",
+          "bytes": 185462,
+          "sha256": "9899cca71c079192fba917317943d8a0f27b45d70c684af6c189504faa474976"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/horse-sheet-1.jpg",
+          "bytes": 153008,
+          "sha256": "27bacb5efa0d6de68ce08c6473403be098d6e3b2e8e40dd388d67ae4b4759008"
+        }
+      ],
+      "ms": 249.79999999701977,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Race horse galloping (Muybridge, 1887, a GIF)",
+      "sample": "horse",
+      "picture": [300, 200],
+      "depth": [160, 107],
+      "submittedMs": 248.10000000149012,
+      "submittedIndices": 102480,
+      "errors": []
+    },
+    {
+      "id": "dragon",
+      "repeat": 0,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/sintel.depth",
+          "bytes": 791810,
+          "sha256": "c6b34e7bdb0b2d5fa8e7418072210261196ecf74c8ce2166bbd868dee155da2c"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel.mp3",
+          "bytes": 42698,
+          "sha256": "f6acd01a7f02dbed7d5cde06b95a8b95a7ae59d234fe54283db15c64158dcbb8"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-1.jpg",
+          "bytes": 417676,
+          "sha256": "049da88213390aeed34b9c0845b411c8715d699b9df9969d7beb7e66bd297eca"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-2.jpg",
+          "bytes": 277668,
+          "sha256": "4598c0842d38314ba68232efe35e490acd2d58b01e054fad813901db28db952f"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-3.jpg",
+          "bytes": 300051,
+          "sha256": "ccda358b06567b61f34ff78797ce2437ac28b6fbecd0b7d3e8c387684b0d6d4a"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-4.jpg",
+          "bytes": 392133,
+          "sha256": "c31b582f02e97276be496b5d5606caa5b0d7690f0e4ced0b08d25c3841e16a55"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-5.jpg",
+          "bytes": 161452,
+          "sha256": "9229a320bdc4bd7811955b60892ab1b3a8df5af451bae107edaaa4231c285ff8"
+        }
+      ],
+      "ms": 548.8000000044703,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "Sintel (trailer, six seconds from 0:29.5)",
+      "sample": "dragon",
+      "picture": [480, 204],
+      "depth": [160, 68],
+      "submittedMs": 547,
+      "submittedIndices": 41184,
+      "errors": []
+    },
+    {
+      "id": "dragon",
+      "repeat": 1,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/sintel.depth",
+          "bytes": 791810,
+          "sha256": "c6b34e7bdb0b2d5fa8e7418072210261196ecf74c8ce2166bbd868dee155da2c"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel.mp3",
+          "bytes": 42698,
+          "sha256": "f6acd01a7f02dbed7d5cde06b95a8b95a7ae59d234fe54283db15c64158dcbb8"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-1.jpg",
+          "bytes": 417676,
+          "sha256": "049da88213390aeed34b9c0845b411c8715d699b9df9969d7beb7e66bd297eca"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-2.jpg",
+          "bytes": 277668,
+          "sha256": "4598c0842d38314ba68232efe35e490acd2d58b01e054fad813901db28db952f"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-3.jpg",
+          "bytes": 300051,
+          "sha256": "ccda358b06567b61f34ff78797ce2437ac28b6fbecd0b7d3e8c387684b0d6d4a"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-4.jpg",
+          "bytes": 392133,
+          "sha256": "c31b582f02e97276be496b5d5606caa5b0d7690f0e4ced0b08d25c3841e16a55"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-5.jpg",
+          "bytes": 161452,
+          "sha256": "9229a320bdc4bd7811955b60892ab1b3a8df5af451bae107edaaa4231c285ff8"
+        }
+      ],
+      "ms": 319.79999999701977,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Sintel (trailer, six seconds from 0:29.5)",
+      "sample": "dragon",
+      "picture": [480, 204],
+      "depth": [160, 68],
+      "submittedMs": 319.29999999701977,
+      "submittedIndices": 41184,
+      "errors": []
+    },
+    {
+      "id": "dragon",
+      "repeat": 2,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/sintel.depth",
+          "bytes": 791810,
+          "sha256": "c6b34e7bdb0b2d5fa8e7418072210261196ecf74c8ce2166bbd868dee155da2c"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel.mp3",
+          "bytes": 42698,
+          "sha256": "f6acd01a7f02dbed7d5cde06b95a8b95a7ae59d234fe54283db15c64158dcbb8"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-1.jpg",
+          "bytes": 417676,
+          "sha256": "049da88213390aeed34b9c0845b411c8715d699b9df9969d7beb7e66bd297eca"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-2.jpg",
+          "bytes": 277668,
+          "sha256": "4598c0842d38314ba68232efe35e490acd2d58b01e054fad813901db28db952f"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-3.jpg",
+          "bytes": 300051,
+          "sha256": "ccda358b06567b61f34ff78797ce2437ac28b6fbecd0b7d3e8c387684b0d6d4a"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-4.jpg",
+          "bytes": 392133,
+          "sha256": "c31b582f02e97276be496b5d5606caa5b0d7690f0e4ced0b08d25c3841e16a55"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-sheet-5.jpg",
+          "bytes": 161452,
+          "sha256": "9229a320bdc4bd7811955b60892ab1b3a8df5af451bae107edaaa4231c285ff8"
+        }
+      ],
+      "ms": 341.80000000447035,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Sintel (trailer, six seconds from 0:29.5)",
+      "sample": "dragon",
+      "picture": [480, 204],
+      "depth": [160, 68],
+      "submittedMs": 341.3999999985099,
+      "submittedIndices": 41184,
+      "errors": []
+    },
+    {
+      "id": "bridge",
+      "repeat": 0,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/tears.depth",
+          "bytes": 791810,
+          "sha256": "e62cc2854cd18d4c8106a847eda4e6b437edc6b7ba6066bb695ea4d7b7d87759"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears.mp3",
+          "bytes": 42558,
+          "sha256": "a6a5b47c175b090853d3fd516a44e6c5e9ded6f111b1dff5184b66cb11d463d7"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-1.jpg",
+          "bytes": 1083425,
+          "sha256": "30c4751f5f5473914175e022e9735ac73b9796a84921732aa7096d25986ff304"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-2.jpg",
+          "bytes": 1048191,
+          "sha256": "33c72ad2c90ef5a6fd22c26298e800663d0b03ecab51afbd3b30d25c1116f0b0"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-3.jpg",
+          "bytes": 1052853,
+          "sha256": "11193b7d89e6531c3df878a92ef9e6f583d2d72a206506d95a2f825df5b92805"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-4.jpg",
+          "bytes": 1062882,
+          "sha256": "5de7565ee8aab2a9da6fbc99a4d9ec888e70422a27a9905a5f1a6a86f3be7ebd"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-5.jpg",
+          "bytes": 636335,
+          "sha256": "c91f8a8a195707c8e1770d4886b2e0b5f4ef98ff1a6088801ae1d63aba77fd21"
+        }
+      ],
+      "ms": 350.09999999403954,
+      "gpuCompletionWaitMs": 0.09999999403953552,
+      "clip": "Tears of Steel (six seconds from 8:30.5)",
+      "sample": "bridge",
+      "picture": [480, 200],
+      "depth": [160, 67],
+      "submittedMs": 347.79999999701977,
+      "submittedIndices": 58149,
+      "errors": []
+    },
+    {
+      "id": "bridge",
+      "repeat": 1,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/tears.depth",
+          "bytes": 791810,
+          "sha256": "e62cc2854cd18d4c8106a847eda4e6b437edc6b7ba6066bb695ea4d7b7d87759"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears.mp3",
+          "bytes": 42558,
+          "sha256": "a6a5b47c175b090853d3fd516a44e6c5e9ded6f111b1dff5184b66cb11d463d7"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-1.jpg",
+          "bytes": 1083425,
+          "sha256": "30c4751f5f5473914175e022e9735ac73b9796a84921732aa7096d25986ff304"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-2.jpg",
+          "bytes": 1048191,
+          "sha256": "33c72ad2c90ef5a6fd22c26298e800663d0b03ecab51afbd3b30d25c1116f0b0"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-3.jpg",
+          "bytes": 1052853,
+          "sha256": "11193b7d89e6531c3df878a92ef9e6f583d2d72a206506d95a2f825df5b92805"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-4.jpg",
+          "bytes": 1062882,
+          "sha256": "5de7565ee8aab2a9da6fbc99a4d9ec888e70422a27a9905a5f1a6a86f3be7ebd"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-5.jpg",
+          "bytes": 636335,
+          "sha256": "c91f8a8a195707c8e1770d4886b2e0b5f4ef98ff1a6088801ae1d63aba77fd21"
+        }
+      ],
+      "ms": 405.09999999403954,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Tears of Steel (six seconds from 8:30.5)",
+      "sample": "bridge",
+      "picture": [480, 200],
+      "depth": [160, 67],
+      "submittedMs": 402.29999999701977,
+      "submittedIndices": 58149,
+      "errors": []
+    },
+    {
+      "id": "bridge",
+      "repeat": 2,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/tears.depth",
+          "bytes": 791810,
+          "sha256": "e62cc2854cd18d4c8106a847eda4e6b437edc6b7ba6066bb695ea4d7b7d87759"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears.mp3",
+          "bytes": 42558,
+          "sha256": "a6a5b47c175b090853d3fd516a44e6c5e9ded6f111b1dff5184b66cb11d463d7"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-1.jpg",
+          "bytes": 1083425,
+          "sha256": "30c4751f5f5473914175e022e9735ac73b9796a84921732aa7096d25986ff304"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-2.jpg",
+          "bytes": 1048191,
+          "sha256": "33c72ad2c90ef5a6fd22c26298e800663d0b03ecab51afbd3b30d25c1116f0b0"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-3.jpg",
+          "bytes": 1052853,
+          "sha256": "11193b7d89e6531c3df878a92ef9e6f583d2d72a206506d95a2f825df5b92805"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-4.jpg",
+          "bytes": 1062882,
+          "sha256": "5de7565ee8aab2a9da6fbc99a4d9ec888e70422a27a9905a5f1a6a86f3be7ebd"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-sheet-5.jpg",
+          "bytes": 636335,
+          "sha256": "c91f8a8a195707c8e1770d4886b2e0b5f4ef98ff1a6088801ae1d63aba77fd21"
+        }
+      ],
+      "ms": 413.8999999985099,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Tears of Steel (six seconds from 8:30.5)",
+      "sample": "bridge",
+      "picture": [480, 200],
+      "depth": [160, 67],
+      "submittedMs": 412.3999999985099,
+      "submittedIndices": 58149,
+      "errors": []
+    },
+    {
+      "id": "machine",
+      "repeat": 0,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/elephants.depth",
+          "bytes": 1055234,
+          "sha256": "dc9f6b0865333678e850d18e3d3cfd73402be71ae5caa43e8bc5c6d61f83ed24"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants.mp3",
+          "bytes": 42508,
+          "sha256": "0af3a9d859d80f54c2ac37f76984c13627e66e5839eada549ad10051b73e3fa2"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-1.jpg",
+          "bytes": 505725,
+          "sha256": "33c2ba4a5543cc2e09187cd5639bfe1a11b7eb11b46fad814dc9d00ffcce7634"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-2.jpg",
+          "bytes": 414477,
+          "sha256": "a1d1123e5f99316d0ec247c7e099dfce3c70415ec23037bbad41eef17d0824b7"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-3.jpg",
+          "bytes": 379948,
+          "sha256": "7c60994bb83c226a846e243a70fb5970a4b78967ae8cb5338af805824aa09d41"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-4.jpg",
+          "bytes": 385765,
+          "sha256": "987dd0dac86c301eee8fddca42301cdc29414480765bd4b99ea56b12d0eb48f0"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-5.jpg",
+          "bytes": 330527,
+          "sha256": "855e2328f039f7aee38b150446b6010d359f75641b10b3303d075a75f2ef341c"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-6.jpg",
+          "bytes": 237901,
+          "sha256": "3c5b24a132462b145a3df48a093013c14e3456585f272e7268a9b80a79f487cc"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-7.jpg",
+          "bytes": 84087,
+          "sha256": "b87df8343ef9c383bcdb0a3972fa3e005c5feab5f169094e802a9fbb254ed9e0"
+        }
+      ],
+      "ms": 530.8000000044703,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "Elephants Dream (six seconds from 5:29.7)",
+      "sample": "machine",
+      "picture": [480, 270],
+      "depth": [160, 90],
+      "submittedMs": 530.6000000014901,
+      "submittedIndices": 85872,
+      "errors": []
+    },
+    {
+      "id": "machine",
+      "repeat": 1,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/elephants.depth",
+          "bytes": 1055234,
+          "sha256": "dc9f6b0865333678e850d18e3d3cfd73402be71ae5caa43e8bc5c6d61f83ed24"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants.mp3",
+          "bytes": 42508,
+          "sha256": "0af3a9d859d80f54c2ac37f76984c13627e66e5839eada549ad10051b73e3fa2"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-1.jpg",
+          "bytes": 505725,
+          "sha256": "33c2ba4a5543cc2e09187cd5639bfe1a11b7eb11b46fad814dc9d00ffcce7634"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-2.jpg",
+          "bytes": 414477,
+          "sha256": "a1d1123e5f99316d0ec247c7e099dfce3c70415ec23037bbad41eef17d0824b7"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-3.jpg",
+          "bytes": 379948,
+          "sha256": "7c60994bb83c226a846e243a70fb5970a4b78967ae8cb5338af805824aa09d41"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-4.jpg",
+          "bytes": 385765,
+          "sha256": "987dd0dac86c301eee8fddca42301cdc29414480765bd4b99ea56b12d0eb48f0"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-5.jpg",
+          "bytes": 330527,
+          "sha256": "855e2328f039f7aee38b150446b6010d359f75641b10b3303d075a75f2ef341c"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-6.jpg",
+          "bytes": 237901,
+          "sha256": "3c5b24a132462b145a3df48a093013c14e3456585f272e7268a9b80a79f487cc"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-7.jpg",
+          "bytes": 84087,
+          "sha256": "b87df8343ef9c383bcdb0a3972fa3e005c5feab5f169094e802a9fbb254ed9e0"
+        }
+      ],
+      "ms": 489.19999999552965,
+      "gpuCompletionWaitMs": 0.5,
+      "clip": "Elephants Dream (six seconds from 5:29.7)",
+      "sample": "machine",
+      "picture": [480, 270],
+      "depth": [160, 90],
+      "submittedMs": 485.69999999552965,
+      "submittedIndices": 85872,
+      "errors": []
+    },
+    {
+      "id": "machine",
+      "repeat": 2,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/elephants.depth",
+          "bytes": 1055234,
+          "sha256": "dc9f6b0865333678e850d18e3d3cfd73402be71ae5caa43e8bc5c6d61f83ed24"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants.mp3",
+          "bytes": 42508,
+          "sha256": "0af3a9d859d80f54c2ac37f76984c13627e66e5839eada549ad10051b73e3fa2"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-1.jpg",
+          "bytes": 505725,
+          "sha256": "33c2ba4a5543cc2e09187cd5639bfe1a11b7eb11b46fad814dc9d00ffcce7634"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-2.jpg",
+          "bytes": 414477,
+          "sha256": "a1d1123e5f99316d0ec247c7e099dfce3c70415ec23037bbad41eef17d0824b7"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-3.jpg",
+          "bytes": 379948,
+          "sha256": "7c60994bb83c226a846e243a70fb5970a4b78967ae8cb5338af805824aa09d41"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-4.jpg",
+          "bytes": 385765,
+          "sha256": "987dd0dac86c301eee8fddca42301cdc29414480765bd4b99ea56b12d0eb48f0"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-5.jpg",
+          "bytes": 330527,
+          "sha256": "855e2328f039f7aee38b150446b6010d359f75641b10b3303d075a75f2ef341c"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-6.jpg",
+          "bytes": 237901,
+          "sha256": "3c5b24a132462b145a3df48a093013c14e3456585f272e7268a9b80a79f487cc"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-sheet-7.jpg",
+          "bytes": 84087,
+          "sha256": "b87df8343ef9c383bcdb0a3972fa3e005c5feab5f169094e802a9fbb254ed9e0"
+        }
+      ],
+      "ms": 401.20000000298023,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Elephants Dream (six seconds from 5:29.7)",
+      "sample": "machine",
+      "picture": [480, 270],
+      "depth": [160, 90],
+      "submittedMs": 399.20000000298023,
+      "submittedIndices": 85872,
+      "errors": []
+    },
+    {
+      "id": "sample-long",
+      "repeat": 0,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-long.webm",
+          "bytes": 1411629,
+          "sha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-long.mp2depth",
+          "bytes": 15805452,
+          "sha256": "35a28dad3862207772d1af8dc153bb7782c3ba7e3dd1bb506ad06f028ca30038"
+        }
+      ],
+      "ms": 1043.9000000059605,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Big Buck Bunny (1:44.5 to 2:14.5)",
+      "sample": "sample-long",
+      "picture": [426, 240],
+      "depth": [160, 90],
+      "submittedMs": 1040.4000000059605,
+      "submittedIndices": 46851,
+      "errors": []
+    },
+    {
+      "id": "sample-long",
+      "repeat": 1,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-long.webm",
+          "bytes": 1411629,
+          "sha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-long.mp2depth",
+          "bytes": 15805452,
+          "sha256": "35a28dad3862207772d1af8dc153bb7782c3ba7e3dd1bb506ad06f028ca30038"
+        }
+      ],
+      "ms": 1017.7000000029802,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Big Buck Bunny (1:44.5 to 2:14.5)",
+      "sample": "sample-long",
+      "picture": [426, 240],
+      "depth": [160, 90],
+      "submittedMs": 1015.7000000029802,
+      "submittedIndices": 46851,
+      "errors": []
+    },
+    {
+      "id": "sample-long",
+      "repeat": 2,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-long.webm",
+          "bytes": 1411629,
+          "sha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-long.mp2depth",
+          "bytes": 15805452,
+          "sha256": "35a28dad3862207772d1af8dc153bb7782c3ba7e3dd1bb506ad06f028ca30038"
+        }
+      ],
+      "ms": 1125.2000000029802,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Big Buck Bunny (1:44.5 to 2:14.5)",
+      "sample": "sample-long",
+      "picture": [426, 240],
+      "depth": [160, 90],
+      "submittedMs": 1122.5,
+      "submittedIndices": 46851,
+      "errors": []
+    },
+    {
+      "id": "dragon-long",
+      "repeat": 0,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-long.webm",
+          "bytes": 975594,
+          "sha256": "c3d4432e8adb1f9c33bef5656c9a6ff2289b49e448fb6c4b67ed2400a54f3269"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-long.mp2depth",
+          "bytes": 11854092,
+          "sha256": "8416f05db894338d612cffe70a15fb304331e18f6855460cb090f7febf5b1844"
+        }
+      ],
+      "ms": 991.7999999970198,
+      "gpuCompletionWaitMs": 0.7999999970197678,
+      "clip": "Sintel (2:15 to 2:45)",
+      "sample": "dragon-long",
+      "picture": [564, 240],
+      "depth": [160, 68],
+      "submittedMs": 988.6000000014901,
+      "submittedIndices": 63798,
+      "errors": []
+    },
+    {
+      "id": "dragon-long",
+      "repeat": 1,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-long.webm",
+          "bytes": 975594,
+          "sha256": "c3d4432e8adb1f9c33bef5656c9a6ff2289b49e448fb6c4b67ed2400a54f3269"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-long.mp2depth",
+          "bytes": 11854092,
+          "sha256": "8416f05db894338d612cffe70a15fb304331e18f6855460cb090f7febf5b1844"
+        }
+      ],
+      "ms": 953,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Sintel (2:15 to 2:45)",
+      "sample": "dragon-long",
+      "picture": [564, 240],
+      "depth": [160, 68],
+      "submittedMs": 951.2000000029802,
+      "submittedIndices": 63798,
+      "errors": []
+    },
+    {
+      "id": "dragon-long",
+      "repeat": 2,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-long.webm",
+          "bytes": 975594,
+          "sha256": "c3d4432e8adb1f9c33bef5656c9a6ff2289b49e448fb6c4b67ed2400a54f3269"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-long.mp2depth",
+          "bytes": 11854092,
+          "sha256": "8416f05db894338d612cffe70a15fb304331e18f6855460cb090f7febf5b1844"
+        }
+      ],
+      "ms": 1016.8999999985099,
+      "gpuCompletionWaitMs": 0.09999999403953552,
+      "clip": "Sintel (2:15 to 2:45)",
+      "sample": "dragon-long",
+      "picture": [564, 240],
+      "depth": [160, 68],
+      "submittedMs": 1014.8000000044703,
+      "submittedIndices": 63798,
+      "errors": []
+    },
+    {
+      "id": "machine-long",
+      "repeat": 0,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+          "bytes": 1951701,
+          "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+          "bytes": 15805452,
+          "sha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f"
+        }
+      ],
+      "ms": 1023.1000000014901,
+      "gpuCompletionWaitMs": 0.8999999985098839,
+      "clip": "Elephants Dream (5:29.7 to 5:59.7)",
+      "sample": "machine-long",
+      "picture": [640, 360],
+      "depth": [160, 90],
+      "submittedMs": 1020.5,
+      "submittedIndices": 85797,
+      "errors": []
+    },
+    {
+      "id": "machine-long",
+      "repeat": 1,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+          "bytes": 1951701,
+          "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+          "bytes": 15805452,
+          "sha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f"
+        }
+      ],
+      "ms": 1216.6999999955297,
+      "gpuCompletionWaitMs": 0.09999999403953552,
+      "clip": "Elephants Dream (5:29.7 to 5:59.7)",
+      "sample": "machine-long",
+      "picture": [640, 360],
+      "depth": [160, 90],
+      "submittedMs": 1214.3999999985099,
+      "submittedIndices": 85797,
+      "errors": []
+    },
+    {
+      "id": "machine-long",
+      "repeat": 2,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+          "bytes": 1951701,
+          "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+          "bytes": 15805452,
+          "sha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f"
+        }
+      ],
+      "ms": 1339.4000000059605,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Elephants Dream (5:29.7 to 5:59.7)",
+      "sample": "machine-long",
+      "picture": [640, 360],
+      "depth": [160, 90],
+      "submittedMs": 1337.1000000014901,
+      "submittedIndices": 85797,
+      "errors": []
+    },
+    {
+      "id": "bridge-long",
+      "repeat": 0,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/tears-long.webm",
+          "bytes": 2176133,
+          "sha256": "5d16d59945f20504f0998b220fa35d5a78bf6d8d82d874cc338c23634477236b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-long.mp2depth",
+          "bytes": 10668684,
+          "sha256": "c9151c3b37f5eb8bb4550d3fe9d74099cea1135234bdfb4b7494aacf2273f834"
+        }
+      ],
+      "ms": 724.5,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "Tears of Steel (a 27-second city montage)",
+      "sample": "bridge-long",
+      "picture": [642, 268],
+      "depth": [160, 67],
+      "submittedMs": 720.5,
+      "submittedIndices": 64128,
+      "errors": []
+    },
+    {
+      "id": "bridge-long",
+      "repeat": 1,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/tears-long.webm",
+          "bytes": 2176133,
+          "sha256": "5d16d59945f20504f0998b220fa35d5a78bf6d8d82d874cc338c23634477236b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-long.mp2depth",
+          "bytes": 10668684,
+          "sha256": "c9151c3b37f5eb8bb4550d3fe9d74099cea1135234bdfb4b7494aacf2273f834"
+        }
+      ],
+      "ms": 856.3999999985099,
+      "gpuCompletionWaitMs": 0,
+      "clip": "Tears of Steel (a 27-second city montage)",
+      "sample": "bridge-long",
+      "picture": [642, 268],
+      "depth": [160, 67],
+      "submittedMs": 854.0999999940395,
+      "submittedIndices": 64128,
+      "errors": []
+    },
+    {
+      "id": "bridge-long",
+      "repeat": 2,
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/tears-long.webm",
+          "bytes": 2176133,
+          "sha256": "5d16d59945f20504f0998b220fa35d5a78bf6d8d82d874cc338c23634477236b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-long.mp2depth",
+          "bytes": 10668684,
+          "sha256": "c9151c3b37f5eb8bb4550d3fe9d74099cea1135234bdfb4b7494aacf2273f834"
+        }
+      ],
+      "ms": 891.3000000044703,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "Tears of Steel (a 27-second city montage)",
+      "sample": "bridge-long",
+      "picture": [642, 268],
+      "depth": [160, 67],
+      "submittedMs": 889.8000000044703,
+      "submittedIndices": 64128,
+      "errors": []
+    },
+    {
+      "id": "r4-blocks",
+      "repeat": 0,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-blocks.mp4",
+          "bytes": 21496,
+          "sha256": "c15f11bf4d7323a3f4d7c91debbd99d66916d5cde475dc1d1d5ca23cd053913c"
+        }
+      ],
+      "ms": 1548,
+      "gpuCompletionWaitMs": 0,
+      "clip": "cdx-mp2-r4-blocks",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1546.1000000014901,
+      "submittedIndices": 85161,
+      "errors": []
+    },
+    {
+      "id": "r4-blocks",
+      "repeat": 1,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-blocks.mp4",
+          "bytes": 21496,
+          "sha256": "c15f11bf4d7323a3f4d7c91debbd99d66916d5cde475dc1d1d5ca23cd053913c"
+        }
+      ],
+      "ms": 1683.6999999955297,
+      "gpuCompletionWaitMs": 0,
+      "clip": "cdx-mp2-r4-blocks",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1681.5,
+      "submittedIndices": 85161,
+      "errors": []
+    },
+    {
+      "id": "r4-blocks",
+      "repeat": 2,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-blocks.mp4",
+          "bytes": 21496,
+          "sha256": "c15f11bf4d7323a3f4d7c91debbd99d66916d5cde475dc1d1d5ca23cd053913c"
+        }
+      ],
+      "ms": 1649,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "cdx-mp2-r4-blocks",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1645.7999999970198,
+      "submittedIndices": 85161,
+      "errors": []
+    },
+    {
+      "id": "r4-gate",
+      "repeat": 0,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-gate.webm",
+          "bytes": 8757,
+          "sha256": "25a01d34d0017cf6aac5a0e05a5565bd31bf7c3b01c97ff8480edc2f02a83f0f"
+        }
+      ],
+      "ms": 1650.5999999940395,
+      "gpuCompletionWaitMs": 0.6999999955296516,
+      "clip": "cdx-mp2-r4-gate",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1648.0999999940395,
+      "submittedIndices": 84816,
+      "errors": []
+    },
+    {
+      "id": "r4-gate",
+      "repeat": 1,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-gate.webm",
+          "bytes": 8757,
+          "sha256": "25a01d34d0017cf6aac5a0e05a5565bd31bf7c3b01c97ff8480edc2f02a83f0f"
+        }
+      ],
+      "ms": 1704.6999999955297,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "cdx-mp2-r4-gate",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1702.3999999985099,
+      "submittedIndices": 84816,
+      "errors": []
+    },
+    {
+      "id": "r4-gate",
+      "repeat": 2,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-gate.webm",
+          "bytes": 8757,
+          "sha256": "25a01d34d0017cf6aac5a0e05a5565bd31bf7c3b01c97ff8480edc2f02a83f0f"
+        }
+      ],
+      "ms": 1733,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "cdx-mp2-r4-gate",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1730.3000000044703,
+      "submittedIndices": 84816,
+      "errors": []
+    },
+    {
+      "id": "r4-wheel",
+      "repeat": 0,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-wheel.mov",
+          "bytes": 31555,
+          "sha256": "6c528fdc8f5e7fd62975fcc7059eea82077fba412a176a1175de4c7511871d36"
+        }
+      ],
+      "ms": 1655.5999999940395,
+      "gpuCompletionWaitMs": 0.3999999985098839,
+      "clip": "cdx-mp2-r4-wheel",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1653.0999999940395,
+      "submittedIndices": 86352,
+      "errors": []
+    },
+    {
+      "id": "r4-wheel",
+      "repeat": 1,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-wheel.mov",
+          "bytes": 31555,
+          "sha256": "6c528fdc8f5e7fd62975fcc7059eea82077fba412a176a1175de4c7511871d36"
+        }
+      ],
+      "ms": 1487.1000000014901,
+      "gpuCompletionWaitMs": 0,
+      "clip": "cdx-mp2-r4-wheel",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1484.8999999985099,
+      "submittedIndices": 86352,
+      "errors": []
+    },
+    {
+      "id": "r4-wheel",
+      "repeat": 2,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-wheel.mov",
+          "bytes": 31555,
+          "sha256": "6c528fdc8f5e7fd62975fcc7059eea82077fba412a176a1175de4c7511871d36"
+        }
+      ],
+      "ms": 1909.5999999940395,
+      "gpuCompletionWaitMs": 0,
+      "clip": "cdx-mp2-r4-wheel",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1907.8999999985099,
+      "submittedIndices": 86352,
+      "errors": []
+    },
+    {
+      "id": "r4-orbit",
+      "repeat": 0,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-orbit.gif",
+          "bytes": 20968,
+          "sha256": "044d3995937eeb3cbe591896a0f28f67a10ab02fdf5dedccf270586077d91914"
+        }
+      ],
+      "ms": 1883,
+      "gpuCompletionWaitMs": 0,
+      "clip": "cdx-mp2-r4-orbit",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1880.2000000029802,
+      "submittedIndices": 79884,
+      "errors": []
+    },
+    {
+      "id": "r4-orbit",
+      "repeat": 1,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-orbit.gif",
+          "bytes": 20968,
+          "sha256": "044d3995937eeb3cbe591896a0f28f67a10ab02fdf5dedccf270586077d91914"
+        }
+      ],
+      "ms": 1736.1000000014901,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "cdx-mp2-r4-orbit",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1735.7000000029802,
+      "submittedIndices": 79884,
+      "errors": []
+    },
+    {
+      "id": "r4-orbit",
+      "repeat": 2,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-orbit.gif",
+          "bytes": 20968,
+          "sha256": "044d3995937eeb3cbe591896a0f28f67a10ab02fdf5dedccf270586077d91914"
+        }
+      ],
+      "ms": 2142.10000000149,
+      "gpuCompletionWaitMs": 0,
+      "clip": "cdx-mp2-r4-orbit",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 2141.5,
+      "submittedIndices": 79884,
+      "errors": []
+    },
+    {
+      "id": "r4-fast",
+      "repeat": 0,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-fast.webm",
+          "bytes": 41578,
+          "sha256": "b248f1f23ae95d2167714203ec5703959999f225af94996650a9fe8e64b2d82a"
+        }
+      ],
+      "ms": 1670.6000000014901,
+      "gpuCompletionWaitMs": 0,
+      "clip": "cdx-mp2-r4-fast",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1668.3000000044703,
+      "submittedIndices": 85512,
+      "errors": []
+    },
+    {
+      "id": "r4-fast",
+      "repeat": 1,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-fast.webm",
+          "bytes": 41578,
+          "sha256": "b248f1f23ae95d2167714203ec5703959999f225af94996650a9fe8e64b2d82a"
+        }
+      ],
+      "ms": 1725.5,
+      "gpuCompletionWaitMs": 0.10000000149011612,
+      "clip": "cdx-mp2-r4-fast",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1724,
+      "submittedIndices": 85512,
+      "errors": []
+    },
+    {
+      "id": "r4-fast",
+      "repeat": 2,
+      "path": "upload",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-fast.webm",
+          "bytes": 41578,
+          "sha256": "b248f1f23ae95d2167714203ec5703959999f225af94996650a9fe8e64b2d82a"
+        }
+      ],
+      "ms": 1776.7000000029802,
+      "gpuCompletionWaitMs": 0,
+      "clip": "cdx-mp2-r4-fast",
+      "picture": [256, 144],
+      "depth": [160, 90],
+      "submittedMs": 1774.6000000014901,
+      "submittedIndices": 85512,
+      "errors": []
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "graphics": {
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "WebKit WebGL",
+    "unmaskedRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+    "subpixelBits": 4,
+    "maxTextureSize": 16384,
+    "hardwareConcurrency": 5,
+    "devicePixelRatio": 3,
+    "drawingBuffer": [585, 900]
+  }
+}

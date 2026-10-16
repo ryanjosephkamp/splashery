@@ -1,0 +1,1927 @@
+{
+  "kind": "isolated-live-recording",
+  "label": "Round 3",
+  "baseline": "49dd8b47",
+  "sourceHash": "f663162bb7f072533c8170c33dc68f2bfb3a629cf0ec586f0195b74f85aceb93",
+  "revision": "49dd8b477aad79f890237401d534ddf9ffea9237",
+  "recordedAt": "2026-10-16T11:43:39.302Z",
+  "phone": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 3,
+    "isMobile": true,
+    "hasTouch": true,
+    "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+  },
+  "cpuRate": 4,
+  "headless": false,
+  "workerThrottled": false,
+  "seconds": 12,
+  "protocol": "Actual CDP screencast presentations at their original wall timestamps; fixed camera; no source-clock stepping or interpolated pictures",
+  "limitation": "Silent recording with JPEG capture overhead, UI hiding requested before capture, and a fixed camera. Clean cadence is measured separately with the natural camera and normal UI. Cropping removes only space outside the stage",
+  "contribution": "Made by Ryan with Codex (GPT-6); capture/export code is MIT; source film licenses remain attached",
+  "cases": [
+    {
+      "id": "sample",
+      "title": "Big Buck Bunny",
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/screen/bunny.mp4",
+          "bytes": 377969,
+          "sha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny.depth",
+          "bytes": 1055234,
+          "sha256": "9ac93f13b2f6b4d0206ebeabe2a87894ba1ee5a55576a3d136aa62d8bbe7b78b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+          "bytes": 243317,
+          "sha256": "772e423e85b0266f514353445a7f2672bc3c4e799ff963bbe633dfe1da2e683e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+          "bytes": 255139,
+          "sha256": "e2109547a945c86572dd62fbf062f65e1a6625ab1d9d18bae23d47cbd90305e2"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+          "bytes": 252771,
+          "sha256": "f70b1dee3591affc5fc9901b4ab4ef23fd72d72afb4a6a00add22d5fa72b0898"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+          "bytes": 254539,
+          "sha256": "8ec13cb6c7bf98f6baf9220bd79a8e83ab2af5d69dd9442d1d71f493f97b2a1e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+          "bytes": 263182,
+          "sha256": "c9a5736de3055d0be761979f6cb05100b9116013b2ab3fd71eda4e63f9076b23"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+          "bytes": 266757,
+          "sha256": "58a983b0793b7da763654c6192f293dc16da707591afab9c5b6502eb1bef6eec"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+          "bytes": 124720,
+          "sha256": "fad69c7dea6aadc9f0811788b7b61e3549c3c4f2d13ac2dd17ee84d9aa46aca8"
+        }
+      ],
+      "author": "Blender Foundation",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sourcePage": "https://peach.blender.org/",
+      "checked": "October 16, 2026",
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 600
+      },
+      "captures": [
+        {
+          "at": 1792151036.491927,
+          "file": "00000.jpg",
+          "sha256": "aef19de1e7f20409549d5a742e4534e9d9904c015e39833a02874106e59a2c42",
+          "time": 0
+        },
+        {
+          "at": 1792151036.639602,
+          "file": "00001.jpg",
+          "sha256": "aef19de1e7f20409549d5a742e4534e9d9904c015e39833a02874106e59a2c42",
+          "time": 0.1476750373840332
+        },
+        {
+          "at": 1792151036.793068,
+          "file": "00002.jpg",
+          "sha256": "aef19de1e7f20409549d5a742e4534e9d9904c015e39833a02874106e59a2c42",
+          "time": 0.30114102363586426
+        },
+        {
+          "at": 1792151036.935942,
+          "file": "00003.jpg",
+          "sha256": "aef19de1e7f20409549d5a742e4534e9d9904c015e39833a02874106e59a2c42",
+          "time": 0.4440150260925293
+        },
+        {
+          "at": 1792151037.080766,
+          "file": "00004.jpg",
+          "sha256": "aef19de1e7f20409549d5a742e4534e9d9904c015e39833a02874106e59a2c42",
+          "time": 0.588839054107666
+        },
+        {
+          "at": 1792151037.219205,
+          "file": "00005.jpg",
+          "sha256": "9a1903f30008cfc0c4eaaa3c21568e091c8da7f55e552055137f9dd62af38867",
+          "time": 0.7272779941558838
+        },
+        {
+          "at": 1792151037.372847,
+          "file": "00006.jpg",
+          "sha256": "3af17b19572c94ea12bdce718dbcd4cd64d6f85f7bcd915375135ea5ea6dfede",
+          "time": 0.8809201717376709
+        },
+        {
+          "at": 1792151037.506915,
+          "file": "00007.jpg",
+          "sha256": "66fa4d05f1307d20d801e99b05412a6f895dca30fa2efb857a436bed7dd01522",
+          "time": 1.0149881839752197
+        },
+        {
+          "at": 1792151037.656886,
+          "file": "00008.jpg",
+          "sha256": "8b28bdaad4d9981b8fcd1981ed7fff54e7b9990972a2533e3f15a12fbcbab2d2",
+          "time": 1.164959192276001
+        },
+        {
+          "at": 1792151037.785132,
+          "file": "00009.jpg",
+          "sha256": "56dd31ae0beca7cce87c96afe2815e6db583f8a413176c3ff8c0cedac7d44e59",
+          "time": 1.2932050228118896
+        },
+        {
+          "at": 1792151037.931425,
+          "file": "00010.jpg",
+          "sha256": "40c87d4a55677c2f61129229487bb1291a1ea563ff2f8447b2541cfffd3ab804",
+          "time": 1.4394981861114502
+        },
+        {
+          "at": 1792151038.072657,
+          "file": "00011.jpg",
+          "sha256": "6c0b5ba54ad0433b192e63b0b83949cd61e84ca0eb281829e9ead8c2d55230b6",
+          "time": 1.5807301998138428
+        },
+        {
+          "at": 1792151038.223151,
+          "file": "00012.jpg",
+          "sha256": "2c393a044868498fd5dd40d41db5e54b0009239cc5ebdd93fd24ff5c8fcc1c04",
+          "time": 1.7312240600585938
+        },
+        {
+          "at": 1792151038.372962,
+          "file": "00013.jpg",
+          "sha256": "09930164cd604606d90721daee7ca9165fe7ff41e0b85f71733aa0149c79c9a0",
+          "time": 1.8810350894927979
+        },
+        {
+          "at": 1792151038.534667,
+          "file": "00014.jpg",
+          "sha256": "0c4c7ddc4b94c45681d556c7f2202ddfd52207eba6c49d34d91d431e1b7bc08a",
+          "time": 2.0427401065826416
+        },
+        {
+          "at": 1792151038.676801,
+          "file": "00015.jpg",
+          "sha256": "7cec8ea7444568c6a8d81a52952d59336502ff15c5c9fdb715cdb7632c4b7068",
+          "time": 2.1848740577697754
+        },
+        {
+          "at": 1792151038.807744,
+          "file": "00016.jpg",
+          "sha256": "fd135c4d12b097cd5d7f75955b708c5ca259604b60246c9623d11d084e3dab2f",
+          "time": 2.31581711769104
+        },
+        {
+          "at": 1792151038.968735,
+          "file": "00017.jpg",
+          "sha256": "71f519f974e9a87e6d2b2b3bfa87b46c84f4177fa84db481ab89a6f224caf02e",
+          "time": 2.4768080711364746
+        },
+        {
+          "at": 1792151039.15011,
+          "file": "00018.jpg",
+          "sha256": "1ac0d4687f14139ef1b085d86eba2b3f6914901badf520dc91f5a0f8ab734529",
+          "time": 2.6581830978393555
+        },
+        {
+          "at": 1792151039.282432,
+          "file": "00019.jpg",
+          "sha256": "34bb34230df3b8e1fb72c378bb874d45659aba2abbca7a58c7d66329724fc017",
+          "time": 2.7905051708221436
+        },
+        {
+          "at": 1792151039.428431,
+          "file": "00020.jpg",
+          "sha256": "8204e94bddb900a364f15d50d508fe5c8bf9e04a16d4c077250a7b6e10673f36",
+          "time": 2.9365041255950928
+        },
+        {
+          "at": 1792151039.608411,
+          "file": "00021.jpg",
+          "sha256": "de8554d66d853183501dd419aaed821158963023dc9a418debbaf700a0514125",
+          "time": 3.1164841651916504
+        },
+        {
+          "at": 1792151039.739427,
+          "file": "00022.jpg",
+          "sha256": "9da04ba95f692bb9f1270b6988734a2638398c5d8754701a8c45aca124ad2fea",
+          "time": 3.24750018119812
+        },
+        {
+          "at": 1792151039.85837,
+          "file": "00023.jpg",
+          "sha256": "13a3eb7b81eacb2c8fd6c7abcc3b647610d198880df49080aab73f6835ab663b",
+          "time": 3.366443157196045
+        },
+        {
+          "at": 1792151040.00978,
+          "file": "00024.jpg",
+          "sha256": "dae1367cdc88c339c9d918002369342216ef679c8a64648eb220f2ae92f9f63b",
+          "time": 3.517853021621704
+        },
+        {
+          "at": 1792151040.182819,
+          "file": "00025.jpg",
+          "sha256": "64031d6f22e095c5cf436252af57ca2a671186b40b87b3dc465f1be99c6a35d8",
+          "time": 3.690891981124878
+        },
+        {
+          "at": 1792151040.355257,
+          "file": "00026.jpg",
+          "sha256": "7b262166b041ac11af3836fa0c45750a38ea11613a566acc7316b1d87aba96e2",
+          "time": 3.863330125808716
+        },
+        {
+          "at": 1792151040.52799,
+          "file": "00027.jpg",
+          "sha256": "5d4c8c3a135cb7ff1c279e0f25dcd461178e2f0531fe1ae09d70ce931fd2a8ed",
+          "time": 4.036063194274902
+        },
+        {
+          "at": 1792151040.699673,
+          "file": "00028.jpg",
+          "sha256": "605483e8362dfae6367b1143c563164a85772cd3f45283bc1c5eba0cbdd17b13",
+          "time": 4.2077460289001465
+        },
+        {
+          "at": 1792151040.87075,
+          "file": "00029.jpg",
+          "sha256": "518921fa5ce1350730905bf6331741331015a5b78b4409327f26e896aedf3d83",
+          "time": 4.3788230419158936
+        },
+        {
+          "at": 1792151041.009493,
+          "file": "00030.jpg",
+          "sha256": "c01028014ac206083be953d5dffa959975cf54a86596004f352a50f0f4ecbb56",
+          "time": 4.517566204071045
+        },
+        {
+          "at": 1792151041.161464,
+          "file": "00031.jpg",
+          "sha256": "cb0b9a2a771671ef44866f67026946a089db73af464a084f019f84a33588d247",
+          "time": 4.66953706741333
+        },
+        {
+          "at": 1792151041.340077,
+          "file": "00032.jpg",
+          "sha256": "2f63b193d9ff3a4b207d479392d85ae2d2be09bc8c4aad53d1c748f4e809cf62",
+          "time": 4.848150014877319
+        },
+        {
+          "at": 1792151041.497964,
+          "file": "00033.jpg",
+          "sha256": "92720930ee79ed2eb2f1ff1b74d6e348125f00fd1531043a09dd9088b1a88fef",
+          "time": 5.006036996841431
+        },
+        {
+          "at": 1792151041.654999,
+          "file": "00034.jpg",
+          "sha256": "c0c77cc62fd291e9ae21592ced9ad3472db3d8c4f35aec434a6b801815fe505d",
+          "time": 5.163072109222412
+        },
+        {
+          "at": 1792151041.79366,
+          "file": "00035.jpg",
+          "sha256": "ff2d67a7ca4969204f89fe086b44c8aac0bf0324e8eccef1da1407fdd1ba3858",
+          "time": 5.301733016967773
+        },
+        {
+          "at": 1792151041.982057,
+          "file": "00036.jpg",
+          "sha256": "c27560d9faa7a212c37851506962a5a66dd64156ed7f7b80b97f4aacc1671688",
+          "time": 5.490130186080933
+        },
+        {
+          "at": 1792151042.125864,
+          "file": "00037.jpg",
+          "sha256": "86c60c9cdd1ef317722ab9a4a7086374f152cc80b9507639d041180fb503c97b",
+          "time": 5.633937120437622
+        },
+        {
+          "at": 1792151042.296266,
+          "file": "00038.jpg",
+          "sha256": "4b30514665e2cd1c7d3372bd9fe6d7c5e4f152cd20cd8b702c21489eb4d5f801",
+          "time": 5.804339170455933
+        },
+        {
+          "at": 1792151042.467655,
+          "file": "00039.jpg",
+          "sha256": "be05abfc75ccc63b31eab52657d80b51471351e0fff5b18e658a7840da43ca4e",
+          "time": 5.9757280349731445
+        },
+        {
+          "at": 1792151042.647793,
+          "file": "00040.jpg",
+          "sha256": "5d4dfd5e40c3d7638eb469ffb1b9a3c1493fb9e940d3fb3ec2cf159165e93955",
+          "time": 6.1558661460876465
+        },
+        {
+          "at": 1792151042.832897,
+          "file": "00041.jpg",
+          "sha256": "7b1e074d67aa6f8a638dca5d85d468ae73454b1c0d58c7d10a501da783a23ff2",
+          "time": 6.340970039367676
+        },
+        {
+          "at": 1792151042.983429,
+          "file": "00042.jpg",
+          "sha256": "a33051333d02736d78817c6fcbebe39a6df0d1fbecb69111a905a1d8af3868cd",
+          "time": 6.491502046585083
+        },
+        {
+          "at": 1792151043.128114,
+          "file": "00043.jpg",
+          "sha256": "16da17c71a3a1c8101d436527ee312647e6f385b0f5a4dd16f8eddfced36ae08",
+          "time": 6.6361870765686035
+        },
+        {
+          "at": 1792151043.276321,
+          "file": "00044.jpg",
+          "sha256": "88458a9255a1f8123c9eab32cab9525a051b84b201b11b4b2bb3fa2658e406cf",
+          "time": 6.784394025802612
+        },
+        {
+          "at": 1792151043.409676,
+          "file": "00045.jpg",
+          "sha256": "cd2b5a2563e558e4ef14250c0656ef29c50ab7f585fca94be0b5f1c900cd0f30",
+          "time": 6.9177491664886475
+        },
+        {
+          "at": 1792151043.562321,
+          "file": "00046.jpg",
+          "sha256": "80121264ca3a70d81457ac6818cc3764c5c5796130799cae746eb8c7581cf0e9",
+          "time": 7.070394039154053
+        },
+        {
+          "at": 1792151043.695348,
+          "file": "00047.jpg",
+          "sha256": "dd5eeab0326e3fa1b9f2c0b0c6b95effd640b88050c8c036e7d814a137c05e0a",
+          "time": 7.203421115875244
+        },
+        {
+          "at": 1792151043.827134,
+          "file": "00048.jpg",
+          "sha256": "da99ac28669d7a1c7b477cacc02dc1700c60713f90e11c0b826a2882f1a9ed2d",
+          "time": 7.335206985473633
+        },
+        {
+          "at": 1792151043.967559,
+          "file": "00049.jpg",
+          "sha256": "eb3fefca14500bf1191d8eacea992f621e92a1725a6a6ad1a31136ea01ccde61",
+          "time": 7.475632190704346
+        },
+        {
+          "at": 1792151044.107478,
+          "file": "00050.jpg",
+          "sha256": "f16b067cf4b30658d2af430423eeb502d103f7a2cde739eb2fa1e56eaedb1a32",
+          "time": 7.615550994873047
+        },
+        {
+          "at": 1792151044.277121,
+          "file": "00051.jpg",
+          "sha256": "73bd4be0f7ff9d6ad6a1f539674d2d17f4c670333552aa5bb0473ffed640dc13",
+          "time": 7.785194158554077
+        },
+        {
+          "at": 1792151044.45391,
+          "file": "00052.jpg",
+          "sha256": "89de5469295e1cf6826259de6e9ceb7dd0860f43e6a86592e8b7f02a3c44d31a",
+          "time": 7.9619832038879395
+        },
+        {
+          "at": 1792151044.628486,
+          "file": "00053.jpg",
+          "sha256": "29b88b268d40b3fedc98691e1d91d90a6d4bef324380d2ee46d773a8521a9b4c",
+          "time": 8.136559009552002
+        },
+        {
+          "at": 1792151044.793201,
+          "file": "00054.jpg",
+          "sha256": "7cec8ea7444568c6a8d81a52952d59336502ff15c5c9fdb715cdb7632c4b7068",
+          "time": 8.301274061203003
+        },
+        {
+          "at": 1792151044.959574,
+          "file": "00055.jpg",
+          "sha256": "041765936accfff3035d9dc483f086fbdbb053cc9703135370e659eccb7a1e7f",
+          "time": 8.467647075653076
+        },
+        {
+          "at": 1792151045.126758,
+          "file": "00056.jpg",
+          "sha256": "28686a5a658607d5942466a36f5336880d6e256a14b9afa5632c361da01cc842",
+          "time": 8.634831190109253
+        },
+        {
+          "at": 1792151045.313207,
+          "file": "00057.jpg",
+          "sha256": "c35dd1d0a71ec33cca6c412a2a62e715b1d8a9750059c134810dc5679088a6c4",
+          "time": 8.821280002593994
+        },
+        {
+          "at": 1792151045.498752,
+          "file": "00058.jpg",
+          "sha256": "415e87a1eac102bee3c5373096413c1a6d35a9d4c9455e6df378bf6e403eab5c",
+          "time": 9.00682520866394
+        },
+        {
+          "at": 1792151045.67009,
+          "file": "00059.jpg",
+          "sha256": "a0c91035f9e340665701d4e03a1dcf3c917efdcde8b99f45f6a2f140a4258c12",
+          "time": 9.178163051605225
+        },
+        {
+          "at": 1792151045.825003,
+          "file": "00060.jpg",
+          "sha256": "df3107fa8e1efe257e3de977ed1fe08acf9c265f3de7822326d8cad33904f509",
+          "time": 9.333076000213623
+        },
+        {
+          "at": 1792151045.980006,
+          "file": "00061.jpg",
+          "sha256": "05124739d0b1b6547e452d041d25a14b4d64c63c24b51c0d7a8024694e6feff9",
+          "time": 9.488079071044922
+        },
+        {
+          "at": 1792151046.127065,
+          "file": "00062.jpg",
+          "sha256": "dae1367cdc88c339c9d918002369342216ef679c8a64648eb220f2ae92f9f63b",
+          "time": 9.635138034820557
+        },
+        {
+          "at": 1792151046.294609,
+          "file": "00063.jpg",
+          "sha256": "64031d6f22e095c5cf436252af57ca2a671186b40b87b3dc465f1be99c6a35d8",
+          "time": 9.802682161331177
+        },
+        {
+          "at": 1792151046.477186,
+          "file": "00064.jpg",
+          "sha256": "7b262166b041ac11af3836fa0c45750a38ea11613a566acc7316b1d87aba96e2",
+          "time": 9.985259056091309
+        },
+        {
+          "at": 1792151046.645752,
+          "file": "00065.jpg",
+          "sha256": "8843a8f4fdbef17a4016165f14e40fda228bf11711ec061159926cd300c334a9",
+          "time": 10.153825044631958
+        },
+        {
+          "at": 1792151046.838342,
+          "file": "00066.jpg",
+          "sha256": "c92c89adc9e49a54adca1f7ceeb149d14088fa8c709097b41f8b32d1b9276e1e",
+          "time": 10.346415042877197
+        },
+        {
+          "at": 1792151047.008593,
+          "file": "00067.jpg",
+          "sha256": "810147f139db116c1fda89b20d13de17eb3207bf5f7be5a79df835355aab606c",
+          "time": 10.516666173934937
+        },
+        {
+          "at": 1792151047.174076,
+          "file": "00068.jpg",
+          "sha256": "345a8f9ae980fce671ccc338104f44c5bb7b49dffadcc01eeac8d4f38e7a6b76",
+          "time": 10.682149171829224
+        },
+        {
+          "at": 1792151047.33736,
+          "file": "00069.jpg",
+          "sha256": "5ed781921e06544e8e3c40d3ddc64507c36b0fa0b6363e52f0c87275b982150a",
+          "time": 10.845432996749878
+        },
+        {
+          "at": 1792151047.491691,
+          "file": "00070.jpg",
+          "sha256": "40c8a761398a8501e2069615197b08bb6db3ad2c4ff4170183ce0a1a769357d7",
+          "time": 10.999764204025269
+        },
+        {
+          "at": 1792151047.639733,
+          "file": "00071.jpg",
+          "sha256": "d09585b041fbbf7b0948c70c7852de2fa5ad7c9d1f3b047dde3313d767deb3a2",
+          "time": 11.147806167602539
+        },
+        {
+          "at": 1792151047.770244,
+          "file": "00072.jpg",
+          "sha256": "734bfbd4c70b35a03b1309ec0c1c2318544a741e75d105fae90a8dea4b214d4a",
+          "time": 11.278316974639893
+        },
+        {
+          "at": 1792151047.912145,
+          "file": "00073.jpg",
+          "sha256": "c5dd81ede6a70a793fecef25af8f0b88669194cbdee79656b534f88ba7b31c9b",
+          "time": 11.420217990875244
+        },
+        {
+          "at": 1792151048.062793,
+          "file": "00074.jpg",
+          "sha256": "e07bd265fce171f30489e093a1b019f143799dcae9efa17b3debef025016e0a3",
+          "time": 11.570866107940674
+        },
+        {
+          "at": 1792151048.203671,
+          "file": "00075.jpg",
+          "sha256": "3e79780bd475cad3b413487bf5f858567ef0ad711b6812e40f1cef243318a090",
+          "time": 11.7117440700531
+        },
+        {
+          "at": 1792151048.384235,
+          "file": "00076.jpg",
+          "sha256": "4b30514665e2cd1c7d3372bd9fe6d7c5e4f152cd20cd8b702c21489eb4d5f801",
+          "time": 11.892307996749878
+        }
+      ],
+      "draws": [
+        {
+          "at": 16863.10000000149,
+          "time": 0,
+          "frame": 0,
+          "sample": "sample",
+          "pictureTime": 0,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 17101,
+          "time": 0.113097,
+          "frame": 1,
+          "sample": "sample",
+          "pictureTime": 0.124109,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 17253.70000000298,
+          "time": 0.257523,
+          "frame": 4,
+          "sample": "sample",
+          "pictureTime": 0.26395,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 17387.5,
+          "time": 0.401161,
+          "frame": 6,
+          "sample": "sample",
+          "pictureTime": 0.408258,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 17544.80000000447,
+          "time": 0.53773,
+          "frame": 8,
+          "sample": "sample",
+          "pictureTime": 0.547033,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 17681.70000000298,
+          "time": 0.6969709999999999,
+          "frame": 11,
+          "sample": "sample",
+          "pictureTime": 0.702667,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 17818.80000000447,
+          "time": 0.825121,
+          "frame": 13,
+          "sample": "sample",
+          "pictureTime": 0.830905,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 17984.5,
+          "time": 0.978684,
+          "frame": 15,
+          "sample": "sample",
+          "pictureTime": 0.984508,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 18126.5,
+          "time": 1.122447,
+          "frame": 17,
+          "sample": "sample",
+          "pictureTime": 1.126689,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 18281.5,
+          "time": 1.271066,
+          "frame": 20,
+          "sample": "sample",
+          "pictureTime": 1.27218,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 18544.60000000149,
+          "time": 1.54575,
+          "frame": 24,
+          "sample": "sample",
+          "pictureTime": 1.553154,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 18735.70000000298,
+          "time": 1.701798,
+          "frame": 27,
+          "sample": "sample",
+          "pictureTime": 1.710234,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 18871.30000000447,
+          "time": 1.880135,
+          "frame": 30,
+          "sample": "sample",
+          "pictureTime": 1.88511,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19034.20000000298,
+          "time": 2.016324,
+          "frame": 32,
+          "sample": "sample",
+          "pictureTime": 2.020802,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19207.5,
+          "time": 2.183472,
+          "frame": 34,
+          "sample": "sample",
+          "pictureTime": 2.189427,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19359.60000000149,
+          "time": 2.349328,
+          "frame": 37,
+          "sample": "sample",
+          "pictureTime": 2.355105,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19509,
+          "time": 2.5031,
+          "frame": 40,
+          "sample": "sample",
+          "pictureTime": 2.507507,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19672.80000000447,
+          "time": 2.656553,
+          "frame": 42,
+          "sample": "sample",
+          "pictureTime": 2.662589,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19807.30000000447,
+          "time": 2.817004,
+          "frame": 45,
+          "sample": "sample",
+          "pictureTime": 2.820891,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19931.5,
+          "time": 2.949109,
+          "frame": 47,
+          "sample": "sample",
+          "pictureTime": 2.955545,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 20081.70000000298,
+          "time": 3.078193,
+          "frame": 49,
+          "sample": "sample",
+          "pictureTime": 3.08419,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 20236.70000000298,
+          "time": 3.228377,
+          "frame": 51,
+          "sample": "sample",
+          "pictureTime": 3.233182,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 20400,
+          "time": 3.387609,
+          "frame": 54,
+          "sample": "sample",
+          "pictureTime": 3.392135,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 20545.30000000447,
+          "time": 3.545893,
+          "frame": 56,
+          "sample": "sample",
+          "pictureTime": 3.550744,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 20740.10000000149,
+          "time": 3.701641,
+          "frame": 59,
+          "sample": "sample",
+          "pictureTime": 3.710607,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 20876.60000000149,
+          "time": 3.881735,
+          "frame": 62,
+          "sample": "sample",
+          "pictureTime": 3.880776,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 21057.90000000596,
+          "time": 4.033556,
+          "frame": 64,
+          "sample": "sample",
+          "pictureTime": 4.038883,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 21223.20000000298,
+          "time": 4.20654600000149,
+          "frame": 67,
+          "sample": "sample",
+          "pictureTime": 4.206549,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 21398.20000000298,
+          "time": 4.367977,
+          "frame": 69,
+          "sample": "sample",
+          "pictureTime": 4.373431,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 21557,
+          "time": 4.54883,
+          "frame": 72,
+          "sample": "sample",
+          "pictureTime": 4.552676,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 21712.5,
+          "time": 4.703744,
+          "frame": 75,
+          "sample": "sample",
+          "pictureTime": 4.707787,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 21873.5,
+          "time": 4.866356,
+          "frame": 77,
+          "sample": "sample",
+          "pictureTime": 4.869802,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 22044.80000000447,
+          "time": 5.020366,
+          "frame": 80,
+          "sample": "sample",
+          "pictureTime": 5.024798,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 22200.70000000298,
+          "time": 5.18860100000149,
+          "frame": 83,
+          "sample": "sample",
+          "pictureTime": 5.193339,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 22372.90000000596,
+          "time": 5.351744,
+          "frame": 85,
+          "sample": "sample",
+          "pictureTime": 5.357595,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 22543.30000000447,
+          "time": 5.518959,
+          "frame": 88,
+          "sample": "sample",
+          "pictureTime": 5.524008,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 22717.70000000298,
+          "time": 5.691438,
+          "frame": 91,
+          "sample": "sample",
+          "pictureTime": 5.695228,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 22899.30000000447,
+          "time": 5.864013,
+          "frame": 93,
+          "sample": "sample",
+          "pictureTime": 5.868673,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 23055.40000000596,
+          "time": 0,
+          "frame": 0,
+          "sample": "sample",
+          "pictureTime": 0
+        },
+        {
+          "at": 23194,
+          "time": 0.107747,
+          "frame": 1,
+          "sample": "sample",
+          "pictureTime": 0.111632,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 23331.90000000596,
+          "time": 0.240868,
+          "frame": 3,
+          "sample": "sample",
+          "pictureTime": 0.244853,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 23471.30000000447,
+          "time": 0.380653,
+          "frame": 6,
+          "sample": "sample",
+          "pictureTime": 0.384154,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 23614.10000000149,
+          "time": 0.524489,
+          "frame": 8,
+          "sample": "sample",
+          "pictureTime": 0.527833,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 23758.40000000596,
+          "time": 0.664414,
+          "frame": 10,
+          "sample": "sample",
+          "pictureTime": 0.668001,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 23900.20000000298,
+          "time": 0.8076160000014901,
+          "frame": 12,
+          "sample": "sample",
+          "pictureTime": 0.812097,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24040.60000000149,
+          "time": 0.948469,
+          "frame": 15,
+          "sample": "sample",
+          "pictureTime": 0.951366,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24179.80000000447,
+          "time": 1.08832,
+          "frame": 17,
+          "sample": "sample",
+          "pictureTime": 1.092025,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24321.70000000298,
+          "time": 1.226388,
+          "frame": 19,
+          "sample": "sample",
+          "pictureTime": 1.231209,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24512.20000000298,
+          "time": 1.370147,
+          "frame": 21,
+          "sample": "sample",
+          "pictureTime": 1.372114,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24679.90000000596,
+          "time": 1.5699,
+          "frame": 25,
+          "sample": "sample",
+          "pictureTime": 1.576988,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24853.90000000596,
+          "time": 1.7328260000014901,
+          "frame": 27,
+          "sample": "sample",
+          "pictureTime": 1.738223,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 25017.40000000596,
+          "time": 1.903439,
+          "frame": 30,
+          "sample": "sample",
+          "pictureTime": 1.908393,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 25191.30000000447,
+          "time": 2.07254,
+          "frame": 33,
+          "sample": "sample",
+          "pictureTime": 2.078068,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 25365.20000000298,
+          "time": 2.242541,
+          "frame": 35,
+          "sample": "sample",
+          "pictureTime": 2.24621,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 25559.20000000298,
+          "time": 2.4154730000029803,
+          "frame": 38,
+          "sample": "sample",
+          "pictureTime": 2.41675,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 25729.20000000298,
+          "time": 2.614256,
+          "frame": 41,
+          "sample": "sample",
+          "pictureTime": 2.618094,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 25896.70000000298,
+          "time": 2.782056,
+          "frame": 44,
+          "sample": "sample",
+          "pictureTime": 2.785961,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 26047.5,
+          "time": 2.947783,
+          "frame": 47,
+          "sample": "sample",
+          "pictureTime": 2.951509,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 26195.30000000447,
+          "time": 3.100625,
+          "frame": 49,
+          "sample": "sample",
+          "pictureTime": 3.105001,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 26355.40000000596,
+          "time": 3.243835,
+          "frame": 51,
+          "sample": "sample",
+          "pictureTime": 3.24781,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 26520.80000000447,
+          "time": 3.40874,
+          "frame": 54,
+          "sample": "sample",
+          "pictureTime": 3.413078,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 26702.60000000149,
+          "time": 3.571469,
+          "frame": 57,
+          "sample": "sample",
+          "pictureTime": 3.57293,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 26893.40000000596,
+          "time": 3.75178,
+          "frame": 60,
+          "sample": "sample",
+          "pictureTime": 3.756533,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 27072,
+          "time": 3.94354,
+          "frame": 63,
+          "sample": "sample",
+          "pictureTime": 3.950578,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 27241.70000000298,
+          "time": 4.128029,
+          "frame": 66,
+          "sample": "sample",
+          "pictureTime": 4.13287,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 27402.30000000447,
+          "time": 4.291633,
+          "frame": 68,
+          "sample": "sample",
+          "pictureTime": 4.293298,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 27565.90000000596,
+          "time": 4.456591,
+          "frame": 71,
+          "sample": "sample",
+          "pictureTime": 4.46074,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 27709.10000000149,
+          "time": 4.610441,
+          "frame": 73,
+          "sample": "sample",
+          "pictureTime": 4.61639,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 27843.70000000298,
+          "time": 4.755659,
+          "frame": 76,
+          "sample": "sample",
+          "pictureTime": 4.759736,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 27984.40000000596,
+          "time": 4.893008,
+          "frame": 78,
+          "sample": "sample",
+          "pictureTime": 4.896151,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 28126.60000000149,
+          "time": 5.030148,
+          "frame": 80,
+          "sample": "sample",
+          "pictureTime": 5.035202,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 28269.10000000149,
+          "time": 5.175405,
+          "frame": 82,
+          "sample": "sample",
+          "pictureTime": 5.18036,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 28450.5,
+          "time": 5.31875100000149,
+          "frame": 85,
+          "sample": "sample",
+          "pictureTime": 5.323576,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 28600.5,
+          "time": 5.499289,
+          "frame": 87,
+          "sample": "sample",
+          "pictureTime": 5.50294,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 28742.60000000149,
+          "time": 5.642416,
+          "frame": 90,
+          "sample": "sample",
+          "pictureTime": 5.650243,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 28935.90000000596,
+          "time": 5.787867,
+          "frame": 92,
+          "sample": "sample",
+          "pictureTime": 5.792849,
+          "pictureKind": "HTMLVideoElement"
+        }
+      ],
+      "errors": [],
+      "output": {
+        "file": "sample-live.mp4",
+        "bytes": 297188,
+        "sha256": "3716fb1c7137905300e53e2b3371c632de881977df1aba4d0cd79f22c28641a4",
+        "duration": 11.999978
+      },
+      "poster": {
+        "file": "sample-live.jpg",
+        "bytes": 19981,
+        "sha256": "fc297e1db6c3de92bdc676d501e803b38b67a2d9977d496f394e67b648a371c1",
+        "sourceMovieSha256": "3716fb1c7137905300e53e2b3371c632de881977df1aba4d0cd79f22c28641a4",
+        "time": 1
+      }
+    },
+    {
+      "id": "machine-long",
+      "title": "Inside the machine: 30 seconds",
+      "path": "sample",
+      "inputHashes": [
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+          "bytes": 1951701,
+          "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+          "bytes": 15805452,
+          "sha256": "bb230caff266efa36fd39ebdabe020244c2719e97c5364a9158964a7f006bd46"
+        }
+      ],
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+      "sourcePage": "https://orange.blender.org/blog/creative-commons-license-2/",
+      "checked": "October 16, 2026",
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 600
+      },
+      "captures": [
+        {
+          "at": 1792151064.193755,
+          "file": "00000.jpg",
+          "sha256": "0609ccfedc679ac982fc34a33974cab4f59c6aa2be833de5e4be377ef3347336",
+          "time": 0
+        },
+        {
+          "at": 1792151064.278045,
+          "file": "00001.jpg",
+          "sha256": "abdea6b4fba6c640165b3207b65b2bb768b1717268cea0c4081d203ca0c0d1af",
+          "time": 0.0842900276184082
+        },
+        {
+          "at": 1792151064.361873,
+          "file": "00002.jpg",
+          "sha256": "90539f62b2647e7331137f8245fd07dec41dfb46e3c1f8acb2c89c7deb145fe8",
+          "time": 0.16811800003051758
+        },
+        {
+          "at": 1792151064.521259,
+          "file": "00003.jpg",
+          "sha256": "90539f62b2647e7331137f8245fd07dec41dfb46e3c1f8acb2c89c7deb145fe8",
+          "time": 0.32750415802001953
+        },
+        {
+          "at": 1792151064.558112,
+          "file": "00004.jpg",
+          "sha256": "90539f62b2647e7331137f8245fd07dec41dfb46e3c1f8acb2c89c7deb145fe8",
+          "time": 0.36435699462890625
+        },
+        {
+          "at": 1792151064.914696,
+          "file": "00005.jpg",
+          "sha256": "d16b6eda720415f4febd0a8a9967f3271d2c1cec98fc9bb669100497af4f9303",
+          "time": 0.7209410667419434
+        },
+        {
+          "at": 1792151065.194411,
+          "file": "00006.jpg",
+          "sha256": "853bdaaf3feecf1c3edaac8229f8366c599c73f759caa1baac1c67160e9c3d6a",
+          "time": 1.0006561279296875
+        },
+        {
+          "at": 1792151065.470904,
+          "file": "00007.jpg",
+          "sha256": "377f71f5fcb8d54d5cb8bac1685560003e4a6a584da95a65faed146362b794a5",
+          "time": 1.2771492004394531
+        },
+        {
+          "at": 1792151065.745867,
+          "file": "00008.jpg",
+          "sha256": "92736d90f28a1f73ce692a07193537780202c3fdfebcb34e2f31ae10a96daf7d",
+          "time": 1.552112102508545
+        },
+        {
+          "at": 1792151066.033305,
+          "file": "00009.jpg",
+          "sha256": "2ef243195bd63a4bd85a8a00eab057283e5be3c915a4b6c3aa75d27213db7f0e",
+          "time": 1.8395500183105469
+        },
+        {
+          "at": 1792151066.300303,
+          "file": "00010.jpg",
+          "sha256": "06e1017df8221791bc68e852d799d2ec75fb40b3ffb13f9184ddffa8c0939bde",
+          "time": 2.1065480709075928
+        },
+        {
+          "at": 1792151066.568394,
+          "file": "00011.jpg",
+          "sha256": "7ac6e0efa54849733279568ad36296bb9fe565ee62dbf97bde32462461a496d8",
+          "time": 2.3746390342712402
+        },
+        {
+          "at": 1792151066.819645,
+          "file": "00012.jpg",
+          "sha256": "10dcba5403b07d2f4c305d2e520021e5a67aa70cf1a7624f1b219a35f98c2cd8",
+          "time": 2.625890016555786
+        },
+        {
+          "at": 1792151067.064145,
+          "file": "00013.jpg",
+          "sha256": "a9a1da389542cccac5a7a497a8baf881509e92e56a7bac284e6a250d024bcebf",
+          "time": 2.8703901767730713
+        },
+        {
+          "at": 1792151067.330456,
+          "file": "00014.jpg",
+          "sha256": "d907ab511be4bf5faf658ecb9232c26c5fe067b9965c936e739479f78633feaf",
+          "time": 3.1367011070251465
+        },
+        {
+          "at": 1792151067.614451,
+          "file": "00015.jpg",
+          "sha256": "fd3ebb394faee6462f6d89489801d664b192021f4ca8733d5115c623d6dc3687",
+          "time": 3.4206960201263428
+        },
+        {
+          "at": 1792151067.881752,
+          "file": "00016.jpg",
+          "sha256": "e9fc13e7908bc40309c449ac502e78794818644478a11774541b417b1d3be07c",
+          "time": 3.6879971027374268
+        },
+        {
+          "at": 1792151068.193673,
+          "file": "00017.jpg",
+          "sha256": "8a75b2945bc39fa1ed155e2dc5850dba4fcece9e10327eaa476ab85ddfe4d113",
+          "time": 3.999917984008789
+        },
+        {
+          "at": 1792151068.451327,
+          "file": "00018.jpg",
+          "sha256": "49bceaeba150e40f5cf44fa611e6ab7fbfb261eea547383a552a413c14cb5b3e",
+          "time": 4.257572174072266
+        },
+        {
+          "at": 1792151068.725807,
+          "file": "00019.jpg",
+          "sha256": "12fa616efb2f05ee15e4664f456bc39b6a841261591b4198b7e5dbd3c5345169",
+          "time": 4.532052040100098
+        },
+        {
+          "at": 1792151068.959617,
+          "file": "00020.jpg",
+          "sha256": "1835dc8d2b555665f20f7ef053d843135c1ee64baf8035b36ef197366fe4c3d8",
+          "time": 4.765861988067627
+        },
+        {
+          "at": 1792151069.196422,
+          "file": "00021.jpg",
+          "sha256": "f64ebe7ad460eee964ed79282133d682c63ebdad2b7a68f9516f85b49e292bc8",
+          "time": 5.002667188644409
+        },
+        {
+          "at": 1792151069.415711,
+          "file": "00022.jpg",
+          "sha256": "ffe66f3e1a3a971c5e0cba1bee455a03c9218d3ea733a9fd239f31c841514c4f",
+          "time": 5.221956014633179
+        },
+        {
+          "at": 1792151069.660573,
+          "file": "00023.jpg",
+          "sha256": "19f850e39c9309833482f48ca80530815a71a5daf632e8f635644fa4c151152d",
+          "time": 5.46681809425354
+        },
+        {
+          "at": 1792151069.89722,
+          "file": "00024.jpg",
+          "sha256": "56f99c92c56d4d7d5d55dac88f20c17f233b6ec9272552ed0ffb3c05f9b890f8",
+          "time": 5.703464984893799
+        },
+        {
+          "at": 1792151070.157486,
+          "file": "00025.jpg",
+          "sha256": "9353d39fb07d5339f5a589d5e6a8a407ac63568be4eb68dd4b7918ea438f16a9",
+          "time": 5.963731050491333
+        },
+        {
+          "at": 1792151070.387901,
+          "file": "00026.jpg",
+          "sha256": "a4acc9c28b1aa16a881f9086169342aff4af6444316d46abeaeed98bb6d5edf6",
+          "time": 6.194146156311035
+        },
+        {
+          "at": 1792151070.614582,
+          "file": "00027.jpg",
+          "sha256": "af87dcfb653795f8fa4e9b0124084f114bea6be1ac242b6220de975307fae033",
+          "time": 6.420827150344849
+        },
+        {
+          "at": 1792151070.890304,
+          "file": "00028.jpg",
+          "sha256": "b4f2e617061c25a9c3728b4b59001ab998be3d73909489222091ecae959e4be7",
+          "time": 6.6965491771698
+        },
+        {
+          "at": 1792151071.115379,
+          "file": "00029.jpg",
+          "sha256": "20d57cc0183369f893e366c606cf32a44daaae226205f38fefe7eb20b7951ecc",
+          "time": 6.921624183654785
+        },
+        {
+          "at": 1792151071.332745,
+          "file": "00030.jpg",
+          "sha256": "c74416a8f85dd938806324f701124b50b408b20fec210dbf1b0e1284240ad8b7",
+          "time": 7.138990163803101
+        },
+        {
+          "at": 1792151071.585618,
+          "file": "00031.jpg",
+          "sha256": "82bd2f321352547949ed0f1f5a36a6315a61627bb336b02c6b70c9d640bf601d",
+          "time": 7.391863107681274
+        },
+        {
+          "at": 1792151071.85902,
+          "file": "00032.jpg",
+          "sha256": "24b1d8f8768b00fda9372f05f9e444b7188e33f87c93a5e5b5f8dd82a768c72e",
+          "time": 7.665265083312988
+        },
+        {
+          "at": 1792151072.107937,
+          "file": "00033.jpg",
+          "sha256": "8afe3ffa2241cf6ac6d9cb13232dc119ae398d1947fd60df7ece0ccb9099c3d3",
+          "time": 7.914182186126709
+        },
+        {
+          "at": 1792151072.349244,
+          "file": "00034.jpg",
+          "sha256": "da41f0af5017b5fe481b4aa733082813dad6c45312ce646fb7d854e387dd9175",
+          "time": 8.155489206314087
+        },
+        {
+          "at": 1792151072.610384,
+          "file": "00035.jpg",
+          "sha256": "67695a38d8df32efdc416b76350cb3fb19c402eb3809f73dd40c26e28ca34d7c",
+          "time": 8.416629076004028
+        },
+        {
+          "at": 1792151072.871374,
+          "file": "00036.jpg",
+          "sha256": "4a74867745d09f40767b47f8590d721adf8c7543f0b5be3a500a18f51d87763c",
+          "time": 8.677618980407715
+        },
+        {
+          "at": 1792151073.115742,
+          "file": "00037.jpg",
+          "sha256": "5daa8fa98080e7924c74923b842ac1dc1cb217111632e9d31d322b2bde1a9951",
+          "time": 8.921987056732178
+        },
+        {
+          "at": 1792151073.378327,
+          "file": "00038.jpg",
+          "sha256": "33cf6ab63ed96e2e1df1b6cb1bf03745392a05739fafd02cb5c001f84098fc15",
+          "time": 9.184571981430054
+        },
+        {
+          "at": 1792151073.602205,
+          "file": "00039.jpg",
+          "sha256": "91c0bcceb64d18a78a28f7df4cc56c10e1c72dead95efad2c00404c0cc492a3a",
+          "time": 9.40845012664795
+        },
+        {
+          "at": 1792151073.85524,
+          "file": "00040.jpg",
+          "sha256": "50b2bf12ff0bb7f9b0f750651b9ac14cefb05e23c3d42302e18679710ac288f9",
+          "time": 9.661485195159912
+        },
+        {
+          "at": 1792151074.075942,
+          "file": "00041.jpg",
+          "sha256": "968ac0228a37963023c39b41f6e4998720954b20761da1afbcde14efed2db04c",
+          "time": 9.882187128067017
+        },
+        {
+          "at": 1792151074.307197,
+          "file": "00042.jpg",
+          "sha256": "105d92dc3e3593095f638d541a25f50a59e65b0bed91d1fc9c24fbffe4d4675e",
+          "time": 10.113442182540894
+        },
+        {
+          "at": 1792151074.560633,
+          "file": "00043.jpg",
+          "sha256": "9ec446734a53d7d12c2d542553aab8e48932ea8e94c03f9af728a8f2adf2b80b",
+          "time": 10.366878032684326
+        },
+        {
+          "at": 1792151074.826449,
+          "file": "00044.jpg",
+          "sha256": "452cf5c4d06d122836e94d582d631d0c54fb7ddbb824a740017ccc5fe6a1a1f4",
+          "time": 10.632694005966187
+        },
+        {
+          "at": 1792151075.089791,
+          "file": "00045.jpg",
+          "sha256": "59f44da8cc85780fcce39e1039708d3fbf36308bd9b41317208bfd00eabf84e7",
+          "time": 10.896036148071289
+        },
+        {
+          "at": 1792151075.311483,
+          "file": "00046.jpg",
+          "sha256": "047351ecdf5044e653290c3abf4eb26686fdb97cd43fab20fad0802d82aaa42c",
+          "time": 11.117727994918823
+        },
+        {
+          "at": 1792151075.554434,
+          "file": "00047.jpg",
+          "sha256": "fb1a6e52223abd9fa13b5cb5cf632cae85afff50093c5f97ae76fcecd6d7b428",
+          "time": 11.360679149627686
+        },
+        {
+          "at": 1792151075.78112,
+          "file": "00048.jpg",
+          "sha256": "279faca901b44edfe91f04db9a8cfbf4d71b6aa60c8d553350e140896a4b6522",
+          "time": 11.58736515045166
+        },
+        {
+          "at": 1792151076.016748,
+          "file": "00049.jpg",
+          "sha256": "9c54d9358bc64fdd44290b9e4362ef6f024144088544407d9b2714b22aba70da",
+          "time": 11.822993040084839
+        }
+      ],
+      "draws": [
+        {
+          "at": 14548.59999999404,
+          "time": 0,
+          "frame": 0,
+          "sample": "machine-long",
+          "pictureTime": 0,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 15018.5,
+          "time": 0.09832399999403954,
+          "frame": 2,
+          "sample": "machine-long",
+          "pictureTime": 0.096758,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 15361.5,
+          "time": 0.4594220000029802,
+          "frame": 11,
+          "sample": "machine-long",
+          "pictureTime": 0.458,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 15639,
+          "time": 0.797537,
+          "frame": 19,
+          "sample": "machine-long",
+          "pictureTime": 0.796852,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 15927,
+          "time": 1.074559,
+          "frame": 25,
+          "sample": "machine-long",
+          "pictureTime": 1.07194,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 16193.09999999404,
+          "time": 1.358972,
+          "frame": 32,
+          "sample": "machine-long",
+          "pictureTime": 1.356799,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 16470.29999999702,
+          "time": 1.6394800000014902,
+          "frame": 39,
+          "sample": "machine-long",
+          "pictureTime": 1.637883,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 16734.79999999702,
+          "time": 1.90323,
+          "frame": 45,
+          "sample": "machine-long",
+          "pictureTime": 1.901696,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 16995.79999999702,
+          "time": 2.17735,
+          "frame": 52,
+          "sample": "machine-long",
+          "pictureTime": 2.175562,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 17230.69999999553,
+          "time": 2.42906,
+          "frame": 58,
+          "sample": "machine-long",
+          "pictureTime": 2.428265,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 17478.89999999851,
+          "time": 2.67057300000149,
+          "frame": 64,
+          "sample": "machine-long",
+          "pictureTime": 2.670479,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 17773.5,
+          "time": 2.917404,
+          "frame": 70,
+          "sample": "machine-long",
+          "pictureTime": 2.915855,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 18039.29999999702,
+          "time": 3.213513,
+          "frame": 77,
+          "sample": "machine-long",
+          "pictureTime": 3.211972,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 18290.09999999404,
+          "time": 3.463493,
+          "frame": 83,
+          "sample": "machine-long",
+          "pictureTime": 3.461944,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 18608.79999999702,
+          "time": 3.721366,
+          "frame": 89,
+          "sample": "machine-long",
+          "pictureTime": 3.720456,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 18894.5,
+          "time": 4.036528,
+          "frame": 96,
+          "sample": "machine-long",
+          "pictureTime": 4.035721,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19133,
+          "time": 4.329122,
+          "frame": 103,
+          "sample": "machine-long",
+          "pictureTime": 4.328063,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19373.59999999404,
+          "time": 4.566636,
+          "frame": 109,
+          "sample": "machine-long",
+          "pictureTime": 4.564493,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19594.5,
+          "time": 4.804847,
+          "frame": 115,
+          "sample": "machine-long",
+          "pictureTime": 4.803316,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 19829.29999999702,
+          "time": 5.02655,
+          "frame": 120,
+          "sample": "machine-long",
+          "pictureTime": 5.025537,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 20071.19999999553,
+          "time": 5.261673,
+          "frame": 126,
+          "sample": "machine-long",
+          "pictureTime": 5.260182,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 20303.89999999851,
+          "time": 5.506453,
+          "frame": 132,
+          "sample": "machine-long",
+          "pictureTime": 5.505695,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 20551.39999999851,
+          "time": 5.731631,
+          "frame": 137,
+          "sample": "machine-long",
+          "pictureTime": 5.730922,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 20798.69999999553,
+          "time": 5.985967,
+          "frame": 143,
+          "sample": "machine-long",
+          "pictureTime": 5.983902,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 21033.5,
+          "time": 6.231234,
+          "frame": 149,
+          "sample": "machine-long",
+          "pictureTime": 6.228293,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 21291.69999999553,
+          "time": 6.47871,
+          "frame": 155,
+          "sample": "machine-long",
+          "pictureTime": 6.477199,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 21512,
+          "time": 6.7226970000014905,
+          "frame": 161,
+          "sample": "machine-long",
+          "pictureTime": 6.721337,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 21755.69999999553,
+          "time": 6.9452,
+          "frame": 166,
+          "sample": "machine-long",
+          "pictureTime": 6.944262,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 22001,
+          "time": 7.188161,
+          "frame": 172,
+          "sample": "machine-long",
+          "pictureTime": 7.187373,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 22266.89999999851,
+          "time": 7.438965,
+          "frame": 178,
+          "sample": "machine-long",
+          "pictureTime": 7.437442,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 22530.5,
+          "time": 7.699898,
+          "frame": 184,
+          "sample": "machine-long",
+          "pictureTime": 7.699092,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 22773.69999999553,
+          "time": 7.962222,
+          "frame": 191,
+          "sample": "machine-long",
+          "pictureTime": 7.960069,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 23028.09999999404,
+          "time": 8.212302,
+          "frame": 197,
+          "sample": "machine-long",
+          "pictureTime": 8.211387,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 23289.09999999404,
+          "time": 8.459244,
+          "frame": 203,
+          "sample": "machine-long",
+          "pictureTime": 8.457728,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 23512.89999999851,
+          "time": 8.729276,
+          "frame": 209,
+          "sample": "machine-long",
+          "pictureTime": 8.727737,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 23768.59999999404,
+          "time": 8.940382,
+          "frame": 214,
+          "sample": "machine-long",
+          "pictureTime": 8.938859,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24033,
+          "time": 9.197478,
+          "frame": 220,
+          "sample": "machine-long",
+          "pictureTime": 9.195945,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24255.5,
+          "time": 9.460391,
+          "frame": 227,
+          "sample": "machine-long",
+          "pictureTime": 9.458828,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24484.29999999702,
+          "time": 9.69198,
+          "frame": 232,
+          "sample": "machine-long",
+          "pictureTime": 9.690414,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24715.79999999702,
+          "time": 9.914006,
+          "frame": 237,
+          "sample": "machine-long",
+          "pictureTime": 9.912474,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 24984.09999999404,
+          "time": 10.15174,
+          "frame": 243,
+          "sample": "machine-long",
+          "pictureTime": 10.151052,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 25232,
+          "time": 10.414266,
+          "frame": 249,
+          "sample": "machine-long",
+          "pictureTime": 10.412734,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 25487.29999999702,
+          "time": 10.669508,
+          "frame": 256,
+          "sample": "machine-long",
+          "pictureTime": 10.669525,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 25703.69999999553,
+          "time": 10.913068,
+          "frame": 261,
+          "sample": "machine-long",
+          "pictureTime": 10.911535,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 25956.89999999851,
+          "time": 11.131989,
+          "frame": 267,
+          "sample": "machine-long",
+          "pictureTime": 11.130581,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 26195.39999999851,
+          "time": 11.391853,
+          "frame": 273,
+          "sample": "machine-long",
+          "pictureTime": 11.390026,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 26413.29999999702,
+          "time": 11.63078500000149,
+          "frame": 279,
+          "sample": "machine-long",
+          "pictureTime": 11.629044,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 26650.09999999404,
+          "time": 11.841176,
+          "frame": 284,
+          "sample": "machine-long",
+          "pictureTime": 11.839734,
+          "pictureKind": "HTMLVideoElement"
+        },
+        {
+          "at": 26948.59999999404,
+          "time": 12.077148,
+          "frame": 289,
+          "sample": "machine-long",
+          "pictureTime": 12.075609,
+          "pictureKind": "HTMLVideoElement"
+        }
+      ],
+      "errors": [],
+      "output": {
+        "file": "machine-long-live.mp4",
+        "bytes": 306884,
+        "sha256": "84397a9bb66071f19717eb54200e801d00e49fc6f39af11a9a1662d03223f250",
+        "duration": 11.999989
+      },
+      "poster": {
+        "file": "machine-long-live.jpg",
+        "bytes": 24586,
+        "sha256": "ccd39935c6fcd44240c9915ccbdbed75de323acfbf118f61c5350bd8643a4f97",
+        "sourceMovieSha256": "84397a9bb66071f19717eb54200e801d00e49fc6f39af11a9a1662d03223f250",
+        "time": 1
+      }
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "graphics": {
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "WebKit WebGL",
+    "unmaskedRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+    "subpixelBits": 4,
+    "maxTextureSize": 16384,
+    "hardwareConcurrency": 5,
+    "devicePixelRatio": 3,
+    "drawingBuffer": [585, 900]
+  },
+  "initialCompositorNote": "The initial native screencast frame can retain the prior UI before the requested visibility change is composited. It is preserved with its original timestamp. Poster images use the actual recorded picture at one second."
+}

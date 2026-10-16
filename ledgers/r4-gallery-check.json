@@ -1,0 +1,208 @@
+{
+  "checkedAt": "2026-10-16T12:21:40.602Z",
+  "method": "Owned local HTTP server; managed Chromium blocks file URLs. Phone verifies all 22 gallery movies advance and decode; desktop verifies layout and one playback. This is functional playback, not continuous visual review or a clean speed benchmark.",
+  "results": [
+    {
+      "width": 390,
+      "overflow": false,
+      "videos": 22,
+      "missing": [],
+      "errors": [],
+      "playback": [
+        {
+          "src": "quality/sample-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.168235,
+          "decoded": 8,
+          "error": null
+        },
+        {
+          "src": "quality/horse-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.164936,
+          "decoded": 6,
+          "error": null
+        },
+        {
+          "src": "quality/dragon-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.172282,
+          "decoded": 7,
+          "error": null
+        },
+        {
+          "src": "quality/bridge-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.17433,
+          "decoded": 7,
+          "error": null
+        },
+        {
+          "src": "quality/machine-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.163349,
+          "decoded": 6,
+          "error": null
+        },
+        {
+          "src": "quality/sample-long-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.170468,
+          "decoded": 8,
+          "error": null
+        },
+        {
+          "src": "quality/dragon-long-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.173678,
+          "decoded": 8,
+          "error": null
+        },
+        {
+          "src": "quality/machine-long-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.163925,
+          "decoded": 8,
+          "error": null
+        },
+        {
+          "src": "quality/bridge-long-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.165122,
+          "decoded": 8,
+          "error": null
+        },
+        {
+          "src": "quality/r4-blocks-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.171848,
+          "decoded": 8,
+          "error": null
+        },
+        {
+          "src": "quality/r4-gate-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.176126,
+          "decoded": 8,
+          "error": null
+        },
+        {
+          "src": "quality/r4-wheel-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.170898,
+          "decoded": 8,
+          "error": null
+        },
+        {
+          "src": "quality/r4-orbit-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.163849,
+          "decoded": 6,
+          "error": null
+        },
+        {
+          "src": "quality/r4-fast-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.160269,
+          "decoded": 15,
+          "error": null
+        },
+        {
+          "src": "round-3/bridge-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.162465,
+          "decoded": 7,
+          "error": null
+        },
+        {
+          "src": "round-3/sample-long-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.173162,
+          "decoded": 9,
+          "error": null
+        },
+        {
+          "src": "live-r3/sample-live.mp4",
+          "width": 390,
+          "height": 844,
+          "time": 0.171242,
+          "decoded": 5,
+          "error": null
+        },
+        {
+          "src": "live-r3/machine-long-live.mp4",
+          "width": 390,
+          "height": 844,
+          "time": 0.167391,
+          "decoded": 6,
+          "error": null
+        },
+        {
+          "src": "live-r4/sample-live.mp4",
+          "width": 390,
+          "height": 844,
+          "time": 0.172565,
+          "decoded": 5,
+          "error": null
+        },
+        {
+          "src": "live-r4/machine-long-live.mp4",
+          "width": 390,
+          "height": 844,
+          "time": 0.17215,
+          "decoded": 5,
+          "error": null
+        },
+        {
+          "src": "live-pairs/sample-live-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.169506,
+          "decoded": 16,
+          "error": null
+        },
+        {
+          "src": "live-pairs/machine-long-live-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.167474,
+          "decoded": 15,
+          "error": null
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "videos": 22,
+      "missing": [],
+      "errors": [],
+      "playback": [
+        {
+          "src": "quality/sample-side-by-side.mp4",
+          "width": 780,
+          "height": 844,
+          "time": 0.164492,
+          "decoded": 8,
+          "error": null
+        }
+      ]
+    }
+  ]
+}

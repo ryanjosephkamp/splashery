@@ -1,0 +1,29 @@
+{
+  "reason": "Rejected entire initial cadence attempt: /proc child-list files are unavailable and the former drain returned early while two full-suite test files still ran",
+  "sourceHash": "ec1886c50d2cc9181df52cd7965ec63f5ed8f0dcfe8cca4475fa3a863c28fc03",
+  "initialCases": ["sample", "horse", "dragon", "bridge", "machine", "sample-long"],
+  "rawReport": "r4-prior-phone-main-drain-bug.json",
+  "rawSha256": "bd13b60c8de67e3fd3fec710a0bdbc56f4544938e9fc7bbcf2fac48f1b01c045",
+  "originalIsolationAt": 1792147031.3026187,
+  "activeBrowsersAtStart": [
+    "160978  160945 Ssl  chromium",
+    "161003  160978 S    chromium",
+    "161004  160978 S    chromium",
+    "161030  161003 Sl   chromium",
+    "161032  160978 Sl   chromium",
+    "161036  161004 Sl   chromium",
+    "161235  161004 Sl   chromium",
+    "161244  161004 Sl   chromium",
+    "161245  161004 Sl   chromium",
+    "161436  161395 Ssl  chromium",
+    "161457  161436 S    chromium",
+    "161458  161436 S    chromium",
+    "161480  161457 Sl   chromium",
+    "161482  161436 Sl   chromium",
+    "161497  161458 Sl   chromium",
+    "161526  161458 Sl   chromium",
+    "161533  161458 Sl   chromium",
+    "161539  161458 Sl   chromium"
+  ],
+  "correction": "Use ps parent graph, let all test children finish naturally, run preflight ledger, and require zero active Chromium processes before launching the first timing browser. Restart every timing protocol; none of this partial attempt contributes to final tables."
+}
