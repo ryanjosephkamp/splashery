@@ -4,6 +4,29 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
+## Now (October 16, 2026, about 22:00 UTC)
+
+The Operator is still `session_01JxfPsHRiWi93aHfLeqd8Jt` (Opus 5.5); handover is due October 18,
+about 00:45 UTC. Main is `144cc80e`. Merged since the section below: Ops #676 (Codex 91 #671), #680
+(78c #612, 93 #672), #681 (96 #670 and the manual's PDF), #682 (`tools/preflight.mjs` and task file
+99), and #683 (classic Photo to 3D frozen: `tests/p3d-golden.spec.mjs`, branch
+`claude/checkpoint-photo-3d-v1`, and tag `photo-3d-classic-v1`).
+
+**Lanes:** PT1 (Engine #684, then #686) and PT2 (#685), both Opus 5.5, rebuild three of task 78's
+portfolio toys after the owner's review: Your name in splats at the Toy Box name toy's level (any
+text, emoji included, in Fredoka), Shape morph with any list of forms and a tap that morphs, and One
+splat with a tap that splits the splat under the finger and a new sound.
+
+**Codex:** the owner started 99 (a Layered Photo to 3D beside classic, in labs). 98 (the v1.0
+readiness check) waits for his call: now, or after PT1 and PT2. Follow-ups out: #673 (94), #677
+(92), and #678 (95). New toy designs now go to Claude lanes ([codex/README.md](codex/README.md),
+"What goes to Codex").
+
+**Also:** the Shop gets its own public repo, `splash-shop`; the Operator, the Dot, and the owner's
+second Claude account align on its charter in a shared folder, and the owner makes the final calls.
+Merging related toys into one is on hold ([BACKLOG.md](BACKLOG.md)): a checkpoint of main comes
+first, and nothing is deleted.
+
 ## Now (October 16, 2026, about 11:30 UTC)
 
 The Operator is `session_01JxfPsHRiWi93aHfLeqd8Jt` (Opus 5.5), since October 16, 2026, 00:45 UTC,
