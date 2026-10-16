@@ -27,7 +27,7 @@ const toolSha256 = digest(toolSource);
 // measurements. Keep their timeout independent of measurement compatibility.
 const protocolSha256 = digest(
   toolSource
-    .slice(toolSource.indexOf("const profiles ="), toolSource.lastIndexOf("\ntry {"))
+    .slice(toolSource.indexOf("\nconst profiles ="), toolSource.lastIndexOf("\ntry {"))
     .replace(/await page\.screenshot\(\{[^\n]*\}\);/g, "await page.screenshot(/* artifact */);"),
 );
 const profiles = {
