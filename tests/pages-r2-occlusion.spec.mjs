@@ -198,15 +198,17 @@ for (const renderer of ["webgl2", "webgpu"])
         item,
         { timeout: 180000 },
       );
-      const result = await page.evaluate(async () => {
+      const result = await page.evaluate(async ({ toy, value }) => {
         const p = window.__splashery.player;
         p.frozen = true;
         let moving = 0,
           inspected = 0,
           captureDraws = 0;
         const failures = [];
-        for (const destination of [1, 2, 0]) {
-          p.pictures.go(destination);
+        const destinations = toy === "photo-album" ? [1, 2, 0, "close"] : [1, 2, 0];
+        for (const destination of destinations) {
+          if (destination === "close") p.act(p.fromRecipe([-0.3, 0, 0.02]));
+          else p.pictures.go(destination);
           for (let frame = 0; frame < 20; frame++) {
             p.time += 0.125;
             p.camera.update(0.125);
@@ -239,13 +241,16 @@ for (const renderer of ["webgl2", "webgpu"])
             inspected++;
           }
         }
-        return { failures, moving, inspected, captureDraws };
-      });
+        const out = p.motion.out;
+        const cover = out.parts.cover?.angle ?? out.leaves[value === "stapled" ? 0 : 8]?.angle;
+        return { failures, moving, inspected, captureDraws, cover };
+      }, item);
       results.push({ ...item, ...result });
       expect(result.failures, JSON.stringify(item)).toEqual([]);
       expect(result.moving, JSON.stringify(item)).toBeGreaterThan(4);
-      expect(result.inspected).toBe(60);
-      expect(result.captureDraws).toBe(15);
+      expect(result.inspected).toBe(item.toy === "photo-album" ? 80 : 60);
+      expect(result.captureDraws).toBe(item.toy === "photo-album" ? 20 : 15);
+      expect(result.cover).toBe(0);
     }
     console.log("Complete book turn volumes:", renderer, JSON.stringify(results));
     expect(results).toHaveLength(8);
