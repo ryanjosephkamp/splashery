@@ -256,10 +256,13 @@ test.describe("sharp pages in the real renderer", () => {
       const point = p.stage.toScreen(p.pictures.rect(s, p.pictures.media.aspect(0)).c);
       const frame = await p.stage.captureFrame();
       const ratio = frame.width / p.canvas.clientWidth;
+      p.pickDirty = true;
+      const picked = await p.pickAt(point[0], point[1]);
       return {
         channels: face.channels,
         bytes: face.pixels.byteLength,
         expected: face.w * face.h * 4,
+        picked,
         pixel: Array.from(
           frame
             .getContext("2d")
@@ -270,6 +273,9 @@ test.describe("sharp pages in the real renderer", () => {
     });
     expect(color.channels).toBe(4);
     expect(color.bytes).toBe(color.expected);
+    expect(color.picked).not.toBe(null);
+    expect(color.picked.every(Number.isFinite)).toBe(true);
+    expect(Math.hypot(...color.picked)).toBeLessThan(0.25);
     for (let i = 0; i < 3; i++)
       expect(Math.abs(color.pixel[i] - [35, 120, 198][i])).toBeLessThanOrEqual(2);
     expect(color.errors).toEqual([]);
@@ -297,6 +303,15 @@ test.describe("sharp pages in the real renderer", () => {
     expect(await old.evaluate((s) => !!s && s.instance.visible && s.material.depthWrite)).toBe(
       true,
     );
+    const picked = await page.evaluate(async () => {
+      const p = window.__splashery.player;
+      const sheet = p.pictures.sheets[0];
+      const point = p.stage.toScreen(p.pictures.rect(sheet, p.pictures.media.aspect(0)).c);
+      p.pickDirty = true;
+      return p.pickAt(point[0], point[1]);
+    });
+    expect(picked).not.toBe(null);
+    expect(picked.every(Number.isFinite)).toBe(true);
     expect(
       await page.evaluate(() => {
         const d = window.__splashery.player.pictures.sheets[0].shown.data;
@@ -348,6 +363,9 @@ test.describe("sharp pages in the real renderer", () => {
         await page.evaluate(() => !!window.__splashery.player.pictures.sheets[0].slot.surface),
       ).toBe(image);
     }
+    expect(
+      await old.evaluate((s) => s.instance.mesh === null && s.instance.material === null),
+    ).toBe(true);
     const replacements = await page.evaluate(() => window.__pagesR2Replacements);
     expect(replacements.length).toBeGreaterThan(0);
     expect(replacements.every((r) => !r.backing && !r.face)).toBe(true);
