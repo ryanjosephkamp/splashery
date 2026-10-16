@@ -220,6 +220,9 @@ async function openImage(src, limits) {
       `That picture is too big for this device (${Math.round(px / 1e6)} megapixels; up to ${Math.round(limits.pixels / 1e6)} here).`,
     );
   }
+  // A decoded still can rasterize immediately. Its ordinary draw method
+  // retains the promise contract for existing consumers.
+  const drawNow = (i, w, h, region = null) => drawScaled(bmp, bmp.width, bmp.height, w, h, region);
   return {
     kind: "image",
     name: src.name,
@@ -227,8 +230,9 @@ async function openImage(src, limits) {
     count: 1,
     aspect: () => bmp.width / bmp.height,
     size: () => ({ width: bmp.width, height: bmp.height }),
+    drawNow,
     async draw(i, w, h, region = null) {
-      return drawScaled(bmp, bmp.width, bmp.height, w, h, region);
+      return drawNow(i, w, h, region);
     },
     close() {
       bmp.close();

@@ -696,7 +696,15 @@ export class Pictures {
       let w = want.level;
       let h = Math.max(8, Math.round(w / aspect));
       const t0 = performance.now();
-      let canvas = want.method === "screen" ? null : await media.draw(want.page, w, h);
+      // A decoded still is synchronous. Start its paper worker before
+      // this frame submits GPU work, rather than yielding the entire
+      // render frame before posting an already available raster.
+      let canvas =
+        want.method === "screen"
+          ? null
+          : this.solid && media.drawNow
+            ? media.drawNow(want.page, w, h)
+            : await media.draw(want.page, w, h);
       if (this.destroyed || media !== this.media) return null;
       // The page may have turned out another shape once reached.
       const a2 = media.aspect(want.page);
