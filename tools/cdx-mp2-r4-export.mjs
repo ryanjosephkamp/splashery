@@ -49,10 +49,22 @@ for (const [name, root, title] of groups) {
       ])
       .filter(Boolean),
   );
+  const declared = new Map(
+    records
+      .flatMap((row) => [...(row.outputs || []), ...(row.files || []), row.poster, row.output])
+      .filter((entry) => entry && typeof entry === "object" && entry.file)
+      .map((entry) => [entry.file, entry]),
+  );
   for (const file of await fs.readdir(folder))
     if (/\.(mp4|jpg)$/.test(file) && !accepted.has(file)) await fs.unlink(path.join(folder, file));
   for (const file of publicFiles) {
     if (!accepted.has(file)) continue;
+    const bytes = await fs.readFile(path.join(root, file)),
+      expected = declared.get(file);
+    if (file.endsWith(".mp4") && !expected?.sha256)
+      throw Error(`Movie has no recorded hash: ${file}`);
+    if (expected?.sha256 && createHash("sha256").update(bytes).digest("hex") !== expected.sha256)
+      throw Error(`Review file changed after validation: ${file}`);
     await fs.copyFile(path.join(root, file), path.join(folder, file));
     if (file.endsWith(".jpg") && (await fs.stat(path.join(folder, file))).size > 1000000)
       throw Error(`Image exceeds 1 MB: ${file}`);
@@ -107,6 +119,7 @@ const ledgers = [
   "r4-input-transform-flags.json",
   "r4-orientation-copy-probe.json",
   "r4-worker-transform-before-after.json",
+  "r4-node22-runtime.json",
   "r4-publication.json",
   "r4-measurements.md",
   "r4-test-ledger.json",

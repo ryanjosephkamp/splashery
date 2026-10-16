@@ -16,7 +16,7 @@ entries below before handback. An incomplete target is not a pass.
 | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Sharp shows the chosen sample and local file                                     | All 81 ordered pairs of nine samples, five local formats, and Sharp/Splats transitions passed on the emulated phone.                                                                    |
 | Phone cadence at least main; Operator median ≤50 ms and worst ≤250 ms            | Final isolated measurements pending.                                                                                                                                                    |
-| Sharper and steadier on all nine samples and five original inputs, both profiles | Final sweep pending. The completed prior short sweep has zero holes and edge specks in all 20 cases; long-film steadiness is worse on some films. The complete Goal is not established. |
+| Sharper and steadier on all nine samples and five original inputs, both profiles | Complete 28-case sweep: 7,102 original source frames, zero holes, edge specks, depth mismatches, or browser errors. Universal sharpness and stability gains are not established; some temporal measures are worse. |
 | First 3D frame no slower than main on phone                                      | Final isolated measurements pending.                                                                                                                                                    |
 | Photo checkpoint and every existing test                                         | Full suite running; 51 Photo scan tests passed. Initial failures and whole-file reruns are preserved in the ledger.                                                                     |
 | Phone comparisons                                                                | Final source-clock films pending on `codex/moving-photo-r4-clips`, which is never merged.                                                                                               |
@@ -115,13 +115,15 @@ existing threshold.
 
 The complete quality sweep is pinned to public `bf58e8c4` (application hash
 `2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4`). The final runtime adds only
-those two transform guards, their comment, and the corrected public generator credit URL. All nine
-native video inputs in the fourteen-case corpus explicitly report zero rotation and no flip; the
-other inputs use retained GIF or sheet pictures. Their existing pixel paths are unchanged. Reversing
-only these small changes reproduces all ten captured application files byte for byte. The exact
-proof, input hashes, and before/after worker results accompany the ledgers. Cadence, startup, and
-live recordings use the final runtime hash
-`5258e5824f3c47013c2fa9c182ff6cc2a8b8b7935546e451e45b7c1e1bdc4f43`.
+those two transform guards, their comment, the corrected public generator credit URL, and a
+Splats-only guard retaining bundled short samples' tier-sized textures. The unchanged fidelity test
+exposed the shared-video path selecting the native size in Splats; its sample, GIF, and short-video
+assertions pass after the guard. Native Sharp pictures remain unchanged. All nine native video
+inputs in the fourteen-case corpus explicitly report zero rotation and no flip; the other inputs use
+retained GIF or sheet pictures. Their existing pixel paths are unchanged. Reversing only these small
+changes reproduces all ten captured application files byte for byte. The exact proof, input hashes,
+and before/after worker results accompany the ledgers. Cadence, startup, and live recordings use the
+final runtime hash `f26ec66e827c53b668c68a18598be50c4e8b2e2d6766717e41ef184e16e1833a`.
 
 The candidate long-film caches were rebuilt from verified interior source times, using the existing
 upload refinement's symmetric, color-gated half-second window, one clip-wide depth range, and the
@@ -170,7 +172,13 @@ prior uploaded R8 between retained-frame changes; those holds are recorded rathe
 replaced with a fresher field. Round 4 additionally requires exact input correspondence. Older
 retained-field tables are not substituted for these results.
 
-Final per-case tables and exact source pins: pending.
+The complete final sweep covers **28/28 cases and 7,102 original source frames**. Every case has
+zero detected holes, edge specks, and depth-input mismatches, with no browser errors. Its
+application hash is `2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4`; the
+runtime equivalence and Splats-only change are documented above. Against main, both coverage proxies improve in all 28 cases. Average depth jitter improves in
+27 cases and worsens in one; large edge flips improve in 22 cases and worsen in six. This is
+not a universal temporal-stability win. The detailed measurement tables are linked after the
+isolated runs finish.
 
 ## Playback and startup protocol
 
@@ -198,9 +206,9 @@ fence waits for that first draw to complete; submission time and the additional 
 retained separately. That wait is not an elapsed GPU profiling measurement. It does not wait for all
 background refinement to finish. Opening the default toy starts the clock before observer module
 preparation, including that overhead in both versions; other clips start with the default toy
-already open. Three repeats per input are planned; the median and range, plus errors, are reported.
-Startup observer validation passed on a sample and a local MP4, but its concurrent timings support
-no speed claim.
+already open. Startup repeats each input three times; the median and range, plus errors, are
+reported. Startup observer validation passed on a sample and a local MP4, but its concurrent timings
+support no speed claim.
 
 The isolated diagnostic below predates the final still-camera scheduling fix. It identifies the
 round 3 bottleneck; final complete timing tables supersede it for the Goal.
@@ -232,6 +240,10 @@ The full suite runs unchanged through `tools/suite.mjs --jobs=2 --gl=llvmpipe`. 
 timing-sensitive files run alone at the end, and its existing graphics-backend exceptions remain
 unchanged. Initial failures are preserved; isolated reruns are separately labeled rather than
 erased.
+
+The initial full run uses Node 24.19.0. Two unchanged QR hash assertions fail there but pass under
+CI's Node 22 major version (verified official Node 22.14.0 archive). Final whole-file rechecks use
+Node 22.14.0. Both runtime versions and the original failures remain recorded.
 
 Focused checks already completed:
 
