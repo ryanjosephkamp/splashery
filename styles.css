@@ -1690,12 +1690,13 @@ button.danger.armed {
   left: calc((100% - var(--panel-w) - 24px) / 2);
   bottom: 24px;
   z-index: 26;
+  width: max-content;
   max-width: min(420px, calc(100vw - 32px));
   transform: translate(-50%, 12px);
   padding: 8px 14px;
   background: var(--ink);
   color: var(--page);
-  border-radius: 999px;
+  border-radius: 18px;
   font-size: 13px;
   opacity: 0;
   pointer-events: none;
