@@ -1,0 +1,168 @@
+{
+  "kind": "Exact archived bytes for rejected performance research. These files are not application changes or acceptance evidence. Raw cost observations use the original software phone profile and preserve every observation.",
+  "createdUTC": "2026-10-16T10:56:15.364934+00:00",
+  "files": [
+    {
+      "file": "canvas-fallback-photo.js.txt",
+      "sha256": "0b3e7ba08ccb55f2d686fa7ed95e53c121f500d532ae8c1f923d3390a1f1b230",
+      "originalWorkspaceFile": "canvas-fallback-photo.js"
+    },
+    {
+      "file": "scratch-gradient-core.js.txt",
+      "sha256": "4f4b094ad3d5deeb5648ea81f6ebadcd7dd9fe932866b90ea583e378b2b2cee9",
+      "originalWorkspaceFile": "scratch-gradient-core.js"
+    },
+    {
+      "file": "photo-3d-core.original.js.txt",
+      "sha256": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57",
+      "originalWorkspaceFile": "photo-3d-core.original.js"
+    },
+    {
+      "file": "verify-scratch-gradient.mjs.txt",
+      "sha256": "0993b18b25b6fa216e8579d0b0f24a1efa9d52eccd3a2e3919cdb58a610e6384",
+      "originalWorkspaceFile": "verify-scratch-gradient.mjs"
+    },
+    {
+      "file": "scratch-gradient-fixtures.mjs.txt",
+      "sha256": "5f5be65849d7af989b7118d62aed07c07f6229036bd54d76442d451e80a79461",
+      "originalWorkspaceFile": "scratch-gradient-fixtures.mjs"
+    },
+    {
+      "file": "package-late-costs.py.txt",
+      "sha256": "035ef9af896096c7f09f1d8da44b9f16a6df2892f8e6fc8d466982d398e44064",
+      "originalWorkspaceFile": "package-late-costs.py"
+    },
+    {
+      "file": "scratch-gradient-equivalence.json.gz",
+      "sha256": "135950ef68d64374fe9f26fac712afb4d8ad0a87b7cb3982c2cfc8d5c4b6036e",
+      "uncompressedSha256": "bb25605c8346cd70ab329c7d387ed398f91ebaf340384a67f4400dfbbe5921f2",
+      "scope": "Pure builder or direct refiner equivalence; no phone performance claim."
+    },
+    {
+      "file": "scratch-gradient-fixtures.json.gz",
+      "sha256": "1b43372a63157bf219efd309348f0232c0ed6d65b657b469932428c82d4f8fef",
+      "uncompressedSha256": "a641298bae84a10f4801a914209c1cf98cdb2f4493a5949f932e06a7d820a437",
+      "scope": "Pure builder or direct refiner equivalence; no phone performance claim."
+    },
+    {
+      "file": "canvas-fallback/manifest.json.gz",
+      "sha256": "a8dea2eaf1d47f5e62885ef482cd7b6c0f180f978c86ec5b710ad0b9d771c22f",
+      "uncompressedSha256": "424c17db294e00aac9795cd2d81f953c1a4f15ee56ed07b8a00dee8fc8a7bc53"
+    },
+    {
+      "file": "canvas-fallback/summary.json.gz",
+      "sha256": "a516fd3ec6e8689176864af341900d9b5dc2fb7c696e4004459e421d7a61ae01",
+      "uncompressedSha256": "d78005922034a483c20feb786bdf66fa0e360239b731a2ed6d690237c515b902"
+    },
+    {
+      "file": "canvas-fallback/forest-0-candidate.json.gz",
+      "sha256": "8a26be4e8c86bc95cc460ad42ef4e8935aff34a24d839ed2775dfc9b7931bdc7",
+      "uncompressedSha256": "496ceca4a2edd416bb100e53d7f7dd27ff6ce7fac79f690edfa86fd93825eda3"
+    },
+    {
+      "file": "canvas-fallback/forest-0-main.json.gz",
+      "sha256": "85f148d9d426968afc58e7c648861425ad732f055663607b73a6313f13196265",
+      "uncompressedSha256": "142a060d8c31795b1b76aa8a461f8a5ae563a017d16b2b5a1ce09eac051d5ffa"
+    },
+    {
+      "file": "canvas-fallback/forest-1-candidate.json.gz",
+      "sha256": "86d9071a4dd03120809bfd3864edd1b066c45aa65a444e21adb2011a4fc120f5",
+      "uncompressedSha256": "779a7e6b5e4e283d029c1bc0fac3c3bd80402b54eab5020484b0f886bb187f25"
+    },
+    {
+      "file": "canvas-fallback/forest-1-main.json.gz",
+      "sha256": "0b3ce1a74b45c6e66348792734decaef74fe0b70947dc592e4caeed9b1dfbdb4",
+      "uncompressedSha256": "517703945dbe1c7f7964dd02223369718c51128850c3cbc21055c43694415e2f"
+    },
+    {
+      "file": "canvas-fallback/forest-2-candidate.json.gz",
+      "sha256": "3b5494e40dd2eec3018ac8a4786a6e2f8d96bcb9d4723d2073d7f74eafda3920",
+      "uncompressedSha256": "ece9d5bd8a43d0bcf525ba99bc24d093c37721759d51f1102ef94bdb893b3c62"
+    },
+    {
+      "file": "canvas-fallback/forest-2-main.json.gz",
+      "sha256": "d8dca53e5c99a88a47b5baac6d7de1437e219456f5b02645b9a26fff82d8dade",
+      "uncompressedSha256": "7bad3b5534a97d246559c595c9cade4eb15d72e83c693c3c2042f1653b1a668a"
+    },
+    {
+      "file": "canvas-fallback/forest-3-candidate.json.gz",
+      "sha256": "a7d2555314a7fb3a6c67f884b15e915b0075648700b5055171a88ccec86f8006",
+      "uncompressedSha256": "f9f58c3c00d9f08aea115861fa481c908e6186f877e51079de2a86aafff97276"
+    },
+    {
+      "file": "canvas-fallback/forest-3-main.json.gz",
+      "sha256": "23843b646e170f0123667306c5aaaa6682b50906be3d4f9ba1d2e45ccb337078",
+      "uncompressedSha256": "87ffbf4d0f561a5a728a3010aebf7419c417580688ab1c370df9860aa852b79a"
+    },
+    {
+      "file": "canvas-fallback/forest-4-candidate.json.gz",
+      "sha256": "298f7a878a6f0c7889bf49cea90335843a978383174de2ac438b158d71cb02f7",
+      "uncompressedSha256": "82734f6f6879523a4774269105e6ca8524f4c5c5e971163ed116a8bcf099e699"
+    },
+    {
+      "file": "canvas-fallback/forest-4-main.json.gz",
+      "sha256": "fc77e50ee63cbc485efb9a445617507625976750c7e071239a7a6380b9be2a29",
+      "uncompressedSha256": "29bb686129058cea82cee808fd6523e982fb8399040a31d766548abcc87350a8"
+    },
+    {
+      "file": "scratch-gradient/manifest.json.gz",
+      "sha256": "1af068ba61df8dd89da5f18618234d6f4cbc91b6f0c3d24a655b271e9116c3c2",
+      "uncompressedSha256": "b6392b1bd88a1a7ae76a2b85eb169c708ad5875d597b6fdb0f4001b66659c493"
+    },
+    {
+      "file": "scratch-gradient/summary.json.gz",
+      "sha256": "e5cc7732651d8af3f87b4f815d122ad177735e0e3c38eb07d8b6552b470b286b",
+      "uncompressedSha256": "310fdbc23ed709aaf9caaa58d7496c931791330ff1d094ef2196c60ea1217ba2"
+    },
+    {
+      "file": "scratch-gradient/forest-0-candidate.json.gz",
+      "sha256": "8758864dec19d42e74f5820395b35c511020e9b977e304c355a7f314b85e2b68",
+      "uncompressedSha256": "5563c063a42806ba4da98cbb5bd190b1fadfcd1f18f2f577407d1fee8c6a8bbb"
+    },
+    {
+      "file": "scratch-gradient/forest-0-main.json.gz",
+      "sha256": "450cd9ed314e5fee1951bef93526470225d156495aa3960dc27e29991cf0b01d",
+      "uncompressedSha256": "db450a5b728b4e088f640eaf64fe8ce317c2fb267c73f528b9fcc4446101f870"
+    },
+    {
+      "file": "scratch-gradient/forest-1-candidate.json.gz",
+      "sha256": "8f124a3fa56537b076a85fd174d23ab9471f4d41339c044ee3ee1cfd100e3ac3",
+      "uncompressedSha256": "600fcf80eb9ca581a3d691cb26a0d3fcd13322b71a03b4b918a6607d06114706"
+    },
+    {
+      "file": "scratch-gradient/forest-1-main.json.gz",
+      "sha256": "68e74daad3adae2f2331fb54f7a501529f7011f527c643e9d8a72ec85ed95242",
+      "uncompressedSha256": "16d7726b312ebaec95b073dca9114295824190537e42c54aa859bab2e668cc68"
+    },
+    {
+      "file": "scratch-gradient/forest-2-candidate.json.gz",
+      "sha256": "3d57695524c2235212ee777a53968bbeabc0c3eefb7c0cc153ff74e63c7c699c",
+      "uncompressedSha256": "49473783e2ecb1bd889f1f76deb76a6487a55eee4a466e296c6a516606ad8d0f"
+    },
+    {
+      "file": "scratch-gradient/forest-2-main.json.gz",
+      "sha256": "4c87b9e84c70dbdb57f13c2570f0709e0926b0476c6de3c6c53edd5602eb1a80",
+      "uncompressedSha256": "89959f26d5403c163f34fe1097a90363e223e90d193e5ae364a99e9df4634f10"
+    },
+    {
+      "file": "scratch-gradient/forest-3-candidate.json.gz",
+      "sha256": "7e8579099e9262c59d7df4b72cad92ca8f8c05a32939361b93e880b52bab81c0",
+      "uncompressedSha256": "6696e87a1b8e9a95530bd88717b0da4f6718d9544ca916e72fd4dfd4ad1d608f"
+    },
+    {
+      "file": "scratch-gradient/forest-3-main.json.gz",
+      "sha256": "508690c1e81acf375dc69a0d4ee2ced7418bfe1150c927792b4477f46681ec7c",
+      "uncompressedSha256": "7d687f1f57892c96cc64c7828a2be95ee383a5c936e680d550fd8ef3f112453b"
+    },
+    {
+      "file": "scratch-gradient/forest-4-candidate.json.gz",
+      "sha256": "e00a3a8a888a218229525183faf9fe5d873c1a1667931d4f6994ef6fd3d61164",
+      "uncompressedSha256": "6c404599c9ef07d2528c982fc33d8eedfb12734c76df68f7740bb3a110758739"
+    },
+    {
+      "file": "scratch-gradient/forest-4-main.json.gz",
+      "sha256": "2ebece8f6c51d8d7883fad6db8e6d492cca36c7691bc152393ab005ee5aaed18",
+      "uncompressedSha256": "64d5fe0fc03d16f18d761a3bfc906b5815ac91ac4d59a28792b508e57302a6e9"
+    }
+  ]
+}

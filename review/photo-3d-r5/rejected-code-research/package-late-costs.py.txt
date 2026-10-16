@@ -1,0 +1,21 @@
+from pathlib import Path
+import json,hashlib,datetime,statistics
+w=Path('/workspace/work/p3d-r5');out=Path('/workspace/splashery/docs/audits/photo-3d-r5');h=lambda b:hashlib.sha256(b).hexdigest()
+for name in ['canvas-fallback','scratch-gradient']:
+ folder=w/(name+'-phone-gate-forest');raw=(folder/'manifest.json').read_bytes();manifest=json.loads(raw);summary=json.loads((folder/'summary.json').read_text());assert summary['complete'] and not summary['fullCorpus'] and not summary['costPassed'];assert manifest['isolationWitness']==[]
+ rows=[]
+ for p in sorted((folder/'rows').glob('*.json')):
+  b=p.read_bytes();record=json.loads(b);assert 'result' in record and not record.get('error');a={**record,**record['result'],'first3dMs':record['result']['timing']['first3dMs'],'beganUTC':record['began']};assert a['first3dMs']>0 and a['memory']['peakPssBytes']>0;assert a['sharp']['on'] and not a['errors'] and not a['externalRequests']
+  rows.append({'id':a['id'],'build':a['build'],'repetition':a['repetition'],'beganUTC':a['beganUTC'],'finishedUTC':a['finishedUTC'],'first3dMs':a['first3dMs'],'peakPssBytes':a['memory']['peakPssBytes'],'pssSamples':len(a['memory']['samples']),'native':a['native'],'browser':a['browser'],'renderer':a['renderer'],'sharp':a['sharp']['on'],'errors':a['errors'],'externalRequests':a['externalRequests'],'retainedFullObservationSha256':h(b)})
+ assert len(rows)==10
+ for build in ['main','candidate']:
+  selected=[r for r in rows if r['build']==build];assert len(selected)==5
+  for metric,key in [('first3dMs','first3dMs'),('peakPssBytes','peakPssBytes')]:
+   assert statistics.median(r[metric] for r in selected)==summary['statistics'][build][key]['median'];assert max(r[metric] for r in selected)==summary['statistics'][build][key]['worst']
+ report={**{k:v for k,v in summary.items() if k not in ['manifest','observations']},'kind':name+' isolated cold-cost rejection; one forest phone input, five fresh browsers per build. Not a full-corpus or physical-phone result, and no causal slowdown claim. Candidate cut without benchmark retry.','packagingMethodSha256':h(Path(__file__).read_bytes()),'rawStudySha256':h(raw),'baselineSourceSha256':manifest['baseline']['sha256'],'candidateSourceSha256':manifest['candidate']['sha256'],'settings':manifest['settings'],'isolationWitness':manifest['isolationWitness'],'observations':rows,'retainedSource':False}
+ if name=='canvas-fallback':report['change']='Use the existing HTMLCanvas texture fallback instead of requesting the optional worker bitmap. The two-profile, eighteen-pose native forest scout matched baseline pixels and all quality values exactly.'
+ else:report['change']='Cache exactly representable stable interior depth gradients in existing local scratch buffers, with original precision fallback. All prepared/unprepared outputs and source preparations match across 236 original input/profile combinations; 1,296 independent refiner fixtures exercise cache hits and both fallback paths. The two-profile, eighteen-pose native forest scout matches baseline pixels.'
+ (out/(name+'-cost-rejection.json')).write_text(json.dumps(report,indent=2)+'\n')
+ print(name,json.dumps(summary['statistics']))
+for filename in ['scratch-gradient-equivalence.json','scratch-gradient-fixtures.json']:
+ a=json.loads((w/filename).read_text());assert a['complete'];(out/filename).write_text(json.dumps(a,indent=2)+'\n')

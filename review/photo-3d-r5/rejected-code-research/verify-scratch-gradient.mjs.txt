@@ -1,0 +1,56 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import zlib from 'node:zlib';
+import pngjs from '/workspace/splashery/node_modules/pngjs/lib/png.js';
+import {unpackDepth} from '/workspace/splashery/src/packs/photo-3d.js';
+import {depthBytes} from '/workspace/splashery/src/live/relief-height.js';
+const w='/workspace/work/p3d-r5',root='/workspace/splashery',hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const sources={},modules={};
+for(const name of ['photo-3d-core.original','scratch-gradient-core']){
+ const source=fs.readFileSync(w+'/'+name+'.js','utf8');sources[name]=hash(source);
+ const absolute=source.replace(/from "(\.\.?\/[^\"]+)"/g,(_,p)=>`from "${new URL(p,'file://'+root+'/src/packs/photo-3d-core.js').href}"`);
+ modules[name]=await import('data:text/javascript;base64,'+Buffer.from(absolute).toString('base64'));
+}
+const [base,candidate]=Object.values(modules),methodSha256=hash(fs.readFileSync(import.meta.filename));
+const file=w+'/scratch-gradient-equivalence.json';
+const report=fs.existsSync(file)?JSON.parse(fs.readFileSync(file)):{kind:'Complete prepared and unprepared pure-builder output equivalence, including exact source-preparation objects and frozen original R8 fields. Explicit fallback fixtures. No browser-cost claim.',createdUTC:new Date().toISOString(),sources,methodSha256,rows:[],fallbackFixtures:0};
+assert.deepEqual(report.sources,sources);assert.equal(report.methodSha256,methodSha256);
+const save=()=>{fs.writeFileSync(file+'.tmp',JSON.stringify(report));fs.renameSync(file+'.tmp',file);};
+for(const [dw,dh,gx,gy]of [[1,1,1,1],[2,3,7,9],[17,19,43,29],[8,8,16,16]])
+ for(const value of [0,.01,.1,.2,.3,.4,.5,1]){
+  const d=Float32Array.from({length:dw*dh},(_,i)=>(i%11)/10),lo=new Float32Array(dw*dh*3),hi=new Float32Array(gx*gy*3).fill(value);
+  assert.deepEqual(candidate.upsampleDepth(d,dw,dh,lo,gx,gy,hi),base.upsampleDepth(d,dw,dh,lo,gx,gy,hi));
+ }
+report.fallbackFixtures=32;
+function resultHash(value){
+ const digest=crypto.createHash('sha256');
+ const visit=v=>{if(ArrayBuffer.isView(v)){digest.update(v.constructor.name);digest.update(Buffer.from(v.buffer,v.byteOffset,v.byteLength));}else if(v&&typeof v==='object'){digest.update(Array.isArray(v)?'array':'object');for(const k of Object.keys(v).sort()){digest.update(k);visit(v[k]);}}else digest.update(JSON.stringify(v)??'undefined');};
+ visit(value);return digest.digest('hex');
+}
+const entries=JSON.parse(fs.readFileSync(w+'/manifest.json'));
+for(const e of entries){
+ const imageBytes=fs.readFileSync(w+'/decoded/'+e.id+'.png'),png=pngjs.PNG.sync.read(imageBytes),photo={w:png.width,h:png.height,data:new Uint8Array(png.data)};
+ const depthBytesOriginal=fs.readFileSync(e.depthFile||w+'/model-depths/'+e.id+'.json'),depth=e.depthFile?unpackDepth(new Uint8Array(depthBytesOriginal)):JSON.parse(depthBytesOriginal);
+ const decodedSha256=hash(imageBytes),originalDepthSha256=hash(depthBytesOriginal);
+ for(const[profile,count,sharpCells]of [['phone',85500,60000],['desktop',199500,120000]]){
+  const prior=report.rows.find(r=>r.id===e.id&&r.profile===profile);
+  if(prior){assert.equal(prior.decodedSha256,decodedSha256);assert.equal(prior.originalDepthSha256,originalDepthSha256);continue;}
+  const options={count,sharpCells,depth:.5,keepFlat:e.kind!=='builtin'};
+  let a=base.buildPhotoSplats(photo,depth,options),b=candidate.buildPhotoSplats(photo,depth,options);
+  assert.deepEqual(b,a,'Every result property: '+e.id+'/'+profile);
+  const old=JSON.parse(zlib.gunzipSync(fs.readFileSync(w+'/review/photo-3d-failures/renders/'+e.id+'-'+profile+'-anchors.json.gz'))).field;
+  assert.deepEqual({width:a.gx,height:a.gy,data:Array.from(depthBytes(a.depth))},old,'Original finder field: '+e.id+'/'+profile);
+  const before=resultHash(a),after=resultHash(b);assert.equal(after,before);
+  let pa=base.preparePhotoColors(photo,{count,depthWidth:depth.w,depthHeight:depth.h}),pb=candidate.preparePhotoColors(photo,{count,depthWidth:depth.w,depthHeight:depth.h});
+  assert.deepEqual(pb,pa,'Every preparation property: '+e.id+'/'+profile);
+  let ca=base.buildPhotoSplats(photo,depth,{...options,prepared:pa}),cb=candidate.buildPhotoSplats(photo,depth,{...options,prepared:pb});
+  assert.deepEqual(cb,ca,'Every prepared result: '+e.id+'/'+profile);assert.deepEqual(ca,a,'Prepared versus unprepared original: '+e.id+'/'+profile);
+  const preparedBefore=resultHash(ca),preparedAfter=resultHash(cb);assert.equal(preparedAfter,preparedBefore);pa=null;pb=null;ca=null;cb=null;
+  report.rows.push({id:e.id,profile,exact:true,decodedSha256,originalDepthSha256,before,after,preparedBefore,preparedAfter,preparedExact:true});save();
+  console.log(JSON.stringify({completed:report.rows.length,id:e.id,profile,exact:true}));a=null;b=null;global.gc?.();
+ }
+}
+for(const[name,digest]of Object.entries(sources))assert.equal(hash(fs.readFileSync(w+'/'+name+'.js')),digest);
+assert.equal(hash(fs.readFileSync(import.meta.filename)),methodSha256);
+report.complete=report.rows.length===entries.length*2;report.finishedUTC=new Date().toISOString();save();

@@ -108,3 +108,6 @@ This review branch is never merged. Source images, labels, and licenses are pres
 [Three labeled prototype comparisons](rejected-mask-research/README.md) show the forest and street
 ribbon gains beside the library boundary regression that cut the two-pixel mask. They are separate
 from the 54 retained-runtime videos above and are not accepted changes.
+
+[Rejected exact-output performance research](rejected-code-research/README.md) preserves both fixed
+forest cost screens, all original observations, and the exact candidate and proof-method bytes.
