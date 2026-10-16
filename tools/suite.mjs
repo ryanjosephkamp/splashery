@@ -130,7 +130,7 @@ function collect(report) {
   return tests;
 }
 
-function runFile(f, dir = OUT) {
+function runFile(f, dir = OUT, workerDisplay = env.DISPLAY) {
   return new Promise((done) => {
     const tmp = path.join(dir, `${f}.json.part`);
     const started = Date.now();
@@ -138,7 +138,7 @@ function runFile(f, dir = OUT) {
     const child = spawn(
       "npx",
       ["playwright", "test", pattern, "--workers=1", "--reporter=json", `--output=${path.join(dir, "results", f)}`, ...PASS], // prettier-ignore
-      { cwd: root, env: { ...env, PLAYWRIGHT_JSON_OUTPUT_NAME: tmp, ...(ON_SWIFTSHADER.has(f) ? { SPLASHERY_GL: "swiftshader" } : {}) }, stdio: ["ignore", "pipe", "pipe"] }, // prettier-ignore
+      { cwd: root, env: { ...env, DISPLAY: workerDisplay, PLAYWRIGHT_JSON_OUTPUT_NAME: tmp, ...(ON_SWIFTSHADER.has(f) ? { SPLASHERY_GL: "swiftshader" } : {}) }, stdio: ["ignore", "pipe", "pipe"] }, // prettier-ignore
     );
     const log = fs.createWriteStream(path.join(dir, `${f}.log`));
     child.stdout.pipe(log);
@@ -150,7 +150,7 @@ function runFile(f, dir = OUT) {
         report = JSON.parse(fs.readFileSync(tmp, "utf8"));
       } catch {}
       if (report) {
-        report.suiteRun = { wall, code };
+        report.suiteRun = { wall, code, display: workerDisplay };
         fs.writeFileSync(reportOf(f, dir), JSON.stringify(report));
         fs.rmSync(tmp, { force: true });
       }
@@ -179,16 +179,17 @@ async function serve() {
   return server;
 }
 
-// The virtual display a headed browser needs for llvmpipe: one Xvfb for the whole run.
+// Each concurrent worker gets its own display. Two headed browsers on one X server can steal
+// pointer capture from each other halfway through a real mouse drag, even in different processes.
 async function display() {
-  if (GL !== "llvmpipe" || env.DISPLAY) return null;
+  if (GL !== "llvmpipe") return null;
+  if (JOBS === 1 && env.DISPLAY) return { name: env.DISPLAY };
   for (let n = 90; n < 110; n++) {
     if (fs.existsSync(`/tmp/.X${n}-lock`)) continue;
     const x = spawn("Xvfb", [`:${n}`, "-screen", "0", "1920x1080x24", "-nolisten", "tcp"], { stdio: "ignore" }); // prettier-ignore
     await new Promise((ok) => setTimeout(ok, 1000));
     if (x.exitCode === null) {
-      env.DISPLAY = `:${n}`;
-      return x;
+      return { name: `:${n}`, process: x };
     }
   }
   console.error("Could not start Xvfb for --gl=llvmpipe.");
@@ -245,13 +246,15 @@ const todo = files.filter((f) => !fs.existsSync(reportOf(f)));
 console.log(`${files.length - todo.length} of ${files.length} files already done in ${path.relative(root, OUT) || "."}; running ${todo.length}, ${JOBS} at once, WebGL2 on ${GL}.`); // prettier-ignore
 
 const server = await serve();
-const xvfb = await display();
+const displays = [];
+for (let i = 0; i < Math.min(JOBS, todo.length); i++) displays.push(await display());
+if (displays[0]) env.DISPLAY = displays[0].name;
 const t0 = Date.now();
 let finished = 0;
-async function lane(queue) {
+async function lane(queue, workerDisplay = env.DISPLAY) {
   while (queue.length) {
     const f = queue.shift();
-    const r = await runFile(f);
+    const r = await runFile(f, OUT, workerDisplay);
     finished++;
     const s = r.ok ? summary([f]) : null;
     const note = !r.ok
@@ -264,7 +267,9 @@ async function lane(queue) {
 }
 const shared = JOBS > 1 ? todo.filter((f) => !SOLO.has(f)) : [...todo];
 const alone = JOBS > 1 ? todo.filter((f) => SOLO.has(f)) : [];
-await Promise.all(Array.from({ length: Math.min(JOBS, shared.length) }, () => lane(shared)));
+await Promise.all(
+  Array.from({ length: Math.min(JOBS, shared.length) }, (_, i) => lane(shared, displays[i]?.name)),
+);
 await lane(alone);
 const elapsed = (Date.now() - t0) / 1000;
 const s = summary(files, elapsed);
@@ -288,7 +293,7 @@ if (arg("recheck") && s.failed.length) {
   text += lines.join("\n") + "\n";
 }
 server?.kill();
-xvfb?.kill();
+for (const d of displays) d?.process?.kill();
 fs.writeFileSync(path.join(OUT, "summary.md"), text);
 console.log("\n" + text);
 if (arg("save-times") && !s.missing.length) {

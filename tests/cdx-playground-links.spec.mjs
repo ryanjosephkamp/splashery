@@ -153,9 +153,23 @@ for (const viewport of [
     test.use({ viewport, isMobile: true, hasTouch: true });
 
     test("settings have room beside the gallery and can be used", async ({ page }) => {
-      await open(page);
+      await open(page, APP + "&labs=0");
       const panes = await page.locator("#panes").boundingBox();
       expect(panes.height).toBeGreaterThan(100);
+      const search = page.locator("#shelf-search");
+      await expect(search).toBeHidden();
+      await page.locator("#shelf-search-toggle").click();
+      await expect(search).toBeFocused();
+      await search.fill("cactus");
+      expect(
+        await page
+          .locator("#shelf .toy-card")
+          .evaluateAll((cards) => cards.map((c) => c.dataset.toy)),
+      ).toEqual(["cactus", "saguaro", "succulent"]);
+      expect((await page.locator("#panes").boundingBox()).height).toBeGreaterThan(100);
+      await page.locator("#shelf-search-toggle").click();
+      await expect(search).toBeHidden();
+      await expect(search).toHaveValue("");
       await page.locator("#auto-turntable").uncheck();
       await expect(page.locator("#auto-turntable")).not.toBeChecked();
       await page.locator("#tab-look").click();
@@ -207,7 +221,9 @@ for (const viewport of [
       await expect(page.locator("#auto-turntable")).not.toBeChecked();
       const stage = await page.locator("#stage").boundingBox();
       const panel = await page.locator("#panel").boundingBox();
-      expect(stage.height).toBe(viewport.height);
+      // The release layout frames the stage below the view buttons and above the caption.
+      expect(stage.y).toBe(116);
+      expect(stage.height).toBe(viewport.height - 180);
       expect(stage.x + stage.width).toBeLessThanOrEqual(panel.x);
     });
 
