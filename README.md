@@ -1,5 +1,12 @@
 # Moving photo to 3D: round 4 evidence
 
+The [color and calibration review](ledgers/operator-review/color-and-calibration/manifest.json)
+retains the reconstruction proof, full local regressions, and discarded diagnostics under separate
+source roles.
+
+The [reviewed-head Actions evidence](ledgers/operator-review/actions-1299a32b/manifest.json)
+preserves full-suite results, original failures, and isolated rechecks on source head `1299a32b`.
+
 The [Operator review follow-up](ledgers/operator-review/manifest.json) retains the compressed-cache
 hashes, twelve new startup launches, clip regression reports before and after the release UI merge,
 browser capability probes, and original CI failures. The existing movies retain their original

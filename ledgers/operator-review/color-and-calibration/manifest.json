@@ -1,0 +1,442 @@
+{
+  "retainedApplicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+  "earlierApplicationSourceHash": "3cb44054172a73cc811a8ffe75daa4bfe610c372d2267690f4902d11e0a9cd7a",
+  "main": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+  "note": "Raw reports keep their original role. Discarded source and route trials are diagnostics, not retained-source measurements. The source-clock movie review, when added, reports its own source snapshots and sampled pixel oracle.",
+  "files": [
+    {
+      "file": "r4-ci-browser-colors.json.gz",
+      "role": "earlier-source-diagnostic",
+      "applicationSourceHash": "3cb44054172a73cc811a8ffe75daa4bfe610c372d2267690f4902d11e0a9cd7a",
+      "integrationMain": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
+      "bytes": 932,
+      "sha256": "d24e30367570ebdc2102d710a4ead9ed732ce8913e33bb5d86b95cc819208d62",
+      "originalBytes": 6173,
+      "originalSha256": "2aea41281136ec8cb568a8708e5216f807450989e4284a055e17eccf3f50d120"
+    },
+    {
+      "file": "r4-ci-color-comparison.json.gz",
+      "role": "earlier-source-diagnostic",
+      "applicationSourceHash": "3cb44054172a73cc811a8ffe75daa4bfe610c372d2267690f4902d11e0a9cd7a",
+      "integrationMain": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
+      "bytes": 259,
+      "sha256": "d53685f2c867526098c4ae6c769a69efb08f19a7694a2cf4df33cffab91b3ff4",
+      "originalBytes": 762,
+      "originalSha256": "be23675ac518c4a70ccdb0cf452b7b1ec0242efc635568b3c98f386d69cb2f0d"
+    },
+    {
+      "file": "r4-canonical-original.json.gz",
+      "role": "earlier-source-diagnostic",
+      "applicationSourceHash": "3cb44054172a73cc811a8ffe75daa4bfe610c372d2267690f4902d11e0a9cd7a",
+      "integrationMain": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
+      "bytes": 565,
+      "sha256": "9107c1b5c5e94863d36c4f5f694b1642bd1f883b80584b016cb5fb7963fe5048",
+      "originalBytes": 1526,
+      "originalSha256": "8fae3b6d446870feab8102c6e4cf8acadf84f73e15fa88e741ef67626c09a6aa"
+    },
+    {
+      "file": "r4-ci-refinement-probe.json.gz",
+      "role": "earlier-source-diagnostic",
+      "applicationSourceHash": "3cb44054172a73cc811a8ffe75daa4bfe610c372d2267690f4902d11e0a9cd7a",
+      "integrationMain": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
+      "bytes": 732,
+      "sha256": "0b3258e2d4ea3a3be863244ea2b6789dcb67e25819a7321a7f3420532a6ed048",
+      "originalBytes": 2539,
+      "originalSha256": "23dd8e19171c587e3dfe1efe3441e33a01288cee4ffe3e171d8335fad8d56d35"
+    },
+    {
+      "file": "r4-operator-score-source.json.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 1314,
+      "sha256": "5bd10cf25beae4024281a8a43c66ec9c3b63bc7cf21f452184dc0b4004e247d2",
+      "originalBytes": 3265,
+      "originalSha256": "a2441d8d5b24b37e72f9b9690cec9f80582fa7150e8c2dab3e289f81e15869d7"
+    },
+    {
+      "file": "r4-operator-score-state.json.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 545,
+      "sha256": "1b293773fe68b14c907a9db3da778185fb81892c0af83e062d7d6e4b999bdd73",
+      "originalBytes": 2742,
+      "originalSha256": "b98210b83e61a392d206a5157666a1e0717207942f240621a7b175a385f2fb8e"
+    },
+    {
+      "file": "r4-score-pack-check.log.gz",
+      "role": "retained-source-pack-check",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 104,
+      "sha256": "b1e0a526b94f4aa382cdf371d9e063594e4697d6aea6ec12ed76daf12cf4e0e5",
+      "originalBytes": 100,
+      "originalSha256": "f5e50239474e421d0d184d16764ea11b91139f5840083ba0088828f74fb20a4b"
+    },
+    {
+      "file": "r4-score-main-pack-check.log.gz",
+      "role": "main-pack-control",
+      "applicationSourceHash": null,
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 103,
+      "sha256": "8eadad6b4f36b2951833c34c97683792a6cce6a112be17b1cfd0d168d10778e6",
+      "originalBytes": 100,
+      "originalSha256": "4612700e69e8a076feeee161fc1d46e8bf32cabbe27fe82ebf9fa47f5710d7ad"
+    },
+    {
+      "file": "r4-score-pack-comparison.json.gz",
+      "role": "pack-build-comparison",
+      "applicationSourceHash": null,
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 237,
+      "sha256": "848f81ab9f14c83118ce6e45f61b25dfb50828978ad0db403caeaf5acb8e0cc2",
+      "originalBytes": 476,
+      "originalSha256": "35f3ac2147f2939a9b769165fa09c2f9affec175c0d7de2be8a73f299cacf355"
+    },
+    {
+      "file": "r4-operator-final-legacy--cdx-mp2.json.gz",
+      "role": "corrected-fixture-before-score-fix",
+      "applicationSourceHash": "3cb44054172a73cc811a8ffe75daa4bfe610c372d2267690f4902d11e0a9cd7a",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 2808,
+      "sha256": "955f35abaffa3b9f8c39c73d3bd129730b90546f35e6269df80f6e544de0a4d6",
+      "originalBytes": 13416,
+      "originalSha256": "26bd552ba688f1c127568e7adaa77a34790d797ca40a3b0b07044d5050370c35"
+    },
+    {
+      "file": "r4-operator-final-legacy.log.gz",
+      "role": "corrected-fixture-before-score-fix",
+      "applicationSourceHash": "3cb44054172a73cc811a8ffe75daa4bfe610c372d2267690f4902d11e0a9cd7a",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 1040,
+      "sha256": "e1772ff6e10f871e29a42a620926540562ac9da764ca0dccfed293946679b7a0",
+      "originalBytes": 2216,
+      "originalSha256": "55b8e932b27c43fb6650e0ea889d9ad9328dd73d7fe372fefbfc32a3bdfcac25"
+    },
+    {
+      "file": "r4-operator-final-legacy-2--cdx-mp2.json.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 2326,
+      "sha256": "488ecc7fb93fd17da6d4843e80bd7c5ace330156b8028fd92cb3ad82a4774c2c",
+      "originalBytes": 11211,
+      "originalSha256": "3eb64a2b5462c26ad30b5c67bfe80d7d2c7daff12af72b5bb8a71ef179b7c3f3"
+    },
+    {
+      "file": "r4-operator-final-legacy-2.log.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 1034,
+      "sha256": "306b1155bb6f88f155b7ddc68a7fcd8920ac2e077a31a1cc0aa3a4444d0f1799",
+      "originalBytes": 2142,
+      "originalSha256": "f5d19de49620527fcc58dcdfd97fbfb0da0a6c805a9cdd2df72310dc18a381c1"
+    },
+    {
+      "file": "r4-operator-score-other-tests--cdx-mp2-cache.json.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 1073,
+      "sha256": "ff7124818c8b8277025cd7673f1be8c718510e3adccf6d85f293d49bb8b54354",
+      "originalBytes": 4287,
+      "originalSha256": "7097d2e4f1928c637381f4e68999756de9196ad40be0a79b0756b3c220366c26"
+    },
+    {
+      "file": "r4-operator-score-other-tests--cdx-mp2-decode.json.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 1279,
+      "sha256": "c301a9f834e2deea34e15243475d5feeb5ee54e4348fb882a012676c69c55519",
+      "originalBytes": 5454,
+      "originalSha256": "461cfdcdb3d6f00c405d05cbfcfc0654eff147105a549681ee1224f24bc3e46e"
+    },
+    {
+      "file": "r4-operator-score-other-tests--cdx-mp2-mobile.json.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 2620,
+      "sha256": "6d8ce39003bb5c7967fc74ecfc99acdf336185a1cf19dbaae118450b3ae26f0c",
+      "originalBytes": 20872,
+      "originalSha256": "1c892dc7d60748ffd9d888b8d181b7121c2cc52473b7add00189244dc77e9c1c"
+    },
+    {
+      "file": "r4-operator-score-other-tests--cdx-mp2-pixels.json.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 1293,
+      "sha256": "cd693869e502cdc9e616ad420b7ceaad3df86e89291a07d25ca897758ffe9b28",
+      "originalBytes": 5460,
+      "originalSha256": "49444a661a344510a52c30f55882700e442d1fc65276dd60dcb30d77d296df86"
+    },
+    {
+      "file": "r4-operator-score-other-tests--cdx-mp2-r3.json.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 2088,
+      "sha256": "426314da166a024a3a45c691cef3c8f0d80ab13fdd917db073a91bf54c97bca9",
+      "originalBytes": 10558,
+      "originalSha256": "9da02620053e0bb69d27c36a9134cf3018d6181b83ff370eee3d2a17c6adf2f7"
+    },
+    {
+      "file": "r4-operator-score-other-tests--cdx-mp2-r4-raster.json.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 1285,
+      "sha256": "da419954c56a6f07a6825c2e63d097e88bc0bc99b5150ab9be5323bdbf4348d0",
+      "originalBytes": 5466,
+      "originalSha256": "bb8209f35c87b50baa81e29d722a657eef3a57aa8d45b1522290e8e5e8639b55"
+    },
+    {
+      "file": "r4-operator-score-other-tests--cdx-mp2-r4.json.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 2827,
+      "sha256": "00177bc90a2d931bff221d168944d7a6fac6b5ad3f0bea1dd98fff0d3eb8615d",
+      "originalBytes": 12654,
+      "originalSha256": "30bcf6220b477b63cac7310cd2b9c0672ae79df98a170b9862204a7eb1446e62"
+    },
+    {
+      "file": "r4-operator-score-other-tests.log.gz",
+      "role": "retained-source-verification",
+      "applicationSourceHash": "9c18bf46aef4fc7de4a0f9668ff0b81ba2b75e15cc3faf514f7677e52c69e3a4",
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 1399,
+      "sha256": "52fec1d4456b9469c438e1f31baa92a9e4da23028e3874bb33e26d36257a5a64",
+      "originalBytes": 3380,
+      "originalSha256": "ac7c59f9ba7b62d11f2146acdf6a497fa6882d4d37db2edb23ab7b60f6fd9c49"
+    },
+    {
+      "file": "r4-generator-red.json.gz",
+      "role": "focused-unit-or-fixture-red-green",
+      "applicationSourceHash": null,
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 1559,
+      "sha256": "c15cdfdf29e34be40915eaf8c735d57b5c32ad43e760b4bfd1e2d5cd675751a6",
+      "originalBytes": 7061,
+      "originalSha256": "a64840bb12c2fc8a876dc2e2e805e83339dd32f11d31b79a6b89b328aa587945"
+    },
+    {
+      "file": "r4-generator-green.json.gz",
+      "role": "focused-unit-or-fixture-red-green",
+      "applicationSourceHash": null,
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 998,
+      "sha256": "f786c17e47e6c4c96d0f347559b89d7e946160259c83ddcd55ff24cfaaf472a4",
+      "originalBytes": 3300,
+      "originalSha256": "518b8ea01b191c65c9b5ae8b68df90eb5f4bda503339cdcfe747fc949d275e80"
+    },
+    {
+      "file": "r4-score-red.json.gz",
+      "role": "focused-unit-or-fixture-red-green",
+      "applicationSourceHash": null,
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 1428,
+      "sha256": "195c47faa99553bf6c50837130123808f3316d2673b7ea0e3427daeeb9ef7cc5",
+      "originalBytes": 5749,
+      "originalSha256": "1ce20ea7af46828335d63f9e164eb9760bbacfbd8a87c0cefb1a358609339261"
+    },
+    {
+      "file": "r4-score-green.json.gz",
+      "role": "focused-unit-or-fixture-red-green",
+      "applicationSourceHash": null,
+      "integrationMain": "0b6f4bf26c6ca0d523dd8839ff1b1e1c33fb0bd1",
+      "bytes": 973,
+      "sha256": "a826360a90b25408c0df8b449f689aeb8c41c0f2204c4b581f81d06cbf644082",
+      "originalBytes": 3194,
+      "originalSha256": "437fbe77529db16b8a743c71c7fbe398deac3ec81b245f0e03643ab591302140"
+    },
+    {
+      "file": "r4-refinement-still-filter.patch.gz",
+      "role": "discarded-or-prototype-diagnostic",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 1914,
+      "sha256": "926a8dd933e5ac2d9cb76acf7c06df3e2d433063363b21e59a3cf3e6d233fbbb",
+      "originalBytes": 4723,
+      "originalSha256": "2a39ce61bf8497a53148b470f3934437d639825629c677b57e10eda7764f657e"
+    },
+    {
+      "file": "r4-ci-refinement-green.json.gz",
+      "role": "discarded-or-prototype-diagnostic",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 732,
+      "sha256": "ef7a5bfc2adadbdce94e0ae907b1d1b56ba20da3c94add6eefa1bae3180ba937",
+      "originalBytes": 2549,
+      "originalSha256": "6eb9a1f5403b61cdaf122aff9e8d6e19e40f27523f319ca03bb060886ffe5d1f"
+    },
+    {
+      "file": "r4-ci-candidates-probe.json.gz",
+      "role": "discarded-or-prototype-diagnostic",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 812,
+      "sha256": "2b66df5b558a0b1e4dc28bc5596474b838c210b8ab3a636de5c8dea7d20211c7",
+      "originalBytes": 2407,
+      "originalSha256": "49f0be7d5223cfd9040126c74d8867062cf1e3951aa69921eddd530f09b6d3b7"
+    },
+    {
+      "file": "r4-ci-fit-probe.json.gz",
+      "role": "discarded-or-prototype-diagnostic",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 649,
+      "sha256": "7141fcd0814c8da9e41aed2fbbd1b0124ac164560b78a9b6cedf73e3549e7c81",
+      "originalBytes": 2205,
+      "originalSha256": "0cd2c0f3917b2d563c2a9d14240ceac101ad5da5676256bc6deceb4191e66659"
+    },
+    {
+      "file": "r4-ci-selected-probe.json.gz",
+      "role": "discarded-or-prototype-diagnostic",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 564,
+      "sha256": "93d70cd72de49e74a2ce37b224e8d278dd7ecd2b91749f22a59442dd599c4d8f",
+      "originalBytes": 1062,
+      "originalSha256": "401e509900a32d00a6af72876035c28b2ed6b8cac079253df88d231f665c8874"
+    },
+    {
+      "file": "r4-ci-selected-ols-probe.json.gz",
+      "role": "discarded-or-prototype-diagnostic",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 562,
+      "sha256": "95517f8d20c8842837215b7132caa404cc862357dc55fad308992bac14e52a8e",
+      "originalBytes": 1062,
+      "originalSha256": "5ec3e060f8db242061300fa0ced4119432361e0bad0334272cc9ff3995172fc3"
+    },
+    {
+      "file": "r4-ci-window-probe.json.gz",
+      "role": "discarded-or-prototype-diagnostic",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 641,
+      "sha256": "fb1c561429e84c0c37e1a33637453b65d00ba28cda80994ab9d62c57d8d0140f",
+      "originalBytes": 2197,
+      "originalSha256": "8be0a4a32b4ff56c4643716c3b297bf1c87bc08868ee89410f1b5c5a1411e71a"
+    },
+    {
+      "file": "r4-bridge-selected-probe.json.gz",
+      "role": "discarded-or-prototype-diagnostic",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 571,
+      "sha256": "f80fc3a52dfe9f82cfacaaf6622da872cd48d4b47eb0e6134ca9bcdb2dbda33b",
+      "originalBytes": 1081,
+      "originalSha256": "4155e4d8a84048efc88db84b0414d4e96b60c2e75c8734d57ca96c283fedd968"
+    },
+    {
+      "file": "r4-bridge-candidates-probe.json.gz",
+      "role": "discarded-or-prototype-diagnostic",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 1062,
+      "sha256": "34c63670727239f21ed3f0edcb025b5423acb74b80e1e743cb4976483f677e0e",
+      "originalBytes": 3415,
+      "originalSha256": "88675dc967062432866f221be16726d4653cee848fedeff4e9076e5ec935f4fc"
+    },
+    {
+      "file": "r4-bridge-rms-probe.json.gz",
+      "role": "discarded-or-prototype-diagnostic",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 573,
+      "sha256": "86f4d37a2175fe1befc3f3ead2c8799f24346e2947eb1e30ad20f425a5fc0dc0",
+      "originalBytes": 1082,
+      "originalSha256": "bf8a0c0dd1be2574e3da53302356e262173da3b5b459975117fa0af874b14bed"
+    },
+    {
+      "file": "r4-ci-refinement-probe.mjs.gz",
+      "role": "diagnostic-program",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 501,
+      "sha256": "522607684a753f7cd3769109bc773c1598c6fcc20915668647ad6d5984d5ef2b",
+      "originalBytes": 855,
+      "originalSha256": "3558f4fc7145763b89337396d9fbdecaecf3eb25d390896f9bfc0868c91c7429"
+    },
+    {
+      "file": "r4-ci-candidates-probe.mjs.gz",
+      "role": "diagnostic-program",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 1191,
+      "sha256": "c50d050049af17a9c794527d2739f0c93fb5a0033844f528b9b459bcb7c20e5a",
+      "originalBytes": 2537,
+      "originalSha256": "18ebb9a14e30091c4fb9d72fd69b935c34c2ceb9fccb883822f2f0f60b489175"
+    },
+    {
+      "file": "r4-ci-fit-probe.mjs.gz",
+      "role": "diagnostic-program",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 988,
+      "sha256": "91fd6813c12a64f19a5849d1d5b1ff774e40185c35e8d3c216b89baf10899ca8",
+      "originalBytes": 1812,
+      "originalSha256": "b629b5ef9e06affead41ec8054c05ca9b09801835525c643a040e208664fd01c"
+    },
+    {
+      "file": "r4-ci-selected-probe.mjs.gz",
+      "role": "diagnostic-program",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 1139,
+      "sha256": "a0d5794123a65a0db9b107198bfe568d214bc3ccba701ba9ac77ccd356317e1c",
+      "originalBytes": 2254,
+      "originalSha256": "b75ba7e68a9a5aada5a1eba13e807c20fa7f5c18a96596e38fce4fca76bbfd4b"
+    },
+    {
+      "file": "r4-ci-window-probe.mjs.gz",
+      "role": "diagnostic-program",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 920,
+      "sha256": "5f1342a9ceeab762666e91b0eb3a369845ce43376c16b91ce713c0ff82d751f1",
+      "originalBytes": 1683,
+      "originalSha256": "ba9a793c1d23f9c3110111e6d671d9e51036177902868604abbe0644b5d67f9b"
+    },
+    {
+      "file": "r4-ci-browser-colors.mjs.gz",
+      "role": "diagnostic-program",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 1261,
+      "sha256": "38214b09dc61fda5befdbad4c7737b406f11135da67d633805bdebd9f9d1be01",
+      "originalBytes": 2474,
+      "originalSha256": "3d643a2f0a048d7c6353bd20fbc3fff9eb1a65d2a2ba207130ad4d623da3c045"
+    },
+    {
+      "file": "r4-measure-one.mjs.gz",
+      "role": "diagnostic-program",
+      "applicationSourceHash": null,
+      "integrationMain": null,
+      "bytes": 416,
+      "sha256": "d43ae3229e3793eac193dd34cf47f3d6dc0555073738e6018d117a144441adf9",
+      "originalBytes": 712,
+      "originalSha256": "6f09246cf524b9d735e3b67c09b17e5cd2b735f5981fb59ed2d7ec2ee0bf4ec9"
+    }
+  ],
+  "inputs": [
+    {
+      "file": "inputs/ci-dragon.webm",
+      "bytes": 5043591,
+      "sha256": "c45fd2b1333ccf773f06d4545320274b1ee568d7445760cd0aec7c492eeed8ff",
+      "title": "Sintel trailer, six-second CI reconstruction",
+      "author": "Blender Foundation",
+      "source": "https://durian.blender.org/sharing/",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "checked": "October 16, 2026",
+      "changes": "Original failed CI reconstruction from the shipped 96 JPEG pictures, copied byte-for-byte from its trace; retains the omitted color-matrix metadata for failure reproduction."
+    }
+  ]
+}
