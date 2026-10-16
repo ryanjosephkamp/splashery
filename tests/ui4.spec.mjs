@@ -21,8 +21,14 @@ async function open(page, id) {
   await page.waitForTimeout(1500); // the view settles
 }
 
-// A recipe point on the canvas (CSS pixels).
-const screen = (page, p) => page.evaluate((p) => window.__splashery.player.screenPoint(p), p);
+// A recipe point in page CSS pixels, including the phone canvas's offset.
+const screen = (page, p) =>
+  page.evaluate((p) => {
+    const { player } = window.__splashery;
+    const [x, y] = player.screenPoint(p);
+    const box = player.stage.canvas.getBoundingClientRect();
+    return [box.left + x, box.top + y];
+  }, p);
 
 // White keys from `a` to `b` (key indices on the grand piano).
 function whites(a, b) {
@@ -102,7 +108,9 @@ test.describe("off the keys", () => {
     ]) {
       await page.mouse.move(x, y);
       await page.mouse.down();
-      await page.waitForTimeout(1500); // the press looks for the toy first
+      // A GPU pick decides whether this press is off the keys. Wait for that decision before
+      // moving; a software GPU can take longer than a fixed pause to read the pick buffer.
+      await page.waitForFunction(() => window.__splashery.app.gestures.gesture === "orbit");
       await page.mouse.move(x + 160, y, { steps: 8 });
       await page.mouse.up();
       await page.waitForTimeout(300);

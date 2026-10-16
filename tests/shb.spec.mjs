@@ -110,9 +110,12 @@ for (const id of ["graph-plotter", "surface-plotter"]) {
       const { plotSliderAt } = await import("/src/packs/maths.js");
       const [x, y, z] = plotSliderAt(id);
       const { player } = window.__splashery;
+      // screenPoint is canvas-relative; the canvas sits below the toolbar on a phone (#671).
+      const r = player.stage.canvas.getBoundingClientRect();
+      const page = ([px, py]) => [r.left + px, r.top + py];
       return [
-        player.screenPoint([x, y, z + 0.06]),
-        player.screenPoint([x + 0.35 * 1.1, y, z + 0.06]),
+        page(player.screenPoint([x, y, z + 0.06])),
+        page(player.screenPoint([x + 0.35 * 1.1, y, z + 0.06])),
       ];
     }, id);
     await page.mouse.move(knob[0], knob[1]);

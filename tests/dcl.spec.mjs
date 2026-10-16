@@ -266,7 +266,10 @@ test.describe("in the browser", () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(APP);
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-    expect(urls.some((u) => /datavis|data-climate|climate-records\/|data-in-3d\//.test(u))).toBe(false); // prettier-ignore
+    // Shelf thumbnails (assets/toys/<id>/thumb.webp) load with the shelf; since the Featured shelf
+    // and the new shelf order (#671), the data toys' cards are in view at start. The lane's code
+    // and data must still wait for a toy to open.
+    expect(urls.some((u) => /datavis|data-climate|climate-records\/|data-in-3d\//.test(u) && !/\/thumb\.webp$/.test(u))).toBe(false); // prettier-ignore
     await page.evaluate(() => window.__splashery.app.chooseToy("data-in-3d"));
     await page.waitForFunction(() => window.__splashery.player.toyInfo?.id === "data-in-3d");
     await expect(page.locator("#dcl-panel")).toBeAttached();
