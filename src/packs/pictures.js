@@ -1049,11 +1049,27 @@ function bk5Start(F, pics) {
   const live = () => PG.pops.includes(F) && F.phase !== "idle";
   (async () => {
     let photo = T.photo;
-    if (!photo) {
-      const c = await pics.crop(T.page, T.box, 160);
-      if (!live() || !c) return;
-      photo = bk5IsPhoto(c);
-      if (!photo) F.relief = bk5Layers(c, T, F.id);
+    let detail = null;
+    if (!photo || (isLab() && pics.kind === "image")) {
+      const image = pics.kind === "image";
+      const c = await pics.crop(T.page, T.box, image ? 518 : 160);
+      if (!live()) return;
+      if (!c && !photo) {
+        Object.assign(F, { kind: "graphic", known: true, failed: true });
+        return;
+      }
+      if (image) detail = c;
+      if (c) photo = bk5IsPhoto(c);
+      if (!photo && c) {
+        // Classify cheaply, then trace graphic cutouts at the same detail as
+        // a raised photo. A tiny classification raster makes small letters
+        // and chart edges visibly blocky when the card stands up.
+        detail ||= await pics.crop(T.page, T.box, 518);
+        if (!live()) return;
+        F.relief = bk5Layers(detail || c, T, F.id);
+        F.base = 1;
+        if (!F.saved) F.depth = 1;
+      }
     }
     F.kind = photo ? "photo" : "graphic";
     // (Lane Polish: a photo found in the lab's PDF opens deeper too.)
@@ -1063,8 +1079,12 @@ function bk5Start(F, pics) {
     }
     F.known = true;
     if (!photo) return;
-    const c = await pics.crop(T.page, T.box, 518);
-    if (!live() || !c) return;
+    const c = detail || (await pics.crop(T.page, T.box, 518));
+    if (!live()) return;
+    if (!c) {
+      F.failed = true;
+      return;
+    }
     const img = c.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, c.width, c.height); // prettier-ignore
     const [{ estimateDepth }, { normalizeDepth }] = await Promise.all([import("./photo-3d-depth.js"), import("./photo-3d-core.js")]); // prettier-ignore
     const dep = await estimateDepth({ w: img.width, h: img.height, data: img.data });
@@ -1081,7 +1101,10 @@ function bk5Start(F, pics) {
     };
   })().catch((err) => {
     console.warn("Pop out:", err?.message || err);
-    if (live()) F.known = true;
+    if (live()) {
+      F.known = F.failed = true;
+      F.kind ||= T.photo ? "photo" : "graphic";
+    }
   });
 }
 
@@ -1280,7 +1303,7 @@ function pgLayer(F, i) {
   const short = (2 * Math.min(T.rect.hw, T.rect.hh)) / T.g0;
   const gap = 0.07 * short * F.depth;
   if (i === 0) return { relief: null, ready: true, gap };
-  if (!r) return { relief: null, ready: false, gap };
+  if (!r) return F.failed ? null : { relief: null, ready: false, gap };
   F.cuts ||= pgCuts(r, F.kind);
   const lo = F.cuts[i - 1];
   if (lo === undefined) return null;

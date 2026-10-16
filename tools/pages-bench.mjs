@@ -5,6 +5,7 @@
 // --profiles=phone,desktop --repeats=3 --seconds=5. Never runs a stepped clock for timing.
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 import { chromium } from "@playwright/test";
 import { PNG } from "pngjs";
 
@@ -17,6 +18,9 @@ const arg = (key, fallback) =>
 const base = arg("url", "http://127.0.0.1:4173/");
 const out = arg("out", "work/pages-r2/bench");
 const fixtures = "work/pages-r2/fixtures";
+const fixtureFiles = ["text.pdf", "text.png", "photo.pdf", "photo.png", "chart.pdf", "chart.png"];
+const digest = (data) => crypto.createHash("sha256").update(data).digest("hex");
+const toolSha256 = digest(fs.readFileSync(new URL(import.meta.url)));
 const profiles = {
   phone: { width: 390, height: 844, deviceScaleFactor: 2, tier: "low" },
   desktop: { width: 1440, height: 900, deviceScaleFactor: 1, tier: "mid" },
@@ -41,6 +45,11 @@ for (const signal of ["SIGINT", "SIGTERM"])
 // Original text and chart: CC0, made by Ryan with Codex (GPT-6).
 // The independent photo input reuses the credited Picture frame sample in CREDITS.md.
 async function makeFixtures() {
+  if (
+    arg("fresh-fixtures", "0") !== "1" &&
+    fixtureFiles.every((name) => fs.existsSync(`${fixtures}/${name}`))
+  )
+    return;
   const p = await browser.newPage({ viewport: { width: 612, height: 792 } });
   const body =
     "A page should remain clear while it moves. Small letters need dark edges, open spaces, and steady paper beneath them. Turn the leaf, follow its edge, and read the next line. Pictures, diagrams, and words belong to the same solid sheet.";
@@ -168,6 +177,10 @@ async function run(toy, input, profile, repeat) {
   const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor });
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
+  page.on("console", (m) => {
+    if (m.type() === "error" && /shader|compil|validation|syntax/i.test(m.text()))
+      errors.push(m.text());
+  });
   await page.goto(`${base}?renderer=webgl2&adapt=off&profile=${tier}&labs=1`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
   const loaded = await page.evaluate(
@@ -208,6 +221,12 @@ async function run(toy, input, profile, repeat) {
     null,
     { timeout: 180000 },
   );
+  const installedPageMs = await page.evaluate(() => performance.now() - window.__benchStart);
+  // New Gaussian sheets need their first sort; count completed page draws,
+  // rather than ending the clock as soon as CPU data has been installed.
+  await page.evaluate(async () => {
+    for (let i = 0; i < 3; i++) await window.__splashery.player.stage.captureFrame();
+  });
   const firstPageMs = await page.evaluate(() => performance.now() - window.__benchStart);
   await page.waitForFunction(
     () => {
@@ -334,6 +353,39 @@ async function run(toy, input, profile, repeat) {
         h = Math.round(H * (box[3] - box[1]));
       const ref = document.createElement("canvas"),
         got = document.createElement("canvas");
+      // Front-facing pages can be compared on the actual framebuffer grid.
+      // Keeping the captured pixels intact avoids a half-pixel resampling
+      // error that otherwise penalizes sharper letter edges.
+      const left = pts[0][0] * ratio,
+        top = pts[0][1] * ratio,
+        pw = (pts[1][0] - pts[0][0]) * ratio,
+        ph = (pts[2][1] - pts[0][1]) * ratio;
+      if (
+        pw > 0 &&
+        ph > 0 &&
+        Math.abs(pts[1][1] - pts[0][1]) < 0.01 &&
+        Math.abs(pts[2][0] - pts[0][0]) < 0.01
+      ) {
+        const x = Math.ceil(left + pw * box[0]),
+          y = Math.ceil(top + ph * box[1]);
+        const cw = Math.floor(left + pw * box[2]) - x,
+          ch = Math.floor(top + ph * box[3]) - y;
+        ref.width = got.width = cw;
+        ref.height = got.height = ch;
+        ref.getContext("2d").drawImage(source, left - x, top - y, pw, ph);
+        got.getContext("2d").drawImage(frame, x, y, cw, ch, 0, 0, cw, ch);
+        return {
+          reference: ref.toDataURL(),
+          render: got.toDataURL(),
+          pts,
+          W,
+          H,
+          box,
+          registration: "framebuffer",
+          body: Array.from(body),
+          bodyQ: Array.from(q),
+        };
+      }
       ref.width = got.width = w;
       ref.height = got.height = h;
       ref
@@ -395,6 +447,26 @@ async function run(toy, input, profile, repeat) {
   await cdp.send("Performance.enable");
   await cdp.send("HeapProfiler.collectGarbage");
   const mem = (await cdp.send("Performance.getMetrics")).metrics || [];
+  // Linux's proportional resident size includes native and software-GPU
+  // allocations without counting shared pages once for every process.
+  let processMemory = null;
+  try {
+    const session = await browser.newBrowserCDPSession();
+    const { processInfo } = await session.send("SystemInfo.getProcessInfo");
+    let pss = 0,
+      rss = 0,
+      n = 0;
+    for (const p of processInfo) {
+      try {
+        const s = fs.readFileSync(`/proc/${p.id}/smaps_rollup`, "utf8");
+        pss += Number(s.match(/^Pss:\s+(\d+)/m)?.[1] || 0) * 1024;
+        rss += Number(s.match(/^Rss:\s+(\d+)/m)?.[1] || 0) * 1024;
+        n++;
+      } catch {}
+    }
+    await session.detach();
+    if (n) processMemory = { pssBytes: pss, rssBytes: rss, processes: n };
+  } catch {}
   const state = await page.evaluate(() => {
     const pl = window.__splashery.player,
       p = pl.pictures;
@@ -411,7 +483,7 @@ async function run(toy, input, profile, repeat) {
           Object.values(d)
             .filter((x) => ArrayBuffer.isView(x))
             .reduce((s, x) => s + x.byteLength, 0) +
-          (d.surface ? d.w * d.h * 4 : 0),
+          (d.surface ? d.w * d.h * 4 + (d.surface.relief?.d?.byteLength || 0) : 0),
         0,
       ),
       gpuBytes: Object.values(pl.stage.device._vram || {}).reduce(
@@ -463,7 +535,9 @@ async function run(toy, input, profile, repeat) {
     repeat,
     ...loaded,
     firstPageMs,
+    installedPageMs,
     ...state,
+    processMemory,
     cdpHeap: mem.find((x) => x.name === "JSHeapUsedSize")?.value || null,
     quality,
     motion,
@@ -487,6 +561,16 @@ try {
             JSON.stringify(
               {
                 browser: browser.version(),
+                toolSha256,
+                fixtures: Object.fromEntries(
+                  fixtureFiles.map((name) => [
+                    name,
+                    {
+                      sha256: digest(fs.readFileSync(`${fixtures}/${name}`)),
+                      bytes: fs.statSync(`${fixtures}/${name}`).size,
+                    },
+                  ]),
+                ),
                 base,
                 profiles,
                 created: new Date().toISOString(),
