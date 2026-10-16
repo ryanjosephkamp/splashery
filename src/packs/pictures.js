@@ -3167,6 +3167,7 @@ export const RECIPES = {
     // it accepts.
     pictures: {
       solid: true,
+      prefetch: false,
       sample: (o) =>
         o.sample === "photo" ? "assets/toys/picture-lab/photo.jpg" : "assets/toys/picture-lab/article.pdf", // prettier-ignore
       accept: ["pdf", "image", "gif", "video"],
