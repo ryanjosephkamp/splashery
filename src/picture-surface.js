@@ -3,7 +3,7 @@
 // toys opt in; screen sheets and the other picture consumers keep their splats.
 import * as pc from "./pc.js";
 
-const VS = `
+const VS = (bend) => `
 attribute vec3 aPosition;
 attribute vec2 aUv;
 uniform mat4 matrix_model;
@@ -22,13 +22,13 @@ varying vec2 vUv;
 vec3 rot(vec4 q, vec3 v) { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
 void main(void) {
   vec3 p = aPosition;
-  if (uLeaf.z > 0.5) {
+  ${bend ? `if (uLeaf.z > 0.5) {
     vec3 nm = cross(uAxis, uDir), rel = p - uSpine;
     float s = dot(rel, uDir), psi = uLeaf.x + uLeaf.y * s;
     float lx = abs(uLeaf.y) < 1e-4 ? s * cos(uLeaf.x) : (sin(psi) - sin(uLeaf.x)) / uLeaf.y;
     float ly = abs(uLeaf.y) < 1e-4 ? s * sin(uLeaf.x) : (cos(uLeaf.x) - cos(psi)) / uLeaf.y;
     p = uSpine + uAxis * dot(rel, uAxis) + uDir * lx + nm * ly + (nm * cos(psi) - uDir * sin(psi)) * dot(rel, nm);
-  }
+  }` : ""}
   p = uPivot.xyz + rot(uPartQ, (p - uPivot.xyz) * (1.0 + uPivot.w)) + uOffset.xyz;
   vec4 q = dot(uSpBodyQ, uSpBodyQ) < 1e-8 ? vec4(0.0, 0.0, 0.0, 1.0) : uSpBodyQ;
   p = uSpToy.xyz + rot(q, p - uSpToy.xyz) + uSpBodyT.xyz;
@@ -50,7 +50,7 @@ void main(void) {
   }
   gl_FragColor = color;
 }`;
-const VSW = `
+const VSW = (bend) => `
 attribute aPosition: vec3f;
 attribute aUv: vec2f;
 uniform matrix_model: mat4x4f;
@@ -70,7 +70,7 @@ fn rot(q: vec4f, v: vec3f) -> vec3f { return v + 2.0 * cross(q.xyz, cross(q.xyz,
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
   var output: VertexOutput;
   var p = input.aPosition;
-  if (uniform.uLeaf.z > 0.5) {
+  ${bend ? `if (uniform.uLeaf.z > 0.5) {
     let nm = cross(uniform.uAxis, uniform.uDir); let rel = p - uniform.uSpine;
     let s = dot(rel, uniform.uDir); let psi = uniform.uLeaf.x + uniform.uLeaf.y * s;
     var lx = s * cos(uniform.uLeaf.x); var ly = s * sin(uniform.uLeaf.x);
@@ -79,7 +79,7 @@ fn rot(q: vec4f, v: vec3f) -> vec3f { return v + 2.0 * cross(q.xyz, cross(q.xyz,
       ly = (cos(uniform.uLeaf.x) - cos(psi)) / uniform.uLeaf.y;
     }
     p = uniform.uSpine + uniform.uAxis * dot(rel, uniform.uAxis) + uniform.uDir * lx + nm * ly + (nm * cos(psi) - uniform.uDir * sin(psi)) * dot(rel, nm);
-  }
+  }` : ""}
   p = uniform.uPivot.xyz + rot(uniform.uPartQ, (p - uniform.uPivot.xyz) * (1.0 + uniform.uPivot.w)) + uniform.uOffset.xyz;
   var q = uniform.uSpBodyQ;
   if (dot(q,q) < 1e-8) { q = vec4f(0.0,0.0,0.0,1.0); }
@@ -109,8 +109,9 @@ varying vUv: vec2f;
 // Pure geometry is also used by the page-surface regression checks. Relief is
 // sampled at the same normalized source coordinates as the splat builder.
 export function surfaceGrid(geom, w, h, relief = null) {
-  const cols = relief?.amount ? Math.min(128, Math.max(32, relief.w)) : 32;
-  const rows = relief?.amount ? Math.min(128, Math.max(32, relief.h)) : 32;
+  const flat = geom.leaf ? 32 : 1;
+  const cols = relief?.amount ? Math.min(128, Math.max(32, relief.w)) : flat;
+  const rows = relief?.amount ? Math.min(128, Math.max(32, relief.h)) : flat;
   const positions = new Float32Array((cols + 1) * (rows + 1) * 3);
   const uvs = new Float32Array((cols + 1) * (rows + 1) * 2);
   const pitch = Math.hypot(...geom.right);
@@ -165,11 +166,11 @@ export class PictureSurface {
     this.mesh.setIndices(indices);
     this.mesh.update(pc.PRIMITIVE_TRIANGLES);
     this.material = new pc.ShaderMaterial({
-      uniqueName: "pictureSolidFace",
+      uniqueName: data.geom.leaf ? "pictureLeafFace" : "pictureFlatFace",
       attributes: { aPosition: pc.SEMANTIC_POSITION, aUv: pc.SEMANTIC_TEXCOORD0 },
-      vertexGLSL: VS,
+      vertexGLSL: VS(!!data.geom.leaf),
       fragmentGLSL: FS,
-      vertexWGSL: VSW,
+      vertexWGSL: VSW(!!data.geom.leaf),
       fragmentWGSL: FSW,
     });
     this.material.cull = pc.CULLFACE_BACK;
