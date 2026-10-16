@@ -99,6 +99,51 @@ export function assertHeldoutTimes(times, trainingTimes, fps) {
     if (trainingTimes.some((s) => Math.abs(t - s) <= 1 / fps + 1e-6))
       throw new Error(`Held-out time ${t} overlaps a training photograph.`);
 }
+
+// Keep the original one-per-four-interval count. If the preferred interval has no unused
+// source frame, choose the nearest eligible time in that same temporal group. Selection
+// reads timestamps only; all attempted seeks and actual training pictures stay excluded.
+export function selectHeldoutTimes({ cameras, sourceTimes, attemptedTimes, trainingTimes, fps }) {
+  const cameraTimes = cameras?.map((c) => c.time);
+  const ordered = (values) =>
+    values?.length > 0 &&
+    values.every((t, i) => Number.isFinite(t) && (i === 0 || t > values[i - 1]));
+  if (
+    !ordered(cameraTimes) ||
+    cameraTimes.length < 3 ||
+    !ordered(sourceTimes) ||
+    !attemptedTimes?.length ||
+    !trainingTimes?.length ||
+    [...attemptedTimes, ...trainingTimes].some((t) => !Number.isFinite(t)) ||
+    !Number.isFinite(fps) ||
+    fps <= 0
+  )
+    throw new Error("Missing or invalid held-out selection evidence.");
+  const excluded = [...attemptedTimes, ...trainingTimes, ...cameraTimes];
+  const available = sourceTimes.filter((t) =>
+    excluded.every((s) => Math.abs(t - s) > 1 / fps + 0.000001),
+  );
+  const times = [];
+  for (let i = 1; i < cameras.length - 1; i += 4) {
+    const a = cameraTimes[i],
+      b = cameraTimes[i + 1],
+      middle = (a + b) / 2;
+    let options = available.filter((t) => t > a && t < b);
+    if (!options.length) {
+      const from = cameraTimes[i - 1],
+        to = cameraTimes[Math.min(cameras.length - 1, i + 3)];
+      options = available.filter((t) => t > from && t < to);
+    }
+    if (!options.length)
+      throw new Error(
+        `No independent source frame inside held-out group ${Math.floor(i / 4) + 1}.`,
+      );
+    times.push(options.sort((x, y) => Math.abs(x - middle) - Math.abs(y - middle) || x - y)[0]);
+  }
+  assertHeldoutTimes(times, excluded, fps);
+  return times;
+}
+
 export function median(values) {
   if (!values.length || values.some((v) => !Number.isFinite(v))) return null;
   const a = values.slice().sort((a, b) => a - b),

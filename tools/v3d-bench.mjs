@@ -23,6 +23,7 @@ import {
   resumeDecision,
   RETRY_MODES,
   accountedOutcome,
+  selectHeldoutTimes,
 } from "./v3d-bench-metrics.mjs";
 import { checkSamples } from "./v3d-bench-samples.mjs";
 import { sourceFrameReceipts, assertPixelDisjointness } from "./v3d-bench-pixels.mjs";
@@ -325,10 +326,11 @@ export async function main(cli = process.argv.slice(2)) {
     "v3d-bench-metrics.mjs",
     "v3d-bench-samples.mjs",
     "v3d-bench-pixels.mjs",
+    "v3d-affinity.py",
     "cdx-v3d-clarity-metrics.mjs",
   ];
   const protocolSha256 = fingerprint({
-    version: 3,
+    version: 4,
     files: protocolFiles.map((f) => ({
       file: f,
       sha256: hash(fs.readFileSync(path.join(import.meta.dirname, f))),
@@ -716,8 +718,8 @@ export async function main(cli = process.argv.slice(2)) {
               row.actualTier = model.stats?.tier;
               if (row.actualTier !== (phone ? "phone" : "high"))
                 throw new Error(`Unexpected actual training tier: ${row.actualTier}.`);
-              // Freeze source frames near every fourth camera midpoint. Exclude all planned seek
-              // attempts, including unselected ones, then independently verify the actual JPEGs.
+              // Freeze one source frame per four-interval group, preserving the original count.
+              // Exclude all planned seeks and actual photos, then independently verify the JPEGs.
               let times;
               const sourceMetadata = JSON.parse(
                 execFileSync(
@@ -753,25 +755,12 @@ export async function main(cli = process.argv.slice(2)) {
                 if (!fixed.width || !fixed.height || !fixed.crop)
                   throw new Error("Reference evaluation has no frozen image geometry.");
               } else {
-                const available = sourceTimes.filter(
-                  (t) =>
-                    t > 0 &&
-                    model.observed.attemptedTimes.every(
-                      (s) => Math.abs(t - s) > 1 / fps + 0.000001,
-                    ),
-                );
-                times = model.cams.slice(0, -1).flatMap((a, i) => {
-                  if (i % 4 !== 1) return [];
-                  const b = model.cams[i + 1],
-                    middle = (a.time + b.time) / 2;
-                  const options = available.filter((t) => t > a.time && t < b.time);
-                  if (!options.length)
-                    throw new Error(
-                      "No independent source frame inside the held-out camera interval.",
-                    );
-                  return [
-                    options.sort((x, y) => Math.abs(x - middle) - Math.abs(y - middle) || x - y)[0],
-                  ];
+                times = selectHeldoutTimes({
+                  cameras: model.cams,
+                  sourceTimes,
+                  attemptedTimes: model.observed.attemptedTimes,
+                  trainingTimes: model.observed.trainingTimes,
+                  fps,
                 });
               }
               const size = model.cams[0],
@@ -817,7 +806,7 @@ export async function main(cli = process.argv.slice(2)) {
                 sourceFrameIndices: pixelReceipts.views.map((f) => f.index),
                 fps,
                 protocol:
-                  "Exact source frames near frozen main midpoints, every fourth interval; all possible planned training seeks excluded. Every training JPEG is matched to an independent presented source frame using the identical extraction canvas and encoder; test JPEGs must be disjoint. FFmpeg selects those exact source indices. Interpolated production flight poses; no image alignment, sharpening, or mask.",
+                  "Exact source frames near frozen main midpoints, one per four-interval group with the original count retained. If a preferred interval is exhausted, use the nearest eligible time in its own group. All planned training seeks, actual training times, and camera timestamps are excluded. Selection uses timestamps only. Every training JPEG is independently matched with the identical extraction canvas and encoder; test JPEGs must be disjoint. FFmpeg selects those exact indices. Interpolated production flight poses; no image alignment, sharpening, or mask.",
               });
               row.evaluationSha256 = hash(fs.readFileSync(path.join(folder, "evaluation.json")));
               await page.evaluate(() =>
