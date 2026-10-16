@@ -265,3 +265,22 @@ the private page.
 - Keep blind reviews blind everywhere the owner can read: messages, check-in prompts (they show in
   the transcript when they fire) and first prompts. A key goes only in the handover page's `sealed/`
   folder and the Operator's scratchpad.
+- Run a Codex PR's own full suite before batching it (the owner's call of October 16, 2026): once
+  the review passes, add the `full-suite` label; batch only PRs whose own run is clean. A batch run
+  then catches only what PRs do to each other, and one PR's failures don't hold up the rest. A PR
+  that conflicts with `main` gets no Actions run of its own: merge it onto `main` on an Ops branch
+  (rebuilding the generated files) and let that run stand in.
+- A layout change reaches tests far from it (October 16, 2026): #671 moved the stage below the
+  toolbar on a phone and reordered the shelves, and about 17 older specs broke (shelf order, pointer
+  math that assumed the canvas at 0, 0, lazy-load checks that matched thumbnails). Ask a Codex task
+  that changes the stage or the shelf to run the specs that use `screenPoint`, `setViewportSize`, or
+  the shelf order, not only smoke.
+- Keep startup deterministic for tests: a fresh visit opens a random Featured toy, so automated
+  browsers (`navigator.webdriver`) start on the shelf's first toy unless `?first-toy=featured`.
+- Moving a spec to the SwiftShader list can quadruple its time (smoke: about 14 to 58 minutes on
+  October 16): check the shard times before accepting it.
+- A merge through the GitHub API can be blocked by auto mode as a production deploy; the owner's
+  one-line "OK merge N" in this session lets it through.
+- Quiet hours (the owner's request of October 16, 2026): he sleeps about 2 to 10 a.m. ET (06:00 to
+  14:00 UTC). Check in every 3 to 4 hours then, message him only for a real blocker, and send one
+  short summary near 14:00 UTC. PR events still wake the Operator.
