@@ -471,17 +471,25 @@ export class Pictures {
 
   // The picture width to build at for a sheet shown `px` pixels wide.
   // (`share`: the share of the picture's width a cropped sheet shows.)
-  levelFor(sheet, aspect, px, page = 0, share = 1, method = this.methodFor(sheet)) {
+  levelFor(
+    sheet,
+    aspect,
+    px,
+    page = 0,
+    share = 1,
+    method = this.methodFor(sheet),
+    solid = this.solid,
+  ) {
     const b = this.budget;
     let cap;
     if (method === "ink") cap = b.width;
-    else if (this.solid && method !== "screen")
+    else if (solid && method !== "screen")
       cap = Math.min(b.width, Math.sqrt((sheet.shown ? 4 : 1) * b.pixels * aspect));
     else cap = Math.sqrt((method === "screen" ? b.screen : b.pixels) * aspect);
     if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width * share); // prettier-ignore
     const target = Math.min(
       cap,
-      Math.max(64, px * (this.solid && method === "ink" && sheet.shown ? 1.5 : 1)),
+      Math.max(64, px * (solid && method === "ink" && sheet.shown ? 1.5 : 1)),
     );
     let level = LADDER.find((w) => w >= target) ?? LADDER[LADDER.length - 1];
     level = Math.min(level, Math.floor(cap));
@@ -692,18 +700,12 @@ export class Pictures {
       this.decorateCanvas(canvas, sheet, want.page, media, want.variant, links);
       const t1 = performance.now();
       const solid = this.solid && want.method !== "screen";
-      const sparse = solid && want.method === "pixels" && this.backing !== "paper";
+      const native = solid && want.method === "pixels";
+      const sparse = native && this.backing !== "paper" && this.profile !== "low";
       // The sharp face can use more source pixels without increasing the
       // Gaussian backing's original pixel budget.
       const bw = sparse
-        ? Math.min(
-            w,
-            Math.floor(
-              Math.sqrt(
-                this.budget.pixels * (this.profile === "low" ? 0.5 : 1) * media.aspect(want.page),
-              ),
-            ),
-          )
+        ? Math.min(w, Math.floor(Math.sqrt(this.budget.pixels * 0.5 * media.aspect(want.page))))
         : solid
           ? 128
           : w;
@@ -724,7 +726,23 @@ export class Pictures {
       let surface = null;
       if (solid) {
         const face = this.geometry(sheet, media.aspect(want.page), w, h);
-        face.lift = (sparse ? Math.hypot(...geom.right) * 6 : 0) + Math.hypot(...face.right) * 0.3;
+        // Preserve the original image plane even when only coarse paper
+        // remains beneath it. The sampled path must also clear its detail.
+        const original = native
+          ? this.levelFor(
+              sheet,
+              aspect,
+              this.screenWidth(sheet, aspect),
+              want.page,
+              1,
+              "pixels",
+              false,
+            )
+          : w;
+        const imagePitch = native ? (Math.hypot(...face.right) * w) / original : 0;
+        face.lift =
+          Math.max(sparse ? Math.hypot(...geom.right) * 6 : 0, imagePitch * 6) +
+          Math.hypot(...face.right) * 0.3;
         surface = { source: canvas, geom: face, w, h };
       }
       // The worker owns a separate pixel buffer. Compact the face while it
@@ -739,7 +757,7 @@ export class Pictures {
           sparse,
           ...geom,
         }),
-        Promise.resolve().then(() => this.compactSurface({ surface }, monochrome, sparse)),
+        Promise.resolve().then(() => this.compactSurface({ surface }, monochrome, native)),
       ]);
       if (solid && backing !== canvas) backing.width = backing.height = 1;
       if (surface) data.surface = surface;
@@ -761,7 +779,7 @@ export class Pictures {
       data.h = h;
       data.drawMs = t1 - t0;
       data.totalMs = performance.now() - t0;
-      if (sparse)
+      if (native)
         data.resolutionKey = `${sheet.i}|${want.page}|${want.method}|${this.order}|${want.variant || ""}`;
       this.stats.builds++;
       this.stats.lastMs = data.totalMs;
