@@ -518,6 +518,8 @@ export class Stage {
   // The old toy is switched off now and freed a few frames later: the
   // engine's work-buffer manager still references it until it reconciles.
   clearToy() {
+    this.pictureWarmup?.destroy();
+    this.pictureWarmup = null;
     const t = this.toy;
     if (!t) return;
     this.toy = null;

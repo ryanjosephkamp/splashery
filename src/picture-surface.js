@@ -239,6 +239,10 @@ export function surfaceGrid(geom, w, h, relief = null) {
 
 export class PictureSurface {
   constructor(stage, slot, data) {
+    if (!data.warmup) {
+      stage.pictureWarmup?.destroy();
+      stage.pictureWarmup = null;
+    }
     this.stage = stage;
     this.slot = slot;
     this.geom = data.geom;
@@ -340,9 +344,55 @@ export class PictureSurface {
   }
   destroy() {
     this.layer.removeMeshInstances([this.instance]);
-    this.mesh.destroy();
+    this.instance.destroy();
     this.material.destroy();
     this.color.destroy();
     this.mask?.destroy();
   }
+}
+
+// Prepare the same material programs while media loads. The clipped geometry
+// contributes no picture pixels, and its temporary resources leave before the
+// first real face or when the toy closes. Programs remain in the device cache.
+export function warmPictureShaders(stage, curved = false) {
+  if (!stage.device || !stage.app?.root) return;
+  stage.pictureProgramsWarmed ||= new Set();
+  const needed = [false, ...(curved ? [true] : [])].filter(
+    (bend) => !stage.pictureProgramsWarmed.has(bend),
+  );
+  if (!needed.length) return;
+  stage.pictureWarmup?.destroy();
+  const entity = new pc.Entity("Picture shader preparation");
+  stage.app.root.addChild(entity);
+  const faces = [];
+  stage.pictureWarmup = {
+    destroy() {
+      for (const face of faces) face.destroy();
+      entity.destroy();
+    },
+  };
+  for (const bend of needed) {
+    faces.push(
+      new PictureSurface(
+        stage,
+        { entity },
+        {
+          warmup: true,
+          w: 1,
+          h: 1,
+          pixels: new Uint8Array([255]),
+          channels: 1,
+          geom: {
+            origin: [100000, 100000, 100000],
+            right: [1, 0, 0],
+            down: [0, 1, 0],
+            normal: [0, 0, 1],
+            leaf: bend ? { slot: 0 } : null,
+          },
+        },
+      ),
+    );
+    stage.pictureProgramsWarmed.add(bend);
+  }
+  stage.requestRender();
 }

@@ -34,7 +34,13 @@
 import * as pc from "./pc.js";
 import { buildSheet } from "./picture-splats.js";
 import { safeLinkURL, clampRegion } from "./media.js";
-import { PictureSurface, grayPixels, opaqueGray, rampPixels } from "./picture-surface.js";
+import {
+  PictureSurface,
+  grayPixels,
+  opaqueGray,
+  rampPixels,
+  warmPictureShaders,
+} from "./picture-surface.js";
 
 // Per device tier, for one sheet: the most splats a photo or a frame gets
 // ("pixels", and "screen" for video, whose texture uploads every frame),
@@ -117,6 +123,11 @@ export class Pictures {
     this.prefetch = prefetch;
     this.decorate = decorate;
     this.stage = player.stage;
+    if (solid)
+      warmPictureShaders(
+        this.stage,
+        defs.some((d) => d.leaf != null),
+      );
     this.profile = profile;
     this.budget = PICTURE_BUDGETS[profile] || PICTURE_BUDGETS.mid;
     const c = transform?.center || [0, 0, 0];
