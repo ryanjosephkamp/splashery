@@ -20,7 +20,16 @@ const out = arg("out", "work/pages-r2/bench");
 const fixtures = "work/pages-r2/fixtures";
 const fixtureFiles = ["text.pdf", "text.png", "photo.pdf", "photo.png", "chart.pdf", "chart.png"];
 const digest = (data) => crypto.createHash("sha256").update(data).digest("hex");
-const toolSha256 = digest(fs.readFileSync(new URL(import.meta.url)));
+const toolSource = fs.readFileSync(new URL(import.meta.url), "utf8");
+const toolSha256 = digest(toolSource);
+// Include profiles, browser flags, fixtures, clarity, and the complete run.
+// Full-page screenshot options affect only the review artifact, after the
+// measurements. Keep their timeout independent of measurement compatibility.
+const protocolSha256 = digest(
+  toolSource
+    .slice(toolSource.indexOf("const profiles ="), toolSource.lastIndexOf("\ntry {"))
+    .replace(/await page\.screenshot\(\{[^\n]*\}\);/g, "await page.screenshot(/* artifact */);"),
+);
 const profiles = {
   phone: { width: 390, height: 844, deviceScaleFactor: 2, tier: "low" },
   desktop: { width: 1440, height: 900, deviceScaleFactor: 1, tier: "mid" },
@@ -525,7 +534,7 @@ async function run(toy, input, profile, repeat) {
     ])
       fs.writeFileSync(`${out}/${stem}-${key}.png`, Buffer.from(v.split(",")[1], "base64"));
   }
-  await page.screenshot({ path: `${out}/${stem}.png` });
+  await page.screenshot({ path: `${out}/${stem}.png`, timeout: 180000 });
   await cdp.send("HeapProfiler.collectGarbage");
   const motion = await page.evaluate(
     async ({ seconds, toy }) => {
@@ -607,6 +616,7 @@ try {
                 isolation: "fresh Chromium process per case and repeat",
                 memoryPoint: "settled page before reference raster and screenshots",
                 toolSha256,
+                protocolSha256,
                 fixtures: Object.fromEntries(
                   fixtureFiles.map((name) => [
                     name,
