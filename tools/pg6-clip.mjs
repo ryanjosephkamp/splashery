@@ -15,6 +15,9 @@
 // layers (P1: an album photo raised as pop-up layers, then tilted),
 // album (an album photo rising, then turned).
 // --dpr=1 renders at one device pixel per CSS pixel (default 2). Writes
+// Task 95 adds r2-book, r2-lab, r2-album, r2-text, and r2-diagram: turns,
+// Pop out with layers off and on, and the original text/diagram inputs.
+// --profile=low and --width=390 match a phone; preparation waits are omitted.
 // <out-dir>/pg6-<scene>.gif and a strip of six frames. The test PDF is made
 // by tests/fixtures/pg6/make-pdf.mjs.
 
@@ -39,8 +42,20 @@ const STEP = 1 / 12;
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
-  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
+  ...(process.env.SPLASHERY_GL === "llvmpipe" ? { headless: false } : {}),
+  args: [
+    ...(process.env.SPLASHERY_GL === "llvmpipe"
+      ? ["--use-gl=angle", "--use-angle=gl", "--hide-scrollbars"]
+      : ["--use-angle=swiftshader"]),
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+  ],
 });
+for (const signal of ["SIGINT", "SIGTERM"])
+  process.once(signal, async () => {
+    await browser.close();
+    process.exit(130);
+  });
 
 // Scales an RGBA image down by box filtering to `w` wide.
 function shrink(png, w) {
@@ -71,9 +86,10 @@ function shrink(png, w) {
 async function record(scene) {
   const width = Number(opt("width", 360));
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: Number(opt("dpr", 2)) }); // prettier-ignore
-  await page.goto(`${base}?renderer=webgl2&adapt=off&profile=mid&labs=1`);
+  await page.goto(`${base}?renderer=webgl2&adapt=off&profile=${opt("profile", "mid")}&labs=1`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   const frames = [];
+  const observations = [];
   const intro = opt("intro", "");
   if (intro)
     frames.push({ img: shrink(PNG.sync.read(fs.readFileSync(intro)), width), delay: Number(opt("hold", 3000)) }); // prettier-ignore
@@ -212,16 +228,19 @@ async function record(scene) {
     }, [key, v]); // prettier-ignore
     await play(0.25);
   };
-  const popOn = () => run(() => { const app = window.__splashery.app; if (!app.popOut) app.togglePopOut(); }); // prettier-ignore
-  const pops = () => run(async () => (await import("/src/packs/pictures.js")).BOOKS_R5.PG.pops.map((F) => ({ phase: F.phase, relief: F.relief?.key || "", kind: F.kind, at: F.at, id: F.id }))); // prettier-ignore
+  const popOn = () => run(() => { const {app,player} = window.__splashery; if (!app.popOut) app.togglePopOut(); player.motion.state.pop=1; }); // prettier-ignore
+  const pops = () => run(async () => (await import("/src/packs/pictures.js")).BOOKS_R5.PG.pops.map((F) => ({ phase: F.phase, relief: F.relief?.key || "", kind: F.kind, at: F.at, id: F.id, failed:!!F.failed }))); // prettier-ignore
   // Steps the clock (unrecorded) until the figure raised last starts to
   // rise: while it waits it lies exactly where it was. For a photo, waits in
   // real time at rest until its depth is worked out, so it rises with it.
   const ready = async () => {
+    const started = Date.now();
     for (let i = 0; i < 3000; i++) {
+      if (Date.now() - started > Number(opt("prep-ms", 750000)))
+        throw new Error("The figure's preparation timed out.");
       const s = (await pops()).at(-1);
       if (!s || s.phase === "rise" || s.phase === "up") return;
-      if (s.kind === "photo" && s.phase === "rest" && !s.relief.startsWith("d")) {
+      if (s.kind === "photo" && !s.failed && s.phase === "rest" && !s.relief.startsWith("d")) {
         await draw();
         await page.waitForTimeout(250);
         continue;
@@ -275,7 +294,107 @@ async function record(scene) {
     await play(2.2);
   };
 
-  if (scene === "two-up") {
+  const r2Cycle = async (n, box) => {
+    for (const layered of [0, 1]) {
+      await control("layers", layered);
+      await popOn();
+      await play(0.25);
+      await hold(650);
+      await raise(n, box);
+      observations.push({ layers: !!layered, figures: await pops() });
+      await turn(0.45, 0.3, 0.65);
+      await hold(650);
+      await turn(0, 0, 0.5);
+      await run(() => {
+        const { app, player } = window.__splashery;
+        if (app.popOut) app.togglePopOut();
+        player.motion.state.pop = 0;
+      });
+      await play(1.4);
+      await hold(450);
+    }
+  };
+
+  if (scene === "r2-book") {
+    const [a] = await bookTwo();
+    await hold(650);
+    await r2Cycle(1, a);
+    await tapAt(await at(1, [0.9, 0.96]));
+    await play(2);
+    await hold(650);
+  } else if (scene === "r2-album") {
+    await warm();
+    await open("photo-album", { reading: "one" });
+    await run(() => window.__splashery.app.pictureStep(1));
+    await play(2);
+    const n = await run(() => window.__splashery.player.pictures.page);
+    await hold(650);
+    await r2Cycle(n, [0, 0, 1, 1]);
+    await run(() => window.__splashery.app.pictureStep(1));
+    await play(2);
+    await hold(650);
+  } else if (scene === "r2-lab") {
+    await open("picture-lab", {});
+    await play(0.6);
+    for (let i = 0; i < 60 && !(await figs(0)).length; i++) await play(STEP);
+    await hold(650);
+    await r2Cycle(0, (await figs(0))[0]);
+    await run(() => window.__splashery.app.pictureStep(1));
+    await play(1.2);
+    await hold(650);
+  } else if (scene === "r2-text" || scene === "r2-diagram") {
+    await warm();
+    await open("picture-lab", {});
+    await run(() => (window.__splashery.player.frozen = false));
+    await run(
+      async ({ scene, base }) => {
+        const { app } = window.__splashery;
+        if (scene === "r2-text")
+          await app.openMedia(new URL("work/pages-r2/fixtures/text.png", base).href);
+        else {
+          // Original CC0 diagram, made by Ryan with Codex (GPT-6).
+          const c = document.createElement("canvas");
+          c.width = 612;
+          c.height = 792;
+          const g = c.getContext("2d");
+          g.fillStyle = "white";
+          g.fillRect(0, 0, c.width, c.height);
+          g.fillStyle = "#17202a";
+          g.font = "bold 34px sans-serif";
+          g.fillText("A page in three steps", 48, 80);
+          for (const [i, label] of ["Source", "Page", "Layer cards"].entries()) {
+            const y = 150 + i * 185;
+            g.fillStyle = ["#dbeafe", "#dcfce7", "#ffedd5"][i];
+            g.fillRect(100, y, 412, 105);
+            g.strokeStyle = "#20364c";
+            g.lineWidth = 3;
+            g.strokeRect(100, y, 412, 105);
+            g.fillStyle = "#17202a";
+            g.font = "28px sans-serif";
+            g.fillText(label, 132, y + 63);
+            if (i < 2) {
+              g.beginPath();
+              g.moveTo(306, y + 115);
+              g.lineTo(306, y + 165);
+              g.moveTo(292, y + 151);
+              g.lineTo(306, y + 165);
+              g.lineTo(320, y + 151);
+              g.stroke();
+            }
+          }
+          const blob = await new Promise((r) => c.toBlob(r, "image/png"));
+          await app.openMedia(new File([blob], "diagram.png", { type: "image/png" }));
+        }
+      },
+      { scene, base },
+    );
+    await settle();
+    await run(() => (window.__splashery.player.frozen = true));
+    await play(0.8);
+    await hold(650);
+    await r2Cycle(0, [0, 0, 1, 1]);
+    await hold(650);
+  } else if (scene === "two-up") {
     const [a, b] = await bookTwo();
     await hold(1000);
     await raise(1, a);
@@ -382,6 +501,27 @@ async function record(scene) {
     await hold(1400);
   }
   await page.close();
+  if (scene.startsWith("r2-"))
+    fs.writeFileSync(
+      path.join(outDir, `pg6-${scene}.json`),
+      JSON.stringify(
+        {
+          scene,
+          base,
+          viewport: [390, 844],
+          dpr: Number(opt("dpr", 2)),
+          profile: opt("profile", "mid"),
+          renderer: process.env.SPLASHERY_GL || "swiftshader",
+          clock: "stepped at 12 fps; preparation waits omitted; not throughput",
+          frames: frames.length,
+          durationMs: frames.reduce((n, f) => n + f.delay, 0),
+          observations,
+          author: "made by Ryan with Codex (GPT-6)",
+        },
+        null,
+        2,
+      ) + "\n",
+    );
   // One palette for the whole clip, from a sample of its frames.
   const step = Math.max(1, Math.floor(frames.length / 12));
   const sample = frames.filter((f, i) => i % step === 0).map((f) => f.img.data);
@@ -405,5 +545,8 @@ async function record(scene) {
   console.log(`${file}: ${frames.length} frames, ${Math.round(gif.bytes().length / 1024)} KB`);
 }
 
-for (const s of list) await record(s);
-await browser.close();
+try {
+  for (const s of list) await record(s);
+} finally {
+  await browser.close();
+}
