@@ -816,6 +816,7 @@ export class Pictures {
     const st = this.stage;
     if (!st.toy) return;
     let slot = sheet.slot;
+    const previous = slot;
     if (!slot || slot.container.maxSplats < data.count) {
       // The old sheet stays on show for a few frames: a new container
       // draws nothing until the engine has sorted it.
@@ -851,6 +852,12 @@ export class Pictures {
     slot.surface?.destroy();
     slot.surface = data.surface ? new PictureSurface(st, slot, data.surface) : null;
     slot.surface?.show(!sheet.hidden);
+    // A continuous face is ready without the splat sort. Retire its old
+    // picture immediately, so two resolutions or pages never overlap.
+    if (data.surface && previous && previous !== slot) {
+      previous.entity.enabled = false;
+      previous.surface?.show(false);
+    }
     // A page on a leaf or a part arrives sorted in its built pose: sort it
     // where it stands (Player.resortPose, lane Books).
     if (sheet.def.leaf !== null || sheet.def.part) this.player.poseStale = true;

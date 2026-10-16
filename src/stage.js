@@ -694,6 +694,7 @@ export class Stage {
     if (i < 0) return;
     t.sheets.splice(i, 1);
     sheet.entity.enabled = false;
+    sheet.surface?.show(false);
     // Buried like a toy: a few frames later.
     this.graveyard.push({ frames: 3, entity: { destroy: () => this.destroySheet(sheet) } });
     this.requestRender();
