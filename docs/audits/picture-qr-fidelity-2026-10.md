@@ -77,7 +77,7 @@ run precedes the Circle finder-edge repair below and is retained as historical v
 refreshed 390-pixel motion clips compare `cb8a8315` and this recipe; both Most detail clips pass the
 full pre-motion reader gate. Review media is published only on the clips branch.
 
-The final required broad run completed with **303 passes, one unexpected failure, and no skips**
+The pre-third required broad run completed with **303 passes, one unexpected failure, and no skips**
 across 33 files. The failure was the general phone-sheet gesture in `smoke`; its exact isolated
 rerun passed. The latest isolated SwiftShader budget suite passed all **11 tests**, and the `qr`
 file, which started before the last Color-return fix, was repeated afterward with **12/12 passes**.
@@ -310,9 +310,9 @@ structural fidelity from RGB error and scan margin.
 
 PR #641 is merged. The qualification used explicit Original settings so the fixed source crops and
 encoded-square measure match the earlier observations. The final evidence labels retained
-observations and fresh affected-path captures separately; retained timings are not fresh
-measurements of the merged UI. All required qrc/qrs and QR-prefix checks have been rerun after the
-merge. The initial concurrent run's phone-sheet gesture failure and its successful isolated rerun
-are both retained.
+observations and fresh affected-path captures separately. Some timings precede the fitting merge;
+others use later revisions. This is not one fresh final-head timing trial. All required qrc/qrs and
+QR-prefix checks have been rerun after the merge. The initial concurrent run's phone-sheet gesture
+failure and its successful isolated rerun are both retained.
 
 Rule check: none.

@@ -23,7 +23,7 @@ const rows = [...captures.detail.values()];
 const text = [
   "# Complete review corpus findings",
   "",
-  "This is a segmented comparison against frozen main cb8a8315. Retained observations and timings precede the fitting merge; they are not fresh final-head measurements. Every result identifies its actual measurement run. The complete raw observations, including superseded failures and baseline replicates, remain in the evidence manifest.",
+  "This is a segmented comparison against frozen main cb8a8315. Some observations precede the fitting merge; affected-path rechecks and continuations use later revisions. This is not one fresh final-head trial. Every result identifies its actual measurement run. The complete raw observations, including superseded failures and baseline replicates, remain in the evidence manifest.",
   "",
   `There are ${rows.length} codes per mode, 100 pictures, ten payloads, and two shapes. Both readers assess 24 conditions per code. Most detail has ${summary.detail.failedCodes.length} independently failing codes, ${summary.detail.failedGate.length} failed runtime gates, ${summary.detail.fallbacks.length} fallbacks, and ${summary.scanRegressions.length} codes that lose a previously passing baseline read.`,
   "",
