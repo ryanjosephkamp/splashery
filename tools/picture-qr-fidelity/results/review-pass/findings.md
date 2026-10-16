@@ -1,9 +1,9 @@
 # Complete review corpus findings
 
-This is a segmented comparison against frozen main cb8a8315. Retained observations and timings
-precede the fitting merge; they are not fresh final-head measurements. Every result identifies its
-actual measurement run. The complete raw observations, including superseded failures and baseline
-replicates, remain in the evidence manifest.
+This is a segmented comparison against frozen main cb8a8315. Some observations precede the fitting
+merge; affected-path rechecks and continuations use later revisions. This is not one fresh
+final-head trial. Every result identifies its actual measurement run. The complete raw observations,
+including superseded failures and baseline replicates, remain in the evidence manifest.
 
 There are 2000 codes per mode, 100 pictures, ten payloads, and two shapes. Both readers assess 24
 conditions per code. Most detail has 0 independently failing codes, 0 failed runtime gates, 0
