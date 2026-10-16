@@ -8,7 +8,7 @@
 // pile up, and puts them back together; Blow pushes the letters away from a
 // held finger. Every letter (and every piece of one) moves as a solid piece:
 // a small rigid-body simulation here, sent to the GPU as tokens.
-import { textSplats, cleanText, visibleCount, TEXT_FONT } from "../text-splats.js";
+import { textSplats, cleanText, visibleCount, graphemes, isBlank, hasInk, TEXT_FONT } from "../text-splats.js"; // prettier-ignore
 import { quatFromTo } from "../kit.js";
 import { TOY_SOUNDS } from "../toy-sounds.js";
 import { parseNotes } from "../voices.js";
@@ -47,12 +47,13 @@ export const PAINTS = [
 ];
 // Toy Box's letters: yellow, pink, white, orange, white, orange, pink, yellow.
 const DEFAULT_COLORS = [1, 0, 2, 3, 2, 3, 0, 1];
+// Toy Box's tool buttons: their colors and their keys, 1 to 5.
 export const TOOLS = [
-  { id: "spin", label: "Spin" },
-  { id: "poke", label: "Poke" },
-  { id: "paint", label: "Paint" },
-  { id: "drop", label: "Drop" },
-  { id: "blow", label: "Blow" },
+  { id: "spin", label: "Spin", tint: "#ff3d8b", key: "1" },
+  { id: "poke", label: "Poke", tint: "#ffd60a", key: "2" },
+  { id: "paint", label: "Paint", tint: "#ff6a1f", key: "3" },
+  { id: "drop", label: "Drop", tint: "#6a2cff", key: "4" },
+  { id: "blow", label: "Blow", tint: "#96f0ff", key: "5" },
 ];
 const TOOL_IDS = ["spin", "poke", "paint", "blow"];
 const DEPTH = 0.17; // half the letters' thickness, in ems (Toy Box: 0.13 of 0.78)
@@ -100,16 +101,25 @@ export function readName(text) {
   if (!n) throw new Error("Type a name first.");
   if (n > MAX_LETTERS)
     throw new Error(`Use up to ${MAX_LETTERS} letters, digits, symbols, or emoji.`);
+  // Some characters draw nothing at all (U+3164, a private-use code point).
+  if (typeof document !== "undefined" && !hasInk(name, { ...FONT, cols: colsFor(name) }))
+    throw new Error("Nothing in that text can be drawn here. Try letters, digits, or emoji.");
   return name;
 }
 
-const safeName = (text) => {
-  try {
-    return readName(text);
-  } catch {
-    return "RYAN KAMP";
+// A name from a link or a saved scene: the first 48 characters that show
+// (a longer one is cut), or the default when there is nothing to show.
+function safeName(text) {
+  const clean = cleanText(text, 400);
+  let shown = 0;
+  let name = "";
+  for (const g of graphemes(clean)) {
+    if (!isBlank(g) && ++shown > MAX_LETTERS) break;
+    name += g;
   }
-};
+  name = name.trim();
+  return visibleCount(name) ? name : "RYAN KAMP";
+}
 
 // Toy Box sets RYAN over KAMP; longer names wrap at spaces into rows a bit
 // wider than tall.
@@ -198,7 +208,10 @@ function splitLetter(s, start, end, k, seed) {
 
 const layoutCache = new Map();
 export function nameLayout(text, count = 12000) {
-  const name = safeName(text);
+  let name = safeName(text);
+  // A name with nothing that draws shows a question mark in its place.
+  if (typeof document !== "undefined" && !hasInk(name, { ...FONT, cols: colsFor(name) }))
+    name = "?";
   const key = `${name}|${count}`;
   if (layoutCache.has(key)) return layoutCache.get(key);
   const s = textSplats(name, { count, seed: 1999, cols: colsFor(name), depth: DEPTH, back: 0.35, ...FONT }); // prettier-ignore
@@ -326,7 +339,8 @@ function letterNow(sim, layout, i) {
 }
 
 // Toy Box's name is a xylophone: one bar for each letter, up a major scale.
-const SCALE = parseNotes("C4 D4 E4 F4 G4 A4 B4 C5 D5 E5 F5 G5 A5 B5 C6").flat();
+// Toy Box's scale: C5 up to C6, one bar per letter, round again after eight.
+const SCALE = parseNotes("C5 D5 E5 F5 G5 A5 B5 C6").flat();
 export function notesFor(layout) {
   return layout.letters.map((_, i) => SCALE[i % SCALE.length]);
 }
@@ -645,6 +659,7 @@ const browser = () => typeof window !== "undefined";
 function pointOn(sim, p) {
   // The point on the letter under p, where that letter was built (paint
   // goes where the splats were made, as Toy Box paints splats' homes).
+  if (!sim.layout.letters.length) return { index: 0, distance: Infinity, home: p.slice() };
   const { index, distance } = nearestLetter(sim, sim.layout, p);
   const l = sim.layout.letters[index];
   let home;
@@ -704,6 +719,7 @@ function gust(sim, p, time) {
 // The Play button (and a tap with no point): the tool on a seeded spot.
 function playTool(sim, n, time) {
   const layout = sim.layout;
+  if (!layout.letters.length) return;
   const i = Math.floor(hash(n * 7919 + 11) * layout.letters.length);
   const c = letterNow(sim, layout, i);
   const p = [c[0] + (hash(n * 13) - 0.5) * 0.3, c[1] + (hash(n * 17) - 0.5) * 0.3, DEPTH];
@@ -765,6 +781,8 @@ export const RECIPES = {
           ...TOOLS.map((t) => ({
             id: t.id,
             text: t.label,
+            tint: t.tint,
+            key: t.key,
             label: t.id === "drop" ? (dropped ? "Put it back together" : "Drop it") : `${t.label} tool`, // prettier-ignore
             pressed: t.id === "drop" ? dropped : ui.tool === t.id,
           })),
@@ -785,6 +803,8 @@ export const RECIPES = {
         ];
       },
       activate(id, time) {
+        // Toy Box's pop when a tool or a color is picked.
+        if (id !== "drop" && id !== "wash") live?.sim.cues.push("pop");
         if (TOOL_IDS.includes(id)) ui.tool = id;
         else if (id === "drop") {
           if (live) setDrop(live.sim, !live.sim.dropped, time);
@@ -855,10 +875,13 @@ export const RECIPES = {
       async read(text) {
         return { name: readName(text), paints: "" };
       },
+      // Toy Box's census: the splats in each letter.
       shown: () => {
         const layout = live?.sim.layout;
         if (!layout) return "";
-        return `${layout.name.replace(/\n/g, " ")} · ${layout.letters.length} solid letters · ${live.count?.toLocaleString("en-US") ?? ""} splats`; // prettier-ignore
+        const count = (n) => n.toLocaleString("en-US");
+        const per = layout.letters.map((l) => `${l.char} ${count(l.end - l.start)}`).join(" · ");
+        return `${layout.name.replace(/\n/g, " ")}: ${count(live.count ?? 0)} splats in ${layout.letters.length} solid letters. ${per}`; // prettier-ignore
       },
     },
     credits: [
@@ -868,7 +891,7 @@ export const RECIPES = {
         author: "Made by Ryan with Claude (Opus 5.5)",
         license: "CC0 1.0",
         changes:
-          "From Ryan Kamp's Toy Box name toy. Letters drawn with the device's own fonts. Code is MIT; procedural shapes are CC0.",
+          "From Ryan Kamp's Toy Box name toy. Letters in Fredoka (Milena Brandão and Hafontia, SIL Open Font License 1.1), as in Toy Box; other scripts and emoji in the device's own fonts. Code is MIT; procedural shapes are CC0.",
       },
     ],
     drive(t, c, out, info) {
@@ -878,6 +901,16 @@ export const RECIPES = {
       const time = info.time ?? t;
       if (browser() && data.live) live = data.live;
       if (info.eye) sim.eye = info.eye;
+      // Toy Box's tick as the name turns, every quarter radian or so.
+      if (Number.isFinite(info.view)) {
+        if (sim.tickAt === undefined) sim.tickAt = info.view;
+        const turned = Math.abs(Math.atan2(Math.sin(info.view - sim.tickAt), Math.cos(info.view - sim.tickAt))); // prettier-ignore
+        if (turned > 0.26) {
+          sim.tickAt = info.view;
+          sim.cues.push({ voice: "tone", kind: "square", f: 1500, decay: 0.05, vol: 0.25 });
+          touch(sim, time);
+        }
+      }
       if (sim.t === null || time < sim.t) sim.t = time;
       // Taps since the last frame: a point pokes (or paints, or blows) there;
       // the Play button uses the tool on a seeded spot.
@@ -928,10 +961,11 @@ export const RECIPES = {
       sim.sort = sort;
     },
     build(k, o) {
-      const name = safeName(o.name);
+      let name = safeName(o.name);
       const count = nameBudget(k.count, o.detail);
       k.count = count;
       const layout = nameLayout(name, count);
+      name = layout.name; // "?" when nothing in it draws
       const n = layout.letters.length;
       const paints = paintString(o.paints, n);
       const colors = layout.letters.map(
@@ -950,6 +984,19 @@ export const RECIPES = {
         ui.tool = toolOf(o.verb);
         ui.paint = paintIndex(o.color);
       }
+      // Toy Box's opening: the letters fly in from all around and settle.
+      if (
+        !same &&
+        browser() &&
+        !matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        window.__splashery?.player?.scene.motion.alive !== false
+      )
+        // prettier-ignore
+        sim.letters.forEach((b, i) => {
+          b.d = [(hash(i * 3 + 1) - 0.5) * 2.4, (hash(i * 3 + 2) - 0.5) * 1.8, (hash(i * 3 + 3) - 0.5) * 1.6]; // prettier-ignore
+          b.v = [(hash(i * 5 + 7) - 0.5) * 3, (hash(i * 5 + 8) - 0.5) * 3, 0];
+          b.r = [(hash(i * 7 + 9) - 0.5) * 1.2, (hash(i * 7 + 10) - 0.5) * 1.2, (hash(i * 7 + 11) - 0.5) * 2]; // prettier-ignore
+        });
       const holder = { sim, count };
       if (browser()) live = holder;
       k.data = { sim, live: holder, colors: colors.map((c) => c.slice()), layout };

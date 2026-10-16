@@ -7,7 +7,7 @@ import { applyClay } from "../src/generators.js";
 import { resolveOptions } from "../src/player.js";
 import { encodeSceneHash, decodeSceneHash } from "../src/codec.js";
 import { normalizeScene } from "../src/state.js";
-import { graphemes, cleanText, visibleCount, textRows, textSplats } from "../src/text-splats.js";
+import { graphemes, cleanText, visibleCount, textRows, textSplats, layoutText } from "../src/text-splats.js"; // prettier-ignore
 
 const APP = "/?labs=1&renderer=webgl2&adapt=off";
 const blank = () => ({ parts: {}, tokens: null, cues: [] });
@@ -38,6 +38,20 @@ test("text splits into what a person sees as characters, emoji sequences include
   expect(cleanText("  Ada \t  Lovelace \r\n\r\n x ")).toBe("Ada Lovelace\nx");
   expect(textRows("RYAN KAMP", 8).map((r) => r.join(""))).toEqual(["RYAN", "KAMP"]);
   expect(textRows("ABCDEFGHIJ", 4).map((r) => r.join(""))).toEqual(["ABCD", "EFGH", "IJ"]);
+});
+
+test("right-to-left rows read right to left, and joined scripts draw whole words", () => {
+  // Hebrew: the first letter (shin) ends up on the right.
+  expect(textRows("שלום", 8)[0]).toEqual(["ם", "ו", "ל", "ש"]);
+  const g = layoutText("שלום").glyphs;
+  expect(g.at(-1).g).toBe("ש");
+  expect(g.at(-1).x).toBeGreaterThan(g[0].x);
+  // Two Hebrew words: the first on the right; Latin and digits inside keep their order.
+  expect(textRows("Hi שלום 123", 12)[0].join("")).toBe("Hi םולש 123");
+  expect(textRows("שלום Ryan", 12)[0].join("")).toBe("Ryan םולש");
+  // Arabic and Devanagari words are one shaped piece each, Arabic right to left.
+  expect(textRows("مرحبا بالعالم", 8)[0]).toEqual(["بالعالم", " ", "مرحبا"]);
+  expect(textRows("नमस्ते Ryan", 12)[0][0]).toBe("नमस्ते");
 });
 
 test("text splats are deterministic, fill the budget, and give each character its own range", () => {
@@ -76,6 +90,9 @@ test("names take any script, symbols, and emoji, up to 48 characters", async () 
   ])
     expect((await input.read(name)).name).toBe(cleanText(name));
   expect(readName("A".repeat(48))).toHaveLength(48);
+  // A link's name is cut to its first 48 characters, not dropped.
+  const { nameLayout } = await import("../src/packs/name-toy.js");
+  expect(nameLayout("B".repeat(60)).letters).toHaveLength(48);
   for (const bad of ["", "   ", "\n", "A".repeat(49)]) expect(() => readName(bad)).toThrow();
 });
 
@@ -128,7 +145,7 @@ test("a poke rings out letter by letter, plays the touched letter's bar, and set
   const R = data.layout.letters[0].center;
   const { out, travel, cues } = play(recipe, data, { 2: [[R[0], R[1], 0.17]] }, 150);
   expect(travel).toBeGreaterThan(0.2);
-  expect(cues[0]).toMatchObject({ voice: "bar", f: "C4" });
+  expect(cues[0]).toMatchObject({ voice: "bar", f: "C5" }); // Toy Box's scale starts at C5
   for (const tk of out.tokens) {
     expect(tk.offset).toEqual([0, 0, 0]);
     expect(tk.quat).toEqual([0, 0, 0, 1]);
@@ -157,6 +174,13 @@ test("Drop breaks letters into pieces that fall, land with knocks, and come back
     expect(tk.offset).toEqual([0, 0, 0]);
     expect(tk.quat).toEqual([0, 0, 0, 1]);
   }
+});
+
+test("Toy Box's tool buttons: colors, keys 1 to 5, and a pop when one is picked", async () => {
+  const { RECIPES } = await import("../src/packs/name-toy.js");
+  const items = RECIPES["name-toy"].toolbar.items().slice(0, 5);
+  expect(items.map((i) => [i.text, i.key])).toEqual([["Spin", "1"], ["Poke", "2"], ["Paint", "3"], ["Drop", "4"], ["Blow", "5"]]); // prettier-ignore
+  expect(items.every((i) => /^#[0-9a-f]{6}$/.test(i.tint))).toBe(true);
 });
 
 test("old links and saved scenes of the name toy still open sensibly", async () => {
@@ -236,7 +260,7 @@ test("Shape morph's editor adds, moves, and removes forms, and the word box adds
   expect(formList(word).list.at(-1)).toBe("w:Ryan 🇺🇸 Kamp");
   expect(word).toMatchObject({ form: "word", word: "Ryan 🇺🇸 Kamp", at: "6" });
   await expect(recipe.input.read("   ")).rejects.toThrow();
-  await expect(recipe.input.read("x".repeat(49))).rejects.toThrow();
+  await expect(recipe.input.read("x".repeat(25))).rejects.toThrow();
   expect(MAX_FORMS).toBe(16);
 });
 
@@ -267,6 +291,10 @@ for (const [width, height] of [
     const errors = await open(page, "name-toy", width, height);
     const row = page.locator("#toy-toolbar");
     await expect(row.locator("button:visible")).toHaveText(["Spin", "Poke", "Paint", "Drop", "Blow"]); // prettier-ignore
+    // Toy Box's census: the splats in each letter.
+    expect(
+      await page.evaluate(() => window.__splashery.player.toyInfo.recipe.input.shown()),
+    ).toMatch(/splats in 8 solid letters\. R [\d,]+ · Y [\d,]+ ·/);
     // Fredoka (the owner's OK of October 16, 2026) is loaded before the letters are drawn.
     const fredoka = () =>
       [...document.fonts].some((f) => /Splashery Fredoka/.test(f.family) && f.status === "loaded");
@@ -387,3 +415,67 @@ for (const [width, height] of [
     expect(errors).toEqual([]);
   });
 }
+
+test("text that draws nothing never breaks either toy", async ({ page }) => {
+  const errors = await open(page, "name-toy", 390, 844);
+  const hangul = "\u3164";
+  const out = await page.evaluate(async (bad) => {
+    const { app, player } = window.__splashery;
+    const recipe = player.toyInfo.recipe;
+    let rejected = false;
+    try {
+      await recipe.input.read(bad);
+    } catch {
+      rejected = true;
+    }
+    // A link with such a name opens a question mark, and its tools still work.
+    await app.setToyOptions({ name: bad });
+    const data = player.motion.ctx.kit.data;
+    player.act();
+    player.act(player.fromRecipe(data.layout.letters[0].center));
+    await new Promise((r) => setTimeout(r, 300));
+    const letters = data.layout.letters.map((l) => l.char);
+    // Shape morph: such a word shows SPLATS, not a point.
+    await app.chooseToy("shape-morph");
+    let morphRejected = false;
+    try {
+      await player.toyInfo.recipe.input.read(bad);
+    } catch {
+      morphRejected = true;
+    }
+    await app.setToyOptions({ form: "word", word: bad });
+    const pos = player.motion.ctx.kit.data.form.pos;
+    let spread = 0;
+    for (let i = 0; i < pos.length; i += 3) spread = Math.max(spread, Math.abs(pos[i]));
+    return { rejected, letters, morphRejected, spread };
+  }, hangul);
+  expect(out).toEqual({ rejected: true, letters: ["?"], morphRejected: true, spread: expect.any(Number) }); // prettier-ignore
+  expect(out.spread).toBeGreaterThan(0.3);
+  expect(errors).toEqual([]);
+});
+
+test("the name flies in when it opens, and ticks while it turns", async ({ page }) => {
+  const errors = await open(page, "name-toy", 390, 844);
+  const out = await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    await app.setToyOptions({ name: "FLY IN" });
+    const data = player.motion.ctx.kit.data;
+    const away = Math.max(...data.sim.letters.map((b) => Math.hypot(...b.d)));
+    await new Promise((r) => setTimeout(r, 2500));
+    // Turn the view a whole radian: about four ticks.
+    const cues = [];
+    const off = player.on("cue", (c) => cues.push(...c));
+    player.camera.begin();
+    for (let k = 0; k < 8; k++) {
+      player.camera.rotateBy(30, 0, 0.02);
+      player.stage.requestRender();
+      await new Promise((r) => setTimeout(r, 120));
+    }
+    player.camera.end();
+    off?.();
+    return { away, ticks: cues.filter((c) => c?.kind === "square").length };
+  });
+  expect(out.away).toBeGreaterThan(0.3);
+  expect(out.ticks).toBeGreaterThan(0);
+  expect(errors).toEqual([]);
+});

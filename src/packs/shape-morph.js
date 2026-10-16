@@ -8,7 +8,7 @@
 // text module (src/text-splats.js), so emoji keep their colors.
 import { quatFromTo, quatEuler, quatRotate } from "../kit.js";
 import { PRESETS, compileProgram } from "./splat-equation.js";
-import { textSplats, cleanText, visibleCount } from "../text-splats.js";
+import { textSplats, cleanText, visibleCount, hasInk } from "../text-splats.js";
 
 const TAU = 2 * Math.PI;
 const GOLD = 0.6180339887498949;
@@ -32,7 +32,7 @@ export const FORMS = [
 const formOf = (o) => (FORMS.some((f) => f.id === o.form) ? o.form : "word");
 const SHAPES = FORMS.filter((f) => f.id !== "word" && f.id !== "qr");
 export const MAX_FORMS = 16;
-const MAX_WORD = 48;
+const MAX_WORD = 24; // as the Word box's own limit
 const unit = (v) => {
   const r = Math.hypot(...v) || 1;
   return v.map((x) => x / r);
@@ -78,7 +78,10 @@ function word(n, o) {
   const out = blank(n);
   out.flat = true;
   // Long words wrap, so they still read on a phone. The device's own fonts.
-  const text = wordOf(o.word);
+  // A word that draws nothing (U+3164, a private-use code point) shows
+  // SPLATS rather than collapsing the cloud to a point.
+  let text = wordOf(o.word);
+  if (!hasInk(text, { cols: 10 })) text = "SPLATS";
   const t = textSplats(text, { count: n, seed: 78, cols: 10, depth: 0, colorKey: "morph" });
   out.rgb = new Float32Array(n * 3).fill(-1);
   let colored = false;
@@ -579,13 +582,15 @@ export const RECIPES = {
       placeholder: "Words, names, or emoji…",
       button: "Add",
       fileButton: false,
-      note: "Each form you add joins the list, and the cloud morphs to it. A tap or Play morphs to the next form, starting where you tap. Pick a form on the stage to go straight to it. Add shapes or a QR code of the QR text, move forms earlier, or remove them under Edit your forms. Any language, digits, symbols, and emoji (flags and skin tones too) work, up to 48 characters.",
+      note: "Each form you add joins the list, and the cloud morphs to it. A tap or Play morphs to the next form, starting where you tap. Pick a form on the stage to go straight to it. Add shapes or a QR code of the QR text, move forms earlier, or remove them under Edit your forms. Any language, digits, symbols, and emoji (flags and skin tones too) work, up to 24 characters.",
       async read(text) {
         const word = cleanText(text, 200);
         const n = visibleCount(word);
         if (!n) throw new Error("Type a word, a name, or an emoji first.");
         if (n > MAX_WORD)
           throw new Error(`Use up to ${MAX_WORD} letters, digits, symbols, or emoji.`);
+        if (typeof document !== "undefined" && !hasInk(word, { cols: 10 }))
+          throw new Error("Nothing in that text can be drawn here. Try letters, digits, or emoji.");
         const { list } = formList(opts);
         if (list.length >= MAX_FORMS) throw new Error(`The list holds up to ${MAX_FORMS} forms. Remove one first.`); // prettier-ignore
         list.push(`w:${word}`);

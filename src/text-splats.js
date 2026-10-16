@@ -15,8 +15,9 @@
 
 import { FONT } from "./font.js";
 
-// Rounded faces first (Toy Box uses Fredoka, which the site does not ship),
-// then the system's own sans, then the color emoji fonts.
+// The default faces: rounded ones first, then the system's own sans, then
+// the color emoji fonts. A toy may put its own face first (the name toy
+// puts Fredoka, which it loads itself).
 export const TEXT_FONT =
   'ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", "Nunito", "Varela Round", "M PLUS Rounded 1c", system-ui, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji"';
 const PX = 112; // the size each glyph is drawn at (pixels per em)
@@ -57,8 +58,57 @@ export function cleanText(text, maxLength = 400) {
 // How many graphemes would show (spaces and line breaks don't).
 export const visibleCount = (text) => graphemes(text).filter((g) => !isBlank(g)).length;
 
-// Rows of graphemes: line breaks as typed, and long lines wrapped at spaces
-// to at most `cols` graphemes (a word longer than that is cut).
+// Scripts whose letters join or combine across characters (Arabic and its
+// relatives, the Indic scripts, Mongolian, Myanmar, Khmer, Tibetan): a word
+// in one of them is drawn whole, in one fillText, so the browser shapes it.
+const JOINED = /[؀-ࣿऀ-෿ༀ-࿿က-႟ក-᢯ꡀ-꡿ﭐ-﷿ﹰ-﻿]/u; // prettier-ignore
+const RTL = /[֐-ࣿיִ-﷿ﹰ-﻿\u{10800}-\u{10FFF}\u{1E800}-\u{1EFFF}]/u;
+const LTR = /[A-Za-zÀ-ɏͰ-ϿЀ-ԯऀ-෿฀-࿿က-႟ក-᢯぀-ヿ㐀-鿿가-힯]/u; // prettier-ignore
+const dirOf = (u) => (RTL.test(u) ? "rtl" : LTR.test(u) ? "ltr" : "");
+
+// A word's drawing units: its graphemes, or the whole word when its script
+// joins letters.
+const unitsOf = (word) => (JOINED.test(word.join("")) ? [word.join("")] : word);
+
+// Puts a row in the order it is seen: a row whose first strong letter is
+// right-to-left (Hebrew, Arabic) runs right to left, with any left-to-right
+// run inside it (Latin, digits beside Latin) kept in its own order, and
+// right-to-left runs inside a left-to-right row turned round.
+function visualOrder(row) {
+  const dirs = row.map((u) => (u === " " ? "" : dirOf(u)));
+  const base = dirs.find(Boolean) || "ltr";
+  const other = base === "rtl" ? "ltr" : "rtl";
+  const out = row.slice();
+  // Runs of the other direction (with neutrals between their strong units).
+  const runs = [];
+  for (let i = 0; i < row.length; i++) {
+    if (dirs[i] !== other) continue;
+    let j = i;
+    for (let k = i + 1; k < row.length; k++) {
+      if (dirs[k] === base) break;
+      if (dirs[k] === other) j = k;
+    }
+    runs.push([i, j]);
+    i = j;
+  }
+  // In a left-to-right row, each right-to-left run turns round.
+  if (base === "ltr") {
+    for (const [i, j] of runs) out.splice(i, j - i + 1, ...row.slice(i, j + 1).reverse());
+    return out;
+  }
+  // A right-to-left row turns round, then each left-to-right run turns back.
+  out.reverse();
+  const n = row.length;
+  for (const [i, j] of runs) {
+    const a = n - 1 - j;
+    out.splice(a, j - i + 1, ...out.slice(a, a + j - i + 1).reverse());
+  }
+  return out;
+}
+
+// Rows of drawing units in the order they are seen: line breaks as typed,
+// and long lines wrapped at spaces to at most `cols` units (a word longer
+// than that is cut, unless its script joins).
 export function textRows(text, cols = 8) {
   const rows = [];
   for (const line of String(text).split("\n")) {
@@ -67,11 +117,11 @@ export function textRows(text, cols = 8) {
     let word = [];
     for (const g of graphemes(line)) {
       if (g === " ") {
-        if (word.length) words.push(word);
+        if (word.length) words.push(unitsOf(word));
         word = [];
       } else word.push(g);
     }
-    if (word.length) words.push(word);
+    if (word.length) words.push(unitsOf(word));
     for (let w of words) {
       if (row.length && row.length + 1 + w.length <= cols) {
         row.push(" ", ...w);
@@ -87,7 +137,7 @@ export function textRows(text, cols = 8) {
     }
     if (row.length) rows.push(row);
   }
-  return rows;
+  return rows.map(visualOrder);
 }
 
 // ---- One glyph's pixels --------------------------------------------------------
@@ -288,6 +338,10 @@ export function layoutText(text, { cols = 8, line = 1.08, font = TEXT_FONT, roun
   }
   return { glyphs: shown, width: hi[0] - lo[0], height: hi[1] - lo[1], rows: rows.length };
 }
+
+// Whether the text draws anything at all (some characters, such as U+3164
+// or a private-use code point, draw nothing).
+export const hasInk = (text, opts = {}) => layoutText(text, opts).glyphs.length > 0;
 
 const splatCache = new Map();
 

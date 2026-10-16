@@ -12792,7 +12792,7 @@
       "license": "CC0 1.0",
       "checked": "October 16, 2026",
       "thumbnail": "assets/toys/name-toy/thumb.webp",
-      "sha256": "56db9bb4b378af1f9eb68bda5d06bc977c999bae2c9386a2401ad400a846a430",
+      "sha256": "3362a3d93e7bfd6f1ebb0b8e7ba7715a7807ce083799e441b2cf8c4d4a1249a7",
       "sourceNote": "From Ryan Kamp's Toy Box name toy. Original procedural splat letters drawn by src/text-splats.js in Fredoka (SIL OFL 1.1, vendor/fredoka/; the owner's OK of October 16, 2026), with the device's own fonts for other scripts and emoji (lane PT1). Code is MIT; shapes and the thumbnail are CC0. No reference files or renderer are shipped."
     }
   ]

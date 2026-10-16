@@ -25,7 +25,7 @@ export const TOY_HELP = {
     howTo:
       "Type a name in Toy, emoji too. Pick Spin, Poke, Paint, Drop, or Blow on the stage, then touch the letters.",
     about:
-      "From Ryan Kamp's Toy Box. Your name becomes thick, rounded letters made of soft splats, drawn with your device's own fonts, so any language, symbols, and emoji (flags and skin tones too) work. Each letter, and each piece of one, moves as a solid piece.\n\nSpin turns the name, and a tap pokes it. Poke rings out from your finger, letter by letter, and each letter plays its own xylophone note. Paint dabs one of eight colors where you drag; Wash it off clears it. Drop breaks the letters into pieces that fall, bounce, and pile up; press it again to put them back. Blow pushes the letters away while you hold. The name and the paint travel in a scene link. Made by Ryan with Claude (Opus 5.5); code is MIT, and the letters are CC0.",
+      "From Ryan Kamp's Toy Box. Your name becomes thick, rounded letters of soft splats in Toy Box's Fredoka font. Any language, symbols, and emoji (flags and skin tones too) work, in your device's own fonts.\n\nSpin turns the name, and a tap pokes it. Poke rings out from your finger, and each letter plays its own xylophone note. Paint dabs one of eight colors where you drag; Wash it off clears it. Drop breaks the letters into pieces that fall and pile up; press it again to put them back. Blow pushes the letters away while you hold. The keys 1 to 5 pick the tools. Links keep the name and the paint. Made by Ryan with Claude (Opus 5.5); MIT code, CC0 letters, and Fredoka under the SIL Open Font License.",
   },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {

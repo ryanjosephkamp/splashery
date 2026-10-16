@@ -211,10 +211,17 @@ for (const [width, height] of [
       p.opts.idleDelay = 1e9;
       p.idle.weight = 0;
     });
+    // The name flies in when it opens (Toy Box); let it settle first.
+    await page.waitForFunction(
+      () => window.__splashery.player.motion.ctx.kit.data.sim.letters.every((b) => Math.hypot(...b.d) === 0), // prettier-ignore
+      null,
+      { timeout: 60_000 },
+    );
     await page.screenshot({ path: `tests/screenshots/cdx-pfd-name-toy-${width}x${height}.png` });
     for (const tool of ["spin", "poke", "paint", "drop", "blow"]) {
-      const diff = await page.evaluate(async (tool) => {
+      const { diff, edgePixels } = await page.evaluate(async (tool) => {
         const { app, player: p } = window.__splashery;
+        if (tool === "blow") app.setLook({ background: "#111111" });
         const data = p.motion.ctx.kit.data;
         const c = data.layout.letters[1].center;
         const at = [c[0], c[1], 0.17];
@@ -236,10 +243,20 @@ for (const [width, height] of [
               p.grabAt(...p.screenPoint([q[0], q[1] - 0.2, 0.17]));
             }
           let action;
-          for (let k = 0; k < 6; k++) action = await (async () => {
+          // Blow: the whole gust stays inside the capture (a 6-pixel margin
+          // of background all round, as Codex task 78d's check had).
+          let edgePixels = 0;
+          for (let k = 0; k < (tool === "blow" ? 15 : 6); k++) {
             p.time += 0.08;
-            return frame();
-          })(); // prettier-ignore
+            action = await frame();
+            if (tool !== "blow") continue;
+            for (let y = 0; y < 390; y++)
+              for (let x = 0; x < 390; x++) {
+                if (x >= 6 && x < 384 && y >= 6 && y < 384) continue;
+                const i = (y * 390 + x) * 4;
+                if (Math.abs(action[i] - 17) + Math.abs(action[i + 1] - 17) + Math.abs(action[i + 2] - 17) > 30) edgePixels++; // prettier-ignore
+              }
+          }
           if (tool === "paint" || tool === "blow") p.grabEnd();
           if (tool === "drop") p.playTool("drop");
           let changed = 0;
@@ -251,10 +268,11 @@ for (const [width, height] of [
               30
             )
               changed++;
-          return changed;
+          return { diff: changed, edgePixels };
         });
       }, tool);
       expect(diff, tool).toBeGreaterThan(400);
+      expect(edgePixels, `${tool} stays inside the capture`).toBe(0);
       await page.evaluate(() => window.__splashery.player.clearPaint());
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(

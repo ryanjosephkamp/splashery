@@ -76,6 +76,21 @@ Ready for review (see the PR). Both toys are rebuilt; the engine PR is open.
 Effect review page 2, lane `PT1` (MP4s, 360 px): `pt1-name-toy-poke`, `pt1-name-toy-paint`,
 `pt1-name-toy-drop`, `pt1-name-toy-blow`, `pt1-name-toy-emoji`, and `pt1-shape-morph`.
 
+### The Operator's review (October 16, 2026)
+
+- Cdx-pfd's Blow check (the gust stays inside the capture) is back.
+- Text that draws nothing (U+3164, private-use code points): the word box refuses it, a link with it
+  shows "?", and Shape morph shows SPLATS rather than a point.
+- Right-to-left rows read right to left (Latin and digits inside keep their order). Words in joined
+  scripts (Arabic, the Indic scripts, and others) are drawn whole, so the browser shapes them.
+- Toy Box parity:
+  - tool chips in Toy Box's colors, with keys 1 to 5 (engine PR #691);
+  - a pop when a tool or color is picked, and a tick as the name turns;
+  - the letters fly in when the name opens;
+  - the census of splats per letter in the Toy tab;
+  - bar notes from C5.
+- A link's name is cut to 48 characters, and Shape morph's word box and Add both take 24.
+
 ## Known issues
 
 - Letters follow the device's fonts: rounded on a Mac or iPhone (`ui-rounded`), and the system's
