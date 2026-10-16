@@ -61,7 +61,14 @@ self.onmessage = ({ data }) => {
         }
         let cpuPicture = false;
         const rect = data.frame.visibleRect;
-        if (directCopy && rect.width === fw && rect.height === fh && data.frame.copyTo) {
+        if (
+          directCopy &&
+          data.frame.rotation === 0 &&
+          data.frame.flip === false &&
+          rect.width === fw &&
+          rect.height === fh &&
+          data.frame.copyTo
+        ) {
           try {
             const size = data.frame.allocationSize({ format: "RGBA" });
             if (!rgba || rgba.byteLength !== size) rgba = new Uint8ClampedArray(size);

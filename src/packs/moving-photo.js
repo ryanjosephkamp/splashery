@@ -2344,7 +2344,7 @@ export const MOVING_PHOTO = {
       label: "Original round 4 test clips",
       title: "Blocks, gate, wheel, orbit, and fast motion",
       source:
-        "https://github.com/ryanjosephkamp/splashery/blob/892ed8eab6b3eb71c65c976f59da8b60b099a78c/tools/cdx-mp2-r4-inputs.mjs",
+        "https://github.com/ryanjosephkamp/splashery/blob/b442876fa4ceb61202da77633eb91b6cc20e676e/tools/cdx-mp2-r4-inputs.mjs",
       author: "Made by Ryan with Codex (GPT-6)",
       license: "CC0 1.0",
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",

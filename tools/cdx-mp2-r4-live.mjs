@@ -292,6 +292,7 @@ try {
       const bytes = await fs.readFile(file);
       report.cases.push({
         id: item.id,
+        title: credit.label,
         path: selectedPath,
         inputHashes: await caseInputHashes(item, selectedPath, code),
         author: credit.author,

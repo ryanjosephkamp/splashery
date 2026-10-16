@@ -3,6 +3,70 @@ import fs from "node:fs/promises";
 import { PNG } from "pngjs";
 import { openRender, renderFrame } from "../tools/cdx-mp2-render.mjs";
 
+test("native worker pictures honor square-frame rotation and flips", async ({ page }) => {
+  await page.goto("/LICENSES.md");
+  const rows = await page.evaluate(async () => {
+    const source = new OffscreenCanvas(16, 16),
+      paint = source.getContext("2d");
+    for (const [i, color] of ["red", "green", "blue", "yellow"].entries()) {
+      paint.fillStyle = color;
+      paint.fillRect((i & 1) * 8, (i >> 1) * 8, 8, 8);
+    }
+    const worker = new Worker("/src/packs/moving-photo-video-worker.js", { type: "module" }),
+      rows = [];
+    worker.postMessage({ init: true, w: 16, h: 16, cols: 8, rows: 8, aspect: 1 });
+    try {
+      for (const rotation of [0, 90, 180, 270])
+        for (const flip of [false, true]) {
+          const frame = new VideoFrame(source, { timestamp: 500000, rotation, flip });
+          if (frame.rotation !== rotation || frame.flip !== flip)
+            throw Error("The browser did not retain the requested native transform");
+          const canvas = new OffscreenCanvas(16, 16),
+            context = canvas.getContext("2d", { willReadFrequently: true });
+          context.drawImage(frame, 0, 0);
+          const expected = context.getImageData(0, 0, 16, 16).data,
+            result = await new Promise((resolve, reject) => {
+              worker.onmessage = ({ data }) =>
+                data.error ? reject(Error(data.error)) : resolve(data);
+              worker.onerror = (error) => reject(Error(error.message));
+              worker.postMessage(
+                {
+                  id: rows.length + 1,
+                  time: 0.5,
+                  frame,
+                  blend: 0,
+                  guided: false,
+                  depth: {
+                    ms: { w: 16, h: 16 },
+                    n: 4,
+                    frames: Array.from({ length: 4 }, () => new Uint8Array(256).fill(128)),
+                  },
+                },
+                [frame],
+              );
+              frame.close();
+            });
+          context.clearRect(0, 0, 16, 16);
+          context.drawImage(result.bitmap, 0, 0);
+          const actual = context.getImageData(0, 0, 16, 16).data;
+          rows.push({
+            rotation,
+            flip,
+            changed: actual.reduce((n, value, i) => n + (value !== expected[i]), 0),
+            frameClosed: result.frameClosed,
+            time: result.time,
+          });
+          result.bitmap.close();
+        }
+      return rows;
+    } finally {
+      worker.terminate();
+    }
+  });
+  expect(rows).toHaveLength(8);
+  for (const row of rows) expect(row).toMatchObject({ changed: 0, frameClosed: true, time: 0.5 });
+});
+
 for (const profile of ["phone", "desktop"]) {
   test(`${profile}: a changing native border keeps its cut-cell support`, async ({ browser }) => {
     test.setTimeout(180000);

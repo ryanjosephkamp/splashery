@@ -118,6 +118,7 @@ for (const a of left.cases) {
   const bytes = await fs.readFile(target);
   report.cases.push({
     id: a.id,
+    title: a.title,
     author: a.author,
     license: a.license,
     licenseUrl: a.licenseUrl,

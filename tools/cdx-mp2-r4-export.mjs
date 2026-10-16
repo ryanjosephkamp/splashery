@@ -13,8 +13,21 @@ const groups = [
   ["live-r4", "work/r4-live-r4", "Round 4 live presentations"],
   ["live-pairs", "work/r4-live-pairs", "Live presentations side by side"],
 ];
+const shortTitles = {
+  quality: "Main / round 4 quality",
+  "round-3": "Round 3 / round 4 quality",
+  "live-r3": "Round 3 live",
+  "live-r4": "Round 4 live",
+  "live-pairs": "Live comparisons",
+};
 const manifest = { exportedAt: new Date().toISOString(), groups: [], ledgers: [] },
-  sections = [];
+  sections = [],
+  galleries = [];
+const escape = (value) =>
+  String(value || "").replace(
+    /[&<>\"]/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
+  );
 await fs.mkdir(out, { recursive: true });
 for (const [name, root, title] of groups) {
   const bytes = await fs.readFile(path.join(root, "manifest.json")).catch(() => null);
@@ -45,8 +58,27 @@ for (const [name, root, title] of groups) {
       throw Error(`Image exceeds 1 MB: ${file}`);
   }
   await fs.copyFile(path.join(root, "manifest.json"), path.join(folder, "manifest.json"));
+  for (const file of ["index.html", "README.md"])
+    if (await fs.stat(path.join(root, file)).catch(() => null))
+      await fs.copyFile(path.join(root, file), path.join(folder, file));
   const movies = publicFiles.filter((file) => accepted.has(file) && file.endsWith(".mp4"));
   manifest.groups.push({ directory: name, title, cases: records.length, movies });
+  galleries.push(
+    `<section id="${name}"><h2>${escape(shortTitles[name])}</h2><details><summary>Recording details</summary><p>${escape(data.note || data.protocol)}</p></details>${records
+      .map((row) => {
+        const output =
+            (row.outputs || []).find((entry) => entry.file.endsWith("side-by-side.mp4")) ||
+            row.output,
+          poster =
+            typeof row.poster === "string" ? row.poster : row.poster?.file || row.output?.poster,
+          individual = (row.outputs || []).filter(
+            (entry) => !entry.file.endsWith("side-by-side.mp4"),
+          );
+        if (!output) return "";
+        return `<article><h3>${escape(row.title || row.id)}</h3><video controls preload="none" ${poster ? `poster="${name}/${escape(poster)}"` : ""} src="${name}/${escape(output.file)}"></video><p>${individual.map((entry) => `<a href="${name}/${escape(entry.file)}">${escape(entry.file)} · 390 × 844</a>`).join(" · ")}</p><p>${escape(row.author)} · <a href="${escape(row.licenseUrl)}">${escape(row.license)}</a> · <a href="${escape(row.sourcePage)}">Source</a></p></article>`;
+      })
+      .join("\n")}</section>`,
+  );
   const posters = records.flatMap((row) => {
     const poster =
         typeof row.poster === "string" ? row.poster : row.poster?.file || row.output?.poster,
@@ -112,6 +144,10 @@ for (const file of await fs.readdir("work")) {
 }
 await fs.writeFile(path.join(out, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
 await fs.writeFile(
+  path.join(out, "index.html"),
+  `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Moving photo round 4 evidence</title><style>body{max-width:850px;margin:24px auto;padding:0 16px;font:16px/1.5 system-ui;background:#f0f3f8;color:#111827}video{width:100%;max-width:780px;height:auto}article{margin:36px 0}a{color:#1545a4}h1{font-size:28px;line-height:1.2}h2{font-size:24px}h3{font-size:20px}nav{display:flex;gap:16px;flex-wrap:wrap}</style><h1>Moving photo: round 4</h1><p>Quality clips use source timing. Live clips show captured presentations, with recording overhead. All films are silent.</p><p>390 × 844 per movie · 780 × 844 paired</p><p><a href="README.md">Notes</a> · <a href="manifest.json">Data</a> · <a href="https://github.com/ryanjosephkamp/splashery/pull/677">Draft PR #677</a></p><nav>${manifest.groups.map((group) => `<a href="#${group.directory}">${escape(shortTitles[group.directory])}</a>`).join(" ")}</nav>${galleries.join("\n")}<footer><p>Original film licenses remain attached to each rendering. Capture contributions made by Ryan with Codex (GPT-6).</p></footer></html>\n`,
+);
+await fs.writeFile(
   path.join(out, "README.md"),
   `# Moving photo to 3D: round 4 evidence\n
 Made by Ryan with Codex (GPT-6), October 16, 2026. This is the separate
@@ -119,6 +155,8 @@ Made by Ryan with Codex (GPT-6), October 16, 2026. This is the separate
 
 The implementation and honest Goal status are in [draft PR #677](https://github.com/ryanjosephkamp/splashery/pull/677),
 which replaces [round 3, PR #560](https://github.com/ryanjosephkamp/splashery/pull/560).
+
+Download this branch as a ZIP, extract it, and open [the local gallery](index.html) to play the films.
 
 Source-clock films use every original source frame and its original hold duration. They show
 picture quality, not live frame rate. Individual phone cards are 390 × 844; paired films are

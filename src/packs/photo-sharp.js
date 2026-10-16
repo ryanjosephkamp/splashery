@@ -1578,8 +1578,8 @@ function clipSampleMaps(m, w, h) {
 }
 
 // WebGL video uploads may use coded pixels rather than the display-sized
-// picture (for example, non-square pixels). Use the native display canvas
-// for those sources and for browsers without transferable decoded frames.
+// picture (for example, non-square pixels or a display transform). Use the
+// native display canvas unless an untransformed direct upload is established.
 const clipVideoModes = new WeakMap();
 function directClipVideo(video) {
   const key = `${video.currentSrc}|${video.videoWidth}|${video.videoHeight}`;
@@ -1590,6 +1590,8 @@ function directClipVideo(video) {
   try {
     frame = new VideoFrame(video);
     direct =
+      frame.rotation === 0 &&
+      frame.flip === false &&
       frame.visibleRect.width === video.videoWidth &&
       frame.visibleRect.height === video.videoHeight;
   } catch {
