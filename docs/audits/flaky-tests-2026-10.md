@@ -3,54 +3,33 @@
 Codex built this task 100 repair on `codex/flaky-tests`. Draft PR only; the raw evidence branch
 `codex/flaky-tests-clips` must never merge.
 
-**Current status, 14:01 UTC:** All ten target families have complete 30/30 stress receipts per
-variant (480 cases); all original assertions remain. Final local CDX passed still 30/30 and low
-light 30/30 with zero failures, skips, retries, or interruptions. Independent matching Actions CDX
-stress is still active. The additional PDF readiness repair passed all 11 page cases, 30/30 stressed
-repetitions, and the first fresh Actions PDF shard. Full preflight passed 271/271 browser cases and
-all six static gates on functional head `499501064b0b42e27545d61df8f5fdb660dfab71`, after main
-synchronization. **Two globally clean full runs are not yet proved:** the first fresh run has 15/16
-shards passed and one active; the second has one passed, four active, and eleven queued. Incomplete
-runs do not count as clean. The hard cutoff remains 14:06 UTC.
+The original campaign completed all ten target families at 30/30 per variant (480 Actions cases),
+including both final mirror clips at 30/30 locally and independently on Actions. Final full run 1
+passed with zero failures; run 2 had four failures outside the target list, all passing alone. **Two
+globally clean full runs were not achieved.** Both runs used functional head
+`499501064b0b42e27545d61df8f5fdb660dfab71`, before the follow-up behavior revert.
 
-Test changes observe completed native state and preserve the original assertions. Separate Engine
-commits repair collision ordering, intact-joint preservation, and focus after closing a recording
-preview. No toy behavior is redesigned.
+The Operator’s
+[review](https://github.com/ryanjosephkamp/splashery/pull/703#issuecomment-6235292612) requests
+three changes. The stress job and all dispatch inputs now live in `.github/workflows/stress.yml`;
+`tests.yml` is restored byte for byte from main. A separate revert commit removes `bbace1372`’s
+`knockable()` restriction and its associated tests. The hit-ordering fix `03334bbaa` and `ui.js`
+close-focus fix remain. Final full-run results are recorded below. The new workflow is documented in
+`docs/CI.md`. Follow-up Quartz stress passed 30/30 after the revert; all 41 source-specific cases
+and full preflight pass.
 
 Task 50 [#581](https://github.com/ryanjosephkamp/splashery/pull/581) supplied turntable shutdown and
 camera-fit readiness; an actual completed render is also necessary to refresh projection. Its
 unrelated runner and test changes were not copied.
 
-**WORKING (four-hour checkpoint, 06:06 UTC):** Seven families have current-code Actions stress
-receipts at 30/30 per variant; the earlier split WebGPU comparisons also passed 30/30 per toy, with
-current-helper WebGPU still running. The native close-focus repair is red/green proved locally, all
-13 Share tests and the existing focus-preservation test pass, and all 16 target variants pass one
-complete cross-family validation run. The new mirror wait passes both unchanged clips once; formal
-30/30 is still required. Source publication follows the audit formatting gate. Remaining work:
-mirror and Share stress proof, retained controlled repetitions, final synchronization/preflight, and
-two clean full Actions runs. The 05:28–05:50 workspace outage returned a fresh checkout; externally
-backed-up proof and prepared controls were restored.
-
-**WORKING (eight-hour checkpoint, 10:06 UTC):** Nine families have current-repair Actions stress
-receipts at 30/30 per variant (420 cases). Retained FL overflow and IMG delayed-native-sort controls
-passed 30/30; Teddy moving fit passed 40/41 before and 41/41 after. Mirror is still unresolved: the
-prior combined candidate completed still 27/30 and low light 30/30 on Actions. The new native-PNG
-and browser-task candidate passed all four existing CDX/LV7 validation cases and has now passed
-11/60 formal local stress cases, with zero failures so far. Strict PNG equivalence passed 48/48
-pairs; 211 repeated identical native model inputs produced identical raw outputs. No depth guard,
-changed fixture, tolerance, count, or retry was adopted. Two fresh full Actions runs and independent
-mirror stress are queued on immutable `18ea9fbe8`. Full preflight will run after local stress, with
-no competing burners. Remaining time: four hours, deadline 14:06 UTC. Earlier full runs on the
-superseded source were canceled and do not count.
-
 ## Verification
 
-The common recipe is 30 repetitions per variant, four fully parallel workers, two continuous CPU
-burners, and zero retries. Retained recipes include the exact commit, every source hash, browser
-version, renderer, CPU quota, command, report, and log. The container used Node 22.20.0, Chromium
-141.0.7390.37 (Playwright revision 1194), Xvfb, and Mesa llvmpipe for WebGL2; WebGPU, PHY, and
-sample-audio stress retain SwiftShader, as the checked-in workflow selects. No competing local
-browser work ran during the final cohort.
+The common stress recipe is 30 repetitions per variant, four fully parallel workers, two continuous
+CPU burners, and zero retries. Retained recipes include the exact commit, source hashes, browser,
+renderer, CPU quota, command, report, and log. Local runs use Node 22.20.0 and Chromium
+141.0.7390.37, with Xvfb and Mesa llvmpipe; WebGPU, Pebbles, and sample-audio stress use
+SwiftShader. Actions uses Node 22.23.3 and the same Chromium. No competing local browser work runs
+during formal stress cohorts.
 
 ```sh
 SPLASHERY_CHROMIUM=<Chromium-141> SPLASHERY_GL=llvmpipe DISPLAY=:91 \
@@ -60,59 +39,58 @@ SPLASHERY_CHROMIUM=<Chromium-141> SPLASHERY_GL=llvmpipe DISPLAY=:91 \
 
 | Original case   |                                                                                    Before failures / completed |                                                                                              After passes / completed | Cause and status                                                                                                                                                                                                                                                                                                                              |
 | --------------- | -------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| cdx-mir:294     |                                                       Original-wait Actions: still 3/30, low light 1/30 failed |                                             Final local: still 30/30 and low light 30/30; independent Actions pending | Native-time and current-view render readiness repair observer races. Independent cell sampling removes image-copy cadence from height measurement. Only low light increases from six to twenty observations at unchanged limits to measure actual noisy-model variation.                                                                      |
+| cdx-mir:294     |                                                       Original-wait Actions: still 3/30, low light 1/30 failed |                                                  Final local and independent Actions: still 30/30 and low light 30/30 | Native-time and current-view render readiness repair observer races. Independent cell sampling removes image-copy cadence from height measurement. Only low light increases from six to twenty observations at unchanged limits to measure actual noisy-model variation.                                                                      |
 | fl:137          |                                                            0/10 CPU stress; retained filled-buffer failure 1/1 |                                                                             30/30 Actions; filled-buffer repair 30/30 | Bounded Resource Timing loses late module entries. Complete request observation retains the original checks. The current filled-buffer repair passed 30/30 under the original controlled pressure.                                                                                                                                            |
 | hh1-toys:258    |                              0/10 CPU stress; controlled camera failures observed before workspace replacement |                                                                                                         30/30 Actions | Unfinished fit and stale projection alter the unchanged gesture. Retained moving-fit control: before 40/41 passed, after 41/41 passed; fresh projection in both phases. Factor 1.02 failed the original settled limit (0.1500 > 0.08).                                                                                                        |
 | shr:202         | Phone and desktop 0/10 plus 0/30 each; native close boundary 1/1 failed; new real-source regression 1/1 failed | Phone 30/30 and desktop 30/30 Actions on b87; native close repair 1/1; all 13 Share tests and focus preservation pass | The native dialog leaves Save focused inside the closed preview until a later frame, reproducing the historical false/false/false focus predicate. Explicitly blur only that closed-preview focus when Record is unavailable; visible Record and external focus are preserved. The earlier hidden-pill hypothesis was unproved and discarded. |
-| hh5-gems:154    |                              Target 0/100 local; 94/100 runs had unintended intact-neighbor unpins, 224 events |                                                                                  Target 30/30; zero unintended unpins | Queued impacts can undo reseating; generic impacts can free an intact joint without breaking it. Natural target failure was not reproduced. Native collision regressions reproduce both invalid transitions directly.                                                                                                                         |
+| hh5-gems:154    |                              Original target 0/100 failures; hit-ordering race reproduced by native regression |                                                          Earlier Actions 30/30; follow-up after behavior revert 30/30 | Queued impacts can undo reseating. Keep the per-substep hit-ordering fix. Revert the separate generic-impact behavior change at the Operator’s request. The historical target failure was not reproduced: original target 100/100 passed.                                                                                                     |
 | fx4-engine:79   |                                                                                                10/10 timed out |                                                                                   All three WebGPU toys 30/30 Actions | Three old/new/new comparisons shared one deadline. Each toy now retains the original 240-second deadline and all comparisons. Current-helper campaign 3 also passed all 90 cases at source 23664b6dc4e289b50ea3035346f4a8846379ff13 (artifact 12092323603).                                                                                   |
 | img-engine:85   |                                              8/10 timed out; controlled native-sort pressure 1/1 pixel failure |                                             All three toys 30/30 Actions with current helper; controlled repair 30/30 | After the camera moves, the applied worker sort can still belong to the previous view. Exact failure: 1,081 changed pixels against 220; native trace confirms the stale view. The current helper also passed 30/30 with the original delayed native-sort control.                                                                             |
 | sndc-engine:122 |                 0/10 Actions; earlier local busy-runner failures, raw lost; tighter prior observer 1/30 failed |                                                                          Final observer 30/30 local and 30/30 Actions | Require decoded sample and native clock progress. Actual tap storage timestamps acceptance. Native start precedes metadata inspection; causal controls show the old observer delayed real playback, and production delays still fail.                                                                                                         |
 | live2:207       |                                                                                                   4/10 Actions |                                                                                                         30/30 Actions | Wall-origin matching loses/misidentifies clicks as native audio progresses differently. Observe actual sample clicks and draws on native output time.                                                                                                                                                                                         |
 | phy:64          |                                                             10/10: seven camera-fit timeouts, three low stacks |                                                                                                         30/30 Actions | Turntable prevents fit settlement; stale projection sends drag rays to the wrong coordinates.                                                                                                                                                                                                                                                 |
 
-The original ten-repeat Actions baseline is
-[38997782641](https://github.com/ryanjosephkamp/splashery/actions/runs/38997782641). An initial zero
-failure rate is reported as zero; controlled causes are distinguished from natural target failures.
-The original fixed-wait mirror independently failed still 3/30 and low light 1/30 in
-[39004136389](https://github.com/ryanjosephkamp/splashery/actions/runs/39004136389). Nine repaired
-families retain 420 passing cases:
+The ten-repeat baseline is
+[38997782641](https://github.com/ryanjosephkamp/splashery/actions/runs/38997782641). Nine families’
+Actions receipts are in
 [campaign 1](https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406),
 [campaign 2](https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618),
 [current image/sort and audio campaign 3](https://github.com/ryanjosephkamp/splashery/actions/runs/39004136389),
 and [final Share stress](https://github.com/ryanjosephkamp/splashery/actions/runs/39008834947). The
-relevant paths and native-sort helper are unchanged by the subsequent mirror-only repairs. Each of
-the three split toys and both Share sizes has its own 30/30 receipt.
+final [mirror Actions run](https://github.com/ryanjosephkamp/splashery/actions/runs/39031197941)
+completed 60/60: still 30/30 and low light 30/30, zero failures, retries, skips, or interruptions.
+The matching local cohort also completed 60/60. These mirror receipts use source `9a16ae2ae`.
 
-The final clean-source local cohort completed 60/60 in 52.43 minutes, zero skips, retries, failures,
-or interruptions. Maximum height was still 0.0002954859 and low light 0.0038058014; maximum shown
-drift was 0.7366402 and 1.7447751. Maximum individual runtimes were 157.54 and 283.364 seconds,
-below the unchanged 600-second timeout. The independent
-[matching Actions stress](https://github.com/ryanjosephkamp/splashery/actions/runs/39031197941) is
-still running; its first-pass outcome will also be retained.
+Final full-suite first-pass results on `499501064`, both attempt 1:
 
-Two independent full Actions runs on functional head `9a16ae2ae`, attempt 1, completed all 398/398
-files with **3407 passed, one failed, and one existing skip each**:
-[run 1](https://github.com/ryanjosephkamp/splashery/actions/runs/39031193271),
-[run 2](https://github.com/ryanjosephkamp/splashery/actions/runs/39031195607). **Neither has a
-failure from the ten-test list. Neither is globally clean.** Both fail only `pages-r2:495`, which
-also fails alone. The existing skip is `cdx-v3d-calibration:217`, whose private counterexample
-fixture is absent; it is outside this task and unchanged.
+| Run                                                                                 |   Files | Passed | Failed | Existing skip | Result                                    |
+| ----------------------------------------------------------------------------------- | ------: | -----: | -----: | ------------: | ----------------------------------------- |
+| [39036877114](https://github.com/ryanjosephkamp/splashery/actions/runs/39036877114) | 398/398 |   3408 |      0 |             1 | Checks, all 16 shards, and Summary passed |
+| [39036878610](https://github.com/ryanjosephkamp/splashery/actions/runs/39036878610) | 398/398 |   3404 |      4 |             1 | Four first-pass failures; Summary failed  |
 
-The fresh full runs after the PDF repair are
-[39036877114](https://github.com/ryanjosephkamp/splashery/actions/runs/39036877114) and
-[39036878610](https://github.com/ryanjosephkamp/splashery/actions/runs/39036878610), both on
-`499501064b0b42e27545d61df8f5fdb660dfab71`. At the 14:01 UTC audit snapshot, they remain incomplete
-as detailed in Known issues. Their first-pass outcomes will not be replaced by rechecks.
+Run 2 failed `cdx-a11y:196`, `chs-engine:11`, `hh5-animals:182`, and `lv7:393`. Each passed alone;
+all four failures still count. The final report includes `chs-engine:11` in addition to the three
+named in the Operator’s comment. Neither full run failed a test from the ten-family target list. The
+one existing skip is `cdx-v3d-calibration:217`, whose private counterexample fixture is absent; it
+is unchanged and outside the target list. No failed-job rerun is counted as a clean run.
 
-Main `69cd6c99326e63873bb0facf82ef75d9d75d18c0` was fetched and merged again at 13:30 UTC (already
-up to date). **Full preflight then passed on functional head
-`499501064b0b42e27545d61df8f5fdb660dfab71`: 271/271 browser cases and all six static gates.** The
-earlier full 271-case pass on `9a16ae2ae` is also retained. No quick mode:
-`SPLASHERY_CHROMIUM=<Chromium-141> SPLASHERY_GL=llvmpipe DISPLAY=:91 node tools/preflight.mjs`, on
-standard port 4173. Subsequent audit-only updates leave all runtime, test, and runner bytes
-unchanged. `tests/taps.spec.mjs` is untouched. PHY left the known list only after its 30/30 stress
-receipt and full six-case local file passed.
+Earlier full runs
+[39031193271](https://github.com/ryanjosephkamp/splashery/actions/runs/39031193271) and
+[39031195607](https://github.com/ryanjosephkamp/splashery/actions/runs/39031195607) each completed
+398/398 files with 3407 passed, one failed, and one existing skip. Both failed `pages-r2:495`, also
+alone and on then-current main. Native traces showed a real PDF raster upgrade between comparison
+captures. A strict wait for the desired raster level, preserving every capture, assertion, and
+timeout, passed the full 11-case file and 30/30 stressed WebGL2 repetitions. Neither earlier full
+run is globally clean.
+
+Full preflight on `499501064`, after merging main `69cd6c993`, passed 271/271 browser cases and all
+six static gates. Follow-up main `c36c4dcd9` is merged with a new merge commit; the new full
+preflight on `a9a1bca4f` passed 271/271 browser cases and all six static gates, without quick mode.
+Source-specific validation passed 41/41 across `heb-engine`, `hh5-gems`, `shr`, and `rec1`, zero
+failures, retries, or skips. The unchanged runtime/test source is `c7f553ac8`;
+workflow/documentation follow-up is `a9a1bca4f`. Stress YAML parses, all five dispatch inputs are
+retained, `tests.yml` matches main byte for byte, and receipt generation without a PR number
+succeeds. The new workflow has not yet run on Actions. `tests/taps.spec.mjs` is untouched.
 
 Causal and preservation evidence:
 
@@ -125,11 +103,11 @@ Causal and preservation evidence:
   original complete focus predicate failed at that actual boundary; the new real-source regression
   failed before and passed after. All 13 Share cases and the separate existing focus-preservation
   control pass. Visible Record and external focus are preserved.
-- Quartz: native engine regressions reproduce impact draining after rather than before constraint
-  stepping, and an intact pinned neighbor being freed by a generic impact. Repaired stress has zero
-  invalid frees. All 17 native Hands engine B regressions and all five browser gem cases pass.
-  Ordinary impacts, projectile contacts, socket behavior, and configured parent breaks remain
-  covered.
+- Quartz: the retained native regression reproduces an earlier queued collision unpinning a joint
+  after reseating. Impacts now drain before constraint stepping within each fixed substep. The
+  generic-impact `knockable()` restriction and its tests are reverted in a separate commit; public
+  impact behavior is restored. Historical intact-neighbor observations are not evidence that this
+  reverted behavior belongs in the flake repair.
 - FX/IMG: each old/new/new comparison retains the 240-second timeout. Every one of 1,316,640 RGBA
   bytes survives lossless transport; the original comparison hash matched. A real delayed native
   sort caused 1,081 changed pixels against the original 220 limit; current-view native sort
@@ -150,21 +128,12 @@ Causal and preservation evidence:
   source-camera sampling cadence.
 
 The mirror still clip keeps six observations and twelve PNGs; only low light increases to twenty
-observations and forty PNGs. All observations enter the unchanged median calculation. Height limits
-remain 0.00055/0.0135, shown-drift limits 0.95/2.2, timeout 600000 ms, and the original 20-frame
-noise fixture and camera motions remain. A twenty-observation real-motion control measured height
-0.0354118 and shown drift 25.3967, exceeding both original clips' limits. Four low-light controls
-completed in 246–264 seconds under the same load; none of their six-observation windows reproduced
-the rare failure, and one complete median increased, so these controls are runtime/fault-detection
-evidence, not causal reproduction or acceptance.
-
-The PDF comparison crosses a real raster upgrade: a coarse 128-pixel raster remains shown while the
-final 256/362-pixel level is pending. The old shown/want key check passes before the desired-level
-upgrade begins. Captures cross that real upgrade, causing pixel differences of 19.1568; native-sort
-readiness alone still fails at 27.3098. Waiting until the actual desired raster is shown and retired
-sheets are gone gives mean zero. Both original expectations, every original capture, and the
-original test timeout remain. The full 11-case file passed, then its original WebGL2 case passed
-30/30 under four workers and two burners, zero retries/skips/failures.
+observations and forty PNGs. All observations enter the unchanged median. Height limits remain
+0.00055/0.0135, shown-drift limits 0.95/2.2, and timeout 600000 ms. The original 20-frame noise
+fixture and camera motions remain. Strict native-canvas/screenshot equivalence passed all RGBA bytes
+and dimensions in 48/48 pairs. A twenty-observation real-motion control measured height 0.0354118
+and shown drift 25.3967, exceeding both original clips’ limits. Four runtime controls passed without
+reproducing the rare failure; these are not causal red/green proof.
 
 Every changed existing expect line: `tests/fl.spec.mjs` 139, 142, and 145 (original 141, 144,
 and 147) replace `expect(await fluidFiles(page)).toEqual([])` with
@@ -175,92 +144,58 @@ Resource Timing, and the empty-list matcher is identical. `tests/fx4-engine.spec
 low-light observation count increases rather than decreases. Added Engine and Share expect lines are
 strict regressions and preservation controls.
 
-[Published raw evidence](https://github.com/ryanjosephkamp/splashery/tree/a8748288dd36df667d2fabc036f9819cc7687044/docs/audits/flaky-tests-raw)
-is pinned at `a8748288dd36df667d2fabc036f9819cc7687044`. Final local mirror is in
-`cdx-final-low20-1225`; both original full runs and current-main PDF excerpts are in
-`actions-final-full-9a16`; the PDF native controls and 30-repeat proof are in the three named PDF
-directories. Complete preflight logs and the generated PNGs with hashes are retained, including the
-latest 27 PNGs in `preflight-after-pdf-1331`. This evidence branch must never merge.
+Raw evidence is retained on
+[`codex/flaky-tests-clips`](https://github.com/ryanjosephkamp/splashery/tree/d631648f0544f5c0503ab2dd9dfca228cfb1fc9f/docs/audits/flaky-tests-raw).
+It includes failed candidates, complete reports, recipes, native controls, traces, preflight logs,
+and generated screenshots with hashes. The final mirror Actions artifact, final full summaries, and
+all four failed-shard artifacts are retained during this follow-up, with original ZIP hashes
+verified against GitHub’s digests. This branch must never merge.
 
 ## Deviations
 
-Both requested full runs also exposed a pre-existing PDF raster race. Scope includes its test-only
-readiness repair so complete full runs can pass; the original first-pass failures remain retained.
-Read-only native traces showed the coarse 128-pixel raster replaced between the comparison captures
-(256/362 pixels), with camera and native sort already stable. A strict desired-level state wait
-fixes this without changing any existing assertion, capture, or timeout. Since the command-line
-Actions credential expired, two explicit PR labels requested fresh full runs; label-triggered
-receipts now have unique concurrency groups just like manual dispatches. The temporary full-suite
-label was removed after both matrices registered, preventing audit-only pushes from starting more
-full runs.
+The original 12-hour campaign stopped at 14:06 UTC while the full runs were incomplete. This
+follow-up implements the Operator’s review and records their completed first-pass results; it does
+not restart an open-ended effort to fix unrelated failures. The extra PDF readiness repair is a
+test-only change supported by original/current-main failures and native raster state.
 
-The first final preflight used my nonstandard port 4217. Two existing viewer tests hardcode PDF
-fixtures on 4173, where no server was listening: 269 passed and both fixture fetches failed.
-Restoring the standard port without any source or assertion change made the complete preflight pass
-271/271. The original log and setup are retained; screenshots/traces were removed by Playwright's
-next-run cleanup and are not claimed. The passing run generated 25 tracked documentation PNGs; their
-exact bytes and hashes were retained, then the tracked outputs were restored before the clean stress
-subject started.
+Historical four-hour checkpoint (06:06 UTC): seven current-code families had complete stress
+receipts, the native close-focus repair had local red/green proof, and mirror/Share stress and
+full-run proof remained. Historical eight-hour checkpoint (10:06 UTC): nine families had complete
+receipts; mirror remained unresolved after the combined candidate failed still 3/30. These
+checkpoints are historical, not current status.
 
-Earlier mirror candidates and their full/stress dispatches were superseded after observed failures.
-Their failures remain evidence; canceled or partial full runs do not count. One stress dispatch used
-an abbreviated SHA and failed checkout before any test; it is a setup failure, not a completed
-repetition. Manual full-suite dispatches now have independent concurrency groups, preserving
-automatic PR cancellation behavior and allowing the two requested measurements to finish
-independently. Existing CI rechecks still run, but first-pass failures remain failures in this
-report; no failed-job rerun or target retry is used.
-
-The workspace returned as a fresh checkout three times, around 03:25, 03:43, and 05:28–05:50 UTC.
-Published source and Actions artifacts survived. Lost receipts do not count; completed evidence and
-controls were restored from verified external backups. Temporary Git transport and email-privacy
-failures required official GitHub API publication of identical verified trees with expected-head
-checks. Native refs were then aligned to those exact published commits; no force update or rewritten
-history occurred.
-
-One early audio follow-up `c8ae05ed1` was published before repeating the required whole-repository
-formatting gate. Both whole-repository Prettier and American English checks then passed before
-further publication. The raw branch's complete immutable diff exceeded the English checker's 64 MB
-subprocess buffer; the identical checker and full diff passed with a temporary preload raising only
-that buffer to 256 MB. No rule or input line was excluded, and the preload is not shipped.
+The first final preflight used port 4217, while two existing viewer cases hardcode fixtures on 4173.
+It passed 269 and failed both fetches. Restoring standard port 4173, without source or assertion
+changes, passed all 271. Its original log is retained; traces lost to Playwright cleanup are not
+claimed. Three workspace resets lost some earlier receipts; lost evidence never counts. One early
+audio commit preceded the whole-repository formatting gate; both checks passed before further
+publication. Raw diff size required a temporary English-check preload raising only the subprocess
+buffer to 256 MB; no lines were excluded and that preload is not shipped.
 
 ## Known issues
 
-| Case                   | Cause and evidence                                                                                                                                                                                                                                                              | Remaining work                                                                                                                     |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Independent CDX check  | Local final stress passed both clips 30/30. Matching Actions stress on the same head remains running.                                                                                                                                                                           | Inspect the complete independent first-pass result before final handback.                                                          |
-| Fresh full-suite proof | On 499501064, first run 39036877114 has 15/16 shards passed and one active; second run 39036878610 has one passed, four active, and eleven queued at 14:01 UTC. No completed shard failed. The earlier PDF failure is repaired, with 11/11 full-file and 30/30 stressed passes. | Both full first-pass runs must finish clean. Unstarted and running shards are unproved; runner queues may exceed the 14:06 cutoff. |
-
-Related native checks passed 52/53 under competing load. The unrelated SoftParts 1 ms benchmark
-measured 1.086 ms; its unchanged isolated check then measured 0.410 ms. That first failure remains
-recorded and does not substitute for any target receipt.
-
-Quartz's historical final-target failure was not reproduced: original target 100/100 passed. The
-same native run recorded 224 invalid intact-neighbor frees in 94/100 cases; repaired target 30/30
-had zero such events. Native regressions reproduce both invalid transitions directly. A supplemental
-projectile fixture failed its added contact qualification in both phases and never reached the
-original final assertion; it is inconclusive and does not count as reproduction.
-
-All failed mirror candidates remain retained: original-wait Actions still 27/30 and low 29/30;
-native-time-only Actions still 28/30 and low 30/30; combined held-frame Actions still 27/30 and low
-30/30; direct protocol/batching local still 16/18 and low 18/18 with three interrupted and 21
-unstarted; native-canvas sequential local still 7/8 and low 8/8 with four interrupted and 40
-unstarted; independent-cadence six-observation cohort completed still 30/30 and low 29/30, zero
-skips/retries/interruptions, with low height 0.0162116086 > 0.0135. These are failed candidates,
-never replacement green receipts.
-
-Native pipeline tracing found actual input-noise sensitivity, not nondeterministic output or a
-pending-vote race: 211 repeated byte-identical inputs produced identical raw outputs; ten coarse
-changes all had a still mask of 1 and a completed three-answer vote. RGB changed about 4.3 levels on
-average (maximum 27–30), raw depth by up to 0.95–1.16, and native history was already 6–13 seconds
-old. Sixty-five complete large fine-change chains began with actual coarse transitions; zero
-pending-vote target mutations were observed. A longer noise fixture failed all four still cases and
-was rejected.
+- Two globally clean full runs are not proved. Run 1 is clean apart from the pre-existing skip; run
+  2 has the four unrelated failures listed above. Passing-alone rechecks do not erase them.
+- Quartz’s historical final-target failure was not reproduced: the original passed 100/100. The
+  `knockable()` behavior change is reverted at the Operator’s request. Earlier 30/30 Actions proof
+  predates this revert; follow-up local stress on the restored behavior passed 30/30, zero failures,
+  retries, skips, or interruptions.
+- All failed mirror candidates remain retained, including the complete six-observation cohort (still
+  30/30, low light 29/30; low height 0.0162116086 > 0.0135). Native tracing found input-noise
+  sensitivity: 211 identical inputs gave identical raw outputs, ten coarse changes all completed
+  their three-answer vote, and 65 fine-change chains began with actual coarse transitions. No
+  pending-vote target mutation was observed. A longer noise fixture failed and was rejected.
+- A related native check previously passed 52/53 under competing load: an unrelated 1 ms SoftParts
+  benchmark measured 1.086 ms, then 0.410 ms alone. Its first failure remains recorded.
 
 ## What was cut
 
-No wider tolerance, smaller count, skipped step, quarantined test, increased timeout, retry,
-production depth guard, stronger smoothing, changed noise fixture, or toy redesign was adopted. No
-test was removed. The rejected longer fixture, speculative current-mask/color-only guards, and extra
-CDP session are excluded. All source-camera data and rendered PNG comparisons remain measured.
+The public-toy generic-impact restriction from `bbace1372` and its associated added tests are
+removed by an explicit new revert commit. Any future proposal to change that behavior belongs in a
+separate owner-reviewed Engine PR with clips. The hit-ordering regression remains.
+
+No target assertion is loosened, no target count is lowered, and no target test is removed,
+quarantined, skipped, or retried. No production depth guard, stronger smoothing, changed noise
+fixture, extra CDP session, or increased timeout is adopted.
 
 Rule check: none.
