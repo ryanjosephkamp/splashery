@@ -1,0 +1,9 @@
+{
+  "supersededRun": 39006478861,
+  "codeCommit": "ada669442de8635063007aaa795693bb556629f4",
+  "reason": "Main advanced with the neuron tool and Photo to 3D research. It was merged normally; panorama runtime and captured source identities are unchanged. The partial old run was canceled to release runners.",
+  "duplicateManualRun": 39007535520,
+  "duplicateReason": "The normal pull-request workflow appeared after manual dispatch; the duplicate was canceled.",
+  "retainedFinalRun": 39007527856,
+  "retainedCodeCommit": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62"
+}

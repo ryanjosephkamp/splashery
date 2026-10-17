@@ -1,6 +1,6 @@
 {
-  "mainCommit": "321a7da7a9639ef462748238dba4e9fe2a1f8d29",
-  "taskCommit": "ada669442de8635063007aaa795693bb556629f4",
+  "mainCommit": "aedbe443373d60b2fd0d041e25b1c46d6d5fcd33",
+  "taskCommit": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
   "paths": [
     "src/photo3d",
     "src/depth",
@@ -18,7 +18,7 @@
     "tests",
     "tools/p3d-golden.mjs"
   ],
-  "fileCount": 1635,
+  "fileCount": 1646,
   "allEqual": true,
   "files": [
     {
@@ -514,6 +514,12 @@
       "equal": true
     },
     {
+      "path": "src/packs/neuron.js",
+      "main": "5542a15966046eb60891064c24ae0639c1525e22",
+      "branch": "5542a15966046eb60891064c24ae0639c1525e22",
+      "equal": true
+    },
+    {
       "path": "src/packs/night-sky.js",
       "main": "8f077afa9d194f658f18cecb27267849dbe78013",
       "branch": "8f077afa9d194f658f18cecb27267849dbe78013",
@@ -859,6 +865,18 @@
       "path": "src/photo3d/input-warning.js",
       "main": "9caeb15e1f3230d42ae77f0e5f4d756314974c7d",
       "branch": "9caeb15e1f3230d42ae77f0e5f4d756314974c7d",
+      "equal": true
+    },
+    {
+      "path": "src/photo3d/next/clean-color.js",
+      "main": "7d297c7d6354c8aae004c969f4f430ff315ff471",
+      "branch": "7d297c7d6354c8aae004c969f4f430ff315ff471",
+      "equal": true
+    },
+    {
+      "path": "src/photo3d/next/patchmatch.js",
+      "main": "1ddb32f55c82246aa687cc21c15221a393ac4b5c",
+      "branch": "1ddb32f55c82246aa687cc21c15221a393ac4b5c",
       "equal": true
     },
     {
@@ -1405,6 +1423,12 @@
       "path": "tests/cdx-pfa.spec.mjs",
       "main": "b96f31baa8c4234c36e1bdad41d46739a3270d8d",
       "branch": "b96f31baa8c4234c36e1bdad41d46739a3270d8d",
+      "equal": true
+    },
+    {
+      "path": "tests/cdx-pfb.spec.mjs",
+      "main": "315ccab0f4e025c44970a89325dc4e99edb1b7ad",
+      "branch": "315ccab0f4e025c44970a89325dc4e99edb1b7ad",
       "equal": true
     },
     {
@@ -3502,6 +3526,12 @@
       "equal": true
     },
     {
+      "path": "tests/nr1.spec.mjs",
+      "main": "8157f97dd7a73cef0a173ad35c6c049f01188ca0",
+      "branch": "8157f97dd7a73cef0a173ad35c6c049f01188ca0",
+      "equal": true
+    },
+    {
       "path": "tests/opm.spec.mjs",
       "main": "0f54af62e382d2fdd0c78c0484fb226f45aca75a",
       "branch": "0f54af62e382d2fdd0c78c0484fb226f45aca75a",
@@ -3535,6 +3565,18 @@
       "path": "tests/p3d-golden.spec.mjs",
       "main": "0970599e12354f490debddf5459ecaccfc428b97",
       "branch": "0970599e12354f490debddf5459ecaccfc428b97",
+      "equal": true
+    },
+    {
+      "path": "tests/p3d-next-camera.py",
+      "main": "ee5a2e37b5ce9ed1cbf8ec067241dc59fa5bbe3f",
+      "branch": "ee5a2e37b5ce9ed1cbf8ec067241dc59fa5bbe3f",
+      "equal": true
+    },
+    {
+      "path": "tests/p3d-next-method.spec.mjs",
+      "main": "78d585efca90c109b7acbc88d5516babfc423b5f",
+      "branch": "78d585efca90c109b7acbc88d5516babfc423b5f",
       "equal": true
     },
     {
@@ -4633,6 +4675,18 @@
       "path": "tests/screenshots/cdx-pfa-one-splat-390x844.png",
       "main": "bbc610125d50f4a723ba0c0feeec82c9d3489cdc",
       "branch": "bbc610125d50f4a723ba0c0feeec82c9d3489cdc",
+      "equal": true
+    },
+    {
+      "path": "tests/screenshots/cdx-pfb-neuron-1440x900.png",
+      "main": "2e22387755cb7ef77d6e138242b63920e377240a",
+      "branch": "2e22387755cb7ef77d6e138242b63920e377240a",
+      "equal": true
+    },
+    {
+      "path": "tests/screenshots/cdx-pfb-neuron-390x844.png",
+      "main": "c95e1e566769003253d3419f6620bf17f63b2d16",
+      "branch": "c95e1e566769003253d3419f6620bf17f63b2d16",
       "equal": true
     },
     {
@@ -7213,6 +7267,18 @@
       "path": "tests/screenshots/nature-390x844.png",
       "main": "95745d487acf34c22438fcb4e30e708c6e82fcce",
       "branch": "95745d487acf34c22438fcb4e30e708c6e82fcce",
+      "equal": true
+    },
+    {
+      "path": "tests/screenshots/nr1-neuron-1440x900.png",
+      "main": "a5c73371b7e1c937ad2ea18c201f923a3a8cbb3d",
+      "branch": "a5c73371b7e1c937ad2ea18c201f923a3a8cbb3d",
+      "equal": true
+    },
+    {
+      "path": "tests/screenshots/nr1-neuron-390x844.png",
+      "main": "0bfc3192bc9d8a568e19a93668d07efbd83dcc1c",
+      "branch": "0bfc3192bc9d8a568e19a93668d07efbd83dcc1c",
       "equal": true
     },
     {
