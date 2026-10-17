@@ -1,0 +1,161 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/playwright.config.mjs",
+    "rootDir": "/workspace/splashery/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/hh5/guard-before-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/hh5/guard-before-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4181",
+      "url": "http://127.0.0.1:4181/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "heb-engine.spec.mjs",
+      "file": "heb-engine.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "impacts: an intact break joint holds fast without an opt-in impact break",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 30,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /workspace/splashery/tests/heb-engine.spec.mjs:341:24",
+                    "location": {
+                      "file": "/workspace/splashery/tests/heb-engine.spec.mjs",
+                      "column": 24,
+                      "line": 341
+                    },
+                    "snippet": "  339 |   expect(hits.some((speed) => speed > 2.5)).toBe(true);\n  340 |   expect(s.j().broken).toBe(false);\n> 341 |   expect(s.j().pinned).toBe(true);\n      |                        ^\n  342 |   expect(s.j().pos).toEqual(s.j().home);\n  343 | });\n  344 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/splashery/tests/heb-engine.spec.mjs",
+                        "column": 24,
+                        "line": 341
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  339 |   expect(hits.some((speed) => speed > 2.5)).toBe(true);\n  340 |   expect(s.j().broken).toBe(false);\n> 341 |   expect(s.j().pinned).toBe(true);\n      |                        ^\n  342 |   expect(s.j().pos).toEqual(s.j().home);\n  343 | });\n  344 |\n    at /workspace/splashery/tests/heb-engine.spec.mjs:341:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:34:43.051Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/guard-before-results/heb-engine-impacts-an-inta-29b4a-hout-an-opt-in-impact-break-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/splashery/tests/heb-engine.spec.mjs",
+                    "column": 24,
+                    "line": 341
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d53e81cca93d190a4a5d-b08218aaa9f939f5fa71",
+          "file": "heb-engine.spec.mjs",
+          "line": 327,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T03:34:42.214Z",
+    "duration": 907.8749999999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

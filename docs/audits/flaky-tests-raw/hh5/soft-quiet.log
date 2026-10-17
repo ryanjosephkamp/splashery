@@ -1,0 +1,13 @@
+[2m[WebServer] [22m(node:703) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:714) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:714) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+soft step: 0.410 ms (84 nodes, 10 substeps)
+  ✓  1 [chromium] › tests/hec-engine.spec.mjs:317:1 › soft parts are cheap: eight arms and a cloth step in well under a millisecond (221ms)
+
+  1 passed (4.6s)

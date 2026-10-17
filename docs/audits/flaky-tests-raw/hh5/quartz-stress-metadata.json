@@ -1,0 +1,43 @@
+{
+  "baseline_commit": "ceb51de7a015377d7f350119c27a792fc1a8a66d",
+  "engine_commit": "06ff66ff2",
+  "repeats_each_phase": 10,
+  "workers": 4,
+  "fully_parallel": true,
+  "burner_threads": 2,
+  "renderer": "Mesa llvmpipe",
+  "display": ":91",
+  "port": 4181,
+  "node": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+  "chromium": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+  "cpu_max": "400000 100000",
+  "cpuset": "0-4",
+  "source_sha256": {
+    "hands-on-before.js": "9752d2b6a47b72ee12b9ac3492ccfd3fc254a20abad8269c69cc158cf5b616f7",
+    "quartz-probe.spec.mjs": "8c909782bb632e0444d831452c3f86b9a9ea4abbed31272843cb303ebd848dbe",
+    "hands-on-after.js": "85e21029d2c3f5d80a550f285446c2fbedfb715fad0bee605c3f39b8ce11d000",
+    "playwright.config.mjs": "f3c38e197958c365812ab6cc4b680b1e51f05e9944c6afbd39e061eb92fd025a",
+    "original-hh5-gems.spec.mjs": "622c218da460a8c6c221ccedc9d1251048071eec7de6fe7aea97730567674e33",
+    "transition-recorder.js": "15387a63477384e8d1eec137128a4a6a04bd7c40dc010beca49bb97b94420f70",
+    "cpu-burner.mjs": "0d03679728f534cdf2bc32d1edef55370dd02298e07a010805cdec5608994a9d"
+  },
+  "changed_expect_expressions": [],
+  "route_override": "Only /src/physics/hands-on.js. Before and after both route frozen source snapshots; all other files current checkout.",
+  "status": "Both initial phases completed; no target failure; generic intact-joint knock investigation pending",
+  "before_start_utc": "2026-10-17T03:32:16.413179+00:00",
+  "burner_pid": 2461,
+  "before_completed_utc": "2026-10-17T03:33:10.510918+00:00",
+  "after_start_utc": "2026-10-17T03:33:10.510918+00:00",
+  "before_counts": {
+    "completed": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "after_completed_utc": "2026-10-17T03:34:16.345718+00:00",
+  "after_counts": {
+    "completed": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "burners_stopped_utc": "2026-10-17T03:34:16.345718+00:00"
+}

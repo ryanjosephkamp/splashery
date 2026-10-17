@@ -1,0 +1,30 @@
+{
+  "baseline_commit": "ceb51de7a015377d7f350119c27a792fc1a8a66d",
+  "final_engine_commit": "b39017fd8",
+  "workers": 4,
+  "fully_parallel": true,
+  "baseline_repeats": 100,
+  "final_repeats": 30,
+  "burner_threads": 2,
+  "renderer": "Mesa llvmpipe",
+  "display": ":91",
+  "port": 4181,
+  "node": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+  "chromium": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+  "cpu_max": "400000 100000",
+  "cpuset": "0-4",
+  "source_sha256": {
+    "hands-on-before.js": "9752d2b6a47b72ee12b9ac3492ccfd3fc254a20abad8269c69cc158cf5b616f7",
+    "quartz-probe.spec.mjs": "8c909782bb632e0444d831452c3f86b9a9ea4abbed31272843cb303ebd848dbe",
+    "playwright.config.mjs": "f3c38e197958c365812ab6cc4b680b1e51f05e9944c6afbd39e061eb92fd025a",
+    "original-hh5-gems.spec.mjs": "622c218da460a8c6c221ccedc9d1251048071eec7de6fe7aea97730567674e33",
+    "transition-recorder.js": "15387a63477384e8d1eec137128a4a6a04bd7c40dc010beca49bb97b94420f70",
+    "hands-on-final.js": "d86ed907500973f76a8d4c0603e13e15b4ea9d835c76da75b71c23464b3ddfc5",
+    "cpu-burner.mjs": "0d03679728f534cdf2bc32d1edef55370dd02298e07a010805cdec5608994a9d"
+  },
+  "changed_original_expect_expressions": [],
+  "status": "Prepared; waiting for root browser release",
+  "route_override": "Only /src/physics/hands-on.js. Before and final both route frozen source snapshots; all other files current checkout.",
+  "published_engine_commit": "bbace1372c24fe6bf4d69dc3cdefef2a129d39ca",
+  "restoration": "Raw initial phases restored from persistent compressed backups; all source/probe hashes rechecked against original metadata after terminal newline normalization."
+}

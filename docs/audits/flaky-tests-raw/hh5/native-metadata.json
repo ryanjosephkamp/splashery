@@ -1,0 +1,15 @@
+{
+  "immutable_source_commit": "ceb51de7a015377d7f350119c27a792fc1a8a66d",
+  "node": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+  "workers": 1,
+  "browser_fixtures_used": false,
+  "before": "native-before.json",
+  "after": "native-after.json",
+  "related": "native-related.json",
+  "engine_change": "Drain native collision hits once per fixed world step, before joints can pin or reseat bodies, instead of after the complete frame.",
+  "source_sha256": {
+    "src/physics/hands-on.js": "85e21029d2c3f5d80a550f285446c2fbedfb715fad0bee605c3f39b8ce11d000",
+    "tests/heb-engine.spec.mjs": "14a381f24b94c63604765d21c6de24d7d0e67bf4cb3a4d298a514dba13101b24"
+  },
+  "limitations": "Native regression proves queued collision vs reseat ordering. Original quartz historical state matches, but actual quartz transition and stress before/after remain unverified."
+}

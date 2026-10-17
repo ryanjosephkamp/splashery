@@ -1,0 +1,16 @@
+[2m[WebServer] [22m(node:6263) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:6274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/hh5-gems.spec.mjs:76:1 › amethyst geode: the front half swings shut and open by hand, and stays (7.6s)
+  ✓  2 [chromium] › tests/hh5-gems.spec.mjs:95:1 › pearl: lifted out, it rests in its shell or on the table, never through the shell; brought back, it clicks in (7.8s)
+  ✓  3 [chromium] › tests/hh5-gems.spec.mjs:119:1 › crystal ball: lifted off its stand, it rolls off the stand's base onto the table; brought back, it settles in its cup (7.8s)
+  ✓  4 [chromium] › tests/hh5-gems.spec.mjs:154:1 › quartz cluster: a big point snaps off the rock, rests, and clicks back into its place (7.5s)
+  ✓  5 [chromium] › tests/hh5-gems.spec.mjs:181:1 › screenshots: the pearl, hands-on (13.9s)
+
+  5 passed (45.7s)

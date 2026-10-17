@@ -1,0 +1,96 @@
+[2m[WebServer] [22m(node:5914) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 53 tests using 1 worker
+
+(node:5925) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5925) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/hea-engine.spec.mjs:51:1 › materials: each ball bounces like the real one (29ms)
+  ✓   2 [chromium] › tests/hea-engine.spec.mjs:67:1 › materials: a beach ball floats down; a basketball drops (8ms)
+  ✓   3 [chromium] › tests/hea-engine.spec.mjs:91:1 › materials: a spin curves a baseball; backspin holds a golf ball up (13ms)
+  ✓   4 [chromium] › tests/hea-engine.spec.mjs:113:1 › materials: rolling resistance: a pool ball rolls far, a medicine ball stops (34ms)
+  ✓   5 [chromium] › tests/hea-engine.spec.mjs:127:1 › materials: a ball twisting on the spot stops within two seconds, and sleeps (14ms)
+  ✓   6 [chromium] › tests/hea-engine.spec.mjs:142:1 › materials: a shuttlecock flips and falls cork first (9ms)
+  ✓   7 [chromium] › tests/hea-engine.spec.mjs:157:1 › materials: a spinning flying disc glides further than a dropped one (65ms)
+  ✓   8 [chromium] › tests/hea-engine.spec.mjs:181:1 › water: a ball floats as deep as its density says, and its bob dies away (10ms)
+  ✓   9 [chromium] › tests/hea-engine.spec.mjs:214:1 › water: a boat tipped over rights itself; one pushed under bobs back up (100ms)
+  ✓  10 [chromium] › tests/hea-engine.spec.mjs:244:1 › air: a hot-air balloon pulled down floats back to where it hovered (14ms)
+  ✓  11 [chromium] › tests/hea-engine.spec.mjs:263:1 › wells: a thrown body orbits a well, and one inside its capture is swallowed (16ms)
+  ✓  12 [chromium] › tests/hea-engine.spec.mjs:296:1 › wheels: pushed along, a car rolls on; pushed side-on, it doesn't slide (73ms)
+  ✓  13 [chromium] › tests/hea-engine.spec.mjs:316:1 › shake: a quick back-and-forth fires; a slow or straight drag doesn't (7ms)
+  ✓  14 [chromium] › tests/hea-engine.spec.mjs:336:1 › flee: things near the finger's line dart away, and come back after (6ms)
+  ✓  15 [chromium] › tests/hea-engine.spec.mjs:352:1 › a kit toy posed whole keeps its turning parts and tokens on it (3ms)
+  ✓  16 [chromium] › tests/heb-engine.spec.mjs:62:1 › hinge: a lid swings up after the finger, falls shut by its weight, stays open past upright (15ms)
+  ✓  17 [chromium] › tests/heb-engine.spec.mjs:94:1 › hinge: a part shown open by its controls starts open, and ↺ brings it back open (5ms)
+  ✓  18 [chromium] › tests/heb-engine.spec.mjs:108:1 › hinge: a spring brings it home, and the stops hold (4ms)
+  ✓  19 [chromium] › tests/heb-engine.spec.mjs:118:1 › slider: stuck until pulled, slides between its stops, friction holds it (5ms)
+  ✓  20 [chromium] › tests/heb-engine.spec.mjs:140:1 › slider: without friction it slides back down under its weight (2ms)
+  ✓  21 [chromium] › tests/heb-engine.spec.mjs:149:1 › dial: turned around and around, it coasts after a flick and settles on a click (10ms)
+  ✓  22 [chromium] › tests/heb-engine.spec.mjs:178:1 › socket: a piece taken out clicks back into its place when brought close (55ms)
+  ✓  23 [chromium] › tests/heb-engine.spec.mjs:197:1 › break: holds and bends a little, snaps off when pulled hard, ↺ mends it (37ms)
+  ✓  24 [chromium] › tests/heb-engine.spec.mjs:222:1 › break: a piece on a loose piece rides along, and a hard landing knocks it off (171ms)
+  ✓  25 [chromium] › tests/heb-engine.spec.mjs:242:1 › parents: a part on a hinged part rides with it (a lamp's arms) (3ms)
+  ✓  26 [chromium] › tests/heb-engine.spec.mjs:258:1 › upright: a whole toy rights itself after a tip, keeping its turn (32ms)
+  ✓  27 [chromium] › tests/heb-engine.spec.mjs:269:1 › swap: a piece off its place shows its kit-built stand-in and a fill; home, the scan's own (14ms)
+  ✓  28 [chromium] › tests/heb-engine.spec.mjs:286:1 › toys without joints have none (1ms)
+  ✓  29 [chromium] › tests/heb-engine.spec.mjs:291:1 › reseating: an earlier loose-body collision cannot unpin the repaired joint (5ms)
+  ✓  30 [chromium] › tests/heb-engine.spec.mjs:318:1 › impacts: a moving piece still knocks a previously pinned piece loose (6ms)
+  ✓  31 [chromium] › tests/heb-engine.spec.mjs:327:1 › impacts: an intact break joint holds fast without an opt-in impact break (6ms)
+  ✓  32 [chromium] › tests/heb-engine.spec.mjs:345:1 › impacts: an ordinary socket can still be knocked out of its place (6ms)
+  ✓  33 [chromium] › tests/hec-engine.spec.mjs:38:1 › a rope built sideways falls and hangs straight down from its pin, keeping its length (79ms)
+  ✓  34 [chromium] › tests/hec-engine.spec.mjs:59:1 › a hanging chain pulled aside swings, settles back home and hands the toy back (41ms)
+  ✓  35 [chromium] › tests/hec-engine.spec.mjs:89:1 › cloth pinned along its top edge drapes, and streams and flutters in the wind (171ms)
+  ✓  36 [chromium] › tests/hec-engine.spec.mjs:117:1 › a breakable string snaps when pulled too far, and Reset mends it (14ms)
+  ✓  37 [chromium] › tests/hec-engine.spec.mjs:144:1 › arms riding a body trail behind it as it moves and curl back to their shape (89ms)
+  ✓  38 [chromium] › tests/hec-engine.spec.mjs:168:1 › rigid pieces ride a rope and turn with it (the yo-yo on its string) (9ms)
+  ✓  39 [chromium] › tests/hec-engine.spec.mjs:192:1 › a tail rides the end of a line, a part's frame carries its tokens, and tokens can hide (26ms)
+  ✓  40 [chromium] › tests/hec-engine.spec.mjs:221:1 › stretch: the pull follows the finger, capped, then wobbles back through rest and stops (9ms)
+  ✓  41 [chromium] › tests/hec-engine.spec.mjs:247:1 › skin helpers: a point on a rope or a sheet finds its nodes, and kit packs skin4 (11ms)
+  ✓  42 [chromium] › tests/hec-engine.spec.mjs:288:1 › Hands-on: a recipe's ropes are taken, dragged, let go and reset by the finger (18ms)
+soft step: 1.086 ms (84 nodes, 10 substeps)
+  ✘  43 [chromium] › tests/hec-engine.spec.mjs:317:1 › soft parts are cheap: eight arms and a cloth step in well under a millisecond (465ms)
+(node:5940) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5940) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  44 [chromium] › tests/hec-engine.spec.mjs:340:1 › a toy on its side or upside down: ropes hang toward the world's down, wind follows the world (122ms)
+  ✓  45 [chromium] › tests/hh5-engine.spec.mjs:36:1 › touch: info.hands.pressed follows the finger, held and speed the body (58ms)
+  ✓  46 [chromium] › tests/hh5-engine.spec.mjs:54:1 › touch: a joint's value and a piece's place for a drive (15ms)
+  ✓  47 [chromium] › tests/hh5-engine.spec.mjs:69:1 › touch with a key: a held press pokes once; a quick tap doesn't (21ms)
+  ✓  48 [chromium] › tests/hh5-engine.spec.mjs:104:1 › touch: a toy without it has no Extras (plays exactly as before) (11ms)
+  ✓  49 [chromium] › tests/hh5-engine.spec.mjs:114:1 › follow with at: a press there is followed, elsewhere it picks the toy up (37ms)
+  ✓  50 [chromium] › tests/hh5-engine.spec.mjs:128:1 › upright with rest: a toy back near upright on the floor settles and sleeps; a touch frees it (31ms)
+  ✓  51 [chromium] › tests/hh5-engine.spec.mjs:162:1 › a piece's when: it is picked up only while when(data) holds (5ms)
+  ✓  52 [chromium] › tests/hh5-engine.spec.mjs:173:1 › socket armAway: armed only once the piece and the finger's line have left its place (15ms)
+  ✓  53 [chromium] › tests/hh5-engine.spec.mjs:187:1 › a piece's home spring: pulled off and let go, it springs back to its place with a wobble (28ms)
+
+
+  1) [chromium] › tests/hec-engine.spec.mjs:317:1 › soft parts are cheap: eight arms and a cloth step in well under a millisecond 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m1[39m
+    Received:   [31m1.0864489866666676[39m
+
+      335 |   const ms = (performance.now() - t0) / N;
+      336 |   console.log(`soft step: ${ms.toFixed(3)} ms (84 nodes, 10 substeps)`);
+    > 337 |   expect(ms).toBeLessThan(1);
+          |              ^
+      338 | });
+      339 |
+      340 | test("a toy on its side or upside down: ropes hang toward the world's down, wind follows the world", () => {
+        at /workspace/splashery/tests/hec-engine.spec.mjs:337:14
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/guard-after-results/hec-engine-soft-parts-are--909b8-in-well-under-a-millisecond-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/hh5/guard-after-results/hec-engine-soft-parts-are--909b8-in-well-under-a-millisecond-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/hec-engine.spec.mjs:317:1 › soft parts are cheap: eight arms and a cloth step in well under a millisecond 
+  52 passed (5.4s)

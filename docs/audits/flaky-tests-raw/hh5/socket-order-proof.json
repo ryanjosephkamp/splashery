@@ -1,0 +1,63 @@
+{
+  "source": "d86ed907500973f76a8d4c0603e13e15b4ea9d835c76da75b71c23464b3ddfc5",
+  "results": [
+    {
+      "mode": "before",
+      "hits": [
+        {
+          "speed": 4.041312171999108,
+          "pinned": true
+        }
+      ],
+      "state": {
+        "name": "token0",
+        "type": "socket",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": false,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "home": [
+          0,
+          0.1,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "after",
+      "hits": [
+        {
+          "speed": 4.041312171999108,
+          "pinned": false
+        }
+      ],
+      "state": {
+        "name": "token0",
+        "type": "socket",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "home": [
+          0,
+          0.1,
+          0
+        ]
+      }
+    }
+  ]
+}

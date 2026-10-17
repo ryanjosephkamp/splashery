@@ -1,0 +1,28 @@
+[2m[WebServer] [22m(node:6080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 17 tests using 1 worker
+
+(node:6091) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6091) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/heb-engine.spec.mjs:62:1 › hinge: a lid swings up after the finger, falls shut by its weight, stays open past upright (28ms)
+  ✓   2 [chromium] › tests/heb-engine.spec.mjs:94:1 › hinge: a part shown open by its controls starts open, and ↺ brings it back open (8ms)
+  ✓   3 [chromium] › tests/heb-engine.spec.mjs:108:1 › hinge: a spring brings it home, and the stops hold (10ms)
+  ✓   4 [chromium] › tests/heb-engine.spec.mjs:118:1 › slider: stuck until pulled, slides between its stops, friction holds it (10ms)
+  ✓   5 [chromium] › tests/heb-engine.spec.mjs:140:1 › slider: without friction it slides back down under its weight (3ms)
+  ✓   6 [chromium] › tests/heb-engine.spec.mjs:149:1 › dial: turned around and around, it coasts after a flick and settles on a click (13ms)
+  ✓   7 [chromium] › tests/heb-engine.spec.mjs:178:1 › socket: a piece taken out clicks back into its place when brought close (25ms)
+  ✓   8 [chromium] › tests/heb-engine.spec.mjs:197:1 › break: holds and bends a little, snaps off when pulled hard, ↺ mends it (19ms)
+  ✓   9 [chromium] › tests/heb-engine.spec.mjs:222:1 › break: a piece on a loose piece rides along, and a hard landing knocks it off (49ms)
+  ✓  10 [chromium] › tests/heb-engine.spec.mjs:242:1 › parents: a part on a hinged part rides with it (a lamp's arms) (3ms)
+  ✓  11 [chromium] › tests/heb-engine.spec.mjs:258:1 › upright: a whole toy rights itself after a tip, keeping its turn (19ms)
+  ✓  12 [chromium] › tests/heb-engine.spec.mjs:269:1 › swap: a piece off its place shows its kit-built stand-in and a fill; home, the scan's own (8ms)
+  ✓  13 [chromium] › tests/heb-engine.spec.mjs:286:1 › toys without joints have none (1ms)
+  ✓  14 [chromium] › tests/heb-engine.spec.mjs:291:1 › reseating: an earlier loose-body collision cannot unpin a socket (4ms)
+  ✓  15 [chromium] › tests/heb-engine.spec.mjs:317:1 › impacts: a moving piece still knocks a previously pinned piece loose (4ms)
+  ✓  16 [chromium] › tests/heb-engine.spec.mjs:326:1 › impacts: an intact break joint holds fast without an opt-in impact break (4ms)
+  ✓  17 [chromium] › tests/heb-engine.spec.mjs:344:1 › impacts: an ordinary socket can still be knocked out of its place (3ms)
+
+  17 passed (1.2s)

@@ -1,0 +1,649 @@
+{
+  "repository": "ryanjosephkamp/splashery",
+  "ref": "ceb51de7a015377d7f350119c27a792fc1a8a66d",
+  "runtime": "functions.exec V8 isolate, no shell/browser",
+  "moduleTransform": "Remove only static import/export declarations; inject exact fetched exports via native factory dependencies. Six production modules plus existing native play() harness.",
+  "sourceBlobs": {
+    "src/physics/world.js": "1a1975236a45c4d0e4919cd7072b66271311feb0",
+    "src/physics/materials.js": "2e35c51d943e5ff7ea68069b01d138aa2f96d9c7",
+    "src/physics/fields.js": "46448d1f4bf6772e35423f1d775a0e5c5b1783c7",
+    "src/physics/soft.js": "e238327ddcf9aa2ebc4de092fb59722d430a199c",
+    "src/physics/joints.js": "255c1ee8208f713343892c3cb2d00b209012ec3a",
+    "src/physics/hands-on.js": "7abf8cb57af7c1e64cc1a933d471df29ca471ea6",
+    "tests/heb-engine.spec.mjs": "0a0e8374f0621e7111c58443d928199b909998cd"
+  },
+  "original": {
+    "fix": false,
+    "hits": [
+      {
+        "speed": 4.041312171999108,
+        "pinned": true,
+        "broken": false
+      }
+    ],
+    "state": {
+      "name": "token0",
+      "type": "break",
+      "v": 0,
+      "w": 0,
+      "broken": false,
+      "held": false,
+      "stuck": false,
+      "pinned": false,
+      "pos": [
+        0.00004097899119255766,
+        0.09982458772806613,
+        0.000038587169360329934
+      ],
+      "home": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    "validImpactUnpinned": true
+  },
+  "fixed": {
+    "fix": true,
+    "hits": [
+      {
+        "speed": 4.041312171999108,
+        "pinned": false,
+        "broken": true
+      }
+    ],
+    "state": {
+      "name": "token0",
+      "type": "break",
+      "v": 0,
+      "w": 0,
+      "broken": false,
+      "held": false,
+      "stuck": false,
+      "pinned": true,
+      "pos": [
+        0,
+        0.1,
+        0
+      ],
+      "home": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    "validImpactUnpinned": true
+  },
+  "originalTimeline": [
+    {
+      "kind": "free",
+      "worldTime": 0,
+      "handsTime": 0,
+      "jointTime": 0,
+      "before": {
+        "id": 1,
+        "pinned": true,
+        "held": false,
+        "invMass": 0,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": false,
+          "gliding": false
+        }
+      },
+      "after": {
+        "id": 1,
+        "pinned": false,
+        "held": false,
+        "invMass": 1,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": false,
+          "gliding": false
+        }
+      },
+      "activeHit": null,
+      "stack": "Error\n    at h.free (eval at <anonymous> (exec_main.mjs:6:2), <anonymous>:36:13)\n    at exec_main.mjs:8:6"
+    },
+    {
+      "kind": "hit-generated",
+      "tick": 1,
+      "worldTime": 0,
+      "handsTime": 0.1,
+      "jointTime": 0.15,
+      "speed": 4.041312171999108,
+      "at": {
+        "tick": 1,
+        "worldTime": 0,
+        "handsTime": 0.1,
+        "jointTime": 0.15,
+        "body": {
+          "id": 1,
+          "pinned": false,
+          "held": false,
+          "invMass": 1,
+          "pos": [
+            0.01196468820435763,
+            0.09522818825172116,
+            0
+          ],
+          "vel": [
+            0,
+            -1.8516340242538445,
+            0
+          ],
+          "joint": {
+            "name": "token0",
+            "broken": true,
+            "gliding": true
+          }
+        },
+        "other": null
+      }
+    },
+    {
+      "kind": "pin:before",
+      "tick": 50,
+      "worldTime": 0.08333333333333333,
+      "handsTime": 0.1,
+      "jointTime": 0.2333333333333333,
+      "body": {
+        "id": 1,
+        "pinned": false,
+        "held": false,
+        "invMass": 1,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": true,
+          "gliding": true
+        }
+      }
+    },
+    {
+      "kind": "pin:after",
+      "tick": 50,
+      "worldTime": 0.08333333333333333,
+      "handsTime": 0.1,
+      "jointTime": 0.2333333333333333,
+      "body": {
+        "id": 1,
+        "pinned": true,
+        "held": false,
+        "invMass": 0,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": true,
+          "gliding": true
+        }
+      }
+    },
+    {
+      "kind": "seat-completed",
+      "tick": 50,
+      "worldTime": 0.08333333333333333,
+      "handsTime": 0.1,
+      "jointTime": 0.2333333333333333,
+      "before": {
+        "broken": true,
+        "gliding": true
+      },
+      "body": {
+        "id": 1,
+        "pinned": true,
+        "held": false,
+        "invMass": 0,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": false,
+          "gliding": false
+        }
+      }
+    },
+    {
+      "kind": "hit-handled",
+      "tick": 60,
+      "worldTime": 0.09999999999999999,
+      "handsTime": 0.1,
+      "jointTime": 0.24999999999999997,
+      "speed": 4.041312171999108,
+      "generated": {
+        "tick": 1,
+        "worldTime": 0,
+        "handsTime": 0.1,
+        "jointTime": 0.15,
+        "body": {
+          "id": 1,
+          "pinned": false,
+          "held": false,
+          "invMass": 1,
+          "pos": [
+            0.01196468820435763,
+            0.09522818825172116,
+            0
+          ],
+          "vel": [
+            0,
+            -1.8516340242538445,
+            0
+          ],
+          "joint": {
+            "name": "token0",
+            "broken": true,
+            "gliding": true
+          }
+        },
+        "other": null
+      },
+      "body": {
+        "id": 1,
+        "pinned": true,
+        "held": false,
+        "invMass": 0,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": false,
+          "gliding": false
+        }
+      },
+      "other": null
+    },
+    {
+      "kind": "free",
+      "tick": 60,
+      "worldTime": 0.09999999999999999,
+      "handsTime": 0.1,
+      "jointTime": 0.24999999999999997,
+      "before": {
+        "id": 1,
+        "pinned": true,
+        "held": false,
+        "invMass": 0,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": false,
+          "gliding": false
+        }
+      },
+      "after": {
+        "id": 1,
+        "pinned": false,
+        "held": false,
+        "invMass": 1,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": false,
+          "gliding": false
+        }
+      },
+      "activeHit": {
+        "speed": 4.041312171999108,
+        "generated": {
+          "tick": 1,
+          "worldTime": 0,
+          "handsTime": 0.1,
+          "jointTime": 0.15,
+          "body": {
+            "id": 1,
+            "pinned": false,
+            "held": false,
+            "invMass": 1,
+            "pos": [
+              0.01196468820435763,
+              0.09522818825172116,
+              0
+            ],
+            "vel": [
+              0,
+              -1.8516340242538445,
+              0
+            ],
+            "joint": {
+              "name": "token0",
+              "broken": true,
+              "gliding": true
+            }
+          },
+          "other": null
+        },
+        "body": {
+          "id": 1,
+          "pinned": true,
+          "held": false,
+          "invMass": 0,
+          "pos": [
+            0,
+            0.1,
+            0
+          ],
+          "vel": [
+            0,
+            0,
+            0
+          ],
+          "joint": {
+            "name": "token0",
+            "broken": false,
+            "gliding": false
+          }
+        },
+        "other": null
+      },
+      "stack": "Error\n    at h.free (eval at <anonymous> (exec_main.mjs:6:2), <anonymous>:36:13)\n    at HandsOn.onHit (eval at compile (eval at <anonymous> (exec_main.mjs:1:13)), <anonymous>:1121:49)\n    at h.onHit (eval at <anonymous> (exec_main.mjs:6:2), <anonymous>:52:18)\n    at HandsOn.step (eval at compile (eval at <anonymous> (exec_main.mjs:1:13)), <anonymous>:1076:42)\n    at exec_main.mjs:9:6"
+    }
+  ],
+  "fixedTimeline": [
+    {
+      "kind": "free",
+      "worldTime": 0,
+      "handsTime": 0,
+      "jointTime": 0,
+      "before": {
+        "id": 1,
+        "pinned": true,
+        "held": false,
+        "invMass": 0,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": false,
+          "gliding": false
+        }
+      },
+      "after": {
+        "id": 1,
+        "pinned": false,
+        "held": false,
+        "invMass": 1,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": false,
+          "gliding": false
+        }
+      },
+      "activeHit": null,
+      "stack": "Error\n    at h.free (eval at <anonymous> (exec_main.mjs:6:2), <anonymous>:36:13)\n    at exec_main.mjs:8:6"
+    },
+    {
+      "kind": "hit-generated",
+      "tick": 1,
+      "worldTime": 0,
+      "handsTime": 0.1,
+      "jointTime": 0.15,
+      "speed": 4.041312171999108,
+      "at": {
+        "tick": 1,
+        "worldTime": 0,
+        "handsTime": 0.1,
+        "jointTime": 0.15,
+        "body": {
+          "id": 1,
+          "pinned": false,
+          "held": false,
+          "invMass": 1,
+          "pos": [
+            0.01196468820435763,
+            0.09522818825172116,
+            0
+          ],
+          "vel": [
+            0,
+            -1.8516340242538445,
+            0
+          ],
+          "joint": {
+            "name": "token0",
+            "broken": true,
+            "gliding": true
+          }
+        },
+        "other": null
+      }
+    },
+    {
+      "kind": "hit-handled",
+      "tick": 10,
+      "worldTime": 0.016666666666666666,
+      "handsTime": 0.1,
+      "jointTime": 0.15,
+      "speed": 4.041312171999108,
+      "generated": {
+        "tick": 1,
+        "worldTime": 0,
+        "handsTime": 0.1,
+        "jointTime": 0.15,
+        "body": {
+          "id": 1,
+          "pinned": false,
+          "held": false,
+          "invMass": 1,
+          "pos": [
+            0.01196468820435763,
+            0.09522818825172116,
+            0
+          ],
+          "vel": [
+            0,
+            -1.8516340242538445,
+            0
+          ],
+          "joint": {
+            "name": "token0",
+            "broken": true,
+            "gliding": true
+          }
+        },
+        "other": null
+      },
+      "body": {
+        "id": 1,
+        "pinned": false,
+        "held": false,
+        "invMass": 1,
+        "pos": [
+          0.011769771737172433,
+          0.09967446928285757,
+          -0.00010889054664829303
+        ],
+        "vel": [
+          -0.017216810439311225,
+          -0.0023091004150796713,
+          -0.02029547978368941
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": true,
+          "gliding": true
+        }
+      },
+      "other": null
+    },
+    {
+      "kind": "pin:before",
+      "tick": 50,
+      "worldTime": 0.08333333333333333,
+      "handsTime": 0.1,
+      "jointTime": 0.2333333333333333,
+      "body": {
+        "id": 1,
+        "pinned": false,
+        "held": false,
+        "invMass": 1,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": true,
+          "gliding": true
+        }
+      }
+    },
+    {
+      "kind": "pin:after",
+      "tick": 50,
+      "worldTime": 0.08333333333333333,
+      "handsTime": 0.1,
+      "jointTime": 0.2333333333333333,
+      "body": {
+        "id": 1,
+        "pinned": true,
+        "held": false,
+        "invMass": 0,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": true,
+          "gliding": true
+        }
+      }
+    },
+    {
+      "kind": "seat-completed",
+      "tick": 50,
+      "worldTime": 0.08333333333333333,
+      "handsTime": 0.1,
+      "jointTime": 0.2333333333333333,
+      "before": {
+        "broken": true,
+        "gliding": true
+      },
+      "body": {
+        "id": 1,
+        "pinned": true,
+        "held": false,
+        "invMass": 0,
+        "pos": [
+          0,
+          0.1,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0
+        ],
+        "joint": {
+          "name": "token0",
+          "broken": false,
+          "gliding": false
+        }
+      }
+    }
+  ],
+  "limits": "Native synthetic contact proves the engine order race. Historical quartz failure shares broken=false/pinned=false but still needs direct event trace for attribution."
+}

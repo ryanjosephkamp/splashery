@@ -1,0 +1,44 @@
+[2m[WebServer] [22m(node:946) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:957) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:957) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/heb-engine.spec.mjs:291:1 › reseating: an earlier loose-body collision cannot unpin the repaired joint (17ms)
+(node:969) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:969) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/heb-engine.spec.mjs:318:1 › impacts: a moving piece still knocks a previously pinned piece loose (21ms)
+
+
+  1) [chromium] › tests/heb-engine.spec.mjs:291:1 › reseating: an earlier loose-body collision cannot unpin the repaired joint 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      309 |   expect(hits.some((speed) => speed > 2.5)).toBe(true);
+      310 |   expect(s.j().broken).toBe(false);
+    > 311 |   expect(s.j().pinned).toBe(true);
+          |                        ^
+      312 |   expect(s.j().pos).toEqual(s.j().home);
+      313 |   s.run(0.5);
+      314 |   expect(s.j().pinned).toBe(true);
+        at /workspace/splashery/tests/heb-engine.spec.mjs:311:24
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/native-before-results/heb-engine-reseating-an-ea-a3456-ot-unpin-the-repaired-joint-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/hh5/native-before-results/heb-engine-reseating-an-ea-a3456-ot-unpin-the-repaired-joint-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/heb-engine.spec.mjs:291:1 › reseating: an earlier loose-body collision cannot unpin the repaired joint 
+  1 passed (1.6s)

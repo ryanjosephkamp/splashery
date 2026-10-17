@@ -1,0 +1,38 @@
+[2m[WebServer] [22m(node:5559) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:5570) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5570) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/heb-engine.spec.mjs:327:1 › impacts: an intact break joint holds fast without an opt-in impact break (30ms)
+
+
+  1) [chromium] › tests/heb-engine.spec.mjs:327:1 › impacts: an intact break joint holds fast without an opt-in impact break 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      339 |   expect(hits.some((speed) => speed > 2.5)).toBe(true);
+      340 |   expect(s.j().broken).toBe(false);
+    > 341 |   expect(s.j().pinned).toBe(true);
+          |                        ^
+      342 |   expect(s.j().pos).toEqual(s.j().home);
+      343 | });
+      344 |
+        at /workspace/splashery/tests/heb-engine.spec.mjs:341:24
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/guard-before-results/heb-engine-impacts-an-inta-29b4a-hout-an-opt-in-impact-break-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/hh5/guard-before-results/heb-engine-impacts-an-inta-29b4a-hout-an-opt-in-impact-break-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/heb-engine.spec.mjs:327:1 › impacts: an intact break joint holds fast without an opt-in impact break 

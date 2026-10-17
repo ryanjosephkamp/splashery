@@ -1,0 +1,72 @@
+[
+  {
+    "repeat": 3,
+    "status": "passed",
+    "pinned": true,
+    "target_unpins": 0,
+    "neighbor_unpins": 2
+  },
+  {
+    "repeat": 1,
+    "status": "passed",
+    "pinned": true,
+    "target_unpins": 0,
+    "neighbor_unpins": 1
+  },
+  {
+    "repeat": 2,
+    "status": "passed",
+    "pinned": true,
+    "target_unpins": 0,
+    "neighbor_unpins": 3
+  },
+  {
+    "repeat": 0,
+    "status": "passed",
+    "pinned": true,
+    "target_unpins": 0,
+    "neighbor_unpins": 3
+  },
+  {
+    "repeat": 4,
+    "status": "passed",
+    "pinned": true,
+    "target_unpins": 0,
+    "neighbor_unpins": 3
+  },
+  {
+    "repeat": 6,
+    "status": "passed",
+    "pinned": true,
+    "target_unpins": 0,
+    "neighbor_unpins": 3
+  },
+  {
+    "repeat": 5,
+    "status": "passed",
+    "pinned": true,
+    "target_unpins": 0,
+    "neighbor_unpins": 1
+  },
+  {
+    "repeat": 7,
+    "status": "passed",
+    "pinned": true,
+    "target_unpins": 0,
+    "neighbor_unpins": 3
+  },
+  {
+    "repeat": 9,
+    "status": "passed",
+    "pinned": true,
+    "target_unpins": 0,
+    "neighbor_unpins": 2
+  },
+  {
+    "repeat": 8,
+    "status": "passed",
+    "pinned": true,
+    "target_unpins": 0,
+    "neighbor_unpins": 2
+  }
+]
