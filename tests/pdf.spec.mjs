@@ -130,8 +130,12 @@ test("Save PDF in the app: the still's link and QR open this scene, as the camer
     const m = await import("/src/pdf-export/index.js");
     const { app, player } = window.__splashery;
     const out = await m.makeToyPDF(app, { mode: "still" });
-    return { bytes: Array.from(out.bytes), url: out.entry.url, cam: player.camera.getState() };
+    let binary = "";
+    for (let i = 0; i < out.bytes.length; i += 8192)
+      binary += String.fromCharCode(...out.bytes.subarray(i, i + 8192));
+    return { bytes: btoa(binary), url: out.entry.url, cam: player.camera.getState() };
   });
+  res.bytes = Array.from(Buffer.from(res.bytes, "base64"));
   expect(errors).toEqual([]);
   const scene = await sceneOf(res.url);
   expect(scene.toy).toMatchObject({ kind: "builtin", id: "grapes" });
@@ -155,17 +159,25 @@ test("the moving recording: one tap, its frames and size within the estimate", a
     const still = await m.makeToyPDF(app, { mode: "still" });
     const est = await m.estimate(app, opts);
     const out = await m.makeToyPDF(app, { mode: "moving", ...opts });
+    const base64 = (bytes) => {
+      let binary = "";
+      for (let i = 0; i < bytes.length; i += 8192)
+        binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
+      return btoa(binary);
+    };
     return {
       stillBytes: still.bytes.length,
-      bytes: Array.from(out.bytes),
+      bytes: base64(out.bytes),
       est,
       frames: out.recording.frames.length,
       tapFrame: out.recording.tapFrame,
       settled: out.recording.settled,
-      first: Array.from(out.recording.frames[0]),
-      mid: Array.from(out.recording.frames[Math.floor(out.recording.frames.length / 3)]),
+      first: base64(out.recording.frames[0]),
+      mid: base64(out.recording.frames[Math.floor(out.recording.frames.length / 3)]),
     };
   }, opts);
+  for (const key of ["bytes", "first", "mid"])
+    res[key] = Array.from(Buffer.from(res[key], "base64"));
   expect(errors).toEqual([]);
   expect(res.frames).toBeGreaterThan(res.tapFrame + 4);
   expect(res.frames).toBeLessThanOrEqual(res.est.frames);
