@@ -153,7 +153,8 @@ export function recordSupport() {
 // Starts recording `canvas` (and the sound from `audio`, { ctx, node }, a
 // node every sound passes through, when there is one). Returns { stop(),
 // frame(), done }: frame() hands the canvas to the video after each render
-// (call it right after the render, as the stage's "postrender"), and done
+// (call it once the frame is on the canvas: the stage's "frameend" after a draw;
+// a WebGPU frame isn't there yet at "postrender"), and done
 // resolves to { blob, ext, seconds, frames, lastFrame, ended } after a stop or the time
 // limit (frames: how many were handed over; lastFrame: when the take's last one was; ended:
 // when the recorder stopped, after the drain; all in seconds from the take's start).

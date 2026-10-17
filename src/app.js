@@ -1896,13 +1896,22 @@ class App {
     stage.reduced = false;
     stage.setPixelRatio(Math.min(saved.cap ?? 3, 1920 / long));
     let rec;
-    // Each drawn frame goes into the video. Lane REC1: "postrender", right after a
-    // real draw ("frameend" also comes for an update that drew nothing, when a
-    // WebGL canvas is already blank to copy).
-    const kick = () => rec?.frame();
-    stage.app.on("postrender", kick);
+    // Each drawn frame goes into the video, copied at "frameend" (as the stage's
+    // own capture is): a WebGPU frame is submitted only after "postrender", so a
+    // copy there is blank (lane REC1 r2). "frameend" also comes for an update
+    // that drew nothing, when a WebGL canvas is already blank, so only a frame
+    // with a draw ("postrender" seen) is copied.
+    let drew = false;
+    const drawn = () => (drew = true);
+    const kick = () => {
+      if (drew) rec?.frame();
+      drew = false;
+    };
+    stage.app.on("postrender", drawn);
+    stage.app.on("frameend", kick);
     const restore = () => {
-      stage.app.off("postrender", kick);
+      stage.app.off("postrender", drawn);
+      stage.app.off("frameend", kick);
       stage.adaptive = saved.adaptive;
       stage.setPixelRatio(saved.cap);
     };
