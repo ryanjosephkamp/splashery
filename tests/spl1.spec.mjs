@@ -133,3 +133,33 @@ test("Sound in a box: more beads only with the slider", async () => {
   const slid = run(buildRecipeTo(recipe, { seed: 1, count: 400_000, options, slider: 400_000 }, applyClay)); // prettier-ignore
   expect(slid).toBe(tier + 12_000);
 });
+
+// The Operator's call of October 17, 2026: the slider goes down to 10,000,
+// 2,000 a stop below 60,000.
+test("the slider's 10k: its stops, its label, and a kit toy at 10,000", async ({ page }) => {
+  const errors = await open(page);
+  const { SPLATS_STOPS, SPLATS_RANGE } = await import("../src/player.js");
+  expect(SPLATS_RANGE.min).toBe(10_000);
+  expect(SPLATS_STOPS[0]).toBe(10_000);
+  expect(SPLATS_STOPS[1] - SPLATS_STOPS[0]).toBe(2000);
+  expect(SPLATS_STOPS.at(-1)).toBe(400_000);
+  expect(SPLATS_STOPS).toContain(60_000);
+  // Dragging to the first stop sets 10,000.
+  await page.evaluate(() => {
+    const s = document.getElementById("look-splats");
+    s.value = "0";
+    s.dispatchEvent(new Event("input"));
+    s.dispatchEvent(new Event("change"));
+  });
+  await page.waitForFunction(() => window.__splashery.player.splats === 10_000);
+  expect(await page.locator("#look-splats-value").textContent()).toBe("10k");
+  const r = await show(page, "clock");
+  expect(Math.abs(r.splats - 10_000)).toBeLessThanOrEqual(200);
+  expect(r.note).toBe("");
+  // A stored count keeps its place on the slider.
+  await page.evaluate(() => window.__splashery.app.setSplats(24_000));
+  await page.waitForFunction(() => window.__splashery.player.splats === 24_000);
+  expect(await page.locator("#look-splats").inputValue()).toBe("7");
+  expect(await page.locator("#look-splats-value").textContent()).toBe("24k");
+  expect(errors).toEqual([]);
+});

@@ -93,7 +93,21 @@ export function saveDetail(detail) {
 // scan files on Low, the fluid and picture budgets). Like Detail it lives in
 // this browser only, never in scenes or links, and it is read only while labs
 // is on. Picking Auto, High or Max clears it.
-export const SPLATS_RANGE = Object.freeze({ min: 60000, max: 400000, step: 10000 });
+export const SPLATS_RANGE = Object.freeze({ min: 10000, max: 400000, step: 10000 });
+// Lane SPL1: the slider's stops, 2,000 apart below 60,000 (10,000 to
+// 58,000; the Operator's call of October 17, 2026) and 10,000 apart above.
+export const SPLATS_STOPS = Object.freeze([
+  ...Array.from({ length: 25 }, (_, i) => 10000 + 2000 * i),
+  ...Array.from({ length: 35 }, (_, i) => 60000 + 10000 * i),
+]);
+
+// The stop nearest a count, as the slider's position.
+export function splatsStop(n) {
+  let best = 0;
+  for (let i = 1; i < SPLATS_STOPS.length; i++)
+    if (Math.abs(SPLATS_STOPS[i] - n) < Math.abs(SPLATS_STOPS[best] - n)) best = i;
+  return best;
+}
 const SPLATS_KEY = "splashery.splats";
 
 export function readSplats() {

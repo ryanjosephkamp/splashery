@@ -19,9 +19,8 @@ can't go past its file. The slider should give the count picked, or as close as 
 
 ## State
 
-- Part 1 (engine): branch `claude/spl1-engine`, PR opened October 17, 2026.
-- Part 2: branch `claude/spl1` (it carries part 1, merged in). Draft PR "Phase SPL1: toys honor the
-  Splats slider".
+- Part 1 (engine): branch `claude/spl1-engine`, PR #716 (the Operator merges it after its full suite).
+- Part 2: branch `claude/spl1` (it carries part 1, merged in), PR #726.
 
 ## What changed (part 1)
 
@@ -87,6 +86,18 @@ the viewers' budget is the same number as before.
   picture they are written to takes under 0.1 ms), well inside a 30-frame second's 33 ms; the GPU's
   share follows the total splats, which the slider sets anyway. Above 43k it says "(the nearest this
   toy draws)".
+
+## The slider's 10k (the Operator's call of October 17, 2026)
+
+The slider now runs from 10,000 to 400,000: 2,000 a stop up to 58,000, then 10,000 a stop
+(`SPLATS_STOPS` and `splatsStop` in `src/player.js`; the input moves through the stops' positions).
+Every kit toy builds at 10k with no error and no non-finite value. 35 land more than 2% off. The
+ones with a floor of their own draw more: the Chladni plate and cell, the room echo, the splat
+mirror, the QR code, the sound lab and recorder, the contour lab, the terrain box, the ripple tank,
+the light bench, the geo maps, the airport x-ray, the night sky, Data in 3D, Climate records, real
+elements, unit cells, and Moving photo to 3D. The fixed sets draw less (the star catalogs, Powers of
+ten, Gaussian splatting, One splat, QR damage, the specimen neuron). Their labels say so; none needs
+a minimum to work.
 
 ## For lanes PT3 and MP1 (Your name in splats, Shape morph, Moving photo to 3D)
 
