@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Material taps · Sound study</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: system-ui, sans-serif;
+        color: #202c33;
+        background: #fafbf9;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 1050px;
+        margin: auto;
+        padding: 52px 28px 32px;
+      }
+      h1 {
+        font-size: clamp(2rem, 5vw, 3.6rem);
+        letter-spacing: -0.055em;
+        line-height: 1.08;
+        margin: 0 0 18px;
+      }
+      p {
+        line-height: 1.6;
+        max-width: 75ch;
+      }
+      .intro {
+        font-size: 1.05rem;
+        color: #4a5b65;
+        margin-bottom: 28px;
+      }
+      .controls {
+        display: flex;
+        gap: 28px;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 20px 0;
+        border-block: 1px solid #ccd6d5;
+      }
+      label {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 0.95rem;
+      }
+      input {
+        accent-color: #17695f;
+      }
+      input[type="range"] {
+        width: 130px;
+      }
+      output {
+        min-width: 4ch;
+        font-variant-numeric: tabular-nums;
+      }
+      #status {
+        min-height: 1.6em;
+        color: #41615c;
+        font-size: 0.9rem;
+        margin: 16px 0 22px;
+      }
+      .material {
+        display: grid;
+        grid-template-columns: 190px minmax(0, 1fr);
+        gap: 28px;
+        padding: 20px 0;
+        border-bottom: 1px solid #dce2df;
+      }
+      .tap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 6px;
+        padding: 16px 20px;
+        background: #edf3ef;
+        border: 1px solid #c7d4cb;
+        border-left: 4px solid var(--swatch);
+        border-radius: 7px;
+        color: #202c33;
+        cursor: pointer;
+        font-family: inherit;
+        text-align: left;
+        min-height: 82px;
+        touch-action: manipulation;
+      }
+      .tap:hover {
+        background: #e1eee5;
+      }
+      .tap:active {
+        background: #c8e3d6;
+      }
+      .tap strong {
+        font-size: 1.15rem;
+        font-weight: 650;
+      }
+      .tap span {
+        font-size: 0.84rem;
+        color: #44574f;
+      }
+      :focus-visible {
+        outline: 3px solid #17695f;
+        outline-offset: 4px;
+      }
+      dl {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 22px;
+        margin: 0;
+        align-content: center;
+      }
+      dl div {
+        min-width: 0;
+      }
+      dt {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.065em;
+        color: #55656c;
+        margin-bottom: 4px;
+      }
+      dd {
+        font:
+          0.8rem/1.5 ui-monospace,
+          monospace;
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+      footer {
+        color: #53646a;
+        font-size: 0.84rem;
+        margin-top: 30px;
+      }
+      a {
+        color: #17695f;
+        text-underline-offset: 3px;
+      }
+      details {
+        margin-top: 20px;
+      }
+      summary {
+        cursor: pointer;
+        color: #17695f;
+      }
+      @media (max-width: 620px) {
+        main {
+          padding: 32px 20px;
+        }
+        .controls {
+          gap: 18px;
+        }
+        .material {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+        .tap {
+          min-height: 70px;
+        }
+        dl {
+          gap: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Tap a material.</h1>
+        <p class="intro">
+          Nine small sound studies, made with resonances and contact noise. Tap again to hear a
+          slightly different strike. Use Space or Enter on a focused button.
+        </p>
+      </header>
+      <div class="controls" aria-label="Sound settings">
+        <label for="volume"
+          >Volume <input id="volume" type="range" min="0" max="100" value="65" /><output
+            id="volume-value"
+            for="volume"
+            >65%</output
+          ></label
+        >
+        <label for="variation"
+          ><input id="variation" type="checkbox" checked /> Vary each strike</label
+        >
+      </div>
+      <p id="status" role="status" aria-live="polite">Ready. Sound starts with your first tap.</p>
+      <div id="materials" aria-label="Material tap studies"></div>
+      <noscript><p>Enable JavaScript to synthesize the material taps.</p></noscript>
+      <footer>
+        <p>
+          These are tuning starting points, not measured material constants. Decay τ is an amplitude
+          time constant; a ring takes about 6.9τ to fall by 60 dB. Mode gains are 1, .55, .30, .16,
+          .09, and .05, multiplied by body gain.
+        </p>
+        <details>
+          <summary>How the taps are made</summary>
+          <p>
+            Each tap combines decaying, inharmonic modes with low-pass contact noise. Paper and
+            fruit add a few short noise grains. Variation changes modal gains by ±12%, decay by ±8%,
+            pitch by ±0.6%, level by ±8%, and grain timing by up to 3 ms. Switch variation off for
+            an identical reference tap.
+          </p>
+          <p>
+            Each buffer has a smooth attack, mean subtraction, a 12 ms tail fade, and a peak of .5
+            before level variation. Playback uses one audio context, a 25 Hz high-pass, six
+            sustained voices, and an 8 ms fade when replacing an older voice. Volume changes are
+            smoothed. Very fast repeats are limited to one tap every 30 ms.
+          </p>
+          <p>
+            Parameters below match
+            <a href="../../docs/research/tap-sounds-2026-10.md">the research report</a>. Synthesis
+            is original; no audio files or libraries are loaded. Browser generation time is not a
+            phone benchmark, and listening on real speakers is still needed.
+          </p>
+        </details>
+        <p>
+          October 17, 2026 · Made by Ryan with Codex (GPT-6). Code: MIT. Original synthesized
+          sounds: CC0. Standalone research demo; not linked from the site.
+        </p>
+      </footer>
+    </main>
+    <script>
+      "use strict";
+      // Original synthesis study. No external code or sound assets.
+      // tau, attack, noiseTau, and grain times are in milliseconds.
+      const MATERIALS = [
+        {
+          id: "wood",
+          name: "Wood",
+          note: "Dry knock",
+          color: "#91694a",
+          f: 360,
+          ratios: [1, 2.57, 4.2],
+          tau: [35, 18, 9],
+          body: 1,
+          attack: 1.5,
+          noise: 0.45,
+          cutoff: 2600,
+          noiseTau: 6,
+        },
+        {
+          id: "glass",
+          name: "Glass",
+          note: "Light ting",
+          color: "#5f909e",
+          f: 780,
+          ratios: [1, 2.32, 4.25, 6.63],
+          tau: [240, 160, 95, 55],
+          body: 1,
+          attack: 1,
+          noise: 0.12,
+          cutoff: 6500,
+          noiseTau: 2,
+        },
+        {
+          id: "metal",
+          name: "Metal",
+          note: "Diffuse clink",
+          color: "#707e90",
+          f: 310,
+          ratios: [1, 1.47, 2.09, 2.56, 3.37, 4.11],
+          tau: [380, 300, 230, 175, 120, 85],
+          body: 1,
+          attack: 1,
+          noise: 0.24,
+          cutoff: 5200,
+          noiseTau: 3,
+        },
+        {
+          id: "ceramic",
+          name: "Ceramic",
+          note: "Hollow tick",
+          color: "#b27a5e",
+          f: 620,
+          ratios: [1, 2.15, 3.9, 5.4],
+          tau: [85, 50, 28, 16],
+          body: 1,
+          attack: 1.3,
+          noise: 0.3,
+          cutoff: 4200,
+          noiseTau: 4,
+        },
+        {
+          id: "plastic",
+          name: "Plastic",
+          note: "Boxy tok",
+          color: "#8c86a9",
+          f: 260,
+          ratios: [1, 1.82, 2.91, 4.3],
+          tau: [45, 26, 15, 8],
+          body: 1,
+          attack: 2,
+          noise: 0.5,
+          cutoff: 2200,
+          noiseTau: 8,
+        },
+        {
+          id: "rubber",
+          name: "Rubber",
+          note: "Muted thup",
+          color: "#5c6861",
+          f: 140,
+          ratios: [1, 1.48, 2.37],
+          tau: [24, 14, 8],
+          body: 0.7,
+          attack: 4,
+          noise: 0.55,
+          cutoff: 850,
+          noiseTau: 12,
+        },
+        {
+          id: "cloth",
+          name: "Cloth",
+          note: "Brushed pat",
+          color: "#899272",
+          f: 180,
+          ratios: [1, 1.73, 2.8],
+          tau: [12, 8, 5],
+          body: 0.12,
+          attack: 6,
+          noise: 1,
+          cutoff: 1500,
+          noiseTau: 25,
+        },
+        {
+          id: "paper",
+          name: "Paper",
+          note: "Crisp flick",
+          color: "#a49468",
+          f: 430,
+          ratios: [1, 2.31, 4.1],
+          tau: [12, 7, 4],
+          body: 0.18,
+          attack: 1,
+          noise: 1,
+          cutoff: 7500,
+          noiseTau: 14,
+          grains: [7, 19, 33, 52],
+          grainLength: 8,
+          grainGain: 0.3,
+        },
+        {
+          id: "fruit",
+          name: "Fruit",
+          note: "Soft skin pat",
+          color: "#b26d61",
+          f: 155,
+          ratios: [1, 1.82, 3.02],
+          tau: [22, 13, 7],
+          body: 0.65,
+          attack: 3,
+          noise: 0.85,
+          cutoff: 1800,
+          noiseTau: 14,
+          grains: [9, 21, 38],
+          grainLength: 10,
+          grainGain: 0.16,
+        },
+      ];
+      const AMPS = [1, 0.55, 0.3, 0.16, 0.09, 0.05];
+      const status = document.querySelector("#status");
+      const volume = document.querySelector("#volume");
+      const variation = document.querySelector("#variation");
+      let ctx, master, input;
+      let lastTap = -Infinity;
+      const voices = new Set();
+      let strike = 0;
+
+      // Pure PCM generator: accepts a seed for repeatable comparisons and QA.
+      function synthesize(p, sampleRate, seed, vary = true) {
+        let state = seed >>> 0;
+        const random = () => {
+          state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
+          return state / 4294967296;
+        };
+        const jitter = (amount) => 1 + (vary ? (random() * 2 - 1) * amount : 0);
+        const pitch = jitter(0.006);
+        const decay = jitter(0.08);
+        const grainTimes = (p.grains || []).map(
+          (ms) => (ms + (vary ? (random() * 2 - 1) * 3 : 0)) / 1000,
+        );
+        const seconds =
+          Math.max(
+            (7 * Math.max(...p.tau, p.noiseTau) * decay) / 1000,
+            (grainTimes.at(-1) || 0) + (p.grainLength || 0) / 1000,
+          ) + 0.012;
+        const data = new Float32Array(Math.ceil(seconds * sampleRate));
+        const modes = p.ratios.map((r, i) => {
+          const frequency = p.f * r * pitch;
+          const angle = (2 * Math.PI * frequency) / sampleRate;
+          const radius = Math.exp(-1 / ((sampleRate * p.tau[i] * decay) / 1000));
+          return {
+            re: 1,
+            im: 0,
+            c: Math.cos(angle) * radius,
+            s: Math.sin(angle) * radius,
+            amp: frequency < sampleRate * 0.45 ? AMPS[i] * p.body * jitter(0.12) : 0,
+          };
+        });
+        const alpha =
+          1 - Math.exp((-2 * Math.PI * Math.min(p.cutoff, sampleRate * 0.45)) / sampleRate);
+        const noiseRadius = Math.exp(-1 / ((sampleRate * p.noiseTau * decay) / 1000));
+        let filtered = 0,
+          noiseEnvelope = 1,
+          sum = 0;
+        for (let i = 0; i < data.length; i++) {
+          const t = i / sampleRate;
+          let body = 0;
+          for (const mode of modes) {
+            body += mode.im * mode.amp;
+            const next = mode.re * mode.c - mode.im * mode.s;
+            mode.im = mode.re * mode.s + mode.im * mode.c;
+            mode.re = next;
+          }
+          filtered += alpha * (random() * 2 - 1 - filtered);
+          let texture = p.noise * noiseEnvelope;
+          for (const start of grainTimes) {
+            const phase = (t - start) / (p.grainLength / 1000);
+            if (phase >= 0 && phase <= 1) texture += p.grainGain * Math.sin(Math.PI * phase) ** 2;
+          }
+          const attack = Math.sin((Math.min(1, t / (p.attack / 1000)) * Math.PI) / 2) ** 2;
+          data[i] = (body + filtered * texture) * attack;
+          sum += data[i];
+          noiseEnvelope *= noiseRadius;
+        }
+        const mean = sum / data.length;
+        let peak = 0;
+        for (let i = 0; i < data.length; i++) {
+          // Removing mean before the edge windows preserves exact zero endpoints.
+          const edge = Math.min(
+            1,
+            i / ((sampleRate * p.attack) / 1000),
+            (data.length - 1 - i) / (sampleRate * 0.012),
+          );
+          data[i] = (data[i] - mean) * Math.sin((edge * Math.PI) / 2) ** 2;
+          peak = Math.max(peak, Math.abs(data[i]));
+        }
+        const scale = peak > 0 ? 0.5 / peak : 0;
+        for (let i = 0; i < data.length; i++) data[i] *= scale;
+        return data;
+      }
+
+      async function tap(p) {
+        try {
+          if (!ctx) {
+            const Audio = window.AudioContext || window.webkitAudioContext;
+            if (!Audio) throw new Error("Web Audio is unavailable in this browser.");
+            ctx = new Audio({ latencyHint: "interactive" });
+            master = ctx.createGain();
+            master.gain.value = (Number(volume.value) / 100) * 0.22;
+            input = ctx.createBiquadFilter();
+            input.type = "highpass";
+            input.frequency.value = 25;
+            input.Q.value = 0.707;
+            input.connect(master).connect(ctx.destination);
+          }
+          await ctx.resume();
+          if (ctx.state !== "running") throw new Error("Audio is paused. Tap again to retry.");
+          if (ctx.currentTime - lastTap < 0.03) return;
+          lastTap = ctx.currentTime;
+          const vary = variation.checked;
+          const seed = vary ? Math.floor(Math.random() * 4294967296) : 118;
+          const started = performance.now();
+          const pcm = synthesize(p, ctx.sampleRate, seed, vary);
+          const generationMs = performance.now() - started;
+          const buffer = ctx.createBuffer(1, pcm.length, ctx.sampleRate);
+          buffer.copyToChannel(pcm, 0);
+          const now = ctx.currentTime;
+          // At most six sustained voices and one fading voice; the 30 ms gap
+          // exceeds the 8 ms steal fade. Prune by audio time even if onended is late.
+          for (const voice of voices)
+            if (voice.end <= now) {
+              voice.source.disconnect();
+              voice.gain.disconnect();
+              voices.delete(voice);
+            }
+          const sustained = [...voices].filter((voice) => !voice.retiring);
+          if (sustained.length >= 6) {
+            const old = sustained[0];
+            old.retiring = true;
+            old.gain.gain.setValueAtTime(old.level, now);
+            old.gain.gain.linearRampToValueAtTime(0, now + 0.008);
+            old.source.stop(now + 0.009);
+            old.end = now + 0.009;
+          }
+          const source = ctx.createBufferSource();
+          const gain = ctx.createGain();
+          const level = vary ? 0.92 + Math.random() * 0.16 : 1;
+          gain.gain.value = level;
+          source.buffer = buffer;
+          source.connect(gain).connect(input);
+          const start = now + 0.005;
+          const voice = { source, gain, level, end: start + buffer.duration, retiring: false };
+          voices.add(voice);
+          source.onended = () => {
+            source.disconnect();
+            gain.disconnect();
+            voices.delete(voice);
+          };
+          source.start(start);
+          strike++;
+          status.textContent = `${p.name} · tap ${strike} · ${vary ? "varied" : "reference"} · ${Math.round(buffer.duration * 1000)} ms · generated in ${generationMs.toFixed(1)} ms`;
+        } catch (error) {
+          status.textContent = error.message || "Audio could not start. Tap again to retry.";
+        }
+      }
+
+      volume.addEventListener("input", () => {
+        document.querySelector("#volume-value").textContent = `${volume.value}%`;
+        // setTargetAtTime replaces the previous target smoothly, including fast drags.
+        if (ctx)
+          master.gain.setTargetAtTime((Number(volume.value) / 100) * 0.22, ctx.currentTime, 0.005);
+      });
+
+      for (const p of MATERIALS) {
+        const row = document.createElement("section");
+        row.className = "material";
+        row.setAttribute("aria-label", p.name);
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "tap";
+        button.style.setProperty("--swatch", p.color);
+        button.setAttribute("aria-label", `Tap ${p.name.toLowerCase()}`);
+        button.innerHTML = `<strong>${p.name}</strong><span>${p.note}</span>`;
+        button.addEventListener("click", () => tap(p));
+        const params = document.createElement("dl");
+        const grainInfo = p.grains
+          ? `; grains ${p.grains.join("/")} ms × ${p.grainLength} ms @ ${p.grainGain}`
+          : "";
+        params.innerHTML = `<div><dt>Modes · Hz × ratios</dt><dd>${p.f} × [${p.ratios.join(", ")}]</dd></div><div><dt>Decay τ · ms</dt><dd>[${p.tau.join(", ")}]</dd></div><div><dt>Body · attack</dt><dd>${p.body} gain · ${p.attack} ms</dd></div><div><dt>Contact · low-pass · decay</dt><dd>${p.noise} gain · ${p.cutoff} Hz · ${p.noiseTau} ms${grainInfo}</dd></div>`;
+        row.append(button, params);
+        document.querySelector("#materials").append(row);
+      }
+    </script>
+  </body>
+</html>
