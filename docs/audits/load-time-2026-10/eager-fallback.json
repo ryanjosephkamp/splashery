@@ -1,0 +1,167 @@
+{
+  "runtimeSource": "30ed36e55974a012d2d6042a6a97d4fa5fe04007",
+  "mainSource": "c13a9d3fab17c8a928299bdf115003502a7823d4",
+  "files": [
+    {
+      "path": "src/app.js",
+      "sameAsMain": true,
+      "sha256": "44dc91a4606633ed084523ac958b963297d5c481d42738e22f93403c1c8ec48b"
+    },
+    {
+      "path": "src/player.js",
+      "sameAsMain": true,
+      "sha256": "f4c5402592a3771552bf094c5c8b74e4feb696e3945927347e66a02bbd48856e"
+    },
+    {
+      "path": "src/ui.js",
+      "sameAsMain": true,
+      "sha256": "deda36e39e200aabaeea481ba5a36b713e0cb3428d8d9d7ed7d622924e424fe2"
+    },
+    {
+      "path": "src/embed.js",
+      "sameAsMain": true,
+      "sha256": "0b5451100ab5cf782d79cc5d65114e20bdbb33766153d84b7a11fb0b136600a4"
+    },
+    {
+      "path": "src/pc.js",
+      "sameAsMain": true,
+      "sha256": "2a60781524604d99365ea1981d290cf8346b19ddee5cc7b5cbb9adf66c091799"
+    },
+    {
+      "path": "src/stage.js",
+      "sameAsMain": true,
+      "sha256": "9182ed245aff2195c52a865883dcc97ab61f4fbbf83105ae63f55ce39f08bf6c"
+    },
+    {
+      "path": "src/rigs.js",
+      "sameAsMain": true,
+      "sha256": "86473e7f550aea1a8f47eaf67d7ebf44a84c533e124907aa7c10bbf70af6f6c7"
+    },
+    {
+      "path": "src/motion.js",
+      "sameAsMain": true,
+      "sha256": "4583648ec2c5df3f3826c9ace35c2fed3f8e3e00f32da32d12d7fec8ea796c5e"
+    },
+    {
+      "path": "src/camera.js",
+      "sameAsMain": true,
+      "sha256": "801e8f60ff75942db03263a39bfaa6dc7e5336cca248250020b23cb20a6afcb2"
+    },
+    {
+      "path": "src/effects.js",
+      "sameAsMain": true,
+      "sha256": "ec5ea4938aaacf69f231ac39330b1cfaec6f9996d6458a0b8e1a02f6dfeaabd3"
+    },
+    {
+      "path": "src/generators.js",
+      "sameAsMain": true,
+      "sha256": "2caaa058fa3d86c09f1dad734c81cdc57454d43d34059f42aa954df738ee10ea"
+    },
+    {
+      "path": "src/toys.js",
+      "sameAsMain": true,
+      "sha256": "8feeb254147740faebe6c95400971202f373ce203e5e657d61fc40784d2d494f"
+    },
+    {
+      "path": "src/toy-help.js",
+      "sameAsMain": true,
+      "sha256": "04820d2a9276a79fbd284cbf62a6bcc6e90f94f7c894117e2c8148c0a9f678d2"
+    }
+  ],
+  "protected": {
+    "count": 388,
+    "prCounts": {
+      "560": 37,
+      "562": 124,
+      "566": 86,
+      "581": 25,
+      "582": 123
+    },
+    "intersections": [],
+    "checkedAt": "2026-10-15 20:58:55 UTC",
+    "method": "GitHub connector: every paginated changed-file page from each of the five protected PRs."
+  },
+  "staticGraph": {
+    "method": "Babel AST: static import/export declarations reachable from src/app.js, including comments and re-exports. Dynamic imports excluded. gifenc resolved through existing import map.",
+    "mainModules": 55,
+    "candidateModules": 54,
+    "candidateOnly": [],
+    "mainOnly": ["vendor/gifenc/gifenc.esm.js"],
+    "sourcePin": "b222e93aad709e03dd7b3814d456612ebaf6c900",
+    "unchangedOnFinalRevision": "30ed36e55974a012d2d6042a6a97d4fa5fe04007"
+  },
+  "regressions": [
+    {
+      "case": "renderer creation retains main's order before shared-scene decoding",
+      "redSource": "97774b0b75730383065f6ee8caf4b0a26bdb146d",
+      "red": "Renderer had not started after 10 seconds while deflate-raw decoding was held.",
+      "greenSource": "703895e54a5ddcd851afd70524fe75102d48264a",
+      "green": "Renderer starts before release; shared Sunglasses scene loads after release.",
+      "renderer": "WebGL2 llvmpipe"
+    },
+    {
+      "case": "an unused PDF decompressor cannot block an ordinary opening",
+      "redSource": "703895e54a5ddcd851afd70524fe75102d48264a",
+      "red": "Body never became ready within 10 seconds while gzip.js response was held.",
+      "greenSource": "0bd9b10a8050a54d2063c19083a7c9c54ef504cb",
+      "green": "Ordinary opening becomes ready without releasing gzip.js.",
+      "renderer": "none; Chromium headless"
+    },
+    {
+      "case": "unused manual edition metadata cannot block an ordinary opening",
+      "redSource": "0bd9b10a8050a54d2063c19083a7c9c54ef504cb",
+      "red": "Body never became ready within 10 seconds while pdf-edition.js response was held.",
+      "greenSource": "b222e93aad709e03dd7b3814d456612ebaf6c900",
+      "green": "Ordinary opening becomes ready without releasing pdf-edition.js.",
+      "renderer": "none; Chromium headless"
+    },
+    {
+      "cases": [
+        "sunglasses retains the original full scan at phone detail",
+        "soda-can retains the original full scan at phone detail",
+        "fountain-pen retains the original full scan at phone detail"
+      ],
+      "redSource": "b222e93aad709e03dd7b3814d456612ebaf6c900",
+      "red": {
+        "failed": 3,
+        "reason": "Original full file was not read; the prefix path remained active."
+      },
+      "greenSource": "30ed36e55974a012d2d6042a6a97d4fa5fe04007",
+      "green": {
+        "passed": 3,
+        "reason": "The unchanged original full file is read; no prefix file is read."
+      },
+      "scope": "Node tests use actual filesystem reads and the production prepare methods, with query-isolated scan caches. They do not launch a browser or modify controls, clocks, or geometry."
+    }
+  ],
+  "independentReview": {
+    "status": "No remaining findings after the static metadata dependency was removed.",
+    "reviewedRuntime": "b222e93aad709e03dd7b3814d456612ebaf6c900",
+    "method": "Read-only source inspection, no browsers or tests.",
+    "finalScanFallback": {
+      "reviewedRuntime": "30ed36e55974a012d2d6042a6a97d4fa5fe04007",
+      "status": "No blocking correctness or measurement-source findings. Report grammar and default input paths corrected.",
+      "scope": "Read-only b222e93a..30ed36e5 source and report overlay inspection; no browsers, tests, or edits by the reviewer."
+    }
+  },
+  "originalTestUpstreamFix": {
+    "commit": "5c187e64",
+    "description": "Main added camera settling and effect-state readiness before the original return-image poll; this PR did not edit the protected smoke test. Original-body repeated comparison remains separate."
+  },
+  "startupMeasurementSource": "b222e93aad709e03dd7b3814d456612ebaf6c900",
+  "fullScanFallback": {
+    "baseCandidateSource": "b222e93aad709e03dd7b3814d456612ebaf6c900",
+    "finalCandidateSource": "30ed36e55974a012d2d6042a6a97d4fa5fe04007",
+    "frozenMain": "c13a9d3fab17c8a928299bdf115003502a7823d4",
+    "onlyRuntimeFileChanged": "src/packs/real-objects.js",
+    "onlyRuntimeChange": "Remove Sunglasses, Soda can, and Fountain pen from OPENING_SHARES. Their low/mid openings now request the unchanged original full files; all other selectors and loader/build functions are byte-identical.",
+    "retestedGroups": ["phone:sunglasses", "phone:soda-can", "phone:fountain-pen"],
+    "carriedForwardGroups": 25,
+    "carriedForwardScope": "Earlier groups retain their actual b222e93a source pins. The only runtime change disables prefixes for these three IDs; the other 25 groups already select the same files and build code. No carried measurement is relabeled as collected on the final revision.",
+    "retainedGeneratedPrefixes": {
+      "activeIds": ["water-bottle", "baseball-cap"],
+      "inactiveIds": ["sunglasses", "soda-can", "fountain-pen"],
+      "note": "Inactive prefix assets and their unchanged-byte proofs are retained as generated artifacts. Runtime requests use the original full scan for these three IDs at every detail setting."
+    }
+  }
+}

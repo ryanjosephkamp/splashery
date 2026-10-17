@@ -1,0 +1,83 @@
+{
+  "candidateSource": "2b5eaae37a07961de240a4b426a90c6a91060787",
+  "mainSource": "226644fb2b4e70dbd02136caec8e0f57c9f7f662",
+  "method": "Same final five-pair phone observations as current-results.json. Navigation-relative CDP loadingFinished times, summarized without raw request traces. Response completion is not module evaluation, GPU setup, or GPU-finished readiness; a scan finishing before GPU setup leaves those later stages inside the remaining interval. These measurements do not establish the cause of first-frame differences.",
+  "groups": {
+    "sunglasses": {
+      "before": {
+        "samples": 5,
+        "engineResponseFinish": {
+          "medianMs": 279.4179999982589,
+          "minMs": 102.7700000013283,
+          "maxMs": 1205.9750000007625
+        },
+        "scanResponseFinish": {
+          "medianMs": 2176.441999999952,
+          "minMs": 1474.4720000016969,
+          "maxMs": 3045.546999997896
+        },
+        "scanResponseFinishToFirstFrame": {
+          "medianMs": 645.8279999990482,
+          "minMs": 493.27000000179396,
+          "maxMs": 1118.353000000614
+        }
+      },
+      "after": {
+        "samples": 5,
+        "engineResponseFinish": {
+          "medianMs": 335.36499999900116,
+          "minMs": 132.6100000005681,
+          "maxMs": 913.6030000008759
+        },
+        "scanResponseFinish": {
+          "medianMs": 1498.4670000012557,
+          "minMs": 734.770999999455,
+          "maxMs": 1716.5710000008403
+        },
+        "scanResponseFinishToFirstFrame": {
+          "medianMs": 1963.2289999961795,
+          "minMs": 1198.3289999983099,
+          "maxMs": 2333.1269999986107
+        }
+      }
+    },
+    "soda-can": {
+      "before": {
+        "samples": 5,
+        "engineResponseFinish": {
+          "medianMs": 159.20699999696808,
+          "minMs": 128.52399999974295,
+          "maxMs": 419.4040000002133
+        },
+        "scanResponseFinish": {
+          "medianMs": 2276.551000002655,
+          "minMs": 1701.4510000008158,
+          "maxMs": 2630.0109999974666
+        },
+        "scanResponseFinishToFirstFrame": {
+          "medianMs": 737.0489999991842,
+          "minMs": 663.4840000017721,
+          "maxMs": 981.8890000047686
+        }
+      },
+      "after": {
+        "samples": 5,
+        "engineResponseFinish": {
+          "medianMs": 141.70600000215927,
+          "minMs": 87.47199999925215,
+          "maxMs": 1282.1100000001024
+        },
+        "scanResponseFinish": {
+          "medianMs": 1174.2730000005395,
+          "minMs": 972.4400000013702,
+          "maxMs": 3099.0830000009737
+        },
+        "scanResponseFinishToFirstFrame": {
+          "medianMs": 2498.0660000008065,
+          "minMs": 1250.2269999994605,
+          "maxMs": 3817.816999997536
+        }
+      }
+    }
+  }
+}

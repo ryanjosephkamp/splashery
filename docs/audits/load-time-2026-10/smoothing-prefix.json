@@ -1,0 +1,25 @@
+{
+  "id": "celestial-globe",
+  "budget": 90000,
+  "capacity": 77400,
+  "originalCount": 295555,
+  "source": "assets/toys/celestial-globe/celestial-globe.splats",
+  "file": "assets/toys/celestial-globe/celestial-globe-opening.splats.gz",
+  "sourceSha256": "fb0422f1cce7c4e850d507d9e1a29ca550beb6172bc0961378edf4f74449ee14",
+  "rawSha256": "e259e75183e7742dd7c3ff813a98b2b51cdd1468101d3ae4de4ec99d039f39bb",
+  "sha256": "c822f22f4e868c46d96968945208536fdb262e9eb130f97acb89ead903b84426",
+  "beforeBytes": 4137814,
+  "afterBytes": 1744127,
+  "rawBytes": 2941256,
+  "meanCell": 0.012,
+  "meanPrecision": "IEEE 754 Float64; no rounding to Float32",
+  "credit": {
+    "author": "Virtual Museums of Małopolska",
+    "license": "CC0 1.0",
+    "url": "https://sketchfab.com/3d-models/celestial-globe-341fa8a777e94883841409438756f747",
+    "checked": "October 13, 2026",
+    "nc": false,
+    "inheritedFrom": "tools/models.json and the toy's in-app credit",
+    "transformation": "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6)."
+  }
+}

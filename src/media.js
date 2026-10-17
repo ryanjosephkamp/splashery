@@ -28,6 +28,16 @@
 import { LIMITS } from "./loaders.js";
 import { normalizeMediaURL } from "./state.js";
 
+// Exact static gzip files, including servers that already decoded Content-Encoding.
+async function gzipBytes(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Could not load ${new URL(url, location.href).pathname}`);
+  const bytes = new Uint8Array(await response.arrayBuffer());
+  if (bytes[0] !== 0x1f || bytes[1] !== 0x8b) return bytes;
+  const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
 const ROOT = new URL("../", import.meta.url);
 const PDFJS = new URL("vendor/pdfjs/", ROOT).href;
 
@@ -149,6 +159,31 @@ async function readSource(source, limits) {
   if (typeof source === "string") {
     const url = checkMediaURL(source);
     const name = decodeURIComponent(new URL(url).pathname.split("/").pop() || "picture");
+    // The site's manual is an exact gzip copy, with its original PDF retained.
+    // Its PDF decoder can load while the document transfers.
+    if (
+      url.startsWith(new URL("manual/", ROOT).href) &&
+      typeof DecompressionStream === "function"
+    ) {
+      // Ordinary toys retain main's module graph. The edition is needed only
+      // for a local manual; the Pictures pack already imports it when opened.
+      const { MANUAL_PDF } = await import("../manual/pdf-edition.js");
+      if (
+        ["tinkerers-manual.pdf", MANUAL_PDF].some(
+          (file) => url === new URL(`manual/${file}`, ROOT).href,
+        )
+      ) {
+        try {
+          const [bytes] = await Promise.all([gzipBytes(`${url}.gz`), loadPDFJS()]);
+          if (bytes.byteLength > limits.bytes) throw tooBig(bytes.byteLength, limits.bytes);
+          const blob = new Blob([bytes], { type: "application/pdf" });
+          return { kind: "pdf", name, blob, size: blob.size, url };
+        } catch (error) {
+          if (error instanceof MediaError) throw error;
+          // A missing compressed copy uses the existing original request below.
+        }
+      }
+    }
     let res;
     try {
       res = await fetch(url, { mode: "cors", credentials: "omit" });

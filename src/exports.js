@@ -2,7 +2,6 @@
 // live recording (Record, UI r5), JSON downloads, and the embed snippets
 // (iframe and custom element).
 
-import { GIFEncoder, quantize, applyPalette } from "gifenc";
 import { encodeSceneHash } from "./codec.js";
 import { formatBytes } from "./state.js";
 
@@ -44,6 +43,7 @@ export async function encodeGIF({
   loopMs = 4000,
   onProgress,
 }) {
+  const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
   const gif = GIFEncoder();
   const delay = Math.max(20, Math.round(loopMs / frames));
   for (let i = 0; i < frames; i++) {

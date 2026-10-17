@@ -1,0 +1,58 @@
+{
+  "at": "2026-10-14T20:25:41.248275+00:00",
+  "method": "Actual public GitHub Pages GET via curl --compressed. size_download counts transferred body bytes; curl writes decoded bytes, which are compared byte-for-byte with the local source. This is a per-file production check, not a production per-toy opening measurement.",
+  "files": [
+    {
+      "source": "vendor/playcanvas/playcanvas.min.mjs",
+      "url": "https://ryanjosephkamp.github.io/splashery/vendor/playcanvas/playcanvas.min.mjs",
+      "status": 200,
+      "headers": {
+        "content-type": "text/javascript; charset=utf-8",
+        "content-encoding": "gzip",
+        "vary": "Accept-Encoding",
+        "content-length": "640711"
+      },
+      "wireBytes": 640711,
+      "decodedBytes": 2465494,
+      "decodedSha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c",
+      "localSourceMatches": true,
+      "customGzipBytes": 634277,
+      "customGzipWireDifference": 6434
+    },
+    {
+      "source": "src/toy-help.js",
+      "url": "https://ryanjosephkamp.github.io/splashery/src/toy-help.js",
+      "status": 200,
+      "headers": {
+        "content-type": "application/javascript; charset=utf-8",
+        "content-encoding": "gzip",
+        "vary": "Accept-Encoding",
+        "content-length": "118347"
+      },
+      "wireBytes": 118347,
+      "decodedBytes": 344750,
+      "decodedSha256": "0e001f275863316e35e529db7c4d5f7ad02f86d4ca6ce4f7daa9739157169c45",
+      "localSourceMatches": true,
+      "customGzipBytes": 115853,
+      "customGzipWireDifference": 2494
+    },
+    {
+      "source": "manual/tinkerers-manual-85d32b96193ea275.pdf",
+      "url": "https://ryanjosephkamp.github.io/splashery/manual/tinkerers-manual-85d32b96193ea275.pdf",
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "vary": "Accept-Encoding",
+        "content-length": "7792711"
+      },
+      "wireBytes": 7792711,
+      "decodedBytes": 7792711,
+      "decodedSha256": "85d32b96193ea27502854ded8910470b1f50f571aae61adf1847972b5bfc54f7",
+      "localSourceMatches": true,
+      "customGzipBytes": 5858411,
+      "customGzipWireDifference": 1934300
+    }
+  ],
+  "decision": "Retain native PlayCanvas URL, preload, and ES module entry. Its public response already uses gzip and matches the vendored source. Remove the full-body custom decode/Blob/import-map bootstrap; the localhost plain-server engine saving does not represent a comparable production-wire saving.",
+  "candidateLimitation": "Custom gzip sizes are local proposed file sizes compared with measured public original response bodies. Candidate gzip files have not been deployed; their public HTTP transfer size has not been measured."
+}

@@ -13,7 +13,69 @@ import { surfacePoints } from "../physics/world.js"; // lanes Hands-on H1 and H3
 
 // ---- The baked models ------------------------------------------------------------------------
 
+// Exact ROS1 scans, ROP1 prefixes, and ROP2 prefixes with original Float64
+// smoothing means. No DOM or engine dependencies.
+// Decodes a .splats file (the format is at the top of tools/ro-bake.mjs).
+export function decodeSplats(bytes) {
+  if (bytes.byteLength < 44) throw new Error("A truncated Real objects splat file.");
+  const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const magic = String.fromCharCode(bytes[0], bytes[1], bytes[2], bytes[3]);
+  if (!["ROS1", "ROP1", "ROP2"].includes(magic)) throw new Error("Not a Real objects splat file.");
+  const n = dv.getUint32(4, true);
+  const parts = dv.getUint32(8, true);
+  const opening = magic !== "ROS1";
+  const means = magic === "ROP2";
+  const offset = means ? 56 : opening ? 48 : 44;
+  if (bytes.byteLength < offset) throw new Error("A truncated Real objects splat file.");
+  const capacity = opening ? dv.getUint32(44, true) : n;
+  if (!capacity || capacity > n || bytes.byteLength !== offset + capacity * (means ? 38 : 14))
+    throw new Error("A broken Real objects splat file.");
+  const f = (k) => dv.getFloat32(12 + k * 4, true);
+  const lo = [f(0), f(1), f(2)];
+  const hi = [f(3), f(4), f(5)];
+  const sLo = f(6);
+  const sHi = f(7);
+  const pos = new Float32Array(capacity * 3);
+  const nrm = new Float32Array(capacity * 3);
+  const sig = new Float32Array(capacity);
+  const rgb = new Float32Array(capacity * 3);
+  const part = new Uint8Array(capacity);
+  let o = offset;
+  for (let i = 0; i < capacity; i++) {
+    for (let k = 0; k < 3; k++) {
+      pos[i * 3 + k] = lo[k] + (dv.getUint16(o + k * 2, true) / 65535) * (hi[k] - lo[k]);
+      nrm[i * 3 + k] = dv.getInt8(o + 6 + k) / 127;
+      rgb[i * 3 + k] = bytes[o + 10 + k] / 255;
+    }
+    sig[i] = Math.exp(sLo + (bytes[o + 9] / 255) * (sHi - sLo));
+    part[i] = bytes[o + 13];
+    o += 14;
+  }
+  // n remains the full scan's count: addScan's size and sampling math must
+  // stay exactly the same when only its used records were transferred.
+  const scan = { n, capacity, parts, pos, nrm, sig, rgb, part };
+  if (means) {
+    scan.meanCell = dv.getFloat64(48, true);
+    if (!Number.isFinite(scan.meanCell) || scan.meanCell <= 0)
+      throw new Error("A broken Real objects smoothing cell.");
+    scan.meanColor = new Float64Array(capacity * 3);
+    for (let i = 0; i < scan.meanColor.length; i++) {
+      const v = dv.getFloat64(o + i * 8, true);
+      if (!Number.isFinite(v) || v < 0 || v > 1)
+        throw new Error("A broken Real objects smoothing mean.");
+      scan.meanColor[i] = v;
+    }
+  }
+  return scan;
+}
+
 const SCANS = new Map();
+// These recipes read only the rendered prefix; they neither smooth colors
+// across the full scan nor use its tail to build extra geometry.
+const OPENING_SHARES = {
+  "water-bottle": 0.8,
+  "baseball-cap": 0.78,
+};
 
 async function readBytes(rel) {
   const url = new URL(rel, import.meta.url);
@@ -26,39 +88,23 @@ async function readBytes(rel) {
   return new Uint8Array(await r.arrayBuffer());
 }
 
-// Decodes a .splats file (the format is at the top of tools/ro-bake.mjs).
-export function decodeSplats(bytes) {
-  const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
-  const magic = String.fromCharCode(bytes[0], bytes[1], bytes[2], bytes[3]);
-  if (magic !== "ROS1") throw new Error("Not a Real objects splat file.");
-  const n = dv.getUint32(4, true);
-  const parts = dv.getUint32(8, true);
-  const f = (k) => dv.getFloat32(12 + k * 4, true);
-  const lo = [f(0), f(1), f(2)];
-  const hi = [f(3), f(4), f(5)];
-  const sLo = f(6);
-  const sHi = f(7);
-  const pos = new Float32Array(n * 3);
-  const nrm = new Float32Array(n * 3);
-  const sig = new Float32Array(n);
-  const rgb = new Float32Array(n * 3);
-  const part = new Uint8Array(n);
-  let o = 44;
-  for (let i = 0; i < n; i++) {
-    for (let k = 0; k < 3; k++) {
-      pos[i * 3 + k] = lo[k] + (dv.getUint16(o + k * 2, true) / 65535) * (hi[k] - lo[k]);
-      nrm[i * 3 + k] = dv.getInt8(o + 6 + k) / 127;
-      rgb[i * 3 + k] = bytes[o + 10 + k] / 255;
-    }
-    sig[i] = Math.exp(sLo + (bytes[o + 9] / 255) * (sHi - sLo));
-    part[i] = bytes[o + 13];
-    o += 14;
+async function loadScan(id, ctx) {
+  const budget = ["low", "weak"].includes(ctx?.profile)
+    ? 90000
+    : ctx?.profile === "mid"
+      ? 210000
+      : 0;
+  const prefix = OPENING_SHARES[id] && ctx?.count > 0 && ctx.count <= budget;
+  const capacity = prefix ? Math.floor(budget * OPENING_SHARES[id]) : null;
+  const cached = SCANS.get(id);
+  if (!cached || cached.capacity < (prefix ? Math.min(capacity, cached.n) : cached.n)) {
+    const suffix = prefix ? (budget === 90000 ? "-opening" : "-opening-mid") : "";
+    const loaded = decodeSplats(await readBytes(`../../assets/toys/${id}/${id}${suffix}.splats`));
+    // Two players can load different tiers together. A late smaller read
+    // must not replace records the larger player's build still needs.
+    const latest = SCANS.get(id);
+    if (!latest || loaded.capacity > latest.capacity) SCANS.set(id, loaded);
   }
-  return { n, parts, pos, nrm, sig, rgb, part };
-}
-
-async function loadScan(id) {
-  if (!SCANS.has(id)) SCANS.set(id, decodeSplats(await readBytes(`../../assets/toys/${id}/${id}.splats`))); // prettier-ignore
   return SCANS.get(id);
 }
 
@@ -94,11 +140,19 @@ export function addScan(
 ) {
   k.data = k.data || {}; // sortWhileMoving keeps its state here
   const m = Math.min(scan.n, Math.max(1000, Math.floor(k.count * share)));
+  const bakedMean =
+    scan.meanCell === cell &&
+    scan.meanColor instanceof Float64Array &&
+    scan.meanColor.length >= m * 3;
+  if (m > scan.capacity || (smooth > 0 && scan.capacity < scan.n && !bakedMean))
+    throw new Error("This scan needs its full records at this detail setting.");
   const grow = Math.sqrt(scan.n / m);
   const list = [];
   for (let i = 0; i < m; i++) if (!keep || keep(scan.part[i], i)) list.push(i);
   let mean = null;
-  if (smooth > 0) {
+  if (smooth > 0 && bakedMean) {
+    mean = (i) => [scan.meanColor[i * 3], scan.meanColor[i * 3 + 1], scan.meanColor[i * 3 + 2]];
+  } else if (smooth > 0) {
     // Mean color per grid cell (and part), over every splat in the file.
     const sums = new Map();
     const key = (i) =>
@@ -359,8 +413,8 @@ const WATER_BOTTLE = {
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
     },
   ],
-  async prepare() {
-    await loadScan("water-bottle");
+  async prepare(_options, _help, ctx) {
+    await loadScan("water-bottle", ctx);
   },
   drive(t, c, out, info) {
     const on = c.pour > 0;
@@ -578,8 +632,8 @@ const SUNGLASSES = {
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
     },
   ],
-  async prepare() {
-    await loadScan("sunglasses");
+  async prepare(_options, _help, ctx) {
+    await loadScan("sunglasses", ctx);
   },
   drive(t, c, out, info) {
     const on = c.flip > 0;
@@ -721,8 +775,8 @@ const BASEBALL_CAP = {
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
     },
   ],
-  async prepare() {
-    await loadScan("baseball-cap");
+  async prepare(_options, _help, ctx) {
+    await loadScan("baseball-cap", ctx);
   },
   drive(t, c, out, info) {
     const on = c.toss > 0;
@@ -908,8 +962,8 @@ const FOUNTAIN_PEN = {
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
     },
   ],
-  async prepare() {
-    await loadScan("fountain-pen");
+  async prepare(_options, _help, ctx) {
+    await loadScan("fountain-pen", ctx);
   },
   drive(t, c, out, info) {
     const on = c.write > 0;
@@ -1161,8 +1215,8 @@ const SODA_CAN = {
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
     },
   ],
-  async prepare() {
-    await loadScan("soda-can");
+  async prepare(_options, _help, ctx) {
+    await loadScan("soda-can", ctx);
   },
   drive(t, c, out, info) {
     const on = c.open > 0;

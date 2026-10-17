@@ -1,0 +1,109 @@
+[
+  {
+    "id": "water-bottle",
+    "url": "https://sketchfab.com/3d-models/water-bottle-42827e2ce39145eda296e6d6524f4c3d",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "danny_p3d",
+    "authorTextFound": true,
+    "inheritedLicense": "CC BY 4.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "sunglasses",
+    "url": "https://polyhaven.com/a/round_spectacles",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "Sean Buckley",
+    "authorTextFound": true,
+    "inheritedLicense": "CC0 1.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "baseball-cap",
+    "url": "https://sketchfab.com/3d-models/baseball-cap-1c1d34d73fd94e6b9e8f82b1eb7194a0",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "Scott VanArsdale",
+    "authorTextFound": true,
+    "inheritedLicense": "CC BY 4.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "fountain-pen",
+    "url": "https://sketchfab.com/3d-models/af3606f31c4343859d887049a1908fb0",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "chemicalX",
+    "authorTextFound": true,
+    "inheritedLicense": "CC BY 4.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "soda-can",
+    "url": "https://sketchfab.com/3d-models/soda-can-f3560f1b73a1498d9313a0f10fd11ef6",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "RoutineStudio",
+    "authorTextFound": true,
+    "inheritedLicense": "CC BY 4.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "celestial-globe",
+    "url": "https://sketchfab.com/3d-models/celestial-globe-341fa8a777e94883841409438756f747",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "Virtual Museums of Małopolska",
+    "matchedAuthorText": "Virtual Museums",
+    "inheritedLicense": "CC0 1.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "armillary-sphere",
+    "url": "https://sketchfab.com/3d-models/armillary-sphere-1771-41e23659c75241459eec6477d9e77c93",
+    "finalUrl": "https://sketchfab.com/3d-models/armillary-sphere-1771-41e23659c75241459eec6477d9e77c93",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "licenseLinks": [
+      "http://creativecommons.org/licenses/by/4.0/",
+      "http://creativecommons.org/licenses/by/4.0/&#34;,"
+    ],
+    "terms": {
+      "CC BY": false,
+      "CC BY-NC": false,
+      "Viola Winkler": false,
+      "VMM": true
+    },
+    "verifiedLicense": "CC BY 4.0",
+    "authorVerified": true
+  },
+  {
+    "id": "stannern-meteorites",
+    "url": "https://datarepository.nhm-wien.ac.at/10.57756/cuqmeh",
+    "finalUrl": "https://datarepository.nhm-wien.ac.at/10.57756/cuqmeh",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "licenseLinks": ["https://creativecommons.org/licenses/by-nc/4.0/legalcode"],
+    "terms": {
+      "CC BY": true,
+      "CC BY-NC": true,
+      "Viola Winkler": false,
+      "VMM": false
+    },
+    "verifiedLicense": "CC BY-NC 4.0",
+    "authorVerified": true
+  },
+  {
+    "id": "pyrite-cubes",
+    "url": "https://sketchfab.com/3d-models/pyrite-0b7c6e8e32144b72806ed31cb49b4145",
+    "status": 503,
+    "checked": "October 14, 2026",
+    "verificationUrl": "https://api.sketchfab.com/v3/models/0b7c6e8e32144b72806ed31cb49b4145",
+    "verificationStatus": 200,
+    "licenseLabel": "CC0 Public Domain",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "author": "Digital Atlas of Ancient Life",
+    "note": "The model page temporarily failed; its live model API confirms CC0 and the author."
+  }
+]

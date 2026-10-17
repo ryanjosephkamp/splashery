@@ -1,0 +1,343 @@
+{
+  "method": "Predeclared five adjacent alternating pairs for each of the12 previously slower groups; both phases open the identical frozen main URL on4174. This independent control is never pooled with candidate measurements.",
+  "declaredAt": "2026-10-15T20:25:29.979Z",
+  "source": "c13a9d3fab17c8a928299bdf115003502a7823d4",
+  "methods": {
+    "before": {
+      "at": "2026-10-15T20:46:08.063Z",
+      "browser": "151.0.7922.173",
+      "args": [
+        "--use-gl=angle",
+        "--use-angle=gl",
+        "--hide-scrollbars",
+        "--enable-unsafe-swiftshader",
+        "--enable-webgl",
+        "--ignore-gpu-blocklist",
+        "--disable-background-timer-throttling",
+        "--disable-renderer-backgrounding",
+        "--disable-backgrounding-occluded-windows"
+      ],
+      "base": "http://127.0.0.1:4174",
+      "definitions": [
+        {
+          "name": "phone",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 3,
+          "isMobile": true,
+          "hasTouch": true,
+          "profile": "weak"
+        },
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "profile": "high"
+        }
+      ],
+      "frozenMain": "c13a9d3fab17c8a928299bdf115003502a7823d4",
+      "candidateSource": "c13a9d3fab17c8a928299bdf115003502a7823d4",
+      "host": {
+        "platform": "linux",
+        "architecture": "x64",
+        "availableCPUs": 4,
+        "mesaThreads": "3",
+        "processPriority": 10,
+        "display": ":99"
+      },
+      "sound": "off",
+      "seed": 424242,
+      "renderer": "webgl2",
+      "adaptation": "off",
+      "cache": "fresh context per toy; CDP cache disabled; service workers blocked",
+      "firstFrame": "navigation to first postrender after requested toy is ready",
+      "timeouts": {
+        "navigationMs": 180000,
+        "readinessMs": 300000,
+        "cellMs": 180000
+      },
+      "payload": "completed HTTP body bytes after 1500 ms settling; Content-Length with Resource Timing fallback, including worker imports; headers excluded",
+      "deviationFromTask06": "Linux llvmpipe instead of Mac Metal; opening metrics only, without the idle/tap frame-cadence windows"
+    },
+    "after": {
+      "at": "2026-10-15T20:46:17.269Z",
+      "browser": "151.0.7922.173",
+      "args": [
+        "--use-gl=angle",
+        "--use-angle=gl",
+        "--hide-scrollbars",
+        "--enable-unsafe-swiftshader",
+        "--enable-webgl",
+        "--ignore-gpu-blocklist",
+        "--disable-background-timer-throttling",
+        "--disable-renderer-backgrounding",
+        "--disable-backgrounding-occluded-windows"
+      ],
+      "base": "http://127.0.0.1:4174",
+      "definitions": [
+        {
+          "name": "phone",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 3,
+          "isMobile": true,
+          "hasTouch": true,
+          "profile": "weak"
+        },
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "profile": "high"
+        }
+      ],
+      "frozenMain": "c13a9d3fab17c8a928299bdf115003502a7823d4",
+      "candidateSource": "c13a9d3fab17c8a928299bdf115003502a7823d4",
+      "host": {
+        "platform": "linux",
+        "architecture": "x64",
+        "availableCPUs": 4,
+        "mesaThreads": "3",
+        "processPriority": 10,
+        "display": ":99"
+      },
+      "sound": "off",
+      "seed": 424242,
+      "renderer": "webgl2",
+      "adaptation": "off",
+      "cache": "fresh context per toy; CDP cache disabled; service workers blocked",
+      "firstFrame": "navigation to first postrender after requested toy is ready",
+      "timeouts": {
+        "navigationMs": 180000,
+        "readinessMs": 300000,
+        "cellMs": 180000
+      },
+      "payload": "completed HTTP body bytes after 1500 ms settling; Content-Length with Resource Timing fallback, including worker imports; headers excluded",
+      "deviationFromTask06": "Linux llvmpipe instead of Mac Metal; opening metrics only, without the idle/tap frame-cadence windows"
+    }
+  },
+  "groups": [
+    {
+      "id": "video-3d",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 2797.5,
+        "minMs": 2387.4000000003725,
+        "maxMs": 7315.5
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 2891.800000000745,
+        "minMs": 2189.5,
+        "maxMs": 5485.699999999255
+      },
+      "medianChangePercent": 3.370866845424314
+    },
+    {
+      "id": "living-city",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 3054,
+        "minMs": 2005.3999999985099,
+        "maxMs": 11700.900000000373
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 3197.4000000003725,
+        "minMs": 2275.199999999255,
+        "maxMs": 7816.0999999996275
+      },
+      "medianChangePercent": 4.695481335965046
+    },
+    {
+      "id": "celestial-globe",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 2387.9000000003725,
+        "minMs": 1867.699999999255,
+        "maxMs": 3771.5
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 2678.800000000745,
+        "minMs": 1852.800000000745,
+        "maxMs": 3014
+      },
+      "medianChangePercent": 12.182252188128784
+    },
+    {
+      "id": "crochet-earth",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 2543.199999999255,
+        "minMs": 2312.9000000003725,
+        "maxMs": 4964.5999999996275
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 2919.0999999996275,
+        "minMs": 2181.699999999255,
+        "maxMs": 3786
+      },
+      "medianChangePercent": 14.780591380956377
+    },
+    {
+      "id": "seeded-loaf",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 2539.7999999988824,
+        "minMs": 2228.5,
+        "maxMs": 15282.200000000186
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 2342.10000000149,
+        "minMs": 2233,
+        "maxMs": 5300.700000000186
+      },
+      "medianChangePercent": -7.78407748631701
+    },
+    {
+      "id": "moving-photo-3d",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 10389.599999999627,
+        "minMs": 7965.4000000003725,
+        "maxMs": 14714.400000000373
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 12936.900000000373,
+        "minMs": 8257.299999999814,
+        "maxMs": 17445.39999999851
+      },
+      "medianChangePercent": 24.51778701779508
+    },
+    {
+      "id": "turtle-souvenir",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 2730.300000000745,
+        "minMs": 1985.5999999996275,
+        "maxMs": 8702.699999999255
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 2562.0999999996275,
+        "minMs": 2229,
+        "maxMs": 2706
+      },
+      "medianChangePercent": -6.160495183718706
+    },
+    {
+      "id": "maple-tree",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 2553.5999999996275,
+        "minMs": 2440.300000000745,
+        "maxMs": 2735.10000000149
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 3056.0999999996275,
+        "minMs": 2492.699999999255,
+        "maxMs": 8553.89999999851
+      },
+      "medianChangePercent": 19.678101503762278
+    },
+    {
+      "id": "cave-lioness",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 3732.5,
+        "minMs": 1978.2000000001863,
+        "maxMs": 7124.199999999255
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 2811.4000000003725,
+        "minMs": 1973.1000000005588,
+        "maxMs": 3316.199999999255
+      },
+      "medianChangePercent": -24.677829872729472
+    },
+    {
+      "id": "soda-can",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 2315.5,
+        "minMs": 1755.2999999988824,
+        "maxMs": 3827.2999999998137
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 2726.699999999255,
+        "minMs": 1664.2999999998137,
+        "maxMs": 4151.699999999255
+      },
+      "medianChangePercent": 17.758583459263868
+    },
+    {
+      "id": "sunglasses",
+      "device": "phone",
+      "before": {
+        "n": 5,
+        "medianMs": 2602.199999999255,
+        "minMs": 1655.3999999985099,
+        "maxMs": 3995.2000000001863
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 2121.0999999996275,
+        "minMs": 1781.9000000003725,
+        "maxMs": 2472.5
+      },
+      "medianChangePercent": -18.488202290360668
+    },
+    {
+      "id": "pyrite-cubes",
+      "device": "desktop",
+      "before": {
+        "n": 5,
+        "medianMs": 3104.0999999996275,
+        "minMs": 2781.600000000559,
+        "maxMs": 3648.0999999996275
+      },
+      "after": {
+        "n": 5,
+        "medianMs": 5047.700000001118,
+        "minMs": 2401.5,
+        "maxMs": 5951.800000000745
+      },
+      "medianChangePercent": 62.61396217910904
+    }
+  ],
+  "higherMedians": 8,
+  "minMedianChangePercent": -24.677829872729472,
+  "maxMedianChangePercent": 62.61396217910904,
+  "interpretation": "Both phases are identical main code at the same HTTP origin, with fresh browsers and fixed samples. Any difference measures repeatability on this software renderer. This separate control is not pooled with candidate samples and does not prove that any specific candidate increase is noise."
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "id": "armillary-sphere",
+    "budget": 90000,
+    "capacity": 77400,
+    "originalCount": 286381,
+    "source": "assets/toys/armillary-sphere/armillary-sphere.splats",
+    "file": "assets/toys/armillary-sphere/armillary-sphere-opening.splats.gz",
+    "sourceSha256": "c1e6d204a53e3ac5f02cad3215ee265952ced837457ef8300e583650e6046a3c",
+    "rawSha256": "7c9332e5997041b4f40dd8497fb39f0376c01263c9284aa311c9371fad2ea7ec",
+    "sha256": "ca2dfc556ef5eb7cdddbf046280cd78a8e6e0392821de2ae4ca1834954442591",
+    "beforeBytes": 4009378,
+    "afterBytes": 1887314,
+    "rawBytes": 2941256,
+    "meanCell": 0.012,
+    "meanPrecision": "IEEE 754 Float64; no rounding to Float32",
+    "credit": {
+      "author": "Virtual Museums of Małopolska",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/armillary-sphere-1771-41e23659c75241459eec6477d9e77c93",
+      "checked": "October 13, 2026",
+      "nc": false,
+      "inheritedFrom": "tools/models.json and the toy's in-app credit",
+      "transformation": "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6)."
+    }
+  },
+  {
+    "id": "stannern-meteorites",
+    "budget": 90000,
+    "capacity": 77400,
+    "originalCount": 295717,
+    "source": "assets/toys/stannern-meteorites/stannern-meteorites.splats",
+    "file": "assets/toys/stannern-meteorites/stannern-meteorites-opening.splats.gz",
+    "sourceSha256": "6d99d79c3b9a7a5dcea9bf8fb95ffa69d38f261c0a820941ceb32c6827a136f9",
+    "rawSha256": "ca8240148c9f4564a12ef9ec362770232167714327f861158b0399b02b0071d0",
+    "sha256": "ce1c163144fc52e6792f2ed035bc8f59bda5601a317b6b573d936ff2823047c1",
+    "beforeBytes": 4140082,
+    "afterBytes": 2179245,
+    "rawBytes": 2941256,
+    "meanCell": 0.012,
+    "meanPrecision": "IEEE 754 Float64; no rounding to Float32",
+    "credit": {
+      "author": "Viola Winkler, Natural History Museum Vienna",
+      "license": "CC BY-NC 4.0",
+      "url": "https://datarepository.nhm-wien.ac.at/10.57756/cuqmeh",
+      "checked": "October 13, 2026",
+      "nc": true,
+      "inheritedFrom": "tools/models.json and the toy's in-app credit",
+      "transformation": "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6)."
+    }
+  },
+  {
+    "id": "pyrite-cubes",
+    "budget": 90000,
+    "capacity": 77400,
+    "originalCount": 256191,
+    "source": "assets/toys/pyrite-cubes/pyrite-cubes.splats",
+    "file": "assets/toys/pyrite-cubes/pyrite-cubes-opening.splats.gz",
+    "sourceSha256": "839b0763f08a5a2734cafe81480fbcd3755279a3f5c521cdc02a564b56908c07",
+    "rawSha256": "b6c8810552dca677caea93fd2f1b1ab7e1fe3b98a37fd544925a0d327ed2ea80",
+    "sha256": "bbe021d3148650ab2f271e225ee0247a5d94e3f64b58e3935d2ec775ae98495d",
+    "beforeBytes": 3586718,
+    "afterBytes": 1962488,
+    "rawBytes": 2941256,
+    "meanCell": 0.012,
+    "meanPrecision": "IEEE 754 Float64; no rounding to Float32",
+    "credit": {
+      "author": "Digital Atlas of Ancient Life (Paleontological Research Institution)",
+      "license": "CC0 1.0",
+      "url": "https://sketchfab.com/3d-models/pyrite-0b7c6e8e32144b72806ed31cb49b4145",
+      "checked": "October 14, 2026",
+      "nc": false,
+      "inheritedFrom": "tools/models.json and the toy's in-app credit",
+      "transformation": "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6)."
+    }
+  }
+]

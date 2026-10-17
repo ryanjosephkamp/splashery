@@ -1,0 +1,99 @@
+{
+  "method": "Original protected smoke test body and assertions, with an external Playwright fixture observer; production dt, controls, and animation are unchanged. State is recorded after each original PNG comparison, so it may lead the image by intervening frames. Raw per-frame records remain outside Git.",
+  "candidateSource": "9302132734fe38a8b7a7345ca2fe71c26fbbb0ab",
+  "mainSource": "226644fb2b4e70dbd02136caec8e0f57c9f7f662",
+  "renderer": "llvmpipe",
+  "display": ":98",
+  "mesaThreads": 3,
+  "phases": {
+    "candidate": {
+      "status": "failed",
+      "engineRequests": ["http://127.0.0.1:4173/vendor/playcanvas/playcanvas.min.mjs"],
+      "rows": [
+        {
+          "differentPixels": 89643,
+          "wallMs": 40239.5,
+          "simulationSeconds": 2.249900000000006,
+          "tapSeconds": 1.3166000000000024,
+          "sinceTapSeconds": 0.9333000000000036,
+          "pop": 0.5757727272727263,
+          "pausedAt": null,
+          "profile": "low",
+          "canvas": {
+            "width": 912,
+            "height": 800
+          },
+          "frames": 40,
+          "frameMsMedian": 705.9000000003725,
+          "frameMsMax": 7077,
+          "postTapUpdateGapMedianMs": 928.0999999996275,
+          "postTapUpdateGapMaxMs": 4607.699999999255
+        },
+        {
+          "differentPixels": 82058,
+          "wallMs": 55187.10000000149,
+          "simulationSeconds": 3.183300000000001,
+          "tapSeconds": 1.3166000000000024,
+          "sinceTapSeconds": 1.8666999999999985,
+          "pop": 0.15150000000000163,
+          "pausedAt": null,
+          "profile": "low",
+          "canvas": {
+            "width": 912,
+            "height": 800
+          },
+          "frames": 51,
+          "frameMsMedian": 790.3000000007451,
+          "frameMsMax": 7077,
+          "postTapUpdateGapMedianMs": 1099.0499999998137,
+          "postTapUpdateGapMaxMs": 4607.699999999255
+        }
+      ]
+    },
+    "main": {
+      "status": "failed",
+      "engineRequests": ["http://127.0.0.1:4174/vendor/playcanvas/playcanvas.min.mjs"],
+      "rows": [
+        {
+          "differentPixels": 82252,
+          "wallMs": 59246.09999999963,
+          "simulationSeconds": 2.2499000000000025,
+          "tapSeconds": 1.0833000000000028,
+          "sinceTapSeconds": 1.1665999999999996,
+          "pop": 0.4697272727272738,
+          "pausedAt": null,
+          "profile": "low",
+          "canvas": {
+            "width": 912,
+            "height": 800
+          },
+          "frames": 80,
+          "frameMsMedian": 31.09999999962747,
+          "frameMsMax": 6143.699999999255,
+          "postTapUpdateGapMedianMs": 19.09999999962747,
+          "postTapUpdateGapMaxMs": 3175.300000000745
+        },
+        {
+          "differentPixels": 81270,
+          "wallMs": 72150.40000000037,
+          "simulationSeconds": 3.0164999999999944,
+          "tapSeconds": 1.0833000000000028,
+          "sinceTapSeconds": 1.9331999999999916,
+          "pop": 0.12127272727273221,
+          "pausedAt": null,
+          "profile": "low",
+          "canvas": {
+            "width": 912,
+            "height": 800
+          },
+          "frames": 90,
+          "frameMsMedian": 398.3500000005588,
+          "frameMsMax": 6143.699999999255,
+          "postTapUpdateGapMedianMs": 21.59999999962747,
+          "postTapUpdateGapMaxMs": 4114.199999999255
+        }
+      ]
+    }
+  },
+  "conclusion": "Both observed executions fail before the unchanged 2.2-second pulse finishes. Candidate elapsed 1.8667/pop 0.1515; main elapsed 1.9332/pop 0.1213. Both use the original HTTP engine. This establishes an unfinished effect at the threshold and software-renderer frame-cadence limitation; it does not establish that the homepage fallback fixes the original failure or that compression caused it."
+}

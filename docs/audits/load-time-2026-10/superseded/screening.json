@@ -1,0 +1,4319 @@
+{
+  "matrixCellsPerPhase": 924,
+  "top20PhoneTargetsMet": 1,
+  "top20PhoneTotals": {
+    "before": 195425658,
+    "after": 191345809
+  },
+  "focusedTiming": [
+    {
+      "id": "cactus",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3566.2000000029802,
+        "min": 3188.39999999851,
+        "max": 4796.20000000298
+      },
+      "after": {
+        "samples": 5,
+        "median": 3057.2999999970198,
+        "min": 2625.6999999955297,
+        "max": 3403.7000000029802
+      }
+    },
+    {
+      "id": "tomatoes",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3274.10000000149,
+        "min": 2906.89999999851,
+        "max": 4552.89999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 3162.10000000149,
+        "min": 2631.89999999851,
+        "max": 6534.20000000298
+      }
+    },
+    {
+      "id": "mandeltorus",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2626.8000000044703,
+        "min": 2531.6999999955297,
+        "max": 2738.89999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 2420.9000000059605,
+        "min": 2279.89999999851,
+        "max": 5415.89999999851
+      }
+    },
+    {
+      "id": "basket",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3012.7999999970198,
+        "min": 2802.60000000149,
+        "max": 3643.60000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 2551.6999999955297,
+        "min": 2303.9000000059605,
+        "max": 3347.60000000149
+      }
+    },
+    {
+      "id": "heart-donut",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3177.5,
+        "min": 2739.6999999955297,
+        "max": 3299.7999999970198
+      },
+      "after": {
+        "samples": 5,
+        "median": 2583.0999999940395,
+        "min": 2127.1999999955297,
+        "max": 4100.80000000447
+      }
+    },
+    {
+      "id": "sushi-boat",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3040.10000000149,
+        "min": 2803.5,
+        "max": 5771.79999999702
+      },
+      "after": {
+        "samples": 5,
+        "median": 2788.3000000044703,
+        "min": 2468.7999999970198,
+        "max": 3392.89999999851
+      }
+    },
+    {
+      "id": "seeded-loaf",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3408.3000000044703,
+        "min": 2421.39999999851,
+        "max": 8063.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 2631.7000000029802,
+        "min": 2527.60000000149,
+        "max": 3313.7000000029802
+      }
+    },
+    {
+      "id": "dog-plush",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 4145.69999999553,
+        "min": 2811.6999999955297,
+        "max": 15302.10000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 2738.2000000029802,
+        "min": 2421.60000000149,
+        "max": 10307.69999999553
+      }
+    },
+    {
+      "id": "celestial-globe",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3519,
+        "min": 2270.0999999940395,
+        "max": 21404.69999999553
+      },
+      "after": {
+        "samples": 5,
+        "median": 2860,
+        "min": 2475.39999999851,
+        "max": 9013
+      }
+    },
+    {
+      "id": "pyrite-cubes",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3623.4000000059605,
+        "min": 2978,
+        "max": 4792
+      },
+      "after": {
+        "samples": 5,
+        "median": 8304.89999999851,
+        "min": 2239.7000000029802,
+        "max": 12532.39999999851
+      }
+    },
+    {
+      "id": "asteroid",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3699.1999999955297,
+        "min": 3196.7000000029802,
+        "max": 4379.30000000447
+      },
+      "after": {
+        "samples": 5,
+        "median": 3634.5999999940395,
+        "min": 2063,
+        "max": 7344.69999999553
+      }
+    },
+    {
+      "id": "black-hole",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2529.4000000059605,
+        "min": 2210.0999999940395,
+        "max": 9163.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 2828.60000000149,
+        "min": 2299.2000000029802,
+        "max": 5121.60000000149
+      }
+    },
+    {
+      "id": "fountain-pen",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2411.2000000029802,
+        "min": 1796.8999999985099,
+        "max": 5365.39999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 2410.60000000149,
+        "min": 1834.3000000044703,
+        "max": 3184.10000000149
+      }
+    },
+    {
+      "id": "water-bottle",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2999,
+        "min": 2406.39999999851,
+        "max": 3109.39999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 2753.7999999970198,
+        "min": 2422.7999999970198,
+        "max": 5218.89999999851
+      }
+    },
+    {
+      "id": "soda-can",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2605.10000000149,
+        "min": 2129,
+        "max": 3190.0999999940395
+      },
+      "after": {
+        "samples": 5,
+        "median": 3638.4000000059605,
+        "min": 2150.2000000029802,
+        "max": 6416.79999999702
+      }
+    },
+    {
+      "id": "sunglasses",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2333.4000000059605,
+        "min": 2094.6999999955297,
+        "max": 3735.60000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 4112,
+        "min": 1898.1000000014901,
+        "max": 6159.5999999940395
+      }
+    },
+    {
+      "id": "baseball-cap",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2822.7000000029802,
+        "min": 2054,
+        "max": 17803.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 2919.1999999955297,
+        "min": 2092.9000000059605,
+        "max": 3048.1999999955297
+      }
+    },
+    {
+      "id": "cactus",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 5485.60000000149,
+        "min": 3704.10000000149,
+        "max": 8238.20000000298
+      },
+      "after": {
+        "samples": 5,
+        "median": 5372.30000000447,
+        "min": 4315.70000000298,
+        "max": 10696.39999999851
+      }
+    },
+    {
+      "id": "tomatoes",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 5158.29999999702,
+        "min": 4687.29999999702,
+        "max": 19132.20000000298
+      },
+      "after": {
+        "samples": 5,
+        "median": 4224.69999999553,
+        "min": 3596.1999999955297,
+        "max": 7873.10000000149
+      }
+    },
+    {
+      "id": "mandeltorus",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 3694.39999999851,
+        "min": 3519.5999999940395,
+        "max": 9525.89999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 3671.2000000029802,
+        "min": 2906.60000000149,
+        "max": 6786.70000000298
+      }
+    },
+    {
+      "id": "basket",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 5512.29999999702,
+        "min": 3202.7999999970198,
+        "max": 17536.29999999702
+      },
+      "after": {
+        "samples": 5,
+        "median": 4089.1999999955297,
+        "min": 3036.6999999955297,
+        "max": 13471.70000000298
+      }
+    },
+    {
+      "id": "heart-donut",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4056,
+        "min": 3111.5,
+        "max": 12905.60000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 9749.89999999851,
+        "min": 2925.9000000059605,
+        "max": 18235.90000000596
+      }
+    },
+    {
+      "id": "sushi-boat",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4526.20000000298,
+        "min": 2846.60000000149,
+        "max": 10047.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 7236.29999999702,
+        "min": 3097,
+        "max": 12468.60000000149
+      }
+    },
+    {
+      "id": "seeded-loaf",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4436.79999999702,
+        "min": 3395.3000000044703,
+        "max": 10923.10000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 14150.69999999553,
+        "min": 3680.10000000149,
+        "max": 37357.70000000298
+      }
+    },
+    {
+      "id": "dog-plush",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 6903.60000000149,
+        "min": 3808,
+        "max": 40432.60000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 9016.70000000298,
+        "min": 4024.5,
+        "max": 13552.89999999851
+      }
+    },
+    {
+      "id": "celestial-globe",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4588.20000000298,
+        "min": 3910.9000000059605,
+        "max": 11868.19999999553
+      },
+      "after": {
+        "samples": 5,
+        "median": 4489.20000000298,
+        "min": 3868.7999999970198,
+        "max": 5537.20000000298
+      }
+    },
+    {
+      "id": "pyrite-cubes",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 5440.39999999851,
+        "min": 3799.2000000029802,
+        "max": 6792.89999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 5361,
+        "min": 4114.20000000298,
+        "max": 8333.29999999702
+      }
+    },
+    {
+      "id": "asteroid",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 5416.80000000447,
+        "min": 4023.7999999970198,
+        "max": 6234.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 5518.79999999702,
+        "min": 4133.60000000149,
+        "max": 6638.10000000149
+      }
+    },
+    {
+      "id": "black-hole",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4031.39999999851,
+        "min": 3108.2000000029802,
+        "max": 4863.29999999702
+      },
+      "after": {
+        "samples": 5,
+        "median": 4806.89999999851,
+        "min": 3499.4000000059605,
+        "max": 6580.39999999851
+      }
+    },
+    {
+      "id": "fountain-pen",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4270.69999999553,
+        "min": 3048.3000000044703,
+        "max": 5509
+      },
+      "after": {
+        "samples": 5,
+        "median": 6125.39999999851,
+        "min": 2979.10000000149,
+        "max": 21815
+      }
+    },
+    {
+      "id": "water-bottle",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4087.2999999970198,
+        "min": 3967.7000000029802,
+        "max": 4967.39999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 4131.29999999702,
+        "min": 3807.7000000029802,
+        "max": 5085.10000000149
+      }
+    },
+    {
+      "id": "soda-can",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 3719.8000000044703,
+        "min": 2929.7999999970198,
+        "max": 5807.89999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 4657.9000000059605,
+        "min": 3903.2999999970198,
+        "max": 5060.5
+      }
+    },
+    {
+      "id": "sunglasses",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 3727.5,
+        "min": 3238.89999999851,
+        "max": 5981.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 4469.5999999940395,
+        "min": 3598.10000000149,
+        "max": 18489.20000000298
+      }
+    },
+    {
+      "id": "baseball-cap",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4353,
+        "min": 2988.10000000149,
+        "max": 5619.29999999702
+      },
+      "after": {
+        "samples": 5,
+        "median": 3712.7999999970198,
+        "min": 3136.10000000149,
+        "max": 4538.80000000447
+      }
+    }
+  ],
+  "slowerScreening": [
+    {
+      "id": "cactus",
+      "device": "phone",
+      "beforeMs": 1927.7999999998137,
+      "afterMs": 2887.199999999255
+    },
+    {
+      "id": "strawberry",
+      "device": "phone",
+      "beforeMs": 1753.5,
+      "afterMs": 4206.39999999851
+    },
+    {
+      "id": "cookie",
+      "device": "phone",
+      "beforeMs": 1637.7999999998137,
+      "afterMs": 2447.099999997765
+    },
+    {
+      "id": "bee",
+      "device": "phone",
+      "beforeMs": 1648.2999999998137,
+      "afterMs": 6685.300000000745
+    },
+    {
+      "id": "torus",
+      "device": "phone",
+      "beforeMs": 1819.1000000000931,
+      "afterMs": 2785.699999999255
+    },
+    {
+      "id": "knot",
+      "device": "phone",
+      "beforeMs": 2121.600000000093,
+      "afterMs": 2609.39999999851
+    },
+    {
+      "id": "cluster-fly",
+      "device": "phone",
+      "beforeMs": 1703.3999999999069,
+      "afterMs": 2687.89999999851
+    },
+    {
+      "id": "may-beetle",
+      "device": "phone",
+      "beforeMs": 2474.600000000093,
+      "afterMs": 4057.300000000745
+    },
+    {
+      "id": "millipede",
+      "device": "phone",
+      "beforeMs": 2888.899999999907,
+      "afterMs": 3353.89999999851
+    },
+    {
+      "id": "blackberry",
+      "device": "phone",
+      "beforeMs": 1690.5,
+      "afterMs": 2041
+    },
+    {
+      "id": "blueberry",
+      "device": "phone",
+      "beforeMs": 1619.7999999998137,
+      "afterMs": 2392.5
+    },
+    {
+      "id": "grape",
+      "device": "phone",
+      "beforeMs": 1704.7000000001863,
+      "afterMs": 2199.199999999255
+    },
+    {
+      "id": "star-cookie",
+      "device": "phone",
+      "beforeMs": 1710.6000000000931,
+      "afterMs": 3052.7000000029802
+    },
+    {
+      "id": "tomatoes",
+      "device": "phone",
+      "beforeMs": 1951,
+      "afterMs": 3882.699999999255
+    },
+    {
+      "id": "mandeltorus",
+      "device": "phone",
+      "beforeMs": 1683.1999999997206,
+      "afterMs": 6422.900000002235
+    },
+    {
+      "id": "basket",
+      "device": "phone",
+      "beforeMs": 2713.399999999907,
+      "afterMs": 5908.5
+    },
+    {
+      "id": "heart-donut",
+      "device": "phone",
+      "beforeMs": 1835.1000000000931,
+      "afterMs": 4997.199999999255
+    },
+    {
+      "id": "sushi-boat",
+      "device": "phone",
+      "beforeMs": 1901.7000000001863,
+      "afterMs": 3645.39999999851
+    },
+    {
+      "id": "seeded-loaf",
+      "device": "phone",
+      "beforeMs": 1800,
+      "afterMs": 5475.10000000149
+    },
+    {
+      "id": "stollen",
+      "device": "phone",
+      "beforeMs": 2168.899999999907,
+      "afterMs": 3012.10000000149
+    },
+    {
+      "id": "orange-photo",
+      "device": "phone",
+      "beforeMs": 1939.1999999997206,
+      "afterMs": 5709.800000000745
+    },
+    {
+      "id": "physalis",
+      "device": "phone",
+      "beforeMs": 1583.2999999998137,
+      "afterMs": 2902.2999999970198
+    },
+    {
+      "id": "alum-crystal",
+      "device": "phone",
+      "beforeMs": 2077.7999999998137,
+      "afterMs": 3041.60000000149
+    },
+    {
+      "id": "puffin",
+      "device": "phone",
+      "beforeMs": 2350.2999999998137,
+      "afterMs": 2694.89999999851
+    },
+    {
+      "id": "toy-trex",
+      "device": "phone",
+      "beforeMs": 2191.100000000093,
+      "afterMs": 5304.89999999851
+    },
+    {
+      "id": "monkey-doll",
+      "device": "phone",
+      "beforeMs": 1702.3000000002794,
+      "afterMs": 5575.60000000149
+    },
+    {
+      "id": "elephant-souvenir",
+      "device": "phone",
+      "beforeMs": 1457.5999999996275,
+      "afterMs": 3373.89999999851
+    },
+    {
+      "id": "turtle-souvenir",
+      "device": "phone",
+      "beforeMs": 2114.8000000002794,
+      "afterMs": 2493.300000000745
+    },
+    {
+      "id": "cave-lioness",
+      "device": "phone",
+      "beforeMs": 1977.1000000000931,
+      "afterMs": 4374.5
+    },
+    {
+      "id": "dog-plush",
+      "device": "phone",
+      "beforeMs": 2135.0999999996275,
+      "afterMs": 4476.699999999255
+    },
+    {
+      "id": "bmx-bike",
+      "device": "phone",
+      "beforeMs": 1808.2000000001863,
+      "afterMs": 3017
+    },
+    {
+      "id": "murex-shell",
+      "device": "phone",
+      "beforeMs": 1385.2999999998137,
+      "afterMs": 2700.900000002235
+    },
+    {
+      "id": "sunflower-photo",
+      "device": "phone",
+      "beforeMs": 1847.3000000002794,
+      "afterMs": 2642.89999999851
+    },
+    {
+      "id": "bonsai-photo",
+      "device": "phone",
+      "beforeMs": 3281.5,
+      "afterMs": 6692.29999999702
+    },
+    {
+      "id": "mushroom-photo",
+      "device": "phone",
+      "beforeMs": 3373.2999999998137,
+      "afterMs": 5487.300000000745
+    },
+    {
+      "id": "cactus-real",
+      "device": "phone",
+      "beforeMs": 2094.0999999996275,
+      "afterMs": 3505.2000000029802
+    },
+    {
+      "id": "crochet-earth",
+      "device": "phone",
+      "beforeMs": 2093,
+      "afterMs": 4728.39999999851
+    },
+    {
+      "id": "desk-globe",
+      "device": "phone",
+      "beforeMs": 2050.600000000093,
+      "afterMs": 2541.39999999851
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "device": "phone",
+      "beforeMs": 1655.3999999999069,
+      "afterMs": 3082.300000000745
+    },
+    {
+      "id": "maple-tree",
+      "device": "phone",
+      "beforeMs": 2240.4000000003725,
+      "afterMs": 5122.099999997765
+    },
+    {
+      "id": "peony",
+      "device": "phone",
+      "beforeMs": 1772.6000000000931,
+      "afterMs": 3726.89999999851
+    },
+    {
+      "id": "money-tree",
+      "device": "phone",
+      "beforeMs": 1774.3999999999069,
+      "afterMs": 3084.800000000745
+    },
+    {
+      "id": "knight-horse",
+      "device": "phone",
+      "beforeMs": 1669.0999999996275,
+      "afterMs": 3323.7000000029802
+    },
+    {
+      "id": "triceratops-skull",
+      "device": "phone",
+      "beforeMs": 1715.7999999998137,
+      "afterMs": 2270.300000000745
+    },
+    {
+      "id": "cone-shell",
+      "device": "phone",
+      "beforeMs": 1773.8999999999069,
+      "afterMs": 2271.199999999255
+    },
+    {
+      "id": "celestial-globe",
+      "device": "phone",
+      "beforeMs": 1652.6999999997206,
+      "afterMs": 2767.400000002235
+    },
+    {
+      "id": "armillary-sphere",
+      "device": "phone",
+      "beforeMs": 1678.1000000000931,
+      "afterMs": 3042.300000000745
+    },
+    {
+      "id": "stannern-meteorites",
+      "device": "phone",
+      "beforeMs": 1551,
+      "afterMs": 11517.5
+    },
+    {
+      "id": "pyrite-cubes",
+      "device": "phone",
+      "beforeMs": 2335.7999999998137,
+      "afterMs": 3401.39999999851
+    },
+    {
+      "id": "wooden-elephant",
+      "device": "phone",
+      "beforeMs": 2213.1999999997206,
+      "afterMs": 2823.800000000745
+    },
+    {
+      "id": "marble-bust",
+      "device": "phone",
+      "beforeMs": 1487.1000000000931,
+      "afterMs": 2247.60000000149
+    },
+    {
+      "id": "ukulele",
+      "device": "phone",
+      "beforeMs": 1711.3000000002794,
+      "afterMs": 2063.599999997765
+    },
+    {
+      "id": "alarm-clock",
+      "device": "phone",
+      "beforeMs": 1598.5,
+      "afterMs": 2353.800000000745
+    },
+    {
+      "id": "vintage-camera",
+      "device": "phone",
+      "beforeMs": 1595,
+      "afterMs": 5057.5
+    },
+    {
+      "id": "boombox",
+      "device": "phone",
+      "beforeMs": 1426.0999999996275,
+      "afterMs": 3574.5
+    },
+    {
+      "id": "croissant-real",
+      "device": "phone",
+      "beforeMs": 1890.7000000001863,
+      "afterMs": 2743.800000000745
+    },
+    {
+      "id": "carrot-cake",
+      "device": "phone",
+      "beforeMs": 2091.5,
+      "afterMs": 3112
+    },
+    {
+      "id": "lantern",
+      "device": "phone",
+      "beforeMs": 1719.6999999997206,
+      "afterMs": 2937.39999999851
+    },
+    {
+      "id": "cat-statue",
+      "device": "phone",
+      "beforeMs": 1743.6000000000931,
+      "afterMs": 2509
+    },
+    {
+      "id": "horse-statue",
+      "device": "phone",
+      "beforeMs": 1848.7000000001863,
+      "afterMs": 2351.400000002235
+    },
+    {
+      "id": "tin-can-real",
+      "device": "phone",
+      "beforeMs": 1700.5,
+      "afterMs": 3045.5
+    },
+    {
+      "id": "basketball",
+      "device": "phone",
+      "beforeMs": 1654.7999999998137,
+      "afterMs": 3219.60000000149
+    },
+    {
+      "id": "soccer-ball",
+      "device": "phone",
+      "beforeMs": 1800.3999999999069,
+      "afterMs": 2581.800000000745
+    },
+    {
+      "id": "american-football",
+      "device": "phone",
+      "beforeMs": 1923.4000000003725,
+      "afterMs": 3807.900000002235
+    },
+    {
+      "id": "tennis-ball",
+      "device": "phone",
+      "beforeMs": 2158,
+      "afterMs": 2500.199999999255
+    },
+    {
+      "id": "baseball",
+      "device": "phone",
+      "beforeMs": 2194.1999999997206,
+      "afterMs": 3610.400000002235
+    },
+    {
+      "id": "softball",
+      "device": "phone",
+      "beforeMs": 2107,
+      "afterMs": 4998.20000000298
+    },
+    {
+      "id": "beach-ball",
+      "device": "phone",
+      "beforeMs": 1762.0999999996275,
+      "afterMs": 2878.60000000149
+    },
+    {
+      "id": "golf-ball",
+      "device": "phone",
+      "beforeMs": 2011.0999999996275,
+      "afterMs": 2325.300000000745
+    },
+    {
+      "id": "rugby-ball",
+      "device": "phone",
+      "beforeMs": 1806.2000000001863,
+      "afterMs": 2752
+    },
+    {
+      "id": "volleyball",
+      "device": "phone",
+      "beforeMs": 1794.7999999998137,
+      "afterMs": 2320
+    },
+    {
+      "id": "ping-pong-ball",
+      "device": "phone",
+      "beforeMs": 1750.2000000001863,
+      "afterMs": 2404
+    },
+    {
+      "id": "cricket-ball",
+      "device": "phone",
+      "beforeMs": 2068.5999999996275,
+      "afterMs": 2594
+    },
+    {
+      "id": "bowling-ball",
+      "device": "phone",
+      "beforeMs": 1746.1000000000931,
+      "afterMs": 3317.7999999970198
+    },
+    {
+      "id": "pool-ball",
+      "device": "phone",
+      "beforeMs": 1933.2000000001863,
+      "afterMs": 4841
+    },
+    {
+      "id": "pickleball",
+      "device": "phone",
+      "beforeMs": 1705.8000000002794,
+      "afterMs": 8982.199999999255
+    },
+    {
+      "id": "dodgeball",
+      "device": "phone",
+      "beforeMs": 1485.8000000002794,
+      "afterMs": 2796.800000000745
+    },
+    {
+      "id": "medicine-ball",
+      "device": "phone",
+      "beforeMs": 1715.5,
+      "afterMs": 3647.10000000149
+    },
+    {
+      "id": "lacrosse-ball",
+      "device": "phone",
+      "beforeMs": 1484,
+      "afterMs": 2361.400000002235
+    },
+    {
+      "id": "squash-ball",
+      "device": "phone",
+      "beforeMs": 1560.8000000002794,
+      "afterMs": 2319.60000000149
+    },
+    {
+      "id": "bouncy-ball",
+      "device": "phone",
+      "beforeMs": 1924.0999999996275,
+      "afterMs": 2309.2999999970198
+    },
+    {
+      "id": "marble",
+      "device": "phone",
+      "beforeMs": 1702.8999999999069,
+      "afterMs": 3881.199999999255
+    },
+    {
+      "id": "hockey-puck",
+      "device": "phone",
+      "beforeMs": 1995,
+      "afterMs": 2306.10000000149
+    },
+    {
+      "id": "flying-disc",
+      "device": "phone",
+      "beforeMs": 1900.4000000003725,
+      "afterMs": 2500.699999999255
+    },
+    {
+      "id": "heart",
+      "device": "phone",
+      "beforeMs": 1856.2000000001863,
+      "afterMs": 2485.89999999851
+    },
+    {
+      "id": "campfire",
+      "device": "phone",
+      "beforeMs": 2389.5,
+      "afterMs": 2970.099999997765
+    },
+    {
+      "id": "mercury",
+      "device": "phone",
+      "beforeMs": 2009.5,
+      "afterMs": 2673.89999999851
+    },
+    {
+      "id": "earth",
+      "device": "phone",
+      "beforeMs": 1845.8000000002794,
+      "afterMs": 2641.800000000745
+    },
+    {
+      "id": "moon",
+      "device": "phone",
+      "beforeMs": 2002.2999999998137,
+      "afterMs": 3150.89999999851
+    },
+    {
+      "id": "jupiter",
+      "device": "phone",
+      "beforeMs": 1634.3999999999069,
+      "afterMs": 2734.60000000149
+    },
+    {
+      "id": "saturn",
+      "device": "phone",
+      "beforeMs": 1411.2000000001863,
+      "afterMs": 2516.10000000149
+    },
+    {
+      "id": "uranus",
+      "device": "phone",
+      "beforeMs": 1522.3000000002794,
+      "afterMs": 2397.2000000029802
+    },
+    {
+      "id": "neptune",
+      "device": "phone",
+      "beforeMs": 1707.6999999997206,
+      "afterMs": 2678.599999997765
+    },
+    {
+      "id": "planet",
+      "device": "phone",
+      "beforeMs": 1565.7000000001863,
+      "afterMs": 4872
+    },
+    {
+      "id": "aurora-planet",
+      "device": "phone",
+      "beforeMs": 1575.7999999998137,
+      "afterMs": 7683.5
+    },
+    {
+      "id": "asteroid",
+      "device": "phone",
+      "beforeMs": 2170.2999999998137,
+      "afterMs": 3172.099999997765
+    },
+    {
+      "id": "comet",
+      "device": "phone",
+      "beforeMs": 1540.3999999999069,
+      "afterMs": 2732.2999999970198
+    },
+    {
+      "id": "meteor",
+      "device": "phone",
+      "beforeMs": 1454.1999999997206,
+      "afterMs": 2470.199999999255
+    },
+    {
+      "id": "planetary-nebula",
+      "device": "phone",
+      "beforeMs": 1695.6999999997206,
+      "afterMs": 2231.900000002235
+    },
+    {
+      "id": "nebula",
+      "device": "phone",
+      "beforeMs": 1872.2000000001863,
+      "afterMs": 2901.10000000149
+    },
+    {
+      "id": "supernova",
+      "device": "phone",
+      "beforeMs": 1458.7000000001863,
+      "afterMs": 2971.300000000745
+    },
+    {
+      "id": "spiral-galaxy",
+      "device": "phone",
+      "beforeMs": 1526.1000000000931,
+      "afterMs": 1949.8999999985099
+    },
+    {
+      "id": "real-moon",
+      "device": "phone",
+      "beforeMs": 1735.6000000000931,
+      "afterMs": 2895.60000000149
+    },
+    {
+      "id": "real-mars",
+      "device": "phone",
+      "beforeMs": 2074,
+      "afterMs": 2905.2000000029802
+    },
+    {
+      "id": "real-earth",
+      "device": "phone",
+      "beforeMs": 2350.4000000003725,
+      "afterMs": 4007.89999999851
+    },
+    {
+      "id": "real-mercury",
+      "device": "phone",
+      "beforeMs": 2021,
+      "afterMs": 14347.10000000149
+    },
+    {
+      "id": "real-venus",
+      "device": "phone",
+      "beforeMs": 1871.6000000000931,
+      "afterMs": 6593.60000000149
+    },
+    {
+      "id": "real-moons",
+      "device": "phone",
+      "beforeMs": 1559.3999999999069,
+      "afterMs": 4249.89999999851
+    },
+    {
+      "id": "real-small-worlds",
+      "device": "phone",
+      "beforeMs": 1827.2000000001863,
+      "afterMs": 4539.699999999255
+    },
+    {
+      "id": "nearby-stars",
+      "device": "phone",
+      "beforeMs": 1350.9000000003725,
+      "afterMs": 4299.699999999255
+    },
+    {
+      "id": "sls",
+      "device": "phone",
+      "beforeMs": 3763,
+      "afterMs": 4628.199999999255
+    },
+    {
+      "id": "space-shuttle",
+      "device": "phone",
+      "beforeMs": 3405,
+      "afterMs": 4096.699999999255
+    },
+    {
+      "id": "solar-orbits",
+      "device": "phone",
+      "beforeMs": 2431.2000000001863,
+      "afterMs": 3334.10000000149
+    },
+    {
+      "id": "virus",
+      "device": "phone",
+      "beforeMs": 2134,
+      "afterMs": 2696.699999999255
+    },
+    {
+      "id": "bacterium",
+      "device": "phone",
+      "beforeMs": 1769.5999999996275,
+      "afterMs": 2992.699999999255
+    },
+    {
+      "id": "red-blood-cell",
+      "device": "phone",
+      "beforeMs": 1645.3999999999069,
+      "afterMs": 2809.89999999851
+    },
+    {
+      "id": "neuron",
+      "device": "phone",
+      "beforeMs": 1736,
+      "afterMs": 2782
+    },
+    {
+      "id": "astrocyte",
+      "device": "phone",
+      "beforeMs": 2239.2000000001863,
+      "afterMs": 3512.2999999970198
+    },
+    {
+      "id": "animal-cell",
+      "device": "phone",
+      "beforeMs": 1716.2999999998137,
+      "afterMs": 4693.10000000149
+    },
+    {
+      "id": "dna",
+      "device": "phone",
+      "beforeMs": 1433.6999999997206,
+      "afterMs": 5174.300000000745
+    },
+    {
+      "id": "white-blood-cell",
+      "device": "phone",
+      "beforeMs": 1912.6999999997206,
+      "afterMs": 4113.10000000149
+    },
+    {
+      "id": "microglia",
+      "device": "phone",
+      "beforeMs": 1775.8999999999069,
+      "afterMs": 3873.699999999255
+    },
+    {
+      "id": "pollen",
+      "device": "phone",
+      "beforeMs": 1696.2999999998137,
+      "afterMs": 3077.699999999255
+    },
+    {
+      "id": "snowflake",
+      "device": "phone",
+      "beforeMs": 1914.8999999994412,
+      "afterMs": 2455.699999999255
+    },
+    {
+      "id": "chromosome",
+      "device": "phone",
+      "beforeMs": 2210.0999999996275,
+      "afterMs": 2677
+    },
+    {
+      "id": "mitochondrion",
+      "device": "phone",
+      "beforeMs": 1856.5999999996275,
+      "afterMs": 8907.099999997765
+    },
+    {
+      "id": "paramecium",
+      "device": "phone",
+      "beforeMs": 1900.5,
+      "afterMs": 6938.800000000745
+    },
+    {
+      "id": "amoeba",
+      "device": "phone",
+      "beforeMs": 2143.300000000745,
+      "afterMs": 11228.10000000149
+    },
+    {
+      "id": "dna-to-protein",
+      "device": "phone",
+      "beforeMs": 2570.5999999996275,
+      "afterMs": 11793.800000000745
+    },
+    {
+      "id": "mitosis",
+      "device": "phone",
+      "beforeMs": 2017.5999999996275,
+      "afterMs": 8697.699999999255
+    },
+    {
+      "id": "apoptosis",
+      "device": "phone",
+      "beforeMs": 2291.10000000149,
+      "afterMs": 5823.60000000149
+    },
+    {
+      "id": "phagocytosis",
+      "device": "phone",
+      "beforeMs": 2343.800000000745,
+      "afterMs": 3608.099999997765
+    },
+    {
+      "id": "orbital",
+      "device": "phone",
+      "beforeMs": 2109.5,
+      "afterMs": 2738.2999999970198
+    },
+    {
+      "id": "atom",
+      "device": "phone",
+      "beforeMs": 1754.2999999988824,
+      "afterMs": 2385.10000000149
+    },
+    {
+      "id": "molecule",
+      "device": "phone",
+      "beforeMs": 1721.4000000003725,
+      "afterMs": 2622.800000000745
+    },
+    {
+      "id": "protein",
+      "device": "phone",
+      "beforeMs": 1756.699999999255,
+      "afterMs": 2861
+    },
+    {
+      "id": "crystal-lattice",
+      "device": "phone",
+      "beforeMs": 1631.9000000003725,
+      "afterMs": 2200.699999999255
+    },
+    {
+      "id": "orbital-atlas",
+      "device": "phone",
+      "beforeMs": 2325.4000000003725,
+      "afterMs": 2723.699999999255
+    },
+    {
+      "id": "periodic-table",
+      "device": "phone",
+      "beforeMs": 2156.0999999996275,
+      "afterMs": 2786
+    },
+    {
+      "id": "real-elements",
+      "device": "phone",
+      "beforeMs": 2589.89999999851,
+      "afterMs": 4137.60000000149
+    },
+    {
+      "id": "ruby",
+      "device": "phone",
+      "beforeMs": 1737.6000000014901,
+      "afterMs": 2302.199999999255
+    },
+    {
+      "id": "amethyst-geode",
+      "device": "phone",
+      "beforeMs": 1977.5,
+      "afterMs": 2827.89999999851
+    },
+    {
+      "id": "opal",
+      "device": "phone",
+      "beforeMs": 1708.0999999996275,
+      "afterMs": 2176.89999999851
+    },
+    {
+      "id": "pearl",
+      "device": "phone",
+      "beforeMs": 1667.699999999255,
+      "afterMs": 2262.60000000149
+    },
+    {
+      "id": "brain",
+      "device": "phone",
+      "beforeMs": 1653.5999999996275,
+      "afterMs": 2412.099999997765
+    },
+    {
+      "id": "eye",
+      "device": "phone",
+      "beforeMs": 1764.4000000003725,
+      "afterMs": 2393.400000002235
+    },
+    {
+      "id": "lungs",
+      "device": "phone",
+      "beforeMs": 1931,
+      "afterMs": 2413.300000000745
+    },
+    {
+      "id": "tooth",
+      "device": "phone",
+      "beforeMs": 1678.0999999996275,
+      "afterMs": 2133.5
+    },
+    {
+      "id": "kidney",
+      "device": "phone",
+      "beforeMs": 1570.699999999255,
+      "afterMs": 1923.300000000745
+    },
+    {
+      "id": "anatomy-atlas",
+      "device": "phone",
+      "beforeMs": 3109.9000000003725,
+      "afterMs": 3623.800000000745
+    },
+    {
+      "id": "oak",
+      "device": "phone",
+      "beforeMs": 1830.2999999988824,
+      "afterMs": 2358.800000000745
+    },
+    {
+      "id": "pine",
+      "device": "phone",
+      "beforeMs": 1740.699999999255,
+      "afterMs": 2351.199999999255
+    },
+    {
+      "id": "palm",
+      "device": "phone",
+      "beforeMs": 1541.5,
+      "afterMs": 2173.39999999851
+    },
+    {
+      "id": "cherry-blossom",
+      "device": "phone",
+      "beforeMs": 1770.699999999255,
+      "afterMs": 3293.699999999255
+    },
+    {
+      "id": "maple",
+      "device": "phone",
+      "beforeMs": 1891.7999999988824,
+      "afterMs": 2228.7999999970198
+    },
+    {
+      "id": "bonsai",
+      "device": "phone",
+      "beforeMs": 1622,
+      "afterMs": 2698.89999999851
+    },
+    {
+      "id": "sunflower",
+      "device": "phone",
+      "beforeMs": 1693.5999999996275,
+      "afterMs": 2224
+    },
+    {
+      "id": "rose",
+      "device": "phone",
+      "beforeMs": 1539.199999999255,
+      "afterMs": 2643.800000000745
+    },
+    {
+      "id": "dandelion",
+      "device": "phone",
+      "beforeMs": 1689,
+      "afterMs": 2448.2000000029802
+    },
+    {
+      "id": "tulip",
+      "device": "phone",
+      "beforeMs": 1787.7000000011176,
+      "afterMs": 2509.5
+    },
+    {
+      "id": "daisy",
+      "device": "phone",
+      "beforeMs": 1705.4000000003725,
+      "afterMs": 3071.39999999851
+    },
+    {
+      "id": "lotus",
+      "device": "phone",
+      "beforeMs": 1663.199999999255,
+      "afterMs": 2786.60000000149
+    },
+    {
+      "id": "mushroom",
+      "device": "phone",
+      "beforeMs": 1902.199999999255,
+      "afterMs": 2499.199999999255
+    },
+    {
+      "id": "saguaro",
+      "device": "phone",
+      "beforeMs": 1661.5,
+      "afterMs": 3254.900000002235
+    },
+    {
+      "id": "coral",
+      "device": "phone",
+      "beforeMs": 1948.0999999996275,
+      "afterMs": 4432.400000002235
+    },
+    {
+      "id": "pinecone",
+      "device": "phone",
+      "beforeMs": 1591.0999999996275,
+      "afterMs": 3195.10000000149
+    },
+    {
+      "id": "acorn",
+      "device": "phone",
+      "beforeMs": 1780.300000000745,
+      "afterMs": 2273.199999999255
+    },
+    {
+      "id": "succulent",
+      "device": "phone",
+      "beforeMs": 1495.300000000745,
+      "afterMs": 2713.900000002235
+    },
+    {
+      "id": "bamboo",
+      "device": "phone",
+      "beforeMs": 1852.5999999996275,
+      "afterMs": 2380.10000000149
+    },
+    {
+      "id": "rocks",
+      "device": "phone",
+      "beforeMs": 1606.5,
+      "afterMs": 2934.800000000745
+    },
+    {
+      "id": "kelp",
+      "device": "phone",
+      "beforeMs": 1592.699999999255,
+      "afterMs": 6912.599999997765
+    },
+    {
+      "id": "storm-cloud",
+      "device": "phone",
+      "beforeMs": 1688.199999999255,
+      "afterMs": 6541.599999997765
+    },
+    {
+      "id": "lava-lamp",
+      "device": "phone",
+      "beforeMs": 1887.5999999996275,
+      "afterMs": 2691.300000000745
+    },
+    {
+      "id": "snow-globe",
+      "device": "phone",
+      "beforeMs": 1643.9000000003725,
+      "afterMs": 2494.5
+    },
+    {
+      "id": "volcano",
+      "device": "phone",
+      "beforeMs": 1685.199999999255,
+      "afterMs": 2741.5
+    },
+    {
+      "id": "ice-statue",
+      "device": "phone",
+      "beforeMs": 1745.1000000014901,
+      "afterMs": 2601.39999999851
+    },
+    {
+      "id": "tornado",
+      "device": "phone",
+      "beforeMs": 1929,
+      "afterMs": 2359.300000000745
+    },
+    {
+      "id": "waterfall",
+      "device": "phone",
+      "beforeMs": 1878.5999999996275,
+      "afterMs": 2307.099999997765
+    },
+    {
+      "id": "ice-cream",
+      "device": "phone",
+      "beforeMs": 2150.9000000003725,
+      "afterMs": 2892
+    },
+    {
+      "id": "watermelon",
+      "device": "phone",
+      "beforeMs": 2345.9000000003725,
+      "afterMs": 3839.699999999255
+    },
+    {
+      "id": "birthday-cake",
+      "device": "phone",
+      "beforeMs": 2428.39999999851,
+      "afterMs": 5329.60000000149
+    },
+    {
+      "id": "popcorn",
+      "device": "phone",
+      "beforeMs": 1928.800000000745,
+      "afterMs": 9665.300000000745
+    },
+    {
+      "id": "jelly",
+      "device": "phone",
+      "beforeMs": 1760.300000000745,
+      "afterMs": 4556.400000002235
+    },
+    {
+      "id": "pancakes",
+      "device": "phone",
+      "beforeMs": 2303.2000000011176,
+      "afterMs": 3335.599999997765
+    },
+    {
+      "id": "cupcake",
+      "device": "phone",
+      "beforeMs": 2261.2000000011176,
+      "afterMs": 2776.89999999851
+    },
+    {
+      "id": "lollipop",
+      "device": "phone",
+      "beforeMs": 2280.699999999255,
+      "afterMs": 2841
+    },
+    {
+      "id": "macarons",
+      "device": "phone",
+      "beforeMs": 1847.2999999988824,
+      "afterMs": 2780.199999999255
+    },
+    {
+      "id": "gummy-bear",
+      "device": "phone",
+      "beforeMs": 2067.5,
+      "afterMs": 2584.5
+    },
+    {
+      "id": "pretzel",
+      "device": "phone",
+      "beforeMs": 2169.60000000149,
+      "afterMs": 2890.800000000745
+    },
+    {
+      "id": "croissant",
+      "device": "phone",
+      "beforeMs": 2688.39999999851,
+      "afterMs": 4880.300000000745
+    },
+    {
+      "id": "pizza",
+      "device": "phone",
+      "beforeMs": 2924.300000000745,
+      "afterMs": 6024
+    },
+    {
+      "id": "taco",
+      "device": "phone",
+      "beforeMs": 2181.300000000745,
+      "afterMs": 3126.199999999255
+    },
+    {
+      "id": "egg",
+      "device": "phone",
+      "beforeMs": 2606.9000000003725,
+      "afterMs": 3055.10000000149
+    },
+    {
+      "id": "coffee",
+      "device": "phone",
+      "beforeMs": 2171.9000000003725,
+      "afterMs": 2823.39999999851
+    },
+    {
+      "id": "apple",
+      "device": "phone",
+      "beforeMs": 1941.699999999255,
+      "afterMs": 4163
+    },
+    {
+      "id": "kiwi",
+      "device": "phone",
+      "beforeMs": 2653.699999999255,
+      "afterMs": 5255.5
+    },
+    {
+      "id": "pineapple",
+      "device": "phone",
+      "beforeMs": 2602.9000000003725,
+      "afterMs": 13028.5
+    },
+    {
+      "id": "cherries",
+      "device": "phone",
+      "beforeMs": 2147.0999999996275,
+      "afterMs": 3111.099999997765
+    },
+    {
+      "id": "grapes",
+      "device": "phone",
+      "beforeMs": 2504.9000000003725,
+      "afterMs": 3024.199999999255
+    },
+    {
+      "id": "avocado",
+      "device": "phone",
+      "beforeMs": 2560,
+      "afterMs": 3077.900000002235
+    },
+    {
+      "id": "bricks",
+      "device": "phone",
+      "beforeMs": 2257.7999999988824,
+      "afterMs": 2966.5
+    },
+    {
+      "id": "rubber-duck",
+      "device": "phone",
+      "beforeMs": 2067.4000000003725,
+      "afterMs": 2982.60000000149
+    },
+    {
+      "id": "spinning-top",
+      "device": "phone",
+      "beforeMs": 2093.5,
+      "afterMs": 3384.300000000745
+    },
+    {
+      "id": "dice",
+      "device": "phone",
+      "beforeMs": 1966.4000000003725,
+      "afterMs": 2671.300000000745
+    },
+    {
+      "id": "newtons-cradle",
+      "device": "phone",
+      "beforeMs": 1967.5,
+      "afterMs": 3050.800000000745
+    },
+    {
+      "id": "teddy-bear",
+      "device": "phone",
+      "beforeMs": 1774.0999999996275,
+      "afterMs": 2911
+    },
+    {
+      "id": "yo-yo",
+      "device": "phone",
+      "beforeMs": 1748,
+      "afterMs": 3048.900000002235
+    },
+    {
+      "id": "puzzle-cube",
+      "device": "phone",
+      "beforeMs": 1882.5,
+      "afterMs": 3024.10000000149
+    },
+    {
+      "id": "spring-toy",
+      "device": "phone",
+      "beforeMs": 1352.2000000011176,
+      "afterMs": 2459.900000002235
+    },
+    {
+      "id": "kite",
+      "device": "phone",
+      "beforeMs": 1697.199999999255,
+      "afterMs": 2654.5
+    },
+    {
+      "id": "paper-plane",
+      "device": "phone",
+      "beforeMs": 1936.199999999255,
+      "afterMs": 2520.10000000149
+    },
+    {
+      "id": "origami-crane",
+      "device": "phone",
+      "beforeMs": 1967.7999999988824,
+      "afterMs": 5412.79999999702
+    },
+    {
+      "id": "balloon-dog",
+      "device": "phone",
+      "beforeMs": 2283.5,
+      "afterMs": 4731.5
+    },
+    {
+      "id": "robot",
+      "device": "phone",
+      "beforeMs": 2100.9000000003725,
+      "afterMs": 2596.599999997765
+    },
+    {
+      "id": "chess-set",
+      "device": "phone",
+      "beforeMs": 2201.800000000745,
+      "afterMs": 3263.099999997765
+    },
+    {
+      "id": "lorenz",
+      "device": "phone",
+      "beforeMs": 1876.800000000745,
+      "afterMs": 3182.099999997765
+    },
+    {
+      "id": "mobius",
+      "device": "phone",
+      "beforeMs": 2238.7000000011176,
+      "afterMs": 3938.900000002235
+    },
+    {
+      "id": "klein-bottle",
+      "device": "phone",
+      "beforeMs": 1912.5999999996275,
+      "afterMs": 2382.5
+    },
+    {
+      "id": "menger-sponge",
+      "device": "phone",
+      "beforeMs": 1787,
+      "afterMs": 2867.10000000149
+    },
+    {
+      "id": "sierpinski",
+      "device": "phone",
+      "beforeMs": 1999.0999999996275,
+      "afterMs": 2470.89999999851
+    },
+    {
+      "id": "platonic",
+      "device": "phone",
+      "beforeMs": 1980.9000000003725,
+      "afterMs": 8831.099999997765
+    },
+    {
+      "id": "seashell-spiral",
+      "device": "phone",
+      "beforeMs": 2745.7000000011176,
+      "afterMs": 4876.5
+    },
+    {
+      "id": "unit-circle",
+      "device": "phone",
+      "beforeMs": 2226.7000000011176,
+      "afterMs": 2582.300000000745
+    },
+    {
+      "id": "thomas-attractor",
+      "device": "phone",
+      "beforeMs": 2060.0999999996275,
+      "afterMs": 2885.39999999851
+    },
+    {
+      "id": "five-cell",
+      "device": "phone",
+      "beforeMs": 2098.300000000745,
+      "afterMs": 2813.800000000745
+    },
+    {
+      "id": "twenty-four-cell",
+      "device": "phone",
+      "beforeMs": 2561.9000000003725,
+      "afterMs": 3265.89999999851
+    },
+    {
+      "id": "duoprism",
+      "device": "phone",
+      "beforeMs": 2494.7999999988824,
+      "afterMs": 3417
+    },
+    {
+      "id": "book",
+      "device": "phone",
+      "beforeMs": 3482.5999999996275,
+      "afterMs": 4443.599999997765
+    },
+    {
+      "id": "music-box",
+      "device": "phone",
+      "beforeMs": 2376.199999999255,
+      "afterMs": 2920.300000000745
+    },
+    {
+      "id": "clock",
+      "device": "phone",
+      "beforeMs": 2116.800000000745,
+      "afterMs": 3876.800000000745
+    },
+    {
+      "id": "gift-box",
+      "device": "phone",
+      "beforeMs": 1790.3999999985099,
+      "afterMs": 2553.10000000149
+    },
+    {
+      "id": "umbrella",
+      "device": "phone",
+      "beforeMs": 2423.2000000011176,
+      "afterMs": 3726.699999999255
+    },
+    {
+      "id": "potion-bottle",
+      "device": "phone",
+      "beforeMs": 2326.7000000011176,
+      "afterMs": 4846.699999999255
+    },
+    {
+      "id": "telescope",
+      "device": "phone",
+      "beforeMs": 2205.10000000149,
+      "afterMs": 3534.699999999255
+    },
+    {
+      "id": "fountain-pen",
+      "device": "phone",
+      "beforeMs": 2157.7000000011176,
+      "afterMs": 2969.39999999851
+    },
+    {
+      "id": "running-shoe",
+      "device": "phone",
+      "beforeMs": 2604.699999999255,
+      "afterMs": 3478.89999999851
+    },
+    {
+      "id": "hoodie",
+      "device": "phone",
+      "beforeMs": 2892.5,
+      "afterMs": 6613.699999999255
+    },
+    {
+      "id": "sunglasses",
+      "device": "phone",
+      "beforeMs": 2043,
+      "afterMs": 3218.300000000745
+    },
+    {
+      "id": "trebuchet",
+      "device": "phone",
+      "beforeMs": 1943.300000000745,
+      "afterMs": 2941.300000000745
+    },
+    {
+      "id": "crossbow",
+      "device": "phone",
+      "beforeMs": 1703.7000000011176,
+      "afterMs": 2904
+    },
+    {
+      "id": "knights-helmet",
+      "device": "phone",
+      "beforeMs": 1859.1000000014901,
+      "afterMs": 2495.800000000745
+    },
+    {
+      "id": "crown",
+      "device": "phone",
+      "beforeMs": 1993,
+      "afterMs": 2657.60000000149
+    },
+    {
+      "id": "dragon-egg",
+      "device": "phone",
+      "beforeMs": 1904.5,
+      "afterMs": 3032.699999999255
+    },
+    {
+      "id": "crystal-ball",
+      "device": "phone",
+      "beforeMs": 1767.0999999996275,
+      "afterMs": 2490.300000000745
+    },
+    {
+      "id": "fish-school",
+      "device": "phone",
+      "beforeMs": 1603.5999999996275,
+      "afterMs": 1927.6000000014901
+    },
+    {
+      "id": "butterfly",
+      "device": "phone",
+      "beforeMs": 1722,
+      "afterMs": 2174.099999997765
+    },
+    {
+      "id": "nautilus",
+      "device": "phone",
+      "beforeMs": 2005.2000000011176,
+      "afterMs": 3393.699999999255
+    },
+    {
+      "id": "snail",
+      "device": "phone",
+      "beforeMs": 1865.5,
+      "afterMs": 2219.60000000149
+    },
+    {
+      "id": "octopus",
+      "device": "phone",
+      "beforeMs": 1954.4000000003725,
+      "afterMs": 2399.10000000149
+    },
+    {
+      "id": "starfish",
+      "device": "phone",
+      "beforeMs": 1782.8999999985099,
+      "afterMs": 2118.39999999851
+    },
+    {
+      "id": "penguin",
+      "device": "phone",
+      "beforeMs": 1801,
+      "afterMs": 2289.60000000149
+    },
+    {
+      "id": "owl",
+      "device": "phone",
+      "beforeMs": 1891.5,
+      "afterMs": 2206.60000000149
+    },
+    {
+      "id": "snowman",
+      "device": "phone",
+      "beforeMs": 1908.1000000014901,
+      "afterMs": 2729.60000000149
+    },
+    {
+      "id": "diya",
+      "device": "phone",
+      "beforeMs": 2279.0999999996275,
+      "afterMs": 3039.900000002235
+    },
+    {
+      "id": "menorah",
+      "device": "phone",
+      "beforeMs": 1889.5,
+      "afterMs": 3388.800000000745
+    },
+    {
+      "id": "xylophone",
+      "device": "phone",
+      "beforeMs": 2072.5,
+      "afterMs": 2409.5
+    },
+    {
+      "id": "toy-piano",
+      "device": "phone",
+      "beforeMs": 1811.800000000745,
+      "afterMs": 2462.5
+    },
+    {
+      "id": "grand-piano",
+      "device": "phone",
+      "beforeMs": 2546.4000000003725,
+      "afterMs": 17961.300000000745
+    },
+    {
+      "id": "upright-piano",
+      "device": "phone",
+      "beforeMs": 2238.4000000003725,
+      "afterMs": 3071.5
+    },
+    {
+      "id": "harpsichord",
+      "device": "phone",
+      "beforeMs": 2234.7999999988824,
+      "afterMs": 2844.199999999255
+    },
+    {
+      "id": "electronic-keyboard",
+      "device": "phone",
+      "beforeMs": 1997.0999999996275,
+      "afterMs": 2408
+    },
+    {
+      "id": "submarine",
+      "device": "phone",
+      "beforeMs": 1595.5,
+      "afterMs": 2412.199999999255
+    },
+    {
+      "id": "bicycle",
+      "device": "phone",
+      "beforeMs": 1894.4000000003725,
+      "afterMs": 2315.2000000029802
+    },
+    {
+      "id": "eiffel-tower",
+      "device": "phone",
+      "beforeMs": 1509.0999999996275,
+      "afterMs": 2036.4000000022352
+    },
+    {
+      "id": "pyramids",
+      "device": "phone",
+      "beforeMs": 1637.300000000745,
+      "afterMs": 1951.5
+    },
+    {
+      "id": "lighthouse",
+      "device": "phone",
+      "beforeMs": 1834.4000000003725,
+      "afterMs": 2778.800000000745
+    },
+    {
+      "id": "statue-of-liberty",
+      "device": "phone",
+      "beforeMs": 1974.199999999255,
+      "afterMs": 35400
+    },
+    {
+      "id": "big-ben",
+      "device": "phone",
+      "beforeMs": 3988.5,
+      "afterMs": 6671.699999999255
+    },
+    {
+      "id": "taj-mahal",
+      "device": "phone",
+      "beforeMs": 1914.4000000003725,
+      "afterMs": 10073.39999999851
+    },
+    {
+      "id": "pagoda",
+      "device": "phone",
+      "beforeMs": 1685.5999999996275,
+      "afterMs": 1958.800000000745
+    },
+    {
+      "id": "turing-machine",
+      "device": "phone",
+      "beforeMs": 1857.4000000003725,
+      "afterMs": 2625
+    },
+    {
+      "id": "qr-build",
+      "device": "phone",
+      "beforeMs": 1628.800000000745,
+      "afterMs": 2120.300000000745
+    },
+    {
+      "id": "sound-lab",
+      "device": "phone",
+      "beforeMs": 2406.5,
+      "afterMs": 6614.699999999255
+    },
+    {
+      "id": "sound-recorder",
+      "device": "phone",
+      "beforeMs": 1939,
+      "afterMs": 2240.199999999255
+    },
+    {
+      "id": "splat-toolkit",
+      "device": "phone",
+      "beforeMs": 6443.9000000003725,
+      "afterMs": 7514
+    },
+    {
+      "id": "splat-field",
+      "device": "phone",
+      "beforeMs": 1679.199999999255,
+      "afterMs": 3861.099999997765
+    },
+    {
+      "id": "baked-chest",
+      "device": "phone",
+      "beforeMs": 1376,
+      "afterMs": 1791.300000000745
+    },
+    {
+      "id": "cryoem-map",
+      "device": "phone",
+      "beforeMs": 2496.4000000003725,
+      "afterMs": 2895.699999999255
+    },
+    {
+      "id": "contour-lab",
+      "device": "phone",
+      "beforeMs": 1537.5999999996275,
+      "afterMs": 3826.5
+    },
+    {
+      "id": "fluid-lab",
+      "device": "phone",
+      "beforeMs": 1527.1000000014901,
+      "afterMs": 1849.4000000022352
+    },
+    {
+      "id": "relief-map",
+      "device": "phone",
+      "beforeMs": 2650.4000000003725,
+      "afterMs": 5724.699999999255
+    },
+    {
+      "id": "living-city",
+      "device": "phone",
+      "beforeMs": 2264.5,
+      "afterMs": 5922
+    },
+    {
+      "id": "earthquakes",
+      "device": "phone",
+      "beforeMs": 2197.7999999988824,
+      "afterMs": 6149.900000002235
+    },
+    {
+      "id": "airport-xray",
+      "device": "phone",
+      "beforeMs": 2327.4000000003725,
+      "afterMs": 2902.39999999851
+    },
+    {
+      "id": "fruit-mri",
+      "device": "phone",
+      "beforeMs": 1639.8999999985099,
+      "afterMs": 3000.300000000745
+    },
+    {
+      "id": "electron-microscope",
+      "device": "phone",
+      "beforeMs": 1699.4000000003725,
+      "afterMs": 2286.10000000149
+    },
+    {
+      "id": "shardball",
+      "device": "phone",
+      "beforeMs": 2010.0999999996275,
+      "afterMs": 2835.599999997765
+    },
+    {
+      "id": "longtail",
+      "device": "phone",
+      "beforeMs": 1578.2999999988824,
+      "afterMs": 2412
+    },
+    {
+      "id": "grain-garden",
+      "device": "phone",
+      "beforeMs": 1578.6000000014901,
+      "afterMs": 1943.699999999255
+    },
+    {
+      "id": "strata",
+      "device": "phone",
+      "beforeMs": 1740.800000000745,
+      "afterMs": 3246.60000000149
+    },
+    {
+      "id": "stone-belt",
+      "device": "phone",
+      "beforeMs": 1737.9000000003725,
+      "afterMs": 9077.099999997765
+    },
+    {
+      "id": "cast-a-shadow",
+      "device": "phone",
+      "beforeMs": 1376.9000000003725,
+      "afterMs": 1627.6000000014901
+    },
+    {
+      "id": "photo-dash",
+      "device": "phone",
+      "beforeMs": 1728.5,
+      "afterMs": 2382.60000000149
+    },
+    {
+      "id": "note-rider",
+      "device": "phone",
+      "beforeMs": 1608.800000000745,
+      "afterMs": 2579.300000000745
+    },
+    {
+      "id": "night-sky",
+      "device": "phone",
+      "beforeMs": 2340.300000000745,
+      "afterMs": 9184.199999999255
+    },
+    {
+      "id": "data-in-3d",
+      "device": "phone",
+      "beforeMs": 1884.5,
+      "afterMs": 4651.5
+    },
+    {
+      "id": "climate-records",
+      "device": "phone",
+      "beforeMs": 1937.7000000011176,
+      "afterMs": 2812.800000000745
+    },
+    {
+      "id": "cookie",
+      "device": "desktop",
+      "beforeMs": 2800.5,
+      "afterMs": 6639.699999999255
+    },
+    {
+      "id": "torus",
+      "device": "desktop",
+      "beforeMs": 2779.0999999996275,
+      "afterMs": 3761.5
+    },
+    {
+      "id": "cluster-fly",
+      "device": "desktop",
+      "beforeMs": 5092.4000000003725,
+      "afterMs": 6753.300000000745
+    },
+    {
+      "id": "raspberry",
+      "device": "desktop",
+      "beforeMs": 3533.5,
+      "afterMs": 4025.400000002235
+    },
+    {
+      "id": "blueberry",
+      "device": "desktop",
+      "beforeMs": 2571.800000000745,
+      "afterMs": 3136.5
+    },
+    {
+      "id": "mandeltorus",
+      "device": "desktop",
+      "beforeMs": 4725.199999999255,
+      "afterMs": 15272
+    },
+    {
+      "id": "basket",
+      "device": "desktop",
+      "beforeMs": 3608.7000000011176,
+      "afterMs": 5296.699999999255
+    },
+    {
+      "id": "heart-donut",
+      "device": "desktop",
+      "beforeMs": 2343.699999999255,
+      "afterMs": 4126.300000000745
+    },
+    {
+      "id": "sushi-boat",
+      "device": "desktop",
+      "beforeMs": 2982.199999999255,
+      "afterMs": 3680.099999997765
+    },
+    {
+      "id": "seeded-loaf",
+      "device": "desktop",
+      "beforeMs": 3408,
+      "afterMs": 8401.199999999255
+    },
+    {
+      "id": "steak",
+      "device": "desktop",
+      "beforeMs": 2838.5,
+      "afterMs": 6641.099999997765
+    },
+    {
+      "id": "stollen",
+      "device": "desktop",
+      "beforeMs": 2330.800000000745,
+      "afterMs": 5155.699999999255
+    },
+    {
+      "id": "crystal-gem",
+      "device": "desktop",
+      "beforeMs": 2408,
+      "afterMs": 3240.800000000745
+    },
+    {
+      "id": "alum-crystal",
+      "device": "desktop",
+      "beforeMs": 3049.5999999996275,
+      "afterMs": 4632.199999999255
+    },
+    {
+      "id": "puffin",
+      "device": "desktop",
+      "beforeMs": 2361.7999999988824,
+      "afterMs": 3491.300000000745
+    },
+    {
+      "id": "toy-trex",
+      "device": "desktop",
+      "beforeMs": 3676.10000000149,
+      "afterMs": 5130.699999999255
+    },
+    {
+      "id": "elephant-souvenir",
+      "device": "desktop",
+      "beforeMs": 2139,
+      "afterMs": 3168.800000000745
+    },
+    {
+      "id": "cave-lioness",
+      "device": "desktop",
+      "beforeMs": 4965,
+      "afterMs": 5796
+    },
+    {
+      "id": "dog-plush",
+      "device": "desktop",
+      "beforeMs": 3617,
+      "afterMs": 4578.89999999851
+    },
+    {
+      "id": "bmx-bike",
+      "device": "desktop",
+      "beforeMs": 3519.4000000003725,
+      "afterMs": 4337.79999999702
+    },
+    {
+      "id": "sunflower-photo",
+      "device": "desktop",
+      "beforeMs": 3240.7000000011176,
+      "afterMs": 4217
+    },
+    {
+      "id": "white-roses",
+      "device": "desktop",
+      "beforeMs": 2771.4000000003725,
+      "afterMs": 3811.699999999255
+    },
+    {
+      "id": "mushroom-photo",
+      "device": "desktop",
+      "beforeMs": 3525.300000000745,
+      "afterMs": 6031.900000002235
+    },
+    {
+      "id": "cactus-real",
+      "device": "desktop",
+      "beforeMs": 3168.10000000149,
+      "afterMs": 7578.900000002235
+    },
+    {
+      "id": "crochet-earth",
+      "device": "desktop",
+      "beforeMs": 2856.7999999988824,
+      "afterMs": 8304.10000000149
+    },
+    {
+      "id": "triceratops-skull",
+      "device": "desktop",
+      "beforeMs": 3450.300000000745,
+      "afterMs": 4093.199999999255
+    },
+    {
+      "id": "pyrite-cubes",
+      "device": "desktop",
+      "beforeMs": 4001.800000000745,
+      "afterMs": 4860.300000000745
+    },
+    {
+      "id": "megalodon-tooth",
+      "device": "desktop",
+      "beforeMs": 3992.9000000003725,
+      "afterMs": 4571
+    },
+    {
+      "id": "rubber-duck-real",
+      "device": "desktop",
+      "beforeMs": 2521.800000000745,
+      "afterMs": 2905.400000002235
+    },
+    {
+      "id": "vintage-camera",
+      "device": "desktop",
+      "beforeMs": 2218.39999999851,
+      "afterMs": 3052.5
+    },
+    {
+      "id": "boombox",
+      "device": "desktop",
+      "beforeMs": 2460.9000000003725,
+      "afterMs": 3234.800000000745
+    },
+    {
+      "id": "cat-statue",
+      "device": "desktop",
+      "beforeMs": 2549.699999999255,
+      "afterMs": 3232.199999999255
+    },
+    {
+      "id": "american-football",
+      "device": "desktop",
+      "beforeMs": 2906.7999999988824,
+      "afterMs": 4237.400000002235
+    },
+    {
+      "id": "tennis-ball",
+      "device": "desktop",
+      "beforeMs": 3205.2999999988824,
+      "afterMs": 4087.599999997765
+    },
+    {
+      "id": "baseball",
+      "device": "desktop",
+      "beforeMs": 4441.0999999996275,
+      "afterMs": 9381.099999997765
+    },
+    {
+      "id": "beach-ball",
+      "device": "desktop",
+      "beforeMs": 2705.5,
+      "afterMs": 3544
+    },
+    {
+      "id": "rugby-ball",
+      "device": "desktop",
+      "beforeMs": 3286.800000000745,
+      "afterMs": 3720.89999999851
+    },
+    {
+      "id": "dodgeball",
+      "device": "desktop",
+      "beforeMs": 2070.5,
+      "afterMs": 2746.5
+    },
+    {
+      "id": "lacrosse-ball",
+      "device": "desktop",
+      "beforeMs": 2726.800000000745,
+      "afterMs": 3119.699999999255
+    },
+    {
+      "id": "hockey-puck",
+      "device": "desktop",
+      "beforeMs": 3516.9000000003725,
+      "afterMs": 6300.5
+    },
+    {
+      "id": "shuttlecock",
+      "device": "desktop",
+      "beforeMs": 3589.4000000003725,
+      "afterMs": 4659.79999999702
+    },
+    {
+      "id": "campfire",
+      "device": "desktop",
+      "beforeMs": 2839.4000000003725,
+      "afterMs": 3329.5
+    },
+    {
+      "id": "neptune",
+      "device": "desktop",
+      "beforeMs": 3902.800000000745,
+      "afterMs": 7866.29999999702
+    },
+    {
+      "id": "planet",
+      "device": "desktop",
+      "beforeMs": 3042.2999999988824,
+      "afterMs": 7660.599999997765
+    },
+    {
+      "id": "aurora-planet",
+      "device": "desktop",
+      "beforeMs": 3291.5999999996275,
+      "afterMs": 5726.300000000745
+    },
+    {
+      "id": "asteroid",
+      "device": "desktop",
+      "beforeMs": 3914.5,
+      "afterMs": 34791.30000000447
+    },
+    {
+      "id": "comet",
+      "device": "desktop",
+      "beforeMs": 3153.300000000745,
+      "afterMs": 9500.5
+    },
+    {
+      "id": "meteor",
+      "device": "desktop",
+      "beforeMs": 2358.300000000745,
+      "afterMs": 31441.5
+    },
+    {
+      "id": "star",
+      "device": "desktop",
+      "beforeMs": 2693.5999999996275,
+      "afterMs": 9615.79999999702
+    },
+    {
+      "id": "pulsar",
+      "device": "desktop",
+      "beforeMs": 2643.5999999996275,
+      "afterMs": 16042.89999999851
+    },
+    {
+      "id": "black-hole",
+      "device": "desktop",
+      "beforeMs": 3275.5,
+      "afterMs": 45348.10000000149
+    },
+    {
+      "id": "star-cluster",
+      "device": "desktop",
+      "beforeMs": 2435.2000000011176,
+      "afterMs": 13047.39999999851
+    },
+    {
+      "id": "planetary-nebula",
+      "device": "desktop",
+      "beforeMs": 2253.199999999255,
+      "afterMs": 24894.80000000447
+    },
+    {
+      "id": "nebula",
+      "device": "desktop",
+      "beforeMs": 3511.7999999988824,
+      "afterMs": 21439.60000000149
+    },
+    {
+      "id": "supernova",
+      "device": "desktop",
+      "beforeMs": 2946.5,
+      "afterMs": 21876.60000000149
+    },
+    {
+      "id": "spiral-galaxy",
+      "device": "desktop",
+      "beforeMs": 2742.199999999255,
+      "afterMs": 17219.79999999702
+    },
+    {
+      "id": "real-moon",
+      "device": "desktop",
+      "beforeMs": 4872.799999998882,
+      "afterMs": 6707
+    },
+    {
+      "id": "real-mars",
+      "device": "desktop",
+      "beforeMs": 3630,
+      "afterMs": 6096.0999999940395
+    },
+    {
+      "id": "real-earth",
+      "device": "desktop",
+      "beforeMs": 4065,
+      "afterMs": 10298.70000000298
+    },
+    {
+      "id": "real-mercury",
+      "device": "desktop",
+      "beforeMs": 5015,
+      "afterMs": 15814.39999999851
+    },
+    {
+      "id": "real-venus",
+      "device": "desktop",
+      "beforeMs": 4355.9000000003725,
+      "afterMs": 48675.69999999553
+    },
+    {
+      "id": "real-moons",
+      "device": "desktop",
+      "beforeMs": 12507.699999999255,
+      "afterMs": 28175.60000000149
+    },
+    {
+      "id": "real-small-worlds",
+      "device": "desktop",
+      "beforeMs": 6967.9000000003725,
+      "afterMs": 17155
+    },
+    {
+      "id": "nearby-stars",
+      "device": "desktop",
+      "beforeMs": 2556,
+      "afterMs": 32295.90000000596
+    },
+    {
+      "id": "star-systems",
+      "device": "desktop",
+      "beforeMs": 2384.300000000745,
+      "afterMs": 12934.19999999553
+    },
+    {
+      "id": "real-galaxies",
+      "device": "desktop",
+      "beforeMs": 4214.4000000003725,
+      "afterMs": 9450.40000000596
+    },
+    {
+      "id": "powers-of-ten",
+      "device": "desktop",
+      "beforeMs": 2129.4000000003725,
+      "afterMs": 4525.30000000447
+    },
+    {
+      "id": "saturn-v",
+      "device": "desktop",
+      "beforeMs": 4687.299999998882,
+      "afterMs": 7192.5
+    },
+    {
+      "id": "sls",
+      "device": "desktop",
+      "beforeMs": 5488.5,
+      "afterMs": 20314.89999999851
+    },
+    {
+      "id": "space-shuttle",
+      "device": "desktop",
+      "beforeMs": 5551.5999999996275,
+      "afterMs": 40495.60000000149
+    },
+    {
+      "id": "solar-orbits",
+      "device": "desktop",
+      "beforeMs": 3178.5,
+      "afterMs": 18062.29999999702
+    },
+    {
+      "id": "virus",
+      "device": "desktop",
+      "beforeMs": 3913.0999999996275,
+      "afterMs": 11802.09999999404
+    },
+    {
+      "id": "bacteriophage",
+      "device": "desktop",
+      "beforeMs": 3423.4000000003725,
+      "afterMs": 9858.89999999851
+    },
+    {
+      "id": "bacterium",
+      "device": "desktop",
+      "beforeMs": 3626.9000000003725,
+      "afterMs": 10950.70000000298
+    },
+    {
+      "id": "red-blood-cell",
+      "device": "desktop",
+      "beforeMs": 3156.7000000011176,
+      "afterMs": 8855.5
+    },
+    {
+      "id": "neuron",
+      "device": "desktop",
+      "beforeMs": 3180.300000000745,
+      "afterMs": 26385.5
+    },
+    {
+      "id": "astrocyte",
+      "device": "desktop",
+      "beforeMs": 3751.699999999255,
+      "afterMs": 37882.29999999702
+    },
+    {
+      "id": "animal-cell",
+      "device": "desktop",
+      "beforeMs": 3264.4000000003725,
+      "afterMs": 48426.19999999553
+    },
+    {
+      "id": "dna",
+      "device": "desktop",
+      "beforeMs": 4785.699999999255,
+      "afterMs": 24878.89999999851
+    },
+    {
+      "id": "white-blood-cell",
+      "device": "desktop",
+      "beforeMs": 4173.4000000003725,
+      "afterMs": 21029.29999999702
+    },
+    {
+      "id": "microglia",
+      "device": "desktop",
+      "beforeMs": 3604.4000000003725,
+      "afterMs": 12391.89999999851
+    },
+    {
+      "id": "diatom",
+      "device": "desktop",
+      "beforeMs": 3626.2999999988824,
+      "afterMs": 12507.69999999553
+    },
+    {
+      "id": "tardigrade",
+      "device": "desktop",
+      "beforeMs": 3438.199999999255,
+      "afterMs": 32901.5
+    },
+    {
+      "id": "pollen",
+      "device": "desktop",
+      "beforeMs": 3090.800000000745,
+      "afterMs": 33726.80000000447
+    },
+    {
+      "id": "snowflake",
+      "device": "desktop",
+      "beforeMs": 4201.0999999996275,
+      "afterMs": 28017.60000000149
+    },
+    {
+      "id": "chromosome",
+      "device": "desktop",
+      "beforeMs": 3223.60000000149,
+      "afterMs": 72658.5
+    },
+    {
+      "id": "mitochondrion",
+      "device": "desktop",
+      "beforeMs": 3291.199999999255,
+      "afterMs": 15049.5
+    },
+    {
+      "id": "paramecium",
+      "device": "desktop",
+      "beforeMs": 3692.89999999851,
+      "afterMs": 25476.89999999851
+    },
+    {
+      "id": "amoeba",
+      "device": "desktop",
+      "beforeMs": 4408.5,
+      "afterMs": 8372.89999999851
+    },
+    {
+      "id": "dna-to-protein",
+      "device": "desktop",
+      "beforeMs": 3999.9000000003725,
+      "afterMs": 11967.10000000149
+    },
+    {
+      "id": "mitosis",
+      "device": "desktop",
+      "beforeMs": 3615,
+      "afterMs": 18082.60000000149
+    },
+    {
+      "id": "apoptosis",
+      "device": "desktop",
+      "beforeMs": 3523.5999999996275,
+      "afterMs": 37710.89999999851
+    },
+    {
+      "id": "phagocytosis",
+      "device": "desktop",
+      "beforeMs": 4013.89999999851,
+      "afterMs": 20649.80000000447
+    },
+    {
+      "id": "orbital",
+      "device": "desktop",
+      "beforeMs": 3990.800000000745,
+      "afterMs": 79221.10000000149
+    },
+    {
+      "id": "atom",
+      "device": "desktop",
+      "beforeMs": 8704.800000000745,
+      "afterMs": 26428.19999999553
+    },
+    {
+      "id": "molecule",
+      "device": "desktop",
+      "beforeMs": 7179.800000000745,
+      "afterMs": 35755.10000000149
+    },
+    {
+      "id": "protein",
+      "device": "desktop",
+      "beforeMs": 4807.199999999255,
+      "afterMs": 78754.5
+    },
+    {
+      "id": "crystal-lattice",
+      "device": "desktop",
+      "beforeMs": 4200.699999999255,
+      "afterMs": 25705.5
+    },
+    {
+      "id": "unit-cells",
+      "device": "desktop",
+      "beforeMs": 3365,
+      "afterMs": 26014.89999999851
+    },
+    {
+      "id": "orbital-atlas",
+      "device": "desktop",
+      "beforeMs": 3903.5,
+      "afterMs": 29038.09999999404
+    },
+    {
+      "id": "molecule-viewer",
+      "device": "desktop",
+      "beforeMs": 3140.2999999988824,
+      "afterMs": 15760.89999999851
+    },
+    {
+      "id": "periodic-table",
+      "device": "desktop",
+      "beforeMs": 3864.2000000011176,
+      "afterMs": 32688.09999999404
+    },
+    {
+      "id": "real-elements",
+      "device": "desktop",
+      "beforeMs": 7409.4000000003725,
+      "afterMs": 58043.5
+    },
+    {
+      "id": "diamond",
+      "device": "desktop",
+      "beforeMs": 3492.4000000003725,
+      "afterMs": 54175.40000000596
+    },
+    {
+      "id": "ruby",
+      "device": "desktop",
+      "beforeMs": 3398.0999999996275,
+      "afterMs": 23272.60000000149
+    },
+    {
+      "id": "emerald",
+      "device": "desktop",
+      "beforeMs": 3113.699999999255,
+      "afterMs": 30899.5
+    },
+    {
+      "id": "amethyst-geode",
+      "device": "desktop",
+      "beforeMs": 3962.5,
+      "afterMs": 23514.29999999702
+    },
+    {
+      "id": "sapphire",
+      "device": "desktop",
+      "beforeMs": 3573.9000000003725,
+      "afterMs": 75317.09999999404
+    },
+    {
+      "id": "quartz-cluster",
+      "device": "desktop",
+      "beforeMs": 4370,
+      "afterMs": 58281.20000000298
+    },
+    {
+      "id": "opal",
+      "device": "desktop",
+      "beforeMs": 3216.699999999255,
+      "afterMs": 41559.5
+    },
+    {
+      "id": "pearl",
+      "device": "desktop",
+      "beforeMs": 3664.9000000003725,
+      "afterMs": 70761.30000000447
+    },
+    {
+      "id": "brain",
+      "device": "desktop",
+      "beforeMs": 3894.699999999255,
+      "afterMs": 38372.70000000298
+    },
+    {
+      "id": "eye",
+      "device": "desktop",
+      "beforeMs": 3111.800000000745,
+      "afterMs": 14162.39999999851
+    },
+    {
+      "id": "lungs",
+      "device": "desktop",
+      "beforeMs": 2939.5,
+      "afterMs": 56535.40000000596
+    },
+    {
+      "id": "tooth",
+      "device": "desktop",
+      "beforeMs": 2730.5999999996275,
+      "afterMs": 112091.70000000298
+    },
+    {
+      "id": "kidney",
+      "device": "desktop",
+      "beforeMs": 3956,
+      "afterMs": 69714.79999999702
+    },
+    {
+      "id": "anatomy-atlas",
+      "device": "desktop",
+      "beforeMs": 4856.299999998882,
+      "afterMs": 48808
+    },
+    {
+      "id": "oak",
+      "device": "desktop",
+      "beforeMs": 3922.5,
+      "afterMs": 49030.60000000149
+    },
+    {
+      "id": "pine",
+      "device": "desktop",
+      "beforeMs": 3109.4000000003725,
+      "afterMs": 73721.29999999702
+    },
+    {
+      "id": "palm",
+      "device": "desktop",
+      "beforeMs": 3180,
+      "afterMs": 40167.79999999702
+    },
+    {
+      "id": "cherry-blossom",
+      "device": "desktop",
+      "beforeMs": 9203.799999998882,
+      "afterMs": 64989.89999999851
+    },
+    {
+      "id": "maple",
+      "device": "desktop",
+      "beforeMs": 3998.5,
+      "afterMs": 47592.30000000447
+    },
+    {
+      "id": "bonsai",
+      "device": "desktop",
+      "beforeMs": 4287.300000000745,
+      "afterMs": 55204.5
+    },
+    {
+      "id": "willow",
+      "device": "desktop",
+      "beforeMs": 3231.5999999996275,
+      "afterMs": 28070.19999999553
+    },
+    {
+      "id": "sunflower",
+      "device": "desktop",
+      "beforeMs": 3782.7999999988824,
+      "afterMs": 44649.10000000149
+    },
+    {
+      "id": "rose",
+      "device": "desktop",
+      "beforeMs": 4276.0999999996275,
+      "afterMs": 23716.80000000447
+    },
+    {
+      "id": "dandelion",
+      "device": "desktop",
+      "beforeMs": 3870.5,
+      "afterMs": 44101.20000000298
+    },
+    {
+      "id": "tulip",
+      "device": "desktop",
+      "beforeMs": 3763.39999999851,
+      "afterMs": 12933
+    },
+    {
+      "id": "daisy",
+      "device": "desktop",
+      "beforeMs": 2921.800000000745,
+      "afterMs": 22222.10000000149
+    },
+    {
+      "id": "lotus",
+      "device": "desktop",
+      "beforeMs": 2923.0999999996275,
+      "afterMs": 15278.5
+    },
+    {
+      "id": "mushroom",
+      "device": "desktop",
+      "beforeMs": 3502.2999999988824,
+      "afterMs": 11365.70000000298
+    },
+    {
+      "id": "fern",
+      "device": "desktop",
+      "beforeMs": 3443.699999999255,
+      "afterMs": 16661.60000000149
+    },
+    {
+      "id": "saguaro",
+      "device": "desktop",
+      "beforeMs": 4405.199999999255,
+      "afterMs": 15306.60000000149
+    },
+    {
+      "id": "coral",
+      "device": "desktop",
+      "beforeMs": 4671.5,
+      "afterMs": 24096.20000000298
+    },
+    {
+      "id": "pinecone",
+      "device": "desktop",
+      "beforeMs": 3004.800000000745,
+      "afterMs": 8047
+    },
+    {
+      "id": "acorn",
+      "device": "desktop",
+      "beforeMs": 3561.5,
+      "afterMs": 8456.30000000447
+    },
+    {
+      "id": "succulent",
+      "device": "desktop",
+      "beforeMs": 3555.2000000011176,
+      "afterMs": 10301.60000000149
+    },
+    {
+      "id": "bamboo",
+      "device": "desktop",
+      "beforeMs": 3372.4000000003725,
+      "afterMs": 12458.39999999851
+    },
+    {
+      "id": "rocks",
+      "device": "desktop",
+      "beforeMs": 3631.4000000003725,
+      "afterMs": 7446.89999999851
+    },
+    {
+      "id": "kelp",
+      "device": "desktop",
+      "beforeMs": 3726.5999999996275,
+      "afterMs": 18199.39999999851
+    },
+    {
+      "id": "storm-cloud",
+      "device": "desktop",
+      "beforeMs": 3280.2999999988824,
+      "afterMs": 19482.29999999702
+    },
+    {
+      "id": "lava-lamp",
+      "device": "desktop",
+      "beforeMs": 3536.699999999255,
+      "afterMs": 22618.10000000149
+    },
+    {
+      "id": "snow-globe",
+      "device": "desktop",
+      "beforeMs": 7810.10000000149,
+      "afterMs": 23556.80000000447
+    },
+    {
+      "id": "volcano",
+      "device": "desktop",
+      "beforeMs": 3171.5,
+      "afterMs": 11852.89999999851
+    },
+    {
+      "id": "ice-statue",
+      "device": "desktop",
+      "beforeMs": 4469.9000000003725,
+      "afterMs": 18105.79999999702
+    },
+    {
+      "id": "candle",
+      "device": "desktop",
+      "beforeMs": 3894.7999999988824,
+      "afterMs": 35440.39999999851
+    },
+    {
+      "id": "tornado",
+      "device": "desktop",
+      "beforeMs": 3584.699999999255,
+      "afterMs": 11461.39999999851
+    },
+    {
+      "id": "rainbow",
+      "device": "desktop",
+      "beforeMs": 3130.300000000745,
+      "afterMs": 16281
+    },
+    {
+      "id": "iceberg",
+      "device": "desktop",
+      "beforeMs": 3139.199999999255,
+      "afterMs": 13031.90000000596
+    },
+    {
+      "id": "waterfall",
+      "device": "desktop",
+      "beforeMs": 4317.300000000745,
+      "afterMs": 30447.20000000298
+    },
+    {
+      "id": "ocean-wave",
+      "device": "desktop",
+      "beforeMs": 3711.89999999851,
+      "afterMs": 20952.5
+    },
+    {
+      "id": "geyser",
+      "device": "desktop",
+      "beforeMs": 4987.799999998882,
+      "afterMs": 99140.89999999851
+    },
+    {
+      "id": "ice-cream",
+      "device": "desktop",
+      "beforeMs": 3859.9000000003725,
+      "afterMs": 19336.39999999851
+    },
+    {
+      "id": "watermelon",
+      "device": "desktop",
+      "beforeMs": 3461.5999999996275,
+      "afterMs": 15824.30000000447
+    },
+    {
+      "id": "birthday-cake",
+      "device": "desktop",
+      "beforeMs": 14741.099999999627,
+      "afterMs": 18748.5
+    },
+    {
+      "id": "jelly",
+      "device": "desktop",
+      "beforeMs": 6268.700000001118,
+      "afterMs": 15514.60000000149
+    },
+    {
+      "id": "cupcake",
+      "device": "desktop",
+      "beforeMs": 4211.5999999996275,
+      "afterMs": 16040.20000000298
+    },
+    {
+      "id": "lollipop",
+      "device": "desktop",
+      "beforeMs": 3634.300000000745,
+      "afterMs": 14833.29999999702
+    },
+    {
+      "id": "candy-cane",
+      "device": "desktop",
+      "beforeMs": 4780.60000000149,
+      "afterMs": 28072.89999999851
+    },
+    {
+      "id": "macarons",
+      "device": "desktop",
+      "beforeMs": 4538.60000000149,
+      "afterMs": 24334.60000000149
+    },
+    {
+      "id": "donut",
+      "device": "desktop",
+      "beforeMs": 3193.2999999988824,
+      "afterMs": 14326
+    },
+    {
+      "id": "gummy-bear",
+      "device": "desktop",
+      "beforeMs": 3859.5,
+      "afterMs": 27257.10000000149
+    },
+    {
+      "id": "pretzel",
+      "device": "desktop",
+      "beforeMs": 3301.10000000149,
+      "afterMs": 18205.60000000149
+    },
+    {
+      "id": "croissant",
+      "device": "desktop",
+      "beforeMs": 3570.800000000745,
+      "afterMs": 12639.29999999702
+    },
+    {
+      "id": "pizza",
+      "device": "desktop",
+      "beforeMs": 4026.5,
+      "afterMs": 18294.60000000149
+    },
+    {
+      "id": "burger",
+      "device": "desktop",
+      "beforeMs": 3851.300000000745,
+      "afterMs": 11013
+    },
+    {
+      "id": "egg",
+      "device": "desktop",
+      "beforeMs": 3343.9000000003725,
+      "afterMs": 6320.60000000149
+    },
+    {
+      "id": "coffee",
+      "device": "desktop",
+      "beforeMs": 3649.0999999996275,
+      "afterMs": 8759.29999999702
+    },
+    {
+      "id": "apple",
+      "device": "desktop",
+      "beforeMs": 8334.5,
+      "afterMs": 26289
+    },
+    {
+      "id": "banana",
+      "device": "desktop",
+      "beforeMs": 6191.39999999851,
+      "afterMs": 14061
+    },
+    {
+      "id": "kiwi",
+      "device": "desktop",
+      "beforeMs": 7986.0999999996275,
+      "afterMs": 19866.10000000149
+    },
+    {
+      "id": "pineapple",
+      "device": "desktop",
+      "beforeMs": 8148.200000001118,
+      "afterMs": 11006.19999999553
+    },
+    {
+      "id": "cherries",
+      "device": "desktop",
+      "beforeMs": 8356.299999998882,
+      "afterMs": 16284.30000000447
+    },
+    {
+      "id": "grapes",
+      "device": "desktop",
+      "beforeMs": 4294.299999998882,
+      "afterMs": 11346.20000000298
+    },
+    {
+      "id": "avocado",
+      "device": "desktop",
+      "beforeMs": 5900,
+      "afterMs": 7622.39999999851
+    },
+    {
+      "id": "spinning-top",
+      "device": "desktop",
+      "beforeMs": 5327.300000000745,
+      "afterMs": 7077.5
+    },
+    {
+      "id": "newtons-cradle",
+      "device": "desktop",
+      "beforeMs": 3676.5999999996275,
+      "afterMs": 7735.60000000149
+    },
+    {
+      "id": "teddy-bear",
+      "device": "desktop",
+      "beforeMs": 4333.4000000003725,
+      "afterMs": 26587.70000000298
+    },
+    {
+      "id": "yo-yo",
+      "device": "desktop",
+      "beforeMs": 3280.5,
+      "afterMs": 32342.20000000298
+    },
+    {
+      "id": "puzzle-cube",
+      "device": "desktop",
+      "beforeMs": 3705.4000000003725,
+      "afterMs": 7092.20000000298
+    },
+    {
+      "id": "spring-toy",
+      "device": "desktop",
+      "beforeMs": 3573.2000000011176,
+      "afterMs": 8493.39999999851
+    },
+    {
+      "id": "kite",
+      "device": "desktop",
+      "beforeMs": 3637.800000000745,
+      "afterMs": 6310.89999999851
+    },
+    {
+      "id": "paper-plane",
+      "device": "desktop",
+      "beforeMs": 4368.0999999996275,
+      "afterMs": 7587.89999999851
+    },
+    {
+      "id": "origami-crane",
+      "device": "desktop",
+      "beforeMs": 3680.7000000011176,
+      "afterMs": 12756.39999999851
+    },
+    {
+      "id": "balloon-dog",
+      "device": "desktop",
+      "beforeMs": 3660.89999999851,
+      "afterMs": 24708.30000000447
+    },
+    {
+      "id": "soap-bubbles",
+      "device": "desktop",
+      "beforeMs": 7003.60000000149,
+      "afterMs": 28743.60000000149
+    },
+    {
+      "id": "robot",
+      "device": "desktop",
+      "beforeMs": 4561,
+      "afterMs": 14644.70000000298
+    },
+    {
+      "id": "chess-set",
+      "device": "desktop",
+      "beforeMs": 4960.199999999255,
+      "afterMs": 9466
+    },
+    {
+      "id": "lorenz",
+      "device": "desktop",
+      "beforeMs": 4705,
+      "afterMs": 31851.59999999404
+    },
+    {
+      "id": "klein-bottle",
+      "device": "desktop",
+      "beforeMs": 5039.299999998882,
+      "afterMs": 16491.30000000447
+    },
+    {
+      "id": "menger-sponge",
+      "device": "desktop",
+      "beforeMs": 9064.699999999255,
+      "afterMs": 13190.5
+    },
+    {
+      "id": "hypercube",
+      "device": "desktop",
+      "beforeMs": 6443.4000000003725,
+      "afterMs": 12164.80000000447
+    },
+    {
+      "id": "torus-knot",
+      "device": "desktop",
+      "beforeMs": 4470.5999999996275,
+      "afterMs": 9030.79999999702
+    },
+    {
+      "id": "gyroid",
+      "device": "desktop",
+      "beforeMs": 5196.700000001118,
+      "afterMs": 9961.79999999702
+    },
+    {
+      "id": "mandelbulb",
+      "device": "desktop",
+      "beforeMs": 3325.300000000745,
+      "afterMs": 18198.20000000298
+    },
+    {
+      "id": "sierpinski",
+      "device": "desktop",
+      "beforeMs": 2987.2000000011176,
+      "afterMs": 17812.80000000447
+    },
+    {
+      "id": "platonic",
+      "device": "desktop",
+      "beforeMs": 4999.200000001118,
+      "afterMs": 11946
+    },
+    {
+      "id": "seashell-spiral",
+      "device": "desktop",
+      "beforeMs": 4036.7000000011176,
+      "afterMs": 12029.69999999553
+    },
+    {
+      "id": "graph-plotter",
+      "device": "desktop",
+      "beforeMs": 5651.0999999996275,
+      "afterMs": 11134.79999999702
+    },
+    {
+      "id": "surface-plotter",
+      "device": "desktop",
+      "beforeMs": 7352.5999999996275,
+      "afterMs": 28141.79999999702
+    },
+    {
+      "id": "unit-circle",
+      "device": "desktop",
+      "beforeMs": 4122.60000000149,
+      "afterMs": 13182
+    },
+    {
+      "id": "fourier-circles",
+      "device": "desktop",
+      "beforeMs": 3240.2999999988824,
+      "afterMs": 8816.39999999851
+    },
+    {
+      "id": "aizawa-attractor",
+      "device": "desktop",
+      "beforeMs": 9681,
+      "afterMs": 19303.10000000149
+    },
+    {
+      "id": "five-cell",
+      "device": "desktop",
+      "beforeMs": 4778.700000001118,
+      "afterMs": 16073
+    },
+    {
+      "id": "sixteen-cell",
+      "device": "desktop",
+      "beforeMs": 4898.9000000003725,
+      "afterMs": 8340.89999999851
+    },
+    {
+      "id": "twenty-four-cell",
+      "device": "desktop",
+      "beforeMs": 7440.5999999996275,
+      "afterMs": 14703.89999999851
+    },
+    {
+      "id": "duoprism",
+      "device": "desktop",
+      "beforeMs": 6980.10000000149,
+      "afterMs": 10934.30000000447
+    },
+    {
+      "id": "splat-equation",
+      "device": "desktop",
+      "beforeMs": 4762.5999999996275,
+      "afterMs": 7391.80000000447
+    },
+    {
+      "id": "book",
+      "device": "desktop",
+      "beforeMs": 4397.200000001118,
+      "afterMs": 6915.5
+    },
+    {
+      "id": "music-box",
+      "device": "desktop",
+      "beforeMs": 5570.699999999255,
+      "afterMs": 7115.80000000447
+    },
+    {
+      "id": "clock",
+      "device": "desktop",
+      "beforeMs": 3659.300000000745,
+      "afterMs": 5736.69999999553
+    },
+    {
+      "id": "gift-box",
+      "device": "desktop",
+      "beforeMs": 2904.5,
+      "afterMs": 7590.60000000149
+    },
+    {
+      "id": "umbrella",
+      "device": "desktop",
+      "beforeMs": 3612.0999999996275,
+      "afterMs": 12269.20000000298
+    },
+    {
+      "id": "desk-fan",
+      "device": "desktop",
+      "beforeMs": 2960.0999999996275,
+      "afterMs": 6700.5
+    },
+    {
+      "id": "potion-bottle",
+      "device": "desktop",
+      "beforeMs": 5405.5999999996275,
+      "afterMs": 6441
+    },
+    {
+      "id": "fountain-pen",
+      "device": "desktop",
+      "beforeMs": 4485.299999998882,
+      "afterMs": 5269.69999999553
+    },
+    {
+      "id": "water-bottle",
+      "device": "desktop",
+      "beforeMs": 3529.300000000745,
+      "afterMs": 7082.5999999940395
+    },
+    {
+      "id": "running-shoe",
+      "device": "desktop",
+      "beforeMs": 9829,
+      "afterMs": 14176.29999999702
+    },
+    {
+      "id": "hoodie",
+      "device": "desktop",
+      "beforeMs": 4428.10000000149,
+      "afterMs": 6089.60000000149
+    },
+    {
+      "id": "sunglasses",
+      "device": "desktop",
+      "beforeMs": 3918.2000000011176,
+      "afterMs": 9032.10000000149
+    },
+    {
+      "id": "baseball-cap",
+      "device": "desktop",
+      "beforeMs": 3883.199999999255,
+      "afterMs": 17283.10000000149
+    },
+    {
+      "id": "sword-in-stone",
+      "device": "desktop",
+      "beforeMs": 4017.0999999996275,
+      "afterMs": 10568.39999999851
+    },
+    {
+      "id": "shield",
+      "device": "desktop",
+      "beforeMs": 4223.0999999996275,
+      "afterMs": 11724.60000000149
+    },
+    {
+      "id": "bow-and-target",
+      "device": "desktop",
+      "beforeMs": 3242.0999999996275,
+      "afterMs": 13541.80000000447
+    },
+    {
+      "id": "trebuchet",
+      "device": "desktop",
+      "beforeMs": 5099,
+      "afterMs": 6039.69999999553
+    },
+    {
+      "id": "crown",
+      "device": "desktop",
+      "beforeMs": 4708.9000000003725,
+      "afterMs": 6999.19999999553
+    },
+    {
+      "id": "dragon-egg",
+      "device": "desktop",
+      "beforeMs": 3627.5,
+      "afterMs": 8865.39999999851
+    },
+    {
+      "id": "wizards-orb",
+      "device": "desktop",
+      "beforeMs": 8688.599999999627,
+      "afterMs": 10432.80000000447
+    },
+    {
+      "id": "crystal-ball",
+      "device": "desktop",
+      "beforeMs": 6882.700000001118,
+      "afterMs": 17959.79999999702
+    },
+    {
+      "id": "fish-school",
+      "device": "desktop",
+      "beforeMs": 3930,
+      "afterMs": 5382.70000000298
+    },
+    {
+      "id": "butterfly",
+      "device": "desktop",
+      "beforeMs": 3712.199999999255,
+      "afterMs": 10729.10000000149
+    },
+    {
+      "id": "pufferfish",
+      "device": "desktop",
+      "beforeMs": 4193.800000000745,
+      "afterMs": 18826.20000000298
+    },
+    {
+      "id": "nautilus",
+      "device": "desktop",
+      "beforeMs": 4417.800000000745,
+      "afterMs": 8338.60000000149
+    },
+    {
+      "id": "ladybug",
+      "device": "desktop",
+      "beforeMs": 3889,
+      "afterMs": 9582.5
+    },
+    {
+      "id": "snail",
+      "device": "desktop",
+      "beforeMs": 3941.199999999255,
+      "afterMs": 6035.29999999702
+    },
+    {
+      "id": "octopus",
+      "device": "desktop",
+      "beforeMs": 3688.5,
+      "afterMs": 6887.19999999553
+    },
+    {
+      "id": "starfish",
+      "device": "desktop",
+      "beforeMs": 3932.7999999988824,
+      "afterMs": 10394.80000000447
+    },
+    {
+      "id": "sea-urchin",
+      "device": "desktop",
+      "beforeMs": 3407.39999999851,
+      "afterMs": 15446.89999999851
+    },
+    {
+      "id": "frog",
+      "device": "desktop",
+      "beforeMs": 6260.699999999255,
+      "afterMs": 7720.39999999851
+    },
+    {
+      "id": "penguin",
+      "device": "desktop",
+      "beforeMs": 4909.5,
+      "afterMs": 7411.60000000149
+    },
+    {
+      "id": "owl",
+      "device": "desktop",
+      "beforeMs": 5259.300000000745,
+      "afterMs": 16372.40000000596
+    },
+    {
+      "id": "jack-o-lantern",
+      "device": "desktop",
+      "beforeMs": 5774.5,
+      "afterMs": 9915.79999999702
+    },
+    {
+      "id": "snowman",
+      "device": "desktop",
+      "beforeMs": 4939.5,
+      "afterMs": 6857.10000000149
+    },
+    {
+      "id": "fireworks",
+      "device": "desktop",
+      "beforeMs": 4398.5999999996275,
+      "afterMs": 11676
+    },
+    {
+      "id": "decorated-tree",
+      "device": "desktop",
+      "beforeMs": 4564.10000000149,
+      "afterMs": 8176
+    },
+    {
+      "id": "patterned-egg",
+      "device": "desktop",
+      "beforeMs": 4520.199999999255,
+      "afterMs": 12085.19999999553
+    },
+    {
+      "id": "paper-lantern",
+      "device": "desktop",
+      "beforeMs": 4183.4000000003725,
+      "afterMs": 7634.60000000149
+    },
+    {
+      "id": "diya",
+      "device": "desktop",
+      "beforeMs": 11489.199999999255,
+      "afterMs": 12991.69999999553
+    },
+    {
+      "id": "menorah",
+      "device": "desktop",
+      "beforeMs": 5728.5,
+      "afterMs": 11968.10000000149
+    },
+    {
+      "id": "guitar",
+      "device": "desktop",
+      "beforeMs": 7832.699999999255,
+      "afterMs": 11646.40000000596
+    },
+    {
+      "id": "drum",
+      "device": "desktop",
+      "beforeMs": 7052.5,
+      "afterMs": 12869.40000000596
+    },
+    {
+      "id": "xylophone",
+      "device": "desktop",
+      "beforeMs": 5655.5,
+      "afterMs": 14965.69999999553
+    },
+    {
+      "id": "toy-piano",
+      "device": "desktop",
+      "beforeMs": 4836.200000001118,
+      "afterMs": 10510
+    },
+    {
+      "id": "grand-piano",
+      "device": "desktop",
+      "beforeMs": 5342.4000000003725,
+      "afterMs": 10733.39999999851
+    },
+    {
+      "id": "upright-piano",
+      "device": "desktop",
+      "beforeMs": 6325.5,
+      "afterMs": 10180.29999999702
+    },
+    {
+      "id": "harpsichord",
+      "device": "desktop",
+      "beforeMs": 9555.300000000745,
+      "afterMs": 12630
+    },
+    {
+      "id": "electronic-keyboard",
+      "device": "desktop",
+      "beforeMs": 7145.5,
+      "afterMs": 15312.40000000596
+    },
+    {
+      "id": "rocket",
+      "device": "desktop",
+      "beforeMs": 7096.0999999996275,
+      "afterMs": 8036.5999999940395
+    },
+    {
+      "id": "hot-air-balloon",
+      "device": "desktop",
+      "beforeMs": 4192.9000000003725,
+      "afterMs": 6319.39999999851
+    },
+    {
+      "id": "steam-train",
+      "device": "desktop",
+      "beforeMs": 5884.4000000003725,
+      "afterMs": 7022
+    },
+    {
+      "id": "sports-car",
+      "device": "desktop",
+      "beforeMs": 5084.9000000003725,
+      "afterMs": 6534.5
+    },
+    {
+      "id": "bus",
+      "device": "desktop",
+      "beforeMs": 6120.300000000745,
+      "afterMs": 7541.60000000149
+    },
+    {
+      "id": "propeller-plane",
+      "device": "desktop",
+      "beforeMs": 4608,
+      "afterMs": 5698.0999999940395
+    },
+    {
+      "id": "jet",
+      "device": "desktop",
+      "beforeMs": 3792.5,
+      "afterMs": 6578.79999999702
+    },
+    {
+      "id": "bicycle",
+      "device": "desktop",
+      "beforeMs": 4982.10000000149,
+      "afterMs": 5768.5
+    },
+    {
+      "id": "tractor",
+      "device": "desktop",
+      "beforeMs": 5640.200000001118,
+      "afterMs": 26120.29999999702
+    },
+    {
+      "id": "ufo",
+      "device": "desktop",
+      "beforeMs": 3440.199999999255,
+      "afterMs": 5043.20000000298
+    },
+    {
+      "id": "supertall",
+      "device": "desktop",
+      "beforeMs": 4857.199999999255,
+      "afterMs": 6030.39999999851
+    },
+    {
+      "id": "lighthouse",
+      "device": "desktop",
+      "beforeMs": 5371.299999998882,
+      "afterMs": 7340.29999999702
+    },
+    {
+      "id": "statue-of-liberty",
+      "device": "desktop",
+      "beforeMs": 5103.4000000003725,
+      "afterMs": 7484.19999999553
+    },
+    {
+      "id": "white-house",
+      "device": "desktop",
+      "beforeMs": 4894.199999999255,
+      "afterMs": 7674.20000000298
+    },
+    {
+      "id": "colosseum",
+      "device": "desktop",
+      "beforeMs": 3717.0999999996275,
+      "afterMs": 5418.29999999702
+    },
+    {
+      "id": "stonehenge",
+      "device": "desktop",
+      "beforeMs": 5492.9000000003725,
+      "afterMs": 44666.30000000447
+    },
+    {
+      "id": "big-ben",
+      "device": "desktop",
+      "beforeMs": 4586.699999999255,
+      "afterMs": 6528.60000000149
+    },
+    {
+      "id": "taj-mahal",
+      "device": "desktop",
+      "beforeMs": 3708.4000000003725,
+      "afterMs": 4495.5
+    },
+    {
+      "id": "perceptron",
+      "device": "desktop",
+      "beforeMs": 5387.9000000003725,
+      "afterMs": 14282.60000000149
+    },
+    {
+      "id": "multilayer-perceptron",
+      "device": "desktop",
+      "beforeMs": 5069.0999999996275,
+      "afterMs": 37055.5
+    },
+    {
+      "id": "neural-network",
+      "device": "desktop",
+      "beforeMs": 4725.39999999851,
+      "afterMs": 6707.60000000149
+    },
+    {
+      "id": "cnn",
+      "device": "desktop",
+      "beforeMs": 4582.0999999996275,
+      "afterMs": 5700.20000000298
+    },
+    {
+      "id": "rnn",
+      "device": "desktop",
+      "beforeMs": 4321.5999999996275,
+      "afterMs": 4956.60000000149
+    },
+    {
+      "id": "looped-transformer",
+      "device": "desktop",
+      "beforeMs": 4155.799999998882,
+      "afterMs": 15232.80000000447
+    },
+    {
+      "id": "diffusion-model",
+      "device": "desktop",
+      "beforeMs": 4187.700000001118,
+      "afterMs": 20569.60000000149
+    },
+    {
+      "id": "half-adder",
+      "device": "desktop",
+      "beforeMs": 3957.4000000003725,
+      "afterMs": 4492.20000000298
+    },
+    {
+      "id": "turing-machine",
+      "device": "desktop",
+      "beforeMs": 4339.5999999996275,
+      "afterMs": 5190.79999999702
+    },
+    {
+      "id": "difference-engine",
+      "device": "desktop",
+      "beforeMs": 4531.199999999255,
+      "afterMs": 6137.20000000298
+    },
+    {
+      "id": "enigma-machine",
+      "device": "desktop",
+      "beforeMs": 4893.9000000003725,
+      "afterMs": 13510.5
+    },
+    {
+      "id": "bombe",
+      "device": "desktop",
+      "beforeMs": 5071.699999999255,
+      "afterMs": 22958.70000000298
+    },
+    {
+      "id": "chladni-plate",
+      "device": "desktop",
+      "beforeMs": 3357.5,
+      "afterMs": 3919.39999999851
+    },
+    {
+      "id": "room-echo",
+      "device": "desktop",
+      "beforeMs": 4156.60000000149,
+      "afterMs": 4867.39999999851
+    },
+    {
+      "id": "model-splats",
+      "device": "desktop",
+      "beforeMs": 5393.5,
+      "afterMs": 8210.60000000149
+    },
+    {
+      "id": "qr-damage",
+      "device": "desktop",
+      "beforeMs": 3613.699999999255,
+      "afterMs": 4575.5
+    },
+    {
+      "id": "photo-3d",
+      "device": "desktop",
+      "beforeMs": 5223.60000000149,
+      "afterMs": 10477.5
+    },
+    {
+      "id": "moving-photo-3d",
+      "device": "desktop",
+      "beforeMs": 11700.89999999851,
+      "afterMs": 13535.70000000298
+    },
+    {
+      "id": "video-3d",
+      "device": "desktop",
+      "beforeMs": 4030.89999999851,
+      "afterMs": 5313
+    },
+    {
+      "id": "sound-lab",
+      "device": "desktop",
+      "beforeMs": 4557.5,
+      "afterMs": 24922.30000000447
+    },
+    {
+      "id": "point-clouds",
+      "device": "desktop",
+      "beforeMs": 10797,
+      "afterMs": 14200.10000000149
+    },
+    {
+      "id": "volume-viewer",
+      "device": "desktop",
+      "beforeMs": 5145.70000000298,
+      "afterMs": 6650
+    },
+    {
+      "id": "splat-field",
+      "device": "desktop",
+      "beforeMs": 3446.39999999851,
+      "afterMs": 4220.39999999851
+    },
+    {
+      "id": "light-lab",
+      "device": "desktop",
+      "beforeMs": 2605.2999999970198,
+      "afterMs": 4439.20000000298
+    },
+    {
+      "id": "baked-chest",
+      "device": "desktop",
+      "beforeMs": 3119.39999999851,
+      "afterMs": 7096.5
+    },
+    {
+      "id": "thermal-ellipsoids",
+      "device": "desktop",
+      "beforeMs": 4495.5,
+      "afterMs": 6945
+    },
+    {
+      "id": "smlm-microscope",
+      "device": "desktop",
+      "beforeMs": 3633.400000002235,
+      "afterMs": 6343.39999999851
+    },
+    {
+      "id": "cryoem-map",
+      "device": "desktop",
+      "beforeMs": 4650.39999999851,
+      "afterMs": 6456.89999999851
+    },
+    {
+      "id": "terrain-box",
+      "device": "desktop",
+      "beforeMs": 5382.89999999851,
+      "afterMs": 6048.30000000447
+    },
+    {
+      "id": "ripple-tank",
+      "device": "desktop",
+      "beforeMs": 3087.099999997765,
+      "afterMs": 19072.10000000149
+    },
+    {
+      "id": "light-bench",
+      "device": "desktop",
+      "beforeMs": 2273.599999997765,
+      "afterMs": 5583.4000000059605
+    },
+    {
+      "id": "fluid-lab",
+      "device": "desktop",
+      "beforeMs": 2614.900000002235,
+      "afterMs": 4951.10000000149
+    },
+    {
+      "id": "grand-canyon",
+      "device": "desktop",
+      "beforeMs": 3821.800000000745,
+      "afterMs": 9822.10000000149
+    },
+    {
+      "id": "st-helens",
+      "device": "desktop",
+      "beforeMs": 3757.2000000029802,
+      "afterMs": 7127.29999999702
+    },
+    {
+      "id": "sea-floor",
+      "device": "desktop",
+      "beforeMs": 3856.199999999255,
+      "afterMs": 7692.60000000149
+    },
+    {
+      "id": "tide-harbor",
+      "device": "desktop",
+      "beforeMs": 3766.800000000745,
+      "afterMs": 7425.20000000298
+    },
+    {
+      "id": "hurricane",
+      "device": "desktop",
+      "beforeMs": 3329.39999999851,
+      "afterMs": 5269.9000000059605
+    },
+    {
+      "id": "relief-map",
+      "device": "desktop",
+      "beforeMs": 15122.20000000298,
+      "afterMs": 18710.39999999851
+    },
+    {
+      "id": "living-city",
+      "device": "desktop",
+      "beforeMs": 6143.89999999851,
+      "afterMs": 9876.70000000298
+    },
+    {
+      "id": "stork-migration",
+      "device": "desktop",
+      "beforeMs": 5002.39999999851,
+      "afterMs": 5715.10000000149
+    },
+    {
+      "id": "earthquakes",
+      "device": "desktop",
+      "beforeMs": 3647.5,
+      "afterMs": 12783.70000000298
+    },
+    {
+      "id": "airport-xray",
+      "device": "desktop",
+      "beforeMs": 3835.39999999851,
+      "afterMs": 10372.60000000149
+    },
+    {
+      "id": "how-ct",
+      "device": "desktop",
+      "beforeMs": 3567.300000000745,
+      "afterMs": 8100.39999999851
+    },
+    {
+      "id": "walnut-ct",
+      "device": "desktop",
+      "beforeMs": 3639.400000002235,
+      "afterMs": 8372.70000000298
+    },
+    {
+      "id": "fruit-mri",
+      "device": "desktop",
+      "beforeMs": 3266.5,
+      "afterMs": 6527.10000000149
+    },
+    {
+      "id": "screen",
+      "device": "desktop",
+      "beforeMs": 4243.199999999255,
+      "afterMs": 8322
+    },
+    {
+      "id": "longtail",
+      "device": "desktop",
+      "beforeMs": 2360.2000000029802,
+      "afterMs": 2963
+    },
+    {
+      "id": "strata",
+      "device": "desktop",
+      "beforeMs": 2769,
+      "afterMs": 3265.60000000149
+    },
+    {
+      "id": "night-owl-pinball",
+      "device": "desktop",
+      "beforeMs": 2500.300000000745,
+      "afterMs": 3371.3000000044703
+    },
+    {
+      "id": "cast-a-shadow",
+      "device": "desktop",
+      "beforeMs": 2237,
+      "afterMs": 4341.80000000447
+    },
+    {
+      "id": "photo-dash",
+      "device": "desktop",
+      "beforeMs": 1997.300000000745,
+      "afterMs": 28866.5
+    },
+    {
+      "id": "note-rider",
+      "device": "desktop",
+      "beforeMs": 2321.5,
+      "afterMs": 4269.29999999702
+    },
+    {
+      "id": "night-sky",
+      "device": "desktop",
+      "beforeMs": 3540,
+      "afterMs": 4720.70000000298
+    },
+    {
+      "id": "data-in-3d",
+      "device": "desktop",
+      "beforeMs": 2281.300000000745,
+      "afterMs": 7513.5
+    },
+    {
+      "id": "climate-records",
+      "device": "desktop",
+      "beforeMs": 4070.39999999851,
+      "afterMs": 7860.5
+    }
+  ],
+  "errors": []
+}

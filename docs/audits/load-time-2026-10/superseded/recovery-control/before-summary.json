@@ -1,0 +1,15 @@
+[
+  {
+    "id": "cactus",
+    "label": "Cactus",
+    "labs": false,
+    "device": "desktop",
+    "sample": 0,
+    "status": "ok",
+    "bytes": 11021766,
+    "requestCount": 122,
+    "firstFrameMs": 55411.29999999702,
+    "errors": [],
+    "largestBodyBytes": 5869356
+  }
+]
