@@ -65,7 +65,7 @@ for (const s of LONG_SAMPLES) {
 }
 // The short bunny's sound.
 const mp3 = fs.readFileSync(`${dir}/bunny.mp3`);
-const b = list[at("sample")];
+const b = list[at("bunny")];
 b.sound = { file: `${dir}/bunny.mp3`, bytes: mp3.length, sha256: sha(mp3) };
 if (!/bunny\.mp3/.test(b.note))
   b.note += ` Lane MP1 (${DATE}): its sound is now its own 56 kbps mono MP3 (bunny.mp3, the same six seconds of assets/toys/screen/bunny.mp4), as the other samples have, so its Sharp view no longer reads a playing video.`; // prettier-ignore

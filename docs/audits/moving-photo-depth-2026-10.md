@@ -90,7 +90,20 @@ What they show:
 
 The 30-second films' caches (re-baked by lane MP1 from 960-pixel films), old and new:
 
-LONG_TABLE
+| Film (frames)                    | Before: contrast / jitter / ratio | After: contrast / jitter / ratio |
+| -------------------------------- | --------------------------------- | -------------------------------- |
+| Sintel (720)                     | 0.208 / 0.0040 / 0.019            | 0.751 / 0.0137 / 0.018           |
+| Big Buck Bunny (720)             | 0.542 / 0.0049 / 0.009            | 0.947 / 0.0030 / 0.003           |
+| Inside the machine (720)         | 0.289 / 0.0183 / 0.063            | 0.775 / 0.0174 / 0.022           |
+| The bridge and the robot (648)   | 0.233 / 0.0079 / 0.034            | 0.798 / 0.0134 / 0.017           |
+| A pink forest (720, new)         |                                   | 0.752 / 0.0330 / 0.044           |
+| Camping in the woods (1440, new) |                                   | 0.666 / 0.0205 / 0.031           |
+
+Every film keeps three to four times the relief with a twitch-to-relief ratio as low or lower. The
+caches are larger (gzip finds less to squeeze in a fuller depth): Sintel's, the default's, went from
+2.5 MB to 6.3 MB; all six come to about 51 MB. The shot detector found fewer cuts than the films
+have in two of them (Sintel 3, the camp 1), where a cut joins two similar shots; the rolling range
+eases across those as it would across a camera move.
 
 ## For a Codex follow-up
 
