@@ -1356,4 +1356,47 @@ export function* buildRecipe(
   return ctx;
 }
 
+// Lane SPL1: what a recipe says it draws when asked for `count` splats (the
+// labs Splats slider), or null when it follows the count. A recipe that
+// can't (a fixed grid, a fixed set of data) says so with
+// `splats(count, options)`, returning a count or { count, all }: `all` when
+// that is every splat it has. tests/spl1-engine.spec.mjs measures it.
+export function statedSplats(recipe, count, options) {
+  if (typeof recipe.splats !== "function") return null;
+  const s = recipe.splats(count, options);
+  const n = typeof s === "number" ? s : s?.count;
+  return Number.isFinite(n) ? { count: Math.max(0, Math.round(n)), all: !!s?.all } : null;
+}
+
+// Lane SPL1: builds a recipe to draw `count` splats (the labs Splats
+// slider). Holes (a color that returns null) and parts of a fixed size make
+// a toy draw more or fewer splats than its budget, so the build is measured
+// and done again with the budget scaled by what it missed: at most twice
+// more, the budget kept within half to two and a half times the count. A
+// recipe that states its count (statedSplats) is built once. The context
+// returned is always the last build's, since a recipe may keep state between
+// builds: when an earlier try came closer, it is built again at that budget.
+export function* buildRecipeTo(recipe, args, applyClay) {
+  const target = args.count;
+  const build = (count) => buildRecipe(recipe, { ...args, count }, applyClay);
+  if (statedSplats(recipe, target, args.options)) return yield* build(target);
+  const off = (n) => Math.abs(n - target);
+  let count = target;
+  let ctx = yield* build(count);
+  let best = { count, n: ctx.buf.count };
+  for (let pass = 0; pass < 2 && off(best.n) > target * 0.01; pass++) {
+    const drawn = ctx.buf.count;
+    const next = Math.round(
+      Math.min(target * 2.5, Math.max(target * 0.5, (count * target) / Math.max(1, drawn))),
+    );
+    if (next === count) break;
+    count = next;
+    ctx = yield* build(count);
+    if (ctx.buf.count === drawn) break; // the count doesn't follow the budget
+    if (off(ctx.buf.count) < off(best.n)) best = { count, n: ctx.buf.count };
+  }
+  if (best.count !== count) ctx = yield* build(best.count);
+  return ctx;
+}
+
 export { norm };

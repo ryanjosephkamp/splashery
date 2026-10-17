@@ -1924,6 +1924,76 @@ export const MODIFIER_RIG = {
   wgsl: variant(WGSL, "rig", "wgsl"),
 };
 
+// Lane SPL1: a capture thinned to the labs Splats slider's count. Each splat
+// stays when a hash of its index is under uSpThin.x (the share kept); the
+// others shrink to nothing, as a cut splat does. Used only while a thinned
+// capture shows, so every other toy keeps its program exactly.
+// thinHash() is the same hash in JavaScript, so thinnedCount() knows the
+// count drawn.
+const THIN = {
+  glslUniforms: `uniform vec4 uSpThin; // lane SPL1: x the share of splats kept
+float spThinHash(uint n) {
+  n = (n ^ 61u) ^ (n >> 16u);
+  n *= 9u;
+  n = n ^ (n >> 4u);
+  n *= 0x27d4eb2du;
+  n = n ^ (n >> 15u);
+  return float(n >> 8u) / 16777216.0;
+}
+`,
+  wgslUniforms: `uniform uSpThin: vec4f;
+fn spThinHash(m: u32) -> f32 {
+  var n = (m ^ 61u) ^ (m >> 16u);
+  n = n * 9u;
+  n = n ^ (n >> 4u);
+  n = n * 0x27d4eb2du;
+  n = n ^ (n >> 15u);
+  return f32(n >> 8u) / 16777216.0;
+}
+`,
+  glsl: `  if (spThinHash(splat.index) >= uSpThin.x) scale = vec3(0.0);\n`,
+  wgsl: `  if (spThinHash(splat.index) >= uniform.uSpThin.x) { *scale = vec3f(0.0); }\n`,
+};
+
+export function thinHash(i) {
+  let n = (i ^ 61 ^ (i >>> 16)) >>> 0;
+  n = Math.imul(n, 9) >>> 0;
+  n = (n ^ (n >>> 4)) >>> 0;
+  n = Math.imul(n, 0x27d4eb2d) >>> 0;
+  n = (n ^ (n >>> 15)) >>> 0;
+  return (n >>> 8) / 16777216;
+}
+
+// The splats a capture of `count` splats draws thinned to the share `keep`.
+export function thinnedCount(count, keep) {
+  const k = Math.fround(keep);
+  let n = 0;
+  for (let i = 0; i < count; i++) if (thinHash(i) < k) n++;
+  return n;
+}
+
+function withThin(src, glsl) {
+  const at = (text, find, add) => {
+    if (!text.includes(find)) throw new Error(`thin: missing ${find}`);
+    return text.replace(find, add + find);
+  };
+  if (glsl) {
+    src = at(src, "float spHash(uint n) {", THIN.glslUniforms);
+    return at(src, "  if (spCut > 0.5) scale = vec3(0.0);\n}", THIN.glsl);
+  }
+  src = at(src, "fn spHash(", THIN.wgslUniforms);
+  return at(src, "  if (spCut > 0.5) { *scale = vec3f(0.0); }\n}", THIN.wgsl);
+}
+
+export const MODIFIER_THIN = {
+  glsl: withThin(variant(GLSL, "plain", "glsl"), true),
+  wgsl: withThin(variant(WGSL, "plain", "wgsl"), false),
+};
+export const MODIFIER_RIG_THIN = {
+  glsl: withThin(variant(GLSL, "rig", "glsl"), true),
+  wgsl: withThin(variant(WGSL, "rig", "wgsl"), false),
+};
+
 // ---- CPU driver -------------------------------------------------------------
 
 const AXIS_VEC = { x: [1, 0, 0], y: [0, 1, 0], z: [0, 0, 1] };

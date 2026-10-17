@@ -6,10 +6,10 @@
 import * as pc from "./pc.js";
 import { Stage, NoGPUError } from "./stage.js";
 import { OrbitCamera, Gestures } from "./camera.js";
-import { EffectDriver, hexToRgb, KINDS } from "./effects.js";
+import { EffectDriver, hexToRgb, KINDS, thinnedCount } from "./effects.js";
 import { Painter } from "./paint.js";
 import { generate, normalizeGenerator, applyClay, PROFILES } from "./generators.js";
-import { buildRecipe, meanLuminance, Kit } from "./kit.js";
+import { buildRecipe, buildRecipeTo, statedSplats, meanLuminance, Kit } from "./kit.js";
 import { MotionDriver } from "./motion.js";
 import { rigLayout, tagRig } from "./rig.js";
 import { posePass } from "./pose.js";
@@ -314,14 +314,23 @@ export class Player {
   }
 
   // A kit toy's splat count: the tier's usual count times the recipe's
-  // density, up to the tier's most. With the Detail slider (lane Kit lab)
-  // the slider's count stands in for the usual count, and the most grows
-  // with it in the same ratio.
+  // density, up to the tier's most. With the Splats slider (labs; lane
+  // SPL1) it is the slider's count itself: the density only sets the
+  // tiers' counts.
   splatBudget(density = 1) {
     const prof = PROFILES[this.profile];
     if (!this.splats) return Math.round(Math.min(prof.maxCount, prof.defaultCount * density));
-    const most = Math.max(prof.maxCount, Math.round((this.splats * prof.maxCount) / prof.defaultCount)); // prettier-ignore
-    return Math.round(Math.min(most, this.splats * density));
+    return this.splats;
+  }
+
+  // Lane SPL1: what the stage's splat label adds when a toy draws a count
+  // more than 2% off the Splats slider's: "all this toy has" when it has no
+  // more (a capture's file, or a recipe's stated { all }), "the nearest this
+  // toy draws" otherwise. Empty without the slider.
+  splatsNote(drawn, stated = null) {
+    const want = this.splats;
+    if (!want || Math.abs(drawn - want) <= want * 0.02) return "";
+    return drawn < want && stated?.all ? " (all this toy has)" : " (the nearest this toy draws)";
   }
 
   setProfile(tier) {
@@ -427,6 +436,7 @@ export class Player {
       info = await this.buildProcedural(generator, toy.clay || [], token, progress, rig);
       if (!info) return null;
       if (rig) this.attachRig(shelf.id, rig, info);
+      if (preset) info.splatsNote = this.splatsNote(info.splats); // lane SPL1
       // A shelf toy edited with clay keeps its name.
       info.id = shelf ? shelf.id : null;
       info.label = preset ? preset.label : shelf ? `${shelf.label}, edited` : "Your toy";
@@ -447,15 +457,31 @@ export class Player {
       // `look` option picks one, and a missing or unknown look is the first.
       const look = pickLook(def, toy.options);
       const src = look?.url ? look : def;
-      const url = assetURL(this.profile === "low" && src.urlWeak ? src.urlWeak : src.url);
-      progress(0, `Loading ${def.label}…`);
-      const bytes = await fetchBytes(url, (f) => progress(f * 0.9, `Loading ${def.label}…`));
-      if (token !== this.loadToken) return null;
-      const asset = await loadNative(this.stage, bytes, url.split("/").pop());
-      if (token !== this.loadToken) {
+      const load = async (file) => {
+        const url = assetURL(file);
+        progress(0, `Loading ${def.label}…`);
+        const bytes = await fetchBytes(url, (f) => progress(f * 0.9, `Loading ${def.label}…`));
+        if (token !== this.loadToken) return null;
+        const asset = await loadNative(this.stage, bytes, url.split("/").pop());
+        if (token !== this.loadToken) {
+          asset.unload();
+          return null;
+        }
+        return asset;
+      };
+      const lite = this.profile === "low" && !!src.urlWeak;
+      let asset = await load(lite ? src.urlWeak : src.url);
+      if (!asset) return null;
+      // Lane SPL1: with the Splats slider a capture draws every splat its
+      // file has, up to the slider's count. A light file with fewer than
+      // the slider gives way to the full one; a file with more is thinned.
+      if (this.splats && lite && asset.resource.numSplats < this.splats * 0.98) {
         asset.unload();
-        return null;
+        asset = await load(src.url);
+        if (!asset) return null;
       }
+      const has = asset.resource.numSplats;
+      const thin = this.splats && has > this.splats ? this.splats / has : null;
       this.disposeProcedural();
       const rig = RIGS[def.id] || null;
       this.stage.setToy({
@@ -463,8 +489,11 @@ export class Player {
         asset,
         transform: def.transform || null,
         rig: !!rig,
+        thin,
       });
       info = this.measure(asset.resource, def.transform);
+      if (thin) info.splats = thinnedCount(has, thin);
+      info.splatsNote = this.splatsNote(info.splats, { count: has, all: true });
       Object.assign(info, { id: def.id, label: def.label, kind: "captured", credit: def.credit });
       if (look) {
         info.options = { look: look.id };
@@ -642,7 +671,8 @@ export class Player {
       if (token !== this.loadToken) return null;
     }
     const clay = toy.clay || [];
-    const it = buildRecipe(
+    // Lane SPL1: with the Splats slider the build is measured to its count.
+    const it = (this.splats ? buildRecipeTo : buildRecipe)(
       recipe,
       { seed: recipe.seed ?? hash32(def.id), count, options, clay, media: mediaInfo(media) },
       applyClay,
@@ -709,6 +739,7 @@ export class Player {
       half,
       radius: Math.max(...half),
       splats: ctx.buf.count,
+      splatsNote: this.splatsNote(ctx.buf.count, statedSplats(recipe, count, options)), // lane SPL1
       lum: ctx.lum,
       kernel: recipe.kernel, // Lab
       pickAlpha: recipe.pickAlpha, // Lab r2
