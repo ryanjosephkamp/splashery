@@ -287,8 +287,9 @@ inverse-depth invariance, and invalid data. Screenshots were opened. New evidenc
 `review-r2/` on `codex/frontier-research-clips`; original LOD evidence remains there. Phones, photo
 ground truth, process peak memory, and WebGPU are unmeasured.
 
-**Repository verification.** Final current-main preflight is rerun for this revision and recorded in
-the PR body. Rule check: none. No site, toy, engine, asset, or weight file is changed.
+**Repository verification.** Merged main (`c36c4dcd9`);
+`SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/preflight.mjs` passed all 271 tests and every other
+check. Rule check: none.
 
 ## Additional opened papers
 
