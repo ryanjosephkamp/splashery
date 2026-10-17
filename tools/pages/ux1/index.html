@@ -1,0 +1,972 @@
+<meta charset="utf-8" />
+<title>Splashery Phone Mockups</title>
+<meta name="claude:viewport-fit-sides" content="cover" />
+<style>
+  /* Layout: a review sheet. Each proposal is one row: what the phone shows now (a capture of
+     main, October 17, 2026) beside the proposed screen, drawn in HTML at true phone size and
+     scaled down. The phone screens keep the Playground's own light palette (--app-*). */
+  :root {
+    --page: #eef1f5;
+    --sheet: #ffffff;
+    --ink: #151a22;
+    --muted: #4d5767;
+    --line: #d5dbe4;
+    --accent: #0b4f9c;
+    --accent-soft: #e3ecf8;
+    --new: #1d6b3a;
+    --new-soft: #def2e4;
+    --app-page: #ffffff;
+    --app-ink: #111111;
+    --app-muted: #3f3f3f;
+    --app-line: #8c8c8c;
+    --app-soft: #dddddd;
+    --app-accent: #0b4f9c;
+    --app-accent-ink: #ffffff;
+    --app-paper: rgba(255, 255, 255, 0.95);
+    --app-scrim: rgba(17, 17, 17, 0.72);
+    --app-scrim-ink: #ffffff;
+    --app-rec: #d42a2a;
+    --paint-1: #e23b5a;
+    --paint-2: #f2b632;
+    --paint-3: #2f9e62;
+    --paint-4: #2a6fdb;
+    --paint-5: #111;
+    --font: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page: #12161c;
+      --sheet: #1b2129;
+      --ink: #e8edf4;
+      --muted: #a6b0bf;
+      --line: #313a46;
+      --accent: #8db8ef;
+      --accent-soft: #1f2e44;
+      --new: #8fd6a6;
+      --new-soft: #183224;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page: #12161c;
+    --sheet: #1b2129;
+    --ink: #e8edf4;
+    --muted: #a6b0bf;
+    --line: #313a46;
+    --accent: #8db8ef;
+    --accent-soft: #1f2e44;
+    --new: #8fd6a6;
+    --new-soft: #183224;
+    color-scheme: dark;
+  }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font: 15px/1.5 var(--font);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 24px 48px;
+  }
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    gap: 28px;
+  }
+  h1,
+  h2 {
+    text-wrap: balance;
+    margin: 0;
+    line-height: 1.2;
+  }
+  h1 {
+    font-size: 1.9rem;
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  p {
+    margin: 0;
+    max-width: 66ch;
+  }
+  .lede {
+    display: grid;
+    gap: 8px;
+  }
+  .lede p {
+    color: var(--muted);
+  }
+  .rank {
+    font: 600 0.75rem/1 var(--font);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .proposal {
+    background: var(--sheet);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+    display: grid;
+    gap: 14px;
+  }
+  .proposal header {
+    display: grid;
+    gap: 6px;
+  }
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .facts b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .pair {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  figure {
+    margin: 0;
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+  }
+  figcaption {
+    font: 600 0.72rem/1.2 var(--font);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  figure.new figcaption {
+    color: var(--new);
+  }
+  .notes {
+    flex: 1 1 240px;
+    min-width: 0;
+    display: grid;
+    gap: 8px;
+    font-size: 0.92rem;
+  }
+  .notes ul {
+    margin: 0;
+    padding-left: 1.1em;
+    display: grid;
+    gap: 4px;
+  }
+  .shot {
+    width: 234px;
+    max-width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    display: block;
+  }
+  .shot.wide {
+    width: 422px;
+  }
+  .scroll-x {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  /* A phone: the screen is drawn at 390 × 844 (or 844 × 390) and scaled to 0.6. */
+  .phone {
+    width: 234px;
+    height: 506px;
+    border-radius: 22px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    position: relative;
+    background: var(--app-page);
+    flex: none;
+  }
+  .phone.land {
+    width: 506px;
+    height: 234px;
+  }
+  .screen {
+    width: 390px;
+    height: 844px;
+    transform: scale(0.6);
+    transform-origin: 0 0;
+    position: absolute;
+    inset: 0 auto auto 0;
+    background: var(--app-page);
+    color: var(--app-ink);
+    font: 14px/1.35 var(--font);
+    overflow: hidden;
+  }
+  .land .screen {
+    width: 844px;
+    height: 390px;
+  }
+  .toy {
+    position: absolute;
+    background: url("toy.jpg") center / contain no-repeat;
+  }
+  .rb {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--app-line);
+    background: var(--app-paper);
+    display: grid;
+    place-items: center;
+    color: var(--app-ink);
+    flex: none;
+  }
+  .rb.on {
+    background: var(--app-accent);
+    border-color: var(--app-accent);
+    color: var(--app-accent-ink);
+  }
+  .rb svg,
+  .ic {
+    width: 18px;
+    height: 18px;
+  }
+  .row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .pill {
+    border: 1.5px solid var(--app-line);
+    border-radius: 999px;
+    padding: 0 16px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    background: var(--app-paper);
+  }
+  .pill.dark {
+    background: var(--app-ink);
+    color: var(--app-page);
+    border-color: var(--app-ink);
+  }
+  .pill.blue {
+    background: var(--app-accent);
+    color: var(--app-accent-ink);
+    border-color: var(--app-accent);
+  }
+  .seg {
+    display: flex;
+    border: 1.5px solid var(--app-line);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+    background: var(--app-paper);
+  }
+  .seg span {
+    padding: 0 10px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+  }
+  .seg .on {
+    background: var(--app-ink);
+    color: var(--app-page);
+  }
+  .sheet {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--app-page);
+    border: 1px solid var(--app-soft);
+    border-radius: 18px 18px 0 0;
+    padding: 8px 14px 14px;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+  .grab {
+    width: 38px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--app-line);
+    justify-self: center;
+  }
+  .tabs {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--app-soft);
+    margin: 0 -14px;
+    padding: 0 14px;
+  }
+  .tabs span {
+    padding: 10px 6px;
+    color: var(--app-muted);
+  }
+  .tabs .on {
+    color: var(--app-ink);
+    font-weight: 600;
+    box-shadow: inset 0 -2px 0 var(--app-ink);
+  }
+  .h {
+    font: 600 12px/1 var(--font);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--app-muted);
+  }
+  .field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .select {
+    border: 1.5px solid var(--app-line);
+    border-radius: 10px;
+    height: 40px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 180px;
+  }
+  .note {
+    color: var(--app-muted);
+    font-size: 12.5px;
+  }
+  .new-mark {
+    outline: 3px dashed var(--new);
+    outline-offset: 3px;
+  }
+  .menu {
+    position: absolute;
+    background: var(--app-page);
+    border: 1px solid var(--app-soft);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+    padding: 6px;
+    display: grid;
+  }
+  .menu div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 12px;
+    height: 46px;
+    border-radius: 10px;
+  }
+  .menu .sw {
+    margin-left: auto;
+    color: var(--app-muted);
+    font-size: 12.5px;
+  }
+  .swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid var(--app-page);
+    box-shadow: 0 0 0 1.5px var(--app-line);
+    flex: none;
+  }
+  .swatch.on {
+    box-shadow: 0 0 0 3px var(--app-ink);
+  }
+  .slider {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--app-soft);
+    position: relative;
+  }
+  .slider::after {
+    content: "";
+    position: absolute;
+    left: var(--at, 40%);
+    top: -8px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--app-accent);
+  }
+  .hud {
+    background: var(--app-scrim);
+    color: var(--app-scrim-ink);
+    border-radius: 999px;
+    padding: 4px;
+  }
+  .hud .seg {
+    background: transparent;
+    border-color: transparent;
+  }
+  .hud .seg .on {
+    background: var(--app-scrim-ink);
+    color: var(--app-ink);
+  }
+  .hud .rb {
+    background: transparent;
+    border-color: transparent;
+    color: var(--app-scrim-ink);
+  }
+  .recdot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--app-rec);
+  }
+</style>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-grid" viewBox="0 0 16 16">
+      <rect x="3" y="3" width="4" height="4" rx="1" fill="currentColor" />
+      <rect x="9" y="3" width="4" height="4" rx="1" fill="currentColor" />
+      <rect x="3" y="9" width="4" height="4" rx="1" fill="currentColor" />
+      <rect x="9" y="9" width="4" height="4" rx="1" fill="currentColor" />
+    </symbol>
+    <symbol id="i-full" viewBox="0 0 16 16">
+      <path
+        d="M3 6V3h3M10 3h3v3M13 10v3h-3M6 13H3v-3"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+      />
+    </symbol>
+    <symbol id="i-sound" viewBox="0 0 16 16">
+      <path d="M2 6h3l4-3v10L5 10H2z" fill="currentColor" />
+      <path d="M11 6l3 4M14 6l-3 4" stroke="currentColor" stroke-width="1.4" />
+    </symbol>
+    <symbol id="i-help" viewBox="0 0 16 16">
+      <path
+        d="M5.5 5.6a2.6 2.6 0 1 1 3.4 2.5c-.6.3-.9.7-.9 1.4v.5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+      />
+      <circle cx="8" cy="12.6" r="1" fill="currentColor" />
+    </symbol>
+    <symbol id="i-more" viewBox="0 0 16 16">
+      <circle cx="3.5" cy="8" r="1.4" fill="currentColor" />
+      <circle cx="8" cy="8" r="1.4" fill="currentColor" />
+      <circle cx="12.5" cy="8" r="1.4" fill="currentColor" />
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 16 16"><path d="M5 3l8 5-8 5z" fill="currentColor" /></symbol>
+    <symbol id="i-hand" viewBox="0 0 16 16">
+      <path
+        d="M5 8V4a1 1 0 0 1 2 0v3V3a1 1 0 0 1 2 0v4V4a1 1 0 0 1 2 0v5l1-1.5a1 1 0 0 1 1.6 1.2L11 13H6L4 10"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.3"
+        stroke-linejoin="round"
+      />
+    </symbol>
+    <symbol id="i-reset" viewBox="0 0 16 16">
+      <path
+        d="M3.5 8a4.5 4.5 0 1 0 1.4-3.3M3.5 2.5v2.6h2.6"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+      />
+      <circle cx="8" cy="8" r="1.2" fill="currentColor" />
+    </symbol>
+    <symbol id="i-exit" viewBox="0 0 16 16">
+      <path
+        d="M6 3v3H3M10 3v3h3M13 10h-3v3M3 10h3v3"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+      />
+    </symbol>
+    <symbol id="i-down" viewBox="0 0 16 16">
+      <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" />
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 16 16">
+      <circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6" />
+      <path d="M10.4 10.4 14 14" stroke="currentColor" stroke-width="1.6" />
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+  <div class="lede">
+    <span class="rank">Lane UX1 · October 17, 2026 · mockups only, not shipped</span>
+    <h1>The Playground on a phone: five proposals</h1>
+    <p>
+      The top five proposals from <code>docs/audits/ux-phone-2026-10.md</code>. On the left, a
+      capture of main at 390 × 844 (headless Chromium, touch). On the right, the proposed screen,
+      drawn in HTML. A dashed green outline marks what is new. Every control that exists today stays
+      reachable in each proposal.
+    </p>
+  </div>
+
+  <!-- 1 -->
+  <section class="proposal" id="p1">
+    <header>
+      <span class="rank">Proposal 1 · high value · small effort</span>
+      <h2>The settings get the sheet</h2>
+      <div class="facts">
+        <span><b>Code:</b> styles.css (phone sheet rules), src/ui.js (setMode)</span>
+        <span><b>Risk:</b> low</span>
+      </div>
+    </header>
+    <div class="pair">
+      <figure>
+        <figcaption>Now</figcaption>
+        <img
+          class="shot"
+          src="now-sheet.jpg"
+          alt="Main today: with More open, the shelf and tool row stay on top and the settings get a strip about 215 pixels tall."
+        />
+      </figure>
+      <figure class="new">
+        <figcaption>Proposed</figcaption>
+        <div class="phone">
+          <div class="screen">
+            <div class="toy" style="left: 120px; top: 30px; width: 150px; height: 220px"></div>
+            <div class="sheet" style="top: 262px">
+              <div class="grab"></div>
+              <div class="row new-mark" style="justify-content: space-between">
+                <span class="pill"
+                  ><span
+                    style="
+                      width: 26px;
+                      height: 26px;
+                      border-radius: 6px;
+                      background: url(&quot;toy.jpg&quot;) center/cover;
+                    "
+                  ></span
+                  ><b>Cactus</b><svg class="ic"><use href="#i-down" /></svg
+                ></span>
+                <span class="pill">Done</span>
+              </div>
+              <div class="seg" style="justify-self: start">
+                <span class="on">Orbit</span><span>Poke</span><span>Paint</span><span>Magnet</span
+                ><span>Clay</span>
+              </div>
+              <div class="tabs">
+                <span class="on">Toy</span><span>Share</span><span>Tools</span><span>Look</span
+                ><span>Make</span><span>ⓘ</span>
+              </div>
+              <div class="h">This toy</div>
+              <div class="row">
+                <span class="pill blue">Bloom</span><span class="note">or tap the toy</span>
+              </div>
+              <div class="h" style="margin-top: 6px">Look</div>
+              <div class="field">
+                <span>Flag colors</span
+                ><span class="select"
+                  >None <svg class="ic"><use href="#i-down" /></svg
+                ></span>
+              </div>
+              <div class="note">Flag colors stay with this toy.</div>
+              <div class="h" style="margin-top: 6px">Motion</div>
+              <div class="field">
+                <span>Turntable when idle</span
+                ><span class="select" style="min-width: 0; width: 44px">✓</span>
+              </div>
+              <div class="field">
+                <span>Move</span
+                ><span class="select"
+                  >Still <svg class="ic"><use href="#i-down" /></svg
+                ></span>
+              </div>
+              <div class="field">
+                <span>Speed</span>
+                <div class="slider" style="--at: 30%; max-width: 190px"></div>
+              </div>
+              <div class="h" style="margin-top: 6px">Quick settings</div>
+              <div class="field">
+                <span>Detail</span>
+                <div class="seg"><span class="on">Auto</span><span>High</span><span>Max</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <div class="notes">
+        <p>
+          While the settings are open, the shelf (search, categories, the toy strip) folds into one
+          chip with the toy's name. Tapping the chip brings the shelf back.
+        </p>
+        <ul>
+          <li>
+            The settings get about 410 pixels at 390 × 844 instead of 215. At 360 × 740 they get
+            about 290 instead of 101.
+          </li>
+          <li>The stage keeps its top 30%, so the toy still answers what you change.</li>
+          <li>
+            The rule already exists for screens shorter than 650 pixels. This makes it the rule on
+            every phone.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="proposal" id="p2">
+    <header>
+      <span class="rank">Proposal 2 · high value · small effort</span>
+      <h2>Four buttons on top, the rest in a labeled menu</h2>
+      <div class="facts">
+        <span><b>Code:</b> index.html (the view buttons), styles.css, src/ui.js</span>
+        <span><b>Risk:</b> low to medium (many specs find these buttons by id)</span>
+      </div>
+    </header>
+    <div class="pair">
+      <figure>
+        <figcaption>Now</figcaption>
+        <img
+          class="shot"
+          src="now-home.jpg"
+          alt="Main today: eight round icon buttons in a row across the top, with no labels."
+        />
+      </figure>
+      <figure class="new">
+        <figcaption>Proposed</figcaption>
+        <div class="phone">
+          <div class="screen">
+            <div
+              class="row"
+              style="
+                position: absolute;
+                top: 18px;
+                left: 14px;
+                right: 14px;
+                justify-content: space-between;
+              "
+            >
+              <span class="rb"
+                ><svg><use href="#i-grid" /></svg
+              ></span>
+              <div class="row">
+                <span class="rb"
+                  ><svg><use href="#i-sound" /></svg
+                ></span>
+                <span class="rb"
+                  ><svg><use href="#i-full" /></svg
+                ></span>
+                <span class="rb"
+                  ><svg><use href="#i-help" /></svg
+                ></span>
+                <span class="rb on new-mark"
+                  ><svg><use href="#i-more" /></svg
+                ></span>
+              </div>
+            </div>
+            <div class="menu new-mark" style="top: 72px; right: 14px; width: 250px">
+              <div>Turntable <span class="sw">On</span></div>
+              <div>Tilt lock <span class="sw">Off</span></div>
+              <div>Reset the view</div>
+              <div>Flag colors <span class="sw">No flag</span></div>
+              <div>Pop out <span class="sw">Labs</span></div>
+            </div>
+            <div class="note" style="position: absolute; top: 72px; left: 14px; width: 100px">
+              Cactus · 120k splats
+            </div>
+            <div
+              class="toy"
+              style="left: 70px; top: 330px; width: 250px; height: 320px; opacity: 0.55"
+            ></div>
+          </div>
+        </div>
+      </figure>
+      <div class="notes">
+        <p>
+          The grid (the toys) on the left; sound, full screen and help on the right; "More" opens a
+          menu of the rest with words and their state.
+        </p>
+        <ul>
+          <li>One row at 360 pixels, where today's eight buttons wrap into two rows.</li>
+          <li>
+            Turntable, Tilt lock and Reset the view are icons people guess at today; the menu names
+            them.
+          </li>
+          <li>
+            The four stay in view when the sheet is open, so sound and full screen are never hidden.
+          </li>
+          <li>
+            The credit line shortens to the toy's name and count; a tap shows the full credit.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="proposal" id="p3">
+    <header>
+      <span class="rank">Proposal 3 · high value · medium effort</span>
+      <h2>A tool's options sit on the tool</h2>
+      <div class="facts">
+        <span><b>Code:</b> index.html (#tool-group), src/ui.js (tool switching), styles.css</span>
+        <span><b>Risk:</b> medium (the Tools tab's controls move, their ids stay)</span>
+      </div>
+    </header>
+    <div class="pair">
+      <figure>
+        <figcaption>Now</figcaption>
+        <img
+          class="shot"
+          src="now-paint.jpg"
+          alt="Main today: Paint is picked on the tool row; its color and size are three taps away in the Tools tab."
+        />
+      </figure>
+      <figure class="new">
+        <figcaption>Proposed</figcaption>
+        <div class="phone">
+          <div class="screen">
+            <div class="toy" style="left: 70px; top: 140px; width: 250px; height: 340px"></div>
+            <div class="sheet" style="top: 600px">
+              <div class="grab"></div>
+              <div class="row new-mark" style="gap: 8px">
+                <span class="swatch on" style="background: var(--paint-1)"></span>
+                <span class="swatch" style="background: var(--paint-2)"></span>
+                <span class="swatch" style="background: var(--paint-3)"></span>
+                <span class="swatch" style="background: var(--paint-4)"></span>
+                <span class="swatch" style="background: var(--paint-5)"></span>
+                <div class="slider" style="--at: 35%; margin: 0 8px"></div>
+                <span class="pill" style="height: 36px; padding: 0 12px">Clear</span>
+              </div>
+              <div class="row" style="justify-content: space-between">
+                <div class="seg">
+                  <span>Orbit</span><span>Poke</span><span class="on">Paint</span><span>Magnet</span
+                  ><span>Clay</span>
+                </div>
+                <span class="pill">More</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <div class="notes">
+        <p>
+          Picking Paint, Clay or Magnet opens a slim tray above the tool row with that tool's few
+          options: the colors, Brush and Clear for Paint; Add, Erase and Blob size for Clay;
+          Strength and Radius for Magnet; Strength for Poke.
+        </p>
+        <ul>
+          <li>Today: pick Paint, then More, then Tools, then scroll, which covers half the toy.</li>
+          <li>The Tools tab keeps every option; the tray is a short way to the common ones.</li>
+          <li>
+            Picking Orbit closes the tray. A swipe down on the tray hides it until the next tool
+            change.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="proposal" id="p4">
+    <header>
+      <span class="rank">Proposal 4 · medium-high value · small effort</span>
+      <h2>Full screen keeps a small control bar</h2>
+      <div class="facts">
+        <span><b>Code:</b> src/ui.js (setFocus), styles.css (body.focus), the hands bar</span>
+        <span><b>Risk:</b> low (after REC1's stage row lands)</span>
+      </div>
+    </header>
+    <div class="pair">
+      <figure>
+        <figcaption>Now</figcaption>
+        <img
+          class="shot"
+          src="now-fullscreen.jpg"
+          alt="Main today: full screen shows the toy and an exit button only."
+        />
+      </figure>
+      <figure class="new">
+        <figcaption>Proposed</figcaption>
+        <div class="phone">
+          <div class="screen">
+            <span class="rb" style="position: absolute; top: 18px; right: 14px"
+              ><svg><use href="#i-exit" /></svg
+            ></span>
+            <div class="toy" style="left: 40px; top: 180px; width: 310px; height: 420px"></div>
+            <div
+              class="hud row new-mark"
+              style="
+                position: absolute;
+                left: 14px;
+                right: 14px;
+                bottom: 96px;
+                justify-content: space-between;
+              "
+            >
+              <div class="seg">
+                <span class="on">Orbit</span><span>Poke</span><span>Paint</span><span>Magnet</span
+                ><span>Clay</span>
+              </div>
+            </div>
+            <div
+              class="hud row new-mark"
+              style="position: absolute; right: 14px; bottom: 30px; gap: 2px"
+            >
+              <span class="rb"
+                ><svg><use href="#i-play" /></svg
+              ></span>
+              <span class="rb"
+                ><svg><use href="#i-hand" /></svg
+              ></span>
+              <span class="rb"
+                ><svg><use href="#i-reset" /></svg
+              ></span>
+              <span class="rb"><span class="recdot"></span></span>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <div class="notes">
+        <p>
+          Full screen keeps the tool row and REC1's stage row (Play, the hand, Reset and Record) on
+          a dark, see-through bar. They fade after three seconds and come back with a tap on the
+          screen's edge.
+        </p>
+        <ul>
+          <li>
+            Today, full screen lets you orbit and tap, but not change tool, play a song or record.
+          </li>
+          <li>
+            Recording a clean take in full screen is the case REC1 just fixed; this makes it one
+            tap.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="proposal" id="p5">
+    <header>
+      <span class="rank">Proposal 5 · high value in landscape · medium effort</span>
+      <h2>A phone on its side gets a phone layout</h2>
+      <div class="facts">
+        <span
+          ><b>Code:</b> styles.css (the "short wide screen" block), src/ui.js (the
+          <code>narrow</code> query)</span
+        >
+        <span><b>Risk:</b> medium (a new layout to keep in the specs)</span>
+      </div>
+    </header>
+    <div class="pair">
+      <figure>
+        <figcaption>Now (844 × 390)</figcaption>
+        <div class="scroll-x">
+          <img
+            class="shot wide"
+            src="now-landscape.jpg"
+            alt="Main today in landscape: the desktop panel on the right, its settings a strip about 120 pixels tall, and a small stage."
+          />
+        </div>
+      </figure>
+      <figure class="new">
+        <figcaption>Proposed (844 × 390)</figcaption>
+        <div class="scroll-x">
+          <div class="phone land">
+            <div class="screen">
+              <div
+                style="
+                  position: absolute;
+                  left: 14px;
+                  top: 14px;
+                  bottom: 14px;
+                  display: grid;
+                  gap: 8px;
+                  align-content: start;
+                "
+              >
+                <span class="rb"
+                  ><svg><use href="#i-grid" /></svg
+                ></span>
+                <span class="rb"
+                  ><svg><use href="#i-sound" /></svg
+                ></span>
+                <span class="rb"
+                  ><svg><use href="#i-full" /></svg
+                ></span>
+                <span class="rb"
+                  ><svg><use href="#i-help" /></svg
+                ></span>
+                <span class="rb"
+                  ><svg><use href="#i-more" /></svg
+                ></span>
+              </div>
+              <div class="toy" style="left: 120px; top: 20px; width: 300px; height: 300px"></div>
+              <div class="row" style="position: absolute; left: 80px; bottom: 14px">
+                <div class="seg">
+                  <span class="on">Orbit</span><span>Poke</span><span>Paint</span><span>Magnet</span
+                  ><span>Clay</span>
+                </div>
+              </div>
+              <div
+                class="sheet new-mark"
+                style="
+                  left: auto;
+                  width: 330px;
+                  top: 0;
+                  border-radius: 18px 0 0 18px;
+                  padding-top: 14px;
+                "
+              >
+                <div class="row" style="justify-content: space-between">
+                  <span class="pill"
+                    ><b>Cactus</b><svg class="ic"><use href="#i-down" /></svg
+                  ></span>
+                  <span class="rb"
+                    ><svg><use href="#i-search" /></svg
+                  ></span>
+                </div>
+                <div class="tabs">
+                  <span class="on">Toy</span><span>Share</span><span>Tools</span><span>Look</span
+                  ><span>Make</span>
+                </div>
+                <div class="h">This toy</div>
+                <div class="row">
+                  <span class="pill blue">Bloom</span><span class="note">or tap the toy</span>
+                </div>
+                <div class="field">
+                  <span>Flag colors</span
+                  ><span class="select" style="min-width: 150px"
+                    >None <svg class="ic"><use href="#i-down" /></svg
+                  ></span>
+                </div>
+                <div class="field">
+                  <span>Speed</span>
+                  <div class="slider" style="--at: 30%; max-width: 160px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <div class="notes">
+        <p>
+          A phone on its side (short and touch) gets a full-height side sheet on the right, the top
+          buttons in a column on the left, and the tool row under the toy.
+        </p>
+        <ul>
+          <li>
+            Today it gets the desktop layout: the settings show about 120 pixels at a time, and the
+            top buttons sit over the stage.
+          </li>
+          <li>
+            The side sheet opens and closes like the phone sheet; closed, the toy fills the screen.
+          </li>
+          <li>Desktop and tablet layouts don't change.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <p style="color: var(--muted); font-size: 0.85rem">
+    Captures: main at <code>c36c4dcd</code>, October 17, 2026, headless Chromium with touch, the
+    Cactus sample (CC0 1.0, steam studio / 3D SCAN STUDIO iris). Mockups are drawn in HTML and CSS;
+    nothing here ships.
+  </p>
+</main>
