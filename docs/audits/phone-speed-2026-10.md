@@ -287,3 +287,19 @@ correction; the subsequently strengthened visual-gate tests also pass. Final tar
 complete-catalog regression results, the full existing suite, and preflight remain pending. The
 survey repeat exceeds the original three-hour screening allocation; no retired timing is final gate
 evidence.
+
+## Eight-hour progress
+
+October 17, 2026, 10:08 UTC, eight-hour progress note: the corrected original survey covers all 465
+frozen toys, and 210 have matched candidate pairs. All15 targets pass five-pair speed and appearance
+checks: minimum29.6%, median48.5%, minimum native SSIM0.994008. The complete30 phone-page QA passes,
+including copy, local export, Stop, and both viewport sizes. Incoming main adds one Neuron specimen;
+all ten pairs pass every timing and matching-hardware gate. The first full suite found four existing
+bounds-test failures caused by direct uploads on minimal Stage adapters. The compatibility guard
+passes all nine unchanged bounds tests and all16 speed tests. Current main is merged. Full preflight
+had269 passes and two fixture-origin failures because these unchanged PDF tests hard-code port4173;
+the candidate is now served on4173 for a complete rerun. The first failed run is retained. A
+workspace disconnect preserved completed data; interrupted metadata is archived, and timing will
+resume with the same four-CPU affinity. The complete catalog, prescribed five/ten- pair follow-ups,
+full existing suite, and final preflight remain pending. The complete goal is not yet claimed, and
+the original twelve-hour task clock continues.

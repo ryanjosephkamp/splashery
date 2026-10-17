@@ -1,12 +1,9 @@
 # Phone speed implementation plan
 
-Latest progress, October 17, 2026, 06:08 UTC (four hours): the corrected original survey has 404/465
-toys with no errors. The shared cache and phone page are implemented. All 14 focused tests passed
-with the readback correction; the subsequently strengthened nonblank-evidence gate tests also pass.
-The final target ranking, five-pair comparisons, final stills, catalog regression check, full
-existing suite, and preflight remain pending. Repeating the survey exceeds the initial three-hour
-screening allocation; the twelve-hour task clock continues. No retired timing is final gate
-evidence.
+Latest progress, October 17, 2026, 10:08 UTC (eight hours): all15 target speed and appearance gates
+and the full30 phone-page QA pass. Neuron passes ten supplemental pairs. There are210/465 matched
+original-catalog pairs. The unrelated-toy gate and full-suite validation remain pending; full
+preflight is rerunning on the canonical fixture origin. The complete goal is not yet claimed.
 
 **Goal:** Measure every toy at phone size, improve the 15 slowest without changing their appearance
 or motion, and provide a local real-device check.
@@ -29,10 +26,10 @@ implementation branch.
       `tests/cdx-speed.spec.mjs`.
 - [x] Screen all catalog toys, preserving failures and source/environment pins. Rank the idle median
       draw intervals and freeze the 15 targets before their final comparison.
-- [ ] Profile each target, implement fixes in recipes/packs, and put any shared fix in a separate
+- [x] Profile each target, implement fixes in recipes/packs, and put any shared fix in a separate
       `Engine:` commit with regression coverage. Compare deterministic rest and mid-tap stills and
       repeated timing pairs against the frozen baseline.
-- [ ] Finish the 30-toy phone page: start, stop, progress, copyable table, local export, explicit
+- [x] Finish the 30-toy phone page: start, stop, progress, copyable table, local export, explicit
       unavailable measurements, and no uploads. Test it at phone and desktop sizes.
 - [ ] Measure the complete catalog again, report every gate honestly, and keep unsuccessful visual
       candidates out of the PR.
@@ -169,3 +166,17 @@ sample records observed parent affinity; direct browser observations are retaine
 The final report now requires consistent CPU configuration across each toy's before and after
 repetition group. No samples, timing thresholds, point counts, or rendering settings were removed or
 relaxed.
+
+October 17, 2026, 10:08 UTC, eight-hour progress note: the corrected original survey covers all 465
+frozen toys, and 210 have matched candidate pairs. All15 targets pass five-pair speed and appearance
+checks: minimum29.6%, median48.5%, minimum native SSIM0.994008. The complete30 phone-page QA passes,
+including copy, local export, Stop, and both viewport sizes. Incoming main adds one Neuron specimen;
+all ten pairs pass every timing and matching-hardware gate. The first full suite found four existing
+bounds-test failures caused by direct uploads on minimal Stage adapters. The compatibility guard
+passes all nine unchanged bounds tests and all16 speed tests. Current main is merged. Full preflight
+had269 passes and two fixture-origin failures because these unchanged PDF tests hard-code port4173;
+the candidate is now served on4173 for a complete rerun. The first failed run is retained. A
+workspace disconnect preserved completed data; interrupted metadata is archived, and timing will
+resume with the same four-CPU affinity. The complete catalog, prescribed five/ten- pair follow-ups,
+full existing suite, and final preflight remain pending. The complete goal is not yet claimed, and
+the original twelve-hour task clock continues.
