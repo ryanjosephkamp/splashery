@@ -1,0 +1,212 @@
+{
+  "rows": [
+    {
+      "id": "cactus",
+      "expectedRuns": 5,
+      "before": {
+        "id": "cactus",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[120000,\"low\",\"webgl2\",3,[390,844],[585,672]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 2888.7000000011176,
+        "idle.median": 323.1499999994412,
+        "idle.p95": 344.30000000074506,
+        "tap.median": 333.3999999994412,
+        "tap.p95": 379.19999999925494
+      },
+      "after": {
+        "id": "cactus",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[120000,\"low\",\"webgl2\",3,[390,844],[585,672]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 2740.699999999255,
+        "idle.median": 200.40000000037253,
+        "idle.p95": 242.7000000011176,
+        "tap.median": 350.09999999962747,
+        "tap.p95": 401.2000000011176
+      },
+      "changes": {
+        "firstViewMs": 0.05123411915456966,
+        "idle.median": 0.3798545567051863,
+        "idle.p95": 0.2950914899779483,
+        "tap.median": -0.05008998200424197,
+        "tap.p95": -0.058016877642156794
+      },
+      "valid": true
+    },
+    {
+      "id": "strawberry",
+      "expectedRuns": 5,
+      "before": {
+        "id": "strawberry",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[120000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3005.800000000745,
+        "idle.median": 392.5,
+        "idle.p95": 419.3999999985099,
+        "tap.median": 390.8999999994412,
+        "tap.p95": 450.2999999988824
+      },
+      "after": {
+        "id": "strawberry",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[120000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 2801.7999999988824,
+        "idle.median": 233.19999999925494,
+        "idle.p95": 276.5,
+        "tap.median": 395.45000000018626,
+        "tap.p95": 447.5
+      },
+      "changes": {
+        "firstViewMs": 0.06786878701238008,
+        "idle.median": 0.4058598726133632,
+        "idle.p95": 0.3407248450143481,
+        "tap.median": -0.011639805578796514,
+        "tap.p95": 0.0062180768351973725
+      },
+      "valid": true
+    }
+  ],
+  "optimized": [],
+  "regressions": [
+    {
+      "id": "cactus",
+      "expectedRuns": 5,
+      "before": {
+        "id": "cactus",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[120000,\"low\",\"webgl2\",3,[390,844],[585,672]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 2888.7000000011176,
+        "idle.median": 323.1499999994412,
+        "idle.p95": 344.30000000074506,
+        "tap.median": 333.3999999994412,
+        "tap.p95": 379.19999999925494
+      },
+      "after": {
+        "id": "cactus",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[120000,\"low\",\"webgl2\",3,[390,844],[585,672]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 2740.699999999255,
+        "idle.median": 200.40000000037253,
+        "idle.p95": 242.7000000011176,
+        "tap.median": 350.09999999962747,
+        "tap.p95": 401.2000000011176
+      },
+      "changes": {
+        "firstViewMs": 0.05123411915456966,
+        "idle.median": 0.3798545567051863,
+        "idle.p95": 0.2950914899779483,
+        "tap.median": -0.05008998200424197,
+        "tap.p95": -0.058016877642156794
+      },
+      "valid": true
+    }
+  ],
+  "medianGain": null,
+  "gates": {
+    "coverage": true,
+    "speed": false,
+    "appearance": false,
+    "noRegressions": false
+  }
+}

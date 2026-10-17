@@ -1,0 +1,106 @@
+{
+  "id": "volume-viewer",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2019.0999999996275,
+  "firstSubmitMs": 1728.1999999997206,
+  "idle": {
+    "count": 8,
+    "median": 401.94999999995343,
+    "p95": 426.60000000009313,
+    "work": {
+      "count": 9,
+      "median": 399.5,
+      "p95": 752.6999999997206
+    },
+    "elapsedMs": 4264,
+    "intervals": [
+      387,
+      411.20000000018626,
+      426.60000000009313,
+      383.79999999981374,
+      401.5,
+      402.39999999990687,
+      382,
+      412.5
+    ],
+    "workMs": [
+      752.6999999997206,
+      383.79999999981374,
+      408.39999999990687,
+      423.20000000018626,
+      379.60000000009313,
+      398.1999999997206,
+      399.5,
+      377.29999999981374,
+      409.39999999990687
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 321.10000000009313,
+    "p95": 407.10000000009313,
+    "work": {
+      "count": 9,
+      "median": 326.5,
+      "p95": 404.5
+    },
+    "elapsedMs": 3089.8000000002794,
+    "intervals": [
+      407.10000000009313,
+      388.20000000018626,
+      396.79999999981374,
+      330.8000000002794,
+      311.39999999990687,
+      309.29999999981374,
+      284.3000000002794,
+      269.39999999990687
+    ],
+    "workMs": [
+      386.5,
+      404.5,
+      384.20000000018626,
+      393,
+      326.5,
+      307.5,
+      306.89999999990687,
+      280,
+      266.70000000018626
+    ]
+  },
+  "action": "sweep",
+  "heapBytes": 59028702,
+  "transferBytes": 5842454,
+  "bodyBytes": 5812154,
+  "cachedRequests": 0,
+  "requests": 101,
+  "splats": 119635,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 25869424,
+    "totalSize": 90230784,
+    "embedderHeapUsedSize": 9454696,
+    "backingStorageSize": 33252718
+  },
+  "run": 0,
+  "label": "Volume viewer",
+  "kind": "kit",
+  "pack": "volume-viewer",
+  "labs": true,
+  "errors": [],
+  "wallMs": 10629,
+  "measuredAt": "2026-10-17T06:10:52.391Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

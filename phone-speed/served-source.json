@@ -1,0 +1,98 @@
+{
+  "checkedAt": "2026-10-17T02:55:38.072Z",
+  "scope": "Every changed runtime source file, the app entry, catalog entry, and pinned engine",
+  "builds": [
+    {
+      "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+      "base": "http://127.0.0.1:4174/",
+      "files": [
+        {
+          "file": "src/parameter-cache.js",
+          "status": 404,
+          "sha256": null
+        },
+        {
+          "file": "src/player.js",
+          "status": 200,
+          "sha256": "8734dda525518f39e1a97b31f371f49770c220973f3bef5dbbd3819c762ebba5"
+        },
+        {
+          "file": "src/rig.js",
+          "status": 200,
+          "sha256": "e36aa80ef907139b5b5178f29859756d7ed38be80185213d8bafc4fff616452c"
+        },
+        {
+          "file": "src/stage.js",
+          "status": 200,
+          "sha256": "6aca8078565def583efb719f6ae21cf4cb27905598b9ac1ecb03e84c8e9c2e53"
+        },
+        {
+          "file": "src/app.js",
+          "status": 200,
+          "sha256": "7c865ce12bc577ba6acf523e44f04d5b44657e3877332e3dc609f5652c9f14e7"
+        },
+        {
+          "file": "src/toys.js",
+          "status": 200,
+          "sha256": "2561263ff10f44c287a10359a99b91ac2b9eae7f8ede28aeed8f2e99c71f65cd"
+        },
+        {
+          "file": "src/pc.js",
+          "status": 200,
+          "sha256": "328df9b7cb43d3cccb4c37cfd046a526f3b030c91518218f388cf29e0f93e14d"
+        },
+        {
+          "file": "vendor/playcanvas/playcanvas.min.mjs",
+          "status": 200,
+          "sha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c"
+        }
+      ]
+    },
+    {
+      "source": "a9f34b032ac6fb92276dbac904f4c5aca72f29ae",
+      "base": "http://127.0.0.1:4173/",
+      "files": [
+        {
+          "file": "src/parameter-cache.js",
+          "status": 200,
+          "sha256": "156184a9ce1faac522dc1991bf8357b965c8df84a4d508ce4aa7ac0fc5de5f57"
+        },
+        {
+          "file": "src/player.js",
+          "status": 200,
+          "sha256": "e3b251152e9ba5ebddd8e1a7ea1e124029eeb99013f673c21a55f8d8e062c042"
+        },
+        {
+          "file": "src/rig.js",
+          "status": 200,
+          "sha256": "70fc607e15928635f656dc2b934572695197bb5be822cf9dbc83fbad455cb128"
+        },
+        {
+          "file": "src/stage.js",
+          "status": 200,
+          "sha256": "ad21a40a47b671338e2173048b7ba1e00354e49be67ad4b12a7373d57ec0ac30"
+        },
+        {
+          "file": "src/app.js",
+          "status": 200,
+          "sha256": "7c865ce12bc577ba6acf523e44f04d5b44657e3877332e3dc609f5652c9f14e7"
+        },
+        {
+          "file": "src/toys.js",
+          "status": 200,
+          "sha256": "2561263ff10f44c287a10359a99b91ac2b9eae7f8ede28aeed8f2e99c71f65cd"
+        },
+        {
+          "file": "src/pc.js",
+          "status": 200,
+          "sha256": "328df9b7cb43d3cccb4c37cfd046a526f3b030c91518218f388cf29e0f93e14d"
+        },
+        {
+          "file": "vendor/playcanvas/playcanvas.min.mjs",
+          "status": 200,
+          "sha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c"
+        }
+      ]
+    }
+  ]
+}

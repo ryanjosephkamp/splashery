@@ -1,0 +1,108 @@
+[
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3072.699999999255,
+    "firstSubmitMs": 2890.5999999996275,
+    "idle": {
+      "count": 8,
+      "median": 323.1499999994412,
+      "p95": 341.6000000014901,
+      "work": {
+        "count": 9,
+        "median": 319.30000000074506,
+        "p95": 591
+      },
+      "elapsedMs": 3508,
+      "intervals": [
+        298.5,
+        302.90000000037253,
+        324.5,
+        326.90000000037253,
+        321.7999999988824,
+        341.6000000014901,
+        331,
+        297.7999999988824
+      ],
+      "workMs": [
+        591,
+        294.09999999962747,
+        300.40000000037253,
+        319.30000000074506,
+        324,
+        319,
+        339,
+        328.40000000037253,
+        295.2999999988824
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 313.1000000005588,
+      "p95": 379.19999999925494,
+      "work": {
+        "count": 9,
+        "median": 306.59999999962747,
+        "p95": 376.09999999962747
+      },
+      "elapsedMs": 2883,
+      "intervals": [
+        293,
+        296.69999999925494,
+        309.40000000037253,
+        309.90000000037253,
+        345.7999999988824,
+        326.30000000074506,
+        379.19999999925494,
+        316.30000000074506
+      ],
+      "workMs": [
+        303,
+        290,
+        293.90000000037253,
+        306.59999999962747,
+        305.2000000011176,
+        343.19999999925494,
+        321.7000000011176,
+        376.09999999962747,
+        313.5
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 31077423,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 11588592,
+      "totalSize": 32505856,
+      "embedderHeapUsedSize": 8494656,
+      "backingStorageSize": 17926272
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 10766,
+    "measuredAt": "2026-10-17T07:53:32.655Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

@@ -1,0 +1,106 @@
+{
+  "id": "maple-tree",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3203.7000000001863,
+  "firstSubmitMs": 2645.2000000001863,
+  "idle": {
+    "count": 8,
+    "median": 332.95000000018626,
+    "p95": 396.70000000018626,
+    "work": {
+      "count": 9,
+      "median": 337.70000000018626,
+      "p95": 942.2999999998137
+    },
+    "elapsedMs": 3719,
+    "intervals": [
+      396.70000000018626,
+      386.8999999994412,
+      324.20000000018626,
+      291.90000000037253,
+      341.70000000018626,
+      303.3999999994412,
+      356,
+      321.90000000037253
+    ],
+    "workMs": [
+      942.2999999998137,
+      385.6000000005588,
+      384.3999999994412,
+      318.29999999981374,
+      288,
+      337.70000000018626,
+      300.59999999962747,
+      353,
+      318.70000000018626
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 807.25,
+    "p95": 870.0999999996275,
+    "work": {
+      "count": 9,
+      "median": 802.5999999996275,
+      "p95": 867.7000000001863
+    },
+    "elapsedMs": 7293.5999999996275,
+    "intervals": [
+      852.9000000003725,
+      870.0999999996275,
+      772.5,
+      810.1000000005588,
+      808,
+      806.5,
+      763.5999999996275,
+      802.5
+    ],
+    "workMs": [
+      802.5999999996275,
+      850,
+      867.7000000001863,
+      769.7000000001863,
+      807.4000000003725,
+      803,
+      802.4000000003725,
+      759.5,
+      799.4000000003725
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 29430958,
+  "transferBytes": 9209206,
+  "bodyBytes": 9179506,
+  "cachedRequests": 0,
+  "requests": 99,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 14652936,
+    "totalSize": 31457280,
+    "embedderHeapUsedSize": 9138896,
+    "backingStorageSize": 15120562
+  },
+  "run": 0,
+  "label": "Golden maple",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 15511,
+  "measuredAt": "2026-10-17T07:26:44.430Z",
+  "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+}

@@ -1,0 +1,108 @@
+[
+  {
+    "id": "dog-plush",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3365.100000000559,
+    "firstSubmitMs": 2653,
+    "idle": {
+      "count": 8,
+      "median": 336.1000000005588,
+      "p95": 471.5,
+      "work": {
+        "count": 9,
+        "median": 349.29999999981374,
+        "p95": 1005.5
+      },
+      "elapsedMs": 4247.899999999441,
+      "intervals": [
+        318.8999999994412,
+        301.5,
+        319.80000000074506,
+        311.69999999925494,
+        352.40000000037253,
+        374.59999999962747,
+        431.70000000018626,
+        471.5
+      ],
+      "workMs": [
+        1005.5,
+        314.29999999981374,
+        298.5,
+        317.1000000005588,
+        308.79999999981374,
+        349.29999999981374,
+        371.79999999981374,
+        429,
+        468.79999999981374
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 693.25,
+      "p95": 719,
+      "work": {
+        "count": 9,
+        "median": 691.3000000007451,
+        "p95": 732.9000000003725
+      },
+      "elapsedMs": 6210,
+      "intervals": [
+        703.7000000001863,
+        692.7999999998137,
+        628,
+        693.7000000001863,
+        644,
+        719,
+        691.5,
+        699.8999999994412
+      ],
+      "workMs": [
+        732.9000000003725,
+        700.6000000005588,
+        690.2000000001863,
+        623.6000000005588,
+        691.3000000007451,
+        637.5,
+        716.7000000001863,
+        688.2000000001863,
+        697.5
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 42940070,
+    "transferBytes": 9278367,
+    "bodyBytes": 9248667,
+    "cachedRequests": 0,
+    "requests": 99,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 18391816,
+      "totalSize": 31719424,
+      "embedderHeapUsedSize": 11004120,
+      "backingStorageSize": 31660814
+    },
+    "run": 0,
+    "label": "Dog plush",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 15090,
+    "measuredAt": "2026-10-17T07:01:20.079Z",
+    "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+  }
+]

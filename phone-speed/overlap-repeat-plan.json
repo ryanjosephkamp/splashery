@@ -1,0 +1,20 @@
+{
+  "plannedAt": "2026-10-17T03:38:10.999Z",
+  "reason": "A resume-control test unexpectedly started a browser after the order policy changed. Repeat every potentially overlapping original-survey sample; preserve the originals.",
+  "begin": "2026-10-17T03:36:50.165Z",
+  "end": "2026-10-17T03:37:07.961Z",
+  "samples": [
+    {
+      "id": "robot",
+      "measuredAt": "2026-10-17T03:36:52.692Z"
+    },
+    {
+      "id": "chess-set",
+      "measuredAt": "2026-10-17T03:37:00.963Z"
+    },
+    {
+      "id": "lorenz",
+      "measuredAt": "2026-10-17T03:37:09.439Z"
+    }
+  ]
+}

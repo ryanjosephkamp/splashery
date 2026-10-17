@@ -1,0 +1,37 @@
+
+Running 1 test using 1 worker
+
+(node:43438) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43438) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-speed.spec.mjs:593:1 › recipe render settings follow the active tier and preserve URL overrides (5.2s)
+
+
+  1) [chromium] › tests/cdx-speed.spec.mjs:593:1 › recipe render settings follow the active tier and preserve URL overrides 
+
+    Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'dpr')
+        at sample (eval at evaluate (:290:30), <anonymous>:29:28)
+        at async eval (eval at evaluate (:290:30), <anonymous>:35:19)
+        at async <anonymous>:316:30
+        at sample (eval at evaluate (:290:30), <anonymous>:29:28)
+        at async eval (eval at evaluate (:290:30), <anonymous>:35:19)
+        at async <anonymous>:316:30
+        at /workspace/splashery/tests/cdx-speed.spec.mjs:515:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-speed.spec.mjs:593:1 › recipe render settings follow the active tier and preserve URL overrides 

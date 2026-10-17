@@ -1,0 +1,32 @@
+{
+  "url": "http://127.0.0.1:4174/",
+  "toolSource": "98ea7181e0c143460f852d06fe3a97a79d469a7d",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+  "dirty": "",
+  "started": "2026-10-17T06:53:39.565Z",
+  "browser": "151.0.7922.173",
+  "launchArgs": [
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-webgl",
+    "--enable-precise-memory-info"
+  ],
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "deviceScaleFactor": 3,
+  "durationMs": 2500,
+  "runs": 1,
+  "measurementSHA256": "0f300e3c3a480eafe0fabaddf4567878a57f6fadad98214244fbdeae0bb0f189",
+  "hybridSHA256": "59e92d3e8174d303051cb667c0510b9d7ff834f3c3a22ffb46abf37d763e76b2",
+  "runnerSHA256": "1980f45190dee7926a6e59e1ea80e8e2aef7ea8705713014e9087ad8069b63e8",
+  "host": {
+    "platform": "linux",
+    "arch": "x64",
+    "cpus": 5,
+    "cpu": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "method": "Fresh context, normal app, cold cache, no network/CPU throttle, weak tier, adaptation off. First view includes synchronous default-framebuffer pixel readback after the first-toy-frame signal; frame intervals are actual postrender draws completed by readPixels, with forced rendering. Audio off; one real action after the idle window. Heap is a live JS heap snapshot, not total process/GPU memory. Local HTTP transfer is not public-site compressed transfer."
+}

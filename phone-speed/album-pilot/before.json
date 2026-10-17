@@ -1,0 +1,329 @@
+[
+  {
+    "id": "photo-album",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2641.100000000093,
+    "firstSubmitMs": 2191,
+    "idle": {
+      "count": 8,
+      "median": 637.25,
+      "p95": 716.0999999996275,
+      "work": {
+        "count": 9,
+        "median": 632.3999999999069,
+        "p95": 1243
+      },
+      "elapsedMs": 6438.699999999721,
+      "intervals": [
+        636.6000000000931,
+        623.1000000000931,
+        631.3999999999069,
+        637.8999999999069,
+        638.9000000003725,
+        716.0999999996275,
+        674.8000000002794,
+        627.2999999998137
+      ],
+      "workMs": [
+        1243,
+        632.3999999999069,
+        617.8999999999069,
+        591,
+        622,
+        634.8000000002794,
+        713.1999999997206,
+        651.7000000001863,
+        618
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 389.29999999981374,
+      "p95": 639.1000000000931,
+      "work": {
+        "count": 9,
+        "median": 446.20000000018626,
+        "p95": 653.4000000003725
+      },
+      "elapsedMs": 3960,
+      "intervals": [
+        617.0999999996275,
+        639.1000000000931,
+        584.8000000002794,
+        450.39999999990687,
+        328.1999999997206,
+        269.40000000037253,
+        220.1999999997206,
+        193.60000000009313
+      ],
+      "workMs": [
+        653.4000000003725,
+        613.2999999998137,
+        615.1000000000931,
+        574.2000000001863,
+        446.20000000018626,
+        318.79999999981374,
+        242.5,
+        207.6999999997206,
+        187.10000000009313
+      ]
+    },
+    "action": "turn",
+    "heapBytes": 63120504,
+    "transferBytes": 6052325,
+    "bodyBytes": 6019625,
+    "cachedRequests": 0,
+    "requests": 109,
+    "splats": 55308,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 19730008,
+      "totalSize": 26214400,
+      "embedderHeapUsedSize": 9173880,
+      "backingStorageSize": 50266824
+    },
+    "run": 0,
+    "label": "Photo album",
+    "kind": "kit",
+    "pack": "pictures",
+    "labs": true,
+    "errors": [],
+    "wallMs": 16517,
+    "measuredAt": "2026-10-17T06:18:40.695Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 0,
+    "phase": "before",
+    "order": "before/after"
+  },
+  {
+    "id": "photo-album",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2442.399999999907,
+    "firstSubmitMs": 2061.6999999997206,
+    "idle": {
+      "count": 8,
+      "median": 673.3999999999069,
+      "p95": 721.8000000002794,
+      "work": {
+        "count": 9,
+        "median": 652,
+        "p95": 1937.7000000001863
+      },
+      "elapsedMs": 7293.4000000003725,
+      "intervals": [
+        650.1000000000931,
+        659.7999999998137,
+        625,
+        618.3999999999069,
+        692.8000000002794,
+        687,
+        698.1999999997206,
+        721.8000000002794
+      ],
+      "workMs": [
+        1937.7000000001863,
+        621.1000000000931,
+        652,
+        619.2000000001863,
+        612.6999999997206,
+        647.2000000001863,
+        676.1000000000931,
+        692.7999999998137,
+        718.5
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 391.25,
+      "p95": 601,
+      "work": {
+        "count": 9,
+        "median": 456,
+        "p95": 658.5
+      },
+      "elapsedMs": 3948.899999999907,
+      "intervals": [
+        582.8999999999069,
+        601,
+        594.1000000000931,
+        478.6999999997206,
+        303.8000000002794,
+        245.79999999981374,
+        217.5,
+        234.70000000018626
+      ],
+      "workMs": [
+        658.5,
+        572.8999999999069,
+        597.5,
+        591.1000000000931,
+        456,
+        294,
+        238.39999999990687,
+        213.60000000009313,
+        186.60000000009313
+      ]
+    },
+    "action": "turn",
+    "heapBytes": 67996808,
+    "transferBytes": 6052325,
+    "bodyBytes": 6019625,
+    "cachedRequests": 0,
+    "requests": 109,
+    "splats": 55308,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 19820000,
+      "totalSize": 38273024,
+      "embedderHeapUsedSize": 9039272,
+      "backingStorageSize": 42890976
+    },
+    "run": 0,
+    "label": "Photo album",
+    "kind": "kit",
+    "pack": "pictures",
+    "labs": true,
+    "errors": [],
+    "wallMs": 15488,
+    "measuredAt": "2026-10-17T06:19:28.306Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 1,
+    "phase": "before",
+    "order": "after/before"
+  },
+  {
+    "id": "photo-album",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2310.100000000093,
+    "firstSubmitMs": 1925.5,
+    "idle": {
+      "count": 8,
+      "median": 592.9499999999534,
+      "p95": 646.7999999998137,
+      "work": {
+        "count": 9,
+        "median": 565.9000000003725,
+        "p95": 1598
+      },
+      "elapsedMs": 6302.200000000186,
+      "intervals": [
+        595.7999999998137,
+        587,
+        533.6000000000931,
+        536.7999999998137,
+        590.1000000000931,
+        598.5,
+        609.8000000002794,
+        646.7999999998137
+      ],
+      "workMs": [
+        1598,
+        564.5,
+        577.8999999999069,
+        528.5,
+        533.1999999997206,
+        546.7999999998137,
+        588.2999999998137,
+        565.9000000003725,
+        638
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 425.70000000018626,
+      "p95": 618.6000000000931,
+      "work": {
+        "count": 9,
+        "median": 421.09999999962747,
+        "p95": 618.2000000001863
+      },
+      "elapsedMs": 3993.2999999998137,
+      "intervals": [
+        618.6000000000931,
+        606.5,
+        550.0999999996275,
+        429,
+        422.40000000037253,
+        283.59999999962747,
+        220.20000000018626,
+        239.5
+      ],
+      "workMs": [
+        618.2000000001863,
+        615.6000000000931,
+        579.4000000003725,
+        541.6999999997206,
+        421.09999999962747,
+        413.10000000009313,
+        248.79999999981374,
+        216,
+        232.10000000009313
+      ]
+    },
+    "action": "turn",
+    "heapBytes": 64184516,
+    "transferBytes": 6052325,
+    "bodyBytes": 6019625,
+    "cachedRequests": 0,
+    "requests": 109,
+    "splats": 55308,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 21150808,
+      "totalSize": 38535168,
+      "embedderHeapUsedSize": 12030968,
+      "backingStorageSize": 45329688
+    },
+    "run": 0,
+    "label": "Photo album",
+    "kind": "kit",
+    "pack": "pictures",
+    "labs": true,
+    "errors": [],
+    "wallMs": 14580,
+    "measuredAt": "2026-10-17T06:19:44.250Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 2,
+    "phase": "before",
+    "order": "before/after"
+  }
+]

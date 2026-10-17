@@ -1,0 +1,45 @@
+{
+  "source": "36f5df601",
+  "browser": "151.0.7922.173",
+  "measuredAt": "2026-10-17T02:36:33.795Z",
+  "rows": [
+    {
+      "id": "toy-trex",
+      "midTapSeconds": 1.3,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "errors": []
+    },
+    {
+      "id": "alum-crystal",
+      "midTapSeconds": 1.2,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "errors": []
+    }
+  ]
+}

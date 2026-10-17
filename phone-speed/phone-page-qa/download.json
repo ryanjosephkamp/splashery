@@ -1,0 +1,3038 @@
+{
+  "started": "2026-10-17T07:39:47.847Z",
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+  "page": "http://127.0.0.1:4173/tools/pages/phone-speed.html",
+  "deviceScaleFactor": 3,
+  "durationMs": 2500,
+  "cache": "Browser-managed; not forced cold",
+  "heap": "Live JS heap where supported; may include the parent page, excludes GPU memory",
+  "preferences": "Temporary empty preferences per toy; saved settings preserved",
+  "reducedMotion": false,
+  "colorScheme": "light",
+  "rows": [
+    {
+      "id": "crochet-earth",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2933.0999999996275,
+      "firstSubmitMs": 1393.9000000003725,
+      "idle": {
+        "count": 8,
+        "median": 524.8999999994412,
+        "p95": 579.1999999992549,
+        "work": {
+          "count": 9,
+          "median": 524.1999999992549,
+          "p95": 1053.7000000011176
+        },
+        "elapsedMs": 5801.799999998882,
+        "intervals": [
+          527.6999999992549,
+          533.5999999996275,
+          541.9000000003725,
+          518.2000000011176,
+          522.0999999996275,
+          579.1999999992549,
+          512.3000000007451,
+          516.7999999988824
+        ],
+        "workMs": [
+          1053.7000000011176,
+          524.1999999992549,
+          530.2999999988824,
+          538.7999999988824,
+          515.1000000014901,
+          519.0999999996275,
+          575.4000000003725,
+          509.30000000074506,
+          513.6999999992549
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 940.3500000005588,
+        "p95": 1003.1000000014901,
+        "work": {
+          "count": 9,
+          "median": 928.1999999992549,
+          "p95": 999.9000000003725
+        },
+        "elapsedMs": 8254.799999998882,
+        "intervals": [
+          824.1999999992549,
+          946.8000000007451,
+          897.7999999988824,
+          933.9000000003725,
+          932.5999999996275,
+          1003.1000000014901,
+          972.5999999996275,
+          974.6999999992549
+        ],
+        "workMs": [
+          765.8000000007451,
+          821.1999999992549,
+          943.8000000007451,
+          894.6999999992549,
+          927.9000000003725,
+          928.1999999992549,
+          999.9000000003725,
+          968.9000000003725,
+          971.9000000003725
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 48992420,
+      "transferBytes": 9325183,
+      "bodyBytes": 9295483,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Crochet Earth",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:40:06.067Z"
+    },
+    {
+      "id": "sunflower-photo",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2723.5999999996275,
+      "firstSubmitMs": 1824.9000000003725,
+      "idle": {
+        "count": 8,
+        "median": 555.0999999996275,
+        "p95": 612.9000000003725,
+        "work": {
+          "count": 9,
+          "median": 549.5999999996275,
+          "p95": 1610.5
+        },
+        "elapsedMs": 6498.9000000003725,
+        "intervals": [
+          544.4000000003725,
+          555.5,
+          554.6999999992549,
+          612.9000000003725,
+          561.9000000003725,
+          471.5,
+          448.09999999962747,
+          605
+        ],
+        "workMs": [
+          1610.5,
+          536.5999999996275,
+          549.5999999996275,
+          551.6999999992549,
+          609.1999999992549,
+          543,
+          465.90000000037253,
+          444.69999999925494,
+          601.4000000003725
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 1172.7999999998137,
+        "p95": 1320.699999999255,
+        "work": {
+          "count": 9,
+          "median": 1168.5,
+          "p95": 1316.199999999255
+        },
+        "elapsedMs": 10739.89999999851,
+        "intervals": [
+          1316.4000000003725,
+          1320.699999999255,
+          1174,
+          1103.300000000745,
+          1171.5999999996275,
+          1240.4000000003725,
+          1065.5999999996275,
+          1098.7999999988824
+        ],
+        "workMs": [
+          1245.5999999996275,
+          1309.5,
+          1316.199999999255,
+          1167.0999999996275,
+          1075.6000000014901,
+          1168.5,
+          1236.7000000011176,
+          1061.9000000003725,
+          1094.2999999988824
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 26635760,
+      "transferBytes": 9185358,
+      "bodyBytes": 9155658,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Sunflower (photo)",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:40:27.259Z"
+    },
+    {
+      "id": "toy-trex",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2747.4000000003725,
+      "firstSubmitMs": 1260.199999999255,
+      "idle": {
+        "count": 8,
+        "median": 545.9000000003725,
+        "p95": 670.2999999988824,
+        "work": {
+          "count": 9,
+          "median": 556.2000000011176,
+          "p95": 1892.1000000014901
+        },
+        "elapsedMs": 6791.4000000003725,
+        "intervals": [
+          577.7999999988824,
+          514.4000000003725,
+          516.1999999992549,
+          501,
+          575.6000000014901,
+          670.2999999988824,
+          578.2000000011176,
+          511.5
+        ],
+        "workMs": [
+          1892.1000000014901,
+          567.6999999992549,
+          506.80000000074506,
+          510.69999999925494,
+          497,
+          571.8000000007451,
+          663,
+          556.2000000011176,
+          505.6000000014901
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 944.5499999998137,
+        "p95": 1052.300000000745,
+        "work": {
+          "count": 9,
+          "median": 942.9000000003725,
+          "p95": 1088.5999999996275
+        },
+        "elapsedMs": 8638.099999999627,
+        "intervals": [
+          820,
+          1046.1000000014901,
+          951,
+          938.0999999996275,
+          884.1999999992549,
+          1052.300000000745,
+          978.5,
+          876
+        ],
+        "workMs": [
+          1088.5999999996275,
+          816.6999999992549,
+          1042.6000000014901,
+          942.9000000003725,
+          933.5999999996275,
+          879.6999999992549,
+          1047,
+          967.2000000011176,
+          871.7000000011176
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 28353374,
+      "transferBytes": 9162880,
+      "bodyBytes": 9133180,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Toy T. rex",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:40:46.657Z"
+    },
+    {
+      "id": "monkey-doll",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2902,
+      "firstSubmitMs": 2063.7999999988824,
+      "idle": {
+        "count": 8,
+        "median": 529.9000000003725,
+        "p95": 611.9000000003725,
+        "work": {
+          "count": 9,
+          "median": 531.2000000011176,
+          "p95": 1416
+        },
+        "elapsedMs": 5631.0999999996275,
+        "intervals": [
+          522.5999999996275,
+          498.2000000011176,
+          504.19999999925494,
+          537.2000000011176,
+          540.7999999988824,
+          454,
+          541,
+          611.9000000003725
+        ],
+        "workMs": [
+          1416,
+          512.0999999996275,
+          473.7000000011176,
+          473.7999999988824,
+          531.2000000011176,
+          536.2999999988824,
+          450.59999999962747,
+          536.9000000003725,
+          608.8000000007451
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 1091.7000000001863,
+        "p95": 1160.300000000745,
+        "work": {
+          "count": 9,
+          "median": 1076.699999999255,
+          "p95": 1156.9000000003725
+        },
+        "elapsedMs": 9680.400000000373,
+        "intervals": [
+          1160.300000000745,
+          963.6999999992549,
+          979.7000000011176,
+          1112.2999999988824,
+          1071.1000000014901,
+          1128.3999999985099,
+          1121.6000000014901,
+          1063.199999999255
+        ],
+        "workMs": [
+          1076.699999999255,
+          1156.9000000003725,
+          959,
+          976.5,
+          1108.7999999988824,
+          1067.5,
+          1123.5,
+          1117.5,
+          1060.300000000745
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 35254818,
+      "transferBytes": 9130734,
+      "bodyBytes": 9101034,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Monkey doll",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:41:06.094Z"
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2709.800000000745,
+      "firstSubmitMs": 1996.300000000745,
+      "idle": {
+        "count": 8,
+        "median": 436.30000000074506,
+        "p95": 513.1999999992549,
+        "work": {
+          "count": 9,
+          "median": 447.90000000037253,
+          "p95": 1277.699999999255
+        },
+        "elapsedMs": 5065.800000000745,
+        "intervals": [
+          475.09999999962747,
+          452.40000000037253,
+          451.80000000074506,
+          420,
+          366.7999999988824,
+          397.80000000074506,
+          513.1999999992549,
+          420.80000000074506
+        ],
+        "workMs": [
+          1277.699999999255,
+          467.69999999925494,
+          448.19999999925494,
+          447.90000000037253,
+          416.80000000074506,
+          363,
+          393.80000000074506,
+          509.90000000037253,
+          417.5
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 907.1499999994412,
+        "p95": 971,
+        "work": {
+          "count": 9,
+          "median": 883.2999999988824,
+          "p95": 967.6999999992549
+        },
+        "elapsedMs": 8086.9000000003725,
+        "intervals": [
+          869.9000000003725,
+          927.2999999988824,
+          814.0999999996275,
+          873.8000000007451,
+          930.5999999996275,
+          887,
+          971,
+          927.8000000007451
+        ],
+        "workMs": [
+          881.7000000011176,
+          865.1000000014901,
+          919,
+          809.3999999985099,
+          870.1999999992549,
+          926.0999999996275,
+          883.2999999988824,
+          967.6999999992549,
+          922.7000000011176
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 36719919,
+      "transferBytes": 9114159,
+      "bodyBytes": 9084459,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        672
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Cherry blossom (photo)",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:41:23.181Z"
+    },
+    {
+      "id": "dog-plush",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2957.60000000149,
+      "firstSubmitMs": 1995.4000000003725,
+      "idle": {
+        "count": 8,
+        "median": 580.6999999992549,
+        "p95": 635.1000000014901,
+        "work": {
+          "count": 9,
+          "median": 586.4000000003725,
+          "p95": 1955.8999999985099
+        },
+        "elapsedMs": 6653.5999999996275,
+        "intervals": [
+          635.1000000014901,
+          571.0999999996275,
+          562.1999999992549,
+          601.5,
+          631.2000000011176,
+          494.09999999962747,
+          516.9000000003725,
+          590.2999999988824
+        ],
+        "workMs": [
+          1955.8999999985099,
+          589.9000000003725,
+          562.9000000003725,
+          559.1999999992549,
+          595.5999999996275,
+          623.7000000011176,
+          489.40000000037253,
+          512.8000000007451,
+          586.4000000003725
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 1016.8000000007451,
+        "p95": 1063.2000000011176,
+        "work": {
+          "count": 9,
+          "median": 1027.6000000014901,
+          "p95": 1102.699999999255
+        },
+        "elapsedMs": 9163.800000000745,
+        "intervals": [
+          942.5999999996275,
+          1052,
+          963.7000000011176,
+          1035.8999999985099,
+          1001.7000000011176,
+          1031.9000000003725,
+          965.3999999985099,
+          1063.2000000011176
+        ],
+        "workMs": [
+          1102.699999999255,
+          915.7999999988824,
+          1048.4000000003725,
+          960.2000000011176,
+          1029.8999999985099,
+          998.5999999996275,
+          1027.6000000014901,
+          957.0999999996275,
+          1058.9000000003725
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 31318463,
+      "transferBytes": 9278367,
+      "bodyBytes": 9248667,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Dog plush",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:41:43.181Z"
+    },
+    {
+      "id": "cone-shell",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2282.4000000003725,
+      "firstSubmitMs": 1912.5,
+      "idle": {
+        "count": 8,
+        "median": 401.6499999994412,
+        "p95": 442.6000000014901,
+        "work": {
+          "count": 9,
+          "median": 396.7999999988824,
+          "p95": 805.6999999992549
+        },
+        "elapsedMs": 4585.800000000745,
+        "intervals": [
+          402.40000000037253,
+          395.09999999962747,
+          359.80000000074506,
+          366.5,
+          400.8999999985099,
+          442.6000000014901,
+          441,
+          407.19999999925494
+        ],
+        "workMs": [
+          805.6999999992549,
+          394.59999999962747,
+          389.80000000074506,
+          355.90000000037253,
+          362.6000000014901,
+          396.7999999988824,
+          439.1000000014901,
+          438.1000000014901,
+          404.19999999925494
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 802.1000000005588,
+        "p95": 899.6999999992549,
+        "work": {
+          "count": 9,
+          "median": 805.3999999985099,
+          "p95": 879.1999999992549
+        },
+        "elapsedMs": 7299.300000000745,
+        "intervals": [
+          792.2999999988824,
+          809.5,
+          794.7000000011176,
+          834.0999999996275,
+          899.6999999992549,
+          733,
+          771.7000000011176,
+          820.4000000003725
+        ],
+        "workMs": [
+          840,
+          788.8999999985099,
+          805.3999999985099,
+          791.2000000011176,
+          820,
+          879.1999999992549,
+          728.5999999996275,
+          764.2000000011176,
+          817.4000000003725
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 24644052,
+      "transferBytes": 9029950,
+      "bodyBytes": 9000250,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Cone shell",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:41:58.575Z"
+    },
+    {
+      "id": "desk-globe",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2398.800000000745,
+      "firstSubmitMs": 1769.5999999996275,
+      "idle": {
+        "count": 8,
+        "median": 393.45000000018626,
+        "p95": 463.40000000037253,
+        "work": {
+          "count": 9,
+          "median": 398.5,
+          "p95": 1376.0999999996275
+        },
+        "elapsedMs": 4673.9000000003725,
+        "intervals": [
+          463.40000000037253,
+          443.90000000037253,
+          402,
+          455.09999999962747,
+          384.30000000074506,
+          363.19999999925494,
+          384.90000000037253,
+          376.80000000074506
+        ],
+        "workMs": [
+          1376.0999999996275,
+          444.40000000037253,
+          440.80000000074506,
+          398.5,
+          452.19999999925494,
+          380.09999999962747,
+          359.69999999925494,
+          381.09999999962747,
+          373.1000000014901
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 763.3499999996275,
+        "p95": 825.7999999988824,
+        "work": {
+          "count": 9,
+          "median": 769.1999999992549,
+          "p95": 821.6999999992549
+        },
+        "elapsedMs": 6819.799999998882,
+        "intervals": [
+          752.5,
+          774.1999999992549,
+          688.4000000003725,
+          723.4000000003725,
+          708.5,
+          781.0999999996275,
+          790.7000000011176,
+          825.7999999988824
+        ],
+        "workMs": [
+          769.5,
+          747.1999999992549,
+          769.1999999992549,
+          685.2999999988824,
+          720,
+          705.5999999996275,
+          777.4000000003725,
+          785.5,
+          821.6999999992549
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 41837968,
+      "transferBytes": 9157307,
+      "bodyBytes": 9127607,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 293009,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Desk globe",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:42:13.697Z"
+    },
+    {
+      "id": "bmx-bike",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2571.199999999255,
+      "firstSubmitMs": 1924.3999999985099,
+      "idle": {
+        "count": 8,
+        "median": 415.1000000005588,
+        "p95": 460.1000000014901,
+        "work": {
+          "count": 9,
+          "median": 429.6000000014901,
+          "p95": 702.9000000003725
+        },
+        "elapsedMs": 4222.5,
+        "intervals": [
+          393.59999999962747,
+          397.5,
+          460.1000000014901,
+          456.09999999962747,
+          371.2999999988824,
+          339.90000000037253,
+          432.7000000011176,
+          457.69999999925494
+        ],
+        "workMs": [
+          702.9000000003725,
+          390.3999999985099,
+          394.5,
+          457.30000000074506,
+          453,
+          368.19999999925494,
+          335.59999999962747,
+          429.6000000014901,
+          452.09999999962747
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 700.5000000009313,
+        "p95": 758.8000000007451,
+        "work": {
+          "count": 9,
+          "median": 700,
+          "p95": 798.5999999996275
+        },
+        "elapsedMs": 6408.199999999255,
+        "intervals": [
+          685.7999999988824,
+          705.3000000007451,
+          758.8000000007451,
+          649.1999999992549,
+          660.1999999992549,
+          727.4000000003725,
+          695.7000000011176,
+          720.8999999985099
+        ],
+        "workMs": [
+          798.5999999996275,
+          677.3999999985099,
+          700,
+          754.8000000007451,
+          645.9000000003725,
+          657.2999999988824,
+          724.5,
+          692.9000000003725,
+          707.7999999988824
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 29217378,
+      "transferBytes": 9075999,
+      "bodyBytes": 9046299,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "BMX bicycle",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:42:28.158Z"
+    },
+    {
+      "id": "mushroom-photo",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2274.7999999988824,
+      "firstSubmitMs": 1559.199999999255,
+      "idle": {
+        "count": 8,
+        "median": 427.19999999925494,
+        "p95": 459,
+        "work": {
+          "count": 9,
+          "median": 424,
+          "p95": 951.5999999996275
+        },
+        "elapsedMs": 4739.200000001118,
+        "intervals": [
+          389.09999999962747,
+          420.1000000014901,
+          459,
+          427.3999999985099,
+          420.6000000014901,
+          435,
+          427,
+          436.5
+        ],
+        "workMs": [
+          951.5999999996275,
+          380.3999999985099,
+          416.30000000074506,
+          453.30000000074506,
+          424,
+          414.2000000011176,
+          431.5,
+          423.40000000037253,
+          430.30000000074506
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 733.1500000003725,
+        "p95": 931.4000000003725,
+        "work": {
+          "count": 9,
+          "median": 736.6999999992549,
+          "p95": 927.5
+        },
+        "elapsedMs": 6942.799999998882,
+        "intervals": [
+          931.4000000003725,
+          773.3000000007451,
+          739.6999999992549,
+          723.3000000007451,
+          725.0999999996275,
+          787.6999999992549,
+          726.6000000014901,
+          672.2999999988824
+        ],
+        "workMs": [
+          857.3999999985099,
+          927.5,
+          769.8000000007451,
+          736.6999999992549,
+          720.0999999996275,
+          712.5999999996275,
+          783.6999999992549,
+          723,
+          666.0999999996275
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 28518751,
+      "transferBytes": 9270534,
+      "bodyBytes": 9240834,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        672
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Mushroom (photo)",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:42:43.365Z"
+    },
+    {
+      "id": "cave-lioness",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2036.7999999988824,
+      "firstSubmitMs": 1639.699999999255,
+      "idle": {
+        "count": 8,
+        "median": 379.79999999981374,
+        "p95": 474.7000000011176,
+        "work": {
+          "count": 9,
+          "median": 379.09999999962747,
+          "p95": 1717.0999999996275
+        },
+        "elapsedMs": 4755.5,
+        "intervals": [
+          308.30000000074506,
+          287.69999999925494,
+          302.40000000037253,
+          376.69999999925494,
+          382.90000000037253,
+          474.7000000011176,
+          448.19999999925494,
+          402.80000000074506
+        ],
+        "workMs": [
+          1717.0999999996275,
+          300.59999999962747,
+          281.7999999988824,
+          297.30000000074506,
+          370.8999999985099,
+          379.09999999962747,
+          469.30000000074506,
+          445,
+          399.40000000037253
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 720.6999999992549,
+        "p95": 782.6999999992549,
+        "work": {
+          "count": 9,
+          "median": 702.5,
+          "p95": 763.8000000007451
+        },
+        "elapsedMs": 6435.9000000003725,
+        "intervals": [
+          755,
+          689.8000000007451,
+          782.6999999992549,
+          737.8000000007451,
+          735.6999999992549,
+          705.6999999992549,
+          644.3000000007451,
+          705.5999999996275
+        ],
+        "workMs": [
+          676.4000000003725,
+          751.0999999996275,
+          684.6000000014901,
+          763.8000000007451,
+          730.6000000014901,
+          732.5999999996275,
+          702.5,
+          639.5999999996275,
+          700.2999999988824
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 24984037,
+      "transferBytes": 9163666,
+      "bodyBytes": 9133966,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Cave lioness",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:42:57.818Z"
+    },
+    {
+      "id": "murex-shell",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 1862.5999999996275,
+      "firstSubmitMs": 1606.199999999255,
+      "idle": {
+        "count": 8,
+        "median": 273.25,
+        "p95": 402.90000000037253,
+        "work": {
+          "count": 9,
+          "median": 265.40000000037253,
+          "p95": 400
+        },
+        "elapsedMs": 2846.4000000003725,
+        "intervals": [
+          301.59999999962747,
+          402.90000000037253,
+          356.90000000037253,
+          216.09999999962747,
+          270.5,
+          257.30000000074506,
+          276,
+          261.19999999925494
+        ],
+        "workMs": [
+          232.5,
+          298.09999999962747,
+          400,
+          352.59999999962747,
+          210.90000000037253,
+          265.40000000037253,
+          254.30000000074506,
+          273.2000000011176,
+          256.5
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 650.75,
+        "p95": 753.3000000007451,
+        "work": {
+          "count": 9,
+          "median": 632.7999999988824,
+          "p95": 747
+        },
+        "elapsedMs": 5819.799999998882,
+        "intervals": [
+          670,
+          635.5999999996275,
+          665.9000000003725,
+          629.0999999996275,
+          753.3000000007451,
+          720.0999999996275,
+          600.8000000007451,
+          597.7999999988824
+        ],
+        "workMs": [
+          542.9000000003725,
+          665.7999999988824,
+          632.7999999988824,
+          661.7999999988824,
+          624,
+          747,
+          717.0999999996275,
+          597.9000000003725,
+          594.7999999988824
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 56491596,
+      "transferBytes": 9197241,
+      "bodyBytes": 9167541,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Murex shell",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:43:09.570Z"
+    },
+    {
+      "id": "video-3d",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 1725.5999999996275,
+      "firstSubmitMs": 1172.5999999996275,
+      "idle": {
+        "count": 8,
+        "median": 525.7000000001863,
+        "p95": 573.4000000003725,
+        "work": {
+          "count": 9,
+          "median": 525.4000000003725,
+          "p95": 1005.7999999988824
+        },
+        "elapsedMs": 5565.4000000003725,
+        "intervals": [
+          573.4000000003725,
+          539.0999999996275,
+          538.7000000011176,
+          484.19999999925494,
+          509,
+          522.4000000003725,
+          529,
+          475.59999999962747
+        ],
+        "workMs": [
+          1005.7999999988824,
+          565.1999999992549,
+          533.3999999985099,
+          535.8000000007451,
+          479.90000000037253,
+          505.90000000037253,
+          517.4000000003725,
+          525.4000000003725,
+          472.59999999962747
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 643.2999999998137,
+        "p95": 694.9000000003725,
+        "work": {
+          "count": 9,
+          "median": 657.4000000003725,
+          "p95": 724.3999999985099
+        },
+        "elapsedMs": 5864.0999999996275,
+        "intervals": [
+          694.9000000003725,
+          660.5,
+          610.5,
+          617.5999999996275,
+          589,
+          666.8000000007451,
+          626.0999999996275,
+          667.5
+        ],
+        "workMs": [
+          724.3999999985099,
+          691.9000000003725,
+          657.4000000003725,
+          607.4000000003725,
+          612,
+          585.5,
+          663.5,
+          623,
+          661.1999999992549
+        ]
+      },
+      "action": "replay",
+      "heapBytes": 36682259,
+      "transferBytes": 6576747,
+      "bodyBytes": 6543447,
+      "cachedRequests": 0,
+      "requests": 111,
+      "splats": 59682,
+      "profile": "low",
+      "canvas": [
+        936,
+        1120
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Video to 3D",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:43:23.952Z"
+    },
+    {
+      "id": "maple-tree",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2224.60000000149,
+      "firstSubmitMs": 1652.7000000011176,
+      "idle": {
+        "count": 8,
+        "median": 377.19999999925494,
+        "p95": 406.2999999988824,
+        "work": {
+          "count": 9,
+          "median": 376.09999999962747,
+          "p95": 1120.9000000003725
+        },
+        "elapsedMs": 4157.299999998882,
+        "intervals": [
+          381.2999999988824,
+          341.2000000011176,
+          406.2999999988824,
+          386.1000000014901,
+          394.19999999925494,
+          373.09999999962747,
+          301.90000000037253,
+          275.19999999925494
+        ],
+        "workMs": [
+          1120.9000000003725,
+          376.09999999962747,
+          338.5,
+          401.09999999962747,
+          383,
+          386,
+          369.5,
+          298.69999999925494,
+          271.69999999925494
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 709.9500000001863,
+        "p95": 762.2999999988824,
+        "work": {
+          "count": 9,
+          "median": 704,
+          "p95": 758.5999999996275
+        },
+        "elapsedMs": 6316.5,
+        "intervals": [
+          762.2999999988824,
+          685,
+          654.9000000003725,
+          666.0999999996275,
+          707,
+          717.8000000007451,
+          712.9000000003725,
+          757.2999999988824
+        ],
+        "workMs": [
+          648.6000000014901,
+          758.5999999996275,
+          681.0999999996275,
+          649.8000000007451,
+          660.5999999996275,
+          704,
+          714.2000000011176,
+          710.3000000007451,
+          753.2999999988824
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 35704077,
+      "transferBytes": 9209206,
+      "bodyBytes": 9179506,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Golden maple",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:43:37.874Z"
+    },
+    {
+      "id": "photo-album",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 1445.2999999988824,
+      "firstSubmitMs": 1070.2999999988824,
+      "idle": {
+        "count": 8,
+        "median": 499.29999999981374,
+        "p95": 537.0999999996275,
+        "work": {
+          "count": 9,
+          "median": 482.90000000037253,
+          "p95": 1302.2999999988824
+        },
+        "elapsedMs": 5238.89999999851,
+        "intervals": [
+          502.09999999962747,
+          515.2000000011176,
+          488.40000000037253,
+          537.0999999996275,
+          496.5,
+          519.7999999988824,
+          436.6000000014901,
+          438.3999999985099
+        ],
+        "workMs": [
+          1302.2999999988824,
+          473.19999999925494,
+          503.7000000011176,
+          482.90000000037253,
+          524.2000000011176,
+          465.5,
+          506.59999999962747,
+          430.30000000074506,
+          433
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 328,
+        "p95": 514.8000000007451,
+        "work": {
+          "count": 9,
+          "median": 374.80000000074506,
+          "p95": 510.19999999925494
+        },
+        "elapsedMs": 3234.5,
+        "intervals": [
+          495.5,
+          514.8000000007451,
+          501.30000000074506,
+          383.19999999925494,
+          272.80000000074506,
+          190.89999999850988,
+          202.5,
+          166.90000000037253
+        ],
+        "workMs": [
+          483.8999999985099,
+          479.69999999925494,
+          510.19999999925494,
+          472.5,
+          374.80000000074506,
+          267.40000000037253,
+          185.5,
+          185.39999999850988,
+          161.2999999988824
+        ]
+      },
+      "action": "turn",
+      "heapBytes": 70889658,
+      "transferBytes": 6056598,
+      "bodyBytes": 6023598,
+      "cachedRequests": 0,
+      "requests": 110,
+      "splats": 55308,
+      "profile": "low",
+      "canvas": [
+        507,
+        607
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Photo album",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:43:50.126Z"
+    },
+    {
+      "id": "triceratops-skull",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 1803.4000000003725,
+      "firstSubmitMs": 1485.5,
+      "idle": {
+        "count": 8,
+        "median": 369.79999999981374,
+        "p95": 417.2000000011176,
+        "work": {
+          "count": 9,
+          "median": 368.5,
+          "p95": 966.1000000014901
+        },
+        "elapsedMs": 4520.5999999996275,
+        "intervals": [
+          352.2999999988824,
+          360.80000000074506,
+          361.59999999962747,
+          353.90000000037253,
+          399.2999999988824,
+          417.2000000011176,
+          378,
+          408
+        ],
+        "workMs": [
+          966.1000000014901,
+          346.19999999925494,
+          355.7000000011176,
+          356.69999999925494,
+          350.7000000011176,
+          394.19999999925494,
+          413.5,
+          375.2000000011176,
+          368.5
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 663.3499999996275,
+        "p95": 730.9000000003725,
+        "work": {
+          "count": 9,
+          "median": 665.2000000011176,
+          "p95": 728.8999999985099
+        },
+        "elapsedMs": 6009.5,
+        "intervals": [
+          682.3000000007451,
+          669.9000000003725,
+          657.2999999988824,
+          730.9000000003725,
+          619.3000000007451,
+          629.9000000003725,
+          614.7999999988824,
+          669.4000000003725
+        ],
+        "workMs": [
+          728.8999999985099,
+          673.5,
+          665.2000000011176,
+          649.1999999992549,
+          727.1999999992549,
+          611.4000000003725,
+          626.7000000011176,
+          609.5999999996275,
+          666.3000000007451
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 26651006,
+      "transferBytes": 9074195,
+      "bodyBytes": 9044495,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Triceratops skull",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:44:03.692Z"
+    },
+    {
+      "id": "moving-photo-3d",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 3340.699999999255,
+      "firstSubmitMs": 3104.5,
+      "idle": {
+        "count": 8,
+        "median": 313.30000000074506,
+        "p95": 517.5,
+        "work": {
+          "count": 9,
+          "median": 318.69999999925494,
+          "p95": 749.5999999996275
+        },
+        "elapsedMs": 3695.2000000011176,
+        "intervals": [
+          279.5,
+          300.6000000014901,
+          292.3999999985099,
+          284.30000000074506,
+          326,
+          469.80000000074506,
+          517.5,
+          368.59999999962747
+        ],
+        "workMs": [
+          749.5999999996275,
+          263.2999999988824,
+          294.30000000074506,
+          282.7999999988824,
+          276.80000000074506,
+          318.69999999925494,
+          460.90000000037253,
+          512.3000000007451,
+          354
+        ]
+      },
+      "tap": {
+        "count": 9,
+        "median": 246.60000000149012,
+        "p95": 335.1000000014901,
+        "work": {
+          "count": 10,
+          "median": 237.70000000018626,
+          "p95": 316.5
+        },
+        "elapsedMs": 2638,
+        "intervals": [
+          335.1000000014901,
+          251.89999999850988,
+          237.60000000149012,
+          251.39999999850988,
+          233.2000000011176,
+          261.7999999988824,
+          246.60000000149012,
+          245.5,
+          241.5
+        ],
+        "workMs": [
+          207.59999999962747,
+          316.5,
+          243.69999999925494,
+          233,
+          246.69999999925494,
+          227.40000000037253,
+          256.8999999985099,
+          238.90000000037253,
+          236.5,
+          231.5
+        ]
+      },
+      "action": "play",
+      "heapBytes": 207862934,
+      "transferBytes": 8936539,
+      "bodyBytes": 8896639,
+      "cachedRequests": 0,
+      "requests": 133,
+      "splats": 98893,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": true,
+      "firstViewProbe": "default-relief-mesh",
+      "label": "Moving photo to 3D",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:44:14.592Z"
+    },
+    {
+      "id": "bonsai-photo",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2213.800000000745,
+      "firstSubmitMs": 1586.300000000745,
+      "idle": {
+        "count": 8,
+        "median": 364.09999999962747,
+        "p95": 383.40000000037253,
+        "work": {
+          "count": 9,
+          "median": 357.2999999988824,
+          "p95": 379.7999999988824
+        },
+        "elapsedMs": 3520.5,
+        "intervals": [
+          360.59999999962747,
+          378.90000000037253,
+          362.59999999962747,
+          353.80000000074506,
+          355.69999999925494,
+          365.59999999962747,
+          383.40000000037253,
+          379.2000000011176
+        ],
+        "workMs": [
+          307.19999999925494,
+          357.2999999988824,
+          372.30000000074506,
+          359.2999999988824,
+          350.2000000011176,
+          352.59999999962747,
+          337.7999999988824,
+          379.7999999988824,
+          375.80000000074506
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 598.2999999998137,
+        "p95": 643,
+        "work": {
+          "count": 9,
+          "median": 589.4000000003725,
+          "p95": 637.2000000011176
+        },
+        "elapsedMs": 5262.799999998882,
+        "intervals": [
+          528.5999999996275,
+          548.0999999996275,
+          632.5999999996275,
+          511.30000000074506,
+          590.3000000007451,
+          643,
+          606.2999999988824,
+          608
+        ],
+        "workMs": [
+          589.4000000003725,
+          523.0999999996275,
+          545.2999999988824,
+          610.5,
+          506.19999999925494,
+          585.6000000014901,
+          637.2000000011176,
+          602.1999999992549,
+          604.5999999996275
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 36867996,
+      "transferBytes": 8446985,
+      "bodyBytes": 8417285,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 251221,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Bonsai tree (photo)",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:44:26.820Z"
+    },
+    {
+      "id": "splat-toolkit",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 3850.5999999996275,
+      "firstSubmitMs": 3281.300000000745,
+      "idle": {
+        "count": 19,
+        "median": 114.39999999850988,
+        "p95": 161.19999999925494,
+        "work": {
+          "count": 20,
+          "median": 111.95000000018626,
+          "p95": 148.30000000074506
+        },
+        "elapsedMs": 2553.60000000149,
+        "intervals": [
+          132.5,
+          108.29999999888241,
+          152.80000000074506,
+          161.19999999925494,
+          101.5,
+          138.30000000074506,
+          112.09999999962747,
+          108.20000000111759,
+          114.39999999850988,
+          113.30000000074506,
+          117.40000000037253,
+          132.2999999988824,
+          112.80000000074506,
+          102.90000000037253,
+          123.09999999962747,
+          108.69999999925494,
+          125.30000000074506,
+          123,
+          99.80000000074506
+        ],
+        "workMs": [
+          138.2000000011176,
+          126.30000000074506,
+          105,
+          148.30000000074506,
+          154.89999999850988,
+          96.79999999888241,
+          134.80000000074506,
+          108.79999999888241,
+          102.20000000111759,
+          108.19999999925494,
+          109.59999999962747,
+          114.30000000074506,
+          129.2999999988824,
+          106.40000000037253,
+          97.20000000111759,
+          119.30000000074506,
+          104.59999999962747,
+          119.5,
+          116.69999999925494,
+          96.5
+        ]
+      },
+      "tap": {
+        "count": 14,
+        "median": 175.6499999994412,
+        "p95": 194.5,
+        "work": {
+          "count": 15,
+          "median": 170.5,
+          "p95": 191
+        },
+        "elapsedMs": 2604.7999999988824,
+        "intervals": [
+          163.80000000074506,
+          155.2999999988824,
+          153.40000000037253,
+          175.5,
+          143.59999999962747,
+          167.30000000074506,
+          185.69999999925494,
+          178.2000000011176,
+          172.5,
+          194.5,
+          186.5,
+          175.7999999988824,
+          193.09999999962747,
+          179
+        ],
+        "workMs": [
+          173.69999999925494,
+          159.2000000011176,
+          152.09999999962747,
+          141.40000000037253,
+          169.19999999925494,
+          139.19999999925494,
+          164.40000000037253,
+          182.59999999962747,
+          172.5,
+          169.30000000074506,
+          191,
+          181.80000000074506,
+          170.5,
+          186.89999999850988,
+          174.7999999988824
+        ]
+      },
+      "action": "spin",
+      "heapBytes": 50753016,
+      "transferBytes": 11362978,
+      "bodyBytes": 11330278,
+      "cachedRequests": 0,
+      "requests": 109,
+      "splats": 113905,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Splat toolkit",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:44:37.057Z"
+    },
+    {
+      "id": "alum-crystal",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2590.0999999996275,
+      "firstSubmitMs": 1928.9000000003725,
+      "idle": {
+        "count": 8,
+        "median": 365.40000000037253,
+        "p95": 430.59999999962747,
+        "work": {
+          "count": 9,
+          "median": 377.5,
+          "p95": 803.7000000011176
+        },
+        "elapsedMs": 4029.2000000011176,
+        "intervals": [
+          349.8999999985099,
+          317.2000000011176,
+          385.19999999925494,
+          429.40000000037253,
+          430.59999999962747,
+          343,
+          350.09999999962747,
+          380.7000000011176
+        ],
+        "workMs": [
+          803.7000000011176,
+          344.59999999962747,
+          313,
+          380.19999999925494,
+          426,
+          427,
+          339.5,
+          345.2999999988824,
+          377.5
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 719.1999999992549,
+        "p95": 801.3000000007451,
+        "work": {
+          "count": 9,
+          "median": 720.2999999988824,
+          "p95": 797
+        },
+        "elapsedMs": 6550.700000001118,
+        "intervals": [
+          704.9000000003725,
+          737.5999999996275,
+          753.0999999996275,
+          801.3000000007451,
+          715,
+          723.3999999985099,
+          685.5,
+          675.1000000014901
+        ],
+        "workMs": [
+          749.5999999996275,
+          700.9000000003725,
+          734.0999999996275,
+          749.5,
+          797,
+          710,
+          720.2999999988824,
+          681.6999999992549,
+          670.9000000003725
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 57382609,
+      "transferBytes": 9216637,
+      "bodyBytes": 9186937,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Alum crystal",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:44:51.451Z"
+    },
+    {
+      "id": "cactus-real",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2405.5999999996275,
+      "firstSubmitMs": 1761.8999999985099,
+      "idle": {
+        "count": 8,
+        "median": 440.70000000018626,
+        "p95": 485.5,
+        "work": {
+          "count": 9,
+          "median": 436.80000000074506,
+          "p95": 806
+        },
+        "elapsedMs": 4609.700000001118,
+        "intervals": [
+          459.90000000037253,
+          442.69999999925494,
+          451.30000000074506,
+          485.5,
+          402,
+          392.59999999962747,
+          398.19999999925494,
+          438.7000000011176
+        ],
+        "workMs": [
+          806,
+          447.80000000074506,
+          436.80000000074506,
+          448.5,
+          482,
+          397,
+          389.80000000074506,
+          395.09999999962747,
+          434
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 681.25,
+        "p95": 718.5999999996275,
+        "work": {
+          "count": 9,
+          "median": 678.2999999988824,
+          "p95": 715.6999999992549
+        },
+        "elapsedMs": 6076.299999998882,
+        "intervals": [
+          682.9000000003725,
+          682.0999999996275,
+          668.0999999996275,
+          680.4000000003725,
+          718.5999999996275,
+          646.9000000003725,
+          611.9000000003725,
+          693.5999999996275
+        ],
+        "workMs": [
+          687.6999999992549,
+          680,
+          678.2999999988824,
+          659.8999999985099,
+          677.2999999988824,
+          715.6999999992549,
+          641.7999999988824,
+          608.8000000007451,
+          689.7999999988824
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 55844047,
+      "transferBytes": 8636165,
+      "bodyBytes": 8606465,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 260429,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Cactus (photo 2)",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:45:05.769Z"
+    },
+    {
+      "id": "peony",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2132.5,
+      "firstSubmitMs": 1558.2999999988824,
+      "idle": {
+        "count": 8,
+        "median": 400.5000000009313,
+        "p95": 412.59999999962747,
+        "work": {
+          "count": 9,
+          "median": 399.6000000014901,
+          "p95": 993.7999999988824
+        },
+        "elapsedMs": 4231.5,
+        "intervals": [
+          398.1000000014901,
+          412.59999999962747,
+          402.90000000037253,
+          410,
+          348.3999999985099,
+          333.40000000037253,
+          409.30000000074506,
+          392.59999999962747
+        ],
+        "workMs": [
+          993.7999999988824,
+          391.6000000014901,
+          409.59999999962747,
+          399.6000000014901,
+          406.6000000014901,
+          341.7999999988824,
+          328.7999999988824,
+          402.30000000074506,
+          389.40000000037253
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 720.4999999990687,
+        "p95": 963.7000000011176,
+        "work": {
+          "count": 9,
+          "median": 735.6999999992549,
+          "p95": 959.6000000014901
+        },
+        "elapsedMs": 7014.199999999255,
+        "intervals": [
+          963.7000000011176,
+          861.5,
+          934.1999999992549,
+          739.1999999992549,
+          665.7000000011176,
+          589.5,
+          701.7999999988824,
+          621
+        ],
+        "workMs": [
+          933.9000000003725,
+          959.6000000014901,
+          856.8000000007451,
+          930.3000000007451,
+          735.6999999992549,
+          662.5999999996275,
+          582.7000000011176,
+          695.7999999988824,
+          617.1999999992549
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 59191238,
+      "transferBytes": 9177531,
+      "bodyBytes": 9147831,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Peonies in a vase",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:45:20.374Z"
+    },
+    {
+      "id": "knight-horse",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2216.7999999988824,
+      "firstSubmitMs": 1537.2999999988824,
+      "idle": {
+        "count": 8,
+        "median": 299.45000000018626,
+        "p95": 343,
+        "work": {
+          "count": 9,
+          "median": 298.40000000037253,
+          "p95": 664.0999999996275
+        },
+        "elapsedMs": 3280.199999999255,
+        "intervals": [
+          294.59999999962747,
+          333.90000000037253,
+          294,
+          278.2000000011176,
+          317.5,
+          257.3999999985099,
+          304.30000000074506,
+          343
+        ],
+        "workMs": [
+          664.0999999996275,
+          290.8999999985099,
+          329.40000000037253,
+          287.90000000037253,
+          275,
+          314.30000000074506,
+          252.09999999962747,
+          298.40000000037253,
+          338.40000000037253
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 562.8999999994412,
+        "p95": 611,
+        "work": {
+          "count": 9,
+          "median": 576.0999999996275,
+          "p95": 605.3000000007451
+        },
+        "elapsedMs": 5074.0999999996275,
+        "intervals": [
+          595.3000000007451,
+          591.5999999996275,
+          546.0999999996275,
+          538.8000000007451,
+          611,
+          493.69999999925494,
+          518.7000000011176,
+          579.6999999992549
+        ],
+        "workMs": [
+          595.5,
+          590.0999999996275,
+          588.0999999996275,
+          543.0999999996275,
+          533.9000000003725,
+          605.3000000007451,
+          482.59999999962747,
+          514.2000000011176,
+          576.0999999996275
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 29194142,
+      "transferBytes": 8327835,
+      "bodyBytes": 8298135,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 233318,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Knight on a horse",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:45:32.171Z"
+    },
+    {
+      "id": "turtle-souvenir",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 1693.2000000011176,
+      "firstSubmitMs": 1403.4000000003725,
+      "idle": {
+        "count": 8,
+        "median": 299.54999999981374,
+        "p95": 371.90000000037253,
+        "work": {
+          "count": 9,
+          "median": 294,
+          "p95": 955.9000000003725
+        },
+        "elapsedMs": 3658.800000000745,
+        "intervals": [
+          300.19999999925494,
+          286.59999999962747,
+          302.5,
+          319.90000000037253,
+          371.90000000037253,
+          289.69999999925494,
+          298.90000000037253,
+          297
+        ],
+        "workMs": [
+          955.9000000003725,
+          293.69999999925494,
+          281.09999999962747,
+          299.09999999962747,
+          316.69999999925494,
+          365.90000000037253,
+          286.19999999925494,
+          293.80000000074506,
+          294
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 691.6500000003725,
+        "p95": 741.0999999996275,
+        "work": {
+          "count": 9,
+          "median": 687.7000000011176,
+          "p95": 746.4000000003725
+        },
+        "elapsedMs": 6213.300000000745,
+        "intervals": [
+          620.5,
+          701.4000000003725,
+          685.0999999996275,
+          741.0999999996275,
+          629.0999999996275,
+          698.2000000011176,
+          675.6999999992549,
+          709.2000000011176
+        ],
+        "workMs": [
+          746.4000000003725,
+          617.3000000007451,
+          695.0999999996275,
+          662.1999999992549,
+          724.6999999992549,
+          625.8999999985099,
+          687.7000000011176,
+          671.7999999988824,
+          702.1000000014901
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 27786348,
+      "transferBytes": 9220212,
+      "bodyBytes": 9190512,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Souvenir turtle",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:45:44.966Z"
+    },
+    {
+      "id": "cactus",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2061.5999999996275,
+      "firstSubmitMs": 1472.7000000011176,
+      "idle": {
+        "count": 8,
+        "median": 352.8500000005588,
+        "p95": 435.09999999962747,
+        "work": {
+          "count": 9,
+          "median": 350.19999999925494,
+          "p95": 1034.2999999988824
+        },
+        "elapsedMs": 4033,
+        "intervals": [
+          301.30000000074506,
+          435.09999999962747,
+          352.2000000011176,
+          324.7999999988824,
+          353.5,
+          346.90000000037253,
+          387.5,
+          374
+        ],
+        "workMs": [
+          1034.2999999988824,
+          296.69999999925494,
+          430.2999999988824,
+          348.5,
+          320,
+          350.19999999925494,
+          341.30000000074506,
+          384.30000000074506,
+          361.19999999925494
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 477.09999999962747,
+        "p95": 638.9000000003725,
+        "work": {
+          "count": 9,
+          "median": 468.19999999925494,
+          "p95": 630.1999999992549
+        },
+        "elapsedMs": 4513.9000000003725,
+        "intervals": [
+          638.9000000003725,
+          516.8000000007451,
+          624.2999999988824,
+          373.90000000037253,
+          481.90000000037253,
+          472.2999999988824,
+          435.80000000074506,
+          389.30000000074506
+        ],
+        "workMs": [
+          575.7999999988824,
+          630.1999999992549,
+          512.8000000007451,
+          620.0999999996275,
+          370.09999999962747,
+          448.90000000037253,
+          468.19999999925494,
+          429.90000000037253,
+          380.90000000037253
+        ]
+      },
+      "action": "bloom",
+      "heapBytes": 26165316,
+      "transferBytes": 6885298,
+      "bodyBytes": 6855598,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 120000,
+      "profile": "low",
+      "canvas": [
+        585,
+        672
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Cactus",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:45:56.803Z"
+    },
+    {
+      "id": "stollen",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2846.4000000003725,
+      "firstSubmitMs": 1975.2999999988824,
+      "idle": {
+        "count": 8,
+        "median": 306.95000000018626,
+        "p95": 490.5,
+        "work": {
+          "count": 9,
+          "median": 303.09999999962747,
+          "p95": 1280.4000000003725
+        },
+        "elapsedMs": 3981.2000000011176,
+        "intervals": [
+          490.5,
+          307.90000000037253,
+          309.19999999925494,
+          306,
+          298.90000000037253,
+          319,
+          289.80000000074506,
+          273
+        ],
+        "workMs": [
+          1280.4000000003725,
+          479.30000000074506,
+          303.90000000037253,
+          303.09999999962747,
+          302.19999999925494,
+          293.80000000074506,
+          315.19999999925494,
+          285.90000000037253,
+          270.2000000011176
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 722.5,
+        "p95": 817.9000000003725,
+        "work": {
+          "count": 9,
+          "median": 714.3999999985099,
+          "p95": 815.0999999996275
+        },
+        "elapsedMs": 6436.0999999996275,
+        "intervals": [
+          646.5,
+          719.5999999996275,
+          720.2999999988824,
+          764.9000000003725,
+          724.7000000011176,
+          747.5,
+          634.1999999992549,
+          817.9000000003725
+        ],
+        "workMs": [
+          657.1000000014901,
+          643,
+          714.0999999996275,
+          714.3999999985099,
+          759.9000000003725,
+          721,
+          743.9000000003725,
+          628.5999999996275,
+          815.0999999996275
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 65275492,
+      "transferBytes": 9030729,
+      "bodyBytes": 9001029,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Stollen",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:46:11.304Z"
+    },
+    {
+      "id": "space-shuttle",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 1743,
+      "firstSubmitMs": 1242.2000000011176,
+      "idle": {
+        "count": 8,
+        "median": 536.8999999994412,
+        "p95": 571.6000000014901,
+        "work": {
+          "count": 9,
+          "median": 531.2999999988824,
+          "p95": 1016
+        },
+        "elapsedMs": 5351,
+        "intervals": [
+          540.2999999988824,
+          534.5,
+          571.6000000014901,
+          539.2999999988824,
+          506.80000000074506,
+          544.2999999988824,
+          533.3000000007451,
+          528.5
+        ],
+        "workMs": [
+          1016,
+          514.3999999985099,
+          531.2999999988824,
+          568.3000000007451,
+          533.0999999996275,
+          503.5,
+          540.7999999988824,
+          530,
+          523.1999999992549
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 547.5999999996275,
+        "p95": 606,
+        "work": {
+          "count": 9,
+          "median": 569.7000000011176,
+          "p95": 602.8000000007451
+        },
+        "elapsedMs": 4985.300000000745,
+        "intervals": [
+          573.4000000003725,
+          506,
+          521.7999999988824,
+          582.3000000007451,
+          586.9000000003725,
+          606,
+          517.7999999988824,
+          494.6000000014901
+        ],
+        "workMs": [
+          592.8000000007451,
+          569.7000000011176,
+          502.80000000074506,
+          518.6999999992549,
+          577.6999999992549,
+          583.3000000007451,
+          602.8000000007451,
+          514.5,
+          490.1000000014901
+        ]
+      },
+      "action": "launch",
+      "heapBytes": 57065380,
+      "transferBytes": 6908586,
+      "bodyBytes": 6876186,
+      "cachedRequests": 0,
+      "requests": 108,
+      "splats": 105118,
+      "profile": "low",
+      "canvas": [
+        1170,
+        1401
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Space Shuttle",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:46:24.611Z"
+    },
+    {
+      "id": "gaussian-splatting",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 2623.4000000003725,
+      "firstSubmitMs": 2258.4000000003725,
+      "idle": {
+        "count": 27,
+        "median": 84.30000000074506,
+        "p95": 110.20000000111759,
+        "work": {
+          "count": 28,
+          "median": 80,
+          "p95": 149.10000000149012
+        },
+        "elapsedMs": 2518.60000000149,
+        "intervals": [
+          74.89999999850988,
+          89.30000000074506,
+          66.90000000037253,
+          73.29999999888241,
+          71.90000000037253,
+          83.20000000111759,
+          74.69999999925494,
+          75.30000000074506,
+          82.79999999888241,
+          86,
+          78.20000000111759,
+          60.19999999925494,
+          84.30000000074506,
+          88.29999999888241,
+          92,
+          90,
+          110.20000000111759,
+          152,
+          67.59999999962747,
+          85.69999999925494,
+          93.30000000074506,
+          84.59999999962747,
+          71.09999999962747,
+          80.09999999962747,
+          87.20000000111759,
+          90.40000000037253,
+          92
+        ],
+        "workMs": [
+          209,
+          67.59999999962747,
+          84.19999999925494,
+          60.70000000111759,
+          67.39999999850988,
+          69.09999999962747,
+          80.30000000074506,
+          68.5,
+          68.90000000037253,
+          78.59999999962747,
+          82.59999999962747,
+          75.10000000149012,
+          56.40000000037253,
+          77.20000000111759,
+          85.09999999962747,
+          88.19999999925494,
+          86.09999999962747,
+          104.90000000037253,
+          149.10000000149012,
+          64.80000000074506,
+          81.19999999925494,
+          88.59999999962747,
+          79.69999999925494,
+          65.90000000037253,
+          74.79999999888241,
+          81.5,
+          84.60000000149012,
+          86.5
+        ]
+      },
+      "tap": {
+        "count": 28,
+        "median": 88.44999999925494,
+        "p95": 107.5,
+        "work": {
+          "count": 29,
+          "median": 83.5,
+          "p95": 103.79999999888241
+        },
+        "elapsedMs": 2581.5999999996275,
+        "intervals": [
+          117.20000000111759,
+          78,
+          93.19999999925494,
+          87.59999999962747,
+          87.20000000111759,
+          79.29999999888241,
+          101.40000000037253,
+          89,
+          98.69999999925494,
+          84.70000000111759,
+          81.40000000037253,
+          88.29999999888241,
+          98.30000000074506,
+          96.69999999925494,
+          74.30000000074506,
+          91.40000000037253,
+          89.29999999888241,
+          107.5,
+          76.30000000074506,
+          93.09999999962747,
+          96.19999999925494,
+          86.80000000074506,
+          81.90000000037253,
+          72,
+          76.79999999888241,
+          88.90000000037253,
+          88.59999999962747,
+          82.70000000111759
+        ],
+        "workMs": [
+          91,
+          113.60000000149012,
+          72.30000000074506,
+          87.40000000037253,
+          82,
+          82,
+          73.29999999888241,
+          95.30000000074506,
+          85.09999999962747,
+          93.09999999962747,
+          81.20000000111759,
+          77.5,
+          85.09999999962747,
+          90.20000000111759,
+          93.19999999925494,
+          70.20000000111759,
+          70.5,
+          85.29999999888241,
+          103.79999999888241,
+          72.59999999962747,
+          90.09999999962747,
+          92,
+          83.5,
+          78.20000000111759,
+          65.70000000111759,
+          69.19999999925494,
+          84.40000000037253,
+          83.29999999888241,
+          79.40000000037253
+        ]
+      },
+      "action": "play",
+      "heapBytes": 45730735,
+      "transferBytes": 5498801,
+      "bodyBytes": 5467301,
+      "cachedRequests": 0,
+      "requests": 105,
+      "splats": 38311,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Gaussian splatting",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:46:33.561Z"
+    },
+    {
+      "id": "seeded-loaf",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 1870.4000000003725,
+      "firstSubmitMs": 1559.800000000745,
+      "idle": {
+        "count": 8,
+        "median": 277.69999999925494,
+        "p95": 343.5,
+        "work": {
+          "count": 9,
+          "median": 291.59999999962747,
+          "p95": 566.7999999988824
+        },
+        "elapsedMs": 3092.699999999255,
+        "intervals": [
+          255.5,
+          230.7000000011176,
+          304.19999999925494,
+          343.5,
+          294.59999999962747,
+          301.5,
+          242.7000000011176,
+          260.7999999988824
+        ],
+        "workMs": [
+          566.7999999988824,
+          250,
+          225.40000000037253,
+          298.69999999925494,
+          340.59999999962747,
+          291.59999999962747,
+          297.7999999988824,
+          239.90000000037253,
+          257.7999999988824
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 683.25,
+        "p95": 717.7999999988824,
+        "work": {
+          "count": 9,
+          "median": 678.3000000007451,
+          "p95": 713.9000000003725
+        },
+        "elapsedMs": 5915.60000000149,
+        "intervals": [
+          573.9000000003725,
+          584.4000000003725,
+          667.4000000003725,
+          682,
+          716,
+          717.7999999988824,
+          695.2000000011176,
+          684.5
+        ],
+        "workMs": [
+          590.5,
+          570.4000000003725,
+          581.2000000011176,
+          663,
+          678.3000000007451,
+          712,
+          713.9000000003725,
+          692,
+          681.2000000011176
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 48658769,
+      "transferBytes": 9320092,
+      "bodyBytes": 9290392,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Seeded bread loaf",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:46:45.671Z"
+    },
+    {
+      "id": "physalis",
+      "completion": "synchronous-readPixels",
+      "firstViewReadback": true,
+      "firstViewMs": 1927,
+      "firstSubmitMs": 1634.800000000745,
+      "idle": {
+        "count": 8,
+        "median": 277.65000000037253,
+        "p95": 335,
+        "work": {
+          "count": 9,
+          "median": 281,
+          "p95": 714.3000000007451
+        },
+        "elapsedMs": 3084.199999999255,
+        "intervals": [
+          335,
+          312.09999999962747,
+          286.40000000037253,
+          244.5,
+          251.7999999988824,
+          268.90000000037253,
+          228.5,
+          300.09999999962747
+        ],
+        "workMs": [
+          714.3000000007451,
+          325.80000000074506,
+          305.90000000037253,
+          281,
+          239.5,
+          247.7999999988824,
+          263,
+          225.09999999962747,
+          296.7999999988824
+        ]
+      },
+      "tap": {
+        "count": 8,
+        "median": 649.8499999996275,
+        "p95": 757,
+        "work": {
+          "count": 9,
+          "median": 648.6999999992549,
+          "p95": 753.4000000003725
+        },
+        "elapsedMs": 5976.200000001118,
+        "intervals": [
+          757,
+          616.3000000007451,
+          682.9000000003725,
+          648,
+          651.6999999992549,
+          634.0999999996275,
+          678.4000000003725,
+          621.3000000007451
+        ],
+        "workMs": [
+          683.4000000003725,
+          753.4000000003725,
+          613.5,
+          679,
+          643.2000000011176,
+          648.6999999992549,
+          631.0999999996275,
+          675.5999999996275,
+          618.4000000003725
+        ]
+      },
+      "action": "hop",
+      "heapBytes": 51090462,
+      "transferBytes": 9066886,
+      "bodyBytes": 9037186,
+      "cachedRequests": 0,
+      "requests": 99,
+      "splats": 300000,
+      "profile": "low",
+      "canvas": [
+        585,
+        700
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "deviceScaleFactor": 3,
+      "renderer": "webgl2",
+      "forcedHybridMesh": false,
+      "firstViewProbe": "loaded-splat-signal",
+      "label": "Physalis",
+      "errors": [],
+      "browserNotifications": [
+        "ResizeObserver loop completed with undelivered notifications."
+      ],
+      "measuredAt": "2026-10-17T07:46:57.883Z"
+    }
+  ]
+}

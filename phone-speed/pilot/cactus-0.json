@@ -1,0 +1,82 @@
+{
+  "id": "cactus",
+  "firstViewMs": 2106.5,
+  "firstSubmitMs": 2106.5,
+  "idle": {
+    "count": 3,
+    "median": 18.79999999998836,
+    "p95": 1185.6000000000058,
+    "work": {
+      "count": 4,
+      "median": 2.75,
+      "p95": 3.8999999999941792
+    },
+    "elapsedMs": 1235.1999999999825,
+    "intervals": [
+      16.79999999998836,
+      18.79999999998836,
+      1185.6000000000058
+    ],
+    "workMs": [
+      1.7000000000116415,
+      1.6000000000058208,
+      3.7999999999883585,
+      3.8999999999941792
+    ]
+  },
+  "tap": {
+    "count": 3,
+    "median": 287.80000000001746,
+    "p95": 290.0999999999767,
+    "work": {
+      "count": 4,
+      "median": 11.69999999999709,
+      "p95": 432.1000000000058
+    },
+    "elapsedMs": 1208.6999999999825,
+    "intervals": [
+      188.79999999998836,
+      287.80000000001746,
+      290.0999999999767
+    ],
+    "workMs": [
+      432.1000000000058,
+      11.39999999999418,
+      8,
+      12
+    ]
+  },
+  "action": "bloom",
+  "heapBytes": 21633336,
+  "transferBytes": 6886513,
+  "bodyBytes": 6856813,
+  "cachedRequests": 0,
+  "requests": 99,
+  "splats": 120000,
+  "profile": "low",
+  "canvas": [
+    585,
+    672
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "heap": {
+    "usedSize": 12293840,
+    "totalSize": 31719424,
+    "embedderHeapUsedSize": 9010336,
+    "backingStorageSize": 16309000
+  },
+  "run": 0,
+  "label": "Cactus",
+  "kind": "captured",
+  "pack": null,
+  "labs": false,
+  "errors": [],
+  "wallMs": 4579,
+  "measuredAt": "2026-10-17T02:14:02.768Z",
+  "source": "ceb51de7a015377d7f350119c27a792fc1a8a66d"
+}

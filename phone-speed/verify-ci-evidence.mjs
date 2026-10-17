@@ -1,0 +1,15 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+const root='.cache/phone-speed';
+const result=JSON.parse(await fs.readFile(`${root}/ci-suite-result.json`,'utf8'));
+const expected=execFileSync('git',['ls-files','tests'],{encoding:'utf8'}).trim().split('\n').filter(file=>/^tests\/[^/]+\.spec\.mjs$/.test(file));
+assert.equal(result.complete,true,'The remote suite is incomplete.');
+assert.equal(result.reportedFiles,expected.length,'Every existing spec file must report.');
+assert.deepEqual([...result.files].sort(),expected.map(file=>file.slice(6,-9)).sort());
+assert.equal(result.failed,0,'The remote suite retains failures; investigate its reports.');
+assert.deepEqual(result.missing,[]);
+assert.equal(result.sourceProof.runtimeMatches,true,'The tested source must be proven.');
+assert.match(result.headSHA,/^[0-9a-f]{40}$/);
+execFileSync('git',['diff','--exit-code',result.headSHA,'--','src','vendor','assets','index.html','styles.css','tests','tools','package.json','package-lock.json','playwright.config.mjs']);
+console.log(JSON.stringify({url:result.url,headSHA:result.headSHA,reportedFiles:result.reportedFiles,passed:result.passed,failed:result.failed,skipped:result.skipped,sourceProof:result.sourceProof}));

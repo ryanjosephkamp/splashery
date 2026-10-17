@@ -1,0 +1,341 @@
+{
+  "plannedAt": "2026-10-17T03:06:49.110Z",
+  "reason": "Conservative repetition of early setup samples after eliminating a stopped browser GPU process. The possible orphan interval could not be bounded precisely.",
+  "originals": [
+    {
+      "id": "cactus",
+      "measuredAt": "2026-10-17T02:15:01.667Z",
+      "error": null
+    },
+    {
+      "id": "strawberry",
+      "measuredAt": "2026-10-17T02:15:11.451Z",
+      "error": null
+    },
+    {
+      "id": "cookie",
+      "measuredAt": "2026-10-17T02:15:20.279Z",
+      "error": null
+    },
+    {
+      "id": "bee",
+      "measuredAt": "2026-10-17T02:15:28.592Z",
+      "error": null
+    },
+    {
+      "id": "torus",
+      "measuredAt": "2026-10-17T02:15:36.331Z",
+      "error": null
+    },
+    {
+      "id": "blob",
+      "measuredAt": "2026-10-17T02:15:44.290Z",
+      "error": null
+    },
+    {
+      "id": "knot",
+      "measuredAt": "2026-10-17T02:15:52.060Z",
+      "error": null
+    },
+    {
+      "id": "cluster-fly",
+      "measuredAt": "2026-10-17T02:15:59.982Z",
+      "error": null
+    },
+    {
+      "id": "may-beetle",
+      "measuredAt": "2026-10-17T02:16:08.335Z",
+      "error": null
+    },
+    {
+      "id": "millipede",
+      "measuredAt": "2026-10-17T02:16:16.559Z",
+      "error": null
+    },
+    {
+      "id": "bumblebee",
+      "measuredAt": "2026-10-17T02:16:24.987Z",
+      "error": null
+    },
+    {
+      "id": "raspberry",
+      "measuredAt": "2026-10-17T02:16:33.635Z",
+      "error": null
+    },
+    {
+      "id": "blackberry",
+      "measuredAt": "2026-10-17T02:16:42.568Z",
+      "error": null
+    },
+    {
+      "id": "blueberry",
+      "measuredAt": "2026-10-17T02:16:51.199Z",
+      "error": null
+    },
+    {
+      "id": "grape",
+      "measuredAt": "2026-10-17T02:16:59.387Z",
+      "error": null
+    },
+    {
+      "id": "star-cookie",
+      "measuredAt": "2026-10-17T02:17:07.756Z",
+      "error": null
+    },
+    {
+      "id": "tomatoes",
+      "measuredAt": "2026-10-17T02:17:17.893Z",
+      "error": null
+    },
+    {
+      "id": "mandeltorus",
+      "measuredAt": "2026-10-17T02:17:26.592Z",
+      "error": null
+    },
+    {
+      "id": "basket",
+      "measuredAt": "2026-10-17T02:17:35.267Z",
+      "error": null
+    },
+    {
+      "id": "heart-donut",
+      "measuredAt": "2026-10-17T02:17:43.892Z",
+      "error": null
+    },
+    {
+      "id": "sushi-boat",
+      "measuredAt": "2026-10-17T02:17:54.372Z",
+      "error": null
+    },
+    {
+      "id": "seeded-loaf",
+      "measuredAt": "2026-10-17T02:18:07.722Z",
+      "error": null
+    },
+    {
+      "id": "steak",
+      "measuredAt": "2026-10-17T02:18:16.984Z",
+      "error": null
+    },
+    {
+      "id": "stollen",
+      "measuredAt": "2026-10-17T02:18:31.627Z",
+      "error": null
+    },
+    {
+      "id": "orange-photo",
+      "measuredAt": "2026-10-17T02:18:42.335Z",
+      "error": null
+    },
+    {
+      "id": "physalis",
+      "measuredAt": "2026-10-17T02:18:57.064Z",
+      "error": null
+    },
+    {
+      "id": "crystal-gem",
+      "measuredAt": "2026-10-17T02:19:06.083Z",
+      "error": null
+    },
+    {
+      "id": "alum-crystal",
+      "measuredAt": "2026-10-17T02:19:21.072Z",
+      "error": null
+    },
+    {
+      "id": "puffin",
+      "measuredAt": "2026-10-17T02:19:34.755Z",
+      "error": null
+    },
+    {
+      "id": "toy-trex",
+      "measuredAt": "2026-10-17T02:19:52.181Z",
+      "error": null
+    },
+    {
+      "id": "monkey-doll",
+      "measuredAt": "2026-10-17T02:20:08.447Z",
+      "error": null
+    },
+    {
+      "id": "elephant-souvenir",
+      "measuredAt": "2026-10-17T02:20:16.852Z",
+      "error": null
+    },
+    {
+      "id": "turtle-souvenir",
+      "measuredAt": "2026-10-17T02:20:28.143Z",
+      "error": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "id": "cave-lioness",
+      "measuredAt": "2026-10-17T02:22:02.271Z",
+      "error": null
+    },
+    {
+      "id": "dog-plush",
+      "measuredAt": "2026-10-17T02:22:18.381Z",
+      "error": null
+    },
+    {
+      "id": "bmx-bike",
+      "measuredAt": "2026-10-17T02:22:34.638Z",
+      "error": null
+    },
+    {
+      "id": "murex-shell",
+      "measuredAt": "2026-10-17T02:22:48.281Z",
+      "error": null
+    },
+    {
+      "id": "sunflower-photo",
+      "measuredAt": "2026-10-17T02:23:05.721Z",
+      "error": null
+    },
+    {
+      "id": "white-roses",
+      "measuredAt": "2026-10-17T02:23:14.402Z",
+      "error": null
+    },
+    {
+      "id": "bonsai-photo",
+      "measuredAt": "2026-10-17T02:23:28.295Z",
+      "error": null
+    },
+    {
+      "id": "mushroom-photo",
+      "measuredAt": "2026-10-17T02:23:44.130Z",
+      "error": null
+    },
+    {
+      "id": "cactus-real",
+      "measuredAt": "2026-10-17T02:24:00.686Z",
+      "error": null
+    },
+    {
+      "id": "crochet-earth",
+      "measuredAt": "2026-10-17T02:24:18.163Z",
+      "error": null
+    },
+    {
+      "id": "desk-globe",
+      "measuredAt": "2026-10-17T02:24:35.969Z",
+      "error": null
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "measuredAt": "2026-10-17T02:24:51.157Z",
+      "error": null
+    },
+    {
+      "id": "maple-tree",
+      "measuredAt": "2026-10-17T02:25:08.547Z",
+      "error": null
+    },
+    {
+      "id": "peony",
+      "measuredAt": "2026-10-17T02:25:24.055Z",
+      "error": null
+    },
+    {
+      "id": "money-tree",
+      "measuredAt": "2026-10-17T02:25:35.191Z",
+      "error": null
+    },
+    {
+      "id": "knight-horse",
+      "measuredAt": "2026-10-17T02:25:49.135Z",
+      "error": null
+    },
+    {
+      "id": "triceratops-skull",
+      "measuredAt": "2026-10-17T02:26:05.380Z",
+      "error": null
+    },
+    {
+      "id": "cone-shell",
+      "measuredAt": "2026-10-17T02:26:19.256Z",
+      "error": null
+    },
+    {
+      "id": "celestial-globe",
+      "measuredAt": "2026-10-17T02:26:27.387Z",
+      "error": null
+    },
+    {
+      "id": "armillary-sphere",
+      "measuredAt": "2026-10-17T02:26:35.295Z",
+      "error": null
+    },
+    {
+      "id": "stannern-meteorites",
+      "measuredAt": "2026-10-17T02:26:43.000Z",
+      "error": null
+    },
+    {
+      "id": "fluorite-crystal",
+      "measuredAt": "2026-10-17T02:26:50.887Z",
+      "error": null
+    },
+    {
+      "id": "ammonite-agate",
+      "measuredAt": "2026-10-17T02:26:58.669Z",
+      "error": null
+    },
+    {
+      "id": "morasko-meteorite",
+      "measuredAt": "2026-10-17T02:27:06.540Z",
+      "error": null
+    },
+    {
+      "id": "pyrite-cubes",
+      "measuredAt": "2026-10-17T02:27:14.348Z",
+      "error": null
+    },
+    {
+      "id": "megalodon-tooth",
+      "measuredAt": "2026-10-17T02:27:22.026Z",
+      "error": null
+    },
+    {
+      "id": "rubber-duck-real",
+      "measuredAt": "2026-10-17T02:27:29.851Z",
+      "error": null
+    },
+    {
+      "id": "garden-gnome",
+      "measuredAt": "2026-10-17T02:27:37.859Z",
+      "error": null
+    },
+    {
+      "id": "wooden-elephant",
+      "measuredAt": "2026-10-17T02:27:46.800Z",
+      "error": null
+    },
+    {
+      "id": "marble-bust",
+      "measuredAt": "2026-10-17T02:27:55.149Z",
+      "error": null
+    },
+    {
+      "id": "ukulele",
+      "measuredAt": "2026-10-17T02:28:03.587Z",
+      "error": null
+    },
+    {
+      "id": "alarm-clock",
+      "measuredAt": "2026-10-17T02:28:11.864Z",
+      "error": null
+    },
+    {
+      "id": "vintage-camera",
+      "measuredAt": "2026-10-17T02:28:20.291Z",
+      "error": null
+    },
+    {
+      "id": "boombox",
+      "measuredAt": "2026-10-17T02:28:28.335Z",
+      "error": null
+    }
+  ]
+}

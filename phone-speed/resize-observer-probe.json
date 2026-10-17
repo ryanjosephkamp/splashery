@@ -1,0 +1,74 @@
+[
+  {
+    "name": "before",
+    "events": [
+      {
+        "message": "ResizeObserver loop completed with undelivered notifications.",
+        "hasError": false,
+        "at": 1310.9000000003725,
+        "viewport": [
+          390,
+          844
+        ],
+        "scroll": [
+          390,
+          844
+        ],
+        "canvas": [
+          390,
+          467
+        ],
+        "url": "http://127.0.0.1:4174/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=tennis-ball"
+      }
+    ],
+    "errors": []
+  },
+  {
+    "name": "after",
+    "events": [
+      {
+        "message": "ResizeObserver loop completed with undelivered notifications.",
+        "hasError": false,
+        "at": 795.4000000003725,
+        "viewport": [
+          390,
+          844
+        ],
+        "scroll": [
+          390,
+          844
+        ],
+        "canvas": [
+          390,
+          467
+        ],
+        "url": "http://127.0.0.1:4173/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=tennis-ball"
+      }
+    ],
+    "errors": []
+  },
+  {
+    "name": "iframe",
+    "events": [
+      {
+        "message": "ResizeObserver loop completed with undelivered notifications.",
+        "hasError": false,
+        "at": 724.2000000011176,
+        "viewport": [
+          390,
+          844
+        ],
+        "scroll": [
+          390,
+          844
+        ],
+        "canvas": [
+          390,
+          467
+        ],
+        "url": "http://127.0.0.1:4173/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=tennis-ball"
+      }
+    ],
+    "errors": []
+  }
+]

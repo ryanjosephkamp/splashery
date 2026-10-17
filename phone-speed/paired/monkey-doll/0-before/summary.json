@@ -1,0 +1,108 @@
+[
+  {
+    "id": "monkey-doll",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 4029.0999999996275,
+    "firstSubmitMs": 2856,
+    "idle": {
+      "count": 8,
+      "median": 767.0499999998137,
+      "p95": 941.6000000005588,
+      "work": {
+        "count": 9,
+        "median": 774,
+        "p95": 2172.199999999255
+      },
+      "elapsedMs": 8965.5,
+      "intervals": [
+        789.8000000007451,
+        754.7999999998137,
+        864.8999999994412,
+        941.6000000005588,
+        757.2999999998137,
+        776.7999999998137,
+        718,
+        745.5
+      ],
+      "workMs": [
+        2172.199999999255,
+        782.5,
+        752.1000000005588,
+        862.0999999996275,
+        938.7000000001863,
+        749.2999999998137,
+        774,
+        715.3999999994412,
+        742.7999999998137
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 775.6000000000931,
+      "p95": 809.9000000003725,
+      "work": {
+        "count": 9,
+        "median": 757.1000000005588,
+        "p95": 807
+      },
+      "elapsedMs": 6890,
+      "intervals": [
+        790.8999999994412,
+        760.3000000007451,
+        745.5,
+        807.2999999998137,
+        744.2999999998137,
+        737.0999999996275,
+        796.5,
+        809.9000000003725
+      ],
+      "workMs": [
+        695.6000000005588,
+        788,
+        757.1000000005588,
+        742.4000000003725,
+        803.6000000005588,
+        741.7000000001863,
+        734.5,
+        793.5999999996275,
+        807
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 37664218,
+    "transferBytes": 9126612,
+    "bodyBytes": 9097212,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 15209360,
+      "totalSize": 31981568,
+      "embedderHeapUsedSize": 11077368,
+      "backingStorageSize": 29580998
+    },
+    "run": 0,
+    "label": "Monkey doll",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 21167,
+    "measuredAt": "2026-10-17T06:52:39.321Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "reviewedAt": "2026-10-17T06:41:25.161Z",
+  "sources": {
+    "before": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "after": "072f15f3d00150825f36784b504b8b365c892cd7"
+  },
+  "manualCSSPoses": [
+    "photo-album/rest",
+    "photo-album/tap",
+    "video-3d/rest",
+    "video-3d/tap"
+  ],
+  "finding": "Compared the actual before/after PNGs at phone size. No apparent visible change in either declared resolution exception. Both tap poses differ from their rest pose. The other13 targets have exact RGB matches at both poses, including native-width comparisons.",
+  "cssMinimum": 0.9952459866888713,
+  "nativeMinimum": 0.994007571755022
+}

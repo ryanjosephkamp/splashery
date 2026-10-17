@@ -1,0 +1,152 @@
+{
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+  "browser": "151.0.7922.173",
+  "protocol": {
+    "toolSHA256": "0e578cb314c41d813279a34c04ab04dc8d0863cd14f354a90368d9a1cca2aeae",
+    "hybridSHA256": "d781a1c3d979041a610f8e21fc968165846c5103be2b796ebd395d2593a260c1",
+    "sceneSeed": 103,
+    "wallTime": "2026-10-17T12:00:00Z",
+    "restSeconds": 0.5,
+    "stepHz": 60,
+    "settleDraws": 3,
+    "calendarOnly": true,
+    "completedDraws": true,
+    "nativeComparisonWidth": 1170
+  },
+  "measuredAt": "2026-10-17T04:40:17.853Z",
+  "rows": [
+    {
+      "id": "video-3d",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 0.3,
+      "sceneSeed": 103,
+      "splats": 59682,
+      "canvas": [
+        1170,
+        1401
+      ],
+      "camera": {
+        "yaw": 0.3134,
+        "pitch": 0.0164,
+        "roll": 0.0582,
+        "distance": 0.9166
+      },
+      "controls": {
+        "replay": 0.5000000000000001
+      },
+      "diagnosis": {
+        "uniformWrites": 135,
+        "workDraws": 3,
+        "updatesMs": [
+          0.5,
+          0.09999999962747097,
+          0.30000000074505806
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 135,
+        "orbitUpdatesMs": [
+          0.599999999627471,
+          2.699999999254942,
+          0.40000000037252903
+        ],
+        "shBands": null,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994,
+          "flight": {
+            "active": false,
+            "clock": 0,
+            "time": null,
+            "pausedAt": null,
+            "done": false,
+            "offset": {
+              "yaw": 0,
+              "pitch": 0,
+              "zoom": 1
+            }
+          },
+          "view": {
+            "camera": {
+              "yaw": 0.3294,
+              "pitch": 0.0177,
+              "roll": 0.0611,
+              "distance": 0.9141
+            },
+            "target": [
+              -0.028147184763067656,
+              0.012555318958949253,
+              0.009387008426485544
+            ],
+            "fov": 38,
+            "horizontalFov": true
+          }
+        },
+        "tap": {
+          "kit": {
+            "t": 0.7833333333333341,
+            "last": 0.8000000000000008,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.8000000000000008,
+            "rate": 1
+          },
+          "time": 0.8000000000000008,
+          "flight": {
+            "active": true,
+            "clock": 0.5166666666666666,
+            "time": 1.0393333333333343,
+            "pausedAt": null,
+            "done": false,
+            "offset": {
+              "yaw": 0,
+              "pitch": 0,
+              "zoom": 1
+            }
+          },
+          "view": {
+            "camera": {
+              "yaw": 0.3134,
+              "pitch": 0.0164,
+              "roll": 0.0582,
+              "distance": 0.9166
+            },
+            "target": [
+              -0.026259965928642326,
+              0.012454518560105498,
+              0.008296571731227997
+            ],
+            "fov": 27.551192031434457,
+            "horizontalFov": true
+          }
+        }
+      },
+      "errors": []
+    }
+  ]
+}

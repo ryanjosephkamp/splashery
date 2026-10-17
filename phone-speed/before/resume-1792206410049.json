@@ -1,0 +1,29 @@
+{
+  "url": "http://127.0.0.1:4174/",
+  "toolSource": "69f1f91996e78d1eac1fd4ee2d07a7b6184f047d",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+  "dirty": "M tests/cdx-speed.spec.mjs\n M tools/pages/phone-speed-page.js\n M tools/pages/phone-speed.html\n M tools/phone-speed-paired.mjs\n M tools/phone-speed.mjs",
+  "started": "2026-10-17T03:06:50.047Z",
+  "browser": "151.0.7922.173",
+  "launchArgs": [
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-webgl",
+    "--enable-precise-memory-info"
+  ],
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "deviceScaleFactor": 3,
+  "durationMs": 2500,
+  "runs": 1,
+  "host": {
+    "platform": "linux",
+    "arch": "x64",
+    "cpus": 5,
+    "cpu": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "method": "Fresh context, normal app, cold cache, no network/CPU throttle, weak tier, adaptation off. First view includes gl.finish after the first-toy-frame signal; frame intervals are completed postrender draws with gl.finish and forced rendering. Audio off; one real action after the idle window. Heap is a live JS heap snapshot, not total process/GPU memory. Local HTTP transfer is not public-site compressed transfer."
+}

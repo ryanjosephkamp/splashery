@@ -1,0 +1,11 @@
+{"variant":"original","denominator":255,"idle":687.5499999998137,"visual":{"psnr":null,"exact":true,"ssim":0.9999999999999997,"laplacian":0.003840574526442971,"sourceLaplacian":0.003840574526442971,"sharpnessRatio":1}}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.evaluate: Error: Color marker missing: gsplatOutputVS
+    at eval (eval at evaluate (:290:30), <anonymous>:18:69)
+    at async <anonymous>:316:30
+    at /workspace/splashery/.cache/phone-speed/video-flat-experiment.mjs:19:39
+
+Node.js v24.19.0

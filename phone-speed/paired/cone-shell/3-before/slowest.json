@@ -1,0 +1,108 @@
+[
+  {
+    "id": "cone-shell",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3051.399999999441,
+    "firstSubmitMs": 2769.5999999996275,
+    "idle": {
+      "count": 8,
+      "median": 596.5500000002794,
+      "p95": 657.5,
+      "work": {
+        "count": 9,
+        "median": 599.7000000001863,
+        "p95": 1952.2999999998137
+      },
+      "elapsedMs": 6882.600000000559,
+      "intervals": [
+        605.1000000005588,
+        657.5,
+        539,
+        641.0999999996275,
+        607.6000000005588,
+        588,
+        579.2999999998137,
+        582
+      ],
+      "workMs": [
+        1952.2999999998137,
+        599.7000000001863,
+        654.5,
+        536.6000000005588,
+        637.7999999998137,
+        604.3000000007451,
+        585.3000000007451,
+        576.2999999998137,
+        579.7000000001863
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 645.25,
+      "p95": 711.7000000001863,
+      "work": {
+        "count": 9,
+        "median": 630,
+        "p95": 708.2999999998137
+      },
+      "elapsedMs": 5653.899999999441,
+      "intervals": [
+        702.2000000001863,
+        711.7000000001863,
+        513.2000000001863,
+        616.3999999994412,
+        556.5,
+        667.5,
+        657.9000000003725,
+        632.5999999996275
+      ],
+      "workMs": [
+        592.0999999996275,
+        697.3999999994412,
+        708.2999999998137,
+        510.1000000005588,
+        612.8999999994412,
+        554.0999999996275,
+        663,
+        654.7000000001863,
+        630
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 32853020,
+    "transferBytes": 9025828,
+    "bodyBytes": 8996428,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 11701964,
+      "totalSize": 16252928,
+      "embedderHeapUsedSize": 10824488,
+      "backingStorageSize": 21814268
+    },
+    "run": 0,
+    "label": "Cone shell",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 16899,
+    "measuredAt": "2026-10-17T07:03:55.551Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

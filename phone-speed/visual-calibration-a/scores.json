@@ -1,0 +1,26 @@
+{
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+  "browser": "151.0.7922.173",
+  "measuredAt": "2026-10-17T02:28:57.353Z",
+  "rows": [
+    {
+      "id": "torus",
+      "midTapSeconds": 1.5,
+      "splats": 60000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.4,
+        "pitch": 0.62,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "roll": 0.5833333333333315
+      },
+      "errors": []
+    }
+  ]
+}

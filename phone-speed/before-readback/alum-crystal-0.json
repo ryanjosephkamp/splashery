@@ -1,0 +1,106 @@
+{
+  "id": "alum-crystal",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2703.7000000011176,
+  "firstSubmitMs": 2291.2000000011176,
+  "idle": {
+    "count": 8,
+    "median": 674.8499999996275,
+    "p95": 719.5,
+    "work": {
+      "count": 9,
+      "median": 672.0999999996275,
+      "p95": 1361.0999999996275
+    },
+    "elapsedMs": 7394.199999999255,
+    "intervals": [
+      648.4000000003725,
+      667.2000000011176,
+      697,
+      678.0999999996275,
+      665.5,
+      677,
+      672.6999999992549,
+      719.5
+    ],
+    "workMs": [
+      1361.0999999996275,
+      645.0999999996275,
+      664.3000000007451,
+      694.4000000003725,
+      673.9000000003725,
+      660.5999999996275,
+      672.0999999996275,
+      670,
+      716.6999999992549
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 680.0999999996275,
+    "p95": 736.5,
+    "work": {
+      "count": 9,
+      "median": 686,
+      "p95": 804.1999999992549
+    },
+    "elapsedMs": 6164.199999999255,
+    "intervals": [
+      607.1999999992549,
+      699.1000000014901,
+      690.2999999988824,
+      617.3000000007451,
+      736.5,
+      628,
+      708.6999999992549,
+      669.9000000003725
+    ],
+    "workMs": [
+      804.1999999992549,
+      604.0999999996275,
+      695.6000000014901,
+      686,
+      614,
+      732.5999999996275,
+      624.5,
+      704.9000000003725,
+      666.6999999992549
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 35361253,
+  "transferBytes": 9212515,
+  "bodyBytes": 9183115,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 15144728,
+    "totalSize": 32243712,
+    "embedderHeapUsedSize": 10983832,
+    "backingStorageSize": 27470213
+  },
+  "run": 0,
+  "label": "Alum crystal",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 17530,
+  "measuredAt": "2026-10-17T05:08:29.759Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

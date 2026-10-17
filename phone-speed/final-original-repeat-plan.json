@@ -1,0 +1,36 @@
+{
+  "plannedAt": "2026-10-17T04:07:17.706583+00:00",
+  "ids": [
+    "robot",
+    "chess-set",
+    "lorenz",
+    "photo-3d",
+    "moving-photo-3d"
+  ],
+  "reason": "Repeat three potentially browser-overlapped rows and two photo default-mesh first-view timeouts. Preserve every original. Other probes and shared timing code are unchanged.",
+  "history": "before/history/controller-and-hybrid-probes",
+  "originalRows": 427,
+  "completedAt": "2026-10-17T04:13:58.041Z",
+  "completedRows": [
+    {
+      "id": "robot",
+      "measuredAt": "2026-10-17T04:07:50.683Z"
+    },
+    {
+      "id": "chess-set",
+      "measuredAt": "2026-10-17T04:07:58.598Z"
+    },
+    {
+      "id": "lorenz",
+      "measuredAt": "2026-10-17T04:08:06.277Z"
+    },
+    {
+      "id": "photo-3d",
+      "measuredAt": "2026-10-17T04:08:14.430Z"
+    },
+    {
+      "id": "moving-photo-3d",
+      "measuredAt": "2026-10-17T04:08:25.884Z"
+    }
+  ]
+}

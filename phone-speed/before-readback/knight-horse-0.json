@@ -1,0 +1,106 @@
+{
+  "id": "knight-horse",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2781.2000000000116,
+  "firstSubmitMs": 2523.5999999999767,
+  "idle": {
+    "count": 8,
+    "median": 577.25,
+    "p95": 661.5,
+    "work": {
+      "count": 9,
+      "median": 578.5999999999767,
+      "p95": 1077.5999999999767
+    },
+    "elapsedMs": 6330.899999999965,
+    "intervals": [
+      607.6000000000349,
+      573.5,
+      552.0999999999767,
+      581,
+      564,
+      661.5,
+      595,
+      572.2999999999884
+    ],
+    "workMs": [
+      1077.5999999999767,
+      601.9000000000233,
+      571.2000000000116,
+      549.7000000000116,
+      578.5999999999767,
+      559.9000000000233,
+      659,
+      592.2000000000116,
+      568.5
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 566.6499999999942,
+    "p95": 608,
+    "work": {
+      "count": 9,
+      "median": 563.6000000000349,
+      "p95": 603.2000000000116
+    },
+    "elapsedMs": 5035.299999999988,
+    "intervals": [
+      608,
+      516.7999999999884,
+      532.9000000000233,
+      493.20000000001164,
+      566.5,
+      597,
+      575.5,
+      566.7999999999884
+    ],
+    "workMs": [
+      573.5,
+      603.2000000000116,
+      512.7999999999884,
+      529.7999999999884,
+      490.20000000001164,
+      563.6000000000349,
+      594.1000000000349,
+      572.9000000000233,
+      562.1000000000349
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 33884928,
+  "transferBytes": 8323713,
+  "bodyBytes": 8294313,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 233318,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 16016508,
+    "totalSize": 31719424,
+    "embedderHeapUsedSize": 10926912,
+    "backingStorageSize": 18335588
+  },
+  "run": 0,
+  "label": "Knight on a horse",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 15432,
+  "measuredAt": "2026-10-17T05:19:19.271Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

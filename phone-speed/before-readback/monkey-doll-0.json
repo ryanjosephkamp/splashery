@@ -1,0 +1,106 @@
+{
+  "id": "monkey-doll",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3020.100000000006,
+  "firstSubmitMs": 1908.1000000000058,
+  "idle": {
+    "count": 8,
+    "median": 790.5999999999985,
+    "p95": 807.5,
+    "work": {
+      "count": 9,
+      "median": 790.5,
+      "p95": 1523
+    },
+    "elapsedMs": 8156.800000000003,
+    "intervals": [
+      807.5,
+      795.5,
+      788.1999999999971,
+      793,
+      748.5,
+      804.3000000000029,
+      696.8000000000029,
+      772.3999999999942
+    ],
+    "workMs": [
+      1523,
+      800.4000000000087,
+      792.6999999999971,
+      785.3999999999942,
+      790.5,
+      745.6999999999971,
+      802,
+      693.7000000000116,
+      769.6000000000058
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 772.25,
+    "p95": 820,
+    "work": {
+      "count": 9,
+      "median": 782.8999999999942,
+      "p95": 817.3999999999942
+    },
+    "elapsedMs": 6777.600000000006,
+    "intervals": [
+      820,
+      732,
+      633.5,
+      656.6000000000058,
+      785.6999999999971,
+      758.8000000000029,
+      798.1999999999971,
+      802.1000000000058
+    ],
+    "workMs": [
+      785.8999999999942,
+      817.3999999999942,
+      729.5999999999913,
+      631.0999999999913,
+      654.1999999999971,
+      782.8999999999942,
+      756.1999999999971,
+      795.3000000000029,
+      796.8000000000029
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 37540246,
+  "transferBytes": 9126612,
+  "bodyBytes": 9097212,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 15081116,
+    "totalSize": 31719424,
+    "embedderHeapUsedSize": 10944768,
+    "backingStorageSize": 29580998
+  },
+  "run": 0,
+  "label": "Monkey doll",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 19200,
+  "measuredAt": "2026-10-17T05:12:45.173Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

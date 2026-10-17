@@ -1,0 +1,108 @@
+[
+  {
+    "id": "cherry-blossom-photo",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3750,
+    "firstSubmitMs": 2740.7999999998137,
+    "idle": {
+      "count": 8,
+      "median": 705.1999999997206,
+      "p95": 761,
+      "work": {
+        "count": 9,
+        "median": 705.4000000003725,
+        "p95": 1387.300000000745
+      },
+      "elapsedMs": 7344.799999999814,
+      "intervals": [
+        633.1999999992549,
+        663.7000000001863,
+        761,
+        738.7999999998137,
+        660.6000000005588,
+        708.2000000001863,
+        702.1999999992549,
+        745.7000000001863
+      ],
+      "workMs": [
+        1387.300000000745,
+        620.8999999994412,
+        657.5,
+        757.5999999996275,
+        733.5,
+        657.5,
+        705.4000000003725,
+        699.1999999992549,
+        742.0999999996275
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 684.9000000003725,
+      "p95": 859.7999999998137,
+      "work": {
+        "count": 9,
+        "median": 679.7000000001863,
+        "p95": 847.5
+      },
+      "elapsedMs": 6431.700000000186,
+      "intervals": [
+        859.7999999998137,
+        685,
+        684.8000000007451,
+        722.7999999998137,
+        671.0999999996275,
+        658.4000000003725,
+        668.2000000001863,
+        725.5999999996275
+      ],
+      "workMs": [
+        752.5,
+        847.5,
+        675.1999999992549,
+        679.7000000001863,
+        719.7999999998137,
+        666.7000000001863,
+        655.2999999998137,
+        664.9000000003725,
+        722.5999999996275
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 30222207,
+    "transferBytes": 9110037,
+    "bodyBytes": 9080637,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 14371168,
+      "totalSize": 32505856,
+      "embedderHeapUsedSize": 9174192,
+      "backingStorageSize": 23108771
+    },
+    "run": 0,
+    "label": "Cherry blossom (photo)",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 18785,
+    "measuredAt": "2026-10-17T06:56:55.027Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

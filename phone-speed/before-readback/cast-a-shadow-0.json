@@ -1,0 +1,106 @@
+{
+  "id": "cast-a-shadow",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 1279,
+  "firstSubmitMs": 1182.6000000000931,
+  "idle": {
+    "count": 8,
+    "median": 396.1999999997206,
+    "p95": 460.89999999990687,
+    "work": {
+      "count": 9,
+      "median": 401,
+      "p95": 1216
+    },
+    "elapsedMs": 4509.5,
+    "intervals": [
+      460.89999999990687,
+      421,
+      386.10000000009313,
+      387.09999999962747,
+      363.90000000037253,
+      405.29999999981374,
+      424.89999999990687,
+      358.70000000018626
+    ],
+    "workMs": [
+      1216,
+      444.5,
+      416.89999999990687,
+      382.10000000009313,
+      382.5,
+      359.90000000037253,
+      401,
+      414.79999999981374,
+      351.89999999990687
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 436.20000000018626,
+    "p95": 473.8000000002794,
+    "work": {
+      "count": 9,
+      "median": 417.89999999990687,
+      "p95": 469.90000000037253
+    },
+    "elapsedMs": 3907.5,
+    "intervals": [
+      405.5,
+      456.10000000009313,
+      412.39999999990687,
+      450.5,
+      443.70000000018626,
+      428.70000000018626,
+      413.1999999997206,
+      473.8000000002794
+    ],
+    "workMs": [
+      408.09999999962747,
+      392.29999999981374,
+      451.10000000009313,
+      405.59999999962747,
+      435.59999999962747,
+      417.89999999990687,
+      423.60000000009313,
+      410,
+      469.90000000037253
+    ]
+  },
+  "action": "go",
+  "heapBytes": 36238387,
+  "transferBytes": 5399347,
+  "bodyBytes": 5368147,
+  "cachedRequests": 0,
+  "requests": 104,
+  "splats": 3003,
+  "profile": "low",
+  "canvas": [
+    1170,
+    1401
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 13953012,
+    "totalSize": 40632320,
+    "embedderHeapUsedSize": 9000368,
+    "backingStorageSize": 16653087
+  },
+  "run": 0,
+  "label": "Cast a Shadow",
+  "kind": "kit",
+  "pack": "arcade",
+  "labs": true,
+  "errors": [],
+  "wallMs": 12326,
+  "measuredAt": "2026-10-17T06:16:26.413Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

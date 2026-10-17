@@ -1,0 +1,106 @@
+[
+  {
+    "id": "sunflower-photo",
+    "firstViewMs": 3172.2000000011176,
+    "firstSubmitMs": 3172.0999999996275,
+    "idle": {
+      "count": 8,
+      "median": 807.9000000003725,
+      "p95": 946,
+      "work": {
+        "count": 9,
+        "median": 1.699999999254942,
+        "p95": 22.5
+      },
+      "elapsedMs": 6861.0999999996275,
+      "intervals": [
+        665.5,
+        793.3000000007451,
+        702.6999999992549,
+        822.5,
+        873.1999999992549,
+        946,
+        836.5,
+        770.8000000007451
+      ],
+      "workMs": [
+        9.5,
+        1.699999999254942,
+        1.5,
+        1.5,
+        22.5,
+        5.299999998882413,
+        5.799999998882413,
+        1.199999999254942,
+        1.199999999254942
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 808.8500000005588,
+      "p95": 1634.5999999996275,
+      "work": {
+        "count": 9,
+        "median": 2,
+        "p95": 8.5
+      },
+      "elapsedMs": 7327,
+      "intervals": [
+        804.7000000011176,
+        796.1999999992549,
+        673.7000000011176,
+        813,
+        848.3999999985099,
+        932.4000000003725,
+        1634.5999999996275,
+        17.5
+      ],
+      "workMs": [
+        8.5,
+        4,
+        8.400000000372529,
+        1.400000000372529,
+        1.400000000372529,
+        1.599999999627471,
+        2,
+        1.5,
+        2
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 24813910,
+    "transferBytes": 9181236,
+    "bodyBytes": 9151836,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 11788040,
+      "totalSize": 15204352,
+      "embedderHeapUsedSize": 8559240,
+      "backingStorageSize": 19842126
+    },
+    "run": 0,
+    "label": "Sunflower (photo)",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 19093,
+    "measuredAt": "2026-10-17T04:52:55.031Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

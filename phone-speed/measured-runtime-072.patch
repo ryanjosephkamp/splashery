@@ -1,0 +1,233 @@
+diff --git a/src/packs/pictures.js b/src/packs/pictures.js
+index 02341a454..e47af0eea 100644
+--- a/src/packs/pictures.js
++++ b/src/packs/pictures.js
+@@ -2614,6 +2614,8 @@ const STORY_RECIPE = {
+ 
+ const ALBUM_RECIPE = {
+   kernel: "sharp", // polish: crisper text and edges (labs; src/kernels.js)
++  // Bound the low tier's overlapping page fill; keep the other tiers unchanged.
++  render: ({ profile }) => (profile === "low" ? { dpr: 1.3 } : null),
+   turntable: false,
+   tiltLock: true, // a drag only spins it left and right (PACKS.md 5c)
+   density: 1,
+diff --git a/src/packs/video3d.js b/src/packs/video3d.js
+index 3472231b6..034a0b1f2 100644
+--- a/src/packs/video3d.js
++++ b/src/packs/video3d.js
+@@ -413,7 +413,17 @@ const VIDEO_3D = {
+   // These models fit Gaussian compositing. A steeper display kernel changes fitted overlaps,
+   // lowering held-out SSIM and adding visible grain. Detail comes from the measured bakes.
+   kernel: "gaussian",
+-  render: { cull: "off", dpr: "native", adapt: "off" },
++  // The ordinary low tier is already capped at 1.5 when adaptation is off.
++  // An explicit ?adapt=off bypasses that cap; bound its native-resolution
++  // Liberty sample too, without changing trained splats or Replay.
++  render: ({ profile, options }) => ({
++    cull: "off",
++    dpr:
++      profile === "low" && options.source === "liberty" && options.navigation === "orbit"
++        ? 2.4
++        : "native",
++    adapt: "off",
++  }),
+   options: [
+     {
+       key: "navigation",
+diff --git a/src/parameter-cache.js b/src/parameter-cache.js
+new file mode 100644
+index 000000000..815c6229d
+--- /dev/null
++++ b/src/parameter-cache.js
+@@ -0,0 +1,49 @@
++// GPU work-buffer parameters. PlayCanvas marks a placement dirty even when
++// setParameter receives the same value. Snapshot numeric arrays because the
++// motion driver reuses and mutates its typed arrays in place.
++// Made by Ryan with Codex (GPT-6), under Splashery's MIT license.
++export class ParameterCache {
++  constructor() {
++    this.components = new WeakMap();
++  }
++
++  forget(component) {
++    this.components.delete(component);
++  }
++
++  assign(component, uniforms, { ignoreCamera = false } = {}) {
++    let previous = this.components.get(component);
++    if (!previous) this.components.set(component, (previous = new Map()));
++    for (const key in uniforms) {
++      // The plain and rig modifiers have no camera uniform. View changes
++      // still reach the renderer and any view-dependent recipe outputs.
++      if (ignoreCamera && key === "uSpCam") continue;
++      const value = uniforms[key];
++      const array = Array.isArray(value) || ArrayBuffer.isView(value);
++      const old = previous.get(key);
++      const clock = key === "uSpClock" || key === "uSpKit";
++      const changed = array
++        ? !old ||
++          old.length !== value.length ||
++          value.some((v, i) => !(clock && i === 0) && !Object.is(v, old[i]))
++        : !previous.has(key) || !Object.is(value, old);
++      if (!changed) continue;
++      component.setParameter(key, value);
++      previous.set(key, array ? value.slice() : value);
++    }
++  }
++}
++
++// These built-in splat behaviors read the shader clock independently of the
++// recipe's drive(). Other behaviors depend on the uniform values themselves.
++export function shaderUsesClock(buf) {
++  if (!buf.anim) return false;
++  for (let i = 0; i < buf.count; i++) {
++    const kind = buf.anim[i * 4 + 1];
++    if (!STATIC_KINDS.has(kind)) return true;
++  }
++  return false;
++}
++
++// Unknown future behaviors stay on the conservative update path too.
++const STATIC_KINDS = new Set([0, 14, 16, 17, 18, 19, 20, 21, 23, 25, 26]);
+diff --git a/src/player.js b/src/player.js
+index 2584bf0dd..bd8629d48 100644
+--- a/src/player.js
++++ b/src/player.js
+@@ -11,6 +11,7 @@ import { Painter } from "./paint.js";
+ import { generate, normalizeGenerator, applyClay, PROFILES } from "./generators.js";
+ import { buildRecipe, meanLuminance, Kit } from "./kit.js";
+ import { MotionDriver } from "./motion.js";
++import { shaderUsesClock } from "./parameter-cache.js";
+ import { rigLayout, tagRig } from "./rig.js";
+ import { posePass } from "./pose.js";
+ import { poseUniforms, poseUp, poseGravity } from "./effects-pose.js"; // lane Any pose
+@@ -504,13 +505,19 @@ export class Player {
+     // Lab: a sharper splat kernel, labs only (src/kernels.js).
+     const kernelParam = new URLSearchParams(location.search).get("kernel");
+     this.stage.setKernel(pickKernel({ labs: labsOn(), param: kernelParam, recipe: info.kernel }));
++    // A recipe may choose its render budget for the current tier and options.
++    // Resolve it on each load so changing tiers never retains the previous budget.
++    const render = info.recipe?.render;
+     // Sharpness: the render levers (src/sharpness.js): adapt "drag" for
+     // every toy, the rest labs only.
+     this.stage.setSharpness(
+       pickSharpness({
+         labs: labsOn(),
+         params: new URLSearchParams(location.search),
+-        recipe: info.recipe?.render,
++        recipe:
++          typeof render === "function"
++            ? render({ profile: this.profile, options: info.options || {} })
++            : render,
+         native: window.devicePixelRatio || 1,
+       }),
+     );
+@@ -659,6 +666,7 @@ export class Player {
+       r = it.next();
+     }
+     const ctx = r.value;
++    ctx.shaderClock = shaderUsesClock(ctx.buf);
+     const container = this.makeContainer(ctx.buf);
+     this.disposeProcedural();
+     // Lab: a recipe may bring its own GPU program for its splats (a field).
+@@ -1767,7 +1775,26 @@ export class Player {
+     poseUniforms(u, this.stage.toyPose, hs && { axis: hs.axis, point: hs.point, amount: this.handsOn.squishAmp() }, grav, info.half); // prettier-ignore
+     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
+     if (info.kind === "kit") u["uSpLeaf[0]"] = this.leafUniform(); // Pictures
+-    this.stage.setUniforms(u);
++    const animating =
++      this.driver.isAnimating(effects, this.time) ||
++      this.motion.isAnimating(motion, this.time) ||
++      this.idle.weight > 0;
++    // Reuse only a built-in, unpainted surface with no live textures. The
++    // complete non-clock uniforms are still compared, including mutable part
++    // and token arrays, so a pose, camera, or look change invalidates it.
++    // Picture media lives on separate sheets, which Stage still updates fully.
++    const reuse =
++      !animating &&
++      !this.stroke &&
++      !this.scene.paint.stamps.length &&
++      !this.patternOn &&
++      !this.screen &&
++      !this.photo &&
++      !this.fluids &&
++      !this.arcade &&
++      !this.chunks &&
++      !this.proc?.ctx?.shaderClock;
++    this.stage.setUniforms(u, { reuse });
+     this.chunks?.update(this.motion.out); // lane Powers of ten
+     this.photoFrame(info, u); // lane Photo fidelity
+     // Redraw a live screen when the recipe says its picture changed.
+@@ -1798,10 +1825,6 @@ export class Player {
+       this.stage.setAddonUniforms({ ...u, ...this.motion.addonU, uSpPat: [0, 0, 0, 0] });
+     }
+     const dripping = this.painter.tick(this.time, (s) => this.scene.paint.stamps.push(s));
+-    const animating =
+-      this.driver.isAnimating(effects, this.time) ||
+-      this.motion.isAnimating(motion, this.time) ||
+-      this.idle.weight > 0;
+     const busy = moving || animating || dripping || !!this.stroke || gliding || handsBusy;
+     if (busy) {
+       this.pickDirty = this.pickDirty || animating || handsBusy;
+diff --git a/src/rig.js b/src/rig.js
+index 9fe27e951..678e43b62 100644
+--- a/src/rig.js
++++ b/src/rig.js
+@@ -192,6 +192,9 @@ export function tagRig(stage, rig) {
+   proc.setParameter("uRigC[0]", cc);
+   proc.setParameter("uRigK[0]", k);
+   proc.process();
++  // A stream write does not dirty the placement. Its cached work buffer may
++  // already contain the initial empty tags while the first toy was loading.
++  g.workBufferUpdate = pc.WORKBUFFER_UPDATE_ONCE;
+   // WebGPU may run the pass with the frame, so it is freed with the toy.
+   toy.rigProc?.destroy();
+   toy.rigProc = proc;
+diff --git a/src/stage.js b/src/stage.js
+index ae69355c4..48f20e09e 100644
+--- a/src/stage.js
++++ b/src/stage.js
+@@ -3,6 +3,7 @@
+ // the engine directly lives here or in paint.js / loaders.js.
+ 
+ import * as pc from "./pc.js";
++import { ParameterCache } from "./parameter-cache.js";
+ import { updateTokenBounds } from "./token-bounds.js";
+ import {
+   MODIFIER,
+@@ -65,6 +66,7 @@ export class Stage {
+   // moving, and comes back for the first still frame.
+   constructor(canvas, device, { weak = false, pixelRatio = 2, adaptive = true } = {}) {
+     this.canvas = canvas;
++    this.parameterCache = new ParameterCache();
+     this.device = device;
+     // Fix11: on WebGPU the engine sends its command encoder before it uploads a texture's data,
+     // and a texture first needed inside a render pass (its own fallback for an unset sampler, made
+@@ -577,7 +579,7 @@ export class Stage {
+     this.graveyard = keep;
+   }
+ 
+-  setUniforms(u) {
++  setUniforms(u, { reuse = false } = {}) {
+     const g = this.toy?.entity.gsplat;
+     if (!g) return;
+     this.sheetUniforms = u;
+@@ -585,7 +587,17 @@ export class Stage {
+     if (this.device.isWebGPU && this.toy.kit && !this.toy.customModifier) {
+       updateTokenBounds(this.toy.resource, u["uSpTokens[0]"], g);
+     }
+-    for (const k in u) g.setParameter(k, u[k]);
++    // SH-bearing imports previously refreshed view-dependent color on every
++    // frame. AUTO uses the engine's coarser colorUpdateAngle threshold.
++    const sphericalHarmonics = this.toy.resource.gsplatData?.shBands > 0;
++    if (reuse && !this.toy.customModifier && !sphericalHarmonics) {
++      g.workBufferUpdate = pc.WORKBUFFER_UPDATE_AUTO;
++      this.parameterCache.assign(g, u, { ignoreCamera: !this.toy.kit });
++    } else {
++      this.parameterCache.forget(g);
++      g.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
++      for (const k in u) g.setParameter(k, u[k]);
++    }
+     // Pictures: a kit toy's picture sheets move with it.
+     for (const sh of this.toy.sheets || []) {
+       const sg = sh.entity.gsplat;

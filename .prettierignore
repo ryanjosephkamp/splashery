@@ -11,3 +11,6 @@ docs/SPEC-v1-planet-painter.md
 
 # grooph hook scripts, copied as installed
 .grooph/hooks/
+
+# Preserve task 103 raw measurement bytes and their hashes. Never merge this data branch.
+/phone-speed/

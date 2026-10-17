@@ -1,0 +1,238 @@
+START visual-before 2026-10-17T06:25:48.990Z
+photo-album: captured
+crochet-earth: captured
+sunflower-photo: captured
+toy-trex: captured
+monkey-doll: captured
+cherry-blossom-photo: captured
+dog-plush: captured
+cone-shell: captured
+desk-globe: captured
+bmx-bike: captured
+mushroom-photo: captured
+cave-lioness: captured
+murex-shell: captured
+video-3d: captured
+maple-tree: captured
+START visual-after 2026-10-17T06:33:47.707Z
+photo-album: SSIM 0.999022/0.999025
+crochet-earth: SSIM 1.000000/1.000000
+sunflower-photo: SSIM 1.000000/1.000000
+toy-trex: SSIM 1.000000/1.000000
+monkey-doll: SSIM 1.000000/1.000000
+cherry-blossom-photo: SSIM 1.000000/1.000000
+dog-plush: SSIM 1.000000/1.000000
+cone-shell: SSIM 1.000000/1.000000
+desk-globe: SSIM 1.000000/1.000000
+bmx-bike: SSIM 1.000000/1.000000
+mushroom-photo: SSIM 1.000000/1.000000
+cave-lioness: SSIM 1.000000/1.000000
+murex-shell: SSIM 1.000000/1.000000
+video-3d: SSIM 0.995789/0.995246
+maple-tree: SSIM 1.000000/1.000000
+START target-pairs 2026-10-17T06:40:20.075Z
+1/1 crochet-earth: 3346ms open, 405.1/803.8ms idle/tap
+1/1 crochet-earth: 4780ms open, 927.0/843.2ms idle/tap
+1/1 crochet-earth: 3809ms open, 836.3/824.5ms idle/tap
+1/1 crochet-earth: 3611ms open, 567.5/828.0ms idle/tap
+1/1 crochet-earth: 3175ms open, 400.7/781.6ms idle/tap
+1/1 crochet-earth: 3522ms open, 786.9/844.8ms idle/tap
+1/1 crochet-earth: 3847ms open, 836.8/822.3ms idle/tap
+1/1 crochet-earth: 3326ms open, 464.8/874.0ms idle/tap
+1/1 crochet-earth: 3828ms open, 477.8/841.3ms idle/tap
+1/1 crochet-earth: 3737ms open, 775.1/821.6ms idle/tap
+1/1 sunflower-photo: 4111ms open, 853.1/827.4ms idle/tap
+1/1 sunflower-photo: 3212ms open, 457.5/885.0ms idle/tap
+1/1 sunflower-photo: 3508ms open, 503.7/849.0ms idle/tap
+1/1 sunflower-photo: 3734ms open, 806.3/811.9ms idle/tap
+1/1 sunflower-photo: 3382ms open, 910.7/807.4ms idle/tap
+1/1 sunflower-photo: 3307ms open, 517.7/898.2ms idle/tap
+1/1 sunflower-photo: 3712ms open, 419.1/767.6ms idle/tap
+1/1 sunflower-photo: 3637ms open, 799.1/740.3ms idle/tap
+1/1 sunflower-photo: 3706ms open, 790.7/802.5ms idle/tap
+1/1 sunflower-photo: 3411ms open, 500.3/800.9ms idle/tap
+1/1 toy-trex: 3446ms open, 759.3/915.9ms idle/tap
+1/1 toy-trex: 3258ms open, 431.6/722.4ms idle/tap
+1/1 toy-trex: 3418ms open, 388.0/735.3ms idle/tap
+1/1 toy-trex: 3480ms open, 683.4/803.0ms idle/tap
+1/1 toy-trex: 3756ms open, 813.5/757.3ms idle/tap
+1/1 toy-trex: 3310ms open, 373.7/744.1ms idle/tap
+1/1 toy-trex: 3185ms open, 439.6/811.4ms idle/tap
+1/1 toy-trex: 3852ms open, 790.2/758.9ms idle/tap
+1/1 toy-trex: 3656ms open, 685.0/767.0ms idle/tap
+1/1 toy-trex: 3275ms open, 452.0/787.9ms idle/tap
+1/1 monkey-doll: 3422ms open, 359.2/724.6ms idle/tap
+1/1 monkey-doll: 4029ms open, 767.0/775.6ms idle/tap
+1/1 monkey-doll: 3671ms open, 768.5/743.9ms idle/tap
+1/1 monkey-doll: 3632ms open, 436.9/840.0ms idle/tap
+1/1 monkey-doll: 3267ms open, 480.1/711.6ms idle/tap
+1/1 monkey-doll: 3686ms open, 739.0/736.3ms idle/tap
+1/1 monkey-doll: 3794ms open, 758.8/791.3ms idle/tap
+1/1 monkey-doll: 3039ms open, 393.9/791.7ms idle/tap
+1/1 monkey-doll: 3554ms open, 383.7/827.7ms idle/tap
+1/1 monkey-doll: 4060ms open, 785.6/745.0ms idle/tap
+1/1 cherry-blossom-photo: 3511ms open, 691.6/684.5ms idle/tap
+1/1 cherry-blossom-photo: 3408ms open, 363.1/672.6ms idle/tap
+1/1 cherry-blossom-photo: 3059ms open, 351.7/663.4ms idle/tap
+1/1 cherry-blossom-photo: 4164ms open, 767.2/756.3ms idle/tap
+1/1 cherry-blossom-photo: 3750ms open, 705.2/684.9ms idle/tap
+1/1 cherry-blossom-photo: 3544ms open, 314.6/819.5ms idle/tap
+1/1 cherry-blossom-photo: 3468ms open, 316.0/761.9ms idle/tap
+1/1 cherry-blossom-photo: 3907ms open, 704.1/710.6ms idle/tap
+1/1 cherry-blossom-photo: 3819ms open, 669.5/637.3ms idle/tap
+1/1 cherry-blossom-photo: 3306ms open, 345.1/705.9ms idle/tap
+1/1 dog-plush: 3198ms open, 423.9/759.4ms idle/tap
+1/1 dog-plush: 3558ms open, 756.0/756.6ms idle/tap
+1/1 dog-plush: 3852ms open, 817.6/719.1ms idle/tap
+1/1 dog-plush: 3355ms open, 420.0/731.1ms idle/tap
+1/1 dog-plush: 3522ms open, 424.2/741.4ms idle/tap
+1/1 dog-plush: 3623ms open, 713.4/746.6ms idle/tap
+1/1 dog-plush: 3611ms open, 700.8/721.2ms idle/tap
+1/1 dog-plush: 3425ms open, 390.8/803.6ms idle/tap
+1/1 dog-plush: 3365ms open, 336.1/693.3ms idle/tap
+1/1 dog-plush: 3525ms open, 715.4/711.0ms idle/tap
+1/1 cone-shell: 3257ms open, 607.3/571.4ms idle/tap
+1/1 cone-shell: 2969ms open, 243.8/627.8ms idle/tap
+1/1 cone-shell: 2945ms open, 271.8/691.2ms idle/tap
+1/1 cone-shell: 3453ms open, 600.0/755.3ms idle/tap
+1/1 cone-shell: 3506ms open, 665.9/625.3ms idle/tap
+1/1 cone-shell: 2776ms open, 271.1/628.5ms idle/tap
+1/1 cone-shell: 2789ms open, 311.8/589.1ms idle/tap
+1/1 cone-shell: 3051ms open, 596.6/645.3ms idle/tap
+1/1 cone-shell: 3216ms open, 639.9/579.8ms idle/tap
+1/1 cone-shell: 2794ms open, 267.9/678.3ms idle/tap
+1/1 desk-globe: 3339ms open, 447.3/762.5ms idle/tap
+1/1 desk-globe: 3497ms open, 779.3/720.5ms idle/tap
+1/1 desk-globe: 3484ms open, 740.4/698.1ms idle/tap
+1/1 desk-globe: 3444ms open, 389.2/830.4ms idle/tap
+1/1 desk-globe: 3243ms open, 400.5/777.1ms idle/tap
+1/1 desk-globe: 3653ms open, 729.1/734.2ms idle/tap
+1/1 desk-globe: 3667ms open, 741.9/704.8ms idle/tap
+1/1 desk-globe: 3076ms open, 336.0/754.6ms idle/tap
+1/1 desk-globe: 3604ms open, 364.1/738.7ms idle/tap
+1/1 desk-globe: 3431ms open, 747.7/783.1ms idle/tap
+1/1 bmx-bike: 2975ms open, 393.6/786.5ms idle/tap
+1/1 bmx-bike: 3942ms open, 701.3/772.3ms idle/tap
+1/1 bmx-bike: 3807ms open, 759.7/719.6ms idle/tap
+1/1 bmx-bike: 3210ms open, 399.8/713.8ms idle/tap
+1/1 bmx-bike: 3400ms open, 318.9/699.3ms idle/tap
+1/1 bmx-bike: 4066ms open, 795.5/803.2ms idle/tap
+1/1 bmx-bike: 4355ms open, 786.3/810.4ms idle/tap
+1/1 bmx-bike: 3569ms open, 363.5/763.2ms idle/tap
+1/1 bmx-bike: 3139ms open, 311.9/739.8ms idle/tap
+1/1 bmx-bike: 3796ms open, 766.7/735.8ms idle/tap
+1/1 mushroom-photo: 3184ms open, 367.9/665.5ms idle/tap
+1/1 mushroom-photo: 3512ms open, 663.3/693.7ms idle/tap
+1/1 mushroom-photo: 4259ms open, 833.1/655.1ms idle/tap
+1/1 mushroom-photo: 3390ms open, 355.1/685.3ms idle/tap
+1/1 mushroom-photo: 3077ms open, 376.2/679.8ms idle/tap
+1/1 mushroom-photo: 3755ms open, 714.7/698.5ms idle/tap
+1/1 mushroom-photo: 3559ms open, 707.4/784.6ms idle/tap
+1/1 mushroom-photo: 3418ms open, 394.8/807.6ms idle/tap
+1/1 mushroom-photo: 3293ms open, 323.9/717.6ms idle/tap
+1/1 mushroom-photo: 3862ms open, 799.2/773.1ms idle/tap
+1/1 cave-lioness: 3499ms open, 323.5/708.8ms idle/tap
+1/1 cave-lioness: 3264ms open, 732.4/747.3ms idle/tap
+1/1 cave-lioness: 3142ms open, 799.6/787.7ms idle/tap
+1/1 cave-lioness: 2938ms open, 374.8/677.9ms idle/tap
+1/1 cave-lioness: 2993ms open, 316.0/786.1ms idle/tap
+1/1 cave-lioness: 3352ms open, 708.8/650.0ms idle/tap
+1/1 cave-lioness: 3162ms open, 702.6/689.7ms idle/tap
+1/1 cave-lioness: 2834ms open, 397.4/723.5ms idle/tap
+1/1 cave-lioness: 2734ms open, 360.5/662.1ms idle/tap
+1/1 cave-lioness: 3123ms open, 697.7/690.2ms idle/tap
+1/1 murex-shell: 3057ms open, 615.0/640.1ms idle/tap
+1/1 murex-shell: 3370ms open, 288.3/600.0ms idle/tap
+1/1 murex-shell: 2756ms open, 307.2/601.1ms idle/tap
+1/1 murex-shell: 3356ms open, 580.3/592.3ms idle/tap
+1/1 murex-shell: 3133ms open, 619.6/657.0ms idle/tap
+1/1 murex-shell: 2631ms open, 297.0/621.1ms idle/tap
+1/1 murex-shell: 2664ms open, 283.5/567.8ms idle/tap
+1/1 murex-shell: 3009ms open, 595.3/600.8ms idle/tap
+1/1 murex-shell: 3403ms open, 659.8/613.0ms idle/tap
+1/1 murex-shell: 2913ms open, 224.4/611.8ms idle/tap
+1/1 video-3d: 2735ms open, 474.2/676.3ms idle/tap
+1/1 video-3d: 2929ms open, 754.7/973.2ms idle/tap
+1/1 video-3d: 2885ms open, 763.9/965.0ms idle/tap
+1/1 video-3d: 2513ms open, 488.7/614.2ms idle/tap
+1/1 video-3d: 2881ms open, 502.1/674.6ms idle/tap
+1/1 video-3d: 2887ms open, 761.9/991.3ms idle/tap
+1/1 video-3d: 3000ms open, 749.7/926.0ms idle/tap
+1/1 video-3d: 2423ms open, 525.7/606.9ms idle/tap
+1/1 video-3d: 2566ms open, 494.3/700.3ms idle/tap
+1/1 video-3d: 3095ms open, 764.7/887.4ms idle/tap
+1/1 maple-tree: 4002ms open, 828.9/814.5ms idle/tap
+1/1 maple-tree: 3379ms open, 368.7/703.7ms idle/tap
+1/1 maple-tree: 3140ms open, 324.9/710.8ms idle/tap
+1/1 maple-tree: 3680ms open, 732.4/716.3ms idle/tap
+1/1 maple-tree: 3540ms open, 734.9/735.1ms idle/tap
+1/1 maple-tree: 3302ms open, 336.8/741.1ms idle/tap
+1/1 maple-tree: 3318ms open, 332.2/653.0ms idle/tap
+1/1 maple-tree: 3682ms open, 708.7/681.6ms idle/tap
+1/1 maple-tree: 3718ms open, 691.1/651.1ms idle/tap
+1/1 maple-tree: 3204ms open, 333.0/807.3ms idle/tap
+START phone-page-qa 2026-10-17T07:26:45.272Z
+LLVM_PROBE {"ok":true,"renderer":"ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"}
+PHONE_QA 1 of 30: Crochet Earth. Keep this tab visible.
+PHONE_QA 2 of 30: Sunflower (photo). Keep this tab visible.
+PHONE_QA 3 of 30: Toy T. rex. Keep this tab visible.
+PHONE_QA 4 of 30: Monkey doll. Keep this tab visible.
+PHONE_QA 5 of 30: Cherry blossom (photo). Keep this tab visible.
+PHONE_QA 6 of 30: Dog plush. Keep this tab visible.
+PHONE_QA 7 of 30: Cone shell. Keep this tab visible.
+PHONE_QA 8 of 30: Desk globe. Keep this tab visible.
+PHONE_QA 9 of 30: BMX bicycle. Keep this tab visible.
+PHONE_QA 10 of 30: Mushroom (photo). Keep this tab visible.
+PHONE_QA 11 of 30: Cave lioness. Keep this tab visible.
+PHONE_QA 12 of 30: Murex shell. Keep this tab visible.
+PHONE_QA 13 of 30: Video to 3D. Keep this tab visible.
+PHONE_QA 14 of 30: Golden maple. Keep this tab visible.
+PHONE_QA 15 of 30: Photo album. Keep this tab visible.
+PHONE_QA 16 of 30: Triceratops skull. Keep this tab visible.
+PHONE_QA 17 of 30: Moving photo to 3D. Keep this tab visible.
+PHONE_QA 18 of 30: Bonsai tree (photo). Keep this tab visible.
+PHONE_QA 19 of 30: Splat toolkit. Keep this tab visible.
+PHONE_QA 20 of 30: Alum crystal. Keep this tab visible.
+PHONE_QA 21 of 30: Cactus (photo 2). Keep this tab visible.
+PHONE_QA 22 of 30: Peonies in a vase. Keep this tab visible.
+PHONE_QA 23 of 30: Knight on a horse. Keep this tab visible.
+PHONE_QA 24 of 30: Souvenir turtle. Keep this tab visible.
+PHONE_QA 25 of 30: Cactus. Keep this tab visible.
+PHONE_QA 26 of 30: Stollen. Keep this tab visible.
+PHONE_QA 27 of 30: Space Shuttle. Keep this tab visible.
+PHONE_QA 28 of 30: Gaussian splatting. Keep this tab visible.
+PHONE_QA 29 of 30: Seeded bread loaf. Keep this tab visible.
+PHONE_QA 30 of 30: Physalis. Keep this tab visible.
+PHONE_QA Complete. 30 toys checked; 30 errors. Copy the table or save the local JSON.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   'ResizeObserver loop completed with undelivered notifications.'
++ ]
+- []
+
+    at file:///workspace/splashery/.cache/phone-speed/phone-page-qa.mjs:29:69
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [ 'ResizeObserver loop completed with undelivered notifications.' ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+file:///workspace/splashery/.cache/phone-speed/run-final-evidence.mjs:31
+ if(code!==0||stopping)throw new Error(`${label} exited ${code}`);
+                             ^
+
+Error: phone-page-qa exited 1
+    at run (file:///workspace/splashery/.cache/phone-speed/run-final-evidence.mjs:31:30)
+    at async file:///workspace/splashery/.cache/phone-speed/run-final-evidence.mjs:46:1
+
+Node.js v24.19.0

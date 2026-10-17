@@ -1,0 +1,108 @@
+[
+  {
+    "id": "toy-trex",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3655.5999999996275,
+    "firstSubmitMs": 2681.0999999996275,
+    "idle": {
+      "count": 8,
+      "median": 685.0499999998137,
+      "p95": 765.3000000007451,
+      "work": {
+        "count": 9,
+        "median": 689.5,
+        "p95": 1522.7999999998137
+      },
+      "elapsedMs": 7292.0999999996275,
+      "intervals": [
+        765.3000000007451,
+        706.8999999994412,
+        691.7999999998137,
+        730.2000000001863,
+        678.2999999998137,
+        630.4000000003725,
+        669.2000000001863,
+        612.7999999998137
+      ],
+      "workMs": [
+        1522.7999999998137,
+        760.2000000001863,
+        701.8999999994412,
+        689.5,
+        727,
+        673.8999999994412,
+        627.5,
+        666.7999999998137,
+        610
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 766.9500000001863,
+      "p95": 811,
+      "work": {
+        "count": 9,
+        "median": 759.5,
+        "p95": 805.7000000001863
+      },
+      "elapsedMs": 6832.200000000186,
+      "intervals": [
+        736.5,
+        784.0999999996275,
+        778.7999999998137,
+        762.2999999998137,
+        702.5,
+        771.6000000005588,
+        723.7999999998137,
+        811
+      ],
+      "workMs": [
+        757.8000000007451,
+        734,
+        781.5999999996275,
+        776,
+        759.5,
+        699.8999999994412,
+        768.7000000001863,
+        721.2000000001863,
+        805.7000000001863
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 38814015,
+    "transferBytes": 9158758,
+    "bodyBytes": 9129358,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 15904312,
+      "totalSize": 32243712,
+      "embedderHeapUsedSize": 10931000,
+      "backingStorageSize": 23413807
+    },
+    "run": 0,
+    "label": "Toy T. rex",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 19052,
+    "measuredAt": "2026-10-17T06:51:41.363Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

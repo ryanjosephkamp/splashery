@@ -1,0 +1,106 @@
+{
+  "id": "steak",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 1919.5,
+  "firstSubmitMs": 1724.5,
+  "idle": {
+    "count": 8,
+    "median": 280.2500000009313,
+    "p95": 336.40000000037253,
+    "work": {
+      "count": 9,
+      "median": 277.80000000074506,
+      "p95": 612.3999999985099
+    },
+    "elapsedMs": 3061.4000000003725,
+    "intervals": [
+      336.40000000037253,
+      270.09999999962747,
+      280.80000000074506,
+      266.40000000037253,
+      297.19999999925494,
+      279.7000000011176,
+      270.69999999925494,
+      319.59999999962747
+    ],
+    "workMs": [
+      612.3999999985099,
+      331.5,
+      267.19999999925494,
+      277.80000000074506,
+      264.09999999962747,
+      294.59999999962747,
+      277.1000000014901,
+      267.59999999962747,
+      317.09999999962747
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 303.6000000005588,
+    "p95": 321.5,
+    "work": {
+      "count": 9,
+      "median": 299.5,
+      "p95": 318.5
+    },
+    "elapsedMs": 2705.5999999996275,
+    "intervals": [
+      288.7999999988824,
+      321.5,
+      304.6000000014901,
+      302.59999999962747,
+      308.5,
+      305.59999999962747,
+      297.30000000074506,
+      291.09999999962747
+    ],
+    "workMs": [
+      280.5,
+      286.09999999962747,
+      318.5,
+      302,
+      299.5,
+      306.09999999962747,
+      303,
+      294.7000000011176,
+      288.5
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 30640858,
+  "transferBytes": 6854456,
+  "bodyBytes": 6825056,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 119246,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 15540624,
+    "totalSize": 31981568,
+    "embedderHeapUsedSize": 10966456,
+    "backingStorageSize": 22340822
+  },
+  "run": 0,
+  "label": "Cowboy steak",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 8935,
+  "measuredAt": "2026-10-17T05:07:19.987Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

@@ -1,0 +1,41 @@
+
+Running 1 test using 1 worker
+
+(node:43934) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43934) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-speed.spec.mjs:593:1 › recipe render settings follow the active tier and preserve URL overrides (10.7s)
+
+
+  1) [chromium] › tests/cdx-speed.spec.mjs:593:1 › recipe render settings follow the active tier and preserve URL overrides 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      554 |   expect(
+      555 |     result.seen.every((s) => JSON.stringify(s.options) === JSON.stringify(result.expectedOptions)),
+    > 556 |   ).toBe(true);
+          |     ^
+      557 | });
+      558 |
+        at /workspace/splashery/tests/cdx-speed.spec.mjs:556:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-speed.spec.mjs:593:1 › recipe render settings follow the active tier and preserve URL overrides 

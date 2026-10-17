@@ -1,0 +1,1261 @@
+{
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+  "browser": "151.0.7922.173",
+  "protocol": {
+    "toolSHA256": "a66995bf971ab34dba2c575b8109a7974a21048304ffdd174e389680ae217c3c",
+    "hybridSHA256": "59e92d3e8174d303051cb667c0510b9d7ff834f3c3a22ffb46abf37d763e76b2",
+    "sceneSeed": 103,
+    "wallTime": "2026-10-17T12:00:00Z",
+    "restSeconds": 0.5,
+    "stepHz": 60,
+    "settleDraws": 3,
+    "calendarOnly": true,
+    "completedDraws": true,
+    "synchronousReadback": true,
+    "nativeComparisonWidth": 1170
+  },
+  "measuredAt": "2026-10-17T06:33:46.906Z",
+  "rows": [
+    {
+      "id": "photo-album",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 0.6,
+      "sceneSeed": 103,
+      "splats": 55308,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.0022,
+        "pitch": 0.0022,
+        "roll": 0,
+        "distance": 2.9522
+      },
+      "controls": {
+        "turn": 0.5000000000000018,
+        "pop": 0,
+        "layers": 0
+      },
+      "diagnosis": {
+        "uniformWrites": 135,
+        "workDraws": 3,
+        "updatesMs": [
+          1.900000000372529,
+          0.599999999627471,
+          1.7999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 135,
+        "orbitUpdatesMs": [
+          0.5,
+          2.599999999627471,
+          4
+        ],
+        "shBands": null,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.0833333333333344,
+            "last": 1.100000000000001,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.100000000000001,
+            "rate": 1
+          },
+          "time": 1.100000000000001
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "crochet-earth",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 1.5,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          0.5,
+          0.39999999944120646,
+          0.30000000074505806
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          0.30000000074505806,
+          0.5,
+          0.19999999925494194
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 30000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.9833333333333312,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "time": 1.9999999999999978
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "sunflower-photo",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 1.5,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          0.6000000005587935,
+          1.599999999627471,
+          9.400000000372529
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          0.40000000037252903,
+          0.40000000037252903,
+          0.2999999998137355
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 12000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.9833333333333312,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "time": 1.9999999999999978
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "toy-trex",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 1.3,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          2.2000000001862645,
+          2.2999999998137355,
+          0.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          0.39999999944120646,
+          0.2999999998137355,
+          1.6000000005587935
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 45000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.7833333333333319,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "time": 1.7999999999999985
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "monkey-doll",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 1.3,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          0.6000000005587935,
+          0.40000000037252903,
+          1.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          0.2999999998137355,
+          0.40000000037252903,
+          0.20000000018626451
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 40000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.7833333333333319,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "time": 1.7999999999999985
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1344
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1344
+        }
+      },
+      "midTapSeconds": 1.1,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        672
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 3.9
+      },
+      "controls": {
+        "hop": 0.5000000000000004
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          0.900000000372529,
+          2.5,
+          0.5
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          1.2999999998137355,
+          1.7000000001862645,
+          1.2000000001862645
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 60003
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.5833333333333326,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "time": 1.5999999999999992
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "dog-plush",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 0.725,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000004
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          1.7000000001862645,
+          0.20000000018626451,
+          0.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          0.30000000074505806,
+          0.2999999998137355,
+          0.40000000037252903
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 54000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.2083333333333317,
+            "last": 1.2249999999999985,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.2249999999999985,
+            "rate": 1
+          },
+          "time": 1.2249999999999985
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "cone-shell",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 1.35,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.4999999999999978
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          5.199999999254942,
+          0.40000000037252903,
+          0.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          0.2999999998137355,
+          0.2999999998137355,
+          0.40000000037252903
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.8333333333333317,
+            "last": 1.8499999999999983,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.8499999999999983,
+            "rate": 1
+          },
+          "time": 1.8499999999999983
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "desk-globe",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 1.5,
+      "sceneSeed": 103,
+      "splats": 293009,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5588235294117663
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          0.599999999627471,
+          0.5,
+          0.20000000018626451
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          0.30000000074505806,
+          0.20000000018626451,
+          0.40000000037252903
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 40000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.9833333333333312,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "time": 1.9999999999999978
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "bmx-bike",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 1.3,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          0.39999999944120646,
+          0.2999999998137355,
+          0.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          0.2999999998137355,
+          0.40000000037252903,
+          0.20000000018626451
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 56000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.7833333333333319,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "time": 1.7999999999999985
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "mushroom-photo",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1344
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1344
+        }
+      },
+      "midTapSeconds": 1.1,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        672
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000004
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          1.5,
+          2,
+          0.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          1.599999999627471,
+          0.2999999998137355,
+          0.20000000018626451
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 40000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.5833333333333326,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "time": 1.5999999999999992
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "cave-lioness",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 1.35,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.2,
+        "roll": 0,
+        "distance": 6
+      },
+      "controls": {
+        "hop": 0.4999999999999978
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          0.40000000037252903,
+          0.20000000018626451,
+          0.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          5.3999999994412065,
+          0.2999999998137355,
+          0.2999999998137355
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.8333333333333317,
+            "last": 1.8499999999999983,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.8499999999999983,
+            "rate": 1
+          },
+          "time": 1.8499999999999983
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "murex-shell",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 1.5,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.2,
+        "roll": 0,
+        "distance": 4.1
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          0.39999999944120646,
+          0.5,
+          0.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          6.8999999994412065,
+          0.39999999944120646,
+          0.20000000018626451
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.9833333333333312,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "time": 1.9999999999999978
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "video-3d",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 0.3,
+      "sceneSeed": 103,
+      "splats": 59682,
+      "canvas": [
+        1170,
+        1401
+      ],
+      "camera": {
+        "yaw": 0.3134,
+        "pitch": 0.0164,
+        "roll": 0.0582,
+        "distance": 0.9166
+      },
+      "controls": {
+        "replay": 0.5000000000000001
+      },
+      "diagnosis": {
+        "uniformWrites": 135,
+        "workDraws": 3,
+        "updatesMs": [
+          0.5,
+          0.40000000037252903,
+          0.39999999944120646
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 135,
+        "orbitUpdatesMs": [
+          0.19999999925494194,
+          0.39999999944120646,
+          0.2999999998137355
+        ],
+        "shBands": null,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994,
+          "flight": {
+            "active": false,
+            "clock": 0,
+            "time": null,
+            "pausedAt": null,
+            "done": false,
+            "offset": {
+              "yaw": 0,
+              "pitch": 0,
+              "zoom": 1
+            }
+          },
+          "view": {
+            "camera": {
+              "yaw": 0.3294,
+              "pitch": 0.0177,
+              "roll": 0.0611,
+              "distance": 0.9141
+            },
+            "target": [
+              -0.028147184763067656,
+              0.012555318958949253,
+              0.009387008426485544
+            ],
+            "fov": 38,
+            "horizontalFov": true
+          }
+        },
+        "tap": {
+          "kit": {
+            "t": 0.7833333333333341,
+            "last": 0.8000000000000008,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.8000000000000008,
+            "rate": 1
+          },
+          "time": 0.8000000000000008,
+          "flight": {
+            "active": true,
+            "clock": 0.5166666666666666,
+            "time": 1.0393333333333343,
+            "pausedAt": null,
+            "done": false,
+            "offset": {
+              "yaw": 0,
+              "pitch": 0,
+              "zoom": 1
+            }
+          },
+          "view": {
+            "camera": {
+              "yaw": 0.3134,
+              "pitch": 0.0164,
+              "roll": 0.0582,
+              "distance": 0.9166
+            },
+            "target": [
+              -0.026259965928642326,
+              0.012454518560105498,
+              0.008296571731227997
+            ],
+            "fov": 27.551192031434457,
+            "horizontalFov": true
+          }
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "maple-tree",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401
+        }
+      },
+      "midTapSeconds": 1.1,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000004
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          0.40000000037252903,
+          0.2999999998137355,
+          0.40000000037252903
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          0.2999999998137355,
+          0.2999999998137355,
+          0.30000000074505806
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 44000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.5833333333333326,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "time": 1.5999999999999992
+        }
+      },
+      "errors": []
+    }
+  ]
+}

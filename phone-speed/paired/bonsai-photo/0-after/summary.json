@@ -1,0 +1,108 @@
+[
+  {
+    "id": "bonsai-photo",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3779.300000000745,
+    "firstSubmitMs": 2647.800000000745,
+    "idle": {
+      "count": 8,
+      "median": 330.5000000009313,
+      "p95": 372.19999999925494,
+      "work": {
+        "count": 9,
+        "median": 333.2000000011176,
+        "p95": 880.5
+      },
+      "elapsedMs": 3548.5,
+      "intervals": [
+        294.90000000037253,
+        372.19999999925494,
+        324.80000000074506,
+        317.19999999925494,
+        360,
+        336.2000000011176,
+        303.5,
+        348.59999999962747
+      ],
+      "workMs": [
+        880.5,
+        291.90000000037253,
+        362.2999999988824,
+        318.59999999962747,
+        313.5,
+        357.2999999988824,
+        333.2000000011176,
+        301,
+        345.59999999962747
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 652.3000000007451,
+      "p95": 799.1999999992549,
+      "work": {
+        "count": 9,
+        "median": 635.9000000003725,
+        "p95": 796.2999999988824
+      },
+      "elapsedMs": 5844.700000001118,
+      "intervals": [
+        799.1999999992549,
+        705.9000000003725,
+        640.2000000011176,
+        703.5999999996275,
+        565.5,
+        664.4000000003725,
+        541,
+        596.5999999996275
+      ],
+      "workMs": [
+        625.1999999992549,
+        796.2999999988824,
+        703,
+        635.9000000003725,
+        699.5,
+        562.8000000007451,
+        661.8000000007451,
+        537.9000000003725,
+        593.4000000003725
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 38685763,
+    "transferBytes": 8446985,
+    "bodyBytes": 8417285,
+    "cachedRequests": 0,
+    "requests": 99,
+    "splats": 251221,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 17357132,
+      "totalSize": 32243712,
+      "embedderHeapUsedSize": 11005504,
+      "backingStorageSize": 28443815
+    },
+    "run": 0,
+    "label": "Bonsai tree (photo)",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 14426,
+    "measuredAt": "2026-10-17T08:06:31.109Z",
+    "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+  }
+]

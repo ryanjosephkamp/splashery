@@ -1,0 +1,13 @@
+{
+  "id": "photo-3d",
+  "error": "page.waitForFunction: Timeout 120000ms exceeded.",
+  "run": 0,
+  "label": "Photo to 3D",
+  "kind": "kit",
+  "pack": "photo-3d",
+  "labs": true,
+  "errors": [],
+  "wallMs": 120459,
+  "measuredAt": "2026-10-17T03:58:16.938Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

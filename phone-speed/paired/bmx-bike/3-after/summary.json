@@ -1,0 +1,108 @@
+[
+  {
+    "id": "bmx-bike",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3568.7999999998137,
+    "firstSubmitMs": 2890.2000000001863,
+    "idle": {
+      "count": 8,
+      "median": 363.5,
+      "p95": 429,
+      "work": {
+        "count": 9,
+        "median": 365.29999999981374,
+        "p95": 858.5
+      },
+      "elapsedMs": 4263.299999999814,
+      "intervals": [
+        381.6000000005588,
+        356,
+        394.79999999981374,
+        429,
+        354,
+        324.79999999981374,
+        357.40000000037253,
+        369.59999999962747
+      ],
+      "workMs": [
+        858.5,
+        378,
+        347.1000000005588,
+        392.29999999981374,
+        425.70000000018626,
+        350.90000000037253,
+        322.29999999981374,
+        334.5,
+        365.29999999981374
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 763.1500000003725,
+      "p95": 884.7999999998137,
+      "work": {
+        "count": 9,
+        "median": 764,
+        "p95": 879.8999999994412
+      },
+      "elapsedMs": 6959.5,
+      "intervals": [
+        759.7000000001863,
+        884.7999999998137,
+        795.4000000003725,
+        716.8999999994412,
+        766.6000000005588,
+        711.2999999998137,
+        719.4000000003725,
+        813.2999999998137
+      ],
+      "workMs": [
+        786.7000000001863,
+        756.5999999996275,
+        879.8999999994412,
+        792.7000000001863,
+        713.5999999996275,
+        764,
+        707.7000000001863,
+        715.2000000001863,
+        809.5
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 41034386,
+    "transferBytes": 9075999,
+    "bodyBytes": 9046299,
+    "cachedRequests": 0,
+    "requests": 99,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 16692792,
+      "totalSize": 31719424,
+      "embedderHeapUsedSize": 10929672,
+      "backingStorageSize": 24818194
+    },
+    "run": 0,
+    "label": "BMX bicycle",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 16067,
+    "measuredAt": "2026-10-17T07:10:23.360Z",
+    "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+  }
+]

@@ -1,0 +1,108 @@
+[
+  {
+    "id": "physalis",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2505.5999999996275,
+    "firstSubmitMs": 2264.5999999996275,
+    "idle": {
+      "count": 8,
+      "median": 308.7499999990687,
+      "p95": 322.90000000037253,
+      "work": {
+        "count": 9,
+        "median": 306,
+        "p95": 482.19999999925494
+      },
+      "elapsedMs": 2941.5,
+      "intervals": [
+        241.5,
+        262.1000000014901,
+        306.7999999988824,
+        322.90000000037253,
+        320.5,
+        310.69999999925494,
+        313.90000000037253,
+        243.09999999962747
+      ],
+      "workMs": [
+        482.19999999925494,
+        233.7999999988824,
+        257.30000000074506,
+        299.7999999988824,
+        319,
+        317.59999999962747,
+        306,
+        311.5,
+        239.09999999962747
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 632.25,
+      "p95": 680,
+      "work": {
+        "count": 9,
+        "median": 624.3000000007451,
+        "p95": 676.8999999985099
+      },
+      "elapsedMs": 5576.89999999851,
+      "intervals": [
+        544.6000000014901,
+        607,
+        628,
+        616.0999999996275,
+        656.1999999992549,
+        636.5,
+        657.5999999996275,
+        680
+      ],
+      "workMs": [
+        548.5,
+        541.5,
+        604.1000000014901,
+        624.3000000007451,
+        612.9000000003725,
+        653.4000000003725,
+        634,
+        655,
+        676.8999999985099
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 32975824,
+    "transferBytes": 9066886,
+    "bodyBytes": 9037186,
+    "cachedRequests": 0,
+    "requests": 99,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 11779100,
+      "totalSize": 15204352,
+      "embedderHeapUsedSize": 8476064,
+      "backingStorageSize": 11065543
+    },
+    "run": 0,
+    "label": "Physalis",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 12292,
+    "measuredAt": "2026-10-17T08:03:09.287Z",
+    "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+  }
+]

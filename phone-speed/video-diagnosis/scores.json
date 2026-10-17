@@ -1,0 +1,87 @@
+{
+  "source": "a9f34b032ac6fb92276dbac904f4c5aca72f29ae",
+  "browser": "151.0.7922.173",
+  "protocol": {
+    "toolSHA256": "70b7f6f100483c938a96304e5603d532b984737b358f1f29bbd58eb828a1ed21",
+    "hybridSHA256": "d781a1c3d979041a610f8e21fc968165846c5103be2b796ebd395d2593a260c1",
+    "sceneSeed": 103,
+    "wallTime": "2026-10-17T12:00:00Z",
+    "restSeconds": 0.5,
+    "stepHz": 60,
+    "settleDraws": 3,
+    "calendarOnly": true,
+    "completedDraws": true
+  },
+  "measuredAt": "2026-10-17T04:16:11.268Z",
+  "rows": [
+    {
+      "id": "video-3d",
+      "midTapSeconds": 0.3,
+      "sceneSeed": 103,
+      "splats": 59682,
+      "canvas": [
+        1170,
+        1401
+      ],
+      "camera": {
+        "yaw": 0.3294,
+        "pitch": 0.0177,
+        "roll": 0.0582,
+        "distance": 0.9141
+      },
+      "controls": {
+        "replay": 0.5000000000000001
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.5,
+          4.099999999627471,
+          0.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 1,
+        "orbitUniformWrites": 1,
+        "orbitUpdatesMs": [
+          0.8000000007450581,
+          0.39999999944120646,
+          0.5
+        ],
+        "shBands": null,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 0.7833333333333341,
+            "last": 0.8000000000000008,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.8000000000000008,
+            "rate": 1
+          },
+          "time": 0.8000000000000008
+        }
+      },
+      "errors": []
+    }
+  ]
+}

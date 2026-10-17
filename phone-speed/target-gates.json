@@ -1,0 +1,1139 @@
+{
+  "rows": [
+    {
+      "id": "crochet-earth",
+      "expectedRuns": 5,
+      "before": {
+        "id": "crochet-earth",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3809.2000000001863,
+        "idle.median": 836.2999999998137,
+        "idle.p95": 897.6000000005588,
+        "tap.median": 824.4500000001863,
+        "tap.p95": 961.8000000007451
+      },
+      "after": {
+        "id": "crochet-earth",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 3345.600000000559,
+        "idle.median": 464.75,
+        "idle.p95": 532.9000000003725,
+        "tap.median": 828.0499999998137,
+        "tap.p95": 888
+      },
+      "changes": {
+        "firstViewMs": 0.12170534495421736,
+        "idle.median": 0.44427836900621365,
+        "idle.p95": 0.4063057040997763,
+        "tap.median": -0.0043665473947802624,
+        "tap.p95": 0.07673112913359104
+      },
+      "valid": true
+    },
+    {
+      "id": "sunflower-photo",
+      "expectedRuns": 5,
+      "before": {
+        "id": "sunflower-photo",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3705.600000000559,
+        "idle.median": 806.3000000002794,
+        "idle.p95": 905.9000000003725,
+        "tap.median": 807.4499999997206,
+        "tap.p95": 882.2000000001863
+      },
+      "after": {
+        "id": "sunflower-photo",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 3411.2000000001863,
+        "idle.median": 500.25,
+        "idle.p95": 539.5999999996275,
+        "tap.median": 849.0499999998137,
+        "tap.p95": 942.5
+      },
+      "changes": {
+        "firstViewMs": 0.07944732297072754,
+        "idle.median": 0.3795733597918558,
+        "idle.p95": 0.4043492659240473,
+        "tap.median": -0.05152021797028605,
+        "tap.p95": -0.06835184765336777
+      },
+      "valid": true
+    },
+    {
+      "id": "toy-trex",
+      "expectedRuns": 5,
+      "before": {
+        "id": "toy-trex",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3655.5999999996275,
+        "idle.median": 759.25,
+        "idle.p95": 859.7000000001863,
+        "tap.median": 766.9500000001863,
+        "tap.p95": 845.5
+      },
+      "after": {
+        "id": "toy-trex",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 3275.199999999255,
+        "idle.median": 431.5500000002794,
+        "idle.p95": 471.59999999962747,
+        "tap.median": 744.1000000000931,
+        "tap.p95": 829.9000000003725
+      },
+      "changes": {
+        "firstViewMs": 0.10405952511226924,
+        "idle.median": 0.4316101415867245,
+        "idle.p95": 0.4514365476334474,
+        "tap.median": 0.029793337245045404,
+        "tap.p95": 0.018450620933917805
+      },
+      "valid": true
+    },
+    {
+      "id": "monkey-doll",
+      "expectedRuns": 5,
+      "before": {
+        "id": "monkey-doll",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3794.100000000559,
+        "idle.median": 767.0499999998137,
+        "idle.p95": 869.4000000003725,
+        "tap.median": 745.0499999998137,
+        "tap.p95": 858.2000000001863
+      },
+      "after": {
+        "id": "monkey-doll",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 3421.7999999998137,
+        "idle.median": 393.89999999990687,
+        "idle.p95": 465.6000000005588,
+        "tap.median": 791.7000000001863,
+        "tap.p95": 854.0999999996275
+      },
+      "changes": {
+        "firstViewMs": 0.0981260377957065,
+        "idle.median": 0.48647415422723095,
+        "idle.p95": 0.4644582470665295,
+        "tap.median": -0.06261324743357388,
+        "tap.p95": 0.00477744115655776
+      },
+      "valid": true
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "expectedRuns": 5,
+      "before": {
+        "id": "cherry-blossom-photo",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,672]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3818.7000000001863,
+        "idle.median": 704.1000000000931,
+        "idle.p95": 761,
+        "tap.median": 684.9000000003725,
+        "tap.p95": 793.8999999994412
+      },
+      "after": {
+        "id": "cherry-blossom-photo",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,672]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 3407.699999999255,
+        "idle.median": 345.10000000009313,
+        "idle.p95": 394.70000000018626,
+        "tap.median": 705.9000000003725,
+        "tap.p95": 735.6000000005588
+      },
+      "changes": {
+        "firstViewMs": 0.107628250451963,
+        "idle.median": 0.5098707569946777,
+        "idle.p95": 0.48134034165547135,
+        "tap.median": -0.03066141042486281,
+        "tap.p95": 0.07343494142703544
+      },
+      "valid": true
+    },
+    {
+      "id": "dog-plush",
+      "expectedRuns": 5,
+      "before": {
+        "id": "dog-plush",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3611.300000000745,
+        "idle.median": 715.4000000003725,
+        "idle.p95": 846,
+        "tap.median": 721.2000000001863,
+        "tap.p95": 795.0999999996275
+      },
+      "after": {
+        "id": "dog-plush",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 3365.100000000559,
+        "idle.median": 420.04999999981374,
+        "idle.p95": 451,
+        "tap.median": 741.3999999999069,
+        "tap.p95": 816.5
+      },
+      "changes": {
+        "firstViewMs": 0.0681748954670438,
+        "idle.median": 0.4128459603024951,
+        "idle.p95": 0.46690307328605196,
+        "tap.median": -0.02800887409832975,
+        "tap.p95": -0.026914853478031242
+      },
+      "valid": true
+    },
+    {
+      "id": "cone-shell",
+      "expectedRuns": 5,
+      "before": {
+        "id": "cone-shell",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3256.5,
+        "idle.median": 607.2500000004657,
+        "idle.p95": 675.0999999996275,
+        "tap.median": 625.25,
+        "tap.p95": 711.7000000001863
+      },
+      "after": {
+        "id": "cone-shell",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 2793.5999999996275,
+        "idle.median": 271.14999999990687,
+        "idle.p95": 312.09999999962747,
+        "tap.median": 628.5,
+        "tap.p95": 725.5
+      },
+      "changes": {
+        "firstViewMs": 0.14214647627832722,
+        "idle.median": 0.5534787978596971,
+        "idle.p95": 0.537698118797512,
+        "tap.median": -0.005197920831667258,
+        "tap.p95": -0.019390192496571812
+      },
+      "valid": true
+    },
+    {
+      "id": "desk-globe",
+      "expectedRuns": 5,
+      "before": {
+        "id": "desk-globe",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[293009,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3496.7999999998137,
+        "idle.median": 741.8999999999069,
+        "idle.p95": 807.6999999992549,
+        "tap.median": 720.4500000001863,
+        "tap.p95": 785
+      },
+      "after": {
+        "id": "desk-globe",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[293009,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 3339.399999999441,
+        "idle.median": 389.1999999997206,
+        "idle.p95": 432.8999999994412,
+        "tap.median": 762.5,
+        "tap.p95": 838.0999999996275
+      },
+      "changes": {
+        "firstViewMs": 0.045012582933076195,
+        "idle.median": 0.47540099743931874,
+        "idle.p95": 0.46403367586995103,
+        "tap.median": -0.058366298840728525,
+        "tap.p95": -0.06764331210143637
+      },
+      "valid": true
+    },
+    {
+      "id": "bmx-bike",
+      "expectedRuns": 5,
+      "before": {
+        "id": "bmx-bike",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3941.5,
+        "idle.median": 766.7000000001863,
+        "idle.p95": 860.3000000007451,
+        "tap.median": 772.3499999996275,
+        "tap.p95": 854
+      },
+      "after": {
+        "id": "bmx-bike",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 3209.5,
+        "idle.median": 363.5,
+        "idle.p95": 413,
+        "tap.median": 739.7999999998137,
+        "tap.p95": 884.7999999998137
+      },
+      "changes": {
+        "firstViewMs": 0.1857160979322593,
+        "idle.median": 0.5258901786879984,
+        "idle.p95": 0.519934906428406,
+        "tap.median": 0.04214410565136195,
+        "tap.p95": -0.03606557377027375
+      },
+      "valid": true
+    },
+    {
+      "id": "mushroom-photo",
+      "expectedRuns": 5,
+      "before": {
+        "id": "mushroom-photo",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,672]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3755.2000000001863,
+        "idle.median": 714.7000000001863,
+        "idle.p95": 871.2999999998137,
+        "tap.median": 698.5,
+        "tap.p95": 802.4000000003725
+      },
+      "after": {
+        "id": "mushroom-photo",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,672]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 3293.2000000001863,
+        "idle.median": 367.89999999990687,
+        "idle.p95": 388,
+        "tap.median": 685.2999999998137,
+        "tap.p95": 790.9000000003725
+      },
+      "changes": {
+        "firstViewMs": 0.12302939923305733,
+        "idle.median": 0.4852385616345166,
+        "idle.p95": 0.5546883966485907,
+        "tap.median": 0.01889763779554221,
+        "tap.p95": 0.014332003988029252
+      },
+      "valid": true
+    },
+    {
+      "id": "cave-lioness",
+      "expectedRuns": 5,
+      "before": {
+        "id": "cave-lioness",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3162.4000000003725,
+        "idle.median": 708.75,
+        "idle.p95": 824,
+        "tap.median": 690.1500000003725,
+        "tap.p95": 791.1000000005588
+      },
+      "after": {
+        "id": "cave-lioness",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 2938.2999999998137,
+        "idle.median": 360.45000000018626,
+        "idle.p95": 368.79999999981374,
+        "tap.median": 708.8000000002794,
+        "tap.p95": 752.0999999996275
+      },
+      "changes": {
+        "firstViewMs": 0.0708639008349774,
+        "idle.median": 0.49142857142830865,
+        "idle.p95": 0.5524271844662454,
+        "tap.median": -0.02702311091776677,
+        "tap.p95": 0.04929844520402449
+      },
+      "valid": true
+    },
+    {
+      "id": "murex-shell",
+      "expectedRuns": 5,
+      "before": {
+        "id": "murex-shell",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3133.2000000001863,
+        "idle.median": 615.0499999998137,
+        "idle.p95": 657.2999999998137,
+        "tap.median": 613,
+        "tap.p95": 667.9000000003725
+      },
+      "after": {
+        "id": "murex-shell",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 2756.0999999996275,
+        "idle.median": 288.25,
+        "idle.p95": 320.30000000074506,
+        "tap.median": 601.1499999999069,
+        "tap.p95": 693.5999999996275
+      },
+      "changes": {
+        "firstViewMs": 0.12035618536976134,
+        "idle.median": 0.5313389155351804,
+        "idle.p95": 0.5127034839482187,
+        "tap.median": 0.019331158238324875,
+        "tap.p95": -0.03847881419260468
+      },
+      "valid": true
+    },
+    {
+      "id": "video-3d",
+      "expectedRuns": 5,
+      "before": {
+        "id": "video-3d",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[59682,\"low\",\"webgl2\",3,[390,844],[1170,1401]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 2928.7000000001863,
+        "idle.median": 761.8999999999069,
+        "idle.p95": 786.5999999996275,
+        "tap.median": 965.0499999998137,
+        "tap.p95": 1000.0999999996275
+      },
+      "after": {
+        "id": "video-3d",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[59682,\"low\",\"webgl2\",3,[390,844],[936,1120]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 2566.2000000001863,
+        "idle.median": 494.25,
+        "idle.p95": 517.5,
+        "tap.median": 674.6499999999069,
+        "tap.p95": 708.8000000007451
+      },
+      "changes": {
+        "firstViewMs": 0.12377505377811893,
+        "idle.median": 0.3512928205800493,
+        "idle.p95": 0.34210526315758316,
+        "tap.median": 0.30091705092996524,
+        "tap.p95": 0.29127087291169973
+      },
+      "valid": true
+    },
+    {
+      "id": "maple-tree",
+      "expectedRuns": 5,
+      "before": {
+        "id": "maple-tree",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 3681.800000000745,
+        "idle.median": 732.3500000005588,
+        "idle.p95": 828.2999999998137,
+        "tap.median": 716.2999999998137,
+        "tap.p95": 767
+      },
+      "after": {
+        "id": "maple-tree",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[300000,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 3301.5,
+        "idle.median": 332.95000000018626,
+        "idle.p95": 401.3999999994412,
+        "tap.median": 710.75,
+        "tap.p95": 785.5
+      },
+      "changes": {
+        "firstViewMs": 0.10329186810817215,
+        "idle.median": 0.5453676520790165,
+        "idle.p95": 0.5153929735608699,
+        "tap.median": 0.007748150216131733,
+        "tap.p95": -0.02411994784876148
+      },
+      "valid": true
+    },
+    {
+      "id": "photo-album",
+      "expectedRuns": 5,
+      "before": {
+        "id": "photo-album",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[55308,\"low\",\"webgl2\",3,[390,844],[585,700]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "before"
+        ],
+        "firstViewMs": 2439.7999999998137,
+        "idle.median": 659.5499999998137,
+        "idle.p95": 698.1000000005588,
+        "tap.median": 384.60000000009313,
+        "tap.p95": 608.5
+      },
+      "after": {
+        "id": "photo-album",
+        "runs": 5,
+        "failures": 0,
+        "configurations": [
+          "[55308,\"low\",\"webgl2\",3,[390,844],[507,607]]"
+        ],
+        "samples": {
+          "mode": "pair",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "valid": true
+        },
+        "phases": [
+          "after"
+        ],
+        "firstViewMs": 2422.9000000003725,
+        "idle.median": 464.35000000009313,
+        "idle.p95": 538.1999999992549,
+        "tap.median": 301.70000000018626,
+        "tap.p95": 496.79999999981374
+      },
+      "changes": {
+        "firstViewMs": 0.0069267972782369736,
+        "idle.median": 0.2959593662342138,
+        "idle.p95": 0.2290502793312933,
+        "tap.median": 0.21554862194458346,
+        "tap.p95": 0.1835661462616044
+      },
+      "valid": true
+    }
+  ],
+  "optimized": [
+    {
+      "id": "crochet-earth",
+      "metric": "idle.median",
+      "loadRank": 9,
+      "drawRank": 1,
+      "gain": 0.44427836900621365,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "sunflower-photo",
+      "metric": "idle.median",
+      "loadRank": 14,
+      "drawRank": 2,
+      "gain": 0.3795733597918558,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "toy-trex",
+      "metric": "idle.median",
+      "loadRank": 1,
+      "drawRank": 3,
+      "gain": 0.4316101415867245,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "monkey-doll",
+      "metric": "idle.median",
+      "loadRank": 8,
+      "drawRank": 4,
+      "gain": 0.48647415422723095,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "metric": "idle.median",
+      "loadRank": 4,
+      "drawRank": 5,
+      "gain": 0.5098707569946777,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "dog-plush",
+      "metric": "idle.median",
+      "loadRank": 10,
+      "drawRank": 6,
+      "gain": 0.4128459603024951,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "cone-shell",
+      "metric": "idle.median",
+      "loadRank": 6,
+      "drawRank": 7,
+      "gain": 0.5534787978596971,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "desk-globe",
+      "metric": "idle.median",
+      "loadRank": 12,
+      "drawRank": 8,
+      "gain": 0.47540099743931874,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "bmx-bike",
+      "metric": "idle.median",
+      "loadRank": 5,
+      "drawRank": 9,
+      "gain": 0.5258901786879984,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "mushroom-photo",
+      "metric": "idle.median",
+      "loadRank": 11,
+      "drawRank": 10,
+      "gain": 0.4852385616345166,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "cave-lioness",
+      "metric": "idle.median",
+      "loadRank": 18,
+      "drawRank": 11,
+      "gain": 0.49142857142830865,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "murex-shell",
+      "metric": "idle.median",
+      "loadRank": 33,
+      "drawRank": 12,
+      "gain": 0.5313389155351804,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "video-3d",
+      "metric": "idle.median",
+      "loadRank": 37,
+      "drawRank": 13,
+      "gain": 0.3512928205800493,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "maple-tree",
+      "metric": "idle.median",
+      "loadRank": 7,
+      "drawRank": 14,
+      "gain": 0.5453676520790165,
+      "appearance": true,
+      "speed": true
+    },
+    {
+      "id": "photo-album",
+      "metric": "idle.median",
+      "loadRank": 118,
+      "drawRank": 15,
+      "gain": 0.2959593662342138,
+      "appearance": true,
+      "speed": true
+    }
+  ],
+  "regressions": [],
+  "medianGain": 0.4852385616345166,
+  "gates": {
+    "coverage": true,
+    "speed": true,
+    "appearance": true,
+    "noRegressions": true
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "id": "murex-shell",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3403,
+  "firstSubmitMs": 3140.2000000001863,
+  "idle": {
+    "count": 8,
+    "median": 659.8000000002794,
+    "p95": 726.5999999996275,
+    "work": {
+      "count": 9,
+      "median": 659.2000000001863,
+      "p95": 1707.7000000001863
+    },
+    "elapsedMs": 8203.100000000559,
+    "intervals": [
+      726.5999999996275,
+      655.4000000003725,
+      693.0999999996275,
+      664.2000000001863,
+      573.9000000003725,
+      586.5,
+      580,
+      666.7999999998137
+    ],
+    "workMs": [
+      1707.7000000001863,
+      721,
+      651.2000000001863,
+      690,
+      659.2000000001863,
+      569.3000000007451,
+      583.6000000005588,
+      577.2000000001863,
+      663.7999999998137
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 613,
+    "p95": 655.6999999992549,
+    "work": {
+      "count": 9,
+      "median": 610.5,
+      "p95": 665.6999999992549
+    },
+    "elapsedMs": 5597.4000000003725,
+    "intervals": [
+      612.5,
+      604,
+      601.8000000007451,
+      655.6999999992549,
+      621.6000000005588,
+      613.5,
+      645.0999999996275,
+      574.2000000001863
+    ],
+    "workMs": [
+      665.6999999992549,
+      610,
+      601.2999999998137,
+      599.2000000001863,
+      653,
+      618.4000000003725,
+      610.5,
+      640.2999999998137,
+      571.4000000003725
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 32781090,
+  "transferBytes": 9193119,
+  "bodyBytes": 9163719,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 18237936,
+    "totalSize": 32243712,
+    "embedderHeapUsedSize": 10894224,
+    "backingStorageSize": 21869738
+  },
+  "run": 0,
+  "label": "Murex shell",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 18499,
+  "measuredAt": "2026-10-17T07:19:53.379Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

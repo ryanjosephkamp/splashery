@@ -1,0 +1,104 @@
+{
+  "frozenAt": "2026-10-17T06:17:22.604Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+  "catalog": 465,
+  "metric": "idle.median",
+  "completion": "synchronous-readPixels",
+  "measurementSHA256": "0f300e3c3a480eafe0fabaddf4567878a57f6fadad98214244fbdeae0bb0f189",
+  "hybridSHA256": "59e92d3e8174d303051cb667c0510b9d7ff834f3c3a22ffb46abf37d763e76b2",
+  "baselineSHA256": "7eb295212e0fe48d098d3b1ba46b31c11091f45720075661569854a4063263ff",
+  "targetsSHA256": "f8f52d382b2f2d8398951fa4392d07148cde499adf80cf9cfbd2c79ae134b232",
+  "targets": [
+    {
+      "id": "crochet-earth",
+      "metric": "idle.median",
+      "loadRank": 9,
+      "drawRank": 1
+    },
+    {
+      "id": "sunflower-photo",
+      "metric": "idle.median",
+      "loadRank": 14,
+      "drawRank": 2
+    },
+    {
+      "id": "toy-trex",
+      "metric": "idle.median",
+      "loadRank": 1,
+      "drawRank": 3
+    },
+    {
+      "id": "monkey-doll",
+      "metric": "idle.median",
+      "loadRank": 8,
+      "drawRank": 4
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "metric": "idle.median",
+      "loadRank": 4,
+      "drawRank": 5
+    },
+    {
+      "id": "dog-plush",
+      "metric": "idle.median",
+      "loadRank": 10,
+      "drawRank": 6
+    },
+    {
+      "id": "cone-shell",
+      "metric": "idle.median",
+      "loadRank": 6,
+      "drawRank": 7
+    },
+    {
+      "id": "desk-globe",
+      "metric": "idle.median",
+      "loadRank": 12,
+      "drawRank": 8
+    },
+    {
+      "id": "bmx-bike",
+      "metric": "idle.median",
+      "loadRank": 5,
+      "drawRank": 9
+    },
+    {
+      "id": "mushroom-photo",
+      "metric": "idle.median",
+      "loadRank": 11,
+      "drawRank": 10
+    },
+    {
+      "id": "cave-lioness",
+      "metric": "idle.median",
+      "loadRank": 18,
+      "drawRank": 11
+    },
+    {
+      "id": "murex-shell",
+      "metric": "idle.median",
+      "loadRank": 33,
+      "drawRank": 12
+    },
+    {
+      "id": "video-3d",
+      "metric": "idle.median",
+      "loadRank": 37,
+      "drawRank": 13
+    },
+    {
+      "id": "maple-tree",
+      "metric": "idle.median",
+      "loadRank": 7,
+      "drawRank": 14
+    },
+    {
+      "id": "photo-album",
+      "metric": "idle.median",
+      "loadRank": 118,
+      "drawRank": 15
+    }
+  ],
+  "retirement": "Initial finish-only survey and freeze are preserved but retired; the same original-only ranking rule is applied automatically to the corrected full survey."
+}

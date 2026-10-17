@@ -1,0 +1,22 @@
+1/1 cactus: 2996ms open, 214.7/373.1ms idle/tap
+1/1 cactus: 2930ms open, 301.9/312.3ms idle/tap
+1/1 cactus: 2704ms open, 295.3/363.6ms idle/tap
+1/1 cactus: 2741ms open, 200.4/350.1ms idle/tap
+1/1 cactus: 2679ms open, 199.7/340.0ms idle/tap
+1/1 cactus: 2889ms open, 334.4/333.4ms idle/tap
+1/1 cactus: 3073ms open, 323.1/313.1ms idle/tap
+1/1 cactus: 2601ms open, 202.9/322.5ms idle/tap
+1/1 cactus: 2859ms open, 193.9/356.6ms idle/tap
+1/1 cactus: 2814ms open, 327.8/338.0ms idle/tap
+1/1 strawberry: 2847ms open, 233.2/411.7ms idle/tap
+1/1 strawberry: 3039ms open, 447.9/434.0ms idle/tap
+1/1 strawberry: 3057ms open, 403.8/393.8ms idle/tap
+1/1 strawberry: 2802ms open, 230.3/395.5ms idle/tap
+1/1 strawberry: 3065ms open, 231.1/417.4ms idle/tap
+1/1 strawberry: 2978ms open, 392.5/347.6ms idle/tap
+1/1 strawberry: 3006ms open, 376.1/390.9ms idle/tap
+1/1 strawberry: 2741ms open, 270.4/382.7ms idle/tap
+1/1 strawberry: 2750ms open, 272.0/391.1ms idle/tap
+1/1 strawberry: 2831ms open, 374.8/384.8ms idle/tap
+{"rows":[{"id":"cactus","valid":true,"changes":{"firstViewMs":0.05123411915456966,"idle.median":0.3798545567051863,"idle.p95":0.2950914899779483,"tap.median":-0.05008998200424197,"tap.p95":-0.058016877642156794}},{"id":"strawberry","valid":true,"changes":{"firstViewMs":0.06786878701238008,"idle.median":0.4058598726133632,"idle.p95":0.3407248450143481,"tap.median":-0.011639805578796514,"tap.p95":0.0062180768351973725}}],"regressions":["cactus"]}
+RESUMED original catalog 2026-10-17T07:56:13.274Z

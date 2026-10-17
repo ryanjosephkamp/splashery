@@ -1,0 +1,428 @@
+{
+  "sources": {
+    "before": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "after": "072f15f3d00150825f36784b504b8b365c892cd7"
+  },
+  "rows": [
+    {
+      "id": "crochet-earth",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/crochet-earth/crochet-earth-lite.sog",
+      "sourceAssetBytes": 3985414,
+      "addonSplats": 30000,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.39999999944120646
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.40000000037252903
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "sunflower-photo",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/sunflower-photo/sunflower-photo-lite.sog",
+      "sourceAssetBytes": 3822921,
+      "addonSplats": 12000,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 1.599999999627471
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.40000000037252903
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "toy-trex",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/toy-trex/toy-trex-lite.sog",
+      "sourceAssetBytes": 3859949,
+      "addonSplats": 45000,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 2.2000000001862645
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.39999999944120646
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "monkey-doll",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/monkey-doll/monkey-doll-lite.sog",
+      "sourceAssetBytes": 3809543,
+      "addonSplats": 40000,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.6000000005587935
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.39999999944120646
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/cherry-blossom-photo/cherry-blossom-photo-lite.sog",
+      "sourceAssetBytes": 3783478,
+      "addonSplats": 60003,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.900000000372529
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.39999999944120646
+      },
+      "canvasBefore": [
+        585,
+        672
+      ],
+      "canvasAfter": [
+        585,
+        672
+      ]
+    },
+    {
+      "id": "dog-plush",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/dog-plush/dog-plush-lite.sog",
+      "sourceAssetBytes": 3924186,
+      "addonSplats": 54000,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.2999999998137355
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.30000000074505806
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "cone-shell",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/cone-shell/cone-shell-lite.sog",
+      "sourceAssetBytes": 3787535,
+      "addonSplats": 0,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.40000000037252903
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.40000000037252903
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "desk-globe",
+      "primarySplats": 293009,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/desk-globe/desk-globe-lite.sog",
+      "sourceAssetBytes": 3823414,
+      "addonSplats": 40000,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.5
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.39999999944120646
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "bmx-bike",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/bmx-bike/bmx-bike-lite.sog",
+      "sourceAssetBytes": 3716192,
+      "addonSplats": 56000,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.2999999998137355
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.39999999944120646
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "mushroom-photo",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/mushroom-photo/mushroom-photo-lite.sog",
+      "sourceAssetBytes": 3913873,
+      "addonSplats": 40000,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 1.5
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.40000000037252903
+      },
+      "canvasBefore": [
+        585,
+        672
+      ],
+      "canvasAfter": [
+        585,
+        672
+      ]
+    },
+    {
+      "id": "cave-lioness",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/cave-lioness/cave-lioness-lite.sog",
+      "sourceAssetBytes": 3823377,
+      "addonSplats": 0,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.2999999998137355
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.39999999944120646
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "murex-shell",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/murex-shell/murex-shell-lite.sog",
+      "sourceAssetBytes": 3843168,
+      "addonSplats": 0,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.39999999944120646
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.39999999944120646
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "video-3d",
+      "primarySplats": 59682,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": null,
+      "sourceAssetBytes": null,
+      "addonSplats": 0,
+      "shBands": null,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.40000000037252903
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.30000000074505806
+      },
+      "canvasBefore": [
+        1170,
+        1401
+      ],
+      "canvasAfter": [
+        936,
+        1120
+      ]
+    },
+    {
+      "id": "maple-tree",
+      "primarySplats": 300000,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": "assets/toys/maple-tree/maple-tree-lite.sog",
+      "sourceAssetBytes": 3883165,
+      "addonSplats": 44000,
+      "shBands": 0,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 0.40000000037252903
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.2999999998137355
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        585,
+        700
+      ]
+    },
+    {
+      "id": "photo-album",
+      "primarySplats": 55308,
+      "lowTierGeneralMaximum": 120000,
+      "sourceAsset": null,
+      "sourceAssetBytes": null,
+      "addonSplats": 0,
+      "shBands": null,
+      "clockDriven": false,
+      "restBefore": {
+        "draws": 3,
+        "workPasses": 3,
+        "cpuUpdateMedianMs": 1.7999999998137355
+      },
+      "restAfter": {
+        "draws": 3,
+        "workPasses": 0,
+        "cpuUpdateMedianMs": 0.7999999998137355
+      },
+      "canvasBefore": [
+        585,
+        700
+      ],
+      "canvasAfter": [
+        507,
+        607
+      ]
+    }
+  ]
+}

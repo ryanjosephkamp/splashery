@@ -1,0 +1,1262 @@
+[
+  {
+    "id": "cactus",
+    "source": "assets/toys/cactus/cactus-lite.sog",
+    "assetBytes": 1612777,
+    "primarySplats": 120000,
+    "addonBudget": 13000,
+    "action": {
+      "key": "bloom",
+      "label": "Bloom"
+    },
+    "controls": [
+      {
+        "key": "bloom",
+        "label": "Bloom",
+        "type": "pulse",
+        "ease": 3.4
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "strawberry",
+    "source": "assets/toys/strawberry/strawberry-lite.sog",
+    "assetBytes": 1594433,
+    "primarySplats": 120000,
+    "addonBudget": 9000,
+    "action": {
+      "key": "pop",
+      "label": "Pop seeds"
+    },
+    "controls": [
+      {
+        "key": "pop",
+        "label": "Pop",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "cookie",
+    "source": "assets/toys/cookie/cookie-lite.sog",
+    "assetBytes": 1615095,
+    "primarySplats": 120000,
+    "addonBudget": 0,
+    "action": {
+      "key": "beat",
+      "label": "Heartbeat"
+    },
+    "controls": [
+      {
+        "key": "beat",
+        "label": "Beat",
+        "type": "pulse",
+        "ease": 1.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "bee",
+    "source": "assets/toys/bee/bee-lite.sog",
+    "assetBytes": 1612064,
+    "primarySplats": 120000,
+    "addonBudget": 0,
+    "action": {
+      "key": "fly",
+      "label": "Fly"
+    },
+    "controls": [
+      {
+        "key": "fly",
+        "label": "Fly",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "cluster-fly",
+    "source": "assets/toys/cluster-fly/cluster-fly-lite.sog",
+    "assetBytes": 1305674,
+    "primarySplats": 100000,
+    "addonBudget": 0,
+    "action": {
+      "key": "groom",
+      "label": "Groom"
+    },
+    "controls": [
+      {
+        "key": "groom",
+        "label": "Groom",
+        "type": "pulse",
+        "ease": 3
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "may-beetle",
+    "source": "assets/toys/may-beetle/may-beetle-lite.sog",
+    "assetBytes": 1320862,
+    "primarySplats": 100000,
+    "addonBudget": 0,
+    "action": {
+      "key": "open",
+      "label": "Open wings"
+    },
+    "controls": [
+      {
+        "key": "open",
+        "label": "Open",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "millipede",
+    "source": "assets/toys/millipede/millipede-lite.sog",
+    "assetBytes": 1352085,
+    "primarySplats": 100000,
+    "addonBudget": 0,
+    "action": {
+      "key": "crawl",
+      "label": "Crawl"
+    },
+    "controls": [
+      {
+        "key": "crawl",
+        "label": "Crawl",
+        "type": "pulse",
+        "ease": 2.8
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "bumblebee",
+    "source": "assets/toys/bumblebee/bumblebee-lite.sog",
+    "assetBytes": 1342259,
+    "primarySplats": 100000,
+    "addonBudget": 0,
+    "action": {
+      "key": "hover",
+      "label": "Hover"
+    },
+    "controls": [
+      {
+        "key": "hover",
+        "label": "Hover",
+        "type": "pulse",
+        "ease": 3
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "raspberry",
+    "source": "assets/toys/raspberry/raspberry-lite.sog",
+    "assetBytes": 1298343,
+    "primarySplats": 100000,
+    "addonBudget": 9000,
+    "action": {
+      "key": "drop",
+      "label": "Drop drupelets"
+    },
+    "controls": [
+      {
+        "key": "drop",
+        "label": "Drop",
+        "type": "pulse",
+        "ease": 3.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "blackberry",
+    "source": "assets/toys/blackberry/blackberry-lite.sog",
+    "assetBytes": 1316488,
+    "primarySplats": 100000,
+    "addonBudget": 9000,
+    "action": {
+      "key": "burst",
+      "label": "Burst"
+    },
+    "controls": [
+      {
+        "key": "burst",
+        "label": "Burst",
+        "type": "pulse",
+        "ease": 2.8
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "blueberry",
+    "source": "assets/toys/blueberry/blueberry-lite.sog",
+    "assetBytes": 1236355,
+    "primarySplats": 100000,
+    "addonBudget": 9000,
+    "action": {
+      "key": "peel",
+      "label": "Peel"
+    },
+    "controls": [
+      {
+        "key": "peel",
+        "label": "Peel",
+        "type": "pulse",
+        "ease": 3.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "grape",
+    "source": "assets/toys/grape/grape-lite.sog",
+    "assetBytes": 1287339,
+    "primarySplats": 100000,
+    "addonBudget": 0,
+    "action": {
+      "key": "peel",
+      "label": "Peel"
+    },
+    "controls": [
+      {
+        "key": "peel",
+        "label": "Peel",
+        "type": "pulse",
+        "ease": 3.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "star-cookie",
+    "source": "assets/toys/star-cookie/star-cookie-lite.sog",
+    "assetBytes": 1349720,
+    "primarySplats": 100000,
+    "addonBudget": 0,
+    "action": {
+      "key": "crumble",
+      "label": "Crumble"
+    },
+    "controls": [
+      {
+        "key": "crumble",
+        "label": "Crumble",
+        "type": "pulse",
+        "ease": 2.8
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "tomatoes",
+    "source": "assets/toys/tomatoes/tomatoes-lite.sog",
+    "assetBytes": 1344843,
+    "primarySplats": 100000,
+    "addonBudget": 60000,
+    "action": {
+      "key": "roll",
+      "label": "Roll"
+    },
+    "controls": [
+      {
+        "key": "roll",
+        "label": "Roll",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "mandeltorus",
+    "source": "assets/toys/mandeltorus/mandeltorus-lite.sog",
+    "assetBytes": 1371686,
+    "primarySplats": 100000,
+    "addonBudget": 0,
+    "action": {
+      "key": "spin",
+      "label": "Counter-spin"
+    },
+    "controls": [
+      {
+        "key": "spin",
+        "label": "Spin",
+        "type": "pulse",
+        "ease": 3
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "basket",
+    "source": "assets/toys/basket/basket-lite.sog",
+    "assetBytes": 1338207,
+    "primarySplats": 100000,
+    "addonBudget": 30000,
+    "action": {
+      "key": "shake",
+      "label": "Shake"
+    },
+    "controls": [
+      {
+        "key": "shake",
+        "label": "Shake",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "heart-donut",
+    "source": "assets/toys/heart-donut/heart-donut-lite.sog",
+    "assetBytes": 2134401,
+    "primarySplats": 157886,
+    "addonBudget": 0,
+    "action": {
+      "key": "hop",
+      "label": "Toss"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Toss",
+        "type": "pulse",
+        "ease": 1.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "sushi-boat",
+    "source": "assets/toys/sushi-boat/sushi-boat-lite.sog",
+    "assetBytes": 2293856,
+    "primarySplats": 170556,
+    "addonBudget": 26000,
+    "action": {
+      "key": "hop",
+      "label": "Rock"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Rock",
+        "type": "pulse",
+        "ease": 3.5
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "seeded-loaf",
+    "source": "assets/toys/seeded-loaf/seeded-loaf-lite.sog",
+    "assetBytes": 4054889,
+    "primarySplats": 300000,
+    "addonBudget": 0,
+    "action": {
+      "key": "hop",
+      "label": "Drop"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Drop",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "steak",
+    "source": "assets/toys/steak/steak-lite.sog",
+    "assetBytes": 1586451,
+    "primarySplats": 119246,
+    "addonBudget": 30000,
+    "action": {
+      "key": "hop",
+      "label": "Flip"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Flip",
+        "type": "pulse",
+        "ease": 3.1
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "stollen",
+    "source": "assets/toys/stollen/stollen-lite.sog",
+    "assetBytes": 3752698,
+    "primarySplats": 300000,
+    "addonBudget": 30000,
+    "action": {
+      "key": "hop",
+      "label": "Drop"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Drop",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "orange-photo",
+    "source": "assets/toys/orange-photo/orange-photo-lite.sog",
+    "assetBytes": 1054257,
+    "primarySplats": 77204,
+    "addonBudget": 40000,
+    "action": {
+      "key": "hop",
+      "label": "Roll"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Roll",
+        "type": "pulse",
+        "ease": 2.8
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "physalis",
+    "source": "assets/toys/physalis/physalis-lite.sog",
+    "assetBytes": 3788051,
+    "primarySplats": 300000,
+    "addonBudget": 0,
+    "action": {
+      "key": "hop",
+      "label": "Sway"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Sway",
+        "type": "pulse",
+        "ease": 3
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "crystal-gem",
+    "source": "assets/toys/crystal-gem/crystal-gem-lite.sog",
+    "assetBytes": 918657,
+    "primarySplats": 68388,
+    "addonBudget": 0,
+    "action": {
+      "key": "hop",
+      "label": "Turn"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Turn",
+        "type": "pulse",
+        "ease": 3
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "alum-crystal",
+    "source": "assets/toys/alum-crystal/alum-crystal-lite.sog",
+    "assetBytes": 3950480,
+    "primarySplats": 300000,
+    "addonBudget": 24000,
+    "action": {
+      "key": "hop",
+      "label": "Turn"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Turn",
+        "type": "pulse",
+        "ease": 2.4
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "puffin",
+    "source": "assets/toys/puffin/puffin-lite.sog",
+    "assetBytes": 2806826,
+    "primarySplats": 262381,
+    "addonBudget": 16000,
+    "action": {
+      "key": "hop",
+      "label": "Hop"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Hop",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "toy-trex",
+    "source": "assets/toys/toy-trex/toy-trex-lite.sog",
+    "assetBytes": 3859949,
+    "primarySplats": 300000,
+    "addonBudget": 45000,
+    "action": {
+      "key": "hop",
+      "label": "Stomp"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Stomp",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "monkey-doll",
+    "source": "assets/toys/monkey-doll/monkey-doll-lite.sog",
+    "assetBytes": 3809543,
+    "primarySplats": 300000,
+    "addonBudget": 40000,
+    "action": {
+      "key": "hop",
+      "label": "Rock"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Rock",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "elephant-souvenir",
+    "source": "assets/toys/elephant-souvenir/elephant-souvenir-lite.sog",
+    "assetBytes": 431098,
+    "primarySplats": 30184,
+    "addonBudget": 16000,
+    "action": {
+      "key": "hop",
+      "label": "Turn"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Turn",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "cave-lioness",
+    "source": "assets/toys/cave-lioness/cave-lioness-lite.sog",
+    "assetBytes": 3823377,
+    "primarySplats": 300000,
+    "addonBudget": 0,
+    "action": {
+      "key": "hop",
+      "label": "Look"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Look",
+        "type": "pulse",
+        "ease": 2.7
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "dog-plush",
+    "source": "assets/toys/dog-plush/dog-plush-lite.sog",
+    "assetBytes": 3924186,
+    "primarySplats": 300000,
+    "addonBudget": 54000,
+    "action": {
+      "key": "hop",
+      "label": "Hop"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Hop",
+        "type": "pulse",
+        "ease": 1.45
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "bmx-bike",
+    "source": "assets/toys/bmx-bike/bmx-bike-lite.sog",
+    "assetBytes": 3716192,
+    "primarySplats": 300000,
+    "addonBudget": 56000,
+    "action": {
+      "key": "hop",
+      "label": "Nudge"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Nudge",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "murex-shell",
+    "source": "assets/toys/murex-shell/murex-shell-lite.sog",
+    "assetBytes": 3843168,
+    "primarySplats": 300000,
+    "addonBudget": 0,
+    "action": {
+      "key": "hop",
+      "label": "Turn"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Turn",
+        "type": "pulse",
+        "ease": 3
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "sunflower-photo",
+    "source": "assets/toys/sunflower-photo/sunflower-photo-lite.sog",
+    "assetBytes": 3822921,
+    "primarySplats": 300000,
+    "addonBudget": 12000,
+    "action": {
+      "key": "hop",
+      "label": "Nod"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Nod",
+        "type": "pulse",
+        "ease": 3
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "white-roses",
+    "source": "assets/toys/white-roses/white-roses-lite.sog",
+    "assetBytes": 182066,
+    "primarySplats": 12181,
+    "addonBudget": 12000,
+    "action": {
+      "key": "hop",
+      "label": "Knock"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Knock",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "bonsai-photo",
+    "source": "assets/toys/bonsai-photo/bonsai-photo-lite.sog",
+    "assetBytes": 3086156,
+    "primarySplats": 251221,
+    "addonBudget": 44000,
+    "action": {
+      "key": "hop",
+      "label": "Drop"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Drop",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "mushroom-photo",
+    "source": "assets/toys/mushroom-photo/mushroom-photo-lite.sog",
+    "assetBytes": 3913873,
+    "primarySplats": 300000,
+    "addonBudget": 40000,
+    "action": {
+      "key": "hop",
+      "label": "Drop"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Drop",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "cactus-real",
+    "source": "assets/toys/cactus-real/cactus-real-lite.sog",
+    "assetBytes": 3281356,
+    "primarySplats": 260429,
+    "addonBudget": 36000,
+    "action": {
+      "key": "hop",
+      "label": "Drop"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Drop",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "crochet-earth",
+    "source": "assets/toys/crochet-earth/crochet-earth-lite.sog",
+    "assetBytes": 3985414,
+    "primarySplats": 300000,
+    "addonBudget": 30000,
+    "action": {
+      "key": "hop",
+      "label": "Spin"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Spin",
+        "type": "pulse",
+        "ease": 3
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "desk-globe",
+    "source": "assets/toys/desk-globe/desk-globe-lite.sog",
+    "assetBytes": 3823414,
+    "primarySplats": 293009,
+    "addonBudget": 40000,
+    "action": {
+      "key": "hop",
+      "label": "Spin"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Spin",
+        "type": "pulse",
+        "ease": 3.4
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "cherry-blossom-photo",
+    "source": "assets/toys/cherry-blossom-photo/cherry-blossom-photo-lite.sog",
+    "assetBytes": 3783478,
+    "primarySplats": 300000,
+    "addonBudget": 60000,
+    "action": {
+      "key": "hop",
+      "label": "Drop"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Drop",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "maple-tree",
+    "source": "assets/toys/maple-tree/maple-tree-lite.sog",
+    "assetBytes": 3883165,
+    "primarySplats": 300000,
+    "addonBudget": 44000,
+    "action": {
+      "key": "hop",
+      "label": "Drop"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Drop",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "peony",
+    "source": "assets/toys/peony/peony-lite.sog",
+    "assetBytes": 3868816,
+    "primarySplats": 300000,
+    "addonBudget": 12000,
+    "action": {
+      "key": "hop",
+      "label": "Knock"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Knock",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "money-tree",
+    "source": "assets/toys/money-tree/money-tree-lite.sog",
+    "assetBytes": 2066557,
+    "primarySplats": 163878,
+    "addonBudget": 16000,
+    "action": {
+      "key": "hop",
+      "label": "Knock"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Knock",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "knight-horse",
+    "source": "assets/toys/knight-horse/knight-horse-lite.sog",
+    "assetBytes": 3051224,
+    "primarySplats": 233318,
+    "addonBudget": 24000,
+    "action": {
+      "key": "hop",
+      "label": "Rear"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Rear",
+        "type": "pulse",
+        "ease": 1.8
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "triceratops-skull",
+    "source": "assets/toys/triceratops-skull/triceratops-skull-lite.sog",
+    "assetBytes": 3811614,
+    "primarySplats": 300000,
+    "addonBudget": 0,
+    "action": {
+      "key": "hop",
+      "label": "Look"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Look",
+        "type": "pulse",
+        "ease": 2.7
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "cone-shell",
+    "source": "assets/toys/cone-shell/cone-shell-lite.sog",
+    "assetBytes": 3787535,
+    "primarySplats": 300000,
+    "addonBudget": 0,
+    "action": {
+      "key": "hop",
+      "label": "Turn"
+    },
+    "controls": [
+      {
+        "key": "hop",
+        "label": "Turn",
+        "type": "pulse",
+        "ease": 2.7
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "rubber-duck-real",
+    "source": "assets/toys/rubber-duck-real/rubber-duck-real-lite.sog",
+    "assetBytes": 857439,
+    "primarySplats": 80000,
+    "addonBudget": 0,
+    "action": {
+      "key": "squeeze",
+      "label": "Squeeze"
+    },
+    "controls": [
+      {
+        "key": "squeeze",
+        "label": "Squeeze",
+        "type": "pulse",
+        "ease": 1.4
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "garden-gnome",
+    "source": "assets/toys/garden-gnome/garden-gnome-lite.sog",
+    "assetBytes": 919134,
+    "primarySplats": 80000,
+    "addonBudget": 4000,
+    "action": {
+      "key": "light",
+      "label": "Light lantern"
+    },
+    "controls": [
+      {
+        "key": "light",
+        "label": "Light",
+        "type": "pulse",
+        "ease": 3.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "wooden-elephant",
+    "source": "assets/toys/wooden-elephant/wooden-elephant-lite.sog",
+    "assetBytes": 917077,
+    "primarySplats": 80000,
+    "addonBudget": 26000,
+    "action": {
+      "key": "trumpet",
+      "label": "Trumpet"
+    },
+    "controls": [
+      {
+        "key": "trumpet",
+        "label": "Trumpet",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "marble-bust",
+    "source": "assets/toys/marble-bust/marble-bust-lite.sog",
+    "assetBytes": 945313,
+    "primarySplats": 80000,
+    "addonBudget": 12000,
+    "action": {
+      "key": "speak",
+      "label": "Speak"
+    },
+    "controls": [
+      {
+        "key": "speak",
+        "label": "Speak",
+        "type": "pulse",
+        "ease": 3.4
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "ukulele",
+    "source": "assets/toys/ukulele/ukulele-lite.sog",
+    "assetBytes": 854823,
+    "primarySplats": 80000,
+    "addonBudget": 2500,
+    "action": {
+      "key": "strum",
+      "label": "Strum"
+    },
+    "controls": [
+      {
+        "key": "strum",
+        "label": "Strum",
+        "type": "pulse",
+        "ease": 2.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "alarm-clock",
+    "source": "assets/toys/alarm-clock/alarm-clock-lite.sog",
+    "assetBytes": 870310,
+    "primarySplats": 80000,
+    "addonBudget": 8000,
+    "action": {
+      "key": "ring",
+      "label": "Ring"
+    },
+    "controls": [
+      {
+        "key": "ring",
+        "label": "Ring",
+        "type": "pulse",
+        "ease": 2.4
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "vintage-camera",
+    "source": "assets/toys/vintage-camera/vintage-camera-lite.sog",
+    "assetBytes": 883402,
+    "primarySplats": 80000,
+    "addonBudget": 5000,
+    "action": {
+      "key": "snap",
+      "label": "Take a photo"
+    },
+    "controls": [
+      {
+        "key": "snap",
+        "label": "Snap",
+        "type": "pulse",
+        "ease": 1.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "boombox",
+    "source": "assets/toys/boombox/boombox-lite.sog",
+    "assetBytes": 753179,
+    "primarySplats": 80000,
+    "addonBudget": 0,
+    "action": {
+      "key": "play",
+      "label": "Play"
+    },
+    "controls": [
+      {
+        "key": "play",
+        "label": "Play",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "croissant-real",
+    "source": "assets/toys/croissant-real/croissant-real-lite.sog",
+    "assetBytes": 940584,
+    "primarySplats": 80000,
+    "addonBudget": 9000,
+    "action": {
+      "key": "tear",
+      "label": "Tear"
+    },
+    "controls": [
+      {
+        "key": "tear",
+        "label": "Tear",
+        "type": "pulse",
+        "ease": 3
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "carrot-cake",
+    "source": "assets/toys/carrot-cake/carrot-cake-lite.sog",
+    "assetBytes": 950003,
+    "primarySplats": 80000,
+    "addonBudget": 12000,
+    "action": {
+      "key": "slice",
+      "label": "Cut a slice"
+    },
+    "controls": [
+      {
+        "key": "slice",
+        "label": "Slice",
+        "type": "pulse",
+        "ease": 3.2
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "pomegranate",
+    "source": "assets/toys/pomegranate/pomegranate-lite.sog",
+    "assetBytes": 967796,
+    "primarySplats": 80000,
+    "addonBudget": 14000,
+    "action": {
+      "key": "split",
+      "label": "Split open"
+    },
+    "controls": [
+      {
+        "key": "split",
+        "label": "Split",
+        "type": "pulse",
+        "ease": 3.4
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "lantern",
+    "source": "assets/toys/lantern/lantern-lite.sog",
+    "assetBytes": 961698,
+    "primarySplats": 80000,
+    "addonBudget": 5000,
+    "action": {
+      "key": "lit",
+      "label": "Light"
+    },
+    "controls": [
+      {
+        "key": "lit",
+        "label": "Lit",
+        "type": "toggle",
+        "ease": 0.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "cat-statue",
+    "source": "assets/toys/cat-statue/cat-statue-lite.sog",
+    "assetBytes": 959309,
+    "primarySplats": 80000,
+    "addonBudget": 9000,
+    "action": {
+      "key": "look",
+      "label": "Look around"
+    },
+    "controls": [
+      {
+        "key": "look",
+        "label": "Look",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "horse-statue",
+    "source": "assets/toys/horse-statue/horse-statue-lite.sog",
+    "assetBytes": 884285,
+    "primarySplats": 80000,
+    "addonBudget": 0,
+    "action": {
+      "key": "rear",
+      "label": "Rear up"
+    },
+    "controls": [
+      {
+        "key": "rear",
+        "label": "Rear",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "pencil-real",
+    "source": "assets/toys/pencil-real/pencil-real-lite.sog",
+    "assetBytes": 932222,
+    "primarySplats": 80000,
+    "addonBudget": 0,
+    "action": {
+      "key": "spin",
+      "label": "Spin"
+    },
+    "controls": [
+      {
+        "key": "spin",
+        "label": "Spin",
+        "type": "pulse",
+        "ease": 2.4
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  },
+  {
+    "id": "tin-can-real",
+    "source": "assets/toys/tin-can-real/tin-can-real-lite.sog",
+    "assetBytes": 1921805,
+    "primarySplats": 160000,
+    "addonBudget": 10000,
+    "action": {
+      "key": "knock",
+      "label": "Knock"
+    },
+    "controls": [
+      {
+        "key": "knock",
+        "label": "Knock",
+        "type": "pulse",
+        "ease": 2.6
+      }
+    ],
+    "recipeSource": "src/packs/photoreal-r3-rigs.js"
+  }
+]

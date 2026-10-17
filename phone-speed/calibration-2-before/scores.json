@@ -1,0 +1,89 @@
+{
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+  "browser": "151.0.7922.173",
+  "protocol": {
+    "toolSHA256": "0615c5cc1db29bbede902a235404828094ad1e73ba58ff76f48b09912e2a9d0d",
+    "sceneSeed": 103,
+    "wallTime": "2026-10-17T12:00:00Z",
+    "restSeconds": 0.5,
+    "stepHz": 60,
+    "settleDraws": 3
+  },
+  "measuredAt": "2026-10-17T03:25:48.459Z",
+  "rows": [
+    {
+      "id": "torus",
+      "midTapSeconds": 1.5,
+      "sceneSeed": 103,
+      "splats": 60000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.4,
+        "pitch": 0.62,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "roll": 0.5833333333333315
+      },
+      "diagnosis": {
+        "uniformWrites": 135,
+        "workDraws": 3,
+        "updatesMs": [
+          1,
+          0,
+          0
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 135,
+        "orbitUpdatesMs": [
+          0,
+          0,
+          0
+        ],
+        "shBands": null,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.9833333333333312,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "time": 1.9999999999999978
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "toy-trex",
+      "error": "page.evaluate: Target page, context or browser has been closed",
+      "errors": []
+    }
+  ]
+}

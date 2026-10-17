@@ -1,0 +1,25 @@
+import fs from 'node:fs/promises';
+import {spawn} from 'node:child_process';
+const pid=Number(process.argv[2]),root='.cache/phone-speed';
+if(!Number.isInteger(pid)||pid<1)throw new Error('Pipeline PID required');
+const alive=()=>{try{process.kill(pid,0);return true;}catch{return false;}};
+while(alive())await new Promise(resolve=>setTimeout(resolve,5000));
+const evidence={started:new Date().toISOString(),pipelinePID:pid,checks:{}};
+const run=async(label,command,args,env={})=>{
+ console.log('START '+label+' '+new Date().toISOString());
+ const code=await new Promise((resolve,reject)=>{const p=spawn(command,args,{stdio:'inherit',env:{...process.env,...env}});p.on('error',reject);p.on('exit',resolve);});
+ evidence.checks[label]={command,args,code,ended:new Date().toISOString()};
+ await fs.writeFile(`${root}/post-evidence-checks.json`,JSON.stringify(evidence,null,2));
+};
+const steps=JSON.parse(await fs.readFile(`${root}/pipeline-steps.json`,'utf8'));
+if(!steps['catalog-screen']?.ok)throw new Error('Catalog screening did not complete; investigate before tests.');
+await run('pack-qa',process.execPath,[`${root}/pack-qa.mjs`,'--source=072f15f3d00150825f36784b504b8b365c892cd7']);
+await run('runtime-pin',process.execPath,[`${root}/pin-runtime.mjs`,'--source=072f15f3d00150825f36784b504b8b365c892cd7']);
+const plan=JSON.parse(await fs.readFile(`${root}/late-main-plan.json`,'utf8'));
+await run('merge-current-main',process.execPath,[`${root}/switch-public-source.mjs`]);
+if(evidence.checks['merge-current-main'].code!==0)throw new Error('Resolve the prepared main merge before checking the new toy and full suite.');
+await run('late-main-toy',process.execPath,[`${root}/late-main-check.mjs`]);
+await run('merged-catalog-report','python3',[`${root}/merge-catalog-report.py`]);
+await run('full-suite-evidence',process.execPath,[`${root}/verify-ci-evidence.mjs`]);
+evidence.ended=new Date().toISOString();await fs.writeFile(`${root}/post-evidence-checks.json`,JSON.stringify(evidence,null,2));
+if(Object.values(evidence.checks).some(check=>check.code!==0))process.exitCode=1;

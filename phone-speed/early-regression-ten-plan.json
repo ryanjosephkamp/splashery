@@ -1,0 +1,9 @@
+{
+  "declaredAt": "2026-10-17T07:57:52.752000+00:00",
+  "ids": [
+    "cactus"
+  ],
+  "runs": 10,
+  "reason": "Only persistent early five-pair flag: tap median+5.009%, tap p95+5.802%. Retain first five, collect five further, and use all ten. Strawberry five-pair result passes.",
+  "previousReport": "early-regression-gates.json"
+}

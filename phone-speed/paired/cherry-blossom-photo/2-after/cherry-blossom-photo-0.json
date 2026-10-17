@@ -1,0 +1,106 @@
+{
+  "id": "cherry-blossom-photo",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3543.7000000001863,
+  "firstSubmitMs": 2964.2999999998137,
+  "idle": {
+    "count": 8,
+    "median": 314.5500000002794,
+    "p95": 345.3999999994412,
+    "work": {
+      "count": 9,
+      "median": 310.90000000037253,
+      "p95": 920
+    },
+    "elapsedMs": 3733,
+    "intervals": [
+      345.3999999994412,
+      296.29999999981374,
+      314.40000000037253,
+      314.70000000018626,
+      319.8999999994412,
+      302,
+      343.70000000018626,
+      306.40000000037253
+    ],
+    "workMs": [
+      920,
+      339.8999999994412,
+      293.5,
+      310.90000000037253,
+      310.1000000005588,
+      317.3999999994412,
+      299.3999999994412,
+      340.8999999994412,
+      301.20000000018626
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 819.5499999998137,
+    "p95": 872.3000000007451,
+    "work": {
+      "count": 9,
+      "median": 812.9000000003725,
+      "p95": 869.1000000005588
+    },
+    "elapsedMs": 7099.9000000003725,
+    "intervals": [
+      834.3999999994412,
+      872.3000000007451,
+      823.1999999992549,
+      855,
+      815.9000000003725,
+      734.0999999996275,
+      749,
+      695.8000000007451
+    ],
+    "workMs": [
+      714.5,
+      830.5,
+      869.1000000005588,
+      820.6999999992549,
+      852,
+      812.9000000003725,
+      731.1999999992549,
+      746.1999999992549,
+      692.4000000003725
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 40876407,
+  "transferBytes": 9114159,
+  "bodyBytes": 9084459,
+  "cachedRequests": 0,
+  "requests": 99,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    672
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 15636608,
+    "totalSize": 31195136,
+    "embedderHeapUsedSize": 10734296,
+    "backingStorageSize": 32355303
+  },
+  "run": 0,
+  "label": "Cherry blossom (photo)",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 15633,
+  "measuredAt": "2026-10-17T06:57:12.280Z",
+  "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+}

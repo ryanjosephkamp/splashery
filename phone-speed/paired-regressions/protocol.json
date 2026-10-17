@@ -1,0 +1,16 @@
+{
+  "order": "Alternate by stable toy-ID character parity plus pair index",
+  "sources": {
+    "before": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "after": "072f15f3d00150825f36784b504b8b365c892cd7"
+  },
+  "urls": {
+    "before": "http://127.0.0.1:4174/",
+    "after": "http://127.0.0.1:4173/"
+  },
+  "duration": 2500,
+  "browser": "151.0.7922.173",
+  "measurementSHA256": "0f300e3c3a480eafe0fabaddf4567878a57f6fadad98214244fbdeae0bb0f189",
+  "hybridSHA256": "59e92d3e8174d303051cb667c0510b9d7ff834f3c3a22ffb46abf37d763e76b2",
+  "runnerSHA256": "1980f45190dee7926a6e59e1ea80e8e2aef7ea8705713014e9087ad8069b63e8"
+}

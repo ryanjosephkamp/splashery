@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-17T05:12:00.810Z",
+  "completed": 29,
+  "interrupted": {
+    "id": "toy-trex",
+    "run": 0,
+    "at": "2026-10-17T05:08:45.365Z",
+    "contextOpen": true
+  },
+  "previousHost": {
+    "platform": "linux",
+    "arch": "x64",
+    "cpus": 5,
+    "cpu": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "resumedHost": {
+    "platform": "linux",
+    "arch": "x64",
+    "cpus": 5,
+    "cpu": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "cpuQuota": "400000 100000",
+  "memoryLimit": "17179869184",
+  "note": "Workspace restart stopped processes; files persisted. Browser and host profile unchanged. Resume only completed saved rows; interrupted toy is repeated."
+}

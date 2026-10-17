@@ -1,0 +1,11 @@
+
+Running 2 tests using 1 worker
+
+(node:51801) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51801) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-speed.spec.mjs:99:1 › phone page measures a real toy locally and exposes a copyable result (6.2s)
+  ✓  2 [chromium] › tests/cdx-speed.spec.mjs:929:1 › phone page retains browser resize notifications and still marks real errors (5.6s)
+
+  2 passed (12.9s)

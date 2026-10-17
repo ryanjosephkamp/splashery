@@ -1,0 +1,42 @@
+
+Running 1 test using 1 worker
+
+(node:20580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-speed.spec.mjs:854:1 › picture toys reuse only the primary surface and invalidate it for a page turn (6.4s)
+
+
+  1) [chromium] › tests/cdx-speed.spec.mjs:854:1 › picture toys reuse only the primary surface and invalidate it for a page turn 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m678[39m
+    Received: [31m723[39m
+
+      752 |     }
+      753 |   });
+    > 754 |   expect(result.idle).toBe(result.before);
+          |                       ^
+      755 |   expect(result.camera).toBeGreaterThan(result.idle);
+      756 |   expect(result.turn).toBeGreaterThan(result.camera);
+      757 |   expect(result.sheetWrites).toBeGreaterThan(0);
+        at /workspace/splashery/tests/cdx-speed.spec.mjs:754:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-speed-picture-toys-reu-dca23-validate-it-for-a-page-turn-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-speed-picture-toys-reu-dca23-validate-it-for-a-page-turn-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-speed-picture-toys-reu-dca23-validate-it-for-a-page-turn-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-speed-picture-toys-reu-dca23-validate-it-for-a-page-turn-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-speed.spec.mjs:854:1 › picture toys reuse only the primary surface and invalidate it for a page turn 

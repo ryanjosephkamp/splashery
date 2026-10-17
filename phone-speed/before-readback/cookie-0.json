@@ -1,0 +1,106 @@
+{
+  "id": "cookie",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 1697,
+  "firstSubmitMs": 1456.7000000011176,
+  "idle": {
+    "count": 8,
+    "median": 321.19999999925494,
+    "p95": 363.80000000074506,
+    "work": {
+      "count": 9,
+      "median": 320.69999999925494,
+      "p95": 924.8000000007451
+    },
+    "elapsedMs": 3663.5,
+    "intervals": [
+      354.5,
+      312.80000000074506,
+      319.2999999988824,
+      313.40000000037253,
+      363.80000000074506,
+      317.59999999962747,
+      323.09999999962747,
+      334
+    ],
+    "workMs": [
+      924.8000000007451,
+      349.59999999962747,
+      310.2000000011176,
+      315.09999999962747,
+      311,
+      360.5,
+      312.80000000074506,
+      320.69999999925494,
+      331
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 338.75,
+    "p95": 369.40000000037253,
+    "work": {
+      "count": 9,
+      "median": 329,
+      "p95": 366.69999999925494
+    },
+    "elapsedMs": 3002.800000000745,
+    "intervals": [
+      329.7999999988824,
+      345.2000000011176,
+      332.2999999988824,
+      369.40000000037253,
+      352.59999999962747,
+      359.5,
+      305.6000000014901,
+      293.19999999925494
+    ],
+    "workMs": [
+      311.59999999962747,
+      327.09999999962747,
+      342.80000000074506,
+      329,
+      366.69999999925494,
+      347.69999999925494,
+      356.69999999925494,
+      303,
+      290.19999999925494
+    ]
+  },
+  "action": "beat",
+  "heapBytes": 26991769,
+  "transferBytes": 6889204,
+  "bodyBytes": 6859804,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 120000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 18137208,
+    "totalSize": 31719424,
+    "embedderHeapUsedSize": 11030816,
+    "backingStorageSize": 9142201
+  },
+  "run": 0,
+  "label": "Heart cookie",
+  "kind": "captured",
+  "pack": null,
+  "labs": false,
+  "errors": [],
+  "wallMs": 9613,
+  "measuredAt": "2026-10-17T05:04:14.363Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

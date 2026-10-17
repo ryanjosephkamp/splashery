@@ -1,0 +1,18 @@
+{
+  "declaredAt": "2026-10-17T07:51:50.912940+00:00",
+  "targets": [
+    {
+      "id": "cactus"
+    },
+    {
+      "id": "strawberry"
+    }
+  ],
+  "runs": 5,
+  "selection": "First two flagged completed catalog IDs in fixed catalog order; diagnostic early collection, identical formal follow-up protocol. All five pairs retained and reused in the full regression follow-up.",
+  "catalogCompletePairs": 11,
+  "sources": {
+    "before": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "after": "072f15f3d00150825f36784b504b8b365c892cd7"
+  }
+}

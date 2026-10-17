@@ -1,0 +1,42 @@
+
+Running 1 test using 1 worker
+
+(node:43660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-speed.spec.mjs:593:1 › recipe render settings follow the active tier and preserve URL overrides (11.1s)
+
+
+  1) [chromium] › tests/cdx-speed.spec.mjs:593:1 › recipe render settings follow the active tier and preserve URL overrides 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m2.4[39m
+    Received: [31mnull[39m
+
+      541 |     }
+      542 |   });
+    > 543 |   expect(result.low.dpr).toBe(2.4);
+          |                          ^
+      544 |   expect(result.high.dpr).toBe(Math.min(3, await page.evaluate(() => devicePixelRatio)));
+      545 |   expect(result.override.dpr).toBe(1.75);
+      546 |   expect(result.low.cull).toEqual({ minPixelSize: 0, minContribution: 0 });
+        at /workspace/splashery/tests/cdx-speed.spec.mjs:543:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-speed-recipe-render-se-44c75--and-preserve-URL-overrides-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-speed.spec.mjs:593:1 › recipe render settings follow the active tier and preserve URL overrides 

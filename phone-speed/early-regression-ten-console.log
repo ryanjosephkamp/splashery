@@ -1,0 +1,12 @@
+1/1 cactus: 2999ms open, 325.8/325.4ms idle/tap
+1/1 cactus: 2699ms open, 160.9/313.2ms idle/tap
+1/1 cactus: 2635ms open, 157.8/343.8ms idle/tap
+1/1 cactus: 3371ms open, 313.3/323.1ms idle/tap
+1/1 cactus: 2953ms open, 328.5/310.6ms idle/tap
+1/1 cactus: 2787ms open, 158.1/316.7ms idle/tap
+1/1 cactus: 2633ms open, 169.7/350.7ms idle/tap
+1/1 cactus: 2775ms open, 313.3/343.9ms idle/tap
+1/1 cactus: 2866ms open, 352.4/347.7ms idle/tap
+1/1 cactus: 2676ms open, 195.8/325.5ms idle/tap
+{"rows":[{"id":"cactus","valid":true,"changes":{"firstViewMs":0.07568961072415736,"idle.median":0.39944521497781804,"idle.p95":0.3942793045406905,"tap.median":-0.038023679418317524,"tap.p95":-0.03193876204207302}}],"regressions":[]}
+RESUMED original catalog 2026-10-17T07:59:59.656Z

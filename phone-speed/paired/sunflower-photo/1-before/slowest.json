@@ -1,0 +1,108 @@
+[
+  {
+    "id": "sunflower-photo",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3734.2999999998137,
+    "firstSubmitMs": 3189.2000000001863,
+    "idle": {
+      "count": 8,
+      "median": 806.3000000002794,
+      "p95": 905.9000000003725,
+      "work": {
+        "count": 9,
+        "median": 808.2999999998137,
+        "p95": 2484.600000000559
+      },
+      "elapsedMs": 9384.5,
+      "intervals": [
+        771,
+        754.8999999994412,
+        801.4000000003725,
+        755.3999999994412,
+        905.9000000003725,
+        811.2000000001863,
+        837.8999999994412,
+        855.5
+      ],
+      "workMs": [
+        2484.600000000559,
+        765.7000000001863,
+        752,
+        796.7999999998137,
+        752.3999999994412,
+        903,
+        808.2999999998137,
+        835.0999999996275,
+        852.6999999992549
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 811.8999999999069,
+      "p95": 872.9000000003725,
+      "work": {
+        "count": 9,
+        "median": 810.7000000001863,
+        "p95": 876.5
+      },
+      "elapsedMs": 7227.200000000186,
+      "intervals": [
+        698.7999999998137,
+        833,
+        698.7000000001863,
+        760.5,
+        857.5999999996275,
+        872.9000000003725,
+        808.2999999998137,
+        815.5
+      ],
+      "workMs": [
+        876.5,
+        696.2000000001863,
+        830.5,
+        696.2000000001863,
+        755.9000000003725,
+        855,
+        870.4000000003725,
+        803.2999999998137,
+        810.7000000001863
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 36356238,
+    "transferBytes": 9181236,
+    "bodyBytes": 9151836,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 12240744,
+      "totalSize": 18350080,
+      "embedderHeapUsedSize": 10852632,
+      "backingStorageSize": 16814686
+    },
+    "run": 0,
+    "label": "Sunflower (photo)",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 21641,
+    "measuredAt": "2026-10-17T06:46:30.556Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "reviewedAt": "2026-10-17T07:48:10.280628+00:00",
+  "files": [
+    "cdx-speed-phone-page-390x844.png",
+    "cdx-speed-phone-page-results-390x844.png",
+    "cdx-speed-phone-page-1440x900.png",
+    "cdx-speed-phone-page-results-1440x900.png"
+  ],
+  "findings": [
+    "Phone controls wrap within390px, with44px tap targets and no outer horizontal overflow.",
+    "Results use a horizontally scrollable numeric table; all30 rows are present in the local JSON and copyable table.",
+    "Desktop1440px shows all seven columns, including real heap and transfer values.",
+    "Ready and completed states inspected visually."
+  ]
+}

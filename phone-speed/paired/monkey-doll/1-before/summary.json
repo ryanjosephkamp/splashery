@@ -1,0 +1,108 @@
+[
+  {
+    "id": "monkey-doll",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3670.5,
+    "firstSubmitMs": 2175.2999999998137,
+    "idle": {
+      "count": 8,
+      "median": 768.5,
+      "p95": 884.7999999998137,
+      "work": {
+        "count": 9,
+        "median": 786.2999999998137,
+        "p95": 2207.100000000559
+      },
+      "elapsedMs": 8768.5,
+      "intervals": [
+        819.0999999996275,
+        816.5,
+        747,
+        722.4000000003725,
+        740.5999999996275,
+        884.7999999998137,
+        790,
+        670.5
+      ],
+      "workMs": [
+        2207.100000000559,
+        813.7000000001863,
+        811.9000000003725,
+        741.5,
+        719.4000000003725,
+        737.5999999996275,
+        882.2999999998137,
+        786.2999999998137,
+        667.2999999998137
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 743.8500000000931,
+      "p95": 863,
+      "work": {
+        "count": 9,
+        "median": 735.1000000005588,
+        "p95": 859.6999999992549
+      },
+      "elapsedMs": 6913.199999999255,
+      "intervals": [
+        750.2000000001863,
+        726.7000000001863,
+        737.5,
+        806.0999999996275,
+        830.2000000001863,
+        735.2000000001863,
+        732.1999999992549,
+        863
+      ],
+      "workMs": [
+        727.4000000003725,
+        747.6000000005588,
+        722.1000000005588,
+        735.1000000005588,
+        802.2999999998137,
+        825.7999999998137,
+        732.4000000003725,
+        727.1999999992549,
+        859.6999999992549
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 38529406,
+    "transferBytes": 9126612,
+    "bodyBytes": 9097212,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 16343348,
+      "totalSize": 31981568,
+      "embedderHeapUsedSize": 10952872,
+      "backingStorageSize": 29580998
+    },
+    "run": 0,
+    "label": "Monkey doll",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 20631,
+    "measuredAt": "2026-10-17T06:53:01.523Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

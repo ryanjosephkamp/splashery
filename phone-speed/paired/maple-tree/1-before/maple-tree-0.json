@@ -1,0 +1,106 @@
+{
+  "id": "maple-tree",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3679.899999999441,
+  "firstSubmitMs": 2734.5999999996275,
+  "idle": {
+    "count": 8,
+    "median": 732.3500000005588,
+    "p95": 828.2999999998137,
+    "work": {
+      "count": 9,
+      "median": 754.0999999996275,
+      "p95": 1984
+    },
+    "elapsedMs": 8052.200000000186,
+    "intervals": [
+      760.8999999994412,
+      828.2999999998137,
+      760,
+      758.8000000007451,
+      669.1999999992549,
+      704.3000000007451,
+      703.6999999992549,
+      705.9000000003725
+    ],
+    "workMs": [
+      1984,
+      754.0999999996275,
+      823,
+      756.7999999998137,
+      756,
+      665.8999999994412,
+      701.3000000007451,
+      698.3999999994412,
+      703
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 716.2999999998137,
+    "p95": 767,
+    "work": {
+      "count": 9,
+      "median": 723.5,
+      "p95": 764.5
+    },
+    "elapsedMs": 6414.700000000186,
+    "intervals": [
+      662.4000000003725,
+      730.2999999998137,
+      643.2000000001863,
+      727.0999999996275,
+      767,
+      674.4000000003725,
+      743.0999999996275,
+      705.5
+    ],
+    "workMs": [
+      757.7000000001863,
+      658.1000000005588,
+      727.5999999996275,
+      640.4000000003725,
+      723.5,
+      764.5,
+      670,
+      739,
+      702.5
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 38469583,
+  "transferBytes": 9205084,
+  "bodyBytes": 9175684,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 15652792,
+    "totalSize": 31719424,
+    "embedderHeapUsedSize": 11016792,
+    "backingStorageSize": 23298471
+  },
+  "run": 0,
+  "label": "Golden maple",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 19444,
+  "measuredAt": "2026-10-17T07:24:51.060Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

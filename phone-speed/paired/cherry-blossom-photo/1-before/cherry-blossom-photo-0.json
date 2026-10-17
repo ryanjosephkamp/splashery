@@ -1,0 +1,106 @@
+{
+  "id": "cherry-blossom-photo",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 4164,
+  "firstSubmitMs": 3034,
+  "idle": {
+    "count": 8,
+    "median": 767.1500000003725,
+    "p95": 863.7999999998137,
+    "work": {
+      "count": 9,
+      "median": 791.1999999992549,
+      "p95": 1633.2000000001863
+    },
+    "elapsedMs": 8158.699999999255,
+    "intervals": [
+      797.7999999998137,
+      819.8999999994412,
+      794,
+      740.3000000007451,
+      863.7999999998137,
+      705,
+      702.8999999994412,
+      697
+    ],
+    "workMs": [
+      1633.2000000001863,
+      794.9000000003725,
+      816.3999999994412,
+      791.1999999992549,
+      737.6000000005588,
+      861.1000000005588,
+      700.7000000001863,
+      700.1999999992549,
+      694.3999999994412
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 756.25,
+    "p95": 793.8999999994412,
+    "work": {
+      "count": 9,
+      "median": 767,
+      "p95": 796.9000000003725
+    },
+    "elapsedMs": 6736.0999999996275,
+    "intervals": [
+      770.2999999998137,
+      742.2000000001863,
+      793.8999999994412,
+      778.2000000001863,
+      713.7999999998137,
+      691.5,
+      777.8000000007451,
+      666.5999999996275
+    ],
+    "workMs": [
+      796.9000000003725,
+      767,
+      737.5,
+      791,
+      773.5,
+      711,
+      687.6999999992549,
+      773.4000000003725,
+      663.5
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 30332027,
+  "transferBytes": 9110037,
+  "bodyBytes": 9080637,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    672
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 14612892,
+    "totalSize": 31981568,
+    "embedderHeapUsedSize": 9151120,
+    "backingStorageSize": 16202387
+  },
+  "run": 0,
+  "label": "Cherry blossom (photo)",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 20334,
+  "measuredAt": "2026-10-17T06:56:34.758Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

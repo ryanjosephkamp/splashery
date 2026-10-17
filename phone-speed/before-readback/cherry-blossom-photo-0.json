@@ -1,0 +1,106 @@
+{
+  "id": "cherry-blossom-photo",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3230.0999999999767,
+  "firstSubmitMs": 2814.2999999999884,
+  "idle": {
+    "count": 8,
+    "median": 785.2999999999884,
+    "p95": 819.7999999999884,
+    "work": {
+      "count": 9,
+      "median": 783,
+      "p95": 2368
+    },
+    "elapsedMs": 8851.400000000023,
+    "intervals": [
+      782,
+      788,
+      819.7999999999884,
+      628.3000000000466,
+      804.2999999999884,
+      776.7000000000116,
+      782.5999999999767,
+      796.7000000000116
+    ],
+    "workMs": [
+      2368,
+      775.5,
+      783,
+      814.3999999999651,
+      623.7000000000116,
+      800.2999999999884,
+      773.8000000000466,
+      779.7999999999884,
+      793
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 747.8499999999767,
+    "p95": 832.5,
+    "work": {
+      "count": 9,
+      "median": 756.0999999999767,
+      "p95": 829.7000000000116
+    },
+    "elapsedMs": 6780.5,
+    "intervals": [
+      832.5,
+      737,
+      758.6999999999534,
+      716.2000000000116,
+      783.7000000000116,
+      695.7999999999884,
+      780.7000000000116,
+      702.4000000000233
+    ],
+    "workMs": [
+      769,
+      829.7000000000116,
+      732.4000000000233,
+      756.0999999999767,
+      713.5999999999767,
+      779,
+      691,
+      770.7000000000116,
+      697
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 28051500,
+  "transferBytes": 9110037,
+  "bodyBytes": 9080637,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    672
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 12197336,
+    "totalSize": 16515072,
+    "embedderHeapUsedSize": 8510864,
+    "backingStorageSize": 23108724
+  },
+  "run": 0,
+  "label": "Cherry blossom (photo)",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 20114,
+  "measuredAt": "2026-10-17T05:18:11.676Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

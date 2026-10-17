@@ -1,0 +1,24 @@
+{
+  "pageModules": {
+    "phone-speed.html": "2488841c284cfc227005ccf8b797ca8be8c79100053b9dc3a1e08c121e54cd85",
+    "phone-speed-page.js": "70646a072d9e8ec302ad5e093ed0b34135bfbb4e0ffe62644c35b65ae2ea3fa8",
+    "phone-speed-metrics.js": "0f300e3c3a480eafe0fabaddf4567878a57f6fadad98214244fbdeae0bb0f189",
+    "phone-speed-hybrid.js": "59e92d3e8174d303051cb667c0510b9d7ff834f3c3a22ffb46abf37d763e76b2",
+    "phone-speed-slowest.json": "71a906de06a7e198a287592151c4fb439c0a5eb3c2b5ea791e28d3c672d537c8"
+  },
+  "toolingRevision": "32972828e4fcd7f89149119c8ab4cc7b910fbe3b",
+  "source": "072f15f3d00150825f36784b504b8b365c892cd7",
+  "started": "2026-10-17T07:39:47.081Z",
+  "browser": "151.0.7922.173",
+  "checks": {
+    "complete30": true,
+    "clipboard": true,
+    "download": true,
+    "clipboardFallback": true,
+    "stopRetainsCompleted": true,
+    "desktop": true
+  },
+  "errors": [],
+  "uploads": [],
+  "completed": "2026-10-17T07:47:07.771Z"
+}

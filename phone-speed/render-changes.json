@@ -1,0 +1,24 @@
+{
+  "video-3d": {
+    "reason": "Declared before final paired sampling: default Liberty sample, low tier, explicit adapt=off; recipe DPR cap 2.4 replaces native DPR3. Ordinary low-tier adaptation-off views already cap at1.5. Point count, model data, camera motion, and Replay remain unchanged; rest/tap CSS and native-size SSIM must both reach0.98.",
+    "beforeCanvas": [
+      1170,
+      1401
+    ],
+    "afterCanvas": [
+      936,
+      1120
+    ]
+  },
+  "photo-album": {
+    "reason": "Declared before final paired sampling: low-tier album canvas cap1.3 replaces the existing1.5. The primary cache pilot improved median idle time only16.6%; overlapping page fill remains. Geometry, point count, photos, page turns, and higher tiers stay unchanged. CSS and native-width rest/tap SSIM must both reach0.98.",
+    "beforeCanvas": [
+      585,
+      700
+    ],
+    "afterCanvas": [
+      507,
+      607
+    ]
+  }
+}

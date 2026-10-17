@@ -1,0 +1,17 @@
+import fs from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
+import assert from 'node:assert/strict';
+const primary='/workspace/splashery',published='/workspace/phone-speed-public';
+const git=(cwd,...args)=>execFileSync('git',args,{cwd,encoding:'utf8'}).trim();
+const plan=JSON.parse(await fs.readFile(`${primary}/.cache/phone-speed/late-main-plan.json`,'utf8'));
+assert.equal(git(published,'branch','--show-current'),'codex/phone-speed');
+assert.equal(git(primary,'branch','--show-current'),'codex/phone-speed-private-history');
+const publicHead=git(published,'rev-parse','HEAD'),originalTip=git(primary,'rev-parse','codex/phone-speed-private-history');
+git(published,'diff','--exit-code');git(primary,'diff','--exit-code');
+git(published,'diff','--exit-code',plan.after,'HEAD','--','src','vendor','assets','index.html','styles.css','tests','tools','package.json','package-lock.json','playwright.config.mjs');
+git(published,'switch','--detach',publicHead);
+git(primary,'switch','codex/phone-speed');
+assert.equal(git(primary,'rev-parse','HEAD'),publicHead);
+assert.equal(git(primary,'rev-parse','codex/phone-speed-private-history'),originalTip);
+await fs.writeFile(`${primary}/.cache/phone-speed/public-source-switch.json`,JSON.stringify({at:new Date().toISOString(),publicHead,originalTip,originalHistoryPreserved:true,measuredRuntimePin:plan.after},null,2));
+console.log(JSON.stringify({publicHead,originalHistoryPreserved:true}));

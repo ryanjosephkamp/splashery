@@ -1,0 +1,88 @@
+{
+  "visual-before": {
+    "started": "2026-10-17T06:25:48.992Z",
+    "args": [
+      "tools/phone-speed-visuals.mjs",
+      "--ids=photo-album,crochet-earth,sunflower-photo,toy-trex,monkey-doll,cherry-blossom-photo,dog-plush,cone-shell,desk-globe,bmx-bike,mushroom-photo,cave-lioness,murex-shell,video-3d,maple-tree",
+      "--out=.cache/phone-speed/visual-before",
+      "--url=http://127.0.0.1:4174/",
+      "--source=36f5df601963f418f71b98ee460783ea6191b0bc",
+      "--profile"
+    ],
+    "attempts": [],
+    "ended": "2026-10-17T06:33:47.706Z",
+    "code": 0,
+    "ok": true
+  },
+  "visual-after": {
+    "started": "2026-10-17T06:33:47.707Z",
+    "args": [
+      "tools/phone-speed-visuals.mjs",
+      "--ids=photo-album,crochet-earth,sunflower-photo,toy-trex,monkey-doll,cherry-blossom-photo,dog-plush,cone-shell,desk-globe,bmx-bike,mushroom-photo,cave-lioness,murex-shell,video-3d,maple-tree",
+      "--out=.cache/phone-speed/visual-after",
+      "--url=http://127.0.0.1:4173/",
+      "--source=072f15f3d00150825f36784b504b8b365c892cd7",
+      "--compare=.cache/phone-speed/visual-before",
+      "--profile"
+    ],
+    "attempts": [],
+    "ended": "2026-10-17T06:40:20.072Z",
+    "code": 0,
+    "ok": true
+  },
+  "target-pairs": {
+    "started": "2026-10-17T06:40:20.075Z",
+    "args": [
+      "tools/phone-speed-paired.mjs",
+      "--targets=.cache/phone-speed/targets.json",
+      "--out=.cache/phone-speed/paired",
+      "--runs=5",
+      "--duration=2500",
+      "--before=http://127.0.0.1:4174/",
+      "--after=http://127.0.0.1:4173/",
+      "--before-source=36f5df601963f418f71b98ee460783ea6191b0bc",
+      "--after-source=072f15f3d00150825f36784b504b8b365c892cd7",
+      "--resume"
+    ],
+    "attempts": [],
+    "ended": "2026-10-17T07:26:45.263Z",
+    "code": 0,
+    "ok": true
+  },
+  "phone-page-qa": {
+    "started": "2026-10-17T07:39:44.015Z",
+    "args": [
+      ".cache/phone-speed/phone-page-qa.mjs"
+    ],
+    "attempts": [
+      {
+        "started": "2026-10-17T07:26:45.272Z",
+        "args": [
+          ".cache/phone-speed/phone-page-qa.mjs"
+        ],
+        "ended": "2026-10-17T07:33:35.438Z",
+        "code": 1,
+        "ok": false
+      }
+    ],
+    "ended": "2026-10-17T07:47:07.857Z",
+    "code": 0,
+    "ok": true
+  },
+  "catalog-pairs": {
+    "started": "2026-10-17T07:47:07.858Z",
+    "args": [
+      "tools/phone-speed-paired.mjs",
+      "--targets=.cache/phone-speed/all-toys.json",
+      "--out=.cache/phone-speed/paired",
+      "--runs=1",
+      "--duration=2500",
+      "--before=http://127.0.0.1:4174/",
+      "--after=http://127.0.0.1:4173/",
+      "--before-source=36f5df601963f418f71b98ee460783ea6191b0bc",
+      "--after-source=072f15f3d00150825f36784b504b8b365c892cd7",
+      "--resume"
+    ],
+    "attempts": []
+  }
+}

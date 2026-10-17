@@ -1,0 +1,108 @@
+[
+  {
+    "id": "triceratops-skull",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3215.0999999996275,
+    "firstSubmitMs": 2881.7999999988824,
+    "idle": {
+      "count": 8,
+      "median": 711.4000000003725,
+      "p95": 819.1000000014901,
+      "work": {
+        "count": 9,
+        "median": 716.4000000003725,
+        "p95": 2161.699999999255
+      },
+      "elapsedMs": 8634.099999999627,
+      "intervals": [
+        819.1000000014901,
+        780.7999999988824,
+        626.5999999996275,
+        719.3000000007451,
+        796.1999999992549,
+        692.9000000003725,
+        681.5999999996275,
+        703.5
+      ],
+      "workMs": [
+        2161.699999999255,
+        814.3000000007451,
+        775.7999999988824,
+        623.5999999996275,
+        716.4000000003725,
+        791.7999999988824,
+        690.2999999988824,
+        678.6999999992549,
+        699.0999999996275
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 752.9500000001863,
+      "p95": 879.5,
+      "work": {
+        "count": 9,
+        "median": 710,
+        "p95": 874.5
+      },
+      "elapsedMs": 6792.799999998882,
+      "intervals": [
+        791.7000000011176,
+        714.1999999992549,
+        699.0999999996275,
+        818.2000000011176,
+        879.5,
+        702.2999999988824,
+        666.3000000007451,
+        813.1999999992549
+      ],
+      "workMs": [
+        703.5,
+        786.9000000003725,
+        710,
+        695.6999999992549,
+        815,
+        874.5,
+        698,
+        663.5999999996275,
+        809.6999999992549
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 32804325,
+    "transferBytes": 9070073,
+    "bodyBytes": 9040673,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 18172892,
+      "totalSize": 31981568,
+      "embedderHeapUsedSize": 10806448,
+      "backingStorageSize": 21838257
+    },
+    "run": 0,
+    "label": "Triceratops skull",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 19919,
+    "measuredAt": "2026-10-17T08:09:26.102Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

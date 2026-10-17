@@ -1,0 +1,32 @@
+
+== main is merged in
+FAIL: 3 commits on origin/main are not in this branch: git merge origin/main
+
+== prettier
+Checking formatting...
+All matched files use Prettier code style!
+ok
+
+== American English on added lines
+No British spellings found.
+ok
+
+== site/ is current
+site/ is current.
+ok
+
+== shared lists parse
+ok
+
+== file sizes
+ok
+
+== Preflight summary
+FAIL  main is merged in: 3 commits on origin/main are not in this branch: git merge origin/main
+ok    prettier
+ok    American English on added lines
+ok    site/ is current
+ok    shared lists parse
+ok    file sizes
+
+1 step(s) failed.

@@ -1,0 +1,26 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {freezeTargets} from '../../tools/phone-speed-compare.mjs';
+import {rankSlowest} from '../../tools/pages/phone-speed-metrics.js';
+import {TOYS} from '../../src/toys.js';
+const root='.cache/phone-speed', hash=b=>createHash('sha256').update(b).digest('hex');
+const source='36f5df601963f418f71b98ee460783ea6191b0bc';
+const file=await fs.readFile(`${root}/before-readback/summary.json`),rows=JSON.parse(file);
+assert.equal(rows.length,TOYS.length);assert.equal(new Set(rows.map(r=>r.id)).size,TOYS.length);
+for(const r of rows){assert.equal(r.source,source);assert.equal(r.run,0);assert.ok(r.heapBytes>0&&r.transferBytes>0&&r.bodyBytes>0&&r.heap?.usedSize>0);}
+const previous=await fs.readFile(`${root}/freeze-readback.json`,'utf8').catch(e=>{if(e.code==='ENOENT')return null;throw e;});
+if(previous)throw new Error('Corrected ranking is already frozen; never rerank final targets.');
+const targets=freezeTargets(rows,TOYS.map(t=>t.id)),bytes=JSON.stringify(targets,null,2)+'\n';
+const frozenAt=new Date().toISOString(), method=JSON.parse(await fs.readFile(`${root}/before-readback/method.json`,'utf8'));
+const frozen={frozenAt,source,catalog:TOYS.length,metric:'idle.median',completion:'synchronous-readPixels',measurementSHA256:method.measurementSHA256,hybridSHA256:method.hybridSHA256,baselineSHA256:hash(file),targetsSHA256:hash(bytes),targets,retirement:'Initial finish-only survey and freeze are preserved but retired; the same original-only ranking rule is applied automatically to the corrected full survey.'};
+await fs.writeFile(`${root}/targets.json`,bytes);
+for(const name of ['freeze.json','freeze-readback.json'])await fs.writeFile(`${root}/${name}`,JSON.stringify(frozen,null,2)+'\n');
+const selected=new Set(targets.map(t=>t.id));
+const repetitions=Object.fromEntries(TOYS.map(t=>[t.id,selected.has(t.id)?5:1]));
+for(const file of ['repetitions-initial.json','repetitions.json'])await fs.writeFile(`${root}/${file}`,JSON.stringify(repetitions,null,2)+'\n');
+const ids=[...selected,...rankSlowest(rows.filter(r=>!selected.has(r.id)),15).map(r=>r.id)];
+assert.equal(ids.length,30);assert.equal(new Set(ids).size,30);
+const phone={source,frozenAt,completion:'synchronous-readPixels',measurementSHA256:method.measurementSHA256,selection:'15 largest corrected original idle medians, plus 15 remaining opening/draw cases',ids};
+for(const file of [`${root}/phone30.json`,'tools/pages/phone-speed-slowest.json'])await fs.writeFile(file,JSON.stringify(phone,null,2)+'\n');
+console.log(JSON.stringify({frozenAt,selectedVideo:selected.has('video-3d'),targets:targets.map(t=>{const r=rows.find(r=>r.id===t.id);return{...t,idle:r.idle.median,splats:r.splats};})},null,2));

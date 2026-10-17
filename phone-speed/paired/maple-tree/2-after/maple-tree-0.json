@@ -1,0 +1,106 @@
+{
+  "id": "maple-tree",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3301.5,
+  "firstSubmitMs": 2637.4000000003725,
+  "idle": {
+    "count": 8,
+    "median": 336.75,
+    "p95": 398.20000000018626,
+    "work": {
+      "count": 9,
+      "median": 340.19999999925494,
+      "p95": 619.3999999994412
+    },
+    "elapsedMs": 3555.399999999441,
+    "intervals": [
+      343.5,
+      325.5,
+      330,
+      398.20000000018626,
+      372.70000000018626,
+      303.29999999981374,
+      297.79999999981374,
+      360.70000000018626
+    ],
+    "workMs": [
+      619.3999999994412,
+      340.19999999925494,
+      321,
+      327.5,
+      394,
+      370.09999999962747,
+      296.70000000018626,
+      295.09999999962747,
+      356.79999999981374
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 741.0999999996275,
+    "p95": 785.5,
+    "work": {
+      "count": 9,
+      "median": 731.3999999994412,
+      "p95": 769.5
+    },
+    "elapsedMs": 6663.799999999814,
+    "intervals": [
+      748.5,
+      748.3999999994412,
+      733.7999999998137,
+      772.6000000005588,
+      732.5999999996275,
+      706.5,
+      706.9000000003725,
+      785.5
+    ],
+    "workMs": [
+      724.4000000003725,
+      745.1000000005588,
+      745.7000000001863,
+      731.3999999994412,
+      769.5,
+      730,
+      703.5999999996275,
+      704.2000000001863,
+      763.2000000001863
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 29335898,
+  "transferBytes": 9209206,
+  "bodyBytes": 9179506,
+  "cachedRequests": 0,
+  "requests": 99,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 14690672,
+    "totalSize": 31457280,
+    "embedderHeapUsedSize": 9135056,
+    "backingStorageSize": 22026946
+  },
+  "run": 0,
+  "label": "Golden maple",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 14811,
+  "measuredAt": "2026-10-17T07:25:29.867Z",
+  "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+}

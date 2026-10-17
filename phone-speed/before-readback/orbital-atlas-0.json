@@ -1,0 +1,106 @@
+{
+  "id": "orbital-atlas",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 1724.6999999999534,
+  "firstSubmitMs": 1422.3999999999069,
+  "idle": {
+    "count": 8,
+    "median": 346.29999999993015,
+    "p95": 391.69999999995343,
+    "work": {
+      "count": 9,
+      "median": 346.89999999990687,
+      "p95": 995.7999999998137
+    },
+    "elapsedMs": 4106.899999999907,
+    "intervals": [
+      326.4000000001397,
+      374.5,
+      326.5999999998603,
+      316.20000000018626,
+      343.5,
+      349.0999999998603,
+      374,
+      391.69999999995343
+    ],
+    "workMs": [
+      995.7999999998137,
+      323.80000000004657,
+      371.30000000004657,
+      321.69999999995343,
+      313.5,
+      341,
+      346.89999999990687,
+      371.5,
+      389
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 348.30000000004657,
+    "p95": 390.5,
+    "work": {
+      "count": 9,
+      "median": 343.80000000004657,
+      "p95": 387.89999999990687
+    },
+    "elapsedMs": 3006.3000000000466,
+    "intervals": [
+      390.5,
+      370.30000000004657,
+      373.69999999995343,
+      340.80000000004657,
+      355.80000000004657,
+      316.69999999995343,
+      255.30000000004657,
+      255
+    ],
+    "workMs": [
+      343.80000000004657,
+      387.89999999990687,
+      367.60000000009313,
+      371.19999999995343,
+      338,
+      353.20000000018626,
+      313.5,
+      252.5,
+      252.60000000009313
+    ]
+  },
+  "action": "open",
+  "heapBytes": 44574374,
+  "transferBytes": 5314652,
+  "bodyBytes": 5284652,
+  "cachedRequests": 0,
+  "requests": 100,
+  "splats": 108646,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 18739300,
+    "totalSize": 35332096,
+    "embedderHeapUsedSize": 10968704,
+    "backingStorageSize": 32924426
+  },
+  "run": 0,
+  "label": "Orbital atlas",
+  "kind": "kit",
+  "pack": "lattices",
+  "labs": true,
+  "errors": [],
+  "wallMs": 10090,
+  "measuredAt": "2026-10-17T05:36:41.286Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

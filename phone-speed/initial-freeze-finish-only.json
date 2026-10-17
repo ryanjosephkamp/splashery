@@ -1,0 +1,100 @@
+{
+  "frozenAt": "2026-10-17T04:13:58.058Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+  "catalog": 465,
+  "metric": "idle.median",
+  "baselineSHA256": "5c05ae5a8d8a6465b8eb489097c3e63b8a784acb91176d096b27c8aa14492c65",
+  "targetsSHA256": "2533cdaa4644a2a69f57a3b9ef21448e491cf55e24e9c506dd6d9809380d6ae3",
+  "targets": [
+    {
+      "id": "alum-crystal",
+      "metric": "idle.median",
+      "loadRank": 17,
+      "drawRank": 1
+    },
+    {
+      "id": "crochet-earth",
+      "metric": "idle.median",
+      "loadRank": 6,
+      "drawRank": 2
+    },
+    {
+      "id": "sunflower-photo",
+      "metric": "idle.median",
+      "loadRank": 20,
+      "drawRank": 3
+    },
+    {
+      "id": "video-3d",
+      "metric": "idle.median",
+      "loadRank": 55,
+      "drawRank": 4
+    },
+    {
+      "id": "toy-trex",
+      "metric": "idle.median",
+      "loadRank": 50,
+      "drawRank": 5
+    },
+    {
+      "id": "desk-globe",
+      "metric": "idle.median",
+      "loadRank": 23,
+      "drawRank": 6
+    },
+    {
+      "id": "dog-plush",
+      "metric": "idle.median",
+      "loadRank": 8,
+      "drawRank": 7
+    },
+    {
+      "id": "maple-tree",
+      "metric": "idle.median",
+      "loadRank": 10,
+      "drawRank": 8
+    },
+    {
+      "id": "bmx-bike",
+      "metric": "idle.median",
+      "loadRank": 28,
+      "drawRank": 9
+    },
+    {
+      "id": "triceratops-skull",
+      "metric": "idle.median",
+      "loadRank": 39,
+      "drawRank": 10
+    },
+    {
+      "id": "cactus-real",
+      "metric": "idle.median",
+      "loadRank": 11,
+      "drawRank": 11
+    },
+    {
+      "id": "mushroom-photo",
+      "metric": "idle.median",
+      "loadRank": 5,
+      "drawRank": 12
+    },
+    {
+      "id": "stollen",
+      "metric": "idle.median",
+      "loadRank": 9,
+      "drawRank": 13
+    },
+    {
+      "id": "physalis",
+      "metric": "idle.median",
+      "loadRank": 30,
+      "drawRank": 14
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "metric": "idle.median",
+      "loadRank": 7,
+      "drawRank": 15
+    }
+  ]
+}

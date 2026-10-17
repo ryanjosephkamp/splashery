@@ -1,0 +1,106 @@
+{
+  "id": "mushroom-photo",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2939.2000000000116,
+  "firstSubmitMs": 2663.9000000000233,
+  "idle": {
+    "count": 8,
+    "median": 716.6999999999825,
+    "p95": 796.2000000000116,
+    "work": {
+      "count": 9,
+      "median": 713.7000000000116,
+      "p95": 2092.7999999999884
+    },
+    "elapsedMs": 8988.5,
+    "intervals": [
+      717.0999999999767,
+      796.2000000000116,
+      780,
+      775.9000000000233,
+      716.2999999999884,
+      710.5,
+      682.7999999999884,
+      639.9000000000233
+    ],
+    "workMs": [
+      2092.7999999999884,
+      711,
+      793.5,
+      774.7000000000116,
+      773,
+      713.7000000000116,
+      707.7999999999884,
+      680.2999999999884,
+      635.5
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 723.4000000000233,
+    "p95": 791.5,
+    "work": {
+      "count": 9,
+      "median": 720.8000000000466,
+      "p95": 829.8999999999651
+    },
+    "elapsedMs": 6612,
+    "intervals": [
+      671.1000000000349,
+      762.5999999999767,
+      786.5999999999767,
+      722,
+      791.5,
+      724.8000000000466,
+      641.2999999999884,
+      678.2999999999884
+    ],
+    "workMs": [
+      829.8999999999651,
+      666,
+      759.9000000000233,
+      783.6999999999534,
+      719.1999999999534,
+      788.6999999999534,
+      720.8000000000466,
+      638.6000000000349,
+      673.2999999999884
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 37876241,
+  "transferBytes": 9266412,
+  "bodyBytes": 9237012,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    672
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 15432084,
+    "totalSize": 31719424,
+    "embedderHeapUsedSize": 11050320,
+    "backingStorageSize": 29685401
+  },
+  "run": 0,
+  "label": "Mushroom (photo)",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 19810,
+  "measuredAt": "2026-10-17T05:15:42.068Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

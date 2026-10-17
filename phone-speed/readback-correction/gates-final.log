@@ -1,0 +1,11 @@
+
+Running 2 tests using 1 worker
+
+(node:7456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-speed.spec.mjs:150:1 › speed gates reject missing runs, failed visuals, and unrelated regressions (314ms)
+  ✓  2 [chromium] › tests/cdx-speed.spec.mjs:682:1 › resolution declarations require exact targeted canvases and native appearance evidence (22ms)
+
+  2 passed (1.6s)

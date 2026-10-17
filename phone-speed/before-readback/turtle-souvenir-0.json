@@ -1,0 +1,106 @@
+{
+  "id": "turtle-souvenir",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2329.300000000003,
+  "firstSubmitMs": 2067,
+  "idle": {
+    "count": 8,
+    "median": 636.4000000000015,
+    "p95": 658,
+    "work": {
+      "count": 9,
+      "median": 633.8999999999942,
+      "p95": 1313.300000000003
+    },
+    "elapsedMs": 6947,
+    "intervals": [
+      636.6999999999971,
+      636.1000000000058,
+      591.6999999999825,
+      656.5,
+      658,
+      580,
+      611.3000000000175,
+      644.8999999999942
+    ],
+    "workMs": [
+      1313.300000000003,
+      633.8999999999942,
+      633.1000000000058,
+      588.7999999999884,
+      651.6999999999825,
+      654.6999999999825,
+      577.5999999999767,
+      608.3999999999942,
+      640.5
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 634.3999999999942,
+    "p95": 739.8000000000175,
+    "work": {
+      "count": 9,
+      "median": 645,
+      "p95": 736.2000000000116
+    },
+    "elapsedMs": 5705.099999999977,
+    "intervals": [
+      619.5,
+      671.6999999999825,
+      555.2000000000116,
+      551.6999999999825,
+      739.8000000000175,
+      571.3999999999942,
+      684.5,
+      649.2999999999884
+    ],
+    "workMs": [
+      657.1000000000058,
+      614.6000000000058,
+      669,
+      552.7000000000116,
+      548.5,
+      736.2000000000116,
+      568.2999999999884,
+      681.3999999999942,
+      645
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 32924518,
+  "transferBytes": 9216090,
+  "bodyBytes": 9186690,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 18123884,
+    "totalSize": 31981568,
+    "embedderHeapUsedSize": 10918248,
+    "backingStorageSize": 14992170
+  },
+  "run": 0,
+  "label": "Souvenir turtle",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 16241,
+  "measuredAt": "2026-10-17T05:13:11.422Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

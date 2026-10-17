@@ -1,0 +1,106 @@
+{
+  "id": "strawberry",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2978.4000000003725,
+  "firstSubmitMs": 2308.0999999996275,
+  "idle": {
+    "count": 8,
+    "median": 392.5,
+    "p95": 460.40000000037253,
+    "work": {
+      "count": 9,
+      "median": 390.5,
+      "p95": 963.2000000011176
+    },
+    "elapsedMs": 4182.9000000003725,
+    "intervals": [
+      400.09999999962747,
+      391.40000000037253,
+      344.19999999925494,
+      368.7000000011176,
+      332.09999999962747,
+      393.59999999962747,
+      408.5,
+      460.40000000037253
+    ],
+    "workMs": [
+      963.2000000011176,
+      394.30000000074506,
+      388.7000000011176,
+      341.59999999962747,
+      366.1000000014901,
+      329.5,
+      390.5,
+      403.30000000074506,
+      456
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 347.59999999962747,
+    "p95": 439.59999999962747,
+    "work": {
+      "count": 9,
+      "median": 340.59999999962747,
+      "p95": 414
+    },
+    "elapsedMs": 3249.5999999996275,
+    "intervals": [
+      360.6000000014901,
+      439.59999999962747,
+      352,
+      338.59999999962747,
+      333,
+      366.30000000074506,
+      343.19999999925494,
+      330.69999999925494
+    ],
+    "workMs": [
+      383,
+      354.7000000011176,
+      414,
+      340.59999999962747,
+      333.59999999962747,
+      327,
+      360.30000000074506,
+      340.09999999962747,
+      326.59999999962747
+    ]
+  },
+  "action": "pop",
+  "heapBytes": 21488520,
+  "transferBytes": 6866476,
+  "bodyBytes": 6837076,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 120000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 12820152,
+    "totalSize": 31195136,
+    "embedderHeapUsedSize": 8605768,
+    "backingStorageSize": 16044672
+  },
+  "run": 0,
+  "label": "Strawberry",
+  "kind": "captured",
+  "pack": null,
+  "labs": false,
+  "errors": [],
+  "wallMs": 11697,
+  "measuredAt": "2026-10-17T07:55:22.674Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

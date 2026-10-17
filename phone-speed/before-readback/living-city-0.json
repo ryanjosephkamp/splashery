@@ -1,0 +1,106 @@
+{
+  "id": "living-city",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 1997.8999999999069,
+  "firstSubmitMs": 1762.7999999998137,
+  "idle": {
+    "count": 8,
+    "median": 402.89999999990687,
+    "p95": 460.5,
+    "work": {
+      "count": 9,
+      "median": 401,
+      "p95": 1433.7000000001863
+    },
+    "elapsedMs": 4851.399999999907,
+    "intervals": [
+      363.5,
+      402.29999999981374,
+      355.70000000018626,
+      458.5,
+      430.1999999997206,
+      460.5,
+      353.5,
+      403.5
+    ],
+    "workMs": [
+      1433.7000000001863,
+      360.3000000002794,
+      399.1999999997206,
+      353.20000000018626,
+      455.70000000018626,
+      427.39999999990687,
+      457.79999999981374,
+      350.89999999990687,
+      401
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 363.19999999995343,
+    "p95": 434.39999999990687,
+    "work": {
+      "count": 9,
+      "median": 366.29999999981374,
+      "p95": 431.39999999990687
+    },
+    "elapsedMs": 3294.7999999998137,
+    "intervals": [
+      309,
+      357.79999999981374,
+      388.40000000037253,
+      339.1999999997206,
+      320,
+      368.60000000009313,
+      388,
+      434.39999999990687
+    ],
+    "workMs": [
+      387.20000000018626,
+      306.60000000009313,
+      354.6999999997206,
+      386,
+      336.5,
+      317.39999999990687,
+      366.29999999981374,
+      385.5,
+      431.39999999990687
+    ]
+  },
+  "action": "night",
+  "heapBytes": 94839993,
+  "transferBytes": 10726757,
+  "bodyBytes": 10696457,
+  "cachedRequests": 0,
+  "requests": 101,
+  "splats": 304087,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 21740380,
+    "totalSize": 36438016,
+    "embedderHeapUsedSize": 10937808,
+    "backingStorageSize": 72849725
+  },
+  "run": 0,
+  "label": "Living city",
+  "kind": "kit",
+  "pack": "geo",
+  "labs": true,
+  "errors": [],
+  "wallMs": 11418,
+  "measuredAt": "2026-10-17T06:13:42.021Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

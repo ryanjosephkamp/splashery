@@ -1,0 +1,43 @@
+
+Running 1 test using 1 worker
+
+(node:51153) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51153) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-speed.spec.mjs:929:1 › phone page retains browser resize notifications and still marks real errors (6.3s)
+
+
+  1) [chromium] › tests/cdx-speed.spec.mjs:929:1 › phone page retains browser resize notifications and still marks real errors 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoContain[2m([22m[32mexpected[39m[2m) // indexOf[22m
+
+    [1mMatcher error[22m: [31mreceived[39m value must not be null nor undefined
+
+    Received has value: [31mundefined[39m
+
+      786 |   await expect(page.getByRole("status")).toContainText("Complete", { timeout: 120000 });
+      787 |   const result = JSON.parse(await page.locator("#json").inputValue()).rows[0];
+    > 788 |   expect(result.browserNotifications).toContain(resize);
+          |                                       ^
+      789 |   expect(result.errors).toContain(resize);
+      790 |   expect(result.errors).toContain("Deliberate application failure");
+      791 |   expect(pageErrors).toContain("Deliberate application failure");
+        at /workspace/splashery/tests/cdx-speed.spec.mjs:788:39
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-speed-phone-page-retai-e35bd-and-still-marks-real-errors-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-speed-phone-page-retai-e35bd-and-still-marks-real-errors-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-speed-phone-page-retai-e35bd-and-still-marks-real-errors-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-speed-phone-page-retai-e35bd-and-still-marks-real-errors-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-speed.spec.mjs:929:1 › phone page retains browser resize notifications and still marks real errors 

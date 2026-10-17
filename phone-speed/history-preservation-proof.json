@@ -1,0 +1,22 @@
+{
+  "before": {
+    "codex/phone-speed": "18924bf1f85566062acc8ea6ff8614df285c5723",
+    "codex/phone-speed-integration": "9cf1e832c3bba2f3e86c66b4c92e3058f0cec4ec",
+    "codex/phone-speed-clips": "ceb51de7a015377d7f350119c27a792fc1a8a66d"
+  },
+  "strategy": "Keep every existing branch and commit intact; create a new additive publication branch from public main with public commit metadata. Do not amend, rebase, delete commits, or force-push.",
+  "after": {
+    "codex/phone-speed": "18924bf1f85566062acc8ea6ff8614df285c5723",
+    "codex/phone-speed-integration": "9cf1e832c3bba2f3e86c66b4c92e3058f0cec4ec",
+    "codex/phone-speed-clips": "ceb51de7a015377d7f350119c27a792fc1a8a66d"
+  },
+  "publicHead": "3e058bac5d18eb33b266bac1b30cf175889305bb",
+  "publicBase": "ea9a9d193de529e6c75264123bb04b7e862b7162",
+  "newCommits": 5,
+  "runtimeAndTestInputsMatch": "9cf1e832c3bba2f3e86c66b4c92e3058f0cec4ec",
+  "preservedOriginalBranch": {
+    "newName": "codex/phone-speed-private-history",
+    "originalTip": "18924bf1f85566062acc8ea6ff8614df285c5723",
+    "actualTip": "18924bf1f85566062acc8ea6ff8614df285c5723"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-17T07:26:45.621Z",
+  "host": "AMD EPYC 9V74 80-Core Processor",
+  "args": [
+    "--use-gl=angle",
+    "--use-angle=gl",
+    "--hide-scrollbars",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-webgl",
+    "--disable-gpu-driver-bug-workarounds",
+    "--enable-unsafe-webgpu",
+    "--enable-features=Vulkan,WebGPU",
+    "--use-webgpu-adapter=swiftshader",
+    "--use-vulkan=swiftshader"
+  ],
+  "browser": "151.0.7922.173",
+  "webgl": {
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+    "pixel": [
+      64,
+      128,
+      191,
+      255
+    ]
+  },
+  "ok": true,
+  "xvfbStderr": "_XSERVTransmkdir: ERROR: euid != 0,directory /tmp/.X11-unix will not be created.\n"
+}

@@ -1,0 +1,25 @@
+
+Running 16 tests using 1 worker
+
+(node:73020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-speed.spec.mjs:3:1 › phone speed statistics retain missing samples and use real percentiles (196ms)
+  ✓   2 [chromium] › tests/cdx-speed.spec.mjs:51:1 › first view includes the photo toys' default relief mesh without switching views (26.1s)
+  ✓   3 [chromium] › tests/cdx-speed.spec.mjs:99:1 › phone page measures a real toy locally and exposes a copyable result (9.5s)
+  ✓   4 [chromium] › tests/cdx-speed.spec.mjs:150:1 › speed gates reject missing runs, failed visuals, and unrelated regressions (67ms)
+  ✓   5 [chromium] › tests/cdx-speed.spec.mjs:270:1 › idle redraws reuse GPU work, then a look change and a tap invalidate it (6.8s)
+  ✓   6 [chromium] › tests/cdx-speed.spec.mjs:333:1 › stopping the CLI finishes its active sample and does not open the next toy (8.6s)
+  ✓   7 [chromium] › tests/cdx-speed.spec.mjs:378:1 › paired resume rejects changed settings and incompatible cached samples (2.4s)
+  ✓   8 [chromium] › tests/cdx-speed.spec.mjs:457:1 › clock-driven and unknown splat behaviors cannot be cached as static (34ms)
+  ✓   9 [chromium] › tests/cdx-speed.spec.mjs:474:1 › completed idle draws skip the main splat work pass until a look or tap changes (9.9s)
+  ✓  10 [chromium] › tests/cdx-speed.spec.mjs:536:1 › imported spherical harmonics retain per-frame color updates (9.4s)
+  ✓  11 [chromium] › tests/cdx-speed.spec.mjs:578:1 › retagging a settled rig invalidates its cached GPU surface (7.9s)
+  ✓  12 [chromium] › tests/cdx-speed.spec.mjs:610:1 › recipe render settings follow the active tier and preserve URL overrides (13.4s)
+  ✓  13 [chromium] › tests/cdx-speed.spec.mjs:682:1 › resolution declarations require exact targeted canvases and native appearance evidence (72ms)
+  ✓  14 [chromium] › tests/cdx-speed.spec.mjs:803:1 › phone draws use a synchronous pixel readback and preserve the read framebuffer (8.0s)
+  ✓  15 [chromium] › tests/cdx-speed.spec.mjs:854:1 › picture toys reuse only the primary surface and invalidate it for a page turn (8.2s)
+  ✓  16 [chromium] › tests/cdx-speed.spec.mjs:929:1 › phone page retains browser resize notifications and still marks real errors (6.9s)
+
+  16 passed (2.0m)

@@ -1,0 +1,1786 @@
+{
+  "source": "072f15f3d00150825f36784b504b8b365c892cd7",
+  "browser": "151.0.7922.173",
+  "protocol": {
+    "toolSHA256": "a66995bf971ab34dba2c575b8109a7974a21048304ffdd174e389680ae217c3c",
+    "hybridSHA256": "59e92d3e8174d303051cb667c0510b9d7ff834f3c3a22ffb46abf37d763e76b2",
+    "sceneSeed": 103,
+    "wallTime": "2026-10-17T12:00:00Z",
+    "restSeconds": 0.5,
+    "stepHz": 60,
+    "settleDraws": 3,
+    "calendarOnly": true,
+    "completedDraws": true,
+    "synchronousReadback": true,
+    "nativeComparisonWidth": 1170
+  },
+  "measuredAt": "2026-10-17T06:40:19.199Z",
+  "rows": [
+    {
+      "id": "photo-album",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": 47.103400058201274,
+          "exact": false,
+          "ssim": 0.9986400155379518,
+          "laplacian": 0.0001319328941211308,
+          "sourceLaplacian": 0.00012582352298649214,
+          "sharpnessRatio": 1.0485550792858864
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": 48.86154985171963,
+          "exact": false,
+          "ssim": 0.9987759217202336,
+          "laplacian": 0.00008873493196576684,
+          "sourceLaplacian": 0.00008359166132938742,
+          "sharpnessRatio": 1.0615285131864134
+        }
+      },
+      "midTapSeconds": 0.6,
+      "sceneSeed": 103,
+      "splats": 55308,
+      "canvas": [
+        507,
+        607
+      ],
+      "camera": {
+        "yaw": 0.0022,
+        "pitch": 0.0022,
+        "roll": 0,
+        "distance": 2.9522
+      },
+      "controls": {
+        "turn": 0.5000000000000018,
+        "pop": 0,
+        "layers": 0
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          1.6000000005587935,
+          0.7999999998137355,
+          0.599999999627471
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 3,
+        "orbitUpdatesMs": [
+          1,
+          1.2000000001862645,
+          0.7000000001862645
+        ],
+        "shBands": null,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.0833333333333344,
+            "last": 1.100000000000001,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.100000000000001,
+            "rate": 1
+          },
+          "time": 1.100000000000001
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 55308,
+      "rest": {
+        "psnr": 47.56957530301043,
+        "exact": false,
+        "ssim": 0.9990220697281982,
+        "laplacian": 0.003048077288013578,
+        "sourceLaplacian": 0.003438040467345056,
+        "sharpnessRatio": 0.8865739996269975
+      },
+      "tap": {
+        "psnr": 48.97562686553926,
+        "exact": false,
+        "ssim": 0.9990247456448605,
+        "laplacian": 0.0021663445971086904,
+        "sourceLaplacian": 0.0024502061575143773,
+        "sharpnessRatio": 0.8841478870930389
+      }
+    },
+    {
+      "id": "crochet-earth",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00018287431794080676,
+          "sourceLaplacian": 0.00018287431794080676,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00015545393177377744,
+          "sourceLaplacian": 0.00015545393177377744,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.5,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.40000000037252903,
+          0.40000000037252903,
+          0.5
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.2999999998137355,
+          0.40000000037252903,
+          0.39999999944120646
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 30000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.9833333333333312,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "time": 1.9999999999999978
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.004208650545149966,
+        "sourceLaplacian": 0.004208650545149966,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.003680848355488374,
+        "sourceLaplacian": 0.003680848355488374,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "sunflower-photo",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00006828110932534333,
+          "sourceLaplacian": 0.00006828110932534333,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00006838668544763526,
+          "sourceLaplacian": 0.00006838668544763526,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.5,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.5,
+          0.40000000037252903,
+          0.39999999944120646
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.2999999998137355,
+          0.20000000018626451,
+          0.2999999998137355
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 12000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.9833333333333312,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "time": 1.9999999999999978
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.0017312565681696945,
+        "sourceLaplacian": 0.0017312565681696945,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.0017573607139058874,
+        "sourceLaplacian": 0.0017573607139058874,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "toy-trex",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00008663908790894389,
+          "sourceLaplacian": 0.00008663908790894389,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00008679940168118226,
+          "sourceLaplacian": 0.00008679940168118226,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.3,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.2999999998137355,
+          0.40000000037252903,
+          0.39999999944120646
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.2999999998137355,
+          0.40000000037252903,
+          0.2999999998137355
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 45000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.7833333333333319,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "time": 1.7999999999999985
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.0016901767691160064,
+        "sourceLaplacian": 0.0016901767691160064,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.0017156762477788868,
+        "sourceLaplacian": 0.0017156762477788868,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "monkey-doll",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00017078407764374443,
+          "sourceLaplacian": 0.00017078407764374443,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00016818754435829846,
+          "sourceLaplacian": 0.00016818754435829846,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.3,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.39999999944120646,
+          0.2999999998137355,
+          0.40000000037252903
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.2999999998137355,
+          0.2999999998137355,
+          0.2999999998137355
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 40000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.7833333333333319,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "time": 1.7999999999999985
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.0032966409092838075,
+        "sourceLaplacian": 0.0032966409092838075,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.0032296763070246695,
+        "sourceLaplacian": 0.0032296763070246695,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1344,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.0004448263588062918,
+          "sourceLaplacian": 0.0004448263588062918,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1344,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00044325771774133134,
+          "sourceLaplacian": 0.00044325771774133134,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.1,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        672
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 3.9
+      },
+      "controls": {
+        "hop": 0.5000000000000004
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.2999999998137355,
+          0.39999999944120646,
+          1.1000000005587935
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.39999999944120646,
+          0.40000000037252903,
+          0.20000000018626451
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 60003
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.5833333333333326,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "time": 1.5999999999999992
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        672
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.00911458423767832,
+        "sourceLaplacian": 0.00911458423767832,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.00920497287972751,
+        "sourceLaplacian": 0.00920497287972751,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "dog-plush",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00014236464910768353,
+          "sourceLaplacian": 0.00014236464910768353,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00014182424240221926,
+          "sourceLaplacian": 0.00014182424240221926,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 0.725,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000004
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.19999999925494194,
+          0.5,
+          0.30000000074505806
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.39999999944120646,
+          0.2999999998137355,
+          0.2999999998137355
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 54000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.2083333333333317,
+            "last": 1.2249999999999985,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.2249999999999985,
+            "rate": 1
+          },
+          "time": 1.2249999999999985
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.002147119325410476,
+        "sourceLaplacian": 0.002147119325410476,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.0021722240849660623,
+        "sourceLaplacian": 0.0021722240849660623,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "cone-shell",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.0005825986331901231,
+          "sourceLaplacian": 0.0005825986331901231,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.0005955126641854666,
+          "sourceLaplacian": 0.0005955126641854666,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.35,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.4999999999999978
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          1.7999999998137355,
+          0.2999999998137355,
+          0.40000000037252903
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.5,
+          0.39999999944120646,
+          0.20000000018626451
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.8333333333333317,
+            "last": 1.8499999999999983,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.8499999999999983,
+            "rate": 1
+          },
+          "time": 1.8499999999999983
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.012628241197942763,
+        "sourceLaplacian": 0.012628241197942763,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.013045677986465769,
+        "sourceLaplacian": 0.013045677986465769,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "desk-globe",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00006108840032130073,
+          "sourceLaplacian": 0.00006108840032130073,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00006571089460231762,
+          "sourceLaplacian": 0.00006571089460231762,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.5,
+      "sceneSeed": 103,
+      "splats": 293009,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5588235294117663
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.39999999944120646,
+          0.5,
+          0.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.2999999998137355,
+          0.40000000037252903,
+          0.30000000074505806
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 40000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.9833333333333312,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "time": 1.9999999999999978
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 293009,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.0015102699770741827,
+        "sourceLaplacian": 0.0015102699770741827,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.0015692695601064678,
+        "sourceLaplacian": 0.0015692695601064678,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "bmx-bike",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.0005820184668026609,
+          "sourceLaplacian": 0.0005820184668026609,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.0005873299710238716,
+          "sourceLaplacian": 0.0005873299710238716,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.3,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          2.199999999254942,
+          0.2999999998137355,
+          0.39999999944120646
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.40000000037252903,
+          0.30000000074505806,
+          0.2999999998137355
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 56000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.7833333333333319,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "time": 1.7999999999999985
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.009717310300715232,
+        "sourceLaplacian": 0.009717310300715232,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.009829464942340466,
+        "sourceLaplacian": 0.009829464942340466,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "mushroom-photo",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1344,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.0002742971700464315,
+          "sourceLaplacian": 0.0002742971700464315,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1344,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00027304015472205174,
+          "sourceLaplacian": 0.00027304015472205174,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.1,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        672
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000004
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.5,
+          0.40000000037252903,
+          0.40000000037252903
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.30000000074505806,
+          0.2999999998137355,
+          0.2999999998137355
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 40000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.5833333333333326,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "time": 1.5999999999999992
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        672
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.006228081734393555,
+        "sourceLaplacian": 0.006228081734393555,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.006190282094366473,
+        "sourceLaplacian": 0.006190282094366473,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "cave-lioness",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00035749574403985695,
+          "sourceLaplacian": 0.00035749574403985695,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.00035202169094343576,
+          "sourceLaplacian": 0.00035202169094343576,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.35,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.2,
+        "roll": 0,
+        "distance": 6
+      },
+      "controls": {
+        "hop": 0.4999999999999978
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.39999999944120646,
+          0.39999999944120646,
+          0.30000000074505806
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.40000000037252903,
+          0.20000000018626451,
+          0.20000000018626451
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.8333333333333317,
+            "last": 1.8499999999999983,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.8499999999999983,
+            "rate": 1
+          },
+          "time": 1.8499999999999983
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.005204361615742233,
+        "sourceLaplacian": 0.005204361615742233,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.005294141925373227,
+        "sourceLaplacian": 0.005294141925373227,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "murex-shell",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.0007337141294107492,
+          "sourceLaplacian": 0.0007337141294107492,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.0007037047184452257,
+          "sourceLaplacian": 0.0007037047184452257,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.5,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.2,
+        "roll": 0,
+        "distance": 4.1
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.2999999998137355,
+          0.39999999944120646,
+          0.40000000037252903
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.599999999627471,
+          0.39999999944120646,
+          1.5
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.9833333333333312,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "time": 1.9999999999999978
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.011956752161140147,
+        "sourceLaplacian": 0.011956752161140147,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.012253869844461666,
+        "sourceLaplacian": 0.012253869844461666,
+        "sharpnessRatio": 1
+      }
+    },
+    {
+      "id": "video-3d",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": 41.35045854147461,
+          "exact": false,
+          "ssim": 0.9945417400934711,
+          "laplacian": 0.000162104733606197,
+          "sourceLaplacian": 0.0002700778636039377,
+          "sharpnessRatio": 0.6002148100664757
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": 44.14427274535187,
+          "exact": false,
+          "ssim": 0.994007571755022,
+          "laplacian": 0.00010819182424641813,
+          "sourceLaplacian": 0.00017559016309449417,
+          "sharpnessRatio": 0.6161610783868029
+        }
+      },
+      "midTapSeconds": 0.3,
+      "sceneSeed": 103,
+      "splats": 59682,
+      "canvas": [
+        936,
+        1120
+      ],
+      "camera": {
+        "yaw": 0.3134,
+        "pitch": 0.0164,
+        "roll": 0.0582,
+        "distance": 0.9166
+      },
+      "controls": {
+        "replay": 0.5000000000000001
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.30000000074505806,
+          0.900000000372529,
+          0.2999999998137355
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 1,
+        "orbitUniformWrites": 1,
+        "orbitUpdatesMs": [
+          0.5,
+          0.40000000037252903,
+          0.2999999998137355
+        ],
+        "shBands": null,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994,
+          "flight": {
+            "active": false,
+            "clock": 0,
+            "time": null,
+            "pausedAt": null,
+            "done": false,
+            "offset": {
+              "yaw": 0,
+              "pitch": 0,
+              "zoom": 1
+            }
+          },
+          "view": {
+            "camera": {
+              "yaw": 0.3294,
+              "pitch": 0.0177,
+              "roll": 0.0611,
+              "distance": 0.9141
+            },
+            "target": [
+              -0.028147184763067656,
+              0.012555318958949253,
+              0.009387008426485544
+            ],
+            "fov": 38,
+            "horizontalFov": true
+          }
+        },
+        "tap": {
+          "kit": {
+            "t": 0.7833333333333341,
+            "last": 0.8000000000000008,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.8000000000000008,
+            "rate": 1
+          },
+          "time": 0.8000000000000008,
+          "flight": {
+            "active": true,
+            "clock": 0.5166666666666666,
+            "time": 1.0393333333333343,
+            "pausedAt": null,
+            "done": false,
+            "offset": {
+              "yaw": 0,
+              "pitch": 0,
+              "zoom": 1
+            }
+          },
+          "view": {
+            "camera": {
+              "yaw": 0.3134,
+              "pitch": 0.0164,
+              "roll": 0.0582,
+              "distance": 0.9166
+            },
+            "target": [
+              -0.026259965928642326,
+              0.012454518560105498,
+              0.008296571731227997
+            ],
+            "fov": 27.551192031434457,
+            "horizontalFov": true
+          }
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        1170,
+        1401
+      ],
+      "referenceSplats": 59682,
+      "rest": {
+        "psnr": 41.3709138647467,
+        "exact": false,
+        "ssim": 0.9957894654617373,
+        "laplacian": 0.0031703443150748268,
+        "sourceLaplacian": 0.003852247329874148,
+        "sharpnessRatio": 0.8229856609903604
+      },
+      "tap": {
+        "psnr": 44.15112692527363,
+        "exact": false,
+        "ssim": 0.9952459866888713,
+        "laplacian": 0.002635748695166476,
+        "sourceLaplacian": 0.0031107711948880723,
+        "sharpnessRatio": 0.8472975124296507
+      }
+    },
+    {
+      "id": "maple-tree",
+      "native": {
+        "rest": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.0008347391250682672,
+          "sourceLaplacian": 0.0008347391250682672,
+          "sharpnessRatio": 1
+        },
+        "tap": {
+          "width": 1170,
+          "height": 1401,
+          "psnr": null,
+          "exact": true,
+          "ssim": 1,
+          "laplacian": 0.0008326097236049531,
+          "sourceLaplacian": 0.0008326097236049531,
+          "sharpnessRatio": 1
+        }
+      },
+      "midTapSeconds": 1.1,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000004
+      },
+      "diagnosis": {
+        "uniformWrites": 0,
+        "workDraws": 0,
+        "updatesMs": [
+          0.30000000074505806,
+          0.2999999998137355,
+          0.20000000018626451
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 0,
+        "orbitUniformWrites": 0,
+        "orbitUpdatesMs": [
+          0.2999999998137355,
+          0.5,
+          0.40000000037252903
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 44000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.5833333333333326,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.5999999999999992,
+            "rate": 1
+          },
+          "time": 1.5999999999999992
+        }
+      },
+      "errors": [],
+      "referenceError": null,
+      "referenceErrors": [],
+      "referenceCanvas": [
+        585,
+        700
+      ],
+      "referenceSplats": 300000,
+      "rest": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.013253050459597238,
+        "sourceLaplacian": 0.013253050459597238,
+        "sharpnessRatio": 1
+      },
+      "tap": {
+        "psnr": null,
+        "exact": true,
+        "ssim": 1,
+        "laplacian": 0.013229158507369701,
+        "sourceLaplacian": 0.013229158507369701,
+        "sharpnessRatio": 1
+      }
+    }
+  ]
+}

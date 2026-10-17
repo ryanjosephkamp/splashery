@@ -1,0 +1,108 @@
+[
+  {
+    "id": "crochet-earth",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3325.5999999996275,
+    "firstSubmitMs": 2860.5,
+    "idle": {
+      "count": 8,
+      "median": 464.75,
+      "p95": 546.2999999998137,
+      "work": {
+        "count": 9,
+        "median": 466.69999999925494,
+        "p95": 2114.0999999996275
+      },
+      "elapsedMs": 6853.899999999441,
+      "intervals": [
+        460.20000000018626,
+        439.1000000005588,
+        546.2999999998137,
+        487.70000000018626,
+        444.79999999981374,
+        459.09999999962747,
+        545,
+        469.29999999981374
+      ],
+      "workMs": [
+        2114.0999999996275,
+        454.79999999981374,
+        433.6000000005588,
+        540.7000000001863,
+        484.6000000005588,
+        440,
+        456,
+        542.5,
+        466.69999999925494
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 874,
+      "p95": 1063.7000000001863,
+      "work": {
+        "count": 9,
+        "median": 882.4000000003725,
+        "p95": 1060.5
+      },
+      "elapsedMs": 8098.5,
+      "intervals": [
+        821.1999999992549,
+        857.4000000003725,
+        1025.7000000001863,
+        1063.7000000001863,
+        890.5999999996275,
+        796.5,
+        757.5,
+        957.2000000001863
+      ],
+      "workMs": [
+        923.9000000003725,
+        817.8999999994412,
+        853.9000000003725,
+        1020.2000000001863,
+        1060.5,
+        882.4000000003725,
+        791.5999999996275,
+        753,
+        954.5
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 28582385,
+    "transferBytes": 9325183,
+    "bodyBytes": 9295483,
+    "cachedRequests": 0,
+    "requests": 99,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 14615972,
+      "totalSize": 31981568,
+      "embedderHeapUsedSize": 9121360,
+      "backingStorageSize": 21080921
+    },
+    "run": 0,
+    "label": "Crochet Earth",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 19524,
+    "measuredAt": "2026-10-17T06:44:20.487Z",
+    "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+  }
+]

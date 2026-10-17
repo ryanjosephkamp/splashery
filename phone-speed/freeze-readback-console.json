@@ -1,0 +1,126 @@
+{
+  "frozenAt": "2026-10-17T06:17:22.604Z",
+  "selectedVideo": true,
+  "targets": [
+    {
+      "id": "crochet-earth",
+      "metric": "idle.median",
+      "loadRank": 9,
+      "drawRank": 1,
+      "idle": 831.6000000000349,
+      "splats": 300000
+    },
+    {
+      "id": "sunflower-photo",
+      "metric": "idle.median",
+      "loadRank": 14,
+      "drawRank": 2,
+      "idle": 812.6499999999942,
+      "splats": 300000
+    },
+    {
+      "id": "toy-trex",
+      "metric": "idle.median",
+      "loadRank": 1,
+      "drawRank": 3,
+      "idle": 799.5999999999985,
+      "splats": 300000
+    },
+    {
+      "id": "monkey-doll",
+      "metric": "idle.median",
+      "loadRank": 8,
+      "drawRank": 4,
+      "idle": 790.5999999999985,
+      "splats": 300000
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "metric": "idle.median",
+      "loadRank": 4,
+      "drawRank": 5,
+      "idle": 785.2999999999884,
+      "splats": 300000
+    },
+    {
+      "id": "dog-plush",
+      "metric": "idle.median",
+      "loadRank": 10,
+      "drawRank": 6,
+      "idle": 780.1499999999942,
+      "splats": 300000
+    },
+    {
+      "id": "cone-shell",
+      "metric": "idle.median",
+      "loadRank": 6,
+      "drawRank": 7,
+      "idle": 761.2000000000698,
+      "splats": 300000
+    },
+    {
+      "id": "desk-globe",
+      "metric": "idle.median",
+      "loadRank": 12,
+      "drawRank": 8,
+      "idle": 759.4000000000233,
+      "splats": 293009
+    },
+    {
+      "id": "bmx-bike",
+      "metric": "idle.median",
+      "loadRank": 5,
+      "drawRank": 9,
+      "idle": 747.8500000000058,
+      "splats": 300000
+    },
+    {
+      "id": "mushroom-photo",
+      "metric": "idle.median",
+      "loadRank": 11,
+      "drawRank": 10,
+      "idle": 716.6999999999825,
+      "splats": 300000
+    },
+    {
+      "id": "cave-lioness",
+      "metric": "idle.median",
+      "loadRank": 18,
+      "drawRank": 11,
+      "idle": 708.8999999999942,
+      "splats": 300000
+    },
+    {
+      "id": "murex-shell",
+      "metric": "idle.median",
+      "loadRank": 33,
+      "drawRank": 12,
+      "idle": 708.1499999999942,
+      "splats": 300000
+    },
+    {
+      "id": "video-3d",
+      "metric": "idle.median",
+      "loadRank": 37,
+      "drawRank": 13,
+      "idle": 702.8499999998603,
+      "splats": 59682
+    },
+    {
+      "id": "maple-tree",
+      "metric": "idle.median",
+      "loadRank": 7,
+      "drawRank": 14,
+      "idle": 693.2000000000116,
+      "splats": 300000
+    },
+    {
+      "id": "photo-album",
+      "metric": "idle.median",
+      "loadRank": 118,
+      "drawRank": 15,
+      "idle": 677.6000000000931,
+      "splats": 55308
+    }
+  ]
+}

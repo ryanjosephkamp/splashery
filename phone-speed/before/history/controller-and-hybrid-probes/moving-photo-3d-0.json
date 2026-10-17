@@ -1,0 +1,13 @@
+{
+  "id": "moving-photo-3d",
+  "error": "page.waitForFunction: Timeout 120000ms exceeded.",
+  "run": 0,
+  "label": "Moving photo to 3D",
+  "kind": "kit",
+  "pack": "live",
+  "labs": true,
+  "errors": [],
+  "wallMs": 120430,
+  "measuredAt": "2026-10-17T04:00:17.595Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

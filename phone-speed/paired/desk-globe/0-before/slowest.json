@@ -1,0 +1,108 @@
+[
+  {
+    "id": "desk-globe",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3496.7999999998137,
+    "firstSubmitMs": 2576.7000000001863,
+    "idle": {
+      "count": 8,
+      "median": 779.2999999998137,
+      "p95": 867.1999999992549,
+      "work": {
+        "count": 9,
+        "median": 789.4000000003725,
+        "p95": 2157
+      },
+      "elapsedMs": 8749.5,
+      "intervals": [
+        792.5,
+        754.9000000003725,
+        867.1999999992549,
+        825.9000000003725,
+        746.2999999998137,
+        742.2000000001863,
+        766.0999999996275,
+        825.3000000007451
+      ],
+      "workMs": [
+        2157,
+        789.4000000003725,
+        751.7000000001863,
+        863.7999999998137,
+        823,
+        743.7000000001863,
+        739.5999999996275,
+        763.6999999992549,
+        822.5
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 720.4500000001863,
+      "p95": 828.7999999998137,
+      "work": {
+        "count": 9,
+        "median": 720.5999999996275,
+        "p95": 875
+      },
+      "elapsedMs": 6803,
+      "intervals": [
+        696.1999999992549,
+        717.4000000003725,
+        716.2000000001863,
+        753.5999999996275,
+        723.5,
+        710.5,
+        778,
+        828.7999999998137
+      ],
+      "workMs": [
+        875,
+        693.5999999996275,
+        714.7000000001863,
+        711.6000000005588,
+        748.8999999994412,
+        720.5999999996275,
+        707.7000000001863,
+        775.5,
+        824.7999999998137
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 37596687,
+    "transferBytes": 9153185,
+    "bodyBytes": 9123785,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 293009,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 15399752,
+      "totalSize": 33030144,
+      "embedderHeapUsedSize": 10920552,
+      "backingStorageSize": 29459211
+    },
+    "run": 0,
+    "label": "Desk globe",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 20328,
+    "measuredAt": "2026-10-17T07:05:08.624Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

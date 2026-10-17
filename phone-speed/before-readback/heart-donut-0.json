@@ -1,0 +1,106 @@
+{
+  "id": "heart-donut",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 1675,
+  "firstSubmitMs": 1501.0999999996275,
+  "idle": {
+    "count": 8,
+    "median": 325,
+    "p95": 369.7999999988824,
+    "work": {
+      "count": 9,
+      "median": 331.09999999962747,
+      "p95": 1385.5999999996275
+    },
+    "elapsedMs": 4132.200000001118,
+    "intervals": [
+      369.7999999988824,
+      316.30000000074506,
+      315.5,
+      341.80000000074506,
+      312,
+      333.69999999925494,
+      309.09999999962747,
+      340.7000000011176
+    ],
+    "workMs": [
+      1385.5999999996275,
+      366.7999999988824,
+      311,
+      313.09999999962747,
+      339.30000000074506,
+      309.30000000074506,
+      331.09999999962747,
+      306.5,
+      334.2000000011176
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 323.20000000018626,
+    "p95": 358.30000000074506,
+    "work": {
+      "count": 9,
+      "median": 316,
+      "p95": 353
+    },
+    "elapsedMs": 2935.5999999996275,
+    "intervals": [
+      318.09999999962747,
+      317,
+      298.90000000037253,
+      318.7000000011176,
+      337,
+      337.69999999925494,
+      358.30000000074506,
+      327.69999999925494
+    ],
+    "workMs": [
+      318.7999999988824,
+      313.3999999985099,
+      313.3999999985099,
+      296.40000000037253,
+      316,
+      310,
+      333.59999999962747,
+      353,
+      323.40000000037253
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 28624318,
+  "transferBytes": 7396950,
+  "bodyBytes": 7367550,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 157886,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 11711580,
+    "totalSize": 31195136,
+    "embedderHeapUsedSize": 10995632,
+    "backingStorageSize": 17320398
+  },
+  "run": 0,
+  "label": "Heart donut",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 9984,
+  "measuredAt": "2026-10-17T05:06:43.271Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

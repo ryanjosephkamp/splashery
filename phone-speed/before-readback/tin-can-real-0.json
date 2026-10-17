@@ -1,0 +1,106 @@
+{
+  "id": "tin-can-real",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2391.100000000093,
+  "firstSubmitMs": 2217.5,
+  "idle": {
+    "count": 8,
+    "median": 402.1500000000233,
+    "p95": 419.30000000004657,
+    "work": {
+      "count": 9,
+      "median": 399.69999999995343,
+      "p95": 423
+    },
+    "elapsedMs": 4386.900000000023,
+    "intervals": [
+      409.30000000004657,
+      417.0999999999767,
+      362.79999999993015,
+      402.9000000000233,
+      401.4000000000233,
+      373.5,
+      419.30000000004657,
+      334
+    ],
+    "workMs": [
+      423,
+      404.5,
+      414,
+      360.39999999990687,
+      399.69999999995343,
+      399,
+      370.69999999995343,
+      416.4000000000233,
+      330
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 384.5,
+    "p95": 415.0999999999767,
+    "work": {
+      "count": 9,
+      "median": 384.80000000004657,
+      "p95": 412.29999999993015
+    },
+    "elapsedMs": 3388,
+    "intervals": [
+      402.19999999995343,
+      407,
+      415.0999999999767,
+      349.4000000000233,
+      312.80000000004657,
+      334.39999999990687,
+      387.20000000006985,
+      381.79999999993015
+    ],
+    "workMs": [
+      395.20000000006985,
+      398.19999999995343,
+      404.30000000004657,
+      412.29999999993015,
+      346.30000000004657,
+      310.10000000009313,
+      332.0999999999767,
+      384.80000000004657,
+      378.5999999999767
+    ]
+  },
+  "action": "knock",
+  "heapBytes": 31829185,
+  "transferBytes": 7127034,
+  "bodyBytes": 7097634,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 160000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 12119008,
+    "totalSize": 31719424,
+    "embedderHeapUsedSize": 10985272,
+    "backingStorageSize": 11978725
+  },
+  "run": 0,
+  "label": "Real tin can",
+  "kind": "captured",
+  "pack": null,
+  "labs": false,
+  "errors": [],
+  "wallMs": 11424,
+  "measuredAt": "2026-10-17T05:23:31.915Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

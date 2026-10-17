@@ -1,0 +1,120 @@
+REUSE visual-before
+REUSE visual-after
+REUSE target-pairs
+START phone-page-qa 2026-10-17T07:39:44.015Z
+LLVM_PROBE {"ok":true,"renderer":"ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"}
+PHONE_QA 1 of 30: Crochet Earth. Keep this tab visible.
+PHONE_QA 2 of 30: Sunflower (photo). Keep this tab visible.
+PHONE_QA 3 of 30: Toy T. rex. Keep this tab visible.
+PHONE_QA 4 of 30: Monkey doll. Keep this tab visible.
+PHONE_QA 5 of 30: Cherry blossom (photo). Keep this tab visible.
+PHONE_QA 6 of 30: Dog plush. Keep this tab visible.
+PHONE_QA 7 of 30: Cone shell. Keep this tab visible.
+PHONE_QA 8 of 30: Desk globe. Keep this tab visible.
+PHONE_QA 9 of 30: BMX bicycle. Keep this tab visible.
+PHONE_QA 10 of 30: Mushroom (photo). Keep this tab visible.
+PHONE_QA 11 of 30: Cave lioness. Keep this tab visible.
+PHONE_QA 12 of 30: Murex shell. Keep this tab visible.
+PHONE_QA 13 of 30: Video to 3D. Keep this tab visible.
+PHONE_QA 14 of 30: Golden maple. Keep this tab visible.
+PHONE_QA 15 of 30: Photo album. Keep this tab visible.
+PHONE_QA 16 of 30: Triceratops skull. Keep this tab visible.
+PHONE_QA 17 of 30: Moving photo to 3D. Keep this tab visible.
+PHONE_QA 18 of 30: Bonsai tree (photo). Keep this tab visible.
+PHONE_QA 19 of 30: Splat toolkit. Keep this tab visible.
+PHONE_QA 20 of 30: Alum crystal. Keep this tab visible.
+PHONE_QA 21 of 30: Cactus (photo 2). Keep this tab visible.
+PHONE_QA 22 of 30: Peonies in a vase. Keep this tab visible.
+PHONE_QA 23 of 30: Knight on a horse. Keep this tab visible.
+PHONE_QA 24 of 30: Souvenir turtle. Keep this tab visible.
+PHONE_QA 25 of 30: Cactus. Keep this tab visible.
+PHONE_QA 26 of 30: Stollen. Keep this tab visible.
+PHONE_QA 27 of 30: Space Shuttle. Keep this tab visible.
+PHONE_QA 28 of 30: Gaussian splatting. Keep this tab visible.
+PHONE_QA 29 of 30: Seeded bread loaf. Keep this tab visible.
+PHONE_QA 30 of 30: Physalis. Keep this tab visible.
+PHONE_QA Complete. 30 toys checked; 0 errors. 30 browser notifications retained in JSON. Copy the table or save the local JSON.
+PHONE_QA Table copied.
+PHONE_QA Select and copy the table below.
+{"pageModules":{"phone-speed.html":"2488841c284cfc227005ccf8b797ca8be8c79100053b9dc3a1e08c121e54cd85","phone-speed-page.js":"70646a072d9e8ec302ad5e093ed0b34135bfbb4e0ffe62644c35b65ae2ea3fa8","phone-speed-metrics.js":"0f300e3c3a480eafe0fabaddf4567878a57f6fadad98214244fbdeae0bb0f189","phone-speed-hybrid.js":"59e92d3e8174d303051cb667c0510b9d7ff834f3c3a22ffb46abf37d763e76b2","phone-speed-slowest.json":"71a906de06a7e198a287592151c4fb439c0a5eb3c2b5ea791e28d3c672d537c8"},"toolingRevision":"32972828e4fcd7f89149119c8ab4cc7b910fbe3b","source":"072f15f3d00150825f36784b504b8b365c892cd7","started":"2026-10-17T07:39:47.081Z","browser":"151.0.7922.173","checks":{"complete30":true,"clipboard":true,"download":true,"clipboardFallback":true,"stopRetainsCompleted":true,"desktop":true},"errors":[],"uploads":[],"completed":"2026-10-17T07:47:07.771Z"}
+START catalog-pairs 2026-10-17T07:47:07.858Z
+1/1 cactus: 2716ms open, 192.0/319.4ms idle/tap
+1/1 cactus: 2778ms open, 323.8/323.0ms idle/tap
+1/1 strawberry: 3085ms open, 244.7/429.7ms idle/tap
+1/1 strawberry: 3486ms open, 429.6/402.5ms idle/tap
+1/1 cookie: 2510ms open, 359.0/334.3ms idle/tap
+1/1 cookie: 2498ms open, 212.8/367.8ms idle/tap
+1/1 bee: 2707ms open, 267.7/281.1ms idle/tap
+1/1 bee: 2301ms open, 144.0/293.3ms idle/tap
+1/1 torus: 2111ms open, 86.0/121.4ms idle/tap
+1/1 torus: 2085ms open, 116.0/116.7ms idle/tap
+1/1 blob: 2618ms open, 114.3/173.5ms idle/tap
+1/1 blob: 2497ms open, 206.9/179.3ms idle/tap
+1/1 knot: 2287ms open, 194.0/179.4ms idle/tap
+1/1 knot: 2250ms open, 103.4/172.8ms idle/tap
+1/1 cluster-fly: 2490ms open, 248.5/254.5ms idle/tap
+1/1 cluster-fly: 2414ms open, 144.1/242.3ms idle/tap
+1/1 may-beetle: 2377ms open, 122.4/254.2ms idle/tap
+1/1 may-beetle: 2693ms open, 253.5/257.4ms idle/tap
+1/1 millipede: 2251ms open, 101.3/222.5ms idle/tap
+1/1 millipede: 2404ms open, 219.5/217.3ms idle/tap
+1/1 bumblebee: 2373ms open, 138.7/264.9ms idle/tap
+1/1 bumblebee: 2417ms open, 243.2/256.8ms idle/tap
+1/1 raspberry: 2948ms open, 278.8/291.5ms idle/tap
+1/1 raspberry: 2571ms open, 176.0/273.7ms idle/tap
+1/1 blackberry: 2564ms open, 166.7/274.5ms idle/tap
+1/1 blackberry: 2730ms open, 274.3/269.8ms idle/tap
+1/1 blueberry: 2884ms open, 294.9/280.7ms idle/tap
+1/1 blueberry: 2977ms open, 189.8/300.0ms idle/tap
+1/1 grape: 2403ms open, 147.6/267.2ms idle/tap
+1/1 grape: 2514ms open, 228.8/272.0ms idle/tap
+1/1 star-cookie: 2325ms open, 154.8/266.4ms idle/tap
+1/1 star-cookie: 2350ms open, 294.0/291.3ms idle/tap
+1/1 tomatoes: 3275ms open, 367.3/370.4ms idle/tap
+1/1 tomatoes: 2927ms open, 209.6/353.0ms idle/tap
+1/1 mandeltorus: 2509ms open, 250.9/260.5ms idle/tap
+1/1 mandeltorus: 2264ms open, 127.0/235.5ms idle/tap
+1/1 basket: 2808ms open, 292.7/311.4ms idle/tap
+1/1 basket: 2872ms open, 205.1/327.8ms idle/tap
+1/1 heart-donut: 2671ms open, 194.3/366.0ms idle/tap
+1/1 heart-donut: 2676ms open, 334.2/368.1ms idle/tap
+1/1 sushi-boat: 2938ms open, 220.7/404.3ms idle/tap
+1/1 sushi-boat: 3157ms open, 406.7/367.8ms idle/tap
+1/1 seeded-loaf: 2968ms open, 253.0/622.8ms idle/tap
+1/1 seeded-loaf: 3288ms open, 602.5/584.6ms idle/tap
+1/1 steak: 3072ms open, 322.3/348.6ms idle/tap
+1/1 steak: 2977ms open, 164.6/302.7ms idle/tap
+1/1 stollen: 3166ms open, 393.6/767.3ms idle/tap
+1/1 stollen: 3621ms open, 654.2/670.0ms idle/tap
+1/1 orange-photo: 3006ms open, 272.0/337.9ms idle/tap
+1/1 orange-photo: 3511ms open, 331.3/321.8ms idle/tap
+1/1 physalis: 2506ms open, 308.7/632.3ms idle/tap
+1/1 physalis: 3394ms open, 663.0/602.7ms idle/tap
+1/1 crystal-gem: 2285ms open, 183.5/191.4ms idle/tap
+1/1 crystal-gem: 2231ms open, 102.2/185.6ms idle/tap
+1/1 alum-crystal: 3675ms open, 729.9/701.4ms idle/tap
+1/1 alum-crystal: 3335ms open, 432.6/730.7ms idle/tap
+1/1 puffin: 3885ms open, 607.3/572.9ms idle/tap
+1/1 puffin: 3000ms open, 259.4/570.6ms idle/tap
+1/1 elephant-souvenir: 2479ms open, 92.3/140.1ms idle/tap
+1/1 elephant-souvenir: 3083ms open, 148.3/143.3ms idle/tap
+1/1 turtle-souvenir: 3723ms open, 609.3/633.3ms idle/tap
+1/1 turtle-souvenir: 2834ms open, 318.7/666.1ms idle/tap
+1/1 white-roses: 2737ms open, 74.7/83.3ms idle/tap
+1/1 white-roses: 2633ms open, 63.2/79.4ms idle/tap
+1/1 bonsai-photo: 3779ms open, 330.5/652.3ms idle/tap
+1/1 bonsai-photo: 3167ms open, 586.5/704.5ms idle/tap
+1/1 cactus-real: 3786ms open, 717.2/717.3ms idle/tap
+1/1 cactus-real: 3600ms open, 408.0/701.5ms idle/tap
+1/1 peony: 3241ms open, 328.6/694.4ms idle/tap
+1/1 peony: 3521ms open, 642.9/657.0ms idle/tap
+1/1 money-tree: 3263ms open, 257.5/471.3ms idle/tap
+1/1 money-tree: 3057ms open, 393.5/411.9ms idle/tap
+1/1 knight-horse: 3154ms open, 333.9/584.6ms idle/tap
+1/1 knight-horse: 3624ms open, 600.0/619.0ms idle/tap
+1/1 triceratops-skull: 3215ms open, 711.4/753.0ms idle/tap
+1/1 triceratops-skull: 3068ms open, 332.0/701.7ms idle/tap
+1/1 celestial-globe: 2390ms open, 165.0/157.1ms idle/tap
+1/1 celestial-globe: 2306ms open, 124.1/162.2ms idle/tap
+1/1 armillary-sphere: 2178ms open, 107.2/139.6ms idle/tap
+1/1 armillary-sphere: 2308ms open, 146.1/146.9ms idle/tap

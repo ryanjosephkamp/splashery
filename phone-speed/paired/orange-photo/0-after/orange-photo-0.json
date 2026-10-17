@@ -1,0 +1,106 @@
+{
+  "id": "orange-photo",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3006.0999999996275,
+  "firstSubmitMs": 2480.800000000745,
+  "idle": {
+    "count": 8,
+    "median": 272,
+    "p95": 295,
+    "work": {
+      "count": 9,
+      "median": 269.80000000074506,
+      "p95": 751.3000000007451
+    },
+    "elapsedMs": 2982.5,
+    "intervals": [
+      267.59999999962747,
+      238.90000000037253,
+      271.7999999988824,
+      295,
+      287.7000000011176,
+      283,
+      241.2999999988824,
+      272.2000000011176
+    ],
+    "workMs": [
+      751.3000000007451,
+      261.40000000037253,
+      235.30000000074506,
+      267.69999999925494,
+      291.8999999985099,
+      282.80000000074506,
+      280.40000000037253,
+      239,
+      269.80000000074506
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 337.90000000037253,
+    "p95": 370,
+    "work": {
+      "count": 9,
+      "median": 342,
+      "p95": 411.90000000037253
+    },
+    "elapsedMs": 3084.5,
+    "intervals": [
+      370,
+      366.19999999925494,
+      344.7000000011176,
+      309.59999999962747,
+      331.09999999962747,
+      350.80000000074506,
+      297.19999999925494,
+      298.40000000037253
+    ],
+    "workMs": [
+      411.90000000037253,
+      367.2000000011176,
+      363,
+      342,
+      306.30000000074506,
+      327,
+      347.5,
+      294.59999999962747,
+      295.90000000037253
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 31086888,
+  "transferBytes": 6332936,
+  "bodyBytes": 6303236,
+  "cachedRequests": 0,
+  "requests": 99,
+  "splats": 77204,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 15827632,
+    "totalSize": 31457280,
+    "embedderHeapUsedSize": 11008448,
+    "backingStorageSize": 22375724
+  },
+  "run": 0,
+  "label": "Orange (photo)",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 10318,
+  "measuredAt": "2026-10-17T08:02:43.068Z",
+  "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+}

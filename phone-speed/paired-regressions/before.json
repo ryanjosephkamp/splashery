@@ -1,0 +1,1092 @@
+[
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2929.7999999988824,
+    "firstSubmitMs": 2722.199999999255,
+    "idle": {
+      "count": 8,
+      "median": 301.8999999994412,
+      "p95": 306.80000000074506,
+      "work": {
+        "count": 9,
+        "median": 300.2999999988824,
+        "p95": 601.8999999985099
+      },
+      "elapsedMs": 3134.199999999255,
+      "intervals": [
+        301,
+        282.90000000037253,
+        283.90000000037253,
+        306.59999999962747,
+        306.2000000011176,
+        295.2999999988824,
+        306.80000000074506,
+        302.7999999988824
+      ],
+      "workMs": [
+        601.8999999985099,
+        298.19999999925494,
+        280,
+        280.90000000037253,
+        304,
+        303.7000000011176,
+        292.7999999988824,
+        304.5,
+        300.2999999988824
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 312.2999999988824,
+      "p95": 352.90000000037253,
+      "work": {
+        "count": 9,
+        "median": 322.2999999988824,
+        "p95": 350.2000000011176
+      },
+      "elapsedMs": 2849.39999999851,
+      "intervals": [
+        297.80000000074506,
+        270.80000000074506,
+        299.69999999925494,
+        278.40000000037253,
+        352.90000000037253,
+        324.8999999985099,
+        331.5,
+        349.5
+      ],
+      "workMs": [
+        341.09999999962747,
+        295,
+        268.30000000074506,
+        294.69999999925494,
+        275.90000000037253,
+        350.2000000011176,
+        322.2999999988824,
+        326.19999999925494,
+        346.8999999985099
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 24135983,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 11674884,
+      "totalSize": 30408704,
+      "embedderHeapUsedSize": 8626992,
+      "backingStorageSize": 9407121
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 10194,
+    "measuredAt": "2026-10-17T07:52:34.785Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 0,
+    "phase": "before",
+    "order": "after/before"
+  },
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2704.2999999988824,
+    "firstSubmitMs": 2557.699999999255,
+    "idle": {
+      "count": 8,
+      "median": 295.29999999981374,
+      "p95": 344.30000000074506,
+      "work": {
+        "count": 9,
+        "median": 294.5,
+        "p95": 599
+      },
+      "elapsedMs": 3064.60000000149,
+      "intervals": [
+        304.7999999988824,
+        283.6000000014901,
+        316.59999999962747,
+        289.19999999925494,
+        298.80000000074506,
+        291.7999999988824,
+        344.30000000074506,
+        289.30000000074506
+      ],
+      "workMs": [
+        599,
+        302.19999999925494,
+        280.2000000011176,
+        312,
+        285.19999999925494,
+        294.5,
+        288,
+        340.40000000037253,
+        277.90000000037253
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 363.59999999962747,
+      "p95": 381.30000000074506,
+      "work": {
+        "count": 9,
+        "median": 359.59999999962747,
+        "p95": 377.90000000037253
+      },
+      "elapsedMs": 3168.2000000011176,
+      "intervals": [
+        366.59999999962747,
+        320.90000000037253,
+        381.30000000074506,
+        362.69999999925494,
+        351.7000000011176,
+        381,
+        364.5,
+        333.09999999962747
+      ],
+      "workMs": [
+        303,
+        361,
+        318.2999999988824,
+        377.90000000037253,
+        359.59999999962747,
+        346.90000000037253,
+        376.5,
+        361.40000000037253,
+        330.30000000074506
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 24315767,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 13574196,
+      "totalSize": 31981568,
+      "embedderHeapUsedSize": 10950752,
+      "backingStorageSize": 11078575
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 10185,
+    "measuredAt": "2026-10-17T07:52:46.499Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 1,
+    "phase": "before",
+    "order": "before/after"
+  },
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2888.7000000011176,
+    "firstSubmitMs": 2527.300000000745,
+    "idle": {
+      "count": 8,
+      "median": 334.3500000005588,
+      "p95": 387.5,
+      "work": {
+        "count": 9,
+        "median": 334,
+        "p95": 1044.800000000745
+      },
+      "elapsedMs": 4025.0999999996275,
+      "intervals": [
+        387.5,
+        308.90000000037253,
+        331.40000000037253,
+        324.09999999962747,
+        363.59999999962747,
+        337.30000000074506,
+        330.5,
+        361.69999999925494
+      ],
+      "workMs": [
+        1044.800000000745,
+        382.59999999962747,
+        305.5,
+        328.90000000037253,
+        319.40000000037253,
+        360.69999999925494,
+        334,
+        327.30000000074506,
+        358.59999999962747
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 333.3999999994412,
+      "p95": 388.6000000014901,
+      "work": {
+        "count": 9,
+        "median": 334.69999999925494,
+        "p95": 385.30000000074506
+      },
+      "elapsedMs": 3079.300000000745,
+      "intervals": [
+        326.5,
+        324.5,
+        340.2999999988824,
+        357.5,
+        364.30000000074506,
+        317.5,
+        317.19999999925494,
+        388.6000000014901
+      ],
+      "workMs": [
+        340.2000000011176,
+        321.30000000074506,
+        321.80000000074506,
+        334.69999999925494,
+        354.2999999988824,
+        361.19999999925494,
+        315.09999999962747,
+        313.19999999925494,
+        385.30000000074506
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 23728227,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 11721272,
+      "totalSize": 31719424,
+      "embedderHeapUsedSize": 8598688,
+      "backingStorageSize": 9407121
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 11298,
+    "measuredAt": "2026-10-17T07:53:20.758Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 2,
+    "phase": "before",
+    "order": "after/before"
+  },
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3072.699999999255,
+    "firstSubmitMs": 2890.5999999996275,
+    "idle": {
+      "count": 8,
+      "median": 323.1499999994412,
+      "p95": 341.6000000014901,
+      "work": {
+        "count": 9,
+        "median": 319.30000000074506,
+        "p95": 591
+      },
+      "elapsedMs": 3508,
+      "intervals": [
+        298.5,
+        302.90000000037253,
+        324.5,
+        326.90000000037253,
+        321.7999999988824,
+        341.6000000014901,
+        331,
+        297.7999999988824
+      ],
+      "workMs": [
+        591,
+        294.09999999962747,
+        300.40000000037253,
+        319.30000000074506,
+        324,
+        319,
+        339,
+        328.40000000037253,
+        295.2999999988824
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 313.1000000005588,
+      "p95": 379.19999999925494,
+      "work": {
+        "count": 9,
+        "median": 306.59999999962747,
+        "p95": 376.09999999962747
+      },
+      "elapsedMs": 2883,
+      "intervals": [
+        293,
+        296.69999999925494,
+        309.40000000037253,
+        309.90000000037253,
+        345.7999999988824,
+        326.30000000074506,
+        379.19999999925494,
+        316.30000000074506
+      ],
+      "workMs": [
+        303,
+        290,
+        293.90000000037253,
+        306.59999999962747,
+        305.2000000011176,
+        343.19999999925494,
+        321.7000000011176,
+        376.09999999962747,
+        313.5
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 31077423,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 11588592,
+      "totalSize": 32505856,
+      "embedderHeapUsedSize": 8494656,
+      "backingStorageSize": 17926272
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 10766,
+    "measuredAt": "2026-10-17T07:53:32.655Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 3,
+    "phase": "before",
+    "order": "before/after"
+  },
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2814.0999999996275,
+    "firstSubmitMs": 2257.2000000011176,
+    "idle": {
+      "count": 8,
+      "median": 327.79999999981374,
+      "p95": 368.90000000037253,
+      "work": {
+        "count": 9,
+        "median": 325.59999999962747,
+        "p95": 734.7000000011176
+      },
+      "elapsedMs": 3576.800000000745,
+      "intervals": [
+        313.09999999962747,
+        325.19999999925494,
+        366.2000000011176,
+        321.90000000037253,
+        328.7999999988824,
+        368.59999999962747,
+        368.90000000037253,
+        326.80000000074506
+      ],
+      "workMs": [
+        734.7000000011176,
+        310.59999999962747,
+        322.2999999988824,
+        363.7000000011176,
+        318.7000000011176,
+        325.59999999962747,
+        366.09999999962747,
+        366.2999999988824,
+        323.40000000037253
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 338,
+      "p95": 378.5,
+      "work": {
+        "count": 9,
+        "median": 330.8999999985099,
+        "p95": 375.6000000014901
+      },
+      "elapsedMs": 3040.89999999851,
+      "intervals": [
+        315.69999999925494,
+        329.80000000074506,
+        307.59999999962747,
+        333.7999999988824,
+        356.40000000037253,
+        342.2000000011176,
+        378.5,
+        345.8999999985099
+      ],
+      "workMs": [
+        328.30000000074506,
+        311,
+        327.30000000074506,
+        304.7000000011176,
+        330.8999999985099,
+        350,
+        339.40000000037253,
+        375.6000000014901,
+        342.69999999925494
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 23485190,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 14422096,
+      "totalSize": 32243712,
+      "embedderHeapUsedSize": 9118352,
+      "backingStorageSize": 16317798
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 10683,
+    "measuredAt": "2026-10-17T07:54:06.134Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 4,
+    "phase": "before",
+    "order": "after/before"
+  },
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2998.699999999255,
+    "firstSubmitMs": 2398.39999999851,
+    "idle": {
+      "count": 8,
+      "median": 325.7500000009313,
+      "p95": 356.8999999985099,
+      "work": {
+        "count": 9,
+        "median": 332.5,
+        "p95": 636.1000000014901
+      },
+      "elapsedMs": 3443.60000000149,
+      "intervals": [
+        356.8999999985099,
+        300.40000000037253,
+        336.90000000037253,
+        348.19999999925494,
+        303.5,
+        349.30000000074506,
+        302.69999999925494,
+        314.6000000014901
+      ],
+      "workMs": [
+        636.1000000014901,
+        351.19999999925494,
+        297.69999999925494,
+        332.5,
+        345.19999999925494,
+        299.8999999985099,
+        346.19999999925494,
+        300,
+        310.90000000037253
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 325.3999999994412,
+      "p95": 372.5,
+      "work": {
+        "count": 9,
+        "median": 321.90000000037253,
+        "p95": 369.3999999985099
+      },
+      "elapsedMs": 2897.2999999988824,
+      "intervals": [
+        325.7999999988824,
+        372.5,
+        279.5,
+        293,
+        267.1000000014901,
+        339.69999999925494,
+        325,
+        336.19999999925494
+      ],
+      "workMs": [
+        355,
+        321.3999999985099,
+        369.3999999985099,
+        276.7999999988824,
+        290.19999999925494,
+        262.1000000014901,
+        337.19999999925494,
+        321.90000000037253,
+        333.2999999988824
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 30531338,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 12646916,
+      "totalSize": 31719424,
+      "embedderHeapUsedSize": 10751656,
+      "backingStorageSize": 11078366
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 10624,
+    "measuredAt": "2026-10-17T07:58:17.055Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 5,
+    "phase": "before",
+    "order": "before/after"
+  },
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 3370.699999999255,
+    "firstSubmitMs": 2653.2999999988824,
+    "idle": {
+      "count": 8,
+      "median": 313.34999999962747,
+      "p95": 356.2999999988824,
+      "work": {
+        "count": 9,
+        "median": 313.09999999962747,
+        "p95": 714
+      },
+      "elapsedMs": 3467.0999999996275,
+      "intervals": [
+        356.2999999988824,
+        310.90000000037253,
+        328.30000000074506,
+        315.7999999988824,
+        351.09999999962747,
+        300.2000000011176,
+        253.5,
+        310.7999999988824
+      ],
+      "workMs": [
+        714,
+        353.09999999962747,
+        307.59999999962747,
+        325.6000000014901,
+        313.09999999962747,
+        348.19999999925494,
+        296.80000000074506,
+        250.80000000074506,
+        308.19999999925494
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 323.1000000005588,
+      "p95": 361,
+      "work": {
+        "count": 9,
+        "median": 318.5,
+        "p95": 358.09999999962747
+      },
+      "elapsedMs": 2875.0999999996275,
+      "intervals": [
+        310.59999999962747,
+        324.59999999962747,
+        361,
+        315.19999999925494,
+        321.6000000014901,
+        342.5,
+        355.19999999925494,
+        283.90000000037253
+      ],
+      "workMs": [
+        257.6000000014901,
+        307.80000000074506,
+        321.59999999962747,
+        358.09999999962747,
+        312.09999999962747,
+        318.5,
+        336.7000000011176,
+        349.90000000037253,
+        281.30000000074506
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 23290231,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 13070648,
+      "totalSize": 32505856,
+      "embedderHeapUsedSize": 10780152,
+      "backingStorageSize": 11078575
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 10976,
+    "measuredAt": "2026-10-17T07:58:50.223Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 6,
+    "phase": "before",
+    "order": "after/before"
+  },
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2952.5,
+    "firstSubmitMs": 2742.39999999851,
+    "idle": {
+      "count": 8,
+      "median": 328.45000000018626,
+      "p95": 366.8999999985099,
+      "work": {
+        "count": 9,
+        "median": 326.69999999925494,
+        "p95": 680.0999999996275
+      },
+      "elapsedMs": 3451.199999999255,
+      "intervals": [
+        341.2999999988824,
+        352.7000000011176,
+        295,
+        325.40000000037253,
+        292.19999999925494,
+        324.80000000074506,
+        366.8999999985099,
+        331.5
+      ],
+      "workMs": [
+        680.0999999996275,
+        337.8999999985099,
+        349.2000000011176,
+        292,
+        322.1000000014901,
+        289.5,
+        321.80000000074506,
+        362.09999999962747,
+        326.69999999925494
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 310.6000000005588,
+      "p95": 379.8999999985099,
+      "work": {
+        "count": 9,
+        "median": 308.59999999962747,
+        "p95": 376.7999999988824
+      },
+      "elapsedMs": 2979.199999999255,
+      "intervals": [
+        296.2000000011176,
+        356.2999999988824,
+        309.90000000037253,
+        297.59999999962747,
+        297.1000000014901,
+        379.8999999985099,
+        311.30000000074506,
+        365
+      ],
+      "workMs": [
+        362.7999999988824,
+        293.30000000074506,
+        352.59999999962747,
+        306.2999999988824,
+        295,
+        294.5,
+        376.7999999988824,
+        308.59999999962747,
+        360
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 30936571,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 11687284,
+      "totalSize": 29622272,
+      "embedderHeapUsedSize": 8559144,
+      "backingStorageSize": 16313505
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 10677,
+    "measuredAt": "2026-10-17T07:59:02.027Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 7,
+    "phase": "before",
+    "order": "before/after"
+  },
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2774.9000000003725,
+    "firstSubmitMs": 2598.9000000003725,
+    "idle": {
+      "count": 8,
+      "median": 313.29999999981374,
+      "p95": 348.1000000014901,
+      "work": {
+        "count": 9,
+        "median": 312.7999999988824,
+        "p95": 1030.2999999988824
+      },
+      "elapsedMs": 3717,
+      "intervals": [
+        311.5,
+        298.5,
+        348.1000000014901,
+        304.3999999985099,
+        335.40000000037253,
+        315.09999999962747,
+        332.30000000074506,
+        307.59999999962747
+      ],
+      "workMs": [
+        1030.2999999988824,
+        308.3999999985099,
+        295.8999999985099,
+        345.80000000074506,
+        301.8999999985099,
+        332.69999999925494,
+        312.7999999988824,
+        327.80000000074506,
+        305.09999999962747
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 343.8999999994412,
+      "p95": 377.09999999962747,
+      "work": {
+        "count": 9,
+        "median": 337.09999999962747,
+        "p95": 374.5
+      },
+      "elapsedMs": 3040.4000000003725,
+      "intervals": [
+        349.2999999988824,
+        377.09999999962747,
+        319.80000000074506,
+        336.69999999925494,
+        303.90000000037253,
+        356.2000000011176,
+        339.69999999925494,
+        348.09999999962747
+      ],
+      "workMs": [
+        306.90000000037253,
+        346.7999999988824,
+        374.5,
+        316.69999999925494,
+        334.09999999962747,
+        300.69999999925494,
+        345.30000000074506,
+        337.09999999962747,
+        345.09999999962747
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 23648199,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 11546784,
+      "totalSize": 30670848,
+      "embedderHeapUsedSize": 8222736,
+      "backingStorageSize": 17926272
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 10810,
+    "measuredAt": "2026-10-17T07:59:35.896Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 8,
+    "phase": "before",
+    "order": "after/before"
+  },
+  {
+    "id": "cactus",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2865.7000000011176,
+    "firstSubmitMs": 2240.2000000011176,
+    "idle": {
+      "count": 8,
+      "median": 352.44999999925494,
+      "p95": 386.40000000037253,
+      "work": {
+        "count": 9,
+        "median": 354.5,
+        "p95": 996.6999999992549
+      },
+      "elapsedMs": 3897.4000000003725,
+      "intervals": [
+        386.40000000037253,
+        340.5,
+        309.19999999925494,
+        365.1000000014901,
+        364.3999999985099,
+        323.2000000011176,
+        337.59999999962747,
+        381.40000000037253
+      ],
+      "workMs": [
+        996.6999999992549,
+        383.40000000037253,
+        336.69999999925494,
+        305.8999999985099,
+        354.5,
+        361,
+        320.59999999962747,
+        334,
+        376
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 347.70000000018626,
+      "p95": 401.09999999962747,
+      "work": {
+        "count": 9,
+        "median": 336.30000000074506,
+        "p95": 398
+      },
+      "elapsedMs": 3120.0999999996275,
+      "intervals": [
+        361.7999999988824,
+        330.80000000074506,
+        355.5,
+        401.09999999962747,
+        323.40000000037253,
+        339.90000000037253,
+        362,
+        333.69999999925494
+      ],
+      "workMs": [
+        307.7000000011176,
+        358.8999999985099,
+        328.19999999925494,
+        348.59999999962747,
+        398,
+        320.69999999925494,
+        336.30000000074506,
+        358.59999999962747,
+        330.40000000037253
+      ]
+    },
+    "action": "bloom",
+    "heapBytes": 21557030,
+    "transferBytes": 6881176,
+    "bodyBytes": 6851776,
+    "cachedRequests": 0,
+    "requests": 98,
+    "splats": 120000,
+    "profile": "low",
+    "canvas": [
+      585,
+      672
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 12626812,
+      "totalSize": 31457280,
+      "embedderHeapUsedSize": 8672056,
+      "backingStorageSize": 16317750
+    },
+    "run": 0,
+    "label": "Cactus",
+    "kind": "captured",
+    "pack": null,
+    "labs": false,
+    "errors": [],
+    "wallMs": 11159,
+    "measuredAt": "2026-10-17T07:59:48.257Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+    "pair": 9,
+    "phase": "before",
+    "order": "before/after"
+  }
+]

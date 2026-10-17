@@ -1,0 +1,42 @@
+{
+  "declaredAt": "2026-10-17T07:46:00Z",
+  "before": "ea9a9d193de529e6c75264123bb04b7e862b7162",
+  "after": "3e058bac5d18eb33b266bac1b30cf175889305bb",
+  "integrationBranch": "codex/phone-speed-integration",
+  "beforeURL": "http://127.0.0.1:4175/",
+  "afterURL": "http://127.0.0.1:4173/",
+  "frozenCatalog": 465,
+  "newIDs": [
+    "specimen-neuron"
+  ],
+  "repetitions": [
+    5,
+    10
+  ],
+  "note": "Never relabel original465 source pins. Incoming main leaves shared engine and all old target recipes unchanged. Supplement measures added toy against current main after prepared merge.",
+  "preparedMergeUpdatedAt": "2026-10-17T08:21:52.294941+00:00",
+  "history": [
+    {
+      "declaredAt": "2026-10-17T07:46:00Z",
+      "before": "aedbe443373d60b2fd0d041e25b1c46d6d5fcd33",
+      "after": "bbbab45033107456deb03dff7b915dc39afe3efa",
+      "integrationBranch": "codex/phone-speed-integration",
+      "beforeURL": "http://127.0.0.1:4175/",
+      "afterURL": "http://127.0.0.1:4173/",
+      "frozenCatalog": 465,
+      "newIDs": [
+        "specimen-neuron"
+      ],
+      "repetitions": [
+        5,
+        10
+      ],
+      "note": "Never relabel original465 source pins. Incoming main leaves shared engine and all old target recipes unchanged. Supplement measures added toy against current main after prepared merge.",
+      "preparedMergeUpdatedAt": "2026-10-17T08:12:39.379486+00:00"
+    }
+  ],
+  "updateReason": "Include the incoming Neuron-only sharpness merge before any supplemental samples.",
+  "publicationBranch": "codex/phone-speed",
+  "publicationWorktree": "/workspace/phone-speed-public",
+  "originalPrivateHistoryRef": "codex/phone-speed-private-history"
+}

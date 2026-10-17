@@ -1,0 +1,106 @@
+{
+  "id": "video-3d",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2185.7000000001863,
+  "firstSubmitMs": 1470.1000000000931,
+  "idle": {
+    "count": 8,
+    "median": 702.8499999998603,
+    "p95": 770.6999999997206,
+    "work": {
+      "count": 9,
+      "median": 702,
+      "p95": 1477
+    },
+    "elapsedMs": 7381.299999999814,
+    "intervals": [
+      699.3999999999069,
+      686.5,
+      706.2999999998137,
+      712.7000000001863,
+      696.5,
+      770.6999999997206,
+      745.9000000003725,
+      692.6999999997206
+    ],
+    "workMs": [
+      1477,
+      687.1000000000931,
+      683.3000000002794,
+      702,
+      707.8000000002794,
+      692.8000000002794,
+      768.0999999996275,
+      743.1000000000931,
+      687.7999999998137
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 907.1999999999534,
+    "p95": 960.3999999999069,
+    "work": {
+      "count": 9,
+      "median": 907,
+      "p95": 948.2000000001863
+    },
+    "elapsedMs": 8133.5,
+    "intervals": [
+      874.5,
+      810.6000000000931,
+      874,
+      898.8000000002794,
+      915.5999999996275,
+      934.7000000001863,
+      960.3999999999069,
+      953.6000000000931
+    ],
+    "workMs": [
+      907,
+      871.8999999999069,
+      807.5,
+      871.2999999998137,
+      893.8000000002794,
+      912.1999999997206,
+      918.2000000001863,
+      916,
+      948.2000000001863
+    ]
+  },
+  "action": "replay",
+  "heapBytes": 38104483,
+  "transferBytes": 6572249,
+  "bodyBytes": 6539249,
+  "cachedRequests": 0,
+  "requests": 110,
+  "splats": 59682,
+  "profile": "low",
+  "canvas": [
+    1170,
+    1401
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 18021500,
+    "totalSize": 31764480,
+    "embedderHeapUsedSize": 11104736,
+    "backingStorageSize": 27276931
+  },
+  "run": 0,
+  "label": "Video to 3D",
+  "kind": "kit",
+  "pack": "video3d",
+  "labs": true,
+  "errors": [],
+  "wallMs": 18963,
+  "measuredAt": "2026-10-17T06:10:03.861Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

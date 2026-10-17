@@ -1,0 +1,5 @@
+{
+  "openedAt": "2026-10-17T05:28:38.977407+00:00",
+  "url": "https://chromium.googlesource.com/chromium/src/+/151.0.7922.173/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc?format=TEXT",
+  "excerpt": "void WebGLRenderingContextBase::finish() {\n  if (isContextLost())\n    return;\n  ContextGL()->Flush();  // Intentionally a flush, not a finish.\n}\n\nvoid WebGLRenderingContextBase::flush() {\n  if (isContextLost())\n    return;\n  ContextGL()->Flush();\n}\n\n"
+}

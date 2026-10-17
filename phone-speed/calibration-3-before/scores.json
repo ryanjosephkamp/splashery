@@ -1,0 +1,155 @@
+{
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc",
+  "browser": "151.0.7922.173",
+  "protocol": {
+    "toolSHA256": "3d07c0710e997eeb1e75ab39c56fc6a822d7cd1dce1f38816b69167718c84af7",
+    "sceneSeed": 103,
+    "wallTime": "2026-10-17T12:00:00Z",
+    "restSeconds": 0.5,
+    "stepHz": 60,
+    "settleDraws": 3,
+    "calendarOnly": true,
+    "completedDraws": true
+  },
+  "measuredAt": "2026-10-17T03:27:02.393Z",
+  "rows": [
+    {
+      "id": "torus",
+      "midTapSeconds": 1.5,
+      "sceneSeed": 103,
+      "splats": 60000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.4,
+        "pitch": 0.62,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "roll": 0.5833333333333315
+      },
+      "diagnosis": {
+        "uniformWrites": 135,
+        "workDraws": 3,
+        "updatesMs": [
+          0.2999999998137355,
+          0.2999999998137355,
+          0.20000000018626451
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 135,
+        "orbitUpdatesMs": [
+          0.5,
+          0.40000000037252903,
+          0.40000000037252903
+        ],
+        "shBands": null,
+        "clockDriven": false,
+        "addonSplats": 0
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.9833333333333312,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.9999999999999978,
+            "rate": 1
+          },
+          "time": 1.9999999999999978
+        }
+      },
+      "errors": []
+    },
+    {
+      "id": "toy-trex",
+      "midTapSeconds": 1.3,
+      "sceneSeed": 103,
+      "splats": 300000,
+      "canvas": [
+        585,
+        700
+      ],
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "controls": {
+        "hop": 0.5000000000000018
+      },
+      "diagnosis": {
+        "uniformWrites": 141,
+        "workDraws": 3,
+        "updatesMs": [
+          2.300000000745058,
+          3,
+          0.20000000018626451
+        ],
+        "completedDraws": 3,
+        "orbitCompletedDraws": 3,
+        "orbitWorkDraws": 3,
+        "orbitUniformWrites": 141,
+        "orbitUpdatesMs": [
+          0.20000000018626451,
+          0.2999999998137355,
+          0.20000000018626451
+        ],
+        "shBands": 0,
+        "clockDriven": false,
+        "addonSplats": 45000
+      },
+      "clocks": {
+        "rest": {
+          "kit": {
+            "t": 0.4833333333333333,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 0.49999999999999994,
+            "rate": 1
+          },
+          "time": 0.49999999999999994
+        },
+        "tap": {
+          "kit": {
+            "t": 1.7833333333333319,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "move": {
+            "t": 0,
+            "last": 1.7999999999999985,
+            "rate": 1
+          },
+          "time": 1.7999999999999985
+        }
+      },
+      "errors": []
+    }
+  ]
+}

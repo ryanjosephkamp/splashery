@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-17T05:00:30.148961+00:00",
+  "reason": "Chromium WebGL finish() only flushes. Prior intervals are submission spacing with GPU backpressure, not synchronously completed draws. No prior timing survey or paired row is final gate evidence. Corrected full original survey will be ranked automatically using the same idle-median rule, then targets/list will be frozen again.",
+  "retired": [
+    "before/",
+    "finish-only-paired/",
+    "initial-freeze-finish-only.json",
+    "initial-targets-finish-only.json"
+  ],
+  "replacement": "before-readback/"
+}

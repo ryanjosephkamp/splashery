@@ -1,0 +1,106 @@
+{
+  "id": "triceratops-skull",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2559,
+  "firstSubmitMs": 2213.399999999965,
+  "idle": {
+    "count": 8,
+    "median": 657.6499999999942,
+    "p95": 706,
+    "work": {
+      "count": 9,
+      "median": 659,
+      "p95": 2017
+    },
+    "elapsedMs": 7702.5,
+    "intervals": [
+      661.4000000000233,
+      677.7000000000116,
+      614.6999999999534,
+      695.1000000000349,
+      653.8999999999651,
+      648.7000000000116,
+      706,
+      603
+    ],
+    "workMs": [
+      2017,
+      659,
+      674.5,
+      611.7999999999884,
+      692.2000000000116,
+      650.7999999999884,
+      645.2000000000116,
+      701.5,
+      600.2999999999884
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 884.5999999999767,
+    "p95": 1073.3000000000466,
+    "work": {
+      "count": 9,
+      "median": 872,
+      "p95": 1069.9000000000233
+    },
+    "elapsedMs": 7657.5,
+    "intervals": [
+      621.2000000000116,
+      745.0999999999767,
+      1045.2000000000116,
+      813,
+      1073.3000000000466,
+      875.5,
+      893.6999999999534,
+      1006.5
+    ],
+    "workMs": [
+      578.7999999999884,
+      618.7000000000116,
+      740.8999999999651,
+      1040.5999999999767,
+      809.6999999999534,
+      1069.9000000000233,
+      872,
+      889.5,
+      1003.3000000000466
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 32892671,
+  "transferBytes": 9070073,
+  "bodyBytes": 9040673,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 11611408,
+    "totalSize": 16252928,
+    "embedderHeapUsedSize": 10951856,
+    "backingStorageSize": 21838371
+  },
+  "run": 0,
+  "label": "Triceratops skull",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 19180,
+  "measuredAt": "2026-10-17T05:19:39.095Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

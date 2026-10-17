@@ -1,0 +1,106 @@
+{
+  "id": "mushroom-photo",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3861.5,
+  "firstSubmitMs": 2774.600000000559,
+  "idle": {
+    "count": 8,
+    "median": 799.1500000003725,
+    "p95": 871.2999999998137,
+    "work": {
+      "count": 9,
+      "median": 799.5,
+      "p95": 2490.7000000001863
+    },
+    "elapsedMs": 9412.100000000559,
+    "intervals": [
+      805.7000000001863,
+      782.2000000001863,
+      826.3999999994412,
+      792.6000000005588,
+      871.2999999998137,
+      776.2999999998137,
+      826.0999999996275,
+      782.3000000007451
+    ],
+    "workMs": [
+      2490.7000000001863,
+      799.5,
+      779.9000000003725,
+      821.2999999998137,
+      774.5,
+      846.5,
+      774.0999999996275,
+      823.1999999992549,
+      779.5
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 773.1000000000931,
+    "p95": 886.5,
+    "work": {
+      "count": 9,
+      "median": 767.2999999998137,
+      "p95": 881
+    },
+    "elapsedMs": 7032.200000000186,
+    "intervals": [
+      734.7000000001863,
+      747.6000000005588,
+      792.8999999994412,
+      680.1000000005588,
+      781.2999999998137,
+      886.5,
+      873.5999999996275,
+      764.9000000003725
+    ],
+    "workMs": [
+      767.2999999998137,
+      730.3999999994412,
+      741.1000000005588,
+      786.5,
+      676.6000000005588,
+      775.7999999998137,
+      881,
+      868.7999999998137,
+      761.7000000001863
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 39498093,
+  "transferBytes": 9266412,
+  "bodyBytes": 9237012,
+  "cachedRequests": 0,
+  "requests": 98,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    672
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 17185540,
+    "totalSize": 32243712,
+    "embedderHeapUsedSize": 11104720,
+    "backingStorageSize": 22779017
+  },
+  "run": 0,
+  "label": "Mushroom (photo)",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 21595,
+  "measuredAt": "2026-10-17T07:14:16.263Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

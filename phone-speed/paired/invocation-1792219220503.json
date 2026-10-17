@@ -1,0 +1,97 @@
+{
+  "at": "2026-10-17T06:40:20.503Z",
+  "runs": 5,
+  "resume": true,
+  "targets": [
+    {
+      "id": "crochet-earth",
+      "metric": "idle.median",
+      "loadRank": 9,
+      "drawRank": 1
+    },
+    {
+      "id": "sunflower-photo",
+      "metric": "idle.median",
+      "loadRank": 14,
+      "drawRank": 2
+    },
+    {
+      "id": "toy-trex",
+      "metric": "idle.median",
+      "loadRank": 1,
+      "drawRank": 3
+    },
+    {
+      "id": "monkey-doll",
+      "metric": "idle.median",
+      "loadRank": 8,
+      "drawRank": 4
+    },
+    {
+      "id": "cherry-blossom-photo",
+      "metric": "idle.median",
+      "loadRank": 4,
+      "drawRank": 5
+    },
+    {
+      "id": "dog-plush",
+      "metric": "idle.median",
+      "loadRank": 10,
+      "drawRank": 6
+    },
+    {
+      "id": "cone-shell",
+      "metric": "idle.median",
+      "loadRank": 6,
+      "drawRank": 7
+    },
+    {
+      "id": "desk-globe",
+      "metric": "idle.median",
+      "loadRank": 12,
+      "drawRank": 8
+    },
+    {
+      "id": "bmx-bike",
+      "metric": "idle.median",
+      "loadRank": 5,
+      "drawRank": 9
+    },
+    {
+      "id": "mushroom-photo",
+      "metric": "idle.median",
+      "loadRank": 11,
+      "drawRank": 10
+    },
+    {
+      "id": "cave-lioness",
+      "metric": "idle.median",
+      "loadRank": 18,
+      "drawRank": 11
+    },
+    {
+      "id": "murex-shell",
+      "metric": "idle.median",
+      "loadRank": 33,
+      "drawRank": 12
+    },
+    {
+      "id": "video-3d",
+      "metric": "idle.median",
+      "loadRank": 37,
+      "drawRank": 13
+    },
+    {
+      "id": "maple-tree",
+      "metric": "idle.median",
+      "loadRank": 7,
+      "drawRank": 14
+    },
+    {
+      "id": "photo-album",
+      "metric": "idle.median",
+      "loadRank": 118,
+      "drawRank": 15
+    }
+  ]
+}

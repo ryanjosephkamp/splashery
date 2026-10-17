@@ -1,0 +1,106 @@
+{
+  "id": "photo-album",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2422.9000000003725,
+  "firstSubmitMs": 2046.9000000003725,
+  "idle": {
+    "count": 8,
+    "median": 508.95000000018626,
+    "p95": 538.1999999992549,
+    "work": {
+      "count": 9,
+      "median": 500,
+      "p95": 869.9000000003725
+    },
+    "elapsedMs": 4901.199999999255,
+    "intervals": [
+      456.79999999981374,
+      480,
+      531.9000000003725,
+      523,
+      538.1999999992549,
+      500.70000000018626,
+      517.2000000001863,
+      449.09999999962747
+    ],
+    "workMs": [
+      869.9000000003725,
+      430.40000000037253,
+      477,
+      506.80000000074506,
+      518.3000000007451,
+      500,
+      496.79999999981374,
+      512.5,
+      433
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 296.9499999997206,
+    "p95": 458.79999999981374,
+    "work": {
+      "count": 9,
+      "median": 363.5,
+      "p95": 456.1000000005588
+    },
+    "elapsedMs": 3043.9000000003725,
+    "intervals": [
+      454.59999999962747,
+      457.40000000037253,
+      458.79999999981374,
+      374.20000000018626,
+      219.69999999925494,
+      206.6000000005588,
+      204.70000000018626,
+      179.79999999981374
+    ],
+    "workMs": [
+      456.1000000005588,
+      450.5,
+      452.5,
+      415.6000000005588,
+      363.5,
+      214.5,
+      203.5,
+      179.6000000005588,
+      174.79999999981374
+    ]
+  },
+  "action": "turn",
+  "heapBytes": 75822543,
+  "transferBytes": 6056598,
+  "bodyBytes": 6023598,
+  "cachedRequests": 0,
+  "requests": 110,
+  "splats": 55308,
+  "profile": "low",
+  "canvas": [
+    507,
+    607
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 26811708,
+    "totalSize": 60817408,
+    "embedderHeapUsedSize": 13120928,
+    "backingStorageSize": 36336179
+  },
+  "run": 0,
+  "label": "Photo album",
+  "kind": "kit",
+  "pack": "pictures",
+  "labs": true,
+  "errors": [],
+  "wallMs": 12084,
+  "measuredAt": "2026-10-17T06:22:56.732Z",
+  "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+}

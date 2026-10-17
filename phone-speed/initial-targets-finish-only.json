@@ -1,0 +1,92 @@
+[
+  {
+    "id": "alum-crystal",
+    "metric": "idle.median",
+    "loadRank": 17,
+    "drawRank": 1
+  },
+  {
+    "id": "crochet-earth",
+    "metric": "idle.median",
+    "loadRank": 6,
+    "drawRank": 2
+  },
+  {
+    "id": "sunflower-photo",
+    "metric": "idle.median",
+    "loadRank": 20,
+    "drawRank": 3
+  },
+  {
+    "id": "video-3d",
+    "metric": "idle.median",
+    "loadRank": 55,
+    "drawRank": 4
+  },
+  {
+    "id": "toy-trex",
+    "metric": "idle.median",
+    "loadRank": 50,
+    "drawRank": 5
+  },
+  {
+    "id": "desk-globe",
+    "metric": "idle.median",
+    "loadRank": 23,
+    "drawRank": 6
+  },
+  {
+    "id": "dog-plush",
+    "metric": "idle.median",
+    "loadRank": 8,
+    "drawRank": 7
+  },
+  {
+    "id": "maple-tree",
+    "metric": "idle.median",
+    "loadRank": 10,
+    "drawRank": 8
+  },
+  {
+    "id": "bmx-bike",
+    "metric": "idle.median",
+    "loadRank": 28,
+    "drawRank": 9
+  },
+  {
+    "id": "triceratops-skull",
+    "metric": "idle.median",
+    "loadRank": 39,
+    "drawRank": 10
+  },
+  {
+    "id": "cactus-real",
+    "metric": "idle.median",
+    "loadRank": 11,
+    "drawRank": 11
+  },
+  {
+    "id": "mushroom-photo",
+    "metric": "idle.median",
+    "loadRank": 5,
+    "drawRank": 12
+  },
+  {
+    "id": "stollen",
+    "metric": "idle.median",
+    "loadRank": 9,
+    "drawRank": 13
+  },
+  {
+    "id": "physalis",
+    "metric": "idle.median",
+    "loadRank": 30,
+    "drawRank": 14
+  },
+  {
+    "id": "cherry-blossom-photo",
+    "metric": "idle.median",
+    "loadRank": 7,
+    "drawRank": 15
+  }
+]

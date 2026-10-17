@@ -1,0 +1,106 @@
+{
+  "id": "space-shuttle",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 2014.3000000000466,
+  "firstSubmitMs": 1844.1999999999534,
+  "idle": {
+    "count": 8,
+    "median": 558.5500000000466,
+    "p95": 579.7000000001863,
+    "work": {
+      "count": 9,
+      "median": 554.4000000001397,
+      "p95": 952.6000000000931
+    },
+    "elapsedMs": 5686.600000000093,
+    "intervals": [
+      553.8999999999069,
+      559.8000000000466,
+      574.8999999999069,
+      579.7000000001863,
+      541.3999999999069,
+      557.3000000000466,
+      575.6999999999534,
+      533.1000000000931
+    ],
+    "workMs": [
+      952.6000000000931,
+      551,
+      552.8000000000466,
+      572,
+      577,
+      538.3000000000466,
+      554.4000000001397,
+      572.1999999999534,
+      527.1000000000931
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 588.8499999999767,
+    "p95": 614.7000000001863,
+    "work": {
+      "count": 9,
+      "median": 583.9000000001397,
+      "p95": 610
+    },
+    "elapsedMs": 5291.40000000014,
+    "intervals": [
+      614.7000000001863,
+      584.0999999998603,
+      589.9000000001397,
+      568.1999999999534,
+      588,
+      595.3000000000466,
+      583.5,
+      589.6999999999534
+    ],
+    "workMs": [
+      575.5,
+      610,
+      579.5,
+      586,
+      564.5,
+      583.9000000001397,
+      592.3000000000466,
+      580.6000000000931,
+      584.1000000000931
+    ]
+  },
+  "action": "launch",
+  "heapBytes": 54878813,
+  "transferBytes": 6904464,
+  "bodyBytes": 6872364,
+  "cachedRequests": 0,
+  "requests": 107,
+  "splats": 105118,
+  "profile": "low",
+  "canvas": [
+    1170,
+    1401
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 12840556,
+    "totalSize": 15482880,
+    "embedderHeapUsedSize": 10908688,
+    "backingStorageSize": 42422797
+  },
+  "run": 0,
+  "label": "Space Shuttle",
+  "kind": "kit",
+  "pack": "space-r2",
+  "labs": true,
+  "errors": [],
+  "wallMs": 14290,
+  "measuredAt": "2026-10-17T05:32:38.996Z",
+  "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+}

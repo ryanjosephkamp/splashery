@@ -1,0 +1,108 @@
+[
+  {
+    "id": "cave-lioness",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2938.2999999998137,
+    "firstSubmitMs": 2614,
+    "idle": {
+      "count": 8,
+      "median": 374.79999999981374,
+      "p95": 412.5,
+      "work": {
+        "count": 9,
+        "median": 372.6000000005588,
+        "p95": 1096.9000000003725
+      },
+      "elapsedMs": 4745.800000000745,
+      "intervals": [
+        412.5,
+        350.79999999981374,
+        310.90000000037253,
+        331.5,
+        374.59999999962747,
+        397.70000000018626,
+        411.70000000018626,
+        375
+      ],
+      "workMs": [
+        1096.9000000003725,
+        407,
+        343.79999999981374,
+        307.6000000005588,
+        326.5,
+        372,
+        395.5,
+        407.90000000037253,
+        372.6000000005588
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 677.8999999999069,
+      "p95": 717.2000000001863,
+      "work": {
+        "count": 9,
+        "median": 678.5999999996275,
+        "p95": 714.2000000001863
+      },
+      "elapsedMs": 6100,
+      "intervals": [
+        717.2000000001863,
+        701.2999999998137,
+        682.0999999996275,
+        630.6000000005588,
+        706,
+        637.0999999996275,
+        673.7000000001863,
+        657.5999999996275
+      ],
+      "workMs": [
+        689.5,
+        714.2000000001863,
+        698.5999999996275,
+        678.5999999996275,
+        628.2000000001863,
+        702.6000000005588,
+        633.2000000001863,
+        669.9000000003725,
+        653.7999999998137
+      ]
+    },
+    "action": "hop",
+    "heapBytes": 33208961,
+    "transferBytes": 9163666,
+    "bodyBytes": 9133966,
+    "cachedRequests": 0,
+    "requests": 99,
+    "splats": 300000,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 11453888,
+      "totalSize": 15728640,
+      "embedderHeapUsedSize": 8597624,
+      "backingStorageSize": 11065564
+    },
+    "run": 0,
+    "label": "Cave lioness",
+    "kind": "captured",
+    "pack": null,
+    "labs": true,
+    "errors": [],
+    "wallMs": 15062,
+    "measuredAt": "2026-10-17T07:15:32.607Z",
+    "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+  }
+]

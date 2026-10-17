@@ -1,0 +1,106 @@
+{
+  "id": "toy-trex",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3185.0999999996275,
+  "firstSubmitMs": 2430.5,
+  "idle": {
+    "count": 8,
+    "median": 439.64999999990687,
+    "p95": 540,
+    "work": {
+      "count": 9,
+      "median": 442,
+      "p95": 1389.2999999998137
+    },
+    "elapsedMs": 4931.0999999996275,
+    "intervals": [
+      485.90000000037253,
+      449.20000000018626,
+      444.3999999994412,
+      420.70000000018626,
+      540,
+      434.90000000037253,
+      405.20000000018626,
+      359.69999999925494
+    ],
+    "workMs": [
+      1389.2999999998137,
+      482.5,
+      446.79999999981374,
+      442,
+      418.09999999962747,
+      534.0999999996275,
+      432,
+      402.6000000005588,
+      355
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 811.4000000003725,
+    "p95": 889.7999999998137,
+    "work": {
+      "count": 9,
+      "median": 802.9000000003725,
+      "p95": 886.9000000003725
+    },
+    "elapsedMs": 7235.299999999814,
+    "intervals": [
+      749.3999999994412,
+      817,
+      805.8000000007451,
+      889.5,
+      803.5999999996275,
+      822.7000000001863,
+      889.7999999998137,
+      762.5
+    ],
+    "workMs": [
+      690.1000000005588,
+      746.7999999998137,
+      813,
+      802.9000000003725,
+      886.9000000003725,
+      801,
+      820,
+      886.5999999996275,
+      759.4000000003725
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 29403786,
+  "transferBytes": 9162880,
+  "bodyBytes": 9133180,
+  "cachedRequests": 0,
+  "requests": 99,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 14566640,
+    "totalSize": 32505856,
+    "embedderHeapUsedSize": 9154616,
+    "backingStorageSize": 15187118
+  },
+  "run": 0,
+  "label": "Toy T. rex",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 16615,
+  "measuredAt": "2026-10-17T06:50:57.984Z",
+  "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+}

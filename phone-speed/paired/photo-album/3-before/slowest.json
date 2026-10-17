@@ -1,0 +1,108 @@
+[
+  {
+    "id": "photo-album",
+    "completion": "synchronous-readPixels",
+    "firstViewReadback": true,
+    "firstViewMs": 2439.7999999998137,
+    "firstSubmitMs": 2008.5,
+    "idle": {
+      "count": 8,
+      "median": 661.1000000000931,
+      "p95": 743.8999999994412,
+      "work": {
+        "count": 9,
+        "median": 652.0999999996275,
+        "p95": 1793.2000000001863
+      },
+      "elapsedMs": 7029.899999999441,
+      "intervals": [
+        603.0999999996275,
+        663.8000000007451,
+        743.8999999994412,
+        621,
+        693.6000000005588,
+        684.2999999998137,
+        658.3999999994412,
+        566.7000000001863
+      ],
+      "workMs": [
+        1793.2000000001863,
+        596.5,
+        640.8000000007451,
+        731.7999999998137,
+        616.7999999998137,
+        652.1000000005588,
+        657.2999999998137,
+        652.0999999996275,
+        562.7000000001863
+      ]
+    },
+    "tap": {
+      "count": 8,
+      "median": 401.70000000018626,
+      "p95": 683.1999999992549,
+      "work": {
+        "count": 9,
+        "median": 440.70000000018626,
+        "p95": 679.5999999996275
+      },
+      "elapsedMs": 4039.5,
+      "intervals": [
+        633.5,
+        683.1999999992549,
+        645,
+        478.30000000074506,
+        325.09999999962747,
+        254,
+        239,
+        206.90000000037253
+      ],
+      "workMs": [
+        555.1000000005588,
+        622,
+        679.5999999996275,
+        616.5,
+        440.70000000018626,
+        317.90000000037253,
+        250.5,
+        221.5,
+        197.40000000037253
+      ]
+    },
+    "action": "turn",
+    "heapBytes": 69075168,
+    "transferBytes": 6052325,
+    "bodyBytes": 6019625,
+    "cachedRequests": 0,
+    "requests": 109,
+    "splats": 55308,
+    "profile": "low",
+    "canvas": [
+      585,
+      700
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 3,
+    "renderer": "webgl2",
+    "forcedHybridMesh": false,
+    "firstViewProbe": "loaded-splat-signal",
+    "heap": {
+      "usedSize": 21128780,
+      "totalSize": 36962304,
+      "embedderHeapUsedSize": 9164904,
+      "backingStorageSize": 43548292
+    },
+    "run": 0,
+    "label": "Photo album",
+    "kind": "kit",
+    "pack": "pictures",
+    "labs": true,
+    "errors": [],
+    "wallMs": 16068,
+    "measuredAt": "2026-10-17T06:24:26.495Z",
+    "source": "36f5df601963f418f71b98ee460783ea6191b0bc"
+  }
+]

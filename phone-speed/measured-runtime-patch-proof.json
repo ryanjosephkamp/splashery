@@ -1,0 +1,28 @@
+{
+  "publicBase": "ceb51de7a015377d7f350119c27a792fc1a8a66d",
+  "originalMeasuredSource": "072f15f3d00150825f36784b504b8b365c892cd7",
+  "patchSHA256": "a6d69fe19813bf5b7fd770ac4e598a0be5d8c91134b5e38a4b4b42cadc56942d",
+  "entries": {
+    "src": {
+      "reconstructed": "2756ef30d1ba0e5f3574c06e21adf93db22df963",
+      "measured": "2756ef30d1ba0e5f3574c06e21adf93db22df963"
+    },
+    "vendor": {
+      "reconstructed": "558f0c7f1cddbe8a327f2f0e04d1b238a5c313f3",
+      "measured": "558f0c7f1cddbe8a327f2f0e04d1b238a5c313f3"
+    },
+    "assets": {
+      "reconstructed": "718d43ab7a8d1b9d918a6ef2e5f5a25f47413913",
+      "measured": "718d43ab7a8d1b9d918a6ef2e5f5a25f47413913"
+    },
+    "index.html": {
+      "reconstructed": "5bf61e4c0ed84fd35964cecc075bfb2d33480ef6",
+      "measured": "5bf61e4c0ed84fd35964cecc075bfb2d33480ef6"
+    },
+    "styles.css": {
+      "reconstructed": "c6b0bc48a30684da67d4a38238331f97f05ea2c0",
+      "measured": "c6b0bc48a30684da67d4a38238331f97f05ea2c0"
+    }
+  },
+  "matches": true
+}

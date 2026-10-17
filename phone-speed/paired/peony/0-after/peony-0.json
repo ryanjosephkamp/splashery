@@ -1,0 +1,106 @@
+{
+  "id": "peony",
+  "completion": "synchronous-readPixels",
+  "firstViewReadback": true,
+  "firstViewMs": 3241.4000000003725,
+  "firstSubmitMs": 2608,
+  "idle": {
+    "count": 8,
+    "median": 328.59999999962747,
+    "p95": 347,
+    "work": {
+      "count": 9,
+      "median": 330.2000000011176,
+      "p95": 544.5
+    },
+    "elapsedMs": 3263.4000000003725,
+    "intervals": [
+      306.69999999925494,
+      334.80000000074506,
+      347,
+      322.3999999985099,
+      311.7000000011176,
+      320.69999999925494,
+      344.2000000011176,
+      336.09999999962747
+    ],
+    "workMs": [
+      544.5,
+      300.90000000037253,
+      330.2000000011176,
+      342.90000000037253,
+      318.5,
+      308.30000000074506,
+      315.90000000037253,
+      340.7000000011176,
+      333.5
+    ]
+  },
+  "tap": {
+    "count": 8,
+    "median": 694.4000000003725,
+    "p95": 769.6999999992549,
+    "work": {
+      "count": 9,
+      "median": 690.5,
+      "p95": 766.1999999992549
+    },
+    "elapsedMs": 6298,
+    "intervals": [
+      617.5,
+      679.5999999996275,
+      668,
+      758.5,
+      744.6999999992549,
+      694.5999999996275,
+      694.2000000011176,
+      769.6999999992549
+    ],
+    "workMs": [
+      667.8000000007451,
+      614.4000000003725,
+      674.9000000003725,
+      665.0999999996275,
+      755.8000000007451,
+      741.5999999996275,
+      690.5,
+      691.5,
+      766.1999999992549
+    ]
+  },
+  "action": "hop",
+  "heapBytes": 36808297,
+  "transferBytes": 9177531,
+  "bodyBytes": 9147831,
+  "cachedRequests": 0,
+  "requests": 99,
+  "splats": 300000,
+  "profile": "low",
+  "canvas": [
+    585,
+    700
+  ],
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 3,
+  "renderer": "webgl2",
+  "forcedHybridMesh": false,
+  "firstViewProbe": "loaded-splat-signal",
+  "heap": {
+    "usedSize": 11586780,
+    "totalSize": 17825792,
+    "embedderHeapUsedSize": 8196288,
+    "backingStorageSize": 23715884
+  },
+  "run": 0,
+  "label": "Peonies in a vase",
+  "kind": "captured",
+  "pack": null,
+  "labs": true,
+  "errors": [],
+  "wallMs": 14100,
+  "measuredAt": "2026-10-17T08:07:44.849Z",
+  "source": "072f15f3d00150825f36784b504b8b365c892cd7"
+}
