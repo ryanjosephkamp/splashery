@@ -351,6 +351,49 @@ async function expectRecordFocused(page) {
   else expect(got.body || got.focused).toBe(true);
 }
 
+test.describe("native preview focus", () => {
+  test.use(PHONE);
+
+  test("closing a phone preview releases its hidden focused control before the next frame", async ({
+    page,
+  }) => {
+    const errors = watchErrors(page);
+    await page.addInitScript(() => {
+      window.__recordCloseFocus = [];
+      const close = HTMLDialogElement.prototype.close;
+      HTMLDialogElement.prototype.close = function (...args) {
+        const result = close.apply(this, args);
+        if (this.id === "rec-preview")
+          queueMicrotask(() => {
+            const r = document.getElementById("record-start");
+            window.__recordCloseFocus.push({
+              open: this.open,
+              shown: !!r.offsetParent && r.getBoundingClientRect().height > 0,
+              focused: document.activeElement === r,
+              body: document.activeElement === document.body,
+            });
+          });
+        return result;
+      };
+    });
+    await open(page);
+    await pick(page, "donut");
+    await showTab(page, "share");
+    await takeOne(page, 1200);
+    expect(await page.evaluate(() => window.__splashery.app.recorded.blob.size)).toBeGreaterThan(0);
+    const download = page.waitForEvent("download");
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#rec-preview")).toBeHidden();
+    await download;
+    expect(await page.evaluate(() => window.__recordCloseFocus)).toEqual([
+      { open: false, shown: false, focused: false, body: true },
+    ]);
+    await expectRecordFocused(page);
+    expect(errors).toEqual([]);
+  });
+});
+
 // One take from the Share tab, stopped from the pill; the preview opens.
 async function takeOne(page, ms = 1500) {
   await page.click("#record-start");
