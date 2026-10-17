@@ -1,0 +1,109 @@
+2026-10-17T10:23:12.6697239Z 0 of 26 files already done in ../../_temp/ci-out/shard-13; running 26, 2 at once, WebGL2 on llvmpipe.
+2026-10-17T10:26:07.3335065Z [1/26] sndc 173 s: ok
+2026-10-17T10:28:14.4467902Z [2/26] wd 300 s: ok
+2026-10-17T10:28:14.6287823Z [3/26] hh5-ai 127 s: ok
+2026-10-17T10:28:20.7392415Z [4/26] cdx-p3d4-worker-preparation 6 s: ok
+2026-10-17T10:28:49.8388592Z [5/26] cdx-life 35 s: ok
+2026-10-17T10:28:53.0778942Z [6/26] cdx-v3d-background 3 s: ok
+2026-10-17T10:28:56.7132111Z [7/26] cdx-v3d-extraction-rate 4 s: ok
+2026-10-17T10:29:00.7243682Z [8/26] cdx-v3d-seed-bounds 4 s: ok
+2026-10-17T10:29:26.7193714Z [9/26] cdx-pfc 66 s: ok
+2026-10-17T10:30:47.1422445Z [10/26] pages-r2 106 s: 1 failed
+2026-10-17T10:31:35.5635447Z [11/26] fb 129 s: ok
+2026-10-17T10:32:11.6368480Z [12/26] hh1-balls 84 s: ok
+2026-10-17T10:32:17.5450670Z [13/26] live3-engine 42 s: ok
+2026-10-17T10:33:02.3391084Z [14/26] fx6 45 s: ok
+2026-10-17T10:33:08.1619124Z [15/26] arc2 57 s: ok
+2026-10-17T10:33:22.4086264Z [16/26] abb 20 s: ok
+2026-10-17T10:33:44.3311724Z [17/26] smd-models 36 s: ok
+2026-10-17T10:34:00.2396589Z [18/26] sci3-engine 16 s: ok
+2026-10-17T10:34:08.9599442Z [19/26] man5 47 s: ok
+2026-10-17T10:34:09.5322557Z [20/26] stm-engine 9 s: ok
+2026-10-17T10:34:11.7897124Z [21/26] cdx-p3d2-r3-anchored 2 s: ok
+2026-10-17T10:34:12.0904544Z [22/26] cdx-p3d2-r3-footprint 3 s: ok
+2026-10-17T10:34:14.6106945Z [23/26] hec-engine 3 s: ok
+2026-10-17T10:39:10.8800673Z [24/26] cdx-mp2 296 s: ok
+2026-10-17T10:41:42.4793133Z [25/26] smd-moving 152 s: ok
+2026-10-17T10:42:13.5577608Z [26/26] spg 31 s: ok
+2026-10-17T10:42:13.6007119Z
+2026-10-17T10:42:13.6007889Z # Suite run
+2026-10-17T10:42:13.6008486Z
+2026-10-17T10:42:13.6008933Z - 26 of 26 files, 210 tests: 209 passed, 1 failed, 0 skipped.
+2026-10-17T10:42:13.6009901Z - Time in files (one after another): 30 min. Wall time of this run: 19 min (2 at once).
+2026-10-17T10:42:13.6010661Z
+2026-10-17T10:42:13.6011063Z ## Failed
+2026-10-17T10:42:13.6011372Z
+2026-10-17T10:42:13.6012258Z - `pages-r2:495` opaque tilted PDF faces cover their own paper backing (webgl2): failed. Error: expect(received).toBeLessThan(expected)
+2026-10-17T10:42:13.6012886Z
+2026-10-17T10:42:13.6013009Z ## Slowest files
+2026-10-17T10:42:13.6013172Z
+2026-10-17T10:42:13.6013323Z | File | Seconds | Tests |
+2026-10-17T10:42:13.6013638Z | --- | ---: | ---: |
+2026-10-17T10:42:13.6013901Z | wd | 300 | 16 |
+2026-10-17T10:42:13.6014204Z | cdx-mp2 | 296 | 16 |
+2026-10-17T10:42:13.6014487Z | sndc | 173 | 9 |
+2026-10-17T10:42:13.6014767Z | smd-moving | 152 | 16 |
+2026-10-17T10:42:13.6015079Z | fb | 129 | 6 |
+2026-10-17T10:42:13.6015347Z | hh5-ai | 127 | 11 |
+2026-10-17T10:42:13.6015641Z | pages-r2 | 106 | 11 |
+2026-10-17T10:42:13.6015920Z | hh1-balls | 84 | 5 |
+2026-10-17T10:42:13.6016221Z | cdx-pfc | 66 | 10 |
+2026-10-17T10:42:13.6016528Z | arc2 | 57 | 7 |
+2026-10-17T10:42:13.6016786Z | man5 | 47 | 19 |
+2026-10-17T10:42:13.6017068Z | fx6 | 45 | 4 |
+2026-10-17T10:42:13.6017333Z | live3-engine | 42 | 4 |
+2026-10-17T10:42:13.6017627Z | smd-models | 36 | 9 |
+2026-10-17T10:42:13.6017919Z | cdx-life | 35 | 5 |
+2026-10-17T10:42:13.6018184Z | spg | 31 | 9 |
+2026-10-17T10:42:13.6018439Z | abb | 20 | 6 |
+2026-10-17T10:42:13.6018720Z | sci3-engine | 16 | 2 |
+2026-10-17T10:42:13.6018999Z | stm-engine | 9 | 1 |
+2026-10-17T10:42:13.6019334Z | cdx-p3d4-worker-preparation | 6 | 1 |
+2026-10-17T10:42:13.6020001Z | cdx-v3d-seed-bounds | 4 | 7 |
+2026-10-17T10:42:13.6020363Z | cdx-v3d-extraction-rate | 4 | 5 |
+2026-10-17T10:42:13.6020852Z | cdx-v3d-background | 3 | 11 |
+2026-10-17T10:42:13.6021195Z | cdx-p3d2-r3-footprint | 3 | 2 |
+2026-10-17T10:42:13.6021543Z | hec-engine | 3 | 12 |
+2026-10-17T10:42:13.6021724Z
+2026-10-17T10:42:13.6021831Z ## Slowest tests
+2026-10-17T10:42:13.6021979Z
+2026-10-17T10:42:13.6022092Z | Test | Seconds |
+2026-10-17T10:42:13.6022335Z | --- | ---: |
+2026-10-17T10:42:13.6023009Z | `cdx-mp2:401` upload refinement reduces machine and bridge regressions without losing horse and Sintel s | 162 |
+2026-10-17T10:42:13.6024173Z | `wd:187` worlds › each tier stays within its splat budget | 105 |
+2026-10-17T10:42:13.6024828Z | `wd:210` worlds › screenshots at 390x844 and 1440x900 | 59 |
+2026-10-17T10:42:13.6025682Z | `cdx-mp2:317` a real uploaded bunny refines every depth frame and closes the measured low-tier sample ga | 39 |
+2026-10-17T10:42:13.6026724Z | `sndc:150` the splatting toy's sorting view clicks once for each splat placed; each view has its own  | 33 |
+2026-10-17T10:42:13.6027640Z | `hh1-balls:34` every ball: its own bounce, room to roll and a landing sound | 33 |
+2026-10-17T10:42:13.6028574Z | `cdx-mp2:436` 60 fps input retains its native picture and improves depth in the background at a larger s | 33 |
+2026-10-17T10:42:13.6029455Z | `sndc:108` the daisy's petals each tap as they land, and the rose's one does too | 32 |
+2026-10-17T10:42:13.6030281Z | `fb:121` the even torus, disc, ellipsoid, tube and rounded box are on their surfaces | 32 |
+2026-10-17T10:42:13.6031286Z | `fb:187` every toy the lane changed builds at the phone tier, within its budget | 29 |
+2026-10-17T10:42:13.6032305Z | `wd:242` worlds render (r2) › the sharp kernel and the tier's pixel ratio are on, and the URL overr | 27 |
+2026-10-17T10:42:13.6033587Z | `sndc:230` screenshot: the periodic table's built atom (1440x900) | 27 |
+2026-10-17T10:42:13.6034682Z | `wd:138` worlds › walking up to a landmark or tapping its sign opens its card | 25 |
+2026-10-17T10:42:13.6035463Z | `pages-r2:564` a closed album cover hides its picture faces (webgpu) | 25 |
+2026-10-17T10:42:13.6036486Z | `live3-engine:57` the Live pill never covers a control, on a phone or a desktop | 24 |
+2026-10-17T10:42:13.6037402Z | `sndc:175` each splat field and each book style plays its own sound | 24 |
+2026-10-17T10:42:13.6038267Z | `cdx-pfc:164` all forms fly, the QR encoder loads on demand, and the rendered QR scans at 1440x900 | 23 |
+2026-10-17T10:42:13.6039055Z | `hh5-ai:283` screenshots: the difference-engine, hands-on | 23 |
+2026-10-17T10:42:13.6039625Z | `wd:40` worlds › the Test island loads without console errors and shows its start screen | 22 |
+2026-10-17T10:42:13.6040229Z | `sndc:128` the periodic table's atom ticks once for each proton and neutron as it packs in | 22 |
+2026-10-17T10:42:13.6041217Z | `pages-r2:134` sharp pages in the real renderer › the requested WebGPU renderer draws masked cards and re | 22 |
+2026-10-17T10:42:13.6043364Z | `man5:201` the PDF › the same input and the same Chromium print the same bytes | 21 |
+2026-10-17T10:42:13.6043983Z | `fb:221` marble screenshots at 390x844 and 1440x900 | 19 |
+2026-10-17T10:42:13.6044611Z | `wd:168` worlds › the list view lists every landmark, and Go there takes you to one | 19 |
+2026-10-17T10:42:13.6045148Z | `smd-models:65` the sample models › the toy shows each one | 19 |
+2026-10-17T10:42:13.6045359Z
+2026-10-17T10:42:13.6175721Z ##[group]Run node tools/ci-report.mjs recheck $OUT --shard=13/$SHARDS --started=1792232592
+2026-10-17T10:42:13.6176246Z [36;1mnode tools/ci-report.mjs recheck $OUT --shard=13/$SHARDS --started=1792232592[0m
+2026-10-17T10:42:13.6230949Z shell: /usr/bin/bash -e {0}
+2026-10-17T10:42:13.6231161Z env:
+2026-10-17T10:42:13.6231330Z   SHARDS: 16
+2026-10-17T10:42:13.6231510Z   SPLASHERY_GL: llvmpipe
+2026-10-17T10:42:13.6231701Z   DISPLAY: :99
+2026-10-17T10:42:13.6231899Z   OUT: /home/runner/work/_temp/ci-out/shard-13
+2026-10-17T10:42:13.6232136Z ##[endgroup]
+2026-10-17T10:42:19.9277290Z pages-r2:495 opaque tilted PDF faces cover their own paper backing (webgl2): failed alone
+2026-10-17T10:42:19.9279905Z 1 failed in this shard; 1 rechecked.
+2026-10-17T10:42:19.9376555Z

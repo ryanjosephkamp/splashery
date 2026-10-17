@@ -1,5 +1,5 @@
 {
-  "createdUTC": "2026-10-17T09:10:01.883788+00:00",
+  "createdUTC": "2026-10-17T11:34:00.533172+00:00",
   "codeCommit": "f94345f3fab560a61c424ab6297cabbd247a79f0",
   "codeTree": "e732714cba32780d3dd12f9ce5c066321ebcc30d",
   "mainCommit": "ea9a9d193de529e6c75264123bb04b7e862b7162",
@@ -31,13 +31,13 @@
     "note": "Same 2048-pixel CC0 input and 390\u00d7844, DSF 3 viewport, normal product pixel caps. Panorama 100 ms versus Classic 200 ms sampling; no physical-phone RAM/GPU-memory claim."
   },
   "fullSuite": {
-    "recordedUTC": "2026-10-17T10:04:03.610604+00:00",
+    "recordedUTC": "2026-10-17T11:32:47.864118+00:00",
     "runId": 39019832991,
     "runAttempt": 1,
     "url": "https://github.com/ryanjosephkamp/splashery/actions/runs/39019832991",
     "headSha": "f94345f3fab560a61c424ab6297cabbd247a79f0",
-    "status": "queued",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "failure",
     "jobs": [
       {
         "id": 117359273372,
@@ -66,18 +66,18 @@
       {
         "id": 117359273553,
         "name": "Suite 2/16",
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "startedAt": "2026-10-17T10:03:17Z",
-        "completedAt": null
+        "completedAt": "2026-10-17T10:20:50Z"
       },
       {
         "id": 117359273563,
         "name": "Suite 3/16",
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "startedAt": "2026-10-17T10:02:01Z",
-        "completedAt": null
+        "completedAt": "2026-10-17T10:23:09Z"
       },
       {
         "id": 117359273568,
@@ -90,90 +90,98 @@
       {
         "id": 117359273588,
         "name": "Suite 11/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:05:18Z",
+        "completedAt": "2026-10-17T10:29:56Z"
       },
       {
         "id": 117359273594,
         "name": "Suite 6/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:14:53Z",
+        "completedAt": "2026-10-17T10:41:09Z"
       },
       {
         "id": 117359273599,
         "name": "Suite 13/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T10:20:51Z",
+        "completedAt": "2026-10-17T10:42:24Z"
       },
       {
         "id": 117359273611,
         "name": "Suite 7/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T10:26:04Z",
+        "completedAt": "2026-10-17T10:50:40Z"
       },
       {
         "id": 117359273622,
         "name": "Suite 4/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:20:53Z",
+        "completedAt": "2026-10-17T10:35:57Z"
       },
       {
         "id": 117359273632,
         "name": "Suite 5/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:33:39Z",
+        "completedAt": "2026-10-17T10:52:08Z"
       },
       {
         "id": 117359273657,
         "name": "Suite 12/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:41:11Z",
+        "completedAt": "2026-10-17T11:06:22Z"
       },
       {
         "id": 117359273682,
         "name": "Suite 16/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:38:59Z",
+        "completedAt": "2026-10-17T10:59:44Z"
       },
       {
         "id": 117359273697,
         "name": "Suite 1/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T10:41:11Z",
+        "completedAt": "2026-10-17T11:24:24Z"
       },
       {
         "id": 117359273700,
         "name": "Suite 14/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:45:45Z",
+        "completedAt": "2026-10-17T11:06:00Z"
       },
       {
         "id": 117359273740,
         "name": "Suite 9/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:52:10Z",
+        "completedAt": "2026-10-17T11:08:39Z"
+      },
+      {
+        "id": 117384315381,
+        "name": "Summary",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T11:31:54Z",
+        "completedAt": "2026-10-17T11:32:32Z"
       }
     ]
   },
@@ -199,6 +207,76 @@
       "status": "completed with three failed shards; PDF isolated recheck passed, Showcase counts fixed, Pebbles failure reproduced on untouched main"
     }
   ],
+  "fullSuiteOutcome": {
+    "recordedUTC": "2026-10-17T11:34:37.026834+00:00",
+    "runId": 39019832991,
+    "codeCommit": "f94345f3fab560a61c424ab6297cabbd247a79f0",
+    "mainCommit": "ea9a9d193de529e6c75264123bb04b7e862b7162",
+    "conclusion": "failure",
+    "counts": {
+      "reportedFiles": 401,
+      "totalFiles": 401,
+      "tests": 3416,
+      "passed": 3412,
+      "failed": 3,
+      "skipped": 1
+    },
+    "fullSuiteGateMet": false,
+    "failures": [
+      {
+        "case": "pages-r2:495",
+        "description": "Opaque tilted PDF faces cover their own paper backing (WebGL2)",
+        "expected": "mean difference < 0.5",
+        "received": 19.484580084079457,
+        "isolatedRecheck": "failed",
+        "localMainAndBranchControls": "both passed; CI cause remains unresolved"
+      },
+      {
+        "case": "phy:64",
+        "assertionLine": 82,
+        "description": "Pebbles stacking height",
+        "expected": "height > 0.21939783634108012",
+        "received": 0.17336339629068773,
+        "isolatedRecheck": "passed",
+        "baseline": "same assertion failed on untouched-main local reproduction"
+      },
+      {
+        "case": "shp:131",
+        "description": "Sharpness-off renderer comparison with labs on or off",
+        "expected": "mean difference < 0.5",
+        "received": 0.5705439814814814,
+        "isolatedRecheck": "passed"
+      }
+    ],
+    "skip": {
+      "case": "cdx-v3d-calibration:215",
+      "reason": "Counterexample clips are held privately outside the repository.",
+      "newSkipAdded": false
+    },
+    "newPanoramaTests": {
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0
+    },
+    "classicGolden": {
+      "passed": 77,
+      "samples": 76,
+      "budgets": ["low", "high"],
+      "unchanged": true
+    },
+    "localRelatedChecks": {
+      "passed": 111,
+      "panorama": 19,
+      "classicGolden": 77,
+      "relatedNeuron": 15
+    },
+    "preflight": {
+      "passed": 272,
+      "mainMerged": true
+    },
+    "retryPolicy": "No rerun on this final merged-head matrix. Earlier pre-Neuron-r2 run and its one bounded failed-shard rerun are retained separately."
+  },
+  "progressNotes": ["progress-4h.md", "progress-8h.md"],
   "localFullSuite": {
     "status": "interrupted",
     "codeCommit": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
@@ -206,24 +284,7 @@
     "passedTests": 255,
     "failedTests": 0,
     "skippedTests": 0,
-    "reason": "Exec-server pong_timeout; partial reports retained without claiming a full local pass.",
-    "archive": "local-suite-partial.tar.gz",
-    "identity": "local-suite-partial-identity.json"
-  },
-  "previousFullMatrix": {
-    "runId": 39007527856,
-    "codeCommit": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
-    "files": 401,
-    "tests": 3416,
-    "passed": 3413,
-    "failed": 2,
-    "skipped": 1,
-    "failedCases": ["phy:64", "hh5-gems:154"],
-    "bothPassedIsolated": true,
-    "attempts": 2,
-    "reports": "pre-neuron-r2-ci/",
-    "skipReason": "Existing Video to 3D counterexample clips are held privately outside the repository.",
-    "note": "Original attempts and failures retained. Final main Neuron r2 update changes none of the affected physics, renderer, test source, panorama, or Classic bytes."
-  },
-  "eightHourProgress": "progress-8h.md"
+    "reason": "Exec-server pong_timeout. Partial reports retained without claiming a full local pass.",
+    "archive": "local-suite-partial.tar.gz"
+  }
 }

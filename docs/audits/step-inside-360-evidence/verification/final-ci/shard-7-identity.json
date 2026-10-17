@@ -1,0 +1,74 @@
+{
+  "runId": 39019832991,
+  "headSha": "f94345f3fab560a61c424ab6297cabbd247a79f0",
+  "jobId": 117359273611,
+  "artifactId": 12098757451,
+  "artifactName": "suite-7-a1",
+  "originalArtifactSha256": "b0914b6700b9d5d4aa661e2669071f798c51ca70f9a585d753e7a2db5a11bdf0",
+  "originalArtifactBytes": 29004088,
+  "retained": "All sharpness JSON, logs, rechecks, screenshots, traces, error context, shard metadata, and summary. Other passing specs screenshots omitted.",
+  "members": [
+    {
+      "name": "recheck/shp-131.json",
+      "bytes": 318929,
+      "sha256": "7e046be446615f74618ae9d767e1f2b06ad15e96835d4fe8e7567d5112d0efe2"
+    },
+    {
+      "name": "recheck.json",
+      "bytes": 90,
+      "sha256": "7ab95d818ce3e00a4b932794297a18a1af235f6e986ad1a5a4b7d8573d76614c"
+    },
+    {
+      "name": "results/shp/shp-with-sharp-0-the-rende-571f9-ly-as-before-labs-on-or-off-chromium/test-failed-1.png",
+      "bytes": 1038963,
+      "sha256": "3fd8135085f5d3ace6b043b38a83a618d2968983ac2b6cf004be1e33f0234a4f"
+    },
+    {
+      "name": "results/shp/shp-with-sharp-0-the-rende-571f9-ly-as-before-labs-on-or-off-chromium/test-failed-2.png",
+      "bytes": 1046831,
+      "sha256": "3aaa91578af0fbc44f1d07b3179498c38e8c17f70ca3fef7c252697da9aa5871"
+    },
+    {
+      "name": "results/shp/shp-with-sharp-0-the-rende-571f9-ly-as-before-labs-on-or-off-chromium/trace.zip",
+      "bytes": 19199531,
+      "sha256": "673472afd62d5a0b6241fbdf4d287f3f12de0e53767c9eb39934689daed50521"
+    },
+    {
+      "name": "shard.json",
+      "bytes": 53,
+      "sha256": "9df03b9353b73e4f8670c12c0ba06952c1a30d0b2374729cd76d782691f6498c"
+    },
+    {
+      "name": "shp.json",
+      "bytes": 323807,
+      "sha256": "f33b596e23ae5a8c11753945d064d3ea9e617ea5af2648040e56def844a006eb"
+    },
+    {
+      "name": "shp.log",
+      "bytes": 3228,
+      "sha256": "8e4abb1921e617737c06772eb43afbbe05a7b152345d359340858cc88564cf03"
+    },
+    {
+      "name": "summary.md",
+      "bytes": 3309,
+      "sha256": "c1e1c82f432a176a84419de358043b21e2917fe9fb4f5969c8009a3cef6e843a"
+    }
+  ],
+  "initial": {
+    "files": 26,
+    "tests": 153,
+    "passed": 152,
+    "failed": 1
+  },
+  "errors": [
+    {
+      "case": "with ?sharp=0 the renderer is exactly as before, labs on or off",
+      "line": 131,
+      "error": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 0.5\nReceived:   0.5705439814814814"
+    }
+  ],
+  "isolatedRecheck": {
+    "shp:131 with ?sharp=0 the renderer is exactly as before, labs on or off": "passed"
+  },
+  "splitArchive": "shard-7-sharpness-receipts.zip.parts"
+}

@@ -3,8 +3,8 @@
   "files": [
     {
       "file": "README.md",
-      "bytes": 21691,
-      "sha256": "4d31f7c5216bde3422e5ef0aa1a4eb48342b048fd85bf3345e44bdcb355778ca"
+      "bytes": 22734,
+      "sha256": "0e666ccf9c7b4891d176d74e7596d97a0d1653edba3722f5ed1a1104ac9860b6"
     },
     {
       "file": "calibration-research-findings.md",
@@ -1389,7 +1389,7 @@
     {
       "file": "verification/ci-checkout-tree-identity.json",
       "bytes": 265,
-      "sha256": "26cbd53f9da5d0a3d061af64e05ea5c8e3d526098aff48e7b07894f57bc016d8"
+      "sha256": "4df23423c918849e74a2d015edc354e69918026b7fa20af283359b8bacbcc7d1"
     },
     {
       "file": "verification/ci-classic-golden-passed.log.gz",
@@ -1507,9 +1507,109 @@
       "sha256": "01ed61373d1d9debed8c214fc957c4b7866592b3b042998d5d48bc50ecd56cad"
     },
     {
+      "file": "verification/final-ci/identity.json",
+      "bytes": 7518,
+      "sha256": "22dd90b88d47a4d5433b3ed776bc3944b65695f68acf1932640d1224e4014e14"
+    },
+    {
+      "file": "verification/final-ci/shard-1-identity.json",
+      "bytes": 2312,
+      "sha256": "d26a8127c8aa93e1ece0ee4e0a58b2d688fa95cc0e234cf7e1f665d9515e2738"
+    },
+    {
+      "file": "verification/final-ci/shard-1-physics-receipts.zip",
+      "bytes": 16319992,
+      "sha256": "601462b3d90cc5f6663d3760141d425a932ae0a425eb0fb4850e71b6a91855ca"
+    },
+    {
+      "file": "verification/final-ci/shard-13-identity.json",
+      "bytes": 2545,
+      "sha256": "f66493afa887f9a29de87c854de457b13c304d9127edf0547df10a70c8ae879d"
+    },
+    {
+      "file": "verification/final-ci/shard-13-pdf-receipts.zip",
+      "bytes": 5402027,
+      "sha256": "611ee310ccac5c87377202672797c49813e702b2587d41f74eaac44f3c8c3f7c"
+    },
+    {
+      "file": "verification/final-ci/shard-7-identity.json",
+      "bytes": 2572,
+      "sha256": "1d09a4a2f886b3b34ade3fc7529c1b43da7c5cf4f0dfed0e1c33fa3288271c10"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/manifest.json",
+      "bytes": 1628,
+      "sha256": "86e19d3d27a694770e05433b21e5a5c9462144189470055e2dcd12fdb0599b3b"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/part-000",
+      "bytes": 2097152,
+      "sha256": "52345616531b7d02b484cd9ba2aad781bb14d0ce7fc55fe0497f93a01ef2768b"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/part-001",
+      "bytes": 2097152,
+      "sha256": "94c6fc53530bc5eba159bc0bd650e155d6690d9c738506c2fb7b93cffa6f37f1"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/part-002",
+      "bytes": 2097152,
+      "sha256": "5c9a90a7f83ac072434a1c2cdc610d1fc913a7edb6ccb38bc808db52decdaaf6"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/part-003",
+      "bytes": 2097152,
+      "sha256": "9a5fb549feb649e606d009626d1416454020a3b8a2d913bccacd11fe69c691f5"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/part-004",
+      "bytes": 2097152,
+      "sha256": "eb46836bc97475baaf480157e3b028ec6b73134d7def1d2558518a550c0cd657"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/part-005",
+      "bytes": 2097152,
+      "sha256": "2594ec8c707c9c0794e32eb0e8a7a232526d25b3b90a4e41b48cd117fa9ce946"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/part-006",
+      "bytes": 2097152,
+      "sha256": "8ec4ea8e0b17ff0b4216730191214d361d09e08140118b3af7a1ffdac19de294"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/part-007",
+      "bytes": 2097152,
+      "sha256": "4e5f4fc91123b0b38a7abdc45730d7b4174cfdef8933bbcf5ef0d51ff3b35d54"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/part-008",
+      "bytes": 2097152,
+      "sha256": "b5a3be5c96cc5b29928e78e71e77f2bd654f0587bdf827fe9143e69e4c612caa"
+    },
+    {
+      "file": "verification/final-ci/shard-7-sharpness-receipts.zip.parts/part-009",
+      "bytes": 2074264,
+      "sha256": "03804005e1598117aaadfe2825239ca1b17952c0bbc98f98df6b05c4ce23aa2e"
+    },
+    {
+      "file": "verification/final-ci/summary-original.zip",
+      "bytes": 3734,
+      "sha256": "7bf7bf7b1e9b1a66ec3a2fcb2fec199a236fe361f24590a9be6657eb3cee0ac4"
+    },
+    {
+      "file": "verification/final-ci/summary.md",
+      "bytes": 2904,
+      "sha256": "d058bc981aebc81754f6185298789045f0c1fa71b4a4116c7bb3aad9901d9b4b"
+    },
+    {
+      "file": "verification/final-ci/times.json",
+      "bytes": 8064,
+      "sha256": "50c12db780d3178d2d398105e8255c71047aba71142d5e94c8707836431782be"
+    },
+    {
       "file": "verification/final-ci-status.json",
-      "bytes": 3610,
-      "sha256": "9fe538d85efebdb240022b5f08c35f5d17280c7d1beb97cb9291c5851fed9e51"
+      "bytes": 4157,
+      "sha256": "9f99fb4376d99435c74955a369cf14c5aabdedd61a0ffdfc4255c40b04ffd3dd"
     },
     {
       "file": "verification/final-confidence-model-equivalence.json",
@@ -1522,14 +1622,49 @@
       "sha256": "b2cf1040d48407c554718bb2446e7417235c26d9828165ec3ed5781e9915ff92"
     },
     {
+      "file": "verification/final-main-ci-shard-1-failure-and-recheck.log",
+      "bytes": 6637,
+      "sha256": "bfde67364fdf2a5122578e6cd5867c5cb7656d401045c63d90c77eb8262289cf"
+    },
+    {
+      "file": "verification/final-main-ci-shard-1-raw.log.gz",
+      "bytes": 37253,
+      "sha256": "c339db435903314fb95a1a4bc3ac9d82f8902e7ca2dacb55cf021ded50ce79d0"
+    },
+    {
+      "file": "verification/final-main-ci-shard-13-failure-and-recheck.log",
+      "bytes": 7740,
+      "sha256": "4645d33ee16b241d858b04ce047d45193fbeeffd2790a6df22f75d3f0fd5d418"
+    },
+    {
+      "file": "verification/final-main-ci-shard-13-raw.log.gz",
+      "bytes": 37958,
+      "sha256": "1943c609a49d67ef7f7af9dcc175453c28be117787a42812e451ea75158aeefb"
+    },
+    {
+      "file": "verification/final-main-ci-shard-7-failure-and-recheck.log",
+      "bytes": 7769,
+      "sha256": "40bb3a4634c9ce970ed7dde5648161ca038d947b3ba6a2f3d5f751e6e4c5d511"
+    },
+    {
+      "file": "verification/final-main-ci-shard-7-raw.log.gz",
+      "bytes": 37951,
+      "sha256": "485ce0c67a761e98394e1bb3f2f0db54603de19265f38f205e5344b7c08889aa"
+    },
+    {
       "file": "verification/final-main-run-plan.json",
       "bytes": 891,
       "sha256": "f4dbedde93ce14cb37701faa9e3cedf4608ff1ebcc49d16786c5b82e09724f98"
     },
     {
+      "file": "verification/final-suite-outcome.json",
+      "bytes": 1985,
+      "sha256": "5f886312c3fa7978843586aed9a33e6cc4eafa214491efee47d4923b00bd5a66"
+    },
+    {
       "file": "verification/final-verification.json",
-      "bytes": 7492,
-      "sha256": "706e71ec2e4f86b8630af91199e149e83efca950911385aa03be2d9b905d0ee9"
+      "bytes": 9539,
+      "sha256": "984e17fe128b2e5058f40d33a590df12a4fb7a582b9c5140324df4b3683bcac2"
     },
     {
       "file": "verification/frozen-file-identities.json",
@@ -1543,8 +1678,8 @@
     },
     {
       "file": "verification/hosted-feature-checks.json",
-      "bytes": 1365,
-      "sha256": "149718dc42d034fab450f6ad8f167bb92058768f4a487b020df96254a199c484"
+      "bytes": 1430,
+      "sha256": "438d66b4495dae5528ce6b8521241875ce23d2ffb42e6290995fd49d61e7d335"
     },
     {
       "file": "verification/latest-main-final-regression.log.gz",
@@ -1575,6 +1710,21 @@
       "file": "verification/panorama-memory-method.mjs.gz",
       "bytes": 3258,
       "sha256": "7271acb67607fe6a9cfdb4545fcdf72539a20a4acfe0237d8080835a2a31a458"
+    },
+    {
+      "file": "verification/pdf-current-isolated.log.gz",
+      "bytes": 342,
+      "sha256": "759a78e5a70905b4d3e45e1e54827201a40e3e61cd3e2a79a5eed98c62fb06c1"
+    },
+    {
+      "file": "verification/pdf-main-comparison.json",
+      "bytes": 2186,
+      "sha256": "c46aabc01e6e811e49bc653d3f7cac53a6f5ee78952d9050691594674a761b42"
+    },
+    {
+      "file": "verification/pdf-main-ea-isolated.log.gz",
+      "bytes": 342,
+      "sha256": "7b9c7f81b30fd5136d71b53a2beb9e1e4b9c1c18514f8931d55fcd35b120d625"
     },
     {
       "file": "verification/phone-confidence-final.log.gz",

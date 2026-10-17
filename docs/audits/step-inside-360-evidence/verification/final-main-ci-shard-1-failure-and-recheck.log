@@ -1,0 +1,90 @@
+2026-10-17T10:43:10.7049580Z 0 of 16 files already done in ../../_temp/ci-out/shard-1; running 16, 2 at once, WebGL2 on llvmpipe.
+2026-10-17T10:43:15.5458940Z [1/16] cdx-v3d-uncapped-stage 3 s: ok
+2026-10-17T10:43:58.2552454Z [2/16] live5 43 s: ok
+2026-10-17T10:45:10.3804682Z [3/16] arc 72 s: ok
+2026-10-17T10:46:04.3014394Z [4/16] sky 54 s: ok
+2026-10-17T10:47:05.2692168Z [5/16] hh4-landmarks 61 s: ok
+2026-10-17T10:48:01.1308300Z [6/16] hh4-tiny 56 s: ok
+2026-10-17T10:48:58.8567656Z [7/16] cdx-p3d2-r3-edges 58 s: ok
+2026-10-17T10:49:39.4904880Z [8/16] live4 41 s: ok
+2026-10-17T10:50:11.9546650Z [9/16] qr4-scan 32 s: ok
+2026-10-17T10:50:38.1324851Z [10/16] ui4-engine 26 s: ok
+2026-10-17T10:50:53.7106262Z [11/16] sky-engine 16 s: ok
+2026-10-17T10:51:05.3169732Z [12/16] e4f 12 s: ok
+2026-10-17T10:51:13.4134774Z [13/16] cmp2-sort 8 s: ok
+2026-10-17T10:51:17.0799369Z [14/16] cdx-v3d-handoff 4 s: ok
+2026-10-17T11:17:07.7489723Z [15/16] cdx-pics 2035 s: ok
+2026-10-17T11:23:43.5274091Z [16/16] phy 396 s: 1 failed
+2026-10-17T11:23:43.5604326Z
+2026-10-17T11:23:43.5605104Z # Suite run
+2026-10-17T11:23:43.5605963Z
+2026-10-17T11:23:43.5606540Z - 16 of 16 files, 126 tests: 125 passed, 1 failed, 0 skipped.
+2026-10-17T11:23:43.5607709Z - Time in files (one after another): 49 min. Wall time of this run: 41 min (2 at once).
+2026-10-17T11:23:43.5608434Z
+2026-10-17T11:23:43.5608687Z ## Failed
+2026-10-17T11:23:43.5608990Z
+2026-10-17T11:23:43.5610192Z - `phy:64` Pebbles: stones pick up and stack into a new cairn; a careless one topples: failed. Error: expect(received).toBeGreaterThan(expected)
+2026-10-17T11:23:43.5611277Z
+2026-10-17T11:23:43.5611984Z ## Slowest files
+2026-10-17T11:23:43.5612306Z
+2026-10-17T11:23:43.5612688Z | File | Seconds | Tests |
+2026-10-17T11:23:43.5613285Z | --- | ---: | ---: |
+2026-10-17T11:23:43.5614071Z | cdx-pics | 2035 | 51 |
+2026-10-17T11:23:43.5614655Z | phy | 396 | 6 |
+2026-10-17T11:23:43.5615138Z | arc | 72 | 13 |
+2026-10-17T11:23:43.5615594Z | hh4-landmarks | 61 | 7 |
+2026-10-17T11:23:43.5616234Z | cdx-p3d2-r3-edges | 58 | 3 |
+2026-10-17T11:23:43.5617303Z | hh4-tiny | 56 | 6 |
+2026-10-17T11:23:43.5617858Z | sky | 54 | 10 |
+2026-10-17T11:23:43.5618316Z | live5 | 43 | 5 |
+2026-10-17T11:23:43.5618805Z | live4 | 41 | 2 |
+2026-10-17T11:23:43.5619252Z | qr4-scan | 32 | 2 |
+2026-10-17T11:23:43.5619759Z | ui4-engine | 26 | 2 |
+2026-10-17T11:23:43.5620248Z | sky-engine | 16 | 4 |
+2026-10-17T11:23:43.5620724Z | e4f | 12 | 5 |
+2026-10-17T11:23:43.5621240Z | cmp2-sort | 8 | 6 |
+2026-10-17T11:23:43.5621805Z | cdx-v3d-handoff | 4 | 2 |
+2026-10-17T11:23:43.5622840Z | cdx-v3d-uncapped-stage | 3 | 2 |
+2026-10-17T11:23:43.5623282Z
+2026-10-17T11:23:43.5623725Z ## Slowest tests
+2026-10-17T11:23:43.5624118Z
+2026-10-17T11:23:43.5624405Z | Test | Seconds |
+2026-10-17T11:23:43.5624891Z | --- | ---: |
+2026-10-17T11:23:43.5626053Z | `cdx-pics:119` Split leaf: five-link browser scans, credits, and lazy loading | 118 |
+2026-10-17T11:23:43.5627344Z | `phy:111` jelly and amoeba stretch and spring back; cherries swing and knock | 115 |
+2026-10-17T11:23:43.5628659Z | `cdx-pics:65` every new Studio sample loads and raises into 3D; other new assets stay lazy | 112 |
+2026-10-17T11:23:43.5630022Z | `cdx-pics:119` Fern frond: five-link browser scans, credits, and lazy loading | 81 |
+2026-10-17T11:23:43.5631598Z | `phy:156` the spring toy stretches and settles; the bow shoots; sushi picks the tapped piece | 79 |
+2026-10-17T11:23:43.5632888Z | `cdx-pics:119` Clay pitcher: five-link browser scans, credits, and lazy loading | 70 |
+2026-10-17T11:23:43.5634300Z | `cdx-pics:119` Tulip: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5635578Z | `cdx-pics:119` Wooden blocks: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5636901Z | `cdx-pics:119` Pumpkin: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5638161Z | `cdx-pics:119` Autumn squash: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5639399Z | `cdx-pics:119` Scallop shell: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5640664Z | `cdx-pics:119` Clay teapot: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5641984Z | `cdx-pics:119` Wooden spinning top: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5643244Z | `cdx-pics:119` Pinecone: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5644738Z | `cdx-pics:119` Paper rainbow: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5646077Z | `cdx-pics:119` Mushroom: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5647492Z | `cdx-pics:119` Green watering can: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5648925Z | `cdx-pics:119` Pear: five-link browser scans, credits, and lazy loading | 68 |
+2026-10-17T11:23:43.5650292Z | `cdx-pics:119` Stacked stones: five-link browser scans, credits, and lazy loading | 67 |
+2026-10-17T11:23:43.5651683Z | `cdx-pics:119` Lotus bloom: five-link browser scans, credits, and lazy loading | 67 |
+2026-10-17T11:23:43.5653884Z | `cdx-pics:119` Ginkgo leaf: five-link browser scans, credits, and lazy loading | 67 |
+2026-10-17T11:23:43.5655106Z | `cdx-pics:119` Potted cactus: five-link browser scans, credits, and lazy loading | 67 |
+2026-10-17T11:23:43.5656384Z | `cdx-pics:119` Wooden stacking rings: five-link browser scans, credits, and lazy loading | 67 |
+2026-10-17T11:23:43.5657638Z | `cdx-pics:119` Smooth pebbles: five-link browser scans, credits, and lazy loading | 67 |
+2026-10-17T11:23:43.5658799Z | `cdx-pics:119` Balloon: five-link browser scans, credits, and lazy loading | 67 |
+2026-10-17T11:23:43.5659358Z
+2026-10-17T11:23:43.5758162Z ##[group]Run node tools/ci-report.mjs recheck $OUT --shard=1/$SHARDS --started=1792233790
+2026-10-17T11:23:43.5758797Z [36;1mnode tools/ci-report.mjs recheck $OUT --shard=1/$SHARDS --started=1792233790[0m
+2026-10-17T11:23:43.5850582Z shell: /usr/bin/bash -e {0}
+2026-10-17T11:23:43.5850849Z env:
+2026-10-17T11:23:43.5851044Z   SHARDS: 16
+2026-10-17T11:23:43.5851278Z   SPLASHERY_GL: llvmpipe
+2026-10-17T11:23:43.5851520Z   DISPLAY: :99
+2026-10-17T11:23:43.5851763Z   OUT: /home/runner/work/_temp/ci-out/shard-1
+2026-10-17T11:23:43.5852057Z ##[endgroup]
+2026-10-17T11:24:19.9947774Z phy:64 Pebbles: stones pick up and stack into a new cairn; a careless one topples: passed alone
+2026-10-17T11:24:19.9952512Z 1 failed in this shard; 1 rechecked.
+2026-10-17T11:24:20.0082233Z

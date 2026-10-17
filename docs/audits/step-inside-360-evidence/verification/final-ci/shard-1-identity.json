@@ -1,0 +1,68 @@
+{
+  "runId": 39019832991,
+  "headSha": "f94345f3fab560a61c424ab6297cabbd247a79f0",
+  "jobId": 117359273697,
+  "artifactId": 12099766205,
+  "artifactName": "suite-1-a1",
+  "originalArtifactSha256": "0b8eb17a9241b2ae25a6ac4915ed4955a909c799b920f8fcb0836e09caff9d6f",
+  "originalArtifactBytes": 17539182,
+  "retained": "All physics JSON, logs, rechecks, screenshots, traces, error context, shard metadata, and summary. Other passing specs screenshots omitted.",
+  "members": [
+    {
+      "name": "phy.json",
+      "bytes": 322669,
+      "sha256": "b67669de2c381b44c363cb05399b81351f6d671fa5d320a73fd7f821cc99e1ea"
+    },
+    {
+      "name": "phy.log",
+      "bytes": 1919,
+      "sha256": "14406ba6f9dcad39d16f64ddee12fed31656e6b250c89030e5fe4b0af8af5c14"
+    },
+    {
+      "name": "recheck/phy-64.json",
+      "bytes": 318936,
+      "sha256": "be726f42cae20c24202696dac263fad6cc2f851faa8abd8634433c522d4c437e"
+    },
+    {
+      "name": "recheck.json",
+      "bytes": 100,
+      "sha256": "baf8e903ac3b20cb34f9f77c6dbdefa4d2547bbe7f31ef605196a781a4384c62"
+    },
+    {
+      "name": "results/phy/phy-Pebbles-stones-pick-up-c32d3-airn-a-careless-one-topples-chromium/error-context.md",
+      "bytes": 46124,
+      "sha256": "8e4aadb627fe3e948f0a06f01c79555fc68e99a07188cbdfe65ef8ae24443e6b"
+    },
+    {
+      "name": "results/phy/phy-Pebbles-stones-pick-up-c32d3-airn-a-careless-one-topples-chromium/trace.zip",
+      "bytes": 16313465,
+      "sha256": "8e8342612d852819670867130f0bbd553d9e447ce06ce715ad4f95d358f57bd8"
+    },
+    {
+      "name": "shard.json",
+      "bytes": 54,
+      "sha256": "dcf2a0bd59e2e8b85141dcfd352f112b1b088918658b5c69cbc0b71f3d7c441c"
+    },
+    {
+      "name": "summary.md",
+      "bytes": 3050,
+      "sha256": "84f2781091d7a53b6a799b02ab5c3092c4e9e99900446b97c8255b106d314615"
+    }
+  ],
+  "initial": {
+    "files": 16,
+    "tests": 126,
+    "passed": 125,
+    "failed": 1
+  },
+  "errors": [
+    {
+      "case": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+      "line": 64,
+      "error": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0.21939783634108012\nReceived:   0.17336339629068773"
+    }
+  ],
+  "isolatedRecheck": {
+    "phy:64 Pebbles: stones pick up and stack into a new cairn; a careless one topples": "passed"
+  }
+}

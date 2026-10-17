@@ -2,23 +2,23 @@
 
 Made by Ryan with Codex (GPT-6), October 17, 2026.
 [Draft PR #700](https://github.com/ryanjosephkamp/splashery/pull/700). **Never merge this evidence
-branch. The measured depth and seam targets pass. Full-suite qualification is still pending, and the
-earlier full matrix failed. Physical-phone performance is unmeasured.**
+branch. The measured depth and seam targets pass. The full-suite gate is not met. Physical-phone
+performance is unmeasured.**
 
 The final method uses six overlapping 294-pixel perspective tiles, four 294-pixel panorama yaw
 views, robust inverse-depth alignment with local RGB calibration confidence, and a fixed 0.375 cube
 blend. It uses only the model already shipped by Splashery. Floor calibration, larger priors, and
 eight-yaw variants were cut.
 
-| Gate                             | Final result                                                                                                                                                                                                                                                                                                        |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Depth: at least 20% lower AbsRel | **Pass (mean):** 25.63% lower pooled mean across all twenty-four scenes (0.145011 versus 0.194976). Three scenes regress; every case is retained.                                                                                                                                                                   |
-| Median seam below 2%             | All twenty-three measured scene medians pass; coast has zero valid seam pairs and is unmeasured. No stitching line observed in inspected turn frames; full recordings below. Stretching after translation remains visible and warned.                                                                               |
-| First look within 25 s           | 1.423–2.359 s in desktop phone emulation, including the interactive radius preview.                                                                                                                                                                                                                                 |
-| Phone memory proxy               | Quiet matched 2048-pixel inputs: panorama 1001–1009 MiB PSS versus Classic 1,177–1,235 MiB. Same viewport, normal product pixel caps; not physical-phone qualification.                                                                                                                                             |
-| Eight clips                      | All eight complete native recordings below; no page errors, warning reached, lean and step completed, and return to center.                                                                                                                                                                                         |
-| Classic                          | All 77 golden tests passed, including both budgets for all 76 frozen samples; frozen source and old tests unchanged.                                                                                                                                                                                                |
-| Regressions                      | Fresh merged-main run: 111/111 passed (19 panorama, 77 Classic golden, and 15 Neuron). Final main ea9a9d193 is merged; post-merge preflight passes all 272 checks. The new full matrix on f94345f3f is in progress. The earlier complete matrix remains red with two existing cases; both passed isolated rechecks. |
+| Gate                             | Final result                                                                                                                                                                                                                                                                                |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Depth: at least 20% lower AbsRel | **Pass (mean):** 25.63% lower pooled mean across all twenty-four scenes (0.145011 versus 0.194976). Three scenes regress; every case is retained.                                                                                                                                           |
+| Median seam below 2%             | All twenty-three measured scene medians pass; coast has zero valid seam pairs and is unmeasured. No stitching line observed in inspected turn frames; full recordings below. Stretching after translation remains visible and warned.                                                       |
+| First look within 25 s           | 1.423–2.359 s in desktop phone emulation, including the interactive radius preview.                                                                                                                                                                                                         |
+| Phone memory proxy               | Quiet matched 2048-pixel inputs: panorama 1001–1009 MiB PSS versus Classic 1,177–1,235 MiB. Same viewport, normal product pixel caps; not physical-phone qualification.                                                                                                                     |
+| Eight clips                      | All eight complete native recordings below; no page errors, warning reached, lean and step completed, and return to center.                                                                                                                                                                 |
+| Classic                          | All 77 golden tests passed, including both budgets for all 76 frozen samples; frozen source and old tests unchanged.                                                                                                                                                                        |
+| Regressions                      | **Full-suite gate not met.** All 401 files reported: 3,412 tests passed, three failed, and one existing private-fixture skip. Panorama 19/19, Classic golden 77/77, merged-head related run 111/111, and post-merge preflight 272/272 pass. Full failure and recheck receipts are retained. |
 
 ## Eight complete recordings
 
@@ -175,8 +175,26 @@ supported calibration. No image detail or inference resolution was reduced.
 The final main merge includes the approved Neuron r2 sharpness update (ea9a9d193). Every recorded
 phone/model/cache/runtime source hash is unchanged. The fresh merged-head run passed all 111 tests:
 19 panorama, 77 Classic golden, and 15 related Neuron tests. Post-merge preflight passed all 272
-checks. Source identity and frozen-file records now identify f94345f3f. The new full 401-file matrix
-is running; its latest status is in verification/final-ci-status.json.
+checks. All 111 related tests also passed in the complete hosted matrix.
+
+**The full-suite gate is not met.** The final matrix on f94345f3f covered all 401 spec files and
+3,416 tests: 3,412 passed, three failed, and one pre-existing test was skipped. The exact current
+summary, original ZIP, per-file times, source identity, raw failure logs, traces, screenshots, and
+isolated rechecks are under verification/final-ci/ and verification/. CI's synthetic checkout has
+exactly the published code tree. The failed cases are:
+
+- pages-r2:495: opaque tilted PDF coverage, mean difference 19.4846 versus <0.5. The isolated CI
+  recheck also failed. The same case passed locally on untouched main ea9a9d193 and this branch
+  under the same setup. Test and shared-renderer blobs match main; the CI cause remains unresolved.
+- phy:64: Pebbles stacking, height 0.173363 versus >0.219398. The isolated recheck passed. The same
+  assertion also failed in the earlier untouched-main local reproduction.
+- shp:131: sharpness-off renderer comparison, mean difference 0.570544 versus <0.5. The isolated
+  recheck passed. The original failure still counts.
+
+The sole skipped case is cdx-v3d-calibration:215, whose counterexample clips are held privately
+outside the repository. No new panorama test was skipped. No tolerance, assertion, old test,
+existing pack, or shared renderer was changed by this task to hide a failure. The PR remains a
+draft. Physical-phone performance remains unmeasured.
 
 The preceding full matrix on 652fe9449 covered all 401 files and 3,416 tests. Initially, 3,412
 passed, three failed, and one was skipped. WebGPU comparison (fx4-engine:79), Hands-on (hl1:92), and

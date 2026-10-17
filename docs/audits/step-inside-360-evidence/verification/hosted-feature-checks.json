@@ -1,49 +1,59 @@
 {
-  "runId": 39007527856,
-  "headSha": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
-  "total": 96,
-  "panorama": 19,
-  "classicGolden": 77,
+  "runId": 39019832991,
+  "headSha": "f94345f3fab560a61c424ab6297cabbd247a79f0",
   "files": [
     {
       "file": "cdx-pano-browser",
-      "tests": 3,
       "shard": 2,
-      "jobId": 117322934894,
-      "jobConclusion": "success",
-      "ownTestsPassed": true
+      "tests": 3,
+      "jobId": 117359273553,
+      "shardConclusion": "success",
+      "ownFilePassed": true
     },
     {
       "file": "cdx-pano-core",
-      "tests": 12,
       "shard": 4,
-      "jobId": 117322934927,
-      "jobConclusion": "success",
-      "ownTestsPassed": true
+      "tests": 12,
+      "jobId": 117359273622,
+      "shardConclusion": "success",
+      "ownFilePassed": true
     },
     {
       "file": "cdx-pano-prior",
-      "tests": 4,
       "shard": 5,
-      "jobId": 117322934911,
-      "jobConclusion": "failure",
-      "ownTestsPassed": true
+      "tests": 4,
+      "jobId": 117359273632,
+      "shardConclusion": "success",
+      "ownFilePassed": true
+    },
+    {
+      "file": "cdx-pfb",
+      "shard": 14,
+      "tests": 8,
+      "jobId": 117359273700,
+      "shardConclusion": "success",
+      "ownFilePassed": true
     },
     {
       "file": "p3d-golden",
-      "tests": 77,
       "shard": 15,
-      "jobId": 117322935023,
-      "jobConclusion": "success",
-      "ownTestsPassed": true
+      "tests": 77,
+      "jobId": 117359273516,
+      "shardConclusion": "success",
+      "ownFilePassed": true
+    },
+    {
+      "file": "nr1",
+      "shard": 16,
+      "tests": 7,
+      "jobId": 117359273682,
+      "shardConclusion": "success",
+      "ownFilePassed": true
     }
   ],
-  "note": "The prior file passed all 4 tests inside shard 5, whose separate old hl1 case failed and passed its isolated recheck. Initial full-suite failures are retained. All 76 frozen Classic samples passed both budgets.",
-  "checkout": {
-    "ciCheckoutCommit": "b7c9ee04123034ba422897b51883eb49d3ad096d",
-    "ciTree": "4fd0846a6942446fb7963058702096729004b6ef",
-    "codeCommit": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
-    "codeTree": "4fd0846a6942446fb7963058702096729004b6ef",
-    "treesEqual": true
-  }
+  "totalPassed": 111,
+  "panoramaPassed": 19,
+  "classicGoldenPassed": 77,
+  "relatedNeuronPassed": 15,
+  "note": "All related files passed in the complete hosted matrix. The only failed cases are listed in final-suite-outcome.json, and its one pre-existing skip requires private Video to 3D clips."
 }

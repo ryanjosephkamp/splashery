@@ -1,0 +1,73 @@
+{
+  "runId": 39019832991,
+  "headSha": "f94345f3fab560a61c424ab6297cabbd247a79f0",
+  "jobId": 117359273599,
+  "artifactId": 12098451579,
+  "artifactName": "suite-13-a1",
+  "originalArtifactSha256": "d99b661cee6f5bca64916d0159ef93940afde302ecd0d92d498cc48d5ee04bc9",
+  "originalArtifactBytes": 12679289,
+  "retained": "All PDF coverage JSON, logs, rechecks, screenshots, traces, error context, shard metadata, and summary. Other passing specs screenshots omitted.",
+  "members": [
+    {
+      "name": "pages-r2.json",
+      "bytes": 325975,
+      "sha256": "d5053ca685478b5885652643c7c0a40faa40b35b80ef5afc7e418405c56714e1"
+    },
+    {
+      "name": "pages-r2.log",
+      "bytes": 2965,
+      "sha256": "7ac7f9f20aa372daab345ac8e896f43a59835f6adfcace7e11480c80742f617d"
+    },
+    {
+      "name": "recheck/pages-r2-495.json",
+      "bytes": 322857,
+      "sha256": "8081005c931432ca8dba2e98fb7500766832d5c7cb59c91ac629fbc0e05484f3"
+    },
+    {
+      "name": "recheck.json",
+      "bytes": 94,
+      "sha256": "5b788c2724989e92427d5b0897dd873f9f8484eeb6874df7715d36cf4aefd6a9"
+    },
+    {
+      "name": "results/pages-r2/pages-r2-opaque-tilted-PDF-e5db7-r-own-paper-backing-webgl2--chromium/error-context.md",
+      "bytes": 52805,
+      "sha256": "727bf1e7ca00ff78719d136fa2926d835655dadeb3c225e11cb81348874d2268"
+    },
+    {
+      "name": "results/pages-r2/pages-r2-opaque-tilted-PDF-e5db7-r-own-paper-backing-webgl2--chromium/test-failed-1.png",
+      "bytes": 86860,
+      "sha256": "4391209a8bda4338ca7a3653166a5d0611adf0fae599d33adb1699593054b0d7"
+    },
+    {
+      "name": "results/pages-r2/pages-r2-opaque-tilted-PDF-e5db7-r-own-paper-backing-webgl2--chromium/trace.zip",
+      "bytes": 5739245,
+      "sha256": "1496ee5d424f8b20d014ddc7568356a005f5c2dba34f54663d7d2b6eb2c5ba42"
+    },
+    {
+      "name": "shard.json",
+      "bytes": 55,
+      "sha256": "6ea18ee72fe34343dc1ddd9b97205c8384f9562aaeaab87c902c3a732d4fe210"
+    },
+    {
+      "name": "summary.md",
+      "bytes": 3306,
+      "sha256": "cecfcc176478460a93c3100953ad3148b057ac7c0b0a9812de902ed29beee29b"
+    }
+  ],
+  "initial": {
+    "files": 26,
+    "tests": 210,
+    "passed": 209,
+    "failed": 1
+  },
+  "errors": [
+    {
+      "case": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+      "line": 495,
+      "error": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 0.5\nReceived:   19.484580084079457"
+    }
+  ],
+  "isolatedRecheck": {
+    "pages-r2:495 opaque tilted PDF faces cover their own paper backing (webgl2)": "failed"
+  }
+}

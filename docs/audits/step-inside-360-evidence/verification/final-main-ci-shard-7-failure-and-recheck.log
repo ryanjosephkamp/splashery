@@ -1,0 +1,109 @@
+2026-10-17T10:27:58.5606172Z 0 of 26 files already done in ../../_temp/ci-out/shard-7; running 26, 2 at once, WebGL2 on llvmpipe.
+2026-10-17T10:33:43.5379191Z [1/26] psv2 343 s: ok
+2026-10-17T10:37:23.9871845Z [2/26] shp 563 s: 1 failed
+2026-10-17T10:38:02.9634722Z [3/26] shw 259 s: ok
+2026-10-17T10:39:42.1543406Z [4/26] pic 138 s: ok
+2026-10-17T10:39:45.7492095Z [5/26] cdx-p3d4-background-bins 4 s: ok
+2026-10-17T10:39:50.8526954Z [6/26] cdx-p3d5-clip-state 5 s: ok
+2026-10-17T10:40:08.9122944Z [7/26] pno 126 s: ok
+2026-10-17T10:40:15.7063492Z [8/26] cdx-v3d-background-fit-gpu 7 s: ok
+2026-10-17T10:40:19.5518212Z [9/26] cdx-v3d-heldout-selection 4 s: ok
+2026-10-17T10:40:38.4813036Z [10/26] cdx-v3d-solve-retry 19 s: ok
+2026-10-17T10:41:13.2827694Z [11/26] cdx-playtest-manual 82 s: ok
+2026-10-17T10:43:46.9134910Z [12/26] ro 154 s: ok
+2026-10-17T10:45:48.4223018Z [13/26] cdx-pics-hard-cases 121 s: ok
+2026-10-17T10:46:41.5173613Z [14/26] pages-r2-occlusion 363 s: ok
+2026-10-17T10:47:21.4237082Z [15/26] mol 93 s: ok
+2026-10-17T10:47:35.8273399Z [16/26] cdx-circle-lab 54 s: ok
+2026-10-17T10:48:22.2696417Z [17/26] hh5-body 61 s: ok
+2026-10-17T10:48:33.0740896Z [18/26] e5 57 s: ok
+2026-10-17T10:49:17.1162610Z [19/26] snda 44 s: ok
+2026-10-17T10:49:18.5564411Z [20/26] hh3-level1 56 s: ok
+2026-10-17T10:49:38.9957693Z [21/26] mol-engine 22 s: ok
+2026-10-17T10:49:47.7412741Z [22/26] tp2-engine 29 s: ok
+2026-10-17T10:49:57.4310459Z [23/26] cdx-p3d2-r3-compact 10 s: ok
+2026-10-17T10:49:58.3898297Z [24/26] sp4 19 s: ok
+2026-10-17T10:50:00.7140178Z [25/26] cdx-p3d2-r3-metrics 3 s: ok
+2026-10-17T10:50:02.1966273Z [26/26] e6b 4 s: ok
+2026-10-17T10:50:02.2477594Z
+2026-10-17T10:50:02.2478233Z # Suite run
+2026-10-17T10:50:02.2478883Z
+2026-10-17T10:50:02.2479557Z - 26 of 26 files, 153 tests: 152 passed, 1 failed, 0 skipped.
+2026-10-17T10:50:02.2481186Z - Time in files (one after another): 44 min. Wall time of this run: 22 min (2 at once).
+2026-10-17T10:50:02.2482291Z
+2026-10-17T10:50:02.2482662Z ## Failed
+2026-10-17T10:50:02.2483027Z
+2026-10-17T10:50:02.2484092Z - `shp:131` with ?sharp=0 the renderer is exactly as before, labs on or off: failed. Error: expect(received).toBeLessThan(expected)
+2026-10-17T10:50:02.2486226Z
+2026-10-17T10:50:02.2486775Z ## Slowest files
+2026-10-17T10:50:02.2487342Z
+2026-10-17T10:50:02.2487833Z | File | Seconds | Tests |
+2026-10-17T10:50:02.2488530Z | --- | ---: | ---: |
+2026-10-17T10:50:02.2489128Z | shp | 563 | 8 |
+2026-10-17T10:50:02.2489772Z | pages-r2-occlusion | 363 | 6 |
+2026-10-17T10:50:02.2490407Z | psv2 | 343 | 6 |
+2026-10-17T10:50:02.2490960Z | shw | 259 | 11 |
+2026-10-17T10:50:02.2491501Z | ro | 154 | 4 |
+2026-10-17T10:50:02.2492367Z | pic | 138 | 13 |
+2026-10-17T10:50:02.2492981Z | pno | 126 | 11 |
+2026-10-17T10:50:02.2493617Z | cdx-pics-hard-cases | 121 | 3 |
+2026-10-17T10:50:02.2494218Z | mol | 93 | 27 |
+2026-10-17T10:50:02.2494808Z | cdx-playtest-manual | 82 | 2 |
+2026-10-17T10:50:02.2495410Z | hh5-body | 61 | 4 |
+2026-10-17T10:50:02.2495912Z | e5 | 57 | 7 |
+2026-10-17T10:50:02.2496442Z | hh3-level1 | 56 | 2 |
+2026-10-17T10:50:02.2497002Z | cdx-circle-lab | 54 | 6 |
+2026-10-17T10:50:02.2497569Z | snda | 44 | 6 |
+2026-10-17T10:50:02.2498100Z | tp2-engine | 29 | 2 |
+2026-10-17T10:50:02.2498697Z | mol-engine | 22 | 3 |
+2026-10-17T10:50:02.2499293Z | sp4 | 19 | 9 |
+2026-10-17T10:50:02.2499864Z | cdx-v3d-solve-retry | 19 | 4 |
+2026-10-17T10:50:02.2500822Z | cdx-p3d2-r3-compact | 10 | 4 |
+2026-10-17T10:50:02.2501554Z | cdx-v3d-background-fit-gpu | 7 | 1 |
+2026-10-17T10:50:02.2502480Z | cdx-p3d5-clip-state | 5 | 2 |
+2026-10-17T10:50:02.2503163Z | cdx-v3d-heldout-selection | 4 | 5 |
+2026-10-17T10:50:02.2503780Z | e6b | 4 | 4 |
+2026-10-17T10:50:02.2504362Z | cdx-p3d4-background-bins | 4 | 1 |
+2026-10-17T10:50:02.2504781Z
+2026-10-17T10:50:02.2505088Z ## Slowest tests
+2026-10-17T10:50:02.2505509Z
+2026-10-17T10:50:02.2505851Z | Test | Seconds |
+2026-10-17T10:50:02.2506344Z | --- | ---: |
+2026-10-17T10:50:02.2507217Z | `shp:231` adapt drag (the default) drops the resolution only during a drag | 206 |
+2026-10-17T10:50:02.2508734Z | `pages-r2-occlusion:155` all bindings and album covers keep full turns inside the sortable volume (webgpu) | 167 |
+2026-10-17T10:50:02.2511869Z | `psv2:38` photo-3d › a saved scene remembers each view | 130 |
+2026-10-17T10:50:02.2513492Z | `cdx-pics-hard-cases:68` every hard-case choice loads its own files and changes from flat to raised in Chromium | 114 |
+2026-10-17T10:50:02.2515288Z | `ro:118` Real objects › each toy opens and plays its tap in the app, with screenshots | 106 |
+2026-10-17T10:50:02.2516684Z | `psv2:38` moving-photo-3d › a saved scene remembers each view | 104 |
+2026-10-17T10:50:02.2517828Z | `shp:268` ?aa=1 turns on the engine's anti-aliased splats, and back | 99 |
+2026-10-17T10:50:02.2519298Z | `pages-r2-occlusion:155` all bindings and album covers keep full turns inside the sortable volume (webgl2) | 80 |
+2026-10-17T10:50:02.2520729Z | `shp:183` ?cull=low draws the far, small splats the default cull drops | 70 |
+2026-10-17T10:50:02.2522181Z | `cdx-playtest-manual:6` all 108 printed contents numbers share one right edge | 68 |
+2026-10-17T10:50:02.2523537Z | `shp:131` with ?sharp=0 the renderer is exactly as before, labs on or off | 58 |
+2026-10-17T10:50:02.2525130Z | `mol:285` the toy › every sample builds in every style, inside the budget, with finite splats | 54 |
+2026-10-17T10:50:02.2527076Z | `psv2:67` moving-photo-3d › a link remembers Splats, and the Detail choice with it | 53 |
+2026-10-17T10:50:02.2528423Z | `shp:160` ?cull= lowers the cull, and a toy without it puts the defaults back | 52 |
+2026-10-17T10:50:02.2529694Z | `shp:204` ?dpr= sets the pixel-ratio cap, and the tier's cap comes back without it | 52 |
+2026-10-17T10:50:02.2531039Z | `pages-r2-occlusion:6` photo-album: the turning cover occludes its pages (webgpu) | 51 |
+2026-10-17T10:50:02.2532496Z | `shw:63` chapter "Real data and real captures": every toy opens and plays | 49 |
+2026-10-17T10:50:02.2533716Z | `shw:63` chapter "Your own files, turned 3D on your device": every toy opens and plays | 45 |
+2026-10-17T10:50:02.2534916Z | `shw:63` chapter "Things that come apart": every toy opens and plays | 35 |
+2026-10-17T10:50:02.2536003Z | `shw:63` chapter "Science you can check": every toy opens and plays | 34 |
+2026-10-17T10:50:02.2537137Z | `shw:63` chapter "Instruments that are played": every toy opens and plays | 34 |
+2026-10-17T10:50:02.2538338Z | `shw:63` chapter "Recipes: tiny, editable, any size": every toy opens and plays | 34 |
+2026-10-17T10:50:02.2539531Z | `hh3-level1:53` the book, the photo album and the one-sided captures stay out | 34 |
+2026-10-17T10:50:02.2540846Z | `pages-r2-occlusion:6` your-book: the turning cover occludes its pages (webgpu) | 31 |
+2026-10-17T10:50:02.2542473Z | `pno:195` pianos (in the app) › upright-piano: screenshots at 390x844 and 1440x900 | 28 |
+2026-10-17T10:50:02.2543254Z
+2026-10-17T10:50:02.2627659Z ##[group]Run node tools/ci-report.mjs recheck $OUT --shard=7/$SHARDS --started=1792232878
+2026-10-17T10:50:02.2628304Z [36;1mnode tools/ci-report.mjs recheck $OUT --shard=7/$SHARDS --started=1792232878[0m
+2026-10-17T10:50:02.2718390Z shell: /usr/bin/bash -e {0}
+2026-10-17T10:50:02.2718651Z env:
+2026-10-17T10:50:02.2718840Z   SHARDS: 16
+2026-10-17T10:50:02.2719056Z   SPLASHERY_GL: llvmpipe
+2026-10-17T10:50:02.2719313Z   DISPLAY: :99
+2026-10-17T10:50:02.2719549Z   OUT: /home/runner/work/_temp/ci-out/shard-7
+2026-10-17T10:50:02.2719851Z ##[endgroup]
+2026-10-17T10:50:36.4971314Z shp:131 with ?sharp=0 the renderer is exactly as before, labs on or off: passed alone
+2026-10-17T10:50:36.4976286Z 1 failed in this shard; 1 rechecked.
+2026-10-17T10:50:36.5070965Z

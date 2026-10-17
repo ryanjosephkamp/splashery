@@ -1,0 +1,282 @@
+{
+  "collectedUTC": "2026-10-17T11:33:04.873508+00:00",
+  "run": {
+    "recordedUTC": "2026-10-17T11:32:47.864118+00:00",
+    "runId": 39019832991,
+    "runAttempt": 1,
+    "url": "https://github.com/ryanjosephkamp/splashery/actions/runs/39019832991",
+    "headSha": "f94345f3fab560a61c424ab6297cabbd247a79f0",
+    "status": "completed",
+    "conclusion": "failure",
+    "jobs": [
+      {
+        "id": 117359273372,
+        "name": "Checks",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T09:07:51Z",
+        "completedAt": "2026-10-17T09:10:56Z"
+      },
+      {
+        "id": 117359273516,
+        "name": "Suite 15/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T09:08:19Z",
+        "completedAt": "2026-10-17T09:32:20Z"
+      },
+      {
+        "id": 117359273543,
+        "name": "Suite 10/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T09:08:41Z",
+        "completedAt": "2026-10-17T09:30:54Z"
+      },
+      {
+        "id": 117359273553,
+        "name": "Suite 2/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:03:17Z",
+        "completedAt": "2026-10-17T10:20:50Z"
+      },
+      {
+        "id": 117359273563,
+        "name": "Suite 3/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:02:01Z",
+        "completedAt": "2026-10-17T10:23:09Z"
+      },
+      {
+        "id": 117359273568,
+        "name": "Suite 8/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T09:38:28Z",
+        "completedAt": "2026-10-17T09:59:13Z"
+      },
+      {
+        "id": 117359273588,
+        "name": "Suite 11/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:05:18Z",
+        "completedAt": "2026-10-17T10:29:56Z"
+      },
+      {
+        "id": 117359273594,
+        "name": "Suite 6/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:14:53Z",
+        "completedAt": "2026-10-17T10:41:09Z"
+      },
+      {
+        "id": 117359273599,
+        "name": "Suite 13/16",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T10:20:51Z",
+        "completedAt": "2026-10-17T10:42:24Z"
+      },
+      {
+        "id": 117359273611,
+        "name": "Suite 7/16",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T10:26:04Z",
+        "completedAt": "2026-10-17T10:50:40Z"
+      },
+      {
+        "id": 117359273622,
+        "name": "Suite 4/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:20:53Z",
+        "completedAt": "2026-10-17T10:35:57Z"
+      },
+      {
+        "id": 117359273632,
+        "name": "Suite 5/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:33:39Z",
+        "completedAt": "2026-10-17T10:52:08Z"
+      },
+      {
+        "id": 117359273657,
+        "name": "Suite 12/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:41:11Z",
+        "completedAt": "2026-10-17T11:06:22Z"
+      },
+      {
+        "id": 117359273682,
+        "name": "Suite 16/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:38:59Z",
+        "completedAt": "2026-10-17T10:59:44Z"
+      },
+      {
+        "id": 117359273697,
+        "name": "Suite 1/16",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T10:41:11Z",
+        "completedAt": "2026-10-17T11:24:24Z"
+      },
+      {
+        "id": 117359273700,
+        "name": "Suite 14/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:45:45Z",
+        "completedAt": "2026-10-17T11:06:00Z"
+      },
+      {
+        "id": 117359273740,
+        "name": "Suite 9/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T10:52:10Z",
+        "completedAt": "2026-10-17T11:08:39Z"
+      },
+      {
+        "id": 117384315381,
+        "name": "Summary",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T11:31:54Z",
+        "completedAt": "2026-10-17T11:32:32Z"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "id": 12099766205,
+      "name": "suite-1-a1",
+      "size_in_bytes": 17539182,
+      "created_at": "2026-10-17T11:24:22Z",
+      "expired": false
+    },
+    {
+      "id": 12099415846,
+      "name": "suite-9-a1",
+      "size_in_bytes": 2117360,
+      "created_at": "2026-10-17T11:08:36Z",
+      "expired": false
+    },
+    {
+      "id": 12099355668,
+      "name": "suite-12-a1",
+      "size_in_bytes": 2343687,
+      "created_at": "2026-10-17T11:06:19Z",
+      "expired": false
+    },
+    {
+      "id": 12099064737,
+      "name": "summary-a1",
+      "size_in_bytes": 3734,
+      "created_at": "2026-10-17T11:32:30Z",
+      "expired": false
+    },
+    {
+      "id": 12098757451,
+      "name": "suite-7-a1",
+      "size_in_bytes": 29004088,
+      "created_at": "2026-10-17T10:50:38Z",
+      "expired": false
+    },
+    {
+      "id": 12098640667,
+      "name": "suite-4-a1",
+      "size_in_bytes": 2036982,
+      "created_at": "2026-10-17T10:35:54Z",
+      "expired": false
+    },
+    {
+      "id": 12098592039,
+      "name": "suite-5-a1",
+      "size_in_bytes": 2991367,
+      "created_at": "2026-10-17T10:52:06Z",
+      "expired": false
+    },
+    {
+      "id": 12098479413,
+      "name": "suite-16-a1",
+      "size_in_bytes": 2208671,
+      "created_at": "2026-10-17T10:59:42Z",
+      "expired": false
+    },
+    {
+      "id": 12098451579,
+      "name": "suite-13-a1",
+      "size_in_bytes": 12679289,
+      "created_at": "2026-10-17T10:42:22Z",
+      "expired": false
+    },
+    {
+      "id": 12098153870,
+      "name": "suite-6-a1",
+      "size_in_bytes": 2119288,
+      "created_at": "2026-10-17T10:41:08Z",
+      "expired": false
+    },
+    {
+      "id": 12098136690,
+      "name": "suite-2-a1",
+      "size_in_bytes": 5763860,
+      "created_at": "2026-10-17T10:20:47Z",
+      "expired": false
+    },
+    {
+      "id": 12097947165,
+      "name": "suite-11-a1",
+      "size_in_bytes": 2118895,
+      "created_at": "2026-10-17T10:29:53Z",
+      "expired": false
+    },
+    {
+      "id": 12097889985,
+      "name": "suite-14-a1",
+      "size_in_bytes": 2118176,
+      "created_at": "2026-10-17T11:05:56Z",
+      "expired": false
+    },
+    {
+      "id": 12097708714,
+      "name": "suite-3-a1",
+      "size_in_bytes": 1954370,
+      "created_at": "2026-10-17T10:23:06Z",
+      "expired": false
+    },
+    {
+      "id": 12097333519,
+      "name": "suite-8-a1",
+      "size_in_bytes": 2117963,
+      "created_at": "2026-10-17T09:59:10Z",
+      "expired": false
+    },
+    {
+      "id": 12096637235,
+      "name": "suite-10-a1",
+      "size_in_bytes": 2117553,
+      "created_at": "2026-10-17T09:30:50Z",
+      "expired": false
+    },
+    {
+      "id": 12096389506,
+      "name": "suite-15-a1",
+      "size_in_bytes": 2116133,
+      "created_at": "2026-10-17T09:32:18Z",
+      "expired": false
+    }
+  ],
+  "summaryArtifactId": 12099064737,
+  "summaryZipSha256": "7bf7bf7b1e9b1a66ec3a2fcb2fec199a236fe361f24590a9be6657eb3cee0ac4",
+  "summaryZipBytes": 3734
+}

@@ -1,0 +1,57 @@
+{
+  "archive": "shard-7-sharpness-receipts.zip",
+  "bytes": 20948632,
+  "sha256": "960f73d265ad2fdf3653565714f4791e48f3c284ad1ffdeae362c6ce266ab33f",
+  "parts": [
+    {
+      "file": "part-000",
+      "bytes": 2097152,
+      "sha256": "52345616531b7d02b484cd9ba2aad781bb14d0ce7fc55fe0497f93a01ef2768b"
+    },
+    {
+      "file": "part-001",
+      "bytes": 2097152,
+      "sha256": "94c6fc53530bc5eba159bc0bd650e155d6690d9c738506c2fb7b93cffa6f37f1"
+    },
+    {
+      "file": "part-002",
+      "bytes": 2097152,
+      "sha256": "5c9a90a7f83ac072434a1c2cdc610d1fc913a7edb6ccb38bc808db52decdaaf6"
+    },
+    {
+      "file": "part-003",
+      "bytes": 2097152,
+      "sha256": "9a5fb549feb649e606d009626d1416454020a3b8a2d913bccacd11fe69c691f5"
+    },
+    {
+      "file": "part-004",
+      "bytes": 2097152,
+      "sha256": "eb46836bc97475baaf480157e3b028ec6b73134d7def1d2558518a550c0cd657"
+    },
+    {
+      "file": "part-005",
+      "bytes": 2097152,
+      "sha256": "2594ec8c707c9c0794e32eb0e8a7a232526d25b3b90a4e41b48cd117fa9ce946"
+    },
+    {
+      "file": "part-006",
+      "bytes": 2097152,
+      "sha256": "8ec4ea8e0b17ff0b4216730191214d361d09e08140118b3af7a1ffdac19de294"
+    },
+    {
+      "file": "part-007",
+      "bytes": 2097152,
+      "sha256": "4e5f4fc91123b0b38a7abdc45730d7b4174cfdef8933bbcf5ef0d51ff3b35d54"
+    },
+    {
+      "file": "part-008",
+      "bytes": 2097152,
+      "sha256": "b5a3be5c96cc5b29928e78e71e77f2bd654f0587bdf827fe9143e69e4c612caa"
+    },
+    {
+      "file": "part-009",
+      "bytes": 2074264,
+      "sha256": "03804005e1598117aaadfe2825239ca1b17952c0bbc98f98df6b05c4ce23aa2e"
+    }
+  ]
+}

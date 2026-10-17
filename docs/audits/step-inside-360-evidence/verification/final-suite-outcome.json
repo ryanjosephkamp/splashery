@@ -1,0 +1,69 @@
+{
+  "recordedUTC": "2026-10-17T11:34:37.026834+00:00",
+  "runId": 39019832991,
+  "codeCommit": "f94345f3fab560a61c424ab6297cabbd247a79f0",
+  "mainCommit": "ea9a9d193de529e6c75264123bb04b7e862b7162",
+  "conclusion": "failure",
+  "counts": {
+    "reportedFiles": 401,
+    "totalFiles": 401,
+    "tests": 3416,
+    "passed": 3412,
+    "failed": 3,
+    "skipped": 1
+  },
+  "fullSuiteGateMet": false,
+  "failures": [
+    {
+      "case": "pages-r2:495",
+      "description": "Opaque tilted PDF faces cover their own paper backing (WebGL2)",
+      "expected": "mean difference < 0.5",
+      "received": 19.484580084079457,
+      "isolatedRecheck": "failed",
+      "localMainAndBranchControls": "both passed; CI cause remains unresolved"
+    },
+    {
+      "case": "phy:64",
+      "assertionLine": 82,
+      "description": "Pebbles stacking height",
+      "expected": "height > 0.21939783634108012",
+      "received": 0.17336339629068773,
+      "isolatedRecheck": "passed",
+      "baseline": "same assertion failed on untouched-main local reproduction"
+    },
+    {
+      "case": "shp:131",
+      "description": "Sharpness-off renderer comparison with labs on or off",
+      "expected": "mean difference < 0.5",
+      "received": 0.5705439814814814,
+      "isolatedRecheck": "passed"
+    }
+  ],
+  "skip": {
+    "case": "cdx-v3d-calibration:215",
+    "reason": "Counterexample clips are held privately outside the repository.",
+    "newSkipAdded": false
+  },
+  "newPanoramaTests": {
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0
+  },
+  "classicGolden": {
+    "passed": 77,
+    "samples": 76,
+    "budgets": ["low", "high"],
+    "unchanged": true
+  },
+  "localRelatedChecks": {
+    "passed": 111,
+    "panorama": 19,
+    "classicGolden": 77,
+    "relatedNeuron": 15
+  },
+  "preflight": {
+    "passed": 272,
+    "mainMerged": true
+  },
+  "retryPolicy": "No rerun on this final merged-head matrix. Earlier pre-Neuron-r2 run and its one bounded failed-shard rerun are retained separately."
+}

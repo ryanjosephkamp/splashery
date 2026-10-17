@@ -1,0 +1,72 @@
+{
+  "mainCommit": "ea9a9d193de529e6c75264123bb04b7e862b7162",
+  "taskCommit": "f94345f3fab560a61c424ab6297cabbd247a79f0",
+  "case": "pages-r2:495 opaque tilted PDF faces cover their own paper backing (webgl2)",
+  "assertion": "difference.mean < 0.5",
+  "hostedCI": {
+    "runId": 39019832991,
+    "jobId": 117359273599,
+    "received": 19.484580084079457,
+    "initial": "failed",
+    "isolated": "failed"
+  },
+  "local": {
+    "main": "passed, 6.4 seconds",
+    "branch": "passed, 6.8 seconds",
+    "browser": "/usr/bin/chromium",
+    "graphics": "Mesa llvmpipe",
+    "displays": {
+      "main": ":93",
+      "branch": ":94"
+    },
+    "ports": {
+      "main": 4345,
+      "branch": 4346
+    }
+  },
+  "frozenSources": [
+    {
+      "path": "tests/pages-r2.spec.mjs",
+      "main": "3615e03fccc9d8593ba12e8e4dc917e71aad6af8",
+      "branch": "3615e03fccc9d8593ba12e8e4dc917e71aad6af8",
+      "equal": true
+    },
+    {
+      "path": "src/player.js",
+      "main": "2584bf0dda4c766d118985371390f43950e81f76",
+      "branch": "2584bf0dda4c766d118985371390f43950e81f76",
+      "equal": true
+    },
+    {
+      "path": "src/stage.js",
+      "main": "ae69355c44acc4c251ca933f1ff130576b701533",
+      "branch": "ae69355c44acc4c251ca933f1ff130576b701533",
+      "equal": true
+    },
+    {
+      "path": "src/ui.js",
+      "main": "8ee6aa0e59dd7bb85f9fa050bd2a5129420866ea",
+      "branch": "8ee6aa0e59dd7bb85f9fa050bd2a5129420866ea",
+      "equal": true
+    },
+    {
+      "path": "src/app.js",
+      "main": "0db7f396972afaee85b06c3bc24693f33f16c4ae",
+      "branch": "0db7f396972afaee85b06c3bc24693f33f16c4ae",
+      "equal": true
+    },
+    {
+      "path": "src/effects.js",
+      "main": "c9f0d010c7b25f777365d42cd27b4fc72e4c2faf",
+      "branch": "c9f0d010c7b25f777365d42cd27b4fc72e4c2faf",
+      "equal": true
+    },
+    {
+      "path": "src/loaders.js",
+      "main": "1b10337754c07e6aadd1c1803f1dec34e122fb9b",
+      "branch": "1b10337754c07e6aadd1c1803f1dec34e122fb9b",
+      "equal": true
+    }
+  ],
+  "note": "The current CI-only failure remains unresolved. Local passes on both branches do not establish the CI cause. No test, tolerance, renderer, or existing pack was changed."
+}
