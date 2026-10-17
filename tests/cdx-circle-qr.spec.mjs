@@ -136,6 +136,10 @@ test("a plain Circle Picture QR retains every module within a small kit budget",
     options = Object.fromEntries(recipe.options.map((option) => [option.key, option.default])),
     modules = new Set();
   options.shape = "circle";
+  // Lane PIC2: Picture QR now opens at the biggest size; this compact-path check keeps the size it
+  // was recorded at (the biggest code's unread weave, with no scan step in Node, leaves some module
+  // centers to error correction, on main as here).
+  options.size = "more";
   let count = 0,
     wrong = 0;
   const kit = {
