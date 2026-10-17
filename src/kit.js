@@ -1384,15 +1384,29 @@ export function statedSplats(recipe, count, options) {
 // recipe that states its count (statedSplats) is built once. The context
 // returned is always the last build's, since a recipe may keep state between
 // builds: when an earlier try came closer, it is built again at that budget.
-export function* buildRecipeTo(recipe, args, applyClay) {
+// One correction always runs; the builds after it stop at about `extraMs`
+// (3 s of extra building): the last build then stands, and the label says
+// how near it came.
+export function* buildRecipeTo(recipe, args, applyClay, { extraMs = 3000 } = {}) {
   const target = args.count;
-  const build = (count) => buildRecipe(recipe, { ...args, count }, applyClay);
+  const now = () => performance.now();
+  let last = 0;
+  const build = function* (count) {
+    const t = now();
+    const ctx = yield* buildRecipe(recipe, { ...args, count }, applyClay);
+    last = now() - t;
+    return ctx;
+  };
   if (statedSplats(recipe, target, args.options)) return yield* build(target);
   const off = (n) => Math.abs(n - target);
   let count = target;
   let ctx = yield* build(count);
+  let extra = 0;
+  // A build after the first correction only while the extra builds stay
+  // within extraMs (judged by the last build's time).
+  const room = () => extra + last <= extraMs;
   let best = { count, n: ctx.buf.count };
-  for (let pass = 0; pass < 2 && off(best.n) > target * 0.01; pass++) {
+  for (let pass = 0; pass < 2 && off(best.n) > target * 0.01 && (!pass || room()); pass++) {
     const drawn = ctx.buf.count;
     const next = Math.round(
       Math.min(target * 2.5, Math.max(target * 0.5, (count * target) / Math.max(1, drawn))),
@@ -1400,10 +1414,11 @@ export function* buildRecipeTo(recipe, args, applyClay) {
     if (next === count) break;
     count = next;
     ctx = yield* build(count);
+    extra += last;
     if (ctx.buf.count === drawn) break; // the count doesn't follow the budget
     if (off(ctx.buf.count) < off(best.n)) best = { count, n: ctx.buf.count };
   }
-  if (best.count !== count) ctx = yield* build(best.count);
+  if (best.count !== count && room()) ctx = yield* build(best.count);
   return ctx;
 }
 
