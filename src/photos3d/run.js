@@ -102,7 +102,7 @@ export async function seedPhotos(
     fenceRing: software ? 1 : 2,
     maxViewW: set.trainSide,
     maxViewH: set.trainSide,
-    holdout: null,
+    holdout: -1,
     evalSplit: 0,
     evalHoldEvery: 1e9,
     trainer: {
@@ -141,12 +141,19 @@ export async function seedPhotos(
         note: "training photos only",
       },
     });
+    // Session's video blur policy is separate from the caller's explicit photo split. Train
+    // every remaining registered photo; never silently create a second evaluation split.
+    const automaticBlurExclusionsDisabled = [...session.trainer.excluded].map(
+      (i) => session.frames[session.trainer.camMeta[i].imgIdx].name,
+    );
+    session.trainer.excluded.clear();
     signal?.throwIfAborted();
     return {
       session,
       trainingNames: fold.trainingNames,
       heldOut: fold.heldOut,
       surfacePoints: surface.n,
+      automaticBlurExclusionsDisabled,
     };
   } catch (error) {
     session.dispose();

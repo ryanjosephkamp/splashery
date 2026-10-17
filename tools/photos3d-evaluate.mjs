@@ -1,6 +1,32 @@
 // MIT. Benchmark helpers; never imported by the site. Masks must be frozen before training.
 import { imageMetrics } from "./studio-truth/metrics.mjs";
 
+// Canvas swap-chain contents can be discarded after presentation. Read the trainer's actual
+// floating-point raster output, queue ordered immediately after renderView, instead of a canvas.
+export async function readRenderedPixels(trainer, width, height, signal) {
+  const device = trainer.device,
+    bytes = width * height * 16;
+  const buffer = device.createBuffer({
+    size: bytes,
+    usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ,
+  });
+  try {
+    const encoder = device.createCommandEncoder();
+    encoder.copyBufferToBuffer(trainer.bufOut, 0, buffer, 0, bytes);
+    device.queue.submit([encoder.finish()]);
+    await buffer.mapAsync(GPUMapMode.READ);
+    signal?.throwIfAborted();
+    const floats = new Float32Array(buffer.getMappedRange());
+    if (floats.some((v) => !Number.isFinite(v))) throw new Error("Rendered pixels are nonfinite");
+    // Match Splat.js BLIT_SRC: RGB clamped to [0,1], opaque display alpha.
+    return Uint8ClampedArray.from(floats, (v, i) =>
+      i % 4 === 3 ? 255 : Math.round(255 * Math.max(0, Math.min(1, v))),
+    );
+  } finally {
+    buffer.destroy();
+  }
+}
+
 export function polygonMask(width, height, annotation) {
   if (!annotation?.polygons?.length) throw new Error("Missing independently annotated object mask");
   const inside = (x, y, polygon) => {
@@ -59,7 +85,7 @@ export async function browserRound2(options) {
   const { solvePhotos, seedPhotos } = await import("/src/photos3d/run.js");
   const { decodeFrames } = await import("/vendor/splatjs/src/io/frames.js");
   const { tierSettings } = await import("/src/video3d/frames.js");
-  const { scoreHeldOut } = await import("/tools/photos3d-evaluate.mjs");
+  const { scoreHeldOut, readRenderedPixels } = await import("/tools/photos3d-evaluate.mjs");
   const files = Array.from(document.querySelector("input").files);
   const row = {
     kind: "task 104 round-two photo module",
@@ -180,6 +206,7 @@ export async function browserRound2(options) {
         const s = activeSession;
         fold.trainingNames = seeded.trainingNames;
         fold.surfacePoints = seeded.surfacePoints;
+        fold.automaticBlurExclusionsDisabled = seeded.automaticBlurExclusionsDisabled;
         const canvas = document.querySelector("canvas");
         const evalCam = name ? row.cameras.find((c) => c.name === name) : row.cameras[0];
         if (!evalCam) throw new Error("Held-out photo has no solved camera");
@@ -217,13 +244,12 @@ export async function browserRound2(options) {
         fold.iterations = s.trainer.iter;
         fold.splats = s.trainer.n;
         s.trainer.renderView(camera, ctx);
-        await s.trainer.device.queue.onSubmittedWorkDone();
+        const pixels = await readRenderedPixels(s.trainer, frame.tw, frame.th, controller.signal);
         const copy = document.createElement("canvas");
         copy.width = frame.tw;
         copy.height = frame.th;
         const c2 = copy.getContext("2d", { willReadFrequently: true });
-        c2.drawImage(canvas, 0, 0);
-        const pixels = c2.getImageData(0, 0, frame.tw, frame.th).data;
+        c2.putImageData(new ImageData(pixels, frame.tw, frame.th), 0, 0);
         if (name)
           fold.metrics = scoreHeldOut(frame, pixels, {
             ...masks.photos[name],

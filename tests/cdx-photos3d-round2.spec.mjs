@@ -250,6 +250,7 @@ test("held-out RGB and masks cannot affect sparse/surface seeds, uploaded target
     const { makeControl } = await import("/tools/photos3d-controls.mjs");
     const { seedPhotos } = await import("/src/photos3d/run.js");
     const { appearanceFold } = await import("/src/photos3d/appearance.js");
+    const { readRenderedPixels } = await import("/tools/photos3d-evaluate.mjs");
     const control = makeControl({ count: 8 });
     const frames = control.images.map((f, i) => ({
       ...f,
@@ -297,17 +298,31 @@ test("held-out RGB and masks cannot affect sparse/surface seeds, uploaded target
       });
       const { session } = trained;
       try {
+        if (session.trainer.holdout !== -1 || session.trainer.excluded.size)
+          throw new Error("Unexpected extra training exclusions");
         const seed = Array.from(session.model.data);
         session.trainer.stepOnce();
         session.trainer.stepOnce();
         await session.trainer.device.queue.onSubmittedWorkDone();
         const params = Array.from((await session.trainer.readGaussians()).data);
+        const canvas = document.createElement("canvas");
+        canvas.width = 32;
+        canvas.height = 24;
+        const ctx = canvas.getContext("webgpu");
+        ctx.configure({
+          device: session.trainer.device,
+          format: navigator.gpu.getPreferredCanvasFormat(),
+          alphaMode: "opaque",
+        });
+        session.trainer.renderTrainCam(0, ctx);
+        const pixels = await readRenderedPixels(session.trainer, 32, 24);
         return {
           seed,
           params,
           surface: trained.surfacePoints,
           sparse: fold.recon.points,
           uploaded: session.frames.map((f) => f.name),
+          renderedMax: Math.max(...pixels.filter((_, i) => i % 4 !== 3)),
         };
       } finally {
         session.dispose();
@@ -321,6 +336,7 @@ test("held-out RGB and masks cannot affect sparse/surface seeds, uploaded target
       surface: [a.surface, b.surface],
       maxChange: Math.max(...a.params.map((v, i) => Math.abs(v - b.params[i]))),
       uploaded: a.uploaded,
+      renderedMax: a.renderedMax,
     };
   });
   expect(result.seedEqual).toBe(true);
@@ -330,4 +346,5 @@ test("held-out RGB and masks cannot affect sparse/surface seeds, uploaded target
   expect(result.maxChange).toBeLessThan(1e-6);
   expect(result.uploaded).toHaveLength(7);
   expect(result.uploaded).not.toContain("control-0");
+  expect(result.renderedMax).toBeGreaterThan(0);
 });
