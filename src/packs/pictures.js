@@ -2614,8 +2614,6 @@ const STORY_RECIPE = {
 
 const ALBUM_RECIPE = {
   kernel: "sharp", // polish: crisper text and edges (labs; src/kernels.js)
-  // Bound the low tier's overlapping page fill; keep the other tiers unchanged.
-  render: ({ profile }) => (profile === "low" ? { dpr: 1.3 } : null),
   turntable: false,
   tiltLock: true, // a drag only spins it left and right (PACKS.md 5c)
   density: 1,
