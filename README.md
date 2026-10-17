@@ -430,8 +430,10 @@ src/app.js, ui.js               app wiring and panel
 src/player.js                   shared runtime (clock, camera, effects, tools, toys)
 src/stage.js, paint.js          PlayCanvas device, toy entity, picking, capture; GPU paint
 src/effects.js                  the per-splat effect shader (GLSL and WGSL) and its uniforms
+src/kit-tables.js               the kit's behavior kinds and limits (no engine, no DOM)
 src/generators.js, noise.js     procedural toys and clay
-src/loaders.js                  SOG/PLY via the engine, SPLAT/SPZ decoders, downsampling
+src/loaders.js                  SOG/PLY via the engine
+src/splat-parsers.js            SPLAT/SPZ decoders, PLY header, downsampling (no engine, no DOM)
 src/camera.js                   orbit camera and gestures
 src/state.js, codec.js          scene schema v3 (loads v2) and link codec
 src/kit.js, packs/              the toy kit and the recipe packs

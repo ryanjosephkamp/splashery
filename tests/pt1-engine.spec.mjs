@@ -173,3 +173,46 @@ test("the keyboard panel stays open while the same toy rebuilds from it", async 
   });
   expect(errors).toEqual([]);
 });
+
+// Engine r2: tinted chips, and a tool row item's key answering ahead of the
+// site's own number keys (only while that toy is shown).
+test("tool row items may carry a tint and a key", async ({ page }) => {
+  const errors = await open(page);
+  await page.evaluate(async () => {
+    const { RECIPES } = await import("/src/packs/music.js");
+    window.pt1k = [];
+    RECIPES.xylophone.toolbar = {
+      label: "Keys",
+      items: () => [
+        { id: "a", text: "Alpha", tint: "#ff3d8b", key: "1" },
+        { id: "b", text: "Beta", tint: "#96f0ff", key: "2", hidden: true },
+      ],
+      activate(id) {
+        window.pt1k.push(id);
+        return null;
+      },
+    };
+    await window.__splashery.app.chooseToy("xylophone");
+  });
+  const a = page.locator('#toy-toolbar [data-toy-tool="a"]');
+  await expect(a).toHaveClass(/tinted-tool/);
+  await expect(a).toHaveAttribute("aria-keyshortcuts", "1");
+  const bg = await a.evaluate((el) => getComputedStyle(el).backgroundColor);
+  expect(bg).not.toBe("rgba(0, 0, 0, 0)");
+  await page.locator("#stage").focus();
+  await page.keyboard.press("1");
+  await page.keyboard.press("2"); // hidden: the site's own key (Poke) instead
+  expect(await page.evaluate(() => window.pt1k)).toEqual(["a"]);
+  expect(await page.evaluate(() => window.__splashery.app.tool)).toBe("poke");
+  // Another toy: 1 is the site's Orbit again.
+  await page.evaluate(() => window.__splashery.app.chooseToy("cactus"));
+  await page.locator("#stage").focus();
+  await page.keyboard.press("1");
+  expect(await page.evaluate(() => window.__splashery.app.tool)).toBe("orbit");
+  expect(await page.evaluate(() => window.pt1k)).toEqual(["a"]);
+  await page.evaluate(async () => {
+    const { RECIPES } = await import("/src/packs/music.js");
+    delete RECIPES.xylophone.toolbar;
+  });
+  expect(errors).toEqual([]);
+});

@@ -202,7 +202,7 @@ ${main}
 <footer class="site-footer">
 <div class="footer-grid">
 <div class="footer-brand"><a class="brand" href="${up}">${LOGO}<span>Splashery</span></a><p>${esc(SITE.tagline)}. Free, in your browser, with nothing to install; files you open stay on your device.</p></div>
-<nav aria-label="Explore"><h2>Explore</h2><ul>${MENU.map((m) => `<li><a href="${up}${m.href}">${esc(m.label)}</a></li>`).join("")}</ul></nav>
+<nav aria-label="Explore"><h2>Explore</h2><ul>${MENU.map((m) => `<li><a href="${up}${m.href}">${esc(m.label)}</a></li>`).join("")}<li><a href="${SITE.howItWorks}">How it works</a></li></ul></nav>
 <nav aria-label="More"><h2>More</h2><ul><li><a href="${up}../">The Playground</a></li><li><a href="${up}search/">Search</a></li><li><a href="${up}../manual/">The Tinkerer's Manual</a></li><li><a href="${SITE.github}">Source on GitHub</a></li><li><a href="${up}share/">Embed and share</a></li><li><a href="${up}about/credits/">Credits</a></li><li><a href="${up}about/contact/">Contact</a></li><li><a href="${up}about/privacy/">Privacy</a></li><li><a href="${up}about/terms/">Terms</a></li></ul></nav>
 </div>
 <p class="fine">Made by <a href="${up}about/contact/">${esc(SITE.maker)}</a>. Code under the MIT license; each toy's assets keep their own licenses. Built on the PlayCanvas engine.${SITE.preview ? ` This is a preview of Splashery's new site; the toys live in <a href="${up}../">the Playground</a>.` : ""}</p>

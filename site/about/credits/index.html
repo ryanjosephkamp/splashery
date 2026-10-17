@@ -279,6 +279,7 @@
                   >WebP codec from splat-transform 3.6.1 (lane Viewers)</a
                 >
               </li>
+              <li><a href="#fredoka-700-a-subset-lane-pt1">Fredoka 700, a subset (lane PT1)</a></li>
               <li><a href="#development-tools-not-shipped">Development tools (not shipped)</a></li>
               <li>
                 <a href="#build-tools-outside-npm-not-shipped"
@@ -2037,15 +2038,16 @@
           <h3 id="shape-morph-codex-task-78c">Shape morph (Codex task 78c)</h3>
           <p>
             From a concept by Ryan Kamp. The six forms are ported from his Overprint concept, with
-            the Klein bottle using Splashery's existing Splat equation preset and the word using the
-            built-in bitmap font. No reference renderer, font files, or QR encoder were copied. The
-            QR form uses the existing vendored QR generator listed in LICENSES.md, loaded only when
-            that form is selected.
+            the Klein bottle using Splashery's existing Splat equation preset. No reference
+            renderer, font files, or QR encoder were copied. The QR form uses the existing vendored
+            QR generator listed in LICENSES.md, loaded only when that form is selected.
           </p>
           <p>
-            Made by Ryan with Codex (GPT-6), October 14, 2026. The new pack code is MIT; the
-            original procedural forms, thumbnail, and synthesized rustle are CC0 1.0. They use no
-            outside assets.
+            Made by Ryan with Codex (GPT-6), October 14, 2026. Lane PT1 (made by Ryan with Claude,
+            Opus 5.5, October 16, 2026) added the list of forms, words drawn with the device's own
+            fonts and emoji through <code>src/text-splats.js</code>, and a synthesized pad sound in
+            place of the rustle. The pack code is MIT; the original procedural forms, thumbnail, and
+            sounds are CC0 1.0. They use no outside assets.
           </p>
           <h3 id="one-splat-many-splats-codex-task-78a">One splat, many splats (Codex task 78a)</h3>
           <p>
@@ -2058,11 +2060,20 @@
           </p>
           <h3 id="your-name-in-splats-codex-task-78d">Your name in splats (Codex task 78d)</h3>
           <p>
-            From a concept by Ryan Kamp. The procedural letters, paint colors, and synthesized notes
-            are made by Ryan with Codex (GPT-6), CC0 1.0; the recipe code is MIT. It reuses the
-            Fourier circles toy's Your words paths, rendered through Splashery's kit and PlayCanvas.
-            No concept fonts, renderers, or external assets ship with the toy. Checked October 14,
-            2026.
+            From Ryan Kamp's Toy Box name toy. Rebuilt by lane PT1 (made by Ryan with Claude, Opus
+            5.5, October 16, 2026): letters drawn by <code>src/text-splats.js</code>, Toy Box's five
+            tools, and synthesized sounds. The procedural letters, paint colors, and sounds are CC0
+            1.0; the code is MIT. The letters use Fredoka, as Toy Box does (Milena Brandão and
+            Hafontia;
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/vendor/fredoka/OFL.txt"
+              target="_blank"
+              rel="noopener"
+              >SIL Open Font License 1.1</a
+            >; a subset at weight 700 in <code>vendor/fredoka/</code>, allowed by the owner on
+            October 16, 2026). Other scripts and emoji use the device's own fonts. No concept
+            renderer or other external asset ships with the toy. The first version was made by Ryan
+            with Codex (GPT-6), October 14, 2026.
           </p>
           <h3 id="baked-assets-lane-baked-engine">Baked assets (lane Baked engine)</h3>
           <p>
@@ -3276,8 +3287,8 @@
           </p>
           <p>
             Your book opens with the Tinkerer's Manual (<a
-              href="../../../manual/tinkerers-manual-43a53a0a05b9fa22.pdf"
-              ><code>manual/tinkerers-manual-43a53a0a05b9fa22.pdf</code></a
+              href="../../../manual/tinkerers-manual-a432b7152a1540fe.pdf"
+              ><code>manual/tinkerers-manual-a432b7152a1540fe.pdf</code></a
             >, lane Manual). The photo album and the picture frame (labs toys, lane Books) open with
             these photos, each
             <a
@@ -9503,6 +9514,30 @@ subject to the following conditions:
               checked on October 5, 2026; both texts are in <code>vendor/webp/LICENSE</code>.
             </li>
           </ul>
+          <h3 id="fredoka-700-a-subset-lane-pt1">Fredoka 700, a subset (lane PT1)</h3>
+          <ul>
+            <li>
+              File: <code>vendor/fredoka/fredoka-700.woff2</code> (15,476 bytes), made from
+              <code>Fredoka[wdth,wght].ttf</code> in Google Fonts' repository (<a
+                href="https://github.com/google/fonts/tree/main/ofl/fredoka"
+                target="_blank"
+                rel="noopener"
+                >https://github.com/google/fonts/tree/main/ofl/fredoka</a
+              >), designed by Milena Brandão and Hafontia. It was set to weight 700 and width 100
+              with fontTools' instancer and cut down with <code>pyftsubset</code> to Basic Latin,
+              Latin-1, Latin Extended-A, common punctuation, ★ and ♥, as woff2.
+            </li>
+            <li>
+              Loaded only when Your name in splats opens (labs), through <code>FontFace</code>,
+              before its letters are drawn; other scripts and emoji fall back to the device's fonts.
+              CLAUDE.md's fonts rule allows it (the owner's OK of October 16, 2026).
+            </li>
+            <li>
+              License: SIL Open Font License 1.1, &quot;Copyright 2016 The Fredoka Project
+              Authors&quot;, checked on October 16, 2026; the full text is in
+              <code>vendor/fredoka/OFL.txt</code>.
+            </li>
+          </ul>
           <h3 id="development-tools-not-shipped">Development tools (not shipped)</h3>
           <p>
             These are <code>devDependencies</code> used to prepare assets and run tests; nothing
@@ -10086,6 +10121,14 @@ subject to the following conditions:
             <li><a href="../../learn/">Learn</a></li>
             <li><a href="../../new/">What's new</a></li>
             <li><a href="../../about/">About</a></li>
+            <li>
+              <a
+                href="https://ryanjosephkamp.github.io/splashery-one-frame/"
+                target="_blank"
+                rel="noopener"
+                >How it works</a
+              >
+            </li>
           </ul>
         </nav>
         <nav aria-label="More">

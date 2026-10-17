@@ -22,9 +22,10 @@
 
 export const TOY_HELP = {
   "name-toy": {
-    howTo: "Type a name in Toy. Pick an action, then tap a letter; turn on sound to hear its note.",
+    howTo:
+      "Type a name in Toy, emoji too. Pick Spin, Poke, Paint, Drop, or Blow on the stage, then touch the letters.",
     about:
-      "From a concept by Ryan Kamp. Your name becomes a toy made of solid splat letters, using the same letter paths as the Fourier circles toy's Your words choice. Each letter stays in one piece as you spin, poke, paint, drop, or blow it. Turn on sound and each letter plays its own note. Paint colors the whole letter; the other actions settle back into place.\n\nType up to 24 letters, digits, or symbols. The name and its paint travel in a scene link or saved JSON. Auto detail uses fewer splats on smaller device profiles, and the five detail steps stay within the device's budget. Blow uses a tap and does not need your microphone. Made by Ryan with Codex (GPT-6); code is MIT, and procedural shapes are CC0.",
+      "From Ryan Kamp's Toy Box. Your name becomes thick, rounded letters of soft splats in Toy Box's Fredoka font. Any language, symbols, and emoji (flags and skin tones too) work, in your device's own fonts.\n\nSpin turns the name, and a tap pokes it. Poke rings out from your finger, and each letter plays its own xylophone note. Paint dabs one of eight colors where you drag; Wash it off clears it. Drop breaks the letters into pieces that fall and pile up; press it again to put them back. Blow pushes the letters away while you hold. The keys 1 to 5 pick the tools. Links keep the name and the paint. Made by Ryan with Claude (Opus 5.5); MIT code, CC0 letters, and Fredoka under the SIL Open Font License.",
   },
   "specimen-neuron": {
     howTo: "Tap the cell to stimulate it there. In Toy, change the stain or turn Focus.",
@@ -1613,15 +1614,16 @@ export const TOY_HELP = {
       "Circles turning on circles can draw almost any closed shape, given enough of them. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type words (up to 40 letters) and each letter gets its own chain of circles, five letters at a time.",
   },
   "shape-morph": {
-    howTo: "Pick a form in the Toy tab. Drag to push the splats; tap to scatter and re-form.",
+    howTo:
+      "Tap to morph to the next form. Add words, emoji, shapes, or QR codes in the Toy tab; drag to push the splats.",
     about:
-      "One cloud of Gaussian splats can take six forms: a word, the Lorenz attractor, a Klein bottle, a gyroid, a loop, and a QR code. Pick a form in the Toy tab and each splat flies from its current position to its new place. Drag through the cloud to push nearby splats, then let go and watch them settle back. A tap scatters the splats and brings them home.\n\nChange the word or QR text in the Toy tab, or turn on Two-ink print for teal and orange splats. The QR form keeps dark ink and a light quiet margin so it can be read once it has settled, facing the camera. It holds up to 42 bytes of text. Nothing leaves your device.\n\nFrom a concept by Ryan Kamp. The form math comes from his Overprint concept; the Klein bottle reuses Splashery's Splat equation preset. Made by Ryan with Codex (GPT-6). Code is MIT; the original procedural forms and sound are CC0.",
+      "One cloud of Gaussian splats takes one form after another: words or names (emoji keep their colors), the Lorenz attractor, a Klein bottle, a gyroid, a loop, and QR codes. You set the list and its order. A tap morphs the cloud to the next form, starting where you tap and spreading from there; pick a form on the stage to go straight to it.\n\nIn the Toy tab, type a word to add it, add shapes or a QR code of the QR text, and move or remove forms. A QR code holds up to 42 bytes and scans once it settles. Drag through the cloud to push splats; they settle back. From Ryan Kamp's Overprint concept. Made by Ryan with Codex (GPT-6) and Claude (Opus 5.5); code is MIT, and the forms and sound are CC0.",
   },
   "one-splat": {
     howTo:
-      "Turn the dial from 1 to 16,384 splats. Tap a splat to split it; hold to read its numbers.",
+      "Tap a splat to split it in two; tap again to go finer there. Hold a piece to merge it back.",
     about:
-      "A word or picture becomes a tree of Gaussian splats. Each splat has the exact center and covariance of the raster pixels beneath it, including the spread within a square pixel. Each split divides those pixels at the median along their principal axis. The two children conserve their parent's pixel count, center, and covariance when their separation is included.\n\nType a word or open a picture in the Toy tab. Tap a splat to split it; hold to see its center, size, angle, and covariance. Replay the last split with the play button. Pictures stay on this device; shared scenes fall back to their word. From a concept by Ryan Kamp. Made by Ryan with Codex (GPT-6). Code: MIT. Procedural splats: CC0.",
+      "A word or picture becomes a tree of splats. Each splat has the exact center and covariance of the pixels beneath it, and each split divides them at the median along their main axis, so the two halves add back up to their parent.\n\nTap a splat and it splits into its two halves, which slide apart from its center; tap again there to go finer. Hold a piece, or tap one at the finest level, to merge it back. Each tap shows its numbers; the pitch rises with the level. The dial sets the whole picture from 1 to 16,384 splats. Type a word or open a picture (it stays on this device) in the Toy tab. From a concept by Ryan Kamp. Made by Ryan with Codex (GPT-6) and Claude (Opus 5.5). Code: MIT. Procedural splats: CC0.",
   },
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",

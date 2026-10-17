@@ -4921,6 +4921,16 @@
           ]
         }
       ]
+    },
+    "one-splat": {
+      "status": "ready",
+      "note": "The old glide sounded harsh.",
+      "plan": "One soft, clean tone for each split or merge, pitched by the level it lands on (lane PT2, October 16, 2026)."
+    },
+    "shape-morph": {
+      "status": "ready",
+      "note": "The old sound was grainy.",
+      "plan": "A clean, soft swell while the splats fly, easing down as the form lands (lane PT1, October 16, 2026)."
     }
   }
 }

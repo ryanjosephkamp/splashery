@@ -2722,14 +2722,22 @@ Proposals below are suggestions; the owner may change them.
     through the fourth dimension (about 5 s) and home. Seven color themes.
   - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
     chord in its own key.
-- **One splat, many splats** (`one-splat`). Now: tap: Replay the last split. Plan: keep.
+- **One splat, many splats** (`one-splat`). Now: tap: Replay the last split or merge. Plan: keep.
   - Owner: Codex task 78a: port Ryan Kamp's One Splat concept to the math shelf behind labs.
-  - Effect: Tap a Gaussian to replace it with its two pixel-tree children, moving from the parent's
-    center to their own centers over 1.8 seconds. Hold to inspect its moments.
+  - Effect: A tap splits the splat under the finger into its two pixel-tree children, which slide
+    apart from the parent's center as the parent fades (1.8 s); a second tap there goes a level
+    finer. A hold, or a tap at the finest level, merges a piece back: its halves slide together into
+    the parent. The readout shows the touched node's count, center, spread, and how its halves add
+    back up.
   - Improved: Exact principal-axis median pixel tree, levels from 1 to 16,384 splats, custom words,
     local pictures with mean color, individual refinements, and a hold readout. Existing Kit clouds,
-    morphs, options, and drag hooks; no engine changes.
-  - Sound: A quiet glide while the children separate.
+    morphs, options, and drag hooks; no engine changes. Lane PT2 (the owner's review of October 16,
+    2026: an awful sound, and a tap that did nothing meaningful where it landed): opens at 64 splats
+    (the word reads, and a split shows), a tap splits the touched splat finer each time, a hold or a
+    tap at the finest level merges it back, the readout on every tap, and a new soft sine pitched by
+    level. Built by Opus 5.5.
+  - Sound: One soft, clean sine per split or merge, pitched by the level it lands on (finer is
+    higher).
 - **Splat equation** (`splat-equation`). Now: tap: Play t. Plan: keep.
   - Owner: The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people
     type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that
@@ -3575,12 +3583,21 @@ Proposals below are suggestions; the owner may change them.
 
 ## Pictures (6)
 
-- **Your name in splats** (`name-toy`). Now: tap: Play this action. Plan: keep.
-  - Effect: The typed name becomes solid splat letters. Spin, poke, paint, drop, and blow move each
-    letter as one piece, then settle home. Paint colors remain in scene links.
-  - Improved: Codex task 78d: reuses Your words paths, with rigid letter tokens, five actions, saved
-    names and whole-letter paint, and five device-capped detail steps. From a concept by Ryan Kamp.
-  - Sound: Each letter plays its own quiet bar note.
+- **Your name in splats** (`name-toy`). Now: tap: Use the tool. Plan: keep.
+  - Owner: The owner's review of October 16, 2026: make it look and feel just like his Toy Box name
+    toy, and take anything a person can type. Rebuilt by lane PT1 (Opus 5.5), behind labs.
+  - Effect: Any typed name, emoji included, as thick rounded letters of soft splats, with Toy Box's
+    five tools on the stage: Spin turns it, Poke rings out letter by letter, Paint dabs eight colors
+    (Wash it off clears them), Drop breaks the letters into pieces that fall, pile up, and come
+    back, and Blow pushes the letters from a held finger. Every letter and piece moves as a solid
+    piece.
+  - Improved: Lane PT1 (October 16, 2026): rebuilt to Toy Box parity with the shared text module
+    (src/text-splats.js), a rigid-body simulation of letters and pieces, the five tools on a stage
+    tool row, the site's paint for Paint, and old links' name, verb, color, paints, and detail still
+    opening.
+  - Sound: Each poked letter plays its own xylophone bar up a major scale; a soft squish for each
+    paint dab, a light knock as each piece lands, a breath as they come back, and a quiet wind while
+    blowing.
   - Touch or drag interaction (phase F).
 - **Picture lab** (`picture-lab`). Now: tap: Next page, or play and pause. Plan: new effect (E6).
   - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27
@@ -4011,16 +4028,20 @@ Proposals below are suggestions; the owner may change them.
 
 ## Lab (5)
 
-- **Shape morph** (`shape-morph`). Now: tap: Scatter and re-form. Plan: keep.
-  - Owner: Codex task 78c: port Ryan Kamp's Overprint concept as a labs toy.
-  - Effect: Every splat flies to its place in one of six forms. Drags push nearby splats, which
-    settle back; a tap scatters and re-forms the cloud.
-  - Improved: Codex task 78c: Word, Lorenz attractor, Klein bottle, gyroid, loop, and QR forms in
-    one cloud, with a smaller Auto budget on phones. The Form picker morphs from the last rendered
-    positions, including an unfinished flight. The QR generator loads only for the QR form. Optional
-    teal and orange inks, editable word and QR text, and spring-back drag interaction. Made by Ryan
-    with Codex (GPT-6).
-  - Sound: A quiet, short rustle as the cloud scatters and re-forms.
+- **Shape morph** (`shape-morph`). Now: tap: Next form. Plan: keep.
+  - Owner: Codex task 78c: port Ryan Kamp's Overprint concept as a labs toy. The owner's review of
+    October 16, 2026: any number of forms in an order the person sets, a tap morphs to the next, and
+    a clean new sound. Upgraded by lane PT1 (Opus 5.5).
+  - Effect: Every splat flies from where it is to its place in the next form of the person's list,
+    starting at the tapped place and spreading out from there; in flight the cloud wears its
+    teal-to-pink ink, and the new form's colors (an emoji's own) come in as it lands. Drags push
+    nearby splats, which settle back.
+  - Improved: Lane PT1 (October 16, 2026): a list of forms (words or names with emoji, shapes, and
+    QR codes) that the person adds to, reorders, and trims; a tap or Play morphs to the next form
+    from the tap; form chips on the stage; words through the shared text module; and a new pad sound
+    in place of the grainy rustle. Codex task 78c: the six Overprint forms, live form switches, and
+    push recovery.
+  - Sound: A clean, soft swell that eases down as the form lands.
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
   - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
     Lab; labs only): splat fields on the GPU.
