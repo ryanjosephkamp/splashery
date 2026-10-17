@@ -791,3 +791,39 @@ test("phone page retains browser resize notifications and still marks real error
   expect(pageErrors).toContain("Deliberate application failure");
   await expect(page.locator("tbody tr")).toContainText("Error:");
 });
+
+test("a recipe can keep updating its settled work buffer without changing its tap", async ({
+  page,
+}) => {
+  for (const id of ["cookie", "torus"]) {
+    await page.goto(`/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=${id}`);
+    await page.waitForFunction(() => window.__splashery?.ready);
+    const result = await page.evaluate(() => {
+      const { app, player: p } = window.__splashery;
+      app.setAutoplay({ turntable: false });
+      p.opts.idleDelay = 1e9;
+      p.idle.weight = 0;
+      p.camera.cur = { ...p.camera.home };
+      p.camera.tgt = { ...p.camera.home };
+      p.camera.vel.yaw = p.camera.vel.pitch = 0;
+      const recipe = p.toyInfo.recipe;
+      recipe.workBufferReuse = false;
+      p.update(0);
+      const placement = p.stage.toy.entity.gsplat._placement;
+      const before = placement.dirtyVersion;
+      p.update(0);
+      const warm = placement.dirtyVersion;
+      recipe.workBufferReuse = true;
+      p.update(0);
+      const cached = placement.dirtyVersion;
+      p.update(0);
+      const settled = placement.dirtyVersion;
+      p.act(null);
+      p.update(0.1);
+      return { before, warm, cached, settled, tap: placement.dirtyVersion };
+    });
+    expect(result.warm).toBeGreaterThan(result.before);
+    expect(result.settled).toBe(result.cached);
+    expect(result.tap).toBeGreaterThan(result.settled);
+  }
+});

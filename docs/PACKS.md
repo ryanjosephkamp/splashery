@@ -1688,3 +1688,11 @@ normal, SH color, opacity, log scales, rotation). To make a toy from a CC0 model
 on the live page, run this, add an entry for the PLY to `tools/assets.json` like the other scans
 (and its credit to `CREDITS.md`), then `node tools/prepare-assets.mjs`. `tools/stm-fixtures.mjs`
 makes the test models and `tools/stm-samples.mjs` the two samples.
+
+### Work-buffer reuse
+
+Settled built-in surfaces can reuse their GPU work buffer. A recipe or captured-toy rig can set
+`workBufferReuse: false` to keep the original unconditional update behavior, including between taps.
+Use this only with repeated before/after measurements when an idle speedup increases tap latency.
+Motion, live textures, and custom shader exclusions still apply; the option changes no geometry,
+uniform value, or effect. Cookie and Torus opt out after their ten-pair tap-p95 checks.
