@@ -1,8 +1,8 @@
 import { decodePhoto, packDepth, unpackDepth } from "../packs/photo-3d.js";
 export { packDepth };
 export const SAMPLES = [
-  { id: "room", label: "Curtained room", title: "Small Empty Room 1", asset: "small_empty_room_1" },
-  { id: "room2", label: "Sunlit room", title: "Small Empty Room 2", asset: "small_empty_room_2" },
+  { id: "room", label: "Sunlit room", title: "Small Empty Room 1", asset: "small_empty_room_1" },
+  { id: "room2", label: "Lamplit room", title: "Small Empty Room 2", asset: "small_empty_room_2" },
 ].map((s) => ({
   ...s,
   author: "Sergej Majboroda",

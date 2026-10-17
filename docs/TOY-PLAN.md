@@ -3900,6 +3900,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A soft breath as the line sweeps (lane QR r5: no note at the end, the breath a little
     fuller).
 - **Step inside a 360° photo** (`step-inside-360`). Now: tap: Lean and return. Plan: keep.
+  - Owner: The owner's panorama request (Codex task 107, October 17, 2026; labs only).
   - Effect: Lean sideways and return; drag to look around, or use Toy to lean and step.
   - Improved: Codex task 107: labs panorama shell with overlapping depth views, estimated room
     scale, bounded movement, and a stretch warning.

@@ -3170,6 +3170,7 @@
     },
     "step-inside-360": {
       "v": "keep",
+      "owner": "The owner's panorama request (Codex task 107, October 17, 2026; labs only).",
       "effect": "Lean sideways and return; drag to look around, or use Toy to lean and step.",
       "sound": "A quiet wooden footstep.",
       "improved": "Codex task 107: labs panorama shell with overlapping depth views, estimated room scale, bounded movement, and a stretch warning."
