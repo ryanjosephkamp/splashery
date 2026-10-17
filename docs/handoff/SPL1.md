@@ -34,6 +34,11 @@ can't go past its file. The slider should give the count picked, or as close as 
 - `src/kit.js`, `statedSplats`: a recipe that can't follow a count says what it draws with
   `splats(count, options)`, a count or `{ count, all }` (`all` when that is every splat it has). It
   is then built once. The spec measures it.
+- `src/kit.js`, `k.shrink` and `k.all` (for part 2's recipes): `k.shrink` is √(the max tier's count
+  for this toy ÷ the slider's count) when the slider is above that count, and 1 otherwise, so a
+  recipe with fixed splat sizes can let them shrink as the count grows. A recipe sets `k.all = true`
+  during its build when it has drawn every splat its data has; the build is then not measured again,
+  and the label says "(all this toy has)".
 - Captured toys (`src/player.js`, the builtin branch): with the slider, a capture loads its light
   file on the low tier as before, but switches to the full file when the light one has fewer than
   the slider; a file with more than the slider is thinned to it. Thinning is a shader variant

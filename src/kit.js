@@ -615,9 +615,16 @@ function kindOf(k) {
 }
 
 export class Kit {
-  constructor(seed, { count = 120000, options = {}, fit = true, media = null } = {}) {
+  constructor(seed, { count = 120000, options = {}, fit = true, media = null, shrink = 1 } = {}) {
     this.seed = seed >>> 0;
     this.count = count;
+    // Lane SPL1: with the labs Splats slider above the most a toy's tiers
+    // give it, the factor (under 1) a recipe may scale its fixed splat sizes
+    // by, so more splats make the toy sharper rather than thicker; 1
+    // otherwise. A recipe that has drawn every splat its data has sets
+    // `all` during its build (the label then says so).
+    this.shrink = shrink;
+    this.all = false;
     // Pictures (lane Books): a picture toy's media, opened before the build
     // ({ kind, count, name, aspect, aspects, names }), or null (not open, or
     // the Node tools). A book sizes its pages from it.
@@ -1328,10 +1335,10 @@ export function nearestColoring(buf) {
 // returns { g, buf, base, coloring, parts, recipe, lum }.
 export function* buildRecipe(
   recipe,
-  { seed, count, options = {}, clay = [], media = null },
+  { seed, count, options = {}, clay = [], media = null, shrink = 1 },
   applyClay,
 ) {
-  const k = new Kit(seed, { count, options, media });
+  const k = new Kit(seed, { count, options, media, shrink });
   recipe.build(k, options);
   const it = k.emit();
   let r = it.next();
@@ -1376,6 +1383,7 @@ export function statedSplats(recipe, count, options) {
 // recipe that states its count (statedSplats) is built once. The context
 // returned is always the last build's, since a recipe may keep state between
 // builds: when an earlier try came closer, it is built again at that budget.
+// A build that sets `k.all` (every splat its data has) is not done again.
 export function* buildRecipeTo(recipe, args, applyClay) {
   const target = args.count;
   const build = (count) => buildRecipe(recipe, { ...args, count }, applyClay);
@@ -1384,7 +1392,7 @@ export function* buildRecipeTo(recipe, args, applyClay) {
   let count = target;
   let ctx = yield* build(count);
   let best = { count, n: ctx.buf.count };
-  for (let pass = 0; pass < 2 && off(best.n) > target * 0.01; pass++) {
+  for (let pass = 0; pass < 2 && off(best.n) > target * 0.01 && !ctx.kit.all; pass++) {
     const drawn = ctx.buf.count;
     const next = Math.round(
       Math.min(target * 2.5, Math.max(target * 0.5, (count * target) / Math.max(1, drawn))),

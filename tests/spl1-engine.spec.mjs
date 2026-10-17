@@ -147,6 +147,20 @@ for (const n of COUNTS) {
   });
 }
 
+test("k.shrink: under 1 only past the most the tiers give a toy", async ({ page }) => {
+  const errors = await open(page);
+  const shrink = () => page.evaluate(() => window.__splashery.player.proc.ctx.kit.shrink);
+  await show(page, "clock"); // density 1: the max tier gives it 280,000
+  expect(await shrink()).toBe(1);
+  await page.evaluate(() => window.__splashery.app.setSplats(200_000));
+  await page.waitForFunction(() => window.__splashery.player.toyInfo?.splats > 190_000);
+  expect(await shrink()).toBe(1);
+  await page.evaluate(() => window.__splashery.app.setSplats(400_000));
+  await page.waitForFunction(() => window.__splashery.player.toyInfo?.splats > 390_000);
+  expect(await shrink()).toBeCloseTo(Math.sqrt(280 / 400), 6);
+  expect(errors).toEqual([]);
+});
+
 test("slider: a shelf shape draws the slider's count", async ({ page }) => {
   const errors = await open(page);
   await page.evaluate(() => window.__splashery.app.setSplats(300_000));
@@ -245,6 +259,9 @@ test("buildRecipeTo: measures and corrects; a stated count is built once", async
   const f = run(fixed, 200_000);
   expect(f.n).toBe(5000);
   expect(f.builds).toBe(3);
+  // A build that says it drew all its data (k.all) is built once.
+  const all = { build: (k) => ((k.all = true), fixed.build(k)) };
+  expect(run(all, 200_000)).toEqual({ n: 5000, builds: 1 });
   // Stated: built once at the slider's count.
   const stated = { ...fixed, splats: () => ({ count: 5000, all: true }) };
   const s = run(stated, 200_000);

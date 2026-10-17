@@ -672,9 +672,13 @@ export class Player {
     }
     const clay = toy.clay || [];
     // Lane SPL1: with the Splats slider the build is measured to its count.
+    // Past the most the tiers give this toy, k.shrink lets its fixed splat
+    // sizes shrink (src/kit.js).
+    const most = Math.min(PROFILES.max.maxCount, PROFILES.max.defaultCount * (recipe.density ?? 1));
+    const shrink = this.splats ? Math.min(1, Math.sqrt(most / this.splats)) : 1;
     const it = (this.splats ? buildRecipeTo : buildRecipe)(
       recipe,
-      { seed: recipe.seed ?? hash32(def.id), count, options, clay, media: mediaInfo(media) },
+      { seed: recipe.seed ?? hash32(def.id), count, options, clay, media: mediaInfo(media), shrink }, // prettier-ignore
       applyClay,
     );
     let r = it.next();
@@ -739,7 +743,10 @@ export class Player {
       half,
       radius: Math.max(...half),
       splats: ctx.buf.count,
-      splatsNote: this.splatsNote(ctx.buf.count, statedSplats(recipe, count, options)), // lane SPL1
+      splatsNote: this.splatsNote(
+        ctx.buf.count,
+        ctx.kit.all ? { all: true } : statedSplats(recipe, count, options),
+      ), // lane SPL1
       lum: ctx.lum,
       kernel: recipe.kernel, // Lab
       pickAlpha: recipe.pickAlpha, // Lab r2
