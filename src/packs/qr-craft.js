@@ -34,13 +34,24 @@ import {
   LEVELS,
   STYLES as PIC_STYLES,
   makeWoven,
+  makeWovenAsync,
   checkWoven,
+  checkStrict,
+  weave,
   measure,
   closestScanning,
+  closestScanningAsync,
+  renderingKey,
   tidy,
   gray,
   SIZES_UP,
 } from "../qr-craft/picture.js";
+import { validateDetail, validateCapture, cancelDetailChecks } from "../qr-craft/scan-pool.js";
+import { tileColors } from "../qr-craft/frame.js";
+import { withScanPause, withScanTail } from "../qr-craft/scan-pause.js";
+import { loadRasterKernel } from "../qr-craft/fast-raster.js";
+import { loadBlurKernel } from "../qr-craft/fast-blur.js";
+import { detailFraction, detailOptionsSupported } from "../qr-craft/detail-policy.js";
 import { codePicture, cropSettings, decorationColor, fitMaskWoven } from "../qr-craft/fit.js";
 import { cropPanel } from "../qr-craft/crop-panel.js";
 import { wovenEyes, paintEyes } from "../qr/eyes.js";
@@ -85,6 +96,7 @@ import {
 const DEFAULT_TEXT = "https://ryanjosephkamp.github.io/splashery/";
 const app = () => globalThis.__splashery?.app;
 const exportsJS = () => import("../exports.js");
+const pausedScan = (check) => withScanPause(app()?.player, check);
 const smooth = (x) => {
   x = Math.min(1, Math.max(0, x));
   return x * x * (3 - 2 * x);
@@ -260,19 +272,62 @@ const pictureNow = (o) => (o.picture === "own" ? PIC.own : PIC.pictures.get(samp
 // and a light underlay further back shows behind a tile while it turns.
 // Each splat moves with its module's tile.
 const LEAD = 0.004; // the dark splats' step forward (modules)
+// The original picture covers the whole sticker. Its center is cropped for
+// the unchanged square weave; decoration samples the same coordinates.
+function circleCrop(pic, size) {
+  const fraction = size / (2 * shapeHalf(size, "circle"));
+  const side = Math.min(pic.w, pic.h);
+  const n = Math.max(1, Math.floor(side * fraction));
+  const x0 = Math.floor((pic.w - n) / 2);
+  const y0 = Math.floor((pic.h - n) / 2);
+  const data = new Float32Array(n * n * 3);
+  for (let y = 0; y < n; y++)
+    for (let x = 0; x < n; x++) {
+      const i = ((y + y0) * pic.w + x + x0) * 3;
+      data.set(pic.data.subarray(i, i + 3), (y * n + x) * 3);
+    }
+  return { w: n, h: n, data };
+}
+
+function circleColor(pic, half, x, y, dark, style, detail = false) {
+  if (!pic || style === "bw") return dark ? FG : BG;
+  const side = Math.min(pic.w, pic.h);
+  const px = Math.max(
+    0,
+    Math.min(pic.w - 1, Math.floor((pic.w - side) / 2 + (0.5 + x / (2 * half)) * side)),
+  );
+  const py = Math.max(
+    0,
+    Math.min(pic.h - 1, Math.floor((pic.h - side) / 2 + (0.5 - y / (2 * half)) * side)),
+  );
+  const at = (py * pic.w + px) * 3;
+  const col = Array.from(pic.data.subarray(at, at + 3));
+  if (detail) return col;
+  const g = gray(col);
+  return dark
+    ? col.map((c) => c * Math.min(1, 0.25 / Math.max(g, 0.001)))
+    : col.map((c) => 1 - (1 - c) * Math.min(1, 0.2 / Math.max(1 - g, 0.001)));
+}
+
 function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
   const N = w.code.size;
   let { k, G, cells } = w;
   const border = borderSettings(options);
   const H = shapeHalf(N, shape, border.quiet);
+  const simpleFallback = options.simpleFallback === true && w.style === "bw";
+  const tiles = (w.fidelity === "detail" || simpleFallback) && detailSettings().texture === "tiles";
+  if (simpleFallback && tiles) w.rendering ||= {};
+  if (w.rendering) w.rendering.texture = tiles ? "tiles" : "splats";
   const make = (fine, layers = 2, plain = false) => {
     const out = [];
-    const M = G * fine;
-    const encodedCount = M * M + (layers - 1) * (M - 1) * (M - 1);
+    const M = Math.round(G * fine);
+    const coarse = fine < 1;
+    const encodedCount = tiles ? N * N : coarse ? M * M : M * M + (layers - 1) * (M - 1) * (M - 1);
     // The underlay, well behind (a turning tile swings through z < 0).
-    if (shape !== "circle") patch(out, -H, -H, H, H, -0.6, 0.34, BG, [0, 0]);
+    if (shape !== "circle")
+      patch(out, -H, -H, H, H, -0.6, w.fidelity === "detail" || plain ? 1.2 : 0.34, BG, [0, 0]);
     // The quiet zone: a sheet just behind the code, around it.
-    const qs = plain ? 0.8 : 0.34;
+    const qs = w.fidelity === "detail" ? 0.65 : plain || coarse ? 0.8 : 0.34;
     const n = Math.round((2 * H) / qs);
     const st = (2 * H) / n;
     const sc0 = [0.6 * st, 0.6 * st, 0.004];
@@ -289,17 +344,25 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
         out.push({ p: [x, y, -0.02], scales: sc0, quat: [0, 0, 0, 1], color: BG, opacity: 1, params: [0, 0], pattern: false }); // prettier-ignore
       }
     if (shape === "circle") {
-      const scale = Math.min(1.6, Math.max(0.8, 2 / fine));
+      const scale = coarse ? 3.2 : Math.min(1.6, Math.max(0.8, 2 / fine));
       let decoration;
       for (let attempt = 0; attempt < 10; attempt++) {
         decoration = circleSplats(w.code, {
           quiet: border.quiet,
-          fg: FG,
+          fg: w.fidelity === "detail" ? BG : FG,
           bg: BG,
+          dots: w.fidelity !== "detail" && !coarse,
           scale: plain ? 3 + attempt : scale,
           coarse: plain || attempt > 0,
-          sheetSpacing: plain ? 3.4 : attempt ? 0.7 + 0.3 * attempt : 0.45,
+          sheetSpacing: plain
+            ? 3.4
+            : attempt
+              ? 0.7 + 0.3 * attempt
+              : w.fidelity === "detail"
+                ? 0.65
+                : 0.45,
           colorAt: (x, y, dark) => {
+            if (w.fidelity === "detail") return circleColor(pic, H, x, y, dark, w.style, true);
             const color = decorationColor(
               pic,
               { ...options, shape, quiet: border.quiet },
@@ -312,6 +375,7 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
             return border.pale ? fitDecoration(color, N, x, y, border.quiet) : color;
           },
           lightColorAt: (x, y) => {
+            if (w.fidelity === "detail") return circleColor(pic, H, x, y, false, w.style, true);
             const color = decorationColor(
               pic,
               { ...options, shape, quiet: border.quiet },
@@ -328,6 +392,14 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
       }
       appendSplats(out, decoration.splats);
     }
+    if (tiles) {
+      for (let row = 0; row < N; row++)
+        for (let col = 0; col < N; col++) {
+          const m = row * N + col;
+          out.push({ p: [col - N / 2 + 0.5, N / 2 - row - 0.5, 0], scales: [0.26, 0.26, 0.004], quat: [0, 0, 0, 1], color: BG, opacity: 1, photo: true, params: [1 + m, w.code.dark[m] ? 2 : 1], pattern: false }); // prettier-ignore
+        }
+      return out;
+    }
     // The code: one lattice of `fine` splats a cell each way, two staggered
     // layers (the second fills the low spots between the first's points).
     const s0 = N / M;
@@ -335,24 +407,26 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
     // Dark splats a little tighter: their soft edges lie in front of the
     // light cells next to them, and at the full size every dark dot grew.
     const scd = [0.48 * s0, 0.48 * s0, 0.004];
-    for (let layer = 0; layer < layers; layer++)
+    const at = (px, py) => {
+      const cx = Math.max(0, Math.min(G - 1, Math.floor((px + N / 2) * k)));
+      const cy = Math.max(0, Math.min(G - 1, Math.floor((N / 2 - py) * k)));
+      const q = (cy * G + cx) * 3;
+      return { cx, cy, col: [cells[q], cells[q + 1], cells[q + 2]] };
+    };
+    for (let layer = 0; layer < (coarse ? 1 : layers); layer++)
       for (let j = 0; j < M - layer; j++)
         for (let i = 0; i < M - layer; i++) {
           const x = -N / 2 + (i + 0.5 + layer * 0.5) * s0;
           const y = N / 2 - (j + 0.5 + layer * 0.5) * s0;
-          const at = (px, py) => {
-            const cx = Math.max(0, Math.min(G - 1, Math.floor((px + N / 2) * k)));
-            const cy = Math.max(0, Math.min(G - 1, Math.floor((N / 2 - py) * k)));
-            const q = (cy * G + cx) * 3;
-            return { cx, cy, col: [cells[q], cells[q + 1], cells[q + 2]] };
-          };
-          const { cx, cy } = at(x, y);
-          let { col } = at(x, y);
+          const point = at(x, y),
+            { cx, cy } = point;
+          const m = Math.floor(cy / k) * N + Math.floor(cx / k);
+          let { col } = point;
           // A dark splat in front sits wholly inside dark cells (one on a
           // cell's edge would paint dark over the light cell next to it, and
           // every dark dot would grow): on an edge with a light cell, the
           // splat takes the light cell's color.
-          if (gray(col) < 0.5)
+          if (!coarse && gray(col) < 0.5)
             for (const [dx, dy] of [
               [-1, -1],
               [1, -1],
@@ -366,17 +440,29 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
                 break;
               }
             }
-          const m = Math.floor(cy / k) * N + Math.floor(cx / k);
           const dk = gray(col) < 0.5;
           out.push({ p: [x, y, dk ? LEAD : 0], scales: dk ? scd : sc, quat: [0, 0, 0, 1], color: col, opacity: 1, params: [1 + m, w.code.dark[m] ? 2 : 1], pattern: false }); // prettier-ignore
         }
     return out;
   };
   let splats = null;
-  for (const fine of [3, 2, 1]) {
-    const M = G * fine;
-    // Square keeps its legacy lattice at fine = 1 for the Kit's budget clipping.
-    if ((shape === "circle" || fine > 1) && M * M + (M - 1) * (M - 1) > budget) continue;
+  if (simpleFallback) {
+    // An explicitly saved long-code fallback keeps every encoded module.
+    // Existing Standard scenes never enable this tier.
+    cells = new Float32Array(N * N * 3);
+    for (let m = 0; m < N * N; m++) cells.set(w.code.dark[m] ? FG : BG, m * 3);
+    k = 1;
+    G = N;
+    splats = make(2, 1, true);
+  }
+  for (const fine of simpleFallback ? [] : tiles ? [1] : [3, 2, 1]) {
+    const M = Math.round(G * fine);
+    if (
+      !tiles &&
+      (shape === "circle" || fine > 1) &&
+      (fine < 1 ? M * M : M * M + (M - 1) * (M - 1)) > budget
+    )
+      continue;
     splats = make(fine);
     if (splats.length <= budget) break;
   }
@@ -386,8 +472,7 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
     !pic &&
     (!w.eyeShape || w.eyeShape === "square")
   ) {
-    // Without a picture, every cell in a module has the same color.
-    // Coalescing those cells keeps the complete code within a small budget.
+    // Main's no-picture fallback coalesces identical cells without changing bits.
     cells = new Float32Array(N * N * 3);
     for (let m = 0; m < N * N; m++) cells.set(w.code.dark[m] ? FG : BG, m * 3);
     k = 1;
@@ -395,10 +480,11 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
     splats = make(1, 2, true);
     if (splats.length > budget) splats = make(1, 1, true);
   }
-  // Curved finders need their submodule outline, even without a picture.
-  if (shape === "circle" && (!splats || splats.length > budget)) {
-    const reduced = compactPicture(w, budget, H, shape, pic, options);
-    if (reduced) return { splats: reduced, half: H, reduced: true };
+  if ((shape === "circle" || simpleFallback) && (!splats || splats.length > budget)) {
+    if (!simpleFallback) {
+      const reduced = compactPicture(w, budget, H, shape, pic, options);
+      if (reduced) return { splats: reduced, half: H, reduced: true };
+    }
     throw new Error(
       "This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text.",
     );
@@ -498,40 +584,157 @@ function compactPicture(w, budget, H, shape, pic, options) {
   return out.length <= budget ? out : null;
 }
 
-const optionsKey = (o) =>
-  JSON.stringify(tidy(o || {})) +
-  (o?.picture ?? "") +
-  (o?.shape || "square") +
-  JSON.stringify(cropSettings(o)) +
-  JSON.stringify(borderSettings(o)) +
-  (o?.eyeShape || "style");
+const optionsKey = (given) => {
+  const o = pictureFitOptions(given || {});
+  return (
+    JSON.stringify(tidy(o)) +
+    (o?.picture ?? "") +
+    (o?.shape || "square") +
+    JSON.stringify(cropSettings(o)) +
+    JSON.stringify(borderSettings(o)) +
+    (o?.eyeShape || "style") +
+    (o?.simpleFallback ? "/simple" : "")
+  );
+};
+const DETAIL_BUDGET_MS = 20000;
+const DETAIL_MAX_VERSION = 13;
+const DETAIL_TIMEOUT_NOTICE = "Most detail took too long. Using Standard.";
+
+function cancelDetailAttempt(attempt) {
+  if (!attempt || attempt.canceled || attempt.finished) return;
+  attempt.canceled = true;
+  clearTimeout(attempt.timer);
+  if (PIC.detailAttempt === attempt) cancelDetailChecks();
+  attempt.reject(new DOMException("The detail request was canceled.", "AbortError"));
+}
+function beginDetailAttempt(options, generation) {
+  const key = optionsKey(options),
+    previous = PIC.detailAttempt;
+  if (previous?.key === key && !previous.canceled && !previous.finished) {
+    previous.generation = generation;
+    return previous;
+  }
+  cancelDetailAttempt(previous);
+  PIC.notice = "";
+  PIC.fallback = null;
+  let reject;
+  const canceled = new Promise((_resolve, fail) => {
+    reject = fail;
+  });
+  canceled.catch(() => {});
+  const override = Number(globalThis.__splashery?.qrCraft?.detailBudgetMs);
+  const milliseconds =
+    Number.isFinite(override) && override > 0
+      ? Math.max(100, Math.min(DETAIL_BUDGET_MS, override))
+      : DETAIL_BUDGET_MS;
+  const attempt = {
+    key,
+    options: { ...options },
+    generation,
+    reject,
+    canceled: false,
+    finished: false,
+    started: performance.now(),
+    run: (work) => Promise.race([Promise.resolve().then(work), canceled]),
+    finish() {
+      this.finished = true;
+      clearTimeout(this.timer);
+    },
+  };
+  PIC.detailAttempt = attempt;
+  attempt.timer = setTimeout(() => {
+    fallbackToStandard(attempt, DETAIL_TIMEOUT_NOTICE).catch(() => {});
+  }, milliseconds);
+  return attempt;
+}
+async function fallbackToStandard(attempt, notice) {
+  if (attempt?.fallback) return attempt.fallback;
+  const player = app()?.player;
+  if (!attempt) return;
+  if (player && player.loadToken !== attempt.generation) {
+    cancelDetailAttempt(attempt);
+    return;
+  }
+  cancelDetailAttempt(attempt);
+  PIC.notice = notice;
+  PIC.fallback = {
+    notice,
+    text: attempt.options.text,
+    shape: attempt.options.shape,
+    elapsedMs: performance.now() - attempt.started,
+  };
+  PIC.panel?.refresh();
+  const options = { ...attempt.options, fidelity: "standard" };
+  attempt.fallback = (async () => {
+    await switchTo(options);
+    // Standard can itself exceed a device's circular-picture geometry budget.
+    // Do not leave an old payload or an unfinished detail code labeled as this one.
+    if (
+      PIC.detailAttempt === attempt &&
+      optionsKey(player?.scene?.toy?.options) === optionsKey(options) &&
+      optionsKey(PIC.options) !== optionsKey(options)
+    ) {
+      PIC.error =
+        "Standard could not build this code on this device. Try Square or a shorter text.";
+      PIC.options = options;
+      PIC.woven = null;
+      PIC.check = null;
+      PIC.checking = false;
+      player.stage.clearToy();
+      release();
+      PIC.panel?.refresh();
+    }
+  })();
+  return attempt.fallback;
+}
+function detailVersion(options) {
+  const smallest = encodeQR(options.text, options.level, { boost: false }).version;
+  return Math.min(40, smallest + SIZES_UP.find((size) => size.id === options.size).up);
+}
+
+// Study overrides stay on the test hook; saved scenes store only the owner's options.
+function detailSettings(rejected = null, picture = null, shape = "square") {
+  const study = globalThis.__splashery?.qrCraft || {};
+  return {
+    texture: study.photoTiles !== false ? "tiles" : "splats",
+    detailUp: study.detailUp || 0,
+    textureBlur: study.textureBlur || 0,
+    textureGuard: study.textureGuard || 0,
+    preferContinuous: study.preferContinuous !== false,
+    preferCorrection: study.preferCorrection !== false,
+    errorFraction: Number.isFinite(study.detailErrorFraction)
+      ? Math.max(0, Math.min(0.6, study.detailErrorFraction))
+      : detailFraction(picture, shape),
+    // A failed stage view gets the full forecast before another expensive rebuild.
+    captureValidation: study.captureValidation !== false && !rejected?.length,
+    channel: study.detailChannel || "weighted",
+    finderGuard: Number.isFinite(study.finderGuard)
+      ? Math.max(0, Math.min(3, Math.round(study.finderGuard)))
+      : 3,
+    trace: study.trace === true,
+  };
+}
 
 // Reads the woven layout at phone size and smaller (picture.js), then the
 // stage's own picture.
 // Lane QR r4 (the owner's note of October 9, 2026): the code is scanned
 // before it is shown. From the build until its check is done, a still of the
 // stage stays up with "Please wait. Scanning code…" on it (Stage.cover);
-// a failed or delayed check keeps that still up until a retry passes.
+// Most detail has a bounded preparation/repair budget and falls back to Standard.
+// Both modes retain a thirty-second scanning-cover watchdog.
 const SCANNING = "Please wait. Scanning code…";
-const coverPlayers = new WeakSet();
-function hold() {
+function guardDetail() {
   const player = app()?.player;
-  const stage = player?.stage;
-  if (typeof window === "undefined" || PIC.noAuto || !stage?.cover || PIC.holding) return;
-  if (!coverPlayers.has(player) && player.on) {
-    coverPlayers.add(player);
-    player.on("toy", (info) => {
-      if (PIC.holding === stage && info.id !== "qr-picture") release();
-    });
+  if (player?.toyInfo?.id === "qr-picture" && PIC.woven?.fidelity === "detail") {
+    fallbackToStandard(PIC.detailAttempt, DETAIL_TIMEOUT_NOTICE).catch(() => {});
+    // Never uncover an unfinished Most detail render while Standard rebuilds.
+    player.stage.clearToy();
+    PIC.woven = null;
+    PIC.checking = false;
   }
-  PIC.holding = stage;
-  stage.cover({ label: SCANNING });
-  clearTimeout(PIC.holdTimer);
-  PIC.holdTimer = setTimeout(() => {
-    if (app()?.player?.toyInfo?.id === "qr-picture")
-      blockPicture("Still checking. Adjust the crop or try more contrast.");
-    else release();
-  }, 30000);
+  if (player?.toyInfo?.id === "qr-picture" && PIC.woven?.fidelity !== "detail" && !PIC.noAuto)
+    blockPicture("Still checking. Adjust the crop or try more contrast.");
+  else release();
 }
 function blockPicture(message) {
   clearTimeout(PIC.holdTimer);
@@ -539,6 +742,27 @@ function blockPicture(message) {
     PIC.holding.coverLabel = message;
     PIC.holding.labelCover();
   }
+}
+const coverPlayers = new WeakSet();
+function hold() {
+  const player = app()?.player,
+    stage = player?.stage;
+  if (typeof window === "undefined" || PIC.noAuto || !stage?.cover) return;
+  const key = optionsKey({ ...PIC.options, fidelity: "standard" });
+  if (PIC.holding && PIC.holdKey === key) return;
+  if (!PIC.holding) {
+    if (!coverPlayers.has(player) && player.on) {
+      coverPlayers.add(player);
+      player.on("toy", (info) => {
+        if (PIC.holding === stage && info.id !== "qr-picture") release();
+      });
+    }
+    PIC.holding = stage;
+    stage.cover({ label: SCANNING });
+  }
+  PIC.holdKey = key;
+  clearTimeout(PIC.holdTimer);
+  PIC.holdTimer = setTimeout(guardDetail, 30000);
 }
 function release() {
   clearTimeout(PIC.holdTimer);
@@ -549,34 +773,85 @@ function release() {
 
 async function checkPicture() {
   clearTimeout(checkTimer);
+  const player = app()?.player;
+  // A previous build's timer can fire during the next async prepare, before
+  // PIC.woven is replaced. It must not adopt the new build's load token.
+  if (player && PIC.buildGeneration !== player.loadToken) return PIC.check;
   while (PIC.running) {
     const { promise, kit } = PIC.running;
     const checked = await promise;
     if (kit === PIC.kit) return checked;
   }
   const kit = PIC.kit;
-  const promise = runPictureCheck().finally(() => {
-    PIC.running = null;
+  const promise = (async () => {
+    const attempt = PIC.woven?.fidelity === "detail" ? PIC.detailAttempt : null;
+    try {
+      return await (attempt
+        ? attempt.run(() => withScanTail(player, () => checkPictureNow()))
+        : checkPictureNow());
+    } catch (error) {
+      if (error.name === "AbortError") return PIC.check;
+      throw error;
+    }
+  })().finally(() => {
+    if (PIC.running?.promise === promise) PIC.running = null;
   });
   PIC.running = { kit, promise };
   return promise;
 }
 
-async function runPictureCheck() {
-  const w = PIC.woven;
+async function checkPictureNow() {
+  const w = PIC.woven,
+    player = app()?.player,
+    generation = player?.loadToken,
+    attempt = w?.fidelity === "detail" ? PIC.detailAttempt : null,
+    isCurrent = () => (!player || player.loadToken === generation) && !attempt?.canceled;
   if (!w) return null;
-  await loadJsQR();
-  if (w !== PIC.woven) return PIC.check;
   const kit = PIC.kit;
-  const layout = checkWoven(w, readRGBA);
-  PIC.check = { ...layout, measure: measure(w), stage: null, text: w.code.text };
-  PIC.panel?.refresh();
+  PIC.checking = true;
+  let layout;
+  try {
+    await loadJsQR();
+    if (!isCurrent()) return PIC.check;
+    layout = checkWoven(w, readRGBA);
+    PIC.check = {
+      ...layout,
+      ok: layout.ok && w.detailCheck?.ok !== false,
+      detail: w.detailCheck,
+      measure: measure(w),
+      stage: null,
+      text: w.code.text,
+    };
+    PIC.panel?.refresh();
+  } catch (error) {
+    if (!isCurrent()) return PIC.check;
+    PIC.check = {
+      ok: false,
+      sizes: [],
+      stage: null,
+      text: w.code.text,
+      measure: measure(w),
+      error: "The scan check couldn't finish. Try making the code again.",
+      stageError: error.message,
+    };
+    if (attempt) {
+      await fallbackToStandard(
+        attempt,
+        "Most detail could not finish its scan check. Using Standard.",
+      );
+      return PIC.check;
+    }
+    PIC.checking = false;
+    release();
+    PIC.panel?.refresh();
+    return PIC.check;
+  }
   // The stage: the splats as drawn, front on, read at phone size and smaller.
   try {
     const half = shapeHalf(w.code, PIC.options?.shape, borderSettings(PIC.options).quiet);
     const big = await renderFront(kit, half, 720, 1, SCANNING);
     // A newer build's own check takes over (and lifts the still).
-    if (kit !== PIC.kit) return PIC.check;
+    if (!isCurrent() || kit !== PIC.kit) return PIC.check;
     const total = 2 * (half + 1); // the picture spans the margin too
     const at = (ppm) => {
       const img = pixels(shrink(big, total * ppm));
@@ -584,28 +859,57 @@ async function runPictureCheck() {
     };
     PIC.lastShot = big;
     const want = w.code.text;
-    PIC.check.stage = [8, 4].map((ppm) => ({ ppm, text: at(ppm), ok: at(ppm) === want }));
+    PIC.check.stage = [8, 4].map((ppm) => {
+      const text = at(ppm);
+      return { ppm, text, ok: text === want };
+    });
+    if (w.fidelity === "detail") {
+      const stress = await pausedScan(() =>
+        validateCapture(pixels(big), total, want, readRGBA, w.rendering?.texture === "tiles"),
+      );
+      if (!isCurrent() || kit !== PIC.kit) return PIC.check;
+      PIC.check.stress = stress;
+      PIC.check.ok = PIC.check.ok && PIC.check.stage.every((s) => s.ok) && PIC.check.stress.ok;
+    }
     // Lane QR r4: when the layout reads but the stage doesn't, the nudge
     // steps up (a rebuild) until it does, three steps at most.
     if (
-      PIC.check.ok &&
-      !PIC.check.stage.every((s) => s.ok) &&
+      layout.ok &&
+      w.detailCheck?.ok !== false &&
+      (!PIC.check.stage.every((s) => s.ok) || PIC.check.stress?.ok === false) &&
       (PIC.extra || 0) < 0.12 &&
       !PIC.noAuto
     ) {
-      PIC.extra = (PIC.extra || 0) + 0.04;
-      PIC.extraFor = optionsKey(PIC.options);
+      const key = optionsKey(PIC.options);
+      const rejectedCount = PIC.rejected?.key === key ? PIC.rejected.methods.length : 0;
+      // Give all six finder tones a chance before increasing picture contrast.
+      if (w.fidelity === "detail" && rejectedCount < 6) {
+        if (PIC.rejected?.key !== key) PIC.rejected = { key, methods: [] };
+        const rejected = renderingKey(w);
+        if (!PIC.rejected.methods.includes(rejected)) PIC.rejected.methods.push(rejected);
+      } else PIC.extra = (PIC.extra || 0) + 0.04;
+      PIC.extraFor = key;
       // The still stays up through the rebuild; its check lifts it.
       app()?.player?.switchTo({ options: { ...PIC.options } });
       PIC.panel?.refresh();
       return PIC.check;
     }
   } catch (err) {
-    if (kit !== PIC.kit) return PIC.check;
+    if (!isCurrent()) return PIC.check;
     PIC.check.stageError = err.message;
+    if (w.fidelity === "detail") PIC.check.ok = false;
   }
+  if (w.fidelity === "detail" && !PIC.check?.ok) {
+    await fallbackToStandard(
+      attempt,
+      "Most detail could not keep this code readable. Using Standard.",
+    );
+    return PIC.check;
+  }
+  attempt?.finish();
+  PIC.checking = false;
   const passed =
-    PIC.check.ok && PIC.check.stage?.length === 2 && PIC.check.stage.every((s) => s.ok);
+    PIC.check?.ok && PIC.check.stage?.length === 2 && PIC.check.stage.every((s) => s.ok);
   if (!PIC.noAuto && !passed)
     blockPicture("This code did not scan. Adjust the crop or try more contrast.");
   else release();
@@ -619,7 +923,7 @@ function scheduleCheck(ms = 500) {
   checkTimer = setTimeout(() => {
     const a = app();
     if (a?.player?.toyInfo?.id !== "qr-picture") return release();
-    if (a.busy) return scheduleCheck(300);
+    if (a.busy) return scheduleCheck(PIC.options?.fidelity === "detail" ? 16 : 300);
     checkPicture();
   }, ms);
 }
@@ -627,24 +931,64 @@ function scheduleCheck(ms = 500) {
 // The closest version that scans (more contrast, a bigger center dot, a
 // higher level), applied.
 async function makeItScan() {
-  // A transient stage failure can recover without changing the picture at all.
-  const retry = await checkPicture();
-  if (retry?.ok && retry.stage?.every((s) => s.ok)) {
-    PIC.fix = { changed: [], options: PIC.options };
-    PIC.panel?.refresh();
-    return PIC.fix;
-  }
+  const player = app()?.player,
+    generation = player?.loadToken;
+  if (player && PIC.buildGeneration !== generation) return null;
+  const attempt =
+    PIC.options?.fidelity === "detail" ? beginDetailAttempt(PIC.options, generation) : null;
+  const isCurrent = () => (!player || player.loadToken === generation) && !attempt?.canceled;
   const pic = pictureNow(PIC.options || {});
   await loadJsQR();
-  const input = PIC.woven
-    ? codePicture(
-        pic,
-        { ...PIC.options, quiet: borderSettings(PIC.options).quiet },
-        PIC.woven.code.size,
-      )
-    : pic;
-  const found = closestScanning(input, PIC.options || {}, readRGBA);
-  if (found) {
+  if (!isCurrent()) return null;
+  const input =
+    pic && PIC.woven && PIC.options?.fidelity !== "detail"
+      ? codePicture(
+          pic,
+          { ...PIC.options, quiet: borderSettings(PIC.options).quiet },
+          PIC.woven.code.size,
+        )
+      : pic;
+  const options = { ...PIC.options },
+    key = optionsKey(options),
+    extra = PIC.extraFor === key ? PIC.extra || 0 : 0,
+    rejected = PIC.rejected?.key === key ? [...PIC.rejected.methods] : [];
+  let found;
+  try {
+    found =
+      options.fidelity === "detail"
+        ? await pausedScan(() =>
+            attempt.run(() =>
+              closestScanningAsync(
+                input,
+                { ...options, ...detailSettings(rejected, pic, options.shape), extra, rejected },
+                readRGBA,
+                (w, p, shape) => validateDetail(w, p, shape, readRGBA),
+                { isCurrent },
+              ),
+            ),
+          )
+        : closestScanning(input, options, readRGBA);
+  } catch (error) {
+    if (error.name === "AbortError") return null;
+    throw error;
+  }
+  if (!isCurrent()) return null;
+  if (found && options.fidelity === "detail") {
+    const nextKey = optionsKey({ ...options, ...found.options });
+    PIC.extra = extra;
+    PIC.extraFor = nextKey;
+    PIC.rejected = { key: nextKey, methods: rejected };
+    PIC.fix = null;
+    PIC.panel?.refresh();
+    // Rebuild even when the public options stayed the same: the selected
+    // rendering method may have changed. Its real stage check gives the verdict.
+    await switchTo(found.options);
+    return { changed: found.changed, options: found.options };
+  }
+  attempt?.finish();
+  PIC.fix = found ? { changed: found.changed, options: found.options } : { none: true };
+  PIC.panel?.refresh();
+  if (found && found.changed.length) {
     const { contrast, center, level } = found.options;
     await switchTo({ contrast, center, level });
   }
@@ -657,10 +1001,31 @@ async function makeItScan() {
   return PIC.fix;
 }
 
+function canSavePicture() {
+  const w = PIC.woven;
+  if (!w) return false;
+  if (w.fidelity !== "detail")
+    return (
+      PIC.noAuto ||
+      (PIC.check?.ok === true &&
+        PIC.check.stage?.length === 2 &&
+        PIC.check.stage.every((s) => s.ok))
+    );
+  const check = PIC.check;
+  return (
+    !PIC.checking &&
+    PIC.buildGeneration === app()?.player?.loadToken &&
+    check?.ok === true &&
+    check.stress?.ok === true &&
+    check.text === w.code.text
+  );
+}
+
 async function savePNG(size = 1600) {
   const a = app();
   const w = PIC.woven;
-  if (!a || !w) return null;
+  if (!a || !w || (w.fidelity === "detail" && !canSavePicture())) return null;
+  const generation = a.player.loadToken;
   if (!PIC.noAuto) {
     const checked =
       PIC.check?.ok && PIC.check.stage?.every((s) => s.ok) ? PIC.check : await checkPicture();
@@ -669,6 +1034,7 @@ async function savePNG(size = 1600) {
       return null;
     }
   }
+
   return a.withBusy("Making the picture…", async () => {
     const { canvasToBlob, downloadBlob, timestampName } = await exportsJS();
     const canvas = await renderFront(
@@ -677,6 +1043,7 @@ async function savePNG(size = 1600) {
       size,
       0,
     );
+    if (PIC.woven !== w || a.player.loadToken !== generation) return null;
     const blob = await canvasToBlob(canvas);
     downloadBlob(blob, timestampName("png", "splashery-picture-qr"));
     a.ui?.toast?.("Picture saved, with its quiet zone.");
@@ -690,6 +1057,22 @@ function picturePanel() {
   input.setAttribute("aria-label", "What the code holds");
   const make = button("qrc-make", "Make the code", () => switchTo({ text: input.value }), true);
   const scan = button("qrc-scan", "Make it scan", () => makeItScan());
+  const originalDetail = button(
+    "qrc-original-detail",
+    "Use Original settings for Most detail",
+    () =>
+      switchTo({
+        pictureFit: "legacy",
+        cropX: 0.5,
+        cropY: 0.5,
+        cropZoom: 1,
+        circleBorder: "legacy",
+        eyeShape: "style",
+        fidelity: "detail",
+        style: "color",
+        simpleFallback: false,
+      }),
+  );
   const png = button("qrc-png", "Save a PNG", () => savePNG());
   const crop = cropPanel({
     picture: () => pictureNow(PIC.options || {}),
@@ -711,32 +1094,38 @@ function picturePanel() {
     fit.element,
     out,
     row(scan),
+    originalDetail,
     note("Each module's middle keeps its bit, dark or light, because a camera reads every module at its center. The rest of the module carries the picture as a halftone: small dark and light dots that average out to the picture's tones. Where a module would read wrong, a few of its dots take its color; the contrast sets how clearly every module reads. The eyes, the timing lines, and the format information stay plain. Your picture is read on this device and never leaves it."), // prettier-ignore
   );
   PIC.panel = {
     refresh() {
       const o = PIC.options || {};
+      originalDetail.hidden = detailOptionsSupported(o);
       crop.refresh();
       fit.refresh();
       if (document.activeElement !== input) input.value = o.text ?? DEFAULT_TEXT;
       out.replaceChildren();
       const ck = PIC.check;
       const w = PIC.woven;
+      if (PIC.notice) out.append(note(PIC.notice, "qrc-fallback"));
       if (w) out.append(el("p", { style: "margin:2px 0", textContent: `Version ${w.code.version} (${w.code.size} × ${w.code.size} modules), error correction ${w.code.ecc}.` })); // prettier-ignore
+      if (w?.fidelity === "detail") out.append(note("Most detail fits the code to your picture, keeping more of its color and shape. The code is checked before it appears.")); // prettier-ignore
       if (PIC.error) out.append(el("p", { style: "margin:2px 0;color:#b3261e", textContent: PIC.error })); // prettier-ignore
       if (!ck) {
-        out.append(el("p", { style: "margin:2px 0", textContent: "Checking that it scans…" }));
+        if (!PIC.error)
+          out.append(el("p", { style: "margin:2px 0", textContent: "Checking that it scans…" }));
       } else {
         const m = ck.measure;
         out.append(el("p", { id: "qrc-contrast", style: "margin:2px 0", textContent: `Contrast: ${m.module.toFixed(1)} : 1 between whole dark and light modules (the center dots ${m.center.toFixed(1)} : 1).` })); // prettier-ignore
         for (const s of ck.sizes) out.append(el("p", { style: "margin:2px 0", textContent: `${s.ok ? "✓" : "✗"} Reads at ${s.label} (${s.ppm} pixels a module, a little out of focus).` })); // prettier-ignore
         if (ck.stage) for (const s of ck.stage) out.append(el("p", { style: "margin:2px 0", textContent: `${s.ok ? "✓" : "✗"} The splats on the stage read at ${s.ppm} pixels a module.` })); // prettier-ignore
         const all = ck.ok && (!ck.stage || ck.stage.every((s) => s.ok));
-        out.append(el("p", { id: "qrc-verdict", style: "margin:4px 0;font-weight:600", textContent: all ? "It scans." : "This one may not scan: the picture is crowding out the code. Tap Make it scan for the closest version that does." })); // prettier-ignore
+        out.append(el("p", { id: "qrc-verdict", style: "margin:4px 0;font-weight:600", textContent: ck.error || (all ? "It scans." : "This one may not scan: the picture is crowding out the code. Tap Make it scan for the closest version that does.") })); // prettier-ignore
       }
       const f = PIC.fix;
       if (f) out.append(el("p", { className: "note", id: "qrc-fix", textContent: f.none ? "No version close to this one scans. Try a plainer picture or a shorter text." : f.changed.length ? `Changed so it scans: ${f.changed.join(", ")}.` : "It already scans as it is." })); // prettier-ignore
       scan.disabled = !ck || (ck.ok && (!ck.stage || ck.stage.every((s) => s.ok)));
+      png.disabled = !canSavePicture();
     },
   };
   PIC.panel.refresh();
@@ -794,6 +1183,8 @@ const PICTURE = {
       default: 1,
     },
     { key: "picture", label: "Picture", type: "select", default: SAMPLES[0].id, choices: [...SAMPLES.map((s) => ({ id: s.id, label: s.label, group: s.group })), { id: "own", label: "Your own picture" }] }, // prettier-ignore
+    { key: "fidelity", label: "Picture detail", type: "select", default: "standard", choices: [{ id: "standard", label: "Standard" }, { id: "detail", label: "Most detail (color)" }] }, // prettier-ignore
+    { key: "simpleFallback", label: "Simple Standard code", type: "switch", default: false, hidden: true }, // prettier-ignore
     // Lane PIC2 (the owner's walkthrough of October 17, 2026): the lowest contrast and the biggest
     // code (the most detail) by default; the scan check still steps the margin up until it reads.
     // A link or scene that carries its own contrast or size opens as it was.
@@ -836,6 +1227,7 @@ const PICTURE = {
             };
       PIC.own = await decodePicture(file);
       PIC.extra = 0;
+      PIC.rejected = null;
       PIC.ownName = fileName || "your picture";
       return {
         picture: "own",
@@ -844,23 +1236,146 @@ const PICTURE = {
     },
     shown: () => (PIC.options?.picture === "own" ? PIC.ownName : sampleById(PIC.options?.picture)?.label || ""), // prettier-ignore
   },
+  splatLimit(o, budget) {
+    const prepared = PIC.prepared,
+      t = tidy(o);
+    if (
+      t.fidelity !== "detail" ||
+      prepared?.woven.rendering?.texture !== "tiles" ||
+      prepared.key !== optionsKey({ ...o, ...t }) ||
+      prepared.pic !== pictureNow(o)
+    )
+      return budget;
+    prepared.geometry = pictureSplats(prepared.woven, budget, o.shape, prepared.pic);
+    return Math.min(budget, prepared.geometry.splats.length);
+  },
   async prepare(o) {
+    const requestedOptions = o;
+    o = pictureFitOptions(o);
+    const player = app()?.player,
+      generation = player?.loadToken;
+    let attempt = null;
+    const isCurrent = () => (!player || player.loadToken === generation) && !attempt?.canceled;
+    PIC.prepared = null;
     if (o.picture === "own" && !PIC.own) return;
     if (typeof document === "undefined") return;
+    const requested = tidy({ ...o, text: o.text ?? DEFAULT_TEXT });
+    if (requested.fidelity === "detail") {
+      attempt = beginDetailAttempt({ ...requestedOptions, ...requested }, generation);
+      if (!detailOptionsSupported(o)) {
+        await fallbackToStandard(
+          attempt,
+          "Most detail needs the Original crop, Original border, and Original eyes. Using Standard.",
+        );
+        return;
+      }
+      if (detailVersion(requested) > DETAIL_MAX_VERSION) {
+        attempt.options = {
+          ...attempt.options,
+          size: "fit",
+          style: "bw",
+          contrast: 1,
+          simpleFallback: true,
+        };
+        await fallbackToStandard(
+          attempt,
+          "Most detail is not available for this code size. Using a black-and-white Standard code.",
+        );
+        return;
+      }
+    } else {
+      const previous = PIC.detailAttempt;
+      const fallbackKey = previous && optionsKey({ ...previous.options, fidelity: "standard" });
+      if (fallbackKey !== optionsKey({ ...o, ...requested }) || !previous?.fallback) {
+        cancelDetailAttempt(previous);
+        PIC.notice = "";
+        PIC.fallback = null;
+      }
+    }
     // Lane QR r4: the build steps the nudge up until the code reads (jsQR).
     await loadJsQR().catch(() => null);
     await loadPicture(o.picture === "own" ? "own" : sampleById(o.picture)?.id || SAMPLES[0].id);
+    if (!isCurrent()) return;
+    const t = tidy({ ...o, text: o.text ?? DEFAULT_TEXT }),
+      pic = pictureNow(o);
+    if (t.fidelity === "detail" && pic && jsqr) {
+      await Promise.all([loadRasterKernel(), loadBlurKernel()]);
+      if (!isCurrent()) return;
+      const key = optionsKey({ ...o, ...t });
+      const extra = PIC.extraFor === key ? PIC.extra || 0 : 0;
+      const rejected = PIC.rejected?.key === key ? PIC.rejected.methods : [];
+      try {
+        const woven = await pausedScan(() =>
+          attempt.run(() =>
+            makeWovenAsync(
+              pic,
+              {
+                ...t,
+                extra,
+                rejected,
+                ...detailSettings(rejected, pic, t.shape),
+              },
+              (w, p, shape) => validateDetail(w, p, shape, readRGBA),
+              { isCurrent },
+            ),
+          ),
+        );
+        if (isCurrent() && woven.detailCheck?.ok === false) {
+          await fallbackToStandard(
+            attempt,
+            "Most detail could not keep this code readable. Using Standard.",
+          );
+          return;
+        }
+        if (isCurrent()) PIC.prepared = { key, pic, woven };
+      } catch (error) {
+        if (attempt?.fallback) await attempt.fallback;
+        else if (error.name !== "AbortError") {
+          await fallbackToStandard(
+            attempt,
+            "Most detail could not finish this picture. Using Standard.",
+          );
+        }
+      }
+    }
   },
   drive(t, c, out) {
     out.morph = [c.turn > 0 ? 1 - c.turn : 0, 0, PIC.tap[0], PIC.tap[1]];
   },
+  photo: {
+    skipIdenticalUniforms: true,
+    on: (o) =>
+      (tidy(o).fidelity === "detail" || (o.simpleFallback && o.style === "bw")) &&
+      detailSettings().texture === "tiles",
+    rect: () => {
+      const half = PIC.woven.code.size / 2;
+      return [-half, -half, half, half];
+    },
+    version: () => PIC.woven,
+    source: () => PIC.texture,
+    tiles: (u) => [
+      PIC.woven.code.size,
+      u.uSpMorph?.[0] || 0,
+      u.uSpMorph?.[2] || 0,
+      u.uSpMorph?.[3] || 0,
+    ],
+  },
   gpuField(o, fit) {
     if (!fit || !Number.isFinite(fit.scale) || !PIC.woven) return null;
-    return pictureModifier({ size: PIC.woven.code.size, fg: FG, bg: BG }, fit);
+    return pictureModifier(
+      {
+        size: PIC.woven.code.size,
+        fg: FG,
+        bg: BG,
+        photo: PIC.woven.rendering?.texture === "tiles",
+      },
+      fit,
+    );
   },
   build(k, o) {
     o = pictureFitOptions(o);
     const t = tidy({ ...o, text: o.text ?? DEFAULT_TEXT });
+    const simpleFallback = o.simpleFallback === true && t.style === "bw";
     let pic = pictureNow(o);
     PIC.error = "";
     if (o.picture === "own" && !PIC.own) PIC.error = "Your own picture isn't on this device any more (a link can't carry it). Open it again, or pick a sample."; // prettier-ignore
@@ -872,14 +1387,37 @@ const PICTURE = {
       (o.shape === "circle" && borderSettings(o).pale) ||
       (o.eyeShape && !["style", "square"].includes(o.eyeShape));
     const extra = (PIC.extra || 0) + (geometry ? FIT_EXTRA : 0);
+    // Most detail crops and checks the complete sticker in makeWoven; the
+    // legacy path keeps its original two passes and saved-scene appearance.
+    const make = (text) => {
+      if (simpleFallback) {
+        // One checked grid covers the longest ASCII link the input allows.
+        // Try masks with all four original source checks before rendering.
+        for (const mask of [0, 1, 2, 3, 4, 5, 6, 7]) {
+          let code = encodeQR(text, t.level, { boost: false, min: 18, mask });
+          if (code.version === 23) code = encodeQR(text, t.level, { boost: false, min: 24, mask });
+          const candidate = weave(code, null, { ...t, margin: 0.5 });
+          if (!jsqr || checkStrict(candidate, readRGBA)) return candidate;
+        }
+        throw new Error("This Standard code did not pass its scan checks.");
+      }
+      return makeWoven(pic, { ...t, text, extra, shape: o.shape }, jsqr ? readRGBA : null);
+    };
     try {
-      w = makeWoven(pic, { ...t, extra }, jsqr ? readRGBA : null);
+      w =
+        PIC.prepared?.key === optionsKey({ ...o, ...t }) && PIC.prepared.pic === pic
+          ? PIC.prepared.woven
+          : make(t.text);
     } catch (err) {
       PIC.error = err.message;
-      w = makeWoven(pic, { ...t, text: DEFAULT_TEXT, extra }, jsqr ? readRGBA : null);
+      if (simpleFallback) throw err;
+      w = make(DEFAULT_TEXT);
     }
     const source =
-      pic && (o.shape === "circle" || cropSettings(o).pictureFit !== "legacy")
+      pic &&
+      t.fidelity !== "detail" &&
+      !simpleFallback &&
+      (o.shape === "circle" || cropSettings(o).pictureFit !== "legacy")
         ? codePicture(pic, { ...o, quiet: borderSettings(o).quiet }, w.code.size)
         : pic;
     if (source !== pic)
@@ -893,36 +1431,64 @@ const PICTURE = {
       ]
         .filter(Boolean)
         .join(" ");
-    const { splats, half, reduced } = pictureSplats(w, k.count, o.shape, pic, o);
+    const { splats, half, reduced } =
+      PIC.prepared?.woven === w && PIC.prepared.geometry
+        ? PIC.prepared.geometry
+        : pictureSplats(w, k.count, o.shape, pic, o);
     if (reduced)
       PIC.error = [PIC.error, "The picture uses less detail to fit this device."]
         .filter(Boolean)
         .join(" ");
+    PIC.texture = null;
+    if (w.rendering?.texture === "tiles" && typeof document !== "undefined") {
+      const canvas = document.createElement("canvas");
+      canvas.width = canvas.height = w.G;
+      const context = canvas.getContext("2d"),
+        image = context.createImageData(w.G, w.G),
+        colors = tileColors(w);
+      for (let i = 0; i < w.G * w.G; i++) {
+        for (let channel = 0; channel < 3; channel++)
+          image.data[i * 4 + channel] = colors[i * 3 + channel];
+        image.data[i * 4 + 3] = 255;
+      }
+      context.putImageData(image, 0, 0);
+      PIC.texture = canvas;
+    }
     PIC.woven = w;
     PIC.options = { ...o, ...t };
     PIC.check = null;
+    PIC.checking = true;
     PIC.fix = PIC.fixKeep ? PIC.fix : null;
     k.reach([half + 1, half + 1, 1]);
     k.reach([-half - 1, -half - 1, -0.8]);
     k.cloud({ share: Math.min(1, splats.length / k.count), jitter: 0, pattern: false }, (rand, i) => splats[i] || null); // prettier-ignore
     k.data = { size: w.code.size, version: w.code.version };
     PIC.kit = k;
+    PIC.buildGeneration = app()?.player?.loadToken;
     hold();
     Promise.resolve().then(() => PIC.panel?.refresh());
-    scheduleCheck(PIC.holding ? 200 : 700);
+    scheduleCheck(t.fidelity === "detail" ? 0 : PIC.holding ? 200 : 700);
   },
-  credits: SAMPLES.map((s) =>
-    s.ai
-      ? { label: "Picture QR", title: `${s.label}: an AI-made sample picture (${s.prompt})`, source: s.page, author: s.author, license: "AI-made by the owner" } // prettier-ignore
-      : {
-          label: "Picture QR",
-          title: `${s.label} (a sample picture)`,
-          source: s.page,
-          author: s.author,
-          license: "CC0 1.0",
-          licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
-        },
-  ),
+  credits: [
+    {
+      label: "Picture QR",
+      title: "Most detail rendering and fidelity study",
+      author: "Ryan with Codex (GPT-6)",
+      license: "MIT",
+    },
+    ...SAMPLES.map((s) =>
+      s.ai
+        ? { label: "Picture QR", title: `${s.label}: an AI-made sample picture (${s.prompt})`, source: s.page, author: s.author, license: "AI-made by the owner" } // prettier-ignore
+        : {
+            label: "Picture QR",
+            title: `${s.label} (a sample picture)`,
+            source: s.page,
+            author: s.author,
+            license: "CC0 1.0",
+            licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+          },
+    ),
+  ],
 };
 
 // ======================================================================================
@@ -1403,7 +1969,16 @@ export const RECIPES = { "qr-picture": PICTURE, "qr-build": BUILD, barcodes: BAR
 //   autoCheck = false  stops the automatic check
 if (typeof window !== "undefined" && window.__splashery) {
   window.__splashery.qrCraft = {
-    picture: () => ({ woven: PIC.woven, options: PIC.options, check: PIC.check, error: PIC.error }),
+    picture: () => ({
+      woven: PIC.woven,
+      options: PIC.options,
+      check: PIC.check,
+      checking: PIC.checking,
+      error: PIC.error,
+      notice: PIC.notice || "",
+      fallback: PIC.fallback || null,
+      rejected: PIC.rejected?.methods || [],
+    }),
     checkPicture: () => checkPicture(),
     makeItScan: () => makeItScan(),
     savePNG: (size) => savePNG(size),

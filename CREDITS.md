@@ -1932,6 +1932,42 @@ Their source is `tools/studio-truth-generate.py`, and each committed file's size
 recorded in `tests/fixtures/truth/assets.json`. Full sequences are kept separately from the shipped
 site. The build-time code is offered under this repository's MIT license.
 
+## Picture QR fidelity test images (October 14, 2026)
+
+Twenty test-only images from The Metropolitan Museum of Art Open Access, checked on their individual
+source pages and against `isPublicDomain: true` in the museum API. The museum releases these images
+under [CC0](https://www.metmuseum.org/about-the-met/policies-and-documents/open-access). They stay
+in `tools/picture-qr-fidelity/fixtures/` and are loaded only by the study. The source, author,
+download, date, SHA-256 hashes, and resizing record for each image are in
+`tools/picture-qr-fidelity/corpus.json` and `tools/assets.json`.
+
+| Test image                  | Maker                                          | Source                                                                   |
+| --------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------ |
+| met-436305: Still Life      | Georg Flegel                                   | [Met collection](https://www.metmuseum.org/art/collection/search/436305) |
+| met-10181: Landscape        | Ralph Albert Blakelock                         | [Met collection](https://www.metmuseum.org/art/collection/search/10181)  |
+| met-459968: Landscape       | Auguste Renoir                                 | [Met collection](https://www.metmuseum.org/art/collection/search/459968) |
+| met-9284: Vase              | American                                       | [Met collection](https://www.metmuseum.org/art/collection/search/9284)   |
+| met-9549: Vase              | American                                       | [Met collection](https://www.metmuseum.org/art/collection/search/9549)   |
+| met-9283: Vase              | American                                       | [Met collection](https://www.metmuseum.org/art/collection/search/9283)   |
+| met-249072: Vase            | East Greek/Sardis, Lydian                      | [Met collection](https://www.metmuseum.org/art/collection/search/249072) |
+| met-312624: Animal          | Nayarit                                        | [Met collection](https://www.metmuseum.org/art/collection/search/312624) |
+| met-478467: Animal          | Coptic                                         | [Met collection](https://www.metmuseum.org/art/collection/search/478467) |
+| met-42138: Fantastic animal | China                                          | [Met collection](https://www.metmuseum.org/art/collection/search/42138)  |
+| met-556849: Animal figurine | Unknown maker (The Metropolitan Museum of Art) | [Met collection](https://www.metmuseum.org/art/collection/search/556849) |
+| met-244130: Shell           | Unknown maker (The Metropolitan Museum of Art) | [Met collection](https://www.metmuseum.org/art/collection/search/244130) |
+| met-325462: Scallop shell   | Unknown maker (The Metropolitan Museum of Art) | [Met collection](https://www.metmuseum.org/art/collection/search/325462) |
+| met-13181: Fruit            | Julian Alden Weir                              | [Met collection](https://www.metmuseum.org/art/collection/search/13181)  |
+| met-203455: Fruit cluster   | Chelsea Porcelain Manufactory                  | [Met collection](https://www.metmuseum.org/art/collection/search/203455) |
+| met-438031: Summer Flowers  | Henri Fantin-Latour                            | [Met collection](https://www.metmuseum.org/art/collection/search/438031) |
+| met-196651: Fruit bowl      | Unknown maker (The Metropolitan Museum of Art) | [Met collection](https://www.metmuseum.org/art/collection/search/196651) |
+| met-3845: Fruit Bowl        | Boston & Sandwich Glass Company                | [Met collection](https://www.metmuseum.org/art/collection/search/3845)   |
+| met-570235: Cowrie shell    | Unknown maker (The Metropolitan Museum of Art) | [Met collection](https://www.metmuseum.org/art/collection/search/570235) |
+| met-244131: Shell           | Unknown maker (The Metropolitan Museum of Art) | [Met collection](https://www.metmuseum.org/art/collection/search/244131) |
+
+The fidelity study and QR improvements are made by Ryan with Codex (GPT-6), offered under the
+project’s MIT license. Most detail lazily loads the local MIT/Apache-2.0 zxing-cpp reader named in
+[LICENSES.md](LICENSES.md).
+
 ## Picture QR theme packs (Codex task 58)
 
 48 original code-made illustrations, selected from 138 candidates, **Made by Ryan with Codex
