@@ -27,6 +27,11 @@ export const TOY_HELP = {
     about:
       "From Ryan Kamp's Toy Box. Your name becomes thick, rounded letters of soft splats in Toy Box's Fredoka font. Any language, symbols, and emoji (flags and skin tones too) work, in your device's own fonts.\n\nSpin turns the name, and a tap pokes it. Poke rings out from your finger, and each letter plays its own xylophone note. Paint dabs one of eight colors where you drag; Wash it off clears it. Drop breaks the letters into pieces that fall and pile up; press it again to put them back. Blow pushes the letters away while you hold. The keys 1 to 5 pick the tools. Links keep the name and the paint. Made by Ryan with Claude (Opus 5.5); MIT code, CC0 letters, and Fredoka under the SIL Open Font License.",
   },
+  "specimen-neuron": {
+    howTo: "Tap the cell to stimulate it there. In Toy, change the stain or turn Focus.",
+    about:
+      "From a concept by Ryan Kamp. A textbook nerve cell on a lit microscope slide: dendrites, a cell body with its nucleus and Nissl bodies, a myelinated axon, and terminals. At full Focus, desktops draw 32,768 splats and phones 8,192.\n\nA tap is a stimulating electrode: the signal spreads through the dendrites to the cell body, which fires a spike down the axon, node to node. The waveform is the Hodgkin-Huxley squid axon model, slowed; this is a schematic, not a measured neuron. Nissl dyes the Nissl bodies and leaves the axon pale, Golgi turns the neuron black on amber, and H&E shows pink cytoplasm and blue-purple nuclei. Lower Focus and pairs of splats merge into one, keeping mass, center, and covariance, while the slide stays lit. Made by Ryan with Codex (GPT-6) and Claude (Opus 5.5), CC0; code MIT.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",
