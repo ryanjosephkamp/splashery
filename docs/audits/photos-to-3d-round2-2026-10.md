@@ -102,7 +102,9 @@ input-only overlay checks. The reliefs have shallow depth and partial-front cove
 complete tabletop orbit. Their READMEs explicitly grant CC BY, badge text says CC BY 4.0, and full
 license files grant Attribution 4.0 International; the badge hyperlinks mistakenly target BY-SA. The
 records preserve that contradiction and use the explicit full-license grant. Their camera and
-appearance benchmarks are pending; obtaining six captures alone does not pass the quality gate.
+appearance benchmarks are pending; obtaining six captures alone does not pass the quality gate. The
+axe's 16 named source photo-mask creators are credited separately from its five photography and
+access authors in the asset record and evidence; the source README retains their exact names.
 
 ## Rendered camera tests
 
@@ -145,6 +147,13 @@ reconstruction. Denser Buddha sampling joins all 60 views in one component, whil
 profiles leave inputs unregistered. Sorted and seed-104-shuffled runs have different picker orders
 but exactly equal parsed graphs, camera arrays, point counts, and RMS. Remaining desktop solves are
 still in progress.
+
+A separate skull calibration sensitivity run reads the JPEG focal-plane resolution tags offline; the
+[EXIF tag reference](https://exiftool.org/TagNames/EXIF.html) identifies their units. Every selected
+skull and die image implies the same 86.50827 mm-equivalent focal. Supplying that value through the
+existing manual-calibration option increases skull verified pairs from five to seven, but still
+places 0/24 cameras. The existing browser EXIF reader does not expose those focal-plane tags
+automatically. This diagnostic neither supplies camera truth nor replaces the default result.
 
 The first completed appearance protocols are below. Each median is conditional on the listed scored
 views; unregistered inputs remain explicit omissions. These 200-step phone-profile diagnostics are
@@ -238,5 +247,12 @@ still rendered at mouse-down even though `toyInfo` already identified Graph plot
 test passed three consecutive repeats after the full-length training job finished, and the complete
 preflight passed with the benchmark queue idle. Both logs and the original failure trace are
 retained. No existing test or product file was changed to obtain the pass.
+
+Two execution interruptions are recorded. The first ended execution clients while their owned
+browsers remained; its completed Buddha JSONL rows were recovered with the caveat above. A later
+confirmed managed-environment restart removed all running processes. Completed per-view receipts
+survived unchanged; unfinished camera solves and folds were archived and restarted without choosing
+scores. The underlying restart cause is unknown. Neither interruption supplies a missing metric or
+changes a partial run into a completed one.
 
 Rule check: none.

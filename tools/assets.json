@@ -14476,7 +14476,27 @@
         "source": ".cache/photos3d/round2/additional-captures-research/micropasts-socketed-axe/final-masks.json",
         "sha256": "6c32936a7db94051116b6702a3ba6aec22c43cf58b2d895bbef4fbefaa4491d4",
         "count": 12,
-        "method": "Source annotations decoded with white foreground, exact pixel-cell contours, and conservative fixed two-pixel erosion at 320-pixel annotation width; see final-masks.json."
+        "method": "Source annotations decoded with white foreground, exact pixel-cell contours, and conservative fixed two-pixel erosion at 320-pixel annotation width; see final-masks.json.",
+        "maskAuthors": [
+          "Michael George Adams",
+          "Denis Antoine",
+          "Arjuna Cecchetti",
+          "Maria Christakou",
+          "Toma Claudiu",
+          "Gordana Dimovska",
+          "Jane Fellows",
+          "Teresa Gilmore",
+          "Adi Keinan-Schoonbaert",
+          "Steffi Kremer",
+          "Heidi Lund",
+          "Joellen McGann",
+          "Holly Peterson",
+          "Tai Pinchevsky",
+          "Adam Rabinowitz",
+          "Ernst Schnell"
+        ],
+        "maskAuthorSource": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/README.md",
+        "attribution": "Socketed axe from Arreton Down, Isle of Wight: source photo-masks by Michael George Adams; Denis Antoine; Arjuna Cecchetti; Maria Christakou; Toma Claudiu; Gordana Dimovska; Jane Fellows; Teresa Gilmore; Adi Keinan-Schoonbaert; Steffi Kremer; Heidi Lund; Joellen McGann; Holly Peterson; Tai Pinchevsky; Adam Rabinowitz; Ernst Schnell. Photography/access by Andy Bevan; Chiara Bonacchi; Adi Keinan-Schoonbaert; Dan Pett; Neil Wilkin. CC BY 4.0. Source: https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/README.md. Evaluation masks converted by Ryan with Codex (GPT-6); source annotation decoding, normalized contours, and fixed erosion are described in final-masks.json."
       }
     },
     {
@@ -15066,7 +15086,9 @@
         "source": ".cache/photos3d/round2/additional-captures-research/nineveh-panel7-roomr/final-masks.json",
         "sha256": "668cca286faa9f60e838d51f54aba6992ac85c1b2286b670f4e7b1a60c4a92fb",
         "count": 12,
-        "method": "Source annotations decoded with white foreground, exact pixel-cell contours, and conservative fixed two-pixel erosion at 320-pixel annotation width; see final-masks.json."
+        "method": "Source annotations decoded with white foreground, exact pixel-cell contours, and conservative fixed two-pixel erosion at 320-pixel annotation width; see final-masks.json.",
+        "maskAuthorSource": "https://github.com/ProjectNineveh/panel7RoomR",
+        "attribution": "Source object-ROI masks from https://github.com/ProjectNineveh/panel7RoomR / CC BY 4.0. The repository credits Daniel Pett for photographs and models; mask creators are not separately named. Evaluation masks converted by Ryan with Codex (GPT-6), preserving source exclusions and applying fixed erosion as recorded in final-masks.json."
       }
     },
     {
@@ -15661,7 +15683,9 @@
         "source": ".cache/photos3d/round2/additional-captures-research/nineveh-panel17-roomm/final-masks.json",
         "sha256": "302e61b651c196d873c8dae07e466cfd5e79356374c054da02a6d899b3f04453",
         "count": 12,
-        "method": "Source annotations decoded with white foreground, exact pixel-cell contours, and conservative fixed two-pixel erosion at 320-pixel annotation width; see final-masks.json."
+        "method": "Source annotations decoded with white foreground, exact pixel-cell contours, and conservative fixed two-pixel erosion at 320-pixel annotation width; see final-masks.json.",
+        "maskAuthorSource": "https://github.com/ProjectNineveh/panel17RoomM",
+        "attribution": "Source object-ROI masks from https://github.com/ProjectNineveh/panel17RoomM / CC BY 4.0. The repository credits Daniel Pett for photographs and models; mask creators are not separately named. Evaluation masks converted by Ryan with Codex (GPT-6), preserving source exclusions and applying fixed erosion as recorded in final-masks.json."
       }
     }
   ],
