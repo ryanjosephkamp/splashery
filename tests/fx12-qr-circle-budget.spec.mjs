@@ -11,7 +11,10 @@ const TEXT = "https://ryanjosephkamp.github.io/splashery/";
 
 test("a circular code without a picture preserves every module within 8,000 splats", async () => {
   const recipe = RECIPES["qr-picture"];
-  const options = resolveOptions(recipe, { shape: "circle", picture: "own", text: TEXT });
+  // Lane PIC2: Picture QR now opens at the biggest size; this budget check keeps the size it was
+  // recorded at (the biggest code's unread weave, with no scan step in Node, leaves some module
+  // centers to error correction, on main as here).
+  const options = resolveOptions(recipe, { shape: "circle", picture: "own", text: TEXT, size: "more" }); // prettier-ignore
   await recipe.prepare?.(options);
   const splats = [];
   const kit = {

@@ -986,7 +986,10 @@ export function makeWoven(pic, o, read = null) {
   const smallest = encodeQR(t.text, t.level, { boost: false }).version;
   const up = SIZES_UP.find((s) => s.id === t.size).up;
   const code = fitMask(t.text, t.level, pic, { min: Math.min(40, smallest + up) });
-  let margin = o.margin ?? marginAt(t.contrast) + (o.extra || 0);
+  // Lane PIC2: at no contrast (a margin of -1, the picture as it is) a stage
+  // step starts from the step itself, so each step still adds margin.
+  const base = marginAt(t.contrast);
+  let margin = o.margin ?? (base < 0 && o.extra > 0 ? o.extra : base + (o.extra || 0));
   let w = weave(code, pic, { ...t, margin });
   if (!read || !pic) return w;
   for (let step = 0; step < 16 && !checkStrict(w, read) && margin < 0.5; step++) {

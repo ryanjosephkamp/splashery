@@ -191,6 +191,21 @@ test.describe("Picture QR's defaults and sound (no browser)", () => {
     expect(resolveOptions(r, {})).toMatchObject({ contrast: 0, size: "most" });
   });
 
+  test("at no contrast, each stage step still adds margin (the biggest code then scans)", async () => {
+    const { makeWoven, marginAt } = await import("../src/qr-craft/picture.js");
+    const pic = { w: 64, h: 64, data: new Float32Array(64 * 64 * 3).fill(0.5) };
+    const o = { text: "https://ryanjosephkamp.github.io/splashery/", level: "H", contrast: 0, size: "most" }; // prettier-ignore
+    expect(marginAt(0)).toBeLessThan(0);
+    // No step: the picture as it is (the scan loop then finds the least margin that reads).
+    expect(makeWoven(pic, o).margin).toBe(marginAt(0));
+    // Each stage step (0.04) now raises the start; before, -1 + 0.08 stayed below 0 and the
+    // loop came back to the same 0.04, so the stage never read at 4 pixels a module.
+    expect(makeWoven(pic, { ...o, extra: 0.04 }).margin).toBeCloseTo(0.04, 6);
+    expect(makeWoven(pic, { ...o, extra: 0.08 }).margin).toBeCloseTo(0.08, 6);
+    // Other contrasts are as before.
+    expect(makeWoven(pic, { ...o, contrast: 0.5, extra: 0.04 }).margin).toBeCloseTo(0.14, 6);
+  });
+
   test("its sound is new: a drop and soft marimba notes, no wind and no clicks", async () => {
     const { TOY_SOUNDS } = await import("../src/toy-sounds.js");
     const { specProblems } = await import("../src/voices.js");
@@ -330,6 +345,39 @@ test.describe("In the app", () => {
     expect(p).toMatchObject({ contrast: 0, size: "most", ok: true });
     // The biggest code: eight versions above the smallest that fits.
     expect(p.version).toBeGreaterThanOrEqual(10);
+  });
+
+  test("at the new defaults, pictures that need the stage's steps end with a code that scans", async ({
+    page,
+  }) => {
+    test.setTimeout(600_000);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await ready(page);
+    await page.evaluate(() => window.__splashery.app.chooseToy("qr-picture"));
+    // Four of the nineteen samples that, before lane PIC2's fix, stayed unread at 4 pixels a module.
+    for (const picture of [
+      "cdx-theme-forest-1-1",
+      "cdx-theme-celebrations-1-1",
+      "cdx-theme-seasons-3-1",
+      "cdx-theme-space-art-2-1",
+    ]) {
+      // prettier-ignore
+      await page.evaluate((picture) => window.__splashery.app.setToyOptions({ picture }), picture);
+      const settled = (picture) => {
+        const { app, qrCraft } = window.__splashery;
+        const p = qrCraft.picture();
+        return p.options?.picture === picture && !app.busy && !p.checking && p.check?.stage?.length === 2; // prettier-ignore
+      };
+      await page.waitForFunction(settled, picture, { timeout: 180_000, polling: 500 });
+      // (The stage's steps rebuild it; wait until they settle.)
+      await page.waitForTimeout(2000);
+      await page.waitForFunction(settled, picture, { timeout: 180_000, polling: 500 });
+      const p = await page.evaluate(() => {
+        const { options, check } = window.__splashery.qrCraft.picture();
+        return { contrast: options.contrast, size: options.size, ok: check.ok, stage: check.stage.map((s) => s.ok) }; // prettier-ignore
+      });
+      expect(p, picture).toEqual({ contrast: 0, size: "most", ok: true, stage: [true, true] });
+    }
   });
 
   test("an old Picture QR link with its own contrast and size opens as it was", async ({
