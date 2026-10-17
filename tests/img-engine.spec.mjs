@@ -32,8 +32,8 @@ async function still(page, size = [390, 844]) {
     stage.setFixedSize(size);
     player.camera.cur = { ...player.camera.home };
     player.camera.tgt = { ...player.camera.home };
-    await stage.captureFrame();
-    const c = await stage.captureFrame();
+    const { captureSortedFrame } = await import("/tests/helpers/native-sort.mjs");
+    const c = await captureSortedFrame(stage);
     const bytes = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
     let binary = "";
     for (let i = 0; i < bytes.length; i += 8192)
