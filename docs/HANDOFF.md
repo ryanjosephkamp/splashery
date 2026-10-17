@@ -15,8 +15,8 @@ since the section below:
 
 **Lanes:**
 
-- NR1 r2 (Opus 5.5) makes the Neuron specimen sharper on phones, after the owner's "just sharper"
-  marks. The low tier draws at the screen's full resolution, phones get twice the splats, the
+- NR1 r2 (Opus 5.5) makes the Neuron specimen sharper on phones, after the owner's review of its
+  clips. The low tier draws at the screen's full resolution, phones get twice the splats, the
   slide's edge is crisper, and the cell swells less when it fires.
 - REC1 (Opus 5.5) fixes the recorder: a 5-second countdown before recording starts, steady framing
   when a phone goes full screen mid-recording, and full-length takes in Photo to 3D.
