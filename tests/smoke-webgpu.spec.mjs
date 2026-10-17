@@ -1,4 +1,4 @@
-// Task 101: independent smoke groups can run on separate suite shards.
+// Task 101: independent smoke checks, with original fixtures and assertions.
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";

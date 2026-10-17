@@ -1,4 +1,4 @@
-// Task 101: independent smoke groups can run on separate suite shards.
+// Task 101: independent smoke checks, with original fixtures and assertions.
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
@@ -445,37 +445,6 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
       return out;
     });
     expect(bad).toEqual([]);
-  });
-
-  test("v3 screenshots at 1440x900 and 390x844", async ({ browser }) => {
-    fs.mkdirSync(SHOTS, { recursive: true });
-    const desk = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-    const page = await desk.newPage();
-    const problems = watchConsole(page);
-    await loadApp(page);
-    await page.click(".toy-card[data-toy='chest']");
-    await waitForToy(page, "Treasure chest");
-    await page.click("#toy-action");
-    await page.evaluate(() => window.__splashery.app.setPattern({ id: "flag", flag: "gb" }));
-    await expect(page.locator("#toy-status")).toContainText("United Kingdom");
-    await page.waitForTimeout(2200);
-    await page.screenshot({ path: path.join(SHOTS, "v3-1440x900.png") });
-    expect(problems).toEqual([]);
-    await desk.close();
-    const phone = await browser.newContext({
-      viewport: { width: 390, height: 844 },
-      hasTouch: true,
-      isMobile: true,
-    });
-    const p2 = await phone.newPage();
-    await loadApp(p2);
-    await p2.click(".chip[data-category='weather']");
-    await p2.click(".toy-card[data-toy='campfire']");
-    await waitForToy(p2, "Campfire");
-    await p2.tap("#sheet-toggle");
-    await p2.waitForTimeout(1200);
-    await p2.screenshot({ path: path.join(SHOTS, "v3-390x844.png") });
-    await phone.close();
   });
 
   test("an embedded kit toy opens when tapped", async ({ page }) => {

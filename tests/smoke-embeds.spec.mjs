@@ -1,4 +1,4 @@
-// Task 101: independent smoke groups can run on separate suite shards.
+// Task 101: independent smoke checks, with original fixtures and assertions.
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
@@ -23,8 +23,6 @@ import {
 test.describe("Sharpness and embeds (WebGL2)", () => {
   test.use({ reducedMotion: "reduce" });
 
-  // Canvas backing pixels = CSS pixels x min(device pixel ratio, tier cap).
-  // The mid and high caps are 3 since September 29, 2026; ?sharp=0 puts back 2.
   for (const [scale, tier, ratio, query] of [
     [2, "high", 2, ""],
     [3, "mid", 3, ""],
