@@ -2034,3 +2034,10 @@ original test tone, with no external footage, people, or marks. Each is two seco
 the fast clip runs at 60 frames per second. MP4, WebM, MOV, and GIF files exercise the local-file
 path. [The generator](tools/cdx-mp2-r4-inputs.mjs) is MIT, and each file's hash, size, and source
 record is in `tools/assets.json`. These fixtures have no shelf entry or automatic fetch.
+
+## Splats to mesh (Codex task 106)
+
+Made by Ryan with Codex (GPT-6): MIT reconstruction, mesh writers, worker, Studio controls, and
+preview code; CC0 original example ring. Reconstructed exports inherit their input's license and
+attribution. The benchmark uses the fourteen existing CC0 Poly Haven inputs already credited above;
+their source meshes stay outside the shipping tree.

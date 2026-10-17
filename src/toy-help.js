@@ -21,6 +21,11 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "splats-to-mesh": {
+    howTo: "Open Toy to convert a splat file or toy ID to a mesh. Drag the preview to inspect it.",
+    about:
+      "Turn a .sog, .ply, .splat, or .spz file, or a built-in toy ID, into a triangle mesh. This labs Studio tool is an allowed exception to Splashery's splat output: it saves colored GLB, OBJ with MTL, or STL for other apps and printers. Conversion runs on this device in a cancelable background worker; nothing is uploaded.\n\nDensity level, resolution, smoothing, and a triangle budget control reconstruction. Ready to print fills enclosed cavities, thickens features, sets millimeters, and checks watertight edges, manifold vertex links, and sampled wall thickness. A failed 1 mm check says the mesh is not ready. Unsampled regions still need a slicer check. Missing surfaces cannot be recovered. Exports keep the source's license. Made by Ryan with Codex (GPT-6); MIT code and CC0 original geometry.",
+  },
   "name-toy": {
     howTo:
       "Type a name in Toy, emoji too. Pick Spin, Poke, Paint, Drop, or Blow on the stage, then touch the letters.",

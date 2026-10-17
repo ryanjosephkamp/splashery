@@ -530,3 +530,13 @@ license. No new third-party browser library was added.
 - Xvfb 21.1.16 ([X.Org licenses](https://www.x.org/releases/current/doc/xorg-docs/License.html)): a
   virtual display for real Chromium verification with Mesa's software renderer. The installed X.Org
   copyright file identifies the canonical X11/MIT form. No X server is served with the site.
+
+## Splats to mesh validation tools (Codex task 106; not shipped)
+
+- Khronos glTF Validator 2.0.0-dev.3.10, Apache-2.0:
+  <https://github.com/KhronosGroup/glTF-Validator> and
+  <https://raw.githubusercontent.com/KhronosGroup/glTF-Validator/main/LICENSE>. Installed outside
+  the repository for independent GLB validation; no validator code ships.
+- The reconstruction, surface extraction, topology checks, mesh encoders, and preview in
+  `src/mesh-export/` are original MIT code. They reuse the existing MIT WebP codec and splat readers
+  listed in this file; no runtime library was added.

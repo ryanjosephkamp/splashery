@@ -381,6 +381,29 @@
 
       <h3 id="models-and-splat-files">Models, and your splat files</h3>
       <p>
+        <b>Splats to mesh</b> is a labs Studio tool for taking your work into other apps and 3D
+        printers. It is an allowed exception to Splashery's splat output: it saves triangle meshes
+        as GLB with vertex color, OBJ with MTL, or STL without color. Open a <code>.sog</code>,
+        <code>.ply</code>, <code>.splat</code>, or <code>.spz</code> file, or enter a built-in toy
+        ID. Built-in toys use their default options at rest; a toy that needs an opened input may
+        need its saved splat file instead. Nothing is uploaded. A cancelable worker samples Gaussian
+        density and color, extracts a surface, removes small disconnected pieces, and smooths it. To
+        meet a tight triangle budget, it resamples a coarser grid and warns that small details or
+        disconnected pieces may disappear. Lower the density level to keep faint surfaces; raise the
+        resolution and triangle budget to keep smaller details.
+      </p>
+      <p>
+        <b>Ready to print</b> sets the longest dimension in millimeters, thickens features, and
+        fills enclosed cavities. The result reports watertight edges, manifold vertex links, and
+        volume. Inward rays sample wall thickness; a failed 1 mm check marks the mesh as not ready
+        to print. Unsampled regions still need checking: review wall thickness, supports, and scale
+        in your slicer before printing. Reconstruction can change thin parts and cannot recover
+        missing surfaces. GLB uses meters when opened in other apps; STL and OBJ print exports use
+        millimeters. OBJ and MTL download together in a ZIP; vertex color support varies by viewer.
+        The license notice beside Save also travels in GLB metadata and OBJ/MTL comments. STL has
+        only a short license notice in its header, so keep the original attribution with it.
+      </p>
+      <p>
         <b>Model to splats</b> (<code>src/packs/studio-models-core.js</code>, which a Node tool
         shares) reads a glTF 2.0 file (<code>.gltf</code> or <code>.glb</code>), an OBJ with its
         MTL, or an STL file, and lays flat discs on the surface, more of them where there is detail,

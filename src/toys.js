@@ -3794,6 +3794,17 @@ export const TOYS = [
     tags: "mirror camera webcam selfie live depth hologram 3d relief video you",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.2 },
   },
+  // ---- Pack: mesh-export (Codex task 106) ----
+  {
+    id: "splats-to-mesh",
+    label: "Splats to mesh",
+    category: "studio",
+    kind: "kit",
+    pack: "mesh-export",
+    labs: true,
+    tags: "splat sog ply spz mesh export glb obj stl print printer watertight solid triangles",
+    camera: { yaw: 0.4, pitch: 0.2, roll: 0, distance: 3.4 },
+  },
   // ---- Pack: studio-models (lane Studio Models) ----
   {
     id: "model-splats",

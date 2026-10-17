@@ -374,6 +374,7 @@ export const SITE_TOY_IDS = [
   "splat-field",
   "splat-mirror",
   "splat-toolkit",
+  "splats-to-mesh",
   "sports-car",
   "spring-toy",
   "squash-ball",
