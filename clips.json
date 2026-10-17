@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "renderer": "PlayCanvas 2.22.3, WebGL2, Chromium, Mesa llvmpipe on Xvfb",
+  "fps": 30,
+  "size": 1080,
+  "clips": [
+    {
+      "id": "reference-duck",
+      "file": "reference-duck.mp4",
+      "width": 1080,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_frames": "85",
+      "duration": 2.833333,
+      "sha256": "9d5adb546127010b4c49c08518179e1defb3583f62d9fb7fdc06d815c2988751"
+    },
+    {
+      "id": "reference-croissant",
+      "file": "reference-croissant.mp4",
+      "width": 1080,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_frames": "85",
+      "duration": 2.833333,
+      "sha256": "5764afe5a84260cd95fe009b6f3421a90a68a5971d262d0c3e3d43088cf35bee"
+    },
+    {
+      "id": "reference-pomegranate",
+      "file": "reference-pomegranate.mp4",
+      "width": 1080,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_frames": "85",
+      "duration": 2.833333,
+      "sha256": "ef9d02b93256b667dbb5aeb1048a13f1fab8310ed16190a9ad6d677a1ccd3f2a"
+    },
+    {
+      "id": "reference-cake",
+      "file": "reference-cake.mp4",
+      "width": 1080,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_frames": "85",
+      "duration": 2.833333,
+      "sha256": "2a6568a3b2959f8c0a2fbbe51ef86f585fd3248edc3c80477b01a41f7d9e5309"
+    },
+    {
+      "id": "reference-lantern",
+      "file": "reference-lantern.mp4",
+      "width": 1080,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_frames": "85",
+      "duration": 2.833333,
+      "sha256": "68394cfd8c5e8db6ddf7410884bd862c19d26246aeae63ed3afd65314d6dcf84"
+    }
+  ]
+}
