@@ -138,7 +138,12 @@ for (const n of COUNTS) {
       const own = r.pics ? `${k(r.splats)} in the toy` : `${k(r.splats)} splats`;
       expect(r.status).toContain(r.pics ? `${k(r.splats + r.pics)} splats (${own}` : own);
       expect(r.render).toContain(`${k(r.splats)} splats${r.note}`);
-      expect(Math.abs(r.splats - want), `${id}: ${r.splats} for ${want}`).toBeLessThanOrEqual(want * 0.02); // prettier-ignore
+      // Within 2%; or, when the time cap on the extra builds (about 3 s, which
+      // depends on the machine) stopped the measuring early, within 4% with
+      // the label saying so.
+      const off = Math.abs(r.splats - want);
+      if (off > want * 0.02) expect(r.note, `${id}: ${r.splats} for ${want}`).toBe(" (the nearest this toy draws)"); // prettier-ignore
+      expect(off, `${id}: ${r.splats} for ${want}`).toBeLessThanOrEqual(want * 0.04);
       if (Math.abs(r.splats - n) > n * 0.02) expect(r.note, id).not.toBe("");
       else expect(r.note, id).toBe("");
     }
