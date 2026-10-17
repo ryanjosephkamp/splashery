@@ -41,6 +41,8 @@ can't go past its file. The slider should give the count picked, or as close as 
   recipe with fixed splat sizes can let them shrink as the count grows. A recipe sets `k.all = true`
   during its build when it has drawn every splat its data has (or all the detail its source has);
   the label then says "(all this toy has)" when the toy falls short of the slider.
+- `k.slider`: the slider's count when it set the build, or null, so a recipe can lift a cap of its
+  own (a simulation's) only for the slider and keep the tiers' look.
 - Captured toys (`src/player.js`, the builtin branch): with the slider, a capture loads its light
   file on the low tier as before, but switches to the full file when the light one has fewer than
   the slider; a file with more than the slider is thinned to it. Thinning is a shader variant

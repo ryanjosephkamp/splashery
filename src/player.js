@@ -678,7 +678,7 @@ export class Player {
     const shrink = this.splats ? Math.min(1, Math.sqrt(most / this.splats)) : 1;
     const it = (this.splats ? buildRecipeTo : buildRecipe)(
       recipe,
-      { seed: recipe.seed ?? hash32(def.id), count, options, clay, media: mediaInfo(media), shrink }, // prettier-ignore
+      { seed: recipe.seed ?? hash32(def.id), count, options, clay, media: mediaInfo(media), shrink, slider: this.splats || null }, // prettier-ignore
       applyClay,
     );
     let r = it.next();

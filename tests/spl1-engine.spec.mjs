@@ -152,17 +152,22 @@ for (const n of COUNTS) {
   });
 }
 
-test("k.shrink: under 1 only past the most the tiers give a toy", async ({ page }) => {
+test("k.shrink and k.slider: only with the slider, k.shrink only past the tiers' most", async ({
+  page,
+}) => {
   const errors = await open(page);
   const shrink = () => page.evaluate(() => window.__splashery.player.proc.ctx.kit.shrink);
   await show(page, "clock"); // density 1: the max tier gives it 280,000
   expect(await shrink()).toBe(1);
+  expect(await page.evaluate(() => window.__splashery.player.proc.ctx.kit.slider)).toBeNull();
   await page.evaluate(() => window.__splashery.app.setSplats(200_000));
   await page.waitForFunction(() => window.__splashery.player.toyInfo?.splats > 190_000);
   expect(await shrink()).toBe(1);
   await page.evaluate(() => window.__splashery.app.setSplats(400_000));
   await page.waitForFunction(() => window.__splashery.player.toyInfo?.splats > 390_000);
   expect(await shrink()).toBeCloseTo(Math.sqrt(280 / 400), 6);
+  // k.slider: the slider's count, so a recipe can lift a cap only for it.
+  expect(await page.evaluate(() => window.__splashery.player.proc.ctx.kit.slider)).toBe(400_000);
   expect(errors).toEqual([]);
 });
 

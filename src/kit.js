@@ -615,7 +615,10 @@ function kindOf(k) {
 }
 
 export class Kit {
-  constructor(seed, { count = 120000, options = {}, fit = true, media = null, shrink = 1 } = {}) {
+  constructor(
+    seed,
+    { count = 120000, options = {}, fit = true, media = null, shrink = 1, slider = null } = {},
+  ) {
     this.seed = seed >>> 0;
     this.count = count;
     // Lane SPL1: with the labs Splats slider above the most a toy's tiers
@@ -625,6 +628,9 @@ export class Kit {
     // the detail its source has) sets `all` during its build, so the label
     // says so when the toy falls short of the slider.
     this.shrink = shrink;
+    // The labs Splats slider's count when it set this build, or null: a
+    // recipe may lift a cap of its own that the tiers keep (a simulation's).
+    this.slider = slider;
     this.all = false;
     // Pictures (lane Books): a picture toy's media, opened before the build
     // ({ kind, count, name, aspect, aspects, names }), or null (not open, or
@@ -1336,10 +1342,10 @@ export function nearestColoring(buf) {
 // returns { g, buf, base, coloring, parts, recipe, lum }.
 export function* buildRecipe(
   recipe,
-  { seed, count, options = {}, clay = [], media = null, shrink = 1 },
+  { seed, count, options = {}, clay = [], media = null, shrink = 1, slider = null },
   applyClay,
 ) {
-  const k = new Kit(seed, { count, options, media, shrink });
+  const k = new Kit(seed, { count, options, media, shrink, slider });
   recipe.build(k, options);
   const it = k.emit();
   let r = it.next();
