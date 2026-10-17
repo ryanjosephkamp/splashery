@@ -1887,6 +1887,13 @@ export class Player {
     return this.fromRecipe(o.map((v, i) => v + d[i] * t0));
   }
 
+  // Lane TF1 (engine): a recipe with `pickBox: true` (the volume viewer) is
+  // picked by its tap box alone, with no pick-buffer render: a press answers
+  // at once, however many splats it draws. Null for every other toy.
+  boxPick(x, y) {
+    return this.toyInfo?.recipe?.pickBox ? this.tapBoxAt(x, y) : null;
+  }
+
   // Pokes the toy at a canvas point. Resolves true when it hit the toy.
   async pokeAt(x, y) {
     const p = await this.pickAt(x, y);
