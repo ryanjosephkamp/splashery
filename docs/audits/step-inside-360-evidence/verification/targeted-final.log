@@ -1,0 +1,25 @@
+
+Running 12 tests using 2 workers
+
+(node:22112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22118) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22118) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-pano-core.spec.mjs:3:1 › replacement terminates the old worker and rejects its pending request (46ms)
+  ✓   2 [chromium] › tests/cdx-pano-core.spec.mjs:36:1 › sphere and perspective tiles cover both poles and wrap without holes (10.6s)
+  ✓   4 [chromium] › tests/cdx-pano-core.spec.mjs:53:1 › GPano accepts complete spheres and rejects cropped, invalid, or non-2:1 images (21ms)
+  ✓   5 [chromium] › tests/cdx-pano-core.spec.mjs:79:1 › joint overlap alignment removes per-face inverse-depth scale and shift (158ms)
+  ✓   6 [chromium] › tests/cdx-pano-core.spec.mjs:115:1 › splat budgets preserve polar caps and movement is bounded with a stretch warning (48ms)
+  ✓   7 [chromium] › tests/cdx-pano-core.spec.mjs:139:1 › sky observations cannot prevent negative inverse-depth offsets for geometry (70ms)
+  ✓   8 [chromium] › tests/cdx-pano-core.spec.mjs:178:1 › unsupported sky stays far without changing the scale of supported geometry (23ms)
+  ✓   9 [chromium] › tests/cdx-pano-core.spec.mjs:214:1 › canceling between perspective faces prevents further inference (8ms)
+  ✓  10 [chromium] › tests/cdx-pano-core.spec.mjs:237:1 › the actual recipe orients side-wall and polar discs toward the camera (1.1s)
+  ✓   3 [chromium] › tests/cdx-pano-browser.spec.mjs:2:1 › Studio panorama opens inside, leans, steps, warns, and leaves cleanly (41.1s)
+  ✓  11 [chromium] › tests/cdx-pano-browser.spec.mjs:46:1 › invalid panorama reports a useful error without replacing the current room (25.9s)
+  ✓  12 [chromium] › tests/cdx-pano-browser.spec.mjs:57:1 › a file finishing after a newer sample selection cannot replace that sample (30.9s)
+
+  12 passed (1.7m)

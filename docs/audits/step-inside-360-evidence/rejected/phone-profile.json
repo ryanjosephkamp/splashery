@@ -1,0 +1,94 @@
+{
+  "note": "390×844, device scale factor 3, forced low profile, real WebGL2 splats and WASM depth. Desktop Chromium with software graphics and concurrent regression checks, not physical-phone evidence. First look includes an interactive constant-radius preview. Process-tree PSS sampled every 100 ms; short peaks can be missed. RSS double-counts shared pages.",
+  "model": "Codex (GPT-6)",
+  "entries": [
+    {
+      "id": "room",
+      "sample": "room",
+      "firstLookMs": 7574,
+      "depthReadyMs": 7629,
+      "peakPssBytes": 680217600,
+      "peakRssBytes": 1082044416,
+      "mainHeapBytes": 58988939,
+      "errors": [],
+      "clip": "room.webm"
+    },
+    {
+      "id": "room2",
+      "sample": "room2",
+      "firstLookMs": 12289,
+      "depthReadyMs": 12307,
+      "peakPssBytes": 716953600,
+      "peakRssBytes": 1129160704,
+      "mainHeapBytes": 88223304,
+      "errors": [],
+      "clip": "room2.webm"
+    },
+    {
+      "id": "truth-room",
+      "file": ".cache/pano3d/truth/room/pano.jpg",
+      "firstLookMs": 11187,
+      "depthReadyMs": 19236,
+      "peakPssBytes": 1014925312,
+      "peakRssBytes": 1315598336,
+      "mainHeapBytes": 46902051,
+      "errors": [],
+      "clip": "truth-room.webm"
+    },
+    {
+      "id": "truth-desk",
+      "file": ".cache/pano3d/truth/desk/pano.jpg",
+      "firstLookMs": 9572,
+      "depthReadyMs": 17932,
+      "peakPssBytes": 971442176,
+      "peakRssBytes": 1347739648,
+      "mainHeapBytes": 89549763,
+      "errors": [],
+      "clip": "truth-desk.webm"
+    },
+    {
+      "id": "truth-stairs",
+      "file": ".cache/pano3d/truth/stairs/pano.jpg",
+      "firstLookMs": 13081,
+      "depthReadyMs": 18940,
+      "peakPssBytes": 954908672,
+      "peakRssBytes": 1334108160,
+      "mainHeapBytes": 44494965,
+      "errors": [],
+      "clip": "truth-stairs.webm"
+    },
+    {
+      "id": "truth-arches",
+      "file": ".cache/pano3d/truth/arches/pano.jpg",
+      "firstLookMs": 10247,
+      "depthReadyMs": 18279,
+      "peakPssBytes": 960576512,
+      "peakRssBytes": 1335320576,
+      "mainHeapBytes": 44531267,
+      "errors": [],
+      "clip": "truth-arches.webm"
+    },
+    {
+      "id": "truth-steps",
+      "file": ".cache/pano3d/truth/steps/pano.jpg",
+      "firstLookMs": 12302,
+      "depthReadyMs": 22830,
+      "peakPssBytes": 923869184,
+      "peakRssBytes": 1339256832,
+      "mainHeapBytes": 69134335,
+      "errors": [],
+      "clip": "truth-steps.webm"
+    },
+    {
+      "id": "truth-lattice",
+      "file": ".cache/pano3d/truth/lattice/pano.jpg",
+      "firstLookMs": 18591,
+      "depthReadyMs": 36563,
+      "peakPssBytes": 881873920,
+      "peakRssBytes": 1311100928,
+      "mainHeapBytes": 45353603,
+      "errors": [],
+      "clip": "truth-lattice.webm"
+    }
+  ]
+}

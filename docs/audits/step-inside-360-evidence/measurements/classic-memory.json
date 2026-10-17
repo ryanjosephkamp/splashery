@@ -1,0 +1,2170 @@
+{
+  "createdUTC": "2026-10-17T02:32:47.426Z",
+  "url": "http://127.0.0.1:4191/",
+  "root": "/workspace/splashery",
+  "runs": 3,
+  "method": {
+    "samplingMs": 200,
+    "units": "KiB",
+    "pss": "Sum of Chromium process-tree proportional resident sets, sampled from /proc/*/smaps_rollup.",
+    "peakWindow": "File-input change through the first completed new Sharp frame and five further completed frames.",
+    "profile": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 3,
+      "nativeBuffer": [585, 1266]
+    },
+    "caveats": "Sampled peaks can miss shorter transients. RSS sums count shared pages repeatedly. This is Chromium/llvmpipe, not a physical phone. The read-only worker probe is appended only in this measurement, not production."
+  },
+  "methodSha256": "cc2321663e913e5dfd2398996f86d431fdc77e84234c08e955ee1b27db5298c6",
+  "probeSha256": "a9177846d10c78a7ee9f177f3fdb52ba9d7f7c6c5baffd9dde953adec5259b7d",
+  "source": {
+    "src/stage.js": "6aca8078565def583efb719f6ae21cf4cb27905598b9ac1ecb03e84c8e9c2e53",
+    "src/photo3d/build-worker.js": "7ed4768c7b3a9440ad75461922aa1f33484342c1bb4ae9dd54458435869bb175",
+    "src/photo3d/prepare.js": "325e06171a1bed49cd242d515946906435e9845212e632a58f44b1539734b014",
+    "src/packs/photo-3d-core.js": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57"
+  },
+  "uploads": [
+    {
+      "file": "/workspace/splashery/assets/toys/step-inside-360/room.jpg",
+      "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc"
+    }
+  ],
+  "rows": [
+    {
+      "run": 0,
+      "pick": 0,
+      "temperature": "cold",
+      "input": {
+        "file": "/workspace/splashery/assets/toys/step-inside-360/room.jpg",
+        "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc"
+      },
+      "before": {
+        "ms": 0.01675500000055763,
+        "pssKiB": 576610,
+        "rssKiB": 989084,
+        "processes": 9,
+        "unavailable": []
+      },
+      "peakPssKiB": 959987,
+      "peakRssKiB": 1380000,
+      "settled": {
+        "first3d": {
+          "ms": 13934.800000000047,
+          "fenceFailed": false
+        },
+        "holds": 0,
+        "graveyard": 0,
+        "nativeBuffer": [585, 1266],
+        "vram": {
+          "tex": 86199556,
+          "vb": 1934684,
+          "ib": 1506396,
+          "ub": 3456,
+          "sb": 0
+        }
+      },
+      "caches": [
+        {
+          "weightBytes": 0,
+          "retainedSourceBufferBytes": 31036688
+        }
+      ],
+      "cacheStates": [
+        {
+          "ms": 205.75040799999988,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 0
+          }
+        },
+        {
+          "ms": 1101.667653999999,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 31036688
+          }
+        }
+      ],
+      "samples": [
+        {
+          "ms": 0.01675500000055763,
+          "pssKiB": 576610,
+          "rssKiB": 989084,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 170.04460699999981,
+          "pssKiB": 579354,
+          "rssKiB": 991828,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 370.1973689999995,
+          "pssKiB": 603391,
+          "rssKiB": 1015952,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 569.7490880000005,
+          "pssKiB": 616404,
+          "rssKiB": 1028972,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 769.8058779999992,
+          "pssKiB": 663614,
+          "rssKiB": 1078248,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 971.7928549999997,
+          "pssKiB": 777690,
+          "rssKiB": 1194492,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1172.2880650000006,
+          "pssKiB": 771088,
+          "rssKiB": 1187392,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1372.7270709999993,
+          "pssKiB": 850716,
+          "rssKiB": 1266684,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1572.9648039999993,
+          "pssKiB": 851677,
+          "rssKiB": 1267728,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1774.029547,
+          "pssKiB": 860878,
+          "rssKiB": 1279896,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1976.1315290000002,
+          "pssKiB": 851236,
+          "rssKiB": 1270292,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2176.1295819999996,
+          "pssKiB": 870228,
+          "rssKiB": 1289288,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2377.073785999999,
+          "pssKiB": 857167,
+          "rssKiB": 1276232,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2577.3625200000006,
+          "pssKiB": 844040,
+          "rssKiB": 1263972,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2777.469905,
+          "pssKiB": 841930,
+          "rssKiB": 1261836,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2977.4675580000003,
+          "pssKiB": 844336,
+          "rssKiB": 1264252,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3177.692808,
+          "pssKiB": 854564,
+          "rssKiB": 1274480,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3381.170763,
+          "pssKiB": 854623,
+          "rssKiB": 1274552,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3581.350009,
+          "pssKiB": 854537,
+          "rssKiB": 1274488,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3781.3572159999985,
+          "pssKiB": 854565,
+          "rssKiB": 1274516,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3981.0367290000013,
+          "pssKiB": 855638,
+          "rssKiB": 1275592,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4181.691062,
+          "pssKiB": 855663,
+          "rssKiB": 1275620,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4382.097048000001,
+          "pssKiB": 855779,
+          "rssKiB": 1275748,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4581.736349000001,
+          "pssKiB": 850638,
+          "rssKiB": 1270608,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4781.684977999999,
+          "pssKiB": 851710,
+          "rssKiB": 1271680,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4983.967863,
+          "pssKiB": 851726,
+          "rssKiB": 1271696,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5187.932591999999,
+          "pssKiB": 851835,
+          "rssKiB": 1271808,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5394.303762999998,
+          "pssKiB": 851831,
+          "rssKiB": 1271804,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5594.1509529999985,
+          "pssKiB": 852911,
+          "rssKiB": 1272884,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5794.203746000001,
+          "pssKiB": 852915,
+          "rssKiB": 1272888,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5996.160748,
+          "pssKiB": 879547,
+          "rssKiB": 1299536,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6196.371519999999,
+          "pssKiB": 886473,
+          "rssKiB": 1306476,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6396.082117,
+          "pssKiB": 912009,
+          "rssKiB": 1332012,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6596.062358000001,
+          "pssKiB": 931117,
+          "rssKiB": 1351128,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6798.032809999999,
+          "pssKiB": 959987,
+          "rssKiB": 1380000,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6998.881506,
+          "pssKiB": 904721,
+          "rssKiB": 1318972,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7198.9172149999995,
+          "pssKiB": 881682,
+          "rssKiB": 1295936,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7400.770072000001,
+          "pssKiB": 911234,
+          "rssKiB": 1325488,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7601.262481,
+          "pssKiB": 930282,
+          "rssKiB": 1345400,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7803.531950999999,
+          "pssKiB": 924186,
+          "rssKiB": 1341740,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8003.704653999999,
+          "pssKiB": 936914,
+          "rssKiB": 1354500,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8203.828312,
+          "pssKiB": 948777,
+          "rssKiB": 1366364,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8403.992322,
+          "pssKiB": 864469,
+          "rssKiB": 1282056,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8603.787193999999,
+          "pssKiB": 864697,
+          "rssKiB": 1282284,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8804.014386,
+          "pssKiB": 865285,
+          "rssKiB": 1282872,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9003.604926999998,
+          "pssKiB": 870177,
+          "rssKiB": 1287340,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9204.189097,
+          "pssKiB": 878507,
+          "rssKiB": 1295676,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9403.855319,
+          "pssKiB": 878938,
+          "rssKiB": 1296108,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9604.133217,
+          "pssKiB": 885005,
+          "rssKiB": 1302176,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9807.499877,
+          "pssKiB": 866294,
+          "rssKiB": 1283912,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10008.062345,
+          "pssKiB": 871726,
+          "rssKiB": 1290048,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10210.767990999999,
+          "pssKiB": 892558,
+          "rssKiB": 1311756,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10410.768933000001,
+          "pssKiB": 901914,
+          "rssKiB": 1321728,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10610.783661,
+          "pssKiB": 899581,
+          "rssKiB": 1320408,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10810.536881999999,
+          "pssKiB": 918873,
+          "rssKiB": 1343360,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11014.074199,
+          "pssKiB": 906638,
+          "rssKiB": 1331368,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11215.258788000001,
+          "pssKiB": 914871,
+          "rssKiB": 1339620,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11417.238134000001,
+          "pssKiB": 915356,
+          "rssKiB": 1340132,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11618.540498,
+          "pssKiB": 914979,
+          "rssKiB": 1340144,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11819.201703,
+          "pssKiB": 914716,
+          "rssKiB": 1340144,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12021.08085,
+          "pssKiB": 914684,
+          "rssKiB": 1340168,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12221.565535,
+          "pssKiB": 914669,
+          "rssKiB": 1340164,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12422.436952999999,
+          "pssKiB": 914659,
+          "rssKiB": 1340148,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12622.464968999999,
+          "pssKiB": 881398,
+          "rssKiB": 1306892,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12824.154894000001,
+          "pssKiB": 881319,
+          "rssKiB": 1306892,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13053.838515999998,
+          "pssKiB": 881346,
+          "rssKiB": 1306892,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13256.072256999998,
+          "pssKiB": 885464,
+          "rssKiB": 1306892,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13456.376880999998,
+          "pssKiB": 885277,
+          "rssKiB": 1306892,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13663.918733,
+          "pssKiB": 884622,
+          "rssKiB": 1306892,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13864.897374999999,
+          "pssKiB": 883665,
+          "rssKiB": 1306892,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 14076.749493000001,
+          "pssKiB": 883013,
+          "rssKiB": 1306896,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 14283.667647,
+          "pssKiB": 876771,
+          "rssKiB": 1301040,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 14483.936549,
+          "pssKiB": 876309,
+          "rssKiB": 1301040,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 14685.945977000001,
+          "pssKiB": 875689,
+          "rssKiB": 1301040,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 14885.656912,
+          "pssKiB": 874773,
+          "rssKiB": 1301040,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 15088.173837,
+          "pssKiB": 874612,
+          "rssKiB": 1301040,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 15288.907952,
+          "pssKiB": 874472,
+          "rssKiB": 1301040,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 15496.148413,
+          "pssKiB": 874320,
+          "rssKiB": 1303840,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 15698.254489,
+          "pssKiB": 874119,
+          "rssKiB": 1303840,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 15901.776153,
+          "pssKiB": 873983,
+          "rssKiB": 1303840,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 16106.943927999999,
+          "pssKiB": 873875,
+          "rssKiB": 1303840,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 16309.556831,
+          "pssKiB": 873861,
+          "rssKiB": 1303840,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 16516.759789000003,
+          "pssKiB": 873860,
+          "rssKiB": 1303840,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 16719.682420999998,
+          "pssKiB": 876752,
+          "rssKiB": 1306780,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 16923.570291999997,
+          "pssKiB": 876765,
+          "rssKiB": 1306800,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 17123.707581000002,
+          "pssKiB": 876765,
+          "rssKiB": 1306800,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 17324.16857,
+          "pssKiB": 876765,
+          "rssKiB": 1306800,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 17524.047142000003,
+          "pssKiB": 876761,
+          "rssKiB": 1306852,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 17753.204909,
+          "pssKiB": 876760,
+          "rssKiB": 1306872,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 17954.150305000003,
+          "pssKiB": 876024,
+          "rssKiB": 1306148,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 18154.489773,
+          "pssKiB": 876024,
+          "rssKiB": 1306148,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 18356.126462,
+          "pssKiB": 876012,
+          "rssKiB": 1306156,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 18563.594491999997,
+          "pssKiB": 875799,
+          "rssKiB": 1306072,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 18769.348835999997,
+          "pssKiB": 875389,
+          "rssKiB": 1305684,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 18975.48923,
+          "pssKiB": 875422,
+          "rssKiB": 1305740,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 19177.915728,
+          "pssKiB": 875414,
+          "rssKiB": 1305740,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 19381.914292,
+          "pssKiB": 875608,
+          "rssKiB": 1306552,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 19587.677855,
+          "pssKiB": 867571,
+          "rssKiB": 1298848,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 19789.380181,
+          "pssKiB": 867571,
+          "rssKiB": 1298848,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 19991.06817,
+          "pssKiB": 870471,
+          "rssKiB": 1301752,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 20194.368081,
+          "pssKiB": 871473,
+          "rssKiB": 1302796,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 20395.661211,
+          "pssKiB": 872345,
+          "rssKiB": 1303672,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 20598.983974000002,
+          "pssKiB": 929447,
+          "rssKiB": 1360772,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 20799.631570000005,
+          "pssKiB": 929459,
+          "rssKiB": 1360784,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 20999.925588,
+          "pssKiB": 929102,
+          "rssKiB": 1360428,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 21202.924896000004,
+          "pssKiB": 929714,
+          "rssKiB": 1361040,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 21404.368201000005,
+          "pssKiB": 929709,
+          "rssKiB": 1361036,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 21604.160818000004,
+          "pssKiB": 927277,
+          "rssKiB": 1358608,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 21777.811122,
+          "pssKiB": 945741,
+          "rssKiB": 1377072,
+          "processes": 9,
+          "unavailable": []
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "pick": 0,
+      "temperature": "cold",
+      "input": {
+        "file": "/workspace/splashery/assets/toys/step-inside-360/room.jpg",
+        "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc"
+      },
+      "before": {
+        "ms": 0.011938000003283378,
+        "pssKiB": 539321,
+        "rssKiB": 956696,
+        "processes": 9,
+        "unavailable": []
+      },
+      "peakPssKiB": 918266,
+      "peakRssKiB": 1344932,
+      "settled": {
+        "first3d": {
+          "ms": 15696.300000000047,
+          "fenceFailed": false
+        },
+        "holds": 0,
+        "graveyard": 0,
+        "nativeBuffer": [585, 1266],
+        "vram": {
+          "tex": 86199556,
+          "vb": 1934684,
+          "ib": 1506396,
+          "ub": 3456,
+          "sb": 0
+        }
+      },
+      "caches": [
+        {
+          "weightBytes": 0,
+          "retainedSourceBufferBytes": 31036688
+        }
+      ],
+      "cacheStates": [
+        {
+          "ms": 380.52173400000174,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 0
+          }
+        },
+        {
+          "ms": 1710.0746680000084,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 31036688
+          }
+        }
+      ],
+      "samples": [
+        {
+          "ms": 0.011938000003283378,
+          "pssKiB": 539321,
+          "rssKiB": 956696,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 200.5102240000051,
+          "pssKiB": 551733,
+          "rssKiB": 969128,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 404.3355689999953,
+          "pssKiB": 539976,
+          "rssKiB": 957396,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 608.1977790000019,
+          "pssKiB": 540006,
+          "rssKiB": 957428,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 809.9906660000051,
+          "pssKiB": 565550,
+          "rssKiB": 983044,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1010.3811480000077,
+          "pssKiB": 583277,
+          "rssKiB": 1000784,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1210.239066000002,
+          "pssKiB": 613733,
+          "rssKiB": 1034140,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1410.1632170000012,
+          "pssKiB": 631614,
+          "rssKiB": 1051532,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1609.8433940000032,
+          "pssKiB": 667395,
+          "rssKiB": 1089380,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1809.4964740000069,
+          "pssKiB": 682547,
+          "rssKiB": 1102484,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2010.2641179999991,
+          "pssKiB": 710769,
+          "rssKiB": 1133124,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2211.497632000006,
+          "pssKiB": 757205,
+          "rssKiB": 1177888,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2415.4236670000028,
+          "pssKiB": 765955,
+          "rssKiB": 1190140,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2616.457801000004,
+          "pssKiB": 838746,
+          "rssKiB": 1263008,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2819.5493110000025,
+          "pssKiB": 836481,
+          "rssKiB": 1260800,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3023.468302000001,
+          "pssKiB": 834835,
+          "rssKiB": 1259232,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3223.832478999997,
+          "pssKiB": 847352,
+          "rssKiB": 1271756,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3427.8384210000004,
+          "pssKiB": 843272,
+          "rssKiB": 1270604,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3628.8278250000076,
+          "pssKiB": 841409,
+          "rssKiB": 1268808,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3831.439350000008,
+          "pssKiB": 838948,
+          "rssKiB": 1266392,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4031.928703000005,
+          "pssKiB": 859728,
+          "rssKiB": 1287176,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4231.668408000005,
+          "pssKiB": 854302,
+          "rssKiB": 1281800,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4431.749908999998,
+          "pssKiB": 837272,
+          "rssKiB": 1264776,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4632.304179000006,
+          "pssKiB": 851573,
+          "rssKiB": 1279104,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4833.977676000002,
+          "pssKiB": 825553,
+          "rssKiB": 1252224,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5039.621613000003,
+          "pssKiB": 829646,
+          "rssKiB": 1255104,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5239.522447000003,
+          "pssKiB": 834978,
+          "rssKiB": 1260436,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5467.445305000008,
+          "pssKiB": 834624,
+          "rssKiB": 1260088,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5667.473365999998,
+          "pssKiB": 829533,
+          "rssKiB": 1255016,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5868.135310999998,
+          "pssKiB": 829569,
+          "rssKiB": 1255052,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6071.507411000006,
+          "pssKiB": 830669,
+          "rssKiB": 1256152,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6272.478678000007,
+          "pssKiB": 830685,
+          "rssKiB": 1256168,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6472.859157000006,
+          "pssKiB": 830697,
+          "rssKiB": 1256180,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6675.4942260000025,
+          "pssKiB": 830725,
+          "rssKiB": 1256208,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6879.459510000008,
+          "pssKiB": 831797,
+          "rssKiB": 1257280,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7080.449752000008,
+          "pssKiB": 831317,
+          "rssKiB": 1256808,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7280.718465000005,
+          "pssKiB": 830864,
+          "rssKiB": 1256468,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7480.543347999999,
+          "pssKiB": 830876,
+          "rssKiB": 1256480,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7686.026653000001,
+          "pssKiB": 830679,
+          "rssKiB": 1256316,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7886.218142000005,
+          "pssKiB": 830583,
+          "rssKiB": 1256220,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8085.871961000004,
+          "pssKiB": 831591,
+          "rssKiB": 1257228,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8286.277672999997,
+          "pssKiB": 831607,
+          "rssKiB": 1257244,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8487.555935000004,
+          "pssKiB": 831623,
+          "rssKiB": 1257260,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8695.490364000005,
+          "pssKiB": 823743,
+          "rssKiB": 1250368,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8896.074377999998,
+          "pssKiB": 823771,
+          "rssKiB": 1250400,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9096.660186000001,
+          "pssKiB": 843295,
+          "rssKiB": 1269924,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9297.120092999998,
+          "pssKiB": 876997,
+          "rssKiB": 1303656,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9497.460192000006,
+          "pssKiB": 877113,
+          "rssKiB": 1303772,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9698.471429999998,
+          "pssKiB": 901006,
+          "rssKiB": 1327672,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9901.420586,
+          "pssKiB": 918266,
+          "rssKiB": 1344932,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10104.794274000007,
+          "pssKiB": 884782,
+          "rssKiB": 1307692,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10305.247867000005,
+          "pssKiB": 855568,
+          "rssKiB": 1277764,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10504.944794000003,
+          "pssKiB": 889054,
+          "rssKiB": 1308212,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10704.635281999996,
+          "pssKiB": 900002,
+          "rssKiB": 1319160,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10904.866390000003,
+          "pssKiB": 908394,
+          "rssKiB": 1327552,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11105.085289000002,
+          "pssKiB": 910249,
+          "rssKiB": 1329440,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11304.934249000005,
+          "pssKiB": 909990,
+          "rssKiB": 1329176,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11504.670974,
+          "pssKiB": 880849,
+          "rssKiB": 1300040,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11704.883107000009,
+          "pssKiB": 819097,
+          "rssKiB": 1238676,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11905.120033000007,
+          "pssKiB": 823601,
+          "rssKiB": 1243188,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12104.891014,
+          "pssKiB": 822997,
+          "rssKiB": 1242584,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12307.510260000003,
+          "pssKiB": 842201,
+          "rssKiB": 1261788,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12507.921072999998,
+          "pssKiB": 848517,
+          "rssKiB": 1268108,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12707.640061000006,
+          "pssKiB": 830797,
+          "rssKiB": 1250388,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12908.824239999994,
+          "pssKiB": 845547,
+          "rssKiB": 1265144,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13108.762854000008,
+          "pssKiB": 850270,
+          "rssKiB": 1269876,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13309.092217000005,
+          "pssKiB": 863461,
+          "rssKiB": 1283068,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13512.166061999997,
+          "pssKiB": 858939,
+          "rssKiB": 1278548,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13712.972000000002,
+          "pssKiB": 868019,
+          "rssKiB": 1293012,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13913.115654000001,
+          "pssKiB": 859519,
+          "rssKiB": 1284520,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 14113.547253999997,
+          "pssKiB": 859943,
+          "rssKiB": 1284944,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 14315.492524000008,
+          "pssKiB": 859945,
+          "rssKiB": 1284948,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 14516.112849000005,
+          "pssKiB": 860173,
+          "rssKiB": 1285176,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 14716.282192000006,
+          "pssKiB": 860173,
+          "rssKiB": 1285176,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 14916.188566000004,
+          "pssKiB": 860257,
+          "rssKiB": 1285260,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 15115.549453000007,
+          "pssKiB": 860261,
+          "rssKiB": 1285264,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 15316.439481999994,
+          "pssKiB": 860267,
+          "rssKiB": 1284864,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 15517.814537999999,
+          "pssKiB": 835657,
+          "rssKiB": 1260256,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 15718.453564999996,
+          "pssKiB": 835657,
+          "rssKiB": 1260256,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 15919.410597999995,
+          "pssKiB": 835657,
+          "rssKiB": 1260256,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 16119.639929999998,
+          "pssKiB": 835657,
+          "rssKiB": 1260256,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 16321.484990999998,
+          "pssKiB": 835657,
+          "rssKiB": 1260256,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 16522.680772,
+          "pssKiB": 822149,
+          "rssKiB": 1246748,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 16723.131239999995,
+          "pssKiB": 822149,
+          "rssKiB": 1246748,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 16923.052296,
+          "pssKiB": 822149,
+          "rssKiB": 1246748,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 17124.029493000002,
+          "pssKiB": 822131,
+          "rssKiB": 1246732,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 17328.233423000005,
+          "pssKiB": 822130,
+          "rssKiB": 1246732,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 17528.210144999997,
+          "pssKiB": 822130,
+          "rssKiB": 1246732,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 17731.454145000003,
+          "pssKiB": 824634,
+          "rssKiB": 1252136,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 17931.453487,
+          "pssKiB": 824634,
+          "rssKiB": 1252136,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 18135.460704999998,
+          "pssKiB": 824634,
+          "rssKiB": 1252136,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 18336.03187700001,
+          "pssKiB": 824634,
+          "rssKiB": 1252136,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 18564.668786999995,
+          "pssKiB": 827640,
+          "rssKiB": 1249372,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 18765.203531,
+          "pssKiB": 827640,
+          "rssKiB": 1249372,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 18964.951630999996,
+          "pssKiB": 827636,
+          "rssKiB": 1249372,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 19165.221989000005,
+          "pssKiB": 827635,
+          "rssKiB": 1249372,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 19364.663044000008,
+          "pssKiB": 827519,
+          "rssKiB": 1252176,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 19565.421513,
+          "pssKiB": 827516,
+          "rssKiB": 1252172,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 19766.196275000002,
+          "pssKiB": 827518,
+          "rssKiB": 1252156,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 19967.046204000006,
+          "pssKiB": 832734,
+          "rssKiB": 1260272,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 20172.474681,
+          "pssKiB": 886722,
+          "rssKiB": 1314272,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 20373.323784,
+          "pssKiB": 884449,
+          "rssKiB": 1312004,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 20572.768694000006,
+          "pssKiB": 884241,
+          "rssKiB": 1311796,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 20642.277898000008,
+          "pssKiB": 899751,
+          "rssKiB": 1327312,
+          "processes": 9,
+          "unavailable": []
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "pick": 0,
+      "temperature": "cold",
+      "input": {
+        "file": "/workspace/splashery/assets/toys/step-inside-360/room.jpg",
+        "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc"
+      },
+      "before": {
+        "ms": 0.0028849999944213778,
+        "pssKiB": 595457,
+        "rssKiB": 1009924,
+        "processes": 9,
+        "unavailable": []
+      },
+      "peakPssKiB": 1015139,
+      "peakRssKiB": 1425300,
+      "settled": {
+        "first3d": {
+          "ms": 10306.90000000014,
+          "fenceFailed": false
+        },
+        "holds": 0,
+        "graveyard": 0,
+        "nativeBuffer": [585, 1266],
+        "vram": {
+          "tex": 86199556,
+          "vb": 1934684,
+          "ib": 1506396,
+          "ub": 3456,
+          "sb": 0
+        }
+      },
+      "caches": [
+        {
+          "weightBytes": 0,
+          "retainedSourceBufferBytes": 31036688
+        }
+      ],
+      "cacheStates": [
+        {
+          "ms": 252.90996900000027,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 0
+          }
+        },
+        {
+          "ms": 1780.0210269999952,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 31036688
+          }
+        }
+      ],
+      "samples": [
+        {
+          "ms": 0.0028849999944213778,
+          "pssKiB": 595457,
+          "rssKiB": 1009924,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 185.4398979999969,
+          "pssKiB": 598005,
+          "rssKiB": 1012472,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 385.41731599999184,
+          "pssKiB": 616139,
+          "rssKiB": 1030676,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 585.4733429999906,
+          "pssKiB": 638952,
+          "rssKiB": 1053492,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 785.1246879999962,
+          "pssKiB": 693384,
+          "rssKiB": 1112892,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 984.7411359999969,
+          "pssKiB": 739793,
+          "rssKiB": 1159600,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1185.3575290000008,
+          "pssKiB": 789498,
+          "rssKiB": 1206852,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1386.5673430000024,
+          "pssKiB": 814797,
+          "rssKiB": 1231912,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1585.980641000002,
+          "pssKiB": 881639,
+          "rssKiB": 1298792,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1786.1256149999972,
+          "pssKiB": 862855,
+          "rssKiB": 1280016,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1985.8111009999993,
+          "pssKiB": 869538,
+          "rssKiB": 1289664,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2186.3218819999893,
+          "pssKiB": 879279,
+          "rssKiB": 1299840,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2386.6482350000006,
+          "pssKiB": 864577,
+          "rssKiB": 1285192,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2587.348339999997,
+          "pssKiB": 866585,
+          "rssKiB": 1287232,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2789.6192239999946,
+          "pssKiB": 867296,
+          "rssKiB": 1287952,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2988.7656049999932,
+          "pssKiB": 870422,
+          "rssKiB": 1291080,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3193.8345659999904,
+          "pssKiB": 867022,
+          "rssKiB": 1285780,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3394.741431000002,
+          "pssKiB": 884001,
+          "rssKiB": 1300260,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3595.3903049999935,
+          "pssKiB": 860581,
+          "rssKiB": 1276980,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3795.2606180000002,
+          "pssKiB": 861011,
+          "rssKiB": 1278956,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4019.1920549999923,
+          "pssKiB": 852281,
+          "rssKiB": 1270656,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4219.044060999993,
+          "pssKiB": 857296,
+          "rssKiB": 1275592,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4419.039246999993,
+          "pssKiB": 862178,
+          "rssKiB": 1280908,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4619.4712,
+          "pssKiB": 862208,
+          "rssKiB": 1280944,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4818.874201999992,
+          "pssKiB": 871370,
+          "rssKiB": 1280968,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5021.100127999991,
+          "pssKiB": 871390,
+          "rssKiB": 1281004,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5221.174291000003,
+          "pssKiB": 872456,
+          "rssKiB": 1282072,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5421.667795000001,
+          "pssKiB": 872993,
+          "rssKiB": 1282656,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5621.690151999996,
+          "pssKiB": 873567,
+          "rssKiB": 1283244,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 5822.687661999997,
+          "pssKiB": 873639,
+          "rssKiB": 1283316,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6022.857607999991,
+          "pssKiB": 874707,
+          "rssKiB": 1284384,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6225.639255000002,
+          "pssKiB": 874812,
+          "rssKiB": 1284496,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6429.945223000002,
+          "pssKiB": 905536,
+          "rssKiB": 1315220,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6631.1207349999895,
+          "pssKiB": 955400,
+          "rssKiB": 1365084,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 6831.519188999999,
+          "pssKiB": 934394,
+          "rssKiB": 1344092,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7031.062418000001,
+          "pssKiB": 947238,
+          "rssKiB": 1357144,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7233.097962,
+          "pssKiB": 950962,
+          "rssKiB": 1361064,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7432.697353999989,
+          "pssKiB": 965874,
+          "rssKiB": 1375976,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7633.058711999998,
+          "pssKiB": 975565,
+          "rssKiB": 1385724,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 7833.668443000002,
+          "pssKiB": 1015139,
+          "rssKiB": 1425300,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8034.612192999994,
+          "pssKiB": 943917,
+          "rssKiB": 1354088,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8235.055693000002,
+          "pssKiB": 937617,
+          "rssKiB": 1347788,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8435.576067000002,
+          "pssKiB": 948437,
+          "rssKiB": 1358608,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8635.616800999996,
+          "pssKiB": 966616,
+          "rssKiB": 1376788,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 8836.089553999991,
+          "pssKiB": 976292,
+          "rssKiB": 1380664,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9035.968418999997,
+          "pssKiB": 982174,
+          "rssKiB": 1389308,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9235.684657999998,
+          "pssKiB": 954215,
+          "rssKiB": 1361392,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9436.574815,
+          "pssKiB": 954789,
+          "rssKiB": 1362112,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9635.815069999997,
+          "pssKiB": 954694,
+          "rssKiB": 1362112,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 9835.892657999997,
+          "pssKiB": 954567,
+          "rssKiB": 1362112,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10036.472429999994,
+          "pssKiB": 954558,
+          "rssKiB": 1362112,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10235.99103199999,
+          "pssKiB": 929296,
+          "rssKiB": 1339800,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10436.697541000001,
+          "pssKiB": 929249,
+          "rssKiB": 1339800,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10637.523906000002,
+          "pssKiB": 915732,
+          "rssKiB": 1326304,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 10837.127416999996,
+          "pssKiB": 915522,
+          "rssKiB": 1325888,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11036.852484000003,
+          "pssKiB": 918045,
+          "rssKiB": 1331324,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11237.648440999998,
+          "pssKiB": 917808,
+          "rssKiB": 1331160,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11437.911022999993,
+          "pssKiB": 917725,
+          "rssKiB": 1331160,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11641.670029999994,
+          "pssKiB": 917719,
+          "rssKiB": 1331160,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 11845.647845999993,
+          "pssKiB": 920133,
+          "rssKiB": 1336492,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12049.911978999997,
+          "pssKiB": 920113,
+          "rssKiB": 1336492,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12250.184085999994,
+          "pssKiB": 920110,
+          "rssKiB": 1336492,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12450.025574999992,
+          "pssKiB": 919423,
+          "rssKiB": 1332932,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12649.82089599999,
+          "pssKiB": 919413,
+          "rssKiB": 1332912,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 12853.683149999997,
+          "pssKiB": 928759,
+          "rssKiB": 1342252,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13053.984119,
+          "pssKiB": 988246,
+          "rssKiB": 1401768,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 13094.379096999997,
+          "pssKiB": 1002198,
+          "rssKiB": 1415720,
+          "processes": 9,
+          "unavailable": []
+        }
+      ]
+    }
+  ],
+  "finishedUTC": "2026-10-17T02:34:49.348Z"
+}

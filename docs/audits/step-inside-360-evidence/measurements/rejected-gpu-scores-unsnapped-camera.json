@@ -1,0 +1,321 @@
+{
+  "createdUTC": "2026-10-17T02:52:59.646Z",
+  "pipelineHash": "1326d658d9b660bcba80fc380791b2a9a7bb57301fbf3bffb56bc399324dcec3",
+  "note": "Actual low-profile product recipe, Kit, and WebGL2 stage at 256×256, DSF 1. Sample responses replaced with the same input panorama and cached per-method globally calibrated depth. The truth-projection control uses exact depth. Fixed source-visible masks are shared with the software diagnostic. All methods clip radial distance to 200 m before the shared 16-bit cache encoding, avoiding out-of-range sky disparities dominating quantization. No hidden surface pixels are removed based on a prediction.",
+  "graphics": "llvmpipe",
+  "source": {
+    "src/pano3d/toy.js": "57f77ba9608af70aa63f9089c602a69cc7a838c572dca21860c307706a43e3d3",
+    "src/pano3d/core.js": "e36864d889520df0fda4727c20619bf058ada3e946ccfdff29134d8c5e3ac11c",
+    "src/stage.js": "6aca8078565def583efb719f6ae21cf4cb27905598b9ac1ecb03e84c8e9c2e53",
+    "src/kit.js": "a3eb480a38905191d1a15dee4e2eef31dbcaa4e4269be0c92921880c3e54e415",
+    "tools/pano-gpu-views.mjs": "dc9a5e803d5c532b239d8e19cb5003d3989d220f9ba0d5e96e86674de5d37e66"
+  },
+  "scenes": [
+    {
+      "id": "room",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.36338960614730054,
+            "windows": 2841,
+            "maskedPixels": 45949,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.37608145118496417,
+            "windows": 2841,
+            "maskedPixels": 45949,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.3743052200402561,
+            "windows": 2841,
+            "maskedPixels": 45949,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.37756871268056036,
+            "windows": 2670,
+            "maskedPixels": 44216,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.39819170153049327,
+            "windows": 2670,
+            "maskedPixels": 44216,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.4482254637429549,
+            "windows": 2670,
+            "maskedPixels": 44216,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "desk",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.5807453665931068,
+            "windows": 2604,
+            "maskedPixels": 42086,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.5834966677064877,
+            "windows": 2604,
+            "maskedPixels": 42086,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.6015884118424655,
+            "windows": 2604,
+            "maskedPixels": 42086,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.583911830588805,
+            "windows": 2480,
+            "maskedPixels": 41240,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.578342038724207,
+            "windows": 2480,
+            "maskedPixels": 41240,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.6663418246164949,
+            "windows": 2480,
+            "maskedPixels": 41240,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "stairs",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.3847651551404496,
+            "windows": 2051,
+            "maskedPixels": 33424,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.38566369412612905,
+            "windows": 2051,
+            "maskedPixels": 33424,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.39203956611106827,
+            "windows": 2051,
+            "maskedPixels": 33424,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.47505063062955366,
+            "windows": 1983,
+            "maskedPixels": 32895,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.49301479863645814,
+            "windows": 1983,
+            "maskedPixels": 32895,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.509020225912212,
+            "windows": 1983,
+            "maskedPixels": 32895,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "arches",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.19266830349569136,
+            "windows": 2433,
+            "maskedPixels": 42156,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.17400564717810024,
+            "windows": 2433,
+            "maskedPixels": 42156,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.16434872132224393,
+            "windows": 2433,
+            "maskedPixels": 42156,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.3212867711480417,
+            "windows": 1962,
+            "maskedPixels": 35858,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.30184458490234023,
+            "windows": 1962,
+            "maskedPixels": 35858,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.42703395537048283,
+            "windows": 1962,
+            "maskedPixels": 35858,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "steps",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.6476364243271698,
+            "windows": 2069,
+            "maskedPixels": 33812,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.6494598502682378,
+            "windows": 2069,
+            "maskedPixels": 33812,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.6506732063678108,
+            "windows": 2069,
+            "maskedPixels": 33812,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.605491445286645,
+            "windows": 1968,
+            "maskedPixels": 33151,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.6389004298171236,
+            "windows": 1968,
+            "maskedPixels": 33151,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.7024818639440664,
+            "windows": 1968,
+            "maskedPixels": 33151,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "lattice",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.36260134137624284,
+            "windows": 2083,
+            "maskedPixels": 34902,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.3635037667572595,
+            "windows": 2083,
+            "maskedPixels": 34902,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.36965473438553165,
+            "windows": 2083,
+            "maskedPixels": 34902,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.3812099416338032,
+            "windows": 1924,
+            "maskedPixels": 33728,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.3928878631554954,
+            "windows": 1924,
+            "maskedPixels": 33728,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.4007449936679791,
+            "windows": 1924,
+            "maskedPixels": 33728,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    }
+  ]
+}

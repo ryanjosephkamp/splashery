@@ -1,0 +1,25 @@
+{
+  "modelHash": "badcaa28c923da4b0bfaa370ed709acfa00e9f743d295d5443e2149a383413c9",
+  "note": "Offline static-518 indoor metric ONNX model; naive panorama is resized to the model's fixed square input. Each method has independent scale-only calibration. Not shipping, and no phone claim.",
+  "scenes": [
+    {
+      "id": "room",
+      "raw": {
+        "absRel": 0.6546312820500529,
+        "delta1": 0.29635659481366333,
+        "scale": 0.8250330303347939
+      },
+      "aligned": {
+        "absRel": 1.8987817106738838,
+        "delta1": 0.6283971794943709,
+        "scale": 4.038743017564495
+      },
+      "naive": {
+        "absRel": 0.19163518581716152,
+        "delta1": 0.6258315688326075,
+        "scale": 1.0831092176658832
+      },
+      "ms": 61069.19999999995
+    }
+  ]
+}

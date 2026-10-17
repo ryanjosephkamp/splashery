@@ -1,0 +1,89 @@
+
+Running 77 tests using 1 worker
+
+[1A[2K(node:3946) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:3946) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/77] [chromium] › tests/p3d-golden.spec.mjs:10:1 › every built-in sample is pinned, and only those
+[1A[2K[2/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: forest
+[1A[2K[3/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: street
+[1A[2K[4/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: still-life
+[1A[2K[5/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: spiral-stairs
+[1A[2K[6/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: palace-stairs
+[1A[2K[7/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: wildflowers
+[1A[2K[8/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-train
+[1A[2K[9/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-oasis
+[1A[2K[10/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-castle
+[1A[2K[11/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cove
+[1A[2K[12/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-harbor
+[1A[2K[13/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-paper-valley
+[1A[2K[14/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-farm
+[1A[2K[15/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-treehouses
+[1A[2K[16/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-library
+[1A[2K[17/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-workshop
+[1A[2K[18/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cloister
+[1A[2K[19/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-greenhouse
+[1A[2K[20/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-attic
+[1A[2K[21/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-bamboo
+[1A[2K[22/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-terraces
+[1A[2K[23/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-canyon
+[1A[2K[24/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-arch
+[1A[2K[25/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-fallen-log
+[1A[2K[26/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-alpine-lake
+[1A[2K[27/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-ice-falls
+[1A[2K[28/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-floating-isles
+[1A[2K[29/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-wave
+[1A[2K[30/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-explorer-desk
+[1A[2K[31/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-watchmaker
+[1A[2K[32/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-dragonfly
+[1A[2K[33/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-mushrooms
+[1A[2K[34/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-market
+[1A[2K[35/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-gears
+[1A[2K[36/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-chess
+[1A[2K[37/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-book-city
+[1A[2K[38/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-stoneware
+[1A[2K[39/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-autumn-squash
+[1A[2K[40/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-wooden-toys
+[1A[2K[41/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-clay-tools
+[1A[2K[42/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-tea-tray
+[1A[2K[43/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-arched-room
+[1A[2K[44/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-plant-studio
+[1A[2K[45/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-moss-stream
+[1A[2K[46/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-dune-grass
+[1A[2K[47/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-redwood-path
+[1A[2K[48/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-pinecone
+[1A[2K[49/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-acorns
+[1A[2K[50/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-fern-curl
+[1A[2K[51/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-cliff-terrace
+[1A[2K[52/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-mushroom-house
+[1A[2K[53/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-crystal-court
+[1A[2K[54/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-tortoise
+[1A[2K[55/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-deer-grove
+[1A[2K[56/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-paper-canyon
+[1A[2K[57/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: dot-cdx-wood-valley
+[1A[2K[58/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-glass-jug
+[1A[2K[59/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-submerged-stones
+[1A[2K[60/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-backlit-dog
+[1A[2K[61/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-wool-fleece
+[1A[2K[62/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-bicycle-spokes
+[1A[2K[63/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-bare-branches
+[1A[2K[64/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-puddle-reflection
+[1A[2K[65/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-polished-floor
+[1A[2K[66/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-reflecting-pool
+[1A[2K[67/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-lanterns
+[1A[2K[68/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-campfire
+[1A[2K[69/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-candle-still-life
+[1A[2K[70/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-moonlit-greenhouse
+[1A[2K[71/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-shed-lamps
+[1A[2K[72/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-fire-bowl
+[1A[2K[73/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-snail-shell
+[1A[2K[74/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-feather-lichen
+[1A[2K[75/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-workshop-bench
+[1A[2K[76/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-potting-bench
+[1A[2K[77/77] [chromium] › tests/p3d-golden.spec.mjs:13:39 › classic Photo to 3D is unchanged: cdx-hard-ceramic-shelf
+[1A[2K  77 passed (1.9m)
