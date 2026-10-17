@@ -3766,7 +3766,12 @@
       "page": "https://peach.blender.org/",
       "license": "CC BY 3.0",
       "checked": "October 2, 2026",
-      "note": "The Screen toy's six-second clip (assets/toys/screen/bunny.mp4) at 16 frames a second (96 frames; 8 until October 5, 2026), 640 by 360, tiled 3 by 5 into seven JPEGs (bunny-sheet-1.jpg to -7.jpg); each frame's depth worked out by tools/live3-depth.mjs with the vendored depth model."
+      "note": "The Screen toy's six-second clip (assets/toys/screen/bunny.mp4) at 16 frames a second (96 frames; 8 until October 5, 2026), 640 by 360, tiled 3 by 5 into seven JPEGs (bunny-sheet-1.jpg to -7.jpg); each frame's depth worked out by tools/live3-depth.mjs with the vendored depth model. Lane MP1 (October 17, 2026): its sound is now its own 56 kbps mono MP3 (bunny.mp3, the same six seconds of assets/toys/screen/bunny.mp4), as the other samples have, so its Sharp view no longer reads a playing video.",
+      "sound": {
+        "file": "assets/toys/moving-photo-3d/bunny.mp3",
+        "bytes": 42752,
+        "sha256": "065b054520ad94ebd1f6e4e06cf5ef2ec151fcd5fe4cb5a203fb39909afda19a"
+      }
     },
     {
       "id": "horse",
@@ -3825,22 +3830,22 @@
       "author": "Blender Foundation",
       "page": "https://archive.org/details/BigBuckBunny_328",
       "license": "CC BY 3.0 US",
-      "checked": "October 16, 2026",
+      "checked": "October 17, 2026",
       "files": [
         {
           "file": "assets/toys/moving-photo-3d/bunny-long.webm",
-          "bytes": 1411629,
-          "sha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e"
+          "bytes": 2696136,
+          "sha256": "9c07a97644c8740cd564ca66a19481baba390a94c498e2b846e9869007d5a841"
         },
         {
           "file": "assets/toys/moving-photo-3d/bunny-long.mp2depth",
-          "bytes": 4451116,
-          "sha256": "bcface9934e79b0a39554db8ca03fbe20d694630f4a1121c1fc302534e5d58c8",
+          "bytes": 5705813,
+          "sha256": "262e622c4741de862e341d617a54e1624e0d44316b15c501782019f838f61362",
           "decodedBytes": 15805452,
-          "decodedSha256": "35a28dad3862207772d1af8dc153bb7782c3ba7e3dd1bb506ad06f028ca30038"
+          "decodedSha256": "a010e44b1355c46d920db2e12bbdcdd1d219cd1937456e89dc92fbd1a05ebb48"
         }
       ],
-      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Archive live record declares CC BY; original Blender pages returned HTTP 403 in this environment. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
+      "note": "Lane MP1 (October 17, 2026): cut from the master at https://archive.org/download/BigBuckBunny_328/BigBuckBunny.avi by tools/cdx-mp2-samples.mjs --video-only (only the parts used are read over the network, re-encoded near-losslessly, then encoded as VP9 960 pixels wide with Opus sound at 24 frames a second, 720 frames); depth baked again by tools/cdx-mp2-r4-bake.mjs from every frame (Depth Anything V2 Small at a 196-pixel model side, 196 by 112), with a rolling one-second depth range in each shot and the color-gated half-second filter, gzip-compressed. The film and its derived depth keep the film's CC BY license. Until then it was cut from the archive's 240-pixel copy. Earlier: 30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Archive live record declares CC BY; original Blender pages returned HTTP 403 in this environment. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
       "depthFrames": 720,
       "distinctDepthFrames": 720
     },
@@ -3853,24 +3858,24 @@
       "author": "Blender Foundation",
       "page": "https://archive.org/details/Sintel",
       "license": "CC BY 3.0",
-      "checked": "October 16, 2026",
+      "checked": "October 17, 2026",
       "files": [
         {
           "file": "assets/toys/moving-photo-3d/sintel-long.webm",
-          "bytes": 975594,
-          "sha256": "c3d4432e8adb1f9c33bef5656c9a6ff2289b49e448fb6c4b67ed2400a54f3269"
+          "bytes": 1702868,
+          "sha256": "17447b22534059edf11e486acc4030edb42b4349f392654861801c156412ed59"
         },
         {
           "file": "assets/toys/moving-photo-3d/sintel-long.mp2depth",
-          "bytes": 2521449,
-          "sha256": "32cfeb53a9e9467176427fe81f96f74090864dcdf1396223489868fdcce7be43",
+          "bytes": 6330392,
+          "sha256": "b67d08693f6e62a566cba8dddd9b4000874e5f8e50522cc4b19d14e1b184aac7",
           "decodedBytes": 11854092,
-          "decodedSha256": "8416f05db894338d612cffe70a15fb304331e18f6855460cb090f7febf5b1844"
+          "decodedSha256": "0599e553ddbc3b4043e158843a6dcad5654ec0f445ebaf2b96dd3ee9a73cf01e"
         }
       ],
-      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Archive live record declares CC BY; original Blender pages returned HTTP 403 in this environment. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
+      "note": "Lane MP1 (October 17, 2026): cut from the master at https://archive.org/download/Sintel/sintel-2048-surround.mp4 by tools/cdx-mp2-samples.mjs --video-only (only the parts used are read over the network, re-encoded near-losslessly, then encoded as VP9 960 pixels wide with Opus sound at 24 frames a second, 720 frames); depth baked again by tools/cdx-mp2-r4-bake.mjs from every frame (Depth Anything V2 Small at a 196-pixel model side, 196 by 84), with a rolling one-second depth range in each shot and the color-gated half-second filter, gzip-compressed. The film and its derived depth keep the film's CC BY license. Until then it was cut from the archive's 240-pixel copy. Earlier: 30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Archive live record declares CC BY; original Blender pages returned HTTP 403 in this environment. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
       "depthFrames": 720,
-      "distinctDepthFrames": 708
+      "distinctDepthFrames": 720
     },
     {
       "id": "machine-long",
@@ -3881,22 +3886,22 @@
       "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
       "page": "https://orange.blender.org/blog/creative-commons-license-2/",
       "license": "CC BY 2.5",
-      "checked": "October 16, 2026",
+      "checked": "October 17, 2026",
       "files": [
         {
           "file": "assets/toys/moving-photo-3d/elephants-long.webm",
-          "bytes": 1951701,
-          "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+          "bytes": 2885600,
+          "sha256": "d27dd6a8279a85919cfed27ef28d0e3dfcb4e4b63099185a8131633bd9d8d261"
         },
         {
           "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
-          "bytes": 6871822,
-          "sha256": "815ee09ad385e69c89ee5da88fcd052b45f86838d5491b3d02f534ff8441f894",
+          "bytes": 9114154,
+          "sha256": "e9a7c340190fa7de10dd5ae5eb8c23884b0db3a904629cc65aea0cd7da3473fd",
           "decodedBytes": 15805452,
-          "decodedSha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f"
+          "decodedSha256": "83a70cdf8d5f18e1fb36ed2f3c0192d8669a50931fecd2b1b443f1f5b4e2c257"
         }
       ],
-      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Downloaded from https://archive.org/details/ElephantsDream. The film’s own copyright page, checked October 12, 2026, declares CC BY 2.5; this agrees with the short sample and supersedes the archive’s 3.0 US descriptor. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
+      "note": "Lane MP1 (October 17, 2026): cut from the master at https://archive.org/download/ElephantsDream/ed_hd.avi by tools/cdx-mp2-samples.mjs --video-only (only the parts used are read over the network, re-encoded near-losslessly, then encoded as VP9 960 pixels wide with Opus sound at 24 frames a second, 720 frames); depth baked again by tools/cdx-mp2-r4-bake.mjs from every frame (Depth Anything V2 Small at a 196-pixel model side, 196 by 112), with a rolling one-second depth range in each shot and the color-gated half-second filter, gzip-compressed. The film and its derived depth keep the film's CC BY license. Until then it was cut from the archive's 240-pixel copy. Earlier: 30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Downloaded from https://archive.org/details/ElephantsDream. The film’s own copyright page, checked October 12, 2026, declares CC BY 2.5; this agrees with the short sample and supersedes the archive’s 3.0 US descriptor. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
       "depthFrames": 720,
       "distinctDepthFrames": 720
     },
@@ -3922,24 +3927,80 @@
       "author": "Blender Foundation",
       "page": "https://archive.org/details/Tears-of-Steel",
       "license": "CC BY 3.0",
-      "checked": "October 16, 2026",
-      "note": "27-second montage of selected city and robot shots: 1:10-1:16, 1:30-1:32, 1:36-1:38, 1:43-1:45, 8:41-8:48, and 9:40-9:48. Identifiable live-action faces and modern firearms are excluded. VP9 and Opus at 24 fps; depth on all 648 frames, aligned, filtered, and stabilized offline. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film under CC BY. Generated by tools/cdx-mp2-samples.mjs; neither file is fetched by default. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
+      "checked": "October 17, 2026",
+      "note": "Lane MP1 (October 17, 2026): cut from the master at https://archive.org/download/Tears-of-Steel/tears_of_steel_1080p.webm by tools/cdx-mp2-samples.mjs --video-only (only the parts used are read over the network, re-encoded near-losslessly, then encoded as VP9 960 pixels wide with Opus sound at 24 frames a second, 648 frames); depth baked again by tools/cdx-mp2-r4-bake.mjs from every frame (Depth Anything V2 Small at a 196-pixel model side, 196 by 84), with a rolling one-second depth range in each shot and the color-gated half-second filter, gzip-compressed. The film and its derived depth keep the film's CC BY license. Until then it was cut from the archive's 240-pixel copy. Earlier: 27-second montage of selected city and robot shots: 1:10-1:16, 1:30-1:32, 1:36-1:38, 1:43-1:45, 8:41-8:48, and 9:40-9:48. Identifiable live-action faces and modern firearms are excluded. VP9 and Opus at 24 fps; depth on all 648 frames, aligned, filtered, and stabilized offline. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film under CC BY. Generated by tools/cdx-mp2-samples.mjs; neither file is fetched by default. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
       "files": [
         {
           "file": "assets/toys/moving-photo-3d/tears-long.webm",
-          "bytes": 2176133,
-          "sha256": "5d16d59945f20504f0998b220fa35d5a78bf6d8d82d874cc338c23634477236b"
+          "bytes": 4340860,
+          "sha256": "fa4c4e8013d24b624256e66b9a4ea5095b498f11f06c56444cfee54ee4001b0c"
         },
         {
           "file": "assets/toys/moving-photo-3d/tears-long.mp2depth",
-          "bytes": 4070112,
-          "sha256": "4524c581380c305ac154d513f62a94152389610753e6c3b631d22bbecf422b00",
+          "bytes": 7011885,
+          "sha256": "b245ab52ca2ba73dacd4de119e393bb034ca71a09e5b30c073a0896c4a0a3000",
           "decodedBytes": 10668684,
-          "decodedSha256": "c9151c3b37f5eb8bb4550d3fe9d74099cea1135234bdfb4b7494aacf2273f834"
+          "decodedSha256": "0792fb327fed94cb27cd31d308a81acce4d458e36626cf4a89fc7b29747a80e6"
         }
       ],
       "depthFrames": 648,
       "distinctDepthFrames": 648
+    },
+    {
+      "id": "forest-long",
+      "file": "assets/toys/moving-photo-3d/cosmos-long.webm",
+      "path": "assets/toys/moving-photo-3d/cosmos-long.mp2depth",
+      "toy": "moving-photo-3d",
+      "name": "Cosmos Laundromat: First Cycle (8:46 to 9:16)",
+      "author": "Blender Foundation / Blender Institute (Gooseberry)",
+      "page": "https://archive.org/details/CosmosLaundromatFirstCycle",
+      "license": "CC BY 4.0",
+      "checked": "October 17, 2026",
+      "files": [
+        {
+          "file": "assets/toys/moving-photo-3d/cosmos-long.webm",
+          "bytes": 7878742,
+          "sha256": "243a367163235c7163b3c7acb098d5621db91e4c725855acccaf38c76046e24b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/cosmos-long.mp2depth",
+          "bytes": 8296039,
+          "sha256": "0d17e0d6cba5f55c0333e7da1620538ac9bad7753fa6368487d3bc6dc1d7dabf",
+          "decodedBytes": 11854092,
+          "decodedSha256": "8057e05f2109cb76e15b20d29fadebe8aa1c72b8641ba1b84cc85bc8cd1ea527"
+        }
+      ],
+      "note": "Lane MP1 (October 17, 2026): cut from the master at https://archive.org/download/CosmosLaundromatFirstCycle/Cosmos%20Laundromat%20-%20First%20Cycle%20(1080p).mp4 by tools/cdx-mp2-samples.mjs --video-only (only the parts used are read over the network, re-encoded near-losslessly, then encoded as VP9 960 pixels wide with Opus sound at 24 frames a second, 720 frames); depth baked again by tools/cdx-mp2-r4-bake.mjs from every frame (Depth Anything V2 Small at a 196-pixel model side, 196 by 84), with a rolling one-second depth range in each shot and the color-gated half-second filter, gzip-compressed. The film and its derived depth keep the film's CC BY license. Master: Cosmos Laundromat - First Cycle (1080p).mp4, 1920 by 804. License: Blender Studio's terms (https://studio.blender.org/terms-and-conditions/) put its films under CC BY 4.0, and the archive record says CC BY 4.0. Explicitly picked; nothing loads until it is.",
+      "depthFrames": 720,
+      "distinctDepthFrames": 720
+    },
+    {
+      "id": "camp-long",
+      "file": "assets/toys/moving-photo-3d/sprite-long.webm",
+      "path": "assets/toys/moving-photo-3d/sprite-long.mp2depth",
+      "toy": "moving-photo-3d",
+      "name": "Sprite Fright (0:05 to 1:05)",
+      "author": "Blender Studio",
+      "page": "https://archive.org/details/sprite-fright",
+      "license": "CC BY 4.0",
+      "checked": "October 17, 2026",
+      "files": [
+        {
+          "file": "assets/toys/moving-photo-3d/sprite-long.webm",
+          "bytes": 7709916,
+          "sha256": "a7991354b9ea207249da862ecaf1be23bbe0c947131f028ea007ec44853d8ad3"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sprite-long.mp2depth",
+          "bytes": 14586348,
+          "sha256": "894f7bd75faa0950f840c0f3dcbe733c5d5427914932982a20c14d7c530c9f91",
+          "decodedBytes": 23708172,
+          "decodedSha256": "251cd7ae9a5a6b388d081068de76c0a6cb54eb63d9ff99820a5a0651f0c58ef1"
+        }
+      ],
+      "note": "Lane MP1 (October 17, 2026): cut from the master at https://archive.org/download/sprite-fright/Sprite%20Fright%20-%20Open%20Movie%20by%20Blender%20Studio-804p.mp4 by tools/cdx-mp2-samples.mjs --video-only (only the parts used are read over the network, re-encoded near-losslessly, then encoded as VP9 960 pixels wide with Opus sound at 24 frames a second, 1440 frames); depth baked again by tools/cdx-mp2-r4-bake.mjs from every frame (Depth Anything V2 Small at a 196-pixel model side, 196 by 84), with a rolling one-second depth range in each shot and the color-gated half-second filter, gzip-compressed. The film and its derived depth keep the film's CC BY license. Master: Sprite Fright - Open Movie by Blender Studio-804p.mp4, 1920 by 804. License: Blender Studio's terms (https://studio.blender.org/terms-and-conditions/) put its films under CC BY 4.0, and the archive record says CC BY 4.0. Explicitly picked; nothing loads until it is.",
+      "depthFrames": 1440,
+      "distinctDepthFrames": 1440
     },
     {
       "id": "own-blocks",

@@ -67,6 +67,65 @@ export function depthRange(list) {
   ];
 }
 
+// Lane MP1: where each shot begins (frame 0 always). A frame starts a new shot when most of its
+// picture changed at once from the frame before (a cut); motion inside a shot changes only part of
+// it. Colors are RGBA on the depth grid.
+export const CUT_SHARE = 0.6;
+export function shotStarts(colors) {
+  const starts = [0];
+  for (let f = 1; f < (colors?.length || 0); f++) {
+    const a = colors[f],
+      b = colors[f - 1];
+    if (!a || !b || a.length !== b.length) continue;
+    const n = a.length / 4;
+    let changed = 0;
+    for (let i = 0; i < n; i++) if (colorDistance(a, b, i) > 1024) changed++;
+    if (changed > n * CUT_SHARE) starts.push(f);
+  }
+  return starts;
+}
+
+// Lane MP1: one depth range per shot ([lo, hi] for each frame, from its shot's answers). A clip
+// with cuts keeps each shot's own relief (one range for the whole clip squeezed a shot whose
+// depths span little next to one that spans a lot), and inside a shot the range holds still, so
+// the depth doesn't pump as a per-frame range did.
+export function shotRanges(list, colors, starts = shotStarts(colors)) {
+  const out = new Array(list.length);
+  for (let k = 0; k < starts.length; k++) {
+    const from = starts[k],
+      to = k + 1 < starts.length ? starts[k + 1] : list.length;
+    const range = depthRange(list.slice(from, to));
+    for (let f = from; f < to; f++) out[f] = range;
+  }
+  return out;
+}
+
+// Lane MP1: each frame's own range, eased over `seconds` each side but never across a cut. The
+// model's scale wanders inside a shot (a camera move, a face coming closer), and one range for the
+// whole shot left most frames using a sliver of it (flat); a frame's own range pumped. Eased over a
+// second, the range follows the wander and not the frame-to-frame noise.
+export function rollingRanges(list, colors, fps, seconds = 1, starts = shotStarts(colors)) {
+  const own = list.map((d) => depthRange([d]));
+  const k = Math.max(1, Math.round(fps * seconds));
+  const out = new Array(list.length);
+  for (let s = 0; s < starts.length; s++) {
+    const from = starts[s],
+      to = s + 1 < starts.length ? starts[s + 1] : list.length;
+    for (let f = from; f < to; f++) {
+      let lo = 0,
+        hi = 0,
+        n = 0;
+      for (let j = Math.max(from, f - k); j <= Math.min(to - 1, f + k); j++) {
+        lo += own[j][0];
+        hi += own[j][1];
+        n++;
+      }
+      out[f] = [lo / n, hi / n];
+    }
+  }
+  return out;
+}
+
 // Shared tangents account for unequal answer gaps; equal gaps give Catmull-Rom.
 // Limit overshoot so a cut cannot create a new near/far surface.
 export function cubicDepth(a, b, c, d, t, before = 1, span = 1, after = 1) {

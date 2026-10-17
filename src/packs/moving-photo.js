@@ -41,6 +41,7 @@ import {
   alignDepth,
   depthRange,
   filterDepths,
+  rollingRanges,
   stableEdges,
   streamDepth,
   cubicDepth,
@@ -161,8 +162,31 @@ const modelSize = (w, h, side = DEPTH_SIDE) => {
 
 // ---- Depth -------------------------------------------------------------------------
 
-// Align model answers on still colors before applying one range and one
-// relief scale to the whole clip. Filtering is symmetric, so it adds no lag.
+// Lane MP1: how the depth's range is set over time. "shot" (the default): each frame's own range,
+// eased over a second each side inside its shot (rollingRanges in src/live/clip-stabilize.js).
+// "clip": one range for the whole clip, as from October 10, 2026, steadiest but flat where the
+// model's scale wanders (Sintel's short clip used a third of the Depth slider's range). Measured in
+// docs/audits/moving-photo-depth-2026-10.md (tools/mp1-depth-study.mjs).
+export const STEADY = { mode: "shot" };
+const clipFrameRate = (frames) =>
+  (1000 * frames.length) /
+  Math.max(
+    1,
+    frames.reduce((s, f) => s + (f.delay || 0), 0),
+  );
+
+// The range(s) for a clip's model answers (aligned, as depthOf returns them): one [lo, hi], or with
+// "shot" one for each frame.
+export function depthRanges(raw, frames, w, h, mode = STEADY.mode) {
+  const list = raw.map((d) => d.d);
+  if (mode !== "shot" || !frames?.length) return depthRange(list);
+  const colors = frames.map((f, i) => shrink(f.data, w, h, raw[i].w, raw[i].h));
+  return rollingRanges(list, colors, clipFrameRate(frames));
+}
+
+// Align model answers on still colors before applying a range (one for the clip, or one for each
+// frame: `range` as [lo, hi] or a list of them) and the relief scale. Filtering is symmetric, so
+// it adds no lag.
 export function normalizeDepths(
   raw,
   w,
@@ -180,11 +204,20 @@ export function normalizeDepths(
     previous = values;
     return { ...d, d: values };
   });
-  const [lo, hi] = range || depthRange(aligned.map((d) => d.d));
-  const span = Math.max(1e-6, hi - lo);
-  const scale = keepFlat ? reliefScale(lo, hi) : 1;
+  const ranges =
+    range ||
+    (STEADY.mode === "shot" && colors
+      ? rollingRanges(
+          aligned.map((d) => d.d),
+          colors,
+          clipFrameRate(frames),
+        )
+      : depthRange(aligned.map((d) => d.d)));
   const small = filterDepths(
-    aligned.map((d) => {
+    aligned.map((d, i) => {
+      const [lo, hi] = Array.isArray(ranges[0]) ? ranges[i] : ranges;
+      const span = Math.max(1e-6, hi - lo);
+      const scale = keepFlat ? reliefScale(lo, hi) : 1;
       const dn = new Float32Array(d.d.length);
       for (let k = 0; k < dn.length; k++)
         dn[k] = 0.5 + (Math.max(0, Math.min(1, (d.d[k] - lo) / span)) - 0.5) * scale;
@@ -454,7 +487,7 @@ export function shownDepth(clip, f) {
 // and the edge history across batches. A pass never holds the page for all
 // of its frames at once: sound, decoding, and the loop clock keep advancing.
 async function refinedNear(raw, frames, clip, cancelled, range = null) {
-  range ||= depthRange(raw.map((d) => d.d));
+  range ||= depthRanges(raw, frames, clip.w, clip.h);
   const radius = Math.max(3, Math.round(clip.n / clip.duration / 2));
   const near = [];
   const edges = {};
@@ -464,7 +497,8 @@ async function refinedNear(raw, frames, clip, cancelled, range = null) {
     const to = Math.min(raw.length, first + 2 + radius);
     const slice = raw.slice(from, to);
     slice.aligned = true;
-    const normalized = normalizeDepths(slice, clip.w, clip.h, true, frames.slice(from, to), true, range, { radius, rejectDepth: false, only: [first - from, first - from + 2] }); // prettier-ignore
+    const part = Array.isArray(range[0]) ? range.slice(from, to) : range; // (lane MP1: per frame)
+    const normalized = normalizeDepths(slice, clip.w, clip.h, true, frames.slice(from, to), true, part, { radius, rejectDepth: false, only: [first - from, first - from + 2] }); // prettier-ignore
     for (let f = first; f < Math.min(raw.length, first + 2); f++) {
       const d = sharpenEdges(normalized[f - from], clip.w, clip.h, frames[f].data, edges);
       near.push(Uint8Array.from(d, (v) => Math.round(255 * v)));
@@ -585,7 +619,7 @@ function refineClip(clip, frames, raw, worker, onStatus, readFrames = null) {
         let next;
         if (!anchor) {
           anchor = result;
-          coarseRange = depthRange(result.map((d) => d.d));
+          coarseRange = depthRanges(result, frames, clip.w, clip.h);
           next = await refinedNear(result, frames, clip, () => job.cancelled, coarseRange);
           job.normalization = "range-fit";
         } else {
@@ -621,7 +655,7 @@ function refineClip(clip, frames, raw, worker, onStatus, readFrames = null) {
           // its range, rather than carrying the rejected candidate forward.
           if (wholeScore < fitScore) {
             anchor = result;
-            coarseRange = depthRange(result.map((d) => d.d));
+            coarseRange = depthRanges(result, frames, clip.w, clip.h);
           }
         }
         // Finish the previous ease before starting the next pass.
@@ -1515,6 +1549,9 @@ async function readBytes(rel) {
 // 360, the scene's own size, shown so on a high or max device and at 480 wide otherwise
 // (SAMPLE_SIDES).
 const BLENDER = { license: "CC BY 3.0", licenseUrl: "https://creativecommons.org/licenses/by/3.0/", author: "Blender Foundation" }; // prettier-ignore
+// Lane MP1: the clip a fresh toy opens with, Sintel's 30-second film (it was the short bunny). A
+// link or saved scene that names a clip, "sample" (the short bunny) among them, still opens that one.
+export const DEFAULT_CLIP = "dragon-long";
 export const SAMPLES = [
   {
     id: "sample",
@@ -1531,6 +1568,7 @@ export const SAMPLES = [
     title: "Big Buck Bunny (a six-second scene, the sample clip)",
     source: "https://peach.blender.org/",
     ...BLENDER,
+    sound: "bunny",
     cut: { src: "assets/toys/screen/bunny.mp4", ss: 0, t: 6 },
   },
   {
@@ -1609,7 +1647,7 @@ export const SAMPLES = [
 ];
 export const SAMPLE = SAMPLES[0];
 // Longer films are explicitly picked. Their video and per-frame depth are
-// fetched only then; opening the toy still fetches the original short bunny.
+// fetched only then. (Lane MP1: Sintel's is the default, so a fresh toy opens with it.)
 export const LONG_SAMPLES = [
   {
     id: "sample-long",
@@ -1622,7 +1660,7 @@ export const LONG_SAMPLES = [
     ...BLENDER,
     license: "CC BY 3.0 US",
     licenseUrl: "https://creativecommons.org/licenses/by/3.0/us/",
-    cut: { src: ".cache/smd/bunny-full.mp4", ss: 104.5, t: 30 },
+    cut: { src: ".cache/smd/bunny-full.mp4", ss: 104.5, t: 30, url: "https://archive.org/download/BigBuckBunny_328/BigBuckBunny.avi" }, // prettier-ignore
   },
   {
     id: "dragon-long",
@@ -1633,7 +1671,7 @@ export const LONG_SAMPLES = [
     title: "Sintel (2:15 to 2:45)",
     source: "https://archive.org/details/Sintel",
     ...BLENDER,
-    cut: { src: ".cache/smd/sintel-full.mp4", ss: 135, t: 30 },
+    cut: { src: ".cache/smd/sintel-full.mp4", ss: 135, t: 30, url: "https://archive.org/download/Sintel/sintel-2048-surround.mp4" }, // prettier-ignore
   },
   {
     id: "machine-long",
@@ -1647,7 +1685,7 @@ export const LONG_SAMPLES = [
     author: "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
     license: "CC BY 2.5",
     licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
-    cut: { src: ".cache/smd/elephants-full.mp4", ss: 329.7, t: 30 },
+    cut: { src: ".cache/smd/elephants-full.mp4", ss: 329.7, t: 30, url: "https://archive.org/download/ElephantsDream/ed_hd.avi" }, // prettier-ignore
   },
   {
     id: "bridge-long",
@@ -1660,6 +1698,7 @@ export const LONG_SAMPLES = [
     ...BLENDER,
     cut: {
       src: ".cache/smd/tears-full.mp4",
+      url: "https://archive.org/download/Tears-of-Steel/tears_of_steel_1080p.webm",
       t: 27,
       segments: [
         [70, 76],
@@ -1672,15 +1711,41 @@ export const LONG_SAMPLES = [
     },
   },
 ];
+// Lane MP1: two more films, from Blender Studio (its terms put the films under CC BY 4.0).
+LONG_SAMPLES.push(
+  {
+    id: "forest-long",
+    label: "A pink forest: 30 seconds",
+    file: "cosmos-long",
+    fps: 24,
+    frames: 720,
+    title: "Cosmos Laundromat: First Cycle (8:46 to 9:16)",
+    source: "https://archive.org/details/CosmosLaundromatFirstCycle",
+    author: "Blender Foundation / Blender Institute (Gooseberry), 2015",
+    license: "CC BY 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    cut: { src: ".cache/smd/cosmos-full.mp4", ss: 526, t: 30, url: "https://archive.org/download/CosmosLaundromatFirstCycle/Cosmos%20Laundromat%20-%20First%20Cycle%20(1080p).mp4" }, // prettier-ignore
+  },
+  {
+    id: "camp-long",
+    label: "Camping in the woods: one minute",
+    file: "sprite-long",
+    fps: 24,
+    frames: 1440,
+    title: "Sprite Fright (0:05 to 1:05)",
+    source: "https://archive.org/details/sprite-fright",
+    author: "Blender Studio, 2021",
+    license: "CC BY 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    cut: { src: ".cache/smd/sprite-full.mp4", ss: 5, t: 60, url: "https://archive.org/download/sprite-fright/Sprite%20Fright%20-%20Open%20Movie%20by%20Blender%20Studio-804p.mp4" }, // prettier-ignore
+  },
+);
 export const SAMPLE_SIDES = { low: 480, mid: 480, high: 640, max: 640 };
-// The bunny's sound (the Screen toy's files): MP4, or WebM where the browser can't play MP4 (some
-// Chromium builds). The others have an MP3 of their own.
-const sampleSound = (s) =>
-  s.sound
-    ? `../../assets/toys/moving-photo-3d/${s.sound}.mp3` // (named without its extension: the Sound A test reads every quoted .mp3 in a pack as an assets/sounds file)
-    : globalThis.document?.createElement("audio").canPlayType('audio/mp4; codecs="mp4a.40.2"')
-      ? "../../assets/toys/screen/bunny.mp4"
-      : "../../assets/toys/screen/bunny.webm";
+// Each sample's sound, an MP3 of its own. (Lane MP1: the bunny's too. It played the Screen toy's
+// MP4, whose picture then fed the Sharp view: reading a playing video's frames into the texture
+// held a phone to a few frames a second, so the short bunny lagged in Sharp alone. Its sheets hold
+// the same frames, as the other samples' do.)
+const sampleSound = (s) => `../../assets/toys/moving-photo-3d/${s.sound}.mp3`; // (named without its extension: the Sound A test reads every quoted .mp3 in a pack as an assets/sounds file)
 
 // The sample's sheets (decoded) cut into frames, in order, each `side` pixels wide (scaled down
 // from the sheets' own size when smaller).
@@ -1724,6 +1789,13 @@ export async function loadSample(id = "sample", onPreview = null) {
   const long = LONG_SAMPLES.find((s) => s.id === id);
   if (long) return loadLongSample(long, onPreview);
   const s = SAMPLES.find((x) => x.id === id) || SAMPLE;
+  // (Lane MP1: a short sample is normalized when it loads, so another Depth over time choice
+  // loads it again; build closes the old one's sound once it's off the stage.)
+  const stale = MOVING.samples.get(s.id);
+  if (stale && stale.steady !== STEADY.mode) {
+    MOVING.samples.delete(s.id);
+    if (stale !== MOVING.clip) closeSound(stale.audio);
+  }
   if (MOVING.samples.has(s.id)) {
     const cached = MOVING.samples.get(s.id);
     await restoreClipVideo(cached);
@@ -1781,12 +1853,10 @@ export async function loadSample(id = "sample", onPreview = null) {
     normalizeDepths(raw, w, h, false, frames, false),
   );
   clip.sample = s.id;
+  clip.steady = STEADY.mode;
   if (preview?.firstPresentedAt) clip.firstPresentedAt = preview.firstPresentedAt;
-  if (typeof Audio !== "undefined" && !s.gif) {
-    const url = new URL(sampleSound(s), import.meta.url).href;
-    if (!s.sound) clip.video = await loadedVideo(url);
-    clip.audio = await soundOf(url, false, clip.video);
-  }
+  if (typeof Audio !== "undefined" && s.sound)
+    clip.audio = await soundOf(new URL(sampleSound(s), import.meta.url).href, false);
   MOVING.samples.set(s.id, clip);
   return clip;
 }
@@ -1993,7 +2063,7 @@ async function presentClip(clip, { full = MOVING.full, valid = () => true } = {}
     pl === globalThis.window?.__splashery?.player &&
     pl?.scene?.toy?.id === "moving-photo-3d" &&
     sharpView("moving-photo-3d") === "sharp" &&
-    (!clip.sample || clip.sample === (pl.scene.toy.options?.clip || "sample"));
+    (!clip.sample || clip.sample === (pl.scene.toy.options?.clip || DEFAULT_CLIP));
   if (!current()) return;
   const preview = {
     ...MOVING,
@@ -2214,11 +2284,22 @@ export const MOVING_PHOTO = {
       key: "clip",
       label: "Clip",
       type: "select",
-      default: "sample",
+      default: DEFAULT_CLIP,
       choices: [
         ...SAMPLES.map((s) => ({ id: s.id, label: s.label })),
         ...LONG_SAMPLES.map((s) => ({ id: s.id, label: s.label })),
         { id: "custom", label: "Your clip (open one below)" },
+      ],
+    },
+    // Lane MP1: how the depth holds from frame to frame (see STEADY).
+    {
+      key: "steady",
+      label: "Depth over time",
+      type: "select",
+      default: "shot",
+      choices: [
+        { id: "shot", label: "Full relief, steady in each shot" },
+        { id: "clip", label: "Steadiest: one range for the whole clip (flatter)" },
       ],
     },
     {
@@ -2270,14 +2351,14 @@ export const MOVING_PHOTO = {
       const pl = globalThis.window?.__splashery?.player;
       const selected = pl?.scene?.toy;
       let canceled = false;
-      const choice = (openingChoice = selected?.options?.clip || "sample");
+      const choice = (openingChoice = selected?.options?.clip || DEFAULT_CLIP);
       const valid = () =>
         !canceled &&
         serial === openingSerial &&
         pl === globalThis.window?.__splashery?.player &&
         pl?.scene?.toy === selected &&
         pl?.scene?.toy?.id === "moving-photo-3d" &&
-        (pl.scene.toy.options?.clip || "sample") === choice;
+        (pl.scene.toy.options?.clip || DEFAULT_CLIP) === choice;
       const aborted = () =>
         new DOMException("Opening canceled because another clip was selected.", "AbortError");
       if (MOVING.pending && MOVING.pending !== MOVING.custom) closeClip(MOVING.pending);
@@ -2407,19 +2488,20 @@ export const MOVING_PHOTO = {
     },
   },
   async prepare(o) {
-    if ((MOVING.opening || MOVING.pending) && (o.clip || "sample") !== openingChoice) {
+    if ((MOVING.opening || MOVING.pending) && (o.clip || DEFAULT_CLIP) !== openingChoice) {
       openingSerial++;
       if (MOVING.pending) closeClip(MOVING.pending);
       MOVING.pending = null;
       MOVING.opening = false;
     }
-    const id = o.clip === "custom" ? "sample" : o.clip || "sample";
+    const id = o.clip === "custom" ? DEFAULT_CLIP : o.clip || DEFAULT_CLIP;
+    STEADY.mode = o.steady === "clip" ? "clip" : "shot"; // lane MP1
     const preview = (clip) =>
       MOVING.clip?.sample !== id
         ? presentClip(clip, { full: LIFT * Math.max(0, o.depth ?? 0.6) })
         : undefined;
     const pl = globalThis.window?.__splashery?.player;
-    const release = holdOpening(pl, () => pl?.scene?.toy?.id === "moving-photo-3d" && (pl.scene.toy.options?.clip || "sample") === (o.clip || "sample")); // prettier-ignore
+    const release = holdOpening(pl, () => pl?.scene?.toy?.id === "moving-photo-3d" && (pl.scene.toy.options?.clip || DEFAULT_CLIP) === (o.clip || DEFAULT_CLIP)); // prettier-ignore
     try {
       MOVING.want = hasOwnClip(o)
         ? await restoreClipVideo(MOVING.custom)
@@ -2518,6 +2600,8 @@ export const MOVING_PHOTO = {
     const clip = MOVING.want;
     if (MOVING.clip !== clip) {
       if (MOVING.clip?.audio) MOVING.clip.audio.track.pause();
+      // (lane MP1: a sample loaded again for another Depth over time choice lets its old copy go)
+      if (MOVING.clip?.sample && MOVING.samples.get(MOVING.clip.sample) !== MOVING.clip && !MOVING.clip.long) closeSound(MOVING.clip.audio); // prettier-ignore
       MOVING.clip?.video?.pause(); // Live r7: a long clip's copy
       MOVING.t = 0;
     }
@@ -2527,6 +2611,10 @@ export const MOVING_PHOTO = {
     MOVING.anchor = null;
     const { cols, rows } = clipGrid(clip, k.count);
     MOVING.grid = { cols, rows };
+    // Lane MP1 (with lane SPL1's Splats slider): a splat for every pixel the clip has is all the
+    // detail it holds, so a higher count would only add splats over the same pixels; the label
+    // then says "(all this toy has)".
+    if (clip.w * clip.h <= Math.floor(k.count * 0.8)) k.all = true;
     MOVING.frame = frameAt(clip, MOVING.t);
     const width = 2;
     const height = (width * rows) / cols;

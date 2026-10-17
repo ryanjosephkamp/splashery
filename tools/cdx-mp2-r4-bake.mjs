@@ -176,8 +176,11 @@ for (const sample of moving.LONG_SAMPLES.filter(
       radius,
       rejectDepth: false,
       frameOffset: 0,
+      // (lane MP1: the toy's default STEADY mode, a rolling range in each shot, since October 17)
       normalization:
-        "One clip-wide range and a symmetric color-gated window, matching upload refinement",
+        moving.STEADY.mode === "shot"
+          ? "A rolling one-second range in each shot and a symmetric color-gated window"
+          : "One clip-wide range and a symmetric color-gated window, matching upload refinement",
       node: process.version,
       browser: metadata.browser || "See reused raw model-answer run",
       date: new Date().toISOString(),
