@@ -1,4 +1,11 @@
-import { TILES, perspective, alignTiles, fuseDepth, tileReliability } from "./core.js";
+import {
+  TILES,
+  perspective,
+  alignTiles,
+  fuseDepth,
+  tileReliability,
+  tileConfidence,
+} from "./core.js";
 import { rotatePhoto, panoramaPrior } from "./prior.js";
 
 // Injection keeps the reconstruction independent of ONNX and browser lifecycle.
@@ -15,9 +22,10 @@ export async function reconstruct(
     );
     const pixels = perspective(photo, TILES[i], side);
     const reliability = tileReliability(pixels);
+    const confidence = tileConfidence(pixels);
     const depth = await estimate(pixels, { side });
     if (canceled()) throw new Error("Panorama canceled.");
-    tiles.push({ ...TILES[i], ...depth, reliability });
+    tiles.push({ ...TILES[i], ...depth, reliability, confidence });
   }
   onStatus("Aligning the depth all around…");
   const alignment = alignTiles(tiles);

@@ -5,10 +5,11 @@ Codex (GPT-6), October 17, 2026. Task 107.
 [Eight clips, raw measurements, and reproducible research](https://github.com/ryanjosephkamp/splashery/tree/codex/step-inside-360-clips/docs/audits/step-inside-360-evidence).
 The evidence branch must never be merged.
 
-**The requested 20% depth improvement is unmet.** The final method improves all eighteen measured
-panoramas over the primary naive run, averaging about 14.6% lower AbsRel. This is an experimental
-labs draft, not a qualified release. Classic Photo to 3D remains byte-identical under its golden
-test. No existing test was loosened or skipped.
+**The measured depth and seam targets pass.** The final method gives 25.63% lower mean AbsRel across
+all twenty-four synthetic panoramas. Three cases regress, and every outcome is retained. This
+remains a labs draft: physical-phone qualification and the complete regression outcome are separate.
+Classic Photo to 3D remains byte-identical under its golden test. No existing test was loosened or
+skipped.
 
 ## Implementation
 
@@ -22,13 +23,18 @@ An interactive constant-radius preview appears before custom inference finishes.
 110-degree perspective tiles run the shipped WASM depth model at a 294-pixel side. Joint robust
 affine alignment in inverse radial depth applies the perspective cosine correction. Four complete
 panorama yaw views, also at 294 pixels, supply global context. Their relative inverse-depth fields
-are robustly aligned, periodically feathered, and combined with one quarter of the locally aligned
-cube field in inverse depth. The whole-panorama prior uses local RGB confidence during calibration
-and normalization. It abstains for a completely featureless input. No true depth or validity mask
-enters production inference. Sequential yaw inputs reuse one scratch buffer, saving two full-size
-RGBA allocations; fresh model runs confirm byte-identical predictions and calibration on all
-eighteen inputs, and both sample depth caches remain byte-identical. No new model, weights, runtime
-dependency, or network service ships.
+are robustly aligned, periodically feathered, and combined with a fixed 0.375 fraction of the
+locally aligned cube field in inverse depth. Both cube overlaps and the whole-panorama prior use
+local RGB confidence during calibration and normalization. Flat predictions cannot move the
+supported views. If the front is unsupported, another supported tile supplies the arbitrary global
+unit; a wholly unsupported tile with positive model output is registered one way to
+already-calibrated neighbors, preserving the full photo. Constant predictions retain an identifiable
+correction through the same weak priors. It abstains for a completely featureless input. No true
+depth or validity mask enters production inference. Sequential yaw inputs reuse one scratch buffer,
+saving two full-size RGBA allocations. That earlier memory change was verified on all eighteen
+then-current inputs with byte-identical predictions and sample caches. The later confidence method
+intentionally changes the geometry; its final model results and caches are measured separately. No
+new model, weights, runtime dependency, or network service ships.
 
 Latitude rings close both poles. Extra samples favor the initial heading within the normal phone and
 desktop budgets. Explicit inward quaternions orient the anisotropic discs. The normal renderer's
@@ -64,26 +70,41 @@ the existing tools/studio-truth-generate.py scene builder in Blender 4.3.2. Six 
 are room, desk, stairs, arches, steps, and lattice. A second group uses six previously unscored
 families: still-life, forest, coast, fur, night, and leaves. A third group adds six closed-enclosure
 and shifted-camera variants of the first group; these share base furniture families and are not six
-new independent scene families. Generators, exact radial BVH depth, opaque/ambiguous masks, input
-panoramas, and held-out 0.3 m and 0.8 m views are on the evidence branch.
+new independent scene families. A fourth group adds six fresh room geometries, furniture layouts,
+textures, and camera poses fixed before their assessment. These remain correlated synthetic indoor
+cases, not physical-photo validation. Generators, exact radial BVH depth, opaque/ambiguous masks,
+input panoramas, and held-out 0.3 m and 0.8 m views are on the evidence branch.
 
-The four-yaw, quarter-cube configuration was frozen on the original six before assessing the second
-and third groups. Those groups subsequently rejected floor and larger-resolution alternatives. They
-are no longer an untouched benchmark for any future method selection. All outcomes and the
-chronology are retained; no failing group is dropped from the eighteen-scene result.
+The earlier four-yaw, quarter-cube method improved the eighteen-scene mean by 14.6% and missed the
+target. Local RGB confidence made cube calibration useful enough to test stronger fixed blends. Four
+weights were assessed on the original six. A conservative research preference allowed at most 5%
+per-scene regression; 0.375 failed that preference despite the best aggregate mean. A separate plan
+then assessed this fixed aggregate-accuracy candidate, against the aggregate accuracy yardstick,
+without hiding its per-scene regressions. It improved the original eighteen by about 23.2% and the
+fresh six by about 29.1% before the generic unsupported-tile bug fixes. No blend parameter was tuned
+on the fresh results. Exact source snapshots, plans, choices, failed criteria, and all assessments
+are retained.
 
-tools/pano-evaluate.mjs runs the actual shipped model and compares the final ten-inference pipeline
-with a naive one-tile equirectangular run at the same 294-pixel side. Benchmark inference times
-include both baseline inferences; phone timings are measured separately. Each method receives one
-whole-sphere median scale calibration. AbsRel and delta1 use opaque, unambiguous true-depth pixels
-with spherical area weights. This is a comparison of accuracy, not matched compute. An additional
-392-pixel naive control is reported, including its unstable zero predictions; it is not substituted
-for the primary baseline to claim success.
+The earlier additional groups also rejected floor and larger-resolution alternatives. These groups
+are no longer untouched future benchmarks. Browser/Chromium RGB decoding differs from jpeg-js, so
+the original offline confidence scores are separate from final actual-browser model scores; byte
+equivalence is claimed only where identical pixels and tensors were compared. Reviewer reproductions
+cover the unsupported-anchor unit, one-way affine registration, constant-field identifiability, and
+supported-transform invariance. tools/pano-evaluate.mjs runs the actual shipped model and compares
+the final ten-inference pipeline with a naive one-tile equirectangular run at the same 294-pixel
+side. Benchmark inference times include both baseline inferences; phone timings are measured
+separately. Each method receives one whole-sphere median scale calibration. AbsRel and delta1 use
+opaque, unambiguous true-depth pixels with spherical area weights. This is a comparison of accuracy,
+not matched compute. An additional 392-pixel naive control is reported, including its unstable zero
+predictions; it is not substituted for the primary baseline to claim success.
 
-The final method improves every scene against the primary baseline. The original six average about
-9.9% better, the second six about 13.7% better, and the enclosure variants about 18.6% better. The
-pooled improvement is about 14.6%, below the 20% gate. Exact final model results, delta1, scales,
-source hashes, inference times, seam pairs, and raw outputs are in the evidence measurements.
+The final twenty-four-scene mean AbsRel is 0.145011 versus 0.194976 naive, a 25.63% reduction. Group
+mean improvements are development 26.98%, additional families 23.81%, closed interiors 20.14%, fresh
+rooms 29.07%. Regressions are arches 15.46%, still-life 17.03%, fresh-room-03 7.42%. All 23
+measurable seam medians are below 2% (0.262–1.704%); coast has zero valid pairs and is unmeasured.
+Exact final model results, delta1, scales, source hashes, inference times, seam pairs, and raw
+outputs are in the evidence measurements. All twenty-four cases are included. The comparison still
+uses the same 294-pixel naive baseline; it does not substitute the unstable 392-pixel control.
 
 Seam jumps use adjacent valid pixels crossing dominant cube boundaries or longitude wrap. A group
 with no valid seam pairs has a null median, not a passing zero. Raw per-tile overlap disagreement is
@@ -110,23 +131,27 @@ after the application is ready, immediately before selecting the tool, and exclu
 navigation and mobile bandwidth. Custom runs include the default sample and automated file
 selection. Source hashes and exact times accompany every clip.
 
-Three quiet cold panorama conversions of the same 2048-pixel CC0 input peak at 993–999 MiB PSS,
-versus 1,177–1,235 MiB for three quiet Classic conversions. Both use the same 390×844, DSF 3
-viewport and their normal pixel caps; Classic has a 585×1266 stage buffer and the panorama controls
-leave a 585×700 buffer. These are observations, not a universal memory ceiling.
+The memory comparison uses three quiet cold conversions of the same 2048-pixel CC0 input, with exact
+final source hashes and the existing read-only Classic probe. Final first-look, depth-ready, and
+sampled PSS values accompany the native clips and verification records on the evidence branch. Both
+tools use the same 390×844, DSF 3 viewport and their normal pixel caps; Classic has a 585×1266 stage
+buffer and the panorama controls leave a 585×700 buffer. These are observations, not a universal
+memory ceiling.
 
-Memory uses Linux browser-process-tree PSS sampled every 100 ms. RSS double-counts shared pages, and
-sampling can miss short peaks. The evidence includes cold Classic conversions and panorama
-conversions of the same 2048-pixel CC0 input, as well as the eight clips. Desktop Chromium with
-software graphics and concurrent checks does not qualify physical-phone latency, RAM, GPU memory, or
-tilt sensors. This limitation is explicit even when the emulated first-look gate passes.
+Memory uses Linux browser-process-tree PSS sampled every 100 ms for panorama and 200 ms for Classic.
+RSS double-counts shared pages, and sampling can miss short peaks. The evidence includes cold
+Classic conversions and panorama conversions of the same 2048-pixel CC0 input, as well as the eight
+clips. Desktop Chromium with software graphics and concurrent checks does not qualify physical-phone
+latency, RAM, GPU memory, or tilt sensors. This limitation is explicit even when the emulated
+first-look gate passes.
 
 ## Rejected alternatives
 
 The initial six-view-only prototype had mean AbsRel 0.2120 against 0.1207 naive. Its original
 measurements remain in rejected evidence. Joint calibration, relative-residual, gauge, convergence,
-projection-FOV, 518-pixel, dense equatorial-tile, uncertainty-weighting, and RGB-confidence studies
-are archived. Ground-truth-assisted affine fits are oracle diagnostics only.
+projection-FOV, 518-pixel, dense equatorial-tile, uncertainty-weighting, and rejected RGB-confidence
+studies are archived. The adopted calibration-only confidence path and its selection chronology are
+recorded separately. Ground-truth-assisted affine fits are oracle diagnostics only.
 
 A floor-plane offset improved development scores but failed the frozen closed-interior assessment,
 including a large regression. Both level and tilted-plane variants, per-rotation correction, and a
@@ -151,13 +176,15 @@ featureless-prior fallback, periodic fusion, and switching back to Classic. Clas
 checks all 76 samples at both budgets. Final test counts and logs, post-merge preflight, the
 complete sharded suite outcome, renderer checks, and frozen-file identities are recorded in the PR
 and the evidence verification directory. Classic passed all 77 golden tests, and the final panorama
-run passed all 16 tests. Existing tests are unchanged.
+run passed all 19 tests, including flat-confidence calibration, unsupported-front fallback, affine
+and constant front fields, and preservation of supported geometry. Existing tests are unchanged.
 
-The existing Pebbles stacking assertion also fails on untouched current main (ceb51de7a) and on this
-branch, with identical test and shared engine blobs. The reproduction and logs are in the evidence
-verification directory. No physics code or existing test was changed to hide this blocker.
+The existing Pebbles stacking assertion also fails on untouched main (ceb51de7a, with identical
+physics and test bytes in the later documentation-only main merge) and on this branch, with
+identical test and shared engine blobs. The reproduction and logs are in the evidence verification
+directory. No physics code or existing test was changed to hide this blocker.
 
-The PR remains a draft. The unmet depth gate and missing physical-phone qualification prevent a
-release claim.
+The PR remains a draft. Missing physical-phone qualification and the existing main physics failure
+prevent an unqualified release claim.
 
 Rule check: none.

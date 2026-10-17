@@ -83,7 +83,9 @@ function readGeometry(t, p, minimum) {
   const x = clamp(Math.floor(p.u * t.w - 0.5), 0, t.w - 1);
   const y = clamp(Math.floor(p.v * t.h - 0.5), 0, t.h - 1);
   for (const yy of [y, Math.min(y + 1, t.h - 1)])
-    for (const xx of [x, Math.min(x + 1, t.w - 1)]) if (t.d[yy * t.w + xx] <= minimum) return NaN;
+    for (const xx of [x, Math.min(x + 1, t.w - 1)])
+      if (t.d[yy * t.w + xx] <= minimum || (t.confidence && !t.confidence[yy * t.w + xx]))
+        return NaN;
   return read(t, p);
 }
 
@@ -121,6 +123,28 @@ export function tileReliability(photo) {
   return variance < 1e-6 ? 0 : 1;
 }
 
+// Flat model predictions do not constrain relative geometry. Use RGB evidence
+// for calibration only; fusion still preserves the whole photo, including walls.
+export function tileConfidence(photo) {
+  const { w, h, data } = photo;
+  return Uint8Array.from({ length: w * h }, (_, i) => {
+    const x = i % w,
+      y = Math.floor(i / w),
+      sums = [0, 0, 0],
+      squares = [0, 0, 0];
+    for (const dy of [-2, 0, 2])
+      for (const dx of [-2, 0, 2])
+        for (let c = 0; c < 3; c++) {
+          const xx = Math.max(0, Math.min(w - 1, x + dx)),
+            yy = Math.max(0, Math.min(h - 1, y + dy)),
+            value = data[(yy * w + xx) * 4 + c] / 255;
+          sums[c] += value;
+          squares[c] += value * value;
+        }
+    return sums.reduce((v, sum, c) => v + squares[c] / 9 - (sum / 9) ** 2, 0) / 3 > 1e-6 ? 1 : 0;
+  });
+}
+
 // Joint robust affine fit in inverse *radial* depth. Anchor only the front scale to
 // remove the global gauge; weak priors prevent featureless overlaps collapsing.
 export function alignTiles(tiles) {
@@ -129,7 +153,17 @@ export function alignTiles(tiles) {
     tiles.some((t) => t.d.length !== t.w * t.h || !t.d.every(Number.isFinite))
   )
     throw new Error("Six complete, finite depth tiles are required.");
-  const med = tiles.map((t) => Math.max(1e-6, median(t.d.filter((v) => v > 1e-6))));
+  const med = tiles.map((t) =>
+    Math.max(1e-6, median(t.d.filter((v, i) => v > 1e-6 && (!t.confidence || t.confidence[i])))),
+  );
+  const supported = tiles.map(
+    (t) =>
+      t.reliability !== 0 && t.d.some((v, i) => v > 1e-6 && (!t.confidence || t.confidence[i])),
+  );
+  // The front scale fixes a gauge, not an absolute distance. A blank front must
+  // not shrink every supported face below fusion's positive-depth threshold.
+  const anchor = supported.findIndex(Boolean);
+  if (!supported[0] && anchor > 0) med[0] = med[anchor];
   const rows = [];
   for (let y = 0; y < 48; y++)
     for (let x = 0; x < 96; x++) {
@@ -202,6 +236,67 @@ export function alignTiles(tiles) {
     a: ((i ? fit[2 * i - 1] : 1) / v) * med[0],
     b: fit[2 * i] * med[0],
   }));
+  // A wholly unsupported tile cannot move supported calibration. Register its
+  // retained prediction one way to the already calibrated overlap instead.
+  tiles.forEach((tile, index) => {
+    if (supported[index] || tile.reliability === 0) return;
+    const positive = tile.d.filter((value) => value > 1e-6);
+    if (!positive.length) return;
+    const localMedian = median(positive),
+      unmasked = { ...tile, confidence: undefined },
+      observations = [];
+    // No overlap keeps the same normalized-unit prior instead of the empty1e-6 median.
+    transforms[index] = { a: med[0] / localMedian, b: 0 };
+    for (let y = 0; y < 48; y++)
+      for (let x = 0; x < 96; x++) {
+        const ray = direction((x + 0.5) / 96, (y + 0.5) / 48),
+          p = project(ray, tile),
+          value = p ? readGeometry(unmasked, p, localMedian * 0.1) : NaN;
+        if (!Number.isFinite(value)) continue;
+        tiles.forEach((other, j) => {
+          if (!supported[j]) return;
+          const q = project(ray, other),
+            raw = q ? readGeometry(other, q, med[j] * 0.1) : NaN;
+          if (!Number.isFinite(raw)) return;
+          const inverse = (transforms[j].a * raw + transforms[j].b) * q.cosine;
+          if (inverse <= 1e-6) return;
+          observations.push({
+            r: [(value / localMedian) * p.cosine, p.cosine],
+            target: inverse / med[0],
+            weight: Math.sqrt(p.weight * q.weight),
+          });
+        });
+      }
+    if (!observations.length) return;
+    let localFit = [1, 0];
+    for (let iteration = 0; iteration < 5; iteration++) {
+      const matrix = [
+          [0.0001, 0],
+          [0, 0.0001],
+        ],
+        rhs = [0.0001, 0];
+      for (const { r, target, weight } of observations) {
+        const residual = Math.abs(dot(r, localFit) - target),
+          w = weight * Math.min(1, 0.04 / Math.max(1e-8, residual));
+        for (let i = 0; i < 2; i++) {
+          rhs[i] += w * r[i] * target;
+          for (let j = 0; j < 2; j++) matrix[i][j] += w * r[i] * r[j];
+        }
+      }
+      const next = solve(matrix, rhs) || localFit.slice();
+      next[0] = clamp(next[0], 0.05, 20);
+      for (let sweep = 0; sweep < 300; sweep++) {
+        next[0] = clamp((rhs[0] - matrix[0][1] * next[1]) / matrix[0][0], 0.05, 20);
+        next[1] = (rhs[1] - matrix[1][0] * next[0]) / matrix[1][1];
+      }
+      if (!next.every(Number.isFinite)) break;
+      localFit = next;
+    }
+    transforms[index] = {
+      a: (localFit[0] / localMedian) * med[0],
+      b: localFit[1] * med[0],
+    };
+  });
   const jumps = rows.map(({ r, target }) => Math.abs(dot(r, fit) - target));
   // Report normalized overlap disagreement, not the jump in a feathered image.
   const relative = [];

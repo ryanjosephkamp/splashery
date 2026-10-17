@@ -2,6 +2,104 @@ import { test, expect } from "@playwright/test";
 
 const core = () => import("../src/pano3d/core.js");
 
+test("local calibration confidence distinguishes flat pixels from color texture", async () => {
+  const { tileConfidence } = await core();
+  const w = 16,
+    h = 8,
+    data = new Uint8ClampedArray(w * h * 4);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const rgb = x < 8 ? [90, 90, 90] : Math.floor(x / 2) % 2 ? [180, 20, 20] : [20, 20, 180];
+      data.set([...rgb, 255], (y * w + x) * 4);
+    }
+  const confidence = tileConfidence({ w, h, data });
+  expect(confidence.length).toBe(w * h);
+  expect(confidence[3 * w + 1]).toBe(0);
+  // These colors have equal channel sums; averaging RGB before variance loses the texture.
+  expect(confidence[3 * w + 11]).toBe(1);
+  expect(
+    tileConfidence({ w, h, data: new Uint8ClampedArray(w * h * 4).fill(90) }).some(Boolean),
+  ).toBe(false);
+});
+
+test("unsupported flat predictions cannot change overlap calibration or remove output pixels", async () => {
+  const { TILES, tileRay, alignTiles, fuseDepth } = await core();
+  const tiles = TILES.map((tile, face) => {
+    const w = 48,
+      h = 48,
+      d = new Float32Array(w * h),
+      confidence = new Uint8Array(w * h);
+    for (let y = 0; y < h; y++)
+      for (let x = 0; x < w; x++) {
+        const { ray, cosine } = tileRay((x + 0.5) / w, (y + 0.5) / h, tile);
+        d[y * w + x] = 1 / ((3 + 0.4 * ray[0] + 0.3 * ray[2]) * cosine) + face * 0.04;
+        confidence[y * w + x] = x < 15 ? 0 : 1;
+      }
+    return { ...tile, w, h, d, confidence };
+  });
+  const corrupted = tiles.map((tile, face) => ({
+    ...tile,
+    d: tile.d.map((value, i) => (tile.confidence[i] ? value : 100 + face * 3)),
+  }));
+  const clean = alignTiles(tiles),
+    changed = alignTiles(corrupted);
+  expect(changed.transforms).toEqual(clean.transforms);
+  expect(changed.residual).toBe(clean.residual);
+  const field = fuseDepth(corrupted, changed, 80, 40);
+  expect(field.d.length).toBe(80 * 40);
+  expect(field.d.every((value) => Number.isFinite(value) && value > 0)).toBe(true);
+});
+
+test("an unsupported front tile cannot collapse the five supported views", async () => {
+  const { TILES, tileRay, direction, project, median, alignTiles, fuseDepth } = await core();
+  const smooth = (ray) => 3 + 0.8 * ray[0] + 0.5 * ray[2];
+  const box = (ray) =>
+    1 /
+    Math.max(Math.abs(ray[0]) / 10, Math.abs(ray[1]) / 10, ray[2] >= 0 ? ray[2] / 3 : -ray[2] / 10);
+  for (const [truth, front] of [
+    [smooth, (value) => value],
+    [smooth, (value) => value * 3 + 0.7],
+    [box, () => 2],
+  ])
+    for (const frontReliability of [0, 1]) {
+      const tiles = TILES.map((tile, face) => {
+        const w = 48,
+          h = 48;
+        return {
+          ...tile,
+          w,
+          h,
+          reliability: face ? 1 : frontReliability,
+          confidence: new Uint8Array(w * h).fill(face ? 1 : 0),
+          d: Float32Array.from({ length: w * h }, (_, i) => {
+            const { ray, cosine } = tileRay(
+              ((i % w) + 0.5) / w,
+              (Math.floor(i / w) + 0.5) / h,
+              tile,
+            );
+            const inverse = 1 / (truth(ray) * cosine);
+            return face ? inverse : front(inverse);
+          }),
+        };
+      });
+      const field = fuseDepth(tiles, alignTiles(tiles), 80, 40);
+      const rays = Array.from(field.d, (_, i) =>
+        direction(((i % 80) + 0.5) / 80, (Math.floor(i / 80) + 0.5) / 40),
+      );
+      const supported = rays.map((ray) => TILES.slice(1).some((tile) => project(ray, tile)));
+      const scale = median(
+        Array.from(field.d, (value, i) => (supported[i] ? truth(rays[i]) / value : NaN)),
+      );
+      const errors = Array.from(field.d, (value, i) =>
+        supported[i] ? Math.abs(value * scale - truth(rays[i])) / truth(rays[i]) : NaN,
+      ).filter(Number.isFinite);
+      expect(errors.reduce((a, b) => a + b) / errors.length).toBeLessThan(0.003);
+      expect(Array.from(field.d).filter((value) => value === 30).length).toBeLessThan(
+        field.d.length * 0.3,
+      );
+    }
+});
+
 test("replacement terminates the old worker and rejects its pending request", async () => {
   const { createPanoramaClient } = await import("../src/pano3d/client.js");
   const workers = [];

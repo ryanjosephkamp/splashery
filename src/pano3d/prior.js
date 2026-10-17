@@ -107,6 +107,6 @@ export function panoramaPrior(photo, observations, cube) {
   );
   const cubeScale =
     median(Array.from(local, (v, i) => (texture[i] && radial[i] < 30 ? radial[i] / v : NaN))) || 1;
-  const d = Float32Array.from(radial, (v, i) => 1 / (0.75 / v + 0.25 / (local[i] * cubeScale)));
+  const d = Float32Array.from(radial, (v, i) => 1 / (0.625 / v + 0.375 / (local[i] * cubeScale)));
   return { depth: { w, h, d }, calibration: { supported: true, fits, cubeScale } };
 }
