@@ -18,8 +18,10 @@ async function pick(page, id) {
   await page.waitForFunction((id) => window.__splashery.player.toyInfo?.id === id, id, { timeout: 120_000 }); // prettier-ignore
 }
 
-// The saved take's frames, drawn small: for each, how bright it is on average and how much of
-// it differs from its corner (the background), so a black frame or a frame without the toy shows.
+// The saved take, sampled at eight times spread across it from 0.6 s (seeking, so a busy browser can't skip
+// any): each drawn small, with how bright it is on average and how much of it differs from its
+// corner (the background), so a black frame or a frame without the toy shows. Also the take's
+// length and how many frames the recorder was handed.
 async function frames(page) {
   await page.waitForFunction(() => window.__splashery.app.recorded?.blob, null, { timeout: 60_000 }); // prettier-ignore
   return page.evaluate(async () => {
@@ -29,32 +31,40 @@ async function frames(page) {
     v.playsInline = true;
     v.src = URL.createObjectURL(r.blob);
     await new Promise((ok, no) => ((v.onloadedmetadata = ok), (v.onerror = no)));
+    const seek = (t) =>
+      new Promise((ok) => {
+        v.onseeked = ok;
+        v.currentTime = t;
+      });
+    // A recorder's WebM has no length in its header: seeking to the end finds it.
+    if (!Number.isFinite(v.duration)) {
+      v.currentTime = 1e9;
+      const t0 = performance.now();
+      while (!Number.isFinite(v.duration) && performance.now() - t0 < 15_000)
+        await new Promise((ok) => setTimeout(ok, 50));
+    }
+    const duration = v.duration;
     const c = document.createElement("canvas");
     c.width = 64;
     c.height = Math.round((64 * v.videoHeight) / v.videoWidth);
     const g = c.getContext("2d", { willReadFrequently: true });
     const out = [];
-    await new Promise((done) => {
-      const on = () => {
-        g.drawImage(v, 0, 0, c.width, c.height);
-        const d = g.getImageData(0, 0, c.width, c.height).data;
-        let sum = 0;
-        let toy = 0;
-        for (let i = 0; i < d.length; i += 4) {
-          sum += (d[i] + d[i + 1] + d[i + 2]) / 3;
-          if (Math.abs(d[i] - d[0]) + Math.abs(d[i + 1] - d[1]) + Math.abs(d[i + 2] - d[2]) > 60) toy++; // prettier-ignore
-        }
-        const n = d.length / 4;
-        out.push({ light: sum / n, toy: toy / n });
-        if (!v.ended) v.requestVideoFrameCallback(on);
-      };
-      v.requestVideoFrameCallback(on);
-      v.onended = done;
-      setTimeout(done, 20_000);
-      v.play();
-    });
+    for (let k = 0; k < 8; k++) {
+      const t = 0.6 + ((duration - 0.85) * k) / 7; // from 0.6 s: a take on a slow GPU opens on the background until its first draw
+      await seek(t);
+      g.drawImage(v, 0, 0, c.width, c.height);
+      const d = g.getImageData(0, 0, c.width, c.height).data;
+      let sum = 0;
+      let toy = 0;
+      for (let i = 0; i < d.length; i += 4) {
+        sum += (d[i] + d[i + 1] + d[i + 2]) / 3;
+        if (Math.abs(d[i] - d[0]) + Math.abs(d[i + 1] - d[1]) + Math.abs(d[i + 2] - d[2]) > 60) toy++; // prettier-ignore
+      }
+      const n = d.length / 4;
+      out.push({ t: Math.round(t * 100) / 100, light: Math.round(sum / n), toy: Math.round((1000 * toy) / n) / 1000 }); // prettier-ignore
+    }
     URL.revokeObjectURL(v.src);
-    return out;
+    return { samples: out, duration, seconds: r.seconds, pushed: r.frames };
   });
 }
 
@@ -80,13 +90,17 @@ for (const renderer of ["webgl2", "webgpu"]) {
       await expect(page.locator("#rec-time")).toHaveText(/\/ 1:00$/, { timeout: 30_000 });
       await page.waitForTimeout(3000);
       await page.click("#rec-stop");
-      const f = await frames(page);
-      expect(f.length).toBeGreaterThan(5);
-      // Every frame shows the page's light background and the toy on it: none is black.
-      const dark = f.filter((x) => x.light < 60);
-      expect(dark.length, `dark frames ${dark.length} of ${f.length}`).toBe(0);
-      const shown = f.filter((x) => x.toy > 0.01);
-      expect(shown.length).toBeGreaterThan(0.8 * f.length);
+      const { samples, duration, seconds, pushed } = await frames(page);
+      const said = JSON.stringify({ samples, duration, seconds, pushed });
+      // The recorder was handed frames all through the take (10 a second at least when still).
+      expect(pushed / seconds, said).toBeGreaterThan(5);
+      expect(duration, said).toBeGreaterThan(seconds - 1.5);
+      // Every sample across the take shows the page's light background and the toy on it: none
+      // is black, and none is a blank canvas.
+      for (const x of samples) {
+        expect(x.light, said).toBeGreaterThan(60);
+        expect(x.toy, said).toBeGreaterThan(0.01);
+      }
       expect(errors).toEqual([]);
     });
   }
