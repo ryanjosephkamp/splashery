@@ -1,0 +1,13 @@
+{
+  "purpose": "New 2x2 diagnostic: same published native-time candidate with sort readiness and initial native color age independently varied. Not acceptance.",
+  "modes": [
+    "control",
+    "sort",
+    "age",
+    "sort-age"
+  ],
+  "original_assertions_unchanged": true,
+  "six_samples_unchanged": true,
+  "native_video_worker_free_running": true,
+  "no_output_selection": true
+}

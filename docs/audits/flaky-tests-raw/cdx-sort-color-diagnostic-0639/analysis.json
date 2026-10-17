@@ -1,0 +1,146 @@
+[
+  {
+    "mode": "control",
+    "status": "passed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.00016082792400239825,\"colorJitter\":0.7040540540540541,\"shownJitter\":0.7957671957671958,\"shownJitterTurned\":0.7596891534391534,\"grain\":0,\"sharpness\":0.8312017167333114,\"drawMs\":118.54499999999534,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":5.1999999999999975,\"frames\":53},\"finish\":{\"total\":5.1999999999999975,\"frames\":53},\"stillAge\":{\"min\":0,\"median\":5.099997520446777,\"max\":5.099997520446777}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.0000000000000142
+  },
+  {
+    "mode": "sort",
+    "status": "passed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.0001671219546649907,\"colorJitter\":0.7174174174174174,\"shownJitter\":0.830654761904762,\"shownJitterTurned\":0.8558531746031746,\"grain\":0,\"sharpness\":0.824283874778043,\"drawMs\":194.07000000001864,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":5.799999999999995,\"frames\":59},\"finish\":{\"total\":5.799999999999995,\"frames\":59},\"stillAge\":{\"min\":0,\"median\":5.6999969482421875,\"max\":5.6999969482421875}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.1000000000000156
+  },
+  {
+    "mode": "age",
+    "status": "failed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.0006044446620754562,\"colorJitter\":0.7294294294294295,\"shownJitter\":0.9678902116402116,\"shownJitterTurned\":0.8759589947089947,\"grain\":0,\"sharpness\":0.8240797879667036,\"drawMs\":163.3850000000093,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":5.4999999999999964,\"frames\":56},\"finish\":{\"total\":5.4999999999999964,\"frames\":56},\"stillAge\":{\"min\":0,\"median\":5.399997234344482,\"max\":5.399997234344482}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.099999999999996
+  },
+  {
+    "mode": "sort-age",
+    "status": "passed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.000007264624844800244,\"colorJitter\":0.6991741741741742,\"shownJitter\":0.8052579365079365,\"shownJitterTurned\":0.8933531746031746,\"grain\":0,\"sharpness\":0.8389203844706988,\"drawMs\":151.58999999999068,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":5.399999999999997,\"frames\":55},\"finish\":{\"total\":5.399999999999997,\"frames\":55},\"stillAge\":{\"min\":0,\"median\":5.299997329711914,\"max\":5.299997329711914}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.1000000000000156
+  },
+  {
+    "mode": "control",
+    "status": "passed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.000006107287900941866,\"colorJitter\":0.626951951951952,\"shownJitter\":0.7673941798941799,\"shownJitterTurned\":0.8853174603174603,\"grain\":0,\"sharpness\":0.8303410581896827,\"drawMs\":146.36500000001396,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":4.699999999999999,\"frames\":48},\"finish\":{\"total\":4.699999999999999,\"frames\":48},\"stillAge\":{\"min\":0,\"median\":4.5999979972839355,\"max\":4.5999979972839355}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.099999999999996
+  },
+  {
+    "mode": "sort",
+    "status": "passed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.000031961070642143754,\"colorJitter\":0.7147147147147147,\"shownJitter\":0.8282407407407407,\"shownJitterTurned\":0.8514880952380952,\"grain\":0,\"sharpness\":0.8287088425673649,\"drawMs\":179.44000000001398,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":4.999999999999998,\"frames\":51},\"finish\":{\"total\":4.999999999999998,\"frames\":51},\"stillAge\":{\"min\":0,\"median\":4.899997711181641,\"max\":4.899997711181641}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.099999999999996
+  },
+  {
+    "mode": "age",
+    "status": "passed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.00016536604285844275,\"colorJitter\":0.7239489489489489,\"shownJitter\":0.8190806878306879,\"shownJitterTurned\":0.7905753968253968,\"grain\":0,\"sharpness\":0.8284556110865403,\"drawMs\":118.43000000000465,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":5.299999999999997,\"frames\":54},\"finish\":{\"total\":5.299999999999997,\"frames\":54},\"stillAge\":{\"min\":0,\"median\":5.199997425079346,\"max\":5.199997425079346}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.1000000000000156
+  },
+  {
+    "mode": "sort-age",
+    "status": "passed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.00014568655709694097,\"colorJitter\":0.7706456456456456,\"shownJitter\":0.8029431216931217,\"shownJitterTurned\":0.8488425925925925,\"grain\":0,\"sharpness\":0.8307987505306274,\"drawMs\":114.83500000000932,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":4.799999999999999,\"frames\":49},\"finish\":{\"total\":4.799999999999999,\"frames\":49},\"stillAge\":{\"min\":0,\"median\":4.699997901916504,\"max\":4.699997901916504}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.0000000000000142
+  },
+  {
+    "mode": "control",
+    "status": "passed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.000004457064006511156,\"colorJitter\":0.7179429429429429,\"shownJitter\":0.8742063492063492,\"shownJitterTurned\":0.782771164021164,\"grain\":0,\"sharpness\":0.8300408427168693,\"drawMs\":142.43499999998602,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":5.099999999999998,\"frames\":52},\"finish\":{\"total\":5.099999999999998,\"frames\":52},\"stillAge\":{\"min\":0,\"median\":4.999997615814209,\"max\":4.999997615814209}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.099999999999996
+  },
+  {
+    "mode": "sort",
+    "status": "passed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.00000630498419071103,\"colorJitter\":0.8188438438438439,\"shownJitter\":0.8301256613756614,\"shownJitterTurned\":0.8128968253968254,\"grain\":0,\"sharpness\":0.8241970267783779,\"drawMs\":109.43500000000931,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":5.599999999999996,\"frames\":57},\"finish\":{\"total\":5.599999999999996,\"frames\":57},\"stillAge\":{\"min\":0,\"median\":5.499997138977051,\"max\":5.499997138977051}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.1999999999999957
+  },
+  {
+    "mode": "age",
+    "status": "passed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.00000808092111067192,\"colorJitter\":0.7493993993993994,\"shownJitter\":0.8750661375661376,\"shownJitterTurned\":0.8799272486772487,\"grain\":0,\"sharpness\":0.8391961855874794,\"drawMs\":88.98999999999069,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":5.599999999999996,\"frames\":57},\"finish\":{\"total\":5.599999999999996,\"frames\":57},\"stillAge\":{\"min\":0,\"median\":5.499997138977051,\"max\":5.499997138977051}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.0000000000000142
+  },
+  {
+    "mode": "sort-age",
+    "status": "failed",
+    "metric": [
+      "cdx mirror still: {\"heightJitter\":0.0005824480616898687,\"colorJitter\":0.7147897897897898,\"shownJitter\":0.8998677248677248,\"shownJitterTurned\":0.8741071428571429,\"grain\":0,\"sharpness\":0.8405541772421856,\"drawMs\":46.194999999995346,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+    ],
+    "initial_history": [
+      "Color history at measurement: {\"start\":{\"total\":5.099999999999998,\"frames\":52},\"finish\":{\"total\":5.099999999999998,\"frames\":52},\"stillAge\":{\"min\":0,\"median\":4.999997615814209,\"max\":4.999997615814209}}\n"
+    ],
+    "all_home_frames_fresh": true,
+    "max_screenshot_interval_native_seconds": 1.1000000000000156
+  }
+]

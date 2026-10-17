@@ -1,0 +1,66 @@
+import {test,expect} from "@playwright/test";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import config from "../../../playwright.config.mjs";
+import {cameras} from "../../../tools/cdx-mir-camera.mjs";
+import {fakeCamera,openMirror,measure} from "./measure.mjs";
+test.describe("real depth worker with a fake camera", () => {
+  test.describe.configure({ timeout: 600000 });
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "splashery-cdx-mir-"));
+  test.beforeAll(() => {
+    cameras(dir, 20, ["still", "low-light"]);
+  });
+  test.afterAll(() => fs.rmSync(dir, { recursive: true, force: true }));
+  for (const mode of ["control", "sort", "age", "sort-age"]) {
+    const clip = "still", height = 0.00055, shown = 0.95;
+    test(`${mode}: measured drift stays below the baseline`, async ({ playwright, baseURL }) => {
+      const browser = await playwright.chromium.launch({
+        ...config.use.launchOptions,
+        args: fakeCamera(path.join(dir, `${clip}.y4m`), config.use.launchOptions.args),
+      });
+      try {
+        const page = await browser.newPage({
+          viewport: { width: 390, height: 844 },
+          deviceScaleFactor: 2,
+        });
+        const errors = [];
+        const requests = [];
+        page.on("pageerror", (e) => errors.push(e.message));
+        page.on("request", (r) => requests.push(r.url()));
+        await page.addInitScript((mode) => {window.__probeMode = mode;}, mode);
+        page.on("console", m => {if(m.type()==="error") console.log("BROWSER_ERROR",m.text());});
+        await openMirror(page, baseURL + "/");
+        await page.evaluate(async()=>{
+          const {MIRROR}=await import("/src/live/relief.js");
+          const cam=MIRROR.cam;
+          const draw=cam.draw;
+          window.__mirrorProgress={total:0,frames:0};
+          cam.draw=function(g,options={}){
+            const result=draw.call(this,g,options);
+            if(result===true && this===cam && cam===MIRROR.cam){
+              window.__mirrorProgress.total+=options.dt === undefined ? 1/60 : options.dt;
+              window.__mirrorProgress.frames++;
+            }
+            return result;
+          };
+        });
+        const m = await measure(page, { answers: 6 });
+        console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);
+        expect(m.heightJitter).toBeLessThan(height);
+        expect(m.shownJitter).toBeLessThan(shown);
+        // Record live timing, but guard cost with the identical-input
+        // relative benchmark below instead of a host-dependent ceiling.
+        expect(m.grid).toBe("423x317");
+        expect(errors).toEqual([]);
+        expect(
+          requests.filter(
+            (u) => /^https?:/.test(u) && new URL(u).origin !== new URL(baseURL).origin,
+          ),
+        ).toEqual([]);
+      } finally {
+        await browser.close();
+      }
+    });
+  }
+});

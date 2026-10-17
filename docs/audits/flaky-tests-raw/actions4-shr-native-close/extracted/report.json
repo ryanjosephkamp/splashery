@@ -1,0 +1,2220 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/splashery/splashery/subject/playwright.config.mjs",
+    "rootDir": "/home/runner/work/splashery/splashery/subject/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/b87f6132c9764cf616fe2afa41c77d73799975ab",
+        "commitHash": "b87f6132c9764cf616fe2afa41c77d73799975ab",
+        "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39008834947"
+      },
+      "gitCommit": {
+        "shortHash": "b87f6132c",
+        "hash": "b87f6132c9764cf616fe2afa41c77d73799975ab",
+        "subject": "Record four-hour stress progress and native focus proof",
+        "body": "Record four-hour stress progress and native focus proof\n",
+        "author": {
+          "name": "Codex",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792217299000
+        },
+        "committer": {
+          "name": "Codex",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792217299000
+        },
+        "branch": "HEAD"
+      },
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/b87f6132c9764cf616fe2afa41c77d73799975ab",
+            "commitHash": "b87f6132c9764cf616fe2afa41c77d73799975ab",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39008834947"
+          },
+          "gitCommit": {
+            "shortHash": "b87f6132c",
+            "hash": "b87f6132c9764cf616fe2afa41c77d73799975ab",
+            "subject": "Record four-hour stress progress and native focus proof",
+            "body": "Record four-hour stress progress and native focus proof\n",
+            "author": {
+              "name": "Codex",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792217299000
+            },
+            "committer": {
+              "name": "Codex",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792217299000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/b87f6132c9764cf616fe2afa41c77d73799975ab",
+            "commitHash": "b87f6132c9764cf616fe2afa41c77d73799975ab",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39008834947"
+          },
+          "gitCommit": {
+            "shortHash": "b87f6132c",
+            "hash": "b87f6132c9764cf616fe2afa41c77d73799975ab",
+            "subject": "Record four-hour stress progress and native focus proof",
+            "body": "Record four-hour stress progress and native focus proof\n",
+            "author": {
+              "name": "Codex",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792217299000
+            },
+            "committer": {
+              "name": "Codex",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792217299000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "shr.spec.mjs",
+      "file": "shr.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "390x844",
+          "file": "shr.spec.mjs",
+          "line": 92,
+          "column": 8,
+          "specs": [
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 76243,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:18:56.959Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-0d1bd8069370fb71e4e8",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 77233,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:18:57.243Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-8884cee4ba68db9b6ec4",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 68412,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:20:20.621Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-ed5bc43a2dcca8738fc9",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 67595,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:20:35.809Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-fc6c3e3bb56ed8362532",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 70387,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:21:32.325Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-668e549782c829ce92f5",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 72079,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:21:47.396Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-8cc88cbe7ec8a82d199c",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 67075,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:22:47.458Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-d2b173636ebdd80f185f",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 65698,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:23:06.399Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-e015139bd97261eec28c",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 67102,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:23:58.158Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-14dd4e6ab17b9a8d509d",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 70239,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:24:27.950Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-b6495c45d25706dfb2b8",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 74441,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:25:08.716Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-17cebba18c5ed31399aa",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 22,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 71952,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:25:42.144Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-9c352b87069dfcc208b6",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 24,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 73016,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:26:26.841Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-826aad1f88eaef3b653a",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 26,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 68468,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:27:05.446Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-ec8a3069e87538e3f7d1",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 28,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 69673,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:27:42.728Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-67fa5c400bcb82747de5",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 29,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 76871,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:28:17.688Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-c81402d49c744621c645",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 32,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 69838,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:28:56.174Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-a04bf8093ed46d82b2fa",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 34,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 67708,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:29:40.439Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-97316d023bf5ba6cfc47",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 36,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 65340,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:30:12.836Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-8a90237ea2e016262a8c",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 38,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 68723,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:31:00.563Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-c827a9ab2932c3c1be0c",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 40,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 68729,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:31:35.004Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-9817a9a5a9262219cb93",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 42,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 70898,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:32:15.241Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-70a856e82d6931f5e353",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 44,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 75592,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:32:48.195Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-b79929177c4a83b8f99e",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 46,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 71849,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:33:39.268Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-04c6fbdfd5800fbe4cb2",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 48,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 69915,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:34:10.757Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-24a6a7f2b19d68990fd0",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 50,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 69619,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:34:57.332Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-e8b374d5bebfe9265389",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 52,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 71216,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:35:33.138Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-1778be0c69ca91fcb6ad",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 54,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 66186,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:36:18.182Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-e5071fc36925acc54208",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 56,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 70700,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:36:51.380Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-effc745a9e5cc5939a5e",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 58,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 66444,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:37:32.691Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-e69d6881e79b76919d33",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "1440x900",
+          "file": "shr.spec.mjs",
+          "line": 92,
+          "column": 8,
+          "specs": [
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 92338,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:18:57.054Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-3646b9f6322ab6a9a8af",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 91287,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:18:56.533Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-1ff2884e4935e3a95efc",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 80044,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:20:20.720Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-025191a4b5ad8d957484",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 83959,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:20:35.823Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-ab1aeab069f85aa37a07",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 78832,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:21:43.862Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-3820be9354cc0b32b9cb",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 77871,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:22:03.331Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-0d7188120414d522c83f",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 81319,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:23:02.813Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-1b3a00461f63731bc765",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 79488,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:23:25.556Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-fa1742c56c751a960c4b",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 81317,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:24:16.087Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-faa2e238fb4b3293d3b2",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 77938,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:24:48.445Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-aa3a987ae14d9724f6a5",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 80319,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:25:40.125Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-d6b82b53a3b36190b420",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 23,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 77810,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:26:09.778Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-4d6d9dae97fc214ea3c7",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 25,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 74693,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:26:59.254Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-6a1b96b0ff58baa97fab",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 27,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 73458,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:27:32.457Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-5c23184a9f6658c09daf",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 30,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 79521,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:28:17.345Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-ea338a4d48c48dc559e4",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 31,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 77722,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:28:49.688Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-7fe80c692b6ae0d06f7e",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 33,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 79398,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:29:38.016Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-80d279ae044a976c367f",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 35,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 81275,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:30:09.871Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-81b98e1314665529aae7",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 37,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 79772,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:30:51.916Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-bdc1fa68717363677824",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 39,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 79723,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:31:21.595Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-32d13985d7e927eca98f",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 41,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 82303,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:32:12.578Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-4abbdb6cb2cec0b4d061",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 43,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 82579,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:32:44.797Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-fe601016b328a26c0102",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 45,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 82217,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:33:30.334Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-c0a64a2dc59d34cae7f5",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 47,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 79944,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:34:07.493Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-916efe2d04113ff94077",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 49,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 78839,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:34:54.460Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-4fbe8f0c7cbda320962f",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 51,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 82467,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:35:24.706Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-839e0b44503c164a708a",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 53,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 77534,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:36:11.359Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-95cbe264d0c9a5288bc0",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 55,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 81412,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:36:48.935Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-a7171fd937dea5890492",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 57,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 71964,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:37:28.224Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-72a794bc3cc2fb17204e",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            },
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 59,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 52949,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:38:05.913Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-82929976f8f13bfc3a2d",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T06:18:54.898Z",
+    "duration": 1204834.519,
+    "expected": 60,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
