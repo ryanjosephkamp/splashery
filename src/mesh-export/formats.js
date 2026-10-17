@@ -21,6 +21,15 @@ export function encodeMesh(mesh, format, metadata = {}) {
 
 function glb(mesh, metadata) {
   const { positions, normals, colors, indices } = mesh;
+  const copyright = [metadata, ...(metadata.credits || [])]
+    .map((credit) =>
+      [credit.title || credit.name, credit.author, credit.license, credit.source]
+        .filter(Boolean)
+        .map(clean)
+        .join("; "),
+    )
+    .filter(Boolean)
+    .join("\n");
   const arrays = [positions, normals, Float32Array.from(colors, linear), indices];
   const offsets = [];
   let bytes = 0;
@@ -38,6 +47,7 @@ function glb(mesh, metadata) {
     asset: {
       version: "2.0",
       generator: "Splashery Splats to mesh",
+      ...(copyright ? { copyright } : {}),
       extras: { ...metadata, units: mesh.report.units, report: mesh.report },
     },
     scene: 0,

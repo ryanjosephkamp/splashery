@@ -20,7 +20,8 @@ export function deviceProfile() {
 
 export function renderMeshPanel() {
   const profile = deviceProfile(),
-    limits = PROFILES[profile];
+    limits = PROFILES[profile],
+    fine = profile === "desktop";
   const box = el("div");
   box.id = "mesh-panel";
   box.style.cssText = "display:grid;gap:10px;min-width:0;max-width:100%";
@@ -73,6 +74,7 @@ export function renderMeshPanel() {
     option.value = value;
     quality.append(option);
   }
+  quality.value = fine ? "fine" : "balanced";
   row("Quality", quality);
   const number = (id, label, value, min, max, step = 1) => {
     const input = el("input");
@@ -88,11 +90,18 @@ export function renderMeshPanel() {
   const resolution = number(
     "mesh-resolution",
     "Grid resolution",
-    limits.resolution,
+    fine ? limits.maxResolution : limits.resolution,
     16,
     limits.maxResolution,
   );
-  const level = number("mesh-level", "Density level (lower keeps more)", 0.5, 0.01, 100, 0.05);
+  const level = number(
+    "mesh-level",
+    "Density level (lower keeps more)",
+    fine ? 1 : 0.5,
+    0.01,
+    100,
+    0.05,
+  );
   const budget = number(
     "mesh-budget",
     "Maximum triangles",
@@ -110,6 +119,7 @@ export function renderMeshPanel() {
   const print = el("input");
   print.type = "checkbox";
   print.id = "mesh-print";
+  print.checked = fine;
   row("Ready to print (solid, with topology checks)", print);
   const size = number("mesh-size", "Longest print dimension (mm)", 100, 5, 1000);
   const printNote = el(

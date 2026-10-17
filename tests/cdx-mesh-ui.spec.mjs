@@ -95,6 +95,29 @@ for (const [width, height] of [
         "max",
         width < 760 ? "80000" : "500000",
       );
+      const defaults = await page.locator("#mesh-panel").evaluate((panel) => {
+        const value = (id) => panel.querySelector(`#mesh-${id}`).value;
+        return {
+          quality: value("quality"),
+          resolution: Number(value("resolution")),
+          level: Number(value("level")),
+          triangleBudget: Number(value("budget")),
+          readyToPrint: panel.querySelector("#mesh-print").checked,
+          printSize: Number(value("size")),
+          smoothing: Number(value("smoothing")),
+          removeFloaters: panel.querySelector("#mesh-floaters").checked,
+        };
+      });
+      expect(defaults).toEqual({
+        quality: width < 760 ? "balanced" : "fine",
+        resolution: width < 760 ? 72 : 160,
+        level: width < 760 ? 0.5 : 1,
+        triangleBudget: width < 760 ? 40000 : 100000,
+        readyToPrint: width >= 760,
+        printSize: 100,
+        smoothing: 3,
+        removeFloaters: true,
+      });
       await page.getByText("Density, triangle budget, and attribution", { exact: true }).click();
       await page.locator("#mesh-file").setInputFiles({
         name: "sphere.splat",

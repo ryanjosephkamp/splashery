@@ -167,6 +167,14 @@ test("GLB, OBJ with MTL, and binary STL preserve geometry and allowed metadata",
     license: "CC BY-SA 4.0",
     author: "Example",
     source: "https://example.org/sphere",
+    credits: [
+      {
+        title: "Inset",
+        author: "Detail author",
+        license: "CC BY 4.0",
+        source: "https://example.org/detail",
+      },
+    ],
   };
   const [glb] = encodeMesh(m, "glb", meta);
   const view = new DataView(glb.bytes.buffer, glb.bytes.byteOffset, glb.bytes.byteLength);
@@ -176,6 +184,17 @@ test("GLB, OBJ with MTL, and binary STL preserve geometry and allowed metadata",
     new TextDecoder().decode(glb.bytes.subarray(20, 20 + view.getUint32(12, true))),
   );
   expect(json.asset.extras.license).toBe(meta.license);
+  expect(json.asset).toHaveProperty("copyright", expect.any(String));
+  expect(json.asset.copyright).toContain(meta.name);
+  expect(json.asset.copyright).toContain(meta.author);
+  expect(json.asset.copyright).toContain(meta.license);
+  expect(json.asset.copyright).toContain(meta.source);
+  for (const credit of meta.credits) {
+    expect(json.asset.copyright).toContain(credit.title);
+    expect(json.asset.copyright).toContain(credit.author);
+    expect(json.asset.copyright).toContain(credit.license);
+    expect(json.asset.copyright).toContain(credit.source);
+  }
   expect(json.meshes[0].primitives[0].attributes.COLOR_0).toBeDefined();
   const obj = encodeMesh(m, "obj", meta);
   expect(obj.map((f) => f.name.split(".").at(-1))).toEqual(["obj", "mtl"]);

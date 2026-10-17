@@ -11,6 +11,10 @@ failures. These are aggregate gates; individual models can have larger errors. T
 resolution-112, level-0.15 print comparison had a 2.4819% median Chamfer. The quality result is
 specific to the stated preset.
 
+The desktop tool now starts with this complete Fine and Ready to print preset, including the 100 mm
+print size. Phones keep their Balanced defaults and lower resource budget. Balanced and other
+advanced settings are not claimed to pass the measured quality gate.
+
 The triangle budget uses scalar-grid resampling rather than a topology-preserving edge-collapse
 decimator. A coarser grid can remove small components; the tool reports this explicitly when it
 resamples. Independent final topology checks still run, but they cannot establish preservation of
@@ -75,6 +79,10 @@ outside the repository. Its
 [Apache-2.0 license](https://raw.githubusercontent.com/KhronosGroup/glTF-Validator/main/LICENSE) was
 opened and confirmed. The per-file validator reports and their summary remain outside git. The final
 25 primary, example, and runtime GLBs have **zero errors and zero warnings**.
+
+Following the Operator's review, new GLBs also write source attribution into the standard
+`asset.copyright` field, including component credits, while retaining the full metadata in
+`asset.extras`. The reconstruction and measured geometry are unchanged.
 
 ## Performance and limits
 
