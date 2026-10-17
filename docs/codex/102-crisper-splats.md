@@ -32,7 +32,8 @@ Report every toy's scores in one JSON on the clips branch. Then rank them.
 ## Part 2: make them crisper
 
 Start with the text toys: Your name in splats, Shape morph, One splat at its deeper levels, the
-Splat equation, and the "Your words" choice in the maths pack. Then the 40 lowest-scoring kit toys.
+Splat equation, and the "Your words" choice in `src/packs/maths.js`. Then the 40 lowest-scoring kit
+toys.
 
 Per toy, within its recipe only:
 
