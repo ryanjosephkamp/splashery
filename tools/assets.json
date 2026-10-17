@@ -12809,5 +12809,48 @@
       "sourceNote": "Original procedural specimen, from a concept by Ryan Kamp. Math read from claude/portfolio-ref at 5191138bdf91c29093af1c6b02a466c6b8ac6aa6:ref/portfolio/specimen/specimen.js; no reference files, fonts, or renderer copied.",
       "changes": "Procedural geometry ported onto the Kit; 32,768 visible leaves on desktops and most phones (8,192 on the low profile); moment-matched focus levels. Lane NR1: textbook stain colors on a lit slide (2,048 of the leaves on desktop, 512 on the phone). Thumbnail rendered with tools/make-thumbs.mjs."
     }
+  ],
+  "panoramaSamples": [
+    {
+      "id": "pano-room",
+      "label": "Small Empty Room 1",
+      "file": "assets/toys/step-inside-360/room.jpg",
+      "source": "https://polyhaven.com/a/small_empty_room_1",
+      "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/small_empty_room_1.jpg",
+      "author": "Sergej Majboroda",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "checked": "October 17, 2026",
+      "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc",
+      "sourceSha256": "25925683b0295bd1f98b73ac230d2dcf5a6941bcff81e893aa992734808148be",
+      "changes": "Poly Haven tonemapped JPEG reduced from 8192×4096 to 2048×1024 with Pillow, JPEG quality 88. Spherical radial depth uses six overlapping perspective tiles, local RGB calibration confidence, and a fixed 0.375 blend with four yaw panorama priors from the shipped model through tools/pano-bake.mjs; caches use the existing Photo to 3D depth file format. No source pixels are synthesized.",
+      "licenseChecked": "Both the live asset page and https://polyhaven.com/license declare CC0. Code made by Ryan with Codex (GPT-6), under MIT.",
+      "depthFile": "assets/toys/step-inside-360/room.depth",
+      "depthSha256": "9306b20b47da6858b6e6b0d9e7d77363bcbf14481ac25190b05a86c26762be70",
+      "depthPipelineSha256": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be",
+      "thumbnail": {
+        "file": "assets/toys/step-inside-360/thumb.webp",
+        "sha256": "c0bef3d0827c44fcee1fca488dd315220891a76cb08c07fd2ef288488e2ff7b9",
+        "changes": "Default sample rendered by tools/make-thumbs.mjs with the normal Kit and WebGL2 stage."
+      }
+    },
+    {
+      "id": "pano-room2",
+      "label": "Small Empty Room 2",
+      "file": "assets/toys/step-inside-360/room2.jpg",
+      "source": "https://polyhaven.com/a/small_empty_room_2",
+      "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/small_empty_room_2.jpg",
+      "author": "Sergej Majboroda",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "checked": "October 17, 2026",
+      "sha256": "d93eb56914ccac629443d8f084eed3fede163b4b511b3f6b0ed41d8ede60f5a1",
+      "sourceSha256": "269cb3f4528fe3bf0450037897e4e5d81f279ddb1b4470b441894a8e90de5587",
+      "changes": "Poly Haven tonemapped JPEG reduced from 8192×4096 to 2048×1024 with Pillow, JPEG quality 88. Spherical radial depth uses six overlapping perspective tiles, local RGB calibration confidence, and a fixed 0.375 blend with four yaw panorama priors from the shipped model through tools/pano-bake.mjs; caches use the existing Photo to 3D depth file format. No source pixels are synthesized.",
+      "licenseChecked": "Both the live asset page and https://polyhaven.com/license declare CC0. Code made by Ryan with Codex (GPT-6), under MIT.",
+      "depthFile": "assets/toys/step-inside-360/room2.depth",
+      "depthSha256": "8b95664a5fabaf3a43524070eda91bf08515ff89f7f841979f7e89275174549f",
+      "depthPipelineSha256": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    }
   ]
 }

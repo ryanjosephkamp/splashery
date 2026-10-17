@@ -3882,6 +3882,17 @@ export const TOYS = [
     // passes read as motion (the check reads it front on).
     camera: { yaw: 0.25, pitch: 0.35, roll: 0, distance: 3.2 },
   },
+  // ---- Pack: pano3d (Codex task 107) ----
+  {
+    id: "step-inside-360",
+    label: "Step inside a 360° photo",
+    category: "studio",
+    kind: "kit",
+    pack: "pano3d",
+    labs: true,
+    tags: "panorama spherical equirectangular 360 room depth splats lean step photo",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
   // ---- Pack: photo-3d (lane Photo to 3D) ----
   {
     id: "photo-3d",

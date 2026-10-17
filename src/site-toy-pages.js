@@ -388,6 +388,7 @@ export const SITE_TOY_IDS = [
   "statue-of-liberty",
   "steak",
   "steam-train",
+  "step-inside-360",
   "stollen",
   "stone-belt",
   "stonehenge",

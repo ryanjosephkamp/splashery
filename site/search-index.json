@@ -3811,6 +3811,16 @@
     "l": 1
   },
   {
+    "t": "Step inside a 360° photo",
+    "u": "toys/step-inside-360/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Drag to look around. Open Toy to lean, step, or open your own 2:1 panorama.",
+    "w": "step inside a 360° photo studio studio panorama spherical equirectangular 360 room depth splats lean step photo step-inside-360",
+    "i": "../assets/toys/step-inside-360/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Photo to 3D",
     "u": "toys/photo-3d/",
     "k": "toy",

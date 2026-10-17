@@ -2054,3 +2054,15 @@ The [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_
 opened on October 14, 2026. This toy integrates the concept's squid giant axon equations with a 0.01
 ms Euler step, samples the potential at 0.1 ms, and displays 7 model milliseconds per second.
 Geometry and timing are schematic, not a measured human neuron.
+
+## Step inside a 360° photo (labs)
+
+Made by Ryan with Codex (GPT-6), October 17, 2026. Original panorama reconstruction code is MIT. The
+two samples are Sergej Majboroda's [Small Empty Room 1](https://polyhaven.com/a/small_empty_room_1)
+and [Small Empty Room 2](https://polyhaven.com/a/small_empty_room_2), under
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). Both live source pages and
+[Poly Haven's license page](https://polyhaven.com/license) were checked on October 17, 2026. Their
+tonemapped JPEGs were reduced to 2048×1024; spherical depth was estimated locally using the existing
+depth model. Hashes and transformations are in `tools/assets.json`. Evaluation-only Blender scenes
+are original CC0 fixtures made by Ryan with Codex (GPT-6), using the existing Studio truth
+generator. They live on the separate clips branch.
