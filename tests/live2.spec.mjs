@@ -222,40 +222,64 @@ test.describe("in the browser", () => {
       async (m) => ((await import(m)).songTest().track.el.currentTime = 0),
       studio,
     );
-    await page.evaluate(() => window.__splashery.app.act());
-    // While it plays, two records on the page's clock (performance.now):
-    // - heard: when each click comes out, found by an analyser on the
-    //   song's own output and placed with the audio output's timestamp;
-    // - drawn: each frame drawn and the moment the toy's audio clock gave it.
+    // Arm both observations before replay. A busy renderer and the audio
+    // context can advance at different rates, so compare both records on the
+    // native audio output clock instead of fitting song time to wall time.
     const rec = await page.evaluate(
       async ({ m, CLICKS }) => {
         const { songShown, songTest } = await import(m);
         const { track } = songTest();
         const ctx = track.ctx;
-        const an = ctx.createAnalyser();
-        an.fftSize = 32768; // 0.74 s: no click is missed between frames
-        track.src.connect(an);
-        const buf = new Float32Array(an.fftSize);
         const heard = [];
         const drawn = [];
-        const t0 = performance.now();
+        // Stamp the actual click sample on the audio thread. A main-thread
+        // analyser dates an old buffer; extrapolating it from a later output
+        // timestamp is wrong when an overloaded audio context stalls.
+        const moduleURL = URL.createObjectURL(
+          new Blob(
+            [
+              `
+          class ClickObserver extends AudioWorkletProcessor {
+            constructor() { super(); this.last = -sampleRate; }
+            process(inputs) {
+              const input = inputs[0]?.[0];
+              if (input) for (let i = 0; i < input.length; i++) {
+                if (Math.abs(input[i]) > 0.25 && currentFrame + i - this.last > sampleRate * 0.3) {
+                  this.last = currentFrame + i;
+                  this.port.postMessage(this.last / sampleRate);
+                }
+              }
+              return true;
+            }
+          }
+          registerProcessor("click-observer", ClickObserver);
+        `,
+            ],
+            { type: "text/javascript" },
+          ),
+        );
+        await ctx.audioWorklet.addModule(moduleURL);
+        URL.revokeObjectURL(moduleURL);
+        const observer = new AudioWorkletNode(ctx, "click-observer");
+        const silent = ctx.createGain();
+        silent.gain.value = 0;
+        observer.connect(silent).connect(ctx.destination);
+        track.src.connect(observer);
+        observer.port.onmessage = (e) => heard.push(e.data);
+        const screen = window.__splashery.player.toyInfo.recipe.screen;
+        const draw = screen.draw;
+        screen.draw = (...args) => {
+          const ts = ctx.getOutputTimestamp();
+          const audible = ts.contextTime + (performance.now() - ts.performanceTime) / 1000;
+          const r = draw(...args);
+          const s = songShown();
+          if (s) drawn.push([audible, s.now]);
+          return r;
+        };
+        window.__splashery.app.act();
         await new Promise((done) => {
           const step = () => {
-            const p = performance.now();
-            an.getFloatTimeDomainData(buf);
-            const ts = ctx.getOutputTimestamp();
-            let at = -1;
-            for (let i = 0; i < buf.length; i++) if (Math.abs(buf[i]) > 0.25) { at = i; break; } // prettier-ignore
-            if (at >= 0) {
-              // The analyser holds the newest samples, ending at currentTime;
-              // the output timestamp says when a context moment is heard.
-              const ct = ctx.currentTime - (buf.length - at) / ctx.sampleRate;
-              const ph = ts.performanceTime + (ct - ts.contextTime) * 1000;
-              if (!heard.length || ph - heard[heard.length - 1] > 300) heard.push(ph);
-            }
-            const s = songShown();
-            if (s) drawn.push([p, s.now]);
-            if (p - t0 < 19_000) requestAnimationFrame(step);
+            if (track.el.currentTime < CLICKS.at(-1) + 1) requestAnimationFrame(step);
             else done();
           };
           requestAnimationFrame(step);
@@ -268,23 +292,26 @@ test.describe("in the browser", () => {
           for (let i = Math.max(0, Math.floor(c / 0.04) - 5); i <= Math.floor(c / 0.04) + 5; i++) if (best < 0 || fe.feat[i * nfi] > fe.feat[best * nfi]) best = i; // prettier-ignore
           return (best + 0.5) * 0.04;
         };
+        screen.draw = draw;
+        track.src.disconnect(observer);
+        observer.disconnect();
+        silent.disconnect();
         return { heard, drawn, peaks: CLICKS.map(peaks), latency: track.latency() };
       },
       { m: studio, CLICKS },
     );
     // A click's line crosses the now mark when the toy's clock reaches its
-    // frame's middle: on the page's clock, that frame's moment plus the
-    // drawing's offset (performance time less song time) around then.
+    // frame's middle: on the native output clock, that frame's moment plus
+    // the drawing's offset (output context time less song time) around then.
     const rows = [];
-    const t0 = rec.drawn[0][0] - rec.drawn[0][1] * 1000;
     for (let k = 0; k < CLICKS.length; k++) {
       const c = CLICKS[k];
-      const h = rec.heard.find((x) => Math.abs((x - t0) / 1000 - c) < 0.3);
+      const h = rec.heard[k];
       const near = rec.drawn.filter(([, now]) => Math.abs(now - c) < 1);
       if (h === undefined || near.length < 3) continue;
-      const off = near.reduce((a, [p, now]) => a + (p - now * 1000), 0) / near.length;
-      const crossed = off + rec.peaks[k] * 1000;
-      rows.push({ click: c, offMs: Math.round(crossed - h) });
+      const off = near.reduce((a, [at, now]) => a + (at - now), 0) / near.length;
+      const crossed = off + rec.peaks[k];
+      rows.push({ click: c, offMs: Math.round((crossed - h) * 1000) });
     }
     console.log("live2 sync:", JSON.stringify({ latencyMs: Math.round(rec.latency * 1000), rows }));
     expect(rows.length).toBeGreaterThanOrEqual(CLICKS.length - 2);

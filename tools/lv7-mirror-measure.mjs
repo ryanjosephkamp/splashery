@@ -67,40 +67,6 @@ export async function openMirror(page, base, { look = "plain", query = "" } = {}
   });
 }
 
-// One fresh depth answer, then a few frames drawn (the heights ease).
-async function nextAnswer(page) {
-  await page.evaluate(async () => {
-    const { MIRROR } = await import("/src/live/relief.js");
-    const cam = MIRROR.cam;
-    const n0 = cam.answers;
-    const t0 = performance.now();
-    while (cam.answers === n0 && performance.now() - t0 < 30000) {
-      cam.ask();
-      await new Promise((r) => setTimeout(r, 30));
-    }
-  });
-  await page.waitForTimeout(400);
-}
-
-// The face's cells: heights (0..1) and colors (r, g, b).
-async function cells(page) {
-  return page.evaluate((F) => {
-    return import("/src/live/relief.js").then(({ MIRROR }) => {
-      const cam = MIRROR.cam;
-      const { cols, rows } = cam;
-      const h = [];
-      const c = [];
-      for (let j = Math.floor(F.y0 * rows); j < F.y1 * rows; j++)
-        for (let i = Math.floor(F.x0 * cols); i < F.x1 * cols; i++) {
-          const k = j * cols + i;
-          h.push(cam.heights[k]);
-          c.push(cam.lastColors[k * 4], cam.lastColors[k * 4 + 1], cam.lastColors[k * 4 + 2]);
-        }
-      return { h, c };
-    });
-  }, FACE);
-}
-
 // The face's box on the page (CSS pixels), from where the picture shows.
 async function faceBox(page) {
   return page.evaluate(async (F) => {
@@ -124,8 +90,25 @@ async function faceBox(page) {
 }
 
 async function shot(page, clip) {
-  await page.evaluate(() => window.__splashery.player.stage.captureFrame());
-  return PNG.sync.read(await page.screenshot({ clip }));
+  await page.evaluate(async () => {
+    const { captureSortedFrame } = await import("/tests/helpers/native-sort.mjs");
+    const stage = window.__splashery.player.stage;
+    if (window.__releaseMirrorShot) throw Error("Previous mirror screenshot hold was not released");
+    await captureSortedFrame(stage);
+    // The screenshot can take several more native frames on a busy runner.
+    // Keep this completed view until its PNG is copied; updates, video, and
+    // the actual depth worker continue on their own clocks.
+    window.__releaseMirrorShot = stage.holdRendering();
+  });
+  try {
+    return PNG.sync.read(await page.screenshot({ clip }));
+  } finally {
+    if (!page.isClosed())
+      await page.evaluate(() => {
+        window.__releaseMirrorShot?.();
+        window.__releaseMirrorShot = null;
+      });
+  }
 }
 
 const meanAbs = (a, b) => {
@@ -197,7 +180,18 @@ async function cameraFace(page, clip) {
   return { width: Math.round(clip.width * 2), height: Math.round(clip.height * 2), data };
 }
 
-export async function measure(page, { answers = 10, turn = 0.35, dump = null } = {}) {
+const sampleModule = "/tests/helpers/mirror-sample.mjs";
+export async function measure(page, options = {}) {
+  try {
+    await page.evaluate(async (url) => (await import(url)).prepareMeasurement(), sampleModule);
+    return await measurePrepared(page, options);
+  } finally {
+    if (!page.isClosed())
+      await page.evaluate(async (url) => (await import(url)).finishMeasurement(), sampleModule);
+  }
+}
+
+async function measurePrepared(page, { answers = 10, turn = 0.35, dump = null } = {}) {
   const hj = [];
   const cj = [];
   const sj = [];
@@ -208,23 +202,15 @@ export async function measure(page, { answers = 10, turn = 0.35, dump = null } =
   let last = null;
   let lastShot = null;
   let lastTurned = null;
-  const cam = page.evaluate.bind(page);
+  const samples = await page.evaluate(
+    async ({ url, F, box, answers, turn }) =>
+      (await import(url)).collectSamples(F, box, answers, turn),
+    { url: sampleModule, F: FACE, box, answers, turn },
+  );
   for (let k = 0; k < answers; k++) {
-    await nextAnswer(page);
-    const now = await cells(page);
-    const face = await shot(page, box);
-    // A little turned (the relief's grain shows there), then back.
-    await cam((d) => {
-      const c = window.__splashery.player.camera;
-      const s = c.getState();
-      c.setState({ ...s, yaw: s.yaw + d }, { snap: true });
-    }, turn);
-    const turned = await shot(page, box);
-    await cam((d) => {
-      const c = window.__splashery.player.camera;
-      const s = c.getState();
-      c.setState({ ...s, yaw: s.yaw - d }, { snap: true });
-    }, turn);
+    const now = samples[k];
+    const face = PNG.sync.read(Buffer.from(now.face, "base64"));
+    const turned = PNG.sync.read(Buffer.from(now.turned, "base64"));
     if (last) {
       hj.push(meanAbs(now.h, last.h));
       cj.push(meanAbs(now.c, last.c));

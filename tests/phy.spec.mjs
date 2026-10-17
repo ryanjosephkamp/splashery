@@ -15,6 +15,9 @@ async function open(page, id, options = null) {
       await app.chooseToy(id);
       if (options) await app.setToyOptions(options);
       player.opts.idleDelay = 1e9;
+      // The drag's projected endpoints must keep the same camera. A slow toy
+      // load can already have used up the turntable's idle delay.
+      player.camera.setTurntable(false);
       // Steps the clock by hand; moves a held piece from a recipe point to
       // recipe points (as a finger would, through Hands-on).
       window.__run = (secs, step = 1 / 30) => {
@@ -45,8 +48,8 @@ async function open(page, id, options = null) {
     },
     { id, options },
   );
-  // The camera eases in to fit the toy; the finger's screen points need it
-  // still.
+  // Wait for the fitted camera and its rendered projection: screenPoint and
+  // the finger's inverse ray must use the same view.
   await page.waitForFunction(
     () => {
       const c = window.__splashery.player.camera;
@@ -56,7 +59,7 @@ async function open(page, id, options = null) {
     null,
     { timeout: 30_000 },
   );
-  await page.waitForTimeout(500);
+  await page.evaluate(() => window.__splashery.player.stage.captureFrame());
 }
 
 const finite = (list) => list.every((v) => Number.isFinite(v));

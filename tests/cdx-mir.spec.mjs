@@ -284,12 +284,12 @@ test.describe("real depth worker with a fake camera", () => {
     cameras(dir, 20, ["still", "low-light"]);
   });
   test.afterAll(() => fs.rmSync(dir, { recursive: true, force: true }));
-  for (const [clip, height, shown] of [
+  for (const [clip, height, shown, answers] of [
     // Live sampling varied across four independent runs. Bounds cover the
     // measured maxima (0.0003501 still, 0.0110579 low light); the exact-pose
     // comparison below adds much tighter absolute and relative checks.
-    ["still", 0.00055, 0.95],
-    ["low-light", 0.0135, 2.2],
+    ["still", 0.00055, 0.95, 6],
+    ["low-light", 0.0135, 2.2, 20],
   ]) {
     test(`${clip}: measured drift stays below the baseline`, async ({ playwright, baseURL }) => {
       const browser = await playwright.chromium.launch({
@@ -306,7 +306,9 @@ test.describe("real depth worker with a fake camera", () => {
         page.on("pageerror", (e) => errors.push(e.message));
         page.on("request", (r) => requests.push(r.url()));
         await openMirror(page, baseURL + "/");
-        const m = await measure(page, { answers: 6 });
+        // Use more pair differences for the noisier dim clip's median, with
+        // the same limits, source clip, and deadline. Include every observation.
+        const m = await measure(page, { answers });
         console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);
         expect(m.heightJitter).toBeLessThan(height);
         expect(m.shownJitter).toBeLessThan(shown);

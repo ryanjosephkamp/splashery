@@ -102,6 +102,25 @@ cloud container, or only on Actions: docs/handoff/CI.md has the evidence), as `f
 (docs/OPERATOR.md, "Known flaky tests"): the report marks them but still counts them. Add one only
 with evidence (it fails on `main` too), and take it off when it is fixed.
 
+## Stress measurements
+
+`.github/workflows/stress.yml` runs task 100's stress recipe independently of Tests. Add the
+`stress-tests` label to measure all ten target families on the immutable PR head. Only adding that
+label starts stress jobs; later pushes do not start another measurement. Each explicit measurement
+has its own concurrency group, preserving its complete first-pass result. `tests.yml` retains its
+normal cancellation behavior and full-suite triggers.
+
+Once the workflow is on `main`, **Actions → Stress → Run workflow** also accepts a subject revision,
+a JSON array of target families, repetitions per variant (default 30), receipt phase, and optional
+PR number. An empty subject revision uses the selected branch. The runner harness comes from the
+workflow checkout, while a separate subject checkout supplies the measured tests and source.
+
+Each family runs with four fully parallel workers, two CPU burners, and zero retries. The browser,
+software renderer, and setup match the existing stress campaign: llvmpipe except for Pebbles and
+sample audio, which use SwiftShader. Seven-day artifacts contain the exact recipe, source hashes,
+original reports, logs, and failure traces. When a PR number is available, its per-family receipt
+comment records every first-pass failure; a later pass never replaces a failed repetition.
+
 ## Printing the manual's PDF
 
 `.github/workflows/manual-pdf.yml` is a manual-only workflow with `contents: read`. It uses the

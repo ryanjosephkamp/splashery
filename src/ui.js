@@ -2546,7 +2546,10 @@ export function createUI(app) {
     hideConfirm();
     releasePreview();
     if (app.recorded) app.closeRecord();
+    // A native dialog can retain its hidden button until the next frame.
+    // Finish returning focus even when the phone's Record sheet is folded.
     if (refocus && els.recordStart.offsetParent) els.recordStart.focus();
+    else if (els.recPreview.contains(document.activeElement)) document.activeElement.blur();
   }
   els.recPreview.addEventListener("close", letGo);
   let confirmed = null;
