@@ -10,10 +10,23 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const blend = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
 const isotropic = (r) => [r * r, r * r, r * r, 0, 0, 0];
 const outer = (d) => [d[0] ** 2, d[1] ** 2, d[2] ** 2, d[0] * d[1], d[0] * d[2], d[1] * d[2]];
-const BODY = [1, 0, 0, 0],
-  DEEP = [0, 1, 0, 0],
-  SHEATH = [0, 0, 1, 0],
-  FINE = [0, 0, 0, 1];
+// Lane NR1: what each splat is made of, as shares of twelve materials. A stain says how each
+// material takes it up (an ink color and a density), so one tree of splats takes all three
+// stains. LIT is the bright slide around the cell (the lit section), CLEAR its unlit rim.
+const MATERIALS = ["cyto", "nissl", "myelin", "fine", "nucleus", "nucleolus", "glia", "dendrite", "axon", "bouton", "lit", "clear"]; // prettier-ignore
+const only = (name) => MATERIALS.map((m) => (m === name ? 1 : 0));
+const CYTO = only("cyto"),
+  NISSL = only("nissl"),
+  SHEATH = only("myelin"),
+  FINE = only("fine"),
+  NUCLEUS = only("nucleus"),
+  NUCLEOLUS = only("nucleolus"),
+  GLIA = only("glia"),
+  DENDRITE = only("dendrite"),
+  AXON = only("axon"),
+  BOUTON = only("bouton");
+const LIT = MATERIALS.indexOf("lit"),
+  CLEAR = MATERIALS.indexOf("clear");
 const SOMA_MS = 4;
 export const SPIKE_SECONDS = 4.6;
 const MODEL_MS_PER_SECOND = 7;
@@ -107,10 +120,11 @@ export function growNeuron(seed = 1952, depth = 15) {
     nucleolus: quota(56),
     spines: quota(4200, 6),
     core: quota(2000),
-    myelin: quota(7500, 5),
+    myelin: quota(6000, 5),
     glia: quota(300, 5),
     twigs: quota(2000),
     boutons: quota(2272, 16),
+    field: quota(2048, 128),
   };
   counts.dendrites = count - Object.values(counts).reduce((a, b) => a + b, 0);
   const somaRadius = [0.17, 0.15, 0.14];
@@ -119,7 +133,7 @@ export function growNeuron(seed = 1952, depth = 15) {
     put(
       q.map((v, k) => v * somaRadius[k]),
       isotropic(0.02),
-      BODY,
+      CYTO,
       SOMA_MS,
       1,
       0.34,
@@ -130,18 +144,18 @@ export function growNeuron(seed = 1952, depth = 15) {
     while (len(q) < 0.5) q = volume(r);
     const at = q.map((v, k) => v * somaRadius[k] * 0.88);
     for (let j = 0; j < 10; j++)
-      put(add(at, mul(volume(r), 0.016)), isotropic(0.006), DEEP, SOMA_MS, 1, 0.5);
+      put(add(at, mul(volume(r), 0.016)), isotropic(0.006), NISSL, SOMA_MS, 1, 0.5);
   }
   const nucleus = [-0.02, 0.01, 0];
   for (let i = 0; i < counts.nucleus; i++) {
     const q = i % 3 ? mul(sphere(r), 0.92 + 0.08 * r()) : volume(r);
-    put(add(nucleus, mul(q, 0.066)), isotropic(0.008), DEEP, SOMA_MS, 1, 0.5);
+    put(add(nucleus, mul(q, 0.066)), isotropic(0.008), NUCLEUS, SOMA_MS, 1, 0.5);
   }
   for (let i = 0; i < counts.nucleolus; i++)
     put(
       add(add(nucleus, [0.012, -0.008, 0.01]), mul(volume(r), 0.016)),
       isotropic(0.006),
-      DEEP,
+      NUCLEOLUS,
       SOMA_MS,
       1,
       1.3,
@@ -163,7 +177,7 @@ export function growNeuron(seed = 1952, depth = 15) {
   }
   const reach = Math.max(...dendriteTips.map((tip) => tip.s));
   const arrival = (s) => SOMA_MS * (1 - s / reach) - 0.001;
-  sampleTubes(r, dendrites, counts.dendrites, (p, S, s) => put(p, S, BODY, arrival(s), 0.42));
+  sampleTubes(r, dendrites, counts.dendrites, (p, S, s) => put(p, S, DENDRITE, arrival(s), 0.42));
   const thin = dendrites.filter((g) => g.radius < 0.017);
   for (let i = 0; i < counts.spines / 6; i++) {
     const g = thin[Math.floor(r() * thin.length)],
@@ -228,13 +242,13 @@ export function growNeuron(seed = 1952, depth = 15) {
     sheaths.push(sheath);
     run(0.048, 0.02, 0.02, time + 1.25, null, true);
   }
-  sampleTubes(r, core, counts.core, (p, S, delay, g) => put(p, S, g.bare ? FINE : BODY, delay));
+  sampleTubes(r, core, counts.core, (p, S, delay, g) => put(p, S, g.bare ? FINE : AXON, delay));
   for (const sheath of sheaths) {
     sampleTubes(
       r,
       sheath,
       counts.myelin / 5,
-      (p, S, delay) => put(p, S, SHEATH, delay, 0.9, 0.8),
+      (p, S, delay) => put(p, S, SHEATH, delay, 0.6, 0.8),
       true,
     );
     const mid = sheath[sheath.length >> 1];
@@ -244,7 +258,7 @@ export function growNeuron(seed = 1952, depth = 15) {
       put(
         add(at, [q[0] * 0.034, q[1] * 0.014, q[2] * 0.014]),
         isotropic(0.006),
-        DEEP,
+        GLIA,
         mid.from,
         0.3,
         0.7,
@@ -259,8 +273,11 @@ export function growNeuron(seed = 1952, depth = 15) {
   for (let i = 0; i < counts.boutons; i++) {
     const tip = tips[i % tips.length];
     const q = i % 3 ? mul(sphere(r), 0.9 + 0.1 * r()) : volume(r);
-    put(add(tip.p, mul(q, 0.03)), isotropic(0.006), DEEP, terminalArrival(tip.s), 1, 0.8);
+    put(add(tip.p, mul(q, 0.03)), isotropic(0.006), BOUTON, terminalArrival(tip.s), 1, 0.8);
   }
+  const last = Math.max(...leaves.map((s) => s.delay));
+  const spread = Math.max(...dendriteTips.map((tip) => len(tip.p)));
+  litField(leaves, counts.field);
   if (leaves.length !== count)
     throw new Error("The neuron's component counts do not match its budget.");
   // Normalize the mathematical distribution once, before making any focus level.
@@ -274,7 +291,49 @@ export function growNeuron(seed = 1952, depth = 15) {
     s.S = s.S.map((x) => x * scale * scale);
     s.w /= moments.w;
   }
-  return { leaves, last: Math.max(...leaves.map((s) => s.delay)) };
+  // Where the cell body and the dendrites' reach land after normalizing (for a tap's stimulus).
+  return { leaves, last, soma: mul(sub([0, 0, 0], moments.m), scale), reach: spread * scale };
+}
+
+// The lit slide behind the cell: a grid of flat splats (a power of two, so it fills its quota at
+// every budget), opaque inside and fading at a rounded rim. It is part of the specimen,
+// so focus merges it with the cell, and it neither fires nor takes a stain's dye.
+function litField(leaves, n) {
+  const lo = [Infinity, Infinity, Infinity],
+    hi = [-Infinity, -Infinity, -Infinity];
+  for (const s of leaves)
+    for (let k = 0; k < 3; k++) {
+      lo[k] = Math.min(lo[k], s.m[k]);
+      hi[k] = Math.max(hi[k], s.m[k]);
+    }
+  const rows = 2 ** Math.floor(Math.log2(n) / 2),
+    cols = n / rows;
+  const pad = 0.12 * (hi[0] - lo[0]),
+    cx = (lo[0] + hi[0]) / 2,
+    cy = (lo[1] + hi[1]) / 2;
+  const w = hi[0] - lo[0] + 2 * pad,
+    h = Math.max(hi[1] - lo[1] + 2 * pad, w / 2.2);
+  const hx = w / cols,
+    hy = h / rows,
+    z = lo[2] - 0.08,
+    corner = 0.3 * h;
+  for (let i = 0; i < rows; i++)
+    for (let j = 0; j < cols; j++) {
+      const x = cx - w / 2 + (j + 0.5) * hx,
+        y = cy - h / 2 + (i + 0.5) * hy;
+      // Distance inside the rounded rectangle's edge, so the rim fades evenly.
+      const qx = Math.max(Math.abs(x - cx) - (w / 2 - corner), 0),
+        qy = Math.max(Math.abs(y - cy) - (h / 2 - corner), 0);
+      const inside = corner - Math.hypot(qx, qy) + Math.min(Math.max(Math.abs(x - cx) - (w / 2 - corner), Math.abs(y - cy) - (h / 2 - corner)), 0); // prettier-ignore
+      const lit = clamp(inside / (0.6 * Math.max(hx, hy)));
+      const k = MATERIALS.map(() => 0);
+      k[LIT] = lit;
+      k[CLEAR] = 1 - lit;
+      // Narrower across the last rows, so the rim stays crisp at a phone's coarser grid.
+      const sx = hx * clamp(Math.min(j + 0.5, cols - j - 0.5) / 2.5, 0.4, 1),
+        sy = hy * clamp(Math.min(i + 0.5, rows - i - 0.5) / 2.5, 0.4, 1);
+      leaves.push({ m: [x, y, z], S: [sx * sx, sy * sy, 1e-6, 0, 0, 0], k, delay: SOMA_MS, gain: 0, w: 0.8 }); // prettier-ignore
+    }
 }
 
 export function mergeGaussians(a, b) {
@@ -453,81 +512,195 @@ export function spikeAt(ms, delay, gain, wave = WAVE) {
 
 export const focusLevel = (value, depth) =>
   Math.round(clamp(Number.isFinite(value) ? value : 1) * depth);
+
+// Lane NR1: the three stains as a histology atlas shows them on a bright slide. Each material has
+// the color it lets through (ink) and how strongly it takes the stain (density; an unstained
+// part is a faint ghost). Nissl (cresyl violet) dyes the cell body's Nissl bodies, nucleolus and
+// glial nuclei and leaves the axon hillock, axon, and myelin nearly clear. Golgi (silver
+// chromate) blackens the whole neuron, spines and all, on an amber field, and leaves myelin
+// unstained. H&E turns cytoplasm and neuropil pink and nuclei blue-purple. The spike color is
+// chosen to stand out on each.
+const ink = (o) => MATERIALS.map((m) => o[m] ?? o.cyto);
 const STAINS = {
-  nissl: [
-    [0.36, 0.18, 0.58],
-    [0.19, 0.1, 0.42],
-    [0.2, 0.54, 0.66],
-    [0.4, 0.2, 0.6],
-  ],
-  golgi: [
-    [0.2, 0.13, 0.07],
-    [0.12, 0.08, 0.05],
-    [0.46, 0.33, 0.16],
-    [0.2, 0.13, 0.07],
-  ],
-  he: [
-    [0.93, 0.46, 0.66],
-    [0.3, 0.2, 0.56],
-    [0.97, 0.74, 0.84],
-    [0.9, 0.4, 0.62],
-  ],
+  nissl: {
+    ink: ink({ cyto: [0.6, 0.4, 0.8], nissl: [0.3, 0.11, 0.5], myelin: [0.84, 0.8, 0.92], fine: [0.7, 0.58, 0.86], nucleus: [0.84, 0.76, 0.93], nucleolus: [0.22, 0.07, 0.4], glia: [0.3, 0.13, 0.5], dendrite: [0.64, 0.47, 0.83], axon: [0.8, 0.71, 0.9], bouton: [0.72, 0.6, 0.87], lit: [0.94, 0.93, 0.97], clear: [0.94, 0.93, 0.97] }), // prettier-ignore
+    dens: ink({ cyto: 1, nissl: 1.4, myelin: 0.6, fine: 0.6, nucleus: 0.6, nucleolus: 1.6, glia: 1.4, dendrite: 0.85, axon: 0.6, bouton: 0.6 }), // prettier-ignore
+    field: [0.94, 0.93, 0.97],
+    spike: [1.0, 0.5, 0.0],
+  },
+  golgi: {
+    ink: ink({ cyto: [0.08, 0.06, 0.04], myelin: [0.8, 0.64, 0.36], fine: [0.11, 0.08, 0.05], dendrite: [0.09, 0.07, 0.05], axon: [0.14, 0.1, 0.06], bouton: [0.12, 0.09, 0.05], glia: [0.62, 0.46, 0.24], lit: [0.92, 0.77, 0.46], clear: [0.92, 0.77, 0.46] }), // prettier-ignore
+    dens: ink({ cyto: 1.7, myelin: 0.5, fine: 1.4, dendrite: 1.5, axon: 1.2, bouton: 1.3, glia: 0.5 }), // prettier-ignore
+    field: [0.92, 0.77, 0.46],
+    spike: [0.0, 0.8, 1.0],
+  },
+  he: {
+    ink: ink({ cyto: [0.8, 0.45, 0.66], nissl: [0.5, 0.28, 0.62], myelin: [0.94, 0.75, 0.85], fine: [0.88, 0.58, 0.74], nucleus: [0.78, 0.68, 0.88], nucleolus: [0.26, 0.15, 0.5], glia: [0.24, 0.19, 0.52], dendrite: [0.85, 0.5, 0.69], axon: [0.84, 0.48, 0.66], bouton: [0.85, 0.53, 0.71], lit: [0.97, 0.86, 0.91], clear: [0.97, 0.86, 0.91] }), // prettier-ignore
+    dens: ink({ cyto: 1, nissl: 1.2, myelin: 0.45, fine: 0.55, nucleus: 0.6, nucleolus: 1.5, glia: 1.4, dendrite: 0.8, axon: 0.8, bouton: 0.6 }), // prettier-ignore
+    field: [0.97, 0.86, 0.91],
+    spike: [0.05, 0.62, 0.62],
+  },
 };
 
-// Reuse all normal Kit effects. Only the focus gate and delayed HH color wave are added.
+// How one splat of the tree looks under a stain. Its cell part absorbs light by its projected
+// optical depth (mass times density over area), as the concept draws it. The finest splats of the
+// lit slide are the lamp: they stay drawn at every focus (see the shader's gate), so a merged
+// splat shows only its cell part, absorbing over that light. Coarse splats spread the same mass
+// over a larger area, so they are paler and softer, as a slide looks out of focus.
+export function stainLook(s, stain = STAINS.nissl, leaf = true) {
+  const lit = s.k[LIT],
+    clear = s.k[CLEAR],
+    cell = 1 - lit - clear;
+  const log = [0, 0, 0];
+  let density = 0;
+  if (cell > 1e-9)
+    for (let i = 0; i < MATERIALS.length; i++) {
+      if (i === LIT || i === CLEAR || !s.k[i]) continue;
+      const share = s.k[i] / cell;
+      for (let j = 0; j < 3; j++) log[j] += share * Math.log(stain.ink[i][j]);
+      density += share * stain.dens[i];
+    }
+  const cellColor = cell > 1e-9 ? log.map(Math.exp) : stain.field;
+  const area = Math.sqrt(Math.max(s.S[0] * s.S[1] - s.S[3] ** 2, 1e-16));
+  const absorb = 1 - Math.exp((-0.7 * s.w * Math.max(cell, 0) * density) / (2 * Math.PI * area));
+  if (!leaf) return { color: cellColor, opacity: cell > 1e-9 ? absorb : 0 };
+  const field = lit + clear > 1e-9 ? lit / (lit + clear) : 0;
+  return {
+    color: field > 0 ? blend(stain.field, cellColor, absorb) : cellColor,
+    opacity: 1 - (1 - absorb) * (1 - field),
+  };
+}
+
+// A tap's point rides on morph channels 2 and 3: x and z packed in thousandths, then y. No tap
+// (the Play button) puts y far outside the specimen.
+export function packTap(point) {
+  if (!point) return [0, 99];
+  const q = (v) => Math.round((clamp(v, -2, 2) + 2) * 1000);
+  return [q(point[0]) + 4096 * q(point[2]), clamp(point[1], -2, 2)];
+}
+
+// Reuse all normal Kit effects. The toy adds a focus crossfade between neighboring levels, the
+// delayed HH wave, and a stimulus where a tap lands that spreads through the dendrites.
 // The same precomputed membrane trace is interpolated by both GPU backends.
-export function neuronModifier() {
+export function neuronModifier(o = {}, transform = null) {
   const values = WAVE.trace
     .map((v) => ((v - WAVE.rest) / (WAVE.peak - WAVE.rest)).toFixed(8))
     .join(",");
+  const f = (v) => Number(v).toFixed(6);
+  const v3 = (a) => a.map(f).join(", ");
+  const fit = transform && Number.isFinite(transform.scale) ? transform : { center: [0, 0, 0], scale: 1 }; // prettier-ignore
+  const cell = cached || { soma: [0, 0, 0], reach: 0, depth: 15 };
+  const depth = cell.depth;
+  const spike = (STAINS[o.stain] || STAINS.nissl).spike;
   const glslWave = `
 vec4 nfAn;
+float nfAct = 0.0;
+float nfStim = 0.0;
+float nfWeight = 1.0;
 const float nfWave[161] = float[161](${values});
-float nfActivation() {
-  vec4 an = nfAn;
-  float x = (uSpMorph.x - an.z) * 10.0;
+float nfActivation(float delay, float gain) {
+  float x = (uSpMorph.x - delay) * 10.0;
   if (x <= 0.0 || x >= 160.0) return 0.0;
   int i = int(floor(x));
-  return clamp(mix(nfWave[i], nfWave[i+1], fract(x)), 0.0, 1.0) * an.w;
+  return clamp(mix(nfWave[i], nfWave[i+1], fract(x)), 0.0, 1.0) * gain;
+}
+void nfStart(vec3 rest) {
+  nfAn = loadSplatAnim();
+  vec3 rc = rest / ${f(fit.scale)} + vec3(${v3(fit.center)});
+  float lo = floor(uSpMorph.y), fr = uSpMorph.y - lo, level = mod(nfAn.x, 16.0);
+  nfWeight = abs(level - lo) < 0.1 ? min(1.0, 2.0 - 2.0 * fr) : abs(level - lo - 1.0) < 0.1 ? min(1.0, 2.0 * fr) : 0.0;
+  if (nfAn.w <= 0.0 && level > ${f(depth - 0.5)}) nfWeight = 1.0;
+  float delay = nfAn.z;
+  float qz = floor(uSpMorph.z / 4096.0);
+  vec3 tap = vec3((uSpMorph.z - 4096.0 * qz) / 1000.0 - 2.0, uSpMorph.w, qz / 1000.0 - 2.0);
+  nfStim = 0.0;
+  if (uSpMorph.w < 50.0) {
+    float toSoma = distance(tap, vec3(${v3(cell.soma)}));
+    if (toSoma < ${f(cell.reach * 1.15)} && delay < ${f(SOMA_MS - 1e-4)} && nfAn.w > 0.0)
+      delay = ${f(SOMA_MS)} * clamp(distance(rc, tap) / max(toSoma, 0.06), 0.0, 1.0) - 0.001;
+    float ms = uSpMorph.x;
+    if (ms >= 0.0 && ms < 3.0) {
+      float r = 0.05 + 0.07 * ms / 3.0;
+      nfStim = (1.0 - ms / 3.0) * (1.0 - smoothstep(0.4 * r, r, distance(rc, tap)));
+    }
+  }
+  nfAct = nfActivation(delay, nfAn.w);
 }
 `;
   const wgslWave = `
 var<private> nfAn: vec4f;
+var<private> nfAct: f32 = 0.0;
+var<private> nfStim: f32 = 0.0;
+var<private> nfWeight: f32 = 1.0;
 const nfWave = array<f32, 161>(${values});
-fn nfActivation() -> f32 {
-  let an = nfAn;
-  let x = (uniform.uSpMorph.x - an.z) * 10.0;
+fn nfActivation(delay: f32, gain: f32) -> f32 {
+  let x = (uniform.uSpMorph.x - delay) * 10.0;
   if (x <= 0.0 || x >= 160.0) { return 0.0; }
   let i = i32(floor(x));
-  return clamp(mix(nfWave[i], nfWave[i+1], fract(x)), 0.0, 1.0) * an.w;
+  return clamp(mix(nfWave[i], nfWave[i+1], fract(x)), 0.0, 1.0) * gain;
+}
+fn nfStart(rest: vec3f) {
+  nfAn = loadSplatAnim();
+  let m = uniform.uSpMorph;
+  let rc = rest / ${f(fit.scale)} + vec3f(${v3(fit.center)});
+  let lo = floor(m.y);
+  let fr = m.y - lo;
+  let level = nfAn.x - 16.0 * floor(nfAn.x / 16.0);
+  nfWeight = select(select(0.0, min(1.0, 2.0 * fr), abs(level - lo - 1.0) < 0.1), min(1.0, 2.0 - 2.0 * fr), abs(level - lo) < 0.1);
+  if (nfAn.w <= 0.0 && level > ${f(depth - 0.5)}) { nfWeight = 1.0; }
+  var delay = nfAn.z;
+  let qz = floor(m.z / 4096.0);
+  let tap = vec3f((m.z - 4096.0 * qz) / 1000.0 - 2.0, m.w, qz / 1000.0 - 2.0);
+  nfStim = 0.0;
+  if (m.w < 50.0) {
+    let toSoma = distance(tap, vec3f(${v3(cell.soma)}));
+    if (toSoma < ${f(cell.reach * 1.15)} && delay < ${f(SOMA_MS - 1e-4)} && nfAn.w > 0.0) {
+      delay = ${f(SOMA_MS)} * clamp(distance(rc, tap) / max(toSoma, 0.06), 0.0, 1.0) - 0.001;
+    }
+    if (m.x >= 0.0 && m.x < 3.0) {
+      let r = 0.05 + 0.07 * m.x / 3.0;
+      nfStim = (1.0 - m.x / 3.0) * (1.0 - smoothstep(0.4 * r, r, distance(rc, tap)));
+    }
+  }
+  nfAct = nfActivation(delay, nfAn.w);
 }
 `;
+  // Firing splats take the spike color and swell a little, like a glow; the stimulus is a glow in
+  // the same color under the tap. Both stay inside the crossfade weight.
+  const glslColor = `
+ float nfA = clamp(nfAct * 1.6, 0.0, 1.0);
+ color.rgb = mix(color.rgb, vec3(${v3(spike)}), nfA);
+ color.rgb = mix(color.rgb, vec3(${v3(spike)}), nfStim);
+ color.a = max(max(color.a, 0.9 * nfA), nfStim) * nfWeight;`;
+  const wgslColor = `
+ let nfA = clamp(nfAct * 1.6, 0.0, 1.0);
+ (*color) = vec4f(mix(mix((*color).rgb, vec3f(${v3(spike)}), nfA), vec3f(${v3(spike)}), nfStim), max(max((*color).a, 0.9 * nfA), nfStim) * nfWeight);`;
   return {
     glsl: MODIFIER_KIT.glsl
       .replace(
         "void modifySplatCenter(inout vec3 center) {",
-        glslWave + "void modifySplatCenter(inout vec3 center) { nfAn = loadSplatAnim();",
+        glslWave + "void modifySplatCenter(inout vec3 center) { nfStart(center);",
       )
       .replace(
         "if (spCut > 0.5) scale = vec3(0.0);",
-        "if (spCut > 0.5 || abs(mod(nfAn.x, 16.0) - uSpMorph.y) > 0.1) scale = vec3(0.0);",
+        "if (spCut > 0.5 || nfWeight < 0.001) scale = vec3(0.0); else scale *= 1.0 + 0.3 * clamp(nfAct, 0.0, 1.0) + 0.4 * nfStim;",
       )
       .replace(
         "void modifySplatColor(vec3 center, inout vec4 color) {",
-        "void modifySplatColor(vec3 center, inout vec4 color) {\n float nfAct = nfActivation();\n color.rgb = mix(color.rgb, vec3(1.0, 0.22, 0.06), clamp(nfAct * 1.6, 0.0, 1.0));\n color.rgb *= 1.0 + 1.4 * nfAct;",
+        "void modifySplatColor(vec3 center, inout vec4 color) {" + glslColor,
       ),
     wgsl: MODIFIER_KIT.wgsl
       .replace(
         "fn modifySplatCenter(center: ptr<function, vec3f>) {",
-        wgslWave + "fn modifySplatCenter(center: ptr<function, vec3f>) { nfAn = loadSplatAnim();",
+        wgslWave + "fn modifySplatCenter(center: ptr<function, vec3f>) { nfStart(*center);",
       )
       .replace(
         "if (spCut > 0.5) { *scale = vec3f(0.0); }",
-        "if (spCut > 0.5 || abs((nfAn.x % 16.0) - uniform.uSpMorph.y) > 0.1) { *scale = vec3f(0.0); }",
+        "if (spCut > 0.5 || nfWeight < 0.001) { *scale = vec3f(0.0); } else { *scale = *scale * (1.0 + 0.3 * clamp(nfAct, 0.0, 1.0) + 0.4 * nfStim); }",
       )
       .replace(
-        "var base = (*color).rgb;",
-        "let nfAct = nfActivation();\n var base = mix((*color).rgb, vec3f(1.0, 0.22, 0.06), clamp(nfAct * 1.6, 0.0, 1.0)) * (1.0 + 1.4 * nfAct);",
+        "fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {",
+        "fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {" + wgslColor,
       ),
   };
 }
@@ -539,7 +712,7 @@ function specimen(depth) {
   const cell = growNeuron(1952, depth),
     tree = buildFocusTree(cell.leaves);
   const axes = tree.nodes.map((s) => covarianceAxes(s.S));
-  cached = { ...tree, axes, last: cell.last };
+  cached = { ...tree, axes, last: cell.last, soma: cell.soma, reach: cell.reach };
   return cached;
 }
 
@@ -556,9 +729,9 @@ export const RECIPES = {
         type: "select",
         default: "nissl",
         choices: [
-          { id: "nissl", label: "Nissl · purple and teal" },
-          { id: "golgi", label: "Golgi · brown" },
-          { id: "he", label: "H&E · pink and purple" },
+          { id: "nissl", label: "Nissl · cresyl violet" },
+          { id: "golgi", label: "Golgi · silver, black on amber" },
+          { id: "he", label: "H&E · pink and blue-purple" },
         ],
       },
     ],
@@ -571,11 +744,11 @@ export const RECIPES = {
     credits: [
       {
         label:
-          "From a concept by Ryan Kamp. Procedural specimen made by Ryan with Codex (GPT-6); CC0. Code: MIT.",
+          "From a concept by Ryan Kamp. Procedural specimen made by Ryan with Codex (GPT-6) and Claude (Opus 5.5); CC0. Code: MIT.",
       },
       {
         label:
-          "Hodgkin-Huxley model (1952): squid giant axon; slowed for viewing. Stains are illustrative colors.",
+          "Hodgkin-Huxley model (1952): squid giant axon; slowed for viewing. Stain colors follow textbook histology.",
         url: "https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model",
       },
     ],
@@ -583,15 +756,21 @@ export const RECIPES = {
     drive(t, c, out, info) {
       const depth = info?.data?.depth ?? 15;
       const ms = c.fire > 0 ? (1 - c.fire) * SPIKE_SECONDS * MODEL_MS_PER_SECOND : -100;
-      const level = focusLevel(c.focus, depth);
-      out.morph = [ms, level, 0, 0];
-      // Parts select the same level as the GPU gate (which also handles the root).
-      for (let i = 1; i <= depth; i++) out.parts[`focus${i}`] = { visible: i === level ? 1 : 0 };
+      // Focus glides: the two neighboring levels crossfade, so the slide comes into focus
+      // smoothly instead of jumping a level at a time.
+      const level = clamp(Number.isFinite(c.focus) ? c.focus : 1) * depth,
+        lo = Math.floor(level);
+      const tap = c.fire > 0 && info?.tap?.key === "fire" ? info.tap.point : null;
+      out.morph = [ms, level, ...packTap(tap)];
+      // Parts show the same two levels as the GPU gate (which also handles the root), and the
+      // finest, whose lit slide stays on.
+      for (let i = 1; i <= depth; i++)
+        out.parts[`focus${i}`] = { visible: i === lo || i === lo + 1 || i === depth ? 1 : 0 };
     },
     build(k, o) {
       const depth = clamp(Math.floor(Math.log2(k.count + 1)) - 1, 12, 15);
       const cell = specimen(depth),
-        inks = STAINS[o.stain] || STAINS.nissl;
+        stain = STAINS[o.stain] || STAINS.nissl;
       k.data = {
         depth,
         last: cell.last,
@@ -606,13 +785,8 @@ export const RECIPES = {
           const index = 2 ** level + i,
             s = cell.nodes[index],
             axes = cell.axes[index];
-          const color = [0, 1, 2].map((j) =>
-            Math.exp(s.k.reduce((sum, weight, k) => sum + weight * Math.log(inks[k][j]), 0)),
-          );
-          // Projected optical density approximates the concept's stain on a bright slide.
-          // The mass remains in the tree; alpha blending is the shared renderer's display.
-          const area = Math.sqrt(Math.max(s.S[0] * s.S[1] - s.S[3] ** 2, 1e-16));
-          const opacity = 1 - Math.exp((-0.7 * s.w) / (2 * Math.PI * area));
+          // The mass stays in the tree; the stain only decides how it looks.
+          const { color, opacity } = stainLook(s, stain, level === depth);
           return {
             p: s.m,
             scales: axes.scales,
