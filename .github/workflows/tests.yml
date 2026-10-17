@@ -34,7 +34,11 @@ permissions:
   contents: read
 
 concurrency:
-  group: tests-${{ github.event.pull_request.number || github.ref }}
+  # Each stress receipt names an immutable subject; independent measurements
+  # must not replace one another while a different cohort is waiting.
+  group:
+    tests-${{ github.event.pull_request.number || github.ref }}-${{ inputs.stress_revision &&
+    github.run_id || 'suite' }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
