@@ -170,8 +170,25 @@ async function faceBox(page) {
 }
 
 async function shot(page, clip) {
-  await page.evaluate(() => window.__splashery.player.stage.captureFrame());
-  return PNG.sync.read(await page.screenshot({ clip }));
+  await page.evaluate(async () => {
+    const { captureSortedFrame } = await import("/tests/helpers/native-sort.mjs");
+    const stage = window.__splashery.player.stage;
+    if (window.__releaseMirrorShot) throw Error("Previous mirror screenshot hold was not released");
+    await captureSortedFrame(stage);
+    // The screenshot can take several more native frames on a busy runner.
+    // Keep this completed view until its PNG is copied; updates, video, and
+    // the actual depth worker continue on their own clocks.
+    window.__releaseMirrorShot = stage.holdRendering();
+  });
+  try {
+    return PNG.sync.read(await page.screenshot({ clip }));
+  } finally {
+    if (!page.isClosed())
+      await page.evaluate(() => {
+        window.__releaseMirrorShot?.();
+        window.__releaseMirrorShot = null;
+      });
+  }
 }
 
 const meanAbs = (a, b) => {
