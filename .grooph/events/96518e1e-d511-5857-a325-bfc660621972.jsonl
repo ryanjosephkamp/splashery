@@ -256,3 +256,4 @@
 {"v":1,"t":"2026-10-17T20:23:40.265Z","harness":"claude-code","event":"tool","session":"96518e1e-d511-5857-a325-bfc660621972","tool":"mcp__github__issue_write","cwd":"splashery"}
 {"v":1,"t":"2026-10-17T20:23:57.113Z","harness":"claude-code","event":"turn-end","session":"96518e1e-d511-5857-a325-bfc660621972","cwd":"splashery"}
 {"v":1,"t":"2026-10-17T20:23:57.293Z","harness":"claude-code","event":"turn-start","session":"96518e1e-d511-5857-a325-bfc660621972","cwd":"splashery"}
+{"v":1,"t":"2026-10-17T20:24:00.368Z","harness":"claude-code","event":"tool","session":"96518e1e-d511-5857-a325-bfc660621972","tool":"ReadNotifications","cwd":"splashery"}
