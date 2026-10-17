@@ -126,29 +126,27 @@ async function open(page, url = APP) {
   return errors;
 }
 
-const fluidFiles = (page) =>
-  page.evaluate(() =>
-    performance
-      .getEntriesByType("resource")
-      .map((e) => e.name)
-      .filter((u) => u.includes("/src/fluids/") || u.includes("/src/packs/fluid-lab.js")),
-  );
-
 test("nothing fluid loads on the shelf or in an embed until a fluid toy opens", async ({
   page,
 }) => {
+  // Resource Timing keeps only a bounded set of entries. Observe requests
+  // before navigation so a busy shelf cannot hide a late fluid module.
+  const requests = [];
+  page.on("request", (request) => requests.push(request.url()));
+  const fluidFiles = () =>
+    requests.filter((u) => u.includes("/src/fluids/") || u.includes("/src/packs/fluid-lab.js"));
   const errors = await open(page);
-  expect(await fluidFiles(page)).toEqual([]);
+  expect(fluidFiles()).toEqual([]);
   await page.evaluate(() => window.__splashery.app.chooseToy("splat-field"));
   await page.waitForTimeout(500);
-  expect(await fluidFiles(page)).toEqual([]);
+  expect(fluidFiles()).toEqual([]);
   await page.goto("/embed/?toy=bee&renderer=webgl2");
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-  expect(await fluidFiles(page)).toEqual([]);
+  expect(fluidFiles()).toEqual([]);
   await open(page);
   await page.evaluate(() => window.__splashery.app.chooseToy("fluid-lab"));
   await page.waitForFunction(() => window.__splashery.player.fluids?.stats?.particles > 0, null, { timeout: 60_000 }); // prettier-ignore
-  const loaded = await fluidFiles(page);
+  const loaded = fluidFiles();
   expect(loaded.some((u) => u.includes("/src/fluids/runtime.js"))).toBe(true);
   expect(errors).toEqual([]);
 });
