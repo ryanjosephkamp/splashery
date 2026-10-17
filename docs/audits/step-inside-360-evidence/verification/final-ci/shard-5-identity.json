@@ -1,0 +1,19 @@
+{
+  "runId": 39007527856,
+  "headSha": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
+  "jobId": 117322934911,
+  "artifactId": 12092622612,
+  "artifactName": "suite-5-a1",
+  "sha256": "3537e8b54e729e5137eecdd58c67994f9ed933e698f5401da6607bfea75dcae7",
+  "bytes": 3089431,
+  "initial": {
+    "files": 25,
+    "tests": 206,
+    "passed": 205,
+    "failed": 1
+  },
+  "failure": "hl1:92 Hands-on interaction reported Level 1 gaps",
+  "isolatedRecheck": "passed; original failure still counts",
+  "panoramaPrior": "cdx-pano-prior passed all 4 tests in this shard",
+  "sourceIdentity": "Frozen test and renderer blobs match main. No old assertion, pack, or rendering source was changed."
+}

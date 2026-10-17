@@ -1,0 +1,108 @@
+2026-10-17T06:37:07.8282894Z 0 of 25 files already done in ../../_temp/ci-out/shard-5; running 25, 2 at once, WebGL2 on llvmpipe.
+2026-10-17T06:39:46.4879722Z [1/25] pg6 157 s: ok
+2026-10-17T06:41:19.6943447Z [2/25] hl1 93 s: 1 failed
+2026-10-17T06:41:27.7873831Z [3/25] wdr3 258 s: ok
+2026-10-17T06:41:30.0124676Z [4/25] cdx-p3d4-soften 2 s: ok
+2026-10-17T06:41:32.8674528Z [5/25] cdx-pano-prior 3 s: ok
+2026-10-17T06:41:38.5088410Z [6/25] cdx-three-bounds 6 s: ok
+2026-10-17T06:41:40.6682235Z [7/25] cdx-v3d-decoded-frame 2 s: ok
+2026-10-17T06:41:44.0313787Z [8/25] cdx-v3d-real-clips 3 s: ok
+2026-10-17T06:42:00.3968246Z [9/25] fx13 16 s: ok
+2026-10-17T06:42:29.5385825Z [10/25] cdx-adv-files 70 s: ok
+2026-10-17T06:43:11.0343256Z [11/25] fx8 41 s: ok
+2026-10-17T06:44:10.0943703Z [12/25] cdx-mp2-r3 130 s: ok
+2026-10-17T06:44:21.7829180Z [13/25] fx7 71 s: ok
+2026-10-17T06:44:40.2163648Z [14/25] cdx-p3d2-text 30 s: ok
+2026-10-17T06:45:06.9017204Z [15/25] vwr 45 s: ok
+2026-10-17T06:45:21.3419486Z [16/25] fx4 41 s: ok
+2026-10-17T06:45:44.6889420Z [17/25] hh3-pictures 23 s: ok
+2026-10-17T06:45:51.8256284Z [18/25] lv9 45 s: ok
+2026-10-17T06:46:00.0533362Z [19/25] man7b 8 s: ok
+2026-10-17T06:46:09.1866873Z [20/25] arc2-engine 9 s: ok
+2026-10-17T06:46:09.5834213Z [21/25] man7a 25 s: ok
+2026-10-17T06:46:12.3773708Z [22/25] bld 3 s: ok
+2026-10-17T06:46:14.4112548Z [23/25] chs-engine 5 s: ok
+2026-10-17T06:46:14.8664639Z [24/25] cdx-mp2-decode 2 s: ok
+2026-10-17T06:47:28.0158567Z [25/25] heb 73 s: ok
+2026-10-17T06:47:28.0435790Z
+2026-10-17T06:47:28.0436399Z # Suite run
+2026-10-17T06:47:28.0436829Z
+2026-10-17T06:47:28.0437248Z - 25 of 25 files, 206 tests: 205 passed, 1 failed, 0 skipped.
+2026-10-17T06:47:28.0438155Z - Time in files (one after another): 19 min. Wall time of this run: 10 min (2 at once).
+2026-10-17T06:47:28.0438580Z
+2026-10-17T06:47:28.0438774Z ## Failed
+2026-10-17T06:47:28.0438985Z
+2026-10-17T06:47:28.0439494Z - `hl1:92` Hands-on: lift, toss, land, settle and Reset: failed. Error: Level 1 gaps; full receipts are attached
+2026-10-17T06:47:28.0439982Z
+2026-10-17T06:47:28.0440181Z ## Slowest files
+2026-10-17T06:47:28.0440408Z
+2026-10-17T06:47:28.0440659Z | File | Seconds | Tests |
+2026-10-17T06:47:28.0440920Z | --- | ---: | ---: |
+2026-10-17T06:47:28.0441151Z | wdr3 | 258 | 7 |
+2026-10-17T06:47:28.0441431Z | pg6 | 157 | 16 |
+2026-10-17T06:47:28.0441919Z | cdx-mp2-r3 | 130 | 16 |
+2026-10-17T06:47:28.0443009Z | hl1 | 93 | 2 |
+2026-10-17T06:47:28.0443328Z | heb | 73 | 6 |
+2026-10-17T06:47:28.0443623Z | fx7 | 71 | 20 |
+2026-10-17T06:47:28.0443937Z | cdx-adv-files | 70 | 10 |
+2026-10-17T06:47:28.0444261Z | vwr | 45 | 21 |
+2026-10-17T06:47:28.0444535Z | lv9 | 45 | 7 |
+2026-10-17T06:47:28.0444811Z | fx8 | 41 | 5 |
+2026-10-17T06:47:28.0445089Z | fx4 | 41 | 4 |
+2026-10-17T06:47:28.0445390Z | cdx-p3d2-text | 30 | 2 |
+2026-10-17T06:47:28.0445701Z | man7a | 25 | 16 |
+2026-10-17T06:47:28.0446004Z | hh3-pictures | 23 | 2 |
+2026-10-17T06:47:28.0446313Z | fx13 | 16 | 3 |
+2026-10-17T06:47:28.0446609Z | arc2-engine | 9 | 1 |
+2026-10-17T06:47:28.0447202Z | man7b | 8 | 24 |
+2026-10-17T06:47:28.0447518Z | cdx-three-bounds | 6 | 9 |
+2026-10-17T06:47:28.0447854Z | chs-engine | 5 | 1 |
+2026-10-17T06:47:28.0448228Z | cdx-v3d-real-clips | 3 | 9 |
+2026-10-17T06:47:28.0448586Z | cdx-pano-prior | 3 | 4 |
+2026-10-17T06:47:28.0448895Z | bld | 3 | 7 |
+2026-10-17T06:47:28.0449495Z | cdx-mp2-decode | 2 | 7 |
+2026-10-17T06:47:28.0449824Z | cdx-p3d4-soften | 2 | 1 |
+2026-10-17T06:47:28.0450184Z | cdx-v3d-decoded-frame | 2 | 6 |
+2026-10-17T06:47:28.0450478Z
+2026-10-17T06:47:28.0450672Z ## Slowest tests
+2026-10-17T06:47:28.0450894Z
+2026-10-17T06:47:28.0451094Z | Test | Seconds |
+2026-10-17T06:47:28.0451390Z | --- | ---: |
+2026-10-17T06:47:28.0452400Z | `wdr3:133` worlds r3 › idle, walk and run play, and the standing foot stays planted while it walks an | 111 |
+2026-10-17T06:47:28.0453056Z | `hl1:92` Hands-on: lift, toss, land, settle and Reset | 90 |
+2026-10-17T06:47:28.0453796Z | `pg6:567` Pop out (in the app) › Your book: two figures up at once, one laid back; the switch holds  | 82 |
+2026-10-17T06:47:28.0454501Z | `wdr3:96` worlds r3 › the realistic character is hybrid mode's default and loads its level in each t | 55 |
+2026-10-17T06:47:28.0454974Z | `wdr3:235` worlds r3 › screenshots at 390x844 and 1440x900 | 52 |
+2026-10-17T06:47:28.0455452Z | `pg6:646` Pop out (in the app) › a depth saved in a scene comes back when the figure is raised | 33 |
+2026-10-17T06:47:28.0455983Z | `wdr3:217` worlds r3 › ?stats=1 shows frames per second, the tier, the mode, splats and draw calls | 25 |
+2026-10-17T06:47:28.0456394Z | `vwr:358` the toys › screenshots | 23 |
+2026-10-17T06:47:28.0456843Z | `lv9:178` Sound in a box, played to › your audio: each note drives its mode at once, the beads settl | 23 |
+2026-10-17T06:47:28.0457248Z | `fx7:462` clothes take flag colors on their cloth | 21 |
+2026-10-17T06:47:28.0457703Z | `pg6:618` Pop out (in the app) › the Picture lab pops a PDF figure and a drawn box | 20 |
+2026-10-17T06:47:28.0458106Z | `fx8:185` alarm-clock screenshots at 390x844 and 1440x900 | 20 |
+2026-10-17T06:47:28.0458589Z | `pg6:681` Pop out (in the app) › old links and saved scenes (v2 and v3) still load; one with Pop out | 17 |
+2026-10-17T06:47:28.0459073Z | `cdx-p3d2-text:10` flattened photo-textured splats retain DejaVu Sans text fidelity | 14 |
+2026-10-17T06:47:28.0459543Z | `cdx-p3d2-text:10` flattened photo-textured splats retain sans-serif text fidelity | 14 |
+2026-10-17T06:47:28.0460080Z | `fx13:193` Pop out with Pop-up layers on (in the app) › the Picture lab's chart rises with Pop-up lay | 14 |
+2026-10-17T06:47:28.0460491Z | `fx4:185` marble screenshots at 390x844 and 1440x900 | 14 |
+2026-10-17T06:47:28.0460903Z | `fx8:81` on the page, the hands show the page's time, upright, on its side and upside down | 14 |
+2026-10-17T06:47:28.0461368Z | `heb:65` chest: the lid lifts on its hinge, drops shut from low, stays open from high | 14 |
+2026-10-17T06:47:28.0462020Z | `heb:122` sword in the stone: stuck, then drawn out along its line; stays; clanks back in | 13 |
+2026-10-17T06:47:28.0462612Z | `fx4:185` clock screenshots at 390x844 and 1440x900 | 13 |
+2026-10-17T06:47:28.0463014Z | `fx7:277` lane Fix7 screenshots at 1440x900 | 13 |
+2026-10-17T06:47:28.0463457Z | `cdx-mp2-r3:80` returning to a toy cannot revive its abandoned first upload | 13 |
+2026-10-17T06:47:28.0464026Z | `fx7:235` taps that used to miss: the one splat's corners and the sunglasses' lenses | 13 |
+2026-10-17T06:47:28.0464617Z | `cdx-mp2-r3:80` changing toys before an upload's first answer releases the paused player | 13 |
+2026-10-17T06:47:28.0464921Z
+2026-10-17T06:47:28.0594930Z ##[group]Run node tools/ci-report.mjs recheck $OUT --shard=5/$SHARDS --started=1792219027
+2026-10-17T06:47:28.0595404Z [36;1mnode tools/ci-report.mjs recheck $OUT --shard=5/$SHARDS --started=1792219027[0m
+2026-10-17T06:47:28.0653561Z shell: /usr/bin/bash -e {0}
+2026-10-17T06:47:28.0653929Z env:
+2026-10-17T06:47:28.0654143Z   SHARDS: 16
+2026-10-17T06:47:28.0654359Z   SPLASHERY_GL: llvmpipe
+2026-10-17T06:47:28.0654659Z   DISPLAY: :99
+2026-10-17T06:47:28.0655032Z   OUT: /home/runner/work/_temp/ci-out/shard-5
+2026-10-17T06:47:28.0655362Z ##[endgroup]
+2026-10-17T06:48:23.4497223Z hl1:92 Hands-on: lift, toss, land, settle and Reset: passed alone
+2026-10-17T06:48:23.4499171Z 1 failed in this shard; 1 rechecked.
+2026-10-17T06:48:23.4573469Z

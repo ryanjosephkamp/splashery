@@ -3,8 +3,8 @@
   "files": [
     {
       "file": "README.md",
-      "bytes": 19481,
-      "sha256": "f5ece394e76f8d1b5736f5d2a5801c188fb7bde4f134d4d74d5641905c4db21a"
+      "bytes": 20019,
+      "sha256": "7c990bd20f2aabc1a2b49752634995e2e31fde0bfdeb4ddb400faa4196084f90"
     },
     {
       "file": "calibration-research-findings.md",
@@ -1392,6 +1392,26 @@
       "sha256": "99b6c0d16f8c7e159c8d4e9d6d37263723289e2ee2f17688bd4bb30b1442ea9c"
     },
     {
+      "file": "verification/ci-shard-5-failure-and-recheck.log",
+      "bytes": 7495,
+      "sha256": "2c49d4d620af00cf68fc71f8c7c7dde91e4988378d973ca5646fd4257107a8f2"
+    },
+    {
+      "file": "verification/ci-shard-5-raw.log.gz",
+      "bytes": 37187,
+      "sha256": "0dc278ff1352810b25cf730da6b3bf5ebd0caa14934a9737ae9030d2affabe05"
+    },
+    {
+      "file": "verification/ci-shard-9-failure-and-recheck.log",
+      "bytes": 7751,
+      "sha256": "3c52b1c4111c1ed6fcf646c3f33520782349e26ba422cbd1d03773a2b9f83a2c"
+    },
+    {
+      "file": "verification/ci-shard-9-raw.log.gz",
+      "bytes": 37720,
+      "sha256": "08496aa179452aad684c88230788cde353bb576e92e9523a6937e3697d9710cb"
+    },
+    {
       "file": "verification/classic-and-engine-blob-identities.txt",
       "bytes": 3099,
       "sha256": "e644358f7a91ec966cf24f60980d06c3419925f67120bd8c095e792ac2a07a0c"
@@ -1447,9 +1467,29 @@
       "sha256": "01ed61373d1d9debed8c214fc957c4b7866592b3b042998d5d48bc50ecd56cad"
     },
     {
+      "file": "verification/final-ci/shard-5-identity.json",
+      "bytes": 681,
+      "sha256": "e1f7dae639090f3d90ae65661db339a6770a4a8603705bf74ebd7c5d5bea7386"
+    },
+    {
+      "file": "verification/final-ci/shard-5.zip",
+      "bytes": 3089431,
+      "sha256": "3537e8b54e729e5137eecdd58c67994f9ed933e698f5401da6607bfea75dcae7"
+    },
+    {
+      "file": "verification/final-ci/shard-9-identity.json",
+      "bytes": 636,
+      "sha256": "d81159e820a67551a7c265b219cf9e0fb6e6fc27352eadc5addb6053df5676c9"
+    },
+    {
+      "file": "verification/final-ci/shard-9.zip",
+      "bytes": 2368910,
+      "sha256": "71fce085bd261c11b23aa8ed651eca5d3a7ee2068e20a4b4f45f7b7cd8ae0902"
+    },
+    {
       "file": "verification/final-ci-status.json",
-      "bytes": 3477,
-      "sha256": "77187f961259a62b7093443b30726b1577207753054e0ed2b8f1690dcb9e332c"
+      "bytes": 3705,
+      "sha256": "d8771b28a7fdaa771969703d63f8f603e95e9d6be1d20742d69eda9b11ff50ca"
     },
     {
       "file": "verification/final-confidence-model-equivalence.json",
@@ -1463,8 +1503,8 @@
     },
     {
       "file": "verification/final-verification.json",
-      "bytes": 5910,
-      "sha256": "83774caeb984ef6dcf0df0c427b0055e5ea8ddcecf0b34fa813926f92667483b"
+      "bytes": 6533,
+      "sha256": "db04e1a9eb27cbee90d6ef857e747ce71c533c690dbc51a777d922ffe3f45129"
     },
     {
       "file": "verification/frozen-file-identities.json",
@@ -1480,6 +1520,16 @@
       "file": "verification/latest-main-final-regression.log.gz",
       "bytes": 2199,
       "sha256": "962f4f39ccdb6aa843701174f4cb01ab88dbb76541b725de75d9ed5e5a2c7cbc"
+    },
+    {
+      "file": "verification/local-suite-partial-identity.json",
+      "bytes": 6106,
+      "sha256": "8f51bd20cd6af30705af517c9cd211bf34d6e18c956bb1fee51e64ac9a8ae600"
+    },
+    {
+      "file": "verification/local-suite-partial.tar.gz",
+      "bytes": 31148,
+      "sha256": "5bf5c7bcf0c646498fc1262cacc14087809a76eb1e0312aa68bdfbbbfa081612"
     },
     {
       "file": "verification/panorama-final-quiet-memory.json",
@@ -1520,6 +1570,11 @@
       "file": "verification/preflight-final.log",
       "bytes": 36947,
       "sha256": "09861bbd5642f436940ba5c0c660b378db29de8350f4a3bd37a9c0ce9e2aaff1"
+    },
+    {
+      "file": "verification/progress-4h.md",
+      "bytes": 1317,
+      "sha256": "3cf0c45b3f18064b3fb895021c89b917a90ede0f7f60c5cae2b99eaf973efc4c"
     },
     {
       "file": "verification/research-archive-verification.json",

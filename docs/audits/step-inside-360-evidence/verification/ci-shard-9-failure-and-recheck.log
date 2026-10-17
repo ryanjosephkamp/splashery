@@ -1,0 +1,109 @@
+2026-10-17T06:12:51.8765977Z 0 of 26 files already done in ../../_temp/ci-out/shard-9; running 26, 2 at once, WebGL2 on llvmpipe.
+2026-10-17T06:21:55.4556526Z [1/26] fx4-engine 541 s: 1 failed
+2026-10-17T06:22:32.6146199Z [2/26] lv7 579 s: ok
+2026-10-17T06:23:46.4640263Z [3/26] stm 74 s: ok
+2026-10-17T06:23:57.6763538Z [4/26] live2 122 s: ok
+2026-10-17T06:24:01.1006762Z [5/26] cdx-p3d5-study-state 3 s: ok
+2026-10-17T06:24:17.5060324Z [6/26] cdx-p3d4-render-hold 31 s: ok
+2026-10-17T06:24:22.6057203Z [7/26] cdx-v3d-bench-join 5 s: ok
+2026-10-17T06:24:25.6662287Z [8/26] cdx-renderer-diag 25 s: ok
+2026-10-17T06:24:34.9857629Z [9/26] cdx-v3d-older-browser-ui 12 s: ok
+2026-10-17T06:24:49.8750528Z [10/26] cdx-v3d-tile-size-gpu 24 s: ok
+2026-10-17T06:25:25.5397032Z [11/26] pt2 51 s: ok
+2026-10-17T06:27:03.2852867Z [12/26] hh5-math 98 s: ok
+2026-10-17T06:27:42.2011379Z [13/26] mt2 172 s: ok
+2026-10-17T06:28:14.9186167Z [14/26] arc-engine 72 s: ok
+2026-10-17T06:28:53.3184687Z [15/26] hh3-holidays 71 s: ok
+2026-10-17T06:29:11.4413836Z [16/26] g 57 s: ok
+2026-10-17T06:29:53.7551011Z [17/26] hh5-gems 60 s: ok
+2026-10-17T06:30:06.5713413Z [18/26] ui5 55 s: ok
+2026-10-17T06:30:28.1126416Z [19/26] phf2 34 s: ok
+2026-10-17T06:30:34.8282861Z [20/26] ops-media 28 s: ok
+2026-10-17T06:30:47.4530366Z [21/26] hh3-storybook 19 s: ok
+2026-10-17T06:30:49.2616209Z [22/26] cdx-p3d2-core 14 s: ok
+2026-10-17T06:30:57.6769611Z [23/26] hh1-shapes 10 s: ok
+2026-10-17T06:30:59.1488514Z [24/26] chem 10 s: ok
+2026-10-17T06:31:00.3589800Z [25/26] lv7-engine 3 s: ok
+2026-10-17T06:32:57.2990610Z [26/26] hec 117 s: ok
+2026-10-17T06:32:57.3538045Z
+2026-10-17T06:32:57.3552501Z # Suite run
+2026-10-17T06:32:57.3552783Z
+2026-10-17T06:32:57.3553206Z - 26 of 26 files, 195 tests: 194 passed, 1 failed, 0 skipped.
+2026-10-17T06:32:57.3554397Z - Time in files (one after another): 38 min. Wall time of this run: 20 min (2 at once).
+2026-10-17T06:32:57.3555298Z
+2026-10-17T06:32:57.3555464Z ## Failed
+2026-10-17T06:32:57.3555666Z
+2026-10-17T06:32:57.3556478Z - `fx4-engine:79` toys without the rim kind draw as before (webgpu): timedOut. Test timeout of 240000ms exceeded.
+2026-10-17T06:32:57.3557198Z
+2026-10-17T06:32:57.3557358Z ## Slowest files
+2026-10-17T06:32:57.3557572Z
+2026-10-17T06:32:57.3557781Z | File | Seconds | Tests |
+2026-10-17T06:32:57.3558242Z | --- | ---: | ---: |
+2026-10-17T06:32:57.3558672Z | lv7 | 579 | 11 |
+2026-10-17T06:32:57.3559097Z | fx4-engine | 541 | 4 |
+2026-10-17T06:32:57.3559526Z | mt2 | 172 | 19 |
+2026-10-17T06:32:57.3559906Z | live2 | 122 | 11 |
+2026-10-17T06:32:57.3560268Z | hec | 117 | 9 |
+2026-10-17T06:32:57.3560657Z | hh5-math | 98 | 9 |
+2026-10-17T06:32:57.3561058Z | stm | 74 | 20 |
+2026-10-17T06:32:57.3561447Z | arc-engine | 72 | 7 |
+2026-10-17T06:32:57.3561886Z | hh3-holidays | 71 | 5 |
+2026-10-17T06:32:57.3562320Z | hh5-gems | 60 | 5 |
+2026-10-17T06:32:57.3562685Z | g | 57 | 9 |
+2026-10-17T06:32:57.3563033Z | ui5 | 55 | 3 |
+2026-10-17T06:32:57.3563384Z | pt2 | 51 | 5 |
+2026-10-17T06:32:57.3563768Z | phf2 | 34 | 7 |
+2026-10-17T06:32:57.3564216Z | cdx-p3d4-render-hold | 31 | 3 |
+2026-10-17T06:32:57.3564656Z | ops-media | 28 | 1 |
+2026-10-17T06:32:57.3565291Z | cdx-renderer-diag | 25 | 18 |
+2026-10-17T06:32:57.3565800Z | cdx-v3d-tile-size-gpu | 24 | 1 |
+2026-10-17T06:32:57.3566274Z | hh3-storybook | 19 | 1 |
+2026-10-17T06:32:57.3566683Z | cdx-p3d2-core | 14 | 4 |
+2026-10-17T06:32:57.3567505Z | cdx-v3d-older-browser-ui | 12 | 1 |
+2026-10-17T06:32:57.3568019Z | hh1-shapes | 10 | 1 |
+2026-10-17T06:32:57.3568456Z | chem | 10 | 24 |
+2026-10-17T06:32:57.3568922Z | cdx-v3d-bench-join | 5 | 12 |
+2026-10-17T06:32:57.3569455Z | cdx-p3d5-study-state | 3 | 3 |
+2026-10-17T06:32:57.3569761Z
+2026-10-17T06:32:57.3569919Z ## Slowest tests
+2026-10-17T06:32:57.3570144Z
+2026-10-17T06:32:57.3570316Z | Test | Seconds |
+2026-10-17T06:32:57.3570691Z | --- | ---: |
+2026-10-17T06:32:57.3572105Z | `lv7:106` the mirror on a camera (a generated mannequin) › plain: steadier than before, frame to fra | 272 |
+2026-10-17T06:32:57.3573231Z | `fx4-engine:79` toys without the rim kind draw as before (webgpu) | 247 |
+2026-10-17T06:32:57.3574178Z | `fx4-engine:79` toys without the rim kind draw as before (webgl2) | 196 |
+2026-10-17T06:32:57.3576123Z | `lv7:150` the mirror on a camera (a generated mannequin) › hologram: nothing drawn over the face, an | 180 |
+2026-10-17T06:32:57.3577640Z | `fx4-engine:122` a thin rim shell is clear face on and solid at its edge (webgpu) | 49 |
+2026-10-17T06:32:57.3578903Z | `fx4-engine:122` a thin rim shell is clear face on and solid at its edge (webgl2) | 41 |
+2026-10-17T06:32:57.3580272Z | `hec:217` on its side or upside down, the soft parts hang toward the world's down and Reset still wo | 39 |
+2026-10-17T06:32:57.3581401Z | `lv7:520` screenshots at phone and desktop size: the landscape growing | 31 |
+2026-10-17T06:32:57.3582743Z | `stm:366` the toy in the browser › a sample shows, a tap lifts and settles, opening your own models  | 30 |
+2026-10-17T06:32:57.3584331Z | `ui5:41` rotation defaults › the storybook, umbrella, xylophone and upright piano open with the til | 29 |
+2026-10-17T06:32:57.3586305Z | `lv7:393` the Chladni plate › your audio: no bow ever, no new plate, the sand sets off for each new  | 28 |
+2026-10-17T06:32:57.3587885Z | `live2:207` in the browser › the click track: each click is at the now mark within 50 ms of when it is | 28 |
+2026-10-17T06:32:57.3589288Z | `stm:426` the toy in the browser › screenshots at phone and desktop size | 27 |
+2026-10-17T06:32:57.3590095Z | `ops-media:16` the web-address box names only what each picture toy opens | 25 |
+2026-10-17T06:32:57.3590996Z | `hec:275` the soft parts' step time stays small with each demo toy in play | 25 |
+2026-10-17T06:32:57.3591632Z | `mt2:274` thomas-attractor mid-tap screenshots at 390x844 and 1440x900 | 25 |
+2026-10-17T06:32:57.3592351Z | `phf2:135` screenshots: Photo to 3D in Splats, One color per splat, at phone and desktop size | 25 |
+2026-10-17T06:32:57.3593544Z | `mt2:274` duoprism mid-tap screenshots at 390x844 and 1440x900 | 24 |
+2026-10-17T06:32:57.3595341Z | `lv7:353` the Chladni plate › a tap bows the plate (the bow shows while it moves the sand) and nothi | 24 |
+2026-10-17T06:32:57.3596673Z | `mt2:274` rossler-attractor mid-tap screenshots at 390x844 and 1440x900 | 24 |
+2026-10-17T06:32:57.3597747Z | `mt2:274` five-cell mid-tap screenshots at 390x844 and 1440x900 | 24 |
+2026-10-17T06:32:57.3598810Z | `mt2:274` twenty-four-cell mid-tap screenshots at 390x844 and 1440x900 | 23 |
+2026-10-17T06:32:57.3600343Z | `live2:297` in the browser › ribbons: builds in both views, on paper and alone, and fills in as it pla | 23 |
+2026-10-17T06:32:57.3601666Z | `mt2:274` aizawa-attractor mid-tap screenshots at 390x844 and 1440x900 | 23 |
+2026-10-17T06:32:57.3602807Z | `mt2:274` sixteen-cell mid-tap screenshots at 390x844 and 1440x900 | 22 |
+2026-10-17T06:32:57.3603354Z
+2026-10-17T06:32:57.3711897Z ##[group]Run node tools/ci-report.mjs recheck $OUT --shard=9/$SHARDS --started=1792217571
+2026-10-17T06:32:57.3712542Z [36;1mnode tools/ci-report.mjs recheck $OUT --shard=9/$SHARDS --started=1792217571[0m
+2026-10-17T06:32:57.3795536Z shell: /usr/bin/bash -e {0}
+2026-10-17T06:32:57.3795803Z env:
+2026-10-17T06:32:57.3796008Z   SHARDS: 16
+2026-10-17T06:32:57.3796229Z   SPLASHERY_GL: llvmpipe
+2026-10-17T06:32:57.3796477Z   DISPLAY: :99
+2026-10-17T06:32:57.3796735Z   OUT: /home/runner/work/_temp/ci-out/shard-9
+2026-10-17T06:32:57.3797038Z ##[endgroup]
+2026-10-17T06:35:26.9956517Z fx4-engine:79 toys without the rim kind draw as before (webgpu): passed alone
+2026-10-17T06:35:26.9960502Z 1 failed in this shard; 1 rechecked.
+2026-10-17T06:35:27.0070484Z

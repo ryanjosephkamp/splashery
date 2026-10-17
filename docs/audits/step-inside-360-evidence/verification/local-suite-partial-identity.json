@@ -1,0 +1,283 @@
+{
+  "recordedUTC": "2026-10-17T07:07:00.316582+00:00",
+  "codeCommit": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
+  "reason": "Exec-server transport disconnected with pong_timeout at about 07:05 UTC. Files persisted, but all execution processes were interrupted. No cgroup OOM event occurred. The redundant local full-suite run was not resumed; full hosted CI remains authoritative.",
+  "totalFiles": 401,
+  "completedFiles": 17,
+  "failedCompletedFiles": 0,
+  "notAFullPass": true,
+  "reports": [
+    {
+      "file": "asc-repeat",
+      "stats": {
+        "startTime": "2026-10-17T06:45:45.371Z",
+        "duration": 295262.014,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 296.458,
+        "code": 0,
+        "display": ":90"
+      }
+    },
+    {
+      "file": "bk5",
+      "stats": {
+        "startTime": "2026-10-17T06:36:11.085Z",
+        "duration": 202579.719,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 204.187,
+        "code": 0,
+        "display": ":91"
+      }
+    },
+    {
+      "file": "cdx-mir",
+      "stats": {
+        "startTime": "2026-10-17T06:53:24.723Z",
+        "duration": 410543.856,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 411.605,
+        "code": 0,
+        "display": ":91"
+      }
+    },
+    {
+      "file": "cdx-pics",
+      "stats": {
+        "startTime": "2026-10-17T05:52:16.505Z",
+        "duration": 2093439.351,
+        "expected": 51,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 2094.551,
+        "code": 0,
+        "display": ":90"
+      }
+    },
+    {
+      "file": "chr",
+      "stats": {
+        "startTime": "2026-10-17T06:49:34.240Z",
+        "duration": 229412.887,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 230.441,
+        "code": 0,
+        "display": ":91"
+      }
+    },
+    {
+      "file": "geo",
+      "stats": {
+        "startTime": "2026-10-17T06:44:17.601Z",
+        "duration": 315620.352,
+        "expected": 16,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 316.896,
+        "code": 0,
+        "display": ":91"
+      }
+    },
+    {
+      "file": "img-engine",
+      "stats": {
+        "startTime": "2026-10-17T06:50:41.574Z",
+        "duration": 387949.635,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 388.909,
+        "code": 0,
+        "display": ":90"
+      }
+    },
+    {
+      "file": "lv7",
+      "stats": {
+        "startTime": "2026-10-17T06:27:11.119Z",
+        "duration": 487232.735,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 488.387,
+        "code": 0,
+        "display": ":90"
+      }
+    },
+    {
+      "file": "psv3",
+      "stats": {
+        "startTime": "2026-10-17T06:35:19.391Z",
+        "duration": 319351.703,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 320.39,
+        "code": 0,
+        "display": ":90"
+      }
+    },
+    {
+      "file": "qr",
+      "stats": {
+        "startTime": "2026-10-17T06:29:09.115Z",
+        "duration": 420342.786,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 421.456,
+        "code": 0,
+        "display": ":91"
+      }
+    },
+    {
+      "file": "qr5",
+      "stats": {
+        "startTime": "2026-10-17T06:40:40.187Z",
+        "duration": 303962.465,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 305.433,
+        "code": 0,
+        "display": ":90"
+      }
+    },
+    {
+      "file": "scr2",
+      "stats": {
+        "startTime": "2026-10-17T06:06:09.222Z",
+        "duration": 461711.998,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 462.793,
+        "code": 0,
+        "display": ":91"
+      }
+    },
+    {
+      "file": "shp",
+      "stats": {
+        "startTime": "2026-10-17T06:22:20.603Z",
+        "duration": 407407.646,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 408.452,
+        "code": 0,
+        "display": ":91"
+      }
+    },
+    {
+      "file": "smoke",
+      "stats": {
+        "startTime": "2026-10-17T05:52:16.554Z",
+        "duration": 831569.238,
+        "expected": 62,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 832.716,
+        "code": 0,
+        "display": ":91"
+      }
+    },
+    {
+      "file": "wd",
+      "stats": {
+        "startTime": "2026-10-17T06:39:34.746Z",
+        "duration": 281565.57300000003,
+        "expected": 16,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 282.671,
+        "code": 0,
+        "display": ":91"
+      }
+    },
+    {
+      "file": "wdh",
+      "stats": {
+        "startTime": "2026-10-17T06:18:00.753Z",
+        "duration": 258810.367,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 259.847,
+        "code": 0,
+        "display": ":91"
+      }
+    },
+    {
+      "file": "wdr3",
+      "stats": {
+        "startTime": "2026-10-17T06:13:52.243Z",
+        "duration": 247479.849,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 248.794,
+        "code": 0,
+        "display": ":91"
+      }
+    }
+  ]
+}
