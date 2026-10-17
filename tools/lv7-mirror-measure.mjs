@@ -182,47 +182,16 @@ async function cameraFace(page, clip) {
 
 const sampleModule = "/tests/helpers/mirror-sample.mjs";
 export async function measure(page, options = {}) {
-  let session;
   try {
-    const setup = await page.evaluate(
-      async (url) => (await import(url)).prepareMeasurement(),
-      sampleModule,
-    );
-    session = await page.context().newCDPSession(page);
-    // Use the same native PNG capture and clip rounding as Playwright, without
-    // repeating its font/caret preparation for every already-held frame. Exact
-    // RGBA equality was checked in both capture orders across 48 screenshot pairs.
-    const capture = async (clip) => {
-      const { visualViewport } = await session.send("Page.getLayoutMetrics");
-      const viewport = page.viewportSize() || setup.viewport;
-      const x = Math.max(0, Math.min(clip.x, viewport.width));
-      const y = Math.max(0, Math.min(clip.y, viewport.height));
-      const width = Math.max(0, Math.min(clip.x + clip.width, viewport.width)) - x;
-      const height = Math.max(0, Math.min(clip.y + clip.height, viewport.height)) - y;
-      const nativeClip = {
-        x: visualViewport.pageX + x,
-        y: visualViewport.pageY + y,
-        width: Math.floor(width / visualViewport.scale + 1e-3),
-        height: Math.floor(height / visualViewport.scale + 1e-3),
-        scale: visualViewport.scale * setup.pixelRatio,
-      };
-      if (!nativeClip.width || !nativeClip.height) throw Error("Empty mirror screenshot clip");
-      const { data } = await session.send("Page.captureScreenshot", {
-        format: "png",
-        clip: nativeClip,
-        captureBeyondViewport: false,
-      });
-      return PNG.sync.read(Buffer.from(data, "base64"));
-    };
-    return await measurePrepared(page, options, capture);
+    await page.evaluate(async (url) => (await import(url)).prepareMeasurement(), sampleModule);
+    return await measurePrepared(page, options);
   } finally {
     if (!page.isClosed())
       await page.evaluate(async (url) => (await import(url)).finishMeasurement(), sampleModule);
-    if (!page.isClosed()) await session?.detach();
   }
 }
 
-async function measurePrepared(page, { answers = 10, turn = 0.35, dump = null } = {}, capture) {
+async function measurePrepared(page, { answers = 10, turn = 0.35, dump = null } = {}) {
   const hj = [];
   const cj = [];
   const sj = [];
@@ -233,17 +202,15 @@ async function measurePrepared(page, { answers = 10, turn = 0.35, dump = null } 
   let last = null;
   let lastShot = null;
   let lastTurned = null;
+  const samples = await page.evaluate(
+    async ({ url, F, box, answers, turn }) =>
+      (await import(url)).collectSamples(F, box, answers, turn),
+    { url: sampleModule, F: FACE, box, answers, turn },
+  );
   for (let k = 0; k < answers; k++) {
-    const now = await page.evaluate(
-      async ({ url, F, restore }) => (await import(url)).beginSample(F, restore),
-      { url: sampleModule, F: FACE, restore: k > 0 },
-    );
-    const face = await capture(box);
-    await page.evaluate(async ({ url, turn }) => (await import(url)).turnSample(turn), {
-      url: sampleModule,
-      turn,
-    });
-    const turned = await capture(box);
+    const now = samples[k];
+    const face = PNG.sync.read(Buffer.from(now.face, "base64"));
+    const turned = PNG.sync.read(Buffer.from(now.turned, "base64"));
     if (last) {
       hj.push(meanAbs(now.h, last.h));
       cj.push(meanAbs(now.c, last.c));
@@ -261,7 +228,6 @@ async function measurePrepared(page, { answers = 10, turn = 0.35, dump = null } 
     lastShot = face;
     lastTurned = turned;
   }
-  await page.evaluate(async (url) => (await import(url)).finishSample(), sampleModule);
   const camFace = await cameraFace(page, box);
   const src = fineDetail(camFace);
   // The camera's face was drawn at twice the CSS size, like the shots.

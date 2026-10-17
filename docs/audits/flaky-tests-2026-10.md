@@ -1,15 +1,26 @@
 ## Summary
 
-**Current status, 09:58 UTC:** Nine families have current-repair Actions receipts at 30/30 per
-variant (420 cases). FL filled-buffer and IMG delayed-native-sort controls also passed 30/30. The
-retained moving-fit control failed 1/41 before and passed 41/41 after, with fresh projection in both
-phases. Mirror remains unresolved: the published combined candidate completed Actions still 27/30
-and low light 30/30, with three height failures. A new candidate reduces screenshot observer cost
-and batches native sampling in the browser. All 48 paired native PNG captures matched the original
-dimensions and every RGBA byte, and all 211 repeated identical native model inputs produced
-identical raw depth outputs. Its four original CDX/LV7 validation cases passed in 4.1 minutes;
-formal 30/30 remains pending. Main `69cd6c993` is merged. Raw evidence is published through
-`7680a07ef`. Full preflight and two clean full Actions runs remain pending.
+**Current status, 10:36 UTC:** Nine families retain current-repair Actions receipts at 30/30 per
+variant (420 cases). Mirror remains unproved. The new browser-native canvas-copy candidate passed
+all four existing CDX/LV7 measurement and stillness cases in 4.0 minutes. Strict comparison passed
+48/48 PNG pairs, with identical dimensions and every RGBA byte in both capture orders; device scale
+stayed at 2. Its six samples and twelve PNGs now run inside the browser without screenshot protocol
+round trips. Formal 30/30 per clip remains pending. The prior direct-protocol candidate failed
+height drift twice (still 16/18 passed; low light 18/18), with three interrupted and 21 unstarted
+cases separate. Main `69cd6c993` is merged. Full preflight and two clean full Actions runs remain
+pending. Deadline: 14:06 UTC.
+
+**WORKING (eight-hour checkpoint, 10:06 UTC):** Nine families have current-repair Actions stress
+receipts at 30/30 per variant (420 cases). Retained FL overflow and IMG delayed-native-sort controls
+passed 30/30; Teddy moving fit passed 40/41 before and 41/41 after. Mirror is still unresolved: the
+prior combined candidate completed still 27/30 and low light 30/30 on Actions. The new native-PNG
+and browser-task candidate passed all four existing CDX/LV7 validation cases and has now passed
+11/60 formal local stress cases, with zero failures so far. Strict PNG equivalence passed 48/48
+pairs; 211 repeated identical native model inputs produced identical raw outputs. No depth guard,
+changed fixture, tolerance, count, or retry was adopted. Two fresh full Actions runs and independent
+mirror stress are queued on immutable `18ea9fbe8`. Full preflight will run after local stress, with
+no competing burners. Remaining time: four hours, deadline 14:06 UTC. Earlier full runs on the
+superseded source were canceled and do not count.
 
 **WORKING (four-hour checkpoint, 06:06 UTC):** Seven families have current-code Actions stress
 receipts at 30/30 per variant; the earlier split WebGPU comparisons also passed 30/30 per toy, with
@@ -21,16 +32,15 @@ mirror and Share stress proof, retained controlled repetitions, final synchroniz
 two clean full Actions runs. The 05:28–05:50 workspace outage returned a fresh checkout; externally
 backed-up proof and prepared controls were restored.
 
-Implementation head: `cf10f12f6fd15913059124a40391f3b2df8db5c4`, including main `aedbe4433`.
-Whole-repository Prettier and American English passed before publication. The new mirror helper
-requires consumed native draw time and the actual current-view sort, then holds only the rendered
-canvas while its PNG is copied; live video, the native worker, and player updates continue. All six
-original samples and all assertions remain unchanged. Its four existing mirror validation cases
-passed in 315 seconds with two workers and no burners. The earlier Share repair and all 16 target
-variants were validated on `b87f6132c`; its Share stress campaign subsequently passed 30/30 per
-size. The native-time-only mirror side of that earlier campaign remains diagnostic.
-[Campaign 3](https://github.com/ryanjosephkamp/splashery/actions/runs/39004136389) retains
-current-repair receipts for the other eight families.
+Implementation: the native-canvas candidate follows `18ea9fbe8` and includes main `69cd6c993`. It
+uses the actual immutable 2D copy already returned by the native rendered-frame capture, crops the
+identical face pixels, and returns every PNG byte losslessly. All six original samples, twelve
+actual PNGs, camera turns/restores, native waits, and original measurement math remain intact. Each
+capture still requires the actual current-view native sort and both original rendered-frame steps.
+No additional CDP session is created. The direct-protocol candidate was insufficient and its probe
+also exposed changed device scale: window scale fell to 1, then a later native canvas followed.
+Matching held screenshots alone had not proved unchanged surrounding page state. The new path passed
+exact PNG equality while scale stayed 2. The other nine repairs remain unchanged.
 
 Codex built this task 100 repair and stress harness. **WORKING:** started October 17, 2026, about
 02:06 UTC; deadline 14:06 UTC. This remains a draft. Completion requires every variant to pass 30/30
@@ -54,11 +64,11 @@ Baseline: immutable main `ceb51de7a015377d7f350119c27a792fc1a8a66d`.
 10 repetitions, four fully parallel workers, two constant CPU burners, Node 22.23.3, Chromium 141.
 Mesa llvmpipe was used except SwiftShader for PHY and sample audio.
 [Preserved raw evidence](https://github.com/ryanjosephkamp/splashery/tree/codex/flaky-tests-clips/docs/audits/flaky-tests-raw)
-is on the separate clips branch, currently `7680a07ef`; never merge it.
+is on the separate clips branch, currently `5b28e52c3`; never merge it.
 
 | Original case   |                                                                                    Before failures / completed |                                                                                              After passes / completed | Cause and status                                                                                                                                                                                                                                                                                                                              |
 | --------------- | -------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| cdx-mir:294     |                                                       Original-wait Actions: still 3/30, low light 1/30 failed |                                          Latest combined Actions: still 27/30, low light 30/30; new transport pending | Wall time misses consumed draw time; current-view sorts and held screenshots are necessary but insufficient. Protocol screenshot preparation adds uncontrolled live evolution. Exact native PNG transport and browser task batching passed four validation cases and still require formal stress.                                             |
+| cdx-mir:294     |          Original-wait Actions: still 3/30, low light 1/30 failed; direct-protocol candidate still 2/18 failed |                                             Native-canvas candidate: four validation cases pass; formal 30/30 pending | Wall waits miss consumed draw time; stale sorts and screenshots add uncontrolled evolution between samples. Native time and held views alone still fail. Direct protocol capture also changed device scale. Native rendered-frame copies match all 48 original PNGs exactly and preserve native sampling without protocol delays.             |
 | fl:137          |                                                            0/10 CPU stress; retained filled-buffer failure 1/1 |                                                                             30/30 Actions; filled-buffer repair 30/30 | Bounded Resource Timing loses late module entries. Complete request observation retains the original checks. The current filled-buffer repair passed 30/30 under the original controlled pressure.                                                                                                                                            |
 | hh1-toys:258    |                              0/10 CPU stress; controlled camera failures observed before workspace replacement |                                                                                                         30/30 Actions | Unfinished fit and stale projection alter the unchanged gesture. Retained moving-fit control: before 40/41 passed, after 41/41 passed; fresh projection in both phases. Factor 1.02 failed the original settled limit (0.1500 > 0.08).                                                                                                        |
 | shr:202         | Phone and desktop 0/10 plus 0/30 each; native close boundary 1/1 failed; new real-source regression 1/1 failed | Phone 30/30 and desktop 30/30 Actions on b87; native close repair 1/1; all 13 Share tests and focus preservation pass | The native dialog leaves Save focused inside the closed preview until a later frame, reproducing the historical false/false/false focus predicate. Explicitly blur only that closed-preview focus when Record is unavailable; visible Record and external focus are preserved. The earlier hidden-pill hypothesis was unproved and discarded. |
@@ -195,9 +205,9 @@ ms. This corrects a demonstrated observer defect; it does not retrospectively at
 
 Earlier local song 30/30 receipts and some cause probes were lost in workspace replacements; those
 observations are disclosed but do not count as final retained acceptance. Prettier and American
-English currently pass. Final main merge, preflight, all retained 30/30 gates, and two clean full
-Actions runs remain pending. `phy:64` is removed from the known list after its retained Actions
-30/30 and the full PHY file passed 6/6 locally; `tests/taps.spec.mjs` is untouched.
+English currently pass. Final synchronization/preflight, mirror 30/30, and two clean full Actions
+runs remain pending. `phy:64` is removed from the known list after its retained Actions 30/30 and
+the full PHY file passed 6/6 locally; `tests/taps.spec.mjs` is untouched.
 
 Every changed existing expect line at source `23664b6`: `tests/fl.spec.mjs` lines 139, 142, and 145
 (original lines 141, 144, and 147) change `expect(await fluidFiles(page)).toEqual([])` to
@@ -210,6 +220,31 @@ into per-toy tests. No other existing expect line differs. New Engine assertions
 checked again after the remaining repairs.
 
 ## Deviations
+
+Manual workflow dispatches now use independent concurrency groups, as stress receipts already did.
+Two requested immutable full-suite runs should neither replace a waiting receipt nor serialize
+behind each other. Automatic PR cancellation behavior, all shard jobs, and all assertions remain
+unchanged. Fresh full runs on the new helper will supersede the earlier diagnostic dispatches.
+Full-suite validation overlaps local stress on the same immutable source so both can complete within
+the goal window; all first-pass results are retained.
+
+The first native-PNG mirror stress dispatch
+[39023010836](https://github.com/ryanjosephkamp/splashery/actions/runs/39023010836) failed before
+any test ran: its checkout input used the abbreviated commit `18ea9fbe8`, which checkout interpreted
+as a branch or tag. A fresh dispatch uses the full 40-character immutable SHA. This setup failure is
+retained separately; it is neither a target-test failure nor a completed repetition, and no test was
+retried.
+
+The two older full-suite dispatches on `cf10f12f6` were canceled after the new mirror helper was
+published; their partial shard results do not count as full runs. Fresh full run
+[1](https://github.com/ryanjosephkamp/splashery/actions/runs/39023009405) and mirror stress
+[39023010836](https://github.com/ryanjosephkamp/splashery/actions/runs/39023010836) test immutable
+`18ea9fbe8`. Full-suite validation overlaps formal mirror stress to fit the remaining goal window;
+neither substitutes for the other, and every first-pass failure remains recorded. Fresh full run
+[2](https://github.com/ryanjosephkamp/splashery/actions/runs/39023079228) is queued behind the
+first, after that first run acquired its concurrency group. The local formal mirror run started at
+09:57 UTC on the same exact clean head: 30 repetitions per clip, four fully parallel workers, two
+continuous CPU burners, and zero retries.
 
 The workspace disconnected and returned as a fresh checkout twice, about 03:25 and 03:43 UTC. It
 disconnected again about 05:28 UTC while a quiet four-case Share focus control was starting.
@@ -234,36 +269,15 @@ further implementation publication. This was a publication-order deviation.
 
 ## Known issues
 
-The exact published combined mirror campaign
-[39013302972](https://github.com/ryanjosephkamp/splashery/actions/runs/39013302972) completed all 60
-cases: still 27/30 and low light 30/30, zero skips or retries. Failed heights were 0.0006253624,
-0.0005780563, and 0.0005951548 against the unchanged 0.00055 limit. Artifact 12095759769 is
-retained. A new transport/batching candidate is being proved; four passing validation cases are not
-acceptance.
+| Case         | Cause and evidence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Work still needed                                                                                                                                                                                                                                                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| cdx-mir:294  | The original Actions campaign failed still 3/30 and low light 1/30. Native-time-only still failed 2/30; the held-frame candidate failed still 3/30. Direct protocol plus task batching still failed 2/18 completed still cases (0.0006173103 and 0.0005962968 > 0.00055), with shown-image drift passing. Native tracing found real coarse-depth transitions of 0.648–0.711 followed by the existing fine three-answer hold, and zero target mutations during pending votes. All 211 repeated byte-identical native model inputs produced identical raw depth outputs. A longer noise sequence failed all four still cases and is rejected. | Prove the browser-native sample/capture candidate 30/30 per original clip under recorded load. If failures remain, retain the exact coarse-input/output chain and distinguish genuine model sensitivity from sampling cadence, without suppressing legitimate geometry changes or altering the original noise, sample count, or limits. |
+| hh5-gems:154 | The historical final-target failure was not reproduced: original target 100/100 passed, but 224 invalid intact-neighbor frees occurred in 94 runs. Native engine regressions reproduce the actual invalid collision transitions, and the repaired target passes 30/30 with zero such frees. A supplemental projectile fixture failed its added contact-qualification check in both phases and never reached the original final assertion.                                                                                                                                                                                                   | Keep the target-failure qualification explicit. The inconclusive supplemental fixture does not count as reproduction or repaired acceptance.                                                                                                                                                                                            |
 
-The supplemental native quartz projectile comparison was inconclusive: both phases failed the added
-collision-qualification check, observing no required unheld-piece-to-intact-pinned-piece contact.
-Neither reached the original final assertion. It is retained separately and does not replace the
-qualified natural 100/100 target-pass baseline or the native engine collision regressions.
-
-The combined held-frame mirror candidate remains incomplete. Its stopped local campaign completed 16
-cases: still 7/8 passed, low light 8/8 passed, four cases were interrupted, and 40 were unstarted.
-The failed still clip had height drift 0.0010682912006437242 > 0.00055, while shown drift
-0.9390542328042328 < 0.95. This rejects the combined timing/sort/PNG repair as sufficient. The next
-diagnostic records real per-cell target, still age, motion, accepted native answer, and capture
-metadata without changing any sample or threshold.
-
-| Case        | Cause and evidence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Work still needed                                                                                                                                                                                                                                                                                                                                                                       |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| cdx-mir:294 | Wall time does not track consumed easing time, but the native-time candidate still fails: still 2/12 pixel failures in the stopped campaign; two further failures in the completed 12-case diagnostic, including height 0.000582448 with both readiness waits. All six face-screenshot intervals used fresh current-view sorts in both failed diagnostic cases. Color history was already 5.1–5.5 native seconds old, so the added age wait was a no-op. Screenshots continued rendering up to 1.2 native seconds beyond the earlier capture. | The combined candidate still fails height drift: local still 7/8, followed by native-cell diagnostic still 8/10. Resolve the actual native depth-edge transitions while preserving motion and all limits, then prove 30/30 per clip. The longer noise sequence is rejected. A native capture transport optimization must first prove exact pixel equivalence and reduced observer cost. |
-
-Remaining: repair and prove mirror drift 30/30, complete retained controlled repetitions, pass final
-preflight, and complete two clean full Actions runs. Current-helper WebGPU passed all 90 cases, and
-the native close-focus Share repair passed 30/30 per size on Actions. The source branch has moved
-since the baseline; latest main `aedbe4433` has now been merged at `0ed4b84d2`, published in
-`b87f6132c`; final synchronization and preflight remain required. The historical quartz target
-failure itself was not reproduced; its invalid intact-but-unpinned state is reproduced by native
-collisions and observed naturally on neighboring quartz pieces.
+The new native-canvas candidate has four passing focused cases and 48 exact screenshot pairs;
+neither is 30-repeat acceptance. Full preflight and two clean full Actions runs remain mandatory.
+All older failed mirror candidates, stopped-cohort counts, setup failures, and rejected proposals
+remain evidence rather than accepted repairs.
 
 ## What was cut
 
