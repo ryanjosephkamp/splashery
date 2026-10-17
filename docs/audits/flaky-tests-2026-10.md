@@ -3,13 +3,15 @@
 Codex built this task 100 repair on `codex/flaky-tests`. Draft PR only; the raw evidence branch
 `codex/flaky-tests-clips` must never merge.
 
-**Current status, 13:19 UTC:** All ten families have complete 30/30 stress receipts per variant (480
-cases). Final local mirror stress on immutable `9a16ae2ae7e49b1b792d01985fba3ea61aea2f78` passed
-still 30/30 and low light 30/30, zero failures, skips, retries, or interruptions, under four workers
-and two constant CPU burners. Full preflight passed 271/271. Both full Actions runs completed with
-no target failure; both are globally red solely because of non-target `pages-r2:495`, independently
-failed on current main. Matching Actions mirror stress is still running and must be inspected.
-Deadline: 14:06 UTC.
+**Current status, 14:01 UTC:** All ten target families have complete 30/30 stress receipts per
+variant (480 cases); all original assertions remain. Final local CDX passed still 30/30 and low
+light 30/30 with zero failures, skips, retries, or interruptions. Independent matching Actions CDX
+stress is still active. The additional PDF readiness repair passed all 11 page cases, 30/30 stressed
+repetitions, and the first fresh Actions PDF shard. Full preflight passed 271/271 browser cases and
+all six static gates on functional head `499501064b0b42e27545d61df8f5fdb660dfab71`, after main
+synchronization. **Two globally clean full runs are not yet proved:** the first fresh run has 15/16
+shards passed and one active; the second has one passed, four active, and eleven queued. Incomplete
+runs do not count as clean. The hard cutoff remains 14:06 UTC.
 
 Test changes observe completed native state and preserve the original assertions. Separate Engine
 commits repair collision ordering, intact-joint preservation, and focus after closing a recording
@@ -97,14 +99,20 @@ failure from the ten-test list. Neither is globally clean.** Both fail only `pag
 also fails alone. The existing skip is `cdx-v3d-calibration:217`, whose private counterexample
 fixture is absent; it is outside this task and unchanged.
 
-Main `69cd6c99326e63873bb0facf82ef75d9d75d18c0` was fetched and merged at 11:58 UTC (already up to
-date), then fetched again before final preflight. **Full preflight passed on functional head
-`9a16ae2ae7e49b1b792d01985fba3ea61aea2f78`: 271/271 browser cases and all six static gates.** No
-quick mode was used:
+The fresh full runs after the PDF repair are
+[39036877114](https://github.com/ryanjosephkamp/splashery/actions/runs/39036877114) and
+[39036878610](https://github.com/ryanjosephkamp/splashery/actions/runs/39036878610), both on
+`499501064b0b42e27545d61df8f5fdb660dfab71`. At the 14:01 UTC audit snapshot, they remain incomplete
+as detailed in Known issues. Their first-pass outcomes will not be replaced by rechecks.
+
+Main `69cd6c99326e63873bb0facf82ef75d9d75d18c0` was fetched and merged again at 13:30 UTC (already
+up to date). **Full preflight then passed on functional head
+`499501064b0b42e27545d61df8f5fdb660dfab71`: 271/271 browser cases and all six static gates.** The
+earlier full 271-case pass on `9a16ae2ae` is also retained. No quick mode:
 `SPLASHERY_CHROMIUM=<Chromium-141> SPLASHERY_GL=llvmpipe DISPLAY=:91 node tools/preflight.mjs`, on
-standard port 4173. Subsequent audit-only commits leave every tested runtime and test byte
-unchanged. `tests/taps.spec.mjs` is untouched. PHY was removed from the known list only after its
-30/30 stress receipt and full six-case local file passed.
+standard port 4173. Subsequent audit-only updates leave all runtime, test, and runner bytes
+unchanged. `tests/taps.spec.mjs` is untouched. PHY left the known list only after its 30/30 stress
+receipt and full six-case local file passed.
 
 Causal and preservation evidence:
 
@@ -150,6 +158,14 @@ completed in 246–264 seconds under the same load; none of their six-observatio
 the rare failure, and one complete median increased, so these controls are runtime/fault-detection
 evidence, not causal reproduction or acceptance.
 
+The PDF comparison crosses a real raster upgrade: a coarse 128-pixel raster remains shown while the
+final 256/362-pixel level is pending. The old shown/want key check passes before the desired-level
+upgrade begins. Captures cross that real upgrade, causing pixel differences of 19.1568; native-sort
+readiness alone still fails at 27.3098. Waiting until the actual desired raster is shown and retired
+sheets are gone gives mean zero. Both original expectations, every original capture, and the
+original test timeout remain. The full 11-case file passed, then its original WebGL2 case passed
+30/30 under four workers and two burners, zero retries/skips/failures.
+
 Every changed existing expect line: `tests/fl.spec.mjs` 139, 142, and 145 (original 141, 144,
 and 147) replace `expect(await fluidFiles(page)).toEqual([])` with
 `expect(fluidFiles()).toEqual([])`; the collector is complete request events instead of bounded
@@ -159,13 +175,24 @@ Resource Timing, and the empty-list matcher is identical. `tests/fx4-engine.spec
 low-light observation count increases rather than decreases. Added Engine and Share expect lines are
 strict regressions and preservation controls.
 
-[Published raw evidence](https://github.com/ryanjosephkamp/splashery/tree/12ae6af6d4255cfc6eef70038953eec0c87c1d3f/docs/audits/flaky-tests-raw)
-is pinned at `12ae6af6d4255cfc6eef70038953eec0c87c1d3f`. Final local mirror is in
-`cdx-final-low20-1225`; both full runs and the current-main PDF excerpts are in
-`actions-final-full-9a16`; both preflight logs and the 25 generated PNGs with hashes are retained in
-their named preflight directories. This evidence branch must never merge.
+[Published raw evidence](https://github.com/ryanjosephkamp/splashery/tree/a8748288dd36df667d2fabc036f9819cc7687044/docs/audits/flaky-tests-raw)
+is pinned at `a8748288dd36df667d2fabc036f9819cc7687044`. Final local mirror is in
+`cdx-final-low20-1225`; both original full runs and current-main PDF excerpts are in
+`actions-final-full-9a16`; the PDF native controls and 30-repeat proof are in the three named PDF
+directories. Complete preflight logs and the generated PNGs with hashes are retained, including the
+latest 27 PNGs in `preflight-after-pdf-1331`. This evidence branch must never merge.
 
 ## Deviations
+
+Both requested full runs also exposed a pre-existing PDF raster race. Scope includes its test-only
+readiness repair so complete full runs can pass; the original first-pass failures remain retained.
+Read-only native traces showed the coarse 128-pixel raster replaced between the comparison captures
+(256/362 pixels), with camera and native sort already stable. A strict desired-level state wait
+fixes this without changing any existing assertion, capture, or timeout. Since the command-line
+Actions credential expired, two explicit PR labels requested fresh full runs; label-triggered
+receipts now have unique concurrency groups just like manual dispatches. The temporary full-suite
+label was removed after both matrices registered, preventing audit-only pushes from starting more
+full runs.
 
 The first final preflight used my nonstandard port 4217. Two existing viewer tests hardcode PDF
 fixtures on 4173, where no server was listening: 269 passed and both fixture fetches failed.
@@ -198,10 +225,10 @@ that buffer to 256 MB. No rule or input line was excluded, and the preload is no
 
 ## Known issues
 
-| Case                                       | Cause and evidence                                                                                                                                                                                                                                                                                                                                                              | Remaining work                                                                                                           |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Independent CDX check                      | Local final stress passed both clips 30/30. Matching Actions stress on the same head remains running.                                                                                                                                                                                                                                                                           | Inspect the complete independent first-pass result before final handback.                                                |
-| Full suite: pages-r2:495 (outside the ten) | Both final full runs fail the unchanged <0.5 opaque-paper pixel comparison; means are 19.6524749445 and 19.6751678993. It also failed alone and in current-main [run 39021491077](https://github.com/ryanjosephkamp/splashery/actions/runs/39021491077), including alone. PDF and picture-renderer sources are unchanged by this branch. Its internal cause is not established. | Report the separate main failure; no assertion or quarantine change is proposed. This prevents globally green full runs. |
+| Case                   | Cause and evidence                                                                                                                                                                                                                                                              | Remaining work                                                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Independent CDX check  | Local final stress passed both clips 30/30. Matching Actions stress on the same head remains running.                                                                                                                                                                           | Inspect the complete independent first-pass result before final handback.                                                          |
+| Fresh full-suite proof | On 499501064, first run 39036877114 has 15/16 shards passed and one active; second run 39036878610 has one passed, four active, and eleven queued at 14:01 UTC. No completed shard failed. The earlier PDF failure is repaired, with 11/11 full-file and 30/30 stressed passes. | Both full first-pass runs must finish clean. Unstarted and running shards are unproved; runner queues may exceed the 14:06 cutoff. |
 
 Related native checks passed 52/53 under competing load. The unrelated SoftParts 1 ms benchmark
 measured 1.086 ms; its unchanged isolated check then measured 0.410 ms. That first failure remains
