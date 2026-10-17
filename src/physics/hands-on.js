@@ -1116,14 +1116,8 @@ export class HandsOn {
     // when picked (a solid's faces: one set down doesn't knock the rest off).
     const knock = this.info?.recipe?.hands?.knock !== false;
     if (knock && this.mode === "pieces" && !hit.body?.held && !hit.other?.held) {
-      // A joint that still holds is not a loose piece: only its own pull
-      // or opt-in impact break can free it. Sockets remain knockable.
-      const knockable = (b) => {
-        const j = this.joints?.joint(b);
-        return !j || !this.joints.posed(j);
-      };
-      if (hit.other?.pinned && speed > 2.5 && knockable(hit.other)) this.free(hit.other);
-      if (hit.body?.pinned && speed > 2.5 && knockable(hit.body)) this.free(hit.body);
+      if (hit.other?.pinned && speed > 2.5) this.free(hit.other);
+      if (hit.body?.pinned && speed > 2.5) this.free(hit.body);
     }
     if (this.mode === "toy" && this.soft > 0 && speed > 0.8) {
       const amp = Math.min(0.45, this.soft * 0.08 * speed);

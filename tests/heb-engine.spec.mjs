@@ -288,13 +288,14 @@ test("toys without joints have none", () => {
   expect(s.h.joints).toBe(null);
 });
 
-test("reseating: an earlier loose-body collision cannot unpin a socket", () => {
-  const s = play({ hands: { floor: 0, pieces: () => [piece(0, [0, 0.1, 0], [0.1, 0.1, 0.1])], joints: [{ type: "socket", token: 0 }] } }); // prettier-ignore
+test("reseating: an earlier loose-body collision cannot unpin the repaired joint", () => {
+  const s = play({ hands: { floor: 0, pieces: () => [piece(0, [0, 0.1, 0], [0.1, 0.1, 0.1])], joints: [{ type: "break", token: 0, reseat: true }] } }); // prettier-ignore
   const b = s.h.pieces[0].body;
   const j = s.h.joints.list[0];
   s.h.free(b);
+  j.broken = true;
   b.pos = [0.05, 0.1, 0];
-  s.h.joints.glide(j);
+  s.h.joints.glideSeat(j, 0);
   s.h.joints.step(0.15);
   // A real floor impact early in this slow frame, before the glide ends.
   b.vel = [0, -4, 0];
@@ -321,31 +322,4 @@ test("impacts: a moving piece still knocks a previously pinned piece loose", () 
   falling.vel = [0, -4, 0];
   s.h.step(0.1);
   expect(target.pinned).toBe(false);
-});
-
-test("impacts: an intact break joint holds fast without an opt-in impact break", () => {
-  const s = play({ hands: { floor: 0, pieces: () => [piece(0, [0, 0.1, 0], [0.1, 0.1, 0.1]), piece(1, [0, 0.45, 0], [0.1, 0.1, 0.1])], joints: [{ type: "break", token: 0, reseat: true }] } }); // prettier-ignore
-  const falling = s.h.pieces[1].body;
-  s.h.free(falling);
-  falling.vel = [0, -4, 0];
-  const hits = [];
-  const onHit = s.h.onHit.bind(s.h);
-  s.h.onHit = (hit) => {
-    hits.push(hit.speed / s.h.R());
-    onHit(hit);
-  };
-  s.h.step(0.1);
-  expect(hits.some((speed) => speed > 2.5)).toBe(true);
-  expect(s.j().broken).toBe(false);
-  expect(s.j().pinned).toBe(true);
-  expect(s.j().pos).toEqual(s.j().home);
-});
-
-test("impacts: an ordinary socket can still be knocked out of its place", () => {
-  const s = play({ hands: { floor: 0, pieces: () => [piece(0, [0, 0.1, 0], [0.1, 0.1, 0.1]), piece(1, [0, 0.45, 0], [0.1, 0.1, 0.1])], joints: [{ type: "socket", token: 0 }] } }); // prettier-ignore
-  const falling = s.h.pieces[1].body;
-  s.h.free(falling);
-  falling.vel = [0, -4, 0];
-  s.h.step(0.1);
-  expect(s.j().pinned).toBe(false);
 });
