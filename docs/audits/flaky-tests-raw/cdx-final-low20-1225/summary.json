@@ -1,0 +1,44 @@
+{
+  "head": "9a16ae2ae7e49b1b792d01985fba3ea61aea2f78",
+  "stats": {
+    "startTime": "2026-10-17T12:25:19.027Z",
+    "duration": 3145914.9960000003,
+    "expected": 60,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "recipe": {
+    "repeat": 30,
+    "workers": 4,
+    "burners": 2,
+    "renderer": "llvmpipe",
+    "node": "v22.20.0",
+    "browserVersion": "Chromium 141.0.7390.37",
+    "cpuQuota": "400000 100000"
+  },
+  "variants": {
+    "still": {
+      "cases": 30,
+      "passed": 30,
+      "statuses": [
+        "passed"
+      ],
+      "retries": 0,
+      "maxDurationMs": 157540,
+      "maxHeight": 0.0002954858955130115,
+      "maxShown": 0.7366402116402117
+    },
+    "low-light": {
+      "cases": 30,
+      "passed": 30,
+      "statuses": [
+        "passed"
+      ],
+      "retries": 0,
+      "maxDurationMs": 283364,
+      "maxHeight": 0.003805801396988131,
+      "maxShown": 1.7447751322751324
+    }
+  }
+}

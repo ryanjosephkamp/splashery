@@ -1,0 +1,13 @@
+{
+  "source": "9a16ae2ae7e49b1b792d01985fba3ea61aea2f78",
+  "started": "2026-10-17T12:06:08Z",
+  "mode": "FULL preflight, no quick",
+  "renderer": "llvmpipe",
+  "display": ":91",
+  "configuredPort": 4217,
+  "hardcodedFixturePort": 4173,
+  "passed": 269,
+  "failed": 2,
+  "cause": "The task runner selected port4217 while two existing PDF tests fetch their fixture from4173. No server was listening there; both failed with fetch/MediaError before PDF assertions. Restored standard4173 for complete rerun; source and assertions unchanged.",
+  "retainedFailureFiles": []
+}

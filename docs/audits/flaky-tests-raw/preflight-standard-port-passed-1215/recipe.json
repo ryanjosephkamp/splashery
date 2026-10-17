@@ -1,0 +1,16 @@
+{
+  "source": "9a16ae2ae7e49b1b792d01985fba3ea61aea2f78",
+  "started": "2026-10-17T12:15:34Z",
+  "observedFinished": "2026-10-17T12:22:35Z",
+  "command": "node tools/preflight.mjs",
+  "mode": "FULL, no quick",
+  "node": "22.20.0",
+  "browser": "Chromium141.0.7390.37",
+  "renderer": "llvmpipe",
+  "display": ":91",
+  "port": 4173,
+  "passed": 271,
+  "failed": 0,
+  "competingBurners": 0,
+  "environmentCorrection": "Removed nondefault4217 override; unchanged tests fetch their PDF fixture on standard4173."
+}

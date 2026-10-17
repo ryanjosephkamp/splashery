@@ -1,0 +1,4 @@
+2026-10-17T12:50:24.0784366Z [10/25] pages-r2 135 s: 1 failed
+2026-10-17T12:57:22.8141256Z - 25 of 25 files, 161 tests: 159 passed, 1 failed, 1 skipped.
+2026-10-17T12:57:22.8164626Z - `pages-r2:495` opaque tilted PDF faces cover their own paper backing (webgl2): failed. Error: expect(received).toBeLessThan(expected)
+2026-10-17T12:57:30.1257932Z pages-r2:495 opaque tilted PDF faces cover their own paper backing (webgl2): failed alone
