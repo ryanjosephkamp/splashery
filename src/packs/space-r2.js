@@ -1023,6 +1023,7 @@ const starsRecipe = {
   build(k, o) {
     const D = STARS.data;
     if (!D) throw new Error("The stars haven't loaded.");
+    k.all = true; // lane SPL1: the catalog's stars, whatever the budget
     const same = o.size === "same";
     const list = D.stars;
     const sizeOf = (absG) =>
@@ -1334,6 +1335,7 @@ const systemsRecipe = {
   build(k, o) {
     const D = SYS.data;
     if (!D) throw new Error("The systems haven't loaded.");
+    k.all = true; // lane SPL1: the systems' stars and planets, whatever the budget
     const sys = D.systems.find((x) => x.id === o.system) || D.systems[0];
     const amax = Math.max(...sys.planets.map((p) => p.aAU));
     const spread = o.spacing === "spread";

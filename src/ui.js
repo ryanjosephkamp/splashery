@@ -11,7 +11,7 @@ import { IDLE_EFFECTS, formatCount, formatBytes } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
 import { initLive, renderLive } from "./live/panel.js"; // lane Live input
-import { ui2On } from "./player.js"; // UI r2
+import { ui2On, SPLATS_STOPS, splatsStop } from "./player.js"; // UI r2; lane SPL1
 import { SITE_TOY_IDS } from "./site-toy-pages.js";
 
 const $ = (id) => document.getElementById(id);
@@ -2372,12 +2372,15 @@ export function createUI(app) {
     b.addEventListener("click", () => app.setDetail(b.dataset.detail));
   }
   // Lane Kit lab: the Detail slider, labs only. The label follows the drag;
-  // the toy rebuilds when the finger lets go.
+  // the toy rebuilds when the finger lets go. (Lane SPL1: the slider moves
+  // through SPLATS_STOPS, finer below 60,000.)
   els.lookSplatsRow.hidden = els.lookSplatsNote.hidden = !labsOn();
+  els.lookSplats.max = String(SPLATS_STOPS.length - 1);
+  const slidTo = () => SPLATS_STOPS[Number(els.lookSplats.value)] ?? SPLATS_STOPS.at(-1);
   els.lookSplats.addEventListener("input", () => {
-    els.lookSplatsValue.value = splatsLabel(Number(els.lookSplats.value));
+    els.lookSplatsValue.value = splatsLabel(slidTo());
   });
-  els.lookSplats.addEventListener("change", () => app.setSplats(Number(els.lookSplats.value)));
+  els.lookSplats.addEventListener("change", () => app.setSplats(slidTo()));
   for (const e of IDLE_EFFECTS) els.autoEffect.add(new Option(e.label, e.id));
   // Reset everything: a second tap within a few seconds confirms.
   let resetArmed = null;
@@ -3730,7 +3733,7 @@ export function createUI(app) {
       // Lane Kit lab: the slider shows its own count, or the tier's.
       const tier = app.player?.profile;
       const n = splats || PROFILES[tier]?.defaultCount || 140000;
-      els.lookSplats.value = String(n);
+      els.lookSplats.value = String(splatsStop(n));
       els.lookSplatsValue.value = splatsLabel(n, splats ? null : tier);
     },
     setAutoplay(a, reducedMotion) {

@@ -254,6 +254,7 @@ export const RECIPES = {
       else driveSorting(p, out);
     },
     build(k, o) {
+      k.all = true; // lane SPL1: each view shows the splats it explains
       const view = VIEWS.includes(o.view) ? o.view : "training";
       SPL.view = view;
       SPL.tapN = 0;

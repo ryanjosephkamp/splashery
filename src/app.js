@@ -434,7 +434,7 @@ class App {
     const info = player.toyInfo;
     if (!info) return;
     this.ui.setRenderInfo(
-      `Rendering with ${player.deviceType === "webgpu" ? "WebGPU" : "WebGL2"} · ${player.profile} detail tier · ${formatCount(info.splats)} splats`,
+      `Rendering with ${player.deviceType === "webgpu" ? "WebGPU" : "WebGL2"} · ${player.profile} detail tier · ${formatCount(info.splats)} splats${info.splatsNote || ""}`,
     );
   }
 
@@ -574,12 +574,9 @@ class App {
     const player = this.player;
     const info = player.toyInfo;
     if (!info) return;
-    // Pictures: a picture toy's sheets count too (and lane Powers of ten: a
-    // toy's chunks on show).
-    const splats = info.splats + (player.pictures?.splats() || 0) + (player.chunks?.splats() || 0); // prettier-ignore
     // Lane Photo sharp view: a toy drawn another way names what is on screen instead of its splats.
     const shown = player.statusLabel?.(info);
-    const parts = [info.label, shown || `${formatCount(splats)} splats`];
+    const parts = [info.label, shown || this.splatsText(info)];
     if (info.credit) parts.push(`by ${info.credit.author} (${info.credit.license})`);
     const pat = player.scene.pattern;
     this.flagCredit = null;
@@ -592,6 +589,23 @@ class App {
     }
     this.ui.setStatus(parts.join(" · "));
     this.renderCredits(info);
+  }
+
+  // The splats on show. Pictures: a picture toy's sheets count too (and lane
+  // Powers of ten: a toy's chunks on show). Lane SPL1: with the labs Splats
+  // slider the toy's own splats are the slider's count, so the label names
+  // the pictures and chunks that come on top, and says when the toy can't
+  // meet the count (info.splatsNote).
+  splatsText(info) {
+    const player = this.player;
+    const pics = player.pictures?.splats() || 0;
+    const chunks = player.chunks?.splats() || 0;
+    const total = formatCount(info.splats + pics + chunks);
+    const note = info.splatsNote || "";
+    if (!player.splats || (!pics && !chunks)) return `${total} splats${note}`;
+    const own = `${formatCount(info.splats)} in the toy${note ? `, ${note.slice(2, -1)}` : ""}`;
+    const more = [pics && `${formatCount(pics)} in its pictures`, chunks && `${formatCount(chunks)} loaded as you zoom`]; // prettier-ignore
+    return `${total} splats (${[own, ...more.filter(Boolean)].join("; ")})`;
   }
 
   async chooseToy(id) {

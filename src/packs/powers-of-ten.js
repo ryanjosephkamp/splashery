@@ -984,6 +984,7 @@ const RECIPE = {
     if (!playing && Math.abs(m.goal - m.z) < 1e-4) m.z = m.goal;
   },
   build(k) {
+    k.all = true; // lane SPL1: its scenes are chunks, sized by the tier
     // Its own splats: the black backdrop and four clear splats that frame
     // the view (every scene is a chunk).
     buildBackdrop(k);

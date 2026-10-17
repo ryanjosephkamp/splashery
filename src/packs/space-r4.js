@@ -372,6 +372,7 @@ const recipe = {
     out.legend = { title: date, items };
   },
   build(k, o) {
+    k.all = true; // lane SPL1: the orbits, planets and moons it shows, whatever the budget
     const D = DATA.orbits;
     if (!D) throw new Error("The orbits haven't loaded.");
     const scaleId = o.scale === "true" ? "true" : "readable";

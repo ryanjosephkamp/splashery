@@ -1676,6 +1676,7 @@ const CRYOEM = {
     // an even share of them, each a little bigger to close the surface.
     const budget = Math.max(2000, Math.floor(k.count * (showModel ? 0.8 : 0.98)));
     const keep = Math.min(showModel ? 0.07 : 1, budget / S.count);
+    if (keep < budget / S.count) k.all = true; // lane SPL1: every point of the map's surface
     const vox = D.voxel[0];
     const size = showModel ? vox * 0.6 : vox * 0.8 * Math.sqrt(1 / keep);
     const pick = [];

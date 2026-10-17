@@ -489,6 +489,7 @@ export const RECIPES = {
       // many as the device's budget allows), each smaller in step, so the
       // surface is finer grained. The program's own count stays in its text.
       const n = o.splats === "fine" ? Math.max(n0, Math.min(prog.count * 4, budget)) : n0;
+      if (n < budget) k.all = true; // lane SPL1: the splats its program asks for
       const fine = Math.sqrt(n0 / n);
       const uv = params(prog, n, () => k.rand());
       const times = Array.from({ length: copies + 1 }, (_, j) => (TAU * j) / copies);

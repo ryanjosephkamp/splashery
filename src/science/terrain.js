@@ -307,6 +307,7 @@ export const CONTOUR = {
     const { D, def } = T.want;
     const exag = Number(o.exag) || 2;
     const stride = strideFor(k);
+    if (stride === 1) k.all = true; // lane SPL1: every point of the elevation model
     const relief = D.head.high - D.head.low;
     // At most 14 layers (the kit's parts).
     let interval = contourInterval(relief, 9);

@@ -724,7 +724,8 @@ export const RECIPES = {
       const D = 0.085;
       const W = 0.044;
       const silver = o.kind !== "tropical";
-      k.cloud({ share: 0.97, size: 0.55, flat: 0.3 }, (rand, i) => {
+      // Lane SPL1: smaller splats past the tiers' most, so more of them sharpen the fish.
+      k.cloud({ share: 0.97, size: 0.55 * k.shrink, flat: 0.3 }, (rand, i) => {
         const fi = i % fish.length;
         const f = fish[fi];
         const s = f.size;
@@ -802,8 +803,8 @@ export const RECIPES = {
           pattern: keepIt ? false : undefined,
         };
       });
-      // Bubbles drifting up.
-      k.cloud({ share: 0.003, size: 0.8, pattern: false }, (rand) => ({
+      // Bubbles drifting up (lane SPL1: no more of them past the tiers' most).
+      k.cloud({ share: 0.003 * k.shrink ** 2, size: 0.8, pattern: false }, (rand) => ({
         p: [(rand() - 0.5) * 1.2, -0.7 + rand() * 0.3, (rand() - 0.5) * 1.2],
         color: "#dff4ff",
         opacity: 0.55,

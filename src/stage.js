@@ -10,6 +10,8 @@ import {
   MODIFIER_KIT_PHOTO,
   MODIFIER_KIT_GLOSS,
   MODIFIER_RIG,
+  MODIFIER_THIN,
+  MODIFIER_RIG_THIN,
 } from "./effects.js";
 import { photoRender, withPhotoPS } from "./photo-splats.js"; // lane Photo fidelity
 import { kernelChunks, normalizeKernel } from "./kernels.js";
@@ -414,7 +416,9 @@ export class Stage {
   // Lane Kit lab: `gloss` ({ strength, sharpness }, labs only) gives a kit
   // toy a highlight that moves with the view (MODIFIER_KIT_GLOSS).
   // prettier-ignore
-  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null, photo = false, gloss = null }) {
+  // thin (lane SPL1): the share of a capture's splats drawn (the labs Splats
+  // slider), or null for all of them.
+  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null, photo = false, gloss = null, thin = null }) {
     this.clearToy();
     if (!photo) this.setPhoto(false); // lane Photo fidelity: only a photo toy keeps it on
     const entity = new pc.Entity("toy");
@@ -451,8 +455,11 @@ export class Stage {
     }
     const photoOn = photo && kit && !modifier && !!this.photo; // lane Photo fidelity
     const glossOn = !!gloss && kit && !modifier && !photoOn; // lane Kit lab
-    entity.gsplat.setWorkBufferModifier(modifier || (photoOn ? MODIFIER_KIT_PHOTO : glossOn ? MODIFIER_KIT_GLOSS : kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
+    const thinOn = thin > 0 && thin < 1 && !kit && !modifier; // lane SPL1
+    const plain = thinOn ? (rig ? MODIFIER_RIG_THIN : MODIFIER_THIN) : rig ? MODIFIER_RIG : MODIFIER;
+    entity.gsplat.setWorkBufferModifier(modifier || (photoOn ? MODIFIER_KIT_PHOTO : glossOn ? MODIFIER_KIT_GLOSS : kit ? MODIFIER_KIT : plain)); // prettier-ignore
     if (glossOn) entity.gsplat.setParameter("uSpGloss", [gloss.strength, gloss.sharpness, 0, 0]);
+    if (thinOn) entity.gsplat.setParameter("uSpThin", [thin, 0, 0, 0]);
     entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
     // The pattern sampler always needs a texture, even with no pattern on
     // (and kit toys' screen sampler too).
@@ -461,6 +468,7 @@ export class Stage {
     this.app.root.addChild(entity);
     this.toy = { entity, resource, asset, owned, kit, rig, photo: photoOn, gloss: glossOn };
     this.toy.customModifier = !!modifier;
+    this.toy.thin = thinOn ? thin : null; // lane SPL1
     this.requestRender();
     return this.toy;
   }
