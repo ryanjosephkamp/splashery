@@ -88,7 +88,15 @@ export async function matchGraph(
 ) {
   const pairs = allPairs(frames.length);
   let gpuMatches = null;
-  if (gpu && !cpuMatching) {
+  const software = /swiftshader|llvmpipe|lavapipe|software/i.test(
+    [gpu?.info?.vendor, gpu?.info?.architecture, gpu?.info?.description].join(" "),
+  );
+  onProgress({
+    stage: "matcher-backend",
+    backend: gpu && !cpuMatching && !software ? "WebGPU" : "cooperative CPU",
+    pairs: pairs.length,
+  });
+  if (gpu && !cpuMatching && !software) {
     try {
       gpuMatches = await gpuMatchAll(features, pairs, 0.8, () => {}, gpu.device, undefined, {
         signal,

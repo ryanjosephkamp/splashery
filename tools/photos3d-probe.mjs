@@ -9,6 +9,9 @@ import { chromium } from "@playwright/test";
 import { makeControl, scoreCameras } from "./photos3d-controls.mjs";
 import { runSfM } from "../vendor/splatjs/src/sfm/sfm.js";
 import { browserRound2 } from "./photos3d-evaluate.mjs";
+import { allPairs, verifyPair } from "../src/photos3d/graph.js";
+import { solvePhotoGraph } from "../src/photos3d/solve.js";
+import { matchSift } from "../vendor/splatjs/src/sfm/sift.js";
 
 export function orderedFiles(files, seed = 0) {
   const out = [...files].sort();
@@ -71,24 +74,50 @@ async function controlProbe(options) {
     uiYield: true,
     ...(options.calibration === "free" ? {} : { focalPx: control.focalPx, lockIntrinsics: true }),
   };
-  row.settings = settings;
+  row.settings = options.round2
+    ? {
+        solver: "Photos to 3D photo graph",
+        calibration: "per-photo exact focal lengths",
+        analyticCorrespondences: true,
+      }
+    : settings;
   row.inputCount = control.images.length;
   row.sentinel = options.sentinel || null;
   row.colorReads = Array(control.images.length).fill(0);
   try {
-    const recon = await runSfM(
-      control.images,
-      (s) => row.log.push(s),
-      (image) => {
-        row.colorReads[image]++;
-        return image === 0 && options.sentinel
-          ? options.sentinel === "red"
-            ? [1, 0, 0]
-            : [0, 0, 1]
-          : [0.5, 0.5, 0.5];
-      },
-      { ...settings, _feats: control.feats },
-    );
+    const recon = options.round2
+      ? await solvePhotoGraph(
+          control.images,
+          control.feats,
+          allPairs(control.images.length).map(([i, j]) =>
+            verifyPair(
+              i,
+              j,
+              matchSift(
+                control.feats[i].desc,
+                control.feats[i].n,
+                control.feats[j].desc,
+                control.feats[j].n,
+              ),
+              control.feats,
+              control.truth.map((c) => ({ f: c.f, cx: 240, cy: 180 })),
+            ),
+          ),
+          control.truth.map((c) => ({ f: c.f, cx: 240, cy: 180 })),
+        )
+      : await runSfM(
+          control.images,
+          (s) => row.log.push(s),
+          (image) => {
+            row.colorReads[image]++;
+            return image === 0 && options.sentinel
+              ? options.sentinel === "red"
+                ? [1, 0, 0]
+                : [0, 0, 1]
+              : [0.5, 0.5, 0.5];
+          },
+          { ...settings, _feats: control.feats },
+        );
     row.cameras = recon.cams.map((c) => ({
       ...c,
       R: Array.from(c.R),

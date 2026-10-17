@@ -5,6 +5,46 @@ import { solvePhotoGraph } from "../src/photos3d/solve.js";
 import { makeControl, scoreCameras } from "../tools/photos3d-controls.mjs";
 import { PNG } from "pngjs";
 import { matchSift } from "../vendor/splatjs/src/sfm/sift.js";
+import { polygonMask, scoreHeldOut } from "../tools/photos3d-evaluate.mjs";
+
+test("masked metrics score object pixels, exclude holes, and distinguish a changed held-out render", () => {
+  const width = 28,
+    height = 28;
+  const annotation = {
+    polygons: [
+      [
+        [0, 0],
+        [1, 0],
+        [1, 1],
+        [0, 1],
+      ],
+    ],
+    holes: [
+      [
+        [0, 0],
+        [0.25, 0],
+        [0.25, 1],
+        [0, 1],
+      ],
+    ],
+  };
+  const mask = polygonMask(width, height, annotation);
+  expect(mask.reduce((a, b) => a + b, 0)).toBe(21 * 28);
+  const frame = { tw: width, th: height, rgb: new Float32Array(width * height * 3).fill(0.5) };
+  const rendered = new Uint8ClampedArray(width * height * 4).fill(128);
+  for (let i = 0; i < width * height; i++) {
+    rendered[i * 4 + 3] = 255;
+    if (!mask[i]) rendered[i * 4] = 0;
+  }
+  const exact = scoreHeldOut(frame, rendered, annotation);
+  expect(exact.exactMatch).toBe(true);
+  expect(exact.ssim).toBe(1);
+  rendered.fill(0);
+  const changed = scoreHeldOut(frame, rendered, annotation);
+  expect(changed.ssim).toBeLessThan(0.1);
+  expect(changed.psnr).toBeGreaterThan(0);
+  expect(changed.psnr).toBeLessThan(10);
+});
 
 test("every unordered pair is proposed at 8, 24, and 60 photos", () => {
   for (const n of [8, 24, 60]) {

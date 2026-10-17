@@ -12968,6 +12968,903 @@
       "shipped": false,
       "scope": "External task 104 diagnostic input; photos are not committed. One object capture, not six sets.",
       "licenseSource": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/LICENSE.md"
+    },
+    {
+      "id": "alicevision-buddha-60",
+      "revision": "9067f679eb5a772c3e818b7a12dc35882c071858",
+      "source": "https://github.com/alicevision/dataset_buddha",
+      "author": "Simone Gasparini, Fabien Castan, and Yann Lanthony",
+      "license": "CC-BY-4.0",
+      "checked": "October 17, 2026",
+      "changes": "60 of 67 unmodified original PNGs, evenly sampled by sorted index round(i*66/59)+1. Frozen before round-two solving.",
+      "files": [
+        {
+          "name": "00001._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00001._c.png",
+          "bytes": 4455150,
+          "sha256": "0df6128a932b6df17e6c39a9bdbdbea1e0b3fe562a6d98d48ddd757fa1bbdad6"
+        },
+        {
+          "name": "00002._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00002._c.png",
+          "bytes": 4245797,
+          "sha256": "79a26b070ac1e704a469ce3ba18d849f44ae7f5e0d6fa3be7c887e1c71a86420"
+        },
+        {
+          "name": "00003._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00003._c.png",
+          "bytes": 4498705,
+          "sha256": "0a9ed2323a2068b181e8c10cd047428b52c1b19fef2b20f564f96530e15a5eab"
+        },
+        {
+          "name": "00004._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00004._c.png",
+          "bytes": 4258717,
+          "sha256": "5aa0ff6649153216ed3c12132e75362ae0769295839b880078faefa3b9da0e0c"
+        },
+        {
+          "name": "00005._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00005._c.png",
+          "bytes": 4264126,
+          "sha256": "b60ac5e058038ce7e7bfcba11ee2c1a59414ddf7dcd10c7485173a016ba2514d"
+        },
+        {
+          "name": "00007._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00007._c.png",
+          "bytes": 4139965,
+          "sha256": "5dcd5ccc571520ab8cedc156be859f44279cfb16786af6083d0df6b190fc912c"
+        },
+        {
+          "name": "00008._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00008._c.png",
+          "bytes": 4314842,
+          "sha256": "b35b2728400ea885baee36789d175e54e128960dcbeae301b854dfa1fe78b088"
+        },
+        {
+          "name": "00009._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00009._c.png",
+          "bytes": 4300359,
+          "sha256": "1b98dd7ebca38849f6ff1b8ccb26972674915a668efe050031cbb7d2555e05c3"
+        },
+        {
+          "name": "00010._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00010._c.png",
+          "bytes": 4108155,
+          "sha256": "2affef598f9965e4cfcb17e531d7bd29bb344566518920aad23d38275c247d33"
+        },
+        {
+          "name": "00011._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00011._c.png",
+          "bytes": 4982304,
+          "sha256": "98a2b4518884707a05b8be6fe907019f4c64feb828a2a052f479c09954ac1dae"
+        },
+        {
+          "name": "00012._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00012._c.png",
+          "bytes": 4348594,
+          "sha256": "416e4a7469be3dc929ec73f9d6f3ba849db257f48f370bada1976b68335d4688"
+        },
+        {
+          "name": "00013._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00013._c.png",
+          "bytes": 4254560,
+          "sha256": "6cbca244883f252083ce2678de3b8fc318eb3b8043d0cb8b9582b0a89ababb9a"
+        },
+        {
+          "name": "00014._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00014._c.png",
+          "bytes": 4394891,
+          "sha256": "e24ca37ac68337c08d11276c466339ef3f265e24e506f8d81bb41ab79a916a1f"
+        },
+        {
+          "name": "00016._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00016._c.png",
+          "bytes": 4378147,
+          "sha256": "210019b6394ec2e40ffa2833b3b456331551262b69b1f11e507dc8c2414e52f2"
+        },
+        {
+          "name": "00017._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00017._c.png",
+          "bytes": 5088398,
+          "sha256": "3b069c1f2ba38f4de1784019ce6861f430b685919a49bb21b40689f996da6d26"
+        },
+        {
+          "name": "00018._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00018._c.png",
+          "bytes": 4076482,
+          "sha256": "c85ab8f07d65d6f91fd53eef05de196ac056529ce5f3ce448e725c96dde64ad0"
+        },
+        {
+          "name": "00019._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00019._c.png",
+          "bytes": 4738508,
+          "sha256": "ac33871a978f008fdc45a38d71a736e32e8112ce8acd4776661f9d247d480494"
+        },
+        {
+          "name": "00020._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00020._c.png",
+          "bytes": 4343857,
+          "sha256": "1d2d3348661d89b26777220dd571f92ad11fdebff2336168dc30bf67f7e71282"
+        },
+        {
+          "name": "00021._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00021._c.png",
+          "bytes": 4548506,
+          "sha256": "bc4a14187b8efd21b04b2d01a37bb5fd17ef1eb6e64a22da0d7ba524f95354f0"
+        },
+        {
+          "name": "00022._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00022._c.png",
+          "bytes": 4583253,
+          "sha256": "69aa1743a6065132184361cec5635606edc42322b69e38b5020af7c2000bdbdd"
+        },
+        {
+          "name": "00023._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00023._c.png",
+          "bytes": 4534427,
+          "sha256": "61e17a69fff6fca5e37327b8e255d978f6ff80c61656f18d21ad68f0cfbec5bf"
+        },
+        {
+          "name": "00024._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00024._c.png",
+          "bytes": 4523505,
+          "sha256": "83f2613680d7eb2ed7a2f9b2aed5cd68ee41be676754e6c93c518d7592c78c27"
+        },
+        {
+          "name": "00026._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00026._c.png",
+          "bytes": 4734475,
+          "sha256": "6ace0fc9d26a56af3ad5c2c41d1daf7055b1fcf3e3b8ff3785a43c02d71a9a7a"
+        },
+        {
+          "name": "00027._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00027._c.png",
+          "bytes": 4471967,
+          "sha256": "323aafb8490b5721acce9e77e3a7942f6c4b69b0f635ce58740929b571109e3b"
+        },
+        {
+          "name": "00028._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00028._c.png",
+          "bytes": 4139246,
+          "sha256": "1e17ed1d931b3fa3e29e05315a9de9beff071048d4413caf7e25bbe98e071215"
+        },
+        {
+          "name": "00029._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00029._c.png",
+          "bytes": 4201267,
+          "sha256": "4494a2949f70fa4b9d7dc0793ce9e0440836fdd5b30a46099d41270647295a27"
+        },
+        {
+          "name": "00030._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00030._c.png",
+          "bytes": 4214871,
+          "sha256": "06ae851a6c175844e756139d16b149615a3caf88835f4f4dff482ae04918b378"
+        },
+        {
+          "name": "00031._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00031._c.png",
+          "bytes": 4291335,
+          "sha256": "a3373e45007879d57f4d78cfdf50e459a75a17649157d33eca1565bbd224fba0"
+        },
+        {
+          "name": "00032._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00032._c.png",
+          "bytes": 4551901,
+          "sha256": "0e2b06b0aa17cef7845849e9c5efc5500b313f207d5029cb7765609ef11629a8"
+        },
+        {
+          "name": "00033._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00033._c.png",
+          "bytes": 4431697,
+          "sha256": "c6222bccfba9b3f75fea4e67807c3a7b82de02addcb572d11adca09718dc4b38"
+        },
+        {
+          "name": "00035._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00035._c.png",
+          "bytes": 4371297,
+          "sha256": "ed96437216b05870b7109bb4d33ed98c3aad7988b6368554973a04b7de0ce2c1"
+        },
+        {
+          "name": "00036._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00036._c.png",
+          "bytes": 4216033,
+          "sha256": "fced5431049135db40b6eaf8a40171f2691e3452a4c3fcacfd32179f09215fd2"
+        },
+        {
+          "name": "00037._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00037._c.png",
+          "bytes": 4402600,
+          "sha256": "af975720691077e4f2141e75b3a76dcbae4a5cc5da15e61f215d0ae3bd258b01"
+        },
+        {
+          "name": "00038._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00038._c.png",
+          "bytes": 4300612,
+          "sha256": "ec67014cb27c4cec8a38bfef7b6d260c2755f46eaad62625c0616eb91587dc75"
+        },
+        {
+          "name": "00039._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00039._c.png",
+          "bytes": 4231103,
+          "sha256": "839459ccdfa1c1ef1f46a438f22eb13681519c040474dfef3113171c403d614a"
+        },
+        {
+          "name": "00040._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00040._c.png",
+          "bytes": 4969158,
+          "sha256": "8f8ed04e5cd2fdadd9ae57f43f4a76d4fd15253a83630371a1b4bd1f27faf141"
+        },
+        {
+          "name": "00041._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00041._c.png",
+          "bytes": 4606701,
+          "sha256": "549fd0c95b8672178b5318c9a7a3c38019d90e24ac752754008c02b65fb485ea"
+        },
+        {
+          "name": "00042._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00042._c.png",
+          "bytes": 4124321,
+          "sha256": "3c24c7333bfbd9fb7667dee97bab4b0caf55df0c718338b72564fc682d52a360"
+        },
+        {
+          "name": "00044._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00044._c.png",
+          "bytes": 4511592,
+          "sha256": "53911b3617cd2ede9477dd1d25cd94e7808ddf6d49f04f19c0e21e0ad1ece9bb"
+        },
+        {
+          "name": "00045._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00045._c.png",
+          "bytes": 4561687,
+          "sha256": "537e0e713fdb954d76bf179bacd37121b8ad590ee27a1ec3395d9c506ec7743d"
+        },
+        {
+          "name": "00046._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00046._c.png",
+          "bytes": 4117906,
+          "sha256": "b294d9f2de749b9ab7862582da05d6ad1ddfb424eaf089d1e048ac65fc8fab3f"
+        },
+        {
+          "name": "00047._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00047._c.png",
+          "bytes": 4164575,
+          "sha256": "7e57f92760c0dfc83f2b3f8953c412ce5df8fc551d55a90cb9c8442095891693"
+        },
+        {
+          "name": "00048._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00048._c.png",
+          "bytes": 4599538,
+          "sha256": "06b581601dd5ae9e8d32f7ede3d5de7900ba846aa370b06f0f9584bd33593c1f"
+        },
+        {
+          "name": "00049._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00049._c.png",
+          "bytes": 4161432,
+          "sha256": "7a33e9afe15e18ae07e921658cdd6587028d3991be439bf66754faeb7f43a08d"
+        },
+        {
+          "name": "00050._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00050._c.png",
+          "bytes": 4660668,
+          "sha256": "ca729ca86f647e506c58411cefdf06b94f675310a20a0cdcb3b84f9e3dcbc9b9"
+        },
+        {
+          "name": "00051._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00051._c.png",
+          "bytes": 4679674,
+          "sha256": "08402616dd521d8fa11351344c45c3a57834b753b859753833e701416ce87032"
+        },
+        {
+          "name": "00052._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00052._c.png",
+          "bytes": 3952525,
+          "sha256": "1d8b68b9f3b1a17ac6736d239ee5e369e745cc7543940a8b364e5fd046433c37"
+        },
+        {
+          "name": "00054._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00054._c.png",
+          "bytes": 4663933,
+          "sha256": "b66416841fb2e7ba56a038d0913c345bb512b0a22f8eaf925313b85b8513937b"
+        },
+        {
+          "name": "00055._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00055._c.png",
+          "bytes": 4088906,
+          "sha256": "d5266845dbbe58326bfcd161efa343fd7675b7bd828a0cae37fd4545c1ded24e"
+        },
+        {
+          "name": "00056._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00056._c.png",
+          "bytes": 4218495,
+          "sha256": "4bdc44032cddbf2ce67ff4406efab72c233ea15e99b40bded66ff02880310f15"
+        },
+        {
+          "name": "00057._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00057._c.png",
+          "bytes": 4466937,
+          "sha256": "7083aa19db3e6e5ded72efb52cb5c08694ccaf06aa6c201887c1cf554e9d4b57"
+        },
+        {
+          "name": "00058._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00058._c.png",
+          "bytes": 4292256,
+          "sha256": "02cebdfd060f72526f114b0ecb2c94d884066e96202d1491417398f1f93683c5"
+        },
+        {
+          "name": "00059._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00059._c.png",
+          "bytes": 4466675,
+          "sha256": "5a74a37c64a66b7f803a33fcd0843b6bc1f6640ba3191ddb2662d8ab2f247162"
+        },
+        {
+          "name": "00060._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00060._c.png",
+          "bytes": 4170885,
+          "sha256": "d48fbc95c3ee9647ee848a2a0c1d88d69b4cb059b1e3eec5e22fc691413c8792"
+        },
+        {
+          "name": "00061._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00061._c.png",
+          "bytes": 4514673,
+          "sha256": "0c0e1bf545167da3aca5f38abbc60fe14edb7ea52813e52ef3b90acb48c8abef"
+        },
+        {
+          "name": "00063._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00063._c.png",
+          "bytes": 4722758,
+          "sha256": "ae8c661e0eb05fd04a670fb394fb102f4aa953e3ea8a614b75fc5628e031ea53"
+        },
+        {
+          "name": "00064._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00064._c.png",
+          "bytes": 4264321,
+          "sha256": "185d76fb783b323396cef8c2687d8f6418bad28e3d8ef1563dd1190516e1eef8"
+        },
+        {
+          "name": "00065._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00065._c.png",
+          "bytes": 3910664,
+          "sha256": "193b8c5074ea1320b634bbb50aa9b1cdb12763967b76f16d9e0233456e9ddb66"
+        },
+        {
+          "name": "00066._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00066._c.png",
+          "bytes": 4422261,
+          "sha256": "9acce5363aee7763d8a527dc9f925d1ff4ba8681ee0be5782d92756e4e611166"
+        },
+        {
+          "name": "00067._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00067._c.png",
+          "bytes": 4816971,
+          "sha256": "d4330caf9cdf5f5414d847d24616df7025cfeaf7417bf6c0f5ebea0a899da8d1"
+        }
+      ],
+      "shipped": false,
+      "scope": "External task 104 round-two diagnostic input; photos are not committed. Same Buddha capture as the 24-photo record, not an additional independent set.",
+      "licenseSource": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/LICENSE.md",
+      "inputCount": 60,
+      "originalCount": 67
+    },
+    {
+      "id": "alansartlog-dice-watercolors-24",
+      "revision": "78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "source": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors",
+      "author": "alansartlog",
+      "authorSource": "https://alansartlog.com",
+      "license": "CC-BY-4.0",
+      "licenseSource": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/README.md",
+      "checked": "October 17, 2026",
+      "changes": "24 of 33 original JPG photographs, evenly sampled by sorted filename using round(i*(N-1)/23); unmodified files. Selection frozen before solving.",
+      "shipped": false,
+      "scope": "External task 104 round-two diagnostic input; originals are not committed. One independent object capture.",
+      "maskStatus": "No source masks. Independent manual evaluation silhouettes are being prepared; photographs stay outside git.",
+      "inputCount": 24,
+      "originalCount": 33,
+      "files": [
+        {
+          "name": "01.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/01.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/01.JPG",
+          "bytes": 2297400,
+          "sha256": "a93a749cb078629a3ea100c67671f31f8eb9ee84251104c87ba494b23f2585e9",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "7901d6bf442dd7342c3ab6f1ee57d3ca1a9d82b1"
+        },
+        {
+          "name": "02.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/02.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/02.JPG",
+          "bytes": 2389469,
+          "sha256": "03eacdcd17cadbcc78bddaa94f0a0f48eb2a117196ec1703e3d6c094a638f8ce",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "5e8489f9166244ea8f63b80afa9a6b198386a43c"
+        },
+        {
+          "name": "04.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/04.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/04.JPG",
+          "bytes": 2304854,
+          "sha256": "2457a06234fd7d3ac36fa329133650eab5bf72f3b5d03b6d92a53ce11df24a69",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "9b13c4c65bbc9c883a8a0c4b62674678b50669db",
+          "retrievalUrl": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/raw/78e0a887ba5263da66910fb4f4da0d9763e9177a/04.JPG"
+        },
+        {
+          "name": "05.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/05.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/05.JPG",
+          "bytes": 2293044,
+          "sha256": "fb19a32b876a7d2c2fb41ba67c18f64e190860c97f39e80e0acb5479af911b80",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "98f3643f4bd686493f7eeafd5069f9571960eb50"
+        },
+        {
+          "name": "07.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/07.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/07.JPG",
+          "bytes": 2372606,
+          "sha256": "2cc2b864f30d650bd2a5e07e4aae09ef6365bdf5ad45b7157dce0e2b84619b16",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "e3d6569d15759fce3fd2206f86c3ce51ec28a3ce"
+        },
+        {
+          "name": "08.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/08.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/08.JPG",
+          "bytes": 2417498,
+          "sha256": "cab04dd0835023b4d4b5c5d2d55117d2d3748f0613d041c838c05a976b021fd9",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "7c6d8c2cd8f947ee35e0d682245fb0b39bcc3a1e"
+        },
+        {
+          "name": "09.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/09.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/09.JPG",
+          "bytes": 2284617,
+          "sha256": "cc328c3e27fe15104bfdeb556db9723cdcc19bd99061c9db9e440e7f2b942755",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "13a912920d0318b41ed3f522beb9c268f8db8efc"
+        },
+        {
+          "name": "11.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/11.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/11.JPG",
+          "bytes": 2390807,
+          "sha256": "8da2dcbcce852dcf0f8c6502d45d9f5987cd33eb491cea1bbfdeb49f4ae822ae",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "7d1991b582d6e09b21cd138b9796cdacda4f813f"
+        },
+        {
+          "name": "12.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/12.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/12.JPG",
+          "bytes": 2300351,
+          "sha256": "1d8d65dd2aae6cd2de3541a76dace9be74afa78bfdff83f9821ed7b1d9caf340",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "f96718368af6202339768a81eefcdd94d36235cb"
+        },
+        {
+          "name": "14.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/14.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/14.JPG",
+          "bytes": 2332334,
+          "sha256": "1d882669f4b977663d58cfc14a1c3c3c6b115f683155cf4221f7d9cbc3ed1270",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "71fbd8c75b63b478258e5064ea132dbb13a0a0e9"
+        },
+        {
+          "name": "15.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/15.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/15.JPG",
+          "bytes": 2380101,
+          "sha256": "45397b12acc547f45d331ac612c56f84a8075b83392df36be3e3cd37bf2731b0",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "7ad91bee9aecc61e7cb82aa7f677ab4970bf4ffb"
+        },
+        {
+          "name": "16.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/16.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/16.JPG",
+          "bytes": 2327284,
+          "sha256": "9ee680f0475bef681760c57e1ecefa82a467176e6c02f6c98a7b68e5a7307e2a",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "ba590539dd3584a96f51567e3d6196184f095930"
+        },
+        {
+          "name": "18.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/18.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/18.JPG",
+          "bytes": 2345922,
+          "sha256": "ad576f67ca55764a7986b5c58b161d5fd1bb133ebf729b6824a1a883abf4fb79",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "348f5956d83d90d458dda0ea8a1427878a065901"
+        },
+        {
+          "name": "19.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/19.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/19.JPG",
+          "bytes": 2439009,
+          "sha256": "1d6f77cd48c1a823946e264398097a1a21d65010b0d34416f45348f5253ae541",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "91e9357bba28e03aba08c063fc8940ff4febbeac"
+        },
+        {
+          "name": "20.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/20.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/20.JPG",
+          "bytes": 2400822,
+          "sha256": "5dfadcc8f597f922b9ec7a2375a1e7025fe720221d3122c2161c34970a464bb0",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "31f1b6e3172e8f19e7bc8d435f16603f72a83b28"
+        },
+        {
+          "name": "22.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/22.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/22.JPG",
+          "bytes": 2423508,
+          "sha256": "e199395b54cc1dbe57ea545dc7923668063cd755cf1281ac60a127c06f466987",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "49127eb18416560e33f8d9916436c4ba372f9ed6"
+        },
+        {
+          "name": "23.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/23.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/23.JPG",
+          "bytes": 2421479,
+          "sha256": "4e2888dc1384918ffd07b71773eb4808d1ffa9caf27c50aa0e0d043e62089195",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "79bb517dfb25554b72f4322ba5f39765a15c4439"
+        },
+        {
+          "name": "25.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/25.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/25.JPG",
+          "bytes": 2365288,
+          "sha256": "d06429a5360f6cfeac3c77adcce289b071f30f2dbf8f1d06d9c8495161231edf",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "6cf9817aef73567278e5e93ea6347f352d7e0fa8"
+        },
+        {
+          "name": "26.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/26.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/26.JPG",
+          "bytes": 2378953,
+          "sha256": "7dd6101d2812e8c1ed92763109a65c85beb83f1f681a7427420fb684a9c6339f",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "5e39323566e14ed82325eda5f7d9d31e2ad8f47c"
+        },
+        {
+          "name": "27.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/27.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/27.JPG",
+          "bytes": 2404463,
+          "sha256": "72dfd2c3383049f20b19ac1dbb0c0405bcfe7698d6473c133066a69436eae1bd",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "67eb96d7b4db728392efb1fd55ed6ea0d679063b"
+        },
+        {
+          "name": "29.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/29.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/29.JPG",
+          "bytes": 2358751,
+          "sha256": "addcc35060b9ee7da89de1c438dfc1425440902e27045a8647ce8cf0ca06c530",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "5832b23616a61da572b6136ead546672cafc7056"
+        },
+        {
+          "name": "30.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/30.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/30.JPG",
+          "bytes": 2292952,
+          "sha256": "a4c444ef90b1b513098c5bd821881ad76a661d4eaf0e1bfeade509bc0f06e4b1",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "48e2f28ace4eb4970012c61404f120e6abd19b62"
+        },
+        {
+          "name": "32.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/32.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/32.JPG",
+          "bytes": 2405809,
+          "sha256": "904cc9344ce81809c53f73660a2cfdff8e6c980c0ca3e94f7433ae3883236a04",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "16400aebdaa463fc236cec7831bea5ef186e2330"
+        },
+        {
+          "name": "33.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/33.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/33.JPG",
+          "bytes": 2453882,
+          "sha256": "c102ee0d82b17ec5718289acbb26cb2d52372b614fffa66f46fef2e1b3398970",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "a9d0ad8f535bca22168001f8b8d6b6d7e69d6a07"
+        }
+      ],
+      "attribution": "\"Photogrammetry Test Set: Dice - Turntable - Strong Lights - Heavily Textured w Watercolors\" by alansartlog / CC BY 4.0",
+      "perImageAttributionNote": "Append # [image number] to the title when attributing individual images, as requested by the source README."
+    },
+    {
+      "id": "alansartlog-skull-flash-24",
+      "revision": "0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "source": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background",
+      "author": "alansartlog",
+      "authorSource": "https://alansartlog.com",
+      "license": "CC-BY-4.0",
+      "licenseSource": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/README.md",
+      "checked": "October 17, 2026",
+      "changes": "24 of 66 original JPG photographs, evenly sampled by sorted filename using round(i*(N-1)/23); unmodified files. Selection frozen before solving.",
+      "shipped": false,
+      "scope": "External task 104 round-two diagnostic input; originals are not committed. One independent object capture.",
+      "maskStatus": "No source masks. Independent manual evaluation silhouettes are being prepared; photographs stay outside git.",
+      "inputCount": 24,
+      "originalCount": 66,
+      "files": [
+        {
+          "name": "01.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/01.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/01.JPG",
+          "bytes": 3079602,
+          "sha256": "49cc69b7e2e8999252c71536cc5a8a0ee32ae25d56d896969542653fa93e4858",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "c47e25bb6d5f730e063a0fa5db1ed2a7f246e277"
+        },
+        {
+          "name": "04.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/04.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/04.JPG",
+          "bytes": 3530007,
+          "sha256": "53b65d52600e6afa41a25c433b81501ae11248df690abff828c48c97e2c428e5",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "93f9f4e8d45e09bf84990bde120dd1c3daf8d71b"
+        },
+        {
+          "name": "07.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/07.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/07.JPG",
+          "bytes": 3094545,
+          "sha256": "cef6c51017e11d2c35f359f80920a28d866c6bc7d1d4f6e876e1718a328ec79c",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "782dad342298198bfb4917f327f17dc5877de6ab"
+        },
+        {
+          "name": "09.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/09.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/09.JPG",
+          "bytes": 3202240,
+          "sha256": "6190f02734af4cd137426afba19352d2c3b412e4016ec844eae61c882e341eb4",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "105d119cd8463160cbfb1dc108578e48a6131173"
+        },
+        {
+          "name": "12.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/12.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/12.JPG",
+          "bytes": 3138412,
+          "sha256": "f771973ad8f3092d6e869d29c4cb88a0ad67d30c6cf03dfe9dce70c98cdd9bb1",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "2e25ca91393681bc19a90b2cae8f0be807b28c76"
+        },
+        {
+          "name": "15.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/15.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/15.JPG",
+          "bytes": 3268609,
+          "sha256": "3366c2efb3f7b70114b94792b9c6b85141b4631111f8bb0f447d370ca0fb098f",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "a639b7d0c9631d03f3a8f115139f9cc2fe96c242"
+        },
+        {
+          "name": "18.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/18.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/18.JPG",
+          "bytes": 2836679,
+          "sha256": "cb3a6b49cec60b0a6b3cbae366617ad9f5634eb26edec6539d7d0f5b8d0889a7",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "bdc227f661d6d74fd5d7bb6d5a869145b4c1e93c"
+        },
+        {
+          "name": "21.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/21.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/21.JPG",
+          "bytes": 2990476,
+          "sha256": "4340e1cf8a235d56f2f20bc13e88c7d6454a5da505d22afa7b8660744875008c",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "45cf0527928ea897e338a2189d8a0c4ac04c6c23"
+        },
+        {
+          "name": "24.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/24.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/24.JPG",
+          "bytes": 2764483,
+          "sha256": "c59e45a60f9fabae4948a092a63860ce44ce163dd35ec30124bc45bb0d732498",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "cc8acd2445f4175c24c187bd019f464c1f2950b8"
+        },
+        {
+          "name": "26.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/26.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/26.JPG",
+          "bytes": 2615703,
+          "sha256": "9386ef84071867cb1752224b1e00a9780534a96d439bf944c815c5774973f456",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "4ec18070f7fec3b89f490ac4120d891d37a65a6f"
+        },
+        {
+          "name": "29.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/29.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/29.JPG",
+          "bytes": 2706318,
+          "sha256": "246e892d23dbaf7f3c2435e590cdb5dcdacaafea90e1d9241d503d98bde7d90a",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "f2ca0dc686e534c2b8682c31454303609b3f843d"
+        },
+        {
+          "name": "32.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/32.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/32.JPG",
+          "bytes": 2923706,
+          "sha256": "49020b694293567d2a82e0d8fbf3642d5e8a504dbb9ee0914a524c5365b50cb6",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "7a5adbc696d2dfcd449ea3c5d2fe6eb1969bc994"
+        },
+        {
+          "name": "35.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/35.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/35.JPG",
+          "bytes": 2865058,
+          "sha256": "9a47a124923456410b888e173826b1ade8d9962f0d0f450405e7b62e4e7d29d2",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "5bf3eecb848c362b3f679a9a11134641d2b4822d"
+        },
+        {
+          "name": "38.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/38.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/38.JPG",
+          "bytes": 2764047,
+          "sha256": "e9921846a892090a8ce5470a2a1075e8feb0a1a0514738b0a7621d70788204d3",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "613cba62f49a6099b4ce8b73436dd11d6e9928c3"
+        },
+        {
+          "name": "41.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/41.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/41.JPG",
+          "bytes": 2721387,
+          "sha256": "2a036eada33dd9d51d33a86ca5a4d79827fdee88680d0a6b8021cf7ff07b36d9",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "740fb679ee470d8418219561f790b79293e3553d"
+        },
+        {
+          "name": "43.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/43.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/43.JPG",
+          "bytes": 2450722,
+          "sha256": "b68a1b30c40ba5cf33aeb4b9f9e88aca976035bdb68f0a583749b535ea18ee1b",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "489cde78b198a12704d38b0324f211ae03d3f194"
+        },
+        {
+          "name": "46.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/46.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/46.JPG",
+          "bytes": 2659302,
+          "sha256": "1dd8a96ae656ecd65d23efd76b20fc7cf25873b911fb44d95c3a7e10644577e5",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "49bec9065fdbfe317f4a99fe835d7e98696dc7e7"
+        },
+        {
+          "name": "49.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/49.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/49.JPG",
+          "bytes": 2712673,
+          "sha256": "a5998ce3427fed73ef77a958dc114332991e982b8197ab49d01b5523136db04f",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "c064f22df8dfc196b2eb3b71b991dfdb3047bac6"
+        },
+        {
+          "name": "52.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/52.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/52.JPG",
+          "bytes": 2766849,
+          "sha256": "0dda7ba94ab17f28d05f52e7dba684469340aecf08d49e00ea186f7d3ca335e0",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "01cf9cedf9505bd0dcc7ede48ee20db7aeb70cca"
+        },
+        {
+          "name": "55.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/55.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/55.JPG",
+          "bytes": 3209497,
+          "sha256": "4fbb55876ff33f2cb8dd1ffd1e3f7163adbeb7b8736f779965cbaa2118d648a1",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "41f67b86c29dd78b1a00796e57fdaa2c7664dbcd"
+        },
+        {
+          "name": "58.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/58.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/58.JPG",
+          "bytes": 3239559,
+          "sha256": "c87f1cb3da38bb34a3bf0281818372e019eeaf83cc60e815eb2adce425823045",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "bcfb00e9ea5166a839fb06d9a24187b279ab78b8"
+        },
+        {
+          "name": "60.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/60.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/60.JPG",
+          "bytes": 3240947,
+          "sha256": "1f8569b45c4107746c50ac1613b7d20a8860e667816cb2e94c905820df9bdd3f",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "bb5f8ef5a9862abf65dfffbaca8280e5d8fd5cde"
+        },
+        {
+          "name": "63.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/63.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/63.JPG",
+          "bytes": 3115741,
+          "sha256": "3a2e0699dfe0059c43b143cdb8f60d7180d2038f156d5a2a8a01bdce6f9e22f9",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "c93c1084a962dc7a52aacc30248b315c3f45b78b"
+        },
+        {
+          "name": "66.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/66.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/66.JPG",
+          "bytes": 3155886,
+          "sha256": "f39b97ee5326bcac52b63158630f8854791e1f6022a22797dc38133815ad113f",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "4a6c2dbb695c535202d79cd11bd90ef0a536887e"
+        }
+      ],
+      "attribution": "\"Photogrammetry Test Set: Skull - Cameramoves - Flash - No Background\" by alansartlog / CC BY 4.0",
+      "perImageAttributionNote": "Append # [image number] to the title when attributing individual images, as requested by the source README."
     }
   ]
 }

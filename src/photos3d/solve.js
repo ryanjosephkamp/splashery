@@ -156,7 +156,21 @@ export async function solvePhotoGraph(
           tried.add(row.img);
           const obj = row.tracks.map((t) => t.X);
           const im = row.tracks.map((t) => xy(t.obs.find((o) => o.img === row.img)));
-          const pose = pnpRansac(obj, im, 4 / VIRTUAL_FOCAL, makeRng(104 + row.img), 1000);
+          let pose = null;
+          // A poor first DLT sample can terminate the vendored PnP routine early. Independent
+          // deterministic attempts keep that numerical failure from permanently omitting a view.
+          for (let attempt = 0; attempt < 4; attempt++) {
+            const candidate = pnpRansac(
+              obj,
+              im,
+              4 / VIRTUAL_FOCAL,
+              makeRng(104 + row.img + 7919 * (attempt + 4 * pass)),
+              1000,
+            );
+            if (candidate && (!pose || candidate.inliers.length > pose.inliers.length))
+              pose = candidate;
+            if (pose?.inliers.length >= Math.max(8, obj.length * 0.75)) break;
+          }
           if (!pose || pose.inliers.length < Math.max(8, obj.length * 0.25)) continue;
           const refined = refinePose(
             pose.R,
