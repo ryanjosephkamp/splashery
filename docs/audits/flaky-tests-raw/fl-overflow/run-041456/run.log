@@ -1,0 +1,48 @@
+[2m[WebServer] [22m(node:26647) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:26658) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26658) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Real Resource Timing entries before fluid: [33m250[39m
+  ✓  1 [chromium] › .cache/flaky-tests/fl-overflow/fl-after.spec.mjs:129:1 › nothing fluid loads on the shelf or in an embed until a fluid toy opens (17.8s)
+Real Resource Timing entries before fluid: [33m250[39m
+  ✘  2 [chromium] › .cache/flaky-tests/fl-overflow/fl-before.spec.mjs:137:1 › nothing fluid loads on the shelf or in an embed until a fluid toy opens (20.5s)
+
+
+  1) [chromium] › .cache/flaky-tests/fl-overflow/fl-before.spec.mjs:137:1 › nothing fluid loads on the shelf or in an embed until a fluid toy opens 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      154 |   await page.waitForFunction(() => window.__splashery.player.fluids?.stats?.particles > 0, null, { timeout: 60_000 }); // prettier-ignore
+      155 |   const loaded = await fluidFiles(page);
+    > 156 |   expect(loaded.some((u) => u.includes("/src/fluids/runtime.js"))).toBe(true);
+          |                                                                    ^
+      157 |   expect(errors).toEqual([]);
+      158 | });
+      159 |
+        at /workspace/splashery/.cache/flaky-tests/fl-overflow/fl-before.spec.mjs:156:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/fl-before-nothing-fluid-lo-5d83f-bed-until-a-fluid-toy-opens-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/fl-before-nothing-fluid-lo-5d83f-bed-until-a-fluid-toy-opens-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/fl-before-nothing-fluid-lo-5d83f-bed-until-a-fluid-toy-opens-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/fl-before-nothing-fluid-lo-5d83f-bed-until-a-fluid-toy-opens-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › .cache/flaky-tests/fl-overflow/fl-before.spec.mjs:137:1 › nothing fluid loads on the shelf or in an embed until a fluid toy opens 
+  1 passed (42.3s)

@@ -1,0 +1,30 @@
+{
+  "status": "unresolved",
+  "unchanged_limit_ms": 30,
+  "completed": {
+    "passed": 29,
+    "failed": 1,
+    "retries": 0,
+    "skips": 0,
+    "duration_ms": 215440.521,
+    "passing_min_ms": 0.8,
+    "passing_max_ms": 9.0,
+    "failed_delay_ms": 31.100000000093132
+  },
+  "exact_split_available": false,
+  "reason": "Original evaluate returned only total delay; trace contains no tapAt or individual source at/when/now values.",
+  "conditional_wall_lower_bound_ms": 26.100000000093132,
+  "bound_assumption": "No native clock regression: Sound.play schedules currentTime+0.005, so remaining native lead is at most5ms.",
+  "static_path": [
+    "Motion.tap storage",
+    "remaining Motion.act state/control work",
+    "Player scene.controls and Stage.requestRender flag",
+    "Player action emit",
+    "App.onAction refreshInputShown",
+    "ownSound/spec selection/resumeToy/soundEvents",
+    "Sound.play/audio/samplesReady",
+    "playSpec/playSample native source, buffer, gain, graph and start"
+  ],
+  "ui_findings": "UI inputShown resets to null when toys change. Dice has no input panel, so generic UI blocking can be controlled but does not attribute this natural failure.",
+  "next": "Frozen cache-only boundary instrumentation; original assertions and formula retained. No production source fix proposed without evidence."
+}

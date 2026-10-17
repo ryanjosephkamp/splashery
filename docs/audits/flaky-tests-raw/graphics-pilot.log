@@ -1,0 +1,81 @@
+[2m[WebServer] [22m(node:27522) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 16 tests using 4 workers
+
+(node:27545) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27534) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27537) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27545) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27534) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27537) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/fx4-engine.spec.mjs:122:3 › a thin rim shell is clear face on and solid at its edge (webgl2) (19.8s)
+  ✓   4 [chromium] › tests/fx4-engine.spec.mjs:88:5 › bouncy-ball: toys without the rim kind draw as before (webgl2) (45.2s)
+  ✓   3 [chromium] › tests/fx4-engine.spec.mjs:88:5 › beach-ball: toys without the rim kind draw as before (webgl2) (45.5s)
+  ✓   2 [chromium] › tests/fx4-engine.spec.mjs:88:5 › gift-box: toys without the rim kind draw as before (webgl2) (56.1s)
+  ✓   8 [chromium] › tests/fx4-engine.spec.mjs:122:3 › a thin rim shell is clear face on and solid at its edge (webgpu) (37.4s)
+Internal error: step id not found: fixture@62Internal error: step id not found: fixture@62
+  ✘   5 [chromium] › tests/fx4-engine.spec.mjs:88:5 › beach-ball: toys without the rim kind draw as before (webgpu) (1.7m)
+(node:28872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [chromium] › tests/img-engine.spec.mjs:92:5 › beach-ball: toys without the volume kind draw as before (webgl2) (44.1s)
+  ✓   6 [chromium] › tests/fx4-engine.spec.mjs:88:5 › bouncy-ball: toys without the rim kind draw as before (webgpu) (1.5m)
+  ✓   7 [chromium] › tests/fx4-engine.spec.mjs:88:5 › gift-box: toys without the rim kind draw as before (webgpu) (1.9m)
+  ✓  12 [chromium] › tests/img-engine.spec.mjs:124:3 › a volume is cut by its plane and shown by its density window (webgl2) (25.9s)
+  ✓  10 [chromium] › tests/img-engine.spec.mjs:92:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (51.0s)
+  ✓  11 [chromium] › tests/img-engine.spec.mjs:92:5 › gift-box: toys without the volume kind draw as before (webgl2) (50.5s)
+  ✓  16 [chromium] › tests/img-engine.spec.mjs:124:3 › a volume is cut by its plane and shown by its density window (webgpu) (52.8s)
+  ✓  13 [chromium] › tests/img-engine.spec.mjs:92:5 › beach-ball: toys without the volume kind draw as before (webgpu) (1.6m)
+  ✓  14 [chromium] › tests/img-engine.spec.mjs:92:5 › bouncy-ball: toys without the volume kind draw as before (webgpu) (1.5m)
+  ✓  15 [chromium] › tests/img-engine.spec.mjs:92:5 › gift-box: toys without the volume kind draw as before (webgpu) (1.5m)
+
+
+  1) [chromium] › tests/fx4-engine.spec.mjs:88:5 › beach-ball: toys without the rim kind draw as before (webgpu) 
+
+    Error: beach-ball: mean change
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: <= [32m0.55[39m
+    Received:    [31m22.97165816016527[39m
+
+      116 |       // (0.06% of the frame). A shader that drew these toys differently
+      117 |       // would change far more.
+    > 118 |       expect(change.mean, `${id}: mean change`).toBeLessThanOrEqual(Math.max(2 * noise.mean, 0.5) + 0.05); // prettier-ignore
+          |                                                 ^
+      119 |       expect(change.big, `${id}: pixels that changed a lot`).toBeLessThanOrEqual(Math.max(2 * noise.big, 200) + 20); // prettier-ignore
+      120 |     });
+      121 |
+        at /workspace/splashery/tests/fx4-engine.spec.mjs:118:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/graphics-pilot-results/fx4-engine-beach-ball-toys-28e24-kind-draw-as-before-webgpu--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/graphics-pilot-results/fx4-engine-beach-ball-toys-28e24-kind-draw-as-before-webgpu--chromium/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/graphics-pilot-results/fx4-engine-beach-ball-toys-28e24-kind-draw-as-before-webgpu--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/graphics-pilot-results/fx4-engine-beach-ball-toys-28e24-kind-draw-as-before-webgpu--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/fx4-engine.spec.mjs:88:5 › beach-ball: toys without the rim kind draw as before (webgpu) 
+  15 passed (4.5m)

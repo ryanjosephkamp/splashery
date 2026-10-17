@@ -1,0 +1,32 @@
+{
+  "started": "2026-10-17T04:15:44.740048+00:00",
+  "head": "c8ae05ed1d56181888a9fa2d586b28e053422b94",
+  "command": [
+    "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/splashery/.cache/flaky-tests/transport/config.mjs",
+    "--reporter=list,json",
+    "--retries=0",
+    "--workers=1"
+  ],
+  "environment": {
+    "SPLASHERY_CHROMIUM": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+    "SPLASHERY_GL": "llvmpipe",
+    "DISPLAY": ":91",
+    "SPLASHERY_PORT": "4188",
+    "PLAYWRIGHT_NODEJS_PATH": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node"
+  },
+  "files": {
+    ".cache/flaky-tests/transport/config.mjs": "fb04a319b3ade7f96edd63b96bc0454c365b2a398d18882787f914ebfce627c9",
+    ".cache/flaky-tests/transport/transport.spec.mjs": "ca10c60f5f2ca760f5ba6ef7b1c98b66c0956623b18c9c4140a495d242a371f2"
+  },
+  "burners": 2,
+  "node": "v22.20.0",
+  "browser": "Chromium 141.0.7390.37",
+  "cpu": "400000 100000",
+  "ended": "2026-10-17T04:16:03.670728+00:00",
+  "exit": 0,
+  "burner_pid": 26899
+}

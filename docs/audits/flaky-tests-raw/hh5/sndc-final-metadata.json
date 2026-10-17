@@ -1,0 +1,38 @@
+{
+  "source_commit": "c8ae05ed1d56181888a9fa2d586b28e053422b94",
+  "start_utc": "2026-10-17T04:10:15.552421+00:00",
+  "workers": 4,
+  "fully_parallel": true,
+  "repeat_each": 30,
+  "burner_threads": 2,
+  "burner_pid": 21907,
+  "renderer": "SwiftShader",
+  "headless": true,
+  "port": 4181,
+  "node": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+  "chromium": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+  "cpu_max": "400000 100000",
+  "cpuset": "0-4",
+  "source_sha256": {
+    "tests/sndc-engine.spec.mjs": "98539eb9dbb366cff3301bf76644a6aaff75ac167917fbb138f5645127b7a50b",
+    "tests/helpers/playing-tune.mjs": "5af1c29311839dd8a992da392e38868279ceb4e4ea5f8d2236ae4a2f5c1056d5",
+    "src/motion.js": "bfecd52323b90bfedb3b99b82a3edbc71581f69bfb0c823dc52f40a71c68fb76",
+    "src/player.js": "8734dda525518f39e1a97b31f371f49770c220973f3bef5dbbd3819c762ebba5",
+    "src/sound.js": "071b9743166fe4ee5908266afc11a7e57877b5bc6bb79201914edc2358cf479c",
+    "src/voices.js": "a70836016030a4cbfdb3f8ff550058e0b39baa63eb8a54a3405ddcd0ca5abce7",
+    "playwright.config.mjs": "7891116df5fe3237546df329cb8f6462d7e569f4f931f2447ca0735ad44426a2",
+    "assets/sounds/dice-throw.mp3": "920a328978756c907beae65b6fa15941c10f7a0796f7f16d0eea4a3ddd483129",
+    ".cache/flaky-tests/hh5/cpu-burner.mjs": "0d03679728f534cdf2bc32d1edef55370dd02298e07a010805cdec5608994a9d"
+  },
+  "retries": 0,
+  "skips": 0,
+  "changed_original_expect_expressions": [],
+  "status": "Completed29pass1failure; diagnosis pending",
+  "command": "SPLASHERY_GL=swiftshader <pinnedNode22> playwright test tests/sndc-engine.spec.mjs --grep first-tap-sample --repeat-each=30 --workers=4 --fully-parallel --reporter=list,json",
+  "completed_utc": "2026-10-17T04:14:45.242692+00:00",
+  "burners_stopped_utc": "2026-10-17T04:14:45.242692+00:00",
+  "statuses": {
+    "passed": 29,
+    "failed": 1
+  }
+}

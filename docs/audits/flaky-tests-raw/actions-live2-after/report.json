@@ -1,0 +1,1312 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/splashery/splashery/subject/playwright.config.mjs",
+    "rootDir": "/home/runner/work/splashery/splashery/subject/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+        "commitHash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+        "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406"
+      },
+      "gitCommit": {
+        "shortHash": "03334bbaa",
+        "hash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+        "subject": "Engine: handle impacts before joints reseat loose pieces",
+        "body": "Engine: handle impacts before joints reseat loose pieces",
+        "author": {
+          "name": "Ryan",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792207902000
+        },
+        "committer": {
+          "name": "Ryan",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792207902000
+        },
+        "branch": "HEAD"
+      },
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "commitHash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406"
+          },
+          "gitCommit": {
+            "shortHash": "03334bbaa",
+            "hash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "subject": "Engine: handle impacts before joints reseat loose pieces",
+            "body": "Engine: handle impacts before joints reseat loose pieces",
+            "author": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "committer": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "commitHash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406"
+          },
+          "gitCommit": {
+            "shortHash": "03334bbaa",
+            "hash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "subject": "Engine: handle impacts before joints reseat loose pieces",
+            "body": "Engine: handle impacts before joints reseat loose pieces",
+            "author": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "committer": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "live2.spec.mjs",
+      "file": "live2.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "in the browser",
+          "file": "live2.spec.mjs",
+          "line": 148,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 47590,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":28},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":16},{\"click\":9.47,\"offMs\":-4},{\"click\":11.06,\"offMs\":5},{\"click\":12.58,\"offMs\":6},{\"click\":13.71,\"offMs\":-2},{\"click\":15.2,\"offMs\":28},{\"click\":16.94,\"offMs\":8}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:05:37.919Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-d65483bfbd015c8320a6",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 48960,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":28},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":28},{\"click\":6.9,\"offMs\":8},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-4},{\"click\":11.06,\"offMs\":5},{\"click\":12.58,\"offMs\":5},{\"click\":13.71,\"offMs\":-5},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":6}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:05:37.709Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-f30b6bcde0a8e3aa8664",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 48254,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":29},{\"click\":2.37,\"offMs\":18},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":26},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":6},{\"click\":13.71,\"offMs\":-4},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":7}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:05:37.930Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-947fab9be0ccaa7bbaff",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 47670,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":28},{\"click\":6.9,\"offMs\":8},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":8},{\"click\":12.58,\"offMs\":8},{\"click\":13.71,\"offMs\":-1},{\"click\":15.2,\"offMs\":28},{\"click\":16.94,\"offMs\":6}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:05:38.121Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-c6294b7ac90535551729",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 39433,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":26},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-4},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":8},{\"click\":13.71,\"offMs\":-2},{\"click\":15.2,\"offMs\":28},{\"click\":16.94,\"offMs\":7}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:06:27.393Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-d781d9ef4b4096512a72",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 43215,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":26},{\"click\":2.37,\"offMs\":18},{\"click\":3.81,\"offMs\":20},{\"click\":5.12,\"offMs\":28},{\"click\":6.9,\"offMs\":6},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":8},{\"click\":13.71,\"offMs\":-2},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":6}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:06:27.669Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-0a5e2de5ae1f98a175f0",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 43737,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":26},{\"click\":2.37,\"offMs\":18},{\"click\":3.81,\"offMs\":19},{\"click\":5.12,\"offMs\":28},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":18},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":7},{\"click\":13.71,\"offMs\":-5},{\"click\":15.2,\"offMs\":26},{\"click\":16.94,\"offMs\":7}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:06:28.094Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-7ed2b0c5e9e39e6b8da1",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 43620,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":18},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":26},{\"click\":6.9,\"offMs\":6},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":8},{\"click\":12.58,\"offMs\":6},{\"click\":13.71,\"offMs\":-2},{\"click\":15.2,\"offMs\":28},{\"click\":16.94,\"offMs\":6}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:06:28.743Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-53c0115d0746bab61a7e",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 38503,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":19},{\"click\":3.81,\"offMs\":19},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":9},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-4},{\"click\":11.06,\"offMs\":8},{\"click\":12.58,\"offMs\":8},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":9}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:07:09.127Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-b7d6116f81be8bf8b979",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 45452,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":28},{\"click\":2.37,\"offMs\":18},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":26},{\"click\":6.9,\"offMs\":9},{\"click\":8.33,\"offMs\":18},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":8},{\"click\":12.58,\"offMs\":5},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":6}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:07:13.624Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-5bcb886c7d134717e916",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 42306,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":28},{\"click\":2.37,\"offMs\":20},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":9},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":8},{\"click\":12.58,\"offMs\":8},{\"click\":13.71,\"offMs\":-4},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":9}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:07:13.996Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-fdb4a9906793f89f1984",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 38892,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":26},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":18},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":8},{\"click\":8.33,\"offMs\":16},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":6},{\"click\":13.71,\"offMs\":-4},{\"click\":15.2,\"offMs\":26},{\"click\":16.94,\"offMs\":8}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:07:14.367Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-d0d758a01cbedc6b75e8",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 38715,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":16},{\"click\":3.81,\"offMs\":18},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":7},{\"click\":13.71,\"offMs\":-4},{\"click\":15.2,\"offMs\":26},{\"click\":16.94,\"offMs\":6}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:07:50.212Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-65087f83faf982337785",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 36416,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":26},{\"click\":2.37,\"offMs\":16},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":26},{\"click\":6.9,\"offMs\":8},{\"click\":8.33,\"offMs\":16},{\"click\":9.47,\"offMs\":-4},{\"click\":11.06,\"offMs\":6},{\"click\":12.58,\"offMs\":6},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":26},{\"click\":16.94,\"offMs\":4}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:07:56.570Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-d96200eb1a736ba56a65",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 37284,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":15},{\"click\":5.12,\"offMs\":26},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":18},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":8},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":26},{\"click\":16.94,\"offMs\":7}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:07:59.441Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-129e1f79d38b4c199e64",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 39634,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":16},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":28},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":4},{\"click\":12.58,\"offMs\":7},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":26},{\"click\":16.94,\"offMs\":8}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:08:01.105Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-57c9e83ecab033684b33",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 40007,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":6},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-4},{\"click\":11.06,\"offMs\":6},{\"click\":12.58,\"offMs\":7},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":25},{\"click\":16.94,\"offMs\":8}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:08:31.589Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-fd06bd1a178efacb95f3",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 36835,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":6},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":8},{\"click\":13.71,\"offMs\":-2},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":5}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:08:35.187Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-c1dc8e237bb0c212df72",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 39279,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":29},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":8},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":9},{\"click\":12.58,\"offMs\":7},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":7}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:08:39.273Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-11e74e15f3a9d7d17bc3",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 39999,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":25},{\"click\":2.37,\"offMs\":16},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":28},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":8},{\"click\":12.58,\"offMs\":9},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":8}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:08:43.639Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-1de4654c80ec5a6ec62b",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 41617,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":18},{\"click\":3.81,\"offMs\":19},{\"click\":5.12,\"offMs\":29},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":16},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":6},{\"click\":13.71,\"offMs\":-4},{\"click\":15.2,\"offMs\":25},{\"click\":16.94,\"offMs\":6}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:09:14.164Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-bf1edeb8609b2a941764",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 37425,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":28},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":26},{\"click\":6.9,\"offMs\":8},{\"click\":8.33,\"offMs\":20},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":5},{\"click\":12.58,\"offMs\":6},{\"click\":13.71,\"offMs\":-4},{\"click\":15.2,\"offMs\":28},{\"click\":16.94,\"offMs\":7}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:09:13.923Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-72bf0412709a7e18501e",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 22,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 39576,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":18},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":18},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":8},{\"click\":13.71,\"offMs\":-1},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":6}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:09:21.243Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-34473fe4f30032d1f4de",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 23,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 38654,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":28},{\"click\":2.37,\"offMs\":18},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":8},{\"click\":12.58,\"offMs\":7},{\"click\":13.71,\"offMs\":-2},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":8}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:09:26.368Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-24b50b5cc9c64dbaea8b",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 24,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 36407,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":26},{\"click\":2.37,\"offMs\":18},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":8},{\"click\":8.33,\"offMs\":18},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":8},{\"click\":13.71,\"offMs\":-1},{\"click\":15.2,\"offMs\":26},{\"click\":16.94,\"offMs\":5}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:09:53.932Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-93a27e2b2328825f822b",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 25,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 40225,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":28},{\"click\":2.37,\"offMs\":19},{\"click\":3.81,\"offMs\":18},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-4},{\"click\":11.06,\"offMs\":6},{\"click\":12.58,\"offMs\":6},{\"click\":13.71,\"offMs\":0},{\"click\":15.2,\"offMs\":29},{\"click\":16.94,\"offMs\":8}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:09:58.353Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-78bb3235ec37ba5484b5",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 26,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 39845,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":15},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":28},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":19},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":7},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":26},{\"click\":16.94,\"offMs\":10}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:10:03.599Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-9397cef97d96508c54f7",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 27,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 37881,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":16},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":9},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":8},{\"click\":12.58,\"offMs\":7},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":29},{\"click\":16.94,\"offMs\":7}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:10:07.671Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-1294a17d6c16b1fdfe0e",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 28,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 34383,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":26},{\"click\":6.9,\"offMs\":6},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-3},{\"click\":11.06,\"offMs\":6},{\"click\":12.58,\"offMs\":7},{\"click\":13.71,\"offMs\":-4},{\"click\":15.2,\"offMs\":26},{\"click\":16.94,\"offMs\":7}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:10:32.410Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-122f1f0cc26772a1473a",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 29,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 31958,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":26},{\"click\":2.37,\"offMs\":16},{\"click\":3.81,\"offMs\":17},{\"click\":5.12,\"offMs\":27},{\"click\":6.9,\"offMs\":7},{\"click\":8.33,\"offMs\":16},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":7},{\"click\":12.58,\"offMs\":6},{\"click\":13.71,\"offMs\":-4},{\"click\":15.2,\"offMs\":27},{\"click\":16.94,\"offMs\":6}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T04:10:41.260Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-d0b71d6a3ffb45ff3182",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T04:05:35.728Z",
+    "duration": 337593.516,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "started": "2026-10-17T04:14:56.881500+00:00",
+  "head": "c8ae05ed1d56181888a9fa2d586b28e053422b94",
+  "command": [
+    "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/splashery/.cache/flaky-tests/fl-overflow/config.mjs",
+    "--reporter=list,json",
+    "--retries=0",
+    "--workers=1",
+    "--fully-parallel",
+    "--grep",
+    "nothing fluid loads"
+  ],
+  "environment": {
+    "SPLASHERY_CHROMIUM": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+    "SPLASHERY_GL": "llvmpipe",
+    "DISPLAY": ":91",
+    "SPLASHERY_PORT": "4185",
+    "PLAYWRIGHT_NODEJS_PATH": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node"
+  },
+  "files": {
+    ".cache/flaky-tests/fl-overflow/config.mjs": "946df3898f0c7e389a6a78d9a36a0dbad2b6531ae32f7b9304d1e8b3e9e4c9dc",
+    ".cache/flaky-tests/fl-overflow/fl-after.spec.mjs": "2fb042a185d1b8ebf4c680f655f1d4ddef98c8aac74398e8ae0f8608ba9ae977",
+    ".cache/flaky-tests/fl-overflow/fl-before.spec.mjs": "4fbd25a743fe3d29fbdd452f8c4a3db1f6638448ff1b4dd09864e9479740c56f"
+  },
+  "burners": 2,
+  "node": "v22.20.0",
+  "browser": "Chromium 141.0.7390.37",
+  "cpu": "400000 100000",
+  "ended": "2026-10-17T04:15:40.397167+00:00",
+  "exit": 1,
+  "burner_pid": 26625
+}

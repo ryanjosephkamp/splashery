@@ -1,0 +1,13 @@
+[2m[WebServer] [22m(node:26921) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:26932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"size":[390,844],"bytes":1316640,"arrayMs":7808.677581,"base64Ms":132.3306900000007,"oldSha256":"aa24fe70a32ab987b715d31acb0107c747918c19b94b456e96fe999f2ca12b0a","base64Sha256":"aa24fe70a32ab987b715d31acb0107c747918c19b94b456e96fe999f2ca12b0a"}
+  ✓  1 [chromium] › .cache/flaky-tests/transport/transport.spec.mjs:3:1 › identical actual RGBA bytes survive lossless base64 transport (15.9s)
+
+  1 passed (17.0s)

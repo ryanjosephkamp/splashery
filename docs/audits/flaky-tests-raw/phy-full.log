@@ -1,0 +1,17 @@
+[2m[WebServer] [22m(node:29642) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:29653) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29653) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/phy.spec.mjs:67:1 › Pebbles: stones pick up and stack into a new cairn; a careless one topples (16.4s)
+  ✓  2 [chromium] › tests/phy.spec.mjs:93:1 › bricks and macarons stack; a brick snaps onto the studs (24.2s)
+  ✓  3 [chromium] › tests/phy.spec.mjs:114:1 › jelly and amoeba stretch and spring back; cherries swing and knock (34.2s)
+  ✓  4 [chromium] › tests/phy.spec.mjs:159:1 › the spring toy stretches and settles; the bow shoots; sushi picks the tapped piece (43.0s)
+  ✓  5 [chromium] › tests/phy.spec.mjs:218:3 › screenshots: the Hands-on buttons on Pebbles at 390x844 (14.7s)
+  ✓  6 [chromium] › tests/phy.spec.mjs:218:3 › screenshots: the Hands-on buttons on Pebbles at 1440x900 (19.7s)
+
+  6 passed (2.6m)

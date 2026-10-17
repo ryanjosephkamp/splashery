@@ -1,0 +1,1183 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/splashery/splashery/subject/playwright.config.mjs",
+    "rootDir": "/home/runner/work/splashery/splashery/subject/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+        "commitHash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+        "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406"
+      },
+      "gitCommit": {
+        "shortHash": "03334bbaa",
+        "hash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+        "subject": "Engine: handle impacts before joints reseat loose pieces",
+        "body": "Engine: handle impacts before joints reseat loose pieces",
+        "author": {
+          "name": "Ryan",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792207902000
+        },
+        "committer": {
+          "name": "Ryan",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792207902000
+        },
+        "branch": "HEAD"
+      },
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "commitHash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406"
+          },
+          "gitCommit": {
+            "shortHash": "03334bbaa",
+            "hash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "subject": "Engine: handle impacts before joints reseat loose pieces",
+            "body": "Engine: handle impacts before joints reseat loose pieces",
+            "author": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "committer": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "commitHash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406"
+          },
+          "gitCommit": {
+            "shortHash": "03334bbaa",
+            "hash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "subject": "Engine: handle impacts before joints reseat loose pieces",
+            "body": "Engine: handle impacts before joints reseat loose pieces",
+            "author": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "committer": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "phy.spec.mjs",
+      "file": "phy.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31062,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:06:46.066Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-30263bda97266dd7820a",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 28274,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:06:45.955Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-9a1e706df420cdf84006",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 43870,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:06:45.697Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-3db48c7ae14dd02913c3",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 44005,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:06:46.134Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-8fd29bdf7266a7e0367b",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 21103,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:07:47.518Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-0b9fc97e957a1d73de02",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22293,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:07:50.459Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-c988762f8ef3a82b6e05",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 23765,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:08:03.423Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-6da1d18a5f100bcd5d8c",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 26523,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:08:04.719Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-adb7128b52d504aa3a0b",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 45868,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:08:40.915Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-1322617f8ca79813b39a",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 45693,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:08:44.913Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-35e857862b26cb79b42c",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 19364,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:00.087Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-20f65fcca162f7245be3",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 21937,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:03.997Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-002d44782c0d2e791200",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 20803,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:52.213Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-f909f1272635d4d55bbe",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 24823,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:58.242Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-098bd032cbe6139a02b3",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 38323,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:59.523Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-60711e207d010f2e6659",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 24220,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:04.168Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-c087948db33a70413b95",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 17106,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:45.299Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-b50ed83b4b6f9024e1fd",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 20535,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:55.927Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-8e5ae7bb096a09d3c94a",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 32772,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:11:02.076Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-5a8283d155f51a5f2d93",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 32672,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:11:11.557Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-e852bb17f5fcd5cf570f",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 20554,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:11:34.954Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-478cf0ed7f0390351d89",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 18128,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:11:49.778Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-052ca13501973eb3205d",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 30508,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:12:07.125Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-077e22415195ae3d4ad5",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 19236,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:12:18.023Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-467c80648eadd5776897",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 20565,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:12:29.808Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-86b0a587dc7cd4c2bb64",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 22480,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:12:41.851Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-d409bd97a4d4181d76b9",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 26,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 33987,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:09.026Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-8d1c536cdd71620333ff",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 27,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 21867,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:09.953Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-9734c8a410c6599ea8ad",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 28,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 21719,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:24.054Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-bee4dea4ec785d6a3a23",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 29,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 19804,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:38.235Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0491bbf168d8919d2c4d-778cab1d78d2b8f846d0",
+          "file": "phy.spec.mjs",
+          "line": 67,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T04:06:44.098Z",
+    "duration": 464460.776,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

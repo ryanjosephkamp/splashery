@@ -1,0 +1,1183 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/splashery/splashery/subject/playwright.config.mjs",
+    "rootDir": "/home/runner/work/splashery/splashery/subject/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+      },
+      "gitCommit": {
+        "shortHash": "0b28beadf",
+        "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "subject": "Document recovered flake evidence and outstanding acceptance gates",
+        "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+        "author": {
+          "name": "Ryan Kamp",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792208885000
+        },
+        "committer": {
+          "name": "Ryan Kamp",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792208885000
+        },
+        "branch": "HEAD"
+      },
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+          },
+          "gitCommit": {
+            "shortHash": "0b28beadf",
+            "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "subject": "Document recovered flake evidence and outstanding acceptance gates",
+            "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+            "author": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "committer": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+          },
+          "gitCommit": {
+            "shortHash": "0b28beadf",
+            "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "subject": "Document recovered flake evidence and outstanding acceptance gates",
+            "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+            "author": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "committer": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "hh5-gems.spec.mjs",
+      "file": "hh5-gems.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19133,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:08:48.149Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-bdfa36600bc06a2fb0f8",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 18586,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:08:48.118Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-edab4826355a71bcb9e4",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 18330,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:08:47.743Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-0aa95162f28da5e409a6",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 19797,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:08:47.732Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-77b3999c1b211ac0fb34",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 15884,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:11.282Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-62f36c171fb6dfdc65cf",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 13446,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:11.232Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-386c3980c38611e85108",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14312,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:11.917Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-cb57a3094d47b6beeac2",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 15476,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:13.548Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-ccc335d77d8ab9c0edf7",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 15919,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:26.911Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-f1f73d235dedc1c216f5",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13983,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:28.350Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-1653b731932b6397bef6",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 16299,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:29.930Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-6aed52cf406b0e140bf1",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 15324,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:32.119Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-12f7189d506b849584e4",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14130,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:44.747Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-43916c2a069298d63ce3",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 16200,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:45.139Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-5132dcfc0bf51acead73",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 16395,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:48.036Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-4921dfc353ab014816a8",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 16909,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:09:52.590Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-cb8b53e9b4d2d78a8095",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14204,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:01.611Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-96f8f9fe79f3eab0f997",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 16165,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:03.987Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-1b15c6ea5c6f45c10a57",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 15617,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:08.748Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-7123390ba1baf98882cf",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 14649,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:12.021Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-c1bd6a62f6d2cb95cd22",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14460,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:19.031Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-ea169fa30e4811ac6913",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 14421,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:22.664Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-c52b6644d7fc45b01665",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 15755,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:26.755Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-992d4c5d9beefd6395b0",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 15511,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:29.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-ac1301d48aa8e54481ed",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14897,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:36.432Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-b54d8536f162b3d622af",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 13765,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:39.294Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-27a176c127b8f8b7f194",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 26,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 15762,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:45.410Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-28e7b4ed90b8b36420ba",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 27,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 16184,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:46.821Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-832eab0c654279145cf8",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 28,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14361,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:53.819Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-f0f46cd5f2e9f9978502",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 29,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 12589,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:10:55.934Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-e0a2c1af71d317cc6cd5",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T04:08:46.533Z",
+    "duration": 142502.24000000002,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
