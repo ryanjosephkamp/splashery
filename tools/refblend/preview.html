@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Built from pictures — local splat toy</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #ece9e1;
+        color: #232420;
+        font: 16px system-ui;
+      }
+      main {
+        display: grid;
+        grid-template-rows: auto minmax(250px, 1fr) auto;
+        height: 100dvh;
+      }
+      header,
+      footer {
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0;
+      }
+      button {
+        border: 0;
+        background: #234b3d;
+        color: white;
+        padding: 12px 22px;
+        border-radius: 24px;
+        font: inherit;
+        cursor: pointer;
+      }
+      .viewport {
+        min-height: 0;
+        overflow: hidden;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        touch-action: none;
+      }
+      small {
+        color: #555950;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1 id="name">Built from pictures</h1>
+        <span id="status" role="status">Loading splats…</span>
+      </header>
+      <div class="viewport">
+        <canvas
+          aria-label="3D splat toy. Drag to orbit, scroll to zoom, or tap to move a part."
+        ></canvas>
+      </div>
+      <footer><button id="tap" disabled>Tap to move</button><small id="credit"></small></footer>
+    </main>
+    <script type="module" src="/preview/preview.js"></script>
+  </body>
+</html>
