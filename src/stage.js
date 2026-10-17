@@ -594,7 +594,8 @@ export class Stage {
       g.workBufferUpdate = pc.WORKBUFFER_UPDATE_AUTO;
       this.parameterCache.assign(g, u, { ignoreCamera: !this.toy.kit });
     } else {
-      this.parameterCache.forget(g);
+      // Direct uploads do not require the optional reuse cache.
+      this.parameterCache?.forget(g);
       g.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
       for (const k in u) g.setParameter(k, u[k]);
     }
