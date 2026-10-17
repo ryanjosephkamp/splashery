@@ -1735,7 +1735,7 @@ Proposals below are suggestions; the owner may change them.
     and the concept's Hodgkin-Huxley waveform. Made by Ryan with Codex (GPT-6); procedural geometry
     CC0, code MIT. Lane NR1 (Claude, Opus 5.5): textbook Nissl, Golgi, and H&E on a lit slide, a
     smooth microscope-like focus, a tap stimulus that spreads through the dendrites, and clean sine
-    cues. NR1 r2 (Ryan's "just sharper"): the screen's own pixel ratio, 32,768 splats on phones, a
+    cues. NR1 r2 (sharper on phones): the screen's own pixel ratio, 32,768 splats on phones, a
     crisper slide rim, and a firing glow that keeps the cell's outline.
   - Sound: Clean sine lab cues in time with the picture: a soft tick at the stimulus, a falling tone
     as the cell body fires, and a quiet ding at the terminals; real nerve cells are not audible.
