@@ -226,23 +226,41 @@ for (const [width, height, profile, depth] of [
           return sum / n;
         };
         // Sharpness as a microscope's autofocus measures it: the mean gradient of luminance
-        // inside the slide's lit span (found along a row above the cell). It falls as focus drops.
+        // inside the slide's lit span. It falls as focus drops. It is taken on 4×4 block means:
+        // CI's SwiftShader dithers about a level per pixel, which would otherwise add the same
+        // floor to every focus and hide the smooth ramps of a slide far out of focus.
+        const B = 4;
         const sharpness = async () => {
           const f = await grab();
           const at = (x, y) => {
             const i = (y * f.w + x) * 4;
             return 0.299 * f.px[i] + 0.587 * f.px[i + 1] + 0.114 * f.px[i + 2];
           };
-          const row = Math.round(f.h * 0.3);
+          // The slide's lit span: down the middle column, then across a row in its upper part.
+          // The band measured stays clear of its rim and rounded corners, which stay sharp.
+          const col = Math.round(f.w / 2);
+          let y0 = 0,
+            y1 = f.h - 1;
+          while (y0 < f.h - 1 && at(col, y0) < 150) y0++;
+          while (y1 > 0 && at(col, y1) < 150) y1--;
+          const row = Math.round(y0 + 0.08 * (y1 - y0));
           let x0 = 0,
             x1 = f.w - 1;
           while (x0 < f.w - 1 && at(x0, row) < 150) x0++;
           while (x1 > 0 && at(x1, row) < 150) x1--;
+          const mean = (bx, by) => {
+            let m = 0;
+            for (let y = by; y < by + B; y++) for (let x = bx; x < bx + B; x++) m += at(x, y);
+            return m / (B * B);
+          };
           let sum = 0,
             n = 0;
-          for (let y = Math.round(f.h * 0.3); y < f.h * 0.7; y++)
-            for (let x = Math.round(x0 + 0.05 * (x1 - x0)); x < x0 + 0.95 * (x1 - x0); x++) {
-              sum += Math.abs(at(x + 1, y) - at(x, y)) + Math.abs(at(x, y + 1) - at(x, y));
+          const yEnd = y0 + 0.85 * (y1 - y0) - B,
+            xEnd = x0 + 0.92 * (x1 - x0) - B;
+          for (let y = Math.round(y0 + 0.15 * (y1 - y0)); y + B < yEnd; y += B)
+            for (let x = Math.round(x0 + 0.08 * (x1 - x0)); x + B < xEnd; x += B) {
+              const m = mean(x, y);
+              sum += (Math.abs(mean(x + B, y) - m) + Math.abs(mean(x, y + B) - m)) / B;
               n++;
             }
           return sum / n;
