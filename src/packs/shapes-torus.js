@@ -270,6 +270,7 @@ export function torusPose(e, dress = "plain") {
 
 export const RECIPES = {
   torus: {
+    workBufferReuse: false,
     alive: false,
     options: [
       {

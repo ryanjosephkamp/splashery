@@ -559,6 +559,7 @@ export const RIGS = {
 
   // The jam heart glows and throbs twice like a heartbeat.
   cookie: {
+    workBufferReuse: false,
     parts: [],
     keys: [{ color: "#7a1c1c", tol: 0.3, at: [0, 0.05, 0.1], r: 0.45 }],
     fx: [
