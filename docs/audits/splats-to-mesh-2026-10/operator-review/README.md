@@ -58,12 +58,24 @@ passed. [Exact counts, job IDs, and isolated outcomes](full-ci.json).
 | `man5:201`               | Explicitly expected by the Operator's review | Failed alone   |
 | `phy:64`                 | Known in `tools/suite.json`                  | Passed alone   |
 
-The run reports failure. All three unlisted failures apart from the expected PDF check passed alone.
-The PDF check's failure is retained until merge-time printing. No test, threshold, or known-failure
-list was changed.
+The test jobs report five failures. All three unlisted failures apart from the expected PDF check
+passed alone. The PDF check's failure is retained until merge-time printing. No test, threshold, or
+known-failure list was changed.
 
-Every test job and isolated recheck has completed. GitHub's separate Summary job remained queued at
-20:49 UTC on October 17; these totals are summed from all sixteen completed shard logs.
+Every test job and isolated recheck completed. The final main-merge push canceled GitHub's separate
+Summary job, which was still queued. These totals are preserved from all sixteen completed shard
+logs.
+
+Final synchronization `43753b9b3` merges main at `86f7bff5e`, whose new changes are research
+documents and standalone demos. The `src`, `tests`, `manual`, and `site` Git trees are identical to
+full-suite commit `e442b74e0`. Fresh preflight passes all checks and all 272 tests (4.8 minutes).
+[Exact tree hashes and final verification](final-merge.json). An earlier final-merge attempt was
+interrupted because the old Xvfb display was absent; restarting the display restored a headed
+browser probe and the complete preflight. No application or test code was changed.
+
+The temporary `full-suite` label was removed after the completed sixteen-shard test run. The final
+push has a
+[normal Checks run](https://github.com/ryanjosephkamp/splashery/actions/runs/39069096183).
 
 Original torus geometry is CC0. The tool and this probe were made by Ryan with Codex (GPT-6), under
 MIT. Rule check: none.

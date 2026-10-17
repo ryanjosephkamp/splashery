@@ -1,0 +1,50 @@
+{
+  "fullCIHead": "e442b74e035395e30c0d7e2bd1737521b46d06fa",
+  "finalHead": "43753b9b330e7bbd399e0d6205e2bf05addaab31",
+  "mergedMain": "86f7bff5e65a590694ab858ee11497a27b59113e",
+  "unchangedTrees": {
+    "src": {
+      "tested": "f4e198ac48142efbb6142cde98016b06ee59130a",
+      "final": "f4e198ac48142efbb6142cde98016b06ee59130a"
+    },
+    "tests": {
+      "tested": "ac27658d5b1a1f586d19ce96facdd9ea138ac949",
+      "final": "ac27658d5b1a1f586d19ce96facdd9ea138ac949"
+    },
+    "manual": {
+      "tested": "47833d15ad1abfec652d80e0861aaf595df54df1",
+      "final": "47833d15ad1abfec652d80e0861aaf595df54df1"
+    },
+    "site": {
+      "tested": "62eb372d58062bcc5ab047e38917bd740056a004",
+      "final": "62eb372d58062bcc5ab047e38917bd740056a004"
+    }
+  },
+  "changedSinceFullCI": [
+    "docs/audits/frontier-2026-10.md",
+    "docs/codex/113-build-from-pictures.md",
+    "docs/codex/114-build-from-pictures-blender.md",
+    "docs/codex/115-walk-inside.md",
+    "docs/codex/116-see-it-in-your-room.md",
+    "docs/codex/117-research-pictures-to-objects.md",
+    "docs/codex/118-research-tap-sounds.md",
+    "docs/codex/119-research-real-places.md",
+    "docs/codex/120-promise-audit.md",
+    "docs/codex/121-silent-caps-audit.md",
+    "docs/codex/README.md",
+    "docs/research/pictures-to-objects-2026-10.md",
+    "docs/research/real-places-2026-10.md",
+    "docs/research/tap-sounds-2026-10.md",
+    "tools/pages/frontier-lod.html",
+    "tools/pages/frontier-relight.html",
+    "tools/pages/tap-sounds-demo.html"
+  ],
+  "preflight": {
+    "passed": 272,
+    "failed": 0,
+    "elapsed": "4.8 minutes",
+    "allChecksPassed": true,
+    "command": "node tools/preflight.mjs"
+  },
+  "environmentIncident": "First final-merge attempt was interrupted after Chromium reported a missing X server. Xvfb was absent; restarting it made an identical headed browser probe pass. No application or test code was changed."
+}

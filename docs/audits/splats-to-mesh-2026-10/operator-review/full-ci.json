@@ -293,7 +293,12 @@
       "failures": []
     }
   ],
-  "summaryStatus": "queued",
+  "summaryStatus": "cancelled",
   "knownListUnchanged": true,
-  "expectedManualException": "Operator review explicitly defers PDF printing to merge time; man5:201 is not on the current known list."
+  "expectedManualException": "Operator review explicitly defers PDF printing to merge time; man5:201 is not on the current known list.",
+  "summaryJobId": 117497001601,
+  "summaryReason": "All sixteen test shards and isolated reruns completed. The Summary job remained queued until the final main-merge push canceled it. Full counts are preserved from every completed shard log.",
+  "finalMergeHead": "43753b9b330e7bbd399e0d6205e2bf05addaab31",
+  "finalMergeVerification": "final-merge.json",
+  "normalChecksRun": "https://github.com/ryanjosephkamp/splashery/actions/runs/39069096183"
 }
