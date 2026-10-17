@@ -2029,3 +2029,17 @@ original test tone, with no external footage, people, or marks. Each is two seco
 the fast clip runs at 60 frames per second. MP4, WebM, MOV, and GIF files exercise the local-file
 path. [The generator](tools/cdx-mp2-r4-inputs.mjs) is MIT, and each file's hash, size, and source
 record is in `tools/assets.json`. These fixtures have no shelf entry or automatic fetch.
+
+## Neuron specimen (Codex task 78b, October 14, 2026)
+
+From a concept by Ryan Kamp. The procedural neuron, Gaussian moment-matching tree, and membrane
+model were ported from Ryan's own Specimen concept on `claude/portfolio-ref`, read directly from
+`ref/portfolio/specimen/specimen.js`. No reference pages, fonts, or renderers ship. The new
+procedural specimen and thumbnail are made by Ryan with Codex (GPT-6), CC0; the port's code is
+offered under Splashery's MIT license. The three stain palettes are illustrative. The quiet
+synthesized tap cue is a visual aid, not a recording of a nerve cell.
+
+The [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model) page was
+opened on October 14, 2026. This toy integrates the concept's squid giant axon equations with a 0.01
+ms Euler step, samples the potential at 0.1 ms, and displays 7 model milliseconds per second.
+Geometry and timing are schematic, not a measured human neuron.

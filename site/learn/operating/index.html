@@ -1169,8 +1169,8 @@
                 >export SPLASHERY_PORT=&lt;its port&gt; SPLASHERY_URL=http://127.0.0.1:&lt;its
                 port&gt;/</code
               >, and start the tools' server from the lane's own folder with
-              <code>python3 -m http.server &lt;its port&gt; --bind 127.0.0.1</code>. Never use 4173
-              there. Most tools read <code>SPLASHERY_URL</code>;
+              <code>node tools/cdx-mp2-server.mjs &lt;its port&gt;</code> (it serves byte ranges).
+              Never use 4173 there. Most tools read <code>SPLASHERY_URL</code>;
               <code>tools/sound-check.mjs</code> takes
               <code>--base=http://127.0.0.1:&lt;its port&gt;</code> instead.
             </li>

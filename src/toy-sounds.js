@@ -20,6 +20,8 @@ export const TOY_SOUNDS = {
     vol: 0.28,
     pickAt: 0,
   },
+  // A quiet illustrative cue, not the sound of a real nerve cell.
+  "specimen-neuron": { voice: "arc", f: 850, rate: 53, decay: 0.7, vol: 0.16, at: 0.6 },
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": { voice: "squish", pitch: 1.3, bright: 0.5, decay: 0.5 },
   // Photoreal r3 (the owner's review of October 3, 2026): the first sound only, as the boat rocks.
