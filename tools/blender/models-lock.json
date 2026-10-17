@@ -1,0 +1,125 @@
+{
+  "rubber-duck-real": {
+    "source": "https://polyhaven.com/a/rubber_duck_toy",
+    "author": "Plat251",
+    "license": "CC0-1.0",
+    "checked": "2026-10-17",
+    "changes": "1k glTF and dependencies embedded losslessly into GLB; source geometry and textures retained",
+    "api": "https://api.polyhaven.com/files/rubber_duck_toy",
+    "api_sha256": "cd12e264ce976486ea42e527588a7fd3c13bb0ff50e015b1340c06b6d13aded7",
+    "files": [
+      {
+        "name": "rubber_duck_toy.gltf",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/rubber_duck_toy/rubber_duck_toy_1k.gltf",
+        "bytes": 3180,
+        "sha256": "dcf036297843dad2775841fc41208fae8c776066848d3f6e26efa42eb98d5016"
+      },
+      {
+        "name": "textures/rubber_duck_toy_diff_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rubber_duck_toy/rubber_duck_toy_diff_1k.jpg",
+        "bytes": 231027,
+        "sha256": "c968d6185c3ec57a430818e6af85c2ba2880c7ee19ccb1a0171730926175cfd6"
+      },
+      {
+        "name": "rubber_duck_toy.bin",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/rubber_duck_toy/rubber_duck_toy.bin",
+        "bytes": 105376,
+        "sha256": "381e1373b99a4ff23d5ee02cb66bfb5e7d897eaa280581f19b652c38ffd83314"
+      },
+      {
+        "name": "textures/rubber_duck_toy_arm_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rubber_duck_toy/rubber_duck_toy_arm_1k.jpg",
+        "bytes": 346707,
+        "sha256": "07df1a805350811e8522dafce6133b98ce2f191326e7256315a15dfaaa4193a0"
+      },
+      {
+        "name": "textures/rubber_duck_toy_nor_gl_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rubber_duck_toy/rubber_duck_toy_nor_gl_1k.jpg",
+        "bytes": 48768,
+        "sha256": "fc00541d9708328f383498914a5ed9935231a87f15ec002d5675af3f2347b544"
+      }
+    ]
+  },
+  "garden-gnome": {
+    "source": "https://polyhaven.com/a/garden_gnome",
+    "author": "Bhargav Kubal",
+    "license": "CC0-1.0",
+    "checked": "2026-10-17",
+    "changes": "1k glTF and dependencies embedded losslessly into GLB; source geometry and textures retained",
+    "api": "https://api.polyhaven.com/files/garden_gnome",
+    "api_sha256": "93c0f66bb59f5f620d4db4ceb24ce14f8f484700e46e41e38bc5dc02f2ae0bf2",
+    "files": [
+      {
+        "name": "garden_gnome.gltf",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/garden_gnome/garden_gnome_1k.gltf",
+        "bytes": 2784,
+        "sha256": "613f28205e58f4a1c2a638e2bbef41873a7c25d11aa30c2fe53e7ed941e4403e"
+      },
+      {
+        "name": "textures/garden_gnome_nor_gl_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/garden_gnome/garden_gnome_nor_gl_1k.jpg",
+        "bytes": 642032,
+        "sha256": "b307397872a096621117e12dc28c4543a7021e6f01d3f341cf3b2346bc68ec89"
+      },
+      {
+        "name": "textures/garden_gnome_diff_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/garden_gnome/garden_gnome_diff_1k.jpg",
+        "bytes": 530382,
+        "sha256": "83b80ce2bcdbba447886d87c0b7e386d7bde481b0874ecb6ddae703a2b19409d"
+      },
+      {
+        "name": "garden_gnome.bin",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/garden_gnome/garden_gnome.bin",
+        "bytes": 683068,
+        "sha256": "d3b29486e4c7ad51ce564524e5e2b1c80afeef1b85ea4027a98ec3deca934b1d"
+      },
+      {
+        "name": "textures/garden_gnome_arm_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/garden_gnome/garden_gnome_arm_1k.jpg",
+        "bytes": 596273,
+        "sha256": "6dab7c92e9beccada880a069c5ebd8024652dff2c298f25ff0d066dac0e931bb"
+      }
+    ]
+  },
+  "wooden-elephant": {
+    "source": "https://polyhaven.com/a/carved_wooden_elephant",
+    "author": "Greg Zaal",
+    "license": "CC0-1.0",
+    "checked": "2026-10-17",
+    "changes": "1k glTF and dependencies embedded losslessly into GLB; source geometry and textures retained",
+    "api": "https://api.polyhaven.com/files/carved_wooden_elephant",
+    "api_sha256": "cb0f692905b61d5ffd94466fc54a4f4edb95f95d24d5a2b14ba21b60113b1793",
+    "files": [
+      {
+        "name": "carved_wooden_elephant.gltf",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/carved_wooden_elephant/carved_wooden_elephant_1k.gltf",
+        "bytes": 2791,
+        "sha256": "c2378354ecd283c5c8d9459b6829ef7e61bdefd6d0f7a6b2d628362bd9bbef25"
+      },
+      {
+        "name": "textures/carved_wooden_elephant_nor_gl_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/carved_wooden_elephant/carved_wooden_elephant_nor_gl_1k.jpg",
+        "bytes": 564625,
+        "sha256": "df066417c37f224d8d0acef8f221cc243ffcf4d8a4501aa0b8c0b82b4054c996"
+      },
+      {
+        "name": "textures/carved_wooden_elephant_rough_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/carved_wooden_elephant/carved_wooden_elephant_rough_1k.jpg",
+        "bytes": 648726,
+        "sha256": "b9d04ca7311882c05c4f1f5a94cbaacd1e0b935d844de7acd56d845d4331370b"
+      },
+      {
+        "name": "textures/carved_wooden_elephant_diff_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/carved_wooden_elephant/carved_wooden_elephant_diff_1k.jpg",
+        "bytes": 578022,
+        "sha256": "420392c3087c709a7f1e0dd09042f1f194eb7edcb7551d124d6464f572d7f610"
+      },
+      {
+        "name": "carved_wooden_elephant.bin",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/carved_wooden_elephant/carved_wooden_elephant.bin",
+        "bytes": 69760,
+        "sha256": "b732bc38c4e57c8630acfe8c9f1bd7623e1ba49b0c488863e13546171f283618"
+      }
+    ]
+  }
+}

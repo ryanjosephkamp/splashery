@@ -306,6 +306,11 @@
                   >Photo to 3D next: offline research tools (Codex task 99; not shipped)</a
                 >
               </li>
+              <li>
+                <a href="#blender-cloud-build-tools-codex-task-105-not-shipped"
+                  >Blender cloud build tools (Codex task 105; not shipped)</a
+                >
+              </li>
             </ul>
           </li>
         </ul>
@@ -10121,6 +10126,45 @@ subject to the following conditions:
             The model weights the bake-off compared are fetched at run time from their official
             pages; each one's license is in <code>docs/audits/</code> (task 99's report), and none
             is vendored.
+          </p>
+          <h3 id="blender-cloud-build-tools-codex-task-105-not-shipped">
+            Blender cloud build tools (Codex task 105; not shipped)
+          </h3>
+          <ul>
+            <li>
+              Blender 4.5.3 LTS (GPL-3.0-or-later, bundled license texts in the downloaded
+              distribution), pinned as <code>blender-4.5.3-linux-x64.tar.xz</code>, SHA-256
+              <code>975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845</code>.
+              <a href="https://download.blender.org/release/Blender4.5/blender-4.5.3.sha256"
+                >Official checksum</a
+              >
+              checked October 17, 2026. <code>tools/blender/install.py</code> installs it outside
+              the repository in <code>~/.cache/splashery-blender/</code>;
+              <code>tools/blender-cloud.sh</code> runs headless build scripts. Blender and its
+              bundled Python, NumPy, and libraries are never shipped. Their license notices stay in
+              the verified archive/install.
+            </li>
+            <li>
+              The original canonical scenes (<code>tools/blender/truth-scenes/*.blend</code>) are
+              CC0-1.0, made by Ryan with Codex (GPT-6); their record is
+              <code>tools/blender/truth-scenes.json</code>. They are build-only.
+            </li>
+            <li>
+              The existing Kenney Food Kit GLB (<code>assets/toys/model-splats/burger.glb</code>) is
+              the rendering example;
+              <a href="https://kenney.nl/assets/food-kit" target="_blank" rel="noopener"
+                >its live source page</a
+              >
+              confirmed CC0 on October 17, 2026. Author: Kenney. Input hash and provenance:
+              <code>tools/blender/burger.json</code>. Existing asset credit is unchanged; no new
+              model or texture ships.
+            </li>
+          </ul>
+          <p>
+            Archive fallback:
+            <a href="https://download.blender.org/release/Blender4.5/blender-4.5.3-linux-x64.tar.xz"
+              >https://download.blender.org/release/Blender4.5/blender-4.5.3-linux-x64.tar.xz</a
+            >.
           </p>
         </div>
       </section>

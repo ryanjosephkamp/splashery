@@ -77,6 +77,7 @@ class KnownGeometry(unittest.TestCase):
             helper=folder/'studio_truth_camera.py'
             shutil.copyfile(path,driver)
             shutil.copyfile(path.parent/helper.name,helper)
+            shutil.copyfile(path.parent/'studio_truth_images.py',folder/'studio_truth_images.py')
             output=folder/'output'
             argv=['test','--','--out',str(output),'--mode','still','--scenes','not-a-scene']
             with patch.object(generator,'__file__',str(driver)),patch.object(sys,'argv',argv):

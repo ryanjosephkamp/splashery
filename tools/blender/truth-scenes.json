@@ -1,0 +1,99 @@
+{
+  "author": "Ryan with Codex (GPT-6)",
+  "blender": "4.5.3 LTS",
+  "canonicalizer_sha256": "a0475b5b6d381009d0efd573c6d4e45178a329c9e59e5b112043f5e1c3e9620b",
+  "changes": "Original procedural geometry, materials, and lighting saved as compressed canonical sources to stabilize Cycles sampling. No outside assets.",
+  "checked": "October 17, 2026",
+  "credit": "made by Ryan with Codex (GPT-6)",
+  "generator_sha256": "85180b26ef7bedb150b02145ac8862be3d7847cd6a1a70d73242167df5419985",
+  "license": "CC0-1.0",
+  "recipe_sha256": "d059a43dc440492a76f4f65699d7c7155ca2cc43b737a8a197d600e295dc0f0b",
+  "scenes": {
+    "arches": {
+      "bytes": 198342,
+      "eye": [0.3, -3.0, 1.6],
+      "seed": 5609,
+      "sha256": "2851dba7c370e7755d71fd201b1f49b69e9f9281dd3aacb2360000efca46f763",
+      "target": [0.0, 7.0, 1.8]
+    },
+    "coast": {
+      "bytes": 193098,
+      "eye": [-3.0, -4.0, 3.7],
+      "seed": 5604,
+      "sha256": "5a983273b6bbcdf7e43fefc087f52eaf32188fa9eef293d3c2534cfa1921c138",
+      "target": [0.0, 4.0, 0.3]
+    },
+    "desk": {
+      "bytes": 102435,
+      "eye": [3.0, -3.0, 3.2],
+      "seed": 5605,
+      "sha256": "6eedc4ef15eb28c80070311360cf805369d019eff60ef97a7d5b0b6507aa2dde",
+      "target": [0, 1, 1]
+    },
+    "forest": {
+      "bytes": 247381,
+      "eye": [0.5, -3.0, 1.7],
+      "seed": 5602,
+      "sha256": "2344ce9a59468376637c578f47911d46387af689743e61f8c5eb6eaf0d16ab1b",
+      "target": [0.0, 7.0, 1.5]
+    },
+    "fur": {
+      "bytes": 254477,
+      "eye": [2, -3, 2],
+      "seed": 5606,
+      "sha256": "17e7ace2ea8d03d9c28f0671ae005da6737c5226c18ed96ab70abd7d11a2fa1b",
+      "target": [0.0, 1.0, 1.1]
+    },
+    "lattice": {
+      "bytes": 101885,
+      "eye": [2, -4, 2],
+      "seed": 5608,
+      "sha256": "0267c8e852d5332ee1fb09d370027325a0bce7be1b83ed999bae0cb694c71868",
+      "target": [0.0, 1.0, 1.3]
+    },
+    "leaves": {
+      "bytes": 158200,
+      "eye": [3.0, -4.0, 2.3],
+      "seed": 5610,
+      "sha256": "e963050146159bc264c81476a99cd1c8614c60f6fcffe966ab693a05b463b282",
+      "target": [0, 2, 1]
+    },
+    "night": {
+      "bytes": 131074,
+      "eye": [0.6, -3.0, 1.6],
+      "seed": 5607,
+      "sha256": "b33b8f1349508a66e94397ef40c21f80bd01c290f9865bdc0b27d90687b418d0",
+      "target": [0.0, 8.0, 1.6]
+    },
+    "room": {
+      "bytes": 96805,
+      "eye": [2.7, -4.0, 2.2],
+      "seed": 5601,
+      "sha256": "dfea89963d9320b3e3abc7218f6a15691f91323f3911b706b594e6feee70238a",
+      "target": [-0.5, 2.5, 1.3]
+    },
+    "stairs": {
+      "bytes": 98869,
+      "eye": [3.3, -3.0, 2.6],
+      "seed": 5603,
+      "sha256": "829936492ebb2083b79d6b1e7d753e0b60ea11eb16e99d4570dddb84ebe54096",
+      "target": [0.0, 2.0, 1.6]
+    },
+    "steps": {
+      "bytes": 93947,
+      "eye": [1, -5, 2],
+      "seed": 5611,
+      "sha256": "552c6a7cbc7fccee67b1ad9df074c9d62560e7712edf9fa2a3bd7c6b57fe4bc4",
+      "target": [0.0, 2.0, 1.2]
+    },
+    "still-life": {
+      "bytes": 108576,
+      "eye": [4.0, -6.0, 3.1],
+      "seed": 5600,
+      "sha256": "9dead16d8d09637cb311ff29adc34c766f19ba30dfa3955cb3e671a215e8762d",
+      "target": [0, 1, 1]
+    }
+  },
+  "schema": 1,
+  "source": "tools/studio-truth-generate.py::build_procedural"
+}

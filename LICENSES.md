@@ -555,3 +555,22 @@ site.
 
 The model weights the bake-off compared are fetched at run time from their official pages; each
 one's license is in `docs/audits/` (task 99's report), and none is vendored.
+
+## Blender cloud build tools (Codex task 105; not shipped)
+
+- Blender 4.5.3 LTS (GPL-3.0-or-later, bundled license texts in the downloaded distribution), pinned
+  as `blender-4.5.3-linux-x64.tar.xz`, SHA-256
+  `975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845`.
+  [Official checksum](https://download.blender.org/release/Blender4.5/blender-4.5.3.sha256) checked
+  October 17, 2026. `tools/blender/install.py` installs it outside the repository in
+  `~/.cache/splashery-blender/`; `tools/blender-cloud.sh` runs headless build scripts. Blender and
+  its bundled Python, NumPy, and libraries are never shipped. Their license notices stay in the
+  verified archive/install.
+- The original canonical scenes (`tools/blender/truth-scenes/*.blend`) are CC0-1.0, made by Ryan
+  with Codex (GPT-6); their record is `tools/blender/truth-scenes.json`. They are build-only.
+- The existing Kenney Food Kit GLB (`assets/toys/model-splats/burger.glb`) is the rendering example;
+  [its live source page](https://kenney.nl/assets/food-kit) confirmed CC0 on October 17, 2026.
+  Author: Kenney. Input hash and provenance: `tools/blender/burger.json`. Existing asset credit is
+  unchanged; no new model or texture ships.
+
+Archive fallback: https://download.blender.org/release/Blender4.5/blender-4.5.3-linux-x64.tar.xz.

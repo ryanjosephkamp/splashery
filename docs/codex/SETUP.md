@@ -132,3 +132,27 @@ libraries, plus test output.
 
 Reply to the Operator with: "Codex setup works" or the last 10 lines of the log. The Operator then
 checks the first task's pull request.
+
+## Optional headless Blender (rendering tasks only)
+
+For task 105 and other Blender jobs, use:
+
+```sh
+bash tools/codex-setup.sh --blender
+```
+
+This checks for at least 5 GB free, then downloads Blender 4.5.3 LTS for Linux x86-64, checks its
+pinned SHA-256, safely extracts it to `~/.cache/splashery-blender/` outside the repository, and
+checks headless Python startup. Host Python 3.12 or newer is required for this optional step.
+Archive and installed file hashes are verified on reuse. Browser-only setup keeps its 3,000 MB
+default and never invokes the Blender installer.
+
+A failed download or integrity check stops the optional setup with its error; it never uses a
+different Blender version. See [the tool guide](../../tools/blender/README.md) for recovery,
+calibrated model and truth-scene views, normals, and panoramas.
+
+Verified October 17, 2026, in the full repository: browser-only setup took 11 seconds, including
+`npm ci`; setup with cached `--blender` took 5 seconds. Both used the existing `/usr/bin/chromium`,
+so the browser download and system-package installation were not rerun. See the
+[measured report](../audits/blender-cloud-2026-10.md) for the fresh Blender install and rendering
+results.

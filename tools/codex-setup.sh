@@ -3,24 +3,28 @@
 #
 #   bash tools/codex-setup.sh                 # the normal run, in Codex's setup step
 #   bash tools/codex-setup.sh --skip-browser  # no Chromium download or apt (a machine that has one)
+#   bash tools/codex-setup.sh --blender      # opt in to pinned headless Blender for rendering tasks
 #   bash tools/codex-setup.sh --no-check      # skip the final browser launch check
 #
 # It installs what the tests need (npm packages from the lockfile, Playwright's Chromium with its
-# system libraries), checks python3 (the tests' web server), and prints a summary. It changes
+# system libraries), checks python3 (the tests' web server), and prints a summary.
+# --blender additionally installs pinned headless Blender. It changes
 # nothing in the repository: node_modules is git-ignored, and no assets are rebuilt.
 # Safe to run again: each step does nothing when its work is already done.
 #
 # Environment:
 #   SPLASHERY_CHROMIUM  a Chromium to use instead of Playwright's own (with --skip-browser)
-#   CODEX_SETUP_MIN_FREE_MB  free disk needed at the start (default 3000)
+#   CODEX_SETUP_MIN_FREE_MB  free disk needed at the start (default 3000; at least 5000 with --blender)
 
 set -euo pipefail
 
 SKIP_BROWSER=0
+INSTALL_BLENDER=0
 NO_CHECK=0
 for arg in "$@"; do
   case "$arg" in
     --skip-browser) SKIP_BROWSER=1 ;;
+    --blender) INSTALL_BLENDER=1 ;;
     --no-check) NO_CHECK=1 ;;
     -h | --help)
       sed -n '2,16p' "$0"
@@ -36,6 +40,7 @@ done
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 ROOT="$PWD"
 MIN_FREE_MB="${CODEX_SETUP_MIN_FREE_MB:-3000}"
+if [ "$INSTALL_BLENDER" -eq 1 ] && [ "$MIN_FREE_MB" -lt 5000 ]; then MIN_FREE_MB=5000; fi
 START=$SECONDS
 SUMMARY=()
 
@@ -66,7 +71,7 @@ note "repository: $(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '?') at 
 begin "Check free disk space (need ${MIN_FREE_MB} MB)"
 FREE_MB="$(df -Pm "$ROOT" | awk 'NR==2 {print $4}')"
 if [ -n "$FREE_MB" ] && [ "$FREE_MB" -lt "$MIN_FREE_MB" ]; then
-  die "only ${FREE_MB} MB free; npm packages and Chromium need about ${MIN_FREE_MB} MB. Free space or use a larger container."
+  die "only ${FREE_MB} MB free; the selected setup steps need about ${MIN_FREE_MB} MB. Free space or use a larger container."
 fi
 note "disk: ${FREE_MB:-unknown} MB free"
 
@@ -144,7 +149,16 @@ const { chromium } = require("@playwright/test");
   note "browser launch: ok, WebGL2 available (software rendering)"
 fi
 
-# 8. Done --------------------------------------------------------------------
+# 8. Pinned headless Blender -------------------------------------------------
+if [ "$INSTALL_BLENDER" -eq 1 ]; then
+  begin "Install and verify pinned headless Blender"
+  BLENDER_PATH="$(python3 tools/blender/install.py --report .cache/blender-cloud-setup.json)" || die "Pinned Blender setup failed. See tools/blender/README.md for platform requirements and cache recovery."
+  note "Blender: pinned 4.5.3, hash-checked at $BLENDER_PATH (CPU, headless)"
+else
+  note "Blender: not requested (opt in with --blender)"
+fi
+
+# 9. Done --------------------------------------------------------------------
 STEP_NAME="summary"
 printf '\n==> Setup finished in %ss. What works:\n' "$((SECONDS - START))"
 for line in "${SUMMARY[@]}"; do printf '  - %s\n' "$line"; done
@@ -154,5 +168,5 @@ Run the checks a task asks for:
   npx prettier --check .
   node tools/us-english.mjs --diff
   npx playwright test tests/<file>.spec.mjs      # starts its own web server on port 4173
-Not done here on purpose: asset rebuilds (tools/prepare-assets.mjs), thumbnails, Blender or Brush.
+Not done here on purpose: asset rebuilds (tools/prepare-assets.mjs), thumbnails, or Brush.
 EOF
