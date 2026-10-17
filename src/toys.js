@@ -3915,6 +3915,17 @@ export const TOYS = [
     tags: "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
   },
+  {
+    id: "walk-inside",
+    label: "Walk inside",
+    category: "studio",
+    kind: "kit",
+    pack: "../walk/recipe",
+    labs: true,
+    tags: "walk place room street splat first person character floor walls local ply sog spz ksplat",
+    camera: { yaw: 0.4, pitch: 0.35, roll: 0, distance: 3.2 },
+  },
+
   // ---- Pack: sound-lab (lane Sound and light lab) ----
   {
     id: "sound-lab",

@@ -3841,6 +3841,16 @@
     "l": 1
   },
   {
+    "t": "Walk inside",
+    "u": "toys/walk-inside/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to enter. Use WASD or the left stick to walk, drag to look, and tap the floor to go.",
+    "w": "walk inside studio studio walk place room street splat first person character floor walls local ply sog spz ksplat walk-inside",
+    "i": "../assets/toys/walk-inside/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Sound lab",
     "u": "toys/sound-lab/",
     "k": "toy",

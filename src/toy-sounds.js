@@ -12,6 +12,7 @@
 const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
 
 export const TOY_SOUNDS = {
+  "walk-inside": { voice: "wood", f: 317, decay: 0.12, vol: 0.18 },
   // Lane PT1: Toy Box's xylophone bar; each letter has its own note up a
   // major scale (src/packs/name-toy.js), and the drive plays every sound.
   "name-toy": { voice: "bar", f: "C5", decay: 0.55, vol: 0.28 },

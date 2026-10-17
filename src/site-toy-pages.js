@@ -449,6 +449,7 @@ export const SITE_TOY_IDS = [
   "volley-table",
   "volleyball",
   "volume-viewer",
+  "walk-inside",
   "walnut-ct",
   "washington-monument",
   "water-bottle",

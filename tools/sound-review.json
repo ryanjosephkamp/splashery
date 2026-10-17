@@ -2,6 +2,18 @@
   "round": "2026-10-02 review (the mega review of the preview site)",
   "note": "October 2, 2026: the owner went through every toy on the preview site and named the sounds to change; every toy he called perfect or fine stays as it is. Two notes cover every toy: when a tap pauses an effect, its sound must pause and resume with it; and a toy's first tap often sounds late (later taps are in sync). He still wants subtle, realistic sounds, often real recordings, with no wind unless it belongs, no motor 'vroom', no buzz or horn and no robotic tones. The full review is docs/reviews/2026-10-02-mega-review/review.md.",
   "toys": {
+    "walk-inside": {
+      "status": "ready",
+      "note": "New labs tool: a quiet wooden tap when its doorway opens. No walking loop or footstep sound.",
+      "plan": "A short, soft doorway tap, made by Ryan with Codex (GPT-6).",
+      "candidates": [
+        {
+          "id": "walk-inside-entry",
+          "label": "Doorway tap (new)",
+          "sound": { "voice": "wood", "f": 317, "decay": 0.12, "vol": 0.18 }
+        }
+      ]
+    },
     "raspberry": {
       "status": "site",
       "note": "It sounds too much like bubbles.",
