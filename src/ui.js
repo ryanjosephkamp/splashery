@@ -3534,6 +3534,10 @@ export function createUI(app) {
         return p;
       }),
     );
+    if (h.gallery?.length)
+      import("./refbuild/about.js").then(({ aboutGallery }) => {
+        if (help.name.textContent === h.label) help.aboutText.append(...aboutGallery(h.gallery));
+      });
     help.howTo.textContent = h.howTo;
     help.can.replaceChildren(
       ...h.abilities.flatMap(([k, v]) => {

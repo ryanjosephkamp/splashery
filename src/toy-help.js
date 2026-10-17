@@ -20,6 +20,8 @@
 // "Type"); an about text of 60 to 140 words in plain words, checked against
 // the toy's recipe and against a real source for every fact.
 
+export const TOY_GALLERIES = {};
+
 export const TOY_HELP = {
   "name-toy": {
     howTo:
@@ -2627,6 +2629,7 @@ export function toyHelp(info) {
     label: info?.label || "",
     howTo,
     about: about ? about.split(/\n\s*\n/) : [],
+    gallery: TOY_GALLERIES[info?.id] || [],
     hasEntry: !!entry,
     abilities: toyAbilities(info),
   };
