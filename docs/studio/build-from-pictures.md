@@ -84,10 +84,11 @@ fields to match a particular builder:
 `size`, `notes`, `parts`, and `moves` are optional. Views are front, back, left, right, top,
 three-quarter, detail, or unknown. Units are m, cm, mm, in, or ft; dimensions supply proportions.
 Paths must be relative and stay inside the pack, including symlink resolution. Supported images are
-PNG and JPEG. Part names are lowercase slugs; there are at most 15 moving parts. Motions are slide,
-hinge, spin, bounce, or wobble, with an x, y, or z axis. Angular amounts are degrees; translation
-amounts are in the builder's normalized coordinates (AABB diagonal 2). A full spin should use a
-multiple of 360 degrees so the pulse ends at rest.
+PNG and JPEG. Part names are nonempty, file-safe strings; readable names such as "Seat cushion" and
+slugs both work. There are at most 15 moving parts. Motions are slide, hinge, spin, bounce, or
+wobble, with an x, y, or z axis. Angular amounts are degrees; translation amounts are in the
+builder's normalized coordinates (AABB diagonal 2). A full spin should use a multiple of 360 degrees
+so the pulse ends at rest.
 
 Private means the entire pack, its derived results, its masks, and reports stay out of git and the
 site. A store's public URL does not grant redistribution rights. Committable pictures must be CC0,

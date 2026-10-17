@@ -34,6 +34,12 @@ export function localFile(dir, name) {
     throw new Error(`File escapes the folder: ${name}`);
   return real;
 }
+const partName = (value) =>
+  typeof value === "string" &&
+  value.length > 0 &&
+  value.trim() === value &&
+  ![".", "..", "__proto__"].includes(value) &&
+  !Array.from(value).some((c) => c.charCodeAt(0) < 32 || '/\\:<>"|?*'.includes(c));
 export function validatePack(pack, dir) {
   const fail = (message) => {
     throw new Error(`Invalid pack: ${message}`);
@@ -72,12 +78,11 @@ export function validatePack(pack, dir) {
       pack.parts.some(
         (p) =>
           !plain(p) ||
-          typeof p.name !== "string" ||
-          !/^[a-z][a-z0-9-]*$/.test(p.name) ||
+          !partName(p.name) ||
           (p.material !== undefined && typeof p.material !== "string"),
       ))
   )
-    fail("parts need unique slug names and optional material text");
+    fail("parts need unique file-safe names and optional material text");
   const parts = (pack.parts || []).map((p) => p.name);
   if (new Set(parts).size !== parts.length) fail("part names must be unique");
   if (
@@ -87,8 +92,7 @@ export function validatePack(pack, dir) {
       pack.moves.some(
         (m) =>
           !plain(m) ||
-          typeof m.part !== "string" ||
-          !/^[a-z][a-z0-9-]*$/.test(m.part) ||
+          !partName(m.part) ||
           !MOTIONS.includes(m.how) ||
           !["x", "y", "z"].includes(m.axis) ||
           !Number.isFinite(m.amount) ||

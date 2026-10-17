@@ -52,6 +52,7 @@ test("checker rejects wrong contracts, traversal, symlinks, and mismatched masks
       { id: 123 },
       { id: true },
       { parts: [{ name: ["seat"] }] },
+      { parts: [{ name: "../seat" }] },
       { moves: [{ part: ["seat"], how: "spin", axis: "y", amount: 360 }] },
       { budget: { minutes: 0, quality: "good" } },
       { budget: { minutes: 1, quality: "great" } },
@@ -62,6 +63,16 @@ test("checker rejects wrong contracts, traversal, symlinks, and mismatched masks
       { notes: 42 },
     ])
       expect(() => validatePack({ ...pack, ...patch }, out)).toThrow();
+    expect(() =>
+      validatePack(
+        {
+          ...pack,
+          parts: [{ name: "Seat cushion" }],
+          moves: [{ part: "Seat cushion", how: "spin", axis: "y", amount: 360 }],
+        },
+        out,
+      ),
+    ).not.toThrow();
     expect(() => localFile(out, "../input.png")).toThrow();
     expect(() => localFile(out, image)).toThrow();
     fs.symlinkSync(image, path.join(out, "escape.png"));
