@@ -1,9 +1,15 @@
-# Photos to 3D: task 104 negative result
+# Photos to 3D: round-one core diagnostics
 
-The investigated reuse path does not meet task 104's acceptance criteria. No Photos to 3D shelf
-entry ships from this investigation. The deliverables are a repeatable camera/trainer diagnostic,
-exact-correspondence geometry controls, a pinned licensed capture, tests, and this report. Codex
-(GPT-6) built them on `codex/photos-to-3d` from main `ceb51de7a` on October 17, 2026.
+This is the preserved first-round investigation of the existing Video to 3D core. It did not attempt
+the photo-specific matching, calibration boundary, or independent appearance benchmark the task
+requires. The
+[Operator's review](https://github.com/ryanjosephkamp/splashery/pull/699#issuecomment-6232478489)
+requested that implementation and a second experiment round. See the
+[round-two report](photos-to-3d-round2-2026-10.md) for the current task-level result.
+
+The first-round deliverables were a repeatable camera/trainer diagnostic, exact-correspondence
+geometry controls, a pinned licensed capture, tests, and this report. Codex (GPT-6) built them on
+`codex/photos-to-3d` from main `ceb51de7a` on October 17, 2026. No shelf entry shipped.
 
 The result concerns the existing Video to 3D core and its settings. It establishes neither a general
 impossibility of browser photogrammetry nor the quality achievable after substantial solver work.
@@ -185,6 +191,6 @@ Verification completed with `/usr/bin/chromium`:
   file-size checks. Generated screenshots were restored. No existing spec was edited or waived; the
   full suite beyond these selections was not run.
 
-The production tool, six-set SSIM experiment, full phone training benchmark, and ten paired clips
-were cut under the brief's negative-result exit. Existing Video to 3D source and tests remain
-unchanged. Rule check: none.
+The first round omitted the production tool, six-set SSIM experiment, full phone training benchmark,
+and ten paired clips. These omissions do not establish that a photo-specific implementation fails.
+Existing Video to 3D source and tests remain unchanged. Rule check: none.
