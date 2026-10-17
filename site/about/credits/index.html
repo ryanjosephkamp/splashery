@@ -223,6 +223,11 @@
                   >Picture QR theme packs (Codex task 58)</a
                 >
               </li>
+              <li>
+                <a href="#neuron-specimen-codex-task-78b-october-14-2026"
+                  >Neuron specimen (Codex task 78b, October 14, 2026)</a
+                >
+              </li>
             </ul>
           </li>
           <li>
@@ -294,6 +299,11 @@
               <li>
                 <a href="#video-to-3d-real-clip-benchmark-tools-task-88-not-shipped"
                   >Video to 3D real-clip benchmark tools (task 88, not shipped)</a
+                >
+              </li>
+              <li>
+                <a href="#photo-to-3d-next-offline-research-tools-codex-task-99-not-shipped"
+                  >Photo to 3D next: offline research tools (Codex task 99; not shipped)</a
                 >
               </li>
             </ul>
@@ -8904,6 +8914,39 @@
             is MIT, and each file's hash, size, and source record is in
             <code>tools/assets.json</code>. These fixtures have no shelf entry or automatic fetch.
           </p>
+          <h2 id="neuron-specimen-codex-task-78b-october-14-2026">
+            Neuron specimen (Codex task 78b, October 14, 2026)
+          </h2>
+          <p>
+            From a concept by Ryan Kamp. The procedural neuron, Gaussian moment-matching tree, and
+            membrane model were ported from Ryan's own Specimen concept on
+            <code>claude/portfolio-ref</code>, read directly from
+            <code>ref/portfolio/specimen/specimen.js</code>. No reference pages, fonts, or renderers
+            ship. The new procedural specimen and thumbnail are made by Ryan with Codex (GPT-6),
+            CC0; the port's code is offered under Splashery's MIT license. The quiet synthesized tap
+            cue is a visual aid, not a recording of a nerve cell.
+          </p>
+          <p>
+            Lane NR1 (Claude, Opus 5.5, October 16, 2026) finished the toy: textbook Nissl, Golgi,
+            and H&amp;E stain colors on a lit slide, a focus that crossfades between levels and
+            blurs like a microscope, a tap stimulus that spreads through the dendrites, and clean
+            sine cues. Made by Ryan with Claude; geometry CC0, code MIT. The stain colors follow
+            standard histology (cresyl violet, silver chromate, hematoxylin and eosin); no images
+            were copied. The spike colors are visual aids.
+          </p>
+          <p>
+            The
+            <a
+              href="https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model"
+              target="_blank"
+              rel="noopener"
+              >Hodgkin-Huxley model</a
+            >
+            page was opened on October 14, 2026. This toy integrates the concept's squid giant axon
+            equations with a 0.01 ms Euler step, samples the potential at 0.1 ms, and displays 7
+            model milliseconds per second. Geometry and timing are schematic, not a measured human
+            neuron.
+          </p>
         </div>
       </section>
       <section class="md-file" aria-label="Third-party licenses">
@@ -10033,6 +10076,43 @@ subject to the following conditions:
               is served with the site.
             </li>
           </ul>
+          <h3 id="photo-to-3d-next-offline-research-tools-codex-task-99-not-shipped">
+            Photo to 3D next: offline research tools (Codex task 99; not shipped)
+          </h3>
+          <p>
+            <code>tools/p3d-next-requirements.txt</code> pins these for the truth-view yardstick and
+            the depth bake-off. They run offline on a build machine; no package, model, or weight
+            from this list is served by the site.
+          </p>
+          <ul>
+            <li>PyTorch 2.14.1 and torchvision 0.29.1, CPU builds (BSD-3-Clause).</li>
+            <li>ONNX Runtime 1.31.0 (MIT) and ONNX 1.23.2 (Apache-2.0).</li>
+            <li>NumPy 2.3.5 and SciPy 1.17.0 (BSD-3-Clause).</li>
+            <li>
+              OpenCV, <code>opencv-python-headless</code> 4.13.0.92 (Apache-2.0; its packaging
+              scripts are MIT).
+            </li>
+            <li>safetensors 0.8.0, Transformers 5.20.1, and huggingface_hub 2.2.0 (Apache-2.0).</li>
+            <li>einops 0.8.2 and addict 2.4.0 (MIT); OmegaConf 2.4.0 (BSD-3-Clause).</li>
+            <li>
+              utils3d (MoGe's helper, commit <code>62f09d58</code>; MIT,
+              <a
+                href="https://github.com/EasternJournalist/utils3d-moge/blob/62f09d58509485564e24d5d9f6aac9ee9ebc0c37/LICENSE"
+                target="_blank"
+                rel="noopener"
+                >https://github.com/EasternJournalist/utils3d-moge/blob/62f09d58509485564e24d5d9f6aac9ee9ebc0c37/LICENSE</a
+              >).
+            </li>
+            <li>
+              Blender 4.3.2 (GPL-2.0-or-later) with its bundled OpenImageDenoise (Apache-2.0):
+              renders the truth views, as with the Studio truth tools above. Never shipped.
+            </li>
+          </ul>
+          <p>
+            The model weights the bake-off compared are fetched at run time from their official
+            pages; each one's license is in <code>docs/audits/</code> (task 99's report), and none
+            is vendored.
+          </p>
         </div>
       </section>
       <p class="note">

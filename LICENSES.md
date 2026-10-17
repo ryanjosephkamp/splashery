@@ -535,3 +535,23 @@ license. No new third-party browser library was added.
 - Xvfb 21.1.16 ([X.Org licenses](https://www.x.org/releases/current/doc/xorg-docs/License.html)): a
   virtual display for real Chromium verification with Mesa's software renderer. The installed X.Org
   copyright file identifies the canonical X11/MIT form. No X server is served with the site.
+
+## Photo to 3D next: offline research tools (Codex task 99; not shipped)
+
+`tools/p3d-next-requirements.txt` pins these for the truth-view yardstick and the depth bake-off.
+They run offline on a build machine; no package, model, or weight from this list is served by the
+site.
+
+- PyTorch 2.14.1 and torchvision 0.29.1, CPU builds (BSD-3-Clause).
+- ONNX Runtime 1.31.0 (MIT) and ONNX 1.23.2 (Apache-2.0).
+- NumPy 2.3.5 and SciPy 1.17.0 (BSD-3-Clause).
+- OpenCV, `opencv-python-headless` 4.13.0.92 (Apache-2.0; its packaging scripts are MIT).
+- safetensors 0.8.0, Transformers 5.20.1, and huggingface_hub 2.2.0 (Apache-2.0).
+- einops 0.8.2 and addict 2.4.0 (MIT); OmegaConf 2.4.0 (BSD-3-Clause).
+- utils3d (MoGe's helper, commit `62f09d58`; MIT,
+  https://github.com/EasternJournalist/utils3d-moge/blob/62f09d58509485564e24d5d9f6aac9ee9ebc0c37/LICENSE).
+- Blender 4.3.2 (GPL-2.0-or-later) with its bundled OpenImageDenoise (Apache-2.0): renders the truth
+  views, as with the Studio truth tools above. Never shipped.
+
+The model weights the bake-off compared are fetched at run time from their official pages; each
+one's license is in `docs/audits/` (task 99's report), and none is vendored.
