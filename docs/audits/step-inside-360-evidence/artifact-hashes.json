@@ -1508,8 +1508,8 @@
     },
     {
       "file": "verification/final-ci-status.json",
-      "bytes": 3511,
-      "sha256": "5aa60945e2e5662e647d0096fd87d213bb42d9545c2877e87eb5187894d258a9"
+      "bytes": 3610,
+      "sha256": "9fe538d85efebdb240022b5f08c35f5d17280c7d1beb97cb9291c5851fed9e51"
     },
     {
       "file": "verification/final-confidence-model-equivalence.json",
@@ -1528,8 +1528,8 @@
     },
     {
       "file": "verification/final-verification.json",
-      "bytes": 7352,
-      "sha256": "08ea59498f5ab6847dd338d8ecbae7df81d157342cf613d440ec2786d5b5892a"
+      "bytes": 7492,
+      "sha256": "706e71ec2e4f86b8630af91199e149e83efca950911385aa03be2d9b905d0ee9"
     },
     {
       "file": "verification/frozen-file-identities.json",
@@ -1760,6 +1760,11 @@
       "file": "verification/progress-4h.md",
       "bytes": 1317,
       "sha256": "3cf0c45b3f18064b3fb895021c89b917a90ede0f7f60c5cae2b99eaf973efc4c"
+    },
+    {
+      "file": "verification/progress-8h.md",
+      "bytes": 1845,
+      "sha256": "e7b12695fe1169557952032abac4dff1a844ab50d7a2977fe9de04b125797da8"
     },
     {
       "file": "verification/research-archive-verification.json",

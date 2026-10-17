@@ -31,7 +31,7 @@
     "note": "Same 2048-pixel CC0 input and 390\u00d7844, DSF 3 viewport, normal product pixel caps. Panorama 100 ms versus Classic 200 ms sampling; no physical-phone RAM/GPU-memory claim."
   },
   "fullSuite": {
-    "recordedUTC": "2026-10-17T09:09:59.980540+00:00",
+    "recordedUTC": "2026-10-17T10:04:03.610604+00:00",
     "runId": 39019832991,
     "runAttempt": 1,
     "url": "https://github.com/ryanjosephkamp/splashery/actions/runs/39019832991",
@@ -42,50 +42,50 @@
       {
         "id": 117359273372,
         "name": "Checks",
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "startedAt": "2026-10-17T09:07:51Z",
-        "completedAt": null
+        "completedAt": "2026-10-17T09:10:56Z"
       },
       {
         "id": 117359273516,
         "name": "Suite 15/16",
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "startedAt": "2026-10-17T09:08:19Z",
-        "completedAt": null
+        "completedAt": "2026-10-17T09:32:20Z"
       },
       {
         "id": 117359273543,
         "name": "Suite 10/16",
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "startedAt": "2026-10-17T09:08:41Z",
-        "completedAt": null
+        "completedAt": "2026-10-17T09:30:54Z"
       },
       {
         "id": 117359273553,
         "name": "Suite 2/16",
-        "status": "queued",
+        "status": "in_progress",
         "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
+        "startedAt": "2026-10-17T10:03:17Z",
         "completedAt": null
       },
       {
         "id": 117359273563,
         "name": "Suite 3/16",
-        "status": "queued",
+        "status": "in_progress",
         "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
+        "startedAt": "2026-10-17T10:02:01Z",
         "completedAt": null
       },
       {
         "id": 117359273568,
         "name": "Suite 8/16",
-        "status": "queued",
-        "conclusion": null,
-        "startedAt": "2026-10-17T09:05:58Z",
-        "completedAt": null
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T09:38:28Z",
+        "completedAt": "2026-10-17T09:59:13Z"
       },
       {
         "id": 117359273588,
@@ -224,5 +224,6 @@
     "reports": "pre-neuron-r2-ci/",
     "skipReason": "Existing Video to 3D counterexample clips are held privately outside the repository.",
     "note": "Original attempts and failures retained. Final main Neuron r2 update changes none of the affected physics, renderer, test source, panorama, or Classic bytes."
-  }
+  },
+  "eightHourProgress": "progress-8h.md"
 }
