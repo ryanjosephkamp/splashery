@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 466 toys. 466 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 443.
+- 467 toys. 467 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 444.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 23.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 5.
@@ -84,7 +84,7 @@ Proposals below are suggestions; the owner may change them.
   Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
   Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
   Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
-  Rider, Night sky, Data in 3D.
+  Rider, Night sky, Data in 3D, Neuron specimen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1542,7 +1542,7 @@ Proposals below are suggestions; the owner may change them.
     the finger (an engine change: from inside, a drag turns as far as it spans on screen).
   - Sound: One soft, low tine and a faint breath as the ring marks it.
 
-## Tiny (22)
+## Tiny (23)
 
 - **Virus** (`virus`). Now: tap: Make copies. Plan: keep.
   - Owner: Looks good; pick an effect.
@@ -1725,6 +1725,19 @@ Proposals below are suggestions; the owner may change them.
     grain.
   - Sound: A soft stretch as the pseudopods reach out, a gulp as the phagosome closes and a low fizz
     as it is digested.
+- **Neuron specimen** (`specimen-neuron`). Now: tap: Fire a spike. Plan: keep.
+  - Effect: A tap stimulates the cell where it lands; a slowed Hodgkin-Huxley spike spreads through
+    the dendrites to the cell body, then hops down the myelinated axon to the terminals. Three
+    textbook stains on a lit slide. Focus merges Gaussian pairs without losing mass, center, or
+    covariance, and blurs like a microscope.
+  - Improved: Codex task 78b: from Ryan Kamp's Specimen concept, a labs neuron with 32,768 visible
+    desktop splats or 8,192 on the phone profile, three stain choices, a moment-matched focus tree,
+    and the concept's Hodgkin-Huxley waveform. Made by Ryan with Codex (GPT-6); procedural geometry
+    CC0, code MIT. Lane NR1 (Claude, Opus 5.5): textbook Nissl, Golgi, and H&E on a lit slide, a
+    smooth microscope-like focus, a tap stimulus that spreads through the dendrites, and clean sine
+    cues.
+  - Sound: Clean sine lab cues in time with the picture: a soft tick at the stimulus, a falling tone
+    as the cell body fires, and a quiet ding at the terminals; real nerve cells are not audible.
 
 ## Atoms (10)
 
