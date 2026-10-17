@@ -153,3 +153,19 @@ after five pairs. Cactus remains over5% after five pairs, then passes using all 
 retained; these exact follow-up samples are reusable in the later complete-catalog follow-up. This
 is an early diagnosis, not a claim that the remaining catalog passes. The original matched survey
 resumed at07:59:59 UTC.
+
+October 17, 2026, 09:11 UTC: draft PR #708 is open, the raw snapshot is published separately, and
+the complete399-spec CI run is queued on public source3e058bac5. The original local history remains
+reachable under local history refs; a separate additive public branch uses noreply metadata. Its
+runtime and test inputs match the prepared source byte for byte. The source patch reconstructs all
+measured runtime entries exactly without private commit metadata. The matched catalog has125
+complete pairs and no measurement errors at this checkpoint.
+
+During an active host observation,2800 of4133 CPU quota periods report throttling (67.75%). The host
+exposes five CPUs with a four-core quota. At08:58:03 UTC, between complete toy pairs with no browser
+open, future benchmark parents were restricted to CPUs0–3. Completed groups keep their original
+CPUs0–4 configuration. Subsequent observation reports32 of2048 throttled periods (1.56%). Every new
+sample records observed parent affinity; direct browser observations are retained where available.
+The final report now requires consistent CPU configuration across each toy's before and after
+repetition group. No samples, timing thresholds, point counts, or rendering settings were removed or
+relaxed.

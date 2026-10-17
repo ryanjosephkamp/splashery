@@ -80,9 +80,9 @@ pixel-ratio cap unless a recipe overrides it. Video to 3D requests native DPR, p
 drawing buffer in the original survey. The candidate low-tier Liberty recipe caps this explicit
 fixed-resolution view at DPR 2.4 (936×1120). Photo album caps its low-tier view at DPR 1.3, changing
 585×700 to 507×607. Both exceptions require native-width evidence; all other surveyed buffers remain
-equal. There is no network or CPU throttling. Runs use local HTTP, whose transfer size is not the
-compressed public site's transfer size. HTTP caches are fresh per context; the screening browser's
-GPU and shader caches can be shared across contexts.
+equal. No browser CPU or network throttling is requested. The host enforces a four-core quota. Runs
+use local HTTP, whose transfer size is not the compressed public site's transfer size. HTTP caches
+are fresh per context; the screening browser's GPU and shader caches can be shared across contexts.
 
 First view is measured from navigation to the app's first loaded-toy draw signal, followed by a
 synchronous 1px RGBA readback from the default framebuffer. The previous read binding is restored.
@@ -154,6 +154,20 @@ setup samples were conservatively archived and repeated after a stopped browser'
 was eliminated; the possible overlap interval could not be bounded precisely. Their replacements
 determine the final ranking. Later test-run intervals were checked against the timing records, and
 GPU jobs run only after a measurement boundary.
+
+## CPU quota and comparison groups
+
+The host exposes five CPUs with a four-core quota. Active observation recorded throttling in2800
+of4133 quota periods (67.75%). At08:58:03 UTC, at a complete-pair boundary with no browser open,
+future benchmark parents were restricted to CPUs0–3. The subsequent observation records32 of2048
+throttled periods (1.56%). Existing complete groups retain their original CPUs0–4 configuration. New
+samples record observed parent affinity, with direct browser observations where available.
+
+Each toy's before and after repetition group must use a single matching configuration; the final
+report rejects mixed or missing post-transition hardware records. The CSV identifies CPU affinity.
+The original ranking survey and completed target pairs retain their original configuration. No
+samples or thresholds are discarded. Compare each toy's paired values; the raw original survey
+retains a uniform setting for ranking across toys.
 
 ## Rendering change
 
