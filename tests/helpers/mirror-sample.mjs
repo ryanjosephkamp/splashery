@@ -122,7 +122,11 @@ async function captureNativePNG(clip) {
 export async function collectSamples(F, clip, answers, delta) {
   if (turned) throw Error("Previous mirror camera turn was not restored");
   const result = [];
+  let images = Promise.resolve();
   try {
+    // Source-camera cells are independent of the stage's view angle. Preserve
+    // their native cadence while every required image pair runs in order, then
+    // join the image queue before returning the six complete observations.
     for (let sample = 0; sample < answers; sample++) {
       await waitNativeAnswer();
       const { MIRROR } = await import("/src/live/relief.js");
@@ -136,20 +140,30 @@ export async function collectSamples(F, clip, answers, delta) {
           h.push(cam.heights[k]);
           c.push(cam.lastColors[k * 4], cam.lastColors[k * 4 + 1], cam.lastColors[k * 4 + 2]);
         }
-      const face = await captureNativePNG(clip);
-      const camera = window.__splashery.player.camera,
-        state = camera.getState();
-      camera.setState({ ...state, yaw: state.yaw + delta }, { snap: true });
-      turned = { camera, delta };
-      const away = await captureNativePNG(clip);
-      restoreCamera();
-      result.push({ h, c, face, turned: away });
+      const now = { h, c };
+      result.push(now);
+      images = images.then(async () => {
+        now.face = await captureNativePNG(clip);
+        const camera = window.__splashery.player.camera,
+          state = camera.getState();
+        camera.setState({ ...state, yaw: state.yaw + delta }, { snap: true });
+        turned = { camera, delta };
+        now.turned = await captureNativePNG(clip);
+        restoreCamera();
+      });
+      // Observe rejection immediately; awaiting the chain below still propagates
+      // any capture failure. No capture or failed assertion is retried.
+      images.catch(() => {});
     }
+    await images;
     return result;
   } finally {
+    // Join every in-flight native capture before restoring the camera on error.
+    await images.catch(() => {});
     restoreCamera();
   }
 }
+
 export function finishMeasurement() {
   restoreCamera();
   if (savedCarets)

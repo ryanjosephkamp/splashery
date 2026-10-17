@@ -1,14 +1,16 @@
 ## Summary
 
-**Current status, 10:36 UTC:** Nine families retain current-repair Actions receipts at 30/30 per
-variant (420 cases). Mirror remains unproved. The new browser-native canvas-copy candidate passed
-all four existing CDX/LV7 measurement and stillness cases in 4.0 minutes. Strict comparison passed
-48/48 PNG pairs, with identical dimensions and every RGBA byte in both capture orders; device scale
-stayed at 2. Its six samples and twelve PNGs now run inside the browser without screenshot protocol
-round trips. Formal 30/30 per clip remains pending. The prior direct-protocol candidate failed
-height drift twice (still 16/18 passed; low light 18/18), with three interrupted and 21 unstarted
-cases separate. Main `69cd6c993` is merged. Full preflight and two clean full Actions runs remain
-pending. Deadline: 14:06 UTC.
+**Current status, 11:10 UTC:** Nine families retain current-repair Actions receipts at 30/30 per
+variant (420 cases). Mirror remains unproved. The native-cadence scheduling candidate passed four
+observed controls and all five focused checks: the four original CDX/LV7 cases plus real motion that
+exceeded both unchanged still limits. It preserves every original native wait, all six cell
+observations, twelve actual PNGs, and camera turns. Cell observation and image-copy tasks now
+overlap, and every image finishes before report. Native answer gaps fell from four–five to mostly
+two–three. Formal 30/30 remains pending. The previous native-canvas candidate failed height drift
+once in eight completed still cases (7/8 passed); low light passed 8/8, with four interrupted and 40
+unstarted cases separate. No production depth-filter change is adopted. Latest main remains
+`69cd6c993`, verified at 10:57 UTC. Full preflight and two clean full Actions runs remain pending.
+Deadline: 14:06 UTC.
 
 **WORKING (eight-hour checkpoint, 10:06 UTC):** Nine families have current-repair Actions stress
 receipts at 30/30 per variant (420 cases). Retained FL overflow and IMG delayed-native-sort controls
@@ -32,15 +34,16 @@ mirror and Share stress proof, retained controlled repetitions, final synchroniz
 two clean full Actions runs. The 05:28–05:50 workspace outage returned a fresh checkout; externally
 backed-up proof and prepared controls were restored.
 
-Implementation: the native-canvas candidate follows `18ea9fbe8` and includes main `69cd6c993`. It
-uses the actual immutable 2D copy already returned by the native rendered-frame capture, crops the
-identical face pixels, and returns every PNG byte losslessly. All six original samples, twelve
-actual PNGs, camera turns/restores, native waits, and original measurement math remain intact. Each
-capture still requires the actual current-view native sort and both original rendered-frame steps.
-No additional CDP session is created. The direct-protocol candidate was insufficient and its probe
-also exposed changed device scale: window scale fell to 1, then a later native canvas followed.
-Matching held screenshots alone had not proved unchanged surrounding page state. The new path passed
-exact PNG equality while scale stayed 2. The other nine repairs remain unchanged.
+Implementation: native-canvas candidate `13aec72c8` follows `18ea9fbe8` and includes main
+`69cd6c993`. It uses the actual immutable 2D copy already returned by the native rendered-frame
+capture, crops the identical face pixels, and returns every PNG byte losslessly. All six original
+samples, twelve actual PNGs, camera turns/restores, native waits, and original measurement math
+remain intact. Each capture still requires the actual current-view native sort and both original
+rendered-frame steps. No additional CDP session is created. The direct-protocol candidate was
+insufficient and its probe also exposed changed device scale: window scale fell to 1, then a later
+native canvas followed. Matching held screenshots alone had not proved unchanged surrounding page
+state. The new path passed exact PNG equality while scale stayed 2. The other nine repairs remain
+unchanged.
 
 Codex built this task 100 repair and stress harness. **WORKING:** started October 17, 2026, about
 02:06 UTC; deadline 14:06 UTC. This remains a draft. Completion requires every variant to pass 30/30
@@ -59,16 +62,27 @@ unrelated runner and test changes were not copied.
 
 ## Verification
 
+The cell-cadence correction changes scheduling explicitly: the original six
+fresh-answer/0.4-consumed-native-second waits and six source-cell reads remain sequential. Each
+corresponding face/turned PNG pair is queued after its cell read, runs in the original image order,
+and all image work is joined before return. Source-camera heights and colors are independent of the
+stage's view angle. Every original wait and capture call still executes. The observed cell interval
+previously included four–five native answers; the controlled correction reduces it to mostly
+two–three. All arithmetic, sample counts, camera moves, pixel dimensions, noise, and limits remain
+unchanged. The native rotating-head control produced height drift 0.0141922 and shown drift 30.8756,
+exceeding both original still limits (0.00055 and 0.95). All four original focused cases and this
+negative control passed in 4.4 minutes with two workers, zero extra burners, and zero retries.
+
 Baseline: immutable main `ceb51de7a015377d7f350119c27a792fc1a8a66d`.
 [All ten baseline families completed](https://github.com/ryanjosephkamp/splashery/actions/runs/38997782641):
 10 repetitions, four fully parallel workers, two constant CPU burners, Node 22.23.3, Chromium 141.
 Mesa llvmpipe was used except SwiftShader for PHY and sample audio.
 [Preserved raw evidence](https://github.com/ryanjosephkamp/splashery/tree/codex/flaky-tests-clips/docs/audits/flaky-tests-raw)
-is on the separate clips branch, currently `5b28e52c3`; never merge it.
+is on the separate clips branch, currently `947b66f77`; never merge it.
 
 | Original case   |                                                                                    Before failures / completed |                                                                                              After passes / completed | Cause and status                                                                                                                                                                                                                                                                                                                              |
 | --------------- | -------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| cdx-mir:294     |          Original-wait Actions: still 3/30, low light 1/30 failed; direct-protocol candidate still 2/18 failed |                                             Native-canvas candidate: four validation cases pass; formal 30/30 pending | Wall waits miss consumed draw time; stale sorts and screenshots add uncontrolled evolution between samples. Native time and held views alone still fail. Direct protocol capture also changed device scale. Native rendered-frame copies match all 48 original PNGs exactly and preserve native sampling without protocol delays.             |
+| cdx-mir:294     |             Original-wait Actions: still 3/30, low light 1/30 failed; native-canvas candidate still 1/8 failed |                           Cadence candidate: four controlled cases and five focused checks pass; formal 30/30 pending | Native rendering/copy work left cell observations four–five depth answers apart. Queueing every required image pair allows the six sequential native cell observations to keep their own cadence, while preserving all waits, PNGs, camera moves, arithmetic, and limits. Real motion still exceeds both original still limits.               |
 | fl:137          |                                                            0/10 CPU stress; retained filled-buffer failure 1/1 |                                                                             30/30 Actions; filled-buffer repair 30/30 | Bounded Resource Timing loses late module entries. Complete request observation retains the original checks. The current filled-buffer repair passed 30/30 under the original controlled pressure.                                                                                                                                            |
 | hh1-toys:258    |                              0/10 CPU stress; controlled camera failures observed before workspace replacement |                                                                                                         30/30 Actions | Unfinished fit and stale projection alter the unchanged gesture. Retained moving-fit control: before 40/41 passed, after 41/41 passed; fresh projection in both phases. Factor 1.02 failed the original settled limit (0.1500 > 0.08).                                                                                                        |
 | shr:202         | Phone and desktop 0/10 plus 0/30 each; native close boundary 1/1 failed; new real-source regression 1/1 failed | Phone 30/30 and desktop 30/30 Actions on b87; native close repair 1/1; all 13 Share tests and focus preservation pass | The native dialog leaves Save focused inside the closed preview until a later frame, reproducing the historical false/false/false focus predicate. Explicitly blur only that closed-preview focus when Record is unavailable; visible Record and external focus are preserved. The earlier hidden-pill hypothesis was unproved and discarded. |
@@ -221,6 +235,11 @@ checked again after the remaining repairs.
 
 ## Deviations
 
+The full and stress dispatches on `18ea9fbe8` were canceled after the browser-native helper was
+published. They do not count as completed full runs or stress acceptance. The fresh independent full
+runs and corrected full-SHA stress dispatch linked in the current status all name `13aec72c8`. No
+failed target was retried or erased.
+
 Manual workflow dispatches now use independent concurrency groups, as stress receipts already did.
 Two requested immutable full-suite runs should neither replace a waiting receipt nor serialize
 behind each other. Automatic PR cancellation behavior, all shard jobs, and all assertions remain
@@ -268,6 +287,16 @@ formatting gate. The full Prettier and American English checks were then run and
 further implementation publication. This was a publication-order deviation.
 
 ## Known issues
+
+The native pipeline trace narrows the remaining mirror behavior. All ten observed still-camera
+coarse changes had a still mask of 1 and a completed three-answer vote, so the proposed current-mask
+explanation is not supported. Retained native input RGB changed by about 4.3 levels on average
+(maximum 27–30), while real raw depth changed by up to 0.95–1.16. One held normalized depth changed
+0.3021 → 0.5162, then snapping changed 0.0296 → 0.7401. Native age was already 6–13 seconds,
+rejecting an uninitialized color history. The model is deterministic for identical inputs; different
+sensor-noise frames still produce real depth changes. No speculative mask, color-only guard, or
+stronger filter was adopted. The sampling-cadence candidate remains unproved until formal stress
+completes.
 
 | Case         | Cause and evidence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Work still needed                                                                                                                                                                                                                                                                                                                       |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
