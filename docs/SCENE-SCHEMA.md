@@ -210,3 +210,48 @@ followed by the base64url of the deflate-raw-compressed JSON (or `j.` and plain 
 browsers without `CompressionStream`). If a scene is too long for a link (about 12 KB), the paint
 and then the clay edits are left out and the app says so. The embed player takes the same payload:
 `embed/#s=<payload>`.
+
+## Adding a compatibility case
+
+Whenever a saved field, schema version, toy id, option, or link encoding changes, add a frozen
+fixture in `tests/fixtures/cdx-compat/` and run `tests/cdx-compat.spec.mjs`. Keep existing fixtures
+and their expectations. A new encoder must not regenerate historical hashes.
+
+1. Copy a public saved document or link from repository history. Record its full source commit,
+   path, and collection method in `$comment` and `$compat`. If history only supplies an example,
+   declared option, or default, label the fixture as a reconstruction and say which values were
+   pinned. Never add a visitor's private file or coordination notes.
+2. Freeze the original scene fields and `hash` (`d.` or `j.`) with a complete normalized `expected`
+   document, excluding only the informational `createdAt`. Derive expectations from the source
+   version's contract, independently of the current loader. The unit check verifies those
+   expectations; it does not prove a scene renders or saves correctly.
+3. Exercise the link at `/` and `/embed/`, the real Load JSON input, and the actual Save JSON
+   download. Import those downloaded bytes in a fresh browser context, and save again. Compare both
+   downloads with the frozen oracle, including the camera, pan, options, pattern, motion, paint, and
+   media metadata. Check the built toy and any independent renderer state, such as Photo to 3D's
+   selected view. Retaining an option in memory is insufficient.
+4. Document intentional route behavior explicitly. Embeds use a `3.8 / 5` distance multiplier and
+   show samples when own-file media is unavailable. Unknown toy ids retain their settings and draw
+   the blob fallback. Own-file Studio outputs save settings; scene JSON does not carry the original
+   photo, clip, model, depth map, or converted splats.
+5. Worlds uses `/worlds/?world=<id>` and `worlds/<id>/world.json`, with its own schema v1. Use a
+   fixture marked `$compat.route: "world"` and intercept only that world-file response with the
+   historical bytes. Verify the real page, rendered world, character spawn, prop coordinates, and
+   reload. Do not send world files through the scene codec, or claim a Save JSON round trip where
+   Worlds has no such control. Scene schema v1 remains intentionally refused.
+
+Use the sandboxed task configuration when the shared launch flags are unsuitable:
+
+```sh
+SPLASHERY_CHROMIUM=/path/to/chromium npx playwright test \
+  --config tests/fixtures/cdx-compat/playwright.safe.config.mjs \
+  tests/cdx-compat.spec.mjs --workers=1
+```
+
+Each scene has an independent 120-second budget and zero retries. The suite has no aggregate
+whole-corpus timeout: a slow case reports under its own fixture name. The separate Worlds test
+builds and reloads a whole island, so it uses the existing `wd.spec.mjs` allowance of 200 seconds
+per readiness check and a 420-second test budget. This route-specific allowance is based on measured
+138-second builds in the cloud container; it does not change the scene budgets. Preserve failures,
+record exact results and environment details in `docs/audits/compat-2026-10.md`, and report checks
+that did not run. Never adjust frozen expectations to accommodate a regression.

@@ -1,0 +1,234 @@
+{
+  "$comment": "Source: d179764baf49821d1829a5891f6488de955c7d3e:manual/index.html. Saved Manual example: custom-7.",
+  "$compat": {
+    "commit": "d179764baf49821d1829a5891f6488de955c7d3e",
+    "file": "manual/index.html",
+    "description": "Saved Manual example: custom-7.",
+    "origin": "copied saved link",
+    "hash": "d.dVPLbtswEPwVY3JJUEagZSsP3voN7alFDhS1tlnTIktSfiTQvxdL2UaQNL5QS-_s7uwM36BDgEIKTqcNxRME9hST9T3UQsBE0pm67xkKtawf7uXzff30s66VXKj5onpslr8gkIg6qHo-r5tGIPsT1Bu2tu-g0A7WZdtDwHbnTvme_g46cxMBH_gjMSJESsStzJCy30HgCIVbWTWzbzNZ1cn2t4v93Z3x6Xa4g8AJCnsIvP43jc-SNkBBzqpqVgfLBK9hVUNgMxBfVM0Elw3j5nVBRihAYD0d7XQk-zoh5LKBgPFDz0MvpZT8b4ikmSnGUcB5v2VqrTbbdfRDWUnQa4JA3tCOC-khewhoY6gUOsdlUz-MdgQ1F6Bj8GmIHIwCtFqRydPW_Jb4ZMlW2iUSSDlSv84bKFk9CBx823IVWTWjwKHo8mU-K9jZSKboo-TIYUre7T91OTOdMCkUE0w9uujDh-zWD70pQyw52-icKV7yd3rds_JfTvUoEHVnhzQVGAXywaaPCL2btJBV8571QkAfbYLCCaNActZ85BJ8smfCAulAFAqwuSKPjAza9p-mLG4oHadXdA6Md57tc0MPi7am4oYrPmW9Cwnq98soYPSOoubrkz5c1hlsNqVU_SQQvXNlss6mrMsaeQVslOB0eW15iH3WhXCOA10cAoXe9zQNzxvvObm8xHIvsHL6bO8Q_Z-L7DhEHfgBUCDNPpufGfHQuFmVH8SVncCNbJerZ4OXIq677OQiyVygo6ytK55kyf3U6Q3a2f117J3nb6RsncN7V3H_Pkfv2PTjOP4D",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 211255,
+      "toy": {
+        "kind": "builtin",
+        "id": "splat-equation",
+        "options": {
+          "preset": "custom",
+          "x": "(0.5 + 0.2sin(3v))cos(u)",
+          "y": "v",
+          "z": "(0.5 + 0.2sin(3v))sin(u)",
+          "u": "0 .. 2pi",
+          "v": "0 .. 2.2",
+          "hue": "0.55 + 0.05sin(12u)",
+          "r": "",
+          "g": "",
+          "b": "",
+          "size": "0.045",
+          "count": "4000",
+          "spread": ""
+        }
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    },
+    "builtOptions": {
+      "preset": "custom",
+      "x": "(0.5 + 0.2sin(3v))cos(u)",
+      "y": "v",
+      "z": "(0.5 + 0.2sin(3v))sin(u)",
+      "u": "0 .. 2pi",
+      "v": "0 .. 2.2",
+      "hue": "0.55 + 0.05sin(12u)",
+      "r": "",
+      "g": "",
+      "b": "",
+      "size": "0.045",
+      "count": "4000",
+      "spread": ""
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "createdAt": "2026-09-28T22:03:13.754Z",
+  "seed": 211255,
+  "toy": {
+    "kind": "builtin",
+    "id": "splat-equation",
+    "options": {
+      "preset": "custom",
+      "x": "(0.5 + 0.2sin(3v))cos(u)",
+      "y": "v",
+      "z": "(0.5 + 0.2sin(3v))sin(u)",
+      "u": "0 .. 2pi",
+      "v": "0 .. 2.2",
+      "hue": "0.55 + 0.05sin(12u)",
+      "r": "",
+      "g": "",
+      "b": "",
+      "size": "0.045",
+      "count": "4000",
+      "spread": ""
+    }
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": false,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": []
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.28,
+    "roll": 0,
+    "distance": 5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  },
+  "pattern": {
+    "id": "none",
+    "flag": "",
+    "projection": "wrap",
+    "repeats": 1,
+    "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+    "scale": 0.5,
+    "amount": 1,
+    "detail": 0.6
+  },
+  "motion": {
+    "alive": true,
+    "move": "still",
+    "speed": 0.5,
+    "controls": {}
+  }
+}

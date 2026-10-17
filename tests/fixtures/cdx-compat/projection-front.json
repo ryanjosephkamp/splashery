@@ -1,0 +1,183 @@
+{
+  "$comment": "Source: 79a24ecc7ae24af8c407bc0f94106ee253efcf89:src/patterns.js. Historical PROJECTIONS entry front over the historical default scene.",
+  "$compat": {
+    "commit": "79a24ecc7ae24af8c407bc0f94106ee253efcf89",
+    "file": "src/patterns.js",
+    "description": "Historical PROJECTIONS entry front over the historical default scene.",
+    "origin": "historical enum reconstruction",
+    "hash": "d.fVJBjtswDPwLe_UGqtOku771De1pFz3QMpOokSVBouOkgf9eSo63QRbtyaYwMxwOeQUMARpIwWI6ULxABSeKyXgHzboCHQmZum8smFrV2yf18lSvfyjV1M9NvV4ppV6Fkog6aF4qYH-B5gpH46SGdjCWjROAKaX1LUwVWO-PGdWiPu6jHwo24J4EyAfqSUoc2EuJWpPjv3X2yd81WsF8roDOwach5kJ0abcjzSlLB3-k_M1j7NAmEipHcns-QKNW2wpG37ZZRa02Qh2L4X_iN5sKOhNFvQSjplym5O3pQ5cgiXULJ4USzNyjiz48oFsZXhcTXzJaIzPFBd_j3hH_x9XXCiJ2ZkizgFB4NOmRgb004SJ6P7UsF89GqHDJO0nW6MdZJFtzG1gAI1EoxM0785yZAY374NL8plvH-bJuhfbWy3zwibbrtiaY7vmJsQ8i-_ZTXjX2FDE_X3Bc4gyGdZGqn2V0b21xJptgLDHmCPKhSMtyhjxEx1gG5jjQciFiwHlHs_mcuMvgcqISrwmU5NJC9L-WfcMuevGYd-LnlyugNad33d7nf2Eb8XS_9jyyY7Gar3Kapj8",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 9,
+      "toy": {
+        "kind": "builtin",
+        "id": "blob"
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "stripes",
+        "flag": "",
+        "projection": "front",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "createdAt": "2026-09-23T00:28:23.000Z",
+  "seed": 9,
+  "toy": {
+    "kind": "builtin",
+    "id": "blob"
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": false,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": []
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.28,
+    "roll": 0,
+    "distance": 5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  },
+  "pattern": {
+    "id": "stripes",
+    "projection": "front"
+  },
+  "motion": {
+    "alive": true,
+    "move": "still",
+    "speed": 0.5,
+    "controls": {}
+  }
+}

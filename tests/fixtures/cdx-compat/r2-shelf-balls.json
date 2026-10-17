@@ -1,0 +1,113 @@
+{
+  "$comment": "Source: 2734137f308d792277fed2f8135f4b6e1b9be292:src/toys.js. Reconstructed scene using the historical basketball shelf id and schema defaults; seed and timestamp pinned.",
+  "$compat": {
+    "commit": "2734137f308d792277fed2f8135f4b6e1b9be292",
+    "file": "src/toys.js",
+    "description": "Reconstructed scene using the historical basketball shelf id and schema defaults; seed and timestamp pinned.",
+    "origin": "historical reconstruction",
+    "reconstruction": "task 65, October 14, 2026",
+    "category": "balls",
+    "hash": "d.Hc1BCoMwEEbhu_zrWCa2Spld79BVd6NOIBiSYiaFIt691OWDD96Oj241lgy-OsybiunyMDB66sfOU-f7p7_zQHyjCxG94FBVF_A4kHew8gXvWGNewJhaTBYzHOKZUle1SVLC4SDNyjvJ6a1t2WRKCg6SqjpoCDr_x7lkxXH8AA",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 6501,
+      "toy": {
+        "kind": "builtin",
+        "id": "basketball"
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": false,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    }
+  },
+  "version": 3,
+  "createdAt": "2026-10-12T18:50:40.000Z",
+  "seed": 6501,
+  "toy": {
+    "kind": "builtin",
+    "id": "basketball"
+  },
+  "autoplay": {
+    "turntable": false,
+    "effect": "none"
+  }
+}

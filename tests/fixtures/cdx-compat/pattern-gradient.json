@@ -1,0 +1,189 @@
+{
+  "$comment": "Source: 79a24ecc7ae24af8c407bc0f94106ee253efcf89:src/patterns.js. Historical PATTERNS entry gradient over the historical default scene.",
+  "$compat": {
+    "commit": "79a24ecc7ae24af8c407bc0f94106ee253efcf89",
+    "file": "src/patterns.js",
+    "description": "Historical PATTERNS entry gradient over the historical default scene.",
+    "origin": "historical enum reconstruction",
+    "hash": "d.fVPBkpswDP0X7ZXNULJJN9z6De2pnT0II4g3xvbYIiTN8O-VnbDNZKflgmXek_SexAXQe6gheoNxT-EMBRwpRO0s1OsCVCBkar-xYKqy2j6Xu-dq_aMs6-q1rtarsix_CiUStVDvCmB3hvoCB20lhmbUhrUVgM6hcQ3MBRjnDgnVoDr0wY0Z67EnAfKeBpIQR3YSolJk-W-c-uTvCo1gvhRAJ-_iGFIgeanrSHFMqb07UHonGR2aSELlQLbnPdTlalvA5JomZSlXG6FOueF_4jebAlodJHs2ppxTGKMzx09VvDjWLpzoszHXGm1w_gHdiHiVm3hJaIXMFBb8gL0l_k9XXwsI2OoxXhMIhScdHxk4SBHOSe9Vy3DxpIUK5zSTaLR61CLe6ptgAUxEPhM3H8xTYnrU9lOX-jfdKl436xYoZ5zogyfarpuKYL7nR8bBS9pfb3KrcKCA6fqM02Kn16xyqupVpDtjcmcyCcZsY7IgLYqUzGvIY7CMWTCHkZYNkQass3RtPjluEzivaJ8MTRtXQGewlxs5-eDel9HDFNDLXSAvf0bMW5hVpcbhqcuPfF8UyqlsXrqdgrc8YLP4soxF-C0xapP3Mo3dXStdAI0-frQ-uHQWk7TIvt-sVN-yuJEWf57nPw",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 9,
+      "toy": {
+        "kind": "builtin",
+        "id": "blob"
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "gradient",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "createdAt": "2026-09-23T00:28:23.000Z",
+  "seed": 9,
+  "toy": {
+    "kind": "builtin",
+    "id": "blob"
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": false,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": []
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.28,
+    "roll": 0,
+    "distance": 5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  },
+  "pattern": {
+    "id": "gradient",
+    "flag": "",
+    "projection": "wrap",
+    "repeats": 1,
+    "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+    "scale": 0.5,
+    "amount": 1,
+    "detail": 0.6
+  },
+  "motion": {
+    "alive": true,
+    "move": "still",
+    "speed": 0.5,
+    "controls": {}
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "$comment": "Source: eb8cee9a4149f1132499ef70afe5b36f7b56e685:tests/g.spec.mjs. Real pencil linked looks test; historical createScene defaults, seed/timestamp pinned.",
+  "$compat": {
+    "commit": "eb8cee9a4149f1132499ef70afe5b36f7b56e685",
+    "file": "tests/g.spec.mjs",
+    "description": "Real pencil linked looks test; historical createScene defaults, seed/timestamp pinned.",
+    "origin": "historical test replay",
+    "hash": "d.fVPBktowDP0X7TUwWdiwJbd-Q3vanT0ojgIuju2xFQJl8u-VDaE77LRciJT3JL0n5QLoPdQQvcG4p3CGAo4UonYW6nUBKhAytd9ZMKtytVmU28Xq9WdZ1c_bulovy7J8E0okaqHeFsDuDPUFDtpKDM2gDWsrAJ1CT1Zps5CSRlLOs3SJCW6cO6T3BgU3TcUtcYEG1WEX3JCredyR8HhPPUmIAzsJUSmy_DdOSviHQiOY5wLo5F0cQgqkLnUdKc49vTtQ-k9COzSRhMqB7I73UJfLTQGja5pUpVxWQh2zpH_iq6qAVgepnq0rpxTG6MzxSxcvBrQzJ_ps3bVHG5x_QDciXuUhXhJaITOFGd_jzhL_Z6rXAgK2eojXAkLhUcdHBvbShHPRz6pl_XjSQoUzCDMarR61iLf6JlgAI5HPxOrOPCWmR22_TKl_063j9fZugXLGiT54os26WVG-hjs_MvZeyr5_SFZhTwFT-ozjbKfXrHKp1TeR7ozJk8kmGLONyYJ0KNIyHyoPwTJmwRwGmi9EBrDO0nX45LhN4HzEOV9AZ3AnkTz54H7Na4cxoJdcIC_fTcwXmBWloeGpyz95P6uTp7J56bYKPvJyzezJvBLht8SoTb7JtHJ37XQBNPp4H7t36VkM0sbA56tK_S2LE-nop2n6Aw",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 9,
+      "toy": {
+        "kind": "builtin",
+        "id": "pencil-real",
+        "options": {
+          "look": "plaid"
+        }
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    },
+    "builtOptions": {
+      "look": "yellow"
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "createdAt": "2026-09-27T05:19:53.000Z",
+  "seed": 9,
+  "toy": {
+    "kind": "builtin",
+    "id": "pencil-real",
+    "options": {
+      "look": "plaid"
+    }
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": false,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": []
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.28,
+    "roll": 0,
+    "distance": 5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  },
+  "pattern": {
+    "id": "none",
+    "flag": "",
+    "projection": "wrap",
+    "repeats": 1,
+    "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+    "scale": 0.5,
+    "amount": 1,
+    "detail": 0.6
+  },
+  "motion": {
+    "alive": true,
+    "move": "still",
+    "speed": 0.5,
+    "controls": {}
+  }
+}

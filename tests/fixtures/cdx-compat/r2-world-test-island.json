@@ -1,0 +1,796 @@
+{
+  "$comment": "Source: 9778fdea6613adead30e977794b18d0585a253f4:worlds/test-island/world.json. Copied historical world file, loaded through /worlds/ and its fetched world-file route, not #s= or Load JSON.",
+  "$compat": {
+    "commit": "9778fdea6613adead30e977794b18d0585a253f4",
+    "file": "worlds/test-island/world.json",
+    "origin": "copied world file",
+    "route": "world",
+    "description": "Historical Test island world file; world schema v1 is independent of scene schema v1 refusal.",
+    "worldId": "test-island",
+    "expected": {
+      "version": 1,
+      "id": "test-island",
+      "title": "Test island",
+      "welcome": "A small island made entirely of splats, for trying out Splashery Worlds. Walk around, visit the five signs, and see how the world is made.",
+      "enter": "Enter",
+      "credit": "",
+      "seed": 20260929,
+      "colors": {
+        "sky": "#6fb3e6",
+        "horizon": "#dcefff",
+        "sand": "#e6d3a0",
+        "wetSand": "#b9a578",
+        "seabed": "#8fa98e",
+        "grass": "#6fa84a",
+        "grassLight": "#9ccc5c",
+        "grassDark": "#3f7a33",
+        "grassDry": "#a8a650",
+        "rock": "#8c8781",
+        "rockDark": "#5f5b57",
+        "snow": "#f3f6fb",
+        "water": "#1f6f9e",
+        "shallow": "#4fc2c4",
+        "foam": "#f4fbff",
+        "cloud": "#ffffff",
+        "accent": "#1f6f8b"
+      },
+      "terrain": {
+        "shape": "island",
+        "size": 128,
+        "chunk": 8,
+        "center": [0, 0],
+        "radius": [34, 28],
+        "height": 3.5,
+        "base": 1,
+        "roughness": 0.45,
+        "coast": 0.3,
+        "seaDepth": 6,
+        "beachHeight": 0.6,
+        "beach": 1.1,
+        "waterLevel": 0,
+        "clearDepth": 2.6,
+        "rockSlope": 0.85,
+        "snowLine": 1000,
+        "hills": [
+          {
+            "at": [10, -8],
+            "radius": 11,
+            "height": 6
+          },
+          {
+            "at": [-17, -9],
+            "radius": 4.5,
+            "height": 4.5
+          }
+        ],
+        "flatten": []
+      },
+      "water": true,
+      "render": "splats",
+      "light": {
+        "sun": {
+          "azimuth": 232,
+          "elevation": 48
+        },
+        "sunColor": [1, 0.9529411764705882, 0.8745098039215686],
+        "sunIntensity": 0.95,
+        "shadow": 0.42,
+        "haze": 0.0045,
+        "hazeColor": [0.8627450980392157, 0.9372549019607843, 1],
+        "exposure": 1,
+        "ambient": [0, 0, 0]
+      },
+      "sky": {
+        "clouds": 0.5
+      },
+      "spawn": {
+        "at": [-4, 14],
+        "facing": 180
+      },
+      "character": {
+        "shirt": "#e0533d",
+        "trousers": "#35507a",
+        "skin": "#c98e6a",
+        "hair": "#3a2a1e",
+        "shoes": "#2e2e33",
+        "model": "auto"
+      },
+      "props": [
+        {
+          "id": "palm-1",
+          "type": "palm",
+          "at": [-26, 2],
+          "lift": 0,
+          "y": null,
+          "size": 6.2,
+          "turn": 20,
+          "tilt": 0,
+          "seed": 1,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "palm-2",
+          "type": "palm",
+          "at": [-24.5, 10.5],
+          "lift": 0,
+          "y": null,
+          "size": 5.4,
+          "turn": 140,
+          "tilt": 0,
+          "seed": 2,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "palm-3",
+          "type": "palm",
+          "at": [-19, 13],
+          "lift": 0,
+          "y": null,
+          "size": 6.6,
+          "turn": 250,
+          "tilt": 0,
+          "seed": 3,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "palm-4",
+          "type": "palm",
+          "at": [-28, 7],
+          "lift": 0,
+          "y": null,
+          "size": 5,
+          "turn": 300,
+          "tilt": 0,
+          "seed": 2,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "pine-1",
+          "type": "pine",
+          "at": [4, -15],
+          "lift": 0,
+          "y": null,
+          "size": 6.5,
+          "turn": 0,
+          "tilt": 0,
+          "seed": 5,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "pine-2",
+          "type": "pine",
+          "at": [15, -17],
+          "lift": 0,
+          "y": null,
+          "size": 7.2,
+          "turn": 0,
+          "tilt": 0,
+          "seed": 2,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "pine-3",
+          "type": "pine",
+          "at": [20, -5],
+          "lift": 0,
+          "y": null,
+          "size": 5.8,
+          "turn": 0,
+          "tilt": 0,
+          "seed": 3,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "pine-4",
+          "type": "pine",
+          "at": [1, -4],
+          "lift": 0,
+          "y": null,
+          "size": 5.2,
+          "turn": 0,
+          "tilt": 0,
+          "seed": 2,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "oak-1",
+          "type": "oak",
+          "at": [7, 9],
+          "lift": 0,
+          "y": null,
+          "size": 5.5,
+          "turn": 0,
+          "tilt": 0,
+          "seed": 9,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "oak-2",
+          "type": "oak",
+          "at": [-11, -4],
+          "lift": 0,
+          "y": null,
+          "size": 6,
+          "turn": 90,
+          "tilt": 0,
+          "seed": 2,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "boulder-1",
+          "type": "boulder",
+          "at": [13, 10],
+          "lift": 0,
+          "y": null,
+          "size": 1.5,
+          "turn": 30,
+          "tilt": 0,
+          "seed": 11,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "boulder-2",
+          "type": "boulder",
+          "at": [18.5, 15],
+          "lift": 0,
+          "y": null,
+          "size": 1.9,
+          "turn": 80,
+          "tilt": 0,
+          "seed": 2,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "boulder-3",
+          "type": "boulder",
+          "at": [20.5, 9],
+          "lift": 0,
+          "y": null,
+          "size": 1.1,
+          "turn": 200,
+          "tilt": 0,
+          "seed": 3,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "boulder-4",
+          "type": "boulder",
+          "at": [15, 16.5],
+          "lift": 0,
+          "y": null,
+          "size": 0.9,
+          "turn": 10,
+          "tilt": 0,
+          "seed": 4,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "mushroom-1",
+          "type": "mushroom",
+          "at": [-9.5, -1.5],
+          "lift": 0,
+          "y": null,
+          "size": 0.45,
+          "turn": 0,
+          "tilt": 0,
+          "seed": 15,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "mushroom-2",
+          "type": "mushroom",
+          "at": [-8.8, -2.3],
+          "lift": 0,
+          "y": null,
+          "size": 0.32,
+          "turn": 60,
+          "tilt": 0,
+          "seed": 2,
+          "detail": 1,
+          "options": {},
+          "collider": null,
+          "only": null
+        },
+        {
+          "id": "lighthouse",
+          "type": "lighthouse",
+          "at": [-9, -30],
+          "lift": 0,
+          "y": -0.25,
+          "size": 10,
+          "turn": 0,
+          "tilt": 0,
+          "seed": 17,
+          "detail": 1.8,
+          "options": {},
+          "collider": null,
+          "only": null
+        }
+      ],
+      "scatter": [
+        {
+          "type": "bush",
+          "count": 14,
+          "on": "grass",
+          "size": [0.8, 1.4],
+          "seed": 100,
+          "within": null,
+          "spacing": 4,
+          "options": {},
+          "only": null
+        },
+        {
+          "type": "tulip",
+          "count": 10,
+          "on": "grass",
+          "size": [0.35, 0.5],
+          "seed": 101,
+          "within": {
+            "at": [-8, 13],
+            "radius": 5
+          },
+          "spacing": 1.2,
+          "options": {},
+          "only": null
+        },
+        {
+          "type": "pebbles",
+          "count": 6,
+          "on": "sand",
+          "size": [0.5, 0.8],
+          "seed": 102,
+          "within": null,
+          "spacing": 6,
+          "options": {},
+          "only": null
+        },
+        {
+          "type": "driftwood",
+          "count": 4,
+          "on": "sand",
+          "size": [2, 3.2],
+          "seed": 103,
+          "within": null,
+          "spacing": 3,
+          "options": {},
+          "only": "hybrid"
+        },
+        {
+          "type": "stump",
+          "count": 3,
+          "on": "grass",
+          "size": [0.45, 0.7],
+          "seed": 104,
+          "within": null,
+          "spacing": 3,
+          "options": {},
+          "only": "hybrid"
+        },
+        {
+          "type": "shell",
+          "count": 28,
+          "on": "sand",
+          "size": [0.09, 0.15],
+          "seed": 105,
+          "within": null,
+          "spacing": 2.5,
+          "options": {},
+          "only": "hybrid"
+        },
+        {
+          "type": "stone",
+          "count": 220,
+          "on": "sand",
+          "size": [0.05, 0.16],
+          "seed": 106,
+          "within": null,
+          "spacing": 0.6,
+          "options": {},
+          "only": "hybrid"
+        }
+      ],
+      "landmarks": [
+        {
+          "id": "welcome",
+          "title": "Welcome to the Test island",
+          "words": "You found your first sign. Walking up to a sign opens its card; tapping or clicking a sign does too. Walk with W, A, S and D or the arrow keys (Shift runs), or with the thumb stick on a phone, and drag to look around. The Places button lists every place on the island.",
+          "link": null,
+          "picture": null,
+          "at": [-7, 9.5],
+          "facing": 40,
+          "radius": 3.2,
+          "sign": "post",
+          "label": "WELCOME"
+        },
+        {
+          "id": "palm-beach",
+          "title": "Palm beach",
+          "words": "These palms, and every tree, rock and flower here, are toys from the Splashery shelf, built from their recipes on your device and placed by the world file. Walk into a trunk: you can't pass through it. Collision uses invisible simple shapes around each prop.",
+          "link": {
+            "href": "../",
+            "label": "Open the toy box"
+          },
+          "picture": {
+            "src": "../assets/toys/palm/thumb.webp",
+            "alt": "The palm tree toy on the Splashery shelf"
+          },
+          "at": [-21.5, 6],
+          "facing": 80,
+          "radius": 3.2,
+          "sign": "post",
+          "label": "PALM BEACH"
+        },
+        {
+          "id": "lookout",
+          "title": "Lookout hill",
+          "words": "The whole island from its highest point. Near things are drawn with many small splats and far things with fewer, larger ones, so the view fits your device's splat budget. Try walking down the steep rocks to the west: the character stops where the slope is too steep.",
+          "link": null,
+          "picture": null,
+          "at": [9.5, -7.5],
+          "facing": 190,
+          "radius": 3.2,
+          "sign": "post",
+          "label": "LOOKOUT"
+        },
+        {
+          "id": "boulders",
+          "title": "Boulder garden",
+          "words": "Boulders to walk around. Each has an invisible collider, so the character slides along it instead of walking through.",
+          "link": null,
+          "picture": null,
+          "at": [16.5, 12],
+          "facing": 250,
+          "radius": 3.2,
+          "sign": "post",
+          "label": "BOULDERS"
+        },
+        {
+          "id": "lighthouse",
+          "title": "The lighthouse",
+          "words": "A big prop, still sharp from across the island. Worlds are made from a world file: its title, colors, terrain, props, landmarks and spawn point. The format is written up for anyone building a world.",
+          "link": {
+            "href": "https://github.com/ryanjosephkamp/splashery/blob/main/docs/WORLDS.md",
+            "label": "Read how worlds are made"
+          },
+          "picture": {
+            "src": "../assets/toys/lighthouse/thumb.webp",
+            "alt": "The lighthouse toy on the Splashery shelf"
+          },
+          "at": [-6, -21],
+          "facing": 10,
+          "radius": 3.2,
+          "sign": "post",
+          "label": "LIGHTHOUSE"
+        }
+      ]
+    }
+  },
+  "version": 1,
+  "id": "test-island",
+  "title": "Test island",
+  "welcome": "A small island made entirely of splats, for trying out Splashery Worlds. Walk around, visit the five signs, and see how the world is made.",
+  "enter": "Enter",
+  "seed": 20260929,
+  "colors": {},
+  "terrain": {
+    "shape": "island",
+    "size": 128,
+    "chunk": 8,
+    "center": [0, 0],
+    "radius": [34, 28],
+    "height": 3.5,
+    "roughness": 0.45,
+    "coast": 0.3,
+    "seaDepth": 6,
+    "beachHeight": 0.6,
+    "beach": 1.1,
+    "waterLevel": 0,
+    "rockSlope": 0.85,
+    "hills": [
+      {
+        "at": [10, -8],
+        "radius": 11,
+        "height": 6
+      },
+      {
+        "at": [-17, -9],
+        "radius": 4.5,
+        "height": 4.5
+      }
+    ]
+  },
+  "spawn": {
+    "at": [-4, 14],
+    "facing": 180
+  },
+  "props": [
+    {
+      "id": "palm-1",
+      "type": "palm",
+      "at": [-26, 2],
+      "size": 6.2,
+      "turn": 20
+    },
+    {
+      "id": "palm-2",
+      "type": "palm",
+      "at": [-24.5, 10.5],
+      "size": 5.4,
+      "turn": 140,
+      "seed": 2
+    },
+    {
+      "id": "palm-3",
+      "type": "palm",
+      "at": [-19, 13],
+      "size": 6.6,
+      "turn": 250,
+      "seed": 3
+    },
+    {
+      "id": "palm-4",
+      "type": "palm",
+      "at": [-28, 7],
+      "size": 5,
+      "turn": 300,
+      "seed": 2
+    },
+    {
+      "id": "pine-1",
+      "type": "pine",
+      "at": [4, -15],
+      "size": 6.5
+    },
+    {
+      "id": "pine-2",
+      "type": "pine",
+      "at": [15, -17],
+      "size": 7.2,
+      "seed": 2
+    },
+    {
+      "id": "pine-3",
+      "type": "pine",
+      "at": [20, -5],
+      "size": 5.8,
+      "seed": 3
+    },
+    {
+      "id": "pine-4",
+      "type": "pine",
+      "at": [1, -4],
+      "size": 5.2,
+      "seed": 2
+    },
+    {
+      "id": "oak-1",
+      "type": "oak",
+      "at": [7, 9],
+      "size": 5.5
+    },
+    {
+      "id": "oak-2",
+      "type": "oak",
+      "at": [-11, -4],
+      "size": 6,
+      "turn": 90,
+      "seed": 2
+    },
+    {
+      "id": "boulder-1",
+      "type": "boulder",
+      "at": [13, 10],
+      "size": 1.5,
+      "turn": 30
+    },
+    {
+      "id": "boulder-2",
+      "type": "boulder",
+      "at": [18.5, 15],
+      "size": 1.9,
+      "turn": 80,
+      "seed": 2
+    },
+    {
+      "id": "boulder-3",
+      "type": "boulder",
+      "at": [20.5, 9],
+      "size": 1.1,
+      "turn": 200,
+      "seed": 3
+    },
+    {
+      "id": "boulder-4",
+      "type": "boulder",
+      "at": [15, 16.5],
+      "size": 0.9,
+      "turn": 10,
+      "seed": 4
+    },
+    {
+      "id": "mushroom-1",
+      "type": "mushroom",
+      "at": [-9.5, -1.5],
+      "size": 0.45
+    },
+    {
+      "id": "mushroom-2",
+      "type": "mushroom",
+      "at": [-8.8, -2.3],
+      "size": 0.32,
+      "turn": 60,
+      "seed": 2
+    },
+    {
+      "id": "lighthouse",
+      "type": "lighthouse",
+      "at": [-9, -30],
+      "size": 10,
+      "turn": 0,
+      "y": -0.25,
+      "detail": 1.8
+    }
+  ],
+  "scatter": [
+    {
+      "type": "bush",
+      "count": 14,
+      "on": "grass",
+      "size": [0.8, 1.4],
+      "spacing": 4
+    },
+    {
+      "type": "tulip",
+      "count": 10,
+      "on": "grass",
+      "size": [0.35, 0.5],
+      "spacing": 1.2,
+      "within": {
+        "at": [-8, 13],
+        "radius": 5
+      }
+    },
+    {
+      "type": "pebbles",
+      "count": 6,
+      "on": "sand",
+      "size": [0.5, 0.8],
+      "spacing": 6
+    },
+    {
+      "type": "driftwood",
+      "count": 4,
+      "on": "sand",
+      "size": [2, 3.2],
+      "spacing": 3,
+      "only": "hybrid"
+    },
+    {
+      "type": "stump",
+      "count": 3,
+      "on": "grass",
+      "size": [0.45, 0.7],
+      "spacing": 3,
+      "only": "hybrid"
+    },
+    {
+      "type": "shell",
+      "count": 28,
+      "on": "sand",
+      "size": [0.09, 0.15],
+      "spacing": 2.5,
+      "only": "hybrid"
+    },
+    {
+      "type": "stone",
+      "count": 220,
+      "on": "sand",
+      "size": [0.05, 0.16],
+      "spacing": 0.6,
+      "only": "hybrid"
+    }
+  ],
+  "landmarks": [
+    {
+      "id": "welcome",
+      "title": "Welcome to the Test island",
+      "label": "Welcome",
+      "at": [-7, 9.5],
+      "facing": 40,
+      "words": "You found your first sign. Walking up to a sign opens its card; tapping or clicking a sign does too. Walk with W, A, S and D or the arrow keys (Shift runs), or with the thumb stick on a phone, and drag to look around. The Places button lists every place on the island."
+    },
+    {
+      "id": "palm-beach",
+      "title": "Palm beach",
+      "label": "Palm beach",
+      "at": [-21.5, 6],
+      "facing": 80,
+      "words": "These palms, and every tree, rock and flower here, are toys from the Splashery shelf, built from their recipes on your device and placed by the world file. Walk into a trunk: you can't pass through it. Collision uses invisible simple shapes around each prop.",
+      "picture": {
+        "src": "../assets/toys/palm/thumb.webp",
+        "alt": "The palm tree toy on the Splashery shelf"
+      },
+      "link": {
+        "href": "../",
+        "label": "Open the toy box"
+      }
+    },
+    {
+      "id": "lookout",
+      "title": "Lookout hill",
+      "label": "Lookout",
+      "at": [9.5, -7.5],
+      "facing": 190,
+      "words": "The whole island from its highest point. Near things are drawn with many small splats and far things with fewer, larger ones, so the view fits your device's splat budget. Try walking down the steep rocks to the west: the character stops where the slope is too steep."
+    },
+    {
+      "id": "boulders",
+      "title": "Boulder garden",
+      "label": "Boulders",
+      "at": [16.5, 12],
+      "facing": 250,
+      "words": "Boulders to walk around. Each has an invisible collider, so the character slides along it instead of walking through."
+    },
+    {
+      "id": "lighthouse",
+      "title": "The lighthouse",
+      "label": "Lighthouse",
+      "at": [-6, -21],
+      "facing": 10,
+      "words": "A big prop, still sharp from across the island. Worlds are made from a world file: its title, colors, terrain, props, landmarks and spawn point. The format is written up for anyone building a world.",
+      "picture": {
+        "src": "../assets/toys/lighthouse/thumb.webp",
+        "alt": "The lighthouse toy on the Splashery shelf"
+      },
+      "link": {
+        "href": "https://github.com/ryanjosephkamp/splashery/blob/main/docs/WORLDS.md",
+        "label": "Read how worlds are made"
+      }
+    }
+  ]
+}

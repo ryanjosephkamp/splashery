@@ -1,0 +1,113 @@
+{
+  "$comment": "Source: 2734137f308d792277fed2f8135f4b6e1b9be292:src/player.js. Reconstructed unknown toy id: keep the saved id and settings, and render the documented blob fallback.",
+  "$compat": {
+    "commit": "2734137f308d792277fed2f8135f4b6e1b9be292",
+    "file": "src/player.js",
+    "description": "Reconstructed unknown toy id: keep the saved id and settings, and render the documented blob fallback.",
+    "origin": "historical reconstruction",
+    "reconstruction": "task 65, October 14, 2026",
+    "hash": "d.HY7BCsIwEAX_5Z0TSVpbZG_-gydvabvFYNhIslGk9N-lHgdmYDa8udSYBdQbzIWD8nJVEDrXjdY767ubv9Dg6OxOzrk7DCrzAhqH3hto_oI2PKMsIEwtJo0Cg3hgk6fkj9hHrJpLnEOyh78bhKb5lcK_1VZEw5QYtIZU2YDXledjQrIw9v0H",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 6531,
+      "toy": {
+        "kind": "builtin",
+        "id": "unknown-historical-toy"
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": false,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    },
+    "builtId": "blob"
+  },
+  "version": 3,
+  "createdAt": "2026-10-12T18:50:40.000Z",
+  "seed": 6531,
+  "toy": {
+    "kind": "builtin",
+    "id": "unknown-historical-toy"
+  },
+  "autoplay": {
+    "turntable": false,
+    "effect": "none"
+  }
+}

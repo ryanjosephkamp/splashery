@@ -1,0 +1,42 @@
+{
+  "$comment": "Source: 1a2dd3d6c8f14f11a1afd5766392e5d687f1ba46:src/state.js. createDefaultScene; timestamp and random template seed pinned.",
+  "$compat": {
+    "commit": "1a2dd3d6c8f14f11a1afd5766392e5d687f1ba46",
+    "file": "src/state.js",
+    "description": "createDefaultScene; timestamp and random template seed pinned.",
+    "origin": "historical default replay",
+    "hash": "j.eyJ2ZXJzaW9uIjoxLCJjcmVhdGVkQXQiOiIyMDI2LTA5LTIyVDA1OjM4OjM1LjAwMFoiLCJ0ZW1wbGF0ZSI6eyJuYW1lIjoicm9ja3kiLCJzZWVkIjo5fSwiY2FtZXJhIjp7InJvdGF0aW9uIjpbMCwwLDAsMV0sImRpc3RhbmNlIjozLjJ9LCJsaWdodGluZyI6eyJleHBvc3VyZSI6MC45NSwia2V5SW50ZW5zaXR5IjoyLjYsImtleUF6aW11dGgiOi0wLjcsImtleUVsZXZhdGlvbiI6MC41NSwiZW52SW50ZW5zaXR5IjowLjU1fSwiYnJ1c2hEZWZhdWx0cyI6eyJzaXplIjowLjA1LCJjb2xvciI6IiNlNjNiMmUiLCJ3ZXRuZXNzIjowLjgsIm9wYWNpdHkiOjF9LCJwaHlzaWNzIjp7ImRyeVRpbWUiOjQsInZpc2Nvc2l0eSI6MC4zNX0sInN0cm9rZXMiOltdLCJzbmFwc2hvdFBORyI6bnVsbH0",
+    "expected": {
+      "refused": "This is a Splashery v1 planet scene. Splashery v2 plays with splat toys; open it on the v1 branch."
+    }
+  },
+  "version": 1,
+  "createdAt": "2026-09-22T05:38:35.000Z",
+  "template": {
+    "name": "rocky",
+    "seed": 9
+  },
+  "camera": {
+    "rotation": [0, 0, 0, 1],
+    "distance": 3.2
+  },
+  "lighting": {
+    "exposure": 0.95,
+    "keyIntensity": 2.6,
+    "keyAzimuth": -0.7,
+    "keyElevation": 0.55,
+    "envIntensity": 0.55
+  },
+  "brushDefaults": {
+    "size": 0.05,
+    "color": "#e63b2e",
+    "wetness": 0.8,
+    "opacity": 1
+  },
+  "physics": {
+    "dryTime": 4,
+    "viscosity": 0.35
+  },
+  "strokes": [],
+  "snapshotPNG": null
+}
