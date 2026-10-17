@@ -153,7 +153,8 @@ for (const size of [
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await open(page, size);
-    expect(await page.evaluate(() => window.__splashery.player.motion.ctx.buf.count)).toBe(8192);
+    // Lane PT2: the toy opens at level 6 (64 splats), so a tap visibly splits.
+    expect(await page.evaluate(() => window.__splashery.player.motion.ctx.buf.count)).toBe(64);
     await page.screenshot({
       path: `tests/screenshots/cdx-pfa-one-splat-${size.width}x${size.height}.png`,
     });
@@ -174,7 +175,7 @@ for (const size of [
     await page.mouse.click(splat.x, splat.y);
     await expect
       .poll(() => page.evaluate(() => window.__splashery.player.motion.ctx.buf.count))
-      .toBe(2);
+      .toBe(3); // lane PT2: the two children, and their parent fading as they leave it
     expect(await page.evaluate(() => window.__splashery.player.motion.ctx.kit.data.ids)).toEqual([
       2, 3,
     ]);
@@ -222,7 +223,7 @@ test("local pictures carry color, and scene links fall back without uploading th
       count: buf.count,
     };
   });
-  expect(result.count).toBe(8192);
+  expect(result.count).toBe(64); // lane PT2: level 6 by default
   expect(result.color[1]).toBe(0);
   expect(result.saved).toBe("test.png");
   expect(result.shown).toContain("Picture unavailable");
