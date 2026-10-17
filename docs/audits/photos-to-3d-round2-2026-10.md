@@ -31,7 +31,8 @@ Geometry may use all input grayscale, including the held-out view, under the tas
 protocol. For each appearance fold, sparse colors are rebuilt from at least two training
 observations, and held-out RGB, masks, and cameras are physically absent from surface seeding,
 trainer inputs, loss, hull filtering, and environment fitting. Each fold starts a fresh trainer.
-Camera poses remain fixed during appearance training.
+Camera poses remain fixed during appearance training. These probes use degree-zero spherical
+harmonics, no environment fitting, and Video to 3D's horizon-dependent refinement schedule.
 
 Evaluation masks are approximate manual silhouettes traced from input photos alone, without camera
 solutions, renders, or optimizer feedback. A uniform two-pixel erosion at the 320-pixel annotation
@@ -99,8 +100,44 @@ rejects incompatible lens groups.
 
 ## Results and acceptance ledger
 
-Measurements are in progress. No quality, complete-coverage, or physical-phone gate is claimed from
-the implementation or numeric controls alone. Raw receipts, masks, partial exports, and source
-hashes will accompany the final ledger on `codex/photos-to-3d-clips`, which must never be merged.
+The completed 24-photo phone reconstruction places 11/24 Buddha views with 1,206 sparse points;
+sorted and seed-104-shuffled picker orders produce identical geometry and match diagnostics. At
+1,600-pixel desktop features, the sorted run places 16/24 views with 4,339 points. The textured die
+places 24/24 phone views with 9,590 points. The skull phone run places 0/24: only five of its 276
+pairs pass verification, leaving 19 graph components. The sorted 60-photo phone run places 60/60
+views in one component, with 193 verified pairs and 9,151 sparse points. The shuffled 60-photo and
+remaining desktop runs are still in progress.
+
+All 11 registered Buddha phone views have a fresh 200-step leave-one-out fold. Their conditional
+median masked SSIM is 0.51175 (range 0.32339–0.69786), and median PSNR is 14.53247 dB. The 13
+unregistered inputs cannot be scored and remain explicit omissions. These short phone-profile
+measurements are diagnostics, not the desktop 7,000-step acceptance test. The independent 1,200-step
+phone fold for `00010._c.png` completed with 30,000 splats, SSIM 0.55978, and PSNR 19.23417 dB,
+compared with 0.60195 and 19.75733 dB for that view's 200-step fold. Each run starts fresh, and
+Video to 3D's refinement schedule scales with the requested horizon; these are separate configured
+runs, not two checkpoints of one training trajectory. The other registered-view folds are still
+running. Six saved Buddha folds were recovered from an interrupted batch without changing their
+numeric values; the raw JSONL, original header, checkpoint, and recovery hashes remain available,
+with the missing runtime mask-hash caveat above.
+
+No quality, complete-coverage, or physical-phone gate is claimed from the implementation or numeric
+controls alone. Raw receipts, masks, partial exports, and source hashes will accompany the final
+ledger on `codex/photos-to-3d-clips`, which must never be merged.
+
+## Verification so far
+
+All 18 photo diagnostics pass on the current code, including the exact-buffer identity regressions,
+CPU-worker parity, EXIF orientation, actual mixed-intrinsics numeric solves, abort handling,
+complete failure denominators, and the held-out RGB/mask sentinel through GPU training. Forty
+existing Video to 3D cases pass unchanged. Full preflight passes, including all 271 shelf-wide
+cases, formatting, American English, site freshness, parsing, and file-size checks. The broader
+existing suite was not run in full.
+
+The first preflight attempt had 270 passes and one graph-plotter slider failure while benchmarks and
+training contended for the container's four CPU cores. Its trace showed the drag starting away from
+the rendered knob while the camera was settling. The unchanged test passed three consecutive repeats
+after the full-length training job finished, and the complete preflight passed with the benchmark
+queue idle. Both logs and the original failure trace are retained. No existing test or product file
+was changed to obtain the pass.
 
 Rule check: none.

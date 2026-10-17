@@ -8,6 +8,7 @@ Those modules are unchanged. All photographs remain in the caller's browser tab.
 import { solvePhotos, seedPhotos } from "./run.js";
 const solution = await solvePhotos(files, {
   profile: "phone", // 960-pixel features; desktop uses 1600, or explicitly 1280.
+  assumeSingleLens: true, // Explicit assumption for one fixed camera/lens capture without EXIF.
   onProgress: console.log,
   signal: controller.signal,
 });
@@ -15,8 +16,10 @@ const solution = await solvePhotos(files, {
 // solution.rejected reports decoder and lens-group rejections.
 if (!solution.recon) throw new Error(solution.error);
 const { session } = await seedPhotos(solution, { signal: controller.signal });
+const camera = session.view.lookThrough(0);
+canvas.width = camera.w;
+canvas.height = camera.h;
 session.view.attach(canvas);
-session.view.lookThrough(0);
 session.start();
 // Stop and keep the current result:
 session.pause();
@@ -48,7 +51,9 @@ seeding, hull filtering, GPU target upload, loss, and environment fitting. Every
 trainer. The photo split disables the Session's additional automatic holdout and video-specific blur
 exclusions; every remaining registered photo trains, and disabled blur exclusions are reported.
 `signal` cancels seeding; after it returns, the caller owns cancellation through
-`session.dispose()`. Dispose the session after exporting or evaluating it.
+`session.dispose()`. Dispose the session after exporting or evaluating it. Render free cameras
+within the tier's training-side dimensions (320 on a phone and 720 on desktop), and match the canvas
+dimensions to the camera. The seed allocates output buffers for that budget.
 
 The module has no upload path, persistent storage, production UI, or acceptance claim. See the task
 104 audit and its round-two evidence for measured limits.
