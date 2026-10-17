@@ -5,7 +5,8 @@ October 17, 2026. Built by Codex (GPT-6).
 Blender 4.5.3 LTS installs headlessly from a pinned, SHA-256-checked archive. The opt-in setup and
 `tools/blender-views.mjs` produce calibrated CC0 model or truth-scene views, depth, geometric
 normals, object/background masks, and full spherical panoramas. All 381 files from three complete
-24-view plus panorama builds matched byte for byte in fresh-process repeats.
+24-view plus panorama builds matched byte for byte in fresh-process repeats. Interrupted command
+sessions were rerun; their partial outputs are excluded from the measurements.
 
 Correction: `docs/codex/105-blender-cloud.md` exists on main and at the original base `ceb51de7`.
 The earlier report and PR body incorrectly called it absent. This revision follows that task file.
@@ -75,15 +76,15 @@ five. Each combined build also has a manifest and checksums file (127 files tota
 
 | Dataset                   |     Bytes |   Seconds A / B | SHA-256 of sorted file-hash map                                    |
 | ------------------------- | --------: | --------------: | ------------------------------------------------------------------ |
-| rubber-duck-real views    | 9,689,869 | 38.356 / 38.786 | `b1e72a3f43119a838afbacb702a3ef36f3a07b85c8858ca86184b9282a6ed75b` |
-| rubber-duck-real panorama |   304,206 |   1.895 / 1.706 | `f266e1369a97b15462b8cbb49e8372f7c2c744b83128ae157a39d3f9371667c5` |
-| garden-gnome views        | 9,684,336 | 32.265 / 35.124 | `c72c4f8148e36f6ab94e636693e178dbb3397628650134adf2057994e221abdb` |
-| garden-gnome panorama     |   317,653 |   1.847 / 1.584 | `8328085fa5b8ce3ada2582d9dbfe7df5502a0045e996963057706e7539dbb516` |
-| wooden-elephant views     | 8,618,341 | 32.661 / 35.913 | `91ff1d582a3b0087a190791c746ce0207d6a903da718f1d663fe636521b9db41` |
-| wooden-elephant panorama  |   310,388 |   1.694 / 1.778 | `7f0ae08f1548341a7404bc32c055ab744a8b7ace89720e8befe6ef2df3b97fd3` |
+| rubber-duck-real views    | 9,692,310 | 72.167 / 80.189 | `77ba7ca2cd4808cf726ec2092964f5876bf3a5587647e9890f8e8212f5218496` |
+| rubber-duck-real panorama |   304,578 |   3.181 / 3.798 | `0e32f1d5500a55bcbb073ad534b4ad3e314a88ff861add312cff8835266b09e5` |
+| garden-gnome views        | 9,684,336 | 78.236 / 90.002 | `c72c4f8148e36f6ab94e636693e178dbb3397628650134adf2057994e221abdb` |
+| garden-gnome panorama     |   317,653 |   3.551 / 4.122 | `8328085fa5b8ce3ada2582d9dbfe7df5502a0045e996963057706e7539dbb516` |
+| wooden-elephant views     | 8,618,341 | 89.505 / 31.921 | `91ff1d582a3b0087a190791c746ce0207d6a903da718f1d663fe636521b9db41` |
+| wooden-elephant panorama  |   310,388 |   5.270 / 1.638 | `7f0ae08f1548341a7404bc32c055ab744a8b7ace89720e8befe6ef2df3b97fd3` |
 
-Mean complete seconds per orbit view (A / B): rubber-duck-real 1.598 / 1.616, garden-gnome 1.344 /
-1.463, wooden-elephant 1.361 / 1.496.
+Mean complete seconds per orbit view (A / B): rubber-duck-real 3.007 / 3.341, garden-gnome 3.260 /
+3.750, wooden-elephant 3.729 / 1.330.
 
 The group digest hashes UTF-8 compact JSON with sorted keys and one trailing newline, mapping each
 filename to `bytes` and `sha256` (Python `json.dumps(..., sort_keys=True, separators=(',', ':'))`).
@@ -91,11 +92,11 @@ Every artifact was read and compared directly, then rehashed against `checksums.
 checksum files alone were not treated as proof. Combined-build checksums-file hashes:
 
 - garden-gnome: 10,068,845 bytes;
-  `045cf5299ec1a3fac43f783412b74c7c574481a3873f879d2a5e0597a82a7e47`.
-- rubber-duck-real: 10,061,055 bytes;
-  `3dba6d7f6ce3f06bc2277c48d4e6f90af143c2023fd87ba8997157b130664b56`.
+  `ad40eec6c9a832954e97ea21b4860713b2602d4ea4216073021483025ccd8f97`.
+- rubber-duck-real: 10,063,868 bytes;
+  `87860b22d24b9018f5a4ffd21c9a82fc8c77d0117bf9eab48ca468e8e6638612`.
 - wooden-elephant: 8,995,793 bytes;
-  `946e3057b1cc154ec5a32cd7806c26dbc5d99971629c0082d3b35bb8382c7d8b`.
+  `7e4d33ec9d997d1c4644c17513faf95d2d492171944dc30205b2aae7d1af0749`.
 
 Normal payload length, unit length at hits, NaN at misses, depth/mask agreement, and matrix inverses
 were checked for all 75 views. The truth-scene route also matched in two fresh-process smoke builds.
@@ -105,15 +106,19 @@ were checked for all 75 views. The truth-scene route also matched in two fresh-p
 All 12 original truth scenes were rendered at both 512×288 and 1024×576 (16:9 long edges), with CPU
 Cycles at eight samples. `tools/blender/benchmark.py` calls the original generator's actual build,
 pose, render, and geometric-depth functions, timing them separately. `--still-side` also makes those
-sizes available from `tools/studio-truth-generate.py` itself.
+sizes available from `tools/studio-truth-generate.py` itself. Benchmark geometry time covers the
+original depth/masks; the six-dataset timings also include normals.
 
-| Backend               | Pixels   | Frames | Mean beauty seconds | Mean geometry seconds | Mean total seconds/frame |
-| --------------------- | -------- | -----: | ------------------: | --------------------: | -----------------------: |
-| CPU Cycles, 8 samples | 512×288  |     12 |               1.024 |                 0.640 |                    1.714 |
-| CPU Cycles, 8 samples | 1024×576 |     12 |               2.967 |                 2.332 |                    5.344 |
+| Backend                    | Pixels   | Frames | Mean beauty seconds | Mean geometry seconds | Mean total seconds/frame |
+| -------------------------- | -------- | -----: | ------------------: | --------------------: | -----------------------: |
+| CPU Cycles, 8 samples      | 512×288  |     12 |               1.024 |                 0.640 |                    1.714 |
+| CPU Cycles, 8 samples      | 1024×576 |     12 |               2.967 |                 2.332 |                    5.344 |
+| Software Eevee, 64 samples | 512×288  |     12 |              10.061 |                 0.574 |                   10.677 |
+| Software Eevee, 64 samples | 1024×576 |     12 |              21.592 |                 2.263 |                   23.901 |
 
 Total time includes loading the source scene and BVH construction. Timings are elapsed cloud
-measurements, not isolated hardware promises; some checks overlapped the CPU work. The machine
+measurements, not isolated hardware promises; some checks overlapped the CPU work. The completed
+Eevee pass ran separately, with its shader cache already populated by earlier probes. The machine
 exposes five AMD EPYC 9V74 x86-64 vCPUs, Debian 13, glibc 2.41, and no GPU device. The report uses
 four rendering threads. Eevee uses a different sample count, so these are not equal-quality speed
 comparisons. Per-scene times are in the linked measurements.
@@ -162,8 +167,9 @@ and oneAPI return nonzero because no device is available. Metal is unsupported i
 The CPU 64×64, two-sample probe rendered in 0.075 seconds. The 64×64, 64-sample Eevee probe rendered
 in 26.091 seconds through Mesa llvmpipe (LLVM 19.1.7, 256 bits), Mesa 25.0.7, OpenGL 4.5; it must
 not be reported as GPU acceleration. The measurements link records actual probe JSON, error text,
-renderer/version strings, and elapsed times. EGL diagnostics can appear before successful software
-rendering. Eevee's startup/shader cost and 64 samples differ from the CPU dataset pipeline.
+renderer/version strings, and elapsed times. The retained first-pass probes recorded EGL diagnostics
+before successful software rendering. Eevee's startup/shader cost and 64 samples differ from the CPU
+dataset pipeline.
 
 ## Reproduction and checks
 
@@ -177,7 +183,7 @@ bash tools/blender-cloud.sh --python tools/blender/benchmark.py -- --backend EEV
 node tools/preflight.mjs --quick
 ```
 
-The [tool guide](../../tools/blender/README.md) lists all tests and camera/file conventions. 49
+The [tool guide](../../tools/blender/README.md) lists all tests and camera/file conventions. 51
 installer, setup, metadata, wrapper, geometry, fresh-process repeat, and existing truth checks
 passed. An existing resume test copies the new metadata helper into its temporary source tree; its
 assertions remain unchanged. New checks live under `tools/blender/tests/`. The unrelated superpowers

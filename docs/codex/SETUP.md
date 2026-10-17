@@ -150,3 +150,9 @@ default and never invokes the Blender installer.
 A failed download or integrity check stops the optional setup with its error; it never uses a
 different Blender version. See [the tool guide](../../tools/blender/README.md) for recovery,
 calibrated model and truth-scene views, normals, and panoramas.
+
+Verified October 17, 2026, in the full repository: browser-only setup took 11 seconds, including
+`npm ci`; setup with cached `--blender` took 5 seconds. Both used the existing `/usr/bin/chromium`,
+so the browser download and system-package installation were not rerun. See the
+[measured report](../audits/blender-cloud-2026-10.md) for the fresh Blender install and rendering
+results.

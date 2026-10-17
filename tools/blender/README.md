@@ -56,7 +56,8 @@ Carved Wooden Elephant by Greg Zaal. Their live source pages and
 [Poly Haven's CC0 license](https://polyhaven.com/license) were checked October 17, 2026. Nothing is
 added to the shipped assets. Each original 1k glTF, buffer, and texture is checked against a
 committed SHA-256 on every use, then embedded losslessly with the pinned npm `NodeIO` dependency.
-The final GLB's SHA-256, dependency hashes, URLs, author, license, and changes are in the dataset.
+Material extensions are retained; unsupported extensions fail instead of being silently dropped. The
+final GLB's SHA-256, dependency hashes, URLs, author, license, and changes are in the dataset.
 Cached corrupt bytes are rejected. Rendering does not query the mutable API or refresh pins.
 
 To explicitly add/update another CC0 Poly Haven model from the shared list:
@@ -70,6 +71,8 @@ sizes and MD5 values, and writes SHA-256 pins. Review and commit the changed loc
 a dataset. Models marked for logo removal are rejected; the wrapper does not bypass those edits.
 External dependencies must be local paths listed in the pin. The local GLB route rejects external
 URIs and requires `source`, `author`, `license` (`CC0-1.0`), `checked`, `sha256`, and `changes`.
+Verify the live license before making a local record; the tool checks that record and the input
+bytes.
 
 Every view and panorama writes:
 
