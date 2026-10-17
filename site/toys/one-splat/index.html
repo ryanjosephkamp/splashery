@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>One splat, many splats · Splashery</title>
-    <meta name="description" content="A word or picture becomes a tree of Gaussian splats." />
+    <meta
+      name="description"
+      content="A word or picture becomes a tree of splats. Tap a splat to split it in two; tap again to go finer there. Hold a piece to merge it back."
+    />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/one-splat/" />
     <meta property="og:type" content="website" />
@@ -12,7 +15,7 @@
     <meta property="og:title" content="One splat, many splats · Splashery" />
     <meta
       property="og:description"
-      content="A word or picture becomes a tree of Gaussian splats."
+      content="A word or picture becomes a tree of splats. Tap a splat to split it in two; tap again to go finer there. Hold a piece to merge it back."
     />
     <meta
       property="og:url"
@@ -148,20 +151,24 @@
           <div class="toy-head">
             <h1>One splat, many splats <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Turn the dial from 1 to 16,384 splats. Tap a splat to split it; hold to read its
-              numbers.
+              Tap a splat to split it in two; tap again to go finer there. Hold a piece to merge it
+              back.
             </p>
             <dl class="does">
               <div>
                 <dt>Tap</dt>
                 <dd>
-                  Tap a Gaussian to replace it with its two pixel-tree children, moving from the
-                  parent's center to their own centers over 1.8 seconds.
+                  A tap splits the splat under the finger into its two pixel-tree children, which
+                  slide apart from the parent's center as the parent fades (1.8 s); a second tap
+                  there goes a level finer.
                 </dd>
               </div>
               <div>
                 <dt>Sound</dt>
-                <dd>A quiet glide while the children separate.</dd>
+                <dd>
+                  One soft, clean sine per split or merge, pitched by the level it lands on (finer
+                  is higher).
+                </dd>
               </div>
               <div>
                 <dt>Arrived</dt>
@@ -213,17 +220,17 @@
         <section class="toy-section" aria-labelledby="h-about">
           <h2 id="h-about">About this toy</h2>
           <p>
-            A word or picture becomes a tree of Gaussian splats. Each splat has the exact center and
-            covariance of the raster pixels beneath it, including the spread within a square pixel.
-            Each split divides those pixels at the median along their principal axis. The two
-            children conserve their parent's pixel count, center, and covariance when their
-            separation is included.
+            A word or picture becomes a tree of splats. Each splat has the exact center and
+            covariance of the pixels beneath it, and each split divides them at the median along
+            their main axis, so the two halves add back up to their parent.
           </p>
           <p>
-            Type a word or open a picture in the Toy tab. Tap a splat to split it; hold to see its
-            center, size, angle, and covariance. Replay the last split with the play button.
-            Pictures stay on this device; shared scenes fall back to their word. From a concept by
-            Ryan Kamp. Made by Ryan with Codex (GPT-6). Code: MIT. Procedural splats: CC0.
+            Tap a splat and it splits into its two halves, which slide apart from its center; tap
+            again there to go finer. Hold a piece, or tap one at the finest level, to merge it back.
+            Each tap shows its numbers; the pitch rises with the level. The dial sets the whole
+            picture from 1 to 16,384 splats. Type a word or open a picture (it stays on this device)
+            in the Toy tab. From a concept by Ryan Kamp. Made by Ryan with Codex (GPT-6) and Claude
+            (Opus 5.5). Code: MIT. Procedural splats: CC0.
           </p>
         </section>
 
