@@ -6,10 +6,55 @@
 import { chromium } from "@playwright/test";
 import { execFileSync } from "node:child_process";
 import fs from "node:fs/promises";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { LONG_SAMPLES } from "../src/packs/moving-photo.js";
 
 const dir = "assets/toys/moving-photo-3d";
-const ids = process.argv.slice(2);
+// Lane MP1: the films are encoded up to WIDE pixels wide (640 until October 17, 2026, from
+// archive.org's 240-pixel derivatives; now from its masters, so the picture is sharp on a phone).
+const WIDE = 960;
+const ff = (...a) => execFileSync("ffmpeg", ["-nostdin", "-v", "error", "-y", ...a]);
+// Lane MP1: a sample whose cut names a `url` (the master on archive.org) and whose local source is
+// missing is cut from the master over the network: only the parts it uses are fetched (ffmpeg
+// reads byte ranges), each re-encoded near-losslessly, and a montage's parts are joined in order,
+// so its segments become back-to-back times in that local file.
+function localCut(sample) {
+  const cut = sample.cut;
+  if (existsSync(cut.src) || !cut.url) return cut;
+  mkdirSync(".cache/smd", { recursive: true });
+  const src = `.cache/smd/${sample.file}-master.mkv`;
+  // (a second either side of a single cut, so its first and last frames are whole)
+  const pad = cut.segments ? 0 : Math.min(1, cut.ss || 0);
+  const parts = cut.segments || [[(cut.ss || 0) - pad, (cut.ss || 0) + cut.t + 1]];
+  const files = existsSync(src)
+    ? []
+    : parts.map(([a, b], i) => {
+        const out = `.cache/smd/${sample.file}-part${i}.mkv`;
+        // (archive.org now and then answers a 5xx: reconnect, and try the part again)
+        const get = () => ff("-reconnect", "1", "-reconnect_on_http_error", "5xx", "-reconnect_delay_max", "16", "-ss", String(a), "-t", String(b - a), "-i", cut.url, "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libx264", "-crf", "12", "-preset", "veryfast", "-c:a", "aac", "-b:a", "256k", out); // prettier-ignore
+        for (let tries = 0; ; tries++)
+          try {
+            get();
+            break;
+          } catch (e) {
+            if (tries >= 3) throw e;
+          }
+        return out;
+      });
+  if (files.length) {
+    const list = `.cache/smd/${sample.file}-parts.txt`;
+    writeFileSync(list, files.map((f) => `file '${f.split("/").pop()}'\n`).join(""));
+    ff("-f", "concat", "-safe", "0", "-i", list, "-c", "copy", src);
+  }
+  if (!cut.segments) return { ...cut, src, ss: pad };
+  let at = 0;
+  const segments = parts.map(([a, b]) => [at, (at += b - a)]);
+  return { ...cut, src, segments };
+}
+// (Lane MP1: --video-only encodes the films and stops; tools/cdx-mp2-r4-bake.mjs then bakes their
+// depth from every source frame.)
+const videoOnly = process.argv.includes("--video-only");
+const ids = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
 });
@@ -19,7 +64,8 @@ try {
   await page.goto(`${process.env.SPLASHERY_URL || "http://127.0.0.1:4173/"}LICENSES.md`);
   for (const sample of LONG_SAMPLES.filter((s) => !ids.length || ids.includes(s.id))) {
     const file = `${dir}/${sample.file}.webm`;
-    const montage = sample.cut.segments;
+    const cut = localCut(sample);
+    const montage = cut.segments;
     const pieces = montage?.flatMap(([start, end], i) => [
       `[0:v]trim=start=${start}:end=${end},setpts=PTS-STARTPTS[v${i}]`,
       `[0:a]atrim=start=${start}:end=${end},asetpts=PTS-STARTPTS[a${i}]`,
@@ -28,7 +74,7 @@ try {
       ? [
           ...pieces,
           `${montage.map((_, i) => `[v${i}][a${i}]`).join("")}concat=n=${montage.length}:v=1:a=1[jv][audio]`,
-          `[jv]fps=${sample.fps},scale=min(640\\,iw):-2[video]`,
+          `[jv]fps=${sample.fps},scale=min(${WIDE}\\,iw):-2[video]`,
         ].join(";")
       : null;
     if (graph)
@@ -38,13 +84,15 @@ try {
         "error",
         "-y",
         "-i",
-        sample.cut.src,
+        cut.src,
         "-filter_complex",
         graph,
         "-map",
         "[video]",
         "-map",
         "[audio]",
+        "-frames:v",
+        String(sample.frames), // (lane MP1: exactly the sample's frames)
         "-c:v",
         "libvpx-vp9",
         "-crf",
@@ -64,13 +112,15 @@ try {
         "error",
         "-y",
         "-ss",
-        String(sample.cut.ss),
+        String(cut.ss),
         "-t",
-        String(sample.cut.t),
+        String(cut.t),
         "-i",
-        sample.cut.src,
+        cut.src,
         "-vf",
-        `fps=${sample.fps},scale=min(640\\,iw):-2`,
+        `fps=${sample.fps},scale=min(${WIDE}\\,iw):-2`,
+        "-frames:v",
+        String(sample.frames), // (lane MP1: exactly the sample's frames)
         "-c:v",
         "libvpx-vp9",
         "-crf",
@@ -84,6 +134,7 @@ try {
         file,
       ]);
     console.log(`${sample.id}: video ready`);
+    if (videoOnly) continue;
     const bytes = await page.evaluate(
       async ({ file, sample }) => {
         const mp = await import("/src/packs/moving-photo.js");

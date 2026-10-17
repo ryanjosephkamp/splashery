@@ -528,14 +528,17 @@ for (const [toy, module, state] of [
   });
 }
 
-test("30-second films are opt-in, play precomputed depth on every frame, and never load the model", async ({
+// (Lane MP1: Sintel's film is the toy's default since October 17, 2026, so opening the toy fetches
+// that one film; every other film is still fetched only when it is picked.)
+test("30-second films other than the default are opt-in, play precomputed depth on every frame, and never load the model", async ({
   page,
 }) => {
   test.setTimeout(300_000);
   const requested = [];
   page.on("request", (r) => requested.push(r.url()));
   await open(page);
-  expect(requested.some((u) => /-long\.(webm|mp2depth)/.test(u))).toBe(false);
+  expect(requested.filter((u) => /-long\.(webm|mp2depth)/.test(u)).every((u) => /sintel-long\./.test(u))).toBe(true); // prettier-ignore
+  expect(requested.some((u) => /sintel-long\.mp2depth/.test(u))).toBe(true);
   for (const [id, duration, frames] of [
     ["sample-long", 30, 720],
     ["dragon-long", 30, 720],
