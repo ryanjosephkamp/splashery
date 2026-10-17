@@ -32,7 +32,11 @@ test("a tap that returns options rebuilds the toy with them, then fires its key"
       const first = player.act([0, 0, 0]);
       player.rebuild = rebuild;
       const t0 = performance.now();
-      while (player.toyInfo.options?.element !== "Na" && performance.now() - t0 < 60_000)
+      // Options appear before rebuilding finishes and the new toy's action fires.
+      while (
+        (player.toyInfo.options?.element !== "Na" || player.switching) &&
+        performance.now() - t0 < 60_000
+      )
         await new Promise((ok) => setTimeout(ok, 50));
       await new Promise((ok) => setTimeout(ok, 200));
       return {
