@@ -76,39 +76,35 @@ for (const renderer of ["webgl2", "webgpu"]) {
   // depth blend in whatever order the sort returns), so the old shader is
   // held to the same page's own load-to-load difference: a load with the rim
   // blocks taken out, then two loads of the shader as it is now.
-  test(`toys without the rim kind draw as before (${renderer})`, async ({ browser }) => {
-    // (The marble left this list in lane Fix7: its glass tint now uses the
-    // rim kind on purpose; tests/fx7.spec.mjs checks it.)
-    const ids = ["beach-ball", "bouncy-ball", "gift-box"];
-    const shots = [];
-    for (const before of [true, false, false]) {
-      const { ctx, page, errors, dev } = await open(browser, renderer, { before });
-      if (renderer === "webgpu" && dev !== "webgpu") {
-        await ctx.close();
-        test.skip(true, "No WebGPU adapter in this browser.");
-      }
-      const run = {};
-      for (const id of ids) {
+  // Each toy keeps its own three shader loads and the original 240-second
+  // deadline. A busy runner no longer has to finish all nine loads in one test.
+  // (The marble uses the rim kind on purpose; tests/fx7.spec.mjs checks it.)
+  for (const id of ["beach-ball", "bouncy-ball", "gift-box"])
+    test(`${id}: toys without the rim kind draw as before (${renderer})`, async ({ browser }) => {
+      const shots = [];
+      for (const before of [true, false, false]) {
+        const { ctx, page, errors, dev } = await open(browser, renderer, { before });
+        if (renderer === "webgpu" && dev !== "webgpu") {
+          await ctx.close();
+          test.skip(true, "No WebGPU adapter in this browser.");
+        }
         await show(page, id, "#111111");
-        run[id] = await still(page);
+        shots.push(await still(page));
+        expect(errors).toEqual([]);
+        await ctx.close();
       }
-      shots.push(run);
-      expect(errors).toEqual([]);
-      await ctx.close();
-    }
-    const compare = (a, b) => {
-      let [sum, big, drawn] = [0, 0, 0];
-      for (let i = 0; i < a.px.length; i += 4) {
-        const d = Math.max(...[0, 1, 2].map((k) => Math.abs(a.px[i + k] - b.px[i + k])));
-        sum += d;
-        if (d > 24) big++;
-        if (a.px[i] > 40 || a.px[i + 1] > 40 || a.px[i + 2] > 40) drawn++;
-      }
-      return { mean: sum / (a.px.length / 4), big, drawn };
-    };
-    for (const id of ids) {
-      const change = compare(shots[0][id], shots[1][id]);
-      const noise = compare(shots[1][id], shots[2][id]);
+      const compare = (a, b) => {
+        let [sum, big, drawn] = [0, 0, 0];
+        for (let i = 0; i < a.px.length; i += 4) {
+          const d = Math.max(...[0, 1, 2].map((k) => Math.abs(a.px[i + k] - b.px[i + k])));
+          sum += d;
+          if (d > 24) big++;
+          if (a.px[i] > 40 || a.px[i + 1] > 40 || a.px[i + 2] > 40) drawn++;
+        }
+        return { mean: sum / (a.px.length / 4), big, drawn };
+      };
+      const change = compare(shots[0], shots[1]);
+      const noise = compare(shots[1], shots[2]);
       expect(change.drawn, `${id} drew something`).toBeGreaterThan(2000);
       // One pair of loads can come out nearly alike by chance, so the noise
       // has a floor: a mean of 0.5 levels and 200 pixels that change a lot
@@ -116,8 +112,7 @@ for (const renderer of ["webgl2", "webgpu"]) {
       // would change far more.
       expect(change.mean, `${id}: mean change`).toBeLessThanOrEqual(Math.max(2 * noise.mean, 0.5) + 0.05); // prettier-ignore
       expect(change.big, `${id}: pixels that changed a lot`).toBeLessThanOrEqual(Math.max(2 * noise.big, 200) + 20); // prettier-ignore
-    }
-  });
+    });
 
   test(`a thin rim shell is clear face on and solid at its edge (${renderer})`, async ({
     browser,

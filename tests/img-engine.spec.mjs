@@ -82,42 +82,39 @@ function measure({ px }) {
 }
 
 for (const renderer of ["webgl2", "webgpu"]) {
-  test(`toys without the volume kind draw as before (${renderer})`, async ({ browser }) => {
-    const ids = ["beach-ball", "bouncy-ball", "gift-box"];
-    const shots = [];
-    for (const before of [true, false, false]) {
-      const { ctx, page, errors, dev } = await open(browser, renderer, { before });
-      if (renderer === "webgpu" && dev !== "webgpu") {
-        await ctx.close();
-        test.skip(true, "No WebGPU adapter in this browser.");
-      }
-      const run = {};
-      for (const id of ids) {
+  // Keep every shader comparison, with a separate unchanged deadline per toy.
+  for (const id of ["beach-ball", "bouncy-ball", "gift-box"])
+    test(`${id}: toys without the volume kind draw as before (${renderer})`, async ({
+      browser,
+    }) => {
+      const shots = [];
+      for (const before of [true, false, false]) {
+        const { ctx, page, errors, dev } = await open(browser, renderer, { before });
+        if (renderer === "webgpu" && dev !== "webgpu") {
+          await ctx.close();
+          test.skip(true, "No WebGPU adapter in this browser.");
+        }
         await show(page, id, "#111111");
-        run[id] = await still(page);
+        shots.push(await still(page));
+        expect(errors).toEqual([]);
+        await ctx.close();
       }
-      shots.push(run);
-      expect(errors).toEqual([]);
-      await ctx.close();
-    }
-    const compare = (a, b) => {
-      let [sum, big, drawn] = [0, 0, 0];
-      for (let i = 0; i < a.px.length; i += 4) {
-        const d = Math.max(...[0, 1, 2].map((k) => Math.abs(a.px[i + k] - b.px[i + k])));
-        sum += d;
-        if (d > 24) big++;
-        if (a.px[i] > 40 || a.px[i + 1] > 40 || a.px[i + 2] > 40) drawn++;
-      }
-      return { mean: sum / (a.px.length / 4), big, drawn };
-    };
-    for (const id of ids) {
-      const change = compare(shots[0][id], shots[1][id]);
-      const noise = compare(shots[1][id], shots[2][id]);
+      const compare = (a, b) => {
+        let [sum, big, drawn] = [0, 0, 0];
+        for (let i = 0; i < a.px.length; i += 4) {
+          const d = Math.max(...[0, 1, 2].map((k) => Math.abs(a.px[i + k] - b.px[i + k])));
+          sum += d;
+          if (d > 24) big++;
+          if (a.px[i] > 40 || a.px[i + 1] > 40 || a.px[i + 2] > 40) drawn++;
+        }
+        return { mean: sum / (a.px.length / 4), big, drawn };
+      };
+      const change = compare(shots[0], shots[1]);
+      const noise = compare(shots[1], shots[2]);
       expect(change.drawn, `${id} drew something`).toBeGreaterThan(2000);
       expect(change.mean, `${id}: mean change`).toBeLessThanOrEqual(Math.max(2 * noise.mean, 0.5) + 0.05); // prettier-ignore
       expect(change.big, `${id}: pixels that changed a lot`).toBeLessThanOrEqual(Math.max(2 * noise.big, 200) + 20); // prettier-ignore
-    }
-  });
+    });
 
   test(`a volume is cut by its plane and shown by its density window (${renderer})`, async ({
     browser,
