@@ -1,0 +1,18 @@
+{
+  "recordedUTC": "2026-10-17T09:07:55.241480+00:00",
+  "runId": 39019832991,
+  "source": "f94345f3fab560a61c424ab6297cabbd247a79f0",
+  "main": "ea9a9d193de529e6c75264123bb04b7e862b7162",
+  "reason": "Required final main merge integrates approved Neuron r2 changes; all captured panorama/model/cache source bytes are identical. Fresh 111-test related run passed; fresh post-merge preflight in progress. Full matrix automatically triggered on this new merged tree.",
+  "priorFullRun": 39007527856,
+  "priorOutcome": {
+    "files": 401,
+    "passed": 3413,
+    "failed": 2,
+    "skipped": 1,
+    "failures": ["phy:64", "hh5-gems:154"],
+    "allFailedCasesPassedIsolated": true
+  },
+  "retryPolicy": "No retry-until-green campaign. The previous run had one bounded failed-shard rerun. Record this new required merged-head full-run outcome honestly.",
+  "deadlineUTC": "2026-10-17T14:03:00Z"
+}

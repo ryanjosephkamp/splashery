@@ -1,0 +1,70 @@
+{
+  "runId": 39007527856,
+  "runAttempt": 2,
+  "headSha": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
+  "jobId": 117349448719,
+  "artifactId": 12095857130,
+  "artifactName": "suite-1-a2",
+  "originalArtifactSha256": "f7dc08ace92ef5344524e0a4812a7c29bd8b50f5b9fb9cf988ebdb3c9cb18af6",
+  "originalArtifactBytes": 17400783,
+  "retained": "All physics JSON, logs, recheck, failure screenshots, trace, error context, shard metadata, and summary retained byte-for-byte. Other passing specs screenshots omitted.",
+  "members": [
+    {
+      "name": "phy.json",
+      "bytes": 322669,
+      "sha256": "ada91feabdaa3a500ed427c7a022a5246c0c283db6187af799882a995115152b"
+    },
+    {
+      "name": "phy.log",
+      "bytes": 1919,
+      "sha256": "2b71c4586891fb86f94ef2600f04a106b06713ab86f24cdc7acb53ecf58c6601"
+    },
+    {
+      "name": "recheck/phy-64.json",
+      "bytes": 318937,
+      "sha256": "7855185647339c4a4e62eee742af925be14e185e6115a5d714d7f399c15dbc63"
+    },
+    {
+      "name": "recheck.json",
+      "bytes": 100,
+      "sha256": "baf8e903ac3b20cb34f9f77c6dbdefa4d2547bbe7f31ef605196a781a4384c62"
+    },
+    {
+      "name": "results/phy/phy-Pebbles-stones-pick-up-c32d3-airn-a-careless-one-topples-chromium/error-context.md",
+      "bytes": 46124,
+      "sha256": "8e4aadb627fe3e948f0a06f01c79555fc68e99a07188cbdfe65ef8ae24443e6b"
+    },
+    {
+      "name": "results/phy/phy-Pebbles-stones-pick-up-c32d3-airn-a-careless-one-topples-chromium/trace.zip",
+      "bytes": 16239714,
+      "sha256": "c2539c582523e5f0c81b3c03655814410e00272fa87c04cf710cc509f87a450a"
+    },
+    {
+      "name": "shard.json",
+      "bytes": 54,
+      "sha256": "0347f9396e0c3af439f9585471ee0fa4f1cb43077547a741bd96079eb5830c68"
+    },
+    {
+      "name": "summary.md",
+      "bytes": 3047,
+      "sha256": "0c9bac9f02170056481d902e60741ea7c6fa79c8eb4fa9d9f38ae9521e2de71b"
+    }
+  ],
+  "errors": [
+    {
+      "case": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+      "line": 64,
+      "error": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0.21939783634108012\nReceived:   0.17337883168847032"
+    }
+  ],
+  "initial": {
+    "files": 16,
+    "tests": 126,
+    "passed": 125,
+    "failed": 1
+  },
+  "isolatedRecheck": {
+    "phy:64 Pebbles: stones pick up and stack into a new cairn; a careless one topples": "passed"
+  },
+  "note": "Single bounded failed-shard rerun; no further retry. All old test, pack, and engine blobs match main."
+}

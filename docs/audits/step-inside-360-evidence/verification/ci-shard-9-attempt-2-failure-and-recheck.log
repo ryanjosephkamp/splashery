@@ -1,0 +1,109 @@
+2026-10-17T08:28:24.6200008Z 0 of 26 files already done in ../../_temp/ci-out/shard-9; running 26, 2 at once, WebGL2 on llvmpipe.
+2026-10-17T08:33:27.0098984Z [1/26] fx4-engine 300 s: ok
+2026-10-17T08:35:00.9376507Z [2/26] lv7 394 s: ok
+2026-10-17T08:35:03.4288110Z [3/26] live2 96 s: ok
+2026-10-17T08:35:23.6703440Z [4/26] cdx-p3d4-render-hold 20 s: ok
+2026-10-17T08:35:26.3233228Z [5/26] cdx-p3d5-study-state 3 s: ok
+2026-10-17T08:35:45.4969348Z [6/26] stm 45 s: ok
+2026-10-17T08:35:45.5755691Z [7/26] cdx-renderer-diag 19 s: ok
+2026-10-17T08:35:47.9124193Z [8/26] cdx-v3d-bench-join 2 s: ok
+2026-10-17T08:35:53.6987459Z [9/26] cdx-v3d-older-browser-ui 8 s: ok
+2026-10-17T08:36:02.2511419Z [10/26] cdx-v3d-tile-size-gpu 14 s: ok
+2026-10-17T08:36:36.5138135Z [11/26] pt2 43 s: ok
+2026-10-17T08:37:48.5529659Z [12/26] hh5-math 72 s: ok
+2026-10-17T08:38:10.7343761Z [13/26] mt2 128 s: ok
+2026-10-17T08:38:37.2283069Z [14/26] arc-engine 49 s: ok
+2026-10-17T08:38:54.7696513Z [15/26] hh3-holidays 44 s: ok
+2026-10-17T08:39:16.8692694Z [16/26] g 40 s: ok
+2026-10-17T08:39:41.9232800Z [17/26] hh5-gems 47 s: 1 failed
+2026-10-17T08:39:52.9174291Z [18/26] ui5 36 s: ok
+2026-10-17T08:40:03.1063003Z [19/26] phf2 21 s: ok
+2026-10-17T08:40:13.9937291Z [20/26] ops-media 21 s: ok
+2026-10-17T08:40:16.7406407Z [21/26] hh3-storybook 14 s: ok
+2026-10-17T08:40:20.8779568Z [22/26] cdx-p3d2-core 7 s: ok
+2026-10-17T08:40:23.4922496Z [23/26] hh1-shapes 7 s: ok
+2026-10-17T08:40:25.3031095Z [24/26] lv7-engine 2 s: ok
+2026-10-17T08:40:25.7267204Z [25/26] chem 5 s: ok
+2026-10-17T08:41:41.8071607Z [26/26] hec 76 s: ok
+2026-10-17T08:41:41.8352596Z
+2026-10-17T08:41:41.8353067Z # Suite run
+2026-10-17T08:41:41.8353212Z
+2026-10-17T08:41:41.8353453Z - 26 of 26 files, 195 tests: 194 passed, 1 failed, 0 skipped.
+2026-10-17T08:41:41.8354045Z - Time in files (one after another): 25 min. Wall time of this run: 13 min (2 at once).
+2026-10-17T08:41:41.8354359Z
+2026-10-17T08:41:41.8354454Z ## Failed
+2026-10-17T08:41:41.8354553Z
+2026-10-17T08:41:41.8355069Z - `hh5-gems:154` quartz cluster: a big point snaps off the rock, rests, and clicks back into its place: failed. Error: expect(received).toBeLessThan(expected)
+2026-10-17T08:41:41.8355503Z
+2026-10-17T08:41:41.8355580Z ## Slowest files
+2026-10-17T08:41:41.8355688Z
+2026-10-17T08:41:41.8355787Z | File | Seconds | Tests |
+2026-10-17T08:41:41.8356010Z | --- | ---: | ---: |
+2026-10-17T08:41:41.8356201Z | lv7 | 394 | 11 |
+2026-10-17T08:41:41.8356394Z | fx4-engine | 300 | 4 |
+2026-10-17T08:41:41.8356589Z | mt2 | 128 | 19 |
+2026-10-17T08:41:41.8356771Z | live2 | 96 | 11 |
+2026-10-17T08:41:41.8356942Z | hec | 76 | 9 |
+2026-10-17T08:41:41.8357123Z | hh5-math | 72 | 9 |
+2026-10-17T08:41:41.8357317Z | arc-engine | 49 | 7 |
+2026-10-17T08:41:41.8357511Z | hh5-gems | 47 | 5 |
+2026-10-17T08:41:41.8357697Z | stm | 45 | 20 |
+2026-10-17T08:41:41.8358131Z | hh3-holidays | 44 | 5 |
+2026-10-17T08:41:41.8358324Z | pt2 | 43 | 5 |
+2026-10-17T08:41:41.8358491Z | g | 40 | 9 |
+2026-10-17T08:41:41.8358652Z | ui5 | 36 | 3 |
+2026-10-17T08:41:41.8358826Z | phf2 | 21 | 7 |
+2026-10-17T08:41:41.8359008Z | ops-media | 21 | 1 |
+2026-10-17T08:41:41.8359242Z | cdx-p3d4-render-hold | 20 | 3 |
+2026-10-17T08:41:41.8359494Z | cdx-renderer-diag | 19 | 18 |
+2026-10-17T08:41:41.8359748Z | cdx-v3d-tile-size-gpu | 14 | 1 |
+2026-10-17T08:41:41.8359978Z | hh3-storybook | 14 | 1 |
+2026-10-17T08:41:41.8360454Z | cdx-v3d-older-browser-ui | 8 | 1 |
+2026-10-17T08:41:41.8360745Z | cdx-p3d2-core | 7 | 4 |
+2026-10-17T08:41:41.8360980Z | hh1-shapes | 7 | 1 |
+2026-10-17T08:41:41.8361197Z | chem | 5 | 24 |
+2026-10-17T08:41:41.8361413Z | cdx-p3d5-study-state | 3 | 3 |
+2026-10-17T08:41:41.8361668Z | cdx-v3d-bench-join | 2 | 12 |
+2026-10-17T08:41:41.8361809Z
+2026-10-17T08:41:41.8362032Z ## Slowest tests
+2026-10-17T08:41:41.8362159Z
+2026-10-17T08:41:41.8362248Z | Test | Seconds |
+2026-10-17T08:41:41.8362420Z | --- | ---: |
+2026-10-17T08:41:41.8363455Z | `lv7:106` the mirror on a camera (a generated mannequin) › plain: steadier than before, frame to fra | 174 |
+2026-10-17T08:41:41.8363994Z | `fx4-engine:79` toys without the rim kind draw as before (webgpu) | 129 |
+2026-10-17T08:41:41.8372975Z | `lv7:150` the mirror on a camera (a generated mannequin) › hologram: nothing drawn over the face, an | 122 |
+2026-10-17T08:41:41.8376347Z | `fx4-engine:79` toys without the rim kind draw as before (webgl2) | 110 |
+2026-10-17T08:41:41.8376945Z | `fx4-engine:122` a thin rim shell is clear face on and solid at its edge (webgpu) | 28 |
+2026-10-17T08:41:41.8378230Z | `live2:207` in the browser › the click track: each click is at the now mark within 50 ms of when it is | 26 |
+2026-10-17T08:41:41.8378821Z | `fx4-engine:122` a thin rim shell is clear face on and solid at its edge (webgl2) | 26 |
+2026-10-17T08:41:41.8379329Z | `lv7:520` screenshots at phone and desktop size: the landscape growing | 26 |
+2026-10-17T08:41:41.8379848Z | `hec:217` on its side or upside down, the soft parts hang toward the world's down and Reset still wo | 25 |
+2026-10-17T08:41:41.8380436Z | `lv7:393` the Chladni plate › your audio: no bow ever, no new plate, the sand sets off for each new  | 25 |
+2026-10-17T08:41:41.8380927Z | `ops-media:8` the web-address box names only what each picture toy opens | 19 |
+2026-10-17T08:41:41.8381341Z | `mt2:274` duoprism mid-tap screenshots at 390x844 and 1440x900 | 18 |
+2026-10-17T08:41:41.8382030Z | `ui5:41` rotation defaults › the storybook, umbrella, xylophone and upright piano open with the til | 18 |
+2026-10-17T08:41:41.8382519Z | `mt2:274` thomas-attractor mid-tap screenshots at 390x844 and 1440x900 | 18 |
+2026-10-17T08:41:41.8382956Z | `mt2:274` twenty-four-cell mid-tap screenshots at 390x844 and 1440x900 | 18 |
+2026-10-17T08:41:41.8383502Z | `lv7:353` the Chladni plate › a tap bows the plate (the bow shows while it moves the sand) and nothi | 18 |
+2026-10-17T08:41:41.8384083Z | `stm:366` the toy in the browser › a sample shows, a tap lifts and settles, opening your own models  | 18 |
+2026-10-17T08:41:41.8384527Z | `mt2:274` five-cell mid-tap screenshots at 390x844 and 1440x900 | 18 |
+2026-10-17T08:41:41.8384998Z | `pt2:110` taps split and a hold merges where the finger is, at 1440×900 | 17 |
+2026-10-17T08:41:41.8385418Z | `mt2:274` sixteen-cell mid-tap screenshots at 390x844 and 1440x900 | 17 |
+2026-10-17T08:41:41.8385850Z | `mt2:274` rossler-attractor mid-tap screenshots at 390x844 and 1440x900 | 17 |
+2026-10-17T08:41:41.8386413Z | `live2:297` in the browser › ribbons: builds in both views, on paper and alone, and fills in as it pla | 17 |
+2026-10-17T08:41:41.8386886Z | `mt2:274` aizawa-attractor mid-tap screenshots at 390x844 and 1440x900 | 17 |
+2026-10-17T08:41:41.8387353Z | `hec:275` the soft parts' step time stays small with each demo toy in play | 17 |
+2026-10-17T08:41:41.8387756Z | `hh5-math:265` screenshots: the menger-sponge, hands-on | 16 |
+2026-10-17T08:41:41.8388129Z
+2026-10-17T08:41:41.8489118Z ##[group]Run node tools/ci-report.mjs recheck $OUT --shard=9/$SHARDS --started=1792225704
+2026-10-17T08:41:41.8489441Z [36;1mnode tools/ci-report.mjs recheck $OUT --shard=9/$SHARDS --started=1792225704[0m
+2026-10-17T08:41:41.8559999Z shell: /usr/bin/bash -e {0}
+2026-10-17T08:41:41.8560137Z env:
+2026-10-17T08:41:41.8560241Z   SHARDS: 16
+2026-10-17T08:41:41.8560359Z   SPLASHERY_GL: llvmpipe
+2026-10-17T08:41:41.8560483Z   DISPLAY: :99
+2026-10-17T08:41:41.8560609Z   OUT: /home/runner/work/_temp/ci-out/shard-9
+2026-10-17T08:41:41.8560764Z ##[endgroup]
+2026-10-17T08:41:48.9399933Z hh5-gems:154 quartz cluster: a big point snaps off the rock, rests, and clicks back into its place: passed alone
+2026-10-17T08:41:48.9401378Z 1 failed in this shard; 1 rechecked.
+2026-10-17T08:41:48.9472160Z

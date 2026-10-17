@@ -3,8 +3,8 @@
   "files": [
     {
       "file": "README.md",
-      "bytes": 20019,
-      "sha256": "7c990bd20f2aabc1a2b49752634995e2e31fde0bfdeb4ddb400faa4196084f90"
+      "bytes": 21691,
+      "sha256": "4d31f7c5216bde3422e5ef0aa1a4eb48342b048fd85bf3345e44bdcb355778ca"
     },
     {
       "file": "calibration-research-findings.md",
@@ -694,7 +694,7 @@
     {
       "file": "source-identity.json",
       "bytes": 3980,
-      "sha256": "bfefd5cbeedfc61b0b53fceb2eecf049d4ecfe991d6eb662096a0d4d30e84af6"
+      "sha256": "e4e2247e8138e74fcececa07463b9e3c4ea8d37f8ed953121680c1f075270686"
     },
     {
       "file": "sources/license.html.gz",
@@ -1387,9 +1387,39 @@
       "sha256": "3e348fa57ffed5783bbd8a8b57e439993b3ef73713a52247dc44aa9f220da3c8"
     },
     {
+      "file": "verification/ci-checkout-tree-identity.json",
+      "bytes": 265,
+      "sha256": "26cbd53f9da5d0a3d061af64e05ea5c8e3d526098aff48e7b07894f57bc016d8"
+    },
+    {
+      "file": "verification/ci-classic-golden-passed.log.gz",
+      "bytes": 37886,
+      "sha256": "b172a625cda0ff0fbfdee5099be77d8cc921fa318d7fc8b05ec211319dd8987d"
+    },
+    {
       "file": "verification/ci-phy.log.gz",
       "bytes": 669,
       "sha256": "99b6c0d16f8c7e159c8d4e9d6d37263723289e2ee2f17688bd4bb30b1442ea9c"
+    },
+    {
+      "file": "verification/ci-shard-1-attempt-2-failure-and-recheck.log",
+      "bytes": 6634,
+      "sha256": "7b3c8fe478c5d723bb1c6066ef85240a7648275922eb49c34c495d3bb45c65b5"
+    },
+    {
+      "file": "verification/ci-shard-1-attempt-2-raw.log.gz",
+      "bytes": 37173,
+      "sha256": "c41fee4ed148e773ebd8de3a10b96d239c074796f0684cb5340610f34a114778"
+    },
+    {
+      "file": "verification/ci-shard-1-failure-and-recheck.log",
+      "bytes": 6631,
+      "sha256": "2c04bd1da04cab52478cf9a9912ff03f505b5b7e4bfbb0a987ab27f591b8d727"
+    },
+    {
+      "file": "verification/ci-shard-1-raw.log.gz",
+      "bytes": 37191,
+      "sha256": "160848cea060cd5ca2117889581d71a7a6e0d6f36d9554271b5644f0cca8d744"
     },
     {
       "file": "verification/ci-shard-5-failure-and-recheck.log",
@@ -1400,6 +1430,16 @@
       "file": "verification/ci-shard-5-raw.log.gz",
       "bytes": 37187,
       "sha256": "0dc278ff1352810b25cf730da6b3bf5ebd0caa14934a9737ae9030d2affabe05"
+    },
+    {
+      "file": "verification/ci-shard-9-attempt-2-failure-and-recheck.log",
+      "bytes": 7778,
+      "sha256": "898bfafce34964779792cdfcae8aff48e1914cd672493f6fb6be126e5aed884b"
+    },
+    {
+      "file": "verification/ci-shard-9-attempt-2-raw.log.gz",
+      "bytes": 37442,
+      "sha256": "92f86fb30d0deb2002191a8bb98da2b461bdaf5c946495a4063d6153dea1752b"
     },
     {
       "file": "verification/ci-shard-9-failure-and-recheck.log",
@@ -1467,29 +1507,9 @@
       "sha256": "01ed61373d1d9debed8c214fc957c4b7866592b3b042998d5d48bc50ecd56cad"
     },
     {
-      "file": "verification/final-ci/shard-5-identity.json",
-      "bytes": 681,
-      "sha256": "e1f7dae639090f3d90ae65661db339a6770a4a8603705bf74ebd7c5d5bea7386"
-    },
-    {
-      "file": "verification/final-ci/shard-5.zip",
-      "bytes": 3089431,
-      "sha256": "3537e8b54e729e5137eecdd58c67994f9ed933e698f5401da6607bfea75dcae7"
-    },
-    {
-      "file": "verification/final-ci/shard-9-identity.json",
-      "bytes": 636,
-      "sha256": "d81159e820a67551a7c265b219cf9e0fb6e6fc27352eadc5addb6053df5676c9"
-    },
-    {
-      "file": "verification/final-ci/shard-9.zip",
-      "bytes": 2368910,
-      "sha256": "71fce085bd261c11b23aa8ed651eca5d3a7ee2068e20a4b4f45f7b7cd8ae0902"
-    },
-    {
       "file": "verification/final-ci-status.json",
-      "bytes": 3705,
-      "sha256": "d8771b28a7fdaa771969703d63f8f603e95e9d6be1d20742d69eda9b11ff50ca"
+      "bytes": 3511,
+      "sha256": "5aa60945e2e5662e647d0096fd87d213bb42d9545c2877e87eb5187894d258a9"
     },
     {
       "file": "verification/final-confidence-model-equivalence.json",
@@ -1502,19 +1522,29 @@
       "sha256": "b2cf1040d48407c554718bb2446e7417235c26d9828165ec3ed5781e9915ff92"
     },
     {
+      "file": "verification/final-main-run-plan.json",
+      "bytes": 891,
+      "sha256": "f4dbedde93ce14cb37701faa9e3cedf4608ff1ebcc49d16786c5b82e09724f98"
+    },
+    {
       "file": "verification/final-verification.json",
-      "bytes": 6533,
-      "sha256": "db04e1a9eb27cbee90d6ef857e747ce71c533c690dbc51a777d922ffe3f45129"
+      "bytes": 7352,
+      "sha256": "08ea59498f5ab6847dd338d8ecbae7df81d157342cf613d440ec2786d5b5892a"
     },
     {
       "file": "verification/frozen-file-identities.json",
       "bytes": 338947,
-      "sha256": "fa54ae40c870e8a732070c4d8dc11f91ea8bbec4c91630c3b983e8d90610938f"
+      "sha256": "9a6219604fc65079e285cf6a61f7e90c79c8999267fed7680e6eeae12e340e43"
     },
     {
       "file": "verification/git-transport-failure.log",
       "bytes": 99,
       "sha256": "a59d93f77e080fdd427bbc4f3bfe1aed914b85a056dc5fd837df7ba9c2e24a48"
+    },
+    {
+      "file": "verification/hosted-feature-checks.json",
+      "bytes": 1365,
+      "sha256": "149718dc42d034fab450f6ad8f167bb92058768f4a487b020df96254a199c484"
     },
     {
       "file": "verification/latest-main-final-regression.log.gz",
@@ -1530,6 +1560,11 @@
       "file": "verification/local-suite-partial.tar.gz",
       "bytes": 31148,
       "sha256": "5bf5c7bcf0c646498fc1262cacc14087809a76eb1e0312aa68bdfbbbfa081612"
+    },
+    {
+      "file": "verification/neuron-r2-final-regression.log.gz",
+      "bytes": 2822,
+      "sha256": "86a4d5c745733fa66032f7063190d5e840b44b6112d1f95620d5fc8179b0e3dc"
     },
     {
       "file": "verification/panorama-final-quiet-memory.json",
@@ -1567,9 +1602,159 @@
       "sha256": "1dff368c54bb322eb1ee5efb313fbb84ae10a56081a22903ae34bc733f9fce87"
     },
     {
+      "file": "verification/pre-neuron-r2-ci/README.md",
+      "bytes": 1093,
+      "sha256": "1e81bcea8710343384b188df4b8ca169cfd111bd959eba509503649d485874aa"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/attempt-1/identity.json",
+      "bytes": 7495,
+      "sha256": "e40e2b9062be8af2c4753ea59f872de832dd29945d0dff73f10b0dc427bf9c16"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/attempt-1/run-identity.json",
+      "bytes": 347,
+      "sha256": "cbfccbab8fbd756d642aead4670027663fe5ff731d1b2d46c5c66d4fb3fc12dd"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/attempt-1/status.json",
+      "bytes": 4138,
+      "sha256": "e599f9d5604824c19a738fc48c8f9b4964fb71873f5791aa53747f5c27a11b93"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/attempt-1/summary-original.zip",
+      "bytes": 3742,
+      "sha256": "bce150d04354517a9c8797f556096806cfef036b3c876b618868c29a9e5c4f2c"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/attempt-1/summary.md",
+      "bytes": 2882,
+      "sha256": "0815f16f8b3277db14a5b7d29619174f8247efe2919a02e2d003b07410432c02"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/attempt-1/times.json",
+      "bytes": 8064,
+      "sha256": "eb4cbec2105744bd0f462662b471e186ae284d502def15e0bb3fd9e68632c93e"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/attempt-1/watch.log.gz",
+      "bytes": 461,
+      "sha256": "a865495fa24d52738f5385efec775a6db98f10be17d253251d512604b5cba0e4"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/ci-checkout-tree-identity.json",
+      "bytes": 265,
+      "sha256": "26cbd53f9da5d0a3d061af64e05ea5c8e3d526098aff48e7b07894f57bc016d8"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/final-ci-status.json",
+      "bytes": 4157,
+      "sha256": "01bfbb1bc9ab9d84f6d514e3504dd54591721413fd9030eb37b53705b861a7a4"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/final-verification.json",
+      "bytes": 6608,
+      "sha256": "d2154a1ad07b671ff33fee30ceea265f193f4d2487df1babf4e469b3804ab0cd"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/hosted-feature-checks.json",
+      "bytes": 1365,
+      "sha256": "149718dc42d034fab450f6ad8f167bb92058768f4a487b020df96254a199c484"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/identity.json",
+      "bytes": 8175,
+      "sha256": "0adae2e7212d6a74bf8381cf3b79c77f3ad10014e004d32e04b58a55a6de67f1"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/initial-skip-and-panorama-browser.zip",
+      "bytes": 161615,
+      "sha256": "cad2e2f69042cc06c9c029ab4b5908d0cfdeb82aeffb230315a1a3974e293ad7"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/initial-skip-identity.json",
+      "bytes": 1235,
+      "sha256": "e97521fa734bd178011b9d399a799786f76fc43c98fe3e970f3a70c1675a93b2"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/rerun-once-plan.json",
+      "bytes": 532,
+      "sha256": "2a48cfb174e1a526d76384003c89cd353c25995eaa406969e3946a9ed8264751"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/shard-1-attempt-2-identity.json",
+      "bytes": 2475,
+      "sha256": "25f97bc5fbe4de883a6cc9aa019cca2e51fd3fc062ba4f3344c4490fa057b106"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/shard-1-attempt-2-physics-receipts.zip",
+      "bytes": 16181519,
+      "sha256": "45d3db664d86880ec315bd296b3b77359b788bdb0b8585ad1d849819093787b8"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/shard-1-identity.json",
+      "bytes": 2233,
+      "sha256": "c384cf50fe7f1e6fa2f54585f85828ad5c43a3af7d95bda30c44c9670d172c4a"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/shard-1-physics-receipts.zip",
+      "bytes": 16469577,
+      "sha256": "4683c6586916cdf909ad829df6afbdf525a1983587bf12e96d92b204047c7695"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/shard-5-identity.json",
+      "bytes": 681,
+      "sha256": "e1f7dae639090f3d90ae65661db339a6770a4a8603705bf74ebd7c5d5bea7386"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/shard-5.zip",
+      "bytes": 3089431,
+      "sha256": "3537e8b54e729e5137eecdd58c67994f9ed933e698f5401da6607bfea75dcae7"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/shard-9-attempt-2-identity.json",
+      "bytes": 2738,
+      "sha256": "e32b58cd976f549677b89e2a5cc79b6e32b22d19f0a72a3b736da70fb22628b6"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/shard-9-attempt-2-quartz-receipts.zip",
+      "bytes": 15110978,
+      "sha256": "3f9e331c22b7952b15c4a8eeec5e2298dcacdec16bd6c28dde8e66ad65caa672"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/shard-9-identity.json",
+      "bytes": 636,
+      "sha256": "d81159e820a67551a7c265b219cf9e0fb6e6fc27352eadc5addb6053df5676c9"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/shard-9.zip",
+      "bytes": 2368910,
+      "sha256": "71fce085bd261c11b23aa8ed651eca5d3a7ee2068e20a4b4f45f7b7cd8ae0902"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/source-identity.json",
+      "bytes": 3980,
+      "sha256": "bfefd5cbeedfc61b0b53fceb2eecf049d4ecfe991d6eb662096a0d4d30e84af6"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/summary-original.zip",
+      "bytes": 3688,
+      "sha256": "70a2161cc7286f7f53280fb6d45c860c773163551ec67140bed42f6ae6e334c9"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/summary.md",
+      "bytes": 2699,
+      "sha256": "80f0fe25631032f38807c2a50c3dc4685c42171833c88b6368d78f14e4134d80"
+    },
+    {
+      "file": "verification/pre-neuron-r2-ci/times.json",
+      "bytes": 8064,
+      "sha256": "dc17dca4e007ee524b6f585c048af32f8eb25ce70ac68f5fdd69349bb373099a"
+    },
+    {
       "file": "verification/preflight-final.log",
-      "bytes": 36947,
-      "sha256": "09861bbd5642f436940ba5c0c660b378db29de8350f4a3bd37a9c0ce9e2aaff1"
+      "bytes": 36951,
+      "sha256": "e6125865aa36e0266e63c291fcf121862586501063e4872a1ac7d86deb94f72a"
     },
     {
       "file": "verification/progress-4h.md",

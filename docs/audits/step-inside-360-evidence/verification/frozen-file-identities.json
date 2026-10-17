@@ -1,6 +1,6 @@
 {
-  "mainCommit": "aedbe443373d60b2fd0d041e25b1c46d6d5fcd33",
-  "taskCommit": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
+  "mainCommit": "ea9a9d193de529e6c75264123bb04b7e862b7162",
+  "taskCommit": "f94345f3fab560a61c424ab6297cabbd247a79f0",
   "paths": [
     "src/photo3d",
     "src/depth",
@@ -515,8 +515,8 @@
     },
     {
       "path": "src/packs/neuron.js",
-      "main": "5542a15966046eb60891064c24ae0639c1525e22",
-      "branch": "5542a15966046eb60891064c24ae0639c1525e22",
+      "main": "ac3d7930291e048e8a97cef4a6e0466165307cda",
+      "branch": "ac3d7930291e048e8a97cef4a6e0466165307cda",
       "equal": true
     },
     {
@@ -4679,14 +4679,14 @@
     },
     {
       "path": "tests/screenshots/cdx-pfb-neuron-1440x900.png",
-      "main": "2e22387755cb7ef77d6e138242b63920e377240a",
-      "branch": "2e22387755cb7ef77d6e138242b63920e377240a",
+      "main": "80eaa5dbddf2369a3920ae718dee48a8f83d70de",
+      "branch": "80eaa5dbddf2369a3920ae718dee48a8f83d70de",
       "equal": true
     },
     {
       "path": "tests/screenshots/cdx-pfb-neuron-390x844.png",
-      "main": "c95e1e566769003253d3419f6620bf17f63b2d16",
-      "branch": "c95e1e566769003253d3419f6620bf17f63b2d16",
+      "main": "ec22384675c37fdcf5f4d9e72671849a4df967ad",
+      "branch": "ec22384675c37fdcf5f4d9e72671849a4df967ad",
       "equal": true
     },
     {
@@ -7271,14 +7271,14 @@
     },
     {
       "path": "tests/screenshots/nr1-neuron-1440x900.png",
-      "main": "a5c73371b7e1c937ad2ea18c201f923a3a8cbb3d",
-      "branch": "a5c73371b7e1c937ad2ea18c201f923a3a8cbb3d",
+      "main": "8a35ba07eb97af1aa3d8e7a1d9b3dd64c8ef8489",
+      "branch": "8a35ba07eb97af1aa3d8e7a1d9b3dd64c8ef8489",
       "equal": true
     },
     {
       "path": "tests/screenshots/nr1-neuron-390x844.png",
-      "main": "0bfc3192bc9d8a568e19a93668d07efbd83dcc1c",
-      "branch": "0bfc3192bc9d8a568e19a93668d07efbd83dcc1c",
+      "main": "9debe7ce6658049fe79658d322f21cd9f141f0f2",
+      "branch": "9debe7ce6658049fe79658d322f21cd9f141f0f2",
       "equal": true
     },
     {

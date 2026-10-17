@@ -1,0 +1,73 @@
+{
+  "runId": 39007527856,
+  "runAttempt": 2,
+  "headSha": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
+  "jobId": 117349448916,
+  "artifactId": 12095512136,
+  "artifactName": "suite-9-a2",
+  "originalArtifactSha256": "0a942886020c91a6676d8c1ead2f44727c107b0bd6c7dd1ac149a7977100dc41",
+  "originalArtifactBytes": 17064920,
+  "retained": "All quartz JSON, logs, recheck, failure screenshots, error context, WebGPU comparison JSON, shard metadata, and summary retained byte-for-byte. Other passing specs screenshots omitted.",
+  "members": [
+    {
+      "name": "fx4-engine.json",
+      "bytes": 318383,
+      "sha256": "81bf712e4949e8c8602d63d6fe89072def2aeff5d5b9370963c7575e4b4cb09e"
+    },
+    {
+      "name": "hh5-gems.json",
+      "bytes": 322306,
+      "sha256": "44f45860c2311242c0e04de6718854d85a8c0979dbb96401efbf110d337899d1"
+    },
+    {
+      "name": "hh5-gems.log",
+      "bytes": 2600,
+      "sha256": "3dc3760f540fb79a58aa970275240e3634df12a680213529f27be36d4167c445"
+    },
+    {
+      "name": "recheck/hh5-gems-154.json",
+      "bytes": 318974,
+      "sha256": "0f34546593e8d45973071e56bee713c05b36d76f4f3941d70263f7b9eefb86a6"
+    },
+    {
+      "name": "recheck.json",
+      "bytes": 117,
+      "sha256": "6f3f0a7869360327a4ecefc3410b7ed3c853afced6b445ed9fcd0d7150980ba5"
+    },
+    {
+      "name": "results/hh5-gems/hh5-gems-quartz-cluster-a--bc492--clicks-back-into-its-place-chromium/error-context.md",
+      "bytes": 36184,
+      "sha256": "cafed69f699e1fb3fd6e4ea7c39efddaf099145e11d94b20a8d92c0dffd7b29e"
+    },
+    {
+      "name": "results/hh5-gems/hh5-gems-quartz-cluster-a--bc492--clicks-back-into-its-place-chromium/test-failed-1.png",
+      "bytes": 84947,
+      "sha256": "2fa2f2693b3997ec45197a954a48f194c9d6bf9744676f363d7ed78a36671c28"
+    },
+    {
+      "name": "results/hh5-gems/hh5-gems-quartz-cluster-a--bc492--clicks-back-into-its-place-chromium/trace.zip",
+      "bytes": 14853568,
+      "sha256": "b0a1905b7bda77d9492da622024dfefc065445644d6f51309e7cf35267ecdaae"
+    },
+    {
+      "name": "shard.json",
+      "bytes": 53,
+      "sha256": "27abe2cafa7b3662121239aa0269084da58aa135ebd8fe73e8982fdc217385a9"
+    },
+    {
+      "name": "summary.md",
+      "bytes": 3334,
+      "sha256": "b20a8af10eb7e55094cbdf03afc8a45c8c6362fafd22f821432448c08146b028"
+    }
+  ],
+  "initial": {
+    "files": 26,
+    "tests": 195,
+    "passed": 194,
+    "failed": 1
+  },
+  "failure": "hh5-gems:154 quartz snap-back distance assertion",
+  "isolatedRecheck": "passed; shard failure still counts",
+  "fx4Engine": "All 4 tests passed in the full shard rerun; original timeout retained separately.",
+  "note": "One bounded failed-shard rerun only. No further retry. All existing test, pack, and engine blobs match main."
+}

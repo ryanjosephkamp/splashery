@@ -1,0 +1,205 @@
+{
+  "createdUTC": "2026-10-17T08:59:16.169642+00:00",
+  "codeCommit": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
+  "codeTree": "4fd0846a6942446fb7963058702096729004b6ef",
+  "mainCommit": "aedbe443373d60b2fd0d041e25b1c46d6d5fcd33",
+  "mainMerge": "Git recovered; git fetch origin main and git merge origin/main completed normally before final preflight.",
+  "preflight": {
+    "passed": 272,
+    "exitCode": 0,
+    "log": "preflight-final.log"
+  },
+  "tests": {
+    "passed": 96,
+    "panorama": 19,
+    "classicGolden": 77,
+    "log": "latest-main-final-regression.log.gz",
+    "command": "DISPLAY=:92 SPLASHERY_GL=llvmpipe SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/cdx-pano-core.spec.mjs tests/cdx-pano-prior.spec.mjs tests/cdx-pano-browser.spec.mjs tests/p3d-golden.spec.mjs --workers=2"
+  },
+  "depth": {
+    "scenes": 24,
+    "pipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be",
+    "summary": "final-confidence-summary.json",
+    "model": "Actual shipped WASM model, no alternative weights. Every cohort and case retained.",
+    "seams": "23 measured scene medians below 2%; coast has zero valid pairs and is unmeasured."
+  },
+  "quietMemory": {
+    "panoramaMiB": [1008.552734375, 1008.8193359375, 1001.279296875],
+    "method": "panorama-memory-method.mjs.gz",
+    "classicReference": "classic-final-quiet.json",
+    "note": "Same 2048-pixel CC0 input and 390\u00d7844, DSF 3 viewport, normal product pixel caps. Panorama 100 ms versus Classic 200 ms sampling; no physical-phone RAM/GPU-memory claim."
+  },
+  "fullSuite": {
+    "recordedUTC": "2026-10-17T08:57:54.531554+00:00",
+    "runId": 39007527856,
+    "runAttempt": 2,
+    "url": "https://github.com/ryanjosephkamp/splashery/actions/runs/39007527856",
+    "headSha": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
+    "status": "completed",
+    "conclusion": "failure",
+    "jobs": [
+      {
+        "id": 117349448719,
+        "name": "Suite 1/16",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T08:13:11Z",
+        "completedAt": "2026-10-17T08:55:49Z"
+      },
+      {
+        "id": 117349448846,
+        "name": "Suite 5/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T08:15:43Z",
+        "completedAt": "2026-10-17T08:34:14Z"
+      },
+      {
+        "id": 117349448916,
+        "name": "Suite 9/16",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T08:26:17Z",
+        "completedAt": "2026-10-17T08:41:54Z"
+      },
+      {
+        "id": 117349449093,
+        "name": "Suite 2/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T06:26:10Z",
+        "completedAt": "2026-10-17T06:45:58Z"
+      },
+      {
+        "id": 117349449277,
+        "name": "Suite 10/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T06:28:59Z",
+        "completedAt": "2026-10-17T06:50:51Z"
+      },
+      {
+        "id": 117349449344,
+        "name": "Suite 11/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T06:51:56Z",
+        "completedAt": "2026-10-17T07:31:35Z"
+      },
+      {
+        "id": 117349449466,
+        "name": "Suite 12/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T07:23:32Z",
+        "completedAt": "2026-10-17T07:47:31Z"
+      },
+      {
+        "id": 117349449558,
+        "name": "Suite 13/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T06:36:43Z",
+        "completedAt": "2026-10-17T07:01:54Z"
+      },
+      {
+        "id": 117349449565,
+        "name": "Suite 15/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T07:16:48Z",
+        "completedAt": "2026-10-17T07:41:11Z"
+      },
+      {
+        "id": 117349449568,
+        "name": "Suite 16/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T06:56:53Z",
+        "completedAt": "2026-10-17T07:16:46Z"
+      },
+      {
+        "id": 117349472953,
+        "name": "Suite 3/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T06:08:14Z",
+        "completedAt": "2026-10-17T06:26:09Z"
+      },
+      {
+        "id": 117349476294,
+        "name": "Suite 8/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T06:48:28Z",
+        "completedAt": "2026-10-17T07:07:37Z"
+      },
+      {
+        "id": 117349478849,
+        "name": "Suite 6/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T06:12:33Z",
+        "completedAt": "2026-10-17T06:29:11Z"
+      },
+      {
+        "id": 117349478878,
+        "name": "Suite 14/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T07:40:55Z",
+        "completedAt": "2026-10-17T08:04:28Z"
+      },
+      {
+        "id": 117349479594,
+        "name": "Suite 7/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T07:27:25Z",
+        "completedAt": "2026-10-17T07:51:23Z"
+      },
+      {
+        "id": 117349479653,
+        "name": "Suite 4/16",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T07:10:14Z",
+        "completedAt": "2026-10-17T07:32:46Z"
+      },
+      {
+        "id": 117349480925,
+        "name": "Checks",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-17T06:02:02Z",
+        "completedAt": "2026-10-17T06:05:22Z"
+      },
+      {
+        "id": 117357431673,
+        "name": "Summary",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-17T08:56:49Z",
+        "completedAt": "2026-10-17T08:57:30Z"
+      }
+    ]
+  },
+  "priorRuns": [
+    {
+      "runId": 39006478861,
+      "status": "superseded by the latest-main merge; panorama runtime and capture identities unchanged"
+    },
+    {
+      "runId": 39003621804,
+      "status": "canceled by latest-main merge push"
+    },
+    {
+      "runId": 39004175570,
+      "status": "superseded by the final confidence-method push"
+    },
+    {
+      "runId": 38997656964,
+      "status": "completed with three failed shards; PDF isolated recheck passed, Showcase counts fixed, Pebbles failure reproduced on untouched main"
+    }
+  ]
+}

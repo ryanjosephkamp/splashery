@@ -1,0 +1,38 @@
+{
+  "runId": 39007527856,
+  "headSha": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
+  "jobId": 117322934894,
+  "artifactId": 12091904703,
+  "sourceArtifactSha256": "65015c771af44221d0fc06f688a149afc926bdbb9c4d8781812fc0320046944b",
+  "skips": [
+    {
+      "file": "cdx-v3d-calibration.json",
+      "line": 215,
+      "title": "retained real counterexample clips decode to caution or poor",
+      "annotations": [
+        {
+          "type": "skip",
+          "description": "Counterexample clips are kept privately outside the repository.",
+          "location": {
+            "file": "/home/runner/work/splashery/splashery/tests/cdx-v3d-calibration.spec.mjs",
+            "line": 217,
+            "column": 8
+          }
+        }
+      ]
+    }
+  ],
+  "retainedReports": [
+    {
+      "file": "cdx-pano-browser.json",
+      "bytes": 317933,
+      "sha256": "b9b5796fbb474559aa2bf2cd296097c11a7ec0bbb2ed6114cbd07130895eaf3c"
+    },
+    {
+      "file": "cdx-v3d-calibration.json",
+      "bytes": 323311,
+      "sha256": "e636189a9f2f31fc1c55f0648fc8f5a9a748d92c97491abe951d24c88e253c2d"
+    }
+  ],
+  "note": "The sole pre-existing skip is retained explicitly. New panorama tests contain no skips, and all three browser tests passed."
+}

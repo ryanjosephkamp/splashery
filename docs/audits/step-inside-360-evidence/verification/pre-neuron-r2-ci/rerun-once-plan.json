@@ -1,0 +1,15 @@
+{
+  "recordedUTC": "2026-10-17T08:11:48.836841+00:00",
+  "runId": 39007527856,
+  "source": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
+  "initial": {
+    "files": 401,
+    "tests": 3416,
+    "passed": 3412,
+    "failed": 3,
+    "skipped": 1
+  },
+  "failedShards": [1, 5, 9],
+  "reason": "Each original failure passed its isolated recheck. Rerun the failed full shards once, preserving all original failures and unchanged assertions. No repeated retry-until-green campaign.",
+  "attempt1Archive": "verification/final-ci/attempt-1"
+}

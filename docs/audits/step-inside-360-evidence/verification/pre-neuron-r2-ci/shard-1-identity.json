@@ -1,0 +1,61 @@
+{
+  "runId": 39007527856,
+  "headSha": "652fe9449839bce3ce2ed9f305ef058f3a7e1a62",
+  "jobId": 117322934926,
+  "artifactId": 12094070695,
+  "artifactName": "suite-1-a1",
+  "originalArtifactSha256": "a941d8df59df91d940943ac5ee7018e7113046b28bdf664c406b1b10311c98ca",
+  "originalArtifactBytes": 17688466,
+  "retained": "All physics JSON, logs, recheck, failure screenshots, error context, shard metadata, and summary are retained byte-for-byte. Other passing specs screenshots were omitted from this selected ZIP.",
+  "members": [
+    {
+      "name": "phy.json",
+      "bytes": 322669,
+      "sha256": "b6ce8bae69b62bd1649a85fc5abc3623c6cc9c81520dfe35cd09231cceb8705d"
+    },
+    {
+      "name": "phy.log",
+      "bytes": 1919,
+      "sha256": "703b0670b7dedef79e020b54e2e6bacdc5f7b9225ead70625fdc4d48243750e1"
+    },
+    {
+      "name": "recheck/phy-64.json",
+      "bytes": 318946,
+      "sha256": "20fb0c53ee8fd4faeddbad623f2a0006c73eca168f6e5881af3fe8e720244354"
+    },
+    {
+      "name": "recheck.json",
+      "bytes": 100,
+      "sha256": "baf8e903ac3b20cb34f9f77c6dbdefa4d2547bbe7f31ef605196a781a4384c62"
+    },
+    {
+      "name": "results/phy/phy-Pebbles-stones-pick-up-c32d3-airn-a-careless-one-topples-chromium/error-context.md",
+      "bytes": 46124,
+      "sha256": "8e4aadb627fe3e948f0a06f01c79555fc68e99a07188cbdfe65ef8ae24443e6b"
+    },
+    {
+      "name": "results/phy/phy-Pebbles-stones-pick-up-c32d3-airn-a-careless-one-topples-chromium/trace.zip",
+      "bytes": 16467845,
+      "sha256": "d8c4606b074029b0fe2641991877a3bcbd4a4f9ee43de1eae4ef4b7077a67054"
+    },
+    {
+      "name": "shard.json",
+      "bytes": 43,
+      "sha256": "372cbdcab30b738da201b0343bd4c996b5403ab495bfc578ef96ff8d4eb10896"
+    },
+    {
+      "name": "summary.md",
+      "bytes": 3044,
+      "sha256": "6f66450cbef2e96f7ec17d5d1fa49ef333f96f99344c25510860b647b274d284"
+    }
+  ],
+  "initial": {
+    "files": 16,
+    "tests": 126,
+    "passed": 125,
+    "failed": 1
+  },
+  "failure": "phy:64 Pebbles stacking-height assertion",
+  "isolatedRecheck": "passed; original failure still counts",
+  "baseline": "The unchanged assertion also failed on an untouched-main local reproduction. Logs and frozen Git identities are retained separately."
+}
