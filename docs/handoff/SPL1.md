@@ -19,7 +19,8 @@ can't go past its file. The slider should give the count picked, or as close as 
 
 ## State
 
-- Part 1 (engine): branch `claude/spl1-engine`, PR #716 (the Operator merges it after its full suite).
+- Part 1 (engine): branch `claude/spl1-engine`, PR #716 (the Operator merges it after its full
+  suite).
 - Part 2: branch `claude/spl1` (it carries part 1, merged in), PR #726.
 
 ## What changed (part 1)
