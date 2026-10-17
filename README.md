@@ -66,6 +66,14 @@ iOS/Android browser, or hardware GPU is measured. CDP throttling does not establ
 speed. These size tests do not establish performance or collision quality on a real two-million
 splat capture.
 
+## Repository gates
+
+All 72 smoke/kit tests passed, including old share links, scene round trips, WebGPU, phone layouts,
+and the embed transfer check (9.2 MB). Full preflight passed all 272 shelf-wide tests and every
+static check after merging current main. See `smoke-kit.log`, `preflight.log`, and
+`preflight-summary.txt`. The implementation revision is `97430aa6e`; runtime feature evidence is
+at the unchanged runtime revision recorded in `cadence.json`.
+
 ## Reproduce
 
 Run the normal local server on port 4173. Use Chromium and the repository's installed Playwright:

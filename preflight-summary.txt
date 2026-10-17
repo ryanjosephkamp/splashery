@@ -1,0 +1,11 @@
+272 passed (6.5m)
+
+ok    main is merged in
+ok    prettier
+ok    American English on added lines
+ok    site/ is current
+ok    shared lists parse
+ok    file sizes
+ok    shelf-wide specs (cdx-t2, evidence-computing, st2, st3, cmp2-engine, vw, bld, spg, shb, help, hta, taps, unit)
+
+All clear. Say in the PR that preflight passed.
