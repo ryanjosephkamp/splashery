@@ -210,6 +210,7 @@ test.describe("REC1: the countdown", () => {
     await page.click("#record-start");
     await expect(page.locator("#rec-time")).toHaveText(/\/ 1:00$/);
     await expect(page.locator("#rec-count")).toBeHidden();
+    await page.waitForTimeout(1500); // a take stopped before its first frame is empty, as before
     await page.click("#rec-stop");
     await expect(page.locator("#rec-preview")).toBeVisible({ timeout: 30_000 });
     expect(errors).toEqual([]);
