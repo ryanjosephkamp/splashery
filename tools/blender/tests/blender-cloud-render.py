@@ -5,10 +5,11 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import numpy as np
 import bpy
 
-path = Path(__file__).resolve().parents[1] / 'tools/blender/render.py'
+path = Path(__file__).resolve().parents[3] / 'tools/blender/render.py'
 
 class RenderContract(unittest.TestCase):
     @classmethod
@@ -35,15 +36,25 @@ class RenderContract(unittest.TestCase):
         tree, flags = m.truth.geometry()
         pose = {'width': 8, 'height': 5, 'K': [[6,0,4],[0,6,2.5],[0,0,1]],
                 'camera_to_world': np.eye(4).tolist()}
-        depth, mask = m.trace(tree, flags, pose, panoramic=False)
+        depth, mask, normals = m.trace(tree, flags, pose, panoramic=False)
         np.testing.assert_allclose(depth, 2, atol=1e-6)
+        np.testing.assert_allclose(normals, np.broadcast_to([0,0,-1],normals.shape), atol=1e-6)
         self.assertTrue(np.all(mask == 1))
-        radial, mask = m.trace(tree, flags, pose, panoramic=True)
+        radial, mask, pano_normals = m.trace(tree, flags, pose, panoramic=True)
         directions = m.panorama_rays(8, 5, np.eye(4))
         valid = directions[:,:,2] > 0
         np.testing.assert_allclose(radial[valid], 2/directions[:,:,2][valid], rtol=1e-6)
         self.assertTrue(np.all(np.isnan(radial[~valid])))
         self.assertTrue(np.all(mask[~valid] == 0))
+        self.assertTrue(np.all(np.isnan(pano_normals[~valid])))
+        np.testing.assert_allclose(pano_normals[valid],np.broadcast_to([0,0,-1],pano_normals[valid].shape),atol=1e-6)
+
+    def test_corrupt_canonical_scene_is_rejected_before_loading(self):
+        with tempfile.TemporaryDirectory() as folder:
+            (Path(folder)/'night.blend').write_bytes(b'corrupt scene')
+            with patch.object(self.renderer.truth,'CANONICAL_DIR',Path(folder)):
+                with self.assertRaisesRegex(ValueError,'SHA-256'):
+                    self.renderer.truth.build(7,'night')
 
     def test_black_emission_with_default_strength_is_opaque(self):
         bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -109,9 +120,17 @@ class RenderContract(unittest.TestCase):
             bpy.data.images.remove(image)
             from studio_truth_camera import read_depth
             actual = read_depth(out/'test.depth.f32.gz',32,16)
+            import gzip
+            normals = np.frombuffer(gzip.decompress((out/'test.normals.f32.gz').read_bytes()),dtype='<f4').reshape(16,32,3)
+            self.assertEqual(pose['normal_space'],'world')
+            np.testing.assert_allclose(np.linalg.norm(normals,axis=2),1,atol=1e-6)
             # Inside a 4m cube, the first intersection is at 2/max(|ray component|).
             directions = m.panorama_rays(32,16,pose['camera_to_world'])
             np.testing.assert_allclose(actual, 2/np.max(np.abs(directions),axis=2), rtol=1e-6)
+            expected = np.zeros_like(directions)
+            axis = np.argmax(np.abs(directions),axis=2)
+            np.put_along_axis(expected,axis[:,:,None],np.take_along_axis(np.sign(directions),axis[:,:,None],axis=2),axis=2)
+            np.testing.assert_allclose(normals,expected,atol=1e-6)
 
 if __name__ == '__main__':
     unittest.main(argv=['blender-cloud-render'])

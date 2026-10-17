@@ -6,7 +6,7 @@ import tempfile
 import unittest
 import zlib
 
-path = Path(__file__).resolve().parents[1] / 'tools/studio_truth_images.py'
+path = Path(__file__).resolve().parents[3] / 'tools/studio_truth_images.py'
 
 class ImageMetadata(unittest.TestCase):
     @classmethod

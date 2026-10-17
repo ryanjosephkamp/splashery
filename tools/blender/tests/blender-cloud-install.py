@@ -5,7 +5,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-path = Path(__file__).resolve().parents[1] / 'tools/blender/install.py'
+path = Path(__file__).resolve().parents[3] / 'tools/blender/install.py'
 
 class InstallIntegrity(unittest.TestCase):
     def test_installer_exists(self):

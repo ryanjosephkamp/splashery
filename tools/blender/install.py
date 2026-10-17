@@ -19,6 +19,7 @@ VERSION = '4.5.3'
 ARCHIVE = f'blender-{VERSION}-linux-x64.tar.xz'
 SHA256 = '975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845'
 URL = f'https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/{ARCHIVE}'
+FALLBACK_URL = f'https://download.blender.org/release/Blender4.5/{ARCHIVE}'
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -51,8 +52,16 @@ def install(cache):
             with tempfile.NamedTemporaryFile(dir=cache, suffix='.download', delete=False) as stream:
                 pending = Path(stream.name)
                 try:
-                    with urllib.request.urlopen(URL, timeout=120) as response:
-                        shutil.copyfileobj(response, stream)
+                    for url in (URL, FALLBACK_URL):
+                        try:
+                            stream.seek(0)
+                            stream.truncate()
+                            with urllib.request.urlopen(url, timeout=120) as response:
+                                shutil.copyfileobj(response, stream)
+                            break
+                        except OSError:
+                            if url == FALLBACK_URL:
+                                raise
                     stream.close()
                     verify(pending, SHA256)
                     pending.replace(archive)
@@ -82,7 +91,7 @@ def install(cache):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--cache', type=Path, default=ROOT / '.cache/blender-cloud')
+    parser.add_argument('--cache', type=Path, default=Path.home() / '.cache/splashery-blender')
     parser.add_argument('--report', type=Path, help='Separate operational timing JSON (not dataset metadata)')
     opt = parser.parse_args()
     if sys.version_info < (3,12):

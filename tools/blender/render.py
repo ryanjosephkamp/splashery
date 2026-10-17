@@ -97,6 +97,7 @@ def trace(tree, flags, pose, panoramic=False):
     origin = Vector(c2w[:3,3])
     forward = c2w[:3,2]
     z, mask = np.full(w*h, np.nan, dtype=np.float32), np.zeros(w*h, dtype=np.uint8)
+    normals = np.full((w*h,3), np.nan, dtype=np.float32)
     for i, direction in enumerate(directions):
         cosine = 1.0 if panoramic else float(np.dot(direction, forward))
         near, far = pose.get('clip_meters', [.05, 200])
@@ -106,7 +107,8 @@ def trace(tree, flags, pose, panoramic=False):
             value = near + distance*cosine
             if near <= value <= far:
                 z[i], mask[i] = value, flags[face]
-    return z.reshape(h,w), mask.reshape(h,w)
+                normals[i] = normal.normalized()
+    return z.reshape(h,w), mask.reshape(h,w), normals.reshape(h,w,3)
 
 
 def write_mask(path, mask):
@@ -147,14 +149,17 @@ def render_view(out, stem, tree, flags, width, height, panoramic=False):
         camera.data.longitude_min, camera.data.longitude_max = -math.pi, math.pi
         camera.data.latitude_min, camera.data.latitude_max = -math.pi/2, math.pi/2
     pose = camera_pose(camera, width, height, panoramic)
-    pose.update(rgb=f'{stem}.png', depth=f'{stem}.depth.f32.gz', mask=f'{stem}.mask.png', pose=f'{stem}.json')
+    pose.update(rgb=f'{stem}.png', depth=f'{stem}.depth.f32.gz', mask=f'{stem}.mask.png', pose=f'{stem}.json',
+                normals=f'{stem}.normals.f32.gz', normal_space='world',
+                normal_convention='unit geometric triangle normal, winding orientation, XYZ; NaN for no hit')
     started = time.monotonic()
     scene.render.filepath = str(out / pose['rgb'])
     bpy.ops.render.render(write_still=True)
     canonical_png(out / pose['rgb'])
     rendered = time.monotonic()
-    z, mask = trace(tree, flags, pose, panoramic)
+    z, mask, normals = trace(tree, flags, pose, panoramic)
     write_depth(out / pose['depth'], z)
+    write_depth(out / pose['normals'], normals)
     write_mask(out / pose['mask'], mask)
     canonical_png(out / pose['mask'])
     save_json(out / pose['pose'], pose)
@@ -165,8 +170,10 @@ def render_view(out, stem, tree, flags, width, height, panoramic=False):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--model', type=Path, required=True)
-    ap.add_argument('--asset-record', type=Path, required=True)
+    inputs = ap.add_mutually_exclusive_group(required=True)
+    inputs.add_argument('--model', type=Path)
+    inputs.add_argument('--scene', choices=[s[0] for s in truth.SCENES])
+    ap.add_argument('--asset-record', type=Path)
     ap.add_argument('--out', type=Path, required=True, help='New or empty directory; never resumes stale files')
     ap.add_argument('--width', type=int, default=640)
     ap.add_argument('--height', type=int, default=480)
@@ -181,15 +188,27 @@ def main():
             4 <= opt.width <= 8192 and 4 <= opt.height <= 8192 and
             8 <= opt.panorama_width <= 16384 and opt.panorama_width % 2 == 0):
         ap.error('Invalid dimensions, view count, or sample count')
-    record = json.loads(opt.asset_record.read_text())
-    validate_model(opt.model, record)
+    if opt.model:
+        if not opt.asset_record:
+            ap.error('--model requires --asset-record')
+        record = json.loads(opt.asset_record.read_text())
+        validate_model(opt.model, record)
+    else:
+        source = json.loads(truth.CANONICAL_RECORD.read_text())
+        record = {key: source[key] for key in ['author','license','checked','changes']}
+        record.update(source='tools/blender/truth-scenes/'+opt.scene+'.blend',
+                      sha256=source['scenes'][opt.scene]['sha256'])
     out = opt.out.resolve()
     if out.exists() and any(out.iterdir()):
         ap.error('Output must be a new or empty directory')
     if opt.timings and (opt.timings.resolve() == out or out in opt.timings.resolve().parents):
         ap.error('Timings must be outside the deterministic output directory')
     bpy.ops.wm.read_factory_settings(use_empty=True)
-    bpy.ops.import_scene.gltf(filepath=str(opt.model.resolve()), import_pack_images=True)
+    if opt.model:
+        bpy.ops.import_scene.gltf(filepath=str(opt.model.resolve()), import_pack_images=True)
+    else:
+        index = [s[0] for s in truth.SCENES].index(opt.scene)
+        truth.build(index, opt.scene)
     meshes = [o for o in bpy.context.scene.objects if o.type == 'MESH']
     if not meshes:
         ap.error('Model has no mesh geometry')
@@ -260,16 +279,18 @@ def main():
     timings.append(timing)
     sources = {str(p.relative_to(TOOLS)): sha(p) for p in [Path(__file__).resolve(),
                TOOLS/'studio-truth-generate.py', TOOLS/'studio_truth_camera.py',
-               TOOLS/'blender/install.py', TOOLS/'blender-cloud.sh', TOOLS/'studio_truth_images.py']}
+               TOOLS/'blender/install.py', TOOLS/'blender-cloud.sh', TOOLS/'studio_truth_images.py',
+               TOOLS/'blender-views.mjs', TOOLS/'blender/models-lock.json']}
     manifest = {'schema': 1, 'blender': bpy.app.version_string, 'engine': 'CYCLES', 'device': 'CPU',
                 'threads': 4, 'samples': opt.samples, 'seed': 105, 'asset': record,
                 'build_hash': bpy.app.build_hash.decode(), 'python': sys.version.split()[0],
                 'numpy': np.__version__,
                 'archive_sha256': '975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845',
-                'source_sha256': sources, 'model_sha256': sha(opt.model),
+                'source_sha256': sources, 'model_sha256': record['sha256'],
                 'world': 'Blender right-handed Z-up, meters; original imported model coordinates',
                 'camera': '+X right, +Y down, +Z forward; row-major matrices acting on column vectors',
                 'pixel_centers': '(x+0.5,y+0.5)', 'depth_encoding': 'gzip float32 LE, top row first; NaN for no hit',
+                'normals_encoding': 'gzip float32 LE, top row first, interleaved XYZ, world unit geometric triangle normals; NaN for no hit',
                 'mask': {'0': 'no geometric hit', '1': 'opaque geometric hit',
                          '3': 'geometric hit with ambiguous appearance (metal, glass, alpha, emission)'},
                 'bounds': {'min': low.tolist(), 'max': high.tolist()}, 'views': views, 'panorama': pano,

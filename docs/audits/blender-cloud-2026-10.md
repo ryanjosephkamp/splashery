@@ -2,219 +2,187 @@
 
 October 17, 2026. Built by Codex (GPT-6).
 
-Blender 4.5.3 LTS installs headlessly from a pinned, SHA-256-checked archive. CPU Cycles renders the
-existing truth scenes and a new CC0 GLB pipeline produces calibrated orbit views, geometric depth,
-masks, and a full spherical panorama. Fresh-process comparisons cover the complete generated files,
-including compressed image/depth bytes and metadata.
+Blender 4.5.3 LTS installs headlessly from a pinned, SHA-256-checked archive. The opt-in setup and
+`tools/blender-views.mjs` produce calibrated CC0 model or truth-scene views, depth, geometric
+normals, object/background masks, and full spherical panoramas. All 381 files from three complete
+24-view plus panorama builds matched byte for byte in fresh-process repeats.
 
-The requested `docs/codex/105-blender-cloud.md` was absent from both the checkout and freshly
-fetched `origin/main` (`ceb51de7a`). The user's GOAL was used as the spec. Scope: build tools,
-tests, licenses, and documentation. No `src/`, `vendor/`, shipped model, or historical truth fixture
-changed. PR branch: `codex/blender-cloud-public`. The original local work branch is retained
-unchanged.
+Correction: `docs/codex/105-blender-cloud.md` exists on main and at the original base `ceb51de7`.
+The earlier report and PR body incorrectly called it absent. This revision follows that task file.
+No toy, runtime source, vendor file, shipped model, or historical truth fixture changed. The PR
+branch remains `codex/blender-cloud-public`; main was merged, without rebasing. The only generated
+site changes are the license page and service-worker version required by
+`node tools/site-build.mjs`.
 
-## Installation
+## Install and browser-only setup
 
-The final installer was run in a fresh cache, downloading and extracting rather than accepting the
-system's preinstalled Blender 4.3.2. This cloud exposes five x86-64 virtual CPUs identifying as AMD
-EPYC 9V74, Debian 13, glibc 2.41, and no physical GPU device. Rendering uses four CPU threads.
+`bash tools/codex-setup.sh` retains the original browser setup and 3,000 MB disk default. It never
+invokes the Blender installer. `--blender` explicitly requests Blender and at least 5 GB free; only
+that step requires Linux x86-64 and host Python 3.12 or newer. Blender unpacks outside the
+repository in `~/.cache/splashery-blender/`. Both real setup modes passed using the existing
+Chromium; browser installation and system packages were not downloaded again.
 
-| Measurement                                    | Result                         |
-| ---------------------------------------------- | ------------------------------ |
-| Cold download, verify, extract, Python startup | 75.31 seconds                  |
-| Warm archive/tree verification, Python startup | 3.85 seconds                   |
-| Archive                                        | 377,397,328 bytes (359.91 MiB) |
-| Installed files                                | 1,530.62 MiB                   |
-| Existing-browser cloud setup, warm Blender     | 14 seconds                     |
-
-These are elapsed measurements with other rendering/check jobs active, not an isolated hardware
-benchmark. Warm setup deliberately hashes the entire archive and installed file tree each time. The
-full setup test used
-`SPLASHERY_CHROMIUM=/usr/bin/chromium bash tools/codex-setup.sh --skip-browser`: npm install,
-browser launch/WebGL2, and Blender all passed. Browser download/system-package installation was not
-rerun.
+| Measurement                                          |            Result |
+| ---------------------------------------------------- | ----------------: |
+| Cold download, hash, extract, headless Python launch |   52.0101 seconds |
+| Cached archive/tree verification and Python launch   |    2.5085 seconds |
+| Archive                                              | 377,397,328 bytes |
+| Installed logical file bytes                         |     1,604,968,564 |
+| Allocated install bytes, counting hard links once    |     1,181,835,264 |
+| Browser-only setup, including first npm install      |        11 seconds |
+| Existing-browser setup with cached `--blender`       |         5 seconds |
 
 Archive SHA-256: `975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845`. Executable
-SHA-256: `5e15447670804c855fef6033ac9b8fd82696b762095becf0df79b1c2f8034397`. Blender build hash:
-`67807e1800cc`.
+SHA-256: `5e15447670804c855fef6033ac9b8fd82696b762095becf0df79b1c2f8034397`. Build hash:
+`67807e1800cc`. The pin matches the
+[official checksum](https://download.blender.org/release/Blender4.5/blender-4.5.3.sha256), opened
+October 17, 2026. The Berkeley download mirror worked; the official host is now reachable too and is
+the fallback URL. A bad hash stops installation; no signature verification is claimed.
 
-The official download host returned HTTP 403. The downloaded archive matched the committed pin, and
-the same checksum was read from
-[Berkeley](https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.3.sha256),
-[RWTH Aachen](https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.5/blender-4.5.3.sha256),
-and [dotsrc](https://mirrors.dotsrc.org/blender/blender-release/Blender4.5/blender-4.5.3.sha256). No
-signature verification is claimed. The bundled `license/license.md` identifies Blender as
-GPL-3.0-or-later; all Blender binaries, libraries, and license files remain in ignored `.cache/`.
+The archive and entire installed tree are rechecked on reuse. Safe extraction, file locking,
+headless Python/NumPy startup, disabled auto-run/user startup, and disabled bytecode writes prevent
+unverified reuse. The installer never silently substitutes the system Blender. Corrupt archives,
+changed installed files, and unexpected installed files are rejected.
 
-The installer requires Linux x86-64 and Python 3.12 or newer, uses safe tar extraction, serializes
-concurrent installs, and fails on corrupt archive bytes or an altered installed tree. It launches
-Blender's headless Python and imports bundled NumPy to check runtime dependencies. It never falls
-back to another Blender version. The launcher disables auto-run scripts, user startup settings, and
-bytecode writes inside Blender. The initial environment flag alone did not prevent Blender from
-writing bytecode; the integrity check caught that and the launcher now disables it in Python too.
+## Six datasets and byte identity
 
-## Rendering and repeatability
+The inputs are three CC0 models already recorded in `tools/models.json`:
+[Rubber Duck Toy](https://polyhaven.com/a/rubber_duck_toy), by Plat251;
+[Garden Gnome](https://polyhaven.com/a/garden_gnome), by Bhargav Kubal; and
+[Carved Wooden Elephant](https://polyhaven.com/a/carved_wooden_elephant), by Greg Zaal. Their live
+pages and [Poly Haven's CC0 license](https://polyhaven.com/license) were opened on October 17, 2026.
+The 1k glTF, buffers, and textures are individually SHA-256-pinned in
+`tools/blender/models-lock.json`. NodeIO embeds them losslessly in a GLB; its hash and all
+dependency hashes appear in each manifest. Rendering never refreshes pins or consults the mutable
+API. Additional CC0 Poly Haven entries use an explicit `--pin-model` step. Models needing logo
+removal are rejected. The existing self-contained CC0 GLB route remains available.
 
-The model example is the repository's existing self-contained `burger.glb` from
-[Kenney Food Kit](https://kenney.nl/assets/food-kit), by Kenney. Its live page was opened and
-confirmed CC0 on October 17, 2026. Input SHA-256 and provenance are in
-[`tools/blender/burger.json`](../../tools/blender/burger.json). No asset download or model
-alteration was needed. The procedural truth scenes retain their original CC0 credit: made by Ryan
-with Codex (GPT-6). Contact sheets below are render evidence, not real captures or new site samples.
+Each object has 24 orbit views at 512×512, 16 CPU Cycles samples, seed 105, and four threads. Each
+panorama is 1024×512 at the first orbit camera center. These are rendered models, not real captures.
+Raw datasets stay in ignored `.cache/blender-review/`; only compact evidence is on
+`codex/blender-cloud-clips`, outside this PR.
 
-![Eight orbit views and a spherical panorama](blender-cloud-2026-10/model-contact.jpg)
+[All 72 views](https://github.com/ryanjosephkamp/splashery/blob/codex/blender-cloud-clips/docs/audits/blender-cloud-2026-10/model-contact.jpg)
+·
+[Three panoramas](https://github.com/ryanjosephkamp/splashery/blob/codex/blender-cloud-clips/docs/audits/blender-cloud-2026-10/panorama-contact.jpg)
+·
+[Measurements and every file hash](https://github.com/ryanjosephkamp/splashery/blob/codex/blender-cloud-clips/docs/audits/blender-cloud-2026-10/measurements.json)
 
-The default model command renders eight 640×480 views and one 1280×640 panorama at 16 samples.
-Across two final runs, all **38 files matched byte for byte**, totaling **3,290,488 bytes** per set.
-This includes every PNG, gzip depth map, mask, pose JSON, manifest, and checksums file. The SHA-256
-of the matching `checksums.json` is
-`40c6e0e06fb1b7d3ed4b7d7a2538946fb8bc05febdd6cb274079e51492465939`.
+Times below sum beauty rendering/saving and geometric depth/normal/mask/pose generation, excluding
+installer/startup, import/BVH construction, and final manifest hashing. The evidence records both
+whole-process wall time and each operation. Object rows contain 120 files; panorama rows contain
+five. Each combined build also has a manifest and checksums file (127 files total).
 
-| Model measurement                                | Run A | Run B |
-| ------------------------------------------------ | ----: | ----: |
-| Median orbit beauty render and save, seconds     | 1.772 | 2.080 |
-| Median orbit depth/mask/pose generation, seconds | 1.520 | 2.141 |
-| Panorama beauty render and save, seconds         | 2.051 | 3.544 |
-| Panorama depth/mask/pose generation, seconds     | 2.703 | 6.514 |
-| Sum of nine render/truth operations, seconds     | 33.82 | 43.51 |
+| Dataset                   |     Bytes |   Seconds A / B | SHA-256 of sorted file-hash map                                    |
+| ------------------------- | --------: | --------------: | ------------------------------------------------------------------ |
+| rubber-duck-real views    | 9,689,869 | 38.356 / 38.786 | `b1e72a3f43119a838afbacb702a3ef36f3a07b85c8858ca86184b9282a6ed75b` |
+| rubber-duck-real panorama |   304,206 |   1.895 / 1.706 | `f266e1369a97b15462b8cbb49e8372f7c2c744b83128ae157a39d3f9371667c5` |
+| garden-gnome views        | 9,684,336 | 32.265 / 35.124 | `c72c4f8148e36f6ab94e636693e178dbb3397628650134adf2057994e221abdb` |
+| garden-gnome panorama     |   317,653 |   1.847 / 1.584 | `8328085fa5b8ce3ada2582d9dbfe7df5502a0045e996963057706e7539dbb516` |
+| wooden-elephant views     | 8,618,341 | 32.661 / 35.913 | `91ff1d582a3b0087a190791c746ce0207d6a903da718f1d663fe636521b9db41` |
+| wooden-elephant panorama  |   310,388 |   1.694 / 1.778 | `7f0ae08f1548341a7404bc32c055ab744a8b7ace89720e8befe6ef2df3b97fd3` |
 
-The sum excludes installer verification, importing, bounds/BVH construction, and final manifest
-hashing. Depth/mask time includes geometric tracing and writing the files. Concurrent jobs affected
-speed, but did not change output bytes. These measurements concern a small, low-poly example and are
-not a throughput promise for large textured models.
+Mean complete seconds per orbit view (A / B): rubber-duck-real 1.598 / 1.616, garden-gnome 1.344 /
+1.463, wooden-elephant 1.361 / 1.496.
 
-The full 12-scene, 1280×720 truth still set was rendered with CPU Cycles at eight samples. All **51
-files matched byte for byte**, totaling **19,934,153 bytes** per set. This includes all stills,
-depth, masks, calibration, build settings, manifest, and checksums. The matching `checksums.json`
-SHA-256 is `7eb9923f3a37be1bd0782e8780f1382f8203674166dacd9cbb047a0054139435`.
+The group digest hashes UTF-8 compact JSON with sorted keys and one trailing newline, mapping each
+filename to `bytes` and `sha256` (Python `json.dumps(..., sort_keys=True, separators=(',', ':'))`).
+Every artifact was read and compared directly, then rehashed against `checksums.json`; matching
+checksum files alone were not treated as proof. Combined-build checksums-file hashes:
 
-| Truth scene: build, beauty, and geometric truth, seconds | Run A | Run B |
-| -------------------------------------------------------- | ----: | ----: |
-| arches                                                   |  14.2 |   9.5 |
-| coast                                                    |  15.8 |  13.3 |
-| desk                                                     |  14.8 |  12.1 |
-| forest                                                   |  25.2 |  13.8 |
-| fur                                                      |  12.6 |  10.2 |
-| lattice                                                  |  13.8 |  10.2 |
-| leaves                                                   |  12.0 |   7.7 |
-| night                                                    |  14.1 |  12.6 |
-| room                                                     |  22.6 |  14.1 |
-| stairs                                                   |  17.5 |  12.0 |
-| steps                                                    |  10.1 |   8.6 |
-| still-life                                               |  13.0 |   9.2 |
-| Total                                                    | 185.7 | 133.3 |
+- garden-gnome: 10,068,845 bytes;
+  `045cf5299ec1a3fac43f783412b74c7c574481a3873f879d2a5e0597a82a7e47`.
+- rubber-duck-real: 10,061,055 bytes;
+  `3dba6d7f6ce3f06bc2277c48d4e6f90af143c2023fd87ba8997157b130664b56`.
+- wooden-elephant: 8,995,793 bytes;
+  `946e3057b1cc154ec5a32cd7806c26dbc5d99971629c0082d3b35bb8382c7d8b`.
 
-Timings are rounded to 0.1 seconds and exclude installer/process startup. Both runs overlapped other
-checks, so contention explains much of the variation.
+Normal payload length, unit length at hits, NaN at misses, depth/mask agreement, and matrix inverses
+were checked for all 75 views. The truth-scene route also matched in two fresh-process smoke builds.
 
-![All twelve truth scenes](blender-cloud-2026-10/truth-contact.jpg)
+## Truth scenes and seconds per frame
 
-Detailed per-scene timings, file hashes, repeat results, and backend errors are in
-[`measurements.json`](blender-cloud-2026-10/measurements.json). Full datasets and verbose logs stay
-in ignored cloud cache; the contact sheets and compact measurements are committed. The cache is
-local to this workspace and is not a hosted archive. The historical truth archive's hosting problem
-was not changed by this task.
+All 12 original truth scenes were rendered at both 512×288 and 1024×576 (16:9 long edges), with CPU
+Cycles at eight samples. `tools/blender/benchmark.py` calls the original generator's actual build,
+pose, render, and geometric-depth functions, timing them separately. `--still-side` also makes those
+sizes available from `tools/studio-truth-generate.py` itself.
 
-Blender writes Date and RenderTime metadata even with the visible stamp disabled. Early runs had
-identical pixels but different files. The shared metadata helper now removes PNG text/time chunks
-and JPEG comments without decoding or recompressing image pixels. PNG color profiles, resolution,
-and compressed image data remain intact. Unit tests verify that encoded image data survives
-unchanged. Gzip timestamps are fixed at zero; deterministic manifests contain no runtime timings or
-absolute machine paths.
+| Backend               | Pixels   | Frames | Mean beauty seconds | Mean geometry seconds | Mean total seconds/frame |
+| --------------------- | -------- | -----: | ------------------: | --------------------: | -----------------------: |
+| CPU Cycles, 8 samples | 512×288  |     12 |               1.024 |                 0.640 |                    1.714 |
+| CPU Cycles, 8 samples | 1024×576 |     12 |               2.967 |                 2.332 |                    5.344 |
 
-Further full repeats found actual beauty-pixel differences first in the many-light night scene and
-later in the forest, while geometry truth matched. Single-thread rendering, disabling the light
-tree, and selecting tabulated Sobol sampling did not fix the night case. Three renders of the same
-saved scene matched. The pinned 4.5.3 path therefore loads all 12 original scenes from
-SHA-256-checked compressed sources in `tools/blender/truth-scenes/` (1,785,089 bytes total). These
-preserve the procedural geometry, materials, and lighting; all recipes remain in `build_procedural`.
-`truth-scenes.json` records the CC0 provenance, source hashes, seeds, camera targets, and every file
-hash. `canonicalize-truth.py` intentionally rebuilds these versioned inputs when a recipe changes.
-The repeated night clip regression caught the procedural failure before this fix. This stabilizes
-scene inputs; no general Blender determinism fix is claimed.
+Total time includes loading the source scene and BVH construction. Timings are elapsed cloud
+measurements, not isolated hardware promises; some checks overlapped the CPU work. The machine
+exposes five AMD EPYC 9V74 x86-64 vCPUs, Debian 13, glibc 2.41, and no GPU device. The report uses
+four rendering threads. Eevee uses a different sample count, so these are not equal-quality speed
+comparisons. Per-scene times are in the linked measurements.
 
-The truth generator records the canonical source record hash and metadata helper's source hash in
-its resume settings, preventing old outputs from being relabeled with the new settings.
+The 12 original CC0 truth recipes remain intact. Blender 4.5.3 loads their hash-checked, compressed
+source scenes (1,785,089 bytes) because rebuilding procedural scenes exposed actual Cycles sampling
+variation across fresh processes. `build_procedural` and the explicit canonicalizer retain the
+recipes. PNG/JPEG time/text metadata is removed without re-encoding pixels; gzip timestamps are
+zero. Source hashes and versioned inputs prevent stale resume reuse.
 
-## Calibration contract
+The earlier complete 12-scene 1280×720 still repeat compared all 51 files (19,934,153 bytes). Its
+[truth contact sheet](https://github.com/ryanjosephkamp/splashery/blob/codex/blender-cloud-clips/docs/audits/blender-cloud-2026-10/truth-contact.jpg),
+[burger smoke sheet](https://github.com/ryanjosephkamp/splashery/blob/codex/blender-cloud-clips/docs/audits/blender-cloud-2026-10/burger-contact.jpg),
+and
+[original measurements](https://github.com/ryanjosephkamp/splashery/blob/codex/blender-cloud-clips/docs/audits/blender-cloud-2026-10/prior-measurements.json)
+are retained on the evidence branch as historical results. Those hashes describe the earlier source
+revision; the six datasets above describe this revision.
 
-World coordinates retain the original imported model's Blender coordinates, Z up, in meters. The
-orbit fits its bounding sphere and adds only cameras and lighting. Camera coordinates are +X right,
-+Y down, and +Z forward; row-major matrices act on column vectors. Perspective K uses the actual
-horizontal sensor and square pixels. Pixel centers are `(x+0.5,y+0.5)`.
+## Calibration and limitations
 
-Perspective depth is optical-axis Z. Panorama depth is radial distance. Both are evaluated-mesh,
-first-hit geometry at pixel centers, with explicit near/far clipping, stored as headerless gzip
-float32 little endian, top row first, NaN for no hit. Mask red-channel values are 0 for no hit, 1
-for opaque geometry, and 3 for appearance-ambiguous geometry. Glass, metal, alpha, and emission are
-flagged conservatively; first-hit geometry is not a claim about reflected or transmitted appearance.
-Beauty area sampling and pixel-center geometry can differ at edges.
+World coordinates are Blender Z-up meters. Camera coordinates are +X right, +Y down, and +Z forward;
+row-major matrices act on column vectors. Pixel centers are `(x+0.5,y+0.5)`, without lens
+distortion. Perspective K uses the horizontal sensor and square pixels. Perspective depth is
+optical-axis Z; panorama depth is radial meters. Both trace the evaluated mesh with near/far clips.
 
-The panorama covers longitude −π to +π left to right and latitude +π/2 to −π/2 top to bottom from a
-single camera center, aligned with the first orbit view. It has no pinhole K. A six-color box test
-checks actual rendered cardinal directions, top/bottom orientation, and the independently known
-radial distance `2/max(abs(ray component))`. A separate known-plane test checks axial depth at
-oblique pixels. Existing truth geometry/calibration tests also pass with the installed Blender.
+Normals are unit geometric triangle normals in the common world frame, oriented by winding, without
+smoothing, material normal maps, or face-forwarding. Depth is gzip little-endian float32, top row
+first; normals use interleaved XYZ in the same encoding. No hit is NaN. Mask red values are 0 for
+background, 1 for opaque geometry, and 3 for appearance-ambiguous geometry. Masks distinguish
+object/background and ambiguity, rather than individual scene object IDs. Glass, alpha, metal,
+emission, and silhouettes can disagree with first-surface truth and pixel-center sampling.
+
+A panorama is a full sphere from one camera center, longitude −π to +π left to right, latitude +π/2
+to −π/2 top to bottom. It has no pinhole K. Independent plane and six-color box tests check
+axial/radial depth, actual rendered cardinal directions, world normals, and missing pixels.
+
+Identity is established on this cloud CPU with the same pinned build, inputs, source, settings, and
+libraries. Cross-architecture or cross-version beauty identity is not established. Full
+120/300-frame truth clips were not regenerated; labeled smoke builds exercise both encoders. HDR
+output and physical GPU acceleration measurements were cut.
 
 ## Without a GPU
 
-Each probe starts the pinned Blender in a separate process. GPU Cycles enables only devices of the
-requested type; CPU fallback is explicitly disabled. These are actual backend discovery/render
-checks, not mocked capability flags.
+GPU probes enable only the requested backend and explicitly disable CPU fallback. CUDA, OptiX, HIP,
+and oneAPI return nonzero because no device is available. Metal is unsupported in this Linux build.
+The CPU 64×64, two-sample probe rendered in 0.075 seconds. The 64×64, 64-sample Eevee probe rendered
+in 26.091 seconds through Mesa llvmpipe (LLVM 19.1.7, 256 bits), Mesa 25.0.7, OpenGL 4.5; it must
+not be reported as GPU acceleration. The measurements link records actual probe JSON, error text,
+renderer/version strings, and elapsed times. EGL diagnostics can appear before successful software
+rendering. Eevee's startup/shader cost and 64 samples differ from the CPU dataset pipeline.
 
-| Backend    | Observed result                                                                                                                                                                                                                                                 |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPU Cycles | Rendered the default 64×64 scene at two samples in 0.070 seconds, excluding process/install startup. All dataset renders also use CPU.                                                                                                                          |
-| CUDA       | No device; nonzero exit with the explicit unavailable-device error.                                                                                                                                                                                             |
-| OptiX      | No device; nonzero exit with the explicit unavailable-device error.                                                                                                                                                                                             |
-| HIP        | No device; nonzero exit with the explicit unavailable-device error.                                                                                                                                                                                             |
-| oneAPI     | No device; nonzero exit with the explicit unavailable-device error.                                                                                                                                                                                             |
-| Metal      | Not available in this Linux build's backend enum; nonzero exit.                                                                                                                                                                                                 |
-| Eevee      | Rendered at 64×64 with its default 64 samples using Mesa llvmpipe (LLVM 19.1.7, 256 bits), OpenGL 4.5, Mesa 25.0.7. First run: 35.78 seconds; repeat with shader cache: 11.56 seconds. EGL_BAD_MATCH diagnostics appeared before successful software rendering. |
-
-Thus GPU Cycles is unavailable here. Eevee succeeds through software OpenGL, with startup/shader
-cost and diagnostics; it should not be described as categorically impossible without a GPU. The
-calibrated pipeline uses CPU Cycles, which also supplies the equirectangular camera. No physical GPU
-speedup, GPU beauty reproducibility, denoising benchmark, browser WebGPU training, or phone
-performance is claimed.
-
-## Reproduce and verify
-
-See the [tool guide](../../tools/blender/README.md) for the installer, default model command, asset
-record format, all options, recovery steps, and the complete camera/depth contract.
+## Reproduction and checks
 
 ```sh
-python3 tools/blender/install.py --report .cache/blender-install.json
-bash tools/blender-cloud.sh --python tools/studio-truth-generate.py -- \
-  --out .cache/blender-truth/run-a --mode still
-bash tools/blender-cloud.sh --python tools/blender/render.py -- \
-  --model assets/toys/model-splats/burger.glb --asset-record tools/blender/burger.json \
-  --out .cache/blender-model/run-a --timings .cache/blender-model/run-a-times.json
-python3 tests/blender-cloud-install.py
-python3 tests/blender-cloud-metadata.py
-bash tools/blender-cloud.sh --python tests/blender-cloud-render.py
-python3 tests/blender-cloud-repeat.py
-bash tools/blender-cloud.sh --python tests/studio-truth-blender.py
-python3 tests/studio-truth-camera.py
-node --test --test-concurrency=1 tests/studio-truth*.test.mjs
-python3 tests/studio-truth-validation.py
+SPLASHERY_CHROMIUM=/usr/bin/chromium bash tools/codex-setup.sh --skip-browser --blender
+node tools/blender-views.mjs --model rubber-duck-real --out .cache/duck-a --timings .cache/duck-a-times.json
+node tools/blender-views.mjs --model rubber-duck-real --out .cache/duck-b --timings .cache/duck-b-times.json
+# Repeat both commands for garden-gnome and wooden-elephant.
+bash tools/blender-cloud.sh --python tools/blender/benchmark.py -- --out .cache/benchmark
+bash tools/blender-cloud.sh --python tools/blender/benchmark.py -- --backend EEVEE --out .cache/eevee
+node tools/preflight.mjs --quick
 ```
 
-Repeat generation into a second empty directory and compare the two `checksums.json` files. The
-compact evidence lists all artifact hashes, including the checksums files themselves. Operational
-timing JSON deliberately lives outside the deterministic dataset.
+The [tool guide](../../tools/blender/README.md) lists all tests and camera/file conventions. 49
+installer, setup, metadata, wrapper, geometry, fresh-process repeat, and existing truth checks
+passed. An existing resume test copies the new metadata helper into its temporary source tree; its
+assertions remain unchanged. New checks live under `tools/blender/tests/`. The unrelated superpowers
+plan was removed, original SETUP.md steps restored, and CREDITS.md kept from main.
 
-The 43 installer, metadata, camera, geometry, rendering, repeat, and existing truth checks passed.
-The repository preflight passed all 270 browser tests (10.6 minutes), formatting, American English,
-generated-site checks, shared-list parsing, and file sizes after merging `origin/main`. A final
-credits-page check and preflight without the already-passed browser suite cover the final report and
-canonical source additions. No test was loosened or skipped.
-
-Byte identity is established for repeated runs on this cloud CPU with the same pinned build, source,
-input bytes, settings, and libraries. Cross-architecture or cross-version beauty identity is not
-established. The renderer accepts embedded GLB only; OBJ, externally referenced glTF, HDR panoramas,
-and more complex import formats were cut from this bounded implementation. Full 120/300-frame clips
-for all 12 scenes were not regenerated; a two-frame handheld/walk smoke test checks both encoders
-without representing itself as a complete dataset.
-
-Rule check: none.
+Rule check: the one-line existing test fixture update and regenerated license page/service worker
+extend the task file's strict paths; they are required to keep the existing checks and generated
+site current. No runtime behavior or historical fixture changed.

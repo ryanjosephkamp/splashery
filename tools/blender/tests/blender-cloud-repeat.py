@@ -7,7 +7,7 @@ import subprocess
 import tempfile
 import unittest
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
 
 class RepeatedRendering(unittest.TestCase):
     def test_every_artifact_is_identical_and_bad_inputs_fail_without_output(self):
@@ -25,7 +25,7 @@ class RepeatedRendering(unittest.TestCase):
                 return {str(p.relative_to(folder)): hashlib.sha256(p.read_bytes()).hexdigest()
                         for p in folder.rglob('*') if p.is_file()}
             self.assertEqual(hashes(tmp/'a'), hashes(tmp/'b'))
-            self.assertEqual(len(hashes(tmp/'a')), 14)  # 3 views x 4 outputs + manifest + checksums
+            self.assertEqual(len(hashes(tmp/'a')), 17)  # 3 views x 5 outputs + manifest + checksums
             m = json.loads((tmp/'a/manifest.json').read_text())
             self.assertEqual(m['panorama']['projection'], 'equirectangular')
             self.assertEqual(m['views'][0]['width'], 64)
