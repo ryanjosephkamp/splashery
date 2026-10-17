@@ -31,9 +31,14 @@ async function frames(page) {
     v.playsInline = true;
     v.src = URL.createObjectURL(r.blob);
     await new Promise((ok, no) => ((v.onloadedmetadata = ok), (v.onerror = no)));
+    // A seek, then the frame it shows (a "seeked" can come before that frame is drawn).
     const seek = (t) =>
       new Promise((ok) => {
-        v.onseeked = ok;
+        let n = 0;
+        const done = () => ++n === 2 && ok();
+        v.onseeked = done;
+        v.requestVideoFrameCallback(done);
+        setTimeout(() => ((n = 1), done()), 5000);
         v.currentTime = t;
       });
     // A recorder's WebM has no length in its header: seeking to the end finds it.
@@ -86,6 +91,9 @@ for (const renderer of ["webgl2", "webgpu"]) {
       // Through the Share tab's Record button, as a person does.
       await page.click("#sheet-toggle");
       await page.click("#tab-share");
+      // With a countdown (as a person records: 5 seconds by default), so the sheet has folded
+      // away and the stage has its size before the take starts.
+      await page.locator("#record-countdown").selectOption("3");
       await page.click("#record-start");
       await expect(page.locator("#rec-time")).toHaveText(/\/ 1:00$/, { timeout: 30_000 });
       await page.waitForTimeout(3000);

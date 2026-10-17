@@ -192,6 +192,11 @@ export function startRecording({
   out.height = H;
   const g = out.getContext("2d", { alpha: !background });
   g.imageSmoothingQuality = "high";
+  // The stage's background until its first frame (lane REC1 r2): never black.
+  if (background) {
+    g.fillStyle = background;
+    g.fillRect(0, 0, W, H);
+  }
   // Frames are handed over by requestFrame() (frame() and the steady clock).
   const video = out.captureStream(0);
   const track = video.getVideoTracks()[0];
@@ -318,20 +323,17 @@ export function startRecording({
     }, DRAIN);
   };
   // The take begins with the stage's first frame (the next render, or after
-  // half a second if none comes), so the file's clock, which starts at its
-  // first frame, and the take's time start together.
+  // two seconds if none comes: a busy phone can take a while to draw the
+  // first one), so the file's clock, which starts at its first frame, and the
+  // take's time start together.
   let begun = false;
   const begin = (drawn) => {
     if (begun) return;
     begun = true;
     clearTimeout(wait);
-    // Without a draw yet (half a second passed), the take opens on the stage's
-    // background until the first frame comes, not on a blank copy (lane REC1 r2).
+    // Without a draw yet, the take opens on the stage's background (filled
+    // above) until the first frame comes, not on a blank copy (lane REC1 r2).
     if (drawn) copy();
-    else if (background) {
-      g.fillStyle = background;
-      g.fillRect(0, 0, W, H);
-    }
     // A timeslice keeps memory in small pieces on long takes.
     rec.start(1000);
     t0 = performance.now();
@@ -354,7 +356,7 @@ export function startRecording({
       push();
     }, 1000 / fps);
   };
-  const wait = setTimeout(() => begin(false), 500);
+  const wait = setTimeout(() => begin(false), 2000);
   return { stop, frame, done, ext, canvas: out };
 }
 
