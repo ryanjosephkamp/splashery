@@ -130,7 +130,7 @@ async function study(page, { from = null } = {}) {
       v.play();
     });
     URL.revokeObjectURL(v.src);
-    return { duration, seconds: r.seconds, pushed: r.frames, lastPushed: r.lastFrame, type: r.blob.type, frames, size: [v.videoWidth, v.videoHeight] }; // prettier-ignore
+    return { duration, seconds: r.seconds, pushed: r.frames, lastPushed: r.lastFrame, ended: r.ended, type: r.blob.type, frames, size: [v.videoWidth, v.videoHeight] }; // prettier-ignore
   }, from);
 }
 
@@ -203,7 +203,12 @@ test.describe("REC1: the countdown", () => {
     expect(took).toBeLessThan(5);
     expect(s.seconds).toBeLessThan(took + 0.5);
     expect(s.seconds).toBeGreaterThan(took - 1.5);
-    expect(Math.abs(s.duration - s.seconds)).toBeLessThan(0.5);
+    // The file runs from the take's start to when the recorder stopped (Stop, then the 400 ms
+    // drain, later on a busy page), by the page's own clock, and so holds no countdown either.
+    expect(s.ended - s.seconds).toBeGreaterThan(0.35);
+    expect(s.duration).toBeGreaterThan(s.seconds - 0.5);
+    expect(s.duration).toBeLessThan(s.ended + 0.25);
+    expect(s.duration).toBeLessThan(took + (s.ended - s.seconds) + 0.5);
     expect(errors).toEqual([]);
   });
 
@@ -309,7 +314,11 @@ test.describe("REC1: full-length takes", () => {
     await page.click("#rec-stop");
     const s = await study(page);
     expect(s.seconds).toBeGreaterThan(9.5);
-    expect(Math.abs(s.duration - s.seconds)).toBeLessThan(0.5);
+    // The file's length: from the take's start to when the recorder stopped (Stop, then the
+    // 400 ms drain), by the page's own clock.
+    expect(s.duration).toBeGreaterThan(s.seconds - 0.5);
+    expect(s.duration).toBeLessThan(s.ended + 0.25);
+    expect(s.ended - s.seconds).toBeLessThan(1.5);
     // The recorder was handed the take's frames right up to Stop. (Whether the file's last video
     // frame is that late is up to the browser's encoder: this sandbox renders the turning toy and
     // encodes it on the same CPUs, falls behind, and a recorder drops what its encoder still holds
@@ -347,7 +356,11 @@ test.describe("REC1: full-length takes", () => {
     await expect(page.locator("#rec-preview")).toBeVisible({ timeout: 90_000 });
     const s = await study(page, { from: 2 });
     expect(s.seconds).toBeCloseTo(60, 0);
-    expect(Math.abs(s.duration - s.seconds)).toBeLessThan(0.5);
+    // The file's length: from the take's start to when the recorder stopped (Stop, then the
+    // 400 ms drain), by the page's own clock.
+    expect(s.duration).toBeGreaterThan(s.seconds - 0.5);
+    expect(s.duration).toBeLessThan(s.ended + 0.25);
+    expect(s.ended - s.seconds).toBeLessThan(1.5);
     // The video's own frames reach the end (not only the sound): the last one is within half
     // a second of the end, and the last two seconds have frames.
     const last = s.frames.at(-1).t;
@@ -371,7 +384,11 @@ test.describe("REC1: full-length takes", () => {
     await page.click("#rec-stop");
     const s = await study(page, { from: 2 });
     expect(s.seconds).toBeGreaterThan(19.5);
-    expect(Math.abs(s.duration - s.seconds)).toBeLessThan(0.5);
+    // The file's length: from the take's start to when the recorder stopped (Stop, then the
+    // 400 ms drain), by the page's own clock.
+    expect(s.duration).toBeGreaterThan(s.seconds - 0.5);
+    expect(s.duration).toBeLessThan(s.ended + 0.25);
+    expect(s.ended - s.seconds).toBeLessThan(1.5);
     expect(s.frames.at(-1).t).toBeGreaterThan(s.seconds - 0.5);
     await expect(page.locator("#rec-preview")).toBeVisible();
     await page.screenshot({ path: shot("rec1-photo-take-390x844.png") });

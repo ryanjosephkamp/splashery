@@ -154,8 +154,9 @@ export function recordSupport() {
 // node every sound passes through, when there is one). Returns { stop(),
 // frame(), done }: frame() hands the canvas to the video after each render
 // (call it right after the render, as the stage's "postrender"), and done
-// resolves to { blob, ext, seconds, frames, lastFrame } after a stop or the time limit
-// (frames: how many were handed over; lastFrame: when the take's last one was, in seconds).
+// resolves to { blob, ext, seconds, frames, lastFrame, ended } after a stop or the time
+// limit (frames: how many were handed over; lastFrame: when the take's last one was; ended:
+// when the recorder stopped, after the drain; all in seconds from the take's start).
 // onTick(seconds) reports the time every quarter second. `background` (a CSS
 // color, or null for a see-through stage) fills what the stage leaves bare
 // after a resize.
@@ -248,7 +249,7 @@ export function startRecording({
       // wait a little for it before calling the take empty.
       const finish = (tries) => {
         if (chunks.length)
-          resolve({ blob: new Blob(chunks, { type }), ext, seconds: length, frames: pushed, lastFrame: (lastLive - t0) / 1000 }); // prettier-ignore
+          resolve({ blob: new Blob(chunks, { type }), ext, seconds: length, frames: pushed, lastFrame: (lastLive - t0) / 1000, ended }); // prettier-ignore
         else if (tries > 0) setTimeout(() => finish(tries - 1), 250);
         else reject(new Error("The recording came out empty."));
       };
@@ -298,6 +299,7 @@ export function startRecording({
   // before the recorder stops.
   const DRAIN = 400;
   let stopping = false;
+  let ended = 0; // when the recorder itself stopped (after the drain), in seconds
   const stop = () => {
     if (!begun) begin(false);
     if (rec.state === "inactive" || stopping) return;
@@ -310,6 +312,7 @@ export function startRecording({
       } catch {
         // Not recording any more.
       }
+      ended = seconds();
       rec.stop();
     }, DRAIN);
   };
