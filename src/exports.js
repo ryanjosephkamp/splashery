@@ -154,7 +154,8 @@ export function recordSupport() {
 // node every sound passes through, when there is one). Returns { stop(),
 // frame(), done }: frame() hands the canvas to the video after each render
 // (call it right after the render, as the stage's "postrender"), and done
-// resolves to { blob, ext, seconds, frames } after a stop or the time limit.
+// resolves to { blob, ext, seconds, frames, lastFrame } after a stop or the time limit
+// (frames: how many were handed over; lastFrame: when the take's last one was, in seconds).
 // onTick(seconds) reports the time every quarter second. `background` (a CSS
 // color, or null for a see-through stage) fills what the stage leaves bare
 // after a resize.
@@ -247,7 +248,7 @@ export function startRecording({
       // wait a little for it before calling the take empty.
       const finish = (tries) => {
         if (chunks.length)
-          resolve({ blob: new Blob(chunks, { type }), ext, seconds: length, frames: pushed }); // prettier-ignore
+          resolve({ blob: new Blob(chunks, { type }), ext, seconds: length, frames: pushed, lastFrame: (lastLive - t0) / 1000 }); // prettier-ignore
         else if (tries > 0) setTimeout(() => finish(tries - 1), 250);
         else reject(new Error("The recording came out empty."));
       };
@@ -257,9 +258,11 @@ export function startRecording({
   });
   let lastFrame = -Infinity;
   let pushed = 0;
+  let lastLive = 0; // when the last frame of the take itself (not the drain) was handed over
   const push = () => {
     lastFrame = performance.now();
     pushed++;
+    if (!stopping) lastLive = lastFrame;
     track.requestFrame?.();
   };
   // Copies the stage's frame into the video's canvas (right after a render,

@@ -1932,8 +1932,8 @@ class App {
     document.getElementById("rec-stop").focus({ preventScroll: true });
     stage.requestRender();
     rec.done
-      .then(({ blob, ext, seconds, frames }) => {
-        this.recorded = { blob, name: timestampName(ext), seconds, frames };
+      .then(({ blob, ext, seconds, frames, lastFrame }) => {
+        this.recorded = { blob, name: timestampName(ext), seconds, frames, lastFrame };
         const share = !!canShareFile(blob, this.recorded.name);
         this.ui.setRecord({ state: "ready", seconds, bytes: blob.size, share });
       })
