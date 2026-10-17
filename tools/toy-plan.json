@@ -11,7 +11,7 @@
       "v": "keep",
       "effect": "A tap stimulates the cell where it lands; a slowed Hodgkin-Huxley spike spreads through the dendrites to the cell body, then hops down the myelinated axon to the terminals. Three textbook stains on a lit slide. Focus merges Gaussian pairs without losing mass, center, or covariance, and blurs like a microscope.",
       "sound": "Clean sine lab cues in time with the picture: a soft tick at the stimulus, a falling tone as the cell body fires, and a quiet ding at the terminals; real nerve cells are not audible.",
-      "improved": "Codex task 78b: from Ryan Kamp's Specimen concept, a labs neuron with 32,768 visible desktop splats or 8,192 on the phone profile, three stain choices, a moment-matched focus tree, and the concept's Hodgkin-Huxley waveform. Made by Ryan with Codex (GPT-6); procedural geometry CC0, code MIT. Lane NR1 (Claude, Opus 5.5): textbook Nissl, Golgi, and H&E on a lit slide, a smooth microscope-like focus, a tap stimulus that spreads through the dendrites, and clean sine cues."
+      "improved": "Codex task 78b: from Ryan Kamp's Specimen concept, a labs neuron with 32,768 visible desktop splats or 8,192 on the phone profile, three stain choices, a moment-matched focus tree, and the concept's Hodgkin-Huxley waveform. Made by Ryan with Codex (GPT-6); procedural geometry CC0, code MIT. Lane NR1 (Claude, Opus 5.5): textbook Nissl, Golgi, and H&E on a lit slide, a smooth microscope-like focus, a tap stimulus that spreads through the dendrites, and clean sine cues. NR1 r2 (sharper on phones): the screen's own pixel ratio, 32,768 splats on phones, a crisper slide rim, and a firing glow that keeps the cell's outline."
     },
     "cactus": {
       "v": "keep",
