@@ -135,6 +135,8 @@ task 78's portfolio toys had to be rebuilt in Claude lanes PT1 and PT2.
 | 117-research-pictures-to-objects.md | Research: pictures to 3D objects, open models, agents that model, and their licenses                      | a report                                                                 | yes           |
 | 118-research-tap-sounds.md          | Research: tap sounds that sound real, synthesis by material, and open sound libraries                     | a report and a demo page                                                 | yes           |
 | 119-research-real-places.md         | Research: license-clean real places to walk through, and big scenes on a phone                            | a report                                                                 | yes           |
+| 120-promise-audit.md                | Every control and every toy option measured in a browser against what its label promises                  | a harness, a report and its data, a fast spec                            | no            |
+| 121-silent-caps-audit.md            | Silent caps, hidden multipliers, and ignored settings, traced through the code                            | a report and its data; proofs on the clips branch                        | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
