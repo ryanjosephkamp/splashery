@@ -838,6 +838,7 @@ export const RIGS = {
   // The glossy drupelets burst off all round, bounce on the table, glint,
   // and spring back.
   blackberry: {
+    workBufferReuse: false,
     // A solid core just inside (lane Sharpness B), hidden while it bursts.
     addon: { count: 9000, build: (k) => fruitCore(k, [-0.01, -0.03, 0], [0.46, 0.52, 0.72], "#17141c", k.part("core")) }, // prettier-ignore
     parts: [],

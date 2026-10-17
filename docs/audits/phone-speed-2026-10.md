@@ -5,7 +5,7 @@ local phone page, and shared rendering optimization.
 
 All 15 frozen targets pass five-pair timing and appearance checks: idle-median improvements range
 from **29.6% to 55.3%**, with a **48.5% median**. Thirteen targets are RGB-identical at rest and
-mid-tap. Minimum SSIM is **0.995246** at phone width and **0.994008** at native width. All466
+mid-tap. Minimum SSIM is **0.995246** at phone width and **0.994008** at native width. All 466
 current toys have before/after first-view, idle/tap frame-time, heap, and transfer measurements. Two
 confirmed tap-p95 regressions are corrected with narrow recipe opt-outs, each checked with ten fresh
 pairs and exact RGB comparisons. Most declared catalog follow-ups remain incomplete, so **the
@@ -279,7 +279,7 @@ download, clipboard fallback, Stop retaining completed results, and desktop layo
 four390×844/1440×900 screenshots were inspected; the phone table scrolls horizontally within the
 page. Thirty no-exception browser resize notifications remain in the JSON. The matched catalog is
 complete; unrelated follow-ups and a successful full existing suite remain unresolved. Full
-preflight passes all271 checks, and embed transfer is9.2MiB. All finish-only rows and prior freezes
+preflight passes all 271 checks, and embed transfer is9.2MiB. All finish-only rows and prior freezes
 remain preserved as retired evidence. Raw runs and stills belong on `codex/phone-speed-clips`, which
 is never merged.
 
@@ -295,22 +295,22 @@ evidence.
 ## Eight-hour progress
 
 October 17, 2026, 10:08 UTC, eight-hour progress note: the corrected original survey covers all 465
-frozen toys, and 210 have matched candidate pairs. All15 targets pass five-pair speed and appearance
-checks: minimum29.6%, median48.5%, minimum native SSIM0.994008. The complete30 phone-page QA passes,
-including copy, local export, Stop, and both viewport sizes. Incoming main adds one Neuron specimen;
-all ten pairs pass every timing and matching-hardware gate. The first full suite found four existing
-bounds-test failures caused by direct uploads on minimal Stage adapters. The compatibility guard
-passes all nine unchanged bounds tests and all16 speed tests. Current main is merged. Full preflight
-had269 passes and two fixture-origin failures because these unchanged PDF tests hard-code port4173;
-the candidate is now served on4173 for a complete rerun. The first failed run is retained. A
-workspace disconnect preserved completed data; interrupted metadata is archived, and timing will
-resume with the same four-CPU affinity. The complete catalog, prescribed five/ten- pair follow-ups,
-full existing suite, and final preflight remain pending. The complete goal is not yet claimed, and
-the original twelve-hour task clock continues.
+frozen toys, and 210 have matched candidate pairs. All 15 targets pass five-pair speed and
+appearance checks: minimum29.6%, median48.5%, minimum native SSIM0.994008. The complete30 phone-page
+QA passes, including copy, local export, Stop, and both viewport sizes. Incoming main adds one
+Neuron specimen; all ten pairs pass every timing and matching-hardware gate. The first full suite
+found four existing bounds-test failures caused by direct uploads on minimal Stage adapters. The
+compatibility guard passes all nine unchanged bounds tests and all16 speed tests. Current main is
+merged. Full preflight had269 passes and two fixture-origin failures because these unchanged PDF
+tests hard-code port4173; the candidate is now served on4173 for a complete rerun. The first failed
+run is retained. A workspace disconnect preserved completed data; interrupted metadata is archived,
+and timing will resume with the same four-CPU affinity. The complete catalog, prescribed five/ten-
+pair follow-ups, full existing suite, and final preflight remain pending. The complete goal is not
+yet claimed, and the original twelve-hour task clock continues.
 
 ## Validation checkpoint
 
-October 17, 2026, 10:18 UTC: full preflight passes all271 checks after current main is merged. Its
+October 17, 2026, 10:18 UTC: full preflight passes all 271 checks after current main is merged. Its
 first run on4177 had269 passes and two PDF fixture-origin errors; the unchanged tests hard-code
 4173, and the complete rerun on4173 passes. Both runs and first-run failure artifacts are retained.
 The existing embed transfer test passes at9.2MiB. All nine unchanged bounds tests and all16 speed
@@ -326,7 +326,7 @@ parents on CPUs0–3. The complete no-other-toy-slower gate remains pending.
 
 October 17, 2026, 12:21 UTC: all465 original matched comparisons are complete, with positive heap
 and transfer values, valid completed-draw timing, and matching hardware. Together with Neuron's
-ten-pair supplemental comparison, the table covers all466 current toys. The initial one-pair screen
+ten-pair supplemental comparison, the table covers all 466 current toys. The initial one-pair screen
 flags307 unrelated toys on at least one timing metric. This is a screening result, not307 confirmed
 regressions. Fifteen flagged toys have complete five-pair follow-ups; three have complete ten-pair
 follow-ups. Cactus passes using all ten. Cookie and Torus retain tap-p95 increases of7.58% and7.95%
@@ -352,12 +352,12 @@ private-history commit was pushed, and no history was rewritten.
 
 ## Full-suite retry
 
-October 17, 2026, 12:28 UTC: all399 spec files reported:3409 passed tests, two failed tests, and one
-skipped test. Besides `sndc-engine:122`, the unchanged `shp:131` cross-page pixel comparison failed;
-both passed the workflow's isolated retry. Both failures still count. The repository's documented
-**Re-run failed jobs** action was requested successfully for the two whole shards and the summary,
-on the exact same3a0b972d7 source. The complete original shard logs and totals are retained. No
-assertion, timeout, retry rule, or workflow was changed.
+October 17, 2026, 12:28 UTC: all 399 spec files reported:3409 passed tests, two failed tests, and
+one skipped test. Besides `sndc-engine:122`, the unchanged `shp:131` cross-page pixel comparison
+failed; both passed the workflow's isolated retry. Both failures still count. The repository's
+documented **Re-run failed jobs** action was requested successfully for the two whole shards and the
+summary, on the exact same3a0b972d7 source. The complete original shard logs and totals are
+retained. No assertion, timeout, retry rule, or workflow was changed.
 
 The connector's raw Git-data GET endpoint subsequently exposed the actual author and committer
 metadata. A prepared documentation commit has a verified public noreply identity and an exactly
@@ -372,9 +372,9 @@ other recipes keep their prior eligibility. The ten-pair experiment includes20 f
 original/candidate samples per toy, with the same browser, viewport, duration, source order, and
 four-CPU configuration. Cookie's tap-p95 increase falls from7.58% in the cached variant to1.14%;
 Torus's tap p95 is7.34% faster than its fresh original comparison. Every timing metric for both toys
-is within the5% gate. Rest and mid-tap are RGB-identical at both390px and1170px widths, with
-SSIM1.0. Both phone views and native tap stills were inspected. The experiment supports retaining
-the original path for these recipes; no hardware-cache mechanism is asserted as proven.
+is within the5% gate. Rest and mid-tap are RGB-identical at both390px and1170px widths, with SSIM
+1.0. Both phone views and native tap stills were inspected. The experiment supports retaining the
+original path for these recipes; no hardware-cache mechanism is asserted as proven.
 
 The new regression fails without the opt-out hook and passes with it. All17 speed tests and nine
 unchanged bounds tests pass together:26 checks. The updated full preflight is running after
@@ -394,3 +394,25 @@ The original twelve-hour cap remains in effect. Catalog collection will stop at 
 time reserved for packaging and the final report. Any remaining declared follow-up or CI gap will
 keep the corresponding gate incomplete. The final PR body and the raw branch's README and
 `current-catalog-gates.json` supply those completion counts.
+
+## Final recipe correction
+
+October 17, 2026, 13:35 UTC: all ten original cached-variant pairs clear May beetle and Basket, but
+Blackberry retains a 9.79% tap-p95 regression. Its own recipe opt-out then passes ten fresh
+original/candidate pairs on every timing metric. Tap p95 improves 1.20%; idle median improves 4.37%.
+Both rest and mid-tap are RGB-identical at phone and native widths, with SSIM 1.0. The measured
+source is 0e4d2885468768859761baf5408c808b0601617a, reproducible from published e4898e9c1 with
+`blackberry-optout-source.patch`. Only Blackberry's existing rig adds one option; the shared Engine
+hook and all test assertions remain unchanged. The original regression and every fresh sample remain
+in the raw branch.
+
+The preceding e4898e9c1 full suite has two failures so far: `phy:64` (the new cairn's height) and
+`sndc-engine:109` (resuming sound within 500 ms). Both pass the unchanged isolated retry. These
+failures still count; no code cause is asserted as proven. The earlier 3a0b972d7 source now passes
+all 399 files after whole-shard retries:3411 tests passed, none failed, and one skipped. The updated
+Blackberry source requires a fresh full-suite run and final preflight. Their actual completion is
+recorded in the PR and the raw results, rather than inferred from those earlier runs.
+
+Collection is ending at a complete original pair to reserve the remaining twelve-hour budget for
+final checks and publication. Hundreds of declared unrelated-toy follow-ups remain incomplete. The
+complete goal is not met, even when the validated recipe corrections are included.

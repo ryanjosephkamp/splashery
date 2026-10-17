@@ -1,7 +1,7 @@
 # Phone speed implementation plan
 
-Publication checkpoint, October 17, 2026, 12:53 UTC: all466 current toys have before/after
-measurements. All15 target speed and appearance gates and full30 phone-page QA pass. Cookie and
+Publication checkpoint, October 17, 2026, 12:53 UTC: all 466 current toys have before/after
+measurements. All 15 target speed and appearance gates and full30 phone-page QA pass. Cookie and
 Torus pass ten fresh opt-out pairs and exact RGB comparisons at both widths. All26 focused checks
 pass; updated full preflight is running, and current-source full-suite validation is required. Most
 declared unrelated-toy follow-ups remain incomplete. The complete goal is not met; the original
@@ -120,7 +120,7 @@ cache-only three-pair pilot improved16.6%, so its low-tier recipe now caps DPR a
 retain their defaults. Both this507×607 buffer and Video to 3D's936×1120 buffer were declared before
 final paired sampling and require native-width SSIM in addition to the phone comparison. Photo
 album's five formal alternating pairs give659.55ms before and464.35ms after, a29.6% improvement. The
-remaining 14 targets' final pairs and all15 final appearance checks are still pending.
+remaining 14 targets' final pairs and all 15 final appearance checks are still pending.
 
 October 17, 2026, 07:27 UTC: all 15 targets pass their five-pair timing and appearance gates.
 Idle-median gains range from29.6% to55.3%, with a48.5% median. Thirteen targets have exact RGB
@@ -171,18 +171,18 @@ repetition group. No samples, timing thresholds, point counts, or rendering sett
 relaxed.
 
 October 17, 2026, 10:08 UTC, eight-hour progress note: the corrected original survey covers all 465
-frozen toys, and 210 have matched candidate pairs. All15 targets pass five-pair speed and appearance
-checks: minimum29.6%, median48.5%, minimum native SSIM0.994008. The complete30 phone-page QA passes,
-including copy, local export, Stop, and both viewport sizes. Incoming main adds one Neuron specimen;
-all ten pairs pass every timing and matching-hardware gate. The first full suite found four existing
-bounds-test failures caused by direct uploads on minimal Stage adapters. The compatibility guard
-passes all nine unchanged bounds tests and all16 speed tests. Current main is merged. Full preflight
-had269 passes and two fixture-origin failures because these unchanged PDF tests hard-code port4173;
-the candidate is now served on4173 for a complete rerun. The first failed run is retained. A
-workspace disconnect preserved completed data; interrupted metadata is archived, and timing will
-resume with the same four-CPU affinity. The complete catalog, prescribed five/ten- pair follow-ups,
-full existing suite, and final preflight remain pending. The complete goal is not yet claimed, and
-the original twelve-hour task clock continues.
+frozen toys, and 210 have matched candidate pairs. All 15 targets pass five-pair speed and
+appearance checks: minimum29.6%, median48.5%, minimum native SSIM0.994008. The complete30 phone-page
+QA passes, including copy, local export, Stop, and both viewport sizes. Incoming main adds one
+Neuron specimen; all ten pairs pass every timing and matching-hardware gate. The first full suite
+found four existing bounds-test failures caused by direct uploads on minimal Stage adapters. The
+compatibility guard passes all nine unchanged bounds tests and all16 speed tests. Current main is
+merged. Full preflight had269 passes and two fixture-origin failures because these unchanged PDF
+tests hard-code port4173; the candidate is now served on4173 for a complete rerun. The first failed
+run is retained. A workspace disconnect preserved completed data; interrupted metadata is archived,
+and timing will resume with the same four-CPU affinity. The complete catalog, prescribed five/ten-
+pair follow-ups, full existing suite, and final preflight remain pending. The complete goal is not
+yet claimed, and the original twelve-hour task clock continues.
 
 October 17, 2026, 10:18 UTC: full preflight passes271 checks on the canonical4173 origin after
 merging current main. Embed transfer passes at9.2MiB. The original failed preflight and artifacts
@@ -190,3 +190,10 @@ are preserved. The Stage adapter fix passes25 focused checks, and the regenerate
 byte facts pass their unchanged check. All399 spec files are requested again on the final source; no
 full-suite success is claimed yet. The original-catalog pipeline resumes at210 matched pairs after
 verifying unchanged source digests and four-CPU affinity.
+
+October 17, 2026, 13:35 UTC: May beetle and Basket clear ten original pairs. Blackberry retains a
+9.79% tap-p95 regression, then passes ten fresh recipe-opt-out pairs with1.20% faster tap p95 and
+exact RGB at both poses and widths. Collection is ending for final preflight and publication within
+the original cap. The latest full suite has two initially failed files, both passing alone; the
+final Blackberry source requires fresh full-suite validation. Hundreds of declared follow-ups remain
+incomplete, so the complete goal is not met.
