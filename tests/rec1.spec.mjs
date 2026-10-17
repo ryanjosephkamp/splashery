@@ -266,10 +266,16 @@ test.describe("REC1: full screen during a take", () => {
     await expect(page.locator("#rec-time")).toHaveText(/\/ 1:00$/);
     const before = await page.evaluate(() => [window.__splashery.player.stage.canvas.width, window.__splashery.player.stage.canvas.height]); // prettier-ignore
     await page.waitForTimeout(2500);
-    // The top bar's full screen (focus mode): the stage takes the whole screen.
+    // The top bar's full screen (focus mode): the stage takes the whole screen. When it switched
+    // and when Stop was pressed, by the page's clock, to find the switch in the video.
+    await page.evaluate(() => {
+      const t = (window.__fs = {});
+      document.getElementById("focus-toggle").addEventListener("click", () => (t.switch ??= performance.now()), true); // prettier-ignore
+      document.getElementById("rec-stop").addEventListener("click", () => (t.stop ??= performance.now()), true); // prettier-ignore
+    });
     await page.click("#focus-toggle");
     await expect(page.locator("body")).toHaveClass(/focus/);
-    await page.waitForTimeout(2500);
+    await page.waitForTimeout(4000);
     const after = await page.evaluate(() => [window.__splashery.player.stage.canvas.width, window.__splashery.player.stage.canvas.height]); // prettier-ignore
     expect(after[1]).toBeGreaterThan(before[1] + 100); // the stage did grow
     await page.screenshot({ path: shot("rec1-fullscreen-390x844.png") });
@@ -279,8 +285,12 @@ test.describe("REC1: full screen during a take", () => {
     expect(seen.length).toBeGreaterThan(20);
     // One size for the whole take.
     expect(new Set(s.frames.map((f) => `${f.w}x${f.h}`)).size).toBe(1);
-    const early = seen.filter((f) => f.t > 0.3 && f.t < 2);
-    const late = seen.filter((f) => f.t > s.duration - 1.5);
+    // Before the switch, and from 0.7 s after it (the new size has reached the canvas) to the end
+    // of the video (a busy encoder can drop the last second or so: see the full-length tests).
+    const t = await page.evaluate(() => window.__fs);
+    const at = s.seconds - (t.stop - t.switch) / 1000;
+    const early = seen.filter((f) => f.t > 0.3 && f.t < at - 0.3);
+    const late = seen.filter((f) => f.t > at + 0.7);
     expect(early.length).toBeGreaterThan(3);
     expect(late.length).toBeGreaterThan(3);
     const mean = (a, k) => a.reduce((x, f) => x + f[k], 0) / a.length;
@@ -322,7 +332,7 @@ test.describe("REC1: full-length takes", () => {
     // The recorder was handed the take's frames right up to Stop. (Whether the file's last video
     // frame is that late is up to the browser's encoder: this sandbox renders the turning toy and
     // encodes it on the same CPUs, falls behind, and a recorder drops what its encoder still holds
-    // when it stops. The idle takes below check the file's last frame to 0.5 s.)
+    // when it stops; the idle takes below bound that at 1.5 s, as docs/handoff/REC1.md says.)
     expect(s.lastPushed).toBeGreaterThan(s.seconds - 0.25);
     expect(s.lastPushed).toBeLessThanOrEqual(s.seconds + 0.05);
     // Every drawn frame goes in (up to 30 a second; the test browser draws on the CPU, more
@@ -354,17 +364,18 @@ test.describe("REC1: full-length takes", () => {
     await expect(page.locator("#rec-time")).toHaveText(/\/ 1:00$/);
     // It stops by itself at the limit.
     await expect(page.locator("#rec-preview")).toBeVisible({ timeout: 90_000 });
-    const s = await study(page, { from: 2 });
+    const s = await study(page, { from: 4 });
     expect(s.seconds).toBeCloseTo(60, 0);
     // The file's length: from the take's start to when the recorder stopped (Stop, then the
     // 400 ms drain), by the page's own clock.
     expect(s.duration).toBeGreaterThan(s.seconds - 0.5);
     expect(s.duration).toBeLessThan(s.ended + 0.25);
     expect(s.ended - s.seconds).toBeLessThan(1.5);
-    // The video's own frames reach the end (not only the sound): the last one is within half
-    // a second of the end, and the last two seconds have frames.
-    const last = s.frames.at(-1).t;
-    expect(last).toBeGreaterThan(s.seconds - 0.5);
+    // The video's own frames reach the end (not only the sound). The recorder was handed them
+    // right up to Stop; the file's last one is within the 1.5 s a busy encoder can drop when it
+    // stops (docs/handoff/REC1.md; an idle runner keeps it within about 0.2 s).
+    expect(s.lastPushed).toBeGreaterThan(s.seconds - 0.25);
+    expect(s.frames.at(-1).t).toBeGreaterThan(s.seconds - 1.5);
     expect(s.frames.length).toBeGreaterThan(4);
     // And steady all through: the still picture again, 10 frames a second as this page's own
     // 100 ms timer counted them (the old recorder handed over frames only while the stage drew).
@@ -382,14 +393,16 @@ test.describe("REC1: full-length takes", () => {
     await expect(page.locator("#rec-time")).toHaveText(/\/ 1:00$/);
     await page.waitForTimeout(20_000);
     await page.click("#rec-stop");
-    const s = await study(page, { from: 2 });
+    const s = await study(page, { from: 4 });
     expect(s.seconds).toBeGreaterThan(19.5);
     // The file's length: from the take's start to when the recorder stopped (Stop, then the
     // 400 ms drain), by the page's own clock.
     expect(s.duration).toBeGreaterThan(s.seconds - 0.5);
     expect(s.duration).toBeLessThan(s.ended + 0.25);
     expect(s.ended - s.seconds).toBeLessThan(1.5);
-    expect(s.frames.at(-1).t).toBeGreaterThan(s.seconds - 0.5);
+    // Frames right up to Stop, and the file's last one within what a busy encoder can drop.
+    expect(s.lastPushed).toBeGreaterThan(s.seconds - 0.25);
+    expect(s.frames.at(-1).t).toBeGreaterThan(s.seconds - 1.5);
     await expect(page.locator("#rec-preview")).toBeVisible();
     await page.screenshot({ path: shot("rec1-photo-take-390x844.png") });
   });

@@ -63,12 +63,12 @@ judges it on clips.
 ## Notes
 
 - This sandbox encodes video on the CPU (open-source Chromium has only software VP9). At 3x it can't
-  keep up with a turning toy, and a recorder drops its encoder's backlog when it stops, so the
-  moving-toy test checks that the recorder was handed frames to within 0.25 s of Stop (`lastFrame`
-  from `startRecording`), not the file's last video frame; the file's own length still meets 0.5 s,
-  and the idle takes check the file's last frame to 0.5 s. Frame rates in the tests are measured
-  against the page's own 100 ms timer, so a busy runner slows both together. Real phones encode in
-  hardware.
+  keep up with a turning toy, and a recorder drops its encoder's backlog when it stops. So the specs
+  check what the recorder controls, by the page's own clock: frames handed over to within 0.25 s of
+  Stop (`lastFrame` from `startRecording`), and the file running from the take's start to when the
+  recorder stopped (`ended`, after the drain). The file's last video frame is bounded at the 1.5 s
+  above (an idle runner keeps it within about 0.2 s). Frame rates are measured against the page's
+  own 100 ms timer, so a busy runner slows both together. Real phones encode in hardware.
 - Codex task 89 (export quality) will change `startRecording` and the Record row: the countdown sits
   before the row's "quality choice goes here" comment, and the fixed-size video canvas is where a
   quality tier would set its size.
