@@ -1,0 +1,33 @@
+{
+  "baselineCommit": "ceb51de7a015377d7f350119c27a792fc1a8a66d",
+  "implementationCommit": "176f2e188e8e06298c72eb256dabbd26a2f29351",
+  "test": "pages-r2: opaque tilted PDF faces cover their own paper backing (webgl2)",
+  "browser": "Chromium 141.0.7390.37",
+  "renderer": "ANGLE GL, Mesa llvmpipe, headed Xvfb",
+  "thresholdMeanDifferenceLessThan": 0.5,
+  "idleBaseline": {
+    "passed": 1,
+    "failed": 2,
+    "failingMeans": [19.199455550138143, 19.07435871161663]
+  },
+  "idleImplementation": {
+    "passed": 1,
+    "failed": 2,
+    "failingMeans": [19.87276211844996, 19.34655702150732]
+  },
+  "withConcurrentLoad": {
+    "baselinePassed": 5,
+    "implementationPassed": 5
+  },
+  "unchangedGitBlobs": {
+    "tests/pages-r2.spec.mjs": "3615e03fccc9d8593ba12e8e4dc917e71aad6af8",
+    "src/packs/pictures.js": "02341a4547e39f96d2decf00668048be8f902a71",
+    "src/pictures.js": "fad1828f4084856a5b2a01922bdd61505b314656",
+    "src/picture-surface.js": "64cb954722ac5b87bc14a047de5a1df1f490dcbe",
+    "src/player.js": "2584bf0dda4c766d118985371390f43950e81f76",
+    "src/stage.js": "ae69355c44acc4c251ca933f1ff130576b701533",
+    "assets/toys/picture-lab/article.pdf": "02761122f46a4660cbd777932d6eb5c038304b8d"
+  },
+  "interpretation": "The assertion is inconsistent on the unchanged baseline as well as this branch. No renderer or test assertion was changed. This blocks the all-existing-specs gate; it is not a mesh reconstruction failure.",
+  "ciRun": "https://github.com/ryanjosephkamp/splashery/actions/runs/39001608591"
+}
