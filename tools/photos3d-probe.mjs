@@ -571,7 +571,13 @@ async function main() {
       ? await controlProbe(options)
       : await photoProbe(options, out, provenance);
   } catch (e) {
-    result = { error: { name: e.name, message: e.message, stack: e.stack } };
+    const header = JSON.parse(await fs.readFile(out, "utf8"));
+    result = Object.fromEntries(
+      ["sources", "maskSha256", "resumeSha256", "truthSha256"]
+        .filter((key) => header[key] !== undefined)
+        .map((key) => [key, header[key]]),
+    );
+    result.error = { name: e.name, message: e.message, stack: e.stack };
   }
   await fs.writeFile(out, JSON.stringify({ provenance, ...result }, null, 2) + "\n");
   console.log(

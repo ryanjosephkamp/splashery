@@ -12,6 +12,7 @@ import os from "node:os";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { jsonSnapshot } from "../tools/photos3d-probe.mjs";
+import { execFileSync } from "node:child_process";
 
 test("evaluation identities belong to the bytes loaded before a run, including interruption", async () => {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), "photos3d-mask-"));
@@ -25,6 +26,33 @@ test("evaluation identities belong to the bytes loaded before a run, including i
     expect(loaded).toEqual({ value: { revision: 1 }, sha256: hash });
     await expect(jsonSnapshot(file, hash)).rejects.toThrow("frozen hash");
     expect(await jsonSnapshot(null)).toEqual({ value: null, sha256: null });
+  } finally {
+    await fs.rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("pre-browser rejection preserves loaded photo and annotation identities", async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "photos3d-rejection-"));
+  try {
+    const png = PNG.sync.write(new PNG({ width: 16, height: 16 }));
+    for (let i = 0; i < 8; i++) await fs.writeFile(path.join(dir, `${i}.png`), png);
+    const masks = path.join(dir, "masks.json");
+    const output = path.join(dir, "result.json");
+    const bytes = '{"photos":{}}\n';
+    await fs.writeFile(masks, bytes);
+    expect(() =>
+      execFileSync(process.execPath, [
+        "tools/photos3d-probe.mjs",
+        "--round2",
+        `--input=${dir}`,
+        `--masks=${masks}`,
+        `--out=${output}`,
+      ]),
+    ).toThrow();
+    const row = JSON.parse(await fs.readFile(output, "utf8"));
+    expect(row.error.message).toContain("mask identities differ");
+    expect(row.sources).toHaveLength(8);
+    expect(row.maskSha256).toBe(createHash("sha256").update(bytes).digest("hex"));
   } finally {
     await fs.rm(dir, { recursive: true, force: true });
   }
