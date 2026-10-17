@@ -1,9 +1,12 @@
 # Phone speed implementation plan
 
-Latest progress, October 17, 2026, 10:08 UTC (eight hours): all15 target speed and appearance gates
-and the full30 phone-page QA pass. Neuron passes ten supplemental pairs. There are210/465 matched
-original-catalog pairs. The unrelated-toy gate and full-suite validation remain pending; full
-preflight is rerunning on the canonical fixture origin. The complete goal is not yet claimed.
+Publication checkpoint, October 17, 2026, 12:53 UTC: all466 current toys have before/after
+measurements. All15 target speed and appearance gates and full30 phone-page QA pass. Cookie and
+Torus pass ten fresh opt-out pairs and exact RGB comparisons at both widths. All26 focused checks
+pass; updated full preflight is running, and current-source full-suite validation is required. Most
+declared unrelated-toy follow-ups remain incomplete. The complete goal is not met; the original
+twelve-hour task clock continues. The PR and raw branch record later completion counts without
+changing these dated checkpoints.
 
 **Goal:** Measure every toy at phone size, improve the 15 slowest without changing their appearance
 or motion, and provide a local real-device check.
@@ -31,8 +34,8 @@ implementation branch.
       repeated timing pairs against the frozen baseline.
 - [x] Finish the 30-toy phone page: start, stop, progress, copyable table, local export, explicit
       unavailable measurements, and no uploads. Test it at phone and desktop sizes.
-- [ ] Measure the complete catalog again, report every gate honestly, and keep unsuccessful visual
-      candidates out of the PR.
+- [x] Measure the complete catalog again and keep unsuccessful visual candidates out of the PR.
+- [ ] Complete all declared regression follow-ups and resolve the no-other-toy-slower gate.
 - [ ] Run required pack specs, the full existing suite, formatting, American English, and final
       preflight after merging main. Publish raw evidence on its separate branch and open one draft
       PR with the five required sections.
@@ -180,3 +183,10 @@ workspace disconnect preserved completed data; interrupted metadata is archived,
 resume with the same four-CPU affinity. The complete catalog, prescribed five/ten- pair follow-ups,
 full existing suite, and final preflight remain pending. The complete goal is not yet claimed, and
 the original twelve-hour task clock continues.
+
+October 17, 2026, 10:18 UTC: full preflight passes271 checks on the canonical4173 origin after
+merging current main. Embed transfer passes at9.2MiB. The original failed preflight and artifacts
+are preserved. The Stage adapter fix passes25 focused checks, and the regenerated showcase recipe
+byte facts pass their unchanged check. All399 spec files are requested again on the final source; no
+full-suite success is claimed yet. The original-catalog pipeline resumes at210 matched pairs after
+verifying unchanged source digests and four-CPU affinity.
