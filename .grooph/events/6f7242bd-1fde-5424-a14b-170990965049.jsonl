@@ -391,3 +391,7 @@
 {"v":1,"t":"2026-10-17T06:28:59.702Z","harness":"claude-code","event":"session-end","session":"6f7242bd-1fde-5424-a14b-170990965049","cwd":"splashery"}
 {"v":1,"t":"2026-10-17T08:02:37.287Z","harness":"claude-code","event":"session-start","session":"6f7242bd-1fde-5424-a14b-170990965049","cwd":"splashery"}
 {"v":1,"t":"2026-10-17T08:02:37.340Z","harness":"claude-code","event":"turn-start","session":"6f7242bd-1fde-5424-a14b-170990965049","cwd":"splashery"}
+{"v":1,"t":"2026-10-17T08:02:41.969Z","harness":"claude-code","event":"tool","session":"6f7242bd-1fde-5424-a14b-170990965049","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-17T08:02:46.411Z","harness":"claude-code","event":"tool","session":"6f7242bd-1fde-5424-a14b-170990965049","tool":"mcp__claude-code-remote__delete_trigger","cwd":"splashery"}
+{"v":1,"t":"2026-10-17T08:02:46.679Z","harness":"claude-code","event":"tool","session":"6f7242bd-1fde-5424-a14b-170990965049","tool":"mcp__claude-code-remote__unsubscribe_pr_activity","cwd":"splashery"}
+{"v":1,"t":"2026-10-17T08:02:53.163Z","harness":"claude-code","event":"turn-end","session":"6f7242bd-1fde-5424-a14b-170990965049","cwd":"splashery"}
