@@ -94,6 +94,7 @@ export function addScan(
 ) {
   k.data = k.data || {}; // sortWhileMoving keeps its state here
   const m = Math.min(scan.n, Math.max(1000, Math.floor(k.count * share)));
+  if (m === scan.n) k.all = true; // lane SPL1: every splat the file has
   const grow = Math.sqrt(scan.n / m);
   const list = [];
   for (let i = 0; i < m; i++) if (!keep || keep(scan.part[i], i)) list.push(i);

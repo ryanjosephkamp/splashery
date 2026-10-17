@@ -39,10 +39,12 @@ async function readBytes(rel) {
   return new Uint8Array(await r.arrayBuffer());
 }
 
-// The splats a toy may draw on this device (as the player counts them).
-function budgetFor(recipe, profile) {
+// The splats a toy may draw on this device (as the player counts them: lane SPL1, the count it
+// passes, which is the labs Splats slider's when that is on and the tier's otherwise).
+function budgetFor(recipe, profile, count) {
   // The Node tools and tests give no profile and build a few thousand splats: a small preview.
   if (!profile) return 24000;
+  if (count > 0) return Math.round(count * 0.97);
   const prof = PROFILES[profile] || PROFILES.mid;
   return Math.round(Math.min(prof.maxCount, prof.defaultCount * (recipe.density ?? 1)) * 0.97);
 }
@@ -340,9 +342,9 @@ const SPLAT_TOOLKIT = {
     license: s.license,
     licenseUrl: s.licenseUrl,
   })),
-  async prepare(o, _help, { profile } = {}) {
+  async prepare(o, _help, { profile, count } = {}) {
     SPL.error = "";
-    const budget = budgetFor(SPLAT_TOOLKIT, profile);
+    const budget = budgetFor(SPLAT_TOOLKIT, profile, count);
     const progress = progressTo((t) => setStatus(t));
     const src = o.source === "custom" && !SPL.files.custom ? "cactus" : o.source;
     const cmp = o.compare === "custom2" && !SPL.files.custom2 ? "off" : o.compare;
@@ -408,6 +410,7 @@ const SPLAT_TOOLKIT = {
     // thousand) takes an even share of it.
     const total = [v.main, v.second].filter(Boolean).reduce((t, w) => t + w.main.count + (w.red?.count || 0), 0); // prettier-ignore
     const share = Math.min(1, (k.count * 0.95) / Math.max(1, total));
+    if (share === 1) k.all = true; // lane SPL1: every splat the files have
     const place = (view, part, off, radius) => {
       const f = view.frame;
       const c = [0, 1, 2].map((a) => (f.min[a] + f.max[a]) / 2);
@@ -775,10 +778,10 @@ const POINT_CLOUDS = {
     license: s.license,
     licenseUrl: s.licenseUrl,
   })),
-  async prepare(o, _help, { profile } = {}) {
+  async prepare(o, _help, { profile, count } = {}) {
     PC.error = "";
     PC.options = o;
-    const budget = budgetFor(POINT_CLOUDS, profile) - 400; // room for the pins and the box
+    const budget = budgetFor(POINT_CLOUDS, profile, count) - 400; // room for the pins and the box
     const progress = progressTo((t) => setCloudStatus(t));
     const src = o.source === "custom" && !PC.file ? "palace" : o.source;
     try {
@@ -827,6 +830,7 @@ const POINT_CLOUDS = {
       return;
     }
     const f = v.frame;
+    if (v.counts && v.counts.drawn >= v.counts.kept) k.all = true; // lane SPL1: every point kept
     const c = [0, 1, 2].map((a) => (f.min[a] + f.max[a]) / 2);
     const half = Math.max(...[0, 1, 2].map((a) => (f.max[a] - f.min[a]) / 2)) || 1;
     const s = 0.95 / half;

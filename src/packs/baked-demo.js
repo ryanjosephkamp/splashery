@@ -44,6 +44,9 @@ export const RECIPES = {
         k.reach([x, -0.35, 1.16]);
       }
       k.data.tier = { splats: ASSET.tier.splats, used: ASSET.n };
+      // Lane SPL1: the largest tier, whole, is every splat the chest has.
+      const most = Math.max(...ASSET.manifest.tiers.map((t) => t.splats));
+      if (ASSET.n === most) k.all = true;
     },
     drive(_t, c, out) {
       // The toggle eases it open and shut about the hinge.

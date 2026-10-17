@@ -496,6 +496,7 @@ function emitRays(k, segs, share = 0.3) {
   const len = (s) => Math.hypot(s.p1[0] - s.p0[0], s.p1[1] - s.p0[1], s.p1[2] - s.p0[2]);
   const total = segs.reduce((a, s) => a + len(s), 0);
   const gap = Math.max(0.008, total / Math.max(1000, k.count * share));
+  if (gap === 0.008) k.all = true; // lane SPL1: rays as fine as they go
   const list = [];
   for (const sg of segs) {
     const d = [sg.p1[0] - sg.p0[0], sg.p1[1] - sg.p0[1], sg.p1[2] - sg.p0[2]];
@@ -525,9 +526,13 @@ function emitRays(k, segs, share = 0.3) {
   );
 }
 
-// Columns for a panel of `w` by `h` (recipe units) taking `share` of the budget.
-const colsFor = (k, share, w, h, max) =>
-  Math.min(max, Math.round(Math.sqrt((k.count * share * w) / h)));
+// Columns for a panel of `w` by `h` (recipe units) taking `share` of the budget,
+// up to `max`, its picture's detail (lane SPL1: k.all says so when it binds).
+const colsFor = (k, share, w, h, max) => {
+  const cols = Math.round(Math.sqrt((k.count * share * w) / h));
+  if (cols > max) k.all = true;
+  return Math.min(max, cols);
+};
 
 function table(k, { w, d, y }) {
   boxSplats(k, { c: [0, y - 0.03, 0], w, h: 0.06, d, gap: budgetGap(k, 0.03), skip: [3], color: lit(shade, "#30353d") }); // prettier-ignore
@@ -727,6 +732,7 @@ function buildPanelOnly(k) {
   const H = (W * 512) / LW;
   boxSplats(k, { c: [0, 0, -0.045], w: W + 0.12, h: H + 0.12, d: 0.08, tilt: PITCH, skip: [5], color: lit(shade, "#2a3038") }); // prettier-ignore
   const cols = Math.min(LW, Math.round(Math.sqrt(Math.min(k.count * 0.78, 220000) * (LW / 512))));
+  if (k.count * 0.78 > 220000) k.all = true; // lane SPL1: the panel's most
   panel(k, { center: [0, 0, 0.002], up: FACE_UP, width: W, height: H, region: { x: 0, y: 0, w: LW, h: 512 }, cols }); // prettier-ignore
   boxSplats(k, {
     c: [0, -H / 2 - 0.36, 0],

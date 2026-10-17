@@ -20,7 +20,8 @@ can't go past its file. The slider should give the count picked, or as close as 
 ## State
 
 - Part 1 (engine): branch `claude/spl1-engine`, PR opened October 17, 2026.
-- Part 2: not started.
+- Part 2: branch `claude/spl1` (it carries part 1, merged in). Draft PR "Phase SPL1: toys honor the
+  Splats slider".
 
 ## What changed (part 1)
 
@@ -52,6 +53,38 @@ can't go past its file. The slider should give the count picked, or as close as 
   toy's line names the pictures that come on top ("502k splats (401k in the toy; 101k in its
   pictures)").
 - `index.html`: the slider's note.
+
+## What changed (part 2)
+
+None of these change a toy with the slider off: `k.all` only feeds the label, `k.shrink` is 1, and
+the viewers' budget is the same number as before.
+
+- Every splat the data has (`k.all`): the baked scans (`addScan` in `src/packs/real-objects.js`, for
+  Real objects and the photoreal shelf), the baked chest's largest tier, Video to 3D's scene, the
+  splat toolkit's files, the point cloud's kept points, the specimen neuron's finest level, the
+  charts of Data in 3D and Climate records, the cryo-EM map's surface, the contour lab's elevation
+  model at full resolution, the splat equation's own count, and the toys that draw a fixed set
+  whatever the budget (the nearby stars, the star systems, Powers of ten, Gaussian splatting, the
+  solar orbits). The light lab says so when its panels reach their picture's detail.
+- Sharper rather than thicker (`k.shrink`): the fish school. The survey (total splat footprint at
+  400k over 60k) found 18 toys that thicken; most have a density of 1.43 or more, so 400k is their
+  max tier's own look and `k.shrink` stays 1. Star cluster and QR three already scale with the
+  budget; the volumes (walnut CT, the volume viewer) add depth, not thickness.
+- The splat toolkit and point clouds sized their previews from the tier, not the count passed:
+  `budgetFor` now takes the count (the same number with the slider off). Point clouds drew 382k at
+  400k before.
+- `tests/spl1.spec.mjs`: each "all" claim holds (twice the budget draws at most 5% more: a dome or a
+  floor around the data), fish school's sizes shrink by `k.shrink`, and the two viewers follow the
+  slider.
+
+## Left as they are (the label says "the nearest this toy draws")
+
+Grids and simulations capped for frame rate: Sound in a box (16,000 beads), the Chladni plate, the
+sound lab and recorder at 400k, the QR code, QR anatomy and QR damage, the room echo, the splat
+mirror. Maps that draw a little more than asked (the living city, earthquakes). Point clouds lands
+about 5% under at 60k (its preview is picked before the build). Other lanes' toys: Your name in
+splats and Shape morph (PT3), Moving photo to 3D (MP1), the QR craft toys (PIC2), One splat and the
+volume viewer (TF1).
 
 ## Measured (Node, every kit toy at 60k, 200k and 400k)
 

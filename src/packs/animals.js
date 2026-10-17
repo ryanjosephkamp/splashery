@@ -724,7 +724,8 @@ export const RECIPES = {
       const D = 0.085;
       const W = 0.044;
       const silver = o.kind !== "tropical";
-      k.cloud({ share: 0.97, size: 0.55, flat: 0.3 }, (rand, i) => {
+      // Lane SPL1: smaller splats past the tiers' most, so more of them sharpen the fish.
+      k.cloud({ share: 0.97, size: 0.55 * k.shrink, flat: 0.3 }, (rand, i) => {
         const fi = i % fish.length;
         const f = fish[fi];
         const s = f.size;

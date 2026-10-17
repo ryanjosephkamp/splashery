@@ -376,6 +376,7 @@ export const RECIPES = {
       faceAndResort(out, info);
     },
     build(k, o) {
+      k.all = true; // lane SPL1: a chart draws its table's rows (up to 60,000)
       let { def, table, custom } = tableFor(o);
       if (!table) ({ def, table } = { def: SAMPLES[0], table: DATA.cache.get(SAMPLES[0].id) });
       const chart = CHARTS.some((x) => x.id === o.chart) ? o.chart : def?.chart || "scatter";
@@ -462,6 +463,7 @@ export const RECIPES = {
       }
     },
     build(k, o) {
+      k.all = true; // lane SPL1: each view draws its records
       CLIMATE.view = o.view;
       if (o.view === "co2") co2Spiral(k, CLIMATE.co2, { source: SNAPSHOTS.co2.caption });
       else if (o.view === "months")

@@ -783,6 +783,7 @@ export const RECIPES = {
     },
     build(k, o) {
       const depth = clamp(Math.floor(Math.log2(k.count + 1)) - 1, 12, 15);
+      if (depth === 15) k.all = true; // lane SPL1: the specimen's finest level
       const cell = specimen(depth),
         stain = STAINS[o.stain] || STAINS.nissl;
       k.data = {

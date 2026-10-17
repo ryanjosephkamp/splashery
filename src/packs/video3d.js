@@ -601,6 +601,7 @@ const VIDEO_3D = {
     }
     const budget = Math.max(100, Math.floor(k.count * 0.98));
     const n = Math.min(s.count, budget);
+    if (n === s.count) k.all = true; // lane SPL1: every splat the scene has
     // A budget below the scene's size keeps an even share of it.
     const step = s.count / n;
     const picked = { near: [], far: [] };
