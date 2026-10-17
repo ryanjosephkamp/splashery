@@ -8,11 +8,12 @@ exact-correspondence geometry controls, a pinned licensed capture, tests, and th
 The result concerns the existing Video to 3D core and its settings. It establishes neither a general
 impossibility of browser photogrammetry nor the quality achievable after substantial solver work.
 
-The primary replay uses committed probe source `0f2ad9466`. Its phone previews arrived at 29.66
-seconds (shuffled) and 34.95 seconds (sorted), again with only four placed cameras. The earlier
-exploratory previews below were faster. Replays overlapped regression/formatting work; these wall
-times are not a controlled device-speed comparison. Each receipt preserves its exact source hashes,
-camera list, and settings.
+The primary replay uses the exact probe files preserved in public source snapshot
+`1e7071d291b66eb6c05b5113aa0ec52dcc5e569b`. Its phone previews arrived at 29.66 seconds (shuffled)
+and 34.95 seconds (sorted), again with only four placed cameras. The earlier exploratory previews
+below were faster. Replays overlapped regression/formatting work; these wall times are not a
+controlled device-speed comparison. Each receipt preserves its exact source hashes, camera list, and
+settings.
 
 ## Evidence and protocol
 
