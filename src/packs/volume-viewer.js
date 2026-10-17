@@ -14,7 +14,7 @@
 //   lane's file) and a young gar's head (Brian Metscher, CC BY 4.0; tools/vol-gar.mjs).
 
 import { readVolume, parseRawForm, RAW_TYPES, VolumeError } from "../volume/read.js";
-import { buildVolume, buildMIP, windowFor, wl, COLORMAPS, PRESETS } from "../volume/view.js";
+import { buildVolume, buildMIP, sampleSteps, windowFor, wl, COLORMAPS, PRESETS } from "../volume/view.js"; // prettier-ignore
 
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const fmt = (n) => Math.round(n).toLocaleString("en-US");
@@ -206,6 +206,9 @@ const PRESET_ORDER = PRESETS.map((p) => p.id);
 // How much farther apart the sheets are than the splats within them (src/volume/view.js): the
 // cut face and the slice get the budget (the owner's "Just sharper", October 8, 2026).
 const SHEETS = { cut: 3, slice: 5 };
+// Lane TF1: the sheets' insides go into this many parts along the cut's axis; the drive shows only
+// those at the cut face (all of them in the Layers view, where the inside shows through).
+const DEPTH_PARTS = 12;
 
 function cutDrag() {
   return {
@@ -259,19 +262,61 @@ function driveVolume(t, c, out, info) {
     vol.glowWidth = 0.6 * d.sheet;
   }
   out.volume = vol;
+  // Lane TF1: only the sheets at the cut face draw their insides (a sheet and a half behind it, so
+  // the face never shows a gap); with nothing cut away, none do. Behind the face, an opaque
+  // inside is never seen.
+  const D = d.depth;
+  if (D) {
+    const shown = vol.normal && !d.slice ? vol.at : null;
+    const keep = 1.5 * d.sheet;
+    for (let b = 0; b < D.n; b++) {
+      const a = D.from + b * D.width;
+      const on =
+        d.layers || (shown !== null && a <= shown + d.pitch && a + D.width >= shown - keep);
+      out.parts[`deep${b}`] = { visible: on ? 1 : 0 };
+    }
+  }
 }
 
-function buildViewer(k, o) {
+// The settings a build of these options samples its lattice with (shared by prepare, which samples
+// ahead, and build).
+function viewParams(o, budget) {
   const V0 = VV.current;
   if (!V0) throw new Error("The volume has not loaded.");
   const V = spacingOverride(V0, o.spacing);
   const [lo, hi] = windowFor(V, o);
-  const budget = k.count;
   const cut = CUT_DIRS[o.cut] ? o.cut : "front";
-  const mip = o.view === "mip";
+  const sheets = { axis: CUT_DIRS[cut].axis, k: o.slice ? SHEETS.slice : SHEETS.cut, flat: !!o.slice }; // prettier-ignore
+  const key = [VV.uid, V0.name, o.source, o.spacing, lo, budget, sheets.axis, sheets.k, sheets.flat].join("|"); // prettier-ignore
+  return { V, lo, hi, cut, sheets, key, mip: o.view === "mip" };
+}
+
+// Lane TF1: the lattice, sampled in prepare a few milliseconds at a time, so the volume on show
+// keeps turning and answering while a tap's next preset is made (the build then only emits it).
+async function sampleAhead(o, budget) {
+  const P = viewParams(o, budget);
+  if (P.mip || VV.sampled?.key === P.key) return;
+  VV.sampled = null;
+  const it = sampleSteps(P.V, { lo: P.lo, budget, sheets: P.sheets });
+  let r = it.next();
+  let last = performance.now();
+  while (!r.done) {
+    if (performance.now() - last > 10) {
+      await new Promise((ok) => setTimeout(ok, 0));
+      last = performance.now();
+    }
+    r = it.next();
+  }
+  VV.sampled = { key: P.key, lattice: r.value };
+}
+
+function buildViewer(k, o) {
+  const budget = k.count;
+  const { V, lo, hi, cut, sheets, key, mip } = viewParams(o, budget);
+  const sampled = VV.sampled?.key === key ? VV.sampled.lattice : null;
   const r = mip
     ? buildMIP(k, V, { lo, hi, axis: CUT_DIRS[cut].axis, colors: o.colors, budget })
-    : buildVolume(k, V, { lo, hi, colors: o.colors, opacity: o.opacity, budget, rand: k.rand, sheets: { axis: CUT_DIRS[cut].axis, k: o.slice ? SHEETS.slice : SHEETS.cut, flat: !!o.slice } }); // prettier-ignore
+    : buildVolume(k, V, { lo, hi, colors: o.colors, opacity: o.opacity, budget, sheets, sampled, depth: DEPTH_PARTS }); // prettier-ignore
   VV.ext = Math.max(...r.half);
   k.data = {
     key: `${o.source}:${o.source === "custom" ? VV.uid : ""}`,
@@ -281,6 +326,11 @@ function buildViewer(k, o) {
     pitch: r.pitch,
     sheet: r.sheet ?? r.pitch,
     mip,
+    depth: r.depth || null,
+    layers: o.opacity === "layers",
+    // Lane TF1: a tap anywhere on the volume's box counts, where the pick finds no splat (a faint
+    // edge, a gap in a thin slice).
+    tapBox: { min: r.half.map((x) => -x), max: r.half.slice() },
   };
   VV.last = { V, lo, hi, n: r.n, pitch: r.pitch, mip, empty: r.n === 0 };
   VV.panel?.refresh();
@@ -428,6 +478,9 @@ const VIEWER = {
   kernel: "sharp", // labs: a sharper splat edge (src/kernels.js)
   density: 2,
   turntable: false,
+  // Lane TF1: a press takes the volume's box (k.data.tapBox) without rendering the pick buffer,
+  // which took most of a second on a phone before a tap or a drag could start.
+  pickBox: true,
   options: [
     {
       key: "source",
@@ -537,10 +590,11 @@ const VIEWER = {
     },
   },
   credits: SAMPLES.map((s) => ({ ...s.credit })),
-  async prepare(o) {
+  async prepare(o, _help, env) {
     VV.options = o;
     VV.note = "";
     VV.current = await volumeFor(o.source, (t) => app()?.ui?.progress?.update?.(0.1, t));
+    if (env?.count) await sampleAhead(o, env.count);
   },
   drive: driveVolume,
   build: buildViewer,

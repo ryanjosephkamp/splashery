@@ -883,7 +883,7 @@ class App {
     const [x, y] = player.canvasPoint(e);
     player.pickDirty = true;
     // Lane Fix9 (engine): a toy with a tap box takes a tap anywhere in it.
-    const hit = (await player.pickAt(x, y)) || player.tapBoxAt(x, y);
+    const hit = player.boxPick(x, y) || (await player.pickAt(x, y)) || player.tapBoxAt(x, y);
     if (hit) player.act(hit);
   }
 
@@ -1236,7 +1236,7 @@ class App {
     }
     st.busy = true;
     player.pickDirty = true;
-    let hit = await player.pickAt(x, y);
+    let hit = player.boxPick(x, y) || (await player.pickAt(x, y));
     st.busy = false;
     if (this.toolState !== st) return;
     // Lane Hands-on H3: with Hands-on on, a press just off a thin toy's

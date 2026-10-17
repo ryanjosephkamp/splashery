@@ -3122,7 +3122,7 @@ export function createUI(app) {
 
   // ---- A toy's labels (lane Anatomy) ------------------------------------------------
   // A kit toy's drive() may set out.legend = { title, items: [{ text, head,
-  // on, dim }] }: a list of names shown as page text beside the stage while
+  // on, dim }], focus }: a list of names shown as page text beside the stage while
   // it is set (the anatomy atlas's parts). `head` makes an item a heading,
   // `on` highlights it and `dim` grays it. The list is rebuilt only when it
   // changes, and hidden as soon as a frame leaves it unset.
@@ -3135,6 +3135,8 @@ export function createUI(app) {
     legendKey = key;
     legendBox.textContent = "";
     legendBox.hidden = !lg;
+    // Lane TF1: `focus: true` keeps the box in focus mode (full screen) too.
+    legendBox.classList.toggle("in-focus", !!lg?.focus);
     if (!lg) return;
     if (lg.title) {
       const title = document.createElement("p");

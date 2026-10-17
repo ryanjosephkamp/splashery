@@ -1877,7 +1877,10 @@ Proposals below are suggestions; the owner may change them.
     glides. Owner's marks (October 5, 2026): the lifted sample is a closed solid (a back, a wall
     round its outline and fillers at steep steps), so no turn shows a hole; 26 stand-in pictures
     from Wikimedia Commons (portraits flat in black and white, flags waving, coats of arms cut out,
-    minerals as samples); promethium's tile is now a real sample photo.
+    minerals as samples); promethium's tile is now a real sample photo. Lane TF1 (the owner's
+    walkthrough of October 17, 2026): the facts box stays in full screen (focus mode), at the
+    stage's top left, and a Show info switch in the Toy tab (on by default, saved with the scene)
+    turns it off. Built by Opus 5.5.
   - Sound: A soft whoosh and a tine as the sample lifts, a whoosh and a small click as it sets down,
     a rising blip as it turns.
 
@@ -2736,7 +2739,12 @@ Proposals below are suggestions; the owner may change them.
     2026: an awful sound, and a tap that did nothing meaningful where it landed): opens at 64 splats
     (the word reads, and a split shows), a tap splits the touched splat finer each time, a hold or a
     tap at the finest level merges it back, the readout on every tap, and a new soft sine pitched by
-    level. Built by Opus 5.5.
+    level. Built by Opus 5.5. Lane TF1 (the owner's walkthrough of October 17, 2026: which splat a
+    tap picked was hard to see at high levels, and the top level's tap made no sound): a yellow ring
+    follows the picked splat (never smaller than a fingertip's mark) with the rest of the stage
+    dimmed while its readout shows, and a tap at the finest level, which splits nothing, now sounds
+    its level's note softly (it had been silent; the notes already stay between G3 and E6). Built by
+    Opus 5.5.
   - Sound: One soft, clean sine per split or merge, pitched by the level it lands on (finer is
     higher).
 - **Splat equation** (`splat-equation`). Now: tap: Play t. Plan: keep.
@@ -4014,7 +4022,13 @@ Proposals below are suggestions; the owner may change them.
     MIT, vendored and loaded only for a DICOM file; NIfTI, TIFF and zip read in the page), the view
     in src/volume/view.js on the Imaging lane's volume kind. Samples: the CWI walnut (CC BY 4.0) and
     a 12.8 mm gar larva's micro-CT by Brian Metscher (Zenodo 19021581, CC BY 4.0;
-    tools/vol-gar.mjs).
+    tools/vol-gar.mjs). Lane TF1 (the owner's walkthrough of October 17, 2026: very laggy, and a tap
+    or drag on the walnut often did nothing but the sound): the solid inside, which only a cut face
+    shows, is drawn only at the cut (it was 43% of the splats, drawn behind the surface every
+    frame); a press takes the volume's box instead of rendering the pick buffer (the pick took most
+    of a second, and missed where the specimen is thin, so a quick drag ended as a tap); the lattice
+    for a tap's next preset is sampled a few milliseconds at a time ahead of the build, about twice
+    as fast, so the volume on show keeps answering. Built by Opus 5.5.
   - Sound: Fix10 (the walkthrough of October 9, 2026: no click and no rising hum): a tap sounds like
     a film slid onto a lightbox, a papery slip and a soft settle. Play has its own dark, soft rush
     for each pass of the cut, down and back up. The drag is silent.

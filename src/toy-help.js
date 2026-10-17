@@ -790,7 +790,7 @@ export const TOY_HELP = {
     howTo:
       "Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back.",
     about:
-      "Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model. The front is real; the depth is an estimate, and the back of a lifted sample is made up from its own colors.\n\nTap a tile and its sample lifts out and turns toward you, with its facts from PubChem: mass, group and period, state, density, melting and boiling points, discovery and uses. Tap the sample to turn it, or its tile to set it back. 26 elements have no photo of a real sample, as the heaviest exist only a few atoms at a time; their hatched tiles show a stand-in. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
+      "Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model. The front is real; the depth is an estimate, and the back of a lifted sample is made up from its own colors.\n\nTap a tile and its sample lifts out and turns toward you, with its facts from PubChem beside the stage, even in full screen (Show info hides them). Tap the sample to turn it, or its tile to set it back. 26 elements have no photo of a real sample, as the heaviest exist only a few atoms at a time; their hatched tiles show a stand-in. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
   },
 
   "crystal-lattice": {
@@ -1623,7 +1623,7 @@ export const TOY_HELP = {
     howTo:
       "Tap a splat to split it in two; tap again to go finer there. Hold a piece to merge it back.",
     about:
-      "A word or picture becomes a tree of splats. Each splat has the exact center and covariance of the pixels beneath it, and each split divides them at the median along their main axis, so the two halves add back up to their parent.\n\nTap a splat and it splits into its two halves, which slide apart from its center; tap again there to go finer. Hold a piece, or tap one at the finest level, to merge it back. Each tap shows its numbers; the pitch rises with the level. The dial sets the whole picture from 1 to 16,384 splats. Type a word or open a picture (it stays on this device) in the Toy tab. From a concept by Ryan Kamp. Made by Ryan with Codex (GPT-6) and Claude (Opus 5.5). Code: MIT. Procedural splats: CC0.",
+      "A word or picture becomes a tree of splats. Each splat has the exact center and covariance of the pixels beneath it, and each split divides them at the median along their main axis, so the two halves add back up to their parent.\n\nTap a splat and it splits into its two halves, which slide apart from its center; tap again there to go finer. Hold a piece, or tap one at the finest level, to merge it back. Each tap rings its splat and shows its numbers. The dial sets the whole picture from 1 to 16,384 splats. Type a word or open a picture (it stays on this device) in the Toy tab. From a concept by Ryan Kamp. Made by Ryan with Codex (GPT-6) and Claude (Opus 5.5). Code: MIT. Procedural splats: CC0.",
   },
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
