@@ -80,14 +80,35 @@ the viewers' budget is the same number as before.
   floor around the data), fish school's sizes shrink by `k.shrink`, and the two viewers follow the
   slider.
 
+- Sound in a box (the Operator's call): with the slider its bead cap lifts from 16,000 to 28,000
+  (`BEADS_SLIDER` in `src/packs/chladni-3d.js`, 7% of 400,000, the most the slider asks). It draws
+  43,460 splats at 200k and at 400k (31,460 before), and the max tier keeps 31,460. Stepping 28,000
+  beads takes about 5.8 ms a frame against 2.9 ms for 16,000 (this container's CPU; the screen
+  picture they are written to takes under 0.1 ms), well inside a 30-frame second's 33 ms; the GPU's
+  share follows the total splats, which the slider sets anyway. Above 43k it says "(the nearest this
+  toy draws)".
+
+## For lanes PT3 and MP1 (Your name in splats, Shape morph, Moving photo to 3D)
+
+At 400k these still miss the slider's count (the name toy draws about 24% of it). Two ways, in the
+recipe, once #716 is on main:
+
+- Follow the count: size whatever is fixed now (the text raster's resolution, a clip's sampled
+  pixels) from `k.count`, so 400k gives 400k. `buildRecipeTo` measures the build and corrects up to
+  2% on its own, so it needs only to grow with the budget.
+- Or say it has no more: set `k.all = true` in `build(k, o)` when the toy has drawn everything its
+  source holds (every pixel of the raster or the clip). The label then reads "(all this toy has)".
+- For fixed splat sizes, scale them by `k.shrink` (1 except past the max tier's count) so a higher
+  count looks sharper, not thicker; `k.slider` (the slider's count or null) lets a recipe lift a cap
+  of its own only for the slider.
+
 ## Left as they are (the label says "the nearest this toy draws")
 
-Grids and simulations capped for frame rate: Sound in a box (16,000 beads), the Chladni plate, the
-sound lab and recorder at 400k, the QR code, QR anatomy and QR damage, the room echo, the splat
-mirror. Maps that draw a little more than asked (the living city, earthquakes). Point clouds lands
-about 5% under at 60k (its preview is picked before the build). Other lanes' toys: Your name in
-splats and Shape morph (PT3), Moving photo to 3D (MP1), the QR craft toys (PIC2), One splat and the
-volume viewer (TF1).
+Grids and simulations capped for frame rate: the Chladni plate, the sound lab and recorder at 400k,
+the QR code, QR anatomy and QR damage, the room echo, the splat mirror. Maps that draw a little more
+than asked (the living city, earthquakes). Point clouds lands about 5% under at 60k (its preview is
+picked before the build). Other lanes' toys: Your name in splats and Shape morph (PT3), Moving photo
+to 3D (MP1), the QR craft toys (PIC2), One splat and the volume viewer (TF1).
 
 ## Measured (Node, every kit toy at 60k, 200k and 400k)
 

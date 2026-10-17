@@ -58,7 +58,7 @@ test("k.all: a toy that follows the count doesn't say it", async () => {
   }
 });
 
-test("fish school: its splats shrink by k.shrink, its count stays", async () => {
+test("fish school: its splats shrink by k.shrink, its count about stays", async () => {
   const mean = (buf) => {
     let s = 0;
     for (let i = 0; i < buf.count; i++) s += buf.scale[i * 3];
@@ -67,7 +67,8 @@ test("fish school: its splats shrink by k.shrink, its count stays", async () => 
   const shrink = Math.sqrt(280 / 400);
   const a = await build("fish-school", 400_000);
   const b = await build("fish-school", 400_000, shrink);
-  expect(b.buf.count).toBe(a.buf.count);
+  // (Its bubbles stay as many as on the max tier, so a few hundred fewer splats.)
+  expect(Math.abs(b.buf.count - a.buf.count)).toBeLessThan(a.buf.count * 0.002);
   expect(mean(b.buf) / mean(a.buf)).toBeCloseTo(shrink, 2);
 });
 
@@ -115,3 +116,20 @@ for (const id of ["point-clouds", "splat-toolkit"]) {
     expect(errors).toEqual([]);
   });
 }
+
+test("Sound in a box: more beads only with the slider", async () => {
+  const { buildRecipeTo } = await import("../src/kit.js");
+  const recipe = (await import("../src/packs/studio.js")).RECIPES["chladni-cell"];
+  const run = (gen) => {
+    let r = gen.next();
+    while (!r.done) r = gen.next();
+    return r.value.buf.count;
+  };
+  const options = resolveOptions(recipe, {});
+  // The max tier's 400,000 keeps 16,000 beads, as before.
+  const tier = run(buildRecipe(recipe, { seed: 1, count: 400_000, options }, applyClay));
+  expect(tier).toBe(31_460);
+  // The slider's 400,000 lifts them to 28,000 (the label says how near it came).
+  const slid = run(buildRecipeTo(recipe, { seed: 1, count: 400_000, options, slider: 400_000 }, applyClay)); // prettier-ignore
+  expect(slid).toBe(tier + 12_000);
+});

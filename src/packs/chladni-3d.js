@@ -300,6 +300,10 @@ const SETTLE_SECS = 1.1; // the time scale of the slide (at full sound)
 export const LIVE = { secs: 0.35, follow: 0.08, drift: 0.15 };
 
 // The beads: n of them, scattered evenly through the cell.
+// Lane SPL1: the most beads with the labs Splats slider (7% of its 400,000);
+// the tiers keep 16,000. Measured in docs/handoff/SPL1.md.
+const BEADS_SLIDER = 28000;
+
 export class Beads {
   constructor(n, mode, rand = Math.random) {
     this.n = n;
@@ -1217,7 +1221,9 @@ export const CHLADNI_CELL = {
     k.cloud({ share: pz.length / k.count, pattern: false, jitter: 0 }, (rand, i) => pz[i] || null); // prettier-ignore
     // The beads: relief splats moved from the screen canvas (as the plate's
     // sand), each resting a hair from the middle.
-    const n = Math.max(5000, Math.min(16000, Math.floor(k.count * 0.07)));
+    // (Lane SPL1: with the labs Splats slider the cap lifts to BEADS_SLIDER, as
+    // many as the simulation steps in time at 30 frames a second.)
+    const n = Math.max(5000, Math.min(k.slider ? BEADS_SLIDER : 16000, Math.floor(k.count * 0.07)));
     const beads = new Beads(n, mode, () => k.rand());
     // Live r10: a change of colors only keeps the beads where they are.
     const was = CELL.beads;
