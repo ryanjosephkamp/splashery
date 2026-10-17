@@ -1,0 +1,3 @@
+# Actions validation near the twelve-hour cutoff
+
+These timestamped job snapshots preserve incomplete first-pass work, not clean-run acceptance. The first fresh full run had 15/16 shards passed and one active; the second had one shard passed, four active, and eleven queued. Independent mirror Actions stress was still active. The run IDs and immutable subjects are in jobs.json. All ten target families already retain complete 30/30 receipts under the recorded stress recipe; current local CDX and the additional repaired PDF stress have no failures, skips, or retries. Full preflight on 499501064 passed 271/271 plus all six static gates. This raw branch must never merge.
