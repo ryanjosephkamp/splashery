@@ -8,6 +8,8 @@ import path from "node:path";
 
 const root = process.cwd();
 const port = Number(process.argv[2] || 4388);
+// A phone can reach the local benchmark when explicitly bound to the LAN.
+const host = process.env.SPLASHERY_HOST || "127.0.0.1";
 const types = {
   ".md": "text/plain",
   ".txt": "text/plain",
@@ -31,6 +33,7 @@ http
   .createServer((req, res) => {
     try {
       let name = decodeURIComponent(new URL(req.url, "http://127.0.0.1").pathname);
+      if (name.split("/").some((part) => part.startsWith("."))) throw new Error("missing");
       if (name.endsWith("/")) name += "index.html";
       const file = path.resolve(root, `.${name}`);
       if (!file.startsWith(`${root}${path.sep}`) || !fs.statSync(file).isFile())
@@ -69,6 +72,4 @@ http
       res.end("Not found");
     }
   })
-  .listen(port, "127.0.0.1", () =>
-    console.log(`Static byte-range server: http://127.0.0.1:${port}/`),
-  );
+  .listen(port, host, () => console.log(`Static byte-range server: http://${host}:${port}/`));

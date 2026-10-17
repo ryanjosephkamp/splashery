@@ -226,6 +226,14 @@ export const RECIPES = {
     build(k, o) {},              // required: describe the toy with the kit
   },
 };</code></pre>
+          <p>
+            An optional <code>render</code> object sets the toy's Sharpness controls
+            (<code>cull</code>, <code>dpr</code>, <code>adapt</code>, and <code>aa</code>). It can
+            instead be a function, <code>render({ profile, options })</code>, receiving the active
+            tier and resolved recipe options on each load. Return an object or <code>null</code> to
+            keep the defaults. The existing labs restriction and URL overrides still apply;
+            switching tiers resolves the budget again.
+          </p>
           <h2 id="2-coordinates-and-size">2. Coordinates and size</h2>
           <ul>
             <li>

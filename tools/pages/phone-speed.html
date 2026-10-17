@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Phone speed · Splashery</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 20px 16px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        background: Canvas;
+        color: CanvasText;
+      }
+      main {
+        max-width: 960px;
+        margin: auto;
+      }
+      h1 {
+        margin: 0 0 8px;
+      }
+      p {
+        max-width: 70ch;
+      }
+      button {
+        min-height: 44px;
+        padding: 8px 16px;
+        font: inherit;
+        cursor: pointer;
+      }
+      button:disabled {
+        cursor: default;
+      }
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      #preview {
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+      }
+      #preview.running {
+        height: min(60vh, 844px);
+        overflow: auto;
+        margin: 16px 0;
+        border: 1px solid GrayText;
+      }
+      iframe {
+        display: block;
+        width: 390px;
+        height: 844px;
+        border: 0;
+      }
+      .table {
+        overflow-x: auto;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 14px;
+        font-variant-numeric: tabular-nums;
+      }
+      th,
+      td {
+        text-align: right;
+        padding: 8px;
+        border-bottom: 1px solid GrayText;
+        white-space: nowrap;
+      }
+      th:first-child,
+      td:first-child {
+        text-align: left;
+      }
+      textarea {
+        display: block;
+        width: 100%;
+        min-height: 180px;
+        margin: 12px 0;
+        font: 12px/1.4 monospace;
+      }
+      summary {
+        cursor: pointer;
+        min-height: 44px;
+        padding: 8px 0;
+      }
+      [role="status"] {
+        min-height: 48px;
+      }
+    </style>
+    <script type="module" src="./phone-speed-page.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Phone speed</h1>
+      <p>
+        Run the 30 slowest toys on this device. Each opens at 390×844 on the phone tier. Keep this
+        tab visible and your phone cool. Each toy uses fresh preferences; your saved settings are
+        preserved. Nothing is uploaded or saved automatically.
+      </p>
+      <div class="buttons">
+        <button id="start">Start run</button>
+        <button id="stop" disabled>Stop</button>
+        <button id="copy" disabled>Copy table</button>
+        <button id="save" disabled>Save JSON</button>
+      </div>
+      <p role="status" aria-live="polite">Ready. A run may take several minutes.</p>
+      <div id="preview" aria-label="Toy being measured"></div>
+      <div class="table" tabindex="0" aria-label="Results, scroll horizontally for all columns">
+        <table>
+          <thead>
+            <tr>
+              <th>Toy</th>
+              <th>First view ms</th>
+              <th>Idle median / p95 ms</th>
+              <th>Tap median / p95 ms</th>
+              <th>JS heap MiB</th>
+              <th>Transfer MiB</th>
+              <th>Cache hits</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <label for="results">Copyable table</label>
+      <textarea id="results" readonly placeholder="Results appear here."></textarea>
+      <details>
+        <summary>Method and limits</summary>
+        <p>
+          The first view waits for the app’s first loaded-toy draw and a synchronous pixel readback.
+          Idle and tap windows each last at least 2.5 seconds and include at least eight completed
+          draw intervals. Rendering is forced during these windows; each readback waits for
+          rendering. These are completed-draw intervals, including synchronization overhead. Idle
+          animation callbacks are not counted as draws. Audio and automatic camera rotation are off.
+          The toy’s own motion and tap action remain on.
+        </p>
+        <p>
+          A short tap may finish within its measurement window. Heap means the browser’s live
+          JavaScript heap, which may include this results page, not total app or GPU memory.
+          “Unavailable” means your browser does not expose that measurement. Transfer comes from
+          Resource Timing and includes cache behavior; a phone run cannot force a cold cache.
+          Compare before and after with the same browser, cache conditions, and temperature. The
+          software-GL ranking is relative; these are your device’s own numbers.
+        </p>
+        <p>
+          Application errors are marked in the table. Browser resize-delivery notifications without
+          an exception are retained separately in the JSON.
+        </p>
+        <p id="environment"></p>
+        <label for="json">Full local results, including raw intervals</label>
+        <textarea id="json" readonly></textarea>
+      </details>
+    </main>
+  </body>
+</html>

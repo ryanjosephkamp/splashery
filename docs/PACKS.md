@@ -39,6 +39,11 @@ export const RECIPES = {
 };
 ```
 
+An optional `render` object sets the toy's Sharpness controls (`cull`, `dpr`, `adapt`, and `aa`). It
+can instead be a function, `render({ profile, options })`, receiving the active tier and resolved
+recipe options on each load. Return an object or `null` to keep the defaults. The existing labs
+restriction and URL overrides still apply; switching tiers resolves the budget again.
+
 ## 2. Coordinates and size
 
 - **+Y is up.** The default camera looks from the front-right, slightly above: +Z faces the viewer,
@@ -1683,3 +1688,14 @@ normal, SH color, opacity, log scales, rotation). To make a toy from a CC0 model
 on the live page, run this, add an entry for the PLY to `tools/assets.json` like the other scans
 (and its credit to `CREDITS.md`), then `node tools/prepare-assets.mjs`. `tools/stm-fixtures.mjs`
 makes the test models and `tools/stm-samples.mjs` the two samples.
+
+### Work-buffer reuse
+
+Settled built-in surfaces can reuse their GPU work buffer. A recipe or captured-toy rig can set
+`workBufferReuse: false` to keep the original unconditional update behavior, including between taps.
+Use this only with repeated before/after measurements when an idle speedup increases tap latency.
+Motion, live textures, and custom shader exclusions still apply; the option changes no geometry,
+uniform value, or effect. Cookie, Torus, and Blackberry opt out after their ten-pair tap-p95 checks.
+For a stale-frame report, append `?reuse=0` (or `&reuse=0` to an existing query) to disable reuse
+throughout the viewer. Removing the parameter restores the default. This switch also covers direct
+Stage uniform updates and does not change the toy's resolution or effect.

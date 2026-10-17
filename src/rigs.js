@@ -559,6 +559,7 @@ export const RIGS = {
 
   // The jam heart glows and throbs twice like a heartbeat.
   cookie: {
+    workBufferReuse: false,
     parts: [],
     keys: [{ color: "#7a1c1c", tol: 0.3, at: [0, 0.05, 0.1], r: 0.45 }],
     fx: [
@@ -837,6 +838,7 @@ export const RIGS = {
   // The glossy drupelets burst off all round, bounce on the table, glint,
   // and spring back.
   blackberry: {
+    workBufferReuse: false,
     // A solid core just inside (lane Sharpness B), hidden while it bursts.
     addon: { count: 9000, build: (k) => fruitCore(k, [-0.01, -0.03, 0], [0.46, 0.52, 0.72], "#17141c", k.part("core")) }, // prettier-ignore
     parts: [],

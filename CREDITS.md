@@ -2054,3 +2054,10 @@ The [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_
 opened on October 14, 2026. This toy integrates the concept's squid giant axon equations with a 0.01
 ms Euler step, samples the potential at 0.1 ms, and displays 7 model milliseconds per second.
 Geometry and timing are schematic, not a measured human neuron.
+
+# Phone speed (Codex task 103)
+
+The completed-draw measurement tools, local phone benchmark page, rendering parameter cache, and
+regression checks are made by Ryan with Codex (GPT-6), October 17, 2026, under Splashery's MIT
+license. Rendered evidence retains the source toys' recorded licenses and attribution. See the
+[phone speed audit](docs/audits/phone-speed-2026-10.md).
