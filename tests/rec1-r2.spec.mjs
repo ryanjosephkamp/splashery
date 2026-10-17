@@ -18,10 +18,10 @@ async function pick(page, id) {
   await page.waitForFunction((id) => window.__splashery.player.toyInfo?.id === id, id, { timeout: 120_000 }); // prettier-ignore
 }
 
-// The saved take, sampled at eight times spread across it from 0.6 s (seeking, so a busy browser can't skip
-// any): each drawn small, with how bright it is on average and how much of it differs from its
-// corner (the background), so a black frame or a frame without the toy shows. Also the take's
-// length and how many frames the recorder was handed.
+// The saved take, sampled at eight times spread across it from its start (seeking, so a busy
+// browser can't skip any): each drawn small, with how bright it is on average and how much of it
+// differs from its corner (the background), so a black frame or a frame without the toy shows.
+// Also the take's length and how many frames the recorder was handed.
 async function frames(page) {
   await page.waitForFunction(() => window.__splashery.app.recorded?.blob, null, { timeout: 60_000 }); // prettier-ignore
   return page.evaluate(async () => {
@@ -55,7 +55,7 @@ async function frames(page) {
     const g = c.getContext("2d", { willReadFrequently: true });
     const out = [];
     for (let k = 0; k < 8; k++) {
-      const t = 0.6 + ((duration - 0.85) * k) / 7; // from 0.6 s: a take on a slow GPU opens on the background until its first draw
+      const t = 0.1 + ((duration - 0.35) * k) / 7;
       await seek(t);
       g.drawImage(v, 0, 0, c.width, c.height);
       const d = g.getImageData(0, 0, c.width, c.height).data;
@@ -80,36 +80,40 @@ for (const renderer of ["webgl2", "webgpu"]) {
     ["donut", false],
     ["photo-3d", true],
   ]) {
-    test(`a take shows the picture, not black (${id}, ${renderer})`, async ({ page }) => {
-      const errors = [];
-      page.on("pageerror", (e) => errors.push(e.message));
-      const dev = await open(page, renderer, { labs });
-      test.skip(renderer === "webgpu" && dev !== "webgpu", "No WebGPU adapter in this browser.");
-      expect(dev).toBe(renderer);
-      await pick(page, id);
-      await page.waitForTimeout(3000);
-      // Through the Share tab's Record button, as a person does.
-      await page.click("#sheet-toggle");
-      await page.click("#tab-share");
-      // With a countdown (as a person records: 5 seconds by default), so the sheet has folded
-      // away and the stage has its size before the take starts.
-      await page.locator("#record-countdown").selectOption("3");
-      await page.click("#record-start");
-      await expect(page.locator("#rec-time")).toHaveText(/\/ 1:00$/, { timeout: 30_000 });
-      await page.waitForTimeout(3000);
-      await page.click("#rec-stop");
-      const { samples, duration, seconds, pushed } = await frames(page);
-      const said = JSON.stringify({ samples, duration, seconds, pushed });
-      // The recorder was handed frames all through the take (10 a second at least when still).
-      expect(pushed / seconds, said).toBeGreaterThan(5);
-      expect(duration, said).toBeGreaterThan(seconds - 1.5);
-      // Every sample across the take shows the page's light background and the toy on it: none
-      // is black, and none is a blank canvas.
-      for (const x of samples) {
-        expect(x.light, said).toBeGreaterThan(60);
-        expect(x.toy, said).toBeGreaterThan(0.01);
-      }
-      expect(errors).toEqual([]);
-    });
+    for (const count of ["0", "3"]) {
+      test(`a take shows the picture, not black (${id}, ${renderer}, countdown ${count})`, async ({
+        page,
+      }) => {
+        const errors = [];
+        page.on("pageerror", (e) => errors.push(e.message));
+        const dev = await open(page, renderer, { labs });
+        test.skip(renderer === "webgpu" && dev !== "webgpu", "No WebGPU adapter in this browser.");
+        expect(dev).toBe(renderer);
+        await pick(page, id);
+        await page.waitForTimeout(3000);
+        // Through the Share tab's Record button, as a person does.
+        await page.click("#sheet-toggle");
+        await page.click("#tab-share");
+        // Without a countdown the take starts as the sheet folds away, while the stage changes
+        // size (a slow GPU takes a while to draw at the new size); with one, it has settled.
+        await page.locator("#record-countdown").selectOption(count);
+        await page.click("#record-start");
+        await expect(page.locator("#rec-time")).toHaveText(/\/ 1:00$/, { timeout: 30_000 });
+        await page.waitForTimeout(3000);
+        await page.click("#rec-stop");
+        const { samples, duration, seconds, pushed } = await frames(page);
+        const said = JSON.stringify({ samples, duration, seconds, pushed });
+        // The recorder was handed frames all through the take (10 a second at least when still).
+        expect(pushed / seconds, said).toBeGreaterThan(5);
+        expect(duration, said).toBeGreaterThan(seconds - 1.5);
+        // Every sample across the take shows the page's light background and the toy on it: none
+        // is black, and none is a blank canvas.
+        for (const x of samples) {
+          expect(x.light, said).toBeGreaterThan(60);
+          expect(x.toy, said).toBeGreaterThan(0.01);
+        }
+        expect(errors).toEqual([]);
+      });
+    }
   }
 }

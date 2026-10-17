@@ -2547,6 +2547,9 @@ export function createUI(app) {
     releasePreview();
     if (app.recorded) app.closeRecord();
     if (refocus && els.recordStart.offsetParent) els.recordStart.focus();
+    // Lane REC1 r2: with Record out of sight (the phone sheet folded away), focus
+    // leaves the closed sheet at once rather than whenever the browser notices.
+    else if (els.recPreview.contains(document.activeElement)) document.activeElement.blur();
   }
   els.recPreview.addEventListener("close", letGo);
   let confirmed = null;

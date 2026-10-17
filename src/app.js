@@ -1877,6 +1877,13 @@ class App {
     // switched on while recording is in the video too).
     const ctx = this.sound.audio?.();
     const audio = ctx && this.sound.master ? { ctx, node: this.sound.master } : null;
+    // Lane REC1 r2: the stage's frame as it is now, while it shows the toy: the
+    // take repeats it until the stage draws again after the sheet folds away
+    // (a slow device can take a moment to draw at the new size).
+    this.recordWait = true;
+    stage.requestRender();
+    const seed = await Promise.race([stage.captureFrame(), new Promise((r) => setTimeout(r, 1500, null))]); // prettier-ignore
+    this.recordWait = false;
     // On a phone the sheet closes first, so the take starts at the stage's
     // own size (two frames for the new size to reach the canvas).
     this.ui.collapseSheet?.();
@@ -1924,6 +1931,7 @@ class App {
         canvas,
         audio,
         background: c.a < 1 ? null : `rgb(${rgb})`,
+        seed,
         maxSeconds: RECORD_LIMIT,
         onTick: (seconds) => {
           this.ui.setRecord({ state: "rec", seconds, limit: RECORD_LIMIT });
