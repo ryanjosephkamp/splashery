@@ -12,9 +12,14 @@
 const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
 
 export const TOY_SOUNDS = {
-  // Lane PT1: Toy Box's xylophone bar; each letter has its own note up a
-  // major scale (src/packs/name-toy.js), and the drive plays every sound.
-  "name-toy": { voice: "bar", f: "C5", decay: 0.55, vol: 0.28 },
+  // Lane PT3: Toy Box's xylophone bar, as Toy Box plays it: a clean sine on
+  // the letter's note (0.55 s) with a short sine two octaves up (0.1 s).
+  // Each letter has its own note up a major scale (src/packs/name-toy.js
+  // sets f), and the drive plays every sound.
+  "name-toy": [
+    { voice: "tone", f: "C5", decay: 1.375, vol: 1.4 },
+    { voice: "tone", f: "C7", decay: 0.25, vol: 0.4 },
+  ],
   // Lane NR1: a lab cue, not the sound of a real nerve cell. Clean sine layers in time with
   // the picture: a soft tick for the stimulus, a falling tone as the cell body's spike peaks
   // (0.8 s), and a quiet ding as it reaches the terminals (2.1 s).
@@ -1913,8 +1918,14 @@ export const TOY_SOUNDS = {
   // Lane Manual, Sound B (his note: too robotic and loud, change entirely):
   // the quiet scratch of chalk as t plays (4 s).
   "splat-equation": { voice: "rustle", f: 2600, n: 30, decay: 2.6, bright: 0.3, vol: 0.3 },
-  // Lane PT1: a clean, soft swell for the flight (no noise), easing down as the form lands.
-  "shape-morph": { voice: "pad", f: "E4", to: 0.94, decay: 0.95, vol: 0.9 },
+  // Lane PT3: a soft tine as the cloud leaves, a faint breath of air under the flight, and a
+  // second tine a fifth up as the form lands (1.8 s). The single-pitch pad it had is banned
+  // (docs/PACKS.md, "Banned sounds").
+  "shape-morph": [
+    { voice: "tine", f: "E5", decay: 0.9, vol: 0.75 },
+    { voice: "breath", f: 700, to: 0.8, at: 0.15, decay: 1.6, vol: 0.12 },
+    { voice: "tine", f: "B5", at: 1.75, decay: 1, vol: 0.55 },
+  ],
   // Lane PT2 (the owner's review of October 16, 2026): one soft, clean sine per split or merge,
   // pitched by the level it lands on (src/packs/one-splat.js plays it as a cue; this is level 7, a first tap's).
   "one-splat": { voice: "tone", f: "C5", decay: 2, vol: 0.45 },

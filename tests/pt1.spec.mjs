@@ -145,7 +145,9 @@ test("a poke rings out letter by letter, plays the touched letter's bar, and set
   const R = data.layout.letters[0].center;
   const { out, travel, cues } = play(recipe, data, { 2: [[R[0], R[1], 0.17]] }, 150);
   expect(travel).toBeGreaterThan(0.2);
-  expect(cues[0]).toMatchObject({ voice: "bar", f: "C5" }); // Toy Box's scale starts at C5
+  // Toy Box's scale starts at C5 (lane PT3: its own bar, a sine and a ring two octaves up).
+  expect(cues[0]).toMatchObject([{ voice: "tone" }, { voice: "tone" }]);
+  expect(cues[0][0].f).toBeCloseTo(523.25, 1);
   for (const tk of out.tokens) {
     expect(tk.offset).toEqual([0, 0, 0]);
     expect(tk.quat).toEqual([0, 0, 0, 1]);
@@ -166,10 +168,14 @@ test("Drop breaks letters into pieces that fall, land with knocks, and come back
   for (const tk of fall.out.tokens) expect(tk.offset[1]).toBeLessThan(-0.05);
   const ys = fall.out.tokens.map((tk, i) => layout.pieceList[i].center[1] + tk.offset[1]);
   expect(Math.min(...ys)).toBeGreaterThan(layout.floor - 0.05);
-  expect(fall.cues.filter((c) => c.voice === "wood").length).toBeGreaterThan(8);
+  // Lane PT3: Toy Box's clatter, a triangle tick as each piece lands.
+  expect(
+    fall.cues.filter((c) => c.voice === "tone" && c.kind === "triangle").length,
+  ).toBeGreaterThan(8);
   setDrop(sim, false, fall.t);
   const back = play(recipe, data, {}, 180, fall.t);
-  expect(back.cues.some((c) => c.voice === "breath")).toBe(true);
+  // Lane PT3: Toy Box's zip as they come back (steps up, then a C6).
+  expect(back.cues.some((c) => Array.isArray(c) && c.at(-1).f === "C6")).toBe(true);
   for (const tk of back.out.tokens) {
     expect(tk.offset).toEqual([0, 0, 0]);
     expect(tk.quat).toEqual([0, 0, 0, 1]);
@@ -454,7 +460,7 @@ test("text that draws nothing never breaks either toy", async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test("the name flies in when it opens, and ticks while it turns", async ({ page }) => {
+test("the name flies in when it opens, and stays silent while it turns", async ({ page }) => {
   const errors = await open(page, "name-toy", 390, 844);
   const out = await page.evaluate(async () => {
     const { app, player } = window.__splashery;
@@ -462,7 +468,8 @@ test("the name flies in when it opens, and ticks while it turns", async ({ page 
     const data = player.motion.ctx.kit.data;
     const away = Math.max(...data.sim.letters.map((b) => Math.hypot(...b.d)));
     await new Promise((r) => setTimeout(r, 2500));
-    // Turn the view a whole radian: about four ticks.
+    // Turn the view a whole radian. Lane PT3: no tick (they read as clicks
+    // under every orbit; tests/pt3.spec.mjs drags a real orbit).
     const cues = [];
     const off = player.on("cue", (c) => cues.push(...c));
     player.camera.begin();
@@ -473,9 +480,9 @@ test("the name flies in when it opens, and ticks while it turns", async ({ page 
     }
     player.camera.end();
     off?.();
-    return { away, ticks: cues.filter((c) => c?.kind === "square").length };
+    return { away, cues: cues.length };
   });
   expect(out.away).toBeGreaterThan(0.3);
-  expect(out.ticks).toBeGreaterThan(0);
+  expect(out.cues).toBe(0);
   expect(errors).toEqual([]);
 });

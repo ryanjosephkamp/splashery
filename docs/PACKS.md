@@ -278,6 +278,17 @@ owner's exceptions (7e), the music shelf and toys marked `keep` in `tools/sound-
 warn. The thresholds (`LINT` at the top) were set on September 30, 2026, so that the toys the owner
 complained about fail and the ones he likes pass; they are a guide, and his ears are the real test.
 
+**Banned sounds** (since October 17, 2026, lane PT3): sounds the owner turned down outright, never
+for a new toy. `tests/pt3.spec.mjs` checks every spec in `src/toy-sounds.js` and every cue a pack
+writes; a toy may keep a banned sound only while it is on that test's list of toys that had it (none
+today).
+
+- The lone `pad`: the `pad` voice on one pitch with no `notes` (only an `f`, a `pitch` or neither),
+  with or without a `to` glide. Two detuned triangle waves on one held note read as a robotic hum.
+  It was Shape morph's tap sound (`{ voice: "pad", f: "E4", to: 0.94, decay: 0.95, vol: 0.9 }`)
+  until lane PT3. A `pad` with `notes` (the laptop's chord, the Fourier circles' notes building into
+  a chord) is still fine.
+
 **Flag colors**: `patternProjection: "top"` makes a toy lay flag colors on from above (a flat toy:
 the chess board) when a flag is picked; `patternAmount: 0.3` lays them on gently and
 `patternDetail: 1` keeps each splat's own light and dark under them (the chess board's light and

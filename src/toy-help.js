@@ -25,7 +25,7 @@ export const TOY_HELP = {
     howTo:
       "Type a name in Toy, emoji too. Pick Spin, Poke, Paint, Drop, or Blow on the stage, then touch the letters.",
     about:
-      "From Ryan Kamp's Toy Box. Your name becomes thick, rounded letters of soft splats in Toy Box's Fredoka font. Any language, symbols, and emoji (flags and skin tones too) work, in your device's own fonts.\n\nSpin turns the name, and a tap pokes it. Poke rings out from your finger, and each letter plays its own xylophone note. Paint dabs one of eight colors where you drag; Wash it off clears it. Drop breaks the letters into pieces that fall and pile up; press it again to put them back. Blow pushes the letters away while you hold. The keys 1 to 5 pick the tools. Links keep the name and the paint. Made by Ryan with Claude (Opus 5.5); MIT code, CC0 letters, and Fredoka under the SIL Open Font License.",
+      "From Ryan Kamp's Toy Box. Your name becomes thick, rounded letters of soft splats in Toy Box's Fredoka font. Any language, symbols, and emoji (flags and skin tones too) work, in your device's own fonts.\n\nSpin turns the name (quietly), and a tap pokes it. Poke rings out from your finger, and each letter plays its own xylophone note, as in Toy Box. Paint dabs one of eight colors where you drag; Wash it off clears it. Drop breaks the letters into pieces that fall and pile up; press it again to put them back. Blow pushes the letters away while you hold. The keys 1 to 5 pick the tools. The Splats slider in Look sets how many splats it is made of. Links keep the name and the paint. Made by Ryan with Claude (Opus 5.5); MIT code, CC0 letters, and Fredoka under the SIL Open Font License.",
   },
   "specimen-neuron": {
     howTo: "Tap the cell to stimulate it there. In Toy, change the stain or turn Focus.",
@@ -1617,7 +1617,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to morph to the next form. Add words, emoji, shapes, or QR codes in the Toy tab; drag to push the splats.",
     about:
-      "One cloud of Gaussian splats takes one form after another: words or names (emoji keep their colors), the Lorenz attractor, a Klein bottle, a gyroid, a loop, and QR codes. You set the list and its order. A tap morphs the cloud to the next form, starting where you tap and spreading from there; pick a form on the stage to go straight to it.\n\nIn the Toy tab, type a word to add it, add shapes or a QR code of the QR text, and move or remove forms. A QR code holds up to 42 bytes and scans once it settles. Drag through the cloud to push splats; they settle back. From Ryan Kamp's Overprint concept. Made by Ryan with Codex (GPT-6) and Claude (Opus 5.5); code is MIT, and the forms and sound are CC0.",
+      "One cloud of Gaussian splats takes one form after another, all in the toy's teal-to-pink ink: words or names (an emoji gives its shape and its light and dark), the Lorenz attractor, a Klein bottle, a gyroid, a loop, and QR codes. You set the list and its order. A tap morphs the cloud to the next form, starting where you tap and flowing from there as one sheet; pick a form on the stage to go straight to it.\n\nIn the Toy tab, type a word to add it, add shapes or a QR code of the QR text, and move or remove forms. A QR code holds up to 42 bytes and scans once it settles. Drag through the cloud to push splats; they settle back. From Ryan Kamp's Overprint concept. Made by Ryan with Codex (GPT-6) and Claude (Opus 5.5); code is MIT, and the forms and sound are CC0.",
   },
   "one-splat": {
     howTo:

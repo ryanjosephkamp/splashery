@@ -3595,10 +3595,13 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Lane PT1 (October 16, 2026): rebuilt to Toy Box parity with the shared text module
     (src/text-splats.js), a rigid-body simulation of letters and pieces, the five tools on a stage
     tool row, the site's paint for Paint, and old links' name, verb, color, paints, and detail still
-    opening.
-  - Sound: Each poked letter plays its own xylophone bar up a major scale; a soft squish for each
-    paint dab, a light knock as each piece lands, a breath as they come back, and a quiet wind while
-    blowing.
+    opening. Lane PT3 (the owner's walkthrough of October 17, 2026; Opus 5.5): Toy Box's own voices,
+    no clicks while orbiting, crisp letters (face splats shrink toward the outline), and the Splats
+    slider's count (up to 400,000) in place of the Detail option.
+  - Sound: Toy Box's sounds: each poked letter plays its own bar up a major scale (a clean sine and
+    a short ring two octaves up); a pop for a tool or color, a bright squelch for each paint dab, a
+    clatter tick as each piece lands, a quick zip up as they come back, and a soft wind while
+    blowing. Turning the view is silent.
   - Touch or drag interaction (phase F).
 - **Picture lab** (`picture-lab`). Now: tap: Next page, or play and pause. Plan: new effect (E6).
   - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27
@@ -4034,15 +4037,20 @@ Proposals below are suggestions; the owner may change them.
     October 16, 2026: any number of forms in an order the person sets, a tap morphs to the next, and
     a clean new sound. Upgraded by lane PT1 (Opus 5.5).
   - Effect: Every splat flies from where it is to its place in the next form of the person's list,
-    starting at the tapped place and spreading out from there; in flight the cloud wears its
-    teal-to-pink ink, and the new form's colors (an emoji's own) come in as it lands. Drags push
-    nearby splats, which settle back.
+    starting at the tapped place and spreading out from there; neighbors land near neighbors, so the
+    cloud flows as one sheet. Every form wears the toy's teal-to-pink ink: an emoji gives only its
+    shape and its light and dark, and a QR code is deep modules on a pale ground (it still scans).
+    Drags push nearby splats, which settle back.
   - Improved: Lane PT1 (October 16, 2026): a list of forms (words or names with emoji, shapes, and
     QR codes) that the person adds to, reorders, and trims; a tap or Play morphs to the next form
     from the tap; form chips on the stage; words through the shared text module; and a new pad sound
     in place of the grainy rustle. Codex task 78c: the six Overprint forms, live form switches, and
-    push recovery.
-  - Sound: A clean, soft swell that eases down as the form lands.
+    push recovery. Lane PT3 (the owner's walkthrough of October 17, 2026; Opus 5.5): every form in
+    the toy's palette, a morph paired along a space-filling curve, crisp letters and QR modules,
+    more splats (the Splats slider's count, up to 400,000), and two soft tines in place of the
+    robotic pad, which is now banned for new toys.
+  - Sound: A soft tine as the cloud leaves, a faint breath of air under the flight, and a second
+    tine a fifth up as the form lands.
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
   - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
     Lab; labs only): splat fields on the GPU.

@@ -4,9 +4,9 @@
   "summary": "Each form in the person's list is one sample of the same cloud of splats. The Lorenz equations, figure-eight Klein-bottle parametrization, gyroid approximation, and QR encoder have reference sources. Words are drawn with the device's own fonts; the loop is a graphic design; the list, flights, waves from a tap, pushes, colors, and the two-ink treatment are animation choices.",
   "claims": [
     {
-      "claim": "The word form samples the typed text as the device's fonts draw it, emoji in their own colors.",
-      "how": "src/text-splats.js splits the text into grapheme clusters with Intl.Segmenter (so emoji sequences joined by zero-width joiners, flags, and skin tones stay whole), draws each one with canvas fillText in the system fonts, and samples its inked pixels with an R2 sequence. Color glyphs (emoji) keep their pixels' colors; other glyphs take the form's ink. Text is cleaned (spaces collapsed, control characters dropped), limited to 48 visible characters when added from the word box, and wrapped at spaces after ten characters per line. In Node, where there is no canvas, the site's five-by-seven bitmap glyphs stand in.",
-      "where": "src/packs/shape-morph.js:77",
+      "claim": "The word form samples the typed text as the device's fonts draw it, an emoji giving only its shape and its light and dark, in the toy's ink.",
+      "how": "src/text-splats.js splits the text into grapheme clusters with Intl.Segmenter (so emoji sequences joined by zero-width joiners, flags, and skin tones stay whole), draws each one with canvas fillText in the system fonts, and samples its inked pixels with an R2 sequence. For a color glyph (an emoji), each splat's luminance shades the toy's ink at its place (lane PT3); other glyphs take the form's ink. Text is cleaned (spaces collapsed, control characters dropped), limited to 48 visible characters when added from the word box, and wrapped at spaces after ten characters per line. In Node, where there is no canvas, the site's five-by-seven bitmap glyphs stand in.",
+      "where": "src/packs/shape-morph.js:84",
       "sources": [
         {
           "title": "Intl.Segmenter",
@@ -22,13 +22,13 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/pt1.spec.mjs:209",
+      "test": "tests/pt1.spec.mjs:215",
       "note": "The tests check grapheme splitting, determinism, and that every list form builds finite and inside the frame. How a glyph looks depends on the device's fonts, so the same word can look a little different on another device."
     },
     {
       "claim": "The Lorenz form uses dx/dt = 10(y - x), dy/dt = x(28 - z) - y, and dz/dt = xy - (8/3)z.",
       "how": "The derivative uses sigma = 10, rho = 28, and beta = 8/3. A fixed-step RK4 path uses step 0.007, discards 800 warm-up steps, and stores 18,000 points before display sampling, axis reordering, centering, and scaling.",
-      "where": "src/packs/shape-morph.js:102",
+      "where": "src/packs/shape-morph.js:113",
       "sources": [
         {
           "title": "Lorenz attractor",
@@ -50,7 +50,7 @@
     {
       "claim": "The Klein form depicts a figure-eight Klein bottle with the expected self-intersections of a three-dimensional view.",
       "how": "The existing Splat equation preset at time zero evaluates R = 2 + cos(u/2)sin(v) - sin(u/2)sin(2v), x = R cos(u), y = sin(u/2)sin(v) + cos(u/2)sin(2v), and z = R sin(u), for u and v from 0 to 2pi. The published figure-eight formula's y and z axes are exchanged; a display rotation and uniform fit follow.",
-      "where": "src/packs/shape-morph.js:139",
+      "where": "src/packs/shape-morph.js:154",
       "sources": [
         {
           "title": "Klein bottle",
@@ -66,7 +66,7 @@
     {
       "claim": "The gyroid form samples the trigonometric approximation sin(x)cos(y) + sin(y)cos(z) + sin(z)cos(x) = 0.",
       "how": "Projected samples are accepted only when the implicit-field residual is at most 0.0001, then clipped to a ball of radius 2pi and fitted for display. The test undoes the display fit and checks sampled Float32 residuals within 0.00011.",
-      "where": "src/packs/shape-morph.js:164",
+      "where": "src/packs/shape-morph.js:179",
       "sources": [
         {
           "title": "Gyroid",
@@ -88,7 +88,7 @@
     {
       "claim": "The loop form is a decorative, flat three-node diagram, not a simulated orbit or a computed attractor.",
       "how": "The sampler places a filled disk, two rings, straight connectors, and an upper arc at fixed two-dimensional coordinates. Splats move between this drawing and the other forms only through the shared animation.",
-      "where": "src/packs/shape-morph.js:197",
+      "where": "src/packs/shape-morph.js:212",
       "sources": [
         {
           "title": "Shape morph's loop sampler",
@@ -104,7 +104,7 @@
     {
       "claim": "The QR form uses the vendored QR Code Model 2 encoder at error-correction level M and includes a four-module quiet zone.",
       "how": "Selecting QR imports the shared encoder, calls it with level M and boosting disabled, and samples its dark and light modules with four blank modules on every side. The editable input accepts up to 42 UTF-8 bytes; a browser test submits 21 accented letters, exactly 42 bytes, and checks the resulting encoded text and level.",
-      "where": "src/packs/shape-morph.js:601",
+      "where": "src/packs/shape-morph.js:718",
       "sources": [
         {
           "title": "QR Code generator library",
@@ -130,7 +130,7 @@
     "The Klein bottle is shown with self-intersections in three dimensions. Its radius, orientation, and colored bands are display choices.",
     "The gyroid uses a trigonometric approximation to the minimal surface and clips it to a finite ball.",
     "The word and loop are graphic designs (the word follows the device's fonts). The two-ink treatment changes colors, without simulating ink or printing.",
-    "A tap's morph starts at the tapped place: each splat waits 0.38 seconds for every unit it lies from the tap, then flies for 1.8 seconds. In flight the cloud wears its teal-to-pink ink, and a form's own colors come in as it lands. These are animation choices."
+    "A tap's morph starts at the tapped place: each splat waits 0.38 seconds for every unit it lies from the tap, then flies for 1.8 seconds. In flight the cloud wears its teal-to-pink ink, and the form's own shading comes in as it lands; each splat flies to the place of the same rank along a 3D Hilbert curve, so neighbors land near neighbors (lane PT3). These are animation choices."
   ],
   "fixes": []
 }

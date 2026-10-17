@@ -345,10 +345,70 @@ export const hasInk = (text, opts = {}) => layoutText(text, opts).glyphs.length 
 
 const splatCache = new Map();
 
+// Lane PT3: crisp faces. A splat's visible edge is about two sigmas out, so
+// near the outline sigma follows half the distance to it (down to a share
+// of the face's spacing), and splats are kept in proportion to the density
+// that size needs to close the face (up to EDGE_DENSITY times the middle's).
+const EDGE_MIN = 0.35;
+const EDGE_DENSITY = 1 / (EDGE_MIN * EDGE_MIN);
+const OVERLAP = 1.35; // sigma over spacing: overlap enough that the even lattice never shows
+const R3 = 0.41421356237309515; // a third even axis for the keep-or-skip draw
+const edgeSigma = (s0, inside) => Math.min(s0, Math.max(s0 * EDGE_MIN, (inside / PX) * 0.5));
+
+// Each pixel's distance (pixels) from its center to the glyph's outline: a
+// two-pass chamfer distance to the nearest pixel off the ink, less half a pixel.
+function insideDistance(ras) {
+  if (ras.inside) return ras.inside;
+  const { w, h, alpha } = ras;
+  const big = 1e6;
+  const d = new Float32Array(w * h);
+  for (let i = 0; i < d.length; i++) d[i] = alpha[i] >= 128 ? big : 0;
+  const at = (x, y) => (x < 0 || y < 0 || x >= w || y >= h ? 0 : d[y * w + x]);
+  const A = 1;
+  const B = Math.SQRT2;
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const i = y * w + x;
+      if (!d[i]) continue;
+      d[i] = Math.min(d[i], at(x - 1, y) + A, at(x, y - 1) + A, at(x - 1, y - 1) + B, at(x + 1, y - 1) + B); // prettier-ignore
+    }
+  for (let y = h - 1; y >= 0; y--)
+    for (let x = w - 1; x >= 0; x--) {
+      const i = y * w + x;
+      if (!d[i]) continue;
+      d[i] = Math.min(d[i], at(x + 1, y) + A, at(x, y + 1) + A, at(x + 1, y + 1) + B, at(x - 1, y + 1) + B); // prettier-ignore
+    }
+  for (let i = 0; i < d.length; i++) d[i] = Math.max(0, d[i] - 0.5);
+  ras.inside = d;
+  return d;
+}
+
+// The face's middle sigma s0 for m splats: the density a splat of sigma s
+// needs to close a surface is 0.9025 / s² (sigma 0.95 of the spacing), so
+// m is the sum of that over the ink. Found by bisection.
+function faceFit(ink, inside, m) {
+  if (!ink.length || m < 1) return 0.01;
+  const area = 1 / (PX * PX);
+  const count = (s0) => {
+    let n = 0;
+    for (const pix of ink) n += (OVERLAP * OVERLAP * area) / edgeSigma(s0, inside[pix]) ** 2;
+    return n;
+  };
+  let lo = 1e-4;
+  let hi = 1;
+  for (let k = 0; k < 40; k++) {
+    const mid = Math.sqrt(lo * hi);
+    if (count(mid) > m) lo = mid;
+    else hi = mid;
+  }
+  return Math.sqrt(lo * hi);
+}
+
 // Splats for the text. options: count (the budget), seed, cols, line,
 // depth (half the slab's thickness, in ems; 0 for a flat sheet: front face
 // only), colorOf(glyphIndex) -> [r, g, b] for plain glyphs, back (the back
-// face's share of a face's splats, 0..1).
+// face's share of a face's splats, 0..1), crisp (true: faces sharpen
+// toward the outline; false: one size per face, as before lane PT3).
 // Returns { layout, n, pos, nrm, col, sigma, glyph (Uint16Array: which
 // glyph each splat belongs to), face (Uint8Array: 0 front, 1 back, 2 rim),
 // ranges: [[start, end)] per glyph, ink: true per glyph that has color }.
@@ -358,9 +418,10 @@ export function textSplats(text, opts = {}) {
   const colorOf = opts.colorOf || (() => [1, 0.86, 0.1]);
   const font = opts.font || TEXT_FONT;
   const round = opts.round ?? true;
+  const crisp = opts.crisp ?? true;
   const layout = layoutText(text, { cols, line, font, round });
   const glyphs = layout.glyphs;
-  const key = `${text}|${count}|${seed}|${cols}|${line}|${depth}|${back}|${opts.colorKey ?? ""}|${font}|${round}|${typeof document !== "undefined"}`; // prettier-ignore
+  const key = `${text}|${count}|${seed}|${cols}|${line}|${depth}|${back}|${opts.colorKey ?? ""}|${font}|${round}|${crisp}|${typeof document !== "undefined"}`; // prettier-ignore
   const hit = splatCache.get(key);
   if (hit) return hit;
   // Each glyph's outline and ink, and its share of the budget by area.
@@ -443,9 +504,15 @@ export function textSplats(text, opts = {}) {
     const nFront = depth > 0 ? Math.round(((want - nRim) * 1) / (1 + back)) : want;
     const nBack = want - nRim - nFront;
     // Sigma from each part's own spacing, so every surface closes.
-    const sF = Math.sqrt(p.faceArea / Math.max(1, nFront)) * 0.95;
-    const sB = Math.sqrt(p.faceArea / Math.max(1, nBack)) * 0.95;
-    const sR = Math.sqrt(p.rimArea / Math.max(1, nRim)) * 0.95;
+    const sR = Math.sqrt(p.rimArea / Math.max(1, nRim)) * (crisp ? OVERLAP : 0.95);
+    // Lane PT3: a face's splats shrink toward the outline, so none spills
+    // past the letter's edge (the soft, ragged rim read as grain), and more
+    // of them sit there, so the face still closes. `inside` is each ink
+    // pixel's distance to the outline.
+    const inside = crisp ? insideDistance(gl.ras) : null;
+    const fit = (m) => (crisp ? faceFit(p.ink, inside, m) : Math.sqrt(p.faceArea / Math.max(1, m)) * 0.95); // prettier-ignore
+    const sF = fit(nFront);
+    const sB = fit(nBack);
     const reach = Math.max(0.02, depth - sR * 0.35);
     // The rim: outline pixels in turn, spread evenly through the depth.
     for (let k = 0; k < nRim && p.edges.length; k++) {
@@ -456,7 +523,7 @@ export function textSplats(text, opts = {}) {
       const gy = a(x, y + 1) - a(x, y - 1);
       const len = Math.hypot(gx, gy) || 1;
       put(ux(x + rand()), uy(y + rand()), (frac(0.5 + k * R2[1]) * 2 - 1) * reach,
-        -gx / len, gy / len, 0, colorAt(pix), 0.74 * (0.98 + 0.035 * rand()), sR * (0.85 + 0.3 * rand()), gi, 2); // prettier-ignore
+        -gx / len, gy / len, 0, colorAt(pix), 0.74 * (0.98 + 0.035 * rand()), sR * (crisp ? 0.95 + 0.1 * rand() : 0.85 + 0.3 * rand()), gi, 2); // prettier-ignore
     }
     // The faces: Toy Box's even (R2) sequence over the glyph's box, kept
     // where it lands on ink.
@@ -481,14 +548,22 @@ export function textSplats(text, opts = {}) {
     ];
     for (const [m, z, nz, k0, s0, f] of faces) {
       let got = 0;
-      for (let k = 0; got < m && ink.length && k < m * 40; k++) {
+      for (let k = 0; got < m && ink.length && k < m * (crisp ? 120 : 40); k++) {
         const fx = bx0 + frac(0.5 + f * 0.31 + k * R2[0]) * bw;
         const fy = by0 + frac(0.5 + f * 0.17 + k * R2[1]) * bh;
         const pix = Math.floor(fy) * w + Math.floor(fx);
         if (alpha[pix] < 128) continue;
+        let s = s0 * (0.85 + 0.3 * rand());
+        if (crisp) {
+          // Kept in proportion to the density a splat this size needs (a
+          // third R2 axis decides, so the faces stay even).
+          const size = edgeSigma(s0, inside[pix]);
+          if (frac(0.5 + f * 0.43 + k * R3) * EDGE_DENSITY > (s0 / size) ** 2) continue;
+          s = size * (0.96 + 0.08 * rand());
+        }
         got++;
         put(ux(fx), uy(fy), z, (rand() - 0.5) * 0.06, (rand() - 0.5) * 0.06, nz,
-          colorAt(pix), k0 * (0.98 + 0.035 * rand()), s0 * (0.85 + 0.3 * rand()), gi, f); // prettier-ignore
+          colorAt(pix), k0 * (0.98 + 0.035 * rand()), s, gi, f); // prettier-ignore
       }
     }
     // (Rounding can leave a splat or two over; they are front-face splats.)

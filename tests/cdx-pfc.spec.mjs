@@ -192,7 +192,8 @@ for (const [width, height] of [
     expect(flight.halfway).toBeGreaterThan(0.1);
     expect(flight.halfway).toBeLessThan(0.9);
     expect(flight.end).toBe(0);
-    expect(flight.splats).toBe(width < 700 ? 7200 : 24000);
+    // Lane PT3: density 0.5 (was 0.12), for a cloud that closes its surfaces.
+    expect(flight.splats).toBe(width < 700 ? 30000 : 100000);
     await page.evaluate(() => window.__splashery.app.ui.collapseSheet());
     let previous = screenshotPixels(await page.locator("#stage").screenshot());
     for (const form of ["klein", "gyroid", "loop", "qr"]) {

@@ -4929,8 +4929,13 @@
     },
     "shape-morph": {
       "status": "ready",
-      "note": "The old sound was grainy.",
-      "plan": "A clean, soft swell while the splats fly, easing down as the form lands (lane PT1, October 16, 2026)."
+      "note": "The PT1 swell (a lone pad) read as robotic; that sound is now banned for new toys.",
+      "plan": "A soft tine as the cloud leaves, a faint breath of air under the flight, and a second tine a fifth up as the form lands (lane PT3, October 17, 2026)."
+    },
+    "name-toy": {
+      "status": "ready",
+      "note": "Its sounds were off, and it clicked while the view turned.",
+      "plan": "Toy Box's own voices: a clean sine bar per letter with a short ring two octaves up, a pop, a squelch, clatter ticks, a zip, and wind; no sound while orbiting (lane PT3, October 17, 2026)."
     }
   }
 }
