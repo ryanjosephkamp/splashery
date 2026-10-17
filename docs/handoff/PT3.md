@@ -66,7 +66,7 @@ Both toys are labs toys: the Operator merges after the full suite and the owner'
 
 ## State
 
-- WORKING (October 17, 2026). Clips and PR next.
+- WORKING (October 17, 2026), PR #717. Clips, thumbnails and preflight next.
 
 ## Decisions and open questions
 
