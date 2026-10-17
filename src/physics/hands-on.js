@@ -1057,6 +1057,9 @@ export class HandsOn {
         this.simTime += STEP;
         if (h && !h.ctl) this.followStep(h);
         if (w.step(STEP)) busy = true;
+        // Apply impacts before a joint can reseat and pin a loose body.
+        // An earlier collision must not knock it out of its new seat.
+        for (const hit of w.takeHits()) this.onHit(hit);
         if (this.joints?.step(STEP)) busy = true; // lane Hands engine B
         if (this.softParts?.step(STEP, this.simTime)) busy = true; // lane Hands engine C
       }
@@ -1070,7 +1073,6 @@ export class HandsOn {
         if (!a || !b || !w.touching(a, b)) this.passing.delete(k);
       }
     }
-    for (const hit of w.takeHits()) this.onHit(hit);
     if (this.squish) {
       const s = this.squish;
       const t = this.time - s.t0;
