@@ -1870,7 +1870,7 @@ class App {
   // The Share tab starts it; the pill on the stage shows the time, stops it and
   // then saves (or, on a phone, shares) the video. 60 seconds at most.
   async startRecord() {
-    if (this.recording || this.recordWait || this.busy) return;
+    if (this.recording || this.recordWait || this.recordCount || this.busy) return;
     const player = this.player;
     const stage = player.stage;
     // The site's sound (its context is made now, in the tap, so a sound
@@ -1880,6 +1880,10 @@ class App {
     // On a phone the sheet closes first, so the take starts at the stage's
     // own size (two frames for the new size to reach the canvas).
     this.ui.collapseSheet?.();
+    // Lane REC1: the countdown (the Share tab's choice), with Cancel a tap away.
+    // Nothing records until it ends, so the person can go full screen first.
+    const count = this.ui.recordCountdown?.() || 0;
+    if (count > 0 && !(await this.recordCountdown(count))) return;
     this.recordWait = true;
     await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
     this.recordWait = false;
@@ -1892,17 +1896,25 @@ class App {
     stage.reduced = false;
     stage.setPixelRatio(Math.min(saved.cap ?? 3, 1920 / long));
     let rec;
-    const kick = () => rec?.frame(); // each drawn frame goes into the video
-    stage.app.on("frameend", kick);
+    // Each drawn frame goes into the video. Lane REC1: "postrender", right after a
+    // real draw ("frameend" also comes for an update that drew nothing, when a
+    // WebGL canvas is already blank to copy).
+    const kick = () => rec?.frame();
+    stage.app.on("postrender", kick);
     const restore = () => {
-      stage.app.off("frameend", kick);
+      stage.app.off("postrender", kick);
       stage.adaptive = saved.adaptive;
       stage.setPixelRatio(saved.cap);
     };
     try {
+      // Lane REC1: what a resize leaves bare in the video (the stage's own
+      // background; nothing for a see-through one).
+      const c = stage.cameraEntity.camera.clearColor;
+      const rgb = [c.r, c.g, c.b].map((v) => Math.round(v * 255)).join(", ");
       rec = startRecording({
         canvas,
         audio,
+        background: c.a < 1 ? null : `rgb(${rgb})`,
         maxSeconds: RECORD_LIMIT,
         onTick: (seconds) => {
           this.ui.setRecord({ state: "rec", seconds, limit: RECORD_LIMIT });
@@ -1920,8 +1932,8 @@ class App {
     document.getElementById("rec-stop").focus({ preventScroll: true });
     stage.requestRender();
     rec.done
-      .then(({ blob, ext, seconds }) => {
-        this.recorded = { blob, name: timestampName(ext), seconds };
+      .then(({ blob, ext, seconds, frames }) => {
+        this.recorded = { blob, name: timestampName(ext), seconds, frames };
         const share = !!canShareFile(blob, this.recorded.name);
         this.ui.setRecord({ state: "ready", seconds, bytes: blob.size, share });
       })
@@ -1935,7 +1947,38 @@ class App {
       });
   }
 
+  // Lane REC1: counts `seconds` down on the stage, a soft tick each second (when
+  // the sound is on). Resolves true when it ends, false when canceled.
+  recordCountdown(seconds) {
+    return new Promise((resolve) => {
+      const t0 = performance.now();
+      let shown = 0;
+      let timer = 0;
+      const end = (ok) => {
+        clearTimeout(timer);
+        this.recordCount = null;
+        if (!ok) this.ui.setRecord({ state: "off" });
+        resolve(ok);
+      };
+      const step = () => {
+        const left = seconds - Math.floor((performance.now() - t0) / 1000);
+        if (left <= 0) return end(true);
+        if (left !== shown) {
+          shown = left;
+          this.ui.setRecord({ state: "count", seconds: left });
+          this.sound.play({ voice: "click", f: left === 1 ? 1800 : 1200, vol: 0.5 }, { key: "rec-count", gap: 0 }); // prettier-ignore
+        }
+        // Wakes at each whole second (and a little after, for timer drift).
+        const next = 1000 - ((performance.now() - t0) % 1000);
+        timer = setTimeout(step, Math.max(16, next + 5));
+      };
+      this.recordCount = { cancel: () => end(false) };
+      step();
+    });
+  }
+
   stopRecord() {
+    if (this.recordCount) return this.recordCount.cancel();
     if (!this.recording) return;
     this.ui.setRecord({ state: "busy" });
     this.recording.stop();

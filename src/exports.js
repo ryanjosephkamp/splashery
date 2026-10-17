@@ -153,21 +153,44 @@ export function recordSupport() {
 // Starts recording `canvas` (and the sound from `audio`, { ctx, node }, a
 // node every sound passes through, when there is one). Returns { stop(),
 // frame(), done }: frame() hands the canvas to the video after each render
-// (at most `fps` a second), and done resolves to { blob, ext, seconds } after
-// a stop or the time limit. onTick(seconds) reports the time every quarter
-// second.
+// (call it right after the render, as the stage's "postrender"), and done
+// resolves to { blob, ext, seconds, frames } after a stop or the time limit.
+// onTick(seconds) reports the time every quarter second. `background` (a CSS
+// color, or null for a see-through stage) fills what the stage leaves bare
+// after a resize.
+//
+// Lane REC1 (October 17, 2026): the video is a 2D canvas of a fixed size, the
+// stage's size when the take starts, and frame() copies each drawn frame into
+// it. Two things follow:
+// - The video gets frames for the whole take (at least `stillFps` a second), whether or not
+//   the stage draws (a still Photo to 3D draws nothing): a phone's recorder
+//   ends the file at the last frame it was handed, so a take that only had
+//   frames while something moved came out a few seconds long.
+// - A resize during the take (going full screen) can't move the toy: the new
+//   frame is scaled so its narrower side, the one the camera's field of view
+//   fits, keeps its length in the video, and centered, as the toy is on the
+//   stage. The video keeps the framing it started with.
 export function startRecording({
   canvas,
   audio = null,
   maxSeconds = RECORD_LIMIT,
   onTick,
   fps = 30,
+  stillFps = 10,
+  background = null,
 }) {
   const sup = recordSupport();
   if (!sup.ok) throw new Error(sup.reason);
-  // Frames are handed over by frame() (the stage draws on demand, and not
-  // every browser captures a WebGL canvas by itself).
-  const video = canvas.captureStream(0);
+  // H.264 wants even sizes.
+  const W = Math.max(2, canvas.width & ~1);
+  const H = Math.max(2, canvas.height & ~1);
+  const out = document.createElement("canvas");
+  out.width = W;
+  out.height = H;
+  const g = out.getContext("2d", { alpha: !background });
+  g.imageSmoothingQuality = "high";
+  // Frames are handed over by requestFrame() (frame() and the steady clock).
+  const video = out.captureStream(0);
   const track = video.getVideoTracks()[0];
   const tracks = [track];
   let tap = null;
@@ -202,13 +225,15 @@ export function startRecording({
   rec.ondataavailable = (e) => {
     if (e.data && e.data.size) chunks.push(e.data);
   };
-  const t0 = performance.now();
+  let t0 = 0;
   const seconds = () => (performance.now() - t0) / 1000;
   let timer = 0;
+  let clock = 0;
   let length = 0;
   const done = new Promise((resolve, reject) => {
     rec.onstop = () => {
       clearInterval(timer);
+      clearInterval(clock);
       for (const t of video.getTracks()) t.stop();
       if (tap) {
         try {
@@ -221,7 +246,8 @@ export function startRecording({
       // A busy device can hand over the last piece a moment after the stop:
       // wait a little for it before calling the take empty.
       const finish = (tries) => {
-        if (chunks.length) resolve({ blob: new Blob(chunks, { type }), ext, seconds: length });
+        if (chunks.length)
+          resolve({ blob: new Blob(chunks, { type }), ext, seconds: length, frames: pushed }); // prettier-ignore
         else if (tries > 0) setTimeout(() => finish(tries - 1), 250);
         else reject(new Error("The recording came out empty."));
       };
@@ -230,32 +256,93 @@ export function startRecording({
     rec.onerror = (e) => reject(e.error || new Error("The recording stopped."));
   });
   let lastFrame = -Infinity;
-  const frame = () => {
-    const now = performance.now();
-    if (rec.state !== "recording" || now - lastFrame < 1000 / fps - 2) return;
-    lastFrame = now;
+  let pushed = 0;
+  const push = () => {
+    lastFrame = performance.now();
+    pushed++;
     track.requestFrame?.();
   };
-  const stop = () => {
-    if (rec.state === "inactive") return;
-    length = Math.min(maxSeconds, seconds());
-    try {
-      rec.requestData(); // what the encoder holds so far
-    } catch {
-      // Not recording any more.
+  // Copies the stage's frame into the video's canvas (right after a render,
+  // while a WebGL canvas still holds its picture).
+  const copy = () => {
+    const w = canvas.width;
+    const h = canvas.height;
+    if (!w || !h) return;
+    if (w === W && h === H) {
+      if (!background) g.clearRect(0, 0, W, H);
+      g.drawImage(canvas, 0, 0);
+      return;
     }
-    rec.stop();
+    const s = Math.min(W, H) / Math.min(w, h);
+    const dw = w * s;
+    const dh = h * s;
+    if (background) {
+      g.fillStyle = background;
+      g.fillRect(0, 0, W, H);
+    } else g.clearRect(0, 0, W, H);
+    g.drawImage(canvas, (W - dw) / 2, (H - dh) / 2, dw, dh);
   };
-  // A timeslice keeps memory in small pieces on long takes.
-  rec.start(1000);
-  frame();
-  timer = setInterval(() => {
-    const s = seconds();
-    onTick?.(Math.min(s, maxSeconds));
-    if (s >= maxSeconds) stop();
-    else frame(); // a still stage still gives the video a few frames a second
-  }, 250);
-  return { stop, frame, done, ext };
+  const frame = () => {
+    if (!begun) return begin(true);
+    if (rec.state !== "recording" || stopping) return;
+    copy();
+    if (performance.now() - lastFrame >= 1000 / fps - 2) push();
+  };
+  // A recorder encodes a little behind the take and drops what it still holds
+  // when it stops (most on a busy device: the last half second or more). So
+  // Stop ends the picture at once, then the steady clock hands over the last
+  // frame again for DRAIN ms, which pushes the take's own last frames through,
+  // before the recorder stops.
+  const DRAIN = 400;
+  let stopping = false;
+  const stop = () => {
+    if (!begun) begin(false);
+    if (rec.state === "inactive" || stopping) return;
+    stopping = true;
+    length = Math.min(maxSeconds, seconds());
+    clearInterval(timer);
+    setTimeout(() => {
+      try {
+        rec.requestData(); // what the encoder holds so far
+      } catch {
+        // Not recording any more.
+      }
+      rec.stop();
+    }, DRAIN);
+  };
+  // The take begins with the stage's first frame (the next render, or after
+  // half a second if none comes), so the file's clock, which starts at its
+  // first frame, and the take's time start together.
+  let begun = false;
+  const begin = (drawn) => {
+    if (begun) return;
+    begun = true;
+    clearTimeout(wait);
+    copy();
+    // A timeslice keeps memory in small pieces on long takes.
+    rec.start(1000);
+    t0 = performance.now();
+    if (drawn) push();
+    timer = setInterval(() => {
+      const s = seconds();
+      onTick?.(Math.min(s, maxSeconds));
+      if (s >= maxSeconds) stop();
+    }, 250);
+    // The steady clock: a still stage still gives the video `stillFps` frames
+    // a second (the same picture again; a moving one gives up to `fps`). Not
+    // more: an encoder that can't keep up queues frames, and a recorder drops
+    // its queue when it stops. Drawing a corner pixel of the canvas onto itself
+    // marks it changed (a browser may skip a frame of an unchanged canvas) and,
+    // on an opaque canvas, changes nothing.
+    clock = setInterval(() => {
+      if (rec.state !== "recording") return;
+      if (performance.now() - lastFrame < 1000 / (stopping ? fps : stillFps) - 2) return;
+      g.drawImage(out, 0, 0, 1, 1, 0, 0, 1, 1);
+      push();
+    }, 1000 / fps);
+  };
+  const wait = setTimeout(() => begin(false), 500);
+  return { stop, frame, done, ext, canvas: out };
 }
 
 // Hands a saved video to the phone's share sheet (Save Video on an iPhone)
