@@ -3,8 +3,8 @@
 Codex (GPT-6) built this study. **The Goal is unmet: neither Layered research variant passes the
 truth-view and boundary gates.** Classic's code and golden pins are unchanged.
 
-This branch is evidence only. Never merge it into `main`. The code and report belong to the draft PR
-from `codex/photo-3d-next`.
+This branch is evidence only. Never merge it into `main`. The code and report belong to
+[draft PR #690](https://github.com/ryanjosephkamp/splashery/pull/690) from `codex/photo-3d-next`.
 
 ## Blind phone comparison
 
@@ -29,9 +29,11 @@ records without revealing method identities.
 
 `raw/index.json.gz` lists archived files and hashes. Per-pose records, model configuration and input
 hashes, the two failed reconstruction variants, source-license checks, and measured cost
-observations are compressed in `raw/`. `raw/study-sources.tar.gz` preserves the exact earlier
-capture sources and control/figure scripts. Numeric model outputs and full-resolution renders can be
-regenerated from the pinned public inputs; they are not packaged as application assets.
+observations are compressed in `raw/`. The CI case archive retains all 3,351 statuses, durations,
+annotations, errors, and original report hashes; binary attachments and console output stay in the
+Actions artifacts. `raw/study-sources.tar.gz` preserves the exact earlier capture sources and
+control/figure scripts. Numeric model outputs and full-resolution renders can be regenerated from
+the pinned public inputs; they are not packaged as application assets.
 
 True-target RGB, masks, and depth rasters are deliberately absent from Git. The target metadata
 records their hashes, fixed physical cameras, and guide protocol. The final protocol uses 16 Cycles
