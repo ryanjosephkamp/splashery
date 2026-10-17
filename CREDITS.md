@@ -1941,7 +1941,7 @@ in `tools/picture-qr-fidelity/fixtures/` and are loaded only by the study. The s
 download, date, SHA-256 hashes, and resizing record for each image are in
 `tools/picture-qr-fidelity/corpus.json` and `tools/assets.json`.
 
-| Test image                  | Maker                                          | Source                                                                   |
+| Entry                       | Maker                                          | Source                                                                   |
 | --------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------ |
 | met-436305: Still Life      | Georg Flegel                                   | [Met collection](https://www.metmuseum.org/art/collection/search/436305) |
 | met-10181: Landscape        | Ralph Albert Blakelock                         | [Met collection](https://www.metmuseum.org/art/collection/search/10181)  |
