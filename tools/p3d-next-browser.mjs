@@ -3,6 +3,8 @@
 import fs from "node:fs";
 import { softBoundaryShader } from "./p3d-next-shader.mjs";
 export async function measureNext(entry, profile, options) {
+  const fillOnly = options.candidate === "fill";
+  if (fillOnly && options.clean) throw new Error("Fill must retain Classic foreground colors");
   const original = new URL("./p3df/browser.mjs", import.meta.url);
   let source = fs.readFileSync(original, "utf8");
   const replace = (before, after) => {
@@ -15,9 +17,14 @@ export async function measureNext(entry, profile, options) {
     .replace("self.onmessage = (", "self.onmessage = async (")
     .replace(
       "    const f =",
-      `    s.background = patchMatchBackground(cached?.photo || photo, s, ${JSON.stringify(options.patch || {})});\n    const f =`,
+      fillOnly
+        ? "    s = fillSurface(cached?.photo || photo, s);\n    const f ="
+        : `    s.background = patchMatchBackground(cached?.photo || photo, s, ${JSON.stringify(options.patch || {})});\n    const f =`,
     );
-  let candidateWorker = 'import { patchMatchBackground } from "./next/patchmatch.js";\n' + worker;
+  let candidateWorker =
+    (fillOnly
+      ? 'import { fillSurface } from "./next/fill.js";\n'
+      : 'import { patchMatchBackground } from "./next/patchmatch.js";\n') + worker;
   if (options.clean) {
     const start = candidateWorker.indexOf("    try {\n      if (options.bitmap"),
       end = candidateWorker.indexOf("    const buffers = new Set();");
@@ -44,7 +51,7 @@ export async function measureNext(entry, profile, options) {
     });
     if (${JSON.stringify(options.candidate || "classic")} !== "classic") {
       await context.route("**/src/photo3d/build-worker.js", r => {overlayHits.push("worker");return r.fulfill({body:${JSON.stringify(candidateWorker)},contentType:"text/javascript"});});
-      await context.route("**/src/live/relief-mesh.js", r => {overlayHits.push("shader");return r.fulfill({body:${JSON.stringify(shader)},contentType:"text/javascript"});});
+      ${fillOnly ? "" : `await context.route("**/src/live/relief-mesh.js", r => {overlayHits.push("shader");return r.fulfill({body:${JSON.stringify(shader)},contentType:"text/javascript"});});`}
     }
     if (entry.truth)`,
   );
@@ -91,7 +98,7 @@ export async function measureNext(entry, profile, options) {
     "    const rows = [];",
     `    const rows = []; const targetCameras = [];
     const fillStats = await page.evaluate(()=>window.__nextFillStats || null);
-    if (${JSON.stringify(options.candidate || "classic")} !== "classic" && (!overlayHits.includes("worker") || !overlayHits.includes("shader") || !fillStats)) throw new Error("Candidate overlay did not execute");`,
+    if (${JSON.stringify(options.candidate || "classic")} !== "classic" && (!overlayHits.includes("worker") || ${fillOnly ? 'overlayHits.includes("shader")' : '!overlayHits.includes("shader")'} || !fillStats)) throw new Error("Candidate overlay did not execute");`,
   );
   replace(
     "      const file = `${prefix}-${yaw}-${pitch}.png`;",
