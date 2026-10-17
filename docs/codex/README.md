@@ -118,6 +118,11 @@ task 78's portfolio toys had to be rebuilt in Claude lanes PT1 and PT2.
 | 101-suite-speed.md                | A faster full suite: whole run under 25 minutes, nothing dropped                                          | the ten slowest spec files, `tools/suite.json`                           | no            |
 | 102-crisper-splats.md             | Crisper toys at phone size: a sharpness yardstick, `even: true`, text toys first                          | pack settings, `tools/crisp-score.mjs`, tests                            | no            |
 | 103-phone-speed.md                | Faster toys on phones: measure every toy, the 15 slowest at least 25% faster                              | packs, `tools/phone-speed.mjs`, a phone page, tests                      | no            |
+| 104-photos-to-3d.md               | Photos to 3D: many photos around one thing into one 3D scene, on the device                               | `src/photos3d/`, tools, tests                                            | yes           |
+| 105-blender-cloud.md              | Blender headless in Codex's cloud: calibrated views, depth, masks, and panoramas as ground truth          | `tools/`, setup docs, a report                                           | yes           |
+| 106-splats-to-mesh.md             | Splats to mesh: GLB, OBJ, and STL export, scored against the Poly Haven source meshes                     | `src/mesh-export/`, a labs tool, tests                                   | yes           |
+| 107-step-inside-360.md            | Step inside a 360° photo: seamless spherical depth and a room of splats you can lean into                 | `src/pano3d/`, a labs tool, tests                                        | yes           |
+| 108-frontier-research.md          | The frontier: a survey of new 3D techniques a browser can run, and two prototype pages                    | a report, two pages under `tools/pages/`                                 | yes           |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
