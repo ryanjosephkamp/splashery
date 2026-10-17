@@ -66,56 +66,73 @@ for (const [width, height] of [
   [1440, 900],
 ]) {
   test(`Studio converts, previews, cancels, and saves at ${width} × ${height}`, async ({
-    page,
+    browser,
+    baseURL,
   }) => {
-    await page.setViewportSize({ width, height });
-    const errors = [];
-    page.on("pageerror", (e) => errors.push(e.message));
-    await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
-    await page.waitForFunction(() => !!window.__splashery?.app);
-    await page.evaluate(() => window.__splashery.app.chooseToy("splats-to-mesh"));
-    if (
-      width < 760 &&
-      (await page.locator("#sheet-toggle").getAttribute("aria-expanded")) === "false"
-    )
-      await page.locator("#sheet-toggle").click();
-    await page.locator("#tab-play").click();
-    await expect(page.locator("#mesh-panel")).toBeVisible();
-    await page.getByText("Density, triangle budget, and attribution", { exact: true }).click();
-    await page.locator("#mesh-file").setInputFiles({
-      name: "sphere.splat",
-      mimeType: "application/octet-stream",
-      buffer: makeSplat(2000),
+    const page = await browser.newPage({
+      baseURL,
+      viewport: { width, height },
+      hasTouch: width < 760,
     });
-    await page.locator("#mesh-resolution").fill("40");
-    await page.locator("#mesh-convert").click();
-    await expect(page.locator("#mesh-status")).toContainText("Mesh ready", { timeout: 60000 });
-    await expect(page.locator("#mesh-report")).toContainText("triangles");
-    await expect(page.locator("#mesh-license")).toContainText("Source license");
-    await expect(page.locator("#mesh-preview")).toBeVisible();
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
-      true,
-    );
-    const dl = page.waitForEvent("download");
-    await page.locator("#mesh-save").click();
-    const download = await dl;
-    expect(download.suggestedFilename()).toMatch(/\.glb$/);
-    expect((await fs.promises.stat(await download.path())).size).toBeGreaterThan(100);
-    await page.locator("#mesh-preview").evaluate((e) => e.scrollIntoView({ block: "start" }));
-    await page.screenshot({ path: `tests/screenshots/cdx-mesh-${width}x${height}.png` });
-    await page.evaluate(() => {
-      document.querySelector("#mesh-convert").click();
-      document.querySelector("#mesh-cancel").click();
-    });
-    await expect(page.locator("#mesh-status")).toContainText("Canceled");
-    await expect(page.locator("#mesh-save")).toBeDisabled();
-    await page.locator("#mesh-file").setInputFiles({
-      name: "damaged.ply",
-      mimeType: "application/octet-stream",
-      buffer: Buffer.from("not a ply"),
-    });
-    await page.locator("#mesh-convert").click();
-    await expect(page.locator("#mesh-status")).toContainText(/could not|invalid|PLY|header/i);
-    expect(errors).toEqual([]);
+    try {
+      const errors = [];
+      page.on("pageerror", (e) => errors.push(e.message));
+      await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
+      await page.waitForFunction(() => !!window.__splashery?.app);
+      await page.evaluate(() => window.__splashery.app.chooseToy("splats-to-mesh"));
+      if (
+        width < 760 &&
+        (await page.locator("#sheet-toggle").getAttribute("aria-expanded")) === "false"
+      )
+        await page.locator("#sheet-toggle").click();
+      await page.locator("#tab-play").click();
+      await expect(page.locator("#mesh-panel")).toBeVisible();
+      await expect(page.locator("#mesh-resolution")).toHaveAttribute(
+        "max",
+        width < 760 ? "80" : "160",
+      );
+      await expect(page.locator("#mesh-budget")).toHaveAttribute(
+        "max",
+        width < 760 ? "80000" : "500000",
+      );
+      await page.getByText("Density, triangle budget, and attribution", { exact: true }).click();
+      await page.locator("#mesh-file").setInputFiles({
+        name: "sphere.splat",
+        mimeType: "application/octet-stream",
+        buffer: makeSplat(2000),
+      });
+      await page.locator("#mesh-resolution").fill("40");
+      await page.locator("#mesh-convert").click();
+      await expect(page.locator("#mesh-status")).toContainText("Mesh ready", { timeout: 60000 });
+      await expect(page.locator("#mesh-report")).toContainText("triangles");
+      await expect(page.locator("#mesh-license")).toContainText("Source license");
+      await expect(page.locator("#mesh-preview")).toBeVisible();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+      const dl = page.waitForEvent("download");
+      await page.locator("#mesh-save").click();
+      const download = await dl;
+      expect(download.suggestedFilename()).toMatch(/\.glb$/);
+      expect((await fs.promises.stat(await download.path())).size).toBeGreaterThan(100);
+      await page.locator("#mesh-preview").evaluate((e) => e.scrollIntoView({ block: "start" }));
+      await page.screenshot({ path: `tests/screenshots/cdx-mesh-${width}x${height}.png` });
+      await page.evaluate(() => {
+        document.querySelector("#mesh-convert").click();
+        document.querySelector("#mesh-cancel").click();
+      });
+      await expect(page.locator("#mesh-status")).toContainText("Canceled");
+      await expect(page.locator("#mesh-save")).toBeDisabled();
+      await page.locator("#mesh-file").setInputFiles({
+        name: "damaged.ply",
+        mimeType: "application/octet-stream",
+        buffer: Buffer.from("not a ply"),
+      });
+      await page.locator("#mesh-convert").click();
+      await expect(page.locator("#mesh-status")).toContainText(/could not|invalid|PLY|header/i);
+      expect(errors).toEqual([]);
+    } finally {
+      await page.close();
+    }
   });
 }
