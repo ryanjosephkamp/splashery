@@ -3161,6 +3161,12 @@
       "effect": "Any typed name, emoji included, as thick rounded letters of soft splats, with Toy Box's five tools on the stage: Spin turns it, Poke rings out letter by letter, Paint dabs eight colors (Wash it off clears them), Drop breaks the letters into pieces that fall, pile up, and come back, and Blow pushes the letters from a held finger. Every letter and piece moves as a solid piece.",
       "sound": "Each poked letter plays its own xylophone bar up a major scale; a soft squish for each paint dab, a light knock as each piece lands, a breath as they come back, and a quiet wind while blowing.",
       "improved": "Lane PT1 (October 16, 2026): rebuilt to Toy Box parity with the shared text module (src/text-splats.js), a rigid-body simulation of letters and pieces, the five tools on a stage tool row, the site's paint for Paint, and old links' name, verb, color, paints, and detail still opening."
+    },
+    "step-inside-360": {
+      "v": "keep",
+      "effect": "Lean sideways and return; drag to look around, or use Toy to lean and step.",
+      "sound": "A quiet wooden footstep.",
+      "improved": "Codex task 107: labs panorama shell with overlapping depth views, estimated room scale, bounded movement, and a stretch warning."
     }
   }
 }

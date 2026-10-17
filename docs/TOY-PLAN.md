@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 465 toys. 465 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 442.
+- 466 toys. 466 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 443.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 23.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 5.
@@ -76,15 +76,15 @@ Proposals below are suggestions; the owner may change them.
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
   Turing machine, Difference engine, Enigma machine, Bombe, Your name in splats, Picture lab, Your
   book, Photo album, Picture frame, Song landscape, Chladni plate, Sound in a box, Room echo meter,
-  Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab,
-  Sound recorder, Splat toolkit, Point clouds, Volume viewer, Shape morph, Splat field, Light lab,
-  Baked chest, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
-  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
-  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
-  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider,
-  Night sky, Data in 3D.
+  Splat mirror, Model to splats, QR code, Step inside a 360° photo, Photo to 3D, Moving photo to 3D,
+  Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume viewer, Shape morph,
+  Splat field, Light lab, Baked chest, Thermal ellipsoids, Super-resolution microscope, Galaxy in a
+  box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand
+  Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city,
+  Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
+  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
+  Rider, Night sky, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -3693,7 +3693,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (22)
+## Studio (23)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -3885,6 +3885,11 @@ Proposals below are suggestions; the owner may change them.
     back (2.6 s). The toy reads its own picture back with zxing-js.
   - Sound: A soft breath as the line sweeps (lane QR r5: no note at the end, the breath a little
     fuller).
+- **Step inside a 360° photo** (`step-inside-360`). Now: tap: Lean and return. Plan: keep.
+  - Effect: Lean sideways and return; drag to look around, or use Toy to lean and step.
+  - Improved: Codex task 107: labs panorama shell with overlapping depth views, estimated room
+    scale, bounded movement, and a stretch warning.
+  - Sound: A quiet wooden footstep.
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
   - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
     3D; labs only).

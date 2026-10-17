@@ -12795,5 +12795,48 @@
       "sha256": "3362a3d93e7bfd6f1ebb0b8e7ba7715a7807ce083799e441b2cf8c4d4a1249a7",
       "sourceNote": "From Ryan Kamp's Toy Box name toy. Original procedural splat letters drawn by src/text-splats.js in Fredoka (SIL OFL 1.1, vendor/fredoka/; the owner's OK of October 16, 2026), with the device's own fonts for other scripts and emoji (lane PT1). Code is MIT; shapes and the thumbnail are CC0. No reference files or renderer are shipped."
     }
+  ],
+  "panoramaSamples": [
+    {
+      "id": "pano-room",
+      "label": "Small Empty Room 1",
+      "file": "assets/toys/step-inside-360/room.jpg",
+      "source": "https://polyhaven.com/a/small_empty_room_1",
+      "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/small_empty_room_1.jpg",
+      "author": "Sergej Majboroda",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "checked": "October 17, 2026",
+      "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc",
+      "sourceSha256": "25925683b0295bd1f98b73ac230d2dcf5a6941bcff81e893aa992734808148be",
+      "changes": "Poly Haven tonemapped JPEG reduced from 8192×4096 to 2048×1024 with Pillow, JPEG quality 88. Spherical radial depth is estimated by the shipped model through tools/pano-bake.mjs; baked caches use the existing Photo to 3D depth file format. No source pixels are synthesized.",
+      "licenseChecked": "Both the live asset page and https://polyhaven.com/license declare CC0. Code made by Ryan with Codex (GPT-6), under MIT.",
+      "depthFile": "assets/toys/step-inside-360/room.depth",
+      "depthSha256": "e8658f275f1888bdbf9d41fc2e082b89c316c5ba6b551937f3a6faf5e08326c8",
+      "depthPipelineSha256": "1326d658d9b660bcba80fc380791b2a9a7bb57301fbf3bffb56bc399324dcec3",
+      "thumbnail": {
+        "file": "assets/toys/step-inside-360/thumb.webp",
+        "sha256": "77276eeceff0507afa974f4da5c81c9cb6ea692c39f61f38aef9118a2f520de6",
+        "changes": "Default sample rendered by tools/make-thumbs.mjs with the normal Kit and WebGL2 stage."
+      }
+    },
+    {
+      "id": "pano-room2",
+      "label": "Small Empty Room 2",
+      "file": "assets/toys/step-inside-360/room2.jpg",
+      "source": "https://polyhaven.com/a/small_empty_room_2",
+      "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/small_empty_room_2.jpg",
+      "author": "Sergej Majboroda",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "checked": "October 17, 2026",
+      "sha256": "d93eb56914ccac629443d8f084eed3fede163b4b511b3f6b0ed41d8ede60f5a1",
+      "sourceSha256": "269cb3f4528fe3bf0450037897e4e5d81f279ddb1b4470b441894a8e90de5587",
+      "changes": "Poly Haven tonemapped JPEG reduced from 8192×4096 to 2048×1024 with Pillow, JPEG quality 88. Spherical radial depth is estimated by the shipped model through tools/pano-bake.mjs; baked caches use the existing Photo to 3D depth file format. No source pixels are synthesized.",
+      "licenseChecked": "Both the live asset page and https://polyhaven.com/license declare CC0. Code made by Ryan with Codex (GPT-6), under MIT.",
+      "depthFile": "assets/toys/step-inside-360/room2.depth",
+      "depthSha256": "bf042299d283eefae1f7598b0dec11cedc8d71b37741146d72afbbf69bc9953c",
+      "depthPipelineSha256": "1326d658d9b660bcba80fc380791b2a9a7bb57301fbf3bffb56bc399324dcec3"
+    }
   ]
 }

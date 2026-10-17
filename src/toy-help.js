@@ -21,6 +21,11 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "step-inside-360": {
+    howTo: "Drag to look around. Open Toy to lean, step, or open your own 2:1 panorama.",
+    about:
+      "A complete panorama becomes a spherical shell of splats around you. Open a 2:1 equirectangular photo, including its ceiling and floor. The depth model runs on this device and combines six overlapping views. A look-around preview appears while it works. Nothing is uploaded or saved.\n\nDrag to look around, or enable phone tilt in Toy. Lean sideways, take small steps, and return to the center. Distances use an estimated room scale: one photo cannot measure meters or show surfaces hidden behind objects. The stretch warning asks you to move back when those limits become visible. Made by Ryan with Codex (GPT-6); MIT code and CC0 samples.",
+  },
   "name-toy": {
     howTo:
       "Type a name in Toy, emoji too. Pick Spin, Poke, Paint, Drop, or Blow on the stage, then touch the letters.",

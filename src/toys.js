@@ -3884,6 +3884,16 @@ export const TOYS = [
   },
   // ---- Pack: photo-3d (lane Photo to 3D) ----
   {
+    id: "step-inside-360",
+    label: "Step inside a 360° photo",
+    category: "studio",
+    kind: "kit",
+    pack: "../pano3d/toy",
+    labs: true,
+    tags: "panorama spherical equirectangular 360 room depth splats lean step photo",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  {
     id: "photo-3d",
     label: "Photo to 3D",
     category: "studio",
