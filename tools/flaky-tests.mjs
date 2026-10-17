@@ -50,6 +50,7 @@ const args = [
   `--repeat-each=${repeat}`,
   `--workers=${workers}`,
   "--fully-parallel",
+  "--retries=0",
   "--reporter=list,json",
   `--output=${path.join(out, "results")}`,
 ];

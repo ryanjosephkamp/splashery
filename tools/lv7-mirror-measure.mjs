@@ -72,14 +72,60 @@ async function nextAnswer(page) {
   await page.evaluate(async () => {
     const { MIRROR } = await import("/src/live/relief.js");
     const cam = MIRROR.cam;
-    const n0 = cam.answers;
-    const t0 = performance.now();
-    while (cam.answers === n0 && performance.now() - t0 < 30000) {
-      cam.ask();
-      await new Promise((r) => setTimeout(r, 30));
+    if (!cam || cam.closed) throw Error("Camera depth is unavailable before the fresh answer");
+    const draw = cam.draw;
+    let total = 0,
+      frames = 0,
+      invalidDt = null;
+    cam.draw = function (g, options = {}) {
+      const result = draw.call(this, g, options);
+      if (result === true && this === cam && cam === MIRROR.cam) {
+        const dt = options.dt === undefined ? 1 / 60 : options.dt;
+        if (!Number.isFinite(dt) || dt < 0) invalidDt = String(dt);
+        else {
+          total += dt;
+          frames++;
+        }
+      }
+      return result;
+    };
+    const check = () => {
+      if (cam !== MIRROR.cam || cam.closed) throw Error("Camera depth changed during observation");
+      if (invalidDt !== null) throw Error("Invalid native camera draw dt: " + invalidDt);
+    };
+    try {
+      const n0 = cam.answers;
+      const t0 = performance.now();
+      while (cam.answers === n0 && performance.now() - t0 < 30000) {
+        check();
+        cam.ask();
+        await new Promise((r) => setTimeout(r, 30));
+      }
+      check();
+      if (cam.answers === n0)
+        throw Error(
+          "No fresh native depth answer within 30000 ms: " +
+            JSON.stringify({ answers: cam.answers, busy: cam.busy, discarded: cam.discarded }),
+        );
+      const before = { total, frames, wall: performance.now() };
+      while (total - before.total < 0.4) {
+        check();
+        if (performance.now() - before.wall >= 30000)
+          throw Error(
+            "Native camera draws did not consume 0.4 seconds within 30000 ms: " +
+              JSON.stringify({
+                nativeSeconds: total - before.total,
+                frames: frames - before.frames,
+                answers: cam.answers,
+              }),
+          );
+        await new Promise((r) => setTimeout(r, 30));
+      }
+      check();
+    } finally {
+      cam.draw = draw;
     }
   });
-  await page.waitForTimeout(400);
 }
 
 // The face's cells: heights (0..1) and colors (r, g, b).
