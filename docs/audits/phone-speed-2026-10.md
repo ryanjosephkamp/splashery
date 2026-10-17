@@ -3,6 +3,14 @@
 Task: [103, faster toys on phones](../codex/103-phone-speed.md). Codex built the measurement tools,
 local phone page, and shared rendering optimization.
 
+## Review checkpoint: October 17, 2026, 6:50 p.m. UTC
+
+This section records the review checkpoint. The
+[draft PR](https://github.com/ryanjosephkamp/splashery/pull/708) and the
+[raw branch README](https://github.com/ryanjosephkamp/splashery/blob/codex/phone-speed-clips/phone-speed/README.md)
+carry later measurements and the final suite result. The original measurements below remain
+historical evidence; they are not silently replaced by the diagnostic controls.
+
 The Operator's October 17 review supersedes the two resolution-based target results below. Both
 resolution caps are removed: Video to 3D again requests native DPR, and Photo album uses the normal
 tier resolution. The earlier fifteen-target timing gate is therefore **not a passing result for the
@@ -22,6 +30,44 @@ idle median of 637.25 ms before and 553.95 ms after, a **13.1%** improvement. Th
 single-sample pilot used the retired completion protocol and cannot support a speed claim. Fresh
 numbers will replace this explicit missing result. Neither target currently establishes the 25% gate
 at unchanged resolution.
+
+The six-toy investigation retains five fresh alternating reuse-on/off pairs for every named toy.
+Every active tap frame takes the same original unconditional update path: one primary work pass, 47
+uniform assignments for the captured toys, and 45 for Torus. No added active GPU work was found. The
+original eight-interval p95 is the maximum of eight observations, so repeated point estimates need a
+control before they can establish a five-percent regression.
+
+The traces identify a timing confound in Torus: its faster cached idle frame changes the first tap
+simulation step from 100 ms to about 67 ms, changing the poses sampled within a fixed wall-time
+window. The other five toys retain the same camera and non-clock uniform payloads; independent runs
+still have different scene seeds and clock values. This does not establish that every reported
+regression is noise.
+
+A separate control holds every uniform, the seed, and the clock identical, then measures 100
+interleaved pairs per toy, totaling 1,200 completed draws. Both conditions make exactly one primary
+work pass in ALWAYS mode. The timer starts after uniform updates and ends after synchronous GPU
+readback. These are active-render controls, not replacements for whole-action measurements.
+
+| Toy         | Median change | p95 change |
+| ----------- | ------------: | ---------: |
+| Cookie      |        -2.13% |     +9.72% |
+| Torus       |        +1.10% |     +0.23% |
+| Blackberry  |        +0.22% |     +1.53% |
+| Sunflower   |        +1.59% |     +0.84% |
+| Monkey doll |        +0.87% |     +3.92% |
+| Desk globe  |        -1.14% |     +6.17% |
+
+Positive means slower. The p95 shifts for Cookie and Desk globe occur with identical uniforms and
+work-pass counts. This quantifies tail-timing variability at the requested threshold. It does not
+clear the original regression flags or the unfinished catalog gate. Placebo comparisons with reuse
+disabled in both groups are queued; no hardware-cache or scheduling mechanism is asserted without
+evidence. No additional recipe opt-outs have been added.
+
+The stronger direct-Stage test removes the Stage guard temporarily, warms the parameter cache, and
+checks a second identical direct update. It fails at the expected skipped work pass when the guard
+is absent and passes when the guard is restored. The generated showcase facts are also regenerated
+after removing the caps: the Book recipe caption changes from 142.4/46.4 KB raw/gzip to 142.3/46.3
+KB. The stale facts failed in the full shard and alone before regeneration.
 
 The preceding head, `576d872`, completed the full 399-file suite with 3,409 passes, three failures,
 and one skip. `fx4-engine:79` (WebGPU) and `pages-r2:495` (WebGL2 and WebGPU) each passed alone.
