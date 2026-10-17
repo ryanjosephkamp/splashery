@@ -555,3 +555,13 @@ site.
 
 The model weights the bake-off compared are fetched at run time from their official pages; each
 one's license is in `docs/audits/` (task 99's report), and none is vendored.
+
+## Splats to mesh validation tools (Codex task 106; not shipped)
+
+- Khronos glTF Validator 2.0.0-dev.3.10, Apache-2.0:
+  <https://github.com/KhronosGroup/glTF-Validator> and
+  <https://raw.githubusercontent.com/KhronosGroup/glTF-Validator/main/LICENSE>. Installed outside
+  the repository for independent GLB validation; no validator code ships.
+- The reconstruction, surface extraction, topology checks, mesh encoders, and preview in
+  `src/mesh-export/` are original MIT code. They reuse the existing MIT WebP codec and splat readers
+  listed in this file; no runtime library was added.

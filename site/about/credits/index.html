@@ -228,6 +228,7 @@
                   >Neuron specimen (Codex task 78b, October 14, 2026)</a
                 >
               </li>
+              <li><a href="#splats-to-mesh-codex-task-106">Splats to mesh (Codex task 106)</a></li>
             </ul>
           </li>
           <li>
@@ -304,6 +305,11 @@
               <li>
                 <a href="#photo-to-3d-next-offline-research-tools-codex-task-99-not-shipped"
                   >Photo to 3D next: offline research tools (Codex task 99; not shipped)</a
+                >
+              </li>
+              <li>
+                <a href="#splats-to-mesh-validation-tools-codex-task-106-not-shipped"
+                  >Splats to mesh validation tools (Codex task 106; not shipped)</a
                 >
               </li>
             </ul>
@@ -8947,6 +8953,13 @@
             model milliseconds per second. Geometry and timing are schematic, not a measured human
             neuron.
           </p>
+          <h2 id="splats-to-mesh-codex-task-106">Splats to mesh (Codex task 106)</h2>
+          <p>
+            Made by Ryan with Codex (GPT-6): MIT reconstruction, mesh writers, worker, Studio
+            controls, and preview code; CC0 original example ring. Reconstructed exports inherit
+            their input's license and attribution. The benchmark uses the fourteen existing CC0 Poly
+            Haven inputs already credited above; their source meshes stay outside the shipping tree.
+          </p>
         </div>
       </section>
       <section class="md-file" aria-label="Third-party licenses">
@@ -10122,6 +10135,23 @@ subject to the following conditions:
             pages; each one's license is in <code>docs/audits/</code> (task 99's report), and none
             is vendored.
           </p>
+          <h3 id="splats-to-mesh-validation-tools-codex-task-106-not-shipped">
+            Splats to mesh validation tools (Codex task 106; not shipped)
+          </h3>
+          <ul>
+            <li>
+              Khronos glTF Validator 2.0.0-dev.3.10, Apache-2.0:
+              &lt;https://github.com/KhronosGroup/glTF-Validator&gt; and
+              &lt;https://raw.githubusercontent.com/KhronosGroup/glTF-Validator/main/LICENSE&gt;.
+              Installed outside the repository for independent GLB validation; no validator code
+              ships.
+            </li>
+            <li>
+              The reconstruction, surface extraction, topology checks, mesh encoders, and preview in
+              <code>src/mesh-export/</code> are original MIT code. They reuse the existing MIT WebP
+              codec and splat readers listed in this file; no runtime library was added.
+            </li>
+          </ul>
         </div>
       </section>
       <p class="note">

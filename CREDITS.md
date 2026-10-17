@@ -2054,3 +2054,10 @@ The [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_
 opened on October 14, 2026. This toy integrates the concept's squid giant axon equations with a 0.01
 ms Euler step, samples the potential at 0.1 ms, and displays 7 model milliseconds per second.
 Geometry and timing are schematic, not a measured human neuron.
+
+## Splats to mesh (Codex task 106)
+
+Made by Ryan with Codex (GPT-6): MIT reconstruction, mesh writers, worker, Studio controls, and
+preview code; CC0 original example ring. Reconstructed exports inherit their input's license and
+attribution. The benchmark uses the fourteen existing CC0 Poly Haven inputs already credited above;
+their source meshes stay outside the shipping tree.

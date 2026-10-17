@@ -3731,6 +3731,16 @@
     "l": 1
   },
   {
+    "t": "Splats to mesh",
+    "u": "toys/splats-to-mesh/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Open Toy to convert a splat file or toy ID to a mesh. Drag the preview to inspect it.",
+    "w": "splats to mesh studio studio splat sog ply spz mesh export glb obj stl print printer watertight solid triangles splats-to-mesh",
+    "i": "../assets/toys/splats-to-mesh/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Model to splats",
     "u": "toys/model-splats/",
     "k": "toy",
