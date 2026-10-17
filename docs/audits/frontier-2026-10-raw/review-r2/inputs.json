@@ -1,0 +1,14 @@
+{
+  "tools/pages/frontier-relight.html": {
+    "bytes": 23770,
+    "sha256": "2de76ef5df41ac4faa55ff1f3fcfe891c47bba9490595347d8d12531b488c287"
+  },
+  "vendor/depth-anything-v2-small/model_quantized.onnx": {
+    "bytes": 27258801,
+    "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d"
+  },
+  "assets/toys/photo-3d/still-life.jpg": {
+    "bytes": 376283,
+    "sha256": "45ea7fcd9ba7da38e7545c8e010cb41bf8cf1ace878863a6d1e26de1d361d8d4"
+  }
+}
