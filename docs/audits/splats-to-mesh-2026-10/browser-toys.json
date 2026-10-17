@@ -1,0 +1,129 @@
+[
+  {
+    "source": {
+      "kind": "toy",
+      "id": "torus"
+    },
+    "metadata": {
+      "name": "Torus",
+      "author": "Ryan and Splashery contributors",
+      "license": "CC0 1.0",
+      "source": "https://github.com/ryanjosephkamp/splashery",
+      "credits": []
+    },
+    "triangles": 17744,
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 2.294660616058463
+    },
+    "glbBytes": 534452
+  },
+  {
+    "source": {
+      "kind": "toy",
+      "id": "photo-3d",
+      "options": {
+        "source": "still-life"
+      },
+      "controls": {
+        "flat": 0
+      }
+    },
+    "metadata": {
+      "name": "Photo to 3D",
+      "id": "still-life",
+      "label": "Still life",
+      "title": "Still Life with Cheese",
+      "author": "Antoine Vollon (Metropolitan Museum of Art Open Access)",
+      "source": "https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    "triangles": 15548,
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 0.9166173646956183
+    },
+    "glbBytes": 468620
+  },
+  {
+    "source": {
+      "kind": "toy",
+      "id": "photo-3d",
+      "options": {
+        "source": "forest"
+      },
+      "controls": {
+        "flat": 0
+      }
+    },
+    "metadata": {
+      "name": "Photo to 3D",
+      "id": "forest",
+      "label": "Forest path",
+      "title": "Forest Away Path",
+      "author": "Seaq68 (from Pixabay, marked CC0 on Wikimedia Commons)",
+      "source": "https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    "triangles": 16964,
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 0.7172168995754056
+    },
+    "glbBytes": 511100
+  },
+  {
+    "source": {
+      "kind": "toy",
+      "id": "photo-3d",
+      "options": {
+        "source": "spiral-stairs"
+      },
+      "controls": {
+        "flat": 0
+      }
+    },
+    "metadata": {
+      "name": "Photo to 3D",
+      "id": "spiral-stairs",
+      "label": "Spiral staircase",
+      "title": "Spiral Staircase, Keck Center (U.S. National Academies)",
+      "author": "Jorge Mendoza",
+      "source": "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    "triangles": 18424,
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 0.7540608713390311
+    },
+    "glbBytes": 554880
+  }
+]
