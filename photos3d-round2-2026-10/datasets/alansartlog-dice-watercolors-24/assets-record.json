@@ -1,0 +1,268 @@
+{
+  "id": "alansartlog-dice-watercolors-24",
+  "revision": "78e0a887ba5263da66910fb4f4da0d9763e9177a",
+  "source": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors",
+  "author": "alansartlog",
+  "authorSource": "https://alansartlog.com",
+  "license": "CC-BY-4.0",
+  "licenseSource": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/README.md",
+  "checked": "October 17, 2026",
+  "changes": "24 of 33 original JPG photographs, evenly sampled by sorted filename using round(i*(N-1)/23); unmodified files. Selection frozen before solving.",
+  "shipped": false,
+  "scope": "External task 104 round-two diagnostic input; originals are not committed. One independent object capture.",
+  "inputCount": 24,
+  "originalCount": 33,
+  "files": [
+    {
+      "name": "01.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/01.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/01.JPG",
+      "bytes": 2297400,
+      "sha256": "a93a749cb078629a3ea100c67671f31f8eb9ee84251104c87ba494b23f2585e9",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "7901d6bf442dd7342c3ab6f1ee57d3ca1a9d82b1"
+    },
+    {
+      "name": "02.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/02.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/02.JPG",
+      "bytes": 2389469,
+      "sha256": "03eacdcd17cadbcc78bddaa94f0a0f48eb2a117196ec1703e3d6c094a638f8ce",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "5e8489f9166244ea8f63b80afa9a6b198386a43c"
+    },
+    {
+      "name": "04.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/04.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/04.JPG",
+      "bytes": 2304854,
+      "sha256": "2457a06234fd7d3ac36fa329133650eab5bf72f3b5d03b6d92a53ce11df24a69",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "9b13c4c65bbc9c883a8a0c4b62674678b50669db",
+      "retrievalUrl": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/raw/78e0a887ba5263da66910fb4f4da0d9763e9177a/04.JPG"
+    },
+    {
+      "name": "05.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/05.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/05.JPG",
+      "bytes": 2293044,
+      "sha256": "fb19a32b876a7d2c2fb41ba67c18f64e190860c97f39e80e0acb5479af911b80",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "98f3643f4bd686493f7eeafd5069f9571960eb50"
+    },
+    {
+      "name": "07.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/07.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/07.JPG",
+      "bytes": 2372606,
+      "sha256": "2cc2b864f30d650bd2a5e07e4aae09ef6365bdf5ad45b7157dce0e2b84619b16",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "e3d6569d15759fce3fd2206f86c3ce51ec28a3ce"
+    },
+    {
+      "name": "08.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/08.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/08.JPG",
+      "bytes": 2417498,
+      "sha256": "cab04dd0835023b4d4b5c5d2d55117d2d3748f0613d041c838c05a976b021fd9",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "7c6d8c2cd8f947ee35e0d682245fb0b39bcc3a1e"
+    },
+    {
+      "name": "09.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/09.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/09.JPG",
+      "bytes": 2284617,
+      "sha256": "cc328c3e27fe15104bfdeb556db9723cdcc19bd99061c9db9e440e7f2b942755",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "13a912920d0318b41ed3f522beb9c268f8db8efc"
+    },
+    {
+      "name": "11.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/11.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/11.JPG",
+      "bytes": 2390807,
+      "sha256": "8da2dcbcce852dcf0f8c6502d45d9f5987cd33eb491cea1bbfdeb49f4ae822ae",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "7d1991b582d6e09b21cd138b9796cdacda4f813f"
+    },
+    {
+      "name": "12.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/12.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/12.JPG",
+      "bytes": 2300351,
+      "sha256": "1d8d65dd2aae6cd2de3541a76dace9be74afa78bfdff83f9821ed7b1d9caf340",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "f96718368af6202339768a81eefcdd94d36235cb"
+    },
+    {
+      "name": "14.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/14.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/14.JPG",
+      "bytes": 2332334,
+      "sha256": "1d882669f4b977663d58cfc14a1c3c3c6b115f683155cf4221f7d9cbc3ed1270",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "71fbd8c75b63b478258e5064ea132dbb13a0a0e9"
+    },
+    {
+      "name": "15.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/15.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/15.JPG",
+      "bytes": 2380101,
+      "sha256": "45397b12acc547f45d331ac612c56f84a8075b83392df36be3e3cd37bf2731b0",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "7ad91bee9aecc61e7cb82aa7f677ab4970bf4ffb"
+    },
+    {
+      "name": "16.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/16.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/16.JPG",
+      "bytes": 2327284,
+      "sha256": "9ee680f0475bef681760c57e1ecefa82a467176e6c02f6c98a7b68e5a7307e2a",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "ba590539dd3584a96f51567e3d6196184f095930"
+    },
+    {
+      "name": "18.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/18.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/18.JPG",
+      "bytes": 2345922,
+      "sha256": "ad576f67ca55764a7986b5c58b161d5fd1bb133ebf729b6824a1a883abf4fb79",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "348f5956d83d90d458dda0ea8a1427878a065901"
+    },
+    {
+      "name": "19.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/19.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/19.JPG",
+      "bytes": 2439009,
+      "sha256": "1d6f77cd48c1a823946e264398097a1a21d65010b0d34416f45348f5253ae541",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "91e9357bba28e03aba08c063fc8940ff4febbeac"
+    },
+    {
+      "name": "20.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/20.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/20.JPG",
+      "bytes": 2400822,
+      "sha256": "5dfadcc8f597f922b9ec7a2375a1e7025fe720221d3122c2161c34970a464bb0",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "31f1b6e3172e8f19e7bc8d435f16603f72a83b28"
+    },
+    {
+      "name": "22.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/22.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/22.JPG",
+      "bytes": 2423508,
+      "sha256": "e199395b54cc1dbe57ea545dc7923668063cd755cf1281ac60a127c06f466987",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "49127eb18416560e33f8d9916436c4ba372f9ed6"
+    },
+    {
+      "name": "23.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/23.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/23.JPG",
+      "bytes": 2421479,
+      "sha256": "4e2888dc1384918ffd07b71773eb4808d1ffa9caf27c50aa0e0d043e62089195",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "79bb517dfb25554b72f4322ba5f39765a15c4439"
+    },
+    {
+      "name": "25.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/25.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/25.JPG",
+      "bytes": 2365288,
+      "sha256": "d06429a5360f6cfeac3c77adcce289b071f30f2dbf8f1d06d9c8495161231edf",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "6cf9817aef73567278e5e93ea6347f352d7e0fa8"
+    },
+    {
+      "name": "26.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/26.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/26.JPG",
+      "bytes": 2378953,
+      "sha256": "7dd6101d2812e8c1ed92763109a65c85beb83f1f681a7427420fb684a9c6339f",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "5e39323566e14ed82325eda5f7d9d31e2ad8f47c"
+    },
+    {
+      "name": "27.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/27.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/27.JPG",
+      "bytes": 2404463,
+      "sha256": "72dfd2c3383049f20b19ac1dbb0c0405bcfe7698d6473c133066a69436eae1bd",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "67eb96d7b4db728392efb1fd55ed6ea0d679063b"
+    },
+    {
+      "name": "29.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/29.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/29.JPG",
+      "bytes": 2358751,
+      "sha256": "addcc35060b9ee7da89de1c438dfc1425440902e27045a8647ce8cf0ca06c530",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "5832b23616a61da572b6136ead546672cafc7056"
+    },
+    {
+      "name": "30.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/30.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/30.JPG",
+      "bytes": 2292952,
+      "sha256": "a4c444ef90b1b513098c5bd821881ad76a661d4eaf0e1bfeade509bc0f06e4b1",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "48e2f28ace4eb4970012c61404f120e6abd19b62"
+    },
+    {
+      "name": "32.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/32.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/32.JPG",
+      "bytes": 2405809,
+      "sha256": "904cc9344ce81809c53f73660a2cfdff8e6c980c0ca3e94f7433ae3883236a04",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "16400aebdaa463fc236cec7831bea5ef186e2330"
+    },
+    {
+      "name": "33.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/33.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/33.JPG",
+      "bytes": 2453882,
+      "sha256": "c102ee0d82b17ec5718289acbb26cb2d52372b614fffa66f46fef2e1b3398970",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "a9d0ad8f535bca22168001f8b8d6b6d7e69d6a07"
+    }
+  ],
+  "attribution": "\"Photogrammetry Test Set: Dice - Turntable - Strong Lights - Heavily Textured w Watercolors\" by alansartlog / CC BY 4.0",
+  "perImageAttributionNote": "Append # [image number] to the title when attributing individual images, as requested by the source README.",
+  "evaluationMasks": {
+    "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+    "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+    "sha256": "03613e67a47a53422e0d333182ce83561dca0860e7013e372400705e2da3fb3c",
+    "annotationSide": 320,
+    "erosionPixels": 2,
+    "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+  }
+}

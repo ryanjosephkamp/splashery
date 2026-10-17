@@ -1,0 +1,51 @@
+{
+  "checked": "October 17, 2026",
+  "sourceReceipts": [
+    {
+      "url": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background",
+      "resolvedUrl": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background",
+      "opened": "2026-10-17T18:13:53.421713+00:00",
+      "status": 200,
+      "receipt": ".cache/photos3d/round2/skull-flash/receipts/source.html",
+      "sha256": "f046ad5ff0e2ba7a7708eca023c37d3584617d2c1d824e274c9bec722842555f",
+      "bytes": 53750
+    },
+    {
+      "url": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/README.md",
+      "resolvedUrl": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/README.md",
+      "opened": "2026-10-17T18:13:53.421713+00:00",
+      "status": 200,
+      "receipt": ".cache/photos3d/round2/skull-flash/receipts/readme.html",
+      "sha256": "89648dd479b0a346ef3575abdcdae9cc99616d0f338ab17e5d6d3e5b059c9938",
+      "bytes": 52344
+    },
+    {
+      "url": "https://gitlab.com/api/v4/projects/8724498/repository/files/README.md/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "resolvedUrl": "https://gitlab.com/api/v4/projects/8724498/repository/files/README.md/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "opened": "2026-10-17T18:13:53.421713+00:00",
+      "status": 200,
+      "receipt": ".cache/photos3d/round2/skull-flash/receipts/readme-raw.md",
+      "sha256": "01e8bfdc1aafda11e61fb13fb6b05b3701349f3820a9f04fc0c744700e2363e8",
+      "bytes": 1205
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "opened": "2026-10-17T18:13:53.421713+00:00",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://gitlab.com/api/v4/projects/8724498/repository/tree?recursive=true&per_page=100&ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "resolvedUrl": "https://gitlab.com/api/v4/projects/8724498/repository/tree?recursive=true&per_page=100&ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "opened": "2026-10-17T18:13:53.421713+00:00",
+      "status": 200,
+      "receipt": ".cache/photos3d/round2/skull-flash/receipts/tree.json",
+      "sha256": "0920edf617b3fd119c82b02dd8221ba2d24673ff4e4de55e84550c6ba13440b4",
+      "bytes": 7633
+    }
+  ],
+  "includedReceipts": [
+    "readme-raw.md",
+    "tree.json"
+  ],
+  "note": "HTML page checks are preserved as receipt metadata; page-session HTML is not copied. The CC deed returned 403, while pinned dataset READMEs explicitly state CC BY 4.0."
+}

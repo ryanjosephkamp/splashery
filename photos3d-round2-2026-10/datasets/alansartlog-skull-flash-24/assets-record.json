@@ -1,0 +1,267 @@
+{
+  "id": "alansartlog-skull-flash-24",
+  "revision": "0f31c229ac289a615b3ae981a5f584856bb24c47",
+  "source": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background",
+  "author": "alansartlog",
+  "authorSource": "https://alansartlog.com",
+  "license": "CC-BY-4.0",
+  "licenseSource": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/README.md",
+  "checked": "October 17, 2026",
+  "changes": "24 of 66 original JPG photographs, evenly sampled by sorted filename using round(i*(N-1)/23); unmodified files. Selection frozen before solving.",
+  "shipped": false,
+  "scope": "External task 104 round-two diagnostic input; originals are not committed. One independent object capture.",
+  "inputCount": 24,
+  "originalCount": 66,
+  "files": [
+    {
+      "name": "01.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/01.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/01.JPG",
+      "bytes": 3079602,
+      "sha256": "49cc69b7e2e8999252c71536cc5a8a0ee32ae25d56d896969542653fa93e4858",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "c47e25bb6d5f730e063a0fa5db1ed2a7f246e277"
+    },
+    {
+      "name": "04.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/04.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/04.JPG",
+      "bytes": 3530007,
+      "sha256": "53b65d52600e6afa41a25c433b81501ae11248df690abff828c48c97e2c428e5",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "93f9f4e8d45e09bf84990bde120dd1c3daf8d71b"
+    },
+    {
+      "name": "07.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/07.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/07.JPG",
+      "bytes": 3094545,
+      "sha256": "cef6c51017e11d2c35f359f80920a28d866c6bc7d1d4f6e876e1718a328ec79c",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "782dad342298198bfb4917f327f17dc5877de6ab"
+    },
+    {
+      "name": "09.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/09.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/09.JPG",
+      "bytes": 3202240,
+      "sha256": "6190f02734af4cd137426afba19352d2c3b412e4016ec844eae61c882e341eb4",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "105d119cd8463160cbfb1dc108578e48a6131173"
+    },
+    {
+      "name": "12.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/12.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/12.JPG",
+      "bytes": 3138412,
+      "sha256": "f771973ad8f3092d6e869d29c4cb88a0ad67d30c6cf03dfe9dce70c98cdd9bb1",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "2e25ca91393681bc19a90b2cae8f0be807b28c76"
+    },
+    {
+      "name": "15.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/15.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/15.JPG",
+      "bytes": 3268609,
+      "sha256": "3366c2efb3f7b70114b94792b9c6b85141b4631111f8bb0f447d370ca0fb098f",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "a639b7d0c9631d03f3a8f115139f9cc2fe96c242"
+    },
+    {
+      "name": "18.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/18.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/18.JPG",
+      "bytes": 2836679,
+      "sha256": "cb3a6b49cec60b0a6b3cbae366617ad9f5634eb26edec6539d7d0f5b8d0889a7",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "bdc227f661d6d74fd5d7bb6d5a869145b4c1e93c"
+    },
+    {
+      "name": "21.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/21.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/21.JPG",
+      "bytes": 2990476,
+      "sha256": "4340e1cf8a235d56f2f20bc13e88c7d6454a5da505d22afa7b8660744875008c",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "45cf0527928ea897e338a2189d8a0c4ac04c6c23"
+    },
+    {
+      "name": "24.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/24.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/24.JPG",
+      "bytes": 2764483,
+      "sha256": "c59e45a60f9fabae4948a092a63860ce44ce163dd35ec30124bc45bb0d732498",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "cc8acd2445f4175c24c187bd019f464c1f2950b8"
+    },
+    {
+      "name": "26.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/26.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/26.JPG",
+      "bytes": 2615703,
+      "sha256": "9386ef84071867cb1752224b1e00a9780534a96d439bf944c815c5774973f456",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "4ec18070f7fec3b89f490ac4120d891d37a65a6f"
+    },
+    {
+      "name": "29.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/29.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/29.JPG",
+      "bytes": 2706318,
+      "sha256": "246e892d23dbaf7f3c2435e590cdb5dcdacaafea90e1d9241d503d98bde7d90a",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "f2ca0dc686e534c2b8682c31454303609b3f843d"
+    },
+    {
+      "name": "32.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/32.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/32.JPG",
+      "bytes": 2923706,
+      "sha256": "49020b694293567d2a82e0d8fbf3642d5e8a504dbb9ee0914a524c5365b50cb6",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "7a5adbc696d2dfcd449ea3c5d2fe6eb1969bc994"
+    },
+    {
+      "name": "35.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/35.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/35.JPG",
+      "bytes": 2865058,
+      "sha256": "9a47a124923456410b888e173826b1ade8d9962f0d0f450405e7b62e4e7d29d2",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "5bf3eecb848c362b3f679a9a11134641d2b4822d"
+    },
+    {
+      "name": "38.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/38.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/38.JPG",
+      "bytes": 2764047,
+      "sha256": "e9921846a892090a8ce5470a2a1075e8feb0a1a0514738b0a7621d70788204d3",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "613cba62f49a6099b4ce8b73436dd11d6e9928c3"
+    },
+    {
+      "name": "41.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/41.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/41.JPG",
+      "bytes": 2721387,
+      "sha256": "2a036eada33dd9d51d33a86ca5a4d79827fdee88680d0a6b8021cf7ff07b36d9",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "740fb679ee470d8418219561f790b79293e3553d"
+    },
+    {
+      "name": "43.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/43.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/43.JPG",
+      "bytes": 2450722,
+      "sha256": "b68a1b30c40ba5cf33aeb4b9f9e88aca976035bdb68f0a583749b535ea18ee1b",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "489cde78b198a12704d38b0324f211ae03d3f194"
+    },
+    {
+      "name": "46.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/46.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/46.JPG",
+      "bytes": 2659302,
+      "sha256": "1dd8a96ae656ecd65d23efd76b20fc7cf25873b911fb44d95c3a7e10644577e5",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "49bec9065fdbfe317f4a99fe835d7e98696dc7e7"
+    },
+    {
+      "name": "49.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/49.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/49.JPG",
+      "bytes": 2712673,
+      "sha256": "a5998ce3427fed73ef77a958dc114332991e982b8197ab49d01b5523136db04f",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "c064f22df8dfc196b2eb3b71b991dfdb3047bac6"
+    },
+    {
+      "name": "52.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/52.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/52.JPG",
+      "bytes": 2766849,
+      "sha256": "0dda7ba94ab17f28d05f52e7dba684469340aecf08d49e00ea186f7d3ca335e0",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "01cf9cedf9505bd0dcc7ede48ee20db7aeb70cca"
+    },
+    {
+      "name": "55.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/55.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/55.JPG",
+      "bytes": 3209497,
+      "sha256": "4fbb55876ff33f2cb8dd1ffd1e3f7163adbeb7b8736f779965cbaa2118d648a1",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "41f67b86c29dd78b1a00796e57fdaa2c7664dbcd"
+    },
+    {
+      "name": "58.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/58.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/58.JPG",
+      "bytes": 3239559,
+      "sha256": "c87f1cb3da38bb34a3bf0281818372e019eeaf83cc60e815eb2adce425823045",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "bcfb00e9ea5166a839fb06d9a24187b279ab78b8"
+    },
+    {
+      "name": "60.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/60.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/60.JPG",
+      "bytes": 3240947,
+      "sha256": "1f8569b45c4107746c50ac1613b7d20a8860e667816cb2e94c905820df9bdd3f",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "bb5f8ef5a9862abf65dfffbaca8280e5d8fd5cde"
+    },
+    {
+      "name": "63.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/63.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/63.JPG",
+      "bytes": 3115741,
+      "sha256": "3a2e0699dfe0059c43b143cdb8f60d7180d2038f156d5a2a8a01bdce6f9e22f9",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "c93c1084a962dc7a52aacc30248b315c3f45b78b"
+    },
+    {
+      "name": "66.JPG",
+      "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/66.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/66.JPG",
+      "bytes": 3155886,
+      "sha256": "f39b97ee5326bcac52b63158630f8854791e1f6022a22797dc38133815ad113f",
+      "width": 4272,
+      "height": 2848,
+      "gitBlobSha1": "4a6c2dbb695c535202d79cd11bd90ef0a536887e"
+    }
+  ],
+  "attribution": "\"Photogrammetry Test Set: Skull - Cameramoves - Flash - No Background\" by alansartlog / CC BY 4.0",
+  "perImageAttributionNote": "Append # [image number] to the title when attributing individual images, as requested by the source README.",
+  "evaluationMasks": {
+    "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+    "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+    "sha256": "57e87bee2a8dd1d2fb675fdf22d3e1e9ec5db0d16fa12127eb5914bf28960bac",
+    "annotationSide": 320,
+    "erosionPixels": 2,
+    "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+  }
+}

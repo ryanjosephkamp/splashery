@@ -1,0 +1,33 @@
+{
+  "renderer": {
+    "commit": "f7710637570ce34aa544e53175f5dc7b03b6c11c",
+    "sourceHashes": [
+      [
+        "tools/blender-cloud.sh",
+        "2461927a106efd1f9ef4210b38ac9e72da22dd523f84a4bc664fbde5a0e05bd5"
+      ],
+      [
+        "tools/blender/install.py",
+        "2036bdaec179cd3f1ee123cadcbf39c42d74ab5c6c2ae1e65122d85e86e3715a"
+      ],
+      [
+        "tools/blender/render.py",
+        "22ecd65ba3acfd69d12c5f7067488263ec7b316be9d523720c7235464c4063f9"
+      ],
+      [
+        "tools/studio-truth-generate.py",
+        "85180b26ef7bedb150b02145ac8862be3d7847cd6a1a70d73242167df5419985"
+      ],
+      [
+        "tools/studio_truth_camera.py",
+        "c6484004609f177b1d2ac077b60d5470b143f32b85c956db8dfbaef65f1b215b"
+      ],
+      [
+        "tools/studio_truth_images.py",
+        "aa6ab58407f3695c4a41cb43e29d1d73e9939ea33162a4fb171669fa961baad7"
+      ]
+    ]
+  },
+  "omitted": "All beauty/reference RGB, panorama RGB, depth rasters, source GLBs, textures, and archives are deliberately omitted; filenames/checksums remain in renderer manifests.",
+  "truthSceneSize": 0.9744151817659173
+}

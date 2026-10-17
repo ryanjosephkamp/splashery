@@ -1,0 +1,31 @@
+[2m[WebServer] [22m(node:22835) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 18 tests using 1 worker
+
+(node:22847) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22847) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-photos3d-round2.spec.mjs:16:1 › evaluation identities belong to the bytes loaded before a run, including interruption (14ms)
+(node:22860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › tests/cdx-photos3d-round2.spec.mjs:43:1 › pre-browser rejection preserves loaded photo and annotation identities (398ms)
+  ✓   3 [chromium] › tests/cdx-photos3d-round2.spec.mjs:67:1 › masked metrics score object pixels, exclude holes, and distinguish a changed held-out render (24ms)
+  ✓   4 [chromium] › tests/cdx-photos3d-round2.spec.mjs:95:1 › every unordered pair is proposed at 8, 24, and 60 photos (8ms)
+  ✓   5 [chromium] › tests/cdx-photos3d-round2.spec.mjs:108:1 › lens selection rejects outliers and incomplete EXIF independent of input order (12ms)
+  ✓   6 [chromium] › tests/cdx-photos3d-round2.spec.mjs:160:1 › real JPEG decoding honors EXIF orientation and reads the per-photo focal (1.3s)
+  ✓   7 [chromium] › tests/cdx-photos3d-round2.spec.mjs:217:1 › graph diagnostics include isolated components and track conflicts cannot merge identities (22ms)
+  ✓   8 [chromium] › tests/cdx-photos3d-round2.spec.mjs:247:1 › photo geometry recovers a calibrated orbit with per-photo focal lengths (4.8s)
+  ✓   9 [chromium] › tests/cdx-photos3d-round2.spec.mjs:264:1 › browser photo API keeps picker order out of graph results and reports every blank photo (2.6s)
+  ✓  10 [chromium] › tests/cdx-photos3d-round2.spec.mjs:316:1 › parallel CPU matching preserves the calibrated all-pair graph (7.5s)
+  ✓  11 [chromium] › tests/cdx-photos3d-round2.spec.mjs:349:1 › a total browser solve failure emits a held-out failure for every selected photo (1.4s)
+  ✓  12 [chromium] › tests/cdx-photos3d-round2.spec.mjs:390:1 › held-out RGB and masks cannot affect sparse/surface seeds, uploaded targets, or trained parameters (9.0s)
+  ✓  13 [chromium] › tests/cdx-photos3d.spec.mjs:6:1 › the real browser pipeline reports eight unplaceable photos without inventing cameras (1.7s)
+  ✓  14 [chromium] › tests/cdx-photos3d.spec.mjs:58:1 › the host watchdog terminates browser work that never settles (12ms)
+  ✓  15 [chromium] › tests/cdx-photos3d.spec.mjs:68:1 › photo permutations are deterministic and preserve every filename (10ms)
+  ✓  16 [chromium] › tests/cdx-photos3d.spec.mjs:78:1 › the existing numeric camera solver recovers a calibrated 24-camera control (3.1s)
+  ✓  17 [chromium] › tests/cdx-photos3d.spec.mjs:97:1 › camera scoring removes one global gauge, preserves source identity, and counts omissions (29ms)
+  ✓  18 [chromium] › tests/cdx-photos3d.spec.mjs:124:1 › camera scoring rejects invalid identities and detects relative orientation errors (28ms)
+
+  18 passed (33.3s)

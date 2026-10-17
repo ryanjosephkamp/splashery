@@ -1,0 +1,384 @@
+{
+  "id": "alicevision-buddha-60",
+  "revision": "9067f679eb5a772c3e818b7a12dc35882c071858",
+  "source": "https://github.com/alicevision/dataset_buddha",
+  "author": "Simone Gasparini, Fabien Castan, and Yann Lanthony",
+  "license": "CC-BY-4.0",
+  "checked": "October 17, 2026",
+  "changes": "60 of 67 unmodified original PNGs, evenly sampled by sorted index round(i*66/59)+1. Frozen before round-two solving.",
+  "files": [
+    {
+      "name": "00001._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00001._c.png",
+      "bytes": 4455150,
+      "sha256": "0df6128a932b6df17e6c39a9bdbdbea1e0b3fe562a6d98d48ddd757fa1bbdad6"
+    },
+    {
+      "name": "00002._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00002._c.png",
+      "bytes": 4245797,
+      "sha256": "79a26b070ac1e704a469ce3ba18d849f44ae7f5e0d6fa3be7c887e1c71a86420"
+    },
+    {
+      "name": "00003._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00003._c.png",
+      "bytes": 4498705,
+      "sha256": "0a9ed2323a2068b181e8c10cd047428b52c1b19fef2b20f564f96530e15a5eab"
+    },
+    {
+      "name": "00004._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00004._c.png",
+      "bytes": 4258717,
+      "sha256": "5aa0ff6649153216ed3c12132e75362ae0769295839b880078faefa3b9da0e0c"
+    },
+    {
+      "name": "00005._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00005._c.png",
+      "bytes": 4264126,
+      "sha256": "b60ac5e058038ce7e7bfcba11ee2c1a59414ddf7dcd10c7485173a016ba2514d"
+    },
+    {
+      "name": "00007._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00007._c.png",
+      "bytes": 4139965,
+      "sha256": "5dcd5ccc571520ab8cedc156be859f44279cfb16786af6083d0df6b190fc912c"
+    },
+    {
+      "name": "00008._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00008._c.png",
+      "bytes": 4314842,
+      "sha256": "b35b2728400ea885baee36789d175e54e128960dcbeae301b854dfa1fe78b088"
+    },
+    {
+      "name": "00009._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00009._c.png",
+      "bytes": 4300359,
+      "sha256": "1b98dd7ebca38849f6ff1b8ccb26972674915a668efe050031cbb7d2555e05c3"
+    },
+    {
+      "name": "00010._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00010._c.png",
+      "bytes": 4108155,
+      "sha256": "2affef598f9965e4cfcb17e531d7bd29bb344566518920aad23d38275c247d33"
+    },
+    {
+      "name": "00011._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00011._c.png",
+      "bytes": 4982304,
+      "sha256": "98a2b4518884707a05b8be6fe907019f4c64feb828a2a052f479c09954ac1dae"
+    },
+    {
+      "name": "00012._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00012._c.png",
+      "bytes": 4348594,
+      "sha256": "416e4a7469be3dc929ec73f9d6f3ba849db257f48f370bada1976b68335d4688"
+    },
+    {
+      "name": "00013._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00013._c.png",
+      "bytes": 4254560,
+      "sha256": "6cbca244883f252083ce2678de3b8fc318eb3b8043d0cb8b9582b0a89ababb9a"
+    },
+    {
+      "name": "00014._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00014._c.png",
+      "bytes": 4394891,
+      "sha256": "e24ca37ac68337c08d11276c466339ef3f265e24e506f8d81bb41ab79a916a1f"
+    },
+    {
+      "name": "00016._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00016._c.png",
+      "bytes": 4378147,
+      "sha256": "210019b6394ec2e40ffa2833b3b456331551262b69b1f11e507dc8c2414e52f2"
+    },
+    {
+      "name": "00017._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00017._c.png",
+      "bytes": 5088398,
+      "sha256": "3b069c1f2ba38f4de1784019ce6861f430b685919a49bb21b40689f996da6d26"
+    },
+    {
+      "name": "00018._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00018._c.png",
+      "bytes": 4076482,
+      "sha256": "c85ab8f07d65d6f91fd53eef05de196ac056529ce5f3ce448e725c96dde64ad0"
+    },
+    {
+      "name": "00019._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00019._c.png",
+      "bytes": 4738508,
+      "sha256": "ac33871a978f008fdc45a38d71a736e32e8112ce8acd4776661f9d247d480494"
+    },
+    {
+      "name": "00020._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00020._c.png",
+      "bytes": 4343857,
+      "sha256": "1d2d3348661d89b26777220dd571f92ad11fdebff2336168dc30bf67f7e71282"
+    },
+    {
+      "name": "00021._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00021._c.png",
+      "bytes": 4548506,
+      "sha256": "bc4a14187b8efd21b04b2d01a37bb5fd17ef1eb6e64a22da0d7ba524f95354f0"
+    },
+    {
+      "name": "00022._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00022._c.png",
+      "bytes": 4583253,
+      "sha256": "69aa1743a6065132184361cec5635606edc42322b69e38b5020af7c2000bdbdd"
+    },
+    {
+      "name": "00023._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00023._c.png",
+      "bytes": 4534427,
+      "sha256": "61e17a69fff6fca5e37327b8e255d978f6ff80c61656f18d21ad68f0cfbec5bf"
+    },
+    {
+      "name": "00024._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00024._c.png",
+      "bytes": 4523505,
+      "sha256": "83f2613680d7eb2ed7a2f9b2aed5cd68ee41be676754e6c93c518d7592c78c27"
+    },
+    {
+      "name": "00026._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00026._c.png",
+      "bytes": 4734475,
+      "sha256": "6ace0fc9d26a56af3ad5c2c41d1daf7055b1fcf3e3b8ff3785a43c02d71a9a7a"
+    },
+    {
+      "name": "00027._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00027._c.png",
+      "bytes": 4471967,
+      "sha256": "323aafb8490b5721acce9e77e3a7942f6c4b69b0f635ce58740929b571109e3b"
+    },
+    {
+      "name": "00028._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00028._c.png",
+      "bytes": 4139246,
+      "sha256": "1e17ed1d931b3fa3e29e05315a9de9beff071048d4413caf7e25bbe98e071215"
+    },
+    {
+      "name": "00029._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00029._c.png",
+      "bytes": 4201267,
+      "sha256": "4494a2949f70fa4b9d7dc0793ce9e0440836fdd5b30a46099d41270647295a27"
+    },
+    {
+      "name": "00030._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00030._c.png",
+      "bytes": 4214871,
+      "sha256": "06ae851a6c175844e756139d16b149615a3caf88835f4f4dff482ae04918b378"
+    },
+    {
+      "name": "00031._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00031._c.png",
+      "bytes": 4291335,
+      "sha256": "a3373e45007879d57f4d78cfdf50e459a75a17649157d33eca1565bbd224fba0"
+    },
+    {
+      "name": "00032._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00032._c.png",
+      "bytes": 4551901,
+      "sha256": "0e2b06b0aa17cef7845849e9c5efc5500b313f207d5029cb7765609ef11629a8"
+    },
+    {
+      "name": "00033._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00033._c.png",
+      "bytes": 4431697,
+      "sha256": "c6222bccfba9b3f75fea4e67807c3a7b82de02addcb572d11adca09718dc4b38"
+    },
+    {
+      "name": "00035._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00035._c.png",
+      "bytes": 4371297,
+      "sha256": "ed96437216b05870b7109bb4d33ed98c3aad7988b6368554973a04b7de0ce2c1"
+    },
+    {
+      "name": "00036._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00036._c.png",
+      "bytes": 4216033,
+      "sha256": "fced5431049135db40b6eaf8a40171f2691e3452a4c3fcacfd32179f09215fd2"
+    },
+    {
+      "name": "00037._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00037._c.png",
+      "bytes": 4402600,
+      "sha256": "af975720691077e4f2141e75b3a76dcbae4a5cc5da15e61f215d0ae3bd258b01"
+    },
+    {
+      "name": "00038._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00038._c.png",
+      "bytes": 4300612,
+      "sha256": "ec67014cb27c4cec8a38bfef7b6d260c2755f46eaad62625c0616eb91587dc75"
+    },
+    {
+      "name": "00039._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00039._c.png",
+      "bytes": 4231103,
+      "sha256": "839459ccdfa1c1ef1f46a438f22eb13681519c040474dfef3113171c403d614a"
+    },
+    {
+      "name": "00040._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00040._c.png",
+      "bytes": 4969158,
+      "sha256": "8f8ed04e5cd2fdadd9ae57f43f4a76d4fd15253a83630371a1b4bd1f27faf141"
+    },
+    {
+      "name": "00041._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00041._c.png",
+      "bytes": 4606701,
+      "sha256": "549fd0c95b8672178b5318c9a7a3c38019d90e24ac752754008c02b65fb485ea"
+    },
+    {
+      "name": "00042._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00042._c.png",
+      "bytes": 4124321,
+      "sha256": "3c24c7333bfbd9fb7667dee97bab4b0caf55df0c718338b72564fc682d52a360"
+    },
+    {
+      "name": "00044._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00044._c.png",
+      "bytes": 4511592,
+      "sha256": "53911b3617cd2ede9477dd1d25cd94e7808ddf6d49f04f19c0e21e0ad1ece9bb"
+    },
+    {
+      "name": "00045._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00045._c.png",
+      "bytes": 4561687,
+      "sha256": "537e0e713fdb954d76bf179bacd37121b8ad590ee27a1ec3395d9c506ec7743d"
+    },
+    {
+      "name": "00046._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00046._c.png",
+      "bytes": 4117906,
+      "sha256": "b294d9f2de749b9ab7862582da05d6ad1ddfb424eaf089d1e048ac65fc8fab3f"
+    },
+    {
+      "name": "00047._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00047._c.png",
+      "bytes": 4164575,
+      "sha256": "7e57f92760c0dfc83f2b3f8953c412ce5df8fc551d55a90cb9c8442095891693"
+    },
+    {
+      "name": "00048._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00048._c.png",
+      "bytes": 4599538,
+      "sha256": "06b581601dd5ae9e8d32f7ede3d5de7900ba846aa370b06f0f9584bd33593c1f"
+    },
+    {
+      "name": "00049._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00049._c.png",
+      "bytes": 4161432,
+      "sha256": "7a33e9afe15e18ae07e921658cdd6587028d3991be439bf66754faeb7f43a08d"
+    },
+    {
+      "name": "00050._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00050._c.png",
+      "bytes": 4660668,
+      "sha256": "ca729ca86f647e506c58411cefdf06b94f675310a20a0cdcb3b84f9e3dcbc9b9"
+    },
+    {
+      "name": "00051._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00051._c.png",
+      "bytes": 4679674,
+      "sha256": "08402616dd521d8fa11351344c45c3a57834b753b859753833e701416ce87032"
+    },
+    {
+      "name": "00052._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00052._c.png",
+      "bytes": 3952525,
+      "sha256": "1d8b68b9f3b1a17ac6736d239ee5e369e745cc7543940a8b364e5fd046433c37"
+    },
+    {
+      "name": "00054._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00054._c.png",
+      "bytes": 4663933,
+      "sha256": "b66416841fb2e7ba56a038d0913c345bb512b0a22f8eaf925313b85b8513937b"
+    },
+    {
+      "name": "00055._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00055._c.png",
+      "bytes": 4088906,
+      "sha256": "d5266845dbbe58326bfcd161efa343fd7675b7bd828a0cae37fd4545c1ded24e"
+    },
+    {
+      "name": "00056._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00056._c.png",
+      "bytes": 4218495,
+      "sha256": "4bdc44032cddbf2ce67ff4406efab72c233ea15e99b40bded66ff02880310f15"
+    },
+    {
+      "name": "00057._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00057._c.png",
+      "bytes": 4466937,
+      "sha256": "7083aa19db3e6e5ded72efb52cb5c08694ccaf06aa6c201887c1cf554e9d4b57"
+    },
+    {
+      "name": "00058._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00058._c.png",
+      "bytes": 4292256,
+      "sha256": "02cebdfd060f72526f114b0ecb2c94d884066e96202d1491417398f1f93683c5"
+    },
+    {
+      "name": "00059._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00059._c.png",
+      "bytes": 4466675,
+      "sha256": "5a74a37c64a66b7f803a33fcd0843b6bc1f6640ba3191ddb2662d8ab2f247162"
+    },
+    {
+      "name": "00060._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00060._c.png",
+      "bytes": 4170885,
+      "sha256": "d48fbc95c3ee9647ee848a2a0c1d88d69b4cb059b1e3eec5e22fc691413c8792"
+    },
+    {
+      "name": "00061._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00061._c.png",
+      "bytes": 4514673,
+      "sha256": "0c0e1bf545167da3aca5f38abbc60fe14edb7ea52813e52ef3b90acb48c8abef"
+    },
+    {
+      "name": "00063._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00063._c.png",
+      "bytes": 4722758,
+      "sha256": "ae8c661e0eb05fd04a670fb394fb102f4aa953e3ea8a614b75fc5628e031ea53"
+    },
+    {
+      "name": "00064._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00064._c.png",
+      "bytes": 4264321,
+      "sha256": "185d76fb783b323396cef8c2687d8f6418bad28e3d8ef1563dd1190516e1eef8"
+    },
+    {
+      "name": "00065._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00065._c.png",
+      "bytes": 3910664,
+      "sha256": "193b8c5074ea1320b634bbb50aa9b1cdb12763967b76f16d9e0233456e9ddb66"
+    },
+    {
+      "name": "00066._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00066._c.png",
+      "bytes": 4422261,
+      "sha256": "9acce5363aee7763d8a527dc9f925d1ff4ba8681ee0be5782d92756e4e611166"
+    },
+    {
+      "name": "00067._c.png",
+      "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00067._c.png",
+      "bytes": 4816971,
+      "sha256": "d4330caf9cdf5f5414d847d24616df7025cfeaf7417bf6c0f5ebea0a899da8d1"
+    }
+  ],
+  "shipped": false,
+  "scope": "External task 104 round-two diagnostic input; photos are not committed. Same Buddha capture as the 24-photo record, not an additional independent set.",
+  "licenseSource": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/LICENSE.md",
+  "inputCount": 60,
+  "originalCount": 67,
+  "evaluationMasks": {
+    "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+    "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+    "sha256": "f0f73f807acce01897f2f0f818b3efe5a2baf300fe285ebd6fbd6e39b2defc53",
+    "annotationSide": 320,
+    "erosionPixels": 2,
+    "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+  }
+}

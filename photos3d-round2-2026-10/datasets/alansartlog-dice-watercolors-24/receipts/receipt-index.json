@@ -1,0 +1,51 @@
+{
+  "checked": "October 17, 2026",
+  "sourceReceipts": [
+    {
+      "url": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors",
+      "resolvedUrl": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors",
+      "opened": "2026-10-17T18:13:53.421713+00:00",
+      "status": 200,
+      "receipt": ".cache/photos3d/round2/dice-watercolors/receipts/source.html",
+      "sha256": "37694cae619123563de0be1da51990484649e1a75490ca0f355d6461dea33383",
+      "bytes": 55840
+    },
+    {
+      "url": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/README.md",
+      "resolvedUrl": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/README.md",
+      "opened": "2026-10-17T18:13:53.421713+00:00",
+      "status": 200,
+      "receipt": ".cache/photos3d/round2/dice-watercolors/receipts/readme.html",
+      "sha256": "0794b86f38f19ea4a9fa72d99362d73cfebaa654742e45fc3b7072f151f2604c",
+      "bytes": 54280
+    },
+    {
+      "url": "https://gitlab.com/api/v4/projects/8723847/repository/files/README.md/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "resolvedUrl": "https://gitlab.com/api/v4/projects/8723847/repository/files/README.md/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "opened": "2026-10-17T18:13:53.421713+00:00",
+      "status": 200,
+      "receipt": ".cache/photos3d/round2/dice-watercolors/receipts/readme-raw.md",
+      "sha256": "9cbec2e01c9d6564b806d55e08d4f3db890ad6fc67b4b2c43195e8b11b2cd9ab",
+      "bytes": 1249
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "opened": "2026-10-17T18:13:53.421713+00:00",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://gitlab.com/api/v4/projects/8723847/repository/tree?recursive=true&per_page=100&ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "resolvedUrl": "https://gitlab.com/api/v4/projects/8723847/repository/tree?recursive=true&per_page=100&ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "opened": "2026-10-17T18:13:53.421713+00:00",
+      "status": 200,
+      "receipt": ".cache/photos3d/round2/dice-watercolors/receipts/tree.json",
+      "sha256": "95533e41e39c824af2111a10e03344b10656b830629b38f2259ad79962d78e64",
+      "bytes": 3937
+    }
+  ],
+  "includedReceipts": [
+    "readme-raw.md",
+    "tree.json"
+  ],
+  "note": "HTML page checks are preserved as receipt metadata; page-session HTML is not copied. The CC deed returned 403, while pinned dataset READMEs explicitly state CC BY 4.0."
+}

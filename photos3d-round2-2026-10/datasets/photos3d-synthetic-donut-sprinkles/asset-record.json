@@ -1,0 +1,145 @@
+{
+  "id": "photos3d-synthetic-donut-sprinkles",
+  "kind": "rendered synthetic object, not a real capture",
+  "views": 24,
+  "source": "https://kenney.nl/assets/food-kit",
+  "author": "Kenney; calibrated renders made by Ryan with Codex (GPT-6)",
+  "license": "CC0-1.0",
+  "checked": "October 17, 2026",
+  "model": {
+    "source": "https://kenney.nl/assets/food-kit",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "checked": "October 17, 2026",
+    "sha256": "c85f9fdc913d0097d19ae81f8988eb410b5c41ee10bf0b0039fa9002a241fb2d",
+    "changes": "Unmodified donut-sprinkles.glb from Food Kit, with palette texture embedded using the existing pinned @gltf-transform/core and registered extensions, including KHR_texture_transform. Mesh geometry and texture transforms retained. Synthetic calibrated views, not real photographs. Archive SHA256 cdad90853682499b94c9fda2f87678b24bfd8f3264e0ed323f6b6a27fd7c6f6f.",
+    "originalModelSha256": "f45946b7e81221e9d45fdfab45ee89eeb095ff0d7fb6a3ad9988919cf587d3b7"
+  },
+  "rendererSource": "https://github.com/ryanjosephkamp/splashery/tree/f7710637570ce34aa544e53175f5dc7b03b6c11c/tools/blender",
+  "rendererCommit": "f7710637570ce34aa544e53175f5dc7b03b6c11c",
+  "manifestSha256": "b26a22a30af2117461bf17480d37f34f8f94dd79d27ac0a48c5c6358ca721a83",
+  "changes": "24 rendered 960x720 orbit views at8samples using task105 pinned Blender4.5.3, with exact cameras and masks. All beauty images, source models, and generated datasets stay outside git.",
+  "shipped": false,
+  "files": [
+    {
+      "name": "view-000.png",
+      "bytes": 414372,
+      "sha256": "ca036e88d8bfc915df3cdbb7d2ce270784727d344815847506a3d71de9e5852e"
+    },
+    {
+      "name": "view-001.png",
+      "bytes": 414711,
+      "sha256": "bdb0016659aa7dfe2486276591717cf54163782522e26977bccac7e3c6fa391d"
+    },
+    {
+      "name": "view-002.png",
+      "bytes": 414921,
+      "sha256": "c2d2f25fc81e3c35a82fccbbb7a4f0af207aed5fb6dca47e658a9a0721945523"
+    },
+    {
+      "name": "view-003.png",
+      "bytes": 414557,
+      "sha256": "c98fde589b516cfb69d766651a71ab1387097c3c0a0c6e94657af111a9dac7f1"
+    },
+    {
+      "name": "view-004.png",
+      "bytes": 415480,
+      "sha256": "a545ec6e641db59e575e12bac7a71881356bc27ae5fd308761675db4f5d3627f"
+    },
+    {
+      "name": "view-005.png",
+      "bytes": 420586,
+      "sha256": "518cc81dfe370a6c8a60c1099918f228c2cf5bf0f0de4a97a326e38e21e53ed4"
+    },
+    {
+      "name": "view-006.png",
+      "bytes": 425627,
+      "sha256": "a68c20d30f11829c3369280228352e1dc4d186a639fa9b3b69f13ddb9d15dcf2"
+    },
+    {
+      "name": "view-007.png",
+      "bytes": 427789,
+      "sha256": "07989db57467eb5b312cd101c9aa9fc1d87a76f8f27342c33361b0279238eb0c"
+    },
+    {
+      "name": "view-008.png",
+      "bytes": 429666,
+      "sha256": "7789491542d827aed74e46a3d1abc0bab9b57291b3591511d7993f8a85f98f30"
+    },
+    {
+      "name": "view-009.png",
+      "bytes": 433405,
+      "sha256": "13eb35f0bf9d9e912228eca8eeced2baa12c285dae2523e5fbe520a3dc1e541d"
+    },
+    {
+      "name": "view-010.png",
+      "bytes": 436668,
+      "sha256": "c373f14ba4ae28d713c80de890e015ab233441f1459c5aa71dede3bc59b34dd0"
+    },
+    {
+      "name": "view-011.png",
+      "bytes": 436641,
+      "sha256": "5a2ef4e1a973f99bb3053edbf9af44d4f36853527357c64a97f102971caf0c71"
+    },
+    {
+      "name": "view-012.png",
+      "bytes": 435371,
+      "sha256": "2bbd0dae7a7877e1de79df7bb56e8747ce41680d94a02ed37520c0e51989a677"
+    },
+    {
+      "name": "view-013.png",
+      "bytes": 436372,
+      "sha256": "e68d1ff1a382556624adb24f517f530ce6245bb89eac98676cd59b293a795694"
+    },
+    {
+      "name": "view-014.png",
+      "bytes": 437796,
+      "sha256": "a255bda19a45ba5f84380c57be79f85a7da71d2d068b39abe99046f5835d68b6"
+    },
+    {
+      "name": "view-015.png",
+      "bytes": 436226,
+      "sha256": "e904d429c80c2888375f739e4cff9634ff2f5105c9126496d97de8ff6dd26457"
+    },
+    {
+      "name": "view-016.png",
+      "bytes": 434552,
+      "sha256": "07a37f1339ac6266c18b54cbc18cf430b735939942ff6173d731bb6d460136fc"
+    },
+    {
+      "name": "view-017.png",
+      "bytes": 435991,
+      "sha256": "122601cf262b887eeec7a3bed396050bd783a8893ce6d2715de3c9a6a1b8854d"
+    },
+    {
+      "name": "view-018.png",
+      "bytes": 435678,
+      "sha256": "099f91367abf4f31ef6c3523b8c529b14ba4a933190754c4ba9b68705c72c50e"
+    },
+    {
+      "name": "view-019.png",
+      "bytes": 432995,
+      "sha256": "2e26a55acbc2e276714f3f41aa82e748990ca748bd159f26d59a8d519d7ff815"
+    },
+    {
+      "name": "view-020.png",
+      "bytes": 428681,
+      "sha256": "6f00d0f0a0cc0af5fe0972809d0120e0e5c88bf817ab2d4788e0ca2b141f3324"
+    },
+    {
+      "name": "view-021.png",
+      "bytes": 428408,
+      "sha256": "74aebfce09481658942798494966ad88bf8a0f0a34bd8faaf3d68297e70cc023"
+    },
+    {
+      "name": "view-022.png",
+      "bytes": 425286,
+      "sha256": "55951796ef5440dadb65d416f332017c2de83b1e7e34cd1437e0611111005dff"
+    },
+    {
+      "name": "view-023.png",
+      "bytes": 418805,
+      "sha256": "c2fa1273ed1c3cb29249a78022b81dae799390c9f5d9b561f56f10b9a4aee067"
+    }
+  ]
+}

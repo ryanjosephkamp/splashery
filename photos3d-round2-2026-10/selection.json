@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "primaryRuns": [
+    "buddha24-phone-loo200-recovered",
+    "buddha24-phone-sorted-final",
+    "buddha24-phone-shuffled-final",
+    "buddha24-high-sorted-final",
+    "dice-watercolors-phone-final",
+    "skull-flash-phone-final",
+    "synthetic-burger-double",
+    "synthetic-cake-birthday",
+    "synthetic-donut-sprinkles",
+    "analytic-uniform24",
+    "analytic-mixed24",
+    "analytic-uniform60",
+    "buddha24-phone-loo200-00035._c.png",
+    "buddha24-phone-loo200-00041._c.png",
+    "buddha24-phone-loo200-00053._c.png",
+    "buddha24-phone-loo200-00056._c.png",
+    "buddha24-phone-loo200-00067._c.png",
+    "buddha24-phone-loo1200-one-final",
+    "buddha60-phone-sorted-final",
+    "dice-watercolors-phone-loo200-01.JPG",
+    "dice-watercolors-phone-loo200-02.JPG",
+    "dice-watercolors-phone-loo200-04.JPG",
+    "dice-watercolors-phone-loo200-05.JPG",
+    "dice-watercolors-phone-loo200-07.JPG",
+    "dice-watercolors-phone-loo200-08.JPG",
+    "dice-watercolors-phone-loo200-09.JPG",
+    "dice-watercolors-phone-loo200-11.JPG",
+    "dice-watercolors-phone-loo200-12.JPG",
+    "dice-watercolors-phone-loo200-14.JPG",
+    "dice-watercolors-phone-loo200-15.JPG",
+    "dice-watercolors-phone-loo200-16.JPG"
+  ],
+  "exploratoryRuns": [],
+  "files": [
+    {
+      "path": ".cache/photos3d/round2/diagnostics-final-current.log",
+      "role": "verification-log"
+    },
+    {
+      "path": ".cache/photos3d/round2/all-targeted-tests.log",
+      "role": "verification-log"
+    },
+    {
+      "path": ".cache/photos3d/round2/hash-snapshot-test.log",
+      "role": "verification-log"
+    },
+    {
+      "path": ".cache/photos3d/round2/preflight.log",
+      "role": "verification-log"
+    },
+    {
+      "path": ".cache/photos3d/round2/preflight-contended.log",
+      "role": "verification-log"
+    },
+    {
+      "path": ".cache/photos3d/round2/slider-reproduction.log",
+      "role": "verification-log"
+    },
+    {
+      "path": ".cache/photos3d/round2/pre-push-prettier-current.log",
+      "role": "verification-log"
+    },
+    {
+      "path": ".cache/photos3d/round2/pre-push-english-current.log",
+      "role": "verification-log"
+    },
+    {
+      "path": ".cache/photos3d/round2/preflight-first-failure/trace.zip",
+      "role": "verification-trace"
+    }
+  ],
+  "includeResults": true,
+  "allowInterrupted": true
+}

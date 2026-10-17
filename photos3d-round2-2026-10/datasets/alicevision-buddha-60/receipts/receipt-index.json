@@ -1,0 +1,18 @@
+{
+  "checked": "October 17, 2026",
+  "source": "https://github.com/alicevision/dataset_buddha",
+  "licenseSource": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/LICENSE.md",
+  "includedReceipts": [
+    {
+      "path": "receipts/README.md",
+      "sha256": "2755429761580498073aff34c2677992f868c5c87a9d8f4e2d655f456930cf11",
+      "url": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/README.md"
+    },
+    {
+      "path": "receipts/LICENSE.md",
+      "sha256": "bb5e0179a1e9bdb55634a4303784cf73c297a1dcee27b92cd546bf398075531c",
+      "url": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/LICENSE.md"
+    }
+  ],
+  "note": "Pinned README and license text are included. Full source HTML is retained privately in the local cache and is not republished."
+}

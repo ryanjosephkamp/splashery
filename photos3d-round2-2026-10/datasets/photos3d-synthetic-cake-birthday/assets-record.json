@@ -1,0 +1,145 @@
+{
+  "id": "photos3d-synthetic-cake-birthday",
+  "kind": "rendered synthetic object, not a real capture",
+  "views": 24,
+  "source": "https://kenney.nl/assets/food-kit",
+  "author": "Kenney; calibrated renders made by Ryan with Codex (GPT-6)",
+  "license": "CC0-1.0",
+  "checked": "October 17, 2026",
+  "model": {
+    "source": "https://kenney.nl/assets/food-kit",
+    "author": "Kenney",
+    "license": "CC0-1.0",
+    "checked": "October 17, 2026",
+    "sha256": "5c9f797259fa626c084091a618e9681ce49a5e96f31956241dc37faef16ac5c4",
+    "changes": "Unmodified cake-birthday.glb from Food Kit, with palette texture embedded using the existing pinned @gltf-transform/core and registered extensions, including KHR_texture_transform. Mesh geometry and texture transforms retained. Synthetic calibrated views, not real photographs. Archive SHA256 cdad90853682499b94c9fda2f87678b24bfd8f3264e0ed323f6b6a27fd7c6f6f.",
+    "originalModelSha256": "3102379c244fa77cdd4818c316037f576f3fb172d28f161ae9e8deead55dac69"
+  },
+  "rendererSource": "https://github.com/ryanjosephkamp/splashery/tree/f7710637570ce34aa544e53175f5dc7b03b6c11c/tools/blender",
+  "rendererCommit": "f7710637570ce34aa544e53175f5dc7b03b6c11c",
+  "manifestSha256": "ffdd12396d6cb0000d306232e26e8bc276a4de8f0823a847e6b2679263c9eb1b",
+  "changes": "24 rendered 960x720 orbit views at8samples using task105 pinned Blender4.5.3, with exact cameras and masks. All beauty images, source models, and generated datasets stay outside git.",
+  "shipped": false,
+  "files": [
+    {
+      "name": "view-000.png",
+      "bytes": 455378,
+      "sha256": "a1623417107dc62d35524d4c81c174bfaaee2a1e438ecf7a51a4011e0eb3ac1e"
+    },
+    {
+      "name": "view-001.png",
+      "bytes": 449851,
+      "sha256": "be69d19f584609867c6dacdbfa29899eeaa2425e7fd59a5477f93115ae23d21a"
+    },
+    {
+      "name": "view-002.png",
+      "bytes": 444957,
+      "sha256": "65c2c076f97040818f3c77b178b6df58ebd6c80c53fc928b56c05a74a48f4fe8"
+    },
+    {
+      "name": "view-003.png",
+      "bytes": 446557,
+      "sha256": "b03e84ee6340136756305b8d2e12493755e702af9f32c6967d4e05c7877ccd73"
+    },
+    {
+      "name": "view-004.png",
+      "bytes": 451004,
+      "sha256": "095530d3d3e5b7ab6e4e38d9b807c19878754db7d6685b6a95bde31de905f4b4"
+    },
+    {
+      "name": "view-005.png",
+      "bytes": 458730,
+      "sha256": "49c05f97de681fd451a3ac108eaa1c55b502911aea5e3ce8d1259f9d451ab476"
+    },
+    {
+      "name": "view-006.png",
+      "bytes": 462476,
+      "sha256": "cf003ec11dac2712df62be6291f19588cabbacf38ffa6529061b57d981786462"
+    },
+    {
+      "name": "view-007.png",
+      "bytes": 466863,
+      "sha256": "06e1d3cff74d87f24ab552e6dc32dff25adfe767a6f4dcccfd4237973cff06fb"
+    },
+    {
+      "name": "view-008.png",
+      "bytes": 470812,
+      "sha256": "1f4beb98784d0c34078e1c6c403b73ebc54e4af194a1b1932ddc8c7c4ecb5475"
+    },
+    {
+      "name": "view-009.png",
+      "bytes": 471356,
+      "sha256": "be8fe82e5ca585223b8579e17fb915b5ada020770b10a7ddf2b98bd054ba936b"
+    },
+    {
+      "name": "view-010.png",
+      "bytes": 469264,
+      "sha256": "bd491403a3dfddc5c61906b3b315ef21e1351d0ec82c88dfcc28535da2053cb9"
+    },
+    {
+      "name": "view-011.png",
+      "bytes": 469807,
+      "sha256": "d440ac3a4d179377fd73a598463b3ffaafeb8e987fe608d39b344b59b7928300"
+    },
+    {
+      "name": "view-012.png",
+      "bytes": 467235,
+      "sha256": "b840045e4bca56eaa4f7abdae7fac6891d32441ca979cd047b1e1e4e2b833c52"
+    },
+    {
+      "name": "view-013.png",
+      "bytes": 464407,
+      "sha256": "c93e6fda9ba7dccc813b9a853e9058a79ce112a940005f9134366b0e7a6e1c87"
+    },
+    {
+      "name": "view-014.png",
+      "bytes": 461325,
+      "sha256": "c2fa55dde7abb6ae7ec7cc4bc055090fdf03c60f9722f74f3779f1fff67254c4"
+    },
+    {
+      "name": "view-015.png",
+      "bytes": 462883,
+      "sha256": "da463e5144de6c020a5da0415f22374575127640aa6bf1c42f46b1c994254b0b"
+    },
+    {
+      "name": "view-016.png",
+      "bytes": 464556,
+      "sha256": "c22bd3dc3b6e5e4133638fa88140a0cfb836bf9e9bf9386260890d600600b5c2"
+    },
+    {
+      "name": "view-017.png",
+      "bytes": 466818,
+      "sha256": "ad4eb195b21fd58056717e86763dc89946a395edec651e726019f83e1cd972e7"
+    },
+    {
+      "name": "view-018.png",
+      "bytes": 465777,
+      "sha256": "002f44e5d0b107ffdb23e58d44c0cdd6d469a0a9f451800af831d87fa2909a08"
+    },
+    {
+      "name": "view-019.png",
+      "bytes": 467708,
+      "sha256": "0ef8c656f540d7822c3bebefefbd4b5b3d3a20938953a8cdf0ee0e7e439373c1"
+    },
+    {
+      "name": "view-020.png",
+      "bytes": 469239,
+      "sha256": "fbdb60bcd76e5477660719d6744f2712a792c6e431c08414821732e74cd8d8f7"
+    },
+    {
+      "name": "view-021.png",
+      "bytes": 467591,
+      "sha256": "8de11e8c8f20250d9f92a05fdfa21d1a156dc12ee0098ed7a5f3aa9980fadc02"
+    },
+    {
+      "name": "view-022.png",
+      "bytes": 465794,
+      "sha256": "4a46758283e77166694ba44a7da49205a4792b3f64fc094de4b7db279a784971"
+    },
+    {
+      "name": "view-023.png",
+      "bytes": 461112,
+      "sha256": "01a1fd9d52eff9ecc16f095fdfdd4188081d73e1792f362052c18e1d442d1915"
+    }
+  ]
+}

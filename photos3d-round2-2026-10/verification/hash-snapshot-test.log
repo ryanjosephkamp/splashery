@@ -1,0 +1,15 @@
+[2m[WebServer] [22m(node:16622) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:16635) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16635) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-photos3d-round2.spec.mjs:16:1 › evaluation identities belong to the bytes loaded before a run, including interruption (90ms)
+(node:16651) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/cdx-photos3d-round2.spec.mjs:43:1 › pre-browser rejection preserves loaded photo and annotation identities (1.9s)
+
+  2 passed (6.2s)
