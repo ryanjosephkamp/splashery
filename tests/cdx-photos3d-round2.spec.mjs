@@ -7,6 +7,28 @@ import { PNG } from "pngjs";
 import { matchSift } from "../vendor/splatjs/src/sfm/sift.js";
 import { polygonMask, scoreHeldOut, browserRound2 } from "../tools/photos3d-evaluate.mjs";
 import jpeg from "jpeg-js";
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import { createHash } from "node:crypto";
+import { jsonSnapshot } from "../tools/photos3d-probe.mjs";
+
+test("evaluation identities belong to the bytes loaded before a run, including interruption", async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "photos3d-mask-"));
+  try {
+    const file = path.join(dir, "mask.json");
+    const bytes = '{"revision":1}\n';
+    const hash = createHash("sha256").update(bytes).digest("hex");
+    await fs.writeFile(file, bytes);
+    const loaded = await jsonSnapshot(file, hash);
+    await fs.writeFile(file, '{"revision":2}\n');
+    expect(loaded).toEqual({ value: { revision: 1 }, sha256: hash });
+    await expect(jsonSnapshot(file, hash)).rejects.toThrow("frozen hash");
+    expect(await jsonSnapshot(null)).toEqual({ value: null, sha256: null });
+  } finally {
+    await fs.rm(dir, { recursive: true, force: true });
+  }
+});
 
 test("masked metrics score object pixels, exclude holes, and distinguish a changed held-out render", () => {
   const width = 28,

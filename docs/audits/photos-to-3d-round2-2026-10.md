@@ -37,8 +37,12 @@ Evaluation masks are approximate manual silhouettes traced from input photos alo
 solutions, renders, or optimizer feedback. A uniform two-pixel erosion at the 320-pixel annotation
 scale removes uncertain boundaries, with supports and visible background openings excluded. These
 are not ground-truth masks. SSIM uses the existing metric tool's local 7×7 luma windows entirely
-inside the mask; PSNR uses RGB squared error over all masked pixels. Mask and input hashes are
-checked before evaluation. Failed or unregistered views remain in coverage denominators.
+inside the mask; PSNR uses RGB squared error over all masked pixels. Input-photo hashes and mask
+source identities are checked before evaluation. The latest probe also checks and records the exact
+loaded annotation bytes against the frozen asset hash before browser work; older receipts recorded
+the annotation hash only at completion. The interrupted batch lacks that final runtime hash, so its
+recovered folds retain an explicit provenance caveat. Failed or unregistered views remain in
+coverage denominators.
 
 This container has software WebGPU and no attached physical phone. Phone profiles and 390×844
 viewports do not establish phone latency, thermal behavior, or peak memory.

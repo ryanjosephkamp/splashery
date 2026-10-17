@@ -26,6 +26,16 @@ export function orderedFiles(files, seed = 0) {
   return out;
 }
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+// Hash the exact bytes parsed for a run, before any browser work. A later filesystem edit must
+// neither change the recorded identity nor silently replace the frozen evaluation annotations.
+export async function jsonSnapshot(filename, expectedSha256) {
+  if (!filename) return { value: null, sha256: null };
+  const bytes = await fs.readFile(filename);
+  const sha256 = sha(bytes);
+  if (expectedSha256 && sha256 !== expectedSha256)
+    throw new Error("Evaluation annotation file differs from its frozen hash");
+  return { value: JSON.parse(bytes.toString("utf8")), sha256 };
+}
 export async function withWatchdog(work, timeoutMs, terminate) {
   let timer;
   try {
@@ -344,8 +354,23 @@ async function photoProbe(options, out, provenance) {
     sources.some((s) => s.sha256 !== dataset.files.find((f) => f.name === s.name)?.sha256)
   )
     throw new Error("Input photos differ from frozen dataset");
-  const masks = options.masks ? JSON.parse(await fs.readFile(options.masks, "utf8")) : null;
-  const resume = options.resume ? JSON.parse(await fs.readFile(options.resume, "utf8")) : null;
+  const [maskFile, resumeFile, truthFile] = await Promise.all([
+    jsonSnapshot(options.masks, dataset?.evaluationMasks?.sha256),
+    jsonSnapshot(options.resume),
+    jsonSnapshot(options.truth),
+  ]);
+  const masks = maskFile.value,
+    resume = resumeFile.value;
+  const loadedIdentities = {
+    sources,
+    maskSha256: maskFile.sha256,
+    resumeSha256: resumeFile.sha256,
+    truthSha256: truthFile.sha256,
+  };
+  await fs.writeFile(
+    out,
+    JSON.stringify({ provenance, status: "running", ...loadedIdentities }, null, 2) + "\n",
+  );
   if (resume && !resume.geometryProvenance?.commit)
     throw new Error("Geometry checkpoint lacks solver-origin provenance");
   if (resume) {
@@ -472,26 +497,23 @@ async function photoProbe(options, out, provenance) {
       timeoutMs + 5000,
       () => browserServer.kill(),
     );
-    const truth = options.truth ? JSON.parse(await fs.readFile(options.truth, "utf8")) : null;
+    const truth = truthFile.value;
     return {
       ...row,
       ...(truth
         ? {
             cameraScore: scoreCameras(row.cameras || [], truth.cameras, truth.sceneSize),
-            truthSha256: sha(await fs.readFile(options.truth)),
           }
         : {}),
-      sources,
+      ...loadedIdentities,
       browser: browser.version(),
       shuffleSeed: Number(options.shuffle || 0),
-      maskSha256: options.masks ? sha(await fs.readFile(options.masks)) : null,
-      resumeSha256: options.resume ? sha(await fs.readFile(options.resume)) : null,
       geometryProvenance: resume?.geometryProvenance || provenance,
     };
   } catch (e) {
     return {
       kind: "interrupted browser photo diagnostic",
-      sources,
+      ...loadedIdentities,
       accepted: [],
       missing: names.map((name) => ({
         name,
