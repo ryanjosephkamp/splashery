@@ -416,6 +416,11 @@ trained from them) is ours, and the models and textures they use keep their own 
   (`npx grooph@0.4.0`, run by `tools/site-loop.mjs`) draws the project's lane loop as an SVG for the
   draft page "The loop a lane follows" (lane Site r2). Nothing of it is served; only the SVG it
   wrote is, and the draft page links to the GROOPH app on the owner's own site.
+- FFmpeg (LGPL-2.1-or-later, with optional GPL parts; distribution builds often report
+  GPL-2.0-or-later or GPL-3.0-or-later), https://ffmpeg.org/legal.html:
+  `tools/effect-clip.mjs --mp4` encodes the private review clips as H.264 with the installed build's
+  libx264. It runs only on the machine that makes a clip; no FFmpeg or x264 code and no clip is
+  served by the site.
 
 ## PDF motion audit build tools (Codex task 21; not shipped)
 
