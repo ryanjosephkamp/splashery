@@ -245,3 +245,4 @@
 {"v":1,"t":"2026-10-17T19:02:45.477Z","harness":"claude-code","event":"tool","session":"d3a5d03e-d0d4-561b-be60-6377916f626b","tool":"mcp__github__get_job_logs","cwd":"splashery"}
 {"v":1,"t":"2026-10-17T19:03:49.887Z","harness":"claude-code","event":"tool","session":"d3a5d03e-d0d4-561b-be60-6377916f626b","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-17T19:03:49.904Z","harness":"claude-code","event":"turn-start","session":"d3a5d03e-d0d4-561b-be60-6377916f626b","cwd":"splashery"}
+{"v":1,"t":"2026-10-17T19:03:55.879Z","harness":"claude-code","event":"turn-end","session":"d3a5d03e-d0d4-561b-be60-6377916f626b","cwd":"splashery"}
