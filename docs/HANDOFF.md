@@ -4,6 +4,37 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
+## Now (October 17, 2026, about 05:40 UTC)
+
+The Operator is still `session_01JxfPsHRiWi93aHfLeqd8Jt` (Opus 5.5). Main is `aedbe443`. Merged
+since the section below:
+
+- Ops #698: Codex 99 (#690) as a study, NR1's Neuron specimen (#694, which carried Codex #613),
+  LICENSES for task 99's offline research tools, and task 98's machine-readable v1.0 toy list.
+- Ops #704: Codex task files 109 to 111.
+
+**Lanes:**
+
+- NR1 r2 (Opus 5.5) makes the Neuron specimen sharper on phones, after the owner's "just sharper"
+  marks. The low tier draws at the screen's full resolution, phones get twice the splats, the
+  slide's edge is crisper, and the cell swells less when it fires.
+- REC1 (Opus 5.5) fixes the recorder: a 5-second countdown before recording starts, steady framing
+  when a phone goes full screen mid-recording, and full-length takes in Photo to 3D.
+
+**Codex:**
+
+- Task 99's final yardstick is sound (16-sample, denoised truth views), so the follow-up is not a
+  re-render. Layered A missed the truth and boundary gates but cut ribbons by about 80% on 20 phone
+  inputs. The owner's blind vote (20 pairs, Classic against Layered A) decides whether a follow-up
+  finishes it; 14 of 20 is the bar. The identity key stays closed until all 20 are in.
+- Tasks 100 to 108 are out. 109 to 111 are ready: Screen in 3D, trim a video before processing, and
+  Splashery offline.
+- 98 (the v1.0 release) waits until NR1 r2 merges.
+
+**Review clips:** lanes now render review clips as 1080-pixel MP4s at 30 frames a second
+(`tools/effect-clip.mjs --mp4`, OPERATING.md "Steps for a lane"). The old 320-pixel GIFs looked
+grainy on a phone.
+
 ## Now (October 17, 2026, about 02:30 UTC)
 
 The Operator is still `session_01JxfPsHRiWi93aHfLeqd8Jt` (Opus 5.5). Main is `ceb51de7`. Merged
