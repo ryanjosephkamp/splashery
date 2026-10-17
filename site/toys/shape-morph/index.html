@@ -6,7 +6,7 @@
     <title>Shape morph · Splashery</title>
     <meta
       name="description"
-      content="One cloud of Gaussian splats can take six forms: a word, the Lorenz attractor, a Klein bottle, a gyroid, a loop, and a QR code."
+      content="One cloud of Gaussian splats takes one form after another: words or names (emoji keep their colors), the Lorenz attractor, a Klein bottle, a gyroid, a loop…"
     />
     <meta name="robots" content="noindex" />
     <link
@@ -18,7 +18,7 @@
     <meta property="og:title" content="Shape morph · Splashery" />
     <meta
       property="og:description"
-      content="One cloud of Gaussian splats can take six forms: a word, the Lorenz attractor, a Klein bottle, a gyroid, a loop, and a QR code."
+      content="One cloud of Gaussian splats takes one form after another: words or names (emoji keep their colors), the Lorenz attractor, a Klein bottle, a gyroid, a loop…"
     />
     <meta
       property="og:url"
@@ -154,16 +154,22 @@
           <div class="toy-head">
             <h1>Shape morph <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Pick a form in the Toy tab. Drag to push the splats; tap to scatter and re-form.
+              Tap to morph to the next form. Add words, emoji, shapes, or QR codes in the Toy tab;
+              drag to push the splats.
             </p>
             <dl class="does">
               <div>
                 <dt>Tap</dt>
-                <dd>Every splat flies to its place in one of six forms.</dd>
+                <dd>
+                  Every splat flies from where it is to its place in the next form of the person's
+                  list, starting at the tapped place and spreading out from there; in flight the
+                  cloud wears its teal-to-pink ink, and the new form's colors (an emoji's own) come
+                  in as it lands.
+                </dd>
               </div>
               <div>
                 <dt>Sound</dt>
-                <dd>A quiet, short rustle as the cloud scatters and re-forms.</dd>
+                <dd>A clean, soft swell that eases down as the form lands.</dd>
               </div>
               <div>
                 <dt>Arrived</dt>
@@ -217,58 +223,72 @@
         <section class="toy-section" aria-labelledby="h-about">
           <h2 id="h-about">About this toy</h2>
           <p>
-            One cloud of Gaussian splats can take six forms: a word, the Lorenz attractor, a Klein
-            bottle, a gyroid, a loop, and a QR code. Pick a form in the Toy tab and each splat flies
-            from its current position to its new place. Drag through the cloud to push nearby
-            splats, then let go and watch them settle back. A tap scatters the splats and brings
-            them home.
+            One cloud of Gaussian splats takes one form after another: words or names (emoji keep
+            their colors), the Lorenz attractor, a Klein bottle, a gyroid, a loop, and QR codes. You
+            set the list and its order. A tap morphs the cloud to the next form, starting where you
+            tap and spreading from there; pick a form on the stage to go straight to it.
           </p>
           <p>
-            Change the word or QR text in the Toy tab, or turn on Two-ink print for teal and orange
-            splats. The QR form keeps dark ink and a light quiet margin so it can be read once it
-            has settled, facing the camera. It holds up to 42 bytes of text. Nothing leaves your
-            device.
-          </p>
-          <p>
-            From a concept by Ryan Kamp. The form math comes from his Overprint concept; the Klein
-            bottle reuses Splashery's Splat equation preset. Made by Ryan with Codex (GPT-6). Code
-            is MIT; the original procedural forms and sound are CC0.
+            In the Toy tab, type a word to add it, add shapes or a QR code of the QR text, and move
+            or remove forms. A QR code holds up to 42 bytes and scans once it settles. Drag through
+            the cloud to push splats; they settle back. From Ryan Kamp's Overprint concept. Made by
+            Ryan with Codex (GPT-6) and Claude (Opus 5.5); code is MIT, and the forms and sound are
+            CC0.
           </p>
         </section>
         <section class="toy-section evidence" aria-labelledby="h-right">
           <h2 id="h-right">Is it right?</h2>
           <p>
-            Six sampled forms share one cloud of splats. The Lorenz equations, figure-eight
-            Klein-bottle parametrization, gyroid approximation, and QR encoder have reference
-            sources. The word and loop are graphic designs; flights, pushes, colors, and the two-ink
+            Each form in the person's list is one sample of the same cloud of splats. The Lorenz
+            equations, figure-eight Klein-bottle parametrization, gyroid approximation, and QR
+            encoder have reference sources. Words are drawn with the device's own fonts; the loop is
+            a graphic design; the list, flights, waves from a tap, pushes, colors, and the two-ink
             treatment are animation choices. <span class="note">Checked October 16, 2026.</span>
           </p>
           <ol class="claims">
             <li class="claim">
               <p class="claim-head">
-                <span class="verdict verdict-correct">Correct</span> The word form samples the
-                site's five-by-seven bitmap glyphs.
+                <span class="verdict verdict-correct">Correct</span> The word form samples the typed
+                text as the device's fonts draw it, emoji in their own colors.
               </p>
               <p>
-                Set bits in the existing glyph table become filled cells sampled by splats. Text is
-                uppercased, limited to 24 characters, and wrapped after eight characters per line;
-                unsupported characters become question marks.
+                src/text-splats.js splits the text into grapheme clusters with Intl.Segmenter (so
+                emoji sequences joined by zero-width joiners, flags, and skin tones stay whole),
+                draws each one with canvas fillText in the system fonts, and samples its inked
+                pixels with an R2 sequence. Color glyphs (emoji) keep their pixels' colors; other
+                glyphs take the form's ink. Text is cleaned (spaces collapsed, control characters
+                dropped), limited to 48 visible characters when added from the word box, and wrapped
+                at spaces after ten characters per line. In Node, where there is no canvas, the
+                site's five-by-seven bitmap glyphs stand in.
               </p>
               <p class="note">
-                The test checks finite, deterministic builds; the glyph design comes from the
-                published source table. This is stylized bitmap lettering.
+                The tests check grapheme splitting, determinism, and that every list form builds
+                finite and inside the frame. How a glyph looks depends on the device's fonts, so the
+                same word can look a little different on another device.
               </p>
               <ul class="sources">
                 <li>
                   <a
-                    href="https://raw.githubusercontent.com/ryanjosephkamp/splashery/89cd1c2665c26bf5381a3e228773040f403024ce/src/font.js"
+                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Segmenter"
                     target="_blank"
                     rel="noopener"
-                    >Splashery's bitmap font</a
-                  >, Splashery:
+                    >Intl.Segmenter</a
+                  >, MDN Web Docs:
                   <q
-                    >The font defines seven rows of five bits per glyph and exports them as the
-                    BITMAP table.</q
+                    >The Intl.Segmenter object enables locale-sensitive text segmentation, enabling
+                    you to get meaningful items (graphemes, words or sentences) from a string.</q
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText"
+                    target="_blank"
+                    rel="noopener"
+                    >CanvasRenderingContext2D: fillText() method</a
+                  >, MDN Web Docs:
+                  <q
+                    >fillText(), part of the Canvas 2D API, draws a text string at the specified
+                    coordinates, filling its characters with the current fill style.</q
                   >
                 </li>
               </ul>
@@ -469,8 +489,14 @@
               finite ball.
             </li>
             <li>
-              The word and loop are graphic designs. The two-ink treatment changes colors, without
-              simulating ink or printing.
+              The word and loop are graphic designs (the word follows the device's fonts). The
+              two-ink treatment changes colors, without simulating ink or printing.
+            </li>
+            <li>
+              A tap's morph starts at the tapped place: each splat waits 0.38 seconds for every unit
+              it lies from the tap, then flies for 1.8 seconds. In flight the cloud wears its
+              teal-to-pink ink, and a form's own colors come in as it lands. These are animation
+              choices.
             </li>
           </ul>
         </section>

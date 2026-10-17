@@ -220,12 +220,14 @@ beating heart, the campfire and the treasure chest) are built in the browser by 
 ### Shape morph (Codex task 78c)
 
 From a concept by Ryan Kamp. The six forms are ported from his Overprint concept, with the Klein
-bottle using Splashery's existing Splat equation preset and the word using the built-in bitmap font.
-No reference renderer, font files, or QR encoder were copied. The QR form uses the existing vendored
-QR generator listed in LICENSES.md, loaded only when that form is selected.
+bottle using Splashery's existing Splat equation preset. No reference renderer, font files, or QR
+encoder were copied. The QR form uses the existing vendored QR generator listed in LICENSES.md,
+loaded only when that form is selected.
 
-Made by Ryan with Codex (GPT-6), October 14, 2026. The new pack code is MIT; the original procedural
-forms, thumbnail, and synthesized rustle are CC0 1.0. They use no outside assets.
+Made by Ryan with Codex (GPT-6), October 14, 2026. Lane PT1 (made by Ryan with Claude, Opus 5.5,
+October 16, 2026) added the list of forms, words drawn with the device's own fonts and emoji through
+`src/text-splats.js`, and a synthesized pad sound in place of the rustle. The pack code is MIT; the
+original procedural forms, thumbnail, and sounds are CC0 1.0. They use no outside assets.
 
 ### One splat, many splats (Codex task 78a)
 
@@ -237,10 +239,13 @@ Visitor pictures are processed locally and are not shipped assets.
 
 ### Your name in splats (Codex task 78d)
 
-From a concept by Ryan Kamp. The procedural letters, paint colors, and synthesized notes are made by
-Ryan with Codex (GPT-6), CC0 1.0; the recipe code is MIT. It reuses the Fourier circles toy's Your
-words paths, rendered through Splashery's kit and PlayCanvas. No concept fonts, renderers, or
-external assets ship with the toy. Checked October 14, 2026.
+From Ryan Kamp's Toy Box name toy. Rebuilt by lane PT1 (made by Ryan with Claude, Opus 5.5, October
+16, 2026): letters drawn by `src/text-splats.js`, Toy Box's five tools, and synthesized sounds. The
+procedural letters, paint colors, and sounds are CC0 1.0; the code is MIT. The letters use Fredoka,
+as Toy Box does (Milena Brandão and Hafontia; [SIL Open Font License 1.1](vendor/fredoka/OFL.txt); a
+subset at weight 700 in `vendor/fredoka/`, allowed by the owner on October 16, 2026). Other scripts
+and emoji use the device's own fonts. No concept renderer or other external asset ships with the
+toy. The first version was made by Ryan with Codex (GPT-6), October 14, 2026.
 
 ### Baked assets (lane Baked engine)
 

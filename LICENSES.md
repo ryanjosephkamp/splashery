@@ -311,6 +311,19 @@ subject to the following conditions:
 - Licenses: MIT (splat-transform) and BSD-3-Clause with Google's patent grant (libwebp), checked on
   October 5, 2026; both texts are in `vendor/webp/LICENSE`.
 
+## Fredoka 700, a subset (lane PT1)
+
+- File: `vendor/fredoka/fredoka-700.woff2` (15,476 bytes), made from `Fredoka[wdth,wght].ttf` in
+  Google Fonts' repository (https://github.com/google/fonts/tree/main/ofl/fredoka), designed by
+  Milena Brandão and Hafontia. It was set to weight 700 and width 100 with fontTools' instancer and
+  cut down with `pyftsubset` to Basic Latin, Latin-1, Latin Extended-A, common punctuation, ★ and ♥,
+  as woff2.
+- Loaded only when Your name in splats opens (labs), through `FontFace`, before its letters are
+  drawn; other scripts and emoji fall back to the device's fonts. CLAUDE.md's fonts rule allows it
+  (the owner's OK of October 16, 2026).
+- License: SIL Open Font License 1.1, "Copyright 2016 The Fredoka Project Authors", checked on
+  October 16, 2026; the full text is in `vendor/fredoka/OFL.txt`.
+
 ## Development tools (not shipped)
 
 These are `devDependencies` used to prepare assets and run tests; nothing from them is served.
