@@ -1,0 +1,22 @@
+{
+  "tests/screenshots/hh5-pearl-1440x900.png": "3ae130e423a14358bfb900db1c28ac9a747a7de097c551cc7a48b73cd65d9b4c",
+  "tests/screenshots/hh5-pearl-390x844.png": "2e8eae1e3969f63a0784989be9ec10a9e1951b4e5b2d1ee7747614d55083475d",
+  "tests/screenshots/rec1-countdown-1440x900.png": "8ad01568723a9f1e9369e5713d0e35df0339a24404467f737accb2115f9ccc27",
+  "tests/screenshots/rec1-countdown-390x844.png": "198e0b5e8d902f799a0aa580544ef27b77f35e0b380dbdfb064f51d48637ed1d",
+  "tests/screenshots/rec1-fullscreen-390x844.png": "1c24e729f69adbe1b9919e75f1546999653cd093adaa906efe863ba2d3867720",
+  "tests/screenshots/rec1-photo-take-390x844.png": "83bad516c3dbf0f01a35967314df285f633dd6c0250466e3e35141cffdf9185c",
+  "tests/screenshots/rec1-settings-1440x900.png": "e741d5cd56071096634c0fa522f86c066a7737dddcd9f3258f6e22f829df19a0",
+  "tests/screenshots/rec1-settings-390x844.png": "b73cafac2cf920734adadf14b16fbbf62843271bf57e3a4b5ae3789c20cc3ddd",
+  "tests/screenshots/shr-clap-1440x900.png": "f5cbd59d35d0ac76613052b1960b634e4639be2f0927981ef41fa8ad22ba8696",
+  "tests/screenshots/shr-preview-1440x900.png": "0bd80c34422f3cf155d8c51c0db92f20e6f3ac75d96176e89ed25e7b0ef204b0",
+  "tests/screenshots/shr-preview-390x844.png": "1b5c75f4a16f8ca066013219936c4b684f91aa308080e5184b89a6cbb54c2dd8",
+  "tests/screenshots/shr-preview-844x390.png": "f62cdacac84081c7286bbb7972438e080fdba637267e6ee11e17dbf306345035",
+  "tests/screenshots/shr-preview-discard-1440x900.png": "c7f9db5c492d45e5eda684fb53c0e1931393f6d04db95266fc272fda75c797c8",
+  "tests/screenshots/shr-preview-discard-390x844.png": "85cd61e659ebf2fe3edad791d20474410f3ad21e589911f19bc1ef656ee42011",
+  "tests/screenshots/shr-share-1440x900.png": "02d5ffaf854ad010a17903d7f3eab6830171ae160ed4dd30918c7e7768a0928c",
+  "tests/screenshots/shr-share-390x844.png": "4dac12e74dec1bdc9e50758f620c8e14315fd6fa22b5fdb3d0b8b948eddd1361",
+  "tests/screenshots/shr-share-end-1440x900.png": "9e8bbb9b1b5e0e40a0df41bc75d5473d791ce3152cd686550543890ebc0e4ee5",
+  "tests/screenshots/shr-share-end-390x844.png": "3d4eb07ff19a2f23013d831c6ec2c33e9d0d5f23a92390b06e92cac27bb9a66e",
+  "tests/screenshots/shr-share-gif-1440x900.png": "f58f6d5807ad731b9ba3e8c95da6c3a4af2c475ba4421408fae03080f37088d2",
+  "tests/screenshots/shr-share-gif-390x844.png": "f5c94e2e3d97dbf298ba311528a7fa7553981eae1363df219e9e2b427b2eb88e"
+}

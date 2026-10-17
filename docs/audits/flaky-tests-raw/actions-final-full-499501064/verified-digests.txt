@@ -1,0 +1,1 @@
+All six original ZIPs match the SHA-256 digests in metadata.json. Verified October 17, 2026.
