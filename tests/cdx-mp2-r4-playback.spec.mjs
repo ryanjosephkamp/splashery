@@ -1,3 +1,4 @@
+// Keep the Operator pack selector aware of "moving-photo-3d" checks in shared helpers.
 // Task 101: this independent phone group keeps its original fixtures and solo execution.
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";

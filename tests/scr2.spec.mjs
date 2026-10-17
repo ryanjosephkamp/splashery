@@ -1,3 +1,4 @@
+// Keep the Operator pack selector aware of "screen" checks in shared helpers.
 // Task 101: independent screen checks, with all original cases and sizes.
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";

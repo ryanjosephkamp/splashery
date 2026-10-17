@@ -1,14 +1,45 @@
-// Task 101: keep all seven upkeep screenshot tests at their original entry point.
+// Task 101: keep asset-triggered checks and all seven upkeep screenshot tests at their original entry point.
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 
-import { searchToys } from "../src/toys.js";
+import { TOYS, searchToys } from "../src/toys.js";
 
-import { SHOTS, watchConsole, loadApp, waitForToy, inkPixels } from "./smoke-helpers.mjs";
+import { SHOTS, ORIGIN, watchConsole, loadApp, waitForToy, inkPixels } from "./smoke-helpers.mjs";
 
 test.describe("Splashery app (WebGL2)", () => {
   test.use({ viewport: { width: 1280, height: 800 }, reducedMotion: "reduce" });
+
+  test("loads with no console errors and shows the shelf", async ({ page }) => {
+    const problems = watchConsole(page);
+    const renderer = await loadApp(page);
+    expect(renderer).toBe("webgl2");
+    await waitForToy(page, "Cactus");
+    const cards = page.locator(".toy-card");
+    await expect(cards).toHaveCount(TOYS.length);
+    for (const id of ["cactus", "strawberry", "cookie", "bee", "torus", "blob", "knot"]) {
+      // The new shelf order puts Shapes farther down; exercise native lazy loading there too.
+      await page.locator(`.toy-card[data-toy='${id}'] img`).scrollIntoViewIfNeeded();
+      await expect(page.locator(`.toy-card[data-toy='${id}'] img`)).toHaveJSProperty(
+        "complete",
+        true,
+      );
+    }
+    // Shelf thumbnails load lazily, so load the offscreen ones before checking them all.
+    const loaded = await page.evaluate(async () => {
+      const imgs = [...document.querySelectorAll(".toy-card img")];
+      for (const img of imgs) img.loading = "eager";
+      await Promise.all(imgs.map((img) => img.decode().catch(() => {})));
+      return imgs.filter((img) => !(img.naturalWidth > 0)).map((img) => img.src);
+    });
+    expect(loaded).toEqual([]);
+    await expect(page.locator(".toy-card[data-toy='cactus']")).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    expect(await inkPixels(page)).toBeGreaterThan(2000);
+    expect(problems).toEqual([]);
+  });
 
   test("the embed page loads a scene from the hash", async ({ page, browser }) => {
     await loadApp(page);
@@ -50,6 +81,26 @@ test.describe("Splashery app (WebGL2)", () => {
     fs.mkdirSync(SHOTS, { recursive: true });
     await embed.screenshot({ path: path.join(SHOTS, "embed-400x300.png") });
     await ctx.close();
+  });
+
+  test("an embedded captured toy stays under 30 MB of transfer", async ({ page }) => {
+    const sizes = new Map();
+    page.on("response", async (res) => {
+      // Network transfer only: blob: URLs are in-memory copies made while unpacking.
+      if (!/^https?:/.test(res.url())) return;
+      try {
+        sizes.set(res.url(), (await res.body()).length);
+      } catch {
+        // redirects and aborted requests have no body
+      }
+    });
+    await page.goto("/embed/?toy=bee&profile=strong&renderer=webgl2");
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await page.waitForTimeout(1500);
+    const total = [...sizes.values()].reduce((a, b) => a + b, 0);
+    expect(sizes.has(`${ORIGIN}/assets/toys/bee/bee.sog`)).toBe(true);
+    expect(total).toBeLessThan(30 * 1024 * 1024);
+    console.log(`embed transfer, bee at the strong profile: ${(total / 1048576).toFixed(1)} MB`);
   });
 
   test("desktop screenshot at 1440x900", async ({ browser }) => {

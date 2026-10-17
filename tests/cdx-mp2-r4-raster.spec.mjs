@@ -1,3 +1,4 @@
+// Keep the Operator pack selector aware of "moving-photo-3d" checks in shared helpers.
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 
