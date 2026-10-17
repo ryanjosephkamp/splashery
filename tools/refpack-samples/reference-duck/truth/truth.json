@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "model": "model.glb",
+  "cameras": [
+    {
+      "view": "front",
+      "yaw": 0,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "right",
+      "yaw": 1.5707963267948966,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "back",
+      "yaw": 3.141592653589793,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "left",
+      "yaw": -1.5707963267948966,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "three-quarter",
+      "yaw": 0.7853981633974483,
+      "pitch": 0.3,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "three-quarter",
+      "yaw": -0.7853981633974483,
+      "pitch": 0.3,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    }
+  ],
+  "source": "https://polyhaven.com/a/rubber_duck_toy",
+  "download": "polyhaven:rubber_duck_toy",
+  "author": "Plat251",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17",
+  "sourceHashes": {
+    "rubber_duck_toy.gltf": "dcf036297843dad2775841fc41208fae8c776066848d3f6e26efa42eb98d5016",
+    "rubber_duck_toy.bin": "381e1373b99a4ff23d5ee02cb66bfb5e7d897eaa280581f19b652c38ffd83314",
+    "textures/rubber_duck_toy_diff_1k.jpg": "c968d6185c3ec57a430818e6af85c2ba2880c7ee19ccb1a0171730926175cfd6"
+  },
+  "modelHash": "9de1c5657aa982ef2e86fd63ad713dc6f602543a3d20104fd285c16e55ff1ecf",
+  "triangles": 4288,
+  "changes": "Simplified to about 4,500 triangles when needed; base texture averaged per triangle and materials made opaque; centered and scaled to AABB diagonal 2. Rendered in Splashery; sixth view composited on a procedural busy background. No logos added.",
+  "credit": "CC0 source by Plat251; test preparation made by Ryan with Codex (GPT-6).",
+  "hiddenFromBuilder": true,
+  "imageHashes": {
+    "images/01.jpg": "b93c4e5ad1cd902ff1f6ada5f6833236fb0b7d230dd7d937efaf1a77361855d4",
+    "images/01-mask.png": "ba69718e21a499d42b39408f86c231773f6c6086ac91f7690f64485ccd072bc9",
+    "images/02.jpg": "6214712d4c972f94a0eb1e560be3cc103fc1cdf56e0a0278b651a0338a0cbcc8",
+    "images/02-mask.png": "8b194c0b5dca76aeecdc41c202736c825b08f80a55cf402ce73a400f0ffe867a",
+    "images/03.jpg": "1c773941d4c3ab3a8676afa85a703a780df07f4de5038c22b5bd369d81f4d69f",
+    "images/03-mask.png": "b32fe5bc9b1f665de683bc9fb5c427009bcee0a5017a0d2dc19165a2dcb7a61c",
+    "images/04.jpg": "998c4cfff6158495a5904749d0e032fe07839ddc37abef6fb363b6484ed9b4b2",
+    "images/04-mask.png": "f9e5e11ec6d770580597921362a633ff51270528b887ca6189a347eb95bc59f1",
+    "images/05.jpg": "14a5c70971b964c1deceb9cfdffb441a949e2ba176d1b3a796b1b05484aa1538",
+    "images/05-mask.png": "e06d8a655e0206953b1b099d16706f885ea435d23884704ec8e4f080252b0b5a",
+    "images/06.jpg": "4c15471fec09bad1acd41e23d30fb3048781bbc5e003c906dc4033884f3f07ee",
+    "images/06-mask.png": "7e391b30fb1e8269df639d3a754664e5996575d4d8999be1ad75f5d20d494037"
+  }
+}

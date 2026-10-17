@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "model": "model.glb",
+  "cameras": [
+    {
+      "view": "front",
+      "yaw": 0,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "right",
+      "yaw": 1.5707963267948966,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "back",
+      "yaw": 3.141592653589793,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "left",
+      "yaw": -1.5707963267948966,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "three-quarter",
+      "yaw": 0.7853981633974483,
+      "pitch": 0.3,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "three-quarter",
+      "yaw": -0.7853981633974483,
+      "pitch": 0.3,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    }
+  ],
+  "source": "https://polyhaven.com/a/croissant",
+  "download": "polyhaven:croissant",
+  "author": "Greg Zaal, Dario Barresi",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17",
+  "sourceHashes": {
+    "croissant.gltf": "b6e1eb36f776e6b79500c51b57c0e29cd17598c2d8a20d0ec0513955a6cc3a2f",
+    "croissant.bin": "d770a5ab7e3bcf3572343d74c7941e87eda87349fe414dd4ab206fa5e1e1524a",
+    "textures/croissant_diff_1k.jpg": "0eb9b98058f96f3c4f08f78c0a0b3cd6951edd24f9ca8347ff167e2d740d9405"
+  },
+  "modelHash": "25dbef4002f5dfdbf24040361ce1fe3a5e2c550984cf2387968ebc510b47f96f",
+  "triangles": 1990,
+  "changes": "Simplified to about 4,500 triangles when needed; base texture averaged per triangle and materials made opaque; centered and scaled to AABB diagonal 2. Rendered in Splashery; sixth view composited on a procedural busy background. No logos added.",
+  "credit": "CC0 source by Greg Zaal, Dario Barresi; test preparation made by Ryan with Codex (GPT-6).",
+  "hiddenFromBuilder": true,
+  "imageHashes": {
+    "images/01.jpg": "f941fec7d6260acd2adfde4132f18d6769131ca616fad49d4f3d7d2b6f677fdb",
+    "images/01-mask.png": "185c2ed1f36bec4b1cd8bd81243104c48e62eb15b14eb0d88f8efd6aa295a259",
+    "images/02.jpg": "3478fc338f8418cdf9b8c1884f5776639487c466a7305c2d484225317ade3aba",
+    "images/02-mask.png": "9e3cf047f4b637b56a4911e468fea1a96611768dce960b858cfadfd0dc062264",
+    "images/03.jpg": "d4a9d029a1f4c29bf78627c224bd4d5de7815f8d61838b12e11937a2be3eb590",
+    "images/03-mask.png": "a7b2c5b68ab743c96bdfb8b04e5e82bbb5823b3f5faf04f22817c84711af8d31",
+    "images/04.jpg": "d5355e4d79b5a301c84dc6831123868646e057224014e247aaa4a93f195f70f8",
+    "images/04-mask.png": "328da29b8e71e7e98b6e12d0db30668bb45b0277ffd77570b7d0e327782af308",
+    "images/05.jpg": "0fe56072dad8d80aabc8de0d17b76265603059bf2675cbaf5a68942401d15a71",
+    "images/05-mask.png": "fe9e537f8137485e27aa2b8814b6d53158f23e5cf2904137a30353e31abbb7f0",
+    "images/06.jpg": "949fc8b531c5de938bc4c46bb5f69ba6129307cce7bed09bc48bddf27a15bbc9",
+    "images/06-mask.png": "6e460171071761f077d5113722258a1ff5d3d67cd9af6e2752b4c540b0f71b57"
+  }
+}

@@ -228,6 +228,11 @@
                   >Neuron specimen (Codex task 78b, October 14, 2026)</a
                 >
               </li>
+              <li>
+                <a href="#built-from-pictures-codex-task-113-october-17-2026"
+                  >Built from pictures (Codex task 113, October 17, 2026)</a
+                >
+              </li>
             </ul>
           </li>
           <li>
@@ -304,6 +309,11 @@
               <li>
                 <a href="#photo-to-3d-next-offline-research-tools-codex-task-99-not-shipped"
                   >Photo to 3D next: offline research tools (Codex task 99; not shipped)</a
+                >
+              </li>
+              <li>
+                <a href="#build-from-pictures-codex-task-113-october-17-2026"
+                  >Build from pictures (Codex task 113, October 17, 2026)</a
                 >
               </li>
             </ul>
@@ -8947,6 +8957,57 @@
             model milliseconds per second. Geometry and timing are schematic, not a measured human
             neuron.
           </p>
+          <h2 id="built-from-pictures-codex-task-113-october-17-2026">
+            Built from pictures (Codex task 113, October 17, 2026)
+          </h2>
+          <p>
+            Made by Ryan with Codex (GPT-6): the context-pack tools, scorer, kit builder, playbook,
+            and labs toy. Code is MIT; original fitted shapes and procedural backgrounds are CC0.
+            The five test packs use these models from the existing catalog, under
+            <a href="https://polyhaven.com/license" target="_blank" rel="noopener"
+              >Poly Haven's CC0 license</a
+            >:
+          </p>
+          <ul>
+            <li>
+              <a href="https://polyhaven.com/a/rubber_duck_toy" target="_blank" rel="noopener"
+                >Rubber duck</a
+              >, by Plat251.
+            </li>
+            <li>
+              <a href="https://polyhaven.com/a/croissant" target="_blank" rel="noopener"
+                >Croissant</a
+              >, by Greg Zaal and Dario Barresi.
+            </li>
+            <li>
+              <a href="https://polyhaven.com/a/food_pomegranate_01" target="_blank" rel="noopener"
+                >Pomegranate</a
+              >, by Oliver Harries.
+            </li>
+            <li>
+              <a href="https://polyhaven.com/a/carrot_cake" target="_blank" rel="noopener"
+                >Carrot cake</a
+              >, by Greg Zaal and James Ray Cock.
+            </li>
+            <li>
+              <a href="https://polyhaven.com/a/Lantern_01" target="_blank" rel="noopener">Lantern</a
+              >, by Rajil Jose Macatangay.
+            </li>
+          </ul>
+          <p>
+            Source and license pages were opened October 17, 2026. Compact truth models preserve
+            simplified source geometry, with base texture colors averaged per triangle and materials
+            made opaque, centered, and scaled. Six reference pictures per object were rendered in
+            Splashery, with a procedural busy background in the last view.
+            <code>tools/refpack-samples/&lt;id&gt;/truth/truth.json</code> records hashes and
+            changes for each asset. The toys are approximations fitted from those pictures, with
+            their measured scores shown in About. No store photographs, private pictures, logos,
+            segmenter weights, or remote inference service ship with the toy.
+          </p>
+          <p>
+            The shipped shelf thumbnail and original kit assets also have their source, license,
+            changes, and thumbnail hash in <code>src/refbuild/asset-records.json</code>.
+          </p>
         </div>
       </section>
       <section class="md-file" aria-label="Third-party licenses">
@@ -10121,6 +10182,30 @@ subject to the following conditions:
             The model weights the bake-off compared are fetched at run time from their official
             pages; each one's license is in <code>docs/audits/</code> (task 99's report), and none
             is vendored.
+          </p>
+          <h3 id="build-from-pictures-codex-task-113-october-17-2026">
+            Build from pictures (Codex task 113, October 17, 2026)
+          </h3>
+          <p>
+            The pack, camera, scoring, and kit-fitting code is made by Ryan with Codex (GPT-6),
+            under the repository's MIT license. Masking uses original alpha/border-color code; no
+            segmenter, model weights, or additional dependency is downloaded or shipped. Build tools
+            reuse the already listed <code>@gltf-transform/core</code> 4.5.0,
+            <code>pngjs</code> 7.0.0, <code>jpeg-js</code> 0.4.4, Playwright, and the vendored
+            PlayCanvas 2.22.3 renderer. Only the kit recipe helpers, fitted shape data, and CC0
+            reference pictures load with the labs toy.
+          </p>
+          <p>
+            The five reference packs are derivatives of CC0 models already recorded in
+            <code>tools/models.json</code>.
+            <a href="https://polyhaven.com/license" target="_blank" rel="noopener"
+              >Poly Haven's live license page</a
+            >
+            and each source page were opened on October 17, 2026. Every pack's
+            <code>truth/truth.json</code> carries its author, live source page, checked date,
+            source-file SHA-256 hashes, compact model hash, and changes. The rendered references,
+            procedural busy backgrounds, and original fitted kit geometry are CC0. Private context
+            packs and their derived outputs are never included in this release.
           </p>
         </div>
       </section>

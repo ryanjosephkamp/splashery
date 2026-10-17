@@ -2054,3 +2054,27 @@ The [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_
 opened on October 14, 2026. This toy integrates the concept's squid giant axon equations with a 0.01
 ms Euler step, samples the potential at 0.1 ms, and displays 7 model milliseconds per second.
 Geometry and timing are schematic, not a measured human neuron.
+
+## Built from pictures (Codex task 113, October 17, 2026)
+
+Made by Ryan with Codex (GPT-6): the context-pack tools, scorer, kit builder, playbook, and labs
+toy. Code is MIT; original fitted shapes and procedural backgrounds are CC0. The five test packs use
+these models from the existing catalog, under
+[Poly Haven's CC0 license](https://polyhaven.com/license):
+
+- [Rubber duck](https://polyhaven.com/a/rubber_duck_toy), by Plat251.
+- [Croissant](https://polyhaven.com/a/croissant), by Greg Zaal and Dario Barresi.
+- [Pomegranate](https://polyhaven.com/a/food_pomegranate_01), by Oliver Harries.
+- [Carrot cake](https://polyhaven.com/a/carrot_cake), by Greg Zaal and James Ray Cock.
+- [Lantern](https://polyhaven.com/a/Lantern_01), by Rajil Jose Macatangay.
+
+Source and license pages were opened October 17, 2026. Compact truth models preserve simplified
+source geometry, with base texture colors averaged per triangle and materials made opaque, centered,
+and scaled. Six reference pictures per object were rendered in Splashery, with a procedural busy
+background in the last view. `tools/refpack-samples/<id>/truth/truth.json` records hashes and
+changes for each asset. The toys are approximations fitted from those pictures, with their measured
+scores shown in About. No store photographs, private pictures, logos, segmenter weights, or remote
+inference service ship with the toy.
+
+The shipped shelf thumbnail and original kit assets also have their source, license, changes, and
+thumbnail hash in `src/refbuild/asset-records.json`.

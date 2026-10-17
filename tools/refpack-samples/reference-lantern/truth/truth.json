@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "model": "model.glb",
+  "cameras": [
+    {
+      "view": "front",
+      "yaw": 0,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "right",
+      "yaw": 1.5707963267948966,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "back",
+      "yaw": 3.141592653589793,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "left",
+      "yaw": -1.5707963267948966,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "three-quarter",
+      "yaw": 0.7853981633974483,
+      "pitch": 0.3,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "three-quarter",
+      "yaw": -0.7853981633974483,
+      "pitch": 0.3,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    }
+  ],
+  "source": "https://polyhaven.com/a/Lantern_01",
+  "download": "polyhaven:Lantern_01",
+  "author": "Rajil Jose Macatangay",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17",
+  "sourceHashes": {
+    "Lantern_01.gltf": "d3f8d7a7afec96d55d3b7f20c3e329c909d19d37047902a826bc157f77c27819",
+    "Lantern_01.bin": "cb0c7eaaea361546201ba1c4324581ac7147c221851657b6e23d2f854beabe49",
+    "textures/Lantern_01_brass_diff_1k.jpg": "d19d4c9417719a89ad824ce3a142f38f5e58c47b8640edca5eacca66918b608e"
+  },
+  "modelHash": "e16a5c57f6f090213b1b50115ebc4f910b02d15db20d7d1eb98351995df0d238",
+  "triangles": 2430,
+  "changes": "Simplified to about 4,500 triangles when needed; base texture averaged per triangle and materials made opaque; centered and scaled to AABB diagonal 2. Rendered in Splashery; sixth view composited on a procedural busy background. No logos added.",
+  "credit": "CC0 source by Rajil Jose Macatangay; test preparation made by Ryan with Codex (GPT-6).",
+  "hiddenFromBuilder": true,
+  "imageHashes": {
+    "images/01.jpg": "39bbb1f0612d3c72382b361b3390d588e34183a3dd0e8f475b1fdad093227970",
+    "images/01-mask.png": "e8946e48c153f2cc439d0cab03fd220ca8a8d10dba8c7a68cda9c9cb42b086d1",
+    "images/02.jpg": "705bbaf3d099e68eb413b82be88f18dc492029ef0946e3367451d1405a116948",
+    "images/02-mask.png": "02e72ae37deac1ace47dc0cecdd711aa7953e2c81101432d4b60a84f95b0f784",
+    "images/03.jpg": "fe06bae914e6874b06251ddfa3f8dd06182ab31df07aca8c36dcb1cd54ff97e4",
+    "images/03-mask.png": "b88319efcb66f29f4f3443f1ac4c312cb53930b9180e82b19eefd7a99b459c0f",
+    "images/04.jpg": "a7f63e954490e689a99353282c36a129fe0c467ca7d57d5345a1a69e724deeae",
+    "images/04-mask.png": "9e515ebfe32bcc0e594bb6f4fbcf66facfa16555dba1e7ad75f2a6e560a8d640",
+    "images/05.jpg": "dec069fb5fc0d2ea3a4045f77e51572e7b0fd8b39ffebd91e167fc7552ffcb05",
+    "images/05-mask.png": "ea7d1a6e500aebd258542d0ecfe048dec7a26f3380688b84d68bbfa84bb9bdd1",
+    "images/06.jpg": "2816fcc38464be439b164b111de2cff444fc705173c48b38acc8c0ccc4e0beaa",
+    "images/06-mask.png": "2720d17e7cefdc29db8a614e0cc66449cefbb83f253c85efba68fdbc7062d2a9"
+  }
+}

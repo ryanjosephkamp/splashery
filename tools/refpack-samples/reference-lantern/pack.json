@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "id": "reference-lantern",
+  "name": "Lantern",
+  "images": [
+    {
+      "file": "images/01.jpg",
+      "view": "front",
+      "mask": "images/01-mask.png"
+    },
+    {
+      "file": "images/02.jpg",
+      "view": "right",
+      "mask": "images/02-mask.png"
+    },
+    {
+      "file": "images/03.jpg",
+      "view": "back",
+      "mask": "images/03-mask.png"
+    },
+    {
+      "file": "images/04.jpg",
+      "view": "left",
+      "mask": "images/04-mask.png"
+    },
+    {
+      "file": "images/05.jpg",
+      "view": "three-quarter",
+      "mask": "images/05-mask.png"
+    },
+    {
+      "file": "images/06.jpg",
+      "view": "three-quarter",
+      "mask": "images/06-mask.png"
+    }
+  ],
+  "size": {
+    "width": 0.12012987956404686,
+    "depth": 0.09626633673906326,
+    "height": 0.2923438549041748,
+    "units": "m",
+    "source": "CC0 source model bounds; synthetic test dimensions"
+  },
+  "notes": "A brass lantern with a wide foot, a narrow center, and a handle at the top.",
+  "parts": [
+    {
+      "name": "object",
+      "material": "Read the pictures; flat part colors are an approximation."
+    }
+  ],
+  "moves": [
+    {
+      "part": "object",
+      "how": "hinge",
+      "axis": "z",
+      "amount": 20
+    }
+  ],
+  "budget": {
+    "minutes": 30,
+    "quality": "good"
+  },
+  "license": {
+    "images": "CC0-1.0",
+    "source": "https://polyhaven.com/a/Lantern_01"
+  }
+}

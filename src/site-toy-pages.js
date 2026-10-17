@@ -50,6 +50,7 @@ export const SITE_TOY_IDS = [
   "bowling-ball",
   "brain",
   "bricks",
+  "built-from-pictures",
   "bumblebee",
   "burger",
   "bus",

@@ -1,0 +1,188 @@
+{
+  "schema": 1,
+  "pack": "reference-pomegranate",
+  "builder": "kit",
+  "minutes": 0.3784662996666666,
+  "quality": "good",
+  "status": "complete",
+  "budgetMinutes": 30,
+  "evaluations": 401,
+  "objective": 0.9602658172812873,
+  "history": [
+    {
+      "evaluation": 22,
+      "silhouetteObjective": 0.9460280149080815
+    },
+    {
+      "evaluation": 62,
+      "silhouetteObjective": 0.9470663511724476
+    },
+    {
+      "evaluation": 116,
+      "silhouetteObjective": 0.9490582539373489
+    },
+    {
+      "evaluation": 123,
+      "silhouetteObjective": 0.9501106921084481
+    },
+    {
+      "evaluation": 124,
+      "silhouetteObjective": 0.9518438025060098
+    },
+    {
+      "evaluation": 169,
+      "silhouetteObjective": 0.9532157597293112
+    },
+    {
+      "evaluation": 219,
+      "silhouetteObjective": 0.9560948789287651
+    },
+    {
+      "evaluation": 303,
+      "silhouetteObjective": 0.9575555192837006
+    },
+    {
+      "evaluation": 312,
+      "silhouetteObjective": 0.9586097831052924
+    },
+    {
+      "evaluation": 336,
+      "silhouetteObjective": 0.9602658172812873
+    }
+  ],
+  "estimatedCameras": [
+    {
+      "yaw": -0.22000000000000003,
+      "pitch": 0.039999999999999994,
+      "fov": 38,
+      "distance": 3.7153846153846155,
+      "target": [0.008688201063308192, 0.000891540206671996, -0.00010750132721773942],
+      "proxyIoU": 0.9674952198852772,
+      "evaluations": 25
+    },
+    {
+      "yaw": 1.2407963267948965,
+      "pitch": -0.04000000000000001,
+      "fov": 38,
+      "distance": 3.7098884842967688,
+      "target": [-0.0003841241583175874, 0.0031856549156879343, -0.0020855595026072096],
+      "proxyIoU": 0.9623352165725048,
+      "evaluations": 25
+    },
+    {
+      "yaw": 2.811592653589793,
+      "pitch": 0.039999999999999994,
+      "fov": 38,
+      "distance": 3.577777777777778,
+      "target": [-0.0019994524386893284, 0.00047439319335852476, 5.7202016832725235e-5],
+      "proxyIoU": 0.969147005444646,
+      "evaluations": 25
+    },
+    {
+      "yaw": -1.7907963267948968,
+      "pitch": -0.12000000000000001,
+      "fov": 38,
+      "distance": 3.7098884842967688,
+      "target": [0.0005336644166158283, 0.004425836374275515, -0.00416374885702279],
+      "proxyIoU": 0.9718045112781954,
+      "evaluations": 25
+    },
+    {
+      "yaw": -2.356194490192345,
+      "pitch": -0.04000000000000001,
+      "fov": 38,
+      "distance": 3.7153846153846155,
+      "target": [-0.004992762171124918, -0.0013126769093085846, 0.005216606314482461],
+      "proxyIoU": 0.9516728624535316,
+      "evaluations": 25
+    },
+    {
+      "yaw": 0.5653981633974483,
+      "pitch": 0.12,
+      "fov": 38,
+      "distance": 3.577777777777778,
+      "target": [0.008363805318632723, -0.0047866118990957714, -0.007547568640330457],
+      "proxyIoU": 0.9520295202952029,
+      "evaluations": 25
+    }
+  ],
+  "inputs": [
+    "pack.json",
+    "images/01.jpg",
+    "images/01-mask.png",
+    "images/02.jpg",
+    "images/02-mask.png",
+    "images/03.jpg",
+    "images/03-mask.png",
+    "images/04.jpg",
+    "images/04-mask.png",
+    "images/05.jpg",
+    "images/05-mask.png",
+    "images/06.jpg",
+    "images/06-mask.png"
+  ],
+  "realFits": [
+    {
+      "candidate": 0,
+      "silhouetteIoU": 0.819327301179713,
+      "score": 71.17096199000358
+    },
+    {
+      "candidate": 1,
+      "silhouetteIoU": 0.8028947642791988,
+      "score": 67.41777071643538
+    },
+    {
+      "candidate": 2,
+      "silhouetteIoU": 0.8368097748096286,
+      "score": 76.1034463924474
+    },
+    {
+      "candidate": 3,
+      "silhouetteIoU": 0.8083397314379656,
+      "score": 67.81364309191336
+    },
+    {
+      "candidate": 4,
+      "silhouetteIoU": 0.8660794077127942,
+      "score": 81.65472707276483
+    },
+    {
+      "candidate": 5,
+      "silhouetteIoU": 0.8491115006371253,
+      "score": 77.86612419274788
+    },
+    {
+      "candidate": 6,
+      "silhouetteIoU": 0.8850336788433713,
+      "score": 85.15383126468882
+    },
+    {
+      "candidate": 7,
+      "silhouetteIoU": 0.8681145409993555,
+      "score": 81.6614460467112
+    }
+  ],
+  "optimization": "Deterministic perspective silhouette search with re-estimated cameras, followed by coordinate search against the real GSplat scorer (truth disabled).",
+  "stopped": "search limit or convergence",
+  "parts": [
+    {
+      "name": "object",
+      "file": "parts/object.ply",
+      "pivot": [0, 0, 0],
+      "motion": {
+        "how": "spin",
+        "axis": "y",
+        "amount": 360
+      }
+    }
+  ],
+  "coordinates": "Y up, +Z front; initialized at AABB diagonal 2 and fitted in that shared frame; all parts retain it",
+  "license": "CC0-1.0",
+  "withinBudget": true,
+  "outputHashes": {
+    "result.ply": "225e0281693cb2acb1ebb2fd33bc17eb028d908dd0179c8c07db85d2f1548c45",
+    "result.glb": "376931710d3afde9eb0b9bcea9dee2bbdbd7fd9c0ca8d97d49ddd7fc9ab44a7a",
+    "parts/object.ply": "225e0281693cb2acb1ebb2fd33bc17eb028d908dd0179c8c07db85d2f1548c45"
+  }
+}

@@ -3901,6 +3901,16 @@
     "l": 1
   },
   {
+    "t": "Built from pictures",
+    "u": "toys/built-from-pictures/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick an object in Toy, tap to move it, and open About to compare its reference pictures.",
+    "w": "built from pictures studio studio reference pictures context pack reconstruction kit shapes silhouette fitting benchmark cc0 built-from-pictures",
+    "i": "../assets/toys/built-from-pictures/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Splat field",
     "u": "toys/splat-field/",
     "k": "toy",

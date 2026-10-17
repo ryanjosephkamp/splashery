@@ -1,0 +1,292 @@
+{
+  "schema": 1,
+  "pack": "reference-duck",
+  "builder": "kit",
+  "minutes": 0.92234083195,
+  "quality": "good",
+  "status": "complete",
+  "budgetMinutes": 30,
+  "evaluations": 401,
+  "objective": 0.893417379387332,
+  "history": [
+    {
+      "evaluation": 14,
+      "silhouetteObjective": 0.8653803580663146
+    },
+    {
+      "evaluation": 15,
+      "silhouetteObjective": 0.8655743273539447
+    },
+    {
+      "evaluation": 26,
+      "silhouetteObjective": 0.8655909295007806
+    },
+    {
+      "evaluation": 28,
+      "silhouetteObjective": 0.8657728916838192
+    },
+    {
+      "evaluation": 32,
+      "silhouetteObjective": 0.8662269485255171
+    },
+    {
+      "evaluation": 49,
+      "silhouetteObjective": 0.8754369119777063
+    },
+    {
+      "evaluation": 50,
+      "silhouetteObjective": 0.8756315606673946
+    },
+    {
+      "evaluation": 56,
+      "silhouetteObjective": 0.8758268322328897
+    },
+    {
+      "evaluation": 69,
+      "silhouetteObjective": 0.8760511938871771
+    },
+    {
+      "evaluation": 71,
+      "silhouetteObjective": 0.8767061615804248
+    },
+    {
+      "evaluation": 73,
+      "silhouetteObjective": 0.8775195185124687
+    },
+    {
+      "evaluation": 77,
+      "silhouetteObjective": 0.8778981424196015
+    },
+    {
+      "evaluation": 80,
+      "silhouetteObjective": 0.8781759201973792
+    },
+    {
+      "evaluation": 97,
+      "silhouetteObjective": 0.8789447432208259
+    },
+    {
+      "evaluation": 102,
+      "silhouetteObjective": 0.8797680162794514
+    },
+    {
+      "evaluation": 110,
+      "silhouetteObjective": 0.8802576595817246
+    },
+    {
+      "evaluation": 134,
+      "silhouetteObjective": 0.8818054192326807
+    },
+    {
+      "evaluation": 137,
+      "silhouetteObjective": 0.8836278058087882
+    },
+    {
+      "evaluation": 139,
+      "silhouetteObjective": 0.8838282889005755
+    },
+    {
+      "evaluation": 141,
+      "silhouetteObjective": 0.8840223176899782
+    },
+    {
+      "evaluation": 142,
+      "silhouetteObjective": 0.8840564748852394
+    },
+    {
+      "evaluation": 146,
+      "silhouetteObjective": 0.8845661367209883
+    },
+    {
+      "evaluation": 157,
+      "silhouetteObjective": 0.8847622489066095
+    },
+    {
+      "evaluation": 162,
+      "silhouetteObjective": 0.8856804160224633
+    },
+    {
+      "evaluation": 169,
+      "silhouetteObjective": 0.8865061746796417
+    },
+    {
+      "evaluation": 173,
+      "silhouetteObjective": 0.8867586001390774
+    },
+    {
+      "evaluation": 185,
+      "silhouetteObjective": 0.8869712529833091
+    },
+    {
+      "evaluation": 198,
+      "silhouetteObjective": 0.8875449764485989
+    },
+    {
+      "evaluation": 207,
+      "silhouetteObjective": 0.8877984876089354
+    },
+    {
+      "evaluation": 221,
+      "silhouetteObjective": 0.8880852259601901
+    },
+    {
+      "evaluation": 227,
+      "silhouetteObjective": 0.8881035113958405
+    },
+    {
+      "evaluation": 237,
+      "silhouetteObjective": 0.8882978788044219
+    },
+    {
+      "evaluation": 245,
+      "silhouetteObjective": 0.8923523172971752
+    },
+    {
+      "evaluation": 247,
+      "silhouetteObjective": 0.8929402843393813
+    },
+    {
+      "evaluation": 277,
+      "silhouetteObjective": 0.8932040460539987
+    },
+    {
+      "evaluation": 300,
+      "silhouetteObjective": 0.893417379387332
+    }
+  ],
+  "estimatedCameras": [
+    {
+      "yaw": 0,
+      "pitch": 0.28,
+      "fov": 38,
+      "distance": 4.41,
+      "target": [-0.003990882914219576, -0.003267291466041545, 0.0003939678394514436],
+      "proxyIoU": 0.907725321888412,
+      "evaluations": 25
+    },
+    {
+      "yaw": 1.5707963267948966,
+      "pitch": 0.12,
+      "fov": 38,
+      "distance": 4.2,
+      "target": [-0.04684959933904853, 0.015339272729682232, -0.005700366121564866],
+      "proxyIoU": 0.92,
+      "evaluations": 25
+    },
+    {
+      "yaw": 3.141592653589793,
+      "pitch": 0.2,
+      "fov": 38,
+      "distance": 4.190476190476191,
+      "target": [-0.022300011048115045, -0.0013177142575441468, -0.00015888911180856388],
+      "proxyIoU": 0.9006211180124224,
+      "evaluations": 25
+    },
+    {
+      "yaw": -1.5707963267948966,
+      "pitch": 0.12,
+      "fov": 38,
+      "distance": 4.055172413793104,
+      "target": [-0.043512117564513196, 0.012339447785149218, -0.003220821669427342],
+      "proxyIoU": 0.9281150159744409,
+      "evaluations": 25
+    },
+    {
+      "yaw": 0.5653981633974483,
+      "pitch": 0.2,
+      "fov": 33,
+      "distance": 5.240885416666667,
+      "target": [-0.0309526013308853, 0.04311466553296686, -0.02139952416468497],
+      "proxyIoU": 0.8706293706293706,
+      "evaluations": 25
+    },
+    {
+      "yaw": -0.5653981633974483,
+      "pitch": 0.28,
+      "fov": 30.5,
+      "distance": 5.565,
+      "target": [-0.08230228227840311, 0.09546130181081262, 0.07369737211623877],
+      "proxyIoU": 0.8694158075601375,
+      "evaluations": 25
+    }
+  ],
+  "inputs": [
+    "pack.json",
+    "images/01.jpg",
+    "images/01-mask.png",
+    "images/02.jpg",
+    "images/02-mask.png",
+    "images/03.jpg",
+    "images/03-mask.png",
+    "images/04.jpg",
+    "images/04-mask.png",
+    "images/05.jpg",
+    "images/05-mask.png",
+    "images/06.jpg",
+    "images/06-mask.png"
+  ],
+  "realFits": [
+    {
+      "candidate": 0,
+      "silhouetteIoU": 0.7657326904697591,
+      "score": 65.12340365384945
+    },
+    {
+      "candidate": 1,
+      "silhouetteIoU": 0.7818587516402404,
+      "score": 67.26041740366232
+    },
+    {
+      "candidate": 2,
+      "silhouetteIoU": 0.766184863926587,
+      "score": 65.18862293616664
+    },
+    {
+      "candidate": 3,
+      "silhouetteIoU": 0.7901935404395766,
+      "score": 68.84784575055306
+    },
+    {
+      "candidate": 4,
+      "silhouetteIoU": 0.7826117954466388,
+      "score": 67.5178532473979
+    },
+    {
+      "candidate": 5,
+      "silhouetteIoU": 0.8013953865312727,
+      "score": 70.45742646705526
+    },
+    {
+      "candidate": 6,
+      "silhouetteIoU": 0.7905984095420912,
+      "score": 68.86491128026482
+    },
+    {
+      "candidate": 7,
+      "silhouetteIoU": 0.815331493305062,
+      "score": 72.58174586260661
+    }
+  ],
+  "optimization": "Deterministic perspective silhouette search with re-estimated cameras, followed by coordinate search against the real GSplat scorer (truth disabled).",
+  "stopped": "search limit or convergence",
+  "parts": [
+    {
+      "name": "object",
+      "file": "parts/object.ply",
+      "pivot": [0, 0, -0.59234319774112],
+      "motion": {
+        "how": "bounce",
+        "axis": "y",
+        "amount": 0.18
+      }
+    }
+  ],
+  "coordinates": "Y up, +Z front; initialized at AABB diagonal 2 and fitted in that shared frame; all parts retain it",
+  "license": "CC0-1.0",
+  "withinBudget": true,
+  "outputHashes": {
+    "result.ply": "3e90e7f62517dfee1ae1e7f7ee4f8506758362640300e8060a795aabca66d0cc",
+    "result.glb": "7a32844847cdda325ddfaa02e2d5fbcd07143f2eb70e38e28df9b53a8ed215d6",
+    "parts/object.ply": "3e90e7f62517dfee1ae1e7f7ee4f8506758362640300e8060a795aabca66d0cc"
+  }
+}

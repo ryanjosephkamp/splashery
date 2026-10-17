@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "id": "reference-pomegranate",
+  "name": "Pomegranate",
+  "images": [
+    {
+      "file": "images/01.jpg",
+      "view": "front",
+      "mask": "images/01-mask.png"
+    },
+    {
+      "file": "images/02.jpg",
+      "view": "right",
+      "mask": "images/02-mask.png"
+    },
+    {
+      "file": "images/03.jpg",
+      "view": "back",
+      "mask": "images/03-mask.png"
+    },
+    {
+      "file": "images/04.jpg",
+      "view": "left",
+      "mask": "images/04-mask.png"
+    },
+    {
+      "file": "images/05.jpg",
+      "view": "three-quarter",
+      "mask": "images/05-mask.png"
+    },
+    {
+      "file": "images/06.jpg",
+      "view": "three-quarter",
+      "mask": "images/06-mask.png"
+    }
+  ],
+  "size": {
+    "width": 0.11422774568200111,
+    "depth": 0.11513452604413033,
+    "height": 0.11403786763548851,
+    "units": "m",
+    "source": "CC0 source model bounds; synthetic test dimensions"
+  },
+  "notes": "A red fruit with a round body and a small crown.",
+  "parts": [
+    {
+      "name": "object",
+      "material": "Read the pictures; flat part colors are an approximation."
+    }
+  ],
+  "moves": [
+    {
+      "part": "object",
+      "how": "spin",
+      "axis": "y",
+      "amount": 360
+    }
+  ],
+  "budget": {
+    "minutes": 30,
+    "quality": "good"
+  },
+  "license": {
+    "images": "CC0-1.0",
+    "source": "https://polyhaven.com/a/food_pomegranate_01"
+  }
+}

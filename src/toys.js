@@ -3982,6 +3982,26 @@ export const TOYS = [
   },
 
   // ---- Pack: lab (lane Lab) ----
+  // ---- Pack: build from pictures (Codex task 113) ----
+  {
+    id: "built-from-pictures",
+    label: "Built from pictures",
+    category: "studio",
+    kind: "kit",
+    pack: "../refbuild/toy",
+    labs: true,
+    tags: "reference pictures context pack reconstruction kit shapes silhouette fitting benchmark cc0",
+    camera: { yaw: 0.55, pitch: 0.2, roll: 0, distance: 4.4 },
+    credit: {
+      title: "Built from pictures: five CC0 reconstruction tests",
+      author: "Made by Ryan with Codex (GPT-6); source models by the credited Poly Haven artists",
+      source: "https://polyhaven.com/license",
+      license: "CC0 1.0",
+      licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+      changes:
+        "Kit shapes fitted to reference renders. Per-source credits, hashes, and licenses accompany each sample pack.",
+    },
+  },
   {
     id: "splat-field",
     label: "Splat field",
