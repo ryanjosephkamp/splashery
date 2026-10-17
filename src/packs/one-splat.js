@@ -291,6 +291,9 @@ export const levelSound = (level, merge = false) => ({
   vol: merge ? 0.4 : 0.45,
 });
 let lastTap = null;
+// Lane TF1: a tap that changes nothing (a splat at the finest level) still
+// sounds: a quieter note at its level, played as the tap lands.
+let probeCue = null;
 
 // A node's level in the tree: the root is level 0, its children level 1.
 export const depth = (i) => 31 - Math.clz32(i);
@@ -302,6 +305,7 @@ function release() {
 }
 
 function hideReadout() {
+  unmark();
   clearInterval(readoutTimer);
   readoutTimer = null;
   readout?.remove();
@@ -344,6 +348,95 @@ function showReadout(text, kind) {
     const gone = (kind !== "hold" && Date.now() - since > READOUT_MS) || (id && id !== "one-splat");
     if (gone && readout === shown) hideReadout();
   }, 250);
+}
+
+// Lane TF1: the picked splat, marked while its readout shows: a ring at two
+// sigma around it (never smaller than a fingertip's mark, so a one-pixel
+// splat at the top level still shows) and the rest of the stage dimmed. It
+// follows the splat as the view moves, and sits under the readout.
+let picked = null;
+let marker = null;
+let markFrame = 0;
+const SVG = "http://www.w3.org/2000/svg";
+
+function unmark() {
+  picked = null;
+  if (typeof cancelAnimationFrame !== "undefined") cancelAnimationFrame(markFrame);
+  markFrame = 0;
+  marker?.remove();
+  marker = null;
+}
+
+function mark(i) {
+  if (typeof document === "undefined" || !current) return;
+  unmark();
+  picked = { i, tree: current.tree, width: current.width, height: current.height };
+  marker = document.createElementNS(SVG, "svg");
+  marker.id = "one-splat-pick";
+  marker.setAttribute("aria-hidden", "true");
+  Object.assign(marker.style, { position: "fixed", zIndex: "19", pointerEvents: "none" });
+  const el = (name, attrs) => {
+    const node = document.createElementNS(SVG, name);
+    for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+    return node;
+  };
+  const mask = el("mask", { id: "one-splat-pick-mask" });
+  mask.append(
+    el("rect", { x: 0, y: 0, width: "100%", height: "100%", fill: "#fff" }),
+    el("ellipse", { class: "hole", fill: "#000" }),
+  );
+  const defs = el("defs", {});
+  defs.append(mask);
+  marker.append(
+    defs,
+    el("rect", { x: 0, y: 0, width: "100%", height: "100%", fill: "#000", opacity: 0.5, mask: "url(#one-splat-pick-mask)" }), // prettier-ignore
+    el("ellipse", { class: "edge", fill: "none", stroke: "#0b1620", "stroke-width": 5, opacity: 0.7 }), // prettier-ignore
+    el("ellipse", { class: "ring", fill: "none", stroke: "#ffe14d", "stroke-width": 2.5 }),
+  );
+  document.body.append(marker);
+  const follow = () => {
+    if (!marker || !picked) return;
+    placeMark();
+    markFrame = requestAnimationFrame(follow);
+  };
+  follow();
+}
+
+// The ring's place on the screen: the splat's center and its two axes at two
+// sigma, through the camera.
+function placeMark() {
+  const player = globalThis.__splashery?.player;
+  if (!player?.screenPoint || !player.canvas) return;
+  if (player.toyInfo?.id !== "one-splat" || current?.tree !== picked.tree) return unmark();
+  const { i, tree, width, height } = picked;
+  const e = eig(tree.a[i], tree.b[i], tree.c[i]);
+  const p = [tree.mx[i] - width / 2, tree.my[i] + height / 2, 0];
+  const u = [Math.cos(e.theta), Math.sin(e.theta)],
+    s1 = 2 * Math.sqrt(e.l1),
+    s2 = 2 * Math.sqrt(e.l2);
+  const c = player.screenPoint(p);
+  const a = player.screenPoint([p[0] + u[0] * s1, p[1] + u[1] * s1, 0]);
+  const b = player.screenPoint([p[0] - u[1] * s2, p[1] + u[0] * s2, 0]);
+  const rx = Math.max(10, Math.hypot(a[0] - c[0], a[1] - c[1]) + 3);
+  const ry = Math.max(10, Math.hypot(b[0] - c[0], b[1] - c[1]) + 3);
+  const turn = (Math.atan2(a[1] - c[1], a[0] - c[0]) * 180) / Math.PI;
+  const box = player.canvas.getBoundingClientRect();
+  Object.assign(marker.style, {
+    left: `${box.left}px`,
+    top: `${box.top}px`,
+    width: `${box.width}px`,
+    height: `${box.height}px`,
+  });
+  marker.dataset.center = `${(box.left + c[0]).toFixed(1)},${(box.top + c[1]).toFixed(1)}`;
+  marker.dataset.splat = String(i);
+  for (const shape of marker.querySelectorAll("ellipse")) {
+    const grow = shape.getAttribute("class") === "hole" ? 2 : 0;
+    shape.setAttribute("cx", c[0].toFixed(1));
+    shape.setAttribute("cy", c[1].toFixed(1));
+    shape.setAttribute("rx", (rx + grow).toFixed(1));
+    shape.setAttribute("ry", (ry + grow).toFixed(1));
+    shape.setAttribute("transform", `rotate(${turn.toFixed(2)} ${c[0].toFixed(1)} ${c[1].toFixed(1)})`); // prettier-ignore
+  }
 }
 
 function prepareWord(o) {
@@ -540,6 +633,7 @@ export const RECIPES = {
         if (!i) return null;
         if (i * 2 + 1 < current.tree.size) {
           showReadout(describe(i, "split"), "tap");
+          mark(i);
           return {
             key: "split",
             options: {
@@ -555,9 +649,12 @@ export const RECIPES = {
         const p = mergeable(i);
         if (p) {
           showReadout(describe(p, "merge"), "tap");
+          mark(p);
           return { key: "split", options: mergeOptions(p), pick: depth(p) };
         }
         showReadout(describe(i), "tap");
+        mark(i);
+        probeCue = { ...levelSound(depth(i)), decay: 1.2, vol: 0.38 };
         return {
           key: "split",
           say: "This splat is at the finest level. Move the level dial down to split larger splats.",
@@ -580,10 +677,12 @@ export const RECIPES = {
           const player = globalThis.__splashery?.player;
           if (!p || !player?.switchTo) {
             showReadout(describe(held.id), "hold");
+            mark(held.id);
             return;
           }
           held.merged = true;
           showReadout(describe(p, "merge"), "merge");
+          mark(p);
           // The press is not also a tap; the merge sounds and plays as a
           // tap that changes the toy does.
           player.dragFired = true;
@@ -615,6 +714,9 @@ export const RECIPES = {
         // the Play button does. Only the second sounds, once per change.
         if (tap.key === "split" && !tap.point && about.time - tap.time < 0.5 && current?.cue)
           out.cues.push(current.cue);
+        // A tap that changed nothing sounds as it lands.
+        if (tap.key === "split" && tap.point && probeCue) out.cues.push(probeCue);
+        probeCue = null;
       }
       // Channel 0 releases a split's children from their parent's center
       // while the parent fades; channel 1 runs the other way for a merge.
@@ -644,6 +746,13 @@ export const RECIPES = {
       k.data.level = level;
       k.data.width = source.width;
       k.data.height = source.height;
+      // Lane TF1: a tap on the picture counts where the pick buffer (drawn at half size) finds no
+      // splat, as at the top level, where most splats are a pixel wide; the tap then acts on the
+      // splat under the finger (onPicture).
+      k.data.tapBox = {
+        min: [-source.width / 2, -source.height / 2, -1],
+        max: [source.width / 2, source.height / 2, 1],
+      };
       const position = (i, z = 0) => [
         source.tree.mx[i] - source.width / 2,
         source.tree.my[i] + source.height / 2,

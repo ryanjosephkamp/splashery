@@ -336,6 +336,8 @@ const REAL_ELEMENTS = {
         { id: "block", label: "By block (s, p, d, f)" },
       ],
     },
+    // Lane TF1: the facts box beside the stage, shown in full screen too; off hides it.
+    { key: "info", label: "Show info", type: "switch", default: true },
   ],
   controls: [
     { key: "up", label: "Lift the sample", type: "toggle", default: 0, ease: 2.4 },
@@ -437,7 +439,7 @@ const REAL_ELEMENTS = {
     out.parts.home = { visible: rise > 0.01 ? 0 : 1 };
     // The splats are sorted where they stand while the sample turns.
     out.resortPose = vis === 1 && (Math.abs(yaw) > 0.4 || c.spin > 0 || (u > 0 && u < 1));
-    if (rise > 0.35) out.legend = D.legend;
+    if (rise > 0.35 && D.legend) out.legend = D.legend;
     // A soft lift and set-down.
     const before = m.u ?? u;
     if (before < 0.02 && u >= 0.02) out.cues.push({ voice: "tine", f: 520, decay: 0.6, vol: 0.32 });
@@ -593,7 +595,7 @@ const REAL_ELEMENTS = {
       element: e.symbol,
       home: home3,
       homeScale: SAMPLE_SIDE / LIFT_SIDE,
-      legend: factsOf(e),
+      legend: o.info === false ? null : { ...factsOf(e), focus: true },
       splats: { tiles: tileList.length, lift: liftList.length },
     };
   },

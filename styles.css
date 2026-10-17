@@ -2331,6 +2331,15 @@ body.focus .panel-fold {
   display: none !important;
 }
 
+/* Lane TF1: a legend that asks for it (the periodic table's facts) stays in focus mode, at the top
+   left of the full stage. */
+body.focus .toy-legend.in-focus:not([hidden]) {
+  display: block !important;
+  top: calc(10px + env(safe-area-inset-top, 0px));
+  left: calc(10px + env(safe-area-inset-left, 0px));
+  max-height: calc(100% - 80px);
+}
+
 .focus-exit {
   position: fixed;
   top: calc(10px + env(safe-area-inset-top, 0px));

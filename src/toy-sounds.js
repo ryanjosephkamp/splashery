@@ -1917,6 +1917,7 @@ export const TOY_SOUNDS = {
   "shape-morph": { voice: "pad", f: "E4", to: 0.94, decay: 0.95, vol: 0.9 },
   // Lane PT2 (the owner's review of October 16, 2026): one soft, clean sine per split or merge,
   // pitched by the level it lands on (src/packs/one-splat.js plays it as a cue; this is level 7, a first tap's).
+  // Lane TF1: a tap at the finest level, which splits nothing, plays its level's note a little softer.
   "one-splat": { voice: "tone", f: "C5", decay: 2, vol: 0.45 },
   // Three hushing waves, each at its loudest as a swell reaches the mouth
   // (0.7, 1.8, 2.9 s).
