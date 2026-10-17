@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "model": "model.glb",
+  "cameras": [
+    {
+      "view": "front",
+      "yaw": 0,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "right",
+      "yaw": 1.5707963267948966,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "back",
+      "yaw": 3.141592653589793,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "left",
+      "yaw": -1.5707963267948966,
+      "pitch": 0.08,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "three-quarter",
+      "yaw": 0.7853981633974483,
+      "pitch": 0.3,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    },
+    {
+      "view": "three-quarter",
+      "yaw": -0.7853981633974483,
+      "pitch": 0.3,
+      "fov": 38,
+      "distance": 3.65,
+      "target": [0, 0, 0]
+    }
+  ],
+  "source": "https://polyhaven.com/a/carrot_cake",
+  "download": "polyhaven:carrot_cake",
+  "author": "Greg Zaal, James Ray Cock",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17",
+  "sourceHashes": {
+    "carrot_cake.gltf": "b0a743a0283bb2aea67d6d88bfb92b0afc5a2b5199f48ca4b9240330a28a87f6",
+    "carrot_cake.bin": "4390df681a8e7d1c1ec8640addb94e422073ccb88d0b1e73971e13cd48bb12cb",
+    "textures/carrot_cake_diff_1k.jpg": "1a1b7d88eb89f7243e605760fcbb53c6aa3d1e19d3b28049bb7b8e43158ca667"
+  },
+  "modelHash": "e8f5dd58d5cc11b87a7ec436ea9abe8f1e0ee1d70d9fc8571aa7c9cf05e6dd68",
+  "triangles": 2422,
+  "changes": "Simplified to about 4,500 triangles when needed; base texture averaged per triangle and materials made opaque; centered and scaled to AABB diagonal 2. Rendered in Splashery; sixth view composited on a procedural busy background. No logos added.",
+  "credit": "CC0 source by Greg Zaal, James Ray Cock; test preparation made by Ryan with Codex (GPT-6).",
+  "hiddenFromBuilder": true,
+  "imageHashes": {
+    "images/01.jpg": "315b30a65ba7e95a0b922b82e7c2c0b07b1308679977a46df20d520b3dbdb25d",
+    "images/01-mask.png": "6e62cd13222be0ac26198b40ac5a44e622314961f423796c5d888c38ba157c87",
+    "images/02.jpg": "ff7ca6766b944730bec133dede86135ba6b34ebdae2ae35f1f912966c65e6ce9",
+    "images/02-mask.png": "059086fa1d4ef4f5520959d6753a5eb3dbb95b29f702d5a38b35b8aa506fffd7",
+    "images/03.jpg": "18e3b85e967ea3a6e0ef150400e5db5b98fff5853886ad4ff5c4e1e3a569a7ac",
+    "images/03-mask.png": "2874c70e6e985c6532a1c7827225e1430bac36a2a397a9d4e12796f319324069",
+    "images/04.jpg": "44ee7ad9fc1be09a528806c5c8e62b39320d3c5c4c292dd0444abb5262816e0b",
+    "images/04-mask.png": "4896de806adc9dd8c27b6ed05b4dfc9c5d1cbcc3a9f47b696740d10a2618e62f",
+    "images/05.jpg": "44304ee59b4ce4033cae235a5b46ef3733c0c54cb25690bd7cd87f000a30a8cf",
+    "images/05-mask.png": "f45c7674e9466c61d5198908c52041ab8ebfd1b869e1da6daa7d8cd28f2fcec2",
+    "images/06.jpg": "65d5c1b84834dffa77f6332f4c4539d2367941237aa78ff0e3cb0a51a800d858",
+    "images/06-mask.png": "48aacb6407431a8cb87b354173d5520b187633849832eec6c6fbac2efc9f4d00"
+  }
+}

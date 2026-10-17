@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "id": "reference-cake",
+  "name": "Carrot cake",
+  "images": [
+    {
+      "file": "images/01.jpg",
+      "view": "front",
+      "mask": "images/01-mask.png"
+    },
+    {
+      "file": "images/02.jpg",
+      "view": "right",
+      "mask": "images/02-mask.png"
+    },
+    {
+      "file": "images/03.jpg",
+      "view": "back",
+      "mask": "images/03-mask.png"
+    },
+    {
+      "file": "images/04.jpg",
+      "view": "left",
+      "mask": "images/04-mask.png"
+    },
+    {
+      "file": "images/05.jpg",
+      "view": "three-quarter",
+      "mask": "images/05-mask.png"
+    },
+    {
+      "file": "images/06.jpg",
+      "view": "three-quarter",
+      "mask": "images/06-mask.png"
+    }
+  ],
+  "size": {
+    "width": 0.2248431146144867,
+    "depth": 0.22465554624795914,
+    "height": 0.09333538624923676,
+    "units": "m",
+    "source": "CC0 source model bounds; synthetic test dimensions"
+  },
+  "notes": "A low round cake with pale frosting and small colored decorations.",
+  "parts": [
+    {
+      "name": "object",
+      "material": "Read the pictures; flat part colors are an approximation."
+    }
+  ],
+  "moves": [
+    {
+      "part": "object",
+      "how": "slide",
+      "axis": "x",
+      "amount": 0.3
+    }
+  ],
+  "budget": {
+    "minutes": 30,
+    "quality": "good"
+  },
+  "license": {
+    "images": "CC0-1.0",
+    "source": "https://polyhaven.com/a/carrot_cake"
+  }
+}

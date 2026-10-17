@@ -1,0 +1,176 @@
+{
+  "schema": 1,
+  "pack": "reference-croissant",
+  "builder": "kit",
+  "renderer": "Splashery Stage / vendored PlayCanvas 2.22.3 / WebGL2 / SwiftShader",
+  "size": 192,
+  "exposure": 0.9655183182649429,
+  "weights": {
+    "silhouetteIoU": 0.5,
+    "boundaryF1": 0.2,
+    "color": 0.2,
+    "edgeRecall": 0.1
+  },
+  "pictures": [
+    {
+      "file": "images/01.jpg",
+      "view": "front",
+      "camera": {
+        "yaw": 0,
+        "pitch": 0.16,
+        "fov": 38,
+        "distance": 4.095,
+        "target": [0, 0, 0],
+        "proxyIoU": 0,
+        "evaluations": 37
+      },
+      "mask": {
+        "method": "provided",
+        "reviewRequired": false
+      },
+      "silhouetteIoU": 0.8922622812565887,
+      "boundaryF1": 0.7507229429704662,
+      "colorDeltaE2000": 6.529399570417442,
+      "colorScore": 72.14660342009785,
+      "edgeRecall": 0.5846422338568935,
+      "score": 77.71885364574594
+    },
+    {
+      "file": "images/02.jpg",
+      "view": "right",
+      "camera": {
+        "yaw": 1.5107963267948965,
+        "pitch": 0.16,
+        "fov": 36,
+        "distance": 4.2,
+        "target": [0, 0, 0],
+        "proxyIoU": 0,
+        "evaluations": 37
+      },
+      "mask": {
+        "method": "provided",
+        "reviewRequired": false
+      },
+      "silhouetteIoU": 0.8672327286761868,
+      "boundaryF1": 0.703404255319149,
+      "colorDeltaE2000": 5.56454383771184,
+      "colorScore": 75.71247893643971,
+      "edgeRecall": 0.5041095890410959,
+      "score": 74.93359282532911
+    },
+    {
+      "file": "images/03.jpg",
+      "view": "back",
+      "camera": {
+        "yaw": 3.141592653589793,
+        "pitch": 0.16,
+        "fov": 36,
+        "distance": 4.2,
+        "target": [0, 0, 0],
+        "proxyIoU": 0,
+        "evaluations": 37
+      },
+      "mask": {
+        "method": "provided",
+        "reviewRequired": false
+      },
+      "silhouetteIoU": 0.8511574516931318,
+      "boundaryF1": 0.6385737439222042,
+      "colorDeltaE2000": 7.987793176308242,
+      "colorScore": 67.07292948445868,
+      "edgeRecall": 0.45248868778280543,
+      "score": 70.59866339474948
+    },
+    {
+      "file": "images/04.jpg",
+      "view": "left",
+      "camera": {
+        "yaw": -1.5107963267948965,
+        "pitch": 0.16,
+        "fov": 38,
+        "distance": 4.095,
+        "target": [0, 0, 0],
+        "proxyIoU": 0,
+        "evaluations": 37
+      },
+      "mask": {
+        "method": "provided",
+        "reviewRequired": false
+      },
+      "silhouetteIoU": 0.8834281072298944,
+      "boundaryF1": 0.7183470809642027,
+      "colorDeltaE2000": 8.496025836803366,
+      "colorScore": 65.3899707428687,
+      "edgeRecall": 0.45694200351493847,
+      "score": 74.1285686906073
+    },
+    {
+      "file": "images/05.jpg",
+      "view": "three-quarter",
+      "camera": {
+        "yaw": 0.7853981633974483,
+        "pitch": 0.16,
+        "fov": 36,
+        "distance": 4.095,
+        "target": [0, 0, 0],
+        "proxyIoU": 0,
+        "evaluations": 41
+      },
+      "mask": {
+        "method": "provided",
+        "reviewRequired": false
+      },
+      "silhouetteIoU": 0.7979819665092315,
+      "boundaryF1": 0.355948206096574,
+      "colorDeltaE2000": 6.322824928467751,
+      "colorScore": 72.89564804000776,
+      "edgeRecall": 0.30442477876106194,
+      "score": 61.081199798078
+    },
+    {
+      "file": "images/06.jpg",
+      "view": "three-quarter",
+      "camera": {
+        "yaw": 0.8453981633974483,
+        "pitch": 0.07999999999999999,
+        "fov": 36,
+        "distance": 4.095,
+        "target": [0, 0, 0],
+        "proxyIoU": 0,
+        "evaluations": 41
+      },
+      "mask": {
+        "method": "provided",
+        "reviewRequired": false
+      },
+      "silhouetteIoU": 0.5739012057565149,
+      "boundaryF1": 0.2550203978368805,
+      "colorDeltaE2000": 7.375196673007323,
+      "colorScore": 69.15914875094427,
+      "edgeRecall": 0.34133790737564323,
+      "score": 43.692514382148445
+    }
+  ],
+  "overall": {
+    "score": 67.0255654561097,
+    "silhouetteIoU": 0.8109939568535914,
+    "boundaryF1": 0.5703361045182461,
+    "colorDeltaE2000": 7.045964003785993,
+    "colorScore": 70.39612989580283,
+    "edgeRecall": 0.44065753338873975
+  },
+  "geometry": {
+    "chamferDistance": 0.06727037231840664,
+    "chamferNormalized": 0.029988217569021283,
+    "volumeIoU": 0.5821334214002643,
+    "voxelResolution": 40,
+    "bounds": {
+      "min": [-1.0003495264053344, -0.30217830777168275, -0.4057188159227371],
+      "max": [1.0003495264053344, 0.3041119420528412, 0.4077194160223007]
+    },
+    "alignment": "shared coordinates; no ICP or truth camera fitting",
+    "note": "Three-axis ray parity; approximate for open or nonmanifold meshes.",
+    "truthModel": "model.glb"
+  },
+  "warnings": []
+}

@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "author": "Made by Ryan with Codex (GPT-6)",
+  "codeLicense": "MIT",
+  "geometryLicense": "CC0-1.0",
+  "checked": "2026-10-17",
+  "source": "tools/refpack-samples/",
+  "changes": "Fitted kit recipes from six reference renders per CC0 model; no source geometry read by the builder.",
+  "thumbnail": {
+    "file": "assets/toys/built-from-pictures/thumb.webp",
+    "license": "CC0-1.0",
+    "source": "tools/refpack-samples/reference-duck/build/model.json",
+    "sha256": "7e83c192090ae4f07b9e4f237452c9d3725cdc27365f8478dc39680ceda3ed1d",
+    "changes": "Shelf thumbnail rendered from the fitted kit recipe."
+  }
+}

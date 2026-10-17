@@ -20,7 +20,17 @@
 // "Type"); an about text of 60 to 140 words in plain words, checked against
 // the toy's recipe and against a real source for every fact.
 
+import { REFERENCE_GALLERY } from "./refbuild/gallery-data.js";
+
+export const TOY_GALLERIES = { "built-from-pictures": REFERENCE_GALLERY };
+
 export const TOY_HELP = {
+  "built-from-pictures": {
+    howTo:
+      "Pick an object in Toy, tap to move it, and open About to compare its reference pictures.",
+    about:
+      "Five attempts to build a solid toy from pictures: a duck, a croissant, a pomegranate, a cake, and a lantern. Pick an object in Toy, drag to inspect the back, and tap to move it as one solid piece. These are fitted kit shapes, with simple colors and visible approximation errors.\n\nThe pictures below are renders of CC0 models, with one busy background per object. Each score measures the good build against all six pictures; the volume score compares its shape with the source model. Higher is better, and failed gates remain visible. Made by Ryan with Codex (GPT-6), CC0 shapes and source assets; code MIT. The reference packs credit every source artist.",
+  },
   "name-toy": {
     howTo:
       "Type a name in Toy, emoji too. Pick Spin, Poke, Paint, Drop, or Blow on the stage, then touch the letters.",
@@ -2627,6 +2637,7 @@ export function toyHelp(info) {
     label: info?.label || "",
     howTo,
     about: about ? about.split(/\n\s*\n/) : [],
+    gallery: TOY_GALLERIES[info?.id] || [],
     hasEntry: !!entry,
     abilities: toyAbilities(info),
   };

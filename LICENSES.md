@@ -555,3 +555,19 @@ site.
 
 The model weights the bake-off compared are fetched at run time from their official pages; each
 one's license is in `docs/audits/` (task 99's report), and none is vendored.
+
+## Build from pictures (Codex task 113, October 17, 2026)
+
+The pack, camera, scoring, and kit-fitting code is made by Ryan with Codex (GPT-6), under the
+repository's MIT license. Masking uses original alpha/border-color code; no segmenter, model
+weights, or additional dependency is downloaded or shipped. Build tools reuse the already listed
+`@gltf-transform/core` 4.5.0, `pngjs` 7.0.0, `jpeg-js` 0.4.4, Playwright, and the vendored
+PlayCanvas 2.22.3 renderer. Only the kit recipe helpers, fitted shape data, and CC0 reference
+pictures load with the labs toy.
+
+The five reference packs are derivatives of CC0 models already recorded in `tools/models.json`.
+[Poly Haven's live license page](https://polyhaven.com/license) and each source page were opened on
+October 17, 2026. Every pack's `truth/truth.json` carries its author, live source page, checked
+date, source-file SHA-256 hashes, compact model hash, and changes. The rendered references,
+procedural busy backgrounds, and original fitted kit geometry are CC0. Private context packs and
+their derived outputs are never included in this release.
