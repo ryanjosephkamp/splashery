@@ -317,21 +317,31 @@ function litField(leaves, n) {
     hy = h / rows,
     z = lo[2] - 0.08,
     corner = 0.3 * h;
+  // NR1 r2: rows and columns crowd toward the rim (spacing 0.4 of the mean there, 1.6 in the
+  // middle), so the rim is crisp at a phone's coarse grid; the slide is one color, so wider
+  // splats in the middle change nothing. Each splat is as wide as its own spacing.
+  const crowd = 0.6;
+  const at = (u) => u - (crowd / (2 * Math.PI)) * Math.sin(2 * Math.PI * u),
+    step = (u) => 1 - crowd * Math.cos(2 * Math.PI * u);
   for (let i = 0; i < rows; i++)
     for (let j = 0; j < cols; j++) {
-      const x = cx - w / 2 + (j + 0.5) * hx,
-        y = cy - h / 2 + (i + 0.5) * hy;
+      const u = (j + 0.5) / cols,
+        v = (i + 0.5) / rows;
+      const x = cx - w / 2 + w * at(u),
+        y = cy - h / 2 + h * at(v),
+        ex = hx * step(u),
+        ey = hy * step(v);
       // Distance inside the rounded rectangle's edge, so the rim fades evenly.
       const qx = Math.max(Math.abs(x - cx) - (w / 2 - corner), 0),
         qy = Math.max(Math.abs(y - cy) - (h / 2 - corner), 0);
       const inside = corner - Math.hypot(qx, qy) + Math.min(Math.max(Math.abs(x - cx) - (w / 2 - corner), Math.abs(y - cy) - (h / 2 - corner)), 0); // prettier-ignore
-      const lit = clamp(inside / (0.6 * Math.max(hx, hy)));
+      const lit = clamp(inside / (0.6 * Math.max(ex, ey)));
       const k = MATERIALS.map(() => 0);
       k[LIT] = lit;
       k[CLEAR] = 1 - lit;
-      // Narrower across the last rows, so the rim stays crisp at a phone's coarser grid.
-      const sx = hx * clamp(Math.min(j + 0.5, cols - j - 0.5) / 2.5, 0.4, 1),
-        sy = hy * clamp(Math.min(i + 0.5, rows - i - 0.5) / 2.5, 0.4, 1);
+      // Narrower across the last rows, so no splat reaches past the rim.
+      const sx = ex * clamp(Math.min(j + 0.5, cols - j - 0.5) / 2.5, 0.4, 1),
+        sy = ey * clamp(Math.min(i + 0.5, rows - i - 0.5) / 2.5, 0.4, 1);
       leaves.push({ m: [x, y, z], S: [sx * sx, sy * sy, 1e-6, 0, 0, 0], k, delay: SOMA_MS, gain: 0, w: 0.8 }); // prettier-ignore
     }
 }
@@ -684,7 +694,7 @@ fn nfStart(rest: vec3f) {
       )
       .replace(
         "if (spCut > 0.5) scale = vec3(0.0);",
-        "if (spCut > 0.5 || nfWeight < 0.001) scale = vec3(0.0); else scale *= 1.0 + 0.3 * clamp(nfAct, 0.0, 1.0) + 0.4 * nfStim;",
+        "if (spCut > 0.5 || nfWeight < 0.001) scale = vec3(0.0); else scale *= 1.0 + 0.1 * clamp(nfAct, 0.0, 1.0) + 0.4 * nfStim;",
       )
       .replace(
         "void modifySplatColor(vec3 center, inout vec4 color) {",
@@ -697,7 +707,7 @@ fn nfStart(rest: vec3f) {
       )
       .replace(
         "if (spCut > 0.5) { *scale = vec3f(0.0); }",
-        "if (spCut > 0.5 || nfWeight < 0.001) { *scale = vec3f(0.0); } else { *scale = *scale * (1.0 + 0.3 * clamp(nfAct, 0.0, 1.0) + 0.4 * nfStim); }",
+        "if (spCut > 0.5 || nfWeight < 0.001) { *scale = vec3f(0.0); } else { *scale = *scale * (1.0 + 0.1 * clamp(nfAct, 0.0, 1.0) + 0.4 * nfStim); }",
       )
       .replace(
         "fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {",
@@ -722,7 +732,10 @@ export const RECIPES = {
     seed: 1952,
     alive: true,
     turntable: false,
-    density: 0.35,
+    // NR1 r2: a phone (the mid tier) draws the finest level at 32,768 splats, and every tier at
+    // the screen's own pixel ratio with the thinnest splats kept (src/sharpness.js).
+    density: 0.5,
+    render: { dpr: "native", cull: "low" },
     options: [
       {
         key: "stain",
