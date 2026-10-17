@@ -413,7 +413,17 @@ const VIDEO_3D = {
   // These models fit Gaussian compositing. A steeper display kernel changes fitted overlaps,
   // lowering held-out SSIM and adding visible grain. Detail comes from the measured bakes.
   kernel: "gaussian",
-  render: { cull: "off", dpr: "native", adapt: "off" },
+  // The ordinary low tier is already capped at 1.5 when adaptation is off.
+  // An explicit ?adapt=off bypasses that cap; bound its native-resolution
+  // Liberty sample too, without changing trained splats or Replay.
+  render: ({ profile, options }) => ({
+    cull: "off",
+    dpr:
+      profile === "low" && options.source === "liberty" && options.navigation === "orbit"
+        ? 2.4
+        : "native",
+    adapt: "off",
+  }),
   options: [
     {
       key: "navigation",
