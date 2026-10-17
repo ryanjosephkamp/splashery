@@ -55,13 +55,20 @@ judges it on clips.
   take of a still Photo to 3D scene should save 20 seconds.
 - On Safari, `requestFrame()` on the recording canvas and the 1-pixel redraw that marks it changed
   are the parts that matter; if a take still comes out short there, look at those first.
+- On a device whose video encoder falls behind (seen here on a CPU encoder under load), the saved
+  file can freeze on its last frame for up to about 1.5 seconds before the end. The file's length is
+  still right. A phone's hardware encoder should not show this; the owner's iPhone check confirms
+  it.
 
 ## Notes
 
 - This sandbox encodes video on the CPU (open-source Chromium has only software VP9). At 3x it can't
   keep up with a turning toy, and a recorder drops its encoder's backlog when it stops, so the
-  moving-toy test bounds the last video frame at 1.0 s (the file's own length still meets 0.5 s).
-  Real phones encode in hardware.
+  moving-toy test checks that the recorder was handed frames to within 0.25 s of Stop (`lastFrame`
+  from `startRecording`), not the file's last video frame; the file's own length still meets 0.5 s,
+  and the idle takes check the file's last frame to 0.5 s. Frame rates in the tests are measured
+  against the page's own 100 ms timer, so a busy runner slows both together. Real phones encode in
+  hardware.
 - Codex task 89 (export quality) will change `startRecording` and the Record row: the countdown sits
   before the row's "quality choice goes here" comment, and the fixed-size video canvas is where a
   quality tier would set its size.
