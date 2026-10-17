@@ -1,6 +1,7 @@
 # Step inside a 360° photo: implementation and qualification
 
 Codex (GPT-6), October 17, 2026. Task 107. Branch: codex/step-inside-360.
+[Draft PR #700](https://github.com/ryanjosephkamp/splashery/pull/700).
 
 **The depth improvement gate is unmet. This is an experimental draft, not a qualified release.** The
 tool is available only in the labs Studio shelf. Classic Photo to 3D's implementation, model,
@@ -62,10 +63,14 @@ weights. Seam jumps use adjacent valid pixels crossing dominant cube boundaries 
 wrap. Raw overlap disagreement is reported separately: feathering can hide a discontinuity without
 making depth accurate.
 
-Held-out masked SSIM currently uses a declared software point-splat diagnostic, not the product GPU
-renderer. Its source-visible mask comes from true geometry and is fixed for both predictions.
-Missing predicted pixels remain black and stay in the score. A true-depth reprojection control shows
-the ceiling imposed by source sampling, visibility, and the noisy reference renders.
+Held-out masked SSIM includes both a declared software point-splat diagnostic and the actual
+product's low-profile Kit/WebGL2 renderer, through tools/pano-gpu-views.mjs. Both use fixed
+source-visible masks from true geometry. Missing predicted pixels stay in the score. The GPU
+comparison uses exact 256×256 export buffers, a snapped 72-degree camera, and globally calibrated
+radial depths; all methods clip the cache's far distance to 200 m to preserve 16-bit precision. A
+true-depth reprojection control measures source sampling, occlusion, blur, and reference noise.
+Review caught the initial comparison camera easing its zoom; those scores are labeled rejected, and
+the fixed-camera run supersedes them.
 
 tools/pano-clips.mjs records the real tool at 390×844, device scale factor 3, with the low profile
 and normal phone pixel cap. Eight recordings cover both CC0 samples and all six truth scenes. First
@@ -81,11 +86,21 @@ eight video links. Earlier captures from changing runtime revisions are labeled 
 
 ## Experiments and limits
 
+The six-scene 294-pixel run measures mean AbsRel 0.2120, versus 0.1207 for the naive input. Every
+scene misses the 20% improvement gate. Valid-pixel seam medians range from 0.839% to 1.222%; raw
+overlap disagreement remains materially larger and is separately reported. Eight complete
+phone-profile recordings show first look in 2.066–3.690 seconds, custom depth ready in 10.698–16.723
+seconds, and maximum sampled PSS of about 905 MiB. Three cold Classic conversions of the same
+shipped room image peak at 897–991 MiB in this environment. This is a limited desktop comparison,
+not a physical-phone qualification or a guaranteed memory ceiling.
+
 Controlled tests exposed real implementation errors in affine offsets, unsupported normalization,
 disc orientation, metadata, and asynchronous lifecycle. Fixing those errors did not establish the
 requested 20% real-model improvement. Ground-truth-assisted affine fits are archived only as oracle
 diagnostics; they are not production results. Fixed validity cutoffs, featureless-view thresholds,
-and global one-tile priors also failed to establish the gate.
+and global one-tile priors also failed to establish the gate. A six-scene, same-model 518-pixel
+comparison also failed and increased inference cost, so it does not replace the smaller runtime
+setting.
 
 An offline indoor metric-model pilot was also evaluated, without adding it to the product:
 [model card](https://huggingface.co/77ukhtar/depth-anything-v2-metric-onnx/blob/a4259a3c45137b6eb32c84fcd95b86cd54c255b9/README.md),
@@ -100,8 +115,10 @@ a panorama-native comparison, and its result is not phone performance evidence.
 The Classic golden run passed 77 tests, including both budgets for its 76 frozen samples. New tests
 cover spherical coordinates, coverage, joint affine calibration, sky support, cancellation, GPano
 validation, inward discs, movement limits, real browser input races, source replacement, and
-switching back to Classic. Final targeted tests, preflight, and the complete existing suite are
-still running; the PR and evidence README will record their actual outcomes.
+switching back to Classic. Final panorama tests passed 12/12 and the post-merge preflight passed all
+271 shelf-wide specs, formatting, English, generated-site, list, and size checks. The complete
+existing suite is running locally and requested in sharded CI; the PR and evidence README record its
+actual outcome.
 
 Thumbnail, phone, and desktop captures are inspected separately from numerical depth scores. No
 merge or release qualification is claimed while the depth gate and physical-phone evidence remain

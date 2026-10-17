@@ -111,6 +111,8 @@ try {
             const p = window.__splashery.player,
               camera = p.camera;
             p.stage.setFixedSize([256, 256]);
+            camera.cur.distance = camera.tgt.distance = camera.home.distance;
+            camera.cur.roll = camera.tgt.roll = 0;
             document.querySelector("#pano-home").click();
             camera.cur.yaw = camera.tgt.yaw = 0;
             camera.cur.pitch = camera.tgt.pitch = 0;
