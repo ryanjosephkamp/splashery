@@ -34,11 +34,11 @@ permissions:
   contents: read
 
 concurrency:
-  # Each manual suite or stress receipt names an immutable subject. Independent
+  # Each explicit dispatch or label request names its subject. Independent
   # measurements must not replace or serialize one another while waiting.
   group:
     tests-${{ github.event.pull_request.number || github.ref }}-${{ (github.event_name ==
-    'workflow_dispatch' || github.event.label.name == 'stress-tests') && github.run_id || 'suite' }}
+    'workflow_dispatch' || github.event.action == 'labeled') && github.run_id || 'suite' }}
   cancel-in-progress:
     ${{ github.event_name == 'pull_request' && github.event.label.name != 'stress-tests' }}
 

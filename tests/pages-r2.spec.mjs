@@ -508,6 +508,21 @@ for (const renderer of ["webgl2", "webgpu"])
       for (let i = 0; i < 4; i++) await p.stage.captureFrame();
     });
     await ready(page);
+    // A matching shown/want key can still describe the coarse preview while
+    // the requested view waits to upgrade. Compare one completed raster level.
+    await page.waitForFunction(
+      () => {
+        const p = window.__splashery.player;
+        p.stage.requestRender();
+        return (
+          p.pictures.sheets.every(
+            (s) => !s.want || (s.shown?.key === s.want.key && s.shown.level === s.wantLevel),
+          ) && p.pictures.retiring.length === 0
+        );
+      },
+      null,
+      { timeout: 180000 },
+    );
     const difference = await page.evaluate(async () => {
       const p = window.__splashery.player;
       const sh = p.pictures.sheets.find((s) => !s.hidden && s.slot?.surface);
