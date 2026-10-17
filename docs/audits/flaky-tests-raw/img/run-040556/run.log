@@ -1,0 +1,55 @@
+[2m[WebServer] [22m(node:21202) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:21213) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21213) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (27.3s)
+Internal error: step id not found: fixture@67Internal error: step id not found: fixture@67Internal error: step id not found: fixture@67
+  ✘  2 [chromium] › .cache/flaky-tests/img/img-before.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (23.9s)
+
+
+  1) [chromium] › .cache/flaky-tests/img/img-before.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) 
+
+    Error: bouncy-ball: pixels that changed a lot
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: <= [32m220[39m
+    Received:    [31m1081[39m
+
+      138 |       expect(change.drawn, `${id} drew something`).toBeGreaterThan(2000);
+      139 |       expect(change.mean, `${id}: mean change`).toBeLessThanOrEqual(Math.max(2 * noise.mean, 0.5) + 0.05); // prettier-ignore
+    > 140 |       expect(change.big, `${id}: pixels that changed a lot`).toBeLessThanOrEqual(Math.max(2 * noise.big, 200) + 20); // prettier-ignore
+          |                                                              ^
+      141 |     });
+      142 |
+      143 |   test(`a volume is cut by its plane and shown by its density window (${renderer})`, async ({
+        at /workspace/splashery/.cache/flaky-tests/img/img-before.spec.mjs:140:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/img-before-bouncy-ball-toy-cad7c-kind-draw-as-before-webgl2--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/img-before-bouncy-ball-toy-cad7c-kind-draw-as-before-webgl2--chromium/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/img-before-bouncy-ball-toy-cad7c-kind-draw-as-before-webgl2--chromium/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/img-before-bouncy-ball-toy-cad7c-kind-draw-as-before-webgl2--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/img-before-bouncy-ball-toy-cad7c-kind-draw-as-before-webgl2--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › .cache/flaky-tests/img/img-before.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) 
+  1 passed (53.4s)

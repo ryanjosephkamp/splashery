@@ -23,8 +23,40 @@
     "cpu-burner.mjs": "0d03679728f534cdf2bc32d1edef55370dd02298e07a010805cdec5608994a9d"
   },
   "changed_original_expect_expressions": [],
-  "status": "Prepared; waiting for root browser release",
+  "status": "Original100 and final30 complete; burners stopped",
   "route_override": "Only /src/physics/hands-on.js. Before and final both route frozen source snapshots; all other files current checkout.",
   "published_engine_commit": "bbace1372c24fe6bf4d69dc3cdefef2a129d39ca",
-  "restoration": "Raw initial phases restored from persistent compressed backups; all source/probe hashes rechecked against original metadata after terminal newline normalization."
+  "restoration": "Raw initial phases restored from persistent compressed backups; all source/probe hashes rechecked against original metadata after terminal newline normalization.",
+  "before_start_utc": "2026-10-17T03:50:36.653990+00:00",
+  "burner_pid": 1469,
+  "published_source_head": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+  "native_head": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+  "before_command": "HH5_SOURCE_MODE=before SPLASHERY_GL=llvmpipe DISPLAY=:91 SPLASHERY_PORT=4181 <pinnedNode22> playwright test --config=.cache/flaky-tests/hh5/playwright.config.mjs --grep quartz --repeat-each=100 --workers=4 --fully-parallel --reporter=list,json",
+  "before_completed_utc": "2026-10-17T04:00:30.151155+00:00",
+  "before_counts": {
+    "completed": 100,
+    "statuses": {
+      "passed": 100
+    },
+    "neighbor_unpins": 224,
+    "target_unpins": 0,
+    "cases_with_neighbor_unpin": 94
+  },
+  "final_start_utc": "2026-10-17T04:01:08.857893+00:00",
+  "same_burner_pid": 1469,
+  "backup_gap_outside_observation": true,
+  "final_command": "HH5_SOURCE_MODE=final SPLASHERY_GL=llvmpipe DISPLAY=:91 SPLASHERY_PORT=4181 <pinnedNode22> playwright test --config=.cache/flaky-tests/hh5/playwright.config.mjs --grep quartz --repeat-each=30 --workers=4 --fully-parallel --reporter=list,json",
+  "final_completed_utc": "2026-10-17T04:04:43.571553+00:00",
+  "burners_stopped_utc": "2026-10-17T04:04:43.571553+00:00",
+  "final_counts": {
+    "completed": 30,
+    "statuses": {
+      "passed": 30
+    },
+    "neighbor_unpins": 0,
+    "target_unpins": 0,
+    "cases_with_neighbor_unpin": 0
+  },
+  "final_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "final_memory_peak": "6425923584\n"
 }

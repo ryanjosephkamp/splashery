@@ -1,0 +1,881 @@
+{
+  "completed": 30,
+  "statuses": {
+    "passed": 30
+  },
+  "neighbor_unpins": 0,
+  "target_unpins": 0,
+  "rows": [
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 21451,
+      "error": null,
+      "repeat": 0,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 20098,
+      "error": null,
+      "repeat": 1,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 19228,
+      "error": null,
+      "repeat": 2,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 21839,
+      "error": null,
+      "repeat": 3,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 20011,
+      "error": null,
+      "repeat": 4,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 18890,
+      "error": null,
+      "repeat": 5,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 17741,
+      "error": null,
+      "repeat": 6,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 18542,
+      "error": null,
+      "repeat": 7,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 18282,
+      "error": null,
+      "repeat": 8,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 19600,
+      "error": null,
+      "repeat": 9,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 17141,
+      "error": null,
+      "repeat": 10,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 18178,
+      "error": null,
+      "repeat": 11,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 19251,
+      "error": null,
+      "repeat": 12,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 19294,
+      "error": null,
+      "repeat": 13,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 17237,
+      "error": null,
+      "repeat": 14,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 25809,
+      "error": null,
+      "repeat": 15,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 17334,
+      "error": null,
+      "repeat": 16,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 16974,
+      "error": null,
+      "repeat": 17,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 17570,
+      "error": null,
+      "repeat": 18,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 19265,
+      "error": null,
+      "repeat": 19,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 18785,
+      "error": null,
+      "repeat": 20,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 18762,
+      "error": null,
+      "repeat": 21,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 15804,
+      "error": null,
+      "repeat": 22,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 17736,
+      "error": null,
+      "repeat": 23,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 17868,
+      "error": null,
+      "repeat": 24,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 20155,
+      "error": null,
+      "repeat": 25,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 20263,
+      "error": null,
+      "repeat": 26,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 14928,
+      "error": null,
+      "repeat": 27,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 13456,
+      "error": null,
+      "repeat": 28,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    },
+    {
+      "status": "passed",
+      "retry": 0,
+      "duration_ms": 13169,
+      "error": null,
+      "repeat": 29,
+      "state": {
+        "name": "xtal0",
+        "type": "break",
+        "v": 0,
+        "w": 0,
+        "broken": false,
+        "held": false,
+        "stuck": false,
+        "pinned": true,
+        "pos": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ],
+        "home": [
+          0,
+          0.07499999999999996,
+          -0.08
+        ]
+      },
+      "neighbor_unpins": 0,
+      "target_unpins": []
+    }
+  ],
+  "cases_with_neighbor_unpin": 0
+}

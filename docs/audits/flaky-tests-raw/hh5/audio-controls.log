@@ -1,0 +1,87 @@
+[2m[WebServer] [22m(node:20694) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:20705) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20705) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 5.9 ms after the tap
+  ✓  1 [chromium] › .cache/flaky-tests/hh5/sndc-old-marker-stall.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (4.5s)
+first sample: 6.2 ms after the tap
+  ✓  2 [chromium] › .cache/flaky-tests/hh5/sndc-tap-setter-candidate.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (3.9s)
+first sample: 103.5 ms after the tap
+  ✘  3 [chromium] › .cache/flaky-tests/hh5/sndc-tap-setter-dispatch.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (4.5s)
+(node:20912) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20912) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 86.3 ms after the tap
+  ✘  4 [chromium] › .cache/flaky-tests/hh5/sndc-tap-setter-stall.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (6.1s)
+
+
+  1) [chromium] › .cache/flaky-tests/hh5/sndc-tap-setter-dispatch.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m30[39m
+    Received:   [31m103.5[39m
+
+      188 |   expect(r).toBeTruthy();
+      189 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);
+    > 190 |   expect(r.delay).toBeLessThan(30);
+          |                   ^
+      191 |   expect(fetched.filter((f) => f === "dice-throw.mp3")).toHaveLength(1);
+      192 | });
+      193 |
+        at /workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-dispatch.spec.mjs:190:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-dispatch-a-84069-mple-starts-with-the-motion-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-dispatch-a-84069-mple-starts-with-the-motion-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-dispatch-a-84069-mple-starts-with-the-motion-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-dispatch-a-84069-mple-starts-with-the-motion-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › .cache/flaky-tests/hh5/sndc-tap-setter-stall.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m30[39m
+    Received:   [31m86.30000000004657[39m
+
+      192 |   expect(r).toBeTruthy();
+      193 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);
+    > 194 |   expect(r.delay).toBeLessThan(30);
+          |                   ^
+      195 |   expect(fetched.filter((f) => f === "dice-throw.mp3")).toHaveLength(1);
+      196 | });
+      197 |
+        at /workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-stall.spec.mjs:194:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-stall-a-to-1005d-mple-starts-with-the-motion-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-stall-a-to-1005d-mple-starts-with-the-motion-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-stall-a-to-1005d-mple-starts-with-the-motion-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-stall-a-to-1005d-mple-starts-with-the-motion-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › .cache/flaky-tests/hh5/sndc-tap-setter-dispatch.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+    [chromium] › .cache/flaky-tests/hh5/sndc-tap-setter-stall.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+  2 passed (21.8s)

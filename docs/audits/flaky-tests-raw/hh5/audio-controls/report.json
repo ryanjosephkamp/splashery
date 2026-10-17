@@ -1,0 +1,336 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-probe.config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/hh5",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/hh5/audio-controls/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/hh5",
+        "testIgnore": [],
+        "testMatch": [
+          "sndc-*.spec.mjs"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4181",
+      "url": "http://127.0.0.1:4181/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery/"
+    }
+  },
+  "suites": [
+    {
+      "title": "sndc-old-marker-stall.spec.mjs",
+      "file": "sndc-old-marker-stall.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4489,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.9 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:04:58.948Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d916beca9dc59ea96813-259fc6596e0ef4576c31",
+          "file": "sndc-old-marker-stall.spec.mjs",
+          "line": 122,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "sndc-tap-setter-candidate.spec.mjs",
+      "file": "sndc-tap-setter-candidate.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3898,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 6.2 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:05:03.736Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "294bf4a0b2860b5a3cd7-5a394218947eeadd2961",
+          "file": "sndc-tap-setter-candidate.spec.mjs",
+          "line": 122,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "sndc-tap-setter-dispatch.spec.mjs",
+      "file": "sndc-tap-setter-dispatch.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4513,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m103.5\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m103.5\u001b[39m\n    at /workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-dispatch.spec.mjs:190:19",
+                    "location": {
+                      "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-dispatch.spec.mjs",
+                      "column": 19,
+                      "line": 190
+                    },
+                    "snippet": "  188 |   expect(r).toBeTruthy();\n  189 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);\n> 190 |   expect(r.delay).toBeLessThan(30);\n      |                   ^\n  191 |   expect(fetched.filter((f) => f === \"dice-throw.mp3\")).toHaveLength(1);\n  192 | });\n  193 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-dispatch.spec.mjs",
+                        "column": 19,
+                        "line": 190
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m103.5\u001b[39m\n\n  188 |   expect(r).toBeTruthy();\n  189 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);\n> 190 |   expect(r.delay).toBeLessThan(30);\n      |                   ^\n  191 |   expect(fetched.filter((f) => f === \"dice-throw.mp3\")).toHaveLength(1);\n  192 | });\n  193 |\n    at /workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-dispatch.spec.mjs:190:19"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "first sample: 103.5 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:05:07.659Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-dispatch-a-84069-mple-starts-with-the-motion-chromium/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-dispatch-a-84069-mple-starts-with-the-motion-chromium/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-dispatch-a-84069-mple-starts-with-the-motion-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-dispatch.spec.mjs",
+                    "column": 19,
+                    "line": 190
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f4dcf5d020e6c4d13988-623c9b94d6e2b5bbb769",
+          "file": "sndc-tap-setter-dispatch.spec.mjs",
+          "line": 122,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "sndc-tap-setter-stall.spec.mjs",
+      "file": "sndc-tap-setter-stall.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6134,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m86.30000000004657\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m86.30000000004657\u001b[39m\n    at /workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-stall.spec.mjs:194:19",
+                    "location": {
+                      "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-stall.spec.mjs",
+                      "column": 19,
+                      "line": 194
+                    },
+                    "snippet": "  192 |   expect(r).toBeTruthy();\n  193 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);\n> 194 |   expect(r.delay).toBeLessThan(30);\n      |                   ^\n  195 |   expect(fetched.filter((f) => f === \"dice-throw.mp3\")).toHaveLength(1);\n  196 | });\n  197 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-stall.spec.mjs",
+                        "column": 19,
+                        "line": 194
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m86.30000000004657\u001b[39m\n\n  192 |   expect(r).toBeTruthy();\n  193 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);\n> 194 |   expect(r.delay).toBeLessThan(30);\n      |                   ^\n  195 |   expect(fetched.filter((f) => f === \"dice-throw.mp3\")).toHaveLength(1);\n  196 | });\n  197 |\n    at /workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-stall.spec.mjs:194:19"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "first sample: 86.3 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:05:13.091Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-stall-a-to-1005d-mple-starts-with-the-motion-chromium/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-stall-a-to-1005d-mple-starts-with-the-motion-chromium/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/audio-controls/results/sndc-tap-setter-stall-a-to-1005d-mple-starts-with-the-motion-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-tap-setter-stall.spec.mjs",
+                    "column": 19,
+                    "line": 194
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fb1dcc114393ec9f760a-74e891d5c8fbd7ac045d",
+          "file": "sndc-tap-setter-stall.spec.mjs",
+          "line": 122,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T04:04:58.111Z",
+    "duration": 21764.252,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

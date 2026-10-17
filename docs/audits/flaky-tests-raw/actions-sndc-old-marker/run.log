@@ -1,0 +1,65 @@
+
+Running 30 tests using 4 workers
+
+first sample: 12.0 ms after the tap
+first sample: 6.2 ms after the tap
+  ✓   2 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (23.9s)
+first sample: 6.1 ms after the tap
+first sample: 15.8 ms after the tap
+  ✓   3 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (25.8s)
+  ✓   4 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (29.4s)
+  ✓   1 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (31.1s)
+first sample: 11.3 ms after the tap
+first sample: 12.4 ms after the tap
+  ✓   5 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (27.4s)
+first sample: 6.0 ms after the tap
+first sample: 6.0 ms after the tap
+  ✓   6 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (24.2s)
+  ✓   7 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (23.8s)
+  ✓   8 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (22.7s)
+first sample: 6.0 ms after the tap
+first sample: 11.9 ms after the tap
+first sample: 5.9 ms after the tap
+first sample: 5.8 ms after the tap
+  ✓   9 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (27.7s)
+  ✓  10 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (24.2s)
+  ✓  11 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (24.3s)
+  ✓  12 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (24.2s)
+first sample: 5.9 ms after the tap
+first sample: 8.4 ms after the tap
+first sample: 7.3 ms after the tap
+first sample: 8.6 ms after the tap
+  ✓  15 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (27.6s)
+  ✓  14 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (28.7s)
+  ✓  13 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (29.5s)
+  ✓  16 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (26.0s)
+first sample: 5.8 ms after the tap
+first sample: 5.9 ms after the tap
+first sample: 6.8 ms after the tap
+first sample: 6.0 ms after the tap
+  ✓  17 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (26.1s)
+  ✓  18 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (25.7s)
+  ✓  19 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (26.0s)
+  ✓  20 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (24.2s)
+first sample: 5.8 ms after the tap
+first sample: 7.6 ms after the tap
+  ✓  21 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (20.5s)
+first sample: 0.9 ms after the tap
+  ✓  23 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (21.5s)
+  ✓  22 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (26.2s)
+first sample: 5.9 ms after the tap
+  ✓  24 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (27.8s)
+first sample: 6.8 ms after the tap
+first sample: 5.8 ms after the tap
+  ✓  26 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (14.9s)
+  ✓  25 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (21.0s)
+first sample: 6.0 ms after the tap
+  ✓  27 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (24.1s)
+first sample: 5.9 ms after the tap
+  ✓  28 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (21.8s)
+first sample: 5.9 ms after the tap
+first sample: 5.8 ms after the tap
+  ✓  30 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (19.1s)
+  ✓  29 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (21.5s)
+
+  30 passed (6.5m)

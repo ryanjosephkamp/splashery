@@ -1,0 +1,8 @@
+<!-- splashery-flaky-hh1-toys-after -->
+### hh1-toys: after stress receipt
+
+Source: `03334bbaa53fcc7d3c97505fb8085cb180d9250e`; 30 repetitions, 4 workers, 2 CPU burners, llvmpipe, v22.23.3, Chromium 141.0.7390.37. [Run](https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406).
+
+| Variant | Passed | Failed | Skipped/interrupted |
+| --- | ---: | ---: | ---: |
+| hh1-toys.spec.mjs › teddy bear: swung and dropped, its arms and head swing on it and settle | 30 | 0 | 0 |

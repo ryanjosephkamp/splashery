@@ -1,0 +1,36 @@
+{
+  "started": "2026-10-17T04:05:56.241195+00:00",
+  "head": "c8ae05ed1d56181888a9fa2d586b28e053422b94",
+  "command": [
+    "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/splashery/.cache/flaky-tests/img/config.mjs",
+    "--reporter=list,json",
+    "--retries=0",
+    "--workers=1",
+    "--fully-parallel",
+    "--grep",
+    "bouncy-ball.*webgl2"
+  ],
+  "environment": {
+    "SPLASHERY_CHROMIUM": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+    "SPLASHERY_GL": "llvmpipe",
+    "DISPLAY": ":91",
+    "SPLASHERY_PORT": "4182",
+    "PLAYWRIGHT_NODEJS_PATH": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node"
+  },
+  "files": {
+    ".cache/flaky-tests/img/config.mjs": "79d8d57c9237db3e90712a0579502ffa68335532d854b0d05d5fef27ba79dd07",
+    ".cache/flaky-tests/img/img-before.spec.mjs": "9bfced2694957cb042849fecdece663edb840c0fad4f37e9bdc0b9dcc21b9d63",
+    ".cache/flaky-tests/img/img-after.spec.mjs": "f44411295105dde66615cd0a119f36794084f94f4276b103aacf3ea786602825"
+  },
+  "burners": 2,
+  "node": "v22.20.0",
+  "browser": "Chromium 141.0.7390.37",
+  "cpu": "400000 100000",
+  "ended": "2026-10-17T04:06:50.747616+00:00",
+  "exit": 1,
+  "burner_pid": 21180
+}

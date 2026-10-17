@@ -1,0 +1,34 @@
+[
+  {
+    "file": "sndc-old-marker-stall.spec.mjs",
+    "status": "passed",
+    "sample_ms": [
+      "5.9"
+    ],
+    "error": null
+  },
+  {
+    "file": "sndc-tap-setter-candidate.spec.mjs",
+    "status": "passed",
+    "sample_ms": [
+      "6.2"
+    ],
+    "error": null
+  },
+  {
+    "file": "sndc-tap-setter-dispatch.spec.mjs",
+    "status": "failed",
+    "sample_ms": [
+      "103.5"
+    ],
+    "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m103.5\u001b[39m"
+  },
+  {
+    "file": "sndc-tap-setter-stall.spec.mjs",
+    "status": "failed",
+    "sample_ms": [
+      "86.3"
+    ],
+    "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m86.30000000004657\u001b[39m"
+  }
+]

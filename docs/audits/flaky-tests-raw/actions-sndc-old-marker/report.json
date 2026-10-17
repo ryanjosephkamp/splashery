@@ -1,0 +1,1303 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/splashery/splashery/subject/playwright.config.mjs",
+    "rootDir": "/home/runner/work/splashery/splashery/subject/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+        "commitHash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+        "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406"
+      },
+      "gitCommit": {
+        "shortHash": "03334bbaa",
+        "hash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+        "subject": "Engine: handle impacts before joints reseat loose pieces",
+        "body": "Engine: handle impacts before joints reseat loose pieces",
+        "author": {
+          "name": "Ryan",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792207902000
+        },
+        "committer": {
+          "name": "Ryan",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792207902000
+        },
+        "branch": "HEAD"
+      },
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "commitHash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406"
+          },
+          "gitCommit": {
+            "shortHash": "03334bbaa",
+            "hash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "subject": "Engine: handle impacts before joints reseat loose pieces",
+            "body": "Engine: handle impacts before joints reseat loose pieces",
+            "author": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "committer": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "commitHash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406"
+          },
+          "gitCommit": {
+            "shortHash": "03334bbaa",
+            "hash": "03334bbaa53fcc7d3c97505fb8085cb180d9250e",
+            "subject": "Engine: handle impacts before joints reseat loose pieces",
+            "body": "Engine: handle impacts before joints reseat loose pieces",
+            "author": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "committer": {
+              "name": "Ryan",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792207902000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "sndc-engine.spec.mjs",
+      "file": "sndc-engine.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31130,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 6.1 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:51:21.009Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-65c4166ea681851b6290",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 23921,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 12.0 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:51:21.362Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-86d41e0ad62fece1b032",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 25785,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 6.2 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:51:21.497Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-ac3d3b859beaaa6c5c4a",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 29358,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 15.8 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:51:21.535Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-bbb76ec2b4dd1e488468",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 24195,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 12.4 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:52:18.383Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-0e291be57da792895dd4",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 27386,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 11.3 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:52:11.204Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-3e995e3f616ef1adf62f",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 23769,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 6.0 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:52:20.699Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-d179822bd8164dac65d6",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22709,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 6.0 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:52:24.846Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-47fd21906240fcf24a34",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 27690,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 6.0 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:53:04.180Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-b99166cb9dabd899e61f",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 24231,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 11.9 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:53:08.459Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-337c3ab4c7b452d87c16",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 24193,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.8 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:53:12.440Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-7e8e9aaf09860a382d75",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 24291,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.9 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:53:10.710Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-0d87f11970e1b5b09180",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 28738,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 8.4 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:53:58.945Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-ce413ad33089bfa74132",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 27609,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.9 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:53:59.248Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-1a333d58fe646de52002",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 29475,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 8.6 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:53:58.672Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-f381c25bb53f7726d237",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 26002,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 7.3 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:54:02.309Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-e339954cff37d91d71a7",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 25963,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 6.8 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:54:52.254Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-343873ee767313a048e0",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 26058,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.8 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:54:50.211Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-511711aeba895f448032",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 25745,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.9 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:54:51.444Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-4923acea00cae9813db5",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 24164,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 6.0 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:54:56.895Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-16283111fd9f5c38445f",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 21471,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 7.6 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:55:44.154Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-fb3b0b8a2bc93eb00190",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20512,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.8 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:55:41.283Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-5c644c39ef893994f0cb",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 26185,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 0.9 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:55:41.620Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-24eb25ffe0f4d7cc6110",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 27813,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.9 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:55:46.557Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-ee91c38fdefca47f36a6",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 21030,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.8 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:56:28.109Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-d6dc7862489d0ea88c23",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 14922,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 6.8 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:56:30.742Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-9b2e60e7ee2e44105b35",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 26,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 24071,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 6.0 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:56:34.883Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-f9954dddf38557d16099",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 27,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 21798,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.9 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:56:44.111Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-42042f50c6f333b53782",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 28,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 21539,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.8 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:57:17.629Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-dacf6dfe553e13e038db",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 29,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19099,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "first sample: 5.9 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T03:57:17.793Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01d121c4feced3c86006-687d222e49f6a9e4eeec",
+          "file": "sndc-engine.spec.mjs",
+          "line": 122,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T03:51:19.223Z",
+    "duration": 391056.211,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
