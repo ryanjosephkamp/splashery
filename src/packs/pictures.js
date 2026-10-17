@@ -1612,8 +1612,10 @@ function bk5Pose(F, u, time) {
 }
 
 const POP_SOUNDS = {
-  // A light paper lift as it rises, a soft tap as it lies back.
-  rise: { voice: "pageflip", f: 2600, decay: 0.45, vol: 0.35 },
+  // A light paper lift as it rises, a soft tap as it lies back. Lane PIC2: the
+  // lift was the pageflip voice (a page turning), which made a Pop out tap
+  // sound like a turn; now a short, soft brush of paper.
+  rise: { voice: "rustle", f: 2400, n: 8, decay: 0.3, vol: 0.2 },
   land: { voice: "thud", f: 170, decay: 0.25, vol: 0.25 },
 };
 
