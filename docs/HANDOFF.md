@@ -4,6 +4,36 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
+## Now (October 17, 2026, about 02:30 UTC)
+
+The Operator is still `session_01JxfPsHRiWi93aHfLeqd8Jt` (Opus 5.5). Main is `ceb51de7`. Merged
+since the section below:
+
+- Ops #688: PT1's engine #684, docs #687, and Codex 94 #673, 92 #677, and 95 #678.
+- Ops #693: PT1 #686 and #691, PT2 #685, SE1 #689 (engine-free kit tables and parsers), and Ops #692
+  ("How it works" in the site footer).
+- Ops #695: Codex task files 100 to 108.
+
+#633 and #642 (the old Pitch lanes) are closed.
+
+**Lanes:** NR1 (#694, Opus 5.5) takes over the Neuron specimen from Codex #613, which closes when
+NR1 merges. PT1, PT2, and SE1 are done.
+
+**Codex:**
+
+- Task 99 (#690) ended in a measured negative result. It merges as a study, and a follow-up fixes
+  the yardstick.
+- Tasks 100 to 107 are ready for the owner's reset: flaky tests, suite speed, crisper toys, phone
+  speed, Photos to 3D, Blender in Codex's cloud, splats to mesh, and Step inside a 360° photo.
+- Task 108 (a survey of new browser-ready 3D techniques) is running.
+- 98 (the v1.0 release) waits until NR1 merges. It now also produces a machine-readable list of the
+  v1.0 toys, for the Shop.
+
+**The Shop:** the owner replaced the charter with a simpler plan of his own (October 17). The Shop
+site comes first, built on his second Claude account. Codex playtests and expands it later. The
+desktop app comes after that. Nothing in the Shop pushes to Splashery; work comes in only through
+the Operator.
+
 ## Now (October 16, 2026, about 22:00 UTC)
 
 The Operator is still `session_01JxfPsHRiWi93aHfLeqd8Jt` (Opus 5.5); handover is due October 18,
