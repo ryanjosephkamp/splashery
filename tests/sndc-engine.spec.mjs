@@ -134,9 +134,14 @@ test("a toy's samples load when it opens, and its first tap's sample starts with
     window.__starts = [];
     const start = AudioBufferSourceNode.prototype.start;
     AudioBufferSourceNode.prototype.start = function (when = 0, ...rest) {
-      if (this.buffer && this.buffer === window.__sndcSample)
-        window.__starts.push({ at: performance.now(), when, now: this.context.currentTime });
-      return start.call(this, when, ...rest);
+      // Capture the request first, and dispatch native playback before the
+      // observer reads metadata to identify the recorded sample.
+      const at = performance.now();
+      const now = this.context.currentTime;
+      const result = start.call(this, when, ...rest);
+      const buffer = this.buffer;
+      if (buffer && buffer === window.__sndcSample) window.__starts.push({ at, when, now });
+      return result;
     };
   });
   await open(page);
