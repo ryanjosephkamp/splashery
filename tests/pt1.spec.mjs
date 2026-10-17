@@ -454,7 +454,7 @@ test("text that draws nothing never breaks either toy", async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test("the name flies in when it opens, and ticks while it turns", async ({ page }) => {
+test("the name flies in when it opens, and stays silent while it turns", async ({ page }) => {
   const errors = await open(page, "name-toy", 390, 844);
   const out = await page.evaluate(async () => {
     const { app, player } = window.__splashery;
@@ -462,7 +462,8 @@ test("the name flies in when it opens, and ticks while it turns", async ({ page 
     const data = player.motion.ctx.kit.data;
     const away = Math.max(...data.sim.letters.map((b) => Math.hypot(...b.d)));
     await new Promise((r) => setTimeout(r, 2500));
-    // Turn the view a whole radian: about four ticks.
+    // Turn the view a whole radian. Lane PT3: no tick (they read as clicks
+    // under every orbit; tests/pt3.spec.mjs drags a real orbit).
     const cues = [];
     const off = player.on("cue", (c) => cues.push(...c));
     player.camera.begin();
@@ -473,9 +474,9 @@ test("the name flies in when it opens, and ticks while it turns", async ({ page 
     }
     player.camera.end();
     off?.();
-    return { away, ticks: cues.filter((c) => c?.kind === "square").length };
+    return { away, cues: cues.length };
   });
   expect(out.away).toBeGreaterThan(0.3);
-  expect(out.ticks).toBeGreaterThan(0);
+  expect(out.cues).toBe(0);
   expect(errors).toEqual([]);
 });

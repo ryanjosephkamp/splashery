@@ -11,7 +11,7 @@
 import { textSplats, cleanText, visibleCount, graphemes, isBlank, hasInk, TEXT_FONT } from "../text-splats.js"; // prettier-ignore
 import { quatFromTo } from "../kit.js";
 import { TOY_SOUNDS } from "../toy-sounds.js";
-import { parseNotes } from "../voices.js";
+import { parseNotes, noteFreq } from "../voices.js";
 
 // The letters' face, in one place: Fredoka, as in Toy Box (SIL OFL; the
 // owner's OK of October 16, 2026), a subset at weight 700 vendored in
@@ -34,7 +34,11 @@ export function loadFont() {
 }
 
 const MAX_LETTERS = 48; // one token per piece; 48 tokens at most
+// Toy Box's counts. Lane PT3: these are what "Auto" picks for the device,
+// and what an older link's Detail asked for; the Splats slider, when set,
+// gives the count itself (up to 400,000).
 const DETAIL = [12000, 24000, 48000, 96000, 192000];
+export const MOST_SPLATS = 400000;
 export const PAINTS = [
   { id: "pink", label: "Pink", hex: "#ff3d8b" },
   { id: "yellow", label: "Yellow", hex: "#ffd60a" },
@@ -125,7 +129,10 @@ function safeName(text) {
 // wider than tall.
 const colsFor = (name) => Math.max(8, Math.ceil(Math.sqrt(visibleCount(name) * 2.6)));
 
-export function nameBudget(budget, detail = "auto") {
+// The count to build: the Splats slider's (`slider` true: the budget is its
+// count), else a link's Detail, else Toy Box's count for the device.
+export function nameBudget(budget, detail = "auto", slider = false) {
+  if (slider) return Math.max(1, Math.min(MOST_SPLATS, Math.floor(budget)));
   const requested =
     detail === "auto"
       ? budget <= 60000
@@ -344,7 +351,36 @@ const SCALE = parseNotes("C5 D5 E5 F5 G5 A5 B5 C6").flat();
 export function notesFor(layout) {
   return layout.letters.map((_, i) => SCALE[i % SCALE.length]);
 }
-const barCue = (layout, i) => ({ ...TOY_SOUNDS["name-toy"], f: notesFor(layout)[i] });
+// Lane PT3: Toy Box's own voices, in the site's voices (src/voices.js).
+// Its bar is a clean sine on the letter's note with a short sine two
+// octaves up (src/toy-sounds.js), not a modal bar.
+const barCue = (layout, i) => {
+  const f = noteFreq(notesFor(layout)[i]);
+  const [body, ring] = TOY_SOUNDS["name-toy"];
+  return [
+    { ...body, f },
+    { ...ring, f: f * 4 },
+  ];
+};
+export const SOUNDS = {
+  // A tool or a color picked: Toy Box's quick pop (from 680 Hz).
+  pop: { voice: "pop", f: 680, decay: 1.1, vol: 0.9 },
+  // Paint: a short, bright, wet squelch.
+  squelch: (r) => ({ voice: "squish", pitch: 1.1 + 0.4 * r, bright: 0.7, decay: 0.45, vol: 0.45 }),
+  // A piece landing after Drop: one of Toy Box's clatter ticks, a short
+  // triangle between 900 and 3,200 Hz, as loud as the landing.
+  tick: (r, v) => ({ voice: "tone", kind: "triangle", f: 900 + 2300 * r, decay: 0.175, vol: v }),
+  // Drop again: Toy Box's zip, as three quick steps up (the site's sounds
+  // never glide up), then a clear C6 as it snaps together.
+  zip: [
+    { voice: "tone", kind: "triangle", f: "G4", decay: 0.3, vol: 0.45 },
+    { voice: "tone", kind: "triangle", f: "C5", at: 0.12, decay: 0.3, vol: 0.45 },
+    { voice: "tone", kind: "triangle", f: "E5", at: 0.24, decay: 0.3, vol: 0.45 },
+    { voice: "tone", f: "C6", at: 0.42, decay: 0.75, vol: 0.6 },
+  ],
+  // Blow: Toy Box's breath of wind, a soft band of noise around 650 Hz.
+  wind: (v) => ({ voice: "wind", f: 650, rate: 0.2, decay: 0.7, vol: v, bright: 0.25 }),
+};
 
 function touch(sim, time) {
   sim.lastTouch = time;
@@ -442,7 +478,7 @@ export function setDrop(sim, on, time) {
       s.sleep = false;
       s.start = time + hash(s.pos[0] * 1000 + 3) * 0.2;
     }
-    sim.cues.push({ voice: "breath", decay: 0.5, vol: 0.35, bright: 0.3 });
+    sim.cues.push(SOUNDS.zip);
   }
 }
 
@@ -572,7 +608,7 @@ function stepSim(sim, dt, time) {
       if (vcy < 0) {
         if (!s.landed || vcy < -1.2) {
           if (sim.knocks < 40 && -vcy > 0.6)
-            sim.cues.push({ voice: "wood", f: 380 + 260 * hash(k * 5 + sim.knocks), decay: 0.35, vol: clamp(-vcy * 0.12, 0.08, 0.4) }); // prettier-ignore
+            sim.cues.push(SOUNDS.tick(hash(k * 5 + sim.knocks), clamp(-vcy * 0.12, 0.08, 0.4)));
           sim.knocks++;
         }
         const e = s.landed ? 0.15 : 0.42 * (0.5 + 0.5 * hash(k * 11));
@@ -704,7 +740,7 @@ function paintAt(sim, p, time) {
   sim.lastDab = { at: home, c: ui.paint, t: time };
   touch(sim, time);
   if (!sim.lastSquish || time - sim.lastSquish > 0.09) {
-    sim.cues.push({ voice: "squish", pitch: 0.8 + 0.4 * hash(Math.floor(time * 50)), decay: 0.35, vol: 0.4 }); // prettier-ignore
+    sim.cues.push(SOUNDS.squelch(hash(Math.floor(time * 50))));
     sim.lastSquish = time;
   }
   return { paint: { at: home, radius: PAINT_R, color: PAINTS[ui.paint].hex } };
@@ -712,7 +748,7 @@ function paintAt(sim, p, time) {
 
 function gust(sim, p, time) {
   sim.gusts.push({ at: p.slice(), until: time + 0.55, strength: 1.2 });
-  sim.cues.push({ voice: "wind", decay: 0.5, vol: 0.22, bright: 0.25 });
+  sim.cues.push(SOUNDS.wind(0.22));
   touch(sim, time);
 }
 
@@ -746,11 +782,14 @@ export const RECIPES = {
       },
       { key: "color", label: "Paint color", type: "select", default: "pink", hidden: true, choices: PAINTS }, // prettier-ignore
       { key: "paints", label: "Painted letters", type: "text", default: "", hidden: true },
+      // Lane PT3: folded into the Splats slider (Look). Kept, hidden, so an
+      // older link's count opens the same on a device that left Splats on Auto.
       {
         key: "detail",
         label: "Detail",
         type: "select",
         default: "auto",
+        hidden: true,
         choices: [
           { id: "auto", label: "Auto (this device)" },
           ...DETAIL.map((n) => ({ id: String(n), label: `${n.toLocaleString("en-US")} splats` })),
@@ -804,7 +843,7 @@ export const RECIPES = {
       },
       activate(id, time) {
         // Toy Box's pop when a tool or a color is picked.
-        if (id !== "drop" && id !== "wash") live?.sim.cues.push("pop");
+        if (id !== "drop" && id !== "wash") live?.sim.cues.push(SOUNDS.pop);
         if (TOOL_IDS.includes(id)) ui.tool = id;
         else if (id === "drop") {
           if (live) setDrop(live.sim, !live.sim.dropped, time);
@@ -901,15 +940,12 @@ export const RECIPES = {
       const time = info.time ?? t;
       if (browser() && data.live) live = data.live;
       if (info.eye) sim.eye = info.eye;
-      // Toy Box's tick as the name turns, every quarter radian or so.
+      // Lane PT3: turning the view is silent (Toy Box ticks as it spins;
+      // here that read as clicks under every orbit). It still counts as a
+      // touch, so the idle sway waits.
       if (Number.isFinite(info.view)) {
-        if (sim.tickAt === undefined) sim.tickAt = info.view;
-        const turned = Math.abs(Math.atan2(Math.sin(info.view - sim.tickAt), Math.cos(info.view - sim.tickAt))); // prettier-ignore
-        if (turned > 0.26) {
-          sim.tickAt = info.view;
-          sim.cues.push({ voice: "tone", kind: "square", f: 1500, decay: 0.05, vol: 0.25 });
-          touch(sim, time);
-        }
+        if (sim.viewAt !== undefined && Math.abs(info.view - sim.viewAt) > 1e-4) touch(sim, time);
+        sim.viewAt = info.view;
       }
       if (sim.t === null || time < sim.t) sim.t = time;
       // Taps since the last frame: a point pokes (or paints, or blows) there;
@@ -930,7 +966,7 @@ export const RECIPES = {
       }
       // Wind while a finger blows: a quiet, overlapping breath.
       if (sim.blow && time >= sim.nextWind) {
-        sim.cues.push({ voice: "wind", decay: 0.7, vol: 0.18, bright: 0.25 });
+        sim.cues.push(SOUNDS.wind(0.18));
         sim.nextWind = time + 0.45;
       }
       // Fixed steps, so the same taps always play the same way.
@@ -962,7 +998,7 @@ export const RECIPES = {
     },
     build(k, o) {
       let name = safeName(o.name);
-      const count = nameBudget(k.count, o.detail);
+      const count = nameBudget(k.count, o.detail, browser() && !!window.__splashery?.player?.splats); // prettier-ignore
       k.count = count;
       const layout = nameLayout(name, count);
       name = layout.name; // "?" when nothing in it draws

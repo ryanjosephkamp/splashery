@@ -129,7 +129,8 @@ test("each letter has its own note, and old painted letters survive detail chang
   const notes = notesFor(painted.ctx.kit.data.layout);
   expect(new Set(notes).size).toBe(3);
   expect(parseNotes(notes.join(" "))).toHaveLength(3);
-  expect(TOY_SOUNDS[ID]).toMatchObject({ voice: "bar" });
+  // Lane PT3: Toy Box's bar, a sine with a short ring two octaves up (was the modal "bar").
+  expect(TOY_SOUNDS[ID]).toMatchObject([{ voice: "tone" }, { voice: "tone" }]);
   const scene = normalizeScene({
     version: 3,
     toy: { kind: "builtin", id: ID, options: painted.options },

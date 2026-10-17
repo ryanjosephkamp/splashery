@@ -5,7 +5,13 @@
 // Lane PT1: a list of forms the person sets (shapes, any words or names with
 // emoji, QR codes), in their order; a tap morphs to the next one, starting
 // where the tap landed and spreading from there. Words come from the shared
-// text module (src/text-splats.js), so emoji keep their colors.
+// text module (src/text-splats.js).
+// Lane PT3: every form wears the toy's own teal-to-pink ink (or the two
+// inks): an emoji gives only its shape and its light and dark, and the QR
+// code's dark and light modules are deep and pale shades of the ink. A
+// morph pairs each splat with a place in the new form along a space-filling
+// curve, so neighbors stay neighbors and the cloud flows as one sheet, and
+// the cloud has more splats, sized to close each surface.
 import { quatFromTo, quatEuler, quatRotate } from "../kit.js";
 import { PRESETS, compileProgram } from "./splat-equation.js";
 import { textSplats, cleanText, visibleCount, hasInk } from "../text-splats.js";
@@ -32,6 +38,7 @@ export const FORMS = [
 const formOf = (o) => (FORMS.some((f) => f.id === o.form) ? o.form : "word");
 const SHAPES = FORMS.filter((f) => f.id !== "word" && f.id !== "qr");
 export const MAX_FORMS = 16;
+export const MOST_SPLATS = 200000;
 const MAX_WORD = 24; // as the Word box's own limit
 const unit = (v) => {
   const r = Math.hypot(...v) || 1;
@@ -83,19 +90,23 @@ function word(n, o) {
   let text = wordOf(o.word);
   if (!hasInk(text, { cols: 10 })) text = "SPLATS";
   const t = textSplats(text, { count: n, seed: 78, cols: 10, depth: 0, colorKey: "morph" });
-  out.rgb = new Float32Array(n * 3).fill(-1);
+  // An emoji's light and dark (0..1, its own colors' luminance; -1 for a
+  // plain glyph), which the ink then shades. Its hues are not used.
+  out.tone = new Float32Array(n).fill(-1);
   let colored = false;
   for (let i = 0; i < n; i++) {
     out.pos.set([t.pos[i * 3], t.pos[i * 3 + 1], 0], i * 3);
     out.direction.set([0, 0, 1], i * 3);
-    out.radius[i] = t.sigma[i] * 1.15;
+    out.radius[i] = t.sigma[i];
     out.ink[i] = t.pos[i * 3] > 0 ? 1 : 0;
     if (t.layout.glyphs[t.glyph[i]]?.color) {
-      out.rgb.set(t.col.subarray(i * 3, i * 3 + 3), i * 3);
+      const [r, g, b] = t.col.subarray(i * 3, i * 3 + 3);
+      // The text module bakes a front face's light (0.93) in; take it out.
+      out.tone[i] = clamp((0.2126 * r + 0.7152 * g + 0.0722 * b) / 0.93);
       colored = true;
     }
   }
-  if (!colored) out.rgb = null;
+  if (!colored) out.tone = null;
   return finish(out);
 }
 
@@ -126,8 +137,12 @@ function lorenz(n) {
   const path = pathForLorenz();
   const steps = path.length / 3;
   for (let i = 0; i < n; i++) {
-    const j = Math.floor(frac((i + 1) * GOLD) * steps) * 3;
-    const [x, y, z] = path.subarray(j, j + 3);
+    // Lane PT3: anywhere along the path, between its steps, so a large
+    // cloud never stacks splats on the same step (that read as dashes).
+    const at = frac((i + 1) * GOLD) * (steps - 1);
+    const j = Math.floor(at) * 3;
+    const f = at - Math.floor(at);
+    const [x, y, z] = [0, 1, 2].map((a) => path[j + a] + (path[j + 3 + a] - path[j + a]) * f);
     const [dx, dy, dz] = lorenzDerivative([x, y, z]);
     out.pos.set([x, z, -y], i * 3);
     out.direction.set(unit([dx, dz, -dy]), i * 3);
@@ -158,7 +173,7 @@ function klein(n) {
     const dv = kleinPoint(u, v + 0.001).map((x, a) => x - p[a]);
     out.pos.set(quatRotate(turn, p), i * 3);
     out.direction.set(quatRotate(turn, unit(cross(du, dv))), i * 3);
-    out.radius[i] = 0.08 * Math.sqrt(12000 / n);
+    out.radius[i] = 0.1 * Math.sqrt(12000 / n); // lane PT3: more overlap, less grain
     out.ink[i] = Math.floor((v / TAU) * 12) % 4 === 0 ? 1 : 0;
   }
   return finish(out);
@@ -189,7 +204,7 @@ function gyroid(n) {
     if (Math.hypot(...p) > half || Math.abs(gyroidField(...p)) > 0.0001) continue;
     out.pos.set(p, i * 3);
     out.direction.set(unit(gradient), i * 3);
-    out.radius[i] = half * Math.sqrt((2.06 * half) / n) * 0.52;
+    out.radius[i] = half * Math.sqrt((2.06 * half) / n) * 0.85; // lane PT3: more overlap, less grain
     out.ink[i] = gradient.reduce((s, x, a) => s + x * p[a], 0) > 0 ? 0 : 1;
     i++;
   }
@@ -244,6 +259,8 @@ function qr(n, o) {
   const cells = side * side;
   const width = 1.16;
   const cell = width / side;
+  const darkAt = (row, col) =>
+    row >= 4 && col >= 4 && row < side - 4 && col < side - 4 && code.dark[(row - 4) * code.size + col - 4] ? 1 : 0; // prettier-ignore
   for (let i = 0; i < n; i++) {
     const id = i % cells;
     const row = Math.floor(id / side);
@@ -254,12 +271,21 @@ function qr(n, o) {
     const rows = Math.ceil(count / cols);
     const y = Math.floor(j / cols);
     const rowCols = Math.min(cols, count - y * cols);
-    out.pos.set([(col + (j % cols + 0.5) / rowCols) * cell - width / 2,
-      width / 2 - (row + (y + 0.5) / rows) * cell, 0], i * 3); // prettier-ignore
+    const fx = ((j % cols) + 0.5) / rowCols;
+    const fy = (y + 0.5) / rows;
+    out.pos.set([(col + fx) * cell - width / 2, width / 2 - (row + fy) * cell, 0], i * 3);
     out.direction.set([0, 0, 1], i * 3);
-    out.radius[i] = (cell / Math.min(cols, rows)) * 0.62;
-    out.ink[i] = row >= 4 && col >= 4 && row < side - 4 && col < side - 4
-      && code.dark[(row - 4) * code.size + col - 4] ? 1 : 0; // prettier-ignore
+    const dark = darkAt(row, col);
+    out.ink[i] = dark;
+    // Lane PT3: modules as clean squares. A splat by a side where the next
+    // module is the other shade shrinks to stay inside its own.
+    let edge = Infinity;
+    if (darkAt(row, col - 1) !== dark) edge = Math.min(edge, fx);
+    if (darkAt(row, col + 1) !== dark) edge = Math.min(edge, 1 - fx);
+    if (darkAt(row - 1, col) !== dark) edge = Math.min(edge, fy);
+    if (darkAt(row + 1, col) !== dark) edge = Math.min(edge, 1 - fy);
+    const r = (cell / Math.min(cols, rows)) * 0.75;
+    out.radius[i] = Math.min(r, Math.max(r * 0.4, edge * cell * 0.5));
   }
   return out;
 }
@@ -397,17 +423,106 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 }
 
 const inkColor = (second) => (second ? [0.98, 0.31, 0.15] : [0.035, 0.4, 0.43]);
-function colorAt(form, i, twoInk) {
-  // An emoji's own colors.
-  if (form.rgb && form.rgb[i * 3] >= 0) return Array.from(form.rgb.subarray(i * 3, i * 3 + 3));
-  if (form.code) return form.ink[i] ? [0.035, 0.075, 0.08] : [0.99, 0.98, 0.95];
-  if (twoInk) return inkColor(form.ink[i]);
+// The toy's ink across the cloud: teal on the left to pink on the right
+// (u 0..1), the same ink the cloud wears in flight (morphModifier).
+export const inkAt = (u) => [0.12 + 0.74 * u, 0.62 - 0.36 * u, 0.78 - 0.15 * u];
+// A shade of an ink, v 0 (deepest) to 1 (palest): darker below 0.6, then
+// toward white, so an emoji's light and dark and a QR code's two kinds of
+// module read in the toy's own colors.
+export function shade(c, v) {
+  if (v < 0.6) return c.map((x) => x * (0.16 + (0.84 * v) / 0.6));
+  const k = ((v - 0.6) / 0.4) * 0.8;
+  return c.map((x) => x + (1 - x) * k);
+}
+// The QR code's modules: deep and pale shades, far enough apart that the
+// code still scans (tests/pt3.spec.mjs checks the contrast).
+export const QR_DARK = 0.12;
+export const QR_LIGHT = 1;
+export function colorAt(form, i, twoInk) {
   const u = clamp(form.pos[i * 3] / 1.64 + 0.5);
+  const tone = form.tone ? form.tone[i] : -1;
+  if (form.code) {
+    const dark = form.ink[i] === 1;
+    if (twoInk) return shade(inkColor(!dark), dark ? 0.12 : QR_LIGHT);
+    return shade(inkAt(u), dark ? QR_DARK : QR_LIGHT);
+  }
+  // An emoji: its shape and its light and dark, in the ink.
+  if (tone >= 0) return shade(twoInk ? inkColor(tone > 0.5) : inkAt(u), 0.08 + 0.9 * tone);
+  if (twoInk) return inkColor(form.ink[i]);
   const normal = form.direction.subarray(i * 3, i * 3 + 3);
   const light = form.flat
     ? 0.66 + 0.34 * Math.abs(normal[0] * 0.42 + normal[1] * 0.8 + normal[2] * 0.43)
     : 1;
-  return [0.12 + 0.74 * u, 0.62 - 0.36 * u, 0.78 - 0.15 * u].map((x) => x * light);
+  return inkAt(u).map((x) => x * light);
+}
+
+// ---- Pairing the old cloud with the new form -------------------------------------
+// A splat flies to the place in the new form at the same rank along a 3D
+// Hilbert curve through each cloud's own box: places close in one form go
+// to places close in the other, so the morph flows as a sheet instead of a
+// dust of crossing splats. Pure and deterministic.
+const HILBERT_BITS = 10;
+export function hilbertKey(x, y, z) {
+  const X = [x, y, z];
+  const top = 1 << (HILBERT_BITS - 1);
+  for (let q = top; q > 1; q >>= 1) {
+    const p = q - 1;
+    for (let i = 0; i < 3; i++) {
+      if (X[i] & q) X[0] ^= p;
+      else {
+        const t = (X[0] ^ X[i]) & p;
+        X[0] ^= t;
+        X[i] ^= t;
+      }
+    }
+  }
+  for (let i = 1; i < 3; i++) X[i] ^= X[i - 1];
+  let t = 0;
+  for (let q = top; q > 1; q >>= 1) if (X[2] & q) t ^= q - 1;
+  for (let i = 0; i < 3; i++) X[i] ^= t;
+  let key = 0;
+  for (let b = HILBERT_BITS - 1; b >= 0; b--)
+    for (let i = 0; i < 3; i++) key = key * 2 + ((X[i] >> b) & 1);
+  return key;
+}
+// The cloud's indices in curve order.
+export function curveOrder(pos, n) {
+  const lo = [Infinity, Infinity, Infinity];
+  const hi = [-Infinity, -Infinity, -Infinity];
+  for (let j = 0; j < n * 3; j++) {
+    lo[j % 3] = Math.min(lo[j % 3], pos[j]);
+    hi[j % 3] = Math.max(hi[j % 3], pos[j]);
+  }
+  // One scale for all three axes, so a flat form stays flat on the curve.
+  const span = Math.max(1e-6, ...hi.map((h, a) => h - lo[a]));
+  const most = (1 << HILBERT_BITS) - 1;
+  const cell = (v, a) => Math.min(most, Math.floor(((v - lo[a]) / span) * most));
+  const key = new Float64Array(n);
+  for (let i = 0; i < n; i++)
+    key[i] = hilbertKey(cell(pos[i * 3], 0), cell(pos[i * 3 + 1], 1), cell(pos[i * 3 + 2], 2)) * n + i; // prettier-ignore
+  const order = new Uint32Array(n);
+  for (let i = 0; i < n; i++) order[i] = i;
+  return order.sort((a, b) => key[a] - key[b]);
+}
+// Reorders the form in place so that splat i (now at from[i]) gets the
+// form's place of the same curve rank.
+export function pairForm(form, from, n) {
+  const was = curveOrder(from, n);
+  const to = curveOrder(form.pos, n);
+  const pick = new Uint32Array(n);
+  for (let r = 0; r < n; r++) pick[was[r]] = to[r];
+  const moved = (a, k) => {
+    if (!a) return a;
+    const b = new a.constructor(a.length);
+    for (let i = 0; i < n; i++) for (let c = 0; c < k; c++) b[i * k + c] = a[pick[i] * k + c];
+    return b;
+  };
+  form.pos = moved(form.pos, 3);
+  form.direction = moved(form.direction, 3);
+  form.radius = moved(form.radius, 1);
+  form.ink = moved(form.ink, 1);
+  form.tone = moved(form.tone, 1);
+  return form;
 }
 
 // ---- The list of forms ------------------------------------------------------------
@@ -480,7 +595,9 @@ export const RECIPES = {
     alive: true,
     turntable: false,
     kernel: "sharp",
-    density: 0.12, // 7,200 on low, 16,800 on mid, and 24,000 on high/max
+    // Lane PT3: 30,000 on low, 70,000 on mid, 100,000 on high, 140,000 on
+    // max, and half the Splats slider's count (up to 200,000).
+    density: 0.5,
     options: [
       { key: "form", label: "Form", type: "select", default: "word", choices: FORMS },
       { key: "word", label: "Word", type: "text", default: "SPLATS", maxLength: 24 },
@@ -664,7 +781,7 @@ export const RECIPES = {
       ];
     },
     build(k, o) {
-      const n = Math.max(1, Math.min(24000, k.count));
+      const n = Math.max(1, Math.min(MOST_SPLATS, k.count));
       const form = makeForm(formOf(o), n, o);
       let from = null;
       if (
@@ -676,6 +793,7 @@ export const RECIPES = {
         from = new Float32Array(n * 3);
         for (let i = 0; i < n; i++) from.set(posePoint(live, i), i * 3);
       }
+      if (from) pairForm(form, from, n);
       // A tap's wave starts at the tapped place (recipe units).
       const at = from && origin ? origin.slice() : null;
       origin = null;
