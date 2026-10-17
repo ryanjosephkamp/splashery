@@ -15,9 +15,11 @@ faster Volume viewer". All three toys are labs toys.
 
 ## State
 
-- Engine PR first: `claude/tf1-engine` ("Engine: a recipe may take presses by its tap box"), merged
-  into `claude/tf1`. The lane PR needs it merged first.
-- Clips on Effect review page 2, lane TF1.
+- READY (October 17, 2026): lane PR #720 (draft, `full-suite`), after the engine PR #715
+  (`claude/tf1-engine`, "Engine: a recipe may take presses by its tap box"), which `claude/tf1`
+  already carries. Preflight passed after merging main.
+- Clips on Effect review page 2, lane TF1: `tf1-one-splat`, `tf1-elements-fullscreen`,
+  `tf1-volume-before`, `tf1-volume-after`.
 
 ## What changed
 
