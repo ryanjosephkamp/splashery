@@ -145,7 +145,9 @@ test("a poke rings out letter by letter, plays the touched letter's bar, and set
   const R = data.layout.letters[0].center;
   const { out, travel, cues } = play(recipe, data, { 2: [[R[0], R[1], 0.17]] }, 150);
   expect(travel).toBeGreaterThan(0.2);
-  expect(cues[0]).toMatchObject({ voice: "bar", f: "C5" }); // Toy Box's scale starts at C5
+  // Toy Box's scale starts at C5 (lane PT3: its own bar, a sine and a ring two octaves up).
+  expect(cues[0]).toMatchObject([{ voice: "tone" }, { voice: "tone" }]);
+  expect(cues[0][0].f).toBeCloseTo(523.25, 1);
   for (const tk of out.tokens) {
     expect(tk.offset).toEqual([0, 0, 0]);
     expect(tk.quat).toEqual([0, 0, 0, 1]);
@@ -166,10 +168,14 @@ test("Drop breaks letters into pieces that fall, land with knocks, and come back
   for (const tk of fall.out.tokens) expect(tk.offset[1]).toBeLessThan(-0.05);
   const ys = fall.out.tokens.map((tk, i) => layout.pieceList[i].center[1] + tk.offset[1]);
   expect(Math.min(...ys)).toBeGreaterThan(layout.floor - 0.05);
-  expect(fall.cues.filter((c) => c.voice === "wood").length).toBeGreaterThan(8);
+  // Lane PT3: Toy Box's clatter, a triangle tick as each piece lands.
+  expect(
+    fall.cues.filter((c) => c.voice === "tone" && c.kind === "triangle").length,
+  ).toBeGreaterThan(8);
   setDrop(sim, false, fall.t);
   const back = play(recipe, data, {}, 180, fall.t);
-  expect(back.cues.some((c) => c.voice === "breath")).toBe(true);
+  // Lane PT3: Toy Box's zip as they come back (steps up, then a C6).
+  expect(back.cues.some((c) => Array.isArray(c) && c.at(-1).f === "C6")).toBe(true);
   for (const tk of back.out.tokens) {
     expect(tk.offset).toEqual([0, 0, 0]);
     expect(tk.quat).toEqual([0, 0, 0, 1]);

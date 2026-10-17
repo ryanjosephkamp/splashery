@@ -436,7 +436,7 @@ export function shade(c, v) {
 }
 // The QR code's modules: deep and pale shades, far enough apart that the
 // code still scans (tests/pt3.spec.mjs checks the contrast).
-export const QR_DARK = 0.12;
+export const QR_DARK = 0.08;
 export const QR_LIGHT = 1;
 export function colorAt(form, i, twoInk) {
   const u = clamp(form.pos[i * 3] / 1.64 + 0.5);

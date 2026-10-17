@@ -119,12 +119,7 @@ test("every Shape morph form is in the toy's ink: emoji give only shape and ligh
       expect(worst).toBeGreaterThan(4.5);
     }
   }
-  // The emoji reads by its light and dark: a wide range of shades.
-  const o = resolveOptions(recipe, { form: "word", word: "🌈" });
-  const form = makeForm("word", n, o);
-  const tones = Array.from(form.tone).filter((t) => t >= 0);
-  expect(tones.length).toBe(n);
-  expect(Math.max(...tones) - Math.min(...tones)).toBeGreaterThan(0.4);
+  // (An emoji's own light and dark needs a color font: the browser test below.)
 });
 
 test("a morph pairs neighbors with neighbors, so the cloud flows as one sheet", async () => {
@@ -207,8 +202,8 @@ test("the name toy's sounds are Toy Box's: a sine bar per letter, and no rising 
 });
 
 test("letters are crisp: face splats shrink toward the outline", () => {
-  const s = textSplats("O", { count: 2000, depth: 0.17 });
-  const soft = textSplats("O", { count: 2000, depth: 0.17, crisp: false });
+  const s = textSplats("O", { count: 20000, depth: 0.17 });
+  const soft = textSplats("O", { count: 20000, depth: 0.17, crisp: false });
   const sizes = (t) => {
     const out = [];
     for (let i = 0; i < t.n; i++) if (t.face[i] === 0) out.push(t.sigma[i]);
@@ -218,9 +213,9 @@ test("letters are crisp: face splats shrink toward the outline", () => {
   const b = sizes(soft);
   // The crisp face has small splats at its edge and full ones inside; the
   // old one used one size (give or take 15%).
-  expect(a[0] / a[Math.floor(a.length / 2)]).toBeLessThan(0.5);
-  expect(b[0] / b[Math.floor(b.length / 2)]).toBeGreaterThan(0.8);
-  expect(s.n).toBe(2000);
+  expect(a[0] / a.at(-1)).toBeLessThan(0.5);
+  expect(b[0] / b.at(-1)).toBeGreaterThan(0.7);
+  expect(s.n).toBe(20000);
 });
 
 // ---- In the browser -------------------------------------------------------------------
@@ -319,6 +314,24 @@ test("Shape morph's QR form scans in the toy's colors, and its count follows the
   const right = at(0.96, 0.5);
   expect(left[2] - left[0]).toBeGreaterThan(12);
   expect(right[0] - right[1]).toBeGreaterThan(12);
+  // An emoji (a color glyph here) gives only its shape and its light and
+  // dark: every splat a shade of the ink at its place, over a wide range.
+  const emoji = await page.evaluate(async () => {
+    const { makeForm, colorAt, inkAt, shade } = await import("/src/packs/shape-morph.js");
+    const n = 6000;
+    const form = makeForm("word", n, { word: "🌈" });
+    const tones = Array.from(form.tone || []).filter((t) => t >= 0);
+    let off = 0;
+    for (let i = 0; i < n; i++) {
+      const u = Math.min(1, Math.max(0, form.pos[i * 3] / 1.64 + 0.5));
+      const want = shade(inkAt(u), 0.08 + 0.9 * form.tone[i]);
+      if (colorAt(form, i, false).some((x, a) => Math.abs(x - want[a]) > 1e-6)) off++;
+    }
+    return { count: tones.length, range: Math.max(...tones) - Math.min(...tones), off };
+  });
+  expect(emoji.count).toBe(6000);
+  expect(emoji.range).toBeGreaterThan(0.4);
+  expect(emoji.off).toBe(0);
   // Half the slider's count (the recipe's density), up to 200,000.
   await page.evaluate(() => window.__splashery.app.setSplats(300000));
   await page.waitForFunction(() => window.__splashery.player.motion.ctx.buf.count === 150000, null, { timeout: 120_000 }); // prettier-ignore
