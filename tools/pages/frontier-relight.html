@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Frontier: depth-guided light</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        background: #101b25;
+        color: #edf3f8;
+      }
+      body {
+        max-width: 1080px;
+        margin: auto;
+        padding: 24px;
+      }
+      h1 {
+        font-size: clamp(1.7rem, 5vw, 2.5rem);
+        margin: 0 0 8px;
+      }
+      p {
+        max-width: 80ch;
+        color: #b9ccd9;
+      }
+      a {
+        color: #90ddf0;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: center;
+        margin: 24px 0;
+      }
+      label {
+        display: grid;
+        gap: 6px;
+      }
+      input {
+        width: 210px;
+        accent-color: #90ddf0;
+      }
+      button {
+        font: inherit;
+        padding: 10px 16px;
+        border: 1px solid #70909e;
+        border-radius: 6px;
+        background: #23404f;
+        color: white;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+      :focus-visible {
+        outline: 3px solid #f7c97d;
+        outline-offset: 4px;
+      }
+      canvas {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+        background: #13232b;
+      }
+      .maps {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      figure {
+        margin: 0 0 20px;
+      }
+      figcaption {
+        margin: 8px 0;
+        color: #b9ccd9;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        padding: 16px;
+        background: #172b38;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+      @media (max-width: 500px) {
+        body {
+          padding: 16px;
+        }
+        .controls {
+          gap: 14px;
+        }
+        input {
+          width: min(280px, 75vw);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Depth-guided light</h1>
+    <p>
+      Move a light across a known depth sample. Perspective surface normals come from neighboring 3D
+      points; shading uses known albedo. This is a CPU rendering probe, not a depth model, intrinsic
+      decomposition, or physical relighting of a photograph.
+    </p>
+    <div class="controls">
+      <label
+        >Light direction <input id="azimuth" type="range" min="-160" max="160" value="-40"
+      /></label>
+      <label>Roughness <input id="roughness" type="range" min="10" max="90" value="45" /></label>
+      <button id="benchmark" type="button">Measure 21 frames</button>
+    </div>
+    <figure>
+      <canvas
+        id="lit"
+        width="640"
+        height="400"
+        aria-label="Relit procedural sphere and floor sample"
+      ></canvas>
+      <figcaption>
+        Original procedural sample: three spheres, a floor, and a back wall. No photographs,
+        downloads, or weights.
+      </figcaption>
+    </figure>
+    <div class="maps">
+      <figure>
+        <canvas id="depth" width="640" height="400" aria-label="Perspective depth map"></canvas>
+        <figcaption>Linear camera depth</figcaption>
+      </figure>
+      <figure>
+        <canvas
+          id="normals"
+          width="640"
+          height="400"
+          aria-label="Estimated surface normal map"
+        ></canvas>
+        <figcaption>Depth-derived normals; black pixels mark rejected boundaries.</figcaption>
+      </figure>
+    </div>
+    <p id="status" role="status">Preparing the sample…</p>
+    <pre id="metrics" aria-label="Measured results"></pre>
+    <p>
+      Times include CPU shading and canvas submission, not display presentation. Memory is accounted
+      live typed arrays plus estimated canvas backing, not process peak or GPU memory. Neural
+      inference, depth accuracy on photos, de-lighting, cast shadows, and hidden surfaces are
+      outside this probe.
+    </p>
+    <p>
+      Research context:
+      <a href="https://github.com/DepthAnything/Depth-Anything-V2">Depth Anything V2</a> and
+      <a href="https://github.com/microsoft/MoGe">MoGe</a>. Original implementation under the
+      repository's MIT license; original sample is CC0, made by Ryan with Codex (GPT-6).
+    </p>
+    <script type="module">
+      const W = 640,
+        H = 400,
+        N = W * H,
+        F = 510;
+      const $ = (id) => document.getElementById(id);
+      const ctx = $("lit").getContext("2d");
+      const depth = new Float32Array(N);
+      const albedo = new Uint8ClampedArray(N * 3);
+      const ids = new Uint8Array(N);
+      const truth = new Float32Array(N * 3);
+      const normals = new Float32Array(N * 3);
+      const valid = new Uint8Array(N);
+      const image = ctx.createImageData(W, H);
+      const spheres = [
+        [-1.05, -0.1, 4.2, 0.88],
+        [0.8, -0.35, 4.8, 0.72],
+        [0.6, 0.85, 5.7, 0.55],
+      ];
+      const colors = [
+        [0.12, 0.65, 0.66],
+        [0.95, 0.42, 0.17],
+        [0.64, 0.39, 0.77],
+      ];
+      const stats = { backend: "CPU / Canvas 2D", width: W, height: H, weights: "none", frames: 0 };
+      const frameTimes = [];
+      const nextFrame = () => new Promise(requestAnimationFrame);
+      const quantile = (v, q) => [...v].sort((a, b) => a - b)[Math.floor((v.length - 1) * q)];
+      const start = performance.now();
+      // Intersections supply camera-space Z and a reference normal, independently
+      // of the finite-difference estimator below. Linear albedo has no baked light.
+      for (let y = 0; y < H; y++)
+        for (let x = 0; x < W; x++) {
+          const i = y * W + x,
+            dx = (x - W / 2) / F,
+            dy = -(y - H / 2) / F;
+          let z = 8,
+            id = 4,
+            rgb = [0.14, 0.21, 0.28],
+            normal = [0, 0, -1];
+          if (dy < 0) {
+            const floor = -1.1 / dy;
+            if (floor < z) {
+              z = floor;
+              id = 5;
+              normal = [0, 1, 0];
+              const check = (Math.floor(dx * z * 2) + Math.floor(z * 2)) & 1;
+              rgb = check ? [0.35, 0.37, 0.31] : [0.57, 0.54, 0.43];
+            }
+          }
+          for (let s = 0; s < spheres.length; s++) {
+            const [cx, cy, cz, r] = spheres[s],
+              a = dx * dx + dy * dy + 1;
+            const b = -2 * (dx * cx + dy * cy + cz),
+              c = cx * cx + cy * cy + cz * cz - r * r;
+            const discriminant = b * b - 4 * a * c;
+            if (discriminant < 0) continue;
+            const hit = (-b - Math.sqrt(discriminant)) / (2 * a);
+            if (hit > 0 && hit < z) {
+              z = hit;
+              id = s + 1;
+              rgb = colors[s];
+              normal = [(dx * z - cx) / r, (dy * z - cy) / r, (z - cz) / r];
+            }
+          }
+          depth[i] = z;
+          ids[i] = id;
+          truth.set(normal, i * 3);
+          for (let k = 0; k < 3; k++) albedo[i * 3 + k] = Math.round(rgb[k] * 255);
+        }
+      stats.sampleMs = performance.now() - start;
+      function point(x, y) {
+        const z = depth[y * W + x];
+        return [((x - W / 2) * z) / F, (-(y - H / 2) * z) / F, z];
+      }
+      const normalStart = performance.now(),
+        errors = [];
+      for (let y = 1; y < H - 1; y++)
+        for (let x = 1; x < W - 1; x++) {
+          const i = y * W + x;
+          if (
+            [i - 1, i + 1, i - W, i + W].some(
+              (j) => ids[j] !== ids[i] || Math.abs(depth[j] - depth[i]) > 0.12,
+            )
+          )
+            continue;
+          const l = point(x - 1, y),
+            r = point(x + 1, y),
+            t = point(x, y - 1),
+            b = point(x, y + 1);
+          const ax = r[0] - l[0],
+            ay = r[1] - l[1],
+            az = r[2] - l[2];
+          const bx = t[0] - b[0],
+            by = t[1] - b[1],
+            bz = t[2] - b[2];
+          let nx = by * az - bz * ay,
+            ny = bz * ax - bx * az,
+            nz = bx * ay - by * ax;
+          const length = Math.hypot(nx, ny, nz);
+          if (length < 1e-10) continue;
+          nx /= length;
+          ny /= length;
+          nz /= length;
+          if (
+            (nx * (x - W / 2) * depth[i]) / F - (ny * (y - H / 2) * depth[i]) / F + nz * depth[i] >
+            0
+          ) {
+            nx = -nx;
+            ny = -ny;
+            nz = -nz;
+          }
+          normals.set([nx, ny, nz], i * 3);
+          valid[i] = 1;
+          const dot = nx * truth[i * 3] + ny * truth[i * 3 + 1] + nz * truth[i * 3 + 2];
+          errors.push((Math.acos(Math.max(-1, Math.min(1, dot))) * 180) / Math.PI);
+        }
+      stats.normalMs = performance.now() - normalStart;
+      stats.validPixels = errors.length;
+      stats.normalMedianDegrees = quantile(errors, 0.5);
+      stats.normalP95Degrees = quantile(errors, 0.95);
+      // Scratch error lists are not retained as sample data.
+      errors.length = 0;
+      function map(id, fn) {
+        const c = $(id).getContext("2d"),
+          out = c.createImageData(W, H);
+        for (let i = 0; i < N; i++) {
+          const rgb = fn(i);
+          out.data.set([...rgb, 255], i * 4);
+        }
+        c.putImageData(out, 0, 0);
+      }
+      map("depth", (i) => {
+        const v = Math.round((255 * (8 - depth[i])) / 5);
+        return [v, v, v];
+      });
+      map("normals", (i) =>
+        valid[i] ? [0, 1, 2].map((k) => Math.round((normals[i * 3 + k] + 1) * 127.5)) : [0, 0, 0],
+      );
+      stats.knownBytes =
+        depth.byteLength +
+        albedo.byteLength +
+        ids.byteLength +
+        truth.byteLength +
+        normals.byteLength +
+        valid.byteLength +
+        image.data.byteLength +
+        3 * N * 4;
+      stats.memoryScope =
+        "live typed arrays + 3 canvas RGBA backings; excludes JS objects, scratch/GC, browser, and compositor";
+      const srgb = (c) => 255 * (c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055);
+      function render(angle = Number($("azimuth").value)) {
+        const t = performance.now(),
+          a = (angle * Math.PI) / 180;
+        const light = [Math.sin(a) * 0.88, 0.45, -Math.cos(a) * 0.88],
+          ll = Math.hypot(...light);
+        for (let k = 0; k < 3; k++) light[k] /= ll;
+        const half = [light[0], light[1], light[2] - 1],
+          hl = Math.hypot(...half);
+        for (let k = 0; k < 3; k++) half[k] /= hl;
+        const rough = Number($("roughness").value) / 100,
+          power = 2 / (rough * rough);
+        for (let i = 0; i < N; i++) {
+          const o = i * 3,
+            nx = normals[o],
+            ny = normals[o + 1],
+            nz = normals[o + 2];
+          const diffuse = valid[i] ? Math.max(0, nx * light[0] + ny * light[1] + nz * light[2]) : 0;
+          const spec =
+            valid[i] && diffuse > 0
+              ? 0.14 * Math.pow(Math.max(0, nx * half[0] + ny * half[1] + nz * half[2]), power)
+              : 0;
+          for (let k = 0; k < 3; k++)
+            image.data[i * 4 + k] = srgb(
+              Math.min(1, (albedo[o + k] / 255) * (0.16 + 0.84 * diffuse) + spec),
+            );
+          image.data[i * 4 + 3] = 255;
+        }
+        ctx.putImageData(image, 0, 0);
+        const ms = performance.now() - t;
+        return ms;
+      }
+      function show() {
+        stats.frames = frameTimes.length;
+        if (frameTimes.length) {
+          stats.lightMedianMs = quantile(frameTimes, 0.5);
+          stats.lightP95Ms = quantile(frameTimes, 0.95);
+        }
+        $("metrics").textContent = JSON.stringify(stats, null, 2);
+      }
+      let scheduled = false;
+      function schedule() {
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(() => {
+          scheduled = false;
+          render();
+        });
+      }
+      $("azimuth").addEventListener("input", schedule);
+      $("roughness").addEventListener("input", schedule);
+      async function benchmark() {
+        $("benchmark").disabled = true;
+        document.body.dataset.state = "measuring";
+        $("status").textContent = "Measuring 21 CPU lighting frames…";
+        frameTimes.length = 0;
+        try {
+          render(); // Warm-up is excluded from the reported distribution.
+          for (let i = 0; i < 21; i++) {
+            await nextFrame();
+            frameTimes.push(render(-70 + i * 7));
+          }
+          render();
+          show();
+          document.body.dataset.state = "ready";
+          $("status").textContent =
+            "Measured 21 frames. Move either control to inspect the result.";
+        } finally {
+          $("benchmark").disabled = false;
+        }
+        return { ...stats };
+      }
+      window.frontier = { stats, benchmark, render, depth, normals, valid, truth };
+      await benchmark();
+    </script>
+  </body>
+</html>
