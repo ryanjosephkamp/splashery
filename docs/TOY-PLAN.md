@@ -76,10 +76,10 @@ Proposals below are suggestions; the owner may change them.
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
   Turing machine, Difference engine, Enigma machine, Bombe, Your name in splats, Picture lab, Your
   book, Photo album, Picture frame, Song landscape, Chladni plate, Sound in a box, Room echo meter,
-  Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab,
-  Sound recorder, Splat toolkit, Point clouds, Volume viewer, Shape morph, Splat field, Light lab,
-  Baked chest, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
+  Splat mirror, Model to splats, QR code, Picture QR, Photo to 3D, Moving photo to 3D, Video to 3D,
+  Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume viewer, Shape morph, Splat field,
+  Light lab, Baked chest, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM
+  map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
   Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
   Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
   microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
@@ -1030,7 +1030,8 @@ Proposals below are suggestions; the owner may change them.
     a solid cover rim, cleaner page edges, and soft gray words on the pages seen only mid-turn.
     Hands-on H3 (October 9, 2026; the owner's idea): a real storybook with pages, The Little Lamp
     Who Wanted to See the Sea (our own words and drawings, tools/hh3-storybook.mjs), read as Your
-    book reads a PDF: tap or pull to turn each page.
+    book reads a PDF: tap or pull to turn each page. PIC2 (October 17, 2026): a softer page sound
+    (Your book's hardcover page, about half as loud and a little lower); the animation is unchanged.
   - Sound: Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the
     synthesized sound as a fallback.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.
@@ -3604,15 +3605,15 @@ Proposals below are suggestions; the owner may change them.
   - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27
     and 28, 2026.
   - Effect: A flat sheet showing what you open: a tap on the right of the page turns to the next
-    page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and
-    pauses a video.
+    page of a PDF, on the left goes back (the page changes in place, with no slide or turn), or a
+    tap plays and pauses a video.
   - Improved: Pages r6 (October 5, 2026): Pop out (the top bar's switch) and Draw a box, as in Your
     book, for a PDF or a picture: a tap raises a figure (a picture in the PDF, or the whole photo),
     a drawn box raises anything else, a tap on a risen one lays it back, and a page step waits until
     they have laid back. A drag on a risen figure tilts the view, and a Depth slider sets its
-    relief.
-  - Sound: A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound
-    as a fallback.
+    relief. PIC2 (October 17, 2026): pages change in place again, with no slide and no page sound.
+  - Sound: Silent on a page change (lane PIC2, October 17, 2026); a figure rising or laying back
+    keeps its own soft sounds.
 - **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Fixed: Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little
@@ -3648,10 +3649,12 @@ Proposals below are suggestions; the owner may change them.
     page turn (tap or drag) lays them all back quickly first. While figures stand up, a drag on one
     (or off the pages) tilts the book to see them from the side; the view comes back level when they
     lie down. A Depth slider sets a risen figure's relief, up to five times its own, and the depth
-    is kept in the scene and in embeds. A page pulled over plays its page sound once.
+    is kept in the scene and in embeds. A page pulled over plays its page sound once. PIC2 (October
+    17, 2026): a softer page sound; the animations are unchanged.
   - Sound: A real page per book type: glossy and slick for the magazine, light for the paperback
     (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C,
-    October 2, 2026).
+    October 2, 2026); softer since lane PIC2 (October 17, 2026): about half as loud, a little lower,
+    and a lighter landing.
 - **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Fixed: Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the
@@ -3674,9 +3677,11 @@ Proposals below are suggestions; the owner may change them.
     While photos stand up, a drag on one (or off the pages) tilts the album to see them from the
     side; the view comes back level when they lie down. A Depth slider sets a risen photo's relief,
     up to five times its own, and the depth is kept in the scene and in embeds. A page pulled over
-    plays its page sound once.
-  - Sound: A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the
-    synthesized sound as a fallback.
+    plays its page sound once. PIC2 (October 17, 2026): the page sound plays only on a turn (a Pop
+    out tap played it too), and more softly; the lift of a risen photo is a soft paper brush, not a
+    page turn.
+  - Sound: A thick card page turning and the thud, softer since lane PIC2 (October 17, 2026), and
+    only when a page turns: a Pop out tap on a photo plays only the lift.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Effect: A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid
@@ -3878,7 +3883,12 @@ Proposals below are suggestions; the owner may change them.
     tap and away, with its own picture colors all the way, so the picture stays whole (lane QR r5;
     3.6 s). The toy measures the contrast and reads its code with jsQR at phone size and smaller;
     Make it scan finds the closest version that scans; Save a PNG.
-  - Sound: A soft breath with a run of light wooden clicks as the tiles lift and fall.
+  - Improved: PIC2 (October 17, 2026): opens at the lowest contrast and the biggest code (the most
+    detail), with a new sound; Most detail (Codex task 79) is an option in the Toy tab. A link with
+    its own contrast and size opens as it was.
+  - Sound: A drop where the code is tapped, and soft marimba notes, rising and fading, as the ripple
+    runs out across the tiles (lane PIC2, October 17, 2026; it was a breath of wind and wooden
+    clicks).
 - **QR from real things** (`qr-build`). Now: tap: Build it. Plan: new effect (E6).
   - Owner: The owner's Push Plan pick Q13 ("Absolutely. This is really, really cool"), lane QR
     craft, October 6, 2026.

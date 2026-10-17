@@ -130,6 +130,40 @@ test("circular marbles retain complete decoration within the phone budget", () =
   expect(made.splats.every((s) => s.p.every(Number.isFinite))).toBe(true);
 });
 
+test("a plain Circle Picture QR retains every module within a small kit budget", async () => {
+  const { RECIPES } = await import("../src/packs/qr-craft.js");
+  const recipe = RECIPES["qr-picture"],
+    options = Object.fromEntries(recipe.options.map((option) => [option.key, option.default])),
+    modules = new Set();
+  options.shape = "circle";
+  // Lane PIC2: Picture QR now opens at the biggest size; this compact-path check keeps the size it
+  // was recorded at (the biggest code's unread weave, with no scan step in Node, leaves some module
+  // centers to error correction, on main as here).
+  options.size = "more";
+  let count = 0,
+    wrong = 0;
+  const kit = {
+    count: 8000,
+    reach() {},
+    cloud(settings, sample) {
+      for (let i = 0; i < Math.round(settings.share * this.count); i++) {
+        const point = sample(() => 0.5, i);
+        if (!point) continue;
+        count++;
+        if (point.params[0] > 0) {
+          modules.add(point.params[0] - 1);
+          if (point.color[0] < 0.5 !== (point.params[1] === 2)) wrong++;
+        }
+      }
+    },
+  };
+  recipe.build(kit, options);
+  expect(count).toBeLessThanOrEqual(8000);
+  expect(count).toBeGreaterThan(4000);
+  expect(modules.size).toBe(kit.data.size ** 2);
+  expect(wrong).toBe(0);
+});
+
 test("Circle Picture QR handles overlong saved text with its existing fallback", async ({
   page,
 }) => {

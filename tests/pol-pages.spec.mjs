@@ -1,6 +1,6 @@
 // Lane Polish (pages): the Picture lab, Your book and the Photo album after
 // the owner's audit. Pop out finds a PDF's drawn figures (src/media.js), the
-// lab opens close on a phone and slides its pages, raised photos open at a
+// lab opens close on a phone and changes its pages in place (lane PIC2), raised photos open at a
 // visible depth, a book holds the whole book in view while its cover or a
 // page turns, links follow only a tap right on them, a closed book's cover
 // takes part in Pop out, and the album's captions read as words. (The
@@ -181,25 +181,24 @@ test.describe("Picture lab (no browser)", () => {
     });
   });
 
-  test("a page change slides the page off and the next one in, in about a quarter of a second", async () => {
+  // Lane PIC2 (the owner's call of October 17, 2026): the slide is gone; a page changes in place.
+  test("a page change happens in place: no slide, the page itself just changes", async () => {
     const pics = fakePics(3);
     const b = await shaped(false, () => play("picture-lab", {}, pics));
     b.frame();
     b.tap([0.6, 0, 0]);
     const xs = [];
-    for (let i = 0; i < 12; i++) xs.push(b.run(1 / 30).parts.labpage.offset[0]);
-    // Off to the left, then in from the right, then still.
-    expect(Math.min(...xs)).toBeLessThan(-0.5);
-    expect(Math.max(...xs)).toBeGreaterThan(0.5);
+    for (let i = 0; i < 12; i++) xs.push(b.run(1 / 30).parts.labpage?.offset?.[0] ?? 0);
+    expect(xs.every((x) => x === 0)).toBe(true);
     expect(pics.page).toBe(1);
-    b.run(0.2);
-    expect(b.out.parts.labpage).toMatchObject({ offset: [0, 0, 0], visible: 1 });
-    // A page changed from the Toy tab slides in too.
+    // Back from the left half.
+    b.tap([-0.6, 0, 0]);
+    b.run(1 / 30);
+    expect(pics.page).toBe(0);
+    // A page changed from the Toy tab doesn't move the page either.
     pics.go(2);
     b.frame();
-    expect(b.run(0.1).parts.labpage.offset[0]).toBeGreaterThan(0);
-    b.run(0.3);
-    expect(b.out.parts.labpage.offset[0]).toBe(0);
+    expect(b.run(0.1).parts.labpage?.offset?.[0] ?? 0).toBe(0);
   });
 
   test("a photo's card takes the photo's shape, and the photo rises at depth 2", async () => {

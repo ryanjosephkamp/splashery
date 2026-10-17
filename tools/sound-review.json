@@ -1242,10 +1242,11 @@
       "candidates": []
     },
     "book": {
-      "status": "site",
-      "note": "We should hear the pages flip like a real book's, not wind.",
-      "plan": "Now: real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
-      "candidates": []
+      "status": "ready",
+      "note": "Walkthrough of October 17, 2026: a softer page turn; the animation stays.",
+      "plan": "Now: Your book's hardcover page, about half as loud and a little lower.",
+      "candidates": [],
+      "round": "2026-10-17"
     },
     "laptop": {
       "status": "site",
@@ -1679,23 +1680,25 @@
       "candidates": []
     },
     "picture-lab": {
-      "status": "site",
-      "note": "Sounds too much like suction or something.",
-      "plan": "Now: a paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
-      "candidates": []
+      "status": "ready",
+      "note": "Walkthrough of October 17, 2026: no page sound in the lab at all.",
+      "plan": "Now: a page change is silent; the Sound Board plays a faint card tap in its place.",
+      "candidates": [],
+      "round": "2026-10-17"
     },
     "your-book": {
-      "status": "site",
-      "note": "A page sound per book type: glossier for a magazine, different for paperback and hardcover.",
-      "plan": "Now: A real page per book type: glossy and slick for the magazine, light for the paperback (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C).",
+      "status": "ready",
+      "note": "Walkthrough of October 17, 2026: a softer page turn; the animation stays.",
+      "plan": "Now: each style's real page, about half as loud and a little lower, with a lighter hardcover landing.",
       "candidates": [],
-      "round": "2026-10-02"
+      "round": "2026-10-17"
     },
     "photo-album": {
-      "status": "site",
-      "note": "Thud is fine, but page turn swish doesn't sound realistic.",
-      "plan": "Now: a thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
-      "candidates": []
+      "status": "ready",
+      "note": "Walkthrough of October 17, 2026: the page sound played on a Pop out tap, and it was too much.",
+      "plan": "Now: the same thick page and thud, about half as loud and a little lower, and only when a page turns.",
+      "candidates": [],
+      "round": "2026-10-17"
     },
     "song-landscape": {
       "status": "approved",
@@ -4931,6 +4934,13 @@
       "status": "ready",
       "note": "The old sound was grainy.",
       "plan": "A clean, soft swell while the splats fly, easing down as the form lands (lane PT1, October 16, 2026)."
+    },
+    "qr-picture": {
+      "candidates": [],
+      "status": "ready",
+      "note": "Walkthrough of October 17, 2026: a new sound in place of the wind and clicks.",
+      "plan": "Now: a drop where the code is tapped, then soft marimba notes that follow the ripple out.",
+      "round": "2026-10-17"
     }
   }
 }

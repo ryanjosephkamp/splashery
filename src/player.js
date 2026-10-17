@@ -624,7 +624,7 @@ export class Player {
     if (token !== this.loadToken) return null;
     const recipe = mod.RECIPES?.[def.id];
     if (!recipe) throw new Error(`${def.label} is missing from its pack.`);
-    const count = this.splatBudget(recipe.density ?? 1);
+    let count = this.splatBudget(recipe.density ?? 1);
     const options = resolveOptions(recipe, toy.options);
     // A recipe may read a data file first (the protein toy's structure).
     if (recipe.prepare) {
@@ -633,6 +633,13 @@ export class Player {
       // (lane Baked engine: a baked asset picks its tier from it, src/baked.js).
       await recipe.prepare(options, this.prepareHelp(toy, recipe, options), { profile: this.profile, count }); // prettier-ignore
       if (token !== this.loadToken) return null;
+    }
+    // Exact lattices can use fewer points than their profile's upper budget.
+    // The hook runs after preparation, when their final geometry is known.
+    if (typeof recipe.splatLimit === "function") {
+      const limit = recipe.splatLimit(options, count);
+      if (Number.isFinite(limit) && limit > 0)
+        count = Math.min(count, Math.max(1, Math.round(limit)));
     }
     // Pictures (lane Books): a picture toy's media opens first, so the
     // build can size itself from it (k.media).
@@ -665,7 +672,9 @@ export class Player {
     const modifier = labsOn() ? recipe.gpuField?.(options, ctx.transform) || null : null;
     // Lane Photo fidelity: a recipe with a photo has splats that take their colors from it.
     const photo =
-      !!recipe.photo && !modifier && (recipe.photo.on ? !!recipe.photo.on(options) : true);
+      !!recipe.photo &&
+      (!modifier || modifier.photo === true) &&
+      (recipe.photo.on ? !!recipe.photo.on(options) : true);
     if (photo) this.stage.setPhoto(true);
     const gloss = labsOn() ? pickGloss(new URLSearchParams(location.search), recipe.gloss) : null; // lane Kit lab
     this.stage.setToy({ resource: container, owned: true, kit: true, modifier, photo, gloss });
@@ -1612,6 +1621,8 @@ export class Player {
     const ph = this.photo;
     if (!ph || ph.recipe !== info.recipe || !this.stage.toy?.photo) return;
     const spec = ph.recipe.photo;
+    const tiles = spec.tiles ? spec.tiles(u) : [0, 0, 0, 0];
+    this.stage.setPhotoTiles(tiles);
     const v = spec.version(this.time);
     if (v !== ph.version) {
       const src = spec.source(this.time);
@@ -1623,9 +1634,11 @@ export class Player {
     const [x0, y0, x1, y1] = spec.rect();
     const a = this.fromRecipe([x0, y1, 0]);
     const b = this.fromRecipe([x1, y0, 0]);
-    const q = u.uSpBodyQ && (u.uSpBodyQ[3] || u.uSpBodyQ[0] || u.uSpBodyQ[1] || u.uSpBodyQ[2]) ? u.uSpBodyQ : [0, 0, 0, 1]; // prettier-ignore
+    // The tile field owns its complete motion in local recipe coordinates;
+    // ordinary photos still follow the common body rotation.
+    const q = tiles[0] > 0.5 ? [0, 0, 0, 1] : u.uSpBodyQ && (u.uSpBodyQ[3] || u.uSpBodyQ[0] || u.uSpBodyQ[1] || u.uSpBodyQ[2]) ? u.uSpBodyQ : [0, 0, 0, 1]; // prettier-ignore
     const tex = this.stage.photoTex;
-    this.stage.setPhotoUniforms(photoUniforms({ x0: a[0], x1: b[0], y0: b[1], y1: a[1] }, q, u.uSpClock?.[2] ?? 1, tex ? [tex.width, tex.height] : [1, 1])); // prettier-ignore
+    this.stage.setPhotoUniforms(photoUniforms({ x0: a[0], x1: b[0], y0: b[1], y1: a[1] }, q, u.uSpClock?.[2] ?? 1, tex ? [tex.width, tex.height] : [1, 1]), spec.skipIdenticalUniforms === true); // prettier-ignore
   }
 
   // A world point in the current toy's recipe coordinates: a kit toy's

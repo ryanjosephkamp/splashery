@@ -124,6 +124,10 @@ for (const [theme, group] of THEMES)
       await import("/src/packs/qr-craft.js");
       window.__splashery.qrCraft.autoCheck = false;
       await window.__splashery.app.chooseToy("qr-picture");
+      // Lane PIC2: Picture QR now opens at the lowest contrast and the biggest code; with the
+      // automatic check off, this test keeps the settings it was recorded at (tests/pic2.spec.mjs
+      // checks the new defaults with the check on).
+      await window.__splashery.app.setToyOptions({ contrast: 0.5, size: "more" });
     });
     expect(requests.filter((s) => s.includes("/qr-picture/themes/"))).toEqual([]);
     if (await page.locator("#sheet-toggle").isVisible()) {

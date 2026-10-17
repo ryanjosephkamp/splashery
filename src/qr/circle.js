@@ -120,7 +120,12 @@ export function circleSplats(
     sheetSpacing = 0.45,
   } = {},
 ) {
-  const layout = circleLayout(code, quiet);
+  // With no dots, only the sticker extent is needed. The decorative layout
+  // can be expensive and has no effect on the sheet or annulus.
+  const half = radius(code.size, quiet);
+  const layout = dots
+    ? circleLayout(code, quiet)
+    : { half, radius: half, quiet, dots: [], dark: () => false, candidates: 0 };
   const H = layout.half;
   const splats = [];
   const { flat, crisp } = painter(splats, { scale, sp: 0.25 });

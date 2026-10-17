@@ -1,0 +1,49 @@
+(module
+ (memory (export "memory") 1 1024)
+ (func $byte (param $v f64) (result i32)
+  (i32.trunc_sat_f64_u (f64.nearest (f64.min (f64.const 255) (f64.max (f64.const 0) (local.get $v))))))
+ (func (export "raster") (param $cells i32) (param $indices i32) (param $active i32) (param $output i32) (param $W i32) (param $G i32) (param $s i32)
+  (local $py i32) (local $px i32) (local $v i32) (local $u i32) (local $y i32) (local $x i32) (local $q i32) (local $o i32)
+  (local $rg v128) (local $b f64) (local $denominator f64)
+  (local.set $denominator (f64.convert_i32_u (i32.mul (local.get $s) (local.get $s))))
+  (local.set $py (i32.const 0))
+  (block $ydone (loop $yloop
+   (br_if $ydone (i32.ge_u (local.get $py) (local.get $W)))
+   (if (i32.load8_u (i32.add (local.get $active) (local.get $py))) (then
+    (local.set $px (i32.const 0))
+    (block $xdone (loop $xloop
+     (br_if $xdone (i32.ge_u (local.get $px) (local.get $W)))
+     (if (i32.load8_u (i32.add (local.get $active) (local.get $px))) (then
+      (local.set $rg (v128.const f64x2 0 0)) (local.set $b (f64.const 0))
+      (local.set $v (i32.const 0))
+      (block $vdone (loop $vloop
+       (br_if $vdone (i32.ge_u (local.get $v) (local.get $s)))
+       (local.set $y (i32.load (i32.add (local.get $indices) (i32.mul (i32.add (i32.mul (local.get $py) (local.get $s)) (local.get $v)) (i32.const 4)))))
+       (local.set $u (i32.const 0))
+       (block $udone (loop $uloop
+        (br_if $udone (i32.ge_u (local.get $u) (local.get $s)))
+        (local.set $x (i32.load (i32.add (local.get $indices) (i32.mul (i32.add (i32.mul (local.get $px) (local.get $s)) (local.get $u)) (i32.const 4)))))
+        (if (i32.or (i32.lt_s (local.get $x) (i32.const 0)) (i32.lt_s (local.get $y) (i32.const 0))) (then
+         (local.set $rg (f64x2.add (local.get $rg) (f64x2.splat (f64.const 1))))
+         (local.set $b (f64.add (local.get $b) (f64.const 1)))
+        ) (else
+         (local.set $q (i32.add (local.get $cells) (i32.mul (i32.add (i32.mul (local.get $y) (local.get $G)) (local.get $x)) (i32.const 12))))
+         (local.set $rg (f64x2.add (local.get $rg) (f64x2.promote_low_f32x4 (v128.load (local.get $q)))))
+         (local.set $b (f64.add (local.get $b) (f64.promote_f32 (f32.load offset=8 (local.get $q)))))
+        ))
+        (local.set $u (i32.add (local.get $u) (i32.const 1))) (br $uloop)
+       ))
+       (local.set $v (i32.add (local.get $v) (i32.const 1))) (br $vloop)
+      ))
+      (local.set $o (i32.add (local.get $output) (i32.mul (i32.add (i32.mul (local.get $py) (local.get $W)) (local.get $px)) (i32.const 4))))
+      (i32.store8 (local.get $o) (call $byte (f64.div (f64.mul (f64.const 255) (f64x2.extract_lane 0 (local.get $rg))) (local.get $denominator))))
+      (i32.store8 offset=1 (local.get $o) (call $byte (f64.div (f64.mul (f64.const 255) (f64x2.extract_lane 1 (local.get $rg))) (local.get $denominator))))
+      (i32.store8 offset=2 (local.get $o) (call $byte (f64.div (f64.mul (f64.const 255) (local.get $b)) (local.get $denominator))))
+     ))
+     (local.set $px (i32.add (local.get $px) (i32.const 1))) (br $xloop)
+    ))
+   ))
+   (local.set $py (i32.add (local.get $py) (i32.const 1))) (br $yloop)
+  ))
+ )
+)
