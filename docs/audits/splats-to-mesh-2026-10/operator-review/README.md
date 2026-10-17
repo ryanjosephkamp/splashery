@@ -46,9 +46,24 @@ SPLASHERY_CHROMIUM=/path/to/chromium141 SPLASHERY_GL=llvmpipe DISPLAY=:98 LP_NUM
 ```
 
 Fresh full CI:
-[run 39058206798](https://github.com/ryanjosephkamp/splashery/actions/runs/39058206798). Its
-complete result and every failure's isolated outcome will be recorded after all sixteen shards and
-the summary finish.
+[run 39058206798](https://github.com/ryanjosephkamp/splashery/actions/runs/39058206798). All sixteen
+shards reported: **403 of 403 files, 3,429 tests, 3,423 passed, 5 failed, and 1 skipped**. Checks
+passed. [Exact counts, job IDs, and isolated outcomes](full-ci.json).
+
+| Failure                  | Classification                               | Isolated rerun |
+| ------------------------ | -------------------------------------------- | -------------- |
+| `chs-engine:11`          | Not on the known list                        | Passed alone   |
+| `fx4-engine:79` (WebGPU) | Not on the known list                        | Passed alone   |
+| `live4:149`              | Not on the known list                        | Passed alone   |
+| `man5:201`               | Explicitly expected by the Operator's review | Failed alone   |
+| `phy:64`                 | Known in `tools/suite.json`                  | Passed alone   |
+
+The run reports failure. All three unlisted failures apart from the expected PDF check passed alone.
+The PDF check's failure is retained until merge-time printing. No test, threshold, or known-failure
+list was changed.
+
+Every test job and isolated recheck has completed. GitHub's separate Summary job remained queued at
+20:49 UTC on October 17; these totals are summed from all sixteen completed shard logs.
 
 Original torus geometry is CC0. The tool and this probe were made by Ryan with Codex (GPT-6), under
 MIT. Rule check: none.

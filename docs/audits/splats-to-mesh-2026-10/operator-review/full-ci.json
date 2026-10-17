@@ -1,0 +1,299 @@
+{
+  "runId": 39058206798,
+  "url": "https://github.com/ryanjosephkamp/splashery/actions/runs/39058206798",
+  "headSha": "e442b74e035395e30c0d7e2bd1737521b46d06fa",
+  "mergedMain": "c36c4dcd91f505ccb94cb5abe0d16cc2c626c395",
+  "checks": "success",
+  "shardCount": 16,
+  "totals": {
+    "files": 403,
+    "expectedFiles": 403,
+    "tests": 3429,
+    "passed": 3423,
+    "failed": 5,
+    "skipped": 1
+  },
+  "failures": [
+    {
+      "id": "chs-engine:11",
+      "title": "a tap that returns options rebuilds the toy with them, then fires its key",
+      "known": false,
+      "status": "failed",
+      "error": "expect(received).toBeGreaterThan(expected)",
+      "alone": "passed",
+      "jobId": 117470465366
+    },
+    {
+      "id": "fx4-engine:79",
+      "title": "toys without the rim kind draw as before (webgpu)",
+      "known": false,
+      "status": "timedOut",
+      "error": "Test timeout of 240000ms exceeded.",
+      "alone": "passed",
+      "jobId": 117470465411
+    },
+    {
+      "id": "live4:149",
+      "title": "your audio plays to the plate: its strongest pitch rings the modes, re-sorting as the tune moves; play, pause and scrub",
+      "known": false,
+      "status": "failed",
+      "error": "Timed out waiting for () => window.__fileModes.a",
+      "alone": "passed",
+      "jobId": 117470465712
+    },
+    {
+      "id": "man5:201",
+      "title": "the same input and the same Chromium print the same bytes",
+      "known": false,
+      "expectedByOperator": true,
+      "status": "failed",
+      "error": "run tools/manual-pdf.mjs again: the shipped PDF is out of date",
+      "alone": "failed",
+      "jobId": 117470465480
+    },
+    {
+      "id": "phy:64",
+      "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+      "known": true,
+      "status": "failed",
+      "error": "expect(received).toBeGreaterThan(expected)",
+      "alone": "passed",
+      "jobId": 117470465366
+    }
+  ],
+  "shards": [
+    {
+      "name": "Suite 1/16",
+      "jobId": 117470465472,
+      "conclusion": "success",
+      "files": 16,
+      "expectedFiles": 16,
+      "tests": 165,
+      "passed": 165,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T19:42:56.7692044Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 2/16",
+      "jobId": 117470465402,
+      "conclusion": "success",
+      "files": 25,
+      "expectedFiles": 25,
+      "tests": 254,
+      "passed": 254,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T18:48:42.7379663Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 3/16",
+      "jobId": 117470465517,
+      "conclusion": "success",
+      "files": 25,
+      "expectedFiles": 25,
+      "tests": 257,
+      "passed": 257,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T19:47:59.4739785Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 4/16",
+      "jobId": 117470465459,
+      "conclusion": "success",
+      "files": 25,
+      "expectedFiles": 25,
+      "tests": 153,
+      "passed": 153,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T19:26:20.4950376Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 5/16",
+      "jobId": 117470465366,
+      "conclusion": "failure",
+      "files": 25,
+      "expectedFiles": 25,
+      "tests": 264,
+      "passed": 262,
+      "failed": 2,
+      "skipped": 0,
+      "isolated": [
+        "2026-10-17T20:25:03.7451056Z chs-engine:11 a tap that returns options rebuilds the toy with them, then fires its key: passed alone",
+        "2026-10-17T20:25:37.1737729Z phy:64 Pebbles: stones pick up and stack into a new cairn; a careless one topples: passed alone",
+        "2026-10-17T20:25:37.1739261Z 2 failed in this shard; 2 rechecked."
+      ],
+      "failures": [
+        "2026-10-17T20:24:56.0577602Z - `phy:64` Pebbles: stones pick up and stack into a new cairn; a careless one topples: failed. Error: expect(received).toBeGreaterThan(expected)",
+        "2026-10-17T20:24:56.0578837Z - `chs-engine:11` a tap that returns options rebuilds the toy with them, then fires its key: failed. Error: expect(received).toBeGreaterThan(expected)"
+      ]
+    },
+    {
+      "name": "Suite 6/16",
+      "jobId": 117470465480,
+      "conclusion": "failure",
+      "files": 26,
+      "expectedFiles": 26,
+      "tests": 220,
+      "passed": 219,
+      "failed": 1,
+      "skipped": 0,
+      "isolated": [
+        "2026-10-17T19:38:06.0889871Z man5:201 the same input and the same Chromium print the same bytes: failed alone",
+        "2026-10-17T19:38:06.0893652Z 1 failed in this shard; 1 rechecked."
+      ],
+      "failures": [
+        "2026-10-17T19:37:45.9748980Z - `man5:201` the PDF › the same input and the same Chromium print the same bytes: failed. Error: run tools/manual-pdf.mjs again: the shipped PDF is out of date"
+      ]
+    },
+    {
+      "name": "Suite 7/16",
+      "jobId": 117470465456,
+      "conclusion": "success",
+      "files": 26,
+      "expectedFiles": 26,
+      "tests": 179,
+      "passed": 179,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T19:18:54.4093759Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 8/16",
+      "jobId": 117470465445,
+      "conclusion": "success",
+      "files": 26,
+      "expectedFiles": 26,
+      "tests": 160,
+      "passed": 160,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T19:14:22.9732242Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 9/16",
+      "jobId": 117470465411,
+      "conclusion": "failure",
+      "files": 26,
+      "expectedFiles": 26,
+      "tests": 274,
+      "passed": 273,
+      "failed": 1,
+      "skipped": 0,
+      "isolated": [
+        "2026-10-17T19:28:49.0235782Z fx4-engine:79 toys without the rim kind draw as before (webgpu): passed alone",
+        "2026-10-17T19:28:49.0239615Z 1 failed in this shard; 1 rechecked."
+      ],
+      "failures": [
+        "2026-10-17T19:26:20.8458993Z - `fx4-engine:79` toys without the rim kind draw as before (webgpu): timedOut. Test timeout of 240000ms exceeded."
+      ]
+    },
+    {
+      "name": "Suite 10/16",
+      "jobId": 117470465568,
+      "conclusion": "success",
+      "files": 26,
+      "expectedFiles": 26,
+      "tests": 137,
+      "passed": 137,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T20:08:23.6543292Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 11/16",
+      "jobId": 117470465351,
+      "conclusion": "success",
+      "files": 26,
+      "expectedFiles": 26,
+      "tests": 224,
+      "passed": 223,
+      "failed": 0,
+      "skipped": 1,
+      "isolated": ["2026-10-17T18:51:21.9261986Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 12/16",
+      "jobId": 117470465712,
+      "conclusion": "failure",
+      "files": 27,
+      "expectedFiles": 27,
+      "tests": 249,
+      "passed": 248,
+      "failed": 1,
+      "skipped": 0,
+      "isolated": [
+        "2026-10-17T20:32:07.5661812Z live4:149 your audio plays to the plate: its strongest pitch rings the modes, re-sorting as the tune moves; play, pause and scrub: passed alone",
+        "2026-10-17T20:32:07.5679827Z 1 failed in this shard; 1 rechecked."
+      ],
+      "failures": [
+        "2026-10-17T20:31:46.1273506Z - `live4:149` your audio plays to the plate: its strongest pitch rings the modes, re-sorting as the tune moves; play, pause and scrub: failed. Error: Timed out waiting for () => window.__fileModes.a"
+      ]
+    },
+    {
+      "name": "Suite 13/16",
+      "jobId": 117470465470,
+      "conclusion": "success",
+      "files": 26,
+      "expectedFiles": 26,
+      "tests": 224,
+      "passed": 224,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T19:10:40.8182409Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 14/16",
+      "jobId": 117470465644,
+      "conclusion": "success",
+      "files": 26,
+      "expectedFiles": 26,
+      "tests": 255,
+      "passed": 255,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T20:09:32.7281485Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 15/16",
+      "jobId": 117470465685,
+      "conclusion": "success",
+      "files": 26,
+      "expectedFiles": 26,
+      "tests": 246,
+      "passed": 246,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T20:11:57.7650146Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    },
+    {
+      "name": "Suite 16/16",
+      "jobId": 117470465541,
+      "conclusion": "success",
+      "files": 26,
+      "expectedFiles": 26,
+      "tests": 168,
+      "passed": 168,
+      "failed": 0,
+      "skipped": 0,
+      "isolated": ["2026-10-17T20:11:43.9770856Z 0 failed in this shard; 0 rechecked."],
+      "failures": []
+    }
+  ],
+  "summaryStatus": "queued",
+  "knownListUnchanged": true,
+  "expectedManualException": "Operator review explicitly defers PDF printing to merge time; man5:201 is not on the current known list."
+}
