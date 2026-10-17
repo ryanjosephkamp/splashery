@@ -80,6 +80,11 @@ export function state(stage) {
       view: view(manager),
       applied: record.applied.get(version),
       sorted: !!manager.world.getState(version)?.sortedBefore,
+      currentToy:
+        manager.world.getState(version)?.splats.some((splat) => splat.node === stage.toy?.entity) ||
+        false,
+      awaitingLod: manager.world.awaitingLodUpdate,
+      pendingLoads: manager.world.pendingLoadCount,
       gpu: manager.renderer.usesGpuSort,
       requests: record.requests,
       responses: record.responses,
@@ -87,10 +92,13 @@ export function state(stage) {
   });
 }
 // Request one fresh native sort for each active manager, then accept a frame
-// only after the current world's order for this exact camera is applied.
+// only after the current toy is in the native world and this camera's order
+// is applied. Preserve both original capture steps: GPU world replacement can
+// still be pending on the first frame even while the previous world is ready.
 export async function captureSortedFrame(stage) {
   const started = performance.now(),
     requested = new Set();
+  let captures = 0;
   for (;;) {
     for (const manager of managers(stage)) {
       observe(manager);
@@ -101,9 +109,18 @@ export async function captureSortedFrame(stage) {
     }
     const canvas = await stage.captureFrame(),
       current = state(stage);
+    captures++;
     if (
-      current.length &&
-      current.every((s) => s.sorted && s.version === s.latest && (s.gpu || s.view === s.applied))
+      captures >= 2 &&
+      current.some((s) => s.currentToy) &&
+      current.every(
+        (s) =>
+          s.sorted &&
+          !s.awaitingLod &&
+          s.pendingLoads === 0 &&
+          s.version === s.latest &&
+          (s.gpu || s.view === s.applied),
+      )
     )
       return canvas;
     if (performance.now() - started > 30000)
