@@ -1,0 +1,443 @@
+import { test, expect } from "@playwright/test";
+import { allPairs, verifyPair, summarizeGraph, buildTracks } from "../src/photos3d/graph.js";
+import { groupLenses, photoSettings } from "../src/photos3d/lenses.js";
+import { solvePhotoGraph } from "../src/photos3d/solve.js";
+import { makeControl, scoreCameras } from "../tools/photos3d-controls.mjs";
+import { PNG } from "pngjs";
+import { matchSift } from "../vendor/splatjs/src/sfm/sift.js";
+import { polygonMask, scoreHeldOut, browserRound2 } from "../tools/photos3d-evaluate.mjs";
+import jpeg from "jpeg-js";
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import { createHash } from "node:crypto";
+import { jsonSnapshot } from "../tools/photos3d-probe.mjs";
+import { execFileSync } from "node:child_process";
+
+test("evaluation identities belong to the bytes loaded before a run, including interruption", async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "photos3d-mask-"));
+  try {
+    const file = path.join(dir, "mask.json");
+    const bytes = '{"revision":1}\n';
+    const hash = createHash("sha256").update(bytes).digest("hex");
+    await fs.writeFile(file, bytes);
+    const loaded = await jsonSnapshot(file, hash);
+    await fs.writeFile(file, '{"revision":2}\n');
+    expect(loaded).toEqual({ value: { revision: 1 }, sha256: hash });
+    await expect(jsonSnapshot(file, hash)).rejects.toThrow("frozen hash");
+    expect(await jsonSnapshot(null)).toEqual({ value: null, sha256: null });
+  } finally {
+    await fs.rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("pre-browser rejection preserves loaded photo and annotation identities", async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "photos3d-rejection-"));
+  try {
+    const png = PNG.sync.write(new PNG({ width: 16, height: 16 }));
+    for (let i = 0; i < 8; i++) await fs.writeFile(path.join(dir, `${i}.png`), png);
+    const masks = path.join(dir, "masks.json");
+    const output = path.join(dir, "result.json");
+    const bytes = '{"photos":{}}\n';
+    await fs.writeFile(masks, bytes);
+    expect(() =>
+      execFileSync(process.execPath, [
+        "tools/photos3d-probe.mjs",
+        "--round2",
+        `--input=${dir}`,
+        `--masks=${masks}`,
+        `--out=${output}`,
+      ]),
+    ).toThrow();
+    const row = JSON.parse(await fs.readFile(output, "utf8"));
+    expect(row.error.message).toContain("mask identities differ");
+    expect(row.sources).toHaveLength(8);
+    expect(row.maskSha256).toBe(createHash("sha256").update(bytes).digest("hex"));
+  } finally {
+    await fs.rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("masked metrics score object pixels, exclude holes, and distinguish a changed held-out render", () => {
+  const width = 28,
+    height = 28;
+  const annotation = {
+    polygons: [
+      [
+        [0, 0],
+        [1, 0],
+        [1, 1],
+        [0, 1],
+      ],
+    ],
+    holes: [
+      [
+        [0, 0],
+        [0.25, 0],
+        [0.25, 1],
+        [0, 1],
+      ],
+    ],
+  };
+  const mask = polygonMask(width, height, annotation);
+  expect(mask.reduce((a, b) => a + b, 0)).toBe(21 * 28);
+  const frame = { tw: width, th: height, rgb: new Float32Array(width * height * 3).fill(0.5) };
+  const rendered = new Uint8ClampedArray(width * height * 4).fill(128);
+  for (let i = 0; i < width * height; i++) {
+    rendered[i * 4 + 3] = 255;
+    if (!mask[i]) rendered[i * 4] = 0;
+  }
+  const exact = scoreHeldOut(frame, rendered, annotation);
+  expect(exact.exactMatch).toBe(true);
+  expect(exact.ssim).toBe(1);
+  rendered.fill(0);
+  const changed = scoreHeldOut(frame, rendered, annotation);
+  expect(changed.ssim).toBeLessThan(0.1);
+  expect(changed.psnr).toBeGreaterThan(0);
+  expect(changed.psnr).toBeLessThan(10);
+});
+
+test("every unordered pair is proposed at 8, 24, and 60 photos", () => {
+  for (const n of [8, 24, 60]) {
+    const pairs = allPairs(n);
+    expect(pairs).toHaveLength((n * (n - 1)) / 2);
+    expect(new Set(pairs.map(([i, j]) => `${i}:${j}`)).size).toBe(pairs.length);
+  }
+  expect(() => allPairs(7)).toThrow();
+  expect(() => allPairs(61)).toThrow();
+  expect(photoSettings("phone").featureSide).toBe(960);
+  expect(photoSettings("high").featureSide).toBe(1600);
+  expect(photoSettings("high", 1280).featureSide).toBe(1280);
+  expect(() => photoSettings("phone", 480)).toThrow();
+});
+
+test("lens selection rejects outliers and incomplete EXIF independent of input order", () => {
+  const frames = Array.from({ length: 12 }, (_, i) => ({
+    name: `p${i}`,
+    fw: 960,
+    fh: 720,
+    exif: { f35: i < 8 ? 28 : 56, model: "camera" },
+  }));
+  frames.push({ name: "missing", fw: 720, fh: 960 });
+  const rows = groupLenses(frames);
+  expect(rows.filter((r) => r.accepted)).toHaveLength(8);
+  expect(rows.find((r) => r.name === "p9").reason).toMatch(/Different camera or focal/);
+  expect(rows.at(-1).reason).toMatch(/Missing/);
+  const byName = (r) => r.sort((a, b) => a.name.localeCompare(b.name)).map(({ index, ...v }) => v);
+  expect(byName(groupLenses([...frames].reverse()))).toEqual(byName(rows));
+  expect(groupLenses([frames.at(-1)])[0].accepted).toBe(false);
+  expect(groupLenses([frames.at(-1)], { assumeSingleLens: true })[0].source).toMatch(/assumption/);
+  const physical = frames.map((f, i) => ({
+    ...f,
+    exif: { fmm: i < 8 ? 55 : 24, model: "camera" },
+  }));
+  expect(groupLenses(physical, { focal35: 85 }).filter((r) => r.accepted)).toHaveLength(8);
+  expect(groupLenses(physical, { assumeSingleLens: true }).filter((r) => r.accepted)).toHaveLength(
+    8,
+  );
+  expect(
+    groupLenses([{ ...frames[0], exif: { f35: Infinity } }], { assumeSingleLens: true })[0].reason,
+  ).toMatch(/Invalid/);
+});
+
+test("real JPEG decoding honors EXIF orientation and reads the per-photo focal", async ({
+  page,
+}) => {
+  const tiff = Buffer.alloc(56);
+  tiff.write("II");
+  tiff.writeUInt16LE(42, 2);
+  tiff.writeUInt32LE(8, 4);
+  tiff.writeUInt16LE(2, 8);
+  tiff.writeUInt16LE(0x112, 10);
+  tiff.writeUInt16LE(3, 12);
+  tiff.writeUInt32LE(1, 14);
+  tiff.writeUInt16LE(6, 18);
+  tiff.writeUInt16LE(0x8769, 22);
+  tiff.writeUInt16LE(4, 24);
+  tiff.writeUInt32LE(1, 26);
+  tiff.writeUInt32LE(38, 30);
+  tiff.writeUInt16LE(1, 38);
+  tiff.writeUInt16LE(0xa405, 40);
+  tiff.writeUInt16LE(3, 42);
+  tiff.writeUInt32LE(1, 44);
+  tiff.writeUInt16LE(28, 48);
+  const encoded = jpeg.encode(
+    {
+      width: 32,
+      height: 16,
+      data: Buffer.alloc(32 * 16 * 4, 255),
+      exifBuffer: Buffer.concat([Buffer.from("Exif\0\0"), tiff]),
+    },
+    80,
+  ).data;
+  await page.goto("/");
+  const result = await page.evaluate(async (bytes) => {
+    const { decodeFrames } = await import("/vendor/splatjs/src/io/frames.js");
+    const frames = await decodeFrames(
+      [new File([new Uint8Array(bytes)], "oriented.jpg", { type: "image/jpeg" })],
+      { featMaxDim: 960, trainMaxDim: 320 },
+    );
+    return frames.map(({ fw, fh, exif }) => ({ fw, fh, exif }));
+  }, Array.from(encoded));
+  expect(result).toHaveLength(1);
+  expect(result[0]).toMatchObject({ fw: 16, fh: 32, exif: { f35: 28 } });
+});
+
+test("graph diagnostics include isolated components and track conflicts cannot merge identities", () => {
+  const frames = Array.from({ length: 8 }, (_, i) => ({ name: `p${i}` }));
+  const features = frames.map(() => ({ n: 50 }));
+  const edges = [
+    {
+      i: 0,
+      j: 1,
+      accepted: true,
+      raw: 30,
+      inliers: 30,
+      matches: [
+        [0, 0],
+        [1, 1],
+      ],
+    },
+    {
+      i: 1,
+      j: 2,
+      accepted: true,
+      raw: 30,
+      inliers: 30,
+      matches: [
+        [0, 0],
+        [1, 0],
+      ],
+    },
+  ];
+  const graph = summarizeGraph(frames, features, edges, new Set([0]));
+  expect(graph.components).toEqual([["p0", "p1", "p2"], ["p3"], ["p4"], ["p5"], ["p6"], ["p7"]]);
+  expect(graph.photos[0].registered).toBe(true);
+  expect(graph.photos[3].reason).toMatch(/No geometrically verified/);
+  expect(buildTracks(features, edges)).toEqual([]);
+});
+
+test("photo geometry recovers a calibrated orbit with per-photo focal lengths", async () => {
+  const control = makeControl({ count: 24, mixedFocal: true });
+  const K = control.truth.map((c) => ({ f: c.f, cx: 240, cy: 180 }));
+  const edges = allPairs(24).map(([i, j]) =>
+    verifyPair(
+      i,
+      j,
+      matchSift(
+        control.feats[i].desc,
+        control.feats[i].n,
+        control.feats[j].desc,
+        control.feats[j].n,
+      ),
+      control.feats,
+      K,
+    ),
+  );
+  const result = await solvePhotoGraph(control.images, control.feats, edges, K);
+  const score = scoreCameras(result.cams, control.truth, control.sceneSize);
+  expect(score.registered).toBe(24);
+  expect(score.rotationDegMedian).toBeLessThan(2);
+  expect(score.positionFractionMedian).toBeLessThan(0.02);
+});
+
+test("browser photo API keeps picker order out of graph results and reports every blank photo", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const png = new PNG({ width: 32, height: 32 });
+  png.data.fill(255);
+  const bytes = Array.from(PNG.sync.write(png));
+  const result = await page.evaluate(async (bytes) => {
+    const { solvePhotos } = await import("/src/photos3d/run.js");
+    const files = Array.from(
+      { length: 8 },
+      (_, i) => new File([new Uint8Array(bytes)], `blank-${i}.png`, { type: "image/png" }),
+    );
+    const options = { assumeSingleLens: true, cpuMatching: true, workers: 2 };
+    const a = await solvePhotos(files, options);
+    const b = await solvePhotos([...files].reverse(), options);
+    const cancel = new AbortController();
+    cancel.abort();
+    let aborted;
+    try {
+      await solvePhotos(files, { ...options, signal: cancel.signal });
+    } catch (e) {
+      aborted = e.name;
+    }
+    return { a: a.graph, b: b.graph, error: a.error, aborted, recon: a.recon };
+  }, bytes);
+  expect(result.a).toEqual(result.b);
+  expect(result.a.pairs).toBe(28);
+  expect(result.a.photos.every((p) => !p.registered && p.reason)).toBe(true);
+  expect(result.error).toMatch(/No geometrically verified/);
+  expect(result.recon).toBeNull();
+  expect(result.aborted).toBe("AbortError");
+});
+
+test("parallel CPU matching preserves the calibrated all-pair graph", async ({ page }) => {
+  await page.goto("/");
+  const result = await page.evaluate(async () => {
+    const { makeControl } = await import("/tools/photos3d-controls.mjs");
+    const { matchGraph } = await import("/src/photos3d/graph.js");
+    const c = makeControl({ count: 8 });
+    const K = c.truth.map((p) => ({ f: p.f, cx: 240, cy: 180 }));
+    const sequential = await matchGraph(c.images, c.feats, K, { workers: 0 });
+    const parallel = await matchGraph(c.images, c.feats, K, { workers: 2 });
+    return {
+      equal: JSON.stringify(sequential) === JSON.stringify(parallel),
+      accepted: parallel.filter((e) => e.accepted).length,
+    };
+  });
+  expect(result.equal).toBe(true);
+  expect(result.accepted).toBe(28);
+});
+
+test("a total browser solve failure emits a held-out failure for every selected photo", async ({
+  page,
+}) => {
+  await page.route("**/photos3d-round2-test.html", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: '<input type="file" multiple><canvas></canvas>',
+    }),
+  );
+  await page.goto("/photos3d-round2-test.html");
+  const png = new PNG({ width: 32, height: 32 });
+  png.data.fill(255);
+  const buffer = PNG.sync.write(png);
+  await page.setInputFiles(
+    "input",
+    Array.from({ length: 8 }, (_, i) => ({
+      name: `blank-${i}.png`,
+      mimeType: "image/png",
+      buffer,
+    })),
+  );
+  const row = await page.evaluate(browserRound2, {
+    profile: "phone",
+    cpuMatching: true,
+    assumeSingleLens: true,
+    iterations: 2,
+    folds: "all",
+    timeoutMs: 30000,
+  });
+  expect(row.foldCounts).toEqual({
+    planned: 8,
+    complete: 0,
+    failed: 0,
+    unregistered: 8,
+    unfinished: 0,
+  });
+  expect(row.folds.every((f) => f.status === "unregistered" && f.reason)).toBe(true);
+  expect(row.folds.map((f) => f.heldOut)).toEqual(
+    Array.from({ length: 8 }, (_, i) => `blank-${i}.png`),
+  );
+});
+
+test("held-out RGB and masks cannot affect sparse/surface seeds, uploaded targets, or trained parameters", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const result = await page.evaluate(async () => {
+    const { makeControl } = await import("/tools/photos3d-controls.mjs");
+    const { seedPhotos } = await import("/src/photos3d/run.js");
+    const { appearanceFold } = await import("/src/photos3d/appearance.js");
+    const { readRenderedPixels } = await import("/tools/photos3d-evaluate.mjs");
+    const control = makeControl({ count: 8 });
+    const frames = control.images.map((f, i) => ({
+      ...f,
+      tw: 32,
+      th: 24,
+      sharpness: 1,
+      rgb: new Float32Array(32 * 24 * 3).fill(0.3 + i / 100),
+      sampleColor: () => [0.5, 0.5, 0.5],
+    }));
+    const cams = control.truth.map((c, imgIdx) => ({ ...c, imgIdx, cx: 240, cy: 180 }));
+    // Exact geometry only: appearance exclusion is the subject of this test.
+    const tracks = Array.from({ length: 140 }, (_, feat) => ({ feat }));
+    const { triangulateN } = await import("/vendor/splatjs/src/sfm/geometry.js");
+    for (const track of tracks) {
+      track.obs = cams.map((_, img) => ({ img, feat: track.feat }));
+      track.X = triangulateN(
+        cams,
+        track.obs.map((o) => [
+          (control.feats[o.img].x[o.feat] - 240) / 420,
+          (control.feats[o.img].y[o.feat] - 180) / 420,
+        ]),
+      );
+    }
+    const solution = {
+      settings: { profile: "phone" },
+      frames,
+      recon: { cams, tracks, features: control.feats },
+    };
+    const run = async (color) => {
+      frames[0] = { ...frames[0], rgb: new Float32Array(32 * 24 * 3).fill(color) };
+      Object.defineProperty(frames[0], "alpha", {
+        get: () => {
+          throw new Error("Held-out mask read");
+        },
+      });
+      frames[0].sampleColor = () => {
+        throw new Error("Held-out color sampled");
+      };
+      const fold = appearanceFold(solution, [frames[0].name]);
+      const trained = await seedPhotos(solution, {
+        heldOut: [frames[0].name],
+        software: true,
+        seed: 128,
+        iterations: 2,
+      });
+      const { session } = trained;
+      try {
+        if (session.trainer.holdout !== -1 || session.trainer.excluded.size)
+          throw new Error("Unexpected extra training exclusions");
+        const seed = Array.from(session.model.data);
+        session.trainer.stepOnce();
+        session.trainer.stepOnce();
+        await session.trainer.device.queue.onSubmittedWorkDone();
+        const params = Array.from((await session.trainer.readGaussians()).data);
+        const canvas = document.createElement("canvas");
+        canvas.width = 32;
+        canvas.height = 24;
+        const ctx = canvas.getContext("webgpu");
+        ctx.configure({
+          device: session.trainer.device,
+          format: navigator.gpu.getPreferredCanvasFormat(),
+          alphaMode: "opaque",
+        });
+        session.trainer.renderTrainCam(0, ctx);
+        const pixels = await readRenderedPixels(session.trainer, 32, 24);
+        return {
+          seed,
+          params,
+          surface: trained.surfacePoints,
+          sparse: fold.recon.points,
+          uploaded: session.frames.map((f) => f.name),
+          renderedMax: Math.max(...pixels.filter((_, i) => i % 4 !== 3)),
+        };
+      } finally {
+        session.dispose();
+      }
+    };
+    const a = await run(0),
+      b = await run(1);
+    return {
+      seedEqual: JSON.stringify(a.seed) === JSON.stringify(b.seed),
+      sparseEqual: JSON.stringify(a.sparse) === JSON.stringify(b.sparse),
+      surface: [a.surface, b.surface],
+      maxChange: Math.max(...a.params.map((v, i) => Math.abs(v - b.params[i]))),
+      uploaded: a.uploaded,
+      renderedMax: a.renderedMax,
+    };
+  });
+  expect(result.seedEqual).toBe(true);
+  expect(result.sparseEqual).toBe(true);
+  expect(result.surface[0]).toBeGreaterThan(0);
+  expect(result.surface[0]).toBe(result.surface[1]);
+  expect(result.maxChange).toBeLessThan(1e-6);
+  expect(result.uploaded).toHaveLength(7);
+  expect(result.uploaded).not.toContain("control-0");
+  expect(result.renderedMax).toBeGreaterThan(0);
+});

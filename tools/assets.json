@@ -12809,5 +12809,3321 @@
       "sourceNote": "Original procedural specimen, from a concept by Ryan Kamp. Math read from claude/portfolio-ref at 5191138bdf91c29093af1c6b02a466c6b8ac6aa6:ref/portfolio/specimen/specimen.js; no reference files, fonts, or renderer copied.",
       "changes": "Procedural geometry ported onto the Kit; 32,768 visible leaves on desktops and most phones (8,192 on the low profile); moment-matched focus levels. Lane NR1: textbook stain colors on a lit slide (2,048 of the leaves on desktop, 512 on the phone). Thumbnail rendered with tools/make-thumbs.mjs."
     }
+  ],
+  "photos3dBenchmarks": [
+    {
+      "id": "alicevision-buddha-24",
+      "revision": "9067f679eb5a772c3e818b7a12dc35882c071858",
+      "source": "https://github.com/alicevision/dataset_buddha",
+      "author": "Simone Gasparini, Fabien Castan, and Yann Lanthony",
+      "license": "CC-BY-4.0",
+      "checked": "October 17, 2026",
+      "changes": "24 of 67 original PNG photographs, evenly sampled by filename; unmodified files.",
+      "files": [
+        {
+          "name": "00001._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00001._c.png",
+          "bytes": 4455150,
+          "sha256": "0df6128a932b6df17e6c39a9bdbdbea1e0b3fe562a6d98d48ddd757fa1bbdad6"
+        },
+        {
+          "name": "00004._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00004._c.png",
+          "bytes": 4258717,
+          "sha256": "5aa0ff6649153216ed3c12132e75362ae0769295839b880078faefa3b9da0e0c"
+        },
+        {
+          "name": "00007._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00007._c.png",
+          "bytes": 4139965,
+          "sha256": "5dcd5ccc571520ab8cedc156be859f44279cfb16786af6083d0df6b190fc912c"
+        },
+        {
+          "name": "00010._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00010._c.png",
+          "bytes": 4108155,
+          "sha256": "2affef598f9965e4cfcb17e531d7bd29bb344566518920aad23d38275c247d33"
+        },
+        {
+          "name": "00012._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00012._c.png",
+          "bytes": 4348594,
+          "sha256": "416e4a7469be3dc929ec73f9d6f3ba849db257f48f370bada1976b68335d4688"
+        },
+        {
+          "name": "00015._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00015._c.png",
+          "bytes": 4531455,
+          "sha256": "51494fb83ae4512ff5391a02d419f618218b5a85c4570f0421e90993715b1309"
+        },
+        {
+          "name": "00018._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00018._c.png",
+          "bytes": 4076482,
+          "sha256": "c85ab8f07d65d6f91fd53eef05de196ac056529ce5f3ce448e725c96dde64ad0"
+        },
+        {
+          "name": "00021._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00021._c.png",
+          "bytes": 4548506,
+          "sha256": "bc4a14187b8efd21b04b2d01a37bb5fd17ef1eb6e64a22da0d7ba524f95354f0"
+        },
+        {
+          "name": "00024._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00024._c.png",
+          "bytes": 4523505,
+          "sha256": "83f2613680d7eb2ed7a2f9b2aed5cd68ee41be676754e6c93c518d7592c78c27"
+        },
+        {
+          "name": "00027._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00027._c.png",
+          "bytes": 4471967,
+          "sha256": "323aafb8490b5721acce9e77e3a7942f6c4b69b0f635ce58740929b571109e3b"
+        },
+        {
+          "name": "00030._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00030._c.png",
+          "bytes": 4214871,
+          "sha256": "06ae851a6c175844e756139d16b149615a3caf88835f4f4dff482ae04918b378"
+        },
+        {
+          "name": "00033._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00033._c.png",
+          "bytes": 4431697,
+          "sha256": "c6222bccfba9b3f75fea4e67807c3a7b82de02addcb572d11adca09718dc4b38"
+        },
+        {
+          "name": "00035._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00035._c.png",
+          "bytes": 4371297,
+          "sha256": "ed96437216b05870b7109bb4d33ed98c3aad7988b6368554973a04b7de0ce2c1"
+        },
+        {
+          "name": "00038._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00038._c.png",
+          "bytes": 4300612,
+          "sha256": "ec67014cb27c4cec8a38bfef7b6d260c2755f46eaad62625c0616eb91587dc75"
+        },
+        {
+          "name": "00041._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00041._c.png",
+          "bytes": 4606701,
+          "sha256": "549fd0c95b8672178b5318c9a7a3c38019d90e24ac752754008c02b65fb485ea"
+        },
+        {
+          "name": "00044._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00044._c.png",
+          "bytes": 4511592,
+          "sha256": "53911b3617cd2ede9477dd1d25cd94e7808ddf6d49f04f19c0e21e0ad1ece9bb"
+        },
+        {
+          "name": "00047._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00047._c.png",
+          "bytes": 4164575,
+          "sha256": "7e57f92760c0dfc83f2b3f8953c412ce5df8fc551d55a90cb9c8442095891693"
+        },
+        {
+          "name": "00050._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00050._c.png",
+          "bytes": 4660668,
+          "sha256": "ca729ca86f647e506c58411cefdf06b94f675310a20a0cdcb3b84f9e3dcbc9b9"
+        },
+        {
+          "name": "00053._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00053._c.png",
+          "bytes": 4351942,
+          "sha256": "881ee0851f4b695fe38a8094932d7a870f5a4d79a6becc1d104203f2ec76d3d0"
+        },
+        {
+          "name": "00056._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00056._c.png",
+          "bytes": 4218495,
+          "sha256": "4bdc44032cddbf2ce67ff4406efab72c233ea15e99b40bded66ff02880310f15"
+        },
+        {
+          "name": "00058._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00058._c.png",
+          "bytes": 4292256,
+          "sha256": "02cebdfd060f72526f114b0ecb2c94d884066e96202d1491417398f1f93683c5"
+        },
+        {
+          "name": "00061._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00061._c.png",
+          "bytes": 4514673,
+          "sha256": "0c0e1bf545167da3aca5f38abbc60fe14edb7ea52813e52ef3b90acb48c8abef"
+        },
+        {
+          "name": "00064._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00064._c.png",
+          "bytes": 4264321,
+          "sha256": "185d76fb783b323396cef8c2687d8f6418bad28e3d8ef1563dd1190516e1eef8"
+        },
+        {
+          "name": "00067._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00067._c.png",
+          "bytes": 4816971,
+          "sha256": "d4330caf9cdf5f5414d847d24616df7025cfeaf7417bf6c0f5ebea0a899da8d1"
+        }
+      ],
+      "shipped": false,
+      "scope": "External task 104 diagnostic input; photos are not committed. One object capture, not six sets.",
+      "licenseSource": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/LICENSE.md",
+      "evaluationMasks": {
+        "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+        "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+        "sha256": "7c60a58c0afb032a2a82e18c76f256aba84dbe3bacbff41fd7d86ff35470b51b",
+        "annotationSide": 320,
+        "erosionPixels": 2,
+        "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+      }
+    },
+    {
+      "id": "alicevision-buddha-60",
+      "revision": "9067f679eb5a772c3e818b7a12dc35882c071858",
+      "source": "https://github.com/alicevision/dataset_buddha",
+      "author": "Simone Gasparini, Fabien Castan, and Yann Lanthony",
+      "license": "CC-BY-4.0",
+      "checked": "October 17, 2026",
+      "changes": "60 of 67 unmodified original PNGs, evenly sampled by sorted index round(i*66/59)+1. Frozen before round-two solving.",
+      "files": [
+        {
+          "name": "00001._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00001._c.png",
+          "bytes": 4455150,
+          "sha256": "0df6128a932b6df17e6c39a9bdbdbea1e0b3fe562a6d98d48ddd757fa1bbdad6"
+        },
+        {
+          "name": "00002._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00002._c.png",
+          "bytes": 4245797,
+          "sha256": "79a26b070ac1e704a469ce3ba18d849f44ae7f5e0d6fa3be7c887e1c71a86420"
+        },
+        {
+          "name": "00003._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00003._c.png",
+          "bytes": 4498705,
+          "sha256": "0a9ed2323a2068b181e8c10cd047428b52c1b19fef2b20f564f96530e15a5eab"
+        },
+        {
+          "name": "00004._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00004._c.png",
+          "bytes": 4258717,
+          "sha256": "5aa0ff6649153216ed3c12132e75362ae0769295839b880078faefa3b9da0e0c"
+        },
+        {
+          "name": "00005._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00005._c.png",
+          "bytes": 4264126,
+          "sha256": "b60ac5e058038ce7e7bfcba11ee2c1a59414ddf7dcd10c7485173a016ba2514d"
+        },
+        {
+          "name": "00007._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00007._c.png",
+          "bytes": 4139965,
+          "sha256": "5dcd5ccc571520ab8cedc156be859f44279cfb16786af6083d0df6b190fc912c"
+        },
+        {
+          "name": "00008._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00008._c.png",
+          "bytes": 4314842,
+          "sha256": "b35b2728400ea885baee36789d175e54e128960dcbeae301b854dfa1fe78b088"
+        },
+        {
+          "name": "00009._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00009._c.png",
+          "bytes": 4300359,
+          "sha256": "1b98dd7ebca38849f6ff1b8ccb26972674915a668efe050031cbb7d2555e05c3"
+        },
+        {
+          "name": "00010._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00010._c.png",
+          "bytes": 4108155,
+          "sha256": "2affef598f9965e4cfcb17e531d7bd29bb344566518920aad23d38275c247d33"
+        },
+        {
+          "name": "00011._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00011._c.png",
+          "bytes": 4982304,
+          "sha256": "98a2b4518884707a05b8be6fe907019f4c64feb828a2a052f479c09954ac1dae"
+        },
+        {
+          "name": "00012._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00012._c.png",
+          "bytes": 4348594,
+          "sha256": "416e4a7469be3dc929ec73f9d6f3ba849db257f48f370bada1976b68335d4688"
+        },
+        {
+          "name": "00013._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00013._c.png",
+          "bytes": 4254560,
+          "sha256": "6cbca244883f252083ce2678de3b8fc318eb3b8043d0cb8b9582b0a89ababb9a"
+        },
+        {
+          "name": "00014._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00014._c.png",
+          "bytes": 4394891,
+          "sha256": "e24ca37ac68337c08d11276c466339ef3f265e24e506f8d81bb41ab79a916a1f"
+        },
+        {
+          "name": "00016._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00016._c.png",
+          "bytes": 4378147,
+          "sha256": "210019b6394ec2e40ffa2833b3b456331551262b69b1f11e507dc8c2414e52f2"
+        },
+        {
+          "name": "00017._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00017._c.png",
+          "bytes": 5088398,
+          "sha256": "3b069c1f2ba38f4de1784019ce6861f430b685919a49bb21b40689f996da6d26"
+        },
+        {
+          "name": "00018._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00018._c.png",
+          "bytes": 4076482,
+          "sha256": "c85ab8f07d65d6f91fd53eef05de196ac056529ce5f3ce448e725c96dde64ad0"
+        },
+        {
+          "name": "00019._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00019._c.png",
+          "bytes": 4738508,
+          "sha256": "ac33871a978f008fdc45a38d71a736e32e8112ce8acd4776661f9d247d480494"
+        },
+        {
+          "name": "00020._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00020._c.png",
+          "bytes": 4343857,
+          "sha256": "1d2d3348661d89b26777220dd571f92ad11fdebff2336168dc30bf67f7e71282"
+        },
+        {
+          "name": "00021._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00021._c.png",
+          "bytes": 4548506,
+          "sha256": "bc4a14187b8efd21b04b2d01a37bb5fd17ef1eb6e64a22da0d7ba524f95354f0"
+        },
+        {
+          "name": "00022._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00022._c.png",
+          "bytes": 4583253,
+          "sha256": "69aa1743a6065132184361cec5635606edc42322b69e38b5020af7c2000bdbdd"
+        },
+        {
+          "name": "00023._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00023._c.png",
+          "bytes": 4534427,
+          "sha256": "61e17a69fff6fca5e37327b8e255d978f6ff80c61656f18d21ad68f0cfbec5bf"
+        },
+        {
+          "name": "00024._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00024._c.png",
+          "bytes": 4523505,
+          "sha256": "83f2613680d7eb2ed7a2f9b2aed5cd68ee41be676754e6c93c518d7592c78c27"
+        },
+        {
+          "name": "00026._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00026._c.png",
+          "bytes": 4734475,
+          "sha256": "6ace0fc9d26a56af3ad5c2c41d1daf7055b1fcf3e3b8ff3785a43c02d71a9a7a"
+        },
+        {
+          "name": "00027._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00027._c.png",
+          "bytes": 4471967,
+          "sha256": "323aafb8490b5721acce9e77e3a7942f6c4b69b0f635ce58740929b571109e3b"
+        },
+        {
+          "name": "00028._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00028._c.png",
+          "bytes": 4139246,
+          "sha256": "1e17ed1d931b3fa3e29e05315a9de9beff071048d4413caf7e25bbe98e071215"
+        },
+        {
+          "name": "00029._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00029._c.png",
+          "bytes": 4201267,
+          "sha256": "4494a2949f70fa4b9d7dc0793ce9e0440836fdd5b30a46099d41270647295a27"
+        },
+        {
+          "name": "00030._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00030._c.png",
+          "bytes": 4214871,
+          "sha256": "06ae851a6c175844e756139d16b149615a3caf88835f4f4dff482ae04918b378"
+        },
+        {
+          "name": "00031._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00031._c.png",
+          "bytes": 4291335,
+          "sha256": "a3373e45007879d57f4d78cfdf50e459a75a17649157d33eca1565bbd224fba0"
+        },
+        {
+          "name": "00032._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00032._c.png",
+          "bytes": 4551901,
+          "sha256": "0e2b06b0aa17cef7845849e9c5efc5500b313f207d5029cb7765609ef11629a8"
+        },
+        {
+          "name": "00033._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00033._c.png",
+          "bytes": 4431697,
+          "sha256": "c6222bccfba9b3f75fea4e67807c3a7b82de02addcb572d11adca09718dc4b38"
+        },
+        {
+          "name": "00035._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00035._c.png",
+          "bytes": 4371297,
+          "sha256": "ed96437216b05870b7109bb4d33ed98c3aad7988b6368554973a04b7de0ce2c1"
+        },
+        {
+          "name": "00036._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00036._c.png",
+          "bytes": 4216033,
+          "sha256": "fced5431049135db40b6eaf8a40171f2691e3452a4c3fcacfd32179f09215fd2"
+        },
+        {
+          "name": "00037._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00037._c.png",
+          "bytes": 4402600,
+          "sha256": "af975720691077e4f2141e75b3a76dcbae4a5cc5da15e61f215d0ae3bd258b01"
+        },
+        {
+          "name": "00038._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00038._c.png",
+          "bytes": 4300612,
+          "sha256": "ec67014cb27c4cec8a38bfef7b6d260c2755f46eaad62625c0616eb91587dc75"
+        },
+        {
+          "name": "00039._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00039._c.png",
+          "bytes": 4231103,
+          "sha256": "839459ccdfa1c1ef1f46a438f22eb13681519c040474dfef3113171c403d614a"
+        },
+        {
+          "name": "00040._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00040._c.png",
+          "bytes": 4969158,
+          "sha256": "8f8ed04e5cd2fdadd9ae57f43f4a76d4fd15253a83630371a1b4bd1f27faf141"
+        },
+        {
+          "name": "00041._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00041._c.png",
+          "bytes": 4606701,
+          "sha256": "549fd0c95b8672178b5318c9a7a3c38019d90e24ac752754008c02b65fb485ea"
+        },
+        {
+          "name": "00042._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00042._c.png",
+          "bytes": 4124321,
+          "sha256": "3c24c7333bfbd9fb7667dee97bab4b0caf55df0c718338b72564fc682d52a360"
+        },
+        {
+          "name": "00044._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00044._c.png",
+          "bytes": 4511592,
+          "sha256": "53911b3617cd2ede9477dd1d25cd94e7808ddf6d49f04f19c0e21e0ad1ece9bb"
+        },
+        {
+          "name": "00045._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00045._c.png",
+          "bytes": 4561687,
+          "sha256": "537e0e713fdb954d76bf179bacd37121b8ad590ee27a1ec3395d9c506ec7743d"
+        },
+        {
+          "name": "00046._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00046._c.png",
+          "bytes": 4117906,
+          "sha256": "b294d9f2de749b9ab7862582da05d6ad1ddfb424eaf089d1e048ac65fc8fab3f"
+        },
+        {
+          "name": "00047._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00047._c.png",
+          "bytes": 4164575,
+          "sha256": "7e57f92760c0dfc83f2b3f8953c412ce5df8fc551d55a90cb9c8442095891693"
+        },
+        {
+          "name": "00048._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00048._c.png",
+          "bytes": 4599538,
+          "sha256": "06b581601dd5ae9e8d32f7ede3d5de7900ba846aa370b06f0f9584bd33593c1f"
+        },
+        {
+          "name": "00049._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00049._c.png",
+          "bytes": 4161432,
+          "sha256": "7a33e9afe15e18ae07e921658cdd6587028d3991be439bf66754faeb7f43a08d"
+        },
+        {
+          "name": "00050._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00050._c.png",
+          "bytes": 4660668,
+          "sha256": "ca729ca86f647e506c58411cefdf06b94f675310a20a0cdcb3b84f9e3dcbc9b9"
+        },
+        {
+          "name": "00051._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00051._c.png",
+          "bytes": 4679674,
+          "sha256": "08402616dd521d8fa11351344c45c3a57834b753b859753833e701416ce87032"
+        },
+        {
+          "name": "00052._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00052._c.png",
+          "bytes": 3952525,
+          "sha256": "1d8b68b9f3b1a17ac6736d239ee5e369e745cc7543940a8b364e5fd046433c37"
+        },
+        {
+          "name": "00054._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00054._c.png",
+          "bytes": 4663933,
+          "sha256": "b66416841fb2e7ba56a038d0913c345bb512b0a22f8eaf925313b85b8513937b"
+        },
+        {
+          "name": "00055._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00055._c.png",
+          "bytes": 4088906,
+          "sha256": "d5266845dbbe58326bfcd161efa343fd7675b7bd828a0cae37fd4545c1ded24e"
+        },
+        {
+          "name": "00056._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00056._c.png",
+          "bytes": 4218495,
+          "sha256": "4bdc44032cddbf2ce67ff4406efab72c233ea15e99b40bded66ff02880310f15"
+        },
+        {
+          "name": "00057._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00057._c.png",
+          "bytes": 4466937,
+          "sha256": "7083aa19db3e6e5ded72efb52cb5c08694ccaf06aa6c201887c1cf554e9d4b57"
+        },
+        {
+          "name": "00058._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00058._c.png",
+          "bytes": 4292256,
+          "sha256": "02cebdfd060f72526f114b0ecb2c94d884066e96202d1491417398f1f93683c5"
+        },
+        {
+          "name": "00059._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00059._c.png",
+          "bytes": 4466675,
+          "sha256": "5a74a37c64a66b7f803a33fcd0843b6bc1f6640ba3191ddb2662d8ab2f247162"
+        },
+        {
+          "name": "00060._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00060._c.png",
+          "bytes": 4170885,
+          "sha256": "d48fbc95c3ee9647ee848a2a0c1d88d69b4cb059b1e3eec5e22fc691413c8792"
+        },
+        {
+          "name": "00061._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00061._c.png",
+          "bytes": 4514673,
+          "sha256": "0c0e1bf545167da3aca5f38abbc60fe14edb7ea52813e52ef3b90acb48c8abef"
+        },
+        {
+          "name": "00063._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00063._c.png",
+          "bytes": 4722758,
+          "sha256": "ae8c661e0eb05fd04a670fb394fb102f4aa953e3ea8a614b75fc5628e031ea53"
+        },
+        {
+          "name": "00064._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00064._c.png",
+          "bytes": 4264321,
+          "sha256": "185d76fb783b323396cef8c2687d8f6418bad28e3d8ef1563dd1190516e1eef8"
+        },
+        {
+          "name": "00065._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00065._c.png",
+          "bytes": 3910664,
+          "sha256": "193b8c5074ea1320b634bbb50aa9b1cdb12763967b76f16d9e0233456e9ddb66"
+        },
+        {
+          "name": "00066._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00066._c.png",
+          "bytes": 4422261,
+          "sha256": "9acce5363aee7763d8a527dc9f925d1ff4ba8681ee0be5782d92756e4e611166"
+        },
+        {
+          "name": "00067._c.png",
+          "source": "https://raw.githubusercontent.com/alicevision/dataset_buddha/9067f679eb5a772c3e818b7a12dc35882c071858/buddha/00067._c.png",
+          "bytes": 4816971,
+          "sha256": "d4330caf9cdf5f5414d847d24616df7025cfeaf7417bf6c0f5ebea0a899da8d1"
+        }
+      ],
+      "shipped": false,
+      "scope": "External task 104 round-two diagnostic input; photos are not committed. Same Buddha capture as the 24-photo record, not an additional independent set.",
+      "licenseSource": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/LICENSE.md",
+      "inputCount": 60,
+      "originalCount": 67,
+      "evaluationMasks": {
+        "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+        "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+        "sha256": "f0f73f807acce01897f2f0f818b3efe5a2baf300fe285ebd6fbd6e39b2defc53",
+        "annotationSide": 320,
+        "erosionPixels": 2,
+        "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+      }
+    },
+    {
+      "id": "alansartlog-dice-watercolors-24",
+      "revision": "78e0a887ba5263da66910fb4f4da0d9763e9177a",
+      "source": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors",
+      "author": "alansartlog",
+      "authorSource": "https://alansartlog.com",
+      "license": "CC-BY-4.0",
+      "licenseSource": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/README.md",
+      "checked": "October 17, 2026",
+      "changes": "24 of 33 original JPG photographs, evenly sampled by sorted filename using round(i*(N-1)/23); unmodified files. Selection frozen before solving.",
+      "shipped": false,
+      "scope": "External task 104 round-two diagnostic input; originals are not committed. One independent object capture.",
+      "inputCount": 24,
+      "originalCount": 33,
+      "files": [
+        {
+          "name": "01.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/01.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/01.JPG",
+          "bytes": 2297400,
+          "sha256": "a93a749cb078629a3ea100c67671f31f8eb9ee84251104c87ba494b23f2585e9",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "7901d6bf442dd7342c3ab6f1ee57d3ca1a9d82b1"
+        },
+        {
+          "name": "02.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/02.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/02.JPG",
+          "bytes": 2389469,
+          "sha256": "03eacdcd17cadbcc78bddaa94f0a0f48eb2a117196ec1703e3d6c094a638f8ce",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "5e8489f9166244ea8f63b80afa9a6b198386a43c"
+        },
+        {
+          "name": "04.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/04.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/04.JPG",
+          "bytes": 2304854,
+          "sha256": "2457a06234fd7d3ac36fa329133650eab5bf72f3b5d03b6d92a53ce11df24a69",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "9b13c4c65bbc9c883a8a0c4b62674678b50669db",
+          "retrievalUrl": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/raw/78e0a887ba5263da66910fb4f4da0d9763e9177a/04.JPG"
+        },
+        {
+          "name": "05.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/05.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/05.JPG",
+          "bytes": 2293044,
+          "sha256": "fb19a32b876a7d2c2fb41ba67c18f64e190860c97f39e80e0acb5479af911b80",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "98f3643f4bd686493f7eeafd5069f9571960eb50"
+        },
+        {
+          "name": "07.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/07.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/07.JPG",
+          "bytes": 2372606,
+          "sha256": "2cc2b864f30d650bd2a5e07e4aae09ef6365bdf5ad45b7157dce0e2b84619b16",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "e3d6569d15759fce3fd2206f86c3ce51ec28a3ce"
+        },
+        {
+          "name": "08.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/08.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/08.JPG",
+          "bytes": 2417498,
+          "sha256": "cab04dd0835023b4d4b5c5d2d55117d2d3748f0613d041c838c05a976b021fd9",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "7c6d8c2cd8f947ee35e0d682245fb0b39bcc3a1e"
+        },
+        {
+          "name": "09.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/09.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/09.JPG",
+          "bytes": 2284617,
+          "sha256": "cc328c3e27fe15104bfdeb556db9723cdcc19bd99061c9db9e440e7f2b942755",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "13a912920d0318b41ed3f522beb9c268f8db8efc"
+        },
+        {
+          "name": "11.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/11.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/11.JPG",
+          "bytes": 2390807,
+          "sha256": "8da2dcbcce852dcf0f8c6502d45d9f5987cd33eb491cea1bbfdeb49f4ae822ae",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "7d1991b582d6e09b21cd138b9796cdacda4f813f"
+        },
+        {
+          "name": "12.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/12.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/12.JPG",
+          "bytes": 2300351,
+          "sha256": "1d8d65dd2aae6cd2de3541a76dace9be74afa78bfdff83f9821ed7b1d9caf340",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "f96718368af6202339768a81eefcdd94d36235cb"
+        },
+        {
+          "name": "14.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/14.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/14.JPG",
+          "bytes": 2332334,
+          "sha256": "1d882669f4b977663d58cfc14a1c3c3c6b115f683155cf4221f7d9cbc3ed1270",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "71fbd8c75b63b478258e5064ea132dbb13a0a0e9"
+        },
+        {
+          "name": "15.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/15.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/15.JPG",
+          "bytes": 2380101,
+          "sha256": "45397b12acc547f45d331ac612c56f84a8075b83392df36be3e3cd37bf2731b0",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "7ad91bee9aecc61e7cb82aa7f677ab4970bf4ffb"
+        },
+        {
+          "name": "16.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/16.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/16.JPG",
+          "bytes": 2327284,
+          "sha256": "9ee680f0475bef681760c57e1ecefa82a467176e6c02f6c98a7b68e5a7307e2a",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "ba590539dd3584a96f51567e3d6196184f095930"
+        },
+        {
+          "name": "18.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/18.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/18.JPG",
+          "bytes": 2345922,
+          "sha256": "ad576f67ca55764a7986b5c58b161d5fd1bb133ebf729b6824a1a883abf4fb79",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "348f5956d83d90d458dda0ea8a1427878a065901"
+        },
+        {
+          "name": "19.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/19.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/19.JPG",
+          "bytes": 2439009,
+          "sha256": "1d6f77cd48c1a823946e264398097a1a21d65010b0d34416f45348f5253ae541",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "91e9357bba28e03aba08c063fc8940ff4febbeac"
+        },
+        {
+          "name": "20.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/20.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/20.JPG",
+          "bytes": 2400822,
+          "sha256": "5dfadcc8f597f922b9ec7a2375a1e7025fe720221d3122c2161c34970a464bb0",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "31f1b6e3172e8f19e7bc8d435f16603f72a83b28"
+        },
+        {
+          "name": "22.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/22.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/22.JPG",
+          "bytes": 2423508,
+          "sha256": "e199395b54cc1dbe57ea545dc7923668063cd755cf1281ac60a127c06f466987",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "49127eb18416560e33f8d9916436c4ba372f9ed6"
+        },
+        {
+          "name": "23.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/23.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/23.JPG",
+          "bytes": 2421479,
+          "sha256": "4e2888dc1384918ffd07b71773eb4808d1ffa9caf27c50aa0e0d043e62089195",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "79bb517dfb25554b72f4322ba5f39765a15c4439"
+        },
+        {
+          "name": "25.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/25.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/25.JPG",
+          "bytes": 2365288,
+          "sha256": "d06429a5360f6cfeac3c77adcce289b071f30f2dbf8f1d06d9c8495161231edf",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "6cf9817aef73567278e5e93ea6347f352d7e0fa8"
+        },
+        {
+          "name": "26.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/26.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/26.JPG",
+          "bytes": 2378953,
+          "sha256": "7dd6101d2812e8c1ed92763109a65c85beb83f1f681a7427420fb684a9c6339f",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "5e39323566e14ed82325eda5f7d9d31e2ad8f47c"
+        },
+        {
+          "name": "27.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/27.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/27.JPG",
+          "bytes": 2404463,
+          "sha256": "72dfd2c3383049f20b19ac1dbb0c0405bcfe7698d6473c133066a69436eae1bd",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "67eb96d7b4db728392efb1fd55ed6ea0d679063b"
+        },
+        {
+          "name": "29.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/29.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/29.JPG",
+          "bytes": 2358751,
+          "sha256": "addcc35060b9ee7da89de1c438dfc1425440902e27045a8647ce8cf0ca06c530",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "5832b23616a61da572b6136ead546672cafc7056"
+        },
+        {
+          "name": "30.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/30.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/30.JPG",
+          "bytes": 2292952,
+          "sha256": "a4c444ef90b1b513098c5bd821881ad76a661d4eaf0e1bfeade509bc0f06e4b1",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "48e2f28ace4eb4970012c61404f120e6abd19b62"
+        },
+        {
+          "name": "32.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/32.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/32.JPG",
+          "bytes": 2405809,
+          "sha256": "904cc9344ce81809c53f73660a2cfdff8e6c980c0ca3e94f7433ae3883236a04",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "16400aebdaa463fc236cec7831bea5ef186e2330"
+        },
+        {
+          "name": "33.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8723847/repository/files/33.JPG/raw?ref=78e0a887ba5263da66910fb4f4da0d9763e9177a",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/dice-turntable-strong-lights-heavily-textured-w-watercolors/-/blob/78e0a887ba5263da66910fb4f4da0d9763e9177a/33.JPG",
+          "bytes": 2453882,
+          "sha256": "c102ee0d82b17ec5718289acbb26cb2d52372b614fffa66f46fef2e1b3398970",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "a9d0ad8f535bca22168001f8b8d6b6d7e69d6a07"
+        }
+      ],
+      "attribution": "\"Photogrammetry Test Set: Dice - Turntable - Strong Lights - Heavily Textured w Watercolors\" by alansartlog / CC BY 4.0",
+      "perImageAttributionNote": "Append # [image number] to the title when attributing individual images, as requested by the source README.",
+      "evaluationMasks": {
+        "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+        "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+        "sha256": "03613e67a47a53422e0d333182ce83561dca0860e7013e372400705e2da3fb3c",
+        "annotationSide": 320,
+        "erosionPixels": 2,
+        "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+      }
+    },
+    {
+      "id": "alansartlog-skull-flash-24",
+      "revision": "0f31c229ac289a615b3ae981a5f584856bb24c47",
+      "source": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background",
+      "author": "alansartlog",
+      "authorSource": "https://alansartlog.com",
+      "license": "CC-BY-4.0",
+      "licenseSource": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/README.md",
+      "checked": "October 17, 2026",
+      "changes": "24 of 66 original JPG photographs, evenly sampled by sorted filename using round(i*(N-1)/23); unmodified files. Selection frozen before solving.",
+      "shipped": false,
+      "scope": "External task 104 round-two diagnostic input; originals are not committed. One independent object capture.",
+      "inputCount": 24,
+      "originalCount": 66,
+      "files": [
+        {
+          "name": "01.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/01.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/01.JPG",
+          "bytes": 3079602,
+          "sha256": "49cc69b7e2e8999252c71536cc5a8a0ee32ae25d56d896969542653fa93e4858",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "c47e25bb6d5f730e063a0fa5db1ed2a7f246e277"
+        },
+        {
+          "name": "04.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/04.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/04.JPG",
+          "bytes": 3530007,
+          "sha256": "53b65d52600e6afa41a25c433b81501ae11248df690abff828c48c97e2c428e5",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "93f9f4e8d45e09bf84990bde120dd1c3daf8d71b"
+        },
+        {
+          "name": "07.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/07.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/07.JPG",
+          "bytes": 3094545,
+          "sha256": "cef6c51017e11d2c35f359f80920a28d866c6bc7d1d4f6e876e1718a328ec79c",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "782dad342298198bfb4917f327f17dc5877de6ab"
+        },
+        {
+          "name": "09.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/09.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/09.JPG",
+          "bytes": 3202240,
+          "sha256": "6190f02734af4cd137426afba19352d2c3b412e4016ec844eae61c882e341eb4",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "105d119cd8463160cbfb1dc108578e48a6131173"
+        },
+        {
+          "name": "12.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/12.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/12.JPG",
+          "bytes": 3138412,
+          "sha256": "f771973ad8f3092d6e869d29c4cb88a0ad67d30c6cf03dfe9dce70c98cdd9bb1",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "2e25ca91393681bc19a90b2cae8f0be807b28c76"
+        },
+        {
+          "name": "15.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/15.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/15.JPG",
+          "bytes": 3268609,
+          "sha256": "3366c2efb3f7b70114b94792b9c6b85141b4631111f8bb0f447d370ca0fb098f",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "a639b7d0c9631d03f3a8f115139f9cc2fe96c242"
+        },
+        {
+          "name": "18.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/18.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/18.JPG",
+          "bytes": 2836679,
+          "sha256": "cb3a6b49cec60b0a6b3cbae366617ad9f5634eb26edec6539d7d0f5b8d0889a7",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "bdc227f661d6d74fd5d7bb6d5a869145b4c1e93c"
+        },
+        {
+          "name": "21.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/21.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/21.JPG",
+          "bytes": 2990476,
+          "sha256": "4340e1cf8a235d56f2f20bc13e88c7d6454a5da505d22afa7b8660744875008c",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "45cf0527928ea897e338a2189d8a0c4ac04c6c23"
+        },
+        {
+          "name": "24.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/24.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/24.JPG",
+          "bytes": 2764483,
+          "sha256": "c59e45a60f9fabae4948a092a63860ce44ce163dd35ec30124bc45bb0d732498",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "cc8acd2445f4175c24c187bd019f464c1f2950b8"
+        },
+        {
+          "name": "26.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/26.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/26.JPG",
+          "bytes": 2615703,
+          "sha256": "9386ef84071867cb1752224b1e00a9780534a96d439bf944c815c5774973f456",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "4ec18070f7fec3b89f490ac4120d891d37a65a6f"
+        },
+        {
+          "name": "29.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/29.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/29.JPG",
+          "bytes": 2706318,
+          "sha256": "246e892d23dbaf7f3c2435e590cdb5dcdacaafea90e1d9241d503d98bde7d90a",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "f2ca0dc686e534c2b8682c31454303609b3f843d"
+        },
+        {
+          "name": "32.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/32.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/32.JPG",
+          "bytes": 2923706,
+          "sha256": "49020b694293567d2a82e0d8fbf3642d5e8a504dbb9ee0914a524c5365b50cb6",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "7a5adbc696d2dfcd449ea3c5d2fe6eb1969bc994"
+        },
+        {
+          "name": "35.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/35.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/35.JPG",
+          "bytes": 2865058,
+          "sha256": "9a47a124923456410b888e173826b1ade8d9962f0d0f450405e7b62e4e7d29d2",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "5bf3eecb848c362b3f679a9a11134641d2b4822d"
+        },
+        {
+          "name": "38.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/38.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/38.JPG",
+          "bytes": 2764047,
+          "sha256": "e9921846a892090a8ce5470a2a1075e8feb0a1a0514738b0a7621d70788204d3",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "613cba62f49a6099b4ce8b73436dd11d6e9928c3"
+        },
+        {
+          "name": "41.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/41.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/41.JPG",
+          "bytes": 2721387,
+          "sha256": "2a036eada33dd9d51d33a86ca5a4d79827fdee88680d0a6b8021cf7ff07b36d9",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "740fb679ee470d8418219561f790b79293e3553d"
+        },
+        {
+          "name": "43.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/43.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/43.JPG",
+          "bytes": 2450722,
+          "sha256": "b68a1b30c40ba5cf33aeb4b9f9e88aca976035bdb68f0a583749b535ea18ee1b",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "489cde78b198a12704d38b0324f211ae03d3f194"
+        },
+        {
+          "name": "46.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/46.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/46.JPG",
+          "bytes": 2659302,
+          "sha256": "1dd8a96ae656ecd65d23efd76b20fc7cf25873b911fb44d95c3a7e10644577e5",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "49bec9065fdbfe317f4a99fe835d7e98696dc7e7"
+        },
+        {
+          "name": "49.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/49.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/49.JPG",
+          "bytes": 2712673,
+          "sha256": "a5998ce3427fed73ef77a958dc114332991e982b8197ab49d01b5523136db04f",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "c064f22df8dfc196b2eb3b71b991dfdb3047bac6"
+        },
+        {
+          "name": "52.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/52.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/52.JPG",
+          "bytes": 2766849,
+          "sha256": "0dda7ba94ab17f28d05f52e7dba684469340aecf08d49e00ea186f7d3ca335e0",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "01cf9cedf9505bd0dcc7ede48ee20db7aeb70cca"
+        },
+        {
+          "name": "55.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/55.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/55.JPG",
+          "bytes": 3209497,
+          "sha256": "4fbb55876ff33f2cb8dd1ffd1e3f7163adbeb7b8736f779965cbaa2118d648a1",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "41f67b86c29dd78b1a00796e57fdaa2c7664dbcd"
+        },
+        {
+          "name": "58.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/58.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/58.JPG",
+          "bytes": 3239559,
+          "sha256": "c87f1cb3da38bb34a3bf0281818372e019eeaf83cc60e815eb2adce425823045",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "bcfb00e9ea5166a839fb06d9a24187b279ab78b8"
+        },
+        {
+          "name": "60.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/60.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/60.JPG",
+          "bytes": 3240947,
+          "sha256": "1f8569b45c4107746c50ac1613b7d20a8860e667816cb2e94c905820df9bdd3f",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "bb5f8ef5a9862abf65dfffbaca8280e5d8fd5cde"
+        },
+        {
+          "name": "63.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/63.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/63.JPG",
+          "bytes": 3115741,
+          "sha256": "3a2e0699dfe0059c43b143cdb8f60d7180d2038f156d5a2a8a01bdce6f9e22f9",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "c93c1084a962dc7a52aacc30248b315c3f45b78b"
+        },
+        {
+          "name": "66.JPG",
+          "source": "https://gitlab.com/api/v4/projects/8724498/repository/files/66.JPG/raw?ref=0f31c229ac289a615b3ae981a5f584856bb24c47",
+          "sourcePage": "https://gitlab.com/photogrammetry-test-sets/skull-cameramoves-flash-no-background/-/blob/0f31c229ac289a615b3ae981a5f584856bb24c47/66.JPG",
+          "bytes": 3155886,
+          "sha256": "f39b97ee5326bcac52b63158630f8854791e1f6022a22797dc38133815ad113f",
+          "width": 4272,
+          "height": 2848,
+          "gitBlobSha1": "4a6c2dbb695c535202d79cd11bd90ef0a536887e"
+        }
+      ],
+      "attribution": "\"Photogrammetry Test Set: Skull - Cameramoves - Flash - No Background\" by alansartlog / CC BY 4.0",
+      "perImageAttributionNote": "Append # [image number] to the title when attributing individual images, as requested by the source README.",
+      "evaluationMasks": {
+        "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+        "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+        "sha256": "57e87bee2a8dd1d2fb675fdf22d3e1e9ec5db0d16fa12127eb5914bf28960bac",
+        "annotationSide": 320,
+        "erosionPixels": 2,
+        "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+      }
+    },
+    {
+      "id": "micropasts-socketed-axe-12",
+      "revision": "ff6a818b226c73018ce331e38fd2ceea1aa1a0e9",
+      "source": "https://github.com/MicroPasts/socketed-axe-version2",
+      "author": "Andy Bevan; Chiara Bonacchi; Adi Keinan-Schoonbaert; Dan Pett; Neil Wilkin",
+      "authorSource": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/README.md",
+      "license": "CC-BY-4.0",
+      "licenseSource": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/LICENSE.md",
+      "checked": "October 17, 2026",
+      "changes": "12 uniformly selected unmodified original photographs; source masks retained unmodified. Evaluation-only mask conversion is documented separately.",
+      "shipped": false,
+      "scope": "Task104 independent real-object benchmark selection; original photographs remain outside git. Selection and evaluation masks frozen before this pipeline solves or renders.",
+      "maskStatus": "Source-provided approximate silhouette annotations, independently frozen before this pipeline; fixed conversion and input-only overlay QC completed. Not ground truth. Source-mask creation method remains unverified for Nineveh.",
+      "inputCount": 12,
+      "originalCount": 54,
+      "files": [
+        {
+          "name": "IMG_8835.JPG",
+          "path": "photos/IMG_8835.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8835.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8835.JPG",
+          "bytes": 3354390,
+          "sha256": "b2ffd17231017c72012063fa2bae670df5472c57ec7299dcda5157d6777667ef",
+          "gitBlobSha1": "8b8ac6b93964dfc42093c7a0c4e1ce8b9623fefe",
+          "retrievalStatus": "copied previously fetched pinned preview",
+          "localPath": "micropasts-socketed-axe/IMG_8835.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8835_mask.JPG",
+          "sourceMaskSha256": "1844d7d3fefc2fa489d7faa13112bce822ebf473b6428389215e1e0a71e756a6",
+          "sourceMaskBytes": 235154,
+          "sourceMaskGitBlobSha1": "08fc8e3addb433a05d3da07b859a522aab7f0047"
+        },
+        {
+          "name": "IMG_8840.JPG",
+          "path": "photos/IMG_8840.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8840.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8840.JPG",
+          "bytes": 3640034,
+          "sha256": "8968094ec949754d3a71ed4963e169059463e8d6024228a356f6fc1f59ee7420",
+          "gitBlobSha1": "161c0fabb4270e538ea99032b421098b73b275cf",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/IMG_8840.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8840_mask.JPG",
+          "sourceMaskSha256": "47509c01fb645c48d2ed6c84ce12099d61f11804d0911251c11527506ef466e9",
+          "sourceMaskBytes": 231735,
+          "sourceMaskGitBlobSha1": "a37c339f4360502cb82ae2f217a4e1981abb5a36"
+        },
+        {
+          "name": "IMG_8845.JPG",
+          "path": "photos/IMG_8845.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8845.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8845.JPG",
+          "bytes": 3440794,
+          "sha256": "080a1de84091dfda989d99e84f15df793442279650fd8895ac035607e2314eb6",
+          "gitBlobSha1": "aeb3b8de55d88e06abd2ed6468aadbebf32ef6fb",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/IMG_8845.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8845_mask.JPG",
+          "sourceMaskSha256": "29b889eeca271acbd9dec336e58757f18b7fe780a37410108c2bdfef65afc9d2",
+          "sourceMaskBytes": 239033,
+          "sourceMaskGitBlobSha1": "5272cbf2701a3a7b39f6d5eedd1dcd8fac54be19"
+        },
+        {
+          "name": "IMG_8849.JPG",
+          "path": "photos/IMG_8849.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8849.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8849.JPG",
+          "bytes": 3887716,
+          "sha256": "ec9cabd1b0716ef64e8125d67d3bc7fa53f44bdc4716b4c76d338e81bc062ac6",
+          "gitBlobSha1": "1617f3329b96463a799996fc31ba7b8209014e9d",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/IMG_8849.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8849_mask.JPG",
+          "sourceMaskSha256": "db7ec3378c83df8d12b32427aa198d1ece8a52d1562a639d60f82ccee941311b",
+          "sourceMaskBytes": 241470,
+          "sourceMaskGitBlobSha1": "8c1b5f4a865be56cd08e759d8bf0a00840d8b40f"
+        },
+        {
+          "name": "IMG_8854.JPG",
+          "path": "photos/IMG_8854.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8854.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8854.JPG",
+          "bytes": 3403987,
+          "sha256": "16f22266802712e81a98c7b52edb7f11d7ef47db6552b467a0b117b61598dadc",
+          "gitBlobSha1": "9ff629bdd063a640594010898db2a5dc55df4716",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/IMG_8854.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8854_mask.JPG",
+          "sourceMaskSha256": "96093fc0803e0ac993168918b202f888c3d18580ae9f64025f1e4ca78d65e7f7",
+          "sourceMaskBytes": 235583,
+          "sourceMaskGitBlobSha1": "83ab76e10b0bc53dad08bf58e7db23da6f95dabb"
+        },
+        {
+          "name": "IMG_8859.JPG",
+          "path": "photos/IMG_8859.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8859.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8859.JPG",
+          "bytes": 3794747,
+          "sha256": "687395f3ab909cca14ba3c5f91b9aa6f1c74babf4f471a06d8a01868178d99e7",
+          "gitBlobSha1": "704c7ad9cab6519d702580d90da289ea7db05644",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/IMG_8859.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8859_mask.JPG",
+          "sourceMaskSha256": "34e3cbecb3dc1601bb957d05e85a5389624e6e232c9e27d4e1f277a006d4746d",
+          "sourceMaskBytes": 238573,
+          "sourceMaskGitBlobSha1": "3f8e68ee698b9d4280d7679896cc00188f2fc5ec"
+        },
+        {
+          "name": "IMG_8864.JPG",
+          "path": "photos/IMG_8864.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8864.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8864.JPG",
+          "bytes": 4002069,
+          "sha256": "d52fec67c7ed91e4df954b9dbd7b5f93af9fa1accf70dfaf54b4ba6474c30bda",
+          "gitBlobSha1": "bff08ce004c07d14af832eedfeb4fde68c36d4d4",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/IMG_8864.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8864_mask.JPG",
+          "sourceMaskSha256": "27918b653a615b589150b7b4c2b65fdab89752aa412ff3d07b941547330a6c58",
+          "sourceMaskBytes": 241361,
+          "sourceMaskGitBlobSha1": "c2dfe80959b90693002e6313a268fc833226d9bf"
+        },
+        {
+          "name": "IMG_8869.JPG",
+          "path": "photos/IMG_8869.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8869.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8869.JPG",
+          "bytes": 4048745,
+          "sha256": "2a1f5012423ed0cfc0ea80bf6022af050b08d0e31f9eadebe64daf4f3393a609",
+          "gitBlobSha1": "9f128baac94826cca736cb8f97dcdff81c0dfed3",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/IMG_8869.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8869_mask.JPG",
+          "sourceMaskSha256": "6bea1cc00074a7f631abad94d7b97ab0db301abe7acd39f2ddb24a3c86ce8df9",
+          "sourceMaskBytes": 240187,
+          "sourceMaskGitBlobSha1": "bf90c4c076f531d20abd9623e44c0344283042c6"
+        },
+        {
+          "name": "IMG_8874.JPG",
+          "path": "photos/IMG_8874.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8874.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8874.JPG",
+          "bytes": 4165985,
+          "sha256": "b02c28af6919df4c46f37711e0cbcefcc99ddb1b16fb44ffa6525c389c8cc257",
+          "gitBlobSha1": "69aef2f70209949e908a50151668175480c07d52",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/IMG_8874.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8874_mask.JPG",
+          "sourceMaskSha256": "dd95a0695683f829718324f0701f916fab5439bc099228cffea395334de079e1",
+          "sourceMaskBytes": 239650,
+          "sourceMaskGitBlobSha1": "b904f02fb654cb52db489e115260b5d98e745ed9"
+        },
+        {
+          "name": "IMG_8878.JPG",
+          "path": "photos/IMG_8878.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8878.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8878.JPG",
+          "bytes": 3974066,
+          "sha256": "4d1b49fdc471017677cf596f170da68ab4c4d354fc5d6baf63069d4b761adf1a",
+          "gitBlobSha1": "654ca91c624869f5c60005657bc690e2c3d1aaa6",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/IMG_8878.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8878_mask.JPG",
+          "sourceMaskSha256": "860e876f7cb10b88ff9c547e9e5f5d3d077fd1f815dac8a383f817c0d45d3274",
+          "sourceMaskBytes": 234353,
+          "sourceMaskGitBlobSha1": "3f1e6182ccb185f79e5e21d5d103dbf4fbea5112"
+        },
+        {
+          "name": "IMG_8883.JPG",
+          "path": "photos/IMG_8883.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8883.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8883.JPG",
+          "bytes": 3710358,
+          "sha256": "f576c1e211a3d041250f8e880c094598fcbe73c98de697c77d5f60afa1c111f1",
+          "gitBlobSha1": "1840af3789962242cf432552d5643249383ad4ed",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/IMG_8883.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8883_mask.JPG",
+          "sourceMaskSha256": "02153ac95db9e8acd28a7797084a287f9716f875ebb2c9543df41e4aee7757ed",
+          "sourceMaskBytes": 231158,
+          "sourceMaskGitBlobSha1": "f7d017300772a2ba502215aa537af00ee78e6a2b"
+        },
+        {
+          "name": "IMG_8888.JPG",
+          "path": "photos/IMG_8888.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8888.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8888.JPG",
+          "bytes": 3627588,
+          "sha256": "4617aaba957c2bb18f2ca50f5f4cc51fbf2c960858c03bebb990539016fde33b",
+          "gitBlobSha1": "0cae7c9e26aac523b5d13daabf43de22f58d2288",
+          "retrievalStatus": "copied previously fetched pinned preview",
+          "localPath": "micropasts-socketed-axe/IMG_8888.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8888_mask.JPG",
+          "sourceMaskSha256": "58b06d03204b7a348f82ab38ee915f96ada86a721c17f5f06154231c24c40114",
+          "sourceMaskBytes": 237374,
+          "sourceMaskGitBlobSha1": "2ac8915056c599c48c64aad00beac7f3ec72c6b9"
+        }
+      ],
+      "sourceMasks": [
+        {
+          "name": "IMG_8835_mask.JPG",
+          "path": "masks/IMG_8835_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8835_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8835_mask.JPG",
+          "bytes": 235154,
+          "sha256": "1844d7d3fefc2fa489d7faa13112bce822ebf473b6428389215e1e0a71e756a6",
+          "gitBlobSha1": "08fc8e3addb433a05d3da07b859a522aab7f0047",
+          "retrievalStatus": "copied previously fetched pinned preview",
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8835_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8835.JPG"
+        },
+        {
+          "name": "IMG_8840_mask.JPG",
+          "path": "masks/IMG_8840_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8840_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8840_mask.JPG",
+          "bytes": 231735,
+          "sha256": "47509c01fb645c48d2ed6c84ce12099d61f11804d0911251c11527506ef466e9",
+          "gitBlobSha1": "a37c339f4360502cb82ae2f217a4e1981abb5a36",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8840_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8840.JPG"
+        },
+        {
+          "name": "IMG_8845_mask.JPG",
+          "path": "masks/IMG_8845_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8845_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8845_mask.JPG",
+          "bytes": 239033,
+          "sha256": "29b889eeca271acbd9dec336e58757f18b7fe780a37410108c2bdfef65afc9d2",
+          "gitBlobSha1": "5272cbf2701a3a7b39f6d5eedd1dcd8fac54be19",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8845_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8845.JPG"
+        },
+        {
+          "name": "IMG_8849_mask.JPG",
+          "path": "masks/IMG_8849_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8849_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8849_mask.JPG",
+          "bytes": 241470,
+          "sha256": "db7ec3378c83df8d12b32427aa198d1ece8a52d1562a639d60f82ccee941311b",
+          "gitBlobSha1": "8c1b5f4a865be56cd08e759d8bf0a00840d8b40f",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8849_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8849.JPG"
+        },
+        {
+          "name": "IMG_8854_mask.JPG",
+          "path": "masks/IMG_8854_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8854_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8854_mask.JPG",
+          "bytes": 235583,
+          "sha256": "96093fc0803e0ac993168918b202f888c3d18580ae9f64025f1e4ca78d65e7f7",
+          "gitBlobSha1": "83ab76e10b0bc53dad08bf58e7db23da6f95dabb",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8854_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8854.JPG"
+        },
+        {
+          "name": "IMG_8859_mask.JPG",
+          "path": "masks/IMG_8859_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8859_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8859_mask.JPG",
+          "bytes": 238573,
+          "sha256": "34e3cbecb3dc1601bb957d05e85a5389624e6e232c9e27d4e1f277a006d4746d",
+          "gitBlobSha1": "3f8e68ee698b9d4280d7679896cc00188f2fc5ec",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8859_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8859.JPG"
+        },
+        {
+          "name": "IMG_8864_mask.JPG",
+          "path": "masks/IMG_8864_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8864_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8864_mask.JPG",
+          "bytes": 241361,
+          "sha256": "27918b653a615b589150b7b4c2b65fdab89752aa412ff3d07b941547330a6c58",
+          "gitBlobSha1": "c2dfe80959b90693002e6313a268fc833226d9bf",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8864_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8864.JPG"
+        },
+        {
+          "name": "IMG_8869_mask.JPG",
+          "path": "masks/IMG_8869_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8869_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8869_mask.JPG",
+          "bytes": 240187,
+          "sha256": "6bea1cc00074a7f631abad94d7b97ab0db301abe7acd39f2ddb24a3c86ce8df9",
+          "gitBlobSha1": "bf90c4c076f531d20abd9623e44c0344283042c6",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8869_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8869.JPG"
+        },
+        {
+          "name": "IMG_8874_mask.JPG",
+          "path": "masks/IMG_8874_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8874_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8874_mask.JPG",
+          "bytes": 239650,
+          "sha256": "dd95a0695683f829718324f0701f916fab5439bc099228cffea395334de079e1",
+          "gitBlobSha1": "b904f02fb654cb52db489e115260b5d98e745ed9",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8874_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8874.JPG"
+        },
+        {
+          "name": "IMG_8878_mask.JPG",
+          "path": "masks/IMG_8878_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8878_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8878_mask.JPG",
+          "bytes": 234353,
+          "sha256": "860e876f7cb10b88ff9c547e9e5f5d3d077fd1f815dac8a383f817c0d45d3274",
+          "gitBlobSha1": "3f1e6182ccb185f79e5e21d5d103dbf4fbea5112",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8878_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8878.JPG"
+        },
+        {
+          "name": "IMG_8883_mask.JPG",
+          "path": "masks/IMG_8883_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8883_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8883_mask.JPG",
+          "bytes": 231158,
+          "sha256": "02153ac95db9e8acd28a7797084a287f9716f875ebb2c9543df41e4aee7757ed",
+          "gitBlobSha1": "f7d017300772a2ba502215aa537af00ee78e6a2b",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8883_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8883.JPG"
+        },
+        {
+          "name": "IMG_8888_mask.JPG",
+          "path": "masks/IMG_8888_mask.JPG",
+          "source": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8888_mask.JPG",
+          "sourcePage": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8888_mask.JPG",
+          "bytes": 237374,
+          "sha256": "58b06d03204b7a348f82ab38ee915f96ada86a721c17f5f06154231c24c40114",
+          "gitBlobSha1": "2ac8915056c599c48c64aad00beac7f3ec72c6b9",
+          "retrievalStatus": 200,
+          "localPath": "micropasts-socketed-axe/source-masks/IMG_8888_mask.JPG",
+          "width": 5184,
+          "height": 3456,
+          "rawWidth": 5184,
+          "rawHeight": 3456,
+          "exifOrientation": null,
+          "photoName": "IMG_8888.JPG"
+        }
+      ],
+      "sourcePhotoBytes": 203552277,
+      "selectedPhotoBytes": 45050479,
+      "selectedSourceMaskBytes": 2845631,
+      "selectionProvenance": {
+        "path": "selection-plan.json",
+        "sha256": "0a83fd8ff789eaf7da3be002fe3502bd899c64b8966f3146db9c5d13cd902dc4",
+        "rule": "12 sorted original paths at indices round(i*(N-1)/11), i=0..11; frozen before acquisition, solves, or renders."
+      },
+      "attribution": "Socketed axe from Arreton Down, Isle of Wight — photography/access: Andy Bevan; Chiara Bonacchi; Adi Keinan-Schoonbaert; Dan Pett; Neil Wilkin / CC BY 4.0; MicroPasts. Source-mask contributors are listed in receipts/readme-raw.md; retain their credit for mask derivatives.",
+      "sourceReceipts": [
+        {
+          "label": "micropasts-pinned-README.md",
+          "url": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/README.md",
+          "finalUrl": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/README.md",
+          "status": 200,
+          "bytes": 1692,
+          "sha256": "5ab82bad18a6c95b582767d78038433ca7f1b5c808d998d15990814da5b7dcfb",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/micropasts/README.md",
+          "checkedAt": "2026-10-17T20:30:58.009825+00:00"
+        },
+        {
+          "label": "micropasts-pinned-LICENSE.md",
+          "url": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/LICENSE.md",
+          "finalUrl": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/LICENSE.md",
+          "status": 200,
+          "bytes": 18651,
+          "sha256": "2a82ac9bbc3e3ee066908381e8d373896db5a6025d083fbd59692fe9ccfb9111",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/micropasts/LICENSE.md",
+          "checkedAt": "2026-10-17T20:30:58.020982+00:00"
+        },
+        {
+          "label": "micropasts-live-source",
+          "url": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/README.md",
+          "finalUrl": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/README.md",
+          "status": 200,
+          "bytes": 230461,
+          "sha256": "d1059d391ddde51e1f0001d11c6b6fb85cfd9ea7c957e357898f4422cd44d700",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/micropasts/source-page.html",
+          "checkedAt": "2026-10-17T20:30:58.440575+00:00"
+        },
+        {
+          "label": "micropasts-live-license",
+          "url": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/LICENSE.md",
+          "finalUrl": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/LICENSE.md",
+          "status": 200,
+          "bytes": 288458,
+          "sha256": "bda5abf6c4422d1bff3158bef34369adad7eab726d6d492ed736ef4ff1ead0ac",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/micropasts/license-page.html",
+          "checkedAt": "2026-10-17T20:30:58.524597+00:00"
+        },
+        {
+          "label": "micropasts-preview-IMG_8835.JPG",
+          "url": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8835.JPG",
+          "finalUrl": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8835.JPG",
+          "status": 200,
+          "bytes": 3354390,
+          "sha256": "b2ffd17231017c72012063fa2bae670df5472c57ec7299dcda5157d6777667ef",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/micropasts/IMG_8835.JPG",
+          "checkedAt": "2026-10-17T20:30:58.591091+00:00"
+        },
+        {
+          "label": "micropasts-preview-IMG_8862.JPG",
+          "url": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8862.JPG",
+          "finalUrl": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8862.JPG",
+          "status": 200,
+          "bytes": 3961958,
+          "sha256": "7cb543b5103654888f2e70258d8a858f1eb8189cc7bf450224c3236679ce3990",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/micropasts/IMG_8862.JPG",
+          "checkedAt": "2026-10-17T20:30:58.996293+00:00"
+        },
+        {
+          "label": "micropasts-preview-IMG_8888.JPG",
+          "url": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8888.JPG",
+          "finalUrl": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/photos/IMG_8888.JPG",
+          "status": 200,
+          "bytes": 3627588,
+          "sha256": "4617aaba957c2bb18f2ca50f5f4cc51fbf2c960858c03bebb990539016fde33b",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/micropasts/IMG_8888.JPG",
+          "checkedAt": "2026-10-17T20:30:58.958731+00:00"
+        },
+        {
+          "label": "micropasts-mask-preview",
+          "url": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8835_mask.JPG",
+          "finalUrl": "https://raw.githubusercontent.com/MicroPasts/socketed-axe-version2/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/masks/IMG_8835_mask.JPG",
+          "status": 200,
+          "bytes": 235154,
+          "sha256": "1844d7d3fefc2fa489d7faa13112bce822ebf473b6428389215e1e0a71e756a6",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/micropasts/IMG_8835_mask.JPG",
+          "checkedAt": "2026-10-17T20:30:58.894588+00:00"
+        },
+        {
+          "label": "micropasts-pinned-tree",
+          "url": "https://api.github.com/repos/MicroPasts/socketed-axe-version2/git/trees/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9?recursive=1",
+          "finalUrl": "https://api.github.com/repos/MicroPasts/socketed-axe-version2/git/trees/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9?recursive=1",
+          "status": 200,
+          "bytes": 31327,
+          "sha256": "853cde08933df3ec3927fc78582fc3ea72fc5edcf7bb086940811e2ee51ecebc",
+          "checkedAt": "2026-10-17T20:32:22.690569+00:00"
+        }
+      ],
+      "licenseBadgeMismatch": null,
+      "previewSuitability": {
+        "inspectedOriginalCount": 3,
+        "inspectedNames": ["IMG_8888.JPG", "IMG_8835.JPG", "IMG_8862.JPG"],
+        "noIdentifiablePeopleOrReadableLogosObserved": true,
+        "fullSelectedPhotoQC": "All12 selected oriented input/source-mask overlays inspected. No identifiable real people or readable logos/insignia observed. Limits and exact QC contact-sheet hash are in input-only-mask-qc.json.",
+        "limitations": [
+          "Ancient archaeological socketed axe; scale/color card has generic measurement text, no readable brand observed.",
+          "White-background turntable capture; card and any support must stay outside evaluation mask."
+        ]
+      },
+      "publicationStatus": "Explicit CC BY 4.0 license-file grant verified; any erroneous BY-SA badge href is retained as a provenance caveat. Input-only selected-photo/mask QC completed; original photographs, source masks, HTML, and contact sheets remain in ignored cache. Input provenance alone does not establish benchmark completion or acceptance.",
+      "maskAttribution": "Source mask contributors: Michael George Adams; Denis Antoine; Arjuna Cecchetti; Maria Christakou; Toma Claudiu; Gordana Dimovska; Jane Fellows; Teresa Gilmore; Adi Keinan-Schoonbaert; Steffi Kremer; Heidi Lund; Joellen McGann; Holly Peterson; Tai Pinchevsky; Adam Rabinowitz; Ernst Schnell. CC BY 4.0, as the source README and LICENSE.md specify.",
+      "evaluationMasks": {
+        "source": ".cache/photos3d/round2/additional-captures-research/micropasts-socketed-axe/final-masks.json",
+        "sha256": "6c32936a7db94051116b6702a3ba6aec22c43cf58b2d895bbef4fbefaa4491d4",
+        "count": 12,
+        "method": "Source annotations decoded with white foreground, exact pixel-cell contours, and conservative fixed two-pixel erosion at 320-pixel annotation width; see final-masks.json.",
+        "maskAuthors": [
+          "Michael George Adams",
+          "Denis Antoine",
+          "Arjuna Cecchetti",
+          "Maria Christakou",
+          "Toma Claudiu",
+          "Gordana Dimovska",
+          "Jane Fellows",
+          "Teresa Gilmore",
+          "Adi Keinan-Schoonbaert",
+          "Steffi Kremer",
+          "Heidi Lund",
+          "Joellen McGann",
+          "Holly Peterson",
+          "Tai Pinchevsky",
+          "Adam Rabinowitz",
+          "Ernst Schnell"
+        ],
+        "maskAuthorSource": "https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/README.md",
+        "attribution": "Socketed axe from Arreton Down, Isle of Wight: source photo-masks by Michael George Adams; Denis Antoine; Arjuna Cecchetti; Maria Christakou; Toma Claudiu; Gordana Dimovska; Jane Fellows; Teresa Gilmore; Adi Keinan-Schoonbaert; Steffi Kremer; Heidi Lund; Joellen McGann; Holly Peterson; Tai Pinchevsky; Adam Rabinowitz; Ernst Schnell. Photography/access by Andy Bevan; Chiara Bonacchi; Adi Keinan-Schoonbaert; Dan Pett; Neil Wilkin. CC BY 4.0. Source: https://github.com/MicroPasts/socketed-axe-version2/blob/ff6a818b226c73018ce331e38fd2ceea1aa1a0e9/README.md. Evaluation masks converted by Ryan with Codex (GPT-6); source annotation decoding, normalized contours, and fixed erosion are described in final-masks.json."
+      }
+    },
+    {
+      "id": "projectnineveh-panel7-roomr-12",
+      "revision": "6afe8ebf3a26274624e7595df083e22da5242cea",
+      "source": "https://github.com/ProjectNineveh/panel7RoomR",
+      "author": "Daniel Pett",
+      "authorSource": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/README.md",
+      "license": "CC-BY-4.0",
+      "licenseSource": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/LICENSE.md",
+      "checked": "October 17, 2026",
+      "changes": "12 uniformly selected unmodified original photographs; source masks retained unmodified. Evaluation-only mask conversion is documented separately.",
+      "shipped": false,
+      "scope": "Task104 independent real-object benchmark selection; original photographs remain outside git. Selection and evaluation masks frozen before this pipeline solves or renders.",
+      "maskStatus": "Source-provided approximate silhouette annotations, independently frozen before this pipeline; fixed conversion and input-only overlay QC completed. Not ground truth. Source-mask creation method remains unverified for Nineveh.",
+      "inputCount": 12,
+      "originalCount": 38,
+      "files": [
+        {
+          "name": "DSC01971.JPG",
+          "path": "images/DSC01971.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01971.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01971.JPG",
+          "bytes": 7340032,
+          "sha256": "4f7fcc3b156e1e04810612de25550649619ebac2d1ca25bd0ddd17f0a361e86d",
+          "gitBlobSha1": "273c7ca6d089451ef67da9bef4cf13fc640a9f1e",
+          "retrievalStatus": "copied previously fetched pinned preview",
+          "localPath": "nineveh-panel7-roomr/DSC01971.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01971_mask.png",
+          "sourceMaskSha256": "8d490f96dcf04570b384f3006c9c7c5ef5932f1ddc2bcb9b8f9c54502ab4f300",
+          "sourceMaskBytes": 33027,
+          "sourceMaskGitBlobSha1": "753132dd13182f7fa64b821b24eba8ddb716d257"
+        },
+        {
+          "name": "DSC01974.JPG",
+          "path": "images/DSC01974.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01974.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01974.JPG",
+          "bytes": 7733248,
+          "sha256": "155865fea3fec2e056858d88edd60a60fb9375530e5d40a35624b87ad3e5b503",
+          "gitBlobSha1": "d547ae151375e7664b4c3421e5b1fa8791100ba5",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/DSC01974.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01974_mask.png",
+          "sourceMaskSha256": "11c3e5a0650edf6cfc1b7f894b38449df872b6fcebbab98cbcf0b2104a453c1d",
+          "sourceMaskBytes": 30785,
+          "sourceMaskGitBlobSha1": "dbf71ba463e0319107fd25f06ba1896d627ca4f2"
+        },
+        {
+          "name": "DSC01978.JPG",
+          "path": "images/DSC01978.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01978.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01978.JPG",
+          "bytes": 7307264,
+          "sha256": "1c1cecc00b2a8b89c0117a88af9cbad6a0a149d1be03ef75e30b0caeb647e144",
+          "gitBlobSha1": "45863c4aecc0365579ea85685b163596095f173c",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/DSC01978.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01978_mask.png",
+          "sourceMaskSha256": "4ada807d2881a9321f479be425782c35e4120a52c316a6701e6b2a683ed30c52",
+          "sourceMaskBytes": 30082,
+          "sourceMaskGitBlobSha1": "3f4a8707f0d31278b5ea5f7443cc79c07f30ba5c"
+        },
+        {
+          "name": "DSC01981.JPG",
+          "path": "images/DSC01981.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01981.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01981.JPG",
+          "bytes": 7536640,
+          "sha256": "fe0a7d6982f2b36c2e4b1d3f1c83bae91d95bf5ff4816791606765bc6bc3b478",
+          "gitBlobSha1": "456e25613040f958f61750a9aa8545448c95a725",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/DSC01981.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01981_mask.png",
+          "sourceMaskSha256": "e43419d1e049f4a0a2895017d2209ed3c5767c96573e7a6fdb86710e88a52b83",
+          "sourceMaskBytes": 31773,
+          "sourceMaskGitBlobSha1": "9c193d484d7f0a3ed5d60a5a5c109299bd80ddd3"
+        },
+        {
+          "name": "DSC01984.JPG",
+          "path": "images/DSC01984.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01984.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01984.JPG",
+          "bytes": 7503872,
+          "sha256": "a0f06fb414a0f421c1152e2bea8a53ececec5d9f2910ceec695bbd3913996233",
+          "gitBlobSha1": "9d66e4a4aee47eae9e6c6e8d1780c0e10b382ec4",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/DSC01984.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01984_mask.png",
+          "sourceMaskSha256": "20d70bd11fd437b3bac681f4b9fac6c2e97827c85996744aeccebca9473f1f21",
+          "sourceMaskBytes": 33573,
+          "sourceMaskGitBlobSha1": "9efbdd2fa0071a2bb63d201a53f437502831a4bc"
+        },
+        {
+          "name": "DSC01988.JPG",
+          "path": "images/DSC01988.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01988.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01988.JPG",
+          "bytes": 7897088,
+          "sha256": "c9cb5a17170ac123a32b6374635948cd20d36a2c5ee8b96a1ffb48ad4a17825e",
+          "gitBlobSha1": "5f8173c9f4c6bc80b7cc48f6735784383e9dfc0e",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/DSC01988.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01988_mask.png",
+          "sourceMaskSha256": "27cdcfbd270a595610196765c8ea92dacb15434ecf89d61608001095c905c38f",
+          "sourceMaskBytes": 32740,
+          "sourceMaskGitBlobSha1": "981e84d352a9a7d1090eac0ab37d58da8fd06c37"
+        },
+        {
+          "name": "DSC01991.JPG",
+          "path": "images/DSC01991.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01991.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01991.JPG",
+          "bytes": 7700480,
+          "sha256": "dd4ab0f930308359e999a24c60d0f3b5d0626a8a204815bb40cd25f3cbdc7abf",
+          "gitBlobSha1": "4d05f3a03d7d2d7805b45c5f913e757828c86cf9",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/DSC01991.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01991_mask.png",
+          "sourceMaskSha256": "07f793f0f0745bd4922721af17e39f19c81124fc40ccc241474ee3cead6b16bf",
+          "sourceMaskBytes": 31987,
+          "sourceMaskGitBlobSha1": "a687f68aab28b396724594bf067ceb2037f23394"
+        },
+        {
+          "name": "DSC01995.JPG",
+          "path": "images/DSC01995.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01995.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01995.JPG",
+          "bytes": 7077888,
+          "sha256": "120305b4cb44a3554146bd61e8b4354fca53b7fa55bac62a7dd0869ef3126fd5",
+          "gitBlobSha1": "a46e43942085f6bc2cba5139745b564b8daa5307",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/DSC01995.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01995_mask.png",
+          "sourceMaskSha256": "a5adec3d090141182f561a6b017735b088079a419179076b788857d2ae390ed8",
+          "sourceMaskBytes": 34534,
+          "sourceMaskGitBlobSha1": "02b5123235ff667855ae8495abb4cbd5e787d83b"
+        },
+        {
+          "name": "DSC01998.JPG",
+          "path": "images/DSC01998.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01998.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01998.JPG",
+          "bytes": 7307264,
+          "sha256": "b84418f15ed06ddcef0ed9a2bcdd94cabe3210b3271fed6143d74750b106663a",
+          "gitBlobSha1": "76c422e80cab361ee60999641bce5b2093d24f6f",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/DSC01998.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01998_mask.png",
+          "sourceMaskSha256": "28eac0ac2bc3debbed0c18038167f6213a43ad2f216cf98bd2a1f130e9a28a06",
+          "sourceMaskBytes": 35671,
+          "sourceMaskGitBlobSha1": "e9f9f653bba454ed54b030220421f6686c20fd67"
+        },
+        {
+          "name": "DSC02001.JPG",
+          "path": "images/DSC02001.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC02001.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC02001.JPG",
+          "bytes": 8060928,
+          "sha256": "f975010b42e6c54993062b969f0f9e0b72199ab667a92df7c831f11fc0c6824a",
+          "gitBlobSha1": "cb6764d0b83a111bd4c101264d14c9659510a4b9",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/DSC02001.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC02001_mask.png",
+          "sourceMaskSha256": "0dbc69cd9a209d4c888391e67f24b61dcf887196949712ff21f5520ad15abcc6",
+          "sourceMaskBytes": 31474,
+          "sourceMaskGitBlobSha1": "04dbf2b2629ab07537c736b78872395aba13986f"
+        },
+        {
+          "name": "DSC02005.JPG",
+          "path": "images/DSC02005.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC02005.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC02005.JPG",
+          "bytes": 8028160,
+          "sha256": "3b981e96828933084bdcba3df127603254921de87d8426b018e81307634eb5af",
+          "gitBlobSha1": "8c789ffd5d6f7f7aacc892dc0550bd13c73efc21",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/DSC02005.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC02005_mask.png",
+          "sourceMaskSha256": "3d5505a5bea15943249a8a10aaaa64228f00d244d509e6f969c8e2f8f5f35ceb",
+          "sourceMaskBytes": 32921,
+          "sourceMaskGitBlobSha1": "794ea652710fbdd3a7f79fac365a0f3ccfdf5e1b"
+        },
+        {
+          "name": "DSC02008.JPG",
+          "path": "images/DSC02008.JPG",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC02008.JPG",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC02008.JPG",
+          "bytes": 7471104,
+          "sha256": "02c51e3aec4ca9065d60b026282d046c656a1a09d1e556046de55973bf0e5578",
+          "gitBlobSha1": "329be9785a710d422bb241577122a6e63178d8f3",
+          "retrievalStatus": "copied previously fetched pinned preview",
+          "localPath": "nineveh-panel7-roomr/DSC02008.JPG",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": 1,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC02008_mask.png",
+          "sourceMaskSha256": "da53d54dc6c6ea7d09e02143bea5f70b2135f967c8cac926f6283c99da8e85ad",
+          "sourceMaskBytes": 33168,
+          "sourceMaskGitBlobSha1": "9d27f03074d0a48a7c766a72fcf5ddeb1af9e2a2"
+        }
+      ],
+      "sourceMasks": [
+        {
+          "name": "DSC01971_mask.png",
+          "path": "masks/DSC01971_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01971_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01971_mask.png",
+          "bytes": 33027,
+          "sha256": "8d490f96dcf04570b384f3006c9c7c5ef5932f1ddc2bcb9b8f9c54502ab4f300",
+          "gitBlobSha1": "753132dd13182f7fa64b821b24eba8ddb716d257",
+          "retrievalStatus": "copied previously fetched pinned preview",
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC01971_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC01971.JPG"
+        },
+        {
+          "name": "DSC01974_mask.png",
+          "path": "masks/DSC01974_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01974_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01974_mask.png",
+          "bytes": 30785,
+          "sha256": "11c3e5a0650edf6cfc1b7f894b38449df872b6fcebbab98cbcf0b2104a453c1d",
+          "gitBlobSha1": "dbf71ba463e0319107fd25f06ba1896d627ca4f2",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC01974_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC01974.JPG"
+        },
+        {
+          "name": "DSC01978_mask.png",
+          "path": "masks/DSC01978_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01978_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01978_mask.png",
+          "bytes": 30082,
+          "sha256": "4ada807d2881a9321f479be425782c35e4120a52c316a6701e6b2a683ed30c52",
+          "gitBlobSha1": "3f4a8707f0d31278b5ea5f7443cc79c07f30ba5c",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC01978_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC01978.JPG"
+        },
+        {
+          "name": "DSC01981_mask.png",
+          "path": "masks/DSC01981_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01981_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01981_mask.png",
+          "bytes": 31773,
+          "sha256": "e43419d1e049f4a0a2895017d2209ed3c5767c96573e7a6fdb86710e88a52b83",
+          "gitBlobSha1": "9c193d484d7f0a3ed5d60a5a5c109299bd80ddd3",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC01981_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC01981.JPG"
+        },
+        {
+          "name": "DSC01984_mask.png",
+          "path": "masks/DSC01984_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01984_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01984_mask.png",
+          "bytes": 33573,
+          "sha256": "20d70bd11fd437b3bac681f4b9fac6c2e97827c85996744aeccebca9473f1f21",
+          "gitBlobSha1": "9efbdd2fa0071a2bb63d201a53f437502831a4bc",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC01984_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC01984.JPG"
+        },
+        {
+          "name": "DSC01988_mask.png",
+          "path": "masks/DSC01988_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01988_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01988_mask.png",
+          "bytes": 32740,
+          "sha256": "27cdcfbd270a595610196765c8ea92dacb15434ecf89d61608001095c905c38f",
+          "gitBlobSha1": "981e84d352a9a7d1090eac0ab37d58da8fd06c37",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC01988_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC01988.JPG"
+        },
+        {
+          "name": "DSC01991_mask.png",
+          "path": "masks/DSC01991_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01991_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01991_mask.png",
+          "bytes": 31987,
+          "sha256": "07f793f0f0745bd4922721af17e39f19c81124fc40ccc241474ee3cead6b16bf",
+          "gitBlobSha1": "a687f68aab28b396724594bf067ceb2037f23394",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC01991_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC01991.JPG"
+        },
+        {
+          "name": "DSC01995_mask.png",
+          "path": "masks/DSC01995_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01995_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01995_mask.png",
+          "bytes": 34534,
+          "sha256": "a5adec3d090141182f561a6b017735b088079a419179076b788857d2ae390ed8",
+          "gitBlobSha1": "02b5123235ff667855ae8495abb4cbd5e787d83b",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC01995_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC01995.JPG"
+        },
+        {
+          "name": "DSC01998_mask.png",
+          "path": "masks/DSC01998_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01998_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01998_mask.png",
+          "bytes": 35671,
+          "sha256": "28eac0ac2bc3debbed0c18038167f6213a43ad2f216cf98bd2a1f130e9a28a06",
+          "gitBlobSha1": "e9f9f653bba454ed54b030220421f6686c20fd67",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC01998_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC01998.JPG"
+        },
+        {
+          "name": "DSC02001_mask.png",
+          "path": "masks/DSC02001_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC02001_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC02001_mask.png",
+          "bytes": 31474,
+          "sha256": "0dbc69cd9a209d4c888391e67f24b61dcf887196949712ff21f5520ad15abcc6",
+          "gitBlobSha1": "04dbf2b2629ab07537c736b78872395aba13986f",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC02001_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC02001.JPG"
+        },
+        {
+          "name": "DSC02005_mask.png",
+          "path": "masks/DSC02005_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC02005_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC02005_mask.png",
+          "bytes": 32921,
+          "sha256": "3d5505a5bea15943249a8a10aaaa64228f00d244d509e6f969c8e2f8f5f35ceb",
+          "gitBlobSha1": "794ea652710fbdd3a7f79fac365a0f3ccfdf5e1b",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC02005_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC02005.JPG"
+        },
+        {
+          "name": "DSC02008_mask.png",
+          "path": "masks/DSC02008_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC02008_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC02008_mask.png",
+          "bytes": 33168,
+          "sha256": "da53d54dc6c6ea7d09e02143bea5f70b2135f967c8cac926f6283c99da8e85ad",
+          "gitBlobSha1": "9d27f03074d0a48a7c766a72fcf5ddeb1af9e2a2",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel7-roomr/source-masks/DSC02008_mask.png",
+          "width": 6000,
+          "height": 3376,
+          "rawWidth": 6000,
+          "rawHeight": 3376,
+          "exifOrientation": null,
+          "photoName": "DSC02008.JPG"
+        }
+      ],
+      "sourcePhotoBytes": 288391168,
+      "selectedPhotoBytes": 90963968,
+      "selectedSourceMaskBytes": 391735,
+      "selectionProvenance": {
+        "path": "selection-plan.json",
+        "sha256": "a36e1df81e87af29380e28cb15da99186c5314399c65b987e0bbf94a9a09b757",
+        "rule": "12 sorted original paths at indices round(i*(N-1)/11), i=0..11; frozen before acquisition, solves, or renders."
+      },
+      "attribution": "Nineveh North Palace, Room R Panel 7 — photographs and models by Daniel Pett / CC BY 4.0.",
+      "sourceReceipts": [
+        {
+          "label": "panel7-pinned-README.md",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/README.md",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/README.md",
+          "status": 200,
+          "bytes": 1507,
+          "sha256": "035be9f9ff593846cf1136eb403a03e5d9bdf0f5ec085fb393ce96d236cee97f",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel7/README.md",
+          "checkedAt": "2026-10-17T20:30:59.086189+00:00"
+        },
+        {
+          "label": "panel7-pinned-LICENSE.md",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/LICENSE.md",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/LICENSE.md",
+          "status": 200,
+          "bytes": 18651,
+          "sha256": "2a82ac9bbc3e3ee066908381e8d373896db5a6025d083fbd59692fe9ccfb9111",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel7/LICENSE.md",
+          "checkedAt": "2026-10-17T20:30:59.218285+00:00"
+        },
+        {
+          "label": "panel7-live-source",
+          "url": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/README.md",
+          "finalUrl": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/README.md",
+          "status": 200,
+          "bytes": 229856,
+          "sha256": "d92f6c3d3c108714c13b28c6b6d80b910cbe4517d8560f016040ed13892405d4",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel7/source-page.html",
+          "checkedAt": "2026-10-17T20:30:59.648137+00:00"
+        },
+        {
+          "label": "panel7-live-license",
+          "url": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/LICENSE.md",
+          "finalUrl": "https://github.com/ProjectNineveh/panel7RoomR/blob/6afe8ebf3a26274624e7595df083e22da5242cea/LICENSE.md",
+          "status": 200,
+          "bytes": 288168,
+          "sha256": "2875a4f4ed8653af2bb0eaa449b34efd4567196b8903b10a3c07e60e368e8b70",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel7/license-page.html",
+          "checkedAt": "2026-10-17T20:30:59.647220+00:00"
+        },
+        {
+          "label": "panel7-preview-DSC01971.JPG",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01971.JPG",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01971.JPG",
+          "status": 200,
+          "bytes": 7340032,
+          "sha256": "4f7fcc3b156e1e04810612de25550649619ebac2d1ca25bd0ddd17f0a361e86d",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel7/DSC01971.JPG",
+          "checkedAt": "2026-10-17T20:30:59.736495+00:00"
+        },
+        {
+          "label": "panel7-preview-DSC01990.JPG",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01990.JPG",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC01990.JPG",
+          "status": 200,
+          "bytes": 7569408,
+          "sha256": "a1dcfae885502c5e47508c4482edb6b9c5a71524ec16b3bc20041c89048c0996",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel7/DSC01990.JPG",
+          "checkedAt": "2026-10-17T20:31:00.293062+00:00"
+        },
+        {
+          "label": "panel7-preview-DSC02008.JPG",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC02008.JPG",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/images/DSC02008.JPG",
+          "status": 200,
+          "bytes": 7471104,
+          "sha256": "02c51e3aec4ca9065d60b026282d046c656a1a09d1e556046de55973bf0e5578",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel7/DSC02008.JPG",
+          "checkedAt": "2026-10-17T20:31:00.117992+00:00"
+        },
+        {
+          "label": "panel7-mask-preview",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01971_mask.png",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel7RoomR/6afe8ebf3a26274624e7595df083e22da5242cea/masks/DSC01971_mask.png",
+          "status": 200,
+          "bytes": 33027,
+          "sha256": "8d490f96dcf04570b384f3006c9c7c5ef5932f1ddc2bcb9b8f9c54502ab4f300",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel7/DSC01971_mask.png",
+          "checkedAt": "2026-10-17T20:30:59.990360+00:00"
+        },
+        {
+          "label": "panel7-pinned-tree",
+          "url": "https://api.github.com/repos/ProjectNineveh/panel7RoomR/git/trees/6afe8ebf3a26274624e7595df083e22da5242cea?recursive=1",
+          "finalUrl": "https://api.github.com/repos/ProjectNineveh/panel7RoomR/git/trees/6afe8ebf3a26274624e7595df083e22da5242cea?recursive=1",
+          "status": 200,
+          "bytes": 22878,
+          "sha256": "8eb37a6ae5d773583a6f4cdb32bfc217faebe1935d5a3c7158bb58bc757b122c",
+          "checkedAt": "2026-10-17T20:32:22.858885+00:00"
+        }
+      ],
+      "licenseBadgeMismatch": {
+        "imageAlt": "License: CC BY 4.0",
+        "imageUrl": "https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg",
+        "linkTarget": "http://creativecommons.org/licenses/by-sa/4.0/",
+        "readmeGrant": "The contents of this repository are licensed under CC-BY",
+        "licenseFileHeading": "Attribution 4.0 International",
+        "assessment": "Use the explicit repository-wide CC-BY grant and full Attribution 4.0 International LICENSE.md. The README badge text also says CC BY 4.0, while its hyperlink incorrectly targets http://creativecommons.org/licenses/by-sa/4.0/. Preserve that erroneous link as a provenance caveat; it does not remove the explicit BY 4 grant. No additional owner approval is required by this session scope."
+      },
+      "previewSuitability": {
+        "inspectedOriginalCount": 3,
+        "inspectedNames": ["DSC02008.JPG", "DSC01990.JPG", "DSC01971.JPG"],
+        "noIdentifiablePeopleOrReadableLogosObserved": true,
+        "fullSelectedPhotoQC": "All12 selected oriented input/source-mask overlays inspected. No identifiable real people or readable logos/insignia observed. Limits and exact QC contact-sheet hash are in input-only-mask-qc.json.",
+        "limitations": [
+          "Two-dimensional wall-mounted ancient relief with shallow depth, partial-front images and limited parallax; not a complete360-degree tabletop orbit.",
+          "Ancient nonidentifiable carved figures; no identifiable live people observed. Background museum-label text or inventory numbers may occur; no readable logo observed in inspected previews."
+        ]
+      },
+      "publicationStatus": "Explicit CC BY 4.0 license-file grant verified; any erroneous BY-SA badge href is retained as a provenance caveat. Input-only selected-photo/mask QC completed; original photographs, source masks, HTML, and contact sheets remain in ignored cache. Input provenance alone does not establish benchmark completion or acceptance.",
+      "maskAttribution": "Source masks from ProjectNineveh repository by Daniel Pett, under its repository-wide CC BY 4.0 grant. A separate mask creator/method is not identified in the README; no authorship beyond the source record is inferred.",
+      "evaluationMasks": {
+        "source": ".cache/photos3d/round2/additional-captures-research/nineveh-panel7-roomr/final-masks.json",
+        "sha256": "668cca286faa9f60e838d51f54aba6992ac85c1b2286b670f4e7b1a60c4a92fb",
+        "count": 12,
+        "method": "Source annotations decoded with white foreground, exact pixel-cell contours, and conservative fixed two-pixel erosion at 320-pixel annotation width; see final-masks.json.",
+        "maskAuthorSource": "https://github.com/ProjectNineveh/panel7RoomR",
+        "attribution": "Source object-ROI masks from https://github.com/ProjectNineveh/panel7RoomR / CC BY 4.0. The repository credits Daniel Pett for photographs and models; mask creators are not separately named. Evaluation masks converted by Ryan with Codex (GPT-6), preserving source exclusions and applying fixed erosion as recorded in final-masks.json."
+      }
+    },
+    {
+      "id": "projectnineveh-panel17-roomm-12",
+      "revision": "add262c56f100d0d32df870db55a082401fa2d0e",
+      "source": "https://github.com/ProjectNineveh/panel17RoomM",
+      "author": "Daniel Pett",
+      "authorSource": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/README.md",
+      "license": "CC-BY-4.0",
+      "licenseSource": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/LICENSE.md",
+      "checked": "October 17, 2026",
+      "changes": "12 uniformly selected unmodified original photographs; source masks retained unmodified. Evaluation-only mask conversion is documented separately.",
+      "shipped": false,
+      "scope": "Task104 independent real-object benchmark selection; original photographs remain outside git. Selection and evaluation masks frozen before this pipeline solves or renders.",
+      "maskStatus": "Source-provided approximate silhouette annotations, independently frozen before this pipeline; fixed conversion and input-only overlay QC completed. Not ground truth. Source-mask creation method remains unverified for Nineveh.",
+      "inputCount": 12,
+      "originalCount": 28,
+      "files": [
+        {
+          "name": "IMG_20181115_133134.jpg",
+          "path": "images/IMG_20181115_133134.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133134.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133134.jpg",
+          "bytes": 1318217,
+          "sha256": "329ee27648c90f6c58886f1b6c811efa7bffd163dca5fbee79c35a170c40b602",
+          "gitBlobSha1": "610efd2390d3ed795db594d1fdea6243865ea5fc",
+          "retrievalStatus": "copied previously fetched pinned preview",
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_133134.jpg",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133134_mask.png",
+          "sourceMaskSha256": "2c9ba64a0b2c01b4111c6a781e79d51e3c25741016c070588caff8ac723a8c86",
+          "sourceMaskBytes": 30723,
+          "sourceMaskGitBlobSha1": "d34afbb58fa5519ad35e5a3e88342c84c305ebf3"
+        },
+        {
+          "name": "IMG_20181115_133137.jpg",
+          "path": "images/IMG_20181115_133137.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133137.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133137.jpg",
+          "bytes": 1109720,
+          "sha256": "c28631f4b09c9b60336a2a6975d421a47edb681c4ade24daef4821e182c78dd8",
+          "gitBlobSha1": "72f06fdf108f6f18e34102d5707e389d6af63520",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_133137.jpg",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133137_mask.png",
+          "sourceMaskSha256": "1df8428879500aecfd81f8691b0dbdae42b15e9e12e63b84cdf916b92b58aaf0",
+          "sourceMaskBytes": 34281,
+          "sourceMaskGitBlobSha1": "631a97abb18d66a04b888591fe58472707220d27"
+        },
+        {
+          "name": "IMG_20181115_133142.jpg",
+          "path": "images/IMG_20181115_133142.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133142.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133142.jpg",
+          "bytes": 809421,
+          "sha256": "52076a84239a642b2770d03dc50487e0fdf34c08f266e8c3e557b3c279edd2c7",
+          "gitBlobSha1": "d2232b9d4251955be9936ac00efbbe8ac281b0d1",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_133142.jpg",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133142_mask.png",
+          "sourceMaskSha256": "e1647fdf754e1387b22be5ad91b1a3c4b55d4a3b1d30c25fd632bfaae61ebb89",
+          "sourceMaskBytes": 36500,
+          "sourceMaskGitBlobSha1": "b07396d0b1292f16f25aef9c97964e74ebe2d6d6"
+        },
+        {
+          "name": "IMG_20181115_133144.jpg",
+          "path": "images/IMG_20181115_133144.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133144.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133144.jpg",
+          "bytes": 1212354,
+          "sha256": "27f37a6bda18305951b6faba0192be95a6053c092c0ff435be41d95c217f046f",
+          "gitBlobSha1": "b93e909eacf088d6362abc2696043a8c85a784d6",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_133144.jpg",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133144_mask.png",
+          "sourceMaskSha256": "7c2b01c20279ac9a1d9212687c31d018ad26395baeb9a99d2a9a191e8f34adf3",
+          "sourceMaskBytes": 34213,
+          "sourceMaskGitBlobSha1": "8ec24b15d0eb5726d4b833e33397cdfee2cb8874"
+        },
+        {
+          "name": "IMG_20181115_133148.jpg",
+          "path": "images/IMG_20181115_133148.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133148.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133148.jpg",
+          "bytes": 673323,
+          "sha256": "c14cb8f9f70da4e149b5f4d75d6349f40dddcd969443fc793ed17339238fcd61",
+          "gitBlobSha1": "5d1c34d4216dc89d0c95e6d0a6018b0433dd5821",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_133148.jpg",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133148_mask.png",
+          "sourceMaskSha256": "54beab6ac3c24dc38b445c85a6b2932edd05d41c6e4a5344f8e6d94007468755",
+          "sourceMaskBytes": 30215,
+          "sourceMaskGitBlobSha1": "b445a2aa695451a7ee7868d874bc9ed75e2fde5a"
+        },
+        {
+          "name": "IMG_20181115_134016.jpg",
+          "path": "images/IMG_20181115_134016.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134016.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134016.jpg",
+          "bytes": 621045,
+          "sha256": "5c18627a1276ae502264cd01c33fb392b95e0c7be164bd525a5824789ea6b39f",
+          "gitBlobSha1": "78f3dfcdc7170e2ca4d18af9acdcf9fb6fd750ed",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_134016.jpg",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134016_mask.png",
+          "sourceMaskSha256": "1ece1d49c0d8257cc22b1623a65cd811c664b4fe44453575d11e780476cc9ade",
+          "sourceMaskBytes": 29694,
+          "sourceMaskGitBlobSha1": "340857a6cd29ac42ca97640c3747676f3315046c"
+        },
+        {
+          "name": "IMG_20181115_134020.jpg",
+          "path": "images/IMG_20181115_134020.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134020.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134020.jpg",
+          "bytes": 1690607,
+          "sha256": "4fe56115990b4ecd808ccb4b82d5c6cd817e9660aad3fee67f1f99a40db6fd39",
+          "gitBlobSha1": "f5ae13d3cf41477386dcf1067cf131f9b5383006",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_134020.jpg",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134020_mask.png",
+          "sourceMaskSha256": "cc7bee50fb4e9c28e63c55e06586dde81848626e959f6859eb596500e2e42782",
+          "sourceMaskBytes": 34587,
+          "sourceMaskGitBlobSha1": "044b96af4856c1ee4c30003d391d4999579dde81"
+        },
+        {
+          "name": "IMG_20181115_134026.jpg",
+          "path": "images/IMG_20181115_134026.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134026.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134026.jpg",
+          "bytes": 2248279,
+          "sha256": "65b6e2c3040e3d51a50ccc61a9c5877911f9e94ec545a2e197b4ac7f86d4932f",
+          "gitBlobSha1": "3844d86a6c6bdc597d5f4900430291c571a80d5e",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_134026.jpg",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134026_mask.png",
+          "sourceMaskSha256": "86dc8a114df3f272044a417d4434e65d4eb581eb2c8e6eec76fa2eccd7112b40",
+          "sourceMaskBytes": 35488,
+          "sourceMaskGitBlobSha1": "b0543dbfb261983ad5c590757109b4a768734019"
+        },
+        {
+          "name": "IMG_20181115_134034.jpg",
+          "path": "images/IMG_20181115_134034.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134034.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134034.jpg",
+          "bytes": 2298893,
+          "sha256": "6417024bffde07acce00acfd238bc19ce3d04e99a93898f12ab2f266cd87f16f",
+          "gitBlobSha1": "b63031736dd1c62f1d10f7b785531a5d4733e86b",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_134034.jpg",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134034_mask.png",
+          "sourceMaskSha256": "fa1163020c031c8ca413c7d4e7459e8c0aae17209757ebd1b3431ff295f2b198",
+          "sourceMaskBytes": 34560,
+          "sourceMaskGitBlobSha1": "66f695e51afdfee68c8a091ca0570e5a965bc4f1"
+        },
+        {
+          "name": "IMG_20181115_134039.jpg",
+          "path": "images/IMG_20181115_134039.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134039.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134039.jpg",
+          "bytes": 3789725,
+          "sha256": "ad2e1e65deb8832c338d12109b70bd324bee33220786f58c5b15b17df86cf155",
+          "gitBlobSha1": "649a64dea83d51075e6869a7b1e3804f50845f12",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_134039.jpg",
+          "width": 3456,
+          "height": 4608,
+          "rawWidth": 3456,
+          "rawHeight": 4608,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134039_mask.png",
+          "sourceMaskSha256": "a2b9b21c5043e5bc2264ea092103869c4890c82462eeb276756f6134edd0e5bf",
+          "sourceMaskBytes": 36314,
+          "sourceMaskGitBlobSha1": "d79c0144fd30983d3f65a6a427ce4f399cbb8953"
+        },
+        {
+          "name": "IMG_20181115_134056.jpg",
+          "path": "images/IMG_20181115_134056.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134056.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134056.jpg",
+          "bytes": 1386574,
+          "sha256": "403d0d3769c4751c2a06be494a0055bbacc60ebed5178f85bfe775d85240849e",
+          "gitBlobSha1": "0d39e77a87f8d442d8128444da1e490b6d086aee",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_134056.jpg",
+          "width": 3456,
+          "height": 4608,
+          "rawWidth": 3456,
+          "rawHeight": 4608,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134056_mask.png",
+          "sourceMaskSha256": "1c935042047bba184f3443bbc6e94652658f6c80dce80d26b8f2820576093c41",
+          "sourceMaskBytes": 29753,
+          "sourceMaskGitBlobSha1": "76d63f9ad5dffc80b2a4106e8c63620d97d90464"
+        },
+        {
+          "name": "IMG_20181115_134107.jpg",
+          "path": "images/IMG_20181115_134107.jpg",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134107.jpg",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134107.jpg",
+          "bytes": 2357742,
+          "sha256": "669a92a29a3b3e3e94d3340144b2b7cd358f1024ec31c25b2bc2a0b5461e1b6b",
+          "gitBlobSha1": "1eab7e942dd0131ee006eb3035495bc5569f38b2",
+          "retrievalStatus": "copied previously fetched pinned preview",
+          "localPath": "nineveh-panel17-roomm/IMG_20181115_134107.jpg",
+          "width": 3456,
+          "height": 4608,
+          "rawWidth": 3456,
+          "rawHeight": 4608,
+          "exifOrientation": 0,
+          "sourceMask": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134107_mask.png",
+          "sourceMaskSha256": "7f0f725128624e38488a3de725bc5960c09bb372bf6a5f38a081d797ed7f5479",
+          "sourceMaskBytes": 33972,
+          "sourceMaskGitBlobSha1": "27904c2a60ec73bb03fa5d65c9b8e853dceadfe3"
+        }
+      ],
+      "sourceMasks": [
+        {
+          "name": "IMG_20181115_133134_mask.png",
+          "path": "masks/IMG_20181115_133134_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133134_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133134_mask.png",
+          "bytes": 30723,
+          "sha256": "2c9ba64a0b2c01b4111c6a781e79d51e3c25741016c070588caff8ac723a8c86",
+          "gitBlobSha1": "d34afbb58fa5519ad35e5a3e88342c84c305ebf3",
+          "retrievalStatus": "copied previously fetched pinned preview",
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_133134_mask.png",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_133134.jpg"
+        },
+        {
+          "name": "IMG_20181115_133137_mask.png",
+          "path": "masks/IMG_20181115_133137_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133137_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133137_mask.png",
+          "bytes": 34281,
+          "sha256": "1df8428879500aecfd81f8691b0dbdae42b15e9e12e63b84cdf916b92b58aaf0",
+          "gitBlobSha1": "631a97abb18d66a04b888591fe58472707220d27",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_133137_mask.png",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_133137.jpg"
+        },
+        {
+          "name": "IMG_20181115_133142_mask.png",
+          "path": "masks/IMG_20181115_133142_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133142_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133142_mask.png",
+          "bytes": 36500,
+          "sha256": "e1647fdf754e1387b22be5ad91b1a3c4b55d4a3b1d30c25fd632bfaae61ebb89",
+          "gitBlobSha1": "b07396d0b1292f16f25aef9c97964e74ebe2d6d6",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_133142_mask.png",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_133142.jpg"
+        },
+        {
+          "name": "IMG_20181115_133144_mask.png",
+          "path": "masks/IMG_20181115_133144_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133144_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133144_mask.png",
+          "bytes": 34213,
+          "sha256": "7c2b01c20279ac9a1d9212687c31d018ad26395baeb9a99d2a9a191e8f34adf3",
+          "gitBlobSha1": "8ec24b15d0eb5726d4b833e33397cdfee2cb8874",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_133144_mask.png",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_133144.jpg"
+        },
+        {
+          "name": "IMG_20181115_133148_mask.png",
+          "path": "masks/IMG_20181115_133148_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133148_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133148_mask.png",
+          "bytes": 30215,
+          "sha256": "54beab6ac3c24dc38b445c85a6b2932edd05d41c6e4a5344f8e6d94007468755",
+          "gitBlobSha1": "b445a2aa695451a7ee7868d874bc9ed75e2fde5a",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_133148_mask.png",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_133148.jpg"
+        },
+        {
+          "name": "IMG_20181115_134016_mask.png",
+          "path": "masks/IMG_20181115_134016_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134016_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134016_mask.png",
+          "bytes": 29694,
+          "sha256": "1ece1d49c0d8257cc22b1623a65cd811c664b4fe44453575d11e780476cc9ade",
+          "gitBlobSha1": "340857a6cd29ac42ca97640c3747676f3315046c",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_134016_mask.png",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_134016.jpg"
+        },
+        {
+          "name": "IMG_20181115_134020_mask.png",
+          "path": "masks/IMG_20181115_134020_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134020_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134020_mask.png",
+          "bytes": 34587,
+          "sha256": "cc7bee50fb4e9c28e63c55e06586dde81848626e959f6859eb596500e2e42782",
+          "gitBlobSha1": "044b96af4856c1ee4c30003d391d4999579dde81",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_134020_mask.png",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_134020.jpg"
+        },
+        {
+          "name": "IMG_20181115_134026_mask.png",
+          "path": "masks/IMG_20181115_134026_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134026_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134026_mask.png",
+          "bytes": 35488,
+          "sha256": "86dc8a114df3f272044a417d4434e65d4eb581eb2c8e6eec76fa2eccd7112b40",
+          "gitBlobSha1": "b0543dbfb261983ad5c590757109b4a768734019",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_134026_mask.png",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_134026.jpg"
+        },
+        {
+          "name": "IMG_20181115_134034_mask.png",
+          "path": "masks/IMG_20181115_134034_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134034_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134034_mask.png",
+          "bytes": 34560,
+          "sha256": "fa1163020c031c8ca413c7d4e7459e8c0aae17209757ebd1b3431ff295f2b198",
+          "gitBlobSha1": "66f695e51afdfee68c8a091ca0570e5a965bc4f1",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_134034_mask.png",
+          "width": 3464,
+          "height": 4618,
+          "rawWidth": 3464,
+          "rawHeight": 4618,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_134034.jpg"
+        },
+        {
+          "name": "IMG_20181115_134039_mask.png",
+          "path": "masks/IMG_20181115_134039_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134039_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134039_mask.png",
+          "bytes": 36314,
+          "sha256": "a2b9b21c5043e5bc2264ea092103869c4890c82462eeb276756f6134edd0e5bf",
+          "gitBlobSha1": "d79c0144fd30983d3f65a6a427ce4f399cbb8953",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_134039_mask.png",
+          "width": 3456,
+          "height": 4608,
+          "rawWidth": 3456,
+          "rawHeight": 4608,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_134039.jpg"
+        },
+        {
+          "name": "IMG_20181115_134056_mask.png",
+          "path": "masks/IMG_20181115_134056_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134056_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134056_mask.png",
+          "bytes": 29753,
+          "sha256": "1c935042047bba184f3443bbc6e94652658f6c80dce80d26b8f2820576093c41",
+          "gitBlobSha1": "76d63f9ad5dffc80b2a4106e8c63620d97d90464",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_134056_mask.png",
+          "width": 3456,
+          "height": 4608,
+          "rawWidth": 3456,
+          "rawHeight": 4608,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_134056.jpg"
+        },
+        {
+          "name": "IMG_20181115_134107_mask.png",
+          "path": "masks/IMG_20181115_134107_mask.png",
+          "source": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134107_mask.png",
+          "sourcePage": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_134107_mask.png",
+          "bytes": 33972,
+          "sha256": "7f0f725128624e38488a3de725bc5960c09bb372bf6a5f38a081d797ed7f5479",
+          "gitBlobSha1": "27904c2a60ec73bb03fa5d65c9b8e853dceadfe3",
+          "retrievalStatus": 200,
+          "localPath": "nineveh-panel17-roomm/source-masks/IMG_20181115_134107_mask.png",
+          "width": 3456,
+          "height": 4608,
+          "rawWidth": 3456,
+          "rawHeight": 4608,
+          "exifOrientation": null,
+          "photoName": "IMG_20181115_134107.jpg"
+        }
+      ],
+      "sourcePhotoBytes": 43838219,
+      "selectedPhotoBytes": 19515900,
+      "selectedSourceMaskBytes": 400300,
+      "selectionProvenance": {
+        "path": "selection-plan.json",
+        "sha256": "a58377c13e607299d84e26b0c116cd40990f3d6de89147209ce195aedbdbb831",
+        "rule": "12 sorted original paths at indices round(i*(N-1)/11), i=0..11; frozen before acquisition, solves, or renders."
+      },
+      "attribution": "Nineveh North Palace, Room M Panel 17 — photographs and models by Daniel Pett / CC BY 4.0.",
+      "sourceReceipts": [
+        {
+          "label": "panel17-pinned-README.md",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/README.md",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/README.md",
+          "status": 200,
+          "bytes": 1441,
+          "sha256": "e78d4afa756eff3874ebd6ea3b5a33786e4a206d59c93d4b930707f677cfbf15",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel17/README.md",
+          "checkedAt": "2026-10-17T20:31:00.190480+00:00"
+        },
+        {
+          "label": "panel17-pinned-LICENSE.md",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/LICENSE.md",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/LICENSE.md",
+          "status": 200,
+          "bytes": 18651,
+          "sha256": "2a82ac9bbc3e3ee066908381e8d373896db5a6025d083fbd59692fe9ccfb9111",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel17/LICENSE.md",
+          "checkedAt": "2026-10-17T20:31:00.302357+00:00"
+        },
+        {
+          "label": "panel17-live-source",
+          "url": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/README.md",
+          "finalUrl": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/README.md",
+          "status": 200,
+          "bytes": 229466,
+          "sha256": "4e76f51844b08e7888ad9318991b3b00aa76264031b4bb88544cc4a44e514840",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel17/source-page.html",
+          "checkedAt": "2026-10-17T20:31:00.848718+00:00"
+        },
+        {
+          "label": "panel17-live-license",
+          "url": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/LICENSE.md",
+          "finalUrl": "https://github.com/ProjectNineveh/panel17RoomM/blob/add262c56f100d0d32df870db55a082401fa2d0e/LICENSE.md",
+          "status": 200,
+          "bytes": 288146,
+          "sha256": "1fec3500d48ea0a1d5651bfbecf9a3af3b76ee0ead0a1a90e4e52aeccdb6f71e",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel17/license-page.html",
+          "checkedAt": "2026-10-17T20:31:00.853259+00:00"
+        },
+        {
+          "label": "panel17-preview-IMG_20181115_133134.jpg",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133134.jpg",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_133134.jpg",
+          "status": 200,
+          "bytes": 1318217,
+          "sha256": "329ee27648c90f6c58886f1b6c811efa7bffd163dca5fbee79c35a170c40b602",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel17/IMG_20181115_133134.jpg",
+          "checkedAt": "2026-10-17T20:31:00.617704+00:00"
+        },
+        {
+          "label": "panel17-preview-IMG_20181115_134018.jpg",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134018.jpg",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134018.jpg",
+          "status": 200,
+          "bytes": 1996851,
+          "sha256": "5b9c80748761098020efb26a144fc38e68519553b52f093bf46e83b34593587c",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel17/IMG_20181115_134018.jpg",
+          "checkedAt": "2026-10-17T20:31:00.956434+00:00"
+        },
+        {
+          "label": "panel17-preview-IMG_20181115_134107.jpg",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134107.jpg",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/images/IMG_20181115_134107.jpg",
+          "status": 200,
+          "bytes": 2357742,
+          "sha256": "669a92a29a3b3e3e94d3340144b2b7cd358f1024ec31c25b2bc2a0b5461e1b6b",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel17/IMG_20181115_134107.jpg",
+          "checkedAt": "2026-10-17T20:31:01.430474+00:00"
+        },
+        {
+          "label": "panel17-mask-preview",
+          "url": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133134_mask.png",
+          "finalUrl": "https://raw.githubusercontent.com/ProjectNineveh/panel17RoomM/add262c56f100d0d32df870db55a082401fa2d0e/masks/IMG_20181115_133134_mask.png",
+          "status": 200,
+          "bytes": 30723,
+          "sha256": "2c9ba64a0b2c01b4111c6a781e79d51e3c25741016c070588caff8ac723a8c86",
+          "receipt": ".cache/photos3d/round2/additional-captures-research/panel17/IMG_20181115_133134_mask.png",
+          "checkedAt": "2026-10-17T20:31:01.087253+00:00"
+        },
+        {
+          "label": "panel17-pinned-tree",
+          "url": "https://api.github.com/repos/ProjectNineveh/panel17RoomM/git/trees/add262c56f100d0d32df870db55a082401fa2d0e?recursive=1",
+          "finalUrl": "https://api.github.com/repos/ProjectNineveh/panel17RoomM/git/trees/add262c56f100d0d32df870db55a082401fa2d0e?recursive=1",
+          "status": 200,
+          "bytes": 18012,
+          "sha256": "2b93e1a7b89b90e395f001ad7b8cac8dab825d774889b5a73484a328848cbfaa",
+          "checkedAt": "2026-10-17T20:32:22.707679+00:00"
+        }
+      ],
+      "licenseBadgeMismatch": {
+        "imageAlt": "License: CC BY 4.0",
+        "imageUrl": "https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg",
+        "linkTarget": "http://creativecommons.org/licenses/by-sa/4.0/",
+        "readmeGrant": "The contents of this repository are licensed under CC-BY",
+        "licenseFileHeading": "Attribution 4.0 International",
+        "assessment": "Use the explicit repository-wide CC-BY grant and full Attribution 4.0 International LICENSE.md. The README badge text also says CC BY 4.0, while its hyperlink incorrectly targets http://creativecommons.org/licenses/by-sa/4.0/. Preserve that erroneous link as a provenance caveat; it does not remove the explicit BY 4 grant. No additional owner approval is required by this session scope."
+      },
+      "previewSuitability": {
+        "inspectedOriginalCount": 3,
+        "inspectedNames": [
+          "IMG_20181115_134018.jpg",
+          "IMG_20181115_134107.jpg",
+          "IMG_20181115_133134.jpg"
+        ],
+        "noIdentifiablePeopleOrReadableLogosObserved": true,
+        "fullSelectedPhotoQC": "All12 selected oriented input/source-mask overlays inspected. No identifiable real people or readable logos/insignia observed. Limits and exact QC contact-sheet hash are in input-only-mask-qc.json.",
+        "limitations": [
+          "Two-dimensional wall-mounted ancient relief with shallow depth, partial-front images and limited parallax; not a complete360-degree tabletop orbit.",
+          "Ancient nonidentifiable carved figures; no identifiable live people observed. Background museum-label text or inventory numbers may occur; no readable logo observed in inspected previews.",
+          "Historical battle scene including carved bows/spears and prisoners; no modern weapons or graphic gore observed."
+        ]
+      },
+      "publicationStatus": "Explicit CC BY 4.0 license-file grant verified; any erroneous BY-SA badge href is retained as a provenance caveat. Input-only selected-photo/mask QC completed; original photographs, source masks, HTML, and contact sheets remain in ignored cache. Input provenance alone does not establish benchmark completion or acceptance.",
+      "maskAttribution": "Source masks from ProjectNineveh repository by Daniel Pett, under its repository-wide CC BY 4.0 grant. A separate mask creator/method is not identified in the README; no authorship beyond the source record is inferred.",
+      "evaluationMasks": {
+        "source": ".cache/photos3d/round2/additional-captures-research/nineveh-panel17-roomm/final-masks.json",
+        "sha256": "302e61b651c196d873c8dae07e466cfd5e79356374c054da02a6d899b3f04453",
+        "count": 12,
+        "method": "Source annotations decoded with white foreground, exact pixel-cell contours, and conservative fixed two-pixel erosion at 320-pixel annotation width; see final-masks.json.",
+        "maskAuthorSource": "https://github.com/ProjectNineveh/panel17RoomM",
+        "attribution": "Source object-ROI masks from https://github.com/ProjectNineveh/panel17RoomM / CC BY 4.0. The repository credits Daniel Pett for photographs and models; mask creators are not separately named. Evaluation masks converted by Ryan with Codex (GPT-6), preserving source exclusions and applying fixed erosion as recorded in final-masks.json."
+      }
+    }
+  ],
+  "photos3dSynthetic": [
+    {
+      "id": "photos3d-synthetic-burger-double",
+      "kind": "rendered synthetic object, not a real capture",
+      "views": 24,
+      "source": "https://kenney.nl/assets/food-kit",
+      "author": "Kenney; calibrated renders made by Ryan with Codex (GPT-6)",
+      "license": "CC0-1.0",
+      "checked": "October 17, 2026",
+      "model": {
+        "source": "https://kenney.nl/assets/food-kit",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "checked": "October 17, 2026",
+        "sha256": "4faa54953d0b18ff8f455d7a3f1a04fc0222e5d2d41e969854d0a2b4ee3c3469",
+        "changes": "Unmodified burger-double.glb from Food Kit, with palette texture embedded using the existing pinned @gltf-transform/core and registered extensions, including KHR_texture_transform. Mesh geometry and texture transforms retained. Synthetic calibrated views, not real photographs. Archive SHA256 cdad90853682499b94c9fda2f87678b24bfd8f3264e0ed323f6b6a27fd7c6f6f.",
+        "originalModelSha256": "93ef8149094cb26a46ce8d05c0550c13ed68648b1978a8c3dfdac7f0b2b5dbe2"
+      },
+      "rendererSource": "https://github.com/ryanjosephkamp/splashery/tree/f7710637570ce34aa544e53175f5dc7b03b6c11c/tools/blender",
+      "rendererCommit": "f7710637570ce34aa544e53175f5dc7b03b6c11c",
+      "manifestSha256": "fec3f21749308b56e6034268be51a2ee9168887340490e655da544d1518831ad",
+      "changes": "24 rendered 960x720 orbit views at8samples using task105 pinned Blender4.5.3, with exact cameras and masks. All beauty images, source models, and generated datasets stay outside git.",
+      "shipped": false,
+      "files": [
+        {
+          "name": "view-000.png",
+          "bytes": 550401,
+          "sha256": "1e890aa454d1bfa970e038377ba129f70854117749a6118b24e9b568c98cdca8"
+        },
+        {
+          "name": "view-001.png",
+          "bytes": 546874,
+          "sha256": "2d347c6356585e38a3d059b5082907b5dc4b12b3d3ac62a96c29f67083514dc7"
+        },
+        {
+          "name": "view-002.png",
+          "bytes": 548392,
+          "sha256": "fa629c0298e12db35d05deeb88ea10237a6e957a88923506623ae62186879126"
+        },
+        {
+          "name": "view-003.png",
+          "bytes": 550732,
+          "sha256": "a24f6e453720a279c2766de14c802ff2a9454a9679f54fd5ee06d9342ec18d99"
+        },
+        {
+          "name": "view-004.png",
+          "bytes": 548226,
+          "sha256": "2abbec963012546e808ba9b9dc341b7f14fad4e782934da8ac3bf0ca26812613"
+        },
+        {
+          "name": "view-005.png",
+          "bytes": 547156,
+          "sha256": "c7543b5dcaf63b9e25c7efbed3308f37df094330c9dca4cff108746bbe186ef3"
+        },
+        {
+          "name": "view-006.png",
+          "bytes": 545942,
+          "sha256": "92c32907de362af89fe9f20fa68e0e4f130ffc6e6bc6847e3763b4f9be414e1a"
+        },
+        {
+          "name": "view-007.png",
+          "bytes": 546595,
+          "sha256": "382710c43fa481eb1c9f835e17f62d8bf58726c8ab205880b001f1c601b8e16b"
+        },
+        {
+          "name": "view-008.png",
+          "bytes": 548642,
+          "sha256": "3bfc6fe1eb4eda8d8ed5817974d7a00e9be2f6ee347d6eec0dd58218650cecb7"
+        },
+        {
+          "name": "view-009.png",
+          "bytes": 550640,
+          "sha256": "4ffa1f8063673c4ec507a797f83bd2df86d39b1d5a9f29ca643d5432a284acbf"
+        },
+        {
+          "name": "view-010.png",
+          "bytes": 542024,
+          "sha256": "2cec89bfe9634f281aa2d2fa1ab5663a705394896a9ea2c15dc96143a577b2f0"
+        },
+        {
+          "name": "view-011.png",
+          "bytes": 537610,
+          "sha256": "0c026fe6340e6d06f01470236e006e93502ad4d419b5aaa5481f941b50440d6d"
+        },
+        {
+          "name": "view-012.png",
+          "bytes": 531386,
+          "sha256": "34956feb24d3e1974cf86a6ac16c8c4e34a4631db3ccb61b73a2b8213d48c5a5"
+        },
+        {
+          "name": "view-013.png",
+          "bytes": 527345,
+          "sha256": "18e7d1961a6b3c9a123e43f8726094ed84299459c9e6c4b7126a7b3ffc565e9f"
+        },
+        {
+          "name": "view-014.png",
+          "bytes": 524375,
+          "sha256": "dfe1aa1f234550f43ab98a2f4e9606541b4a21fa193a630864e29685a9bb8fee"
+        },
+        {
+          "name": "view-015.png",
+          "bytes": 528828,
+          "sha256": "1c6021325e4389cf50f576132f93e836afd33db8e0672a173f5a2c72f6cbc7dd"
+        },
+        {
+          "name": "view-016.png",
+          "bytes": 526270,
+          "sha256": "2c5059340dd6fb54b5dac15462dbab3e8398125883494e3fa365f712eb8a9ec2"
+        },
+        {
+          "name": "view-017.png",
+          "bytes": 525446,
+          "sha256": "d9d9d6603a4f6119971853d0fea59cf433b1cde2ca9f1a53f1fdd4ad623d819a"
+        },
+        {
+          "name": "view-018.png",
+          "bytes": 527316,
+          "sha256": "37adc95acb8ed8522d8302daee923a39a3ffefcca11b915e85c25ab2bd9163a1"
+        },
+        {
+          "name": "view-019.png",
+          "bytes": 537110,
+          "sha256": "bac66eff16e1ee1491c840799063b57c7a46c1fd3b59b5284b8487d054308aa3"
+        },
+        {
+          "name": "view-020.png",
+          "bytes": 542871,
+          "sha256": "4d15c79b908316aafb3e2b451057ac8d622f686117f829ed7193133c12b322d2"
+        },
+        {
+          "name": "view-021.png",
+          "bytes": 548344,
+          "sha256": "38c6ac444b26c0a4193d319f8a3c6c600ce2dc613293e6a1198b609ec9865e9e"
+        },
+        {
+          "name": "view-022.png",
+          "bytes": 548615,
+          "sha256": "6104326f9cb9753ac5453de5a93eab548880c9ddde975a5afe92542b9c71ec6c"
+        },
+        {
+          "name": "view-023.png",
+          "bytes": 548535,
+          "sha256": "c1bc98ff90a854091ede0e352b44c8138a30ad97ecfb9f74165885814937a0ae"
+        }
+      ]
+    },
+    {
+      "id": "photos3d-synthetic-cake-birthday",
+      "kind": "rendered synthetic object, not a real capture",
+      "views": 24,
+      "source": "https://kenney.nl/assets/food-kit",
+      "author": "Kenney; calibrated renders made by Ryan with Codex (GPT-6)",
+      "license": "CC0-1.0",
+      "checked": "October 17, 2026",
+      "model": {
+        "source": "https://kenney.nl/assets/food-kit",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "checked": "October 17, 2026",
+        "sha256": "5c9f797259fa626c084091a618e9681ce49a5e96f31956241dc37faef16ac5c4",
+        "changes": "Unmodified cake-birthday.glb from Food Kit, with palette texture embedded using the existing pinned @gltf-transform/core and registered extensions, including KHR_texture_transform. Mesh geometry and texture transforms retained. Synthetic calibrated views, not real photographs. Archive SHA256 cdad90853682499b94c9fda2f87678b24bfd8f3264e0ed323f6b6a27fd7c6f6f.",
+        "originalModelSha256": "3102379c244fa77cdd4818c316037f576f3fb172d28f161ae9e8deead55dac69"
+      },
+      "rendererSource": "https://github.com/ryanjosephkamp/splashery/tree/f7710637570ce34aa544e53175f5dc7b03b6c11c/tools/blender",
+      "rendererCommit": "f7710637570ce34aa544e53175f5dc7b03b6c11c",
+      "manifestSha256": "ffdd12396d6cb0000d306232e26e8bc276a4de8f0823a847e6b2679263c9eb1b",
+      "changes": "24 rendered 960x720 orbit views at8samples using task105 pinned Blender4.5.3, with exact cameras and masks. All beauty images, source models, and generated datasets stay outside git.",
+      "shipped": false,
+      "files": [
+        {
+          "name": "view-000.png",
+          "bytes": 455378,
+          "sha256": "a1623417107dc62d35524d4c81c174bfaaee2a1e438ecf7a51a4011e0eb3ac1e"
+        },
+        {
+          "name": "view-001.png",
+          "bytes": 449851,
+          "sha256": "be69d19f584609867c6dacdbfa29899eeaa2425e7fd59a5477f93115ae23d21a"
+        },
+        {
+          "name": "view-002.png",
+          "bytes": 444957,
+          "sha256": "65c2c076f97040818f3c77b178b6df58ebd6c80c53fc928b56c05a74a48f4fe8"
+        },
+        {
+          "name": "view-003.png",
+          "bytes": 446557,
+          "sha256": "b03e84ee6340136756305b8d2e12493755e702af9f32c6967d4e05c7877ccd73"
+        },
+        {
+          "name": "view-004.png",
+          "bytes": 451004,
+          "sha256": "095530d3d3e5b7ab6e4e38d9b807c19878754db7d6685b6a95bde31de905f4b4"
+        },
+        {
+          "name": "view-005.png",
+          "bytes": 458730,
+          "sha256": "49c05f97de681fd451a3ac108eaa1c55b502911aea5e3ce8d1259f9d451ab476"
+        },
+        {
+          "name": "view-006.png",
+          "bytes": 462476,
+          "sha256": "cf003ec11dac2712df62be6291f19588cabbacf38ffa6529061b57d981786462"
+        },
+        {
+          "name": "view-007.png",
+          "bytes": 466863,
+          "sha256": "06e1d3cff74d87f24ab552e6dc32dff25adfe767a6f4dcccfd4237973cff06fb"
+        },
+        {
+          "name": "view-008.png",
+          "bytes": 470812,
+          "sha256": "1f4beb98784d0c34078e1c6c403b73ebc54e4af194a1b1932ddc8c7c4ecb5475"
+        },
+        {
+          "name": "view-009.png",
+          "bytes": 471356,
+          "sha256": "be8fe82e5ca585223b8579e17fb915b5ada020770b10a7ddf2b98bd054ba936b"
+        },
+        {
+          "name": "view-010.png",
+          "bytes": 469264,
+          "sha256": "bd491403a3dfddc5c61906b3b315ef21e1351d0ec82c88dfcc28535da2053cb9"
+        },
+        {
+          "name": "view-011.png",
+          "bytes": 469807,
+          "sha256": "d440ac3a4d179377fd73a598463b3ffaafeb8e987fe608d39b344b59b7928300"
+        },
+        {
+          "name": "view-012.png",
+          "bytes": 467235,
+          "sha256": "b840045e4bca56eaa4f7abdae7fac6891d32441ca979cd047b1e1e4e2b833c52"
+        },
+        {
+          "name": "view-013.png",
+          "bytes": 464407,
+          "sha256": "c93e6fda9ba7dccc813b9a853e9058a79ce112a940005f9134366b0e7a6e1c87"
+        },
+        {
+          "name": "view-014.png",
+          "bytes": 461325,
+          "sha256": "c2fa55dde7abb6ae7ec7cc4bc055090fdf03c60f9722f74f3779f1fff67254c4"
+        },
+        {
+          "name": "view-015.png",
+          "bytes": 462883,
+          "sha256": "da463e5144de6c020a5da0415f22374575127640aa6bf1c42f46b1c994254b0b"
+        },
+        {
+          "name": "view-016.png",
+          "bytes": 464556,
+          "sha256": "c22bd3dc3b6e5e4133638fa88140a0cfb836bf9e9bf9386260890d600600b5c2"
+        },
+        {
+          "name": "view-017.png",
+          "bytes": 466818,
+          "sha256": "ad4eb195b21fd58056717e86763dc89946a395edec651e726019f83e1cd972e7"
+        },
+        {
+          "name": "view-018.png",
+          "bytes": 465777,
+          "sha256": "002f44e5d0b107ffdb23e58d44c0cdd6d469a0a9f451800af831d87fa2909a08"
+        },
+        {
+          "name": "view-019.png",
+          "bytes": 467708,
+          "sha256": "0ef8c656f540d7822c3bebefefbd4b5b3d3a20938953a8cdf0ee0e7e439373c1"
+        },
+        {
+          "name": "view-020.png",
+          "bytes": 469239,
+          "sha256": "fbdb60bcd76e5477660719d6744f2712a792c6e431c08414821732e74cd8d8f7"
+        },
+        {
+          "name": "view-021.png",
+          "bytes": 467591,
+          "sha256": "8de11e8c8f20250d9f92a05fdfa21d1a156dc12ee0098ed7a5f3aa9980fadc02"
+        },
+        {
+          "name": "view-022.png",
+          "bytes": 465794,
+          "sha256": "4a46758283e77166694ba44a7da49205a4792b3f64fc094de4b7db279a784971"
+        },
+        {
+          "name": "view-023.png",
+          "bytes": 461112,
+          "sha256": "01a1fd9d52eff9ecc16f095fdfdd4188081d73e1792f362052c18e1d442d1915"
+        }
+      ]
+    },
+    {
+      "id": "photos3d-synthetic-donut-sprinkles",
+      "kind": "rendered synthetic object, not a real capture",
+      "views": 24,
+      "source": "https://kenney.nl/assets/food-kit",
+      "author": "Kenney; calibrated renders made by Ryan with Codex (GPT-6)",
+      "license": "CC0-1.0",
+      "checked": "October 17, 2026",
+      "model": {
+        "source": "https://kenney.nl/assets/food-kit",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "checked": "October 17, 2026",
+        "sha256": "c85f9fdc913d0097d19ae81f8988eb410b5c41ee10bf0b0039fa9002a241fb2d",
+        "changes": "Unmodified donut-sprinkles.glb from Food Kit, with palette texture embedded using the existing pinned @gltf-transform/core and registered extensions, including KHR_texture_transform. Mesh geometry and texture transforms retained. Synthetic calibrated views, not real photographs. Archive SHA256 cdad90853682499b94c9fda2f87678b24bfd8f3264e0ed323f6b6a27fd7c6f6f.",
+        "originalModelSha256": "f45946b7e81221e9d45fdfab45ee89eeb095ff0d7fb6a3ad9988919cf587d3b7"
+      },
+      "rendererSource": "https://github.com/ryanjosephkamp/splashery/tree/f7710637570ce34aa544e53175f5dc7b03b6c11c/tools/blender",
+      "rendererCommit": "f7710637570ce34aa544e53175f5dc7b03b6c11c",
+      "manifestSha256": "b26a22a30af2117461bf17480d37f34f8f94dd79d27ac0a48c5c6358ca721a83",
+      "changes": "24 rendered 960x720 orbit views at8samples using task105 pinned Blender4.5.3, with exact cameras and masks. All beauty images, source models, and generated datasets stay outside git.",
+      "shipped": false,
+      "files": [
+        {
+          "name": "view-000.png",
+          "bytes": 414372,
+          "sha256": "ca036e88d8bfc915df3cdbb7d2ce270784727d344815847506a3d71de9e5852e"
+        },
+        {
+          "name": "view-001.png",
+          "bytes": 414711,
+          "sha256": "bdb0016659aa7dfe2486276591717cf54163782522e26977bccac7e3c6fa391d"
+        },
+        {
+          "name": "view-002.png",
+          "bytes": 414921,
+          "sha256": "c2d2f25fc81e3c35a82fccbbb7a4f0af207aed5fb6dca47e658a9a0721945523"
+        },
+        {
+          "name": "view-003.png",
+          "bytes": 414557,
+          "sha256": "c98fde589b516cfb69d766651a71ab1387097c3c0a0c6e94657af111a9dac7f1"
+        },
+        {
+          "name": "view-004.png",
+          "bytes": 415480,
+          "sha256": "a545ec6e641db59e575e12bac7a71881356bc27ae5fd308761675db4f5d3627f"
+        },
+        {
+          "name": "view-005.png",
+          "bytes": 420586,
+          "sha256": "518cc81dfe370a6c8a60c1099918f228c2cf5bf0f0de4a97a326e38e21e53ed4"
+        },
+        {
+          "name": "view-006.png",
+          "bytes": 425627,
+          "sha256": "a68c20d30f11829c3369280228352e1dc4d186a639fa9b3b69f13ddb9d15dcf2"
+        },
+        {
+          "name": "view-007.png",
+          "bytes": 427789,
+          "sha256": "07989db57467eb5b312cd101c9aa9fc1d87a76f8f27342c33361b0279238eb0c"
+        },
+        {
+          "name": "view-008.png",
+          "bytes": 429666,
+          "sha256": "7789491542d827aed74e46a3d1abc0bab9b57291b3591511d7993f8a85f98f30"
+        },
+        {
+          "name": "view-009.png",
+          "bytes": 433405,
+          "sha256": "13eb35f0bf9d9e912228eca8eeced2baa12c285dae2523e5fbe520a3dc1e541d"
+        },
+        {
+          "name": "view-010.png",
+          "bytes": 436668,
+          "sha256": "c373f14ba4ae28d713c80de890e015ab233441f1459c5aa71dede3bc59b34dd0"
+        },
+        {
+          "name": "view-011.png",
+          "bytes": 436641,
+          "sha256": "5a2ef4e1a973f99bb3053edbf9af44d4f36853527357c64a97f102971caf0c71"
+        },
+        {
+          "name": "view-012.png",
+          "bytes": 435371,
+          "sha256": "2bbd0dae7a7877e1de79df7bb56e8747ce41680d94a02ed37520c0e51989a677"
+        },
+        {
+          "name": "view-013.png",
+          "bytes": 436372,
+          "sha256": "e68d1ff1a382556624adb24f517f530ce6245bb89eac98676cd59b293a795694"
+        },
+        {
+          "name": "view-014.png",
+          "bytes": 437796,
+          "sha256": "a255bda19a45ba5f84380c57be79f85a7da71d2d068b39abe99046f5835d68b6"
+        },
+        {
+          "name": "view-015.png",
+          "bytes": 436226,
+          "sha256": "e904d429c80c2888375f739e4cff9634ff2f5105c9126496d97de8ff6dd26457"
+        },
+        {
+          "name": "view-016.png",
+          "bytes": 434552,
+          "sha256": "07a37f1339ac6266c18b54cbc18cf430b735939942ff6173d731bb6d460136fc"
+        },
+        {
+          "name": "view-017.png",
+          "bytes": 435991,
+          "sha256": "122601cf262b887eeec7a3bed396050bd783a8893ce6d2715de3c9a6a1b8854d"
+        },
+        {
+          "name": "view-018.png",
+          "bytes": 435678,
+          "sha256": "099f91367abf4f31ef6c3523b8c529b14ba4a933190754c4ba9b68705c72c50e"
+        },
+        {
+          "name": "view-019.png",
+          "bytes": 432995,
+          "sha256": "2e26a55acbc2e276714f3f41aa82e748990ca748bd159f26d59a8d519d7ff815"
+        },
+        {
+          "name": "view-020.png",
+          "bytes": 428681,
+          "sha256": "6f00d0f0a0cc0af5fe0972809d0120e0e5c88bf817ab2d4788e0ca2b141f3324"
+        },
+        {
+          "name": "view-021.png",
+          "bytes": 428408,
+          "sha256": "74aebfce09481658942798494966ad88bf8a0f0a34bd8faaf3d68297e70cc023"
+        },
+        {
+          "name": "view-022.png",
+          "bytes": 425286,
+          "sha256": "55951796ef5440dadb65d416f332017c2de83b1e7e34cd1437e0611111005dff"
+        },
+        {
+          "name": "view-023.png",
+          "bytes": 418805,
+          "sha256": "c2fa1273ed1c3cb29249a78022b81dae799390c9f5d9b561f56f10b9a4aee067"
+        }
+      ]
+    }
   ]
 }
