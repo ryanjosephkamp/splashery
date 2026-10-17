@@ -20,3 +20,12 @@ The initial full CI run also caught stale generated Showcase counts caused by ad
 Regenerating `src/showcase/facts.json` changed only the total toy and kit counts, and its existing
 test now passes. The corrected implementation's full-suite run is linked in the JSON; its complete
 result will be recorded in the PR.
+
+The existing Pebbles stacking assertion in `tests/phy.spec.mjs` also failed in CI and its isolated
+recheck. On unmodified `main`, three single-worker runs produced two passes and one failure; this
+branch produced three passes in the same comparison. [Measurements](baseline-pebbles-check.json)
+record the failing height threshold. No physics or test code was changed.
+
+```sh
+SPLASHERY_CHROMIUM=/path/to/chromium141 SPLASHERY_GL=llvmpipe DISPLAY=:99 npx playwright test tests/phy.spec.mjs -g 'Pebbles:' --repeat-each=3 --workers=1
+```

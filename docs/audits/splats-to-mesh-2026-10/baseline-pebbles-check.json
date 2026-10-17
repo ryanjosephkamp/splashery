@@ -1,0 +1,20 @@
+{
+  "baselineCommit": "ceb51de7a015377d7f350119c27a792fc1a8a66d",
+  "implementationCommit": "176f2e188e8e06298c72eb256dabbd26a2f29351",
+  "test": "phy: Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+  "browser": "Chromium 141.0.7390.37",
+  "renderer": "ANGLE GL, Mesa llvmpipe, headed Xvfb",
+  "baseline": {
+    "passed": 2,
+    "failed": 1,
+    "assertion": "ys[1] > ys[0] + 0.12",
+    "failedExpectedGreaterThan": 0.21939665435196154,
+    "failedReceived": 0.1734119768502741
+  },
+  "implementation": {
+    "passed": 3,
+    "failed": 0
+  },
+  "ci": "The corrected-branch CI run failed this test and its isolated recheck. The same test also fails on the unchanged baseline. No physics or test code was changed.",
+  "ciRun": "https://github.com/ryanjosephkamp/splashery/actions/runs/39001608591"
+}
