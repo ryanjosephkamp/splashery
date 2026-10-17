@@ -16,7 +16,7 @@ async function open(page, labs) {
 
 // Two frames of the toy, `secs` apart, from the home view.
 async function twoFrames(page, program, secs = 1.5) {
-  return page.evaluate(
+  const result = await page.evaluate(
     async ({ program, secs }) => {
       const { app, player } = window.__splashery;
       await app.chooseToy("splat-field");
@@ -34,10 +34,21 @@ async function twoFrames(page, program, secs = 1.5) {
       const a = await grab();
       await new Promise((r) => setTimeout(r, secs * 1000));
       const b = await grab();
-      return { a, b, splats: player.toyInfo.splats };
+      // Encode after both observations, preserving the interval between them.
+      const encode = (sample) => {
+        const bytes = new Uint8Array(sample);
+        let binary = "";
+        for (let i = 0; i < bytes.length; i += 8192)
+          binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
+        return btoa(binary);
+      };
+      return { a: encode(a), b: encode(b), splats: player.toyInfo.splats };
     },
     { program, secs },
   );
+  result.a = Array.from(Buffer.from(result.a, "base64"));
+  result.b = Array.from(Buffer.from(result.b, "base64"));
+  return result;
 }
 
 const diff = (a, b) => a.reduce((s, v, i) => s + Math.abs(v - b[i]), 0) / a.length;
