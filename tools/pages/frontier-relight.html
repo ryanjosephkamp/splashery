@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Frontier: depth-guided light</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        background: #101b25;
+        color: #edf3f8;
+      }
+      body {
+        max-width: 1080px;
+        margin: auto;
+        padding: 24px;
+      }
+      h1 {
+        font-size: clamp(1.7rem, 5vw, 2.5rem);
+        margin: 0 0 8px;
+      }
+      p {
+        max-width: 80ch;
+        color: #b9ccd9;
+      }
+      a {
+        color: #90ddf0;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: center;
+        margin: 24px 0;
+      }
+      label {
+        display: grid;
+        gap: 6px;
+      }
+      input {
+        width: 210px;
+        accent-color: #90ddf0;
+      }
+      button {
+        font: inherit;
+        padding: 10px 16px;
+        border: 1px solid #70909e;
+        border-radius: 6px;
+        background: #23404f;
+        color: white;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+      :focus-visible {
+        outline: 3px solid #f7c97d;
+        outline-offset: 4px;
+      }
+      canvas {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+        background: #13232b;
+      }
+      .maps {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      figure {
+        margin: 0 0 20px;
+      }
+      figcaption {
+        margin: 8px 0;
+        color: #b9ccd9;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        padding: 16px;
+        background: #172b38;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+      @media (max-width: 500px) {
+        .images {
+          grid-template-columns: 1fr;
+        }
+        body {
+          padding: 16px;
+        }
+        .controls {
+          gap: 14px;
+        }
+        input {
+          width: min(280px, 75vw);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Depth-guided light</h1>
+    <p>
+      Run the vendored depth model on the CC0 still-life sample, then move a light across its
+      estimated surface. Both modes derive normals and reject boundaries from depth alone. Photo
+      colors already contain lighting; this modulates them rather than recovering albedo or removing
+      shadows.
+    </p>
+    <div class="controls">
+      <button id="photo" type="button">Run photo depth (27 MB, local)</button>
+      <button id="analytic" type="button">Run analytic check</button>
+      <button id="benchmark" type="button">Measure 21 lighting frames</button>
+      <label
+        >Light direction <input id="azimuth" type="range" min="-160" max="160" value="-40"
+      /></label>
+      <label>Roughness <input id="roughness" type="range" min="10" max="90" value="45" /></label>
+      <label
+        >Depth jump cutoff (%)
+        <input id="cutoff" type="range" min="0.5" max="10" step="0.5" value="3"
+      /></label>
+    </div>
+    <div class="maps images">
+      <figure>
+        <canvas id="source" width="640" height="400" aria-label="Source colors"></canvas>
+        <figcaption>Source colors</figcaption>
+      </figure>
+      <figure>
+        <canvas
+          id="lit"
+          width="640"
+          height="400"
+          aria-label="Depth-guided lighting preview"
+        ></canvas>
+        <figcaption>Lighting modulation; rejected pixels retain source color.</figcaption>
+      </figure>
+    </div>
+    <div class="maps">
+      <figure>
+        <canvas id="depth" width="640" height="400" aria-label="Relative camera depth map"></canvas>
+        <figcaption>Camera Z; photo depth uses arbitrary relative units.</figcaption>
+      </figure>
+      <figure>
+        <canvas
+          id="normals"
+          width="640"
+          height="400"
+          aria-label="Estimated surface normal map"
+        ></canvas>
+        <figcaption>Depth-only normals; black pixels mark rejection.</figcaption>
+      </figure>
+    </div>
+    <p id="sample-credit">
+      Analytic check: original CC0 spheres, floor, and wall, made by Ryan with Codex (GPT-6).
+      Reference normals are used only to measure error, never to select pixels.
+    </p>
+    <p id="status" role="status">Preparing the analytic check…</p>
+    <pre id="metrics" aria-label="Measured results"></pre>
+    <p>
+      Photo mode calls <code>estimateDepth</code> with the existing 27,258,801-byte int8 ONNX model
+      and ONNX Runtime Web WASM worker. The model loads from this repository only after Run photo
+      depth; no new weights, remote requests, or uploads. Repeated runs reuse the worker until this
+      page closes.
+    </p>
+    <p>
+      Memory lists live page arrays, estimated canvas backing, and the worker's retained input
+      tensor. Serialized model bytes are listed separately and in an accounted minimum. ORT
+      session/activation tensors, WASM heap, transient copies, scratch/GC, image decoding, and
+      compositor memory are unmeasured; this is not process peak. Times end at canvas submission,
+      not display presentation.
+    </p>
+    <p>
+      Photo geometry is a guess: inverse depth is normalized at its 2nd/98th percentiles, mapped to
+      inverse distances 1/8 through 1/2, then inverted to camera Z. Near/far 2–8 and focal length
+      0.8 × the long side are assumptions, not metric depth or a recovered camera. Smooth depth
+      errors, boundary halos, baked shadows, cast shadows, and hidden surfaces remain unresolved.
+    </p>
+    <p>
+      Research context:
+      <a href="https://github.com/DepthAnything/Depth-Anything-V2">Depth Anything V2</a>. Photo:
+      Antoine Vollon's
+      <a href="https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg"
+        >Still Life with Cheese</a
+      >, CC0, Metropolitan Museum of Art Open Access; already credited in
+      <a href="../../CREDITS.md">CREDITS.md</a>. Original probe code is MIT, made by Ryan with Codex
+      (GPT-6).
+    </p>
+    <script type="module">
+      const $ = (id) => document.getElementById(id);
+      const MODEL_BYTES = 27258801;
+      const nextFrame = () => new Promise(requestAnimationFrame);
+      const quantile = (v, q) =>
+        v.length ? [...v].sort((a, b) => a - b)[Math.floor((v.length - 1) * q)] : null;
+      let sample = null,
+        stats = {},
+        image = null,
+        busy = false,
+        depthModule = null;
+      let retainedWorkerInputBytes = 0,
+        modelResident = false;
+      const toLinear = (c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+      const toSrgb = (c) => 255 * (c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055);
+
+      // Same estimator for photo and analytic modes. No labels, colors, or
+      // reference normals are accepted. Both discontinuity tests use only Z.
+      function deriveNormals({ w, h, f, depth }, cutoff = 0.03) {
+        if (depth.length !== w * h || !(f > 0) || !(cutoff > 0))
+          throw new Error("Invalid depth geometry.");
+        const normals = new Float32Array(w * h * 3),
+          valid = new Uint8Array(w * h);
+        const rejected = {
+          border: 2 * w + 2 * h - 4,
+          nonfinite: 0,
+          jump: 0,
+          curvature: 0,
+          degenerate: 0,
+        };
+        for (let y = 1; y < h - 1; y++)
+          for (let x = 1; x < w - 1; x++) {
+            const i = y * w + x,
+              z = depth[i],
+              l = depth[i - 1],
+              r = depth[i + 1],
+              t = depth[i - w],
+              b = depth[i + w];
+            if (![z, l, r, t, b].every((v) => Number.isFinite(v) && v > 0)) {
+              rejected.nonfinite++;
+              continue;
+            }
+            if ([l, r, t, b].some((v) => Math.abs(v - z) / Math.min(v, z) > cutoff)) {
+              rejected.jump++;
+              continue;
+            }
+            if (Math.max(Math.abs(l + r - 2 * z), Math.abs(t + b - 2 * z)) / z > cutoff / 2) {
+              rejected.curvature++;
+              continue;
+            }
+            const ax = ((x + 1 - w / 2) * r - (x - 1 - w / 2) * l) / f,
+              ay = (-(y - h / 2) * (r - l)) / f,
+              az = r - l;
+            const bx = ((x - w / 2) * (t - b)) / f,
+              by = (-(y - 1 - h / 2) * t + (y + 1 - h / 2) * b) / f,
+              bz = t - b;
+            let nx = by * az - bz * ay,
+              ny = bz * ax - bx * az,
+              nz = bx * ay - by * ax;
+            const length = Math.hypot(nx, ny, nz);
+            if (!(length > 1e-10)) {
+              rejected.degenerate++;
+              continue;
+            }
+            nx /= length;
+            ny /= length;
+            nz /= length;
+            if ((nx * (x - w / 2) * z) / f - (ny * (y - h / 2) * z) / f + nz * z > 0) {
+              nx = -nx;
+              ny = -ny;
+              nz = -nz;
+            }
+            normals.set([nx, ny, nz], i * 3);
+            valid[i] = 1;
+          }
+        return { normals, valid, rejected };
+      }
+      function convertInverseDepth(raw, near = 2, far = 8) {
+        const finite = raw.filter(Number.isFinite).sort();
+        const lo = finite[Math.floor((finite.length - 1) * 0.02)],
+          hi = finite[Math.floor((finite.length - 1) * 0.98)];
+        if (!(near > 0 && far > near && hi > lo)) throw new Error("No finite inverse-depth range.");
+        const depth = new Float32Array(raw.length);
+        for (let i = 0; i < raw.length; i++) {
+          const u = Math.min(1, Math.max(0, (raw[i] - lo) / (hi - lo)));
+          depth[i] = Number.isFinite(raw[i]) ? 1 / (1 / far + u * (1 / near - 1 / far)) : NaN;
+        }
+        return { depth, inversePercentiles: [lo, hi], near, far };
+      }
+      function analyticSample() {
+        const w = 640,
+          h = 400,
+          f = 510,
+          n = w * h,
+          depth = new Float32Array(n),
+          rgb = new Float32Array(n * 3),
+          truth = new Float32Array(n * 3);
+        const spheres = [
+          [-1.05, -0.1, 4.2, 0.88],
+          [0.8, -0.35, 4.8, 0.72],
+          [0.6, 0.85, 5.7, 0.55],
+        ];
+        const colors = [
+          [0.12, 0.65, 0.66],
+          [0.95, 0.42, 0.17],
+          [0.64, 0.39, 0.77],
+        ];
+        for (let y = 0; y < h; y++)
+          for (let x = 0; x < w; x++) {
+            const i = y * w + x,
+              dx = (x - w / 2) / f,
+              dy = -(y - h / 2) / f;
+            let z = 8,
+              color = [0.14, 0.21, 0.28],
+              normal = [0, 0, -1];
+            if (dy < 0 && -1.1 / dy < z) {
+              z = -1.1 / dy;
+              normal = [0, 1, 0];
+              color =
+                (Math.floor(dx * z * 2) + Math.floor(z * 2)) & 1
+                  ? [0.35, 0.37, 0.31]
+                  : [0.57, 0.54, 0.43];
+            }
+            for (let s = 0; s < spheres.length; s++) {
+              const [cx, cy, cz, r] = spheres[s],
+                a = dx * dx + dy * dy + 1,
+                b = -2 * (dx * cx + dy * cy + cz),
+                c = cx * cx + cy * cy + cz * cz - r * r;
+              const disc = b * b - 4 * a * c;
+              if (disc < 0) continue;
+              const hit = (-b - Math.sqrt(disc)) / (2 * a);
+              if (hit > 0 && hit < z) {
+                z = hit;
+                color = colors[s];
+                normal = [(dx * z - cx) / r, (dy * z - cy) / r, (z - cz) / r];
+              }
+            }
+            depth[i] = z;
+            rgb.set(color, i * 3);
+            truth.set(normal, i * 3);
+          }
+        return { mode: "analytic", w, h, f, depth, rgb, truth, rawInverse: null };
+      }
+      async function photoSample() {
+        const started = performance.now(),
+          picture = new Image();
+        picture.src = new URL("../../assets/toys/photo-3d/still-life.jpg", import.meta.url).href;
+        await picture.decode();
+        const inputCanvas = document.createElement("canvas");
+        inputCanvas.width = picture.naturalWidth;
+        inputCanvas.height = picture.naturalHeight;
+        const c = inputCanvas.getContext("2d");
+        c.drawImage(picture, 0, 0);
+        const photo = {
+          w: inputCanvas.width,
+          h: inputCanvas.height,
+          data: c.getImageData(0, 0, inputCanvas.width, inputCanvas.height).data,
+        };
+        const decodeMs = performance.now() - started,
+          callStart = performance.now(),
+          cold = !modelResident;
+        depthModule ||= await import("../../src/packs/photo-3d-depth.js");
+        const result = await depthModule.estimateDepth(
+          photo,
+          (text) => {
+            if (text) $("status").textContent = text;
+          },
+          { side: 518 },
+        );
+        const depthCallMs = performance.now() - callStart;
+        modelResident = true;
+        retainedWorkerInputBytes = 3 * result.w * result.h * 4;
+        const conversionStart = performance.now(),
+          converted = convertInverseDepth(result.d);
+        const conversionMs = performance.now() - conversionStart;
+        // Match colors to the model's output grid; input preprocessing stays in
+        // the existing depth worker, not this probe.
+        inputCanvas.width = result.w;
+        inputCanvas.height = result.h;
+        c.drawImage(picture, 0, 0, result.w, result.h);
+        const pixels = c.getImageData(0, 0, result.w, result.h).data,
+          rgb = new Float32Array(result.w * result.h * 3);
+        for (let i = 0; i < result.w * result.h; i++)
+          for (let k = 0; k < 3; k++) rgb[i * 3 + k] = toLinear(pixels[i * 4 + k] / 255);
+        return {
+          mode: "photo",
+          w: result.w,
+          h: result.h,
+          f: 0.8 * Math.max(result.w, result.h),
+          depth: converted.depth,
+          rgb,
+          truth: null,
+          rawInverse: result.d,
+          details: {
+            sourceWidth: photo.w,
+            sourceHeight: photo.h,
+            decodeMs,
+            depthCallMs,
+            depthInferenceMs: result.ms,
+            depthCold: cold,
+            inverseConversionMs: conversionMs,
+            inversePercentiles: converted.inversePercentiles,
+            pseudoNearFar: [2, 8],
+            focalAssumption: "0.8 × long side; not recovered",
+          },
+        };
+      }
+      function updateMemory() {
+        const { w, h } = sample,
+          n = w * h;
+        stats.pageArrayBytes =
+          sample.depth.byteLength +
+          sample.rgb.byteLength +
+          (sample.truth?.byteLength || 0) +
+          (sample.rawInverse?.byteLength || 0) +
+          sample.normals.byteLength +
+          sample.valid.byteLength +
+          image.data.byteLength;
+        stats.canvasBackingBytes = 4 * n * 4;
+        stats.retainedWorkerInputBytes = retainedWorkerInputBytes;
+        stats.knownBytes =
+          stats.pageArrayBytes + stats.canvasBackingBytes + retainedWorkerInputBytes;
+        stats.modelFileBytes = modelResident ? MODEL_BYTES : 0;
+        stats.knownBytesPlusModelFile = stats.knownBytes + stats.modelFileBytes;
+        stats.depthSessionResident = modelResident;
+        stats.memoryScope =
+          "accounted page arrays, estimated 4 RGBA canvas backings, and retained worker input; serialized model listed separately; excludes ORT/WASM heap, activations, transient copies, scratch/GC, decode, and compositor";
+      }
+      function rebuildNormals() {
+        const t = performance.now();
+        Object.assign(sample, deriveNormals(sample, Number($("cutoff").value) / 100));
+        stats.normalMs = performance.now() - t;
+        stats.depthJumpCutoff = Number($("cutoff").value) / 100;
+        stats.validPixels = sample.valid.reduce((a, v) => a + v, 0);
+        stats.rejectedPixels = sample.w * sample.h - stats.validPixels;
+        stats.rejected = { ...sample.rejected };
+        stats.normalMedianDegrees = stats.normalP95Degrees = stats.normalMaxDegrees = null;
+        stats.normalAbove5Degrees = stats.curvedNormalP95Degrees = null;
+        if (sample.truth) {
+          const errors = [],
+            curved = [];
+          for (let i = 0; i < sample.w * sample.h; i++)
+            if (sample.valid[i]) {
+              const o = i * 3,
+                dot =
+                  sample.normals[o] * sample.truth[o] +
+                  sample.normals[o + 1] * sample.truth[o + 1] +
+                  sample.normals[o + 2] * sample.truth[o + 2];
+              const error = (Math.acos(Math.max(-1, Math.min(1, dot))) * 180) / Math.PI;
+              errors.push(error);
+              if (Math.abs(sample.truth[o]) > 1e-4 && Math.abs(sample.truth[o + 2]) > 1e-4)
+                curved.push(error);
+            }
+          stats.normalMedianDegrees = quantile(errors, 0.5);
+          stats.normalP95Degrees = quantile(errors, 0.95);
+          stats.curvedNormalP95Degrees = quantile(curved, 0.95);
+          stats.normalMaxDegrees = quantile(errors, 1);
+          stats.normalAbove5Degrees = errors.filter((v) => v > 5).length;
+        }
+        updateMemory();
+        drawMaps();
+      }
+      function drawMaps() {
+        const { w, h, depth, normals, valid, rgb } = sample;
+        const out = $("source").getContext("2d").createImageData(w, h);
+        for (const id of ["source", "depth", "normals"]) {
+          for (let i = 0; i < w * h; i++) {
+            for (let k = 0; k < 3; k++)
+              out.data[i * 4 + k] =
+                id === "source"
+                  ? toSrgb(rgb[i * 3 + k])
+                  : id === "depth"
+                    ? 255 * Math.min(1, Math.max(0, (8 - depth[i]) / 6))
+                    : valid[i]
+                      ? (normals[i * 3 + k] + 1) * 127.5
+                      : 0;
+            out.data[i * 4 + 3] = 255;
+          }
+          $(id).getContext("2d").putImageData(out, 0, 0);
+        }
+      }
+      function render(angle = Number($("azimuth").value)) {
+        if (!sample) return 0;
+        const t = performance.now(),
+          a = (angle * Math.PI) / 180,
+          light = [Math.sin(a) * 0.88, 0.45, -Math.cos(a) * 0.88],
+          ll = Math.hypot(...light);
+        for (let k = 0; k < 3; k++) light[k] /= ll;
+        const half = [light[0], light[1], light[2] - 1],
+          hl = Math.hypot(...half);
+        for (let k = 0; k < 3; k++) half[k] /= hl;
+        const power = 2 / (Number($("roughness").value) / 100) ** 2,
+          { w, h, normals, valid, rgb } = sample;
+        for (let i = 0; i < w * h; i++) {
+          const o = i * 3,
+            nx = normals[o],
+            ny = normals[o + 1],
+            nz = normals[o + 2];
+          const diffuse = Math.max(0, nx * light[0] + ny * light[1] + nz * light[2]);
+          const spec =
+            diffuse > 0
+              ? (sample.mode === "photo" ? 0.03 : 0.14) *
+                Math.max(0, nx * half[0] + ny * half[1] + nz * half[2]) ** power
+              : 0;
+          const gain = sample.mode === "photo" ? 0.55 + 0.7 * diffuse : 0.16 + 0.84 * diffuse;
+          for (let k = 0; k < 3; k++)
+            image.data[i * 4 + k] = toSrgb(
+              Math.min(1, valid[i] ? rgb[o + k] * gain + spec : rgb[o + k]),
+            );
+          image.data[i * 4 + 3] = 255;
+        }
+        $("lit").getContext("2d").putImageData(image, 0, 0);
+        return performance.now() - t;
+      }
+      function show() {
+        $("metrics").textContent = JSON.stringify(
+          stats,
+          (_, v) => (typeof v === "number" ? Math.round(v * 1000) / 1000 : v),
+          2,
+        );
+      }
+      function controls(disabled) {
+        busy = disabled;
+        for (const id of ["photo", "analytic", "benchmark", "cutoff"]) $(id).disabled = disabled;
+      }
+      async function measureFrames() {
+        const times = [];
+        render();
+        for (let i = 0; i < 21; i++) {
+          await nextFrame();
+          times.push(render(-70 + i * 7));
+        }
+        render();
+        stats.frames = times.length;
+        stats.lightMedianMs = quantile(times, 0.5);
+        stats.lightP95Ms = quantile(times, 0.95);
+        show();
+      }
+      async function runMode(mode) {
+        if (busy) return;
+        controls(true);
+        document.body.dataset.state = "loading";
+        $("status").textContent =
+          mode === "photo"
+            ? "Loading the existing CC0 photo and local depth model…"
+            : "Building the analytic check…";
+        try {
+          const start = performance.now(),
+            next = mode === "photo" ? await photoSample() : analyticSample();
+          sample = next;
+          stats = {
+            mode,
+            width: sample.w,
+            height: sample.h,
+            focalPixels: sample.f,
+            backend:
+              mode === "photo"
+                ? "ONNX Runtime Web WASM, one worker thread + Canvas 2D"
+                : "CPU / Canvas 2D",
+            sampleMs: performance.now() - start,
+            depthCallMs: 0,
+            depthInferenceMs: 0,
+            ...sample.details,
+          };
+          for (const id of ["source", "lit", "depth", "normals"]) {
+            $(id).width = sample.w;
+            $(id).height = sample.h;
+          }
+          image = $("lit").getContext("2d").createImageData(sample.w, sample.h);
+          rebuildNormals();
+          $("sample-credit").textContent =
+            mode === "photo"
+              ? "Photo mode: Still Life with Cheese, Antoine Vollon, CC0, Metropolitan Museum of Art Open Access. Existing assets/toys/photo-3d/still-life.jpg; observed RGB is not albedo. No ground-truth depth or normals are available."
+              : "Analytic check: original CC0 spheres, floor, and wall, made by Ryan with Codex (GPT-6). Reference normals measure errors only; rejection uses depth alone.";
+          document.body.dataset.state = "measuring";
+          await measureFrames();
+          document.body.dataset.state = "ready";
+          document.body.dataset.mode = mode;
+          $("status").textContent =
+            `${mode === "photo" ? "Photo" : "Analytic"} mode complete. ${stats.validPixels.toLocaleString()} accepted pixels; ${stats.rejectedPixels.toLocaleString()} rejected using depth alone. Photo geometry and lighting accuracy are unverified.`;
+          return { ...stats };
+        } catch (error) {
+          document.body.dataset.state = "error";
+          $("status").textContent = error.message;
+          throw error;
+        } finally {
+          controls(false);
+        }
+      }
+      async function benchmark() {
+        if (busy || !sample) return;
+        controls(true);
+        try {
+          await measureFrames();
+          return { ...stats };
+        } finally {
+          controls(false);
+        }
+      }
+      let scheduled = false;
+      function schedule() {
+        if (scheduled || busy) return;
+        scheduled = true;
+        requestAnimationFrame(() => {
+          scheduled = false;
+          render();
+        });
+      }
+      for (const id of ["azimuth", "roughness"]) $(id).addEventListener("input", schedule);
+      $("cutoff").addEventListener("input", () => {
+        if (!busy) {
+          rebuildNormals();
+          render();
+          show();
+        }
+      });
+      $("photo").addEventListener("click", () => runMode("photo").catch(() => {}));
+      $("analytic").addEventListener("click", () => runMode("analytic").catch(() => {}));
+      $("benchmark").addEventListener("click", benchmark);
+      window.frontier = {
+        get stats() {
+          return stats;
+        },
+        get sample() {
+          return sample;
+        },
+        deriveNormals,
+        convertInverseDepth,
+        render,
+        benchmark,
+        runMode,
+      };
+      await runMode("analytic");
+    </script>
+  </body>
+</html>
