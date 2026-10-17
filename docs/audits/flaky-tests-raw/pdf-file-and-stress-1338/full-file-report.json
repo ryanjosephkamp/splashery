@@ -1,0 +1,499 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/playwright.config.mjs",
+    "rootDir": "/workspace/splashery/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/prepublish-pdf-ready/pages-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/prepublish-pdf-ready/pages-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "pages-r2.spec.mjs",
+      "file": "pages-r2.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a chart opened as an image gets graphic cutouts instead of photo inference",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 199,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:27:17.611Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-5562e7e96acf904a12c8",
+          "file": "pages-r2.spec.mjs",
+          "line": 57,
+          "column": 1
+        },
+        {
+          "title": "a failed layered photo returns a single card instead of waiting forever",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 44,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "Pop out: Depth input unavailable in this regression check.\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:27:17.836Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-88852a4d86ee93e1e4d2",
+          "file": "pages-r2.spec.mjs",
+          "line": 91,
+          "column": 1
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3683,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:27:55.924Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-896a9c6755a5eda4ad36",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7789,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:27:59.619Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-63d21cfc389f0538211d",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "a closed album cover hides its picture faces (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10736,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:28:07.423Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-603a0b21db9a224b404b",
+          "file": "pages-r2.spec.mjs",
+          "line": 579,
+          "column": 3
+        },
+        {
+          "title": "a closed album cover hides its picture faces (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 26410,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:28:18.175Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-0a4a3f6ddbc67dc8f189",
+          "file": "pages-r2.spec.mjs",
+          "line": 579,
+          "column": 3
+        },
+        {
+          "title": "a connected page has a printed front and pickable white reverse (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3234,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:28:44.605Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-0cea5051cba91af6bbb2",
+          "file": "pages-r2.spec.mjs",
+          "line": 632,
+          "column": 3
+        },
+        {
+          "title": "a connected page has a printed front and pickable white reverse (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5212,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:28:47.857Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-07ccfc0b4b3ca8b3c44e",
+          "file": "pages-r2.spec.mjs",
+          "line": 632,
+          "column": 3
+        }
+      ],
+      "suites": [
+        {
+          "title": "sharp pages in the real renderer",
+          "file": "pages-r2.spec.mjs",
+          "line": 130,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the requested WebGPU renderer draws masked cards and reports its backend",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 360000,
+                  "annotations": [
+                    {
+                      "type": "renderer",
+                      "description": "webgpu"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 17254,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Masked card renderer: {\"backend\":\"webgpu\",\"gpuErrors\":[],\"count\":3,\"layers\":true,\"pops\":[{\"phase\":\"up\",\"layered\":true,\"kind\":\"graphic\"}],\"sheets\":[{\"id\":\"page\",\"hidden\":false,\"page\":0,\"enabled\":true,\"visible\":true,\"partVisible\":true,\"part\":1},{\"id\":\"pop0\",\"hidden\":false,\"page\":0,\"enabled\":true,\"visible\":true,\"partVisible\":true,\"part\":2},{\"id\":\"pop1\",\"hidden\":false,\"page\":0,\"enabled\":true,\"visible\":true,\"partVisible\":true,\"part\":3}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T13:27:17.891Z",
+                      "annotations": [
+                        {
+                          "type": "renderer",
+                          "description": "webgpu"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c79b240b3f2ed1e825c1-f72a6ed6ed5742fd6f08",
+              "file": "pages-r2.spec.mjs",
+              "line": 134,
+              "column": 3
+            },
+            {
+              "title": "still pages own continuous faces, moving media and the neighboring frame retain their splats",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 360000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13732,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T13:27:35.432Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c79b240b3f2ed1e825c1-97992243f7069a45673c",
+              "file": "pages-r2.spec.mjs",
+              "line": 306,
+              "column": 3
+            },
+            {
+              "title": "a turning leaf's two faces remain attached and leave no face in the next toy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 360000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6739,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T13:27:49.174Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c79b240b3f2ed1e825c1-90b04e74ca44596692a0",
+              "file": "pages-r2.spec.mjs",
+              "line": 446,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T13:27:16.489Z",
+    "duration": 96729.68299999999,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

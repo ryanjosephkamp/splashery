@@ -1,0 +1,24 @@
+[2m[WebServer] [22m(node:86660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 11 tests using 1 worker
+
+(node:86671) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:86671) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/pages-r2.spec.mjs:57:1 › a chart opened as an image gets graphic cutouts instead of photo inference (199ms)
+Pop out: Depth input unavailable in this regression check.
+  ✓   2 [chromium] › tests/pages-r2.spec.mjs:91:1 › a failed layered photo returns a single card instead of waiting forever (44ms)
+Masked card renderer: {"backend":"webgpu","gpuErrors":[],"count":3,"layers":true,"pops":[{"phase":"up","layered":true,"kind":"graphic"}],"sheets":[{"id":"page","hidden":false,"page":0,"enabled":true,"visible":true,"partVisible":true,"part":1},{"id":"pop0","hidden":false,"page":0,"enabled":true,"visible":true,"partVisible":true,"part":2},{"id":"pop1","hidden":false,"page":0,"enabled":true,"visible":true,"partVisible":true,"part":3}]}
+  ✓   3 [chromium] › tests/pages-r2.spec.mjs:134:3 › sharp pages in the real renderer › the requested WebGPU renderer draws masked cards and reports its backend (17.3s)
+  ✓   4 [chromium] › tests/pages-r2.spec.mjs:306:3 › sharp pages in the real renderer › still pages own continuous faces, moving media and the neighboring frame retain their splats (13.7s)
+  ✓   5 [chromium] › tests/pages-r2.spec.mjs:446:3 › sharp pages in the real renderer › a turning leaf's two faces remain attached and leave no face in the next toy (6.7s)
+  ✓   6 [chromium] › tests/pages-r2.spec.mjs:495:3 › opaque tilted PDF faces cover their own paper backing (webgl2) (3.7s)
+  ✓   7 [chromium] › tests/pages-r2.spec.mjs:495:3 › opaque tilted PDF faces cover their own paper backing (webgpu) (7.8s)
+  ✓   8 [chromium] › tests/pages-r2.spec.mjs:579:3 › a closed album cover hides its picture faces (webgl2) (10.7s)
+  ✓   9 [chromium] › tests/pages-r2.spec.mjs:579:3 › a closed album cover hides its picture faces (webgpu) (26.4s)
+  ✓  10 [chromium] › tests/pages-r2.spec.mjs:632:3 › a connected page has a printed front and pickable white reverse (webgl2) (3.2s)
+  ✓  11 [chromium] › tests/pages-r2.spec.mjs:632:3 › a connected page has a printed front and pickable white reverse (webgpu) (5.2s)
+
+  11 passed (1.6m)

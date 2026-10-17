@@ -1,0 +1,1117 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/playwright.config.mjs",
+    "rootDir": "/workspace/splashery/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/pdf-stress-1338/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/pdf-stress-1338/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "pages-r2.spec.mjs",
+      "file": "pages-r2.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12497,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:10.054Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-896a9c6755a5eda4ad36",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 11980,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:10.352Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-f914d90a9f5fa9cc0fbf",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 11730,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:09.628Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-4f0ae1376384b5d18d04",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 12365,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:09.458Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-752826b1903b597afb42",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 12627,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:23.334Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-d4575058e4b419b44442",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 12653,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:23.598Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-abcaf5f00d294f78a447",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 12477,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:24.228Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-14165ed4e243344c08ba",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12287,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:24.402Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-d88f6d90b8c25c5ae4ec",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 13299,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:37.854Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-4c506dc5bc93a2ea8ae1",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 12944,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:38.052Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-634a6d74968f0fe4b0b3",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 12682,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:38.707Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-c1d8c79f42e462ebe236",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12062,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:39.061Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-3bfa6e751075959ea4a6",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 13164,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:52.709Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-de445cbb072625e626a8",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 13822,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:52.838Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-b11d823249292961403b",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12818,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:52.951Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-0c471a1e11550b8f2674",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 12870,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:38:53.903Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-9fd15580194d24c8f801",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12407,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:07.830Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-d7656980050453cd75ab",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 11914,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:07.904Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-84b1b68c1235d6c2f245",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 13251,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:08.827Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-e9dd1058bc351d9013c4",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 11913,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:09.552Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-6c113516726a63906d2c",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 12383,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:22.416Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-62d06f68e4a17d102a06",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12813,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:22.519Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-02b645027a881f8d5baf",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 12182,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:23.791Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-062e360bae98732436eb",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 12392,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:24.463Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-345363bdd347588de315",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 13859,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:36.929Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-c54b653a75b3c3a7946e",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14655,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:37.718Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-16812a6a1ef8ba6d3799",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 26,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 13290,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:38.058Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-fbb563d69327f8b51427",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 27,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 13471,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:38.907Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-006b5b66fb81eca75d96",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 28,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 7673,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:53.111Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-861f4b035cf0c11e02d0",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        },
+        {
+          "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 29,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 7450,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:39:53.436Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c79b240b3f2ed1e825c1-af6057b758dcf252e5fb",
+          "file": "pages-r2.spec.mjs",
+          "line": 495,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T13:38:08.479Z",
+    "duration": 112869.278,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

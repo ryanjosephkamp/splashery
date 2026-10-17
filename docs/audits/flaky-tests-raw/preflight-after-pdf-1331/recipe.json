@@ -1,0 +1,14 @@
+{
+  "head": "499501064b0b42e27545d61df8f5fdb660dfab71",
+  "exitCode": 0,
+  "node": "22.20.0",
+  "chromium": "141.0.7390.37",
+  "renderer": "llvmpipe",
+  "display": ":91",
+  "port": 4173,
+  "command": "node tools/preflight.mjs",
+  "browserCases": 271,
+  "staticGates": 6,
+  "main": "69cd6c99326e63873bb0facf82ef75d9d75d18c0",
+  "mainSynchronized": "2026-10-17T13:30:31Z"
+}

@@ -1,0 +1,7 @@
+{
+  "functionalHead": "9a16ae2ae7e49b1b792d01985fba3ea61aea2f78",
+  "purpose": "Diagnostic only for existing non-target PDF failure; original expectations and original captures retained, second variant adds native readiness. Native state observation in both variants, no artificial delay. Not target stress acceptance.",
+  "workers": 1,
+  "burners": 0,
+  "retries": 0
+}

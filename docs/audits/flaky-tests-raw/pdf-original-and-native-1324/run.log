@@ -1,0 +1,82 @@
+[2m[WebServer] [22m(node:86008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:86019) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:86019) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PDF_DIFFERENCE {"nativeReady":false,"mean":19.15683008917109,"count":9607}
+  ✘  1 [chromium] › .cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:27:1 › original-fixed-frames › opaque tilted PDF faces cover their own paper backing (webgl2) (3.9s)
+(node:86185) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:86185) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PDF_DIFFERENCE {"nativeReady":true,"mean":27.309750031313186,"count":18629}
+  ✘  2 [chromium] › .cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:27:1 › native-ready › opaque tilted PDF faces cover their own paper backing (webgl2) (4.2s)
+
+
+  1) [chromium] › .cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:27:1 › original-fixed-frames › opaque tilted PDF faces cover their own paper backing (webgl2) 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.5[39m
+    Received:   [31m19.15683008917109[39m
+
+      123 |     console.log("PDF_DIFFERENCE", JSON.stringify({ nativeReady, ...difference }));
+      124 |     expect(difference.count).toBeGreaterThan(1000);
+    > 125 |     expect(difference.mean).toBeLessThan(0.5);
+          |                             ^
+      126 |   });
+      127 |  });
+      128 | }
+        at /workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:125:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/pdf-existing-1324/results/probe-original-fixed-frame-5c1ae-r-own-paper-backing-webgl2--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .cache/flaky-tests/pdf-existing-1324/results/probe-original-fixed-frame-5c1ae-r-own-paper-backing-webgl2--chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/pdf-existing-1324/results/probe-original-fixed-frame-5c1ae-r-own-paper-backing-webgl2--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/pdf-existing-1324/results/probe-original-fixed-frame-5c1ae-r-own-paper-backing-webgl2--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › .cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:27:1 › native-ready › opaque tilted PDF faces cover their own paper backing (webgl2) 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.5[39m
+    Received:   [31m27.309750031313186[39m
+
+      123 |     console.log("PDF_DIFFERENCE", JSON.stringify({ nativeReady, ...difference }));
+      124 |     expect(difference.count).toBeGreaterThan(1000);
+    > 125 |     expect(difference.mean).toBeLessThan(0.5);
+          |                             ^
+      126 |   });
+      127 |  });
+      128 | }
+        at /workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:125:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/pdf-existing-1324/results/probe-native-ready-opaque--9dace-r-own-paper-backing-webgl2--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .cache/flaky-tests/pdf-existing-1324/results/probe-native-ready-opaque--9dace-r-own-paper-backing-webgl2--chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/pdf-existing-1324/results/probe-native-ready-opaque--9dace-r-own-paper-backing-webgl2--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/pdf-existing-1324/results/probe-native-ready-opaque--9dace-r-own-paper-backing-webgl2--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › .cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:27:1 › original-fixed-frames › opaque tilted PDF faces cover their own paper backing (webgl2) 
+    [chromium] › .cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:27:1 › native-ready › opaque tilted PDF faces cover their own paper backing (webgl2) 

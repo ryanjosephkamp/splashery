@@ -1,0 +1,3 @@
+# Repaired PDF: full file and thirty-repeat stress
+
+Published source 499501064b0b42e27545d61df8f5fdb660dfab71. All 11 page-file cases passed. Then the original webgl2 PDF test passed 30/30 under four fully parallel workers, two continuous CPU burners, and zero retries. No skips, failures, or interruptions occurred. The complete recipe includes every source hash and an empty tracked source diff. The harness is the task 100 harness with one additional PDF selector; the exact copy is retained. Every original assertion, threshold, timeout, and capture remains; only native desired-raster readiness is added. This raw branch must never merge.

@@ -1,0 +1,438 @@
+{
+  "status": "failed",
+  "nativeReady": false,
+  "records": [
+    {
+      "frame": 1,
+      "clock": 2413.099999997765,
+      "native": [
+        {
+          "version": 3,
+          "latest": 3,
+          "view": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "applied": "0.4761791229248047,0.24494637548923492,2.3208608627319336,-0.19985245524202638,-0.10280403677957871,-0.974417942238112",
+          "sorted": true,
+          "currentToy": true,
+          "awaitingLod": false,
+          "pendingLoads": 0,
+          "gpu": false,
+          "requests": 2,
+          "responses": 1
+        }
+      ],
+      "camera": {
+        "yaw": 0.45,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 2.3826533531671297
+      },
+      "sheets": [
+        {
+          "hidden": false,
+          "faceBacked": true,
+          "enabled": false,
+          "surface": true,
+          "want": "0|128|ink|0",
+          "shown": "0|128|ink|0"
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        }
+      ],
+      "retiring": []
+    },
+    {
+      "frame": 2,
+      "clock": 2436,
+      "native": [
+        {
+          "version": 3,
+          "latest": 3,
+          "view": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "applied": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "sorted": true,
+          "currentToy": true,
+          "awaitingLod": false,
+          "pendingLoads": 0,
+          "gpu": false,
+          "requests": 3,
+          "responses": 2
+        }
+      ],
+      "camera": {
+        "yaw": 0.45,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 2.3826533531671297
+      },
+      "sheets": [
+        {
+          "hidden": false,
+          "faceBacked": true,
+          "enabled": false,
+          "surface": true,
+          "want": "0|128|ink|0",
+          "shown": "0|128|ink|0"
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        }
+      ],
+      "retiring": []
+    },
+    {
+      "frame": 3,
+      "clock": 2468.099999997765,
+      "native": [
+        {
+          "version": 3,
+          "latest": 3,
+          "view": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "applied": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "sorted": true,
+          "currentToy": true,
+          "awaitingLod": false,
+          "pendingLoads": 0,
+          "gpu": false,
+          "requests": 4,
+          "responses": 3
+        }
+      ],
+      "camera": {
+        "yaw": 0.45,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 2.3826533531671297
+      },
+      "sheets": [
+        {
+          "hidden": false,
+          "faceBacked": true,
+          "enabled": false,
+          "surface": true,
+          "want": "0|128|ink|0",
+          "shown": "0|128|ink|0"
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        }
+      ],
+      "retiring": []
+    },
+    {
+      "frame": 4,
+      "clock": 2517,
+      "native": [
+        {
+          "version": 3,
+          "latest": 3,
+          "view": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "applied": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "sorted": true,
+          "currentToy": true,
+          "awaitingLod": false,
+          "pendingLoads": 0,
+          "gpu": false,
+          "requests": 5,
+          "responses": 4
+        }
+      ],
+      "camera": {
+        "yaw": 0.45,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 2.3826533531671297
+      },
+      "sheets": [
+        {
+          "hidden": false,
+          "faceBacked": true,
+          "enabled": false,
+          "surface": true,
+          "want": "0|128|ink|0",
+          "shown": "0|128|ink|0"
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        }
+      ],
+      "retiring": []
+    },
+    {
+      "frame": 5,
+      "clock": 2663.599999997765,
+      "native": [
+        {
+          "version": 3,
+          "latest": 3,
+          "view": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "applied": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "sorted": true,
+          "currentToy": true,
+          "awaitingLod": false,
+          "pendingLoads": 0,
+          "gpu": false,
+          "requests": 9,
+          "responses": 8
+        }
+      ],
+      "camera": {
+        "yaw": 0.45,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 2.3826533531671297
+      },
+      "sheets": [
+        {
+          "hidden": false,
+          "faceBacked": true,
+          "enabled": false,
+          "surface": true,
+          "want": "0|256|ink|0",
+          "shown": "0|128|ink|0"
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        }
+      ],
+      "retiring": []
+    },
+    {
+      "frame": 6,
+      "clock": 2794.5,
+      "native": [
+        {
+          "version": 3,
+          "latest": 3,
+          "view": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "applied": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "sorted": true,
+          "currentToy": true,
+          "awaitingLod": false,
+          "pendingLoads": 0,
+          "gpu": false,
+          "requests": 10,
+          "responses": 9
+        }
+      ],
+      "camera": {
+        "yaw": 0.45,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 2.3826533531671297
+      },
+      "sheets": [
+        {
+          "hidden": false,
+          "faceBacked": true,
+          "enabled": false,
+          "surface": true,
+          "want": "0|256|ink|0",
+          "shown": "0|128|ink|0"
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        }
+      ],
+      "retiring": []
+    },
+    {
+      "frame": 7,
+      "clock": 2809.699999999255,
+      "native": [
+        {
+          "version": 3,
+          "latest": 4,
+          "view": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "applied": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "sorted": true,
+          "currentToy": true,
+          "awaitingLod": false,
+          "pendingLoads": 0,
+          "gpu": false,
+          "requests": 11,
+          "responses": 10
+        }
+      ],
+      "camera": {
+        "yaw": 0.45,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 2.3826533531671297
+      },
+      "sheets": [
+        {
+          "hidden": false,
+          "faceBacked": true,
+          "enabled": false,
+          "surface": true,
+          "want": "0|256|ink|0",
+          "shown": "0|256|ink|0"
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        }
+      ],
+      "retiring": []
+    },
+    {
+      "frame": 8,
+      "clock": 2838.5,
+      "native": [
+        {
+          "version": 4,
+          "latest": 4,
+          "view": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "applied": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "sorted": true,
+          "currentToy": true,
+          "awaitingLod": false,
+          "pendingLoads": 0,
+          "gpu": false,
+          "requests": 12,
+          "responses": 11
+        }
+      ],
+      "camera": {
+        "yaw": 0.45,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 2.3826533531671297
+      },
+      "sheets": [
+        {
+          "hidden": false,
+          "faceBacked": true,
+          "enabled": false,
+          "surface": true,
+          "want": "0|256|ink|0",
+          "shown": "0|256|ink|0"
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        }
+      ],
+      "retiring": []
+    },
+    {
+      "frame": 9,
+      "clock": 2843.39999999851,
+      "native": [
+        {
+          "version": 4,
+          "latest": 4,
+          "view": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "applied": "0.9900840520858765,0.7041221857070923,2.0477797985076904,-0.41553845803009215,-0.29552021481407315,-0.8602299649129977",
+          "sorted": true,
+          "currentToy": true,
+          "awaitingLod": false,
+          "pendingLoads": 0,
+          "gpu": false,
+          "requests": 13,
+          "responses": 12
+        }
+      ],
+      "camera": {
+        "yaw": 0.45,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 2.3826533531671297
+      },
+      "sheets": [
+        {
+          "hidden": false,
+          "faceBacked": true,
+          "enabled": false,
+          "surface": true,
+          "want": "0|256|ink|0",
+          "shown": "0|256|ink|0"
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        },
+        {
+          "hidden": true,
+          "surface": false
+        }
+      ],
+      "retiring": []
+    }
+  ]
+}

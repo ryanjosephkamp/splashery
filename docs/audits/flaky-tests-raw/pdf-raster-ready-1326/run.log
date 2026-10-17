@@ -1,0 +1,13 @@
+[2m[WebServer] [22m(node:86362) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:86373) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:86373) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PDF_DIFFERENCE {"nativeReady":true,"mean":0,"count":19076}
+  ✓  1 [chromium] › .cache/flaky-tests/pdf-raster-ready-1326/probe.spec.mjs:27:1 › desired-raster-ready › opaque tilted PDF faces cover their own paper backing (webgl2) (4.4s)
+
+  1 passed (5.8s)

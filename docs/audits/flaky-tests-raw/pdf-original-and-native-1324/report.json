@@ -1,0 +1,257 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324",
+        "testIgnore": [],
+        "testMatch": [
+          "probe.spec.mjs"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery"
+    }
+  },
+  "suites": [
+    {
+      "title": "probe.spec.mjs",
+      "file": "probe.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "original-fixed-frames",
+          "file": "probe.spec.mjs",
+          "line": 26,
+          "column": 7,
+          "specs": [
+            {
+              "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 3904,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.5\u001b[39m\nReceived:   \u001b[31m19.15683008917109\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.5\u001b[39m\nReceived:   \u001b[31m19.15683008917109\u001b[39m\n    at /workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:125:29",
+                        "location": {
+                          "file": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs",
+                          "column": 29,
+                          "line": 125
+                        },
+                        "snippet": "  123 |     console.log(\"PDF_DIFFERENCE\", JSON.stringify({ nativeReady, ...difference }));\n  124 |     expect(difference.count).toBeGreaterThan(1000);\n> 125 |     expect(difference.mean).toBeLessThan(0.5);\n      |                             ^\n  126 |   });\n  127 |  });\n  128 | }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs",
+                            "column": 29,
+                            "line": 125
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.5\u001b[39m\nReceived:   \u001b[31m19.15683008917109\u001b[39m\n\n  123 |     console.log(\"PDF_DIFFERENCE\", JSON.stringify({ nativeReady, ...difference }));\n  124 |     expect(difference.count).toBeGreaterThan(1000);\n> 125 |     expect(difference.mean).toBeLessThan(0.5);\n      |                             ^\n  126 |   });\n  127 |  });\n  128 | }\n    at /workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:125:29"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "PDF_DIFFERENCE {\"nativeReady\":false,\"mean\":19.15683008917109,\"count\":9607}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T13:24:17.908Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/results/probe-original-fixed-frame-5c1ae-r-own-paper-backing-webgl2--chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/results/probe-original-fixed-frame-5c1ae-r-own-paper-backing-webgl2--chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/results/probe-original-fixed-frame-5c1ae-r-own-paper-backing-webgl2--chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs",
+                        "column": 29,
+                        "line": 125
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "33459b0cee36fa0488f7-29c2e166fcb739d2f671",
+              "file": "probe.spec.mjs",
+              "line": 27,
+              "column": 1
+            }
+          ]
+        },
+        {
+          "title": "native-ready",
+          "file": "probe.spec.mjs",
+          "line": 26,
+          "column": 7,
+          "specs": [
+            {
+              "title": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 4235,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.5\u001b[39m\nReceived:   \u001b[31m27.309750031313186\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.5\u001b[39m\nReceived:   \u001b[31m27.309750031313186\u001b[39m\n    at /workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:125:29",
+                        "location": {
+                          "file": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs",
+                          "column": 29,
+                          "line": 125
+                        },
+                        "snippet": "  123 |     console.log(\"PDF_DIFFERENCE\", JSON.stringify({ nativeReady, ...difference }));\n  124 |     expect(difference.count).toBeGreaterThan(1000);\n> 125 |     expect(difference.mean).toBeLessThan(0.5);\n      |                             ^\n  126 |   });\n  127 |  });\n  128 | }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs",
+                            "column": 29,
+                            "line": 125
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.5\u001b[39m\nReceived:   \u001b[31m27.309750031313186\u001b[39m\n\n  123 |     console.log(\"PDF_DIFFERENCE\", JSON.stringify({ nativeReady, ...difference }));\n  124 |     expect(difference.count).toBeGreaterThan(1000);\n> 125 |     expect(difference.mean).toBeLessThan(0.5);\n      |                             ^\n  126 |   });\n  127 |  });\n  128 | }\n    at /workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs:125:29"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "PDF_DIFFERENCE {\"nativeReady\":true,\"mean\":27.309750031313186,\"count\":18629}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T13:24:22.856Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/results/probe-native-ready-opaque--9dace-r-own-paper-backing-webgl2--chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/results/probe-native-ready-opaque--9dace-r-own-paper-backing-webgl2--chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/results/probe-native-ready-opaque--9dace-r-own-paper-backing-webgl2--chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/pdf-existing-1324/probe.spec.mjs",
+                        "column": 29,
+                        "line": 125
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "33459b0cee36fa0488f7-80f482923c5161b678ef",
+              "file": "probe.spec.mjs",
+              "line": 27,
+              "column": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T13:24:17.213Z",
+    "duration": 10473.955,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}
