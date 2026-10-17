@@ -1,0 +1,44 @@
+{
+  "review": "https://github.com/ryanjosephkamp/splashery/pull/702#issuecomment-6232466385",
+  "head": "e442b74e035395e30c0d7e2bd1737521b46d06fa",
+  "mergedMain": "c36c4dcd91f505ccb94cb5abe0d16cc2c626c395",
+  "mergeCommit": "61b76087cf3652851fe1435e3703d28d726abd1b",
+  "manualFiles": {
+    "manual/tinkerers-manual.pdf": {
+      "head": "0a5fd25d1ed91dd82843b27056c41355d8574dc0",
+      "main": "0a5fd25d1ed91dd82843b27056c41355d8574dc0"
+    },
+    "manual/pdf-edition.js": {
+      "head": "22b6690a830f010b09c701d2d205faf5ec218a4b",
+      "main": "22b6690a830f010b09c701d2d205faf5ec218a4b"
+    },
+    "manual/index.html": {
+      "head": "fe64380602b12be9525549acec2a041ea406fbc4",
+      "main": "fe64380602b12be9525549acec2a041ea406fbc4"
+    },
+    "site/learn/index.html": {
+      "head": "15b4cfbc075f4cd279850a3b9bc1e306a585f1d7",
+      "main": "15b4cfbc075f4cd279850a3b9bc1e306a585f1d7"
+    },
+    "site/learn/notebook/books/index.html": {
+      "head": "3e0efb0c90709800f013e47d2d43a751c58c6d8e",
+      "main": "3e0efb0c90709800f013e47d2d43a751c58c6d8e"
+    }
+  },
+  "manualChangedFiles": ["manual/all.html", "manual/make.html"],
+  "focused": {
+    "passed": 24,
+    "failed": 0,
+    "command": "npx playwright test tests/cdx-mesh.spec.mjs tests/cdx-mesh-input.spec.mjs tests/cdx-mesh-pose.spec.mjs tests/cdx-mesh-ui.spec.mjs"
+  },
+  "preflight": {
+    "passed": 272,
+    "failed": 0,
+    "elapsed": "4.9 minutes",
+    "command": "node tools/preflight.mjs",
+    "largeFileExceptions": []
+  },
+  "fullCI": "https://github.com/ryanjosephkamp/splashery/actions/runs/39058206798",
+  "expectedException": "man5:201: shipped PDF stale until the Operator prints at merge time",
+  "physicalPhoneVerified": false
+}

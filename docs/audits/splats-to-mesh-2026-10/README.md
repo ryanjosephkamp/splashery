@@ -6,6 +6,9 @@ Implementation and reproduction instructions are on `codex/splats-to-mesh`, in
 examples use implementation snapshot `65e2a6bf6`; the photo examples select `flat: 0` for depth
 relief, and kit examples bake their default poses and visibility.
 
+The [Operator review verification](operator-review/) records the later `e442b74e0` desktop-default
+and copyright changes, first-use browser downloads, inspected screenshots, and PDF rollback.
+
 - [Primary scores](scores.json): fourteen existing Poly Haven SOGs reconstructed with the fixed Fine
   preset (160, level 1, 100,000 triangles, smoothing 3, and 100 mm). Median Chamfer 1.4235%, median
   absolute normal consistency 0.9003, and independent watertight/manifold checks 14/14.

@@ -1,0 +1,130 @@
+{
+  "purpose": "First-use UI defaults verified through downloaded GLB; phone profile on desktop hardware.",
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "hasTouch": false
+      },
+      "settings": {
+        "quality": "fine",
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100
+      },
+      "downloadedReport": {
+        "inputSplats": 160000,
+        "sampledSplats": 160000,
+        "triangles": 83212,
+        "vertices": 41606,
+        "resolution": 160,
+        "surfaceResolution": 69,
+        "budgetMethod": "grid resampling",
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 11.760250738855099,
+          "sampledFaces": 2030,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 50.02276741576116,
+          "center": [-0.00017505884170532227, -0.00006446242332458496, 0.000021338462829589844]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 165645.20623018086
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 7574568,
+        "sparseBricks": 1600,
+        "bufferBytesEstimate": 75943192,
+        "elapsedMs": 2994.100000000093
+      },
+      "copyright": "Torus; Ryan and Splashery contributors; CC0 1.0; https://github.com/ryanjosephkamp/splashery",
+      "validation": {
+        "errors": 0,
+        "warnings": 0
+      },
+      "geometryBinSha256": "a90fb72b60eb0a9efc268a81ef9227716e1e1827212b0caeef4d9da24ce40821",
+      "matchesScoredTorusGeometry": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "hasTouch": true
+      },
+      "settings": {
+        "quality": "balanced",
+        "resolution": 72,
+        "level": 0.5,
+        "triangleBudget": 40000,
+        "readyToPrint": false,
+        "printSize": 100
+      },
+      "downloadedReport": {
+        "inputSplats": 60000,
+        "sampledSplats": 60000,
+        "triangles": 30420,
+        "vertices": 14990,
+        "resolution": 72,
+        "surfaceResolution": 31,
+        "budgetMethod": "grid resampling",
+        "level": 0.5,
+        "units": "source units",
+        "readyToPrint": false,
+        "printable": false,
+        "thicknessEstimateMm": null,
+        "thicknessVerified": false,
+        "thicknessCheck": null,
+        "printSize": null,
+        "printTransform": null,
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 1.3495931789520876
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail."
+        ],
+        "removedTriangles": 24,
+        "work": 2837134,
+        "sparseBricks": 204,
+        "bufferBytesEstimate": 5158680,
+        "elapsedMs": 712.5
+      },
+      "copyright": "Torus; Ryan and Splashery contributors; CC0 1.0; https://github.com/ryanjosephkamp/splashery",
+      "validation": {
+        "errors": 0,
+        "warnings": 0
+      },
+      "geometryBinSha256": "32567098e7550f3b138d0699ebf77a9065d0bbe533fd0a78ea8c57e88fd880ef"
+    }
+  ]
+}

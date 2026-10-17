@@ -1,0 +1,20 @@
+{
+  "validator": "Khronos glTF Validator 2.0.0-dev.3.10",
+  "license": "Apache-2.0",
+  "errors": 0,
+  "warnings": 0,
+  "copyright": "Torus; Ryan and Splashery contributors; CC0 1.0; https://github.com/ryanjosephkamp/splashery",
+  "options": {
+    "profile": "desktop",
+    "resolution": 160,
+    "level": 1,
+    "triangleBudget": 100000,
+    "readyToPrint": true,
+    "printSize": 100,
+    "smoothIterations": 3,
+    "minComponent": 0.002
+  },
+  "geometryBinSha256": "a90fb72b60eb0a9efc268a81ef9227716e1e1827212b0caeef4d9da24ce40821",
+  "previousGeometryBinSha256": "a90fb72b60eb0a9efc268a81ef9227716e1e1827212b0caeef4d9da24ce40821",
+  "geometryBinUnchanged": true
+}
