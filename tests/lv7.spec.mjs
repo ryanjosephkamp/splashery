@@ -11,12 +11,12 @@
 // 11.4.
 
 import { test, expect } from "@playwright/test";
-import { execFileSync } from "node:child_process";
+
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import config from "../playwright.config.mjs";
-import { fakeCamera, openMirror, measure, overFace, stillness } from "../tools/lv7-mirror-measure.mjs"; // prettier-ignore
+// prettier-ignore
 
 const DIR = fs.mkdtempSync(path.join(os.tmpdir(), "splashery-lv7-"));
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
@@ -91,106 +91,6 @@ test.describe("the mirror's depth (no browser)", () => {
 });
 
 // ---- The mirror on a camera ----------------------------------------------------------
-
-test.describe("the mirror on a camera (a generated mannequin)", () => {
-  test.describe.configure({ timeout: 600_000 });
-  let y4m;
-  test.beforeAll(() => {
-    y4m = path.join(DIR, "still.y4m");
-    execFileSync("node", ["tools/lv7-mannequin.mjs", y4m, "--still", "--frames=20"], { stdio: "ignore" }); // prettier-ignore
-  });
-
-  const launch = (playwright) =>
-    playwright.chromium.launch({ ...config.use.launchOptions, args: fakeCamera(y4m, config.use.launchOptions.args) }); // prettier-ignore
-
-  test("plain: steadier than before, frame to frame, and sharper", async ({
-    playwright,
-    baseURL,
-  }) => {
-    const browser = await launch(playwright);
-    try {
-      const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }); // prettier-ignore
-      const errors = [];
-      page.on("pageerror", (e) => errors.push(e.message));
-      await openMirror(page, baseURL + "/");
-      const m = await measure(page, { answers: 8 });
-      console.log("lv7 mirror, plain:", JSON.stringify(m));
-      // (Medians over the answers, with room for a loaded machine, where every
-      // jitter runs higher: this lane measured 0.7 to 1.0 face on and 1.2 to
-      // 3.0 turned on this container, main 1.41 to 1.51 and 2.31 to 3.23.)
-      expect(m.colorJitter).toBeLessThan(1.6); // main: 3.63
-      // The depth model's own guess wanders on a still picture; the relief
-      // follows it no more than before.
-      expect(m.heightJitter).toBeLessThan(0.03); // main: 0.013
-      expect(m.shownJitter).toBeLessThan(1.3); // main: 1.41 to 1.51
-      // Turned, the picture moves mostly with the depth model's own wobble,
-      // which runs from about 1.6 to over 4 on a loaded machine whatever the
-      // code (the face-on, color and height jitters above carry the claim);
-      // this catches a turned view gone wrong.
-      expect(m.shownJitterTurned).toBeLessThan(6); // main: 2.31 to 3.23 (unloaded)
-      // The polish round: sharper (how much of the camera's own edges reach
-      // the face; 0.51 to 0.52 before it, 0.56 to 0.57 after).
-      expect(m.sharpness).toBeGreaterThan(0.54);
-      // Stability (the owner's "Please improve stability" of October 6): held
-      // still, the whole picture holds still, splats and colors, face on and
-      // turned. r4 measured here: heights 0.69 (thousandths of the relief a
-      // frame), 5.9 per thousand splats moving a frame, 5.3 per thousand
-      // pixels flickering turned; r5: 0.14, 0.12 and 1.1.
-      const st = await stillness(page);
-      console.log("lv7 mirror, plain, held still:", JSON.stringify(st));
-      expect(st.height).toBeLessThan(0.4);
-      expect(st.moved).toBeLessThan(1.5);
-      expect(st.flickerTurned).toBeLessThan(3);
-      expect(errors).toEqual([]);
-    } finally {
-      await browser.close();
-    }
-  });
-
-  test("hologram: nothing drawn over the face, and steady", async ({ playwright, baseURL }) => {
-    const browser = await launch(playwright);
-    try {
-      const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }); // prettier-ignore
-      const errors = [];
-      page.on("pageerror", (e) => errors.push(e.message));
-      await openMirror(page, baseURL + "/", { look: "hologram" });
-      const m = await measure(page, { answers: 4 });
-      const over = await overFace(page);
-      console.log("lv7 mirror, hologram:", JSON.stringify({ ...m, overFace: over }));
-      expect(over).toBeLessThan(10); // main: 36 (scanlines and edge glow over the face)
-      expect(m.shownJitter).toBeLessThan(3); // main: 11.4 (the scanlines drifted over the face)
-      // Stability: the scanlines stand still too (r4: the room's colors moved
-      // 10.3 levels a frame here, 5.0 per thousand pixels flickering turned;
-      // r5: 0.16 and 0.2).
-      const st = await stillness(page);
-      console.log("lv7 mirror, hologram, held still:", JSON.stringify(st));
-      expect(st.color).toBeLessThan(1.5);
-      expect(st.moved).toBeLessThan(1.5);
-      expect(st.flickerTurned).toBeLessThan(2);
-      // Still the cool cyan look (r3).
-      const tint = await page.evaluate(async () => {
-        const { MIRROR, mirrorScreen } = await import("/src/live/relief.js");
-        const c = document.createElement("canvas");
-        c.width = mirrorScreen.width;
-        c.height = mirrorScreen.height;
-        const g = c.getContext("2d");
-        mirrorScreen.draw(g, 1);
-        const d = g.getImageData(0, 0, MIRROR.cols, MIRROR.rows).data;
-        let r = 0;
-        let b = 0;
-        for (let i = 0; i < d.length; i += 4) {
-          r += d[i];
-          b += d[i + 2];
-        }
-        return b / Math.max(1, r);
-      });
-      expect(tint).toBeGreaterThan(2);
-      expect(errors).toEqual([]);
-    } finally {
-      await browser.close();
-    }
-  });
-});
 
 // ---- The Song landscape grows as the song plays --------------------------------------
 

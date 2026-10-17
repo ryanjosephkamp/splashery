@@ -1,4 +1,4 @@
-// Task 101: this independent phone group keeps its original fixtures and solo execution.
+// Task 101: independent source-binding checks keep the original phone fixtures.
 import { test, expect } from "@playwright/test";
 
 import { android, watchPictures, chosenPicture } from "./cdx-mp2-r4-helpers.mjs";
@@ -21,6 +21,13 @@ test.describe("phone clip switches", () => {
     await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
     await page.waitForSelector("body[data-ready='true']");
     await watchPictures(page);
+    // These assertions read every native source pixel and the texture binding.
+    // The unused stage image needs only CSS resolution; keep the phone viewport.
+    await page.evaluate(() => {
+      const stage = window.__splashery.player.stage;
+      const { width, height } = stage.canvas.getBoundingClientRect();
+      stage.setFixedSize([Math.round(width), Math.round(height)]);
+    });
     const hashes = [];
     for (const file of ["blocks.mp4", "gate.webm", "wheel.mov", "orbit.gif", "fast.webm"]) {
       const name = `cdx-mp2-r4-${file.split(".")[0]}`;
@@ -77,6 +84,13 @@ test.describe("phone clip switches", () => {
     await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
     await page.waitForSelector("body[data-ready='true']");
     await watchPictures(page);
+    // These assertions read every native source pixel and the texture binding.
+    // The unused stage image needs only CSS resolution; keep the phone viewport.
+    await page.evaluate(() => {
+      const stage = window.__splashery.player.stage;
+      const { width, height } = stage.canvas.getBoundingClientRect();
+      stage.setFixedSize([Math.round(width), Math.round(height)]);
+    });
     const ids = await page.evaluate(() =>
       window.__r4Moving.MOVING_PHOTO.options
         .find((o) => o.key === "clip")
