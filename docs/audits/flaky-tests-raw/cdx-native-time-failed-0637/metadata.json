@@ -1,0 +1,19 @@
+{
+  "status": "cache-only unexecuted candidate",
+  "scope": "Only nextAnswer changed; no sort wait/forcing; actual worker/video free-running.",
+  "original_wait_ms": 400,
+  "candidate_consumed_native_seconds": 0.4,
+  "fresh_answer_timeout_ms": 30000,
+  "native_progress_timeout_ms": 30000,
+  "actual_cam_same_identity_required": true,
+  "restores_original_cam_draw_in_finally": true,
+  "all6samples_and_expect_lines_unchanged": true,
+  "outside_nextAnswer_byte_identical": true,
+  "source_hashes": {
+    ".cache/flaky-tests/cdx-natural/cdx.spec.mjs": "b0250de450009a78715cd1931ddc6185a5858f5bb4967dbbbcecc2fe8e57efb5",
+    ".cache/flaky-tests/cdx-natural/measure.mjs": "6137e229ee29d2ec633fce9d65f496e2dec6dedd484b91b7bb5d4b7fb78b99d0",
+    ".cache/flaky-tests/cdx-ready/cdx.spec.mjs": "b0250de450009a78715cd1931ddc6185a5858f5bb4967dbbbcecc2fe8e57efb5",
+    ".cache/flaky-tests/cdx-ready/measure.mjs": "67bf8b3dcb616c678b08543fb0114e1b95b63502eeb6a224777f987c72801617",
+    ".cache/flaky-tests/cdx-ready/config.mjs": "d30a0566238c7237928fe72e73027c4ae9fe8b04a9bc271431518f6b32e269d8"
+  }
+}
