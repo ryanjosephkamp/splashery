@@ -1,0 +1,330 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/cdx-low-count/config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/cdx-low-count",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-low-count/run-115115/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/cdx-low-count",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-low-count/run-115115/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/cdx-low-count",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4215",
+      "url": "http://127.0.0.1:4215/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery"
+    }
+  },
+  "suites": [
+    {
+      "title": "count.spec.mjs",
+      "file": "count.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "0: low-light: twenty original native observations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 262903,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-count-control-FA1aIg/still.y4m\n"
+                    },
+                    {
+                      "text": "Generated low-light: /tmp/splashery-count-control-FA1aIg/low-light.y4m\n"
+                    },
+                    {
+                      "text": "Native observation count control: {\"answers\":20,\"samples\":20,\"pairHeights\":[0.000928332417918084,0.002407323769167871,0.018894760376513674,0.01916505690068342,0.0013813640926503114,0.001450001569213094,0.0010182085388281323,0.0032759024388249124,0.004244177697041818,0.002884694706933858,0.003093534155102732,0.0007478311683076459,0.0008118173338237915,0.002241037118978597,0.0008314359798893198,0.002622296914944912,0.0011437646444752679,0.00019624907531783924,0.002241671742737159],\"pairShown\":[1.0729828042328042,1.458234126984127,1.6825396825396826,1.2555886243386243,1.4555886243386242,1.4596891534391534,1.4566137566137567,1.3961309523809524,1.4553902116402115,1.589351851851852,1.3804232804232803,1.2540674603174604,1.0689484126984128,1.6238095238095238,1.4755621693121692,1.5223214285714286,1.35380291005291,1.5537037037037038,1.2326388888888888],\"firstSix\":{\"height\":0.002407323769167871,\"shown\":1.4555886243386242},\"all\":{\"height\":0.002241037118978597,\"shown\":1.4555886243386242},\"windows\":[{\"firstSample\":0,\"height\":0.002407323769167871,\"shown\":1.4555886243386242},{\"firstSample\":1,\"height\":0.002407323769167871,\"shown\":1.458234126984127},{\"firstSample\":2,\"height\":0.001450001569213094,\"shown\":1.4566137566137567},{\"firstSample\":3,\"height\":0.001450001569213094,\"shown\":1.4555886243386242},{\"firstSample\":4,\"height\":0.001450001569213094,\"shown\":1.4555886243386242},{\"firstSample\":5,\"height\":0.002884694706933858,\"shown\":1.4566137566137567},{\"firstSample\":6,\"height\":0.003093534155102732,\"shown\":1.4553902116402115},{\"firstSample\":7,\"height\":0.003093534155102732,\"shown\":1.3961309523809524},{\"firstSample\":8,\"height\":0.002884694706933858,\"shown\":1.3804232804232803},{\"firstSample\":9,\"height\":0.002241037118978597,\"shown\":1.3804232804232803},{\"firstSample\":10,\"height\":0.0008314359798893198,\"shown\":1.3804232804232803},{\"firstSample\":11,\"height\":0.0008314359798893198,\"shown\":1.4755621693121692},{\"firstSample\":12,\"height\":0.0011437646444752679,\"shown\":1.4755621693121692},{\"firstSample\":13,\"height\":0.0011437646444752679,\"shown\":1.5223214285714286},{\"firstSample\":14,\"height\":0.0011437646444752679,\"shown\":1.4755621693121692}]}\n"
+                    },
+                    {
+                      "text": "cdx mirror low-light: {\"heightJitter\":0.002241037118978597,\"colorJitter\":1.447972972972973,\"shownJitter\":1.4555886243386242,\"shownJitterTurned\":1.4379298941798941,\"grain\":0,\"sharpness\":0.4585856234814737,\"drawMs\":127.8199999999255,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:51:17.211Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b160ca3f201b4be9273c-84d8ec1ebf2a075849e0",
+          "file": "count.spec.mjs",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "1: low-light: twenty original native observations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 246286,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-count-control-ZcUJTR/still.y4m\n"
+                    },
+                    {
+                      "text": "Generated low-light: /tmp/splashery-count-control-ZcUJTR/low-light.y4m\n"
+                    },
+                    {
+                      "text": "Native observation count control: {\"answers\":20,\"samples\":20,\"pairHeights\":[0.00040860061852580253,0.001157347882283969,0.003395059296173287,0.0016510142860850236,0.0009960446850740695,0.0006370338535792118,0.001093955714725428,0.0015867855769019943,0.0013562265150081198,0.001783227842922012,0.0016493808033431435,0.002331284569106526,0.003370159420579135,0.006369872651323005,0.00894436713912197,0.00592879280993329,0.00586307469864485,0.0025346283809290276,0.0015366159983583399],\"pairShown\":[1.340542328042328,1.613260582010582,1.7233796296296295,1.3379298941798943,1.3959656084656085,1.3009920634920635,1.5313492063492065,1.371031746031746,1.3477843915343914,1.6234457671957672,1.473776455026455,1.4456349206349206,1.7104497354497354,1.6604166666666667,1.5422619047619048,1.5933862433862434,1.6352513227513228,1.5834325396825397,1.6104497354497354],\"firstSix\":{\"height\":0.001157347882283969,\"shown\":1.3959656084656085},\"all\":{\"height\":0.0016510142860850236,\"shown\":1.5422619047619048},\"windows\":[{\"firstSample\":0,\"height\":0.001157347882283969,\"shown\":1.3959656084656085},{\"firstSample\":1,\"height\":0.001157347882283969,\"shown\":1.3959656084656085},{\"firstSample\":2,\"height\":0.001093955714725428,\"shown\":1.3959656084656085},{\"firstSample\":3,\"height\":0.001093955714725428,\"shown\":1.371031746031746},{\"firstSample\":4,\"height\":0.001093955714725428,\"shown\":1.371031746031746},{\"firstSample\":5,\"height\":0.0013562265150081198,\"shown\":1.371031746031746},{\"firstSample\":6,\"height\":0.0015867855769019943,\"shown\":1.473776455026455},{\"firstSample\":7,\"height\":0.0016493808033431435,\"shown\":1.4456349206349206},{\"firstSample\":8,\"height\":0.001783227842922012,\"shown\":1.473776455026455},{\"firstSample\":9,\"height\":0.002331284569106526,\"shown\":1.6234457671957672},{\"firstSample\":10,\"height\":0.003370159420579135,\"shown\":1.5422619047619048},{\"firstSample\":11,\"height\":0.00592879280993329,\"shown\":1.5933862433862434},{\"firstSample\":12,\"height\":0.00592879280993329,\"shown\":1.6352513227513228},{\"firstSample\":13,\"height\":0.00592879280993329,\"shown\":1.5933862433862434},{\"firstSample\":14,\"height\":0.00586307469864485,\"shown\":1.5933862433862434}]}\n"
+                    },
+                    {
+                      "text": "cdx mirror low-light: {\"heightJitter\":0.0016510142860850236,\"colorJitter\":1.4395645645645645,\"shownJitter\":1.5422619047619048,\"shownJitterTurned\":1.550760582010582,\"grain\":0,\"sharpness\":0.44657234492022285,\"drawMs\":245.7,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:51:17.232Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b160ca3f201b4be9273c-058ff7576b1dd7efbeaa",
+          "file": "count.spec.mjs",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "2: low-light: twenty original native observations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 250988,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-count-control-MSR3Ol/still.y4m\n"
+                    },
+                    {
+                      "text": "Generated low-light: /tmp/splashery-count-control-MSR3Ol/low-light.y4m\n"
+                    },
+                    {
+                      "text": "Native observation count control: {\"answers\":20,\"samples\":20,\"pairHeights\":[0.004042469543983808,0.0028151942484147914,0.0009755504158166078,0.0005437004958858361,0.0012428382260573877,0.000437814523340077,0.0005480933951230736,0.0010266953835951853,0.00412669593367625,0.0007066192717903907,0.0028364821840581055,0.0018042493317913901,0.0011350544941452173,0.001413615335718737,0.0005634355425901778,0.00019906105238709363,0.0033149697658446456,0.001122085612502184,0.0013567718685613022],\"pairShown\":[1.4970238095238095,1.5893187830687832,1.5247685185185185,1.4152116402116401,1.351686507936508,1.428637566137566,1.3278769841269842,1.1972883597883597,1.4299933862433862,1.5785383597883598,1.6381944444444445,1.6792328042328042,1.5915343915343916,1.5982142857142858,1.3070767195767197,1.6083333333333334,1.3604828042328043,1.6587301587301588,1.6699735449735449],\"firstSix\":{\"height\":0.0012428382260573877,\"shown\":1.4970238095238095},\"all\":{\"height\":0.0011350544941452173,\"shown\":1.5247685185185185},\"windows\":[{\"firstSample\":0,\"height\":0.0012428382260573877,\"shown\":1.4970238095238095},{\"firstSample\":1,\"height\":0.0009755504158166078,\"shown\":1.428637566137566},{\"firstSample\":2,\"height\":0.0005480933951230736,\"shown\":1.4152116402116401},{\"firstSample\":3,\"height\":0.0005480933951230736,\"shown\":1.351686507936508},{\"firstSample\":4,\"height\":0.0010266953835951853,\"shown\":1.351686507936508},{\"firstSample\":5,\"height\":0.0007066192717903907,\"shown\":1.428637566137566},{\"firstSample\":6,\"height\":0.0010266953835951853,\"shown\":1.4299933862433862},{\"firstSample\":7,\"height\":0.0018042493317913901,\"shown\":1.5785383597883598},{\"firstSample\":8,\"height\":0.0018042493317913901,\"shown\":1.5915343915343916},{\"firstSample\":9,\"height\":0.001413615335718737,\"shown\":1.5982142857142858},{\"firstSample\":10,\"height\":0.001413615335718737,\"shown\":1.5982142857142858},{\"firstSample\":11,\"height\":0.0011350544941452173,\"shown\":1.5982142857142858},{\"firstSample\":12,\"height\":0.0011350544941452173,\"shown\":1.5915343915343916},{\"firstSample\":13,\"height\":0.001122085612502184,\"shown\":1.5982142857142858},{\"firstSample\":14,\"height\":0.001122085612502184,\"shown\":1.6083333333333334}]}\n"
+                    },
+                    {
+                      "text": "cdx mirror low-light: {\"heightJitter\":0.0011350544941452173,\"colorJitter\":1.412912912912913,\"shownJitter\":1.5247685185185185,\"shownJitterTurned\":1.4755291005291005,\"grain\":0,\"sharpness\":0.4466682779718976,\"drawMs\":217.55999999996274,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:51:17.744Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b160ca3f201b4be9273c-8584de22b0db47e7bc53",
+          "file": "count.spec.mjs",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "3: low-light: twenty original native observations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 263878,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-count-control-ca2amN/still.y4m\n"
+                    },
+                    {
+                      "text": "Generated low-light: /tmp/splashery-count-control-ca2amN/low-light.y4m\n"
+                    },
+                    {
+                      "text": "Native observation count control: {\"answers\":20,\"samples\":20,\"pairHeights\":[0.005056529362509782,0.004541880723407811,0.003873822114405197,0.0009737152929275154,0.005064403131050436,0.0014783380716737059,0.0009845392954711978,0.0013959062440941732,0.0022049882289794116,0.011359167390561722,0.008051901741523867,0.003561883527567392,0.0014567417403062186,0.009768970927374589,0.011823467542375395,0.005048172021502847,0.004296554914499457,0.00332796666729222,0.00527075539712232],\"pairShown\":[1.525297619047619,1.5138888888888888,1.7564484126984128,1.4762566137566138,1.5773809523809523,1.302314814814815,1.2145833333333333,1.6238756613756613,1.6087301587301588,1.6587301587301588,1.4484126984126984,1.8488425925925926,1.4034060846560847,1.2151785714285714,1.743287037037037,1.5086640211640212,1.7355820105820106,1.4975198412698412,1.39375],\"firstSix\":{\"height\":0.004541880723407811,\"shown\":1.525297619047619},\"all\":{\"height\":0.004296554914499457,\"shown\":1.5138888888888888},\"windows\":[{\"firstSample\":0,\"height\":0.004541880723407811,\"shown\":1.525297619047619},{\"firstSample\":1,\"height\":0.003873822114405197,\"shown\":1.5138888888888888},{\"firstSample\":2,\"height\":0.0014783380716737059,\"shown\":1.4762566137566138},{\"firstSample\":3,\"height\":0.0013959062440941732,\"shown\":1.4762566137566138},{\"firstSample\":4,\"height\":0.0014783380716737059,\"shown\":1.5773809523809523},{\"firstSample\":5,\"height\":0.0014783380716737059,\"shown\":1.6087301587301588},{\"firstSample\":6,\"height\":0.0022049882289794116,\"shown\":1.6087301587301588},{\"firstSample\":7,\"height\":0.003561883527567392,\"shown\":1.6238756613756613},{\"firstSample\":8,\"height\":0.003561883527567392,\"shown\":1.6087301587301588},{\"firstSample\":9,\"height\":0.008051901741523867,\"shown\":1.4484126984126984},{\"firstSample\":10,\"height\":0.008051901741523867,\"shown\":1.4484126984126984},{\"firstSample\":11,\"height\":0.005048172021502847,\"shown\":1.5086640211640212},{\"firstSample\":12,\"height\":0.005048172021502847,\"shown\":1.5086640211640212},{\"firstSample\":13,\"height\":0.005048172021502847,\"shown\":1.5086640211640212},{\"firstSample\":14,\"height\":0.005048172021502847,\"shown\":1.5086640211640212}]}\n"
+                    },
+                    {
+                      "text": "cdx mirror low-light: {\"heightJitter\":0.004296554914499457,\"colorJitter\":1.4875375375375375,\"shownJitter\":1.5138888888888888,\"shownJitterTurned\":1.5730820105820107,\"grain\":0,\"sharpness\":0.45413224985816353,\"drawMs\":145.5,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:51:17.425Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b160ca3f201b4be9273c-8f17d8a2cd2d32b76a01",
+          "file": "count.spec.mjs",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "real motion still exceeds both original limits with twenty observations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 110578,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated turn: /tmp/splashery-count-motion-tkLrTD/turn.y4m\n"
+                    },
+                    {
+                      "text": "Native observation count control: {\"answers\":20,\"samples\":20,\"pairHeights\":[0.07250292143943879,0.03904380687671873,0.05369771149865276,0.06423929699084109,0.019789422256452544,0.06182131293011611,0.017203708975114397,0.018566643934159934,0.0816048900328308,0.08520120177501897,0.0461703143481098,0.025754360091108996,0.02239518288380324,0.0037447060808656857,0.022110041573870223,0.035411825371688015,0.04643716941050648,0.020103104196086123,0.03048411531474542],\"pairShown\":[37.606712962962966,31.520767195767196,22.813955026455027,18.461640211640212,18.28561507936508,22.55542328042328,5.001917989417989,25.875066137566137,4.374239417989418,25.771064814814814,35.96564153439154,25.39672619047619,2.3724206349206347,41.47972883597883,22.540079365079364,2.4416335978835977,34.32119708994709,34.36851851851852,40.59778439153439],\"firstSix\":{\"height\":0.05369771149865276,\"shown\":22.813955026455027},\"all\":{\"height\":0.035411825371688015,\"shown\":25.39672619047619},\"windows\":[{\"firstSample\":0,\"height\":0.05369771149865276,\"shown\":22.813955026455027},{\"firstSample\":1,\"height\":0.05369771149865276,\"shown\":22.55542328042328},{\"firstSample\":2,\"height\":0.05369771149865276,\"shown\":18.461640211640212},{\"firstSample\":3,\"height\":0.019789422256452544,\"shown\":18.461640211640212},{\"firstSample\":4,\"height\":0.019789422256452544,\"shown\":18.28561507936508},{\"firstSample\":5,\"height\":0.06182131293011611,\"shown\":22.55542328042328},{\"firstSample\":6,\"height\":0.0461703143481098,\"shown\":25.771064814814814},{\"firstSample\":7,\"height\":0.0461703143481098,\"shown\":25.771064814814814},{\"firstSample\":8,\"height\":0.0461703143481098,\"shown\":25.39672619047619},{\"firstSample\":9,\"height\":0.025754360091108996,\"shown\":25.771064814814814},{\"firstSample\":10,\"height\":0.02239518288380324,\"shown\":25.39672619047619},{\"firstSample\":11,\"height\":0.02239518288380324,\"shown\":22.540079365079364},{\"firstSample\":12,\"height\":0.02239518288380324,\"shown\":22.540079365079364},{\"firstSample\":13,\"height\":0.022110041573870223,\"shown\":34.32119708994709},{\"firstSample\":14,\"height\":0.03048411531474542,\"shown\":34.32119708994709}]}\n"
+                    },
+                    {
+                      "text": "Real native twenty-observation motion: {\"heightJitter\":0.035411825371688015,\"colorJitter\":33.387387387387385,\"shownJitter\":25.39672619047619,\"shownJitterTurned\":38.30545634920635,\"grain\":0,\"sharpness\":0.9909011234204655,\"drawMs\":46.33499999996275,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:55:23.605Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b160ca3f201b4be9273c-d8059dd5a4a6f63aee47",
+          "file": "count.spec.mjs",
+          "line": 17,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T11:51:16.125Z",
+    "duration": 358150.261,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

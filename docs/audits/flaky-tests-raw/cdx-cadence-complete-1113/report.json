@@ -1,0 +1,2776 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/playwright.config.mjs",
+    "rootDir": "/workspace/splashery/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-cadence-formal/run-1113/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-cadence-formal/run-1113/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4214",
+      "url": "http://127.0.0.1:4214/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "cdx-mir.spec.mjs",
+      "file": "cdx-mir.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "real depth worker with a fake camera",
+          "file": "cdx-mir.spec.mjs",
+          "line": 280,
+          "column": 6,
+          "specs": [
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 139153,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-SbcvHh/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-SbcvHh/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.000003868462266148748,\"colorJitter\":0.4789039039039039,\"shownJitter\":0.7063822751322751,\"shownJitterTurned\":0.6946428571428571,\"grain\":0,\"sharpness\":0.8354215087326694,\"drawMs\":137.50999999996276,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:13:18.789Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-07db22bf38edf533d4d7",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 134268,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-Nt8Jn8/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-Nt8Jn8/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0021296789573908253,\"colorJitter\":1.4216966966966966,\"shownJitter\":1.543287037037037,\"shownJitterTurned\":1.3362433862433862,\"grain\":0,\"sharpness\":0.4660067554836248,\"drawMs\":206.45499999988823,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:13:18.403Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-6536944f2aff44792ae6",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 135212,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-s4S73z/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-s4S73z/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.0005381537592961445,\"colorJitter\":0.5122372372372372,\"shownJitter\":0.6898148148148148,\"shownJitterTurned\":0.735978835978836,\"grain\":0,\"sharpness\":0.8247896424455389,\"drawMs\":167.61999999992548,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:13:18.432Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-a679f388b15a36dc2833",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 138376,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-JdM6zB/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-JdM6zB/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0009727932823201021,\"colorJitter\":1.311036036036036,\"shownJitter\":1.4635912698412699,\"shownJitterTurned\":1.4781415343915343,\"grain\":0,\"sharpness\":0.4576435206593867,\"drawMs\":161.26500000003725,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:13:19.051Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-e25652a84e974181d84d",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 128996,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-4nvqAG/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-4nvqAG/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.0000016708208063432762,\"colorJitter\":0.506981981981982,\"shownJitter\":0.6082341269841269,\"shownJitterTurned\":0.660813492063492,\"grain\":0,\"sharpness\":0.8379216945457102,\"drawMs\":153.1449999999255,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:15:37.315Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-134a0d3c403f988d20b5",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 148052,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-Sflqcr/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-Sflqcr/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.001236596599489719,\"colorJitter\":1.4134384384384384,\"shownJitter\":1.4265542328042329,\"shownJitterTurned\":1.614814814814815,\"grain\":0,\"sharpness\":0.43874815487572166,\"drawMs\":158.24000000003724,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:15:37.634Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-efaef4a741307b077320",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 141446,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-E43DtY/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-E43DtY/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":9.34101439811088e-7,\"colorJitter\":0.5413663663663664,\"shownJitter\":0.6441137566137566,\"shownJitterTurned\":0.6530753968253968,\"grain\":0,\"sharpness\":0.838384813115013,\"drawMs\":152.54500000011177,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:15:42.350Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-a0a8b2d8df8d178efbb4",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 140305,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-kZUP11/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-kZUP11/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.002845450919037601,\"colorJitter\":1.4726726726726727,\"shownJitter\":1.4633928571428572,\"shownJitterTurned\":1.572123015873016,\"grain\":0,\"sharpness\":0.4424879384132626,\"drawMs\":174.32999999988823,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:15:42.924Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-77d39a6b56f753eb441e",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 139876,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-sKW4Ho/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-sKW4Ho/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.0000025323113879641973,\"colorJitter\":0.41936936936936936,\"shownJitter\":0.6653439153439153,\"shownJitterTurned\":0.7083664021164021,\"grain\":0,\"sharpness\":0.8232888840754058,\"drawMs\":193.35999999996275,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:17:53.906Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-4f4755d0eedeca85473b",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 131200,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-bq7s0u/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-bq7s0u/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0011944951657373627,\"colorJitter\":1.5409159159159158,\"shownJitter\":1.5775462962962963,\"shownJitterTurned\":1.4503306878306879,\"grain\":0,\"sharpness\":0.4422483788896246,\"drawMs\":145.81500000003726,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:18:08.213Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-77fed16efc36f6ce264c",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 143842,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-y6qFXr/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-y6qFXr/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.0001582259031197241,\"colorJitter\":0.4762762762762763,\"shownJitter\":0.6446428571428572,\"shownJitterTurned\":0.6457671957671958,\"grain\":0,\"sharpness\":0.821875135079231,\"drawMs\":102.69000000003726,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:18:08.453Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-7d57568f0b618127f6e1",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 129285,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-ve0JbM/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-ve0JbM/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0029287796614372785,\"colorJitter\":1.3292792792792794,\"shownJitter\":1.345734126984127,\"shownJitterTurned\":1.4317791005291005,\"grain\":0,\"sharpness\":0.46210159425422065,\"drawMs\":212.7199999999255,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:18:10.925Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-206cb5466e6ce83285c9",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 145981,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-Yl6md2/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-Yl6md2/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":2.4011006226410737e-7,\"colorJitter\":0.5847597597597598,\"shownJitter\":0.7261904761904762,\"shownJitterTurned\":0.709589947089947,\"grain\":0,\"sharpness\":0.840357530829924,\"drawMs\":181.40499999988825,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:20:21.618Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-4083858d72bcb1aa96e9",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 137519,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-8S35ma/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-8S35ma/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0015225076234085602,\"colorJitter\":1.4367867867867867,\"shownJitter\":1.5628968253968254,\"shownJitterTurned\":1.318287037037037,\"grain\":0,\"sharpness\":0.4317131583101841,\"drawMs\":185.77999999988825,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:20:24.485Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-e66bac9faa8b57fade5a",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 137132,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-p0x7ug/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-p0x7ug/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.000013045912927335448,\"colorJitter\":0.579954954954955,\"shownJitter\":0.7433201058201058,\"shownJitterTurned\":0.6772817460317461,\"grain\":0,\"sharpness\":0.8276639736228497,\"drawMs\":143.10999999996275,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:20:26.926Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-e0cf35f8d79a2953eaf4",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 133304,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.0135\u001b[39m\nReceived:   \u001b[31m0.016211608645447472\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.0135\u001b[39m\nReceived:   \u001b[31m0.016211608645447472\u001b[39m\n    at /workspace/splashery/tests/cdx-mir.spec.mjs:311:32",
+                        "location": {
+                          "file": "/workspace/splashery/tests/cdx-mir.spec.mjs",
+                          "column": 32,
+                          "line": 311
+                        },
+                        "snippet": "  309 |         const m = await measure(page, { answers: 6 });\n  310 |         console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);\n> 311 |         expect(m.heightJitter).toBeLessThan(height);\n      |                                ^\n  312 |         expect(m.shownJitter).toBeLessThan(shown);\n  313 |         // Record live timing, but guard cost with the identical-input\n  314 |         // relative benchmark below instead of a host-dependent ceiling."
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/splashery/tests/cdx-mir.spec.mjs",
+                            "column": 32,
+                            "line": 311
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.0135\u001b[39m\nReceived:   \u001b[31m0.016211608645447472\u001b[39m\n\n  309 |         const m = await measure(page, { answers: 6 });\n  310 |         console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);\n> 311 |         expect(m.heightJitter).toBeLessThan(height);\n      |                                ^\n  312 |         expect(m.shownJitter).toBeLessThan(shown);\n  313 |         // Record live timing, but guard cost with the identical-input\n  314 |         // relative benchmark below instead of a host-dependent ceiling.\n    at /workspace/splashery/tests/cdx-mir.spec.mjs:311:32"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-F7vp3Y/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-F7vp3Y/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.016211608645447472,\"colorJitter\":1.5006756756756756,\"shownJitter\":1.7712301587301587,\"shownJitterTurned\":1.5973544973544973,\"grain\":0,\"sharpness\":0.4595886787033827,\"drawMs\":136.47999999988824,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:20:37.750Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/workspace/splashery/.cache/flaky-tests/cdx-cadence-formal/run-1113/results/cdx-mir-real-depth-worker--3a6f8-ft-stays-below-the-baseline-chromium-repeat7/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/splashery/tests/cdx-mir.spec.mjs",
+                        "column": 32,
+                        "line": 311
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-e2e8236ef607e7053d95",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 143851,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-rb8HDe/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-rb8HDe/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":6.420307096328821e-7,\"colorJitter\":0.5118618618618619,\"shownJitter\":0.6555886243386243,\"shownJitterTurned\":0.6866071428571429,\"grain\":0,\"sharpness\":0.8295517975384739,\"drawMs\":172.17999999988825,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:22:48.762Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-322b0d20684719d5a5e1",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 142902,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-RSghRd/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-RSghRd/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0013027342774712288,\"colorJitter\":1.4524774774774776,\"shownJitter\":1.6082671957671957,\"shownJitterTurned\":1.5761574074074074,\"grain\":0,\"sharpness\":0.4558517663191975,\"drawMs\":177.6800000000745,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:22:51.024Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-09a1d800f8fca86bf65d",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 137442,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-uDGTpm/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-uDGTpm/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.000003582265160910718,\"colorJitter\":0.46944444444444444,\"shownJitter\":0.6861111111111111,\"shownJitterTurned\":0.662797619047619,\"grain\":0,\"sharpness\":0.8275630134535327,\"drawMs\":209.68499999996274,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:22:54.249Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-3577a184ea85d3ccf4d0",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 147502,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-I8u3HY/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-I8u3HY/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.002270161944466668,\"colorJitter\":1.1362612612612613,\"shownJitter\":1.5091931216931216,\"shownJitterTurned\":1.5861772486772487,\"grain\":0,\"sharpness\":0.44316434827987766,\"drawMs\":161.49000000003724,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:22:58.503Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-c6a885af9c985e7cadaf",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 140627,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-L2FEtc/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-L2FEtc/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.000002505301355241655,\"colorJitter\":0.563963963963964,\"shownJitter\":0.6406415343915344,\"shownJitterTurned\":0.6498677248677248,\"grain\":0,\"sharpness\":0.8319685725075668,\"drawMs\":163.21500000003726,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:25:18.223Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-38e75a1fbbf0d9113877",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 135590,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-YuvJLC/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-YuvJLC/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0010153148008661497,\"colorJitter\":1.4946696696696697,\"shownJitter\":1.5440476190476191,\"shownJitterTurned\":1.5525462962962964,\"grain\":0,\"sharpness\":0.45963797482907787,\"drawMs\":178.63000000007452,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:25:18.295Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-592676fc68d9e344d951",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 22,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 134823,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-zxsmSJ/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-zxsmSJ/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.0000168068749779785,\"colorJitter\":0.5143393393393393,\"shownJitter\":0.6799272486772486,\"shownJitterTurned\":0.6469907407407407,\"grain\":0,\"sharpness\":0.8372970256383807,\"drawMs\":155.69000000003726,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:25:19.436Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-b754d4219daafca871ae",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 23,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 135466,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-6RdjCL/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-6RdjCL/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.001974283119344765,\"colorJitter\":1.4177177177177178,\"shownJitter\":1.5197751322751323,\"shownJitterTurned\":1.5494378306878307,\"grain\":0,\"sharpness\":0.4369101407702529,\"drawMs\":129.325,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:25:32.443Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-e5cc2aa298f4bd6689b3",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 24,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 132168,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-ps85mK/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-ps85mK/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.000003490164070516019,\"colorJitter\":0.5198198198198198,\"shownJitter\":0.6429563492063493,\"shownJitterTurned\":0.6438161375661375,\"grain\":0,\"sharpness\":0.8258833161889144,\"drawMs\":187.125,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:27:39.143Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-5a2ebf487d3f29ed26fc",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 25,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 140317,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-WDbsiU/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-WDbsiU/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0021169808726791326,\"colorJitter\":1.5573573573573574,\"shownJitter\":1.5685515873015874,\"shownJitterTurned\":1.5467923280423281,\"grain\":0,\"sharpness\":0.44932823895427537,\"drawMs\":167.55999999996274,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:27:39.914Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-c3707e2f5fae0417cf83",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 26,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 137778,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-R8t8fR/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-R8t8fR/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.0000049477002608615,\"colorJitter\":0.5533033033033034,\"shownJitter\":0.7254298941798942,\"shownJitterTurned\":0.7143849206349207,\"grain\":0,\"sharpness\":0.8224242336212917,\"drawMs\":116.95,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:27:43.959Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-61d1a6da7188067255bb",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 27,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 132104,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-5C1JOy/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-5C1JOy/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.002687604988816085,\"colorJitter\":1.4827327327327327,\"shownJitter\":1.464781746031746,\"shownJitterTurned\":1.5941798941798941,\"grain\":0,\"sharpness\":0.44746306687512133,\"drawMs\":131.03999999985098,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:27:54.946Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-8fd9cac07b1979d9e619",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 28,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 137406,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-7xrpBt/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-7xrpBt/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":3.1675035889084276e-7,\"colorJitter\":0.5717717717717717,\"shownJitter\":0.6408068783068783,\"shownJitterTurned\":0.729563492063492,\"grain\":0,\"sharpness\":0.8358227554614983,\"drawMs\":183.40999999996274,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:29:57.716Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-8cf302c4a4818cdf5914",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 29,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 139437,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-IxLyJS/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-IxLyJS/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0067829069215804335,\"colorJitter\":1.4915165165165165,\"shownJitter\":1.5912367724867724,\"shownJitterTurned\":1.5332671957671957,\"grain\":0,\"sharpness\":0.45811108271685563,\"drawMs\":154.41499999985098,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:30:06.629Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-12b81b1a9fa6556e0e26",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 30,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 138743,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-4voai0/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-4voai0/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.00000448861906120369,\"colorJitter\":0.47057057057057056,\"shownJitter\":0.6878637566137566,\"shownJitterTurned\":0.562037037037037,\"grain\":0,\"sharpness\":0.831889884771784,\"drawMs\":135.73499999996275,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:30:08.215Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-8edde657eb9799acf56a",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 31,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 141252,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-Tbm4GL/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-Tbm4GL/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0026848468048548376,\"colorJitter\":1.4921921921921921,\"shownJitter\":1.5128968253968254,\"shownJitterTurned\":1.5693121693121692,\"grain\":0,\"sharpness\":0.4362025626697914,\"drawMs\":141.44000000003726,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:30:15.319Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-8b5509d17f9ac4a5ef4c",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 32,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 138622,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-euD5tu/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-euD5tu/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":6.443342647036991e-7,\"colorJitter\":0.4947447447447447,\"shownJitter\":0.7410383597883597,\"shownJitterTurned\":0.6412698412698413,\"grain\":0,\"sharpness\":0.8392160808563887,\"drawMs\":207.2199999999255,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:32:22.241Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-3e307340fdd76bede6d3",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 33,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 133396,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-B8vH9x/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-B8vH9x/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0020493681005596576,\"colorJitter\":1.5921921921921922,\"shownJitter\":1.4287367724867726,\"shownJitterTurned\":1.4944444444444445,\"grain\":0,\"sharpness\":0.4512623392288743,\"drawMs\":223.6050000000745,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:32:31.902Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-264bcea61365eafcec6f",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 34,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 144622,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-ZCOZCV/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-ZCOZCV/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.000001496559864765889,\"colorJitter\":0.5288288288288289,\"shownJitter\":0.7108134920634921,\"shownJitterTurned\":0.65,\"grain\":0,\"sharpness\":0.8278977488151273,\"drawMs\":131.9300000000745,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:32:33.451Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-d4d0659171296340f7d5",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 35,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 146633,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-XXQ2R7/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-XXQ2R7/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0041717539910596235,\"colorJitter\":1.5807807807807808,\"shownJitter\":1.522883597883598,\"shownJitterTurned\":1.3717592592592593,\"grain\":0,\"sharpness\":0.4442427704880295,\"drawMs\":140.1050000000745,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:32:42.620Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-c49f6bd30d6a522b11d1",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 36,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 139451,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-GWmlMw/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-GWmlMw/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":6.122900559021546e-8,\"colorJitter\":0.48423423423423423,\"shownJitter\":0.64755291005291,\"shownJitterTurned\":0.6723875661375661,\"grain\":0,\"sharpness\":0.8208227074874573,\"drawMs\":160.36999999992548,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:34:49.903Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-389c2ffdc73eee03dbe3",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 37,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 137233,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-SqaBQA/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-SqaBQA/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.001672080531296832,\"colorJitter\":1.4560810810810811,\"shownJitter\":1.445138888888889,\"shownJitterTurned\":1.56630291005291,\"grain\":0,\"sharpness\":0.4580735909017387,\"drawMs\":172.53499999996274,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:34:51.616Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-9f0f693db9d5421f2bdc",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 38,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 130756,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-u9zMnm/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-u9zMnm/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.000010396772156561818,\"colorJitter\":0.49512012012012013,\"shownJitter\":0.6716600529100529,\"shownJitterTurned\":0.6585648148148148,\"grain\":0,\"sharpness\":0.8182218667442592,\"drawMs\":96.50499999988824,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:35:05.287Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-1954231363de6c62bba1",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 39,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 138447,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-Iommc6/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-Iommc6/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.000736779378945226,\"colorJitter\":1.3193693693693693,\"shownJitter\":1.3793320105820106,\"shownJitterTurned\":1.4708664021164022,\"grain\":0,\"sharpness\":0.45115712320578527,\"drawMs\":167.09000000003726,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:35:15.437Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-07126aba318b71742d29",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 40,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 130364,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-RriWU9/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-RriWU9/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":4.580160519024273e-7,\"colorJitter\":0.504054054054054,\"shownJitter\":0.7127645502645502,\"shownJitterTurned\":0.6661706349206349,\"grain\":0,\"sharpness\":0.8391150959108254,\"drawMs\":157.88499999996276,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:37:15.242Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-1cb7407f13033aed5096",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 41,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 129629,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-wk4HRd/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-wk4HRd/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.003783307724573591,\"colorJitter\":1.3099099099099099,\"shownJitter\":1.5089947089947089,\"shownJitterTurned\":1.5863095238095237,\"grain\":0,\"sharpness\":0.45110903304328054,\"drawMs\":166.4300000000745,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:37:15.821Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-29313cff124ddc1af162",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 42,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 135278,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-VER51J/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-VER51J/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.0000015528083921552778,\"colorJitter\":0.5145645645645646,\"shownJitter\":0.6374007936507936,\"shownJitterTurned\":0.7086309523809524,\"grain\":0,\"sharpness\":0.8254987178860657,\"drawMs\":149.22000000011175,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:37:23.150Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-de72c51b5d40bc679da5",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 43,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 138878,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-RFdFaQ/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-RFdFaQ/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0018321466359502829,\"colorJitter\":1.5626126126126125,\"shownJitter\":1.5453703703703703,\"shownJitterTurned\":1.6330357142857144,\"grain\":0,\"sharpness\":0.4535804445001475,\"drawMs\":198.06500000003726,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:37:41.453Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-37657d3d775f83d368f8",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 44,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 136847,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-rjA2KB/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-rjA2KB/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.0000032567494624369853,\"colorJitter\":0.5453453453453454,\"shownJitter\":0.6416005291005291,\"shownJitterTurned\":0.6733134920634921,\"grain\":0,\"sharpness\":0.8456044591247146,\"drawMs\":188.225,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:39:32.355Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-1bcc7b2d3b302b93dfe5",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 45,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 139699,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-i28e7e/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-i28e7e/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0012848087376705162,\"colorJitter\":1.5021771771771772,\"shownJitter\":1.475760582010582,\"shownJitterTurned\":1.4735449735449735,\"grain\":0,\"sharpness\":0.44528027036771145,\"drawMs\":173.5,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:39:31.749Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-33125b5084e30312edfe",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 46,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 137864,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-u8UY4q/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-u8UY4q/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.00000791449334707346,\"colorJitter\":0.6071321321321321,\"shownJitter\":0.667228835978836,\"shownJitterTurned\":0.7600198412698412,\"grain\":0,\"sharpness\":0.8411329946131496,\"drawMs\":131.014999999851,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:39:45.218Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-a95b55e3f7e77ad6f7dd",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 47,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 144060,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-6gxzjK/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-6gxzjK/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0032044828112178423,\"colorJitter\":1.4384384384384385,\"shownJitter\":1.622255291005291,\"shownJitterTurned\":1.5211309523809524,\"grain\":0,\"sharpness\":0.4532884181435722,\"drawMs\":226.11999999992548,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:40:08.444Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-1f99375f7ec2aace55f8",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 48,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 142783,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-kS7Tij/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-kS7Tij/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.000002399342017130809,\"colorJitter\":0.4906906906906907,\"shownJitter\":0.6940145502645503,\"shownJitterTurned\":0.6428571428571429,\"grain\":0,\"sharpness\":0.8274540582186894,\"drawMs\":145.6050000000745,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:41:56.119Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-87e3605aa5fc1fad4ce0",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 49,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 136196,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-HJsOva/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-HJsOva/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.00363793121021543,\"colorJitter\":1.4623123123123123,\"shownJitter\":1.5430555555555556,\"shownJitterTurned\":1.512202380952381,\"grain\":0,\"sharpness\":0.4510851145833862,\"drawMs\":183.8949999999255,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:41:57.242Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-efde857eabdb7dd3120e",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 50,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 138745,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-zalC0w/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-zalC0w/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":6.901519792573946e-7,\"colorJitter\":0.5299549549549549,\"shownJitter\":0.6641534391534392,\"shownJitterTurned\":0.6450396825396826,\"grain\":0,\"sharpness\":0.8316921398190824,\"drawMs\":161.2300000000745,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:42:10.184Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-87b09d4e311a85541ff3",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 51,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 134747,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-tFxB5e/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-tFxB5e/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.001214941861611363,\"colorJitter\":1.6817567567567568,\"shownJitter\":1.5778439153439154,\"shownJitterTurned\":1.485218253968254,\"grain\":0,\"sharpness\":0.45990936286963047,\"drawMs\":161.75,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:42:40.458Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-6f74989d8c76ce4ffb31",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 52,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 127260,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-dxS37P/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-dxS37P/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.00000422645259547878,\"colorJitter\":0.5358858858858859,\"shownJitter\":0.6671957671957672,\"shownJitterTurned\":0.6423941798941799,\"grain\":0,\"sharpness\":0.8203222374169814,\"drawMs\":171.65,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:44:18.998Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-d4cad9d2df12fa1f6f33",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 53,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 129745,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-0Q29kZ/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-0Q29kZ/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0014171042664161138,\"colorJitter\":1.556831831831832,\"shownJitter\":1.5873346560846562,\"shownJitterTurned\":1.426388888888889,\"grain\":0,\"sharpness\":0.44503099299871596,\"drawMs\":161.475,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:44:25.740Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-f180049591788d0f9645",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 54,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 128657,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-rkYsTi/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-rkYsTi/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.000003833115637839377,\"colorJitter\":0.5805555555555556,\"shownJitter\":0.6375,\"shownJitterTurned\":0.6903769841269841,\"grain\":0,\"sharpness\":0.8206547779185047,\"drawMs\":128.75500000007452,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:44:36.489Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-ac371e14f54b3ec2da29",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 55,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 136848,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-FIZ6Yv/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-FIZ6Yv/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0016178344502239615,\"colorJitter\":1.3614114114114113,\"shownJitter\":1.3614417989417988,\"shownJitterTurned\":1.4098544973544973,\"grain\":0,\"sharpness\":0.4432512995373915,\"drawMs\":182.92000000011177,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:45:04.003Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-93b2da601a9a6f0b5e80",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 56,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 150258,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-G3aQim/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-G3aQim/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.000003538153193018458,\"colorJitter\":0.545045045045045,\"shownJitter\":0.6792989417989418,\"shownJitterTurned\":0.6640873015873016,\"grain\":0,\"sharpness\":0.8202853863632031,\"drawMs\":190.0949999999255,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:46:33.122Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-b9bf6f1ff9db50625323",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 57,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 138902,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-VSdXbt/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-VSdXbt/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.003826912536982212,\"colorJitter\":1.3114864864864866,\"shownJitter\":1.542526455026455,\"shownJitterTurned\":1.5531084656084657,\"grain\":0,\"sharpness\":0.4446325590360037,\"drawMs\":194.47000000011175,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:46:43.334Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-054991d998ab3d66e1f2",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 58,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 137234,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-Z9mjFn/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-Z9mjFn/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.0000034088352779010396,\"colorJitter\":0.5873123123123123,\"shownJitter\":0.6814814814814815,\"shownJitterTurned\":0.6803902116402116,\"grain\":0,\"sharpness\":0.8240630867164456,\"drawMs\":95.875,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:46:52.090Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-64a375c42249f6ffba98",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 59,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 114878,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-TJoDIF/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-TJoDIF/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.004537230215312258,\"colorJitter\":1.2747747747747749,\"shownJitter\":1.3389219576719578,\"shownJitterTurned\":1.5605820105820105,\"grain\":0,\"sharpness\":0.45069188751498496,\"drawMs\":45.144999999925496,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:47:27.813Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-bf74f99ff104b2512383",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T11:13:17.379Z",
+    "duration": 2171188.58,
+    "expected": 59,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
