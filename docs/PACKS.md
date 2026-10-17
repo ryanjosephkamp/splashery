@@ -1695,4 +1695,7 @@ Settled built-in surfaces can reuse their GPU work buffer. A recipe or captured-
 `workBufferReuse: false` to keep the original unconditional update behavior, including between taps.
 Use this only with repeated before/after measurements when an idle speedup increases tap latency.
 Motion, live textures, and custom shader exclusions still apply; the option changes no geometry,
-uniform value, or effect. Cookie and Torus opt out after their ten-pair tap-p95 checks.
+uniform value, or effect. Cookie, Torus, and Blackberry opt out after their ten-pair tap-p95 checks.
+For a stale-frame report, append `?reuse=0` (or `&reuse=0` to an existing query) to disable reuse
+throughout the viewer. Removing the parameter restores the default. This switch also covers direct
+Stage uniform updates and does not change the toy's resolution or effect.
