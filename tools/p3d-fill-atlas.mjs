@@ -6,7 +6,7 @@ import zlib from "node:zlib";
 import { inventory, hash } from "./p3df/inputs.mjs";
 import { localServer } from "./p3df/browser.mjs";
 import { POSES } from "./p3df/scoring.mjs";
-import { measureNext } from "./p3d-next-browser.mjs";
+import { measureHardEdge as measureNext } from "./p3d-hard-edge-browser.mjs";
 import { median } from "./p3d-next-score.mjs";
 
 const args = Object.fromEntries(process.argv.slice(2).map((s) => s.replace(/^--/, "").split("=")));
@@ -50,8 +50,19 @@ const sources = [
   ...Object.keys(atlas.source.files).filter((f) => fs.existsSync(f)),
   "src/photo3d/next/fill.js",
   "src/photo3d/next/patchmatch.js",
+  "src/photo3d/next/hard-edge.js",
+  "src/photo3d/next/relief.js",
+  "tools/p3d-hard-edge-browser.mjs",
 ];
+const importFile = path.join(out, "imported-classic.json"),
+  importedClassic = fs.existsSync(importFile) ? JSON.parse(fs.readFileSync(importFile)) : null;
+if (importedClassic)
+  for (const [file, digest] of Object.entries(importedClassic.sharedSources))
+    if (hash(fs.readFileSync(file)) !== digest)
+      throw new Error("Imported Classic runtime changed: " + file);
 const settings = {
+  method: "layered-h-classic-foreground-v1",
+  importedClassic,
   sources: Object.fromEntries(
     [...new Set(sources)].sort().map((f) => [f, hash(fs.readFileSync(f))]),
   ),
@@ -92,6 +103,9 @@ try {
         const folder = path.join(out, candidate);
         fs.mkdirSync(folder, { recursive: true });
         const file = path.join(folder, `${entry.id}-${profile}.json`);
+        const imported = importedClassic?.rows[path.basename(file)];
+        if (candidate === "classic" && imported && hash(fs.readFileSync(file)) !== imported)
+          throw new Error("Imported Classic metadata changed");
         const row = fs.existsSync(file)
           ? JSON.parse(fs.readFileSync(file))
           : {
@@ -145,7 +159,8 @@ try {
   for (const [file, digest] of Object.entries(settings.sources))
     if (hash(fs.readFileSync(file)) !== digest)
       throw new Error("A capture source changed: " + file);
-  result.complete = entries.length === 118 && profiles.length === 2 && result.rows.length === 472;
+  result.scopeComplete = entries.length === 118 && result.rows.length === 236 * profiles.length;
+  result.complete = result.scopeComplete && profiles.length === 2;
   result.finishedUTC = new Date().toISOString();
   result.summary = profiles.map((profile) => {
     const pairs = entries.map(({ id }) => {

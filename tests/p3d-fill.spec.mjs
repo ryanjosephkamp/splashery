@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { fillSurface } from "../src/photo3d/next/fill.js";
+import { fillSurface } from "../src/photo3d/next/hard-edge.js";
 import { patchMatchBackground } from "../src/photo3d/next/patchmatch.js";
 import { buildPhotoSplats } from "../src/packs/photo-3d-core.js";
 import { compareFillQuality, compareFillBoundaries } from "../tools/p3d-fill-score.mjs";
@@ -36,6 +36,7 @@ test("Fill preserves Classic geometry and foreground while using Layered A backg
       expect(result.background[key]).toBe(classic.background[key]);
   expect(result.background.rgba).toEqual(layeredA.rgba);
   expect(result.background.filled).toEqual(layeredA.filled);
+  expect(result.background.classicRgba).toBe(classic.background.rgba);
   expect(result.background.patchmatch.supported).toBeGreaterThan(0);
   expect(result.background.rgba).not.toEqual(classic.background.rgba);
 });
@@ -56,6 +57,14 @@ const qualityFixture = () => {
           overlayProof: {
             hits: candidate === "fill" ? ["worker"] : [],
             fillStats: candidate === "fill" ? { supported: 1 } : null,
+            colorBinding:
+              candidate === "fill"
+                ? {
+                    foregroundSeparate: true,
+                    foregroundMatchesClassic: true,
+                    backingMatchesFilled: true,
+                  }
+                : null,
           },
           native: profile === "phone" ? [585, 1266] : [1440, 900],
           browser: "same",
@@ -101,6 +110,12 @@ test("Fill reports each input below 60% even when the corpus median passes", () 
   expect(result.ribbonPass).toBe(true);
   expect(result.everyInputRibbonPass).toBe(false);
   expect(result.profiles[0].below60Percent).toEqual(["input-0"]);
+});
+
+test("a shared background sampler cannot qualify as Classic foreground colors", () => {
+  const { ids, rows } = qualityFixture();
+  rows[1].observation.overlayProof.colorBinding.foregroundMatchesClassic = false;
+  expect(compareFillQuality(rows, ids).complete).toBe(false);
 });
 
 test("a good ribbon median cannot hide a single input more than 5% worse", () => {

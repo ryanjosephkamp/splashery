@@ -110,6 +110,13 @@ export function compareFillQuality(rows, expectedIds) {
         !value.overlayProof.fillStats
       )
         issues.push("Fill must execute without a shader overlay: " + id + "/" + profile);
+      const binding = value.overlayProof.colorBinding;
+      if (
+        !binding?.foregroundSeparate ||
+        !binding.foregroundMatchesClassic ||
+        !binding.backingMatchesFilled
+      )
+        issues.push("Fill must preserve Classic foreground color bindings: " + id + "/" + profile);
       const supported =
         Number.isFinite(base.values.streaks) && Number.isFinite(value.values.streaks);
       if (!supported) unsupported.push(id);

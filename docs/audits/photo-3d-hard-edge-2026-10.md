@@ -15,14 +15,23 @@ and 150 MiB memory. Every individual ribbon result is also reported.
 Layered H (`fill` in the capture records) applies Layered A's deterministic PatchMatch background to
 Classic's build: three passes, radius-two patches, seed 99, and no synthesized-context coherence. It
 retains the same foreground colors, geometry, depth, surface cuts, backing geometry, and shader. The
-research browser adapter replaces only the build worker's background operation. It rejects a
-foreground cleanup request and requires evidence of worker execution without a shader overlay.
+research browser adapter replaces the build worker's background operation and selects a new relief
+subclass through an explicit H-only loader. The foreground shader itself also reads the background
+as a fallback when it has no same-side source texel. H therefore retains Classic's original
+background bytes in a separate foreground sampler while PatchMatch colors the backing. Both GLSL and
+WGSL remain unchanged. Actual texture bytes and separate bindings are checked in the browser; a
+cleanup request, a shader overlay, or a missing binding proof cannot qualify.
 
 The first phone screen found an additional thin-line loss on Spiral staircase at −30° pitch. An
 isolated second screen tests retaining Classic's background within four background pixels of a depth
-cut exceeding 0.08. This is a separate, explicitly routed research candidate; the original H run
-continues unchanged. The guard did not recover the lost Spiral staircase probe, and it reduced the
-ribbon gains in its screen. Neither method is connected to the app.
+cut exceeding 0.08. The guard did not recover the lost Spiral staircase probe, and it reduced the
+ribbon gains in its screen. The foreground sampler correction preserves the required Classic colors,
+but that probe still loses contrast against the changed backing. The early worker-only and guard
+screens are rejected records, not the final H atlas. No method is connected to the app.
+
+The final run retains 23 phone and 16 desktop Classic captures whose shared runtime, input, probe,
+metadata, and native-artifact hashes were verified. Every H capture is new. The imported Classic
+provenance is recorded beside each profile's settings; exploratory timing is excluded.
 
 ## Evaluation
 
@@ -36,7 +45,8 @@ Phone captures are native 585×1266; desktop captures are 1440×900. Both method
 Chromium/Mesa renderer. The runs are paired by photo, profile, probe hash, camera, and pose, with
 hashed native artifacts. Rendering and scoring use the existing atlas definitions. Source-cue
 boundary scores remain diagnostics. The comparison rejects duplicate poses, incomplete pairs, lost
-support, soft shader overlays, and extra thin-probe losses.
+support, soft shader overlays, changed foreground bindings, and extra thin-probe losses. The final
+rollup also requires every H mask and UV raster to match Classic byte for byte.
 
 Three original phone inputs and ten original desktop inputs have no supported ribbon score.
 Unsupported values remain absent, are listed individually, and cannot become zero or a claimed
@@ -65,11 +75,13 @@ a physical phone run.
 
 ## Verification and reproduction
 
-Initial Classic golden: 77 passed. Fill invariants and the existing method/metric tests: 19 passed.
-Additional regression checks and final preflight are pending. The invariant test checks the entire
-Classic build is unmodified and every foreground/geometry field is retained by reference. The gate
-fixtures verify that incomplete coverage, duplicate poses, support loss, shader changes, and a
-single added thin-probe loss cannot pass.
+Initial Classic golden: 77 passed. After the sampler correction, 20 Fill and existing method/metric
+tests passed. The real-browser renderer test also passed: separate samplers, unchanged GLSL and
+WGSL, correct additional texture accounting, and no leaked mesh instances. Additional regression
+checks and final preflight are pending. The invariant test checks the entire Classic build is
+unmodified and every foreground/geometry field is retained by reference. The gate fixtures verify
+that incomplete coverage, duplicate poses, support loss, shader changes, and a single added
+thin-probe loss cannot pass.
 
 Use an Xvfb display and Mesa as described in [CI.md](../CI.md). Restore inputs, then run the two
 profiles in separate folders, optionally concurrently:

@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { inventory, hash } from "./p3df/inputs.mjs";
 import { localServer } from "./p3df/browser.mjs";
-import { measureNext } from "./p3d-next-browser.mjs";
+import { measureHardEdge as measureNext } from "./p3d-hard-edge-browser.mjs";
 import { median } from "./p3d-next-score.mjs";
 
 const args = Object.fromEntries(process.argv.slice(2).map((s) => s.replace(/^--/, "").split("=")));
@@ -37,9 +37,13 @@ const sources = [
     "tools/p3df/browser.mjs",
     "src/photo3d/next/fill.js",
     "src/photo3d/next/patchmatch.js",
+    "src/photo3d/next/hard-edge.js",
+    "src/photo3d/next/relief.js",
+    "tools/p3d-hard-edge-browser.mjs",
     "src/photo3d/build-worker.js",
     "src/packs/photo-3d.js",
     "src/packs/photo-3d-core.js",
+    "src/packs/photo-sharp.js",
     "src/live/relief-mesh.js",
     "src/depth/engine.js",
     "playwright.config.mjs",
@@ -127,7 +131,7 @@ try {
     };
   });
   result.timeRatio = result.methods[1].medianMs / result.methods[0].medianMs;
-  result.timePass = result.complete && result.timeRatio <= 1.25;
+  result.timePass = result.complete && runs >= 5 && result.timeRatio <= 1.25;
   result.maximumPairedPssIncreaseMiB = Math.max(
     ...result.rows
       .filter((r) => r.candidate === "fill")
@@ -140,7 +144,7 @@ try {
         return (r.peakPssBytes - base.peakPssBytes) / 1024 ** 2;
       }),
   );
-  result.memoryPass = result.complete && result.maximumPairedPssIncreaseMiB <= 150;
+  result.memoryPass = result.complete && runs >= 5 && result.maximumPairedPssIncreaseMiB <= 150;
 } finally {
   save();
   await server.close();

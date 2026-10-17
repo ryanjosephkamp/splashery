@@ -25,8 +25,19 @@ replace(
 );
 replace('["classic", "layered-a"]', '["classic", "fill"]');
 replace(
+  'import { measureNext } from "./p3d-next-browser.mjs";',
+  'import { measureHardEdge as measureNext } from "./p3d-hard-edge-browser.mjs";',
+);
+replace(
   '  "src/photo3d/next/patchmatch.js",',
-  '  "src/photo3d/next/fill.js",\n  "tools/p3d-hard-edge-clips.mjs",\n  "src/photo3d/next/patchmatch.js",',
+  '  "src/photo3d/next/fill.js",\n  "src/photo3d/next/hard-edge.js",\n  "src/photo3d/next/relief.js",\n  "src/packs/photo-sharp.js",\n  "tools/p3d-hard-edge-browser.mjs",\n  "tools/p3d-hard-edge-clips.mjs",\n  "src/photo3d/next/patchmatch.js",',
+);
+replace(
+  "      fs.writeFileSync(metadata, JSON.stringify(observation));",
+  `      fs.writeFileSync(metadata, JSON.stringify(observation));
+      const sourceDepthSha256 = hash(fs.readFileSync(path.join(folder, observation.depthImage)));
+      if (pair.sourceDepthSha256 && pair.sourceDepthSha256 !== sourceDepthSha256) throw new Error("Source depth differs within a review pair");
+      pair.sourceDepthSha256 = sourceDepthSha256;`,
 );
 replace(
   "Classic and research Layered A; owner votes unmeasured",
