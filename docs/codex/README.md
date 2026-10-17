@@ -114,6 +114,10 @@ task 78's portfolio toys had to be rebuilt in Claude lanes PT1 and PT2.
 | 97-math-pickers.md                | One toy for the 4D shapes, one for the attractors; old links keep working (after #197)                    | the Math pack, an alias map, tests                                       | no            |
 | 98-release-v1.md                  | Splashery v1.0: a readiness audit of every labs toy, the fixes, then all of them public (after 91 and 96) | an audit tool and report, the toys that need fixes, tests, release notes | no            |
 | 99-photo-3d-next.md               | Photo to 3D: freeze classic, a truer yardstick, a depth bake-off, a Layered labs variant                  | a golden spec, `src/photo3d/next/`, tools, tests                         | yes           |
+| 100-flaky-tests.md                | Flaky tests fixed at the cause: a stress recipe, each test 30 of 30, nothing loosened                     | test and runner files; Engine: commits for real races                    | no            |
+| 101-suite-speed.md                | A faster full suite: whole run under 25 minutes, nothing dropped                                          | the ten slowest spec files, `tools/suite.json`                           | no            |
+| 102-crisper-splats.md             | Crisper toys at phone size: a sharpness yardstick, `even: true`, text toys first                          | pack settings, `tools/crisp-score.mjs`, tests                            | no            |
+| 103-phone-speed.md                | Faster toys on phones: measure every toy, the 15 slowest at least 25% faster                              | packs, `tools/phone-speed.mjs`, a phone page, tests                      | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
