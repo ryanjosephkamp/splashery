@@ -1,0 +1,37 @@
+[2m[WebServer] [22m(node:52183) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:52194) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:52194) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-native-canvas-6jldu5/still.y4m
+  ✘  1 [chromium] › .cache/flaky-tests/cdx-canvas-equivalence/canvas.spec.mjs:8:1 › native canvas crop geometry, original still drift (30.6s)
+
+
+  1) [chromium] › .cache/flaky-tests/cdx-canvas-equivalence/canvas.spec.mjs:8:1 › native canvas crop geometry, original still drift 
+
+    Error: page.evaluate: Error: Unexpected rendered canvas scale {"sx":2,"sy":2,"dpr":1}
+        at eval (eval at evaluate (:290:30), <anonymous>:12:71)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at eval (eval at evaluate (:290:30), <anonymous>:12:71)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at capture (/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/measure.mjs:216:35)
+        at measurePrepared (/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/measure.mjs:274:18)
+        at measure (/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/measure.mjs:250:12)
+        at /workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/canvas.spec.mjs:18:11
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/cdx-canvas-equivalence/run-102335/results/canvas-native-canvas-crop-geometry-original-still-drift-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/cdx-canvas-equivalence/run-102335/results/canvas-native-canvas-crop-geometry-original-still-drift-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › .cache/flaky-tests/cdx-canvas-equivalence/canvas.spec.mjs:8:1 › native canvas crop geometry, original still drift 

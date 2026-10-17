@@ -1,0 +1,406 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/run-102655/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/run-102655/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4208",
+      "url": "http://127.0.0.1:4208/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery"
+    }
+  },
+  "suites": [
+    {
+      "title": "canvas.spec.mjs",
+      "file": "canvas.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "playwright-first: still: original mirror drift and exact canvas pixels",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 211932,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-native-canvas-yIfopl/still.y4m\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":1,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1294.306064000004,\"canvasMs\":1146.7753139999986,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":2,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2370.360704000006,\"canvasMs\":1682.283918000001,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":3,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1813.2788429999928,\"canvasMs\":1001.2582189999957,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":4,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2681.717024999991,\"canvasMs\":1197.7093290000048,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":5,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2532.6624650000012,\"canvasMs\":1770.2131329999975,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":6,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1958.5832729999966,\"canvasMs\":1491.2564279999933,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":7,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1482.0011980000127,\"canvasMs\":1091.331089000014,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":8,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2162.0778240000072,\"canvasMs\":1086.1737200000207,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":9,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1379.8659559999942,\"canvasMs\":1832.1070140000083,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":10,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2892.76254299999,\"canvasMs\":2592.71332000001,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":11,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1970.8992920000164,\"canvasMs\":1205.918295999989,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":12,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1330.1294209999905,\"canvasMs\":1271.849721000006,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "cdx mirror still: {\"heightJitter\":0.000003736821917800216,\"colorJitter\":0.7277777777777777,\"shownJitter\":0.7826719576719576,\"shownJitterTurned\":0.822255291005291,\"grain\":0,\"sharpness\":0.8304729634621908,\"drawMs\":121.82999999988824,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:26:57.800Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1e6543de221a4db39f7f-7a94674c09a9a841e8ef",
+          "file": "canvas.spec.mjs",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "playwright-first: low-light: original mirror drift and exact canvas pixels",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 208550,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated low-light: /tmp/splashery-native-canvas-yYQmSQ/low-light.y4m\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":1,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2494.0553549999895,\"canvasMs\":2407.2045849999995,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":2,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2165.445066,\"canvasMs\":1396.4982440000022,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":3,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1300.621443000011,\"canvasMs\":1596.619651999994,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":4,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2020.1329410000035,\"canvasMs\":1622.352292999989,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":5,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":956.7605239999975,\"canvasMs\":767.0628910000087,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":6,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2248.476090000011,\"canvasMs\":1611.818328999987,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":7,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2224.430794999993,\"canvasMs\":2199.1545890000125,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":8,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2432.4267420000106,\"canvasMs\":1853.4596099999908,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":9,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2189.5990529999835,\"canvasMs\":1648.5100610000081,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":10,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":3386.883047999989,\"canvasMs\":1099.9826120000216,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":11,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1079.6323879999982,\"canvasMs\":1146.579028999986,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":12,\"order\":\"playwright-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2978.721445000003,\"canvasMs\":1292.6571570000087,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "cdx mirror low-light: {\"heightJitter\":0.005201694513209634,\"colorJitter\":1.4674174174174175,\"shownJitter\":1.7422619047619048,\"shownJitterTurned\":1.63994708994709,\"grain\":0,\"sharpness\":0.46329861677337836,\"drawMs\":125.8300000000745,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:26:57.709Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1e6543de221a4db39f7f-3d1b37a45dad3f9583c0",
+          "file": "canvas.spec.mjs",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "canvas-first: still: original mirror drift and exact canvas pixels",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 204175,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-native-canvas-Do6zTa/still.y4m\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":1,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2513.4298019999987,\"canvasMs\":942.7716979999968,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":2,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1059.058275000003,\"canvasMs\":731.3437970000086,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":3,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2109.3040949999995,\"canvasMs\":464.48355500001344,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":4,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1578.5189470000041,\"canvasMs\":500.7191240000102,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":5,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1619.3351859999966,\"canvasMs\":899.4881929999974,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":6,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1888.416812999989,\"canvasMs\":669.3146889999916,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":7,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2235.1000809999823,\"canvasMs\":825.9537229999842,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":8,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2246.5302800000063,\"canvasMs\":1447.408448000002,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":9,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1889.179696999985,\"canvasMs\":765.7665429999761,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":10,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1767.6019579999847,\"canvasMs\":1824.8796239999938,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":11,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2249.8035600000003,\"canvasMs\":832.1084550000087,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":12,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1334.1523230000166,\"canvasMs\":1452.5205960000167,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "cdx mirror still: {\"heightJitter\":0.00003070913775412886,\"colorJitter\":0.6587087087087087,\"shownJitter\":0.7853835978835979,\"shownJitterTurned\":0.8072420634920635,\"grain\":0,\"sharpness\":0.8228206471490086,\"drawMs\":143.525,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:26:58.541Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1e6543de221a4db39f7f-436bdc77f55bcbb10c3a",
+          "file": "canvas.spec.mjs",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "canvas-first: low-light: original mirror drift and exact canvas pixels",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 210840,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated low-light: /tmp/splashery-native-canvas-mn5Uhx/low-light.y4m\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":1,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1698.1937619999953,\"canvasMs\":847.423598999987,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":2,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2081.5122529999935,\"canvasMs\":766.6185679999908,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":3,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1893.9665349999996,\"canvasMs\":568.9039499999926,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":4,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2199.162876999995,\"canvasMs\":642.7546690000017,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":5,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2587.8790020000015,\"canvasMs\":755.8112530000071,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":6,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1868.6347660000029,\"canvasMs\":1012.261885999993,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":7,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1505.1952999999921,\"canvasMs\":594.3465379999834,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":8,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1936.4588020000083,\"canvasMs\":1773.9651679999952,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":9,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2105.1500229999947,\"canvasMs\":1059.508415999997,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":10,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":2179.2754619999905,\"canvasMs\":2007.7247050000005,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":11,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1858.0423139999912,\"canvasMs\":1056.4125620000123,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "Strict native canvas PNG: {\"index\":12,\"order\":\"canvas-first\",\"same\":true,\"width\":90,\"height\":112,\"canvasWidth\":90,\"canvasHeight\":112,\"playwrightMs\":1830.3959850000101,\"canvasMs\":378.54503999999724,\"dpr\":2}\n"
+                    },
+                    {
+                      "text": "cdx mirror low-light: {\"heightJitter\":0.004306558353893526,\"colorJitter\":1.7769519519519519,\"shownJitter\":1.7773148148148148,\"shownJitterTurned\":1.7955357142857142,\"grain\":0,\"sharpness\":0.4490063616508781,\"drawMs\":150.47000000011175,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:26:57.924Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1e6543de221a4db39f7f-cd005a7fc1f32db93dec",
+          "file": "canvas.spec.mjs",
+          "line": 9,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T10:26:56.666Z",
+    "duration": 213145.039,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

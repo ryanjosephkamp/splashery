@@ -1,0 +1,40 @@
+{
+  "started": "2026-10-17T10:23:35.305652+00:00",
+  "head": "18ea9fbe87a644b2c8b6a0f9c27e0ad6060aff61",
+  "command": [
+    "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/config.mjs",
+    "--reporter=list,json",
+    "--retries=0",
+    "--output",
+    "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/run-102335/results",
+    "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/canvas.spec.mjs",
+    "--workers=1"
+  ],
+  "environment": {
+    "SPLASHERY_CHROMIUM": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+    "SPLASHERY_GL": "llvmpipe",
+    "DISPLAY": ":91",
+    "SPLASHERY_PORT": "4208",
+    "PLAYWRIGHT_NODEJS_PATH": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node"
+  },
+  "diff": "",
+  "files": {
+    ".cache/flaky-tests/cdx-canvas-equivalence/config.mjs": "3c768494ad39a2734415ec330430ce3c6718e7a7201b246784b6f531a471345e",
+    ".cache/flaky-tests/cdx-canvas-equivalence/canvas.spec.mjs": "a452498437c0a7269f0adc050eaa68de69974794783b3bc528ed82907d2e7386",
+    ".cache/flaky-tests/cdx-canvas-equivalence/sample.mjs": "4cd550d373d17f5182692869aafb1b9ec598ed7552d3968f994da9baba0d3859",
+    ".cache/flaky-tests/cdx-canvas-equivalence/measure.mjs": "563227df56004869a830d8f2f74b05d4ff95e1a83ce48039b13f708fa9f8bfa5",
+    ".cache/flaky-tests/run-probe.py": "6a1516b1c58b47e58eede828c02058b86d2829af90ef57abae6978a92e7af360",
+    "tests/helpers/native-sort.mjs": "d4e4d92fb608bac6f7ef33fea051f94feda8a3f038c2a7a39083d0433ff7190e"
+  },
+  "burners": 2,
+  "node": "v22.20.0",
+  "browser": "Chromium 141.0.7390.37",
+  "cpu": "400000 100000",
+  "ended": "2026-10-17T10:24:07.671201+00:00",
+  "exit": 1,
+  "burner_pid": 52161
+}

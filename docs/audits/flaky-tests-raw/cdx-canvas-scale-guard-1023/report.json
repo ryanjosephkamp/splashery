@@ -1,0 +1,165 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/run-102335/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/run-102335/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4208",
+      "url": "http://127.0.0.1:4208/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery"
+    }
+  },
+  "suites": [
+    {
+      "title": "canvas.spec.mjs",
+      "file": "canvas.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "native canvas crop geometry, original still drift",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 30575,
+                  "error": {
+                    "message": "Error: page.evaluate: Error: Unexpected rendered canvas scale {\"sx\":2,\"sy\":2,\"dpr\":1}\n    at eval (eval at evaluate (:290:30), <anonymous>:12:71)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+                    "stack": "Error: page.evaluate: Error: Unexpected rendered canvas scale {\"sx\":2,\"sy\":2,\"dpr\":1}\n    at eval (eval at evaluate (:290:30), <anonymous>:12:71)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:290:30), <anonymous>:12:71)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at capture (/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/measure.mjs:216:35)\n    at measurePrepared (/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/measure.mjs:274:18)\n    at measure (/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/measure.mjs:250:12)\n    at /workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/canvas.spec.mjs:18:11",
+                    "location": {
+                      "file": "eval at evaluate (:290:30), <anonymous>",
+                      "column": 71,
+                      "line": 12
+                    }
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "eval at evaluate (:290:30), <anonymous>",
+                        "column": 71,
+                        "line": 12
+                      },
+                      "message": "Error: page.evaluate: Error: Unexpected rendered canvas scale {\"sx\":2,\"sy\":2,\"dpr\":1}\n    at eval (eval at evaluate (:290:30), <anonymous>:12:71)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:290:30), <anonymous>:12:71)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at capture (/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/measure.mjs:216:35)\n    at measurePrepared (/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/measure.mjs:274:18)\n    at measure (/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/measure.mjs:250:12)\n    at /workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/canvas.spec.mjs:18:11"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-native-canvas-6jldu5/still.y4m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:23:36.968Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/splashery/.cache/flaky-tests/cdx-canvas-equivalence/run-102335/results/canvas-native-canvas-crop-geometry-original-still-drift-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "eval at evaluate (:290:30), <anonymous>",
+                    "column": 71,
+                    "line": 12
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e6543de221a4db39f7f-d4ecbb9490cd8377a79f",
+          "file": "canvas.spec.mjs",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T10:23:36.175Z",
+    "duration": 31458.553,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

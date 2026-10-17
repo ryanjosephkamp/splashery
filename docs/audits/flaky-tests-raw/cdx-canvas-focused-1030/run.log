@@ -1,0 +1,27 @@
+[2m[WebServer] [22m(node:53473) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 2 workers
+
+(node:53485) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53485) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-IUnPaZ/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-IUnPaZ/low-light.y4m
+cdx mirror still: {"heightJitter":0.00031740123255027307,"colorJitter":0.5530780780780781,"shownJitter":0.7313161375661376,"shownJitterTurned":0.7226190476190476,"grain":0,"sharpness":0.8258506027399263,"drawMs":70.10500000007451,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  2 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (1.2m)
+lv7 mirror, plain: {"heightJitter":0.0000015923749185628719,"colorJitter":0.5266516516516516,"shownJitter":0.6309193121693122,"shownJitterTurned":0.6511904761904762,"grain":0,"sharpness":0.6510842070192844,"drawMs":64.6199999999255,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+lv7 mirror, plain, held still: {"frames":17,"color":0.3945112778986886,"height":0.0005212593967650796,"moved":0.00701893841188622,"backColor":0.018645041174606438,"backHeight":0.0009765871209882814,"backShown":0,"shown":0.7292685785333154,"flicker":0.12229423994129876,"shownTurned":0.6548104948840371,"flickerTurned":0.17121193591781828}
+  ✓  1 [chromium] › tests/lv7.spec.mjs:106:3 › the mirror on a camera (a generated mannequin) › plain: steadier than before, frame to frame, and sharper (2.4m)
+cdx mirror low-light: {"heightJitter":0.005615590862627771,"colorJitter":1.5454204204204205,"shownJitter":1.6074074074074074,"shownJitterTurned":1.7749669312169312,"grain":0,"sharpness":0.4557652640478949,"drawMs":74.5550000000745,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  3 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (1.3m)
+lv7 mirror, hologram: {"heightJitter":0.0005841503490333084,"colorJitter":0.4614864864864865,"shownJitter":0.4236111111111111,"shownJitterTurned":0.4367063492063492,"grain":0,"sharpness":0.4424241949676621,"drawMs":49.62999999988824,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986},"overFace":6.26366424048413}
+lv7 mirror, hologram, held still: {"frames":30,"color":0.1692647364683574,"height":0.0012770568499404097,"moved":0.007954796866804385,"backColor":0.007434085001216433,"backHeight":0.000033896236839786046,"backShown":0,"shown":0.36694259304542637,"flicker":0.41656475480004884,"shownTurned":0.33270963270962683,"flickerTurned":0.3447168888345359}
+  ✓  4 [chromium] › tests/lv7.spec.mjs:150:3 › the mirror on a camera (a generated mannequin) › hologram: nothing drawn over the face, and steady (1.5m)
+
+  4 passed (4.0m)

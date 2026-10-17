@@ -1,0 +1,373 @@
+[2m[WebServer] [22m(node:45834) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 60 tests using 4 workers
+
+(node:45846) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45847) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45845) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45859) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45846) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45847) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45845) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45859) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-xtSs46/still.y4m
+Generated still: /tmp/splashery-cdx-mir-kUigyW/still.y4m
+Generated still: /tmp/splashery-cdx-mir-p2igGf/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-xtSs46/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-kUigyW/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-p2igGf/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-etlQRT/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-etlQRT/low-light.y4m
+cdx mirror still: {"heightJitter":0.000002407113526452769,"colorJitter":0.772972972972973,"shownJitter":0.5894179894179894,"shownJitterTurned":0.6575066137566138,"grain":0,"sharpness":0.7314988814567098,"drawMs":127.06000000005588,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   4 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.6m)
+(node:46504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:46504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+cdx mirror still: {"heightJitter":0.000004151584328831853,"colorJitter":0.6441441441441441,"shownJitter":0.6136243386243386,"shownJitterTurned":0.6062830687830688,"grain":0,"sharpness":0.7339027267225573,"drawMs":135.94500000001864,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   3 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.7m)
+(node:46518) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-S5Afau/still.y4m
+(node:46518) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated low-light: /tmp/splashery-cdx-mir-S5Afau/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-QO2FZL/still.y4m
+cdx mirror low-light: {"heightJitter":0.004408840058153277,"colorJitter":1.7467717717717717,"shownJitter":1.4148809523809525,"shownJitterTurned":1.3352843915343915,"grain":0,"sharpness":0.34576112627019157,"drawMs":124.75499999998138,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+cdx mirror low-light: {"heightJitter":0.003548170338376417,"colorJitter":1.6213963963963964,"shownJitter":1.362665343915344,"shownJitterTurned":1.2505291005291006,"grain":0,"sharpness":0.3498744105010298,"drawMs":104.11000000005588,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   1 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.8m)
+  ✓   2 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.8m)
+Generated low-light: /tmp/splashery-cdx-mir-QO2FZL/low-light.y4m
+(node:46653) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:46660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:46653) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:46660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-hbeOGn/still.y4m
+Generated still: /tmp/splashery-cdx-mir-hRqU3Y/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-hbeOGn/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-hRqU3Y/low-light.y4m
+cdx mirror still: {"heightJitter":0.000009998839835191632,"colorJitter":0.6392642642642643,"shownJitter":0.6379960317460317,"shownJitterTurned":0.5797949735449736,"grain":0,"sharpness":0.7238094710223696,"drawMs":146.525,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   5 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.7m)
+(node:47116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+cdx mirror still: {"heightJitter":0.000005081009858094894,"colorJitter":0.6587837837837838,"shownJitter":0.6045965608465609,"shownJitterTurned":0.6067791005291006,"grain":0,"sharpness":0.7233085337696411,"drawMs":121.3699999999255,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   7 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.6m)
+(node:47126) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:47116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:47126) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+cdx mirror low-light: {"heightJitter":0.0041953652811882736,"colorJitter":1.5204954954954955,"shownJitter":1.4239748677248678,"shownJitterTurned":1.3560185185185185,"grain":0,"sharpness":0.34593413314746896,"drawMs":138.53499999996274,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Generated still: /tmp/splashery-cdx-mir-a02L1w/still.y4m
+  ✓   6 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.7m)
+(node:47146) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-EWO0lV/still.y4m
+(node:47146) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated low-light: /tmp/splashery-cdx-mir-a02L1w/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-EWO0lV/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-f76rFK/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-f76rFK/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.008145004080457463,"colorJitter":1.8162912912912912,"shownJitter":1.3523148148148147,"shownJitterTurned":1.2957671957671957,"grain":0,"sharpness":0.3440516129575165,"drawMs":121.72999999998137,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   8 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.8m)
+(node:47506) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:47506) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-UjlZ7C/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-UjlZ7C/low-light.y4m
+cdx mirror still: {"heightJitter":0.00015143443461138387,"colorJitter":0.7504504504504504,"shownJitter":0.7530753968253968,"shownJitterTurned":0.6903439153439154,"grain":0,"sharpness":0.7286992485723564,"drawMs":112.09500000001863,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  11 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.5m)
+(node:47744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:47744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+cdx mirror low-light: {"heightJitter":0.004267538601515798,"colorJitter":1.7356606606606606,"shownJitter":1.2972222222222223,"shownJitterTurned":1.329265873015873,"grain":0,"sharpness":0.34574317183648196,"drawMs":113.43499999996274,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  10 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.6m)
+(node:47759) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-mbuPRy/still.y4m
+(node:47759) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated low-light: /tmp/splashery-cdx-mir-mbuPRy/low-light.y4m
+cdx mirror still: {"heightJitter":0.000024147011205419765,"colorJitter":0.670045045045045,"shownJitter":0.7213955026455027,"shownJitterTurned":0.629431216931217,"grain":0,"sharpness":0.7279056942035645,"drawMs":79.00499999998138,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Generated still: /tmp/splashery-cdx-mir-PTN6dp/still.y4m
+  ✓   9 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.7m)
+(node:47889) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated low-light: /tmp/splashery-cdx-mir-PTN6dp/low-light.y4m
+(node:47889) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-utPT2t/still.y4m
+cdx mirror low-light: {"heightJitter":0.004809145863495163,"colorJitter":1.6130630630630631,"shownJitter":1.3366071428571429,"shownJitterTurned":1.3157738095238096,"grain":0,"sharpness":0.34514158424958075,"drawMs":110.85,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Generated low-light: /tmp/splashery-cdx-mir-utPT2t/low-light.y4m
+  ✓  12 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.7m)
+(node:48056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:48056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-aV5eHk/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-aV5eHk/low-light.y4m
+cdx mirror still: {"heightJitter":0.000004124050741797095,"colorJitter":0.7478978978978978,"shownJitter":0.673776455026455,"shownJitterTurned":0.656084656084656,"grain":0,"sharpness":0.7326270917330523,"drawMs":143.4850000000559,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+cdx mirror low-light: {"heightJitter":0.005125835668799039,"colorJitter":1.8183933933933933,"shownJitter":1.3812830687830688,"shownJitterTurned":1.4171296296296296,"grain":0,"sharpness":0.3511668711497862,"drawMs":119.33499999996275,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  14 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.8m)
+  ✓  15 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.7m)
+(node:48403) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:48397) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+cdx mirror still: {"heightJitter":0.000005151828130086263,"colorJitter":0.7535285285285285,"shownJitter":0.6142857142857143,"shownJitterTurned":0.6092261904761904,"grain":0,"sharpness":0.7199886120837122,"drawMs":104.72000000001863,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+(node:48403) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:48397) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  13 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.9m)
+(node:48424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-45Mjud/still.y4m
+(node:48424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-4Ux1pL/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-45Mjud/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-4Ux1pL/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-oiuSZB/still.y4m
+cdx mirror low-light: {"heightJitter":0.002639928884670004,"colorJitter":1.6692942942942943,"shownJitter":1.219510582010582,"shownJitterTurned":1.2787698412698412,"grain":0,"sharpness":0.34482906938615515,"drawMs":89.49000000003726,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  16 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.7m)
+(node:48669) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated low-light: /tmp/splashery-cdx-mir-oiuSZB/low-light.y4m
+(node:48669) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-14ulhE/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-14ulhE/low-light.y4m
+cdx mirror still: {"heightJitter":0.0002870948053896427,"colorJitter":0.63003003003003,"shownJitter":0.6489417989417989,"shownJitterTurned":0.6791005291005291,"grain":0,"sharpness":0.7283301721613474,"drawMs":161.89000000003725,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  19 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.5m)
+(node:49012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+cdx mirror still: {"heightJitter":0.0000038058891355454383,"colorJitter":0.7399399399399399,"shownJitter":0.6706679894179894,"shownJitterTurned":0.5911375661375662,"grain":0,"sharpness":0.7274262294958117,"drawMs":139.95999999996275,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+(node:49012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  17 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.5m)
+(node:49027) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:49027) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-4g95at/still.y4m
+cdx mirror low-light: {"heightJitter":0.0037190152000770105,"colorJitter":1.5109609609609609,"shownJitter":1.1946097883597884,"shownJitterTurned":1.3106481481481482,"grain":0,"sharpness":0.342928808033022,"drawMs":144.12999999998138,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  18 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.6m)
+Generated low-light: /tmp/splashery-cdx-mir-4g95at/low-light.y4m
+(node:49042) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-0fFs3D/still.y4m
+(node:49042) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated low-light: /tmp/splashery-cdx-mir-0fFs3D/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-TBHCSr/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-TBHCSr/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.0023146612469006228,"colorJitter":1.7523273273273274,"shownJitter":1.2107804232804233,"shownJitterTurned":1.235978835978836,"grain":0,"sharpness":0.3338480114196813,"drawMs":103.18499999996274,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  20 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.6m)
+(node:49423) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:49423) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-AT9xgl/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-AT9xgl/low-light.y4m
+cdx mirror still: {"heightJitter":0.0000032379518489579896,"colorJitter":0.7253003003003003,"shownJitter":0.6458994708994709,"shownJitterTurned":0.6070436507936507,"grain":0,"sharpness":0.7202962957542333,"drawMs":126.33500000005589,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  21 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.7m)
+(node:49653) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:49653) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-2Bj8nX/still.y4m
+cdx mirror low-light: {"heightJitter":0.0032182372082863843,"colorJitter":1.7774774774774775,"shownJitter":1.1738095238095239,"shownJitterTurned":1.221957671957672,"grain":0,"sharpness":0.3381713252373923,"drawMs":149.83499999996275,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+cdx mirror still: {"heightJitter":0.000004057742672057839,"colorJitter":0.6618618618618619,"shownJitter":0.6168650793650794,"shownJitterTurned":0.6149801587301588,"grain":0,"sharpness":0.7211170500367952,"drawMs":137.39000000003725,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  23 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.6m)
+  ✓  24 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.5m)
+Generated low-light: /tmp/splashery-cdx-mir-2Bj8nX/low-light.y4m
+(node:49668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:49674) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:49674) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:49668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-qtGiHT/still.y4m
+Generated still: /tmp/splashery-cdx-mir-vx3KFm/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-qtGiHT/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.003600316628108959,"colorJitter":1.6529279279279279,"shownJitter":1.3897156084656084,"shownJitterTurned":1.3418981481481482,"grain":0,"sharpness":0.35239813664975617,"drawMs":125.43999999994412,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  22 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.8m)
+Generated low-light: /tmp/splashery-cdx-mir-vx3KFm/low-light.y4m
+(node:49922) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:49922) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-7hFlH8/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-7hFlH8/low-light.y4m
+cdx mirror still: {"heightJitter":0.0003179330764724328,"colorJitter":0.7415165165165165,"shownJitter":0.6825727513227513,"shownJitterTurned":0.7018518518518518,"grain":0,"sharpness":0.7248409340061602,"drawMs":126.13500000005588,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  25 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.7m)
+(node:50353) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+cdx mirror still: {"heightJitter":0.000006527435202319342,"colorJitter":0.6632882882882883,"shownJitter":0.6131283068783069,"shownJitterTurned":0.6372354497354498,"grain":0,"sharpness":0.7365686126433754,"drawMs":106.77999999998137,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+(node:50353) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  26 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.7m)
+(node:50364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:50364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-Ue0Ek2/still.y4m
+Generated still: /tmp/splashery-cdx-mir-4RIjwf/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-Ue0Ek2/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-4RIjwf/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.01011739709993472,"colorJitter":1.7540540540540541,"shownJitter":1.4065145502645502,"shownJitterTurned":1.1907407407407407,"grain":0,"sharpness":0.34974708501599744,"drawMs":109.54000000003725,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  28 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.7m)
+(node:50627) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+cdx mirror low-light: {"heightJitter":0.00320043763363952,"colorJitter":1.7938438438438438,"shownJitter":1.391170634920635,"shownJitterTurned":1.2911044973544974,"grain":0,"sharpness":0.33814356630424364,"drawMs":148.38000000007452,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  27 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.8m)
+(node:50627) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:50639) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:50639) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-qZyiU7/still.y4m
+Generated still: /tmp/splashery-cdx-mir-wkgtgq/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-qZyiU7/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-wkgtgq/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.003988544112658716,"colorJitter":1.5236486486486487,"shownJitter":1.188095238095238,"shownJitterTurned":1.3349867724867726,"grain":0,"sharpness":0.3561021794504858,"drawMs":140.66500000003725,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  30 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.6m)
+(node:50976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:50976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-5MwkpD/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-5MwkpD/low-light.y4m
+cdx mirror still: {"heightJitter":0.0006173102541717592,"colorJitter":0.6661411411411411,"shownJitter":0.6978835978835979,"shownJitterTurned":0.6660383597883598,"grain":0,"sharpness":0.728730606399745,"drawMs":114.10500000007451,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✘  29 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.7m)
+(node:51104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-kGeJLw/still.y4m
+cdx mirror low-light: {"heightJitter":0.00462185932105189,"colorJitter":1.6379129129129129,"shownJitter":1.3574735449735449,"shownJitterTurned":1.2615740740740742,"grain":0,"sharpness":0.34546033721879904,"drawMs":111.56499999994412,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Generated low-light: /tmp/splashery-cdx-mir-kGeJLw/low-light.y4m
+  ✓  32 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.6m)
+(node:51143) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51143) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-uy5ba2/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-uy5ba2/low-light.y4m
+cdx mirror still: {"heightJitter":0.0000015831699276024158,"colorJitter":0.6847597597597598,"shownJitter":0.6550595238095238,"shownJitterTurned":0.5892195767195767,"grain":0,"sharpness":0.7271903212652264,"drawMs":144.42000000001863,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  31 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.8m)
+(node:51402) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51402) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-Z1agZB/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-Z1agZB/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.005290789835926917,"colorJitter":1.6974474474474475,"shownJitter":1.3451058201058201,"shownJitterTurned":1.3735449735449736,"grain":0,"sharpness":0.3458491440635196,"drawMs":143.13000000007452,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+cdx mirror still: {"heightJitter":0.0005962967893595362,"colorJitter":0.6798048048048048,"shownJitter":0.7307208994708995,"shownJitterTurned":0.6567460317460317,"grain":0,"sharpness":0.7245040835730157,"drawMs":135.975,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✘  33 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.6m)
+  ✓  34 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.5m)
+(node:51680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51674) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51674) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+cdx mirror still: {"heightJitter":0.0000025682889663421357,"colorJitter":0.6585585585585586,"shownJitter":0.6097222222222223,"shownJitterTurned":0.6624669312169312,"grain":0,"sharpness":0.7318437000236452,"drawMs":155.8199999999255,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Generated still: /tmp/splashery-cdx-mir-ChcatZ/still.y4m
+Generated still: /tmp/splashery-cdx-mir-pfPxvk/still.y4m
+  ✓  35 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (2.5m)
+(node:51700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated low-light: /tmp/splashery-cdx-mir-pfPxvk/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-ChcatZ/low-light.y4m
+(node:51700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-r42aDa/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-r42aDa/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.0025991229944535205,"colorJitter":1.5986486486486486,"shownJitter":1.3529431216931216,"shownJitterTurned":1.1692791005291006,"grain":0,"sharpness":0.34167469683049495,"drawMs":206.44000000003726,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  36 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (2.6m)
+  ✘  39 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (19.2s)
+  ✘  38 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (23.5s)
+  ✘  37 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (25.4s)
+
+
+  1) [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.00055[39m
+    Received:   [31m0.0006173102541717592[39m
+
+      309 |         const m = await measure(page, { answers: 6 });
+      310 |         console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);
+    > 311 |         expect(m.heightJitter).toBeLessThan(height);
+          |                                ^
+      312 |         expect(m.shownJitter).toBeLessThan(shown);
+      313 |         // Record live timing, but guard cost with the identical-input
+      314 |         // relative benchmark below instead of a host-dependent ceiling.
+        at /workspace/splashery/tests/cdx-mir.spec.mjs:311:32
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/cdx-batched-formal/run-0958/results/cdx-mir-real-depth-worker--94c1e-ft-stays-below-the-baseline-chromium-repeat14/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/cdx-batched-formal/run-0958/results/cdx-mir-real-depth-worker--94c1e-ft-stays-below-the-baseline-chromium-repeat14/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.00055[39m
+    Received:   [31m0.0005962967893595362[39m
+
+      309 |         const m = await measure(page, { answers: 6 });
+      310 |         console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);
+    > 311 |         expect(m.heightJitter).toBeLessThan(height);
+          |                                ^
+      312 |         expect(m.shownJitter).toBeLessThan(shown);
+      313 |         // Record live timing, but guard cost with the identical-input
+      314 |         // relative benchmark below instead of a host-dependent ceiling.
+        at /workspace/splashery/tests/cdx-mir.spec.mjs:311:32
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/cdx-batched-formal/run-0958/results/cdx-mir-real-depth-worker--94c1e-ft-stays-below-the-baseline-chromium-repeat16/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/cdx-batched-formal/run-0958/results/cdx-mir-real-depth-worker--94c1e-ft-stays-below-the-baseline-chromium-repeat16/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+    [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+  3 interrupted
+    [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+    [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline 
+    [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+  21 did not run
+  34 passed (25.4m)
