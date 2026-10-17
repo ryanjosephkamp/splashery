@@ -259,9 +259,9 @@ test("buildRecipeTo: measures and corrects; a stated count is built once", async
   const f = run(fixed, 200_000);
   expect(f.n).toBe(5000);
   expect(f.builds).toBe(3);
-  // A build that says it drew all its data (k.all) is built once.
+  // A build that says it drew all its data (k.all) is measured as any other.
   const all = { build: (k) => ((k.all = true), fixed.build(k)) };
-  expect(run(all, 200_000)).toEqual({ n: 5000, builds: 1 });
+  expect(run(all, 200_000)).toEqual({ n: 5000, builds: 3 });
   // Stated: built once at the slider's count.
   const stated = { ...fixed, splats: () => ({ count: 5000, all: true }) };
   const s = run(stated, 200_000);

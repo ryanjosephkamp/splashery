@@ -621,8 +621,9 @@ export class Kit {
     // Lane SPL1: with the labs Splats slider above the most a toy's tiers
     // give it, the factor (under 1) a recipe may scale its fixed splat sizes
     // by, so more splats make the toy sharper rather than thicker; 1
-    // otherwise. A recipe that has drawn every splat its data has sets
-    // `all` during its build (the label then says so).
+    // otherwise. A recipe that has drawn every splat its data has (or all
+    // the detail its source has) sets `all` during its build, so the label
+    // says so when the toy falls short of the slider.
     this.shrink = shrink;
     this.all = false;
     // Pictures (lane Books): a picture toy's media, opened before the build
@@ -1383,7 +1384,6 @@ export function statedSplats(recipe, count, options) {
 // recipe that states its count (statedSplats) is built once. The context
 // returned is always the last build's, since a recipe may keep state between
 // builds: when an earlier try came closer, it is built again at that budget.
-// A build that sets `k.all` (every splat its data has) is not done again.
 export function* buildRecipeTo(recipe, args, applyClay) {
   const target = args.count;
   const build = (count) => buildRecipe(recipe, { ...args, count }, applyClay);
@@ -1392,7 +1392,7 @@ export function* buildRecipeTo(recipe, args, applyClay) {
   let count = target;
   let ctx = yield* build(count);
   let best = { count, n: ctx.buf.count };
-  for (let pass = 0; pass < 2 && off(best.n) > target * 0.01 && !ctx.kit.all; pass++) {
+  for (let pass = 0; pass < 2 && off(best.n) > target * 0.01; pass++) {
     const drawn = ctx.buf.count;
     const next = Math.round(
       Math.min(target * 2.5, Math.max(target * 0.5, (count * target) / Math.max(1, drawn))),
