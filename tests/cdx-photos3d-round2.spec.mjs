@@ -5,7 +5,7 @@ import { solvePhotoGraph } from "../src/photos3d/solve.js";
 import { makeControl, scoreCameras } from "../tools/photos3d-controls.mjs";
 import { PNG } from "pngjs";
 import { matchSift } from "../vendor/splatjs/src/sfm/sift.js";
-import { polygonMask, scoreHeldOut } from "../tools/photos3d-evaluate.mjs";
+import { polygonMask, scoreHeldOut, browserRound2 } from "../tools/photos3d-evaluate.mjs";
 import jpeg from "jpeg-js";
 
 test("masked metrics score object pixels, exclude holes, and distinguish a changed held-out render", () => {
@@ -240,6 +240,48 @@ test("parallel CPU matching preserves the calibrated all-pair graph", async ({ p
   });
   expect(result.equal).toBe(true);
   expect(result.accepted).toBe(28);
+});
+
+test("a total browser solve failure emits a held-out failure for every selected photo", async ({
+  page,
+}) => {
+  await page.route("**/photos3d-round2-test.html", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: '<input type="file" multiple><canvas></canvas>',
+    }),
+  );
+  await page.goto("/photos3d-round2-test.html");
+  const png = new PNG({ width: 32, height: 32 });
+  png.data.fill(255);
+  const buffer = PNG.sync.write(png);
+  await page.setInputFiles(
+    "input",
+    Array.from({ length: 8 }, (_, i) => ({
+      name: `blank-${i}.png`,
+      mimeType: "image/png",
+      buffer,
+    })),
+  );
+  const row = await page.evaluate(browserRound2, {
+    profile: "phone",
+    cpuMatching: true,
+    assumeSingleLens: true,
+    iterations: 2,
+    folds: "all",
+    timeoutMs: 30000,
+  });
+  expect(row.foldCounts).toEqual({
+    planned: 8,
+    complete: 0,
+    failed: 0,
+    unregistered: 8,
+    unfinished: 0,
+  });
+  expect(row.folds.every((f) => f.status === "unregistered" && f.reason)).toBe(true);
+  expect(row.folds.map((f) => f.heldOut)).toEqual(
+    Array.from({ length: 8 }, (_, i) => `blank-${i}.png`),
+  );
 });
 
 test("held-out RGB and masks cannot affect sparse/surface seeds, uploaded targets, or trained parameters", async ({

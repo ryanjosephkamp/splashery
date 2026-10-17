@@ -541,6 +541,8 @@ async function main() {
     ],
   };
   await fs.writeFile(out, JSON.stringify({ provenance, status: "running" }, null, 2) + "\n");
+  if (options.round2 && options.input)
+    await fs.writeFile(out.replace(/\.json$/, "") + ".folds.jsonl", "");
   let result;
   try {
     result = options.control

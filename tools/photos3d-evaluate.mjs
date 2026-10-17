@@ -95,6 +95,14 @@ export async function browserRound2(options) {
     physicalPhone: false,
     peakGpuMemory: null,
   };
+  row.plannedFolds =
+    options.folds === "all"
+      ? files.map((f) => f.name).sort()
+      : options.folds
+        ? options.folds.split(",")
+        : options.iterations
+          ? [null]
+          : [];
   const started = performance.now();
   const controller = new AbortController();
   let activeSession;
@@ -160,6 +168,19 @@ export async function browserRound2(options) {
     }));
     if (!solution.recon) {
       row.solveError = solution.error;
+      for (const name of row.plannedFolds) {
+        const fold = {
+          heldOut: name,
+          status: "unregistered",
+          reason:
+            solution.rejected.find((p) => p.name === name)?.reason ||
+            solution.graph?.photos.find((p) => p.name === name)?.reason ||
+            solution.error,
+          seconds: 0,
+        };
+        row.folds.push(fold);
+        await globalThis.probeFold?.(fold);
+      }
       return row;
     }
     const { recon, frames } = solution;
@@ -183,14 +204,7 @@ export async function browserRound2(options) {
     await globalThis.probeCheckpoint?.(row.checkpoint);
     if (!options.iterations) return row;
     const masks = options.masks;
-    const heldOut =
-      options.folds === "all"
-        ? files.map((f) => f.name).sort()
-        : options.folds
-          ? options.folds.split(",")
-          : [null];
-    row.plannedFolds = heldOut;
-    for (const name of heldOut) {
+    for (const name of row.plannedFolds) {
       controller.signal.throwIfAborted();
       const foldStart = performance.now();
       const fold = { heldOut: name, status: "running" };
