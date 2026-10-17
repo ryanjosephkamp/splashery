@@ -2,10 +2,9 @@
 
 October 17, 2026. Codex (GPT-6), task 108, `codex/frontier-research`.
 
-**Recommendation:** build a depth-guided light brush and budgeted progressive detail first. The two
-linked prototypes run their core CPU stages without models, libraries, or external requests. Next: a
-triangle viewer, small joint geometry estimation, and assisted object cutting. These are engineering
-recommendations, not a benchmark ranking of research quality.
+**Recommendation:** build depth-guided lighting and budgeted LOD first. The two standalone CPU
+probes exercise their cores without weights or external requests. Next: a triangle viewer, joint
+geometry estimation, and assisted cutting.
 
 ## Scope and evidence
 
@@ -297,5 +296,4 @@ was not run. Rule check: none.
 [Universal Beta Splatting](https://arxiv.org/abs/2510.03312),
 [MoGe-3](https://arxiv.org/abs/2607.17967), [Inpaint360GS](https://arxiv.org/abs/2511.06457),
 [Mobile-GS](https://arxiv.org/abs/2603.11531), and [Flux-GS](https://arxiv.org/abs/2606.30017).
-Preprint and conference years can differ. Other primary method, license, and model sources are
-linked directly in the table.
+Preprint and conference years can differ.
