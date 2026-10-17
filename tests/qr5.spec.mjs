@@ -65,7 +65,11 @@ async function holdClock(page, size) {
         }
         if (!c) c = await stage.captureFrame();
         const g = c.getContext("2d");
-        return { w: c.width, h: c.height, data: Array.from(g.getImageData(0, 0, c.width, c.height).data) }; // prettier-ignore
+        const data = g.getImageData(0, 0, c.width, c.height).data;
+        let binary = "";
+        for (let i = 0; i < data.length; i += 8192)
+          binary += String.fromCharCode(...data.subarray(i, i + 8192));
+        return { w: c.width, h: c.height, data: btoa(binary) };
       },
       toWorld(p) {
         const tf = player.motion.ctx.transform;
@@ -73,6 +77,13 @@ async function holdClock(page, size) {
       },
     };
   }, size);
+}
+
+// Decode the exact RGBA bytes on the Node side, before the original pixel checks.
+async function step(page, seconds) {
+  const img = await page.evaluate((seconds) => window.__qr5.step(seconds), seconds);
+  img.data = Array.from(Buffer.from(img.data, "base64"));
+  return img;
 }
 
 // The share of clearly colored pixels (saturation over 0.3 and not dark) in
@@ -99,11 +110,11 @@ test("Picture QR: the ripple keeps every module's picture colors", async ({ page
   await page.waitForFunction(() => !window.__splashery.app.busy, null, { timeout: 120_000 });
   await page.waitForTimeout(3000);
   await holdClock(page, [390, 844]);
-  const rest = await page.evaluate(() => window.__qr5.step(0.5));
+  const rest = await step(page, 0.5);
   await page.evaluate(() => window.__splashery.app.player.act(window.__qr5.toWorld([0, 0])));
   // Mid-ripple: the wave is out over the middle of the code.
   const shares = [];
-  for (let k = 0; k < 4; k++) shares.push(colorful(await page.evaluate(() => window.__qr5.step(0.4)))); // prettier-ignore
+  for (let k = 0; k < 4; k++) shares.push(colorful(await step(page, 0.4))); // prettier-ignore
   const r0 = colorful(rest);
   expect(r0).toBeGreaterThan(0.2);
   // Before lane QR r5 the tiles inside the wave showed the plain code (black
@@ -146,8 +157,12 @@ async function tapDamage(page, tool, points) {
     const c = await q.checkDamage();
     const img = q.lastShot();
     const { codes, options } = q.damage();
-    return { damage: options.damage, size: codes[0].size, scans: c.codes[0].scans, wrong: c.codes[0].analysis.wrong, w: img.width, h: img.height, data: Array.from(img.data) }; // prettier-ignore
+    let binary = "";
+    for (let i = 0; i < img.data.length; i += 8192)
+      binary += String.fromCharCode(...img.data.subarray(i, i + 8192));
+    return { damage: options.damage, size: codes[0].size, scans: c.codes[0].scans, wrong: c.codes[0].analysis.wrong, w: img.width, h: img.height, data: btoa(binary) }; // prettier-ignore
   });
+  r.data = Array.from(Buffer.from(r.data, "base64"));
   expect(r.scans, r.damage).toBe(read(r.data, r.w, r.h) === "https://ryanjosephkamp.github.io/splashery/"); // prettier-ignore
   // The wrong modules in code units (x right, y up, from the center).
   const N = r.size;
@@ -233,7 +248,7 @@ test("three codes in one: each code reads pulled apart, in the colors picked", a
   }
   await holdClock(page, [1500, 640]);
   await page.evaluate(() => window.__splashery.app.player.act());
-  const img = await page.evaluate(() => window.__qr5.step(2.1)); // apart, holding
+  const img = await step(page, 2.1); // apart, holding
   const want = ["https://ryanjosephkamp.github.io/splashery/", "Three codes in one square", "Red, green and blue"]; // prettier-ignore
   // Each code's columns (its colored pixels), with a white margin around it.
   const inked = [];

@@ -93,8 +93,13 @@ test("the Damage lab's meter agrees with jsQR on a fixed set", async ({ page }) 
     const r = await page.evaluate(async () => {
       const c = await window.__splashery.qrLab.checkDamage();
       const img = window.__splashery.qrLab.lastShot();
-      return { codes: c.codes.map((x) => ({ scans: x.scans, decodes: x.analysis.decodes, wrong: x.analysis.wrong.length, blocks: x.analysis.blocks.map((b) => [b.lost, b.fixable]) })), w: img.width, h: img.height, data: Array.from(img.data) }; // prettier-ignore
+      // Preserve every RGBA byte without serializing millions of individual numbers.
+      let binary = "";
+      for (let i = 0; i < img.data.length; i += 8192)
+        binary += String.fromCharCode(...img.data.subarray(i, i + 8192));
+      return { codes: c.codes.map((x) => ({ scans: x.scans, decodes: x.analysis.decodes, wrong: x.analysis.wrong.length, blocks: x.analysis.blocks.map((b) => [b.lost, b.fixable]) })), w: img.width, h: img.height, data: btoa(binary) }; // prettier-ignore
     });
+    r.data = Array.from(Buffer.from(r.data, "base64"));
     // jsQR in Node on the very picture the meter read.
     const text = read(r.data, r.w, r.h);
     const want = "https://ryanjosephkamp.github.io/splashery/";
