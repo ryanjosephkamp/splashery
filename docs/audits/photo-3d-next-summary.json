@@ -1,0 +1,285 @@
+{
+  "status": "clean_negative",
+  "goalMet": false,
+  "builder": "Codex (GPT-6)",
+  "baseline": "144cc80ec6f3aee0b248a076fbf6159f6008d84f",
+  "startedUTC": "2026-10-16T20:16:54Z",
+  "hardStopUTC": "2026-10-17T08:16:54Z",
+  "yardstick": {
+    "completedUTC": "2026-10-16T22:08:48.713219+00:00",
+    "deadlineUTC": "2026-10-16T22:16:54Z",
+    "withinBudget": true,
+    "protocol": "16 samples, guided OpenImageDenoise; fixed cameras and exact geometry masks"
+  },
+  "cameraProof": {
+    "orientations": 2,
+    "poses": 9,
+    "points": 1152,
+    "maxPixelError": 0.00010204869647623127
+  },
+  "noiseControls": {
+    "scope": "one fixed masked room view",
+    "rawEightSampleError": 0.5869960645738896,
+    "guidedSixteenSampleError": 0.008219681757746122
+  },
+  "truth": {
+    "views": 216,
+    "baselineError": 0.5771034888140871,
+    "baselineBoundaryError": 47.013189068286835,
+    "baselineEdgeF1": 0.6543669890925112,
+    "boundaryViews": 184,
+    "boundaryPixels": 1604453,
+    "profiles": 2,
+    "poses": 9,
+    "phoneRaster": [390, 844],
+    "desktopRaster": [720, 450]
+  },
+  "candidates": [
+    {
+      "name": "layered-a",
+      "truthError": 0.5769161351656877,
+      "truthGain": 0.000324644802935417,
+      "boundaryError": 47.80143130733566,
+      "boundaryGain": -0.016766406505712737,
+      "edgeF1": 0.6545890091443989,
+      "views": 216,
+      "truthPass": false,
+      "boundaryPass": false,
+      "worstSceneGain": -0.012967891971093595,
+      "atlasInputs": 20,
+      "streakGain": 0.7939778823836267,
+      "textureDelta": -0.4172253876456918,
+      "ribbonWorse": [],
+      "thinWorse": ["dot-bamboo"],
+      "extraThinLost": 4
+    },
+    {
+      "name": "layered-b",
+      "truthError": 0.5777536671033634,
+      "truthGain": -0.0011266233905678651,
+      "boundaryError": 47.887509685360826,
+      "boundaryGain": -0.018597347561426582,
+      "edgeF1": 0.6538949739323516,
+      "views": 216,
+      "truthPass": false,
+      "boundaryPass": false,
+      "worstSceneGain": -0.015794841669178473,
+      "atlasInputs": 20,
+      "streakGain": 0.8921587649917402,
+      "textureDelta": 0.04526707594064683,
+      "ribbonWorse": [],
+      "thinWorse": ["dot-bamboo", "dot-cdx-pinecone", "dot-train"],
+      "extraThinLost": 6
+    }
+  ],
+  "depthBakeoff": [
+    {
+      "name": "da2",
+      "backend": "WASM",
+      "bytes": 27258801,
+      "wasmMs": 1530.2999999998137,
+      "absRel": 0.04798262007372696,
+      "delta1": 0.976144443743618,
+      "orderError": 0.01808133284923042,
+      "boundaryF1": 0.8133153794467298,
+      "truthInputs": 12,
+      "nativeInputs": 817,
+      "nativeComplete": true,
+      "labCounts": [306, 185, 154, 160]
+    },
+    {
+      "name": "distill",
+      "backend": "WASM",
+      "bytes": 99018579,
+      "wasmMs": 5213.4000000003725,
+      "absRel": 0.04598402998092957,
+      "delta1": 0.9868735548190636,
+      "orderError": 0.012919051585437045,
+      "boundaryF1": 0.8411597653162983,
+      "truthInputs": 12,
+      "nativeInputs": 817,
+      "nativeComplete": true,
+      "labCounts": [306, 185, 154, 160]
+    },
+    {
+      "name": "da3-small",
+      "backend": "WASM",
+      "bytes": 100439574,
+      "wasmMs": 2747.2999999998137,
+      "absRel": 0.06483026606633768,
+      "delta1": 0.9712276103644959,
+      "orderError": 0.03400496589936542,
+      "boundaryF1": 0.7284860201331063,
+      "truthInputs": 12,
+      "nativeInputs": 817,
+      "nativeComplete": true,
+      "labCounts": [306, 185, 154, 160]
+    },
+    {
+      "name": "moge-small",
+      "backend": "WASM",
+      "bytes": 140852051,
+      "wasmMs": 14382.399999999441,
+      "absRel": 0.03804150498466949,
+      "delta1": 0.9925528202465606,
+      "orderError": 0.008976175970481127,
+      "boundaryF1": 0.885719212802091,
+      "truthInputs": 12,
+      "nativeInputs": 817,
+      "nativeComplete": true,
+      "labCounts": [306, 185, 154, 160]
+    },
+    {
+      "name": "da3-base",
+      "backend": "CPU",
+      "bytes": 541518028,
+      "wasmMs": null,
+      "absRel": 0.06025835906745067,
+      "delta1": 0.983839667074869,
+      "orderError": 0.026908552937319613,
+      "boundaryF1": 0.824976087773448,
+      "truthInputs": 12,
+      "nativeInputs": 32,
+      "nativeComplete": false,
+      "labCounts": [5, 5, 5, 5]
+    },
+    {
+      "name": "da3-mono-large",
+      "backend": "CPU",
+      "bytes": 1336734448,
+      "wasmMs": null,
+      "absRel": 0.08187344399191829,
+      "delta1": 0.9401565739696236,
+      "orderError": 0.0061921805249040415,
+      "boundaryF1": 0.8953755892966693,
+      "truthInputs": 12,
+      "nativeInputs": 32,
+      "nativeComplete": false,
+      "labCounts": [5, 5, 5, 5]
+    },
+    {
+      "name": "moge-large",
+      "backend": "CPU",
+      "bytes": 1323815904,
+      "wasmMs": null,
+      "absRel": 0.02747265577540766,
+      "delta1": 0.9961322487356243,
+      "orderError": 0.0031258280070811115,
+      "boundaryF1": 0.9247716670750585,
+      "truthInputs": 12,
+      "nativeInputs": 32,
+      "nativeComplete": false,
+      "labCounts": [5, 5, 5, 5]
+    },
+    {
+      "name": "moge-small-300-int8",
+      "backend": "CPU",
+      "bytes": 76498521,
+      "wasmMs": 3132.399999999441,
+      "absRel": 0.06225156129861222,
+      "delta1": 0.9850746560099761,
+      "orderError": 0.01841377022180803,
+      "boundaryF1": 0.7060408552110373,
+      "truthInputs": 12,
+      "nativeInputs": 32,
+      "nativeComplete": false,
+      "labCounts": [5, 5, 5, 5]
+    }
+  ],
+  "costScreen": {
+    "scope": "One phone input, five fresh-browser observations per method; not the corpus cost gate or a physical phone",
+    "input": "new-13-60172881",
+    "observationsPerMethod": 5,
+    "methods": [
+      {
+        "name": "classic",
+        "medianMs": 4485.4000000003725,
+        "timeDelta": 0.0,
+        "peakPssMiB": 1086.6044921875,
+        "memoryDeltaMiB": 0.0
+      },
+      {
+        "name": "layered-a",
+        "medianMs": 4816.100000000559,
+        "timeDelta": 0.07372809559909022,
+        "peakPssMiB": 1071.4873046875,
+        "memoryDeltaMiB": -15.1171875
+      },
+      {
+        "name": "layered-b",
+        "medianMs": 6686.9000000003725,
+        "timeDelta": 0.4908146430641229,
+        "peakPssMiB": 1078.3408203125,
+        "memoryDeltaMiB": -8.263671875
+      }
+    ]
+  },
+  "reviewPairs": 20,
+  "ownerBlindWins": null,
+  "physicalPhoneResult": null,
+  "productionOptionEnabled": false,
+  "targetsInGit": false,
+  "browserBaselineParity": true,
+  "verification": {
+    "goldenInitialPassed": 77,
+    "samples": 76,
+    "budgets": 2,
+    "methodPassed": 13,
+    "cameraPoints": 1152,
+    "reviewPage": "passed; synthetic vote download only",
+    "browserBaselineByteIdenticalScenes": 12,
+    "fullSuite": "all 393 spec files from 16 completed CI shards; 3,349 passed, 1 failed, 1 skipped",
+    "preflight": "passed",
+    "fullSuiteCommit": "95b30a91f8df5304d2ae35b940380b0bc36f2641",
+    "fullSuiteFiles": 393,
+    "fullSuiteStartedUTC": "2026-10-16T23:14:15Z",
+    "mergedMain": "d49c387ecb0172732618298e0e73c80df78199f3",
+    "ciRun": "https://github.com/ryanjosephkamp/splashery/actions/runs/38980331170",
+    "ciMergeCommit": "0d93418b0f4d6415e4048257d4788c9d87f7203b",
+    "ciTreeEqualsLocalMergedTree": true,
+    "preflightPassed": 270,
+    "goldenFinalPassed": 77,
+    "goldenMethodUnexpected": 0,
+    "movingMirrorPassed": 56,
+    "movingMirrorFiles": ["live", "live3", "live5", "lv7", "smd-moving"],
+    "recorderBaselineChromium151": "one mobile case passed; CI uses bundled Chromium 141",
+    "recorderBaselineChromium141": "passed one mobile case on unchanged main",
+    "recorderBranchChromium141": "passed the same case",
+    "recorderCI": "failed initially and alone; not reproduced locally; unresolved",
+    "finalMergedMain": "d49c387ecb0172732618298e0e73c80df78199f3",
+    "finalPreflight": "passed",
+    "finalPreflightPassed": 270,
+    "fullSuiteStats": {
+      "filesReported": 393,
+      "filesExpected": 393,
+      "tests": 3351,
+      "passed": 3349,
+      "failed": 1,
+      "skipped": 1,
+      "exitCode": 1
+    },
+    "ciAggregation": "tools/ci-report.mjs over all 16 uploaded artifact report sets",
+    "ciSkipped": [
+      {
+        "file": "cdx-v3d-calibration",
+        "line": 215,
+        "title": "retained real counterexample clips decode to caution or poor",
+        "annotations": [
+          {
+            "type": "skip",
+            "description": "Counterexample clips are kept privately outside the repository.",
+            "location": {
+              "file": "/home/runner/work/splashery/splashery/tests/cdx-v3d-calibration.spec.mjs",
+              "line": 217,
+              "column": 8
+            }
+          }
+        ]
+      }
+    ],
+    "verificationCompletedUTC": "2026-10-17T00:37:27.607324+00:00",
+    "complete": true
+  },
+  "evidenceBranch": "codex/photo-3d-next-clips",
+  "ruleCheck": "none"
+}
