@@ -1,0 +1,48 @@
+{
+  "file": "pano-parent-research.tar.gz",
+  "bytes": 15320239,
+  "sha256": "86386e0016093bd532fb8688dcb5410d8bfe171753955eb8e321b9f68c82ce29",
+  "parts": [
+    {
+      "file": "part-000",
+      "bytes": 2097152,
+      "sha256": "d86727aefe7052f5c19ca2f8e5a7fc45ac648c4f043a6d473740da2fe6701618"
+    },
+    {
+      "file": "part-001",
+      "bytes": 2097152,
+      "sha256": "ca23b3800265c1a727f863d6812077cf660f812b54fdfb3b8ad67d11f93ecdd6"
+    },
+    {
+      "file": "part-002",
+      "bytes": 2097152,
+      "sha256": "dcdcfbed6f368efec0d5e22877c6bfada94d5696c3c4fbc1582a5f05dab8efc9"
+    },
+    {
+      "file": "part-003",
+      "bytes": 2097152,
+      "sha256": "52e6a9a55af620f9144979f3791c12150759cf7e924418a6cdc7ecc1b21a8037"
+    },
+    {
+      "file": "part-004",
+      "bytes": 2097152,
+      "sha256": "af82d0210566f6f5e8e5461197d614f86420ed351cfdb2553e70d6ee43a555ac"
+    },
+    {
+      "file": "part-005",
+      "bytes": 2097152,
+      "sha256": "3713ee720bb3ef0b625238f157637c35014a53ffbecbcabe0d3622c06dd0fe9a"
+    },
+    {
+      "file": "part-006",
+      "bytes": 2097152,
+      "sha256": "1893fea68f3ec216c3636e5dd330ef0e831bfa2e87b220a9aa106701eb773eb6"
+    },
+    {
+      "file": "part-007",
+      "bytes": 640175,
+      "sha256": "e519b86abcd3c6da3eb9127645be5f2e0bdf4ccdb720a5e4c598d8e8826371b8"
+    }
+  ],
+  "restore": "Concatenate part-* in filename order, then verify the complete SHA256 and extract with tar -xzf."
+}

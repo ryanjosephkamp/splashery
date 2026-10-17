@@ -1,14 +1,16 @@
 {
-  "createdUTC": "2026-10-17T03:00:47.647Z",
-  "pipelineHash": "1326d658d9b660bcba80fc380791b2a9a7bb57301fbf3bffb56bc399324dcec3",
+  "createdUTC": "2026-10-17T05:17:26.611Z",
+  "pipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be",
   "note": "Actual low-profile product recipe, Kit, and WebGL2 stage at 256×256, DSF 1. Sample responses replaced with the same input panorama and cached per-method globally calibrated depth. The truth-projection control uses exact depth. Fixed source-visible masks are shared with the software diagnostic. All methods clip radial distance to 200 m before the shared 16-bit cache encoding, avoiding out-of-range sky disparities dominating quantization. No hidden surface pixels are removed based on a prediction.",
   "graphics": "llvmpipe",
   "source": {
     "src/pano3d/toy.js": "57f77ba9608af70aa63f9089c602a69cc7a838c572dca21860c307706a43e3d3",
-    "src/pano3d/core.js": "e36864d889520df0fda4727c20619bf058ada3e946ccfdff29134d8c5e3ac11c",
+    "src/pano3d/core.js": "a2a4efa5e2f238041934bd3f07468b5affedb87df4441af6246f81ae4459fafa",
+    "src/pano3d/pipeline.js": "8a23939079b8cf4fdbfdbd3edda335cf46f37ac0391b19428a7920522a3faf44",
+    "src/pano3d/prior.js": "c87ff9f15f246b7b7d15a660373582a3ef21638b8966e2c3d887d80122959aa0",
     "src/stage.js": "6aca8078565def583efb719f6ae21cf4cb27905598b9ac1ecb03e84c8e9c2e53",
     "src/kit.js": "a3eb480a38905191d1a15dee4e2eef31dbcaa4e4269be0c92921880c3e54e415",
-    "tools/pano-gpu-views.mjs": "829d49a73fb0d86120fe2e1152dae83fbdd0178689552d7ea4b21d637132516d"
+    "tools/pano-gpu-views.mjs": "0d45b8201c4ad206faf8104b3210659560b5a030f43dde3a46718369a6b7c38a"
   },
   "scenes": [
     {
@@ -16,7 +18,7 @@
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.41564544555698746,
+            "ssim": 0.4535448485023238,
             "windows": 2841,
             "maskedPixels": 45949,
             "offset": [0.2999999996541948, 0, 0],
@@ -39,7 +41,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.37756871268056036,
+            "ssim": 0.42212116991092075,
             "windows": 2670,
             "maskedPixels": 44216,
             "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
@@ -67,7 +69,7 @@
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.6368467108419245,
+            "ssim": 0.6189810739309,
             "windows": 2604,
             "maskedPixels": 42086,
             "offset": [0.2999999996541948, 0, 0],
@@ -90,7 +92,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.583911830588805,
+            "ssim": 0.5713462431237533,
             "windows": 2480,
             "maskedPixels": 41240,
             "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
@@ -118,7 +120,7 @@
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.5340356977328522,
+            "ssim": 0.5386405728487088,
             "windows": 2051,
             "maskedPixels": 33424,
             "offset": [0.2999999996541948, 0, 0],
@@ -141,7 +143,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.47505063062955366,
+            "ssim": 0.4935776288298911,
             "windows": 1983,
             "maskedPixels": 32895,
             "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
@@ -169,7 +171,7 @@
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.37605475973981867,
+            "ssim": 0.40195119235359994,
             "windows": 2433,
             "maskedPixels": 42156,
             "offset": [0.2999999996541948, 0, 0],
@@ -192,7 +194,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.3212867711480417,
+            "ssim": 0.3372121969324313,
             "windows": 1962,
             "maskedPixels": 35858,
             "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
@@ -220,7 +222,7 @@
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.6700326427534673,
+            "ssim": 0.7204603646906397,
             "windows": 2069,
             "maskedPixels": 33812,
             "offset": [0.2999999996541948, 0, 0],
@@ -243,7 +245,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.605491445286645,
+            "ssim": 0.6778699978577217,
             "windows": 1968,
             "maskedPixels": 33151,
             "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
@@ -271,7 +273,7 @@
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.4212470674018222,
+            "ssim": 0.4246992843382791,
             "windows": 2083,
             "maskedPixels": 34902,
             "offset": [0.2999999996541948, 0, 0],
@@ -294,7 +296,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.3812099416338032,
+            "ssim": 0.3954114232903888,
             "windows": 1924,
             "maskedPixels": 33728,
             "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],

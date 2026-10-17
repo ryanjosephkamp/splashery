@@ -1,14 +1,16 @@
 {
   "madeBy": "Ryan with Codex (GPT-6)",
   "codePR": "https://github.com/ryanjosephkamp/splashery/pull/700",
-  "codeTree": "3093f44f8055fa2414a498a6b0e0a9080fbba641",
-  "pipelineHash": "1326d658d9b660bcba80fc380791b2a9a7bb57301fbf3bffb56bc399324dcec3",
-  "note": "The published tree identity is the initial runtime tree. Later commits update only measurement tooling and audit status. Phone source hashes identify every measured runtime file.",
+  "finalCodeCommit": "ada669442de8635063007aaa795693bb556629f4",
+  "finalCodeTree": "5a0bfeacb1ab37c04d34f7421920ccac418efbab",
+  "mainCommit": "321a7da7a9639ef462748238dba4e9fe2a1f8d29",
+  "pipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be",
   "phoneSource": {
     "src/pano3d/client.js": "fb4c5b23663bfa433fc3dba8d79cc99e42cde7e9de313ba3d73cdbc0b65fc2a3",
-    "src/pano3d/core.js": "e36864d889520df0fda4727c20619bf058ada3e946ccfdff29134d8c5e3ac11c",
+    "src/pano3d/core.js": "a2a4efa5e2f238041934bd3f07468b5affedb87df4441af6246f81ae4459fafa",
     "src/pano3d/input.js": "5bf4bb9b2745423806e31b1baf693aa3cc7b4771c1e7241622a6ce26b48c8bda",
-    "src/pano3d/pipeline.js": "37d1e4259400b343ef209584f0f25fc5ded75b5f4bf9d57f90084c78ce74e9d7",
+    "src/pano3d/pipeline.js": "8a23939079b8cf4fdbfdbd3edda335cf46f37ac0391b19428a7920522a3faf44",
+    "src/pano3d/prior.js": "c87ff9f15f246b7b7d15a660373582a3ef21638b8966e2c3d887d80122959aa0",
     "src/pano3d/samples.js": "b859d4b25bf64cd06be3b9070d1923d8aa2664e196a0249a6fadea433c81c36e",
     "src/pano3d/toy.js": "57f77ba9608af70aa63f9089c602a69cc7a838c572dca21860c307706a43e3d3",
     "src/pano3d/worker.js": "1b452b3e51ad8e60ca0143ca9eee58bdc655a59f4e5f3140ce6b78146f29a253",
@@ -17,10 +19,28 @@
     "src/kit.js": "a3eb480a38905191d1a15dee4e2eef31dbcaa4e4269be0c92921880c3e54e415",
     "src/player.js": "8734dda525518f39e1a97b31f371f49770c220973f3bef5dbbd3819c762ebba5",
     "vendor/depth-anything-v2-small/model_quantized.onnx": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
-    "tools/pano-clips.mjs": "32b1c25af974315a4dec9d4080f662a988baeab910509682c35b9335fc7c84bf",
-    "assets/toys/step-inside-360/room.depth": "e8658f275f1888bdbf9d41fc2e082b89c316c5ba6b551937f3a6faf5e08326c8",
-    "assets/toys/step-inside-360/room2.depth": "bf042299d283eefae1f7598b0dec11cedc8d71b37741146d72afbbf69bc9953c"
+    "tools/pano-clips.mjs": "fad009c1aa6ebfa3e48d0a3e65067aa2a4fd8d59d5b478fca16d9abe280eb92a",
+    "assets/toys/step-inside-360/room.depth": "9306b20b47da6858b6e6b0d9e7d77363bcbf14481ac25190b05a86c26762be70",
+    "assets/toys/step-inside-360/room2.depth": "8b95664a5fabaf3a43524070eda91bf08515ff89f7f841979f7e89275174549f"
   },
-  "finalCodeCommit": "9adff04e0cbb80f24e6c81ad9db6d35482c45ca5",
-  "finalCodeTree": "e2850eff8ac2c1836355cedeecfb9c724d7f4287"
+  "memorySource": {
+    "src/pano3d/client.js": "fb4c5b23663bfa433fc3dba8d79cc99e42cde7e9de313ba3d73cdbc0b65fc2a3",
+    "src/pano3d/core.js": "a2a4efa5e2f238041934bd3f07468b5affedb87df4441af6246f81ae4459fafa",
+    "src/pano3d/input.js": "5bf4bb9b2745423806e31b1baf693aa3cc7b4771c1e7241622a6ce26b48c8bda",
+    "src/pano3d/pipeline.js": "8a23939079b8cf4fdbfdbd3edda335cf46f37ac0391b19428a7920522a3faf44",
+    "src/pano3d/prior.js": "c87ff9f15f246b7b7d15a660373582a3ef21638b8966e2c3d887d80122959aa0",
+    "src/pano3d/samples.js": "b859d4b25bf64cd06be3b9070d1923d8aa2664e196a0249a6fadea433c81c36e",
+    "src/pano3d/toy.js": "57f77ba9608af70aa63f9089c602a69cc7a838c572dca21860c307706a43e3d3",
+    "src/pano3d/worker.js": "1b452b3e51ad8e60ca0143ca9eee58bdc655a59f4e5f3140ce6b78146f29a253",
+    "src/depth/engine.js": "2f59ffb7755ee1c96af95de2c93483c80dafc8c7f71007f2fc0bfb89cb332faf",
+    "src/stage.js": "6aca8078565def583efb719f6ae21cf4cb27905598b9ac1ecb03e84c8e9c2e53",
+    "src/kit.js": "a3eb480a38905191d1a15dee4e2eef31dbcaa4e4269be0c92921880c3e54e415",
+    "src/player.js": "8734dda525518f39e1a97b31f371f49770c220973f3bef5dbbd3819c762ebba5",
+    "vendor/depth-anything-v2-small/model_quantized.onnx": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+    "tools/pano-clips.mjs": "fad009c1aa6ebfa3e48d0a3e65067aa2a4fd8d59d5b478fca16d9abe280eb92a",
+    ".cache/pano3d/phone-confidence-memory.mjs": "a4ae49f2de0fa99ab93438f69199c08bad07980bc48afdee4b065b02d5ac3653",
+    "assets/toys/step-inside-360/room.depth": "9306b20b47da6858b6e6b0d9e7d77363bcbf14481ac25190b05a86c26762be70",
+    "assets/toys/step-inside-360/room2.depth": "8b95664a5fabaf3a43524070eda91bf08515ff89f7f841979f7e89275174549f"
+  },
+  "note": "The final eight recordings and three quiet memory runs match every listed runtime, capture-source, model, and baked-depth byte. Original offline jpeg-js studies are distinct from final Chromium results. Historical equivalence records identify their earlier sourcepoints."
 }

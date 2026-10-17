@@ -1,0 +1,323 @@
+{
+  "createdUTC": "2026-10-17T05:18:51.134Z",
+  "pipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be",
+  "note": "Actual low-profile product recipe, Kit, and WebGL2 stage at 256×256, DSF 1. Sample responses replaced with the same input panorama and cached per-method globally calibrated depth. The truth-projection control uses exact depth. Fixed source-visible masks are shared with the software diagnostic. All methods clip radial distance to 200 m before the shared 16-bit cache encoding, avoiding out-of-range sky disparities dominating quantization. No hidden surface pixels are removed based on a prediction.",
+  "graphics": "llvmpipe",
+  "source": {
+    "src/pano3d/toy.js": "57f77ba9608af70aa63f9089c602a69cc7a838c572dca21860c307706a43e3d3",
+    "src/pano3d/core.js": "a2a4efa5e2f238041934bd3f07468b5affedb87df4441af6246f81ae4459fafa",
+    "src/pano3d/pipeline.js": "8a23939079b8cf4fdbfdbd3edda335cf46f37ac0391b19428a7920522a3faf44",
+    "src/pano3d/prior.js": "c87ff9f15f246b7b7d15a660373582a3ef21638b8966e2c3d887d80122959aa0",
+    "src/stage.js": "6aca8078565def583efb719f6ae21cf4cb27905598b9ac1ecb03e84c8e9c2e53",
+    "src/kit.js": "a3eb480a38905191d1a15dee4e2eef31dbcaa4e4269be0c92921880c3e54e415",
+    "tools/pano-gpu-views.mjs": "0d45b8201c4ad206faf8104b3210659560b5a030f43dde3a46718369a6b7c38a"
+  },
+  "scenes": [
+    {
+      "id": "still-life",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.794358679291263,
+            "windows": 2189,
+            "maskedPixels": 35689,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.8034295276311416,
+            "windows": 2189,
+            "maskedPixels": 35689,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.8091161149366172,
+            "windows": 2189,
+            "maskedPixels": 35689,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.7691244839404425,
+            "windows": 2118,
+            "maskedPixels": 35335,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.7851931915780092,
+            "windows": 2118,
+            "maskedPixels": 35335,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.8086481544540277,
+            "windows": 2118,
+            "maskedPixels": 35335,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "forest",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.45389851754962024,
+            "windows": 2784,
+            "maskedPixels": 47085,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.39728513759563083,
+            "windows": 2784,
+            "maskedPixels": 47085,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.4758690563634125,
+            "windows": 2784,
+            "maskedPixels": 47085,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.3801898959019174,
+            "windows": 2616,
+            "maskedPixels": 45712,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.30644836664160163,
+            "windows": 2616,
+            "maskedPixels": 45712,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.46538151597935623,
+            "windows": 2616,
+            "maskedPixels": 45712,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "coast",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.5951559779859691,
+            "windows": 481,
+            "maskedPixels": 8469,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.5917579926504357,
+            "windows": 481,
+            "maskedPixels": 8469,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.6161773393914975,
+            "windows": 481,
+            "maskedPixels": 8469,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.5069318571387755,
+            "windows": 482,
+            "maskedPixels": 8459,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.4668883169141715,
+            "windows": 482,
+            "maskedPixels": 8459,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.6146815339467653,
+            "windows": 482,
+            "maskedPixels": 8459,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "fur",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.6281802463427238,
+            "windows": 2174,
+            "maskedPixels": 35520,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.628394232554011,
+            "windows": 2174,
+            "maskedPixels": 35520,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.6392516978325506,
+            "windows": 2174,
+            "maskedPixels": 35520,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.6049336088028195,
+            "windows": 2026,
+            "maskedPixels": 34338,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.6016327707802167,
+            "windows": 2026,
+            "maskedPixels": 34338,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.620340371939048,
+            "windows": 2026,
+            "maskedPixels": 34338,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "night",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.11859275509505968,
+            "windows": 1981,
+            "maskedPixels": 33729,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.12107247522995164,
+            "windows": 1981,
+            "maskedPixels": 33729,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.13100468069987903,
+            "windows": 1981,
+            "maskedPixels": 33729,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.11546286675175356,
+            "windows": 1734,
+            "maskedPixels": 31494,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.10882990311088266,
+            "windows": 1734,
+            "maskedPixels": 31494,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.1317870479708077,
+            "windows": 1734,
+            "maskedPixels": 31494,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "leaves",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.6181716073655272,
+            "windows": 2117,
+            "maskedPixels": 34500,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.6366564196331211,
+            "windows": 2117,
+            "maskedPixels": 34500,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.6499331195384757,
+            "windows": 2117,
+            "maskedPixels": 34500,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.6022652364811841,
+            "windows": 1997,
+            "maskedPixels": 33622,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.6017471887660669,
+            "windows": 1997,
+            "maskedPixels": 33622,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.6426764065089141,
+            "windows": 1997,
+            "maskedPixels": 33622,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    }
+  ]
+}

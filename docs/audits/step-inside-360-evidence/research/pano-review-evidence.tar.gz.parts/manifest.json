@@ -1,0 +1,73 @@
+{
+  "file": "pano-review-evidence.tar.gz",
+  "bytes": 26151737,
+  "sha256": "e79d40e6b2684a3155992b51c84cdd713914456e64688efbeb682633b17d40a8",
+  "parts": [
+    {
+      "file": "part-000",
+      "bytes": 2097152,
+      "sha256": "7fc7c8876024c1d0c557b41c8bd3bed1485ed11d65d6dd133272fb8c3b1e185d"
+    },
+    {
+      "file": "part-001",
+      "bytes": 2097152,
+      "sha256": "3ed59ad387ce5c678689f30a27304ef939d6410b07de475d74ac1917acca590d"
+    },
+    {
+      "file": "part-002",
+      "bytes": 2097152,
+      "sha256": "cb0116abe81dbf8e6d6c1cabd5692529cdb83385de89e8b0f3981b0a3f0ddc84"
+    },
+    {
+      "file": "part-003",
+      "bytes": 2097152,
+      "sha256": "77ca16a432f0ee62908c6ba2cdf69e38a1efecc416dfa4831025bb3c069ede22"
+    },
+    {
+      "file": "part-004",
+      "bytes": 2097152,
+      "sha256": "b0252ba4e0d85aabc915fd194948fadd5438ac83d2beadcd8b2177e74e5ab8a5"
+    },
+    {
+      "file": "part-005",
+      "bytes": 2097152,
+      "sha256": "8650fb67f5b1da6e9c3b2f0b4776a66f7bd0bdd69fe30fec5473fcd461bd4616"
+    },
+    {
+      "file": "part-006",
+      "bytes": 2097152,
+      "sha256": "af6b0b21dc7b627ceb22b2ad0db40d13d7eae698d2b97b82d340ceab101abaf7"
+    },
+    {
+      "file": "part-007",
+      "bytes": 2097152,
+      "sha256": "e4d61b1572093814de89e1aa7fa0375529636b3022534e57e191d057c91f15c3"
+    },
+    {
+      "file": "part-008",
+      "bytes": 2097152,
+      "sha256": "8692c63c984d8278561f5363c1dfa0f661b5972091428f6e154be163eeb28415"
+    },
+    {
+      "file": "part-009",
+      "bytes": 2097152,
+      "sha256": "8845fbe015a63182592b3dd117f2f4219d77c78370f31d39e024668b7255c3a7"
+    },
+    {
+      "file": "part-010",
+      "bytes": 2097152,
+      "sha256": "74532f91cd6b59cb03c9fa4d7747b2231c9d944ea8f93c12ccbe073743db65df"
+    },
+    {
+      "file": "part-011",
+      "bytes": 2097152,
+      "sha256": "afdcd7b846205af7905274c3e12256c7e16c4a7c44a711203cf1461be9d0ec78"
+    },
+    {
+      "file": "part-012",
+      "bytes": 985913,
+      "sha256": "543be88f06d7968288c5c8c94cfdabc98d50ef035efbe43ec5c3656cfeecba8e"
+    }
+  ],
+  "restore": "Concatenate part-* in filename order, then verify the complete SHA256 and extract with tar -xzf."
+}

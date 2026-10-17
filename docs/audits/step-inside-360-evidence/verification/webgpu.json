@@ -1,0 +1,29 @@
+{
+  "createdUTC": "2026-10-17T05:23:46.223Z",
+  "profile": "low",
+  "viewport": [1440, 900],
+  "deviceScaleFactor": 1,
+  "firstLookMs": 13216,
+  "webgpu": true,
+  "count": 85994,
+  "buffer": [1072, 900],
+  "inside": {
+    "fov": 72
+  },
+  "legend": {
+    "title": "Curtained room",
+    "items": [
+      {
+        "text": "Depth ready. Distances use an estimated room scale."
+      },
+      {
+        "text": "0.00 m from center (estimated scale)"
+      },
+      {
+        "text": "Drag to look around; lean and step in Toy."
+      }
+    ]
+  },
+  "errors": [],
+  "note": "Actual product and renderer, 90,000 requested splat budget via recipe density, WebGPU/SwiftShader. Measurement during concurrent suite; not a phone latency claim."
+}

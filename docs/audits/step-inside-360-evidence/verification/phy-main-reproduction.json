@@ -1,0 +1,37 @@
+{
+  "mainCommit": "ceb51de7a015377d7f350119c27a792fc1a8a66d",
+  "taskCommitBeforeMemoryFix": "3b31c9b940c594a1169c137431b61e5a4f33ee0d",
+  "renderer": "WebGL2/Mesa llvmpipe, Chromium, identical unmodified spec, current main in detached worktree on separate port4312",
+  "results": {
+    "phy-current": {
+      "assertion": "stacking height tests/phy.spec.mjs:82",
+      "expected": ["Expected: > 0.2193978363410805"],
+      "received": ["Received:   0.17359446638158268"],
+      "log": "phy-current.log"
+    },
+    "phy-main": {
+      "assertion": "stacking height tests/phy.spec.mjs:82",
+      "expected": ["Expected: > 0.21939783634108012"],
+      "received": ["Received:   0.17341211096935133"],
+      "log": "phy-main.log"
+    }
+  },
+  "blobIdentities": {
+    "tests/phy.spec.mjs": {
+      "main": "ce9bb5416ca3ea00368f80586f13f4d7a9da63a4",
+      "branch": "ce9bb5416ca3ea00368f80586f13f4d7a9da63a4",
+      "equal": true
+    },
+    "src/player.js": {
+      "main": "2584bf0dda4c766d118985371390f43950e81f76",
+      "branch": "2584bf0dda4c766d118985371390f43950e81f76",
+      "equal": true
+    },
+    "src/stage.js": {
+      "main": "ae69355c44acc4c251ca933f1ff130576b701533",
+      "branch": "ae69355c44acc4c251ca933f1ff130576b701533",
+      "equal": true
+    }
+  },
+  "decision": "Pre-existing failure reproduced on main; no physics, shared engine, or existing test changes are authorized for this panorama task. Preserve the failure and keep the PR draft."
+}

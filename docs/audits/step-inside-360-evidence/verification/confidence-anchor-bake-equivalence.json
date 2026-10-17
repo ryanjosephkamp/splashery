@@ -1,0 +1,12 @@
+{
+  "note": "Unsupported-tile guard changes are verified by strict analytic regressions. Both real CC0 sample depth caches are byte-identical to the confidence-method bakes before those guards; their pipeline provenance is updated to final runtime.",
+  "before": {
+    "room2.depth": "8b95664a5fabaf3a43524070eda91bf08515ff89f7f841979f7e89275174549f",
+    "room.depth": "9306b20b47da6858b6e6b0d9e7d77363bcbf14481ac25190b05a86c26762be70"
+  },
+  "after": {
+    "room2.depth": "8b95664a5fabaf3a43524070eda91bf08515ff89f7f841979f7e89275174549f",
+    "room.depth": "9306b20b47da6858b6e6b0d9e7d77363bcbf14481ac25190b05a86c26762be70"
+  },
+  "allEqual": true
+}

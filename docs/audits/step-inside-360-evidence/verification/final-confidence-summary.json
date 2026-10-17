@@ -1,0 +1,51 @@
+{
+  "createdUTC": "2026-10-17T05:19:09.718163+00:00",
+  "pipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be",
+  "count": 24,
+  "meanAbsRel": 0.14501145955050448,
+  "naiveMeanAbsRel": 0.19497564286702126,
+  "improvementFraction": 0.25625858995420125,
+  "groups": [
+    {
+      "group": "Development",
+      "absRel": 0.08812470100342111,
+      "naiveAbsRel": 0.12068613993904816,
+      "improvementFraction": 0.2698026380831471
+    },
+    {
+      "group": "Additional families",
+      "absRel": 0.12417840623892817,
+      "naiveAbsRel": 0.16298513804641349,
+      "improvementFraction": 0.23809981862539065
+    },
+    {
+      "group": "Closed interiors",
+      "absRel": 0.14109256941951923,
+      "naiveAbsRel": 0.17668500988458727,
+      "improvementFraction": 0.20144572812553507
+    },
+    {
+      "group": "Fresh rooms",
+      "absRel": 0.22665016154014947,
+      "naiveAbsRel": 0.31954628359803616,
+      "improvementFraction": 0.29071257225054337
+    }
+  ],
+  "regressions": [
+    {
+      "id": "arches",
+      "regressionFraction": 0.15462354236763876
+    },
+    {
+      "id": "still-life",
+      "regressionFraction": 0.17034573817653897
+    },
+    {
+      "id": "fresh-room-03",
+      "regressionFraction": 0.07418440237495516
+    }
+  ],
+  "measuredSeams": 23,
+  "seamRange": [0.002616278499458075, 0.017041117567831377],
+  "unmeasuredSeams": ["coast"]
+}

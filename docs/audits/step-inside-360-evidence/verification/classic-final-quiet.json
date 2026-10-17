@@ -1,0 +1,693 @@
+{
+  "createdUTC": "2026-10-17T04:21:37.653Z",
+  "url": "http://127.0.0.1:4173/",
+  "root": "/workspace/splashery",
+  "runs": 3,
+  "method": {
+    "samplingMs": 200,
+    "units": "KiB",
+    "pss": "Sum of Chromium process-tree proportional resident sets, sampled from /proc/*/smaps_rollup.",
+    "peakWindow": "File-input change through the first completed new Sharp frame and five further completed frames.",
+    "profile": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 3,
+      "nativeBuffer": [585, 1266]
+    },
+    "caveats": "Sampled peaks can miss shorter transients. RSS sums count shared pages repeatedly. This is Chromium/llvmpipe, not a physical phone. The read-only worker probe is appended only in this measurement, not production."
+  },
+  "methodSha256": "cc2321663e913e5dfd2398996f86d431fdc77e84234c08e955ee1b27db5298c6",
+  "probeSha256": "a9177846d10c78a7ee9f177f3fdb52ba9d7f7c6c5baffd9dde953adec5259b7d",
+  "source": {
+    "src/stage.js": "6aca8078565def583efb719f6ae21cf4cb27905598b9ac1ecb03e84c8e9c2e53",
+    "src/photo3d/build-worker.js": "7ed4768c7b3a9440ad75461922aa1f33484342c1bb4ae9dd54458435869bb175",
+    "src/photo3d/prepare.js": "325e06171a1bed49cd242d515946906435e9845212e632a58f44b1539734b014",
+    "src/packs/photo-3d-core.js": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57"
+  },
+  "uploads": [
+    {
+      "file": "/workspace/splashery/assets/toys/step-inside-360/room.jpg",
+      "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc"
+    }
+  ],
+  "rows": [
+    {
+      "run": 0,
+      "pick": 0,
+      "temperature": "cold",
+      "input": {
+        "file": "/workspace/splashery/assets/toys/step-inside-360/room.jpg",
+        "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc"
+      },
+      "before": {
+        "ms": 0.013109000000440574,
+        "pssKiB": 786775,
+        "rssKiB": 1110216,
+        "processes": 9,
+        "unavailable": []
+      },
+      "peakPssKiB": 1264387,
+      "peakRssKiB": 1585948,
+      "settled": {
+        "first3d": {
+          "ms": 3877.899999999441,
+          "fenceFailed": false
+        },
+        "holds": 0,
+        "graveyard": 0,
+        "nativeBuffer": [585, 1266],
+        "vram": {
+          "tex": 86199556,
+          "vb": 1934684,
+          "ib": 1506396,
+          "ub": 3456,
+          "sb": 0
+        }
+      },
+      "caches": [
+        {
+          "weightBytes": 0,
+          "retainedSourceBufferBytes": 31036688
+        }
+      ],
+      "cacheStates": [
+        {
+          "ms": 191.41760800000066,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 0
+          }
+        },
+        {
+          "ms": 549.2642700000006,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 31036688
+          }
+        }
+      ],
+      "samples": [
+        {
+          "ms": 0.013109000000440574,
+          "pssKiB": 786775,
+          "rssKiB": 1110216,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 158.36101400000007,
+          "pssKiB": 862099,
+          "rssKiB": 1185800,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 357.67233300000044,
+          "pssKiB": 981735,
+          "rssKiB": 1305500,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 558.237392,
+          "pssKiB": 1018675,
+          "rssKiB": 1344508,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 758.3132170000008,
+          "pssKiB": 1108083,
+          "rssKiB": 1431920,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 957.7205280000007,
+          "pssKiB": 1170863,
+          "rssKiB": 1494720,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1158.7034010000007,
+          "pssKiB": 1183385,
+          "rssKiB": 1507244,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1359.0494310000004,
+          "pssKiB": 1189167,
+          "rssKiB": 1513072,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1558.9490450000003,
+          "pssKiB": 1176679,
+          "rssKiB": 1500584,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1759.5368980000003,
+          "pssKiB": 1161517,
+          "rssKiB": 1485460,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1959.7208230000006,
+          "pssKiB": 1162635,
+          "rssKiB": 1486580,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2160.2461940000003,
+          "pssKiB": 1163799,
+          "rssKiB": 1487752,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2360.009521,
+          "pssKiB": 1165035,
+          "rssKiB": 1488988,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2559.9607920000008,
+          "pssKiB": 1214531,
+          "rssKiB": 1536092,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2760.2361980000005,
+          "pssKiB": 1264387,
+          "rssKiB": 1585948,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2960.043901,
+          "pssKiB": 1186603,
+          "rssKiB": 1508596,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3159.7704940000003,
+          "pssKiB": 1114347,
+          "rssKiB": 1436340,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3360.533716,
+          "pssKiB": 1143639,
+          "rssKiB": 1465632,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3560.9701060000007,
+          "pssKiB": 1169239,
+          "rssKiB": 1491232,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3760.872445,
+          "pssKiB": 1197223,
+          "rssKiB": 1519216,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3960.6844360000005,
+          "pssKiB": 1185695,
+          "rssKiB": 1508592,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4161.441830000001,
+          "pssKiB": 1197351,
+          "rssKiB": 1520252,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4361.803725000001,
+          "pssKiB": 1214007,
+          "rssKiB": 1536920,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4398.957067,
+          "pssKiB": 1229675,
+          "rssKiB": 1552596,
+          "processes": 9,
+          "unavailable": []
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "pick": 0,
+      "temperature": "cold",
+      "input": {
+        "file": "/workspace/splashery/assets/toys/step-inside-360/room.jpg",
+        "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc"
+      },
+      "before": {
+        "ms": 0.008943000000726897,
+        "pssKiB": 816910,
+        "rssKiB": 1140656,
+        "processes": 9,
+        "unavailable": []
+      },
+      "peakPssKiB": 1261407,
+      "peakRssKiB": 1583264,
+      "settled": {
+        "first3d": {
+          "ms": 3731.300000000745,
+          "fenceFailed": false
+        },
+        "holds": 0,
+        "graveyard": 0,
+        "nativeBuffer": [585, 1266],
+        "vram": {
+          "tex": 86199556,
+          "vb": 1934684,
+          "ib": 1506396,
+          "ub": 3456,
+          "sb": 0
+        }
+      },
+      "caches": [
+        {
+          "weightBytes": 0,
+          "retainedSourceBufferBytes": 31036688
+        }
+      ],
+      "cacheStates": [
+        {
+          "ms": 135.67878500000006,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 0
+          }
+        },
+        {
+          "ms": 844.6937949999992,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 31036688
+          }
+        }
+      ],
+      "samples": [
+        {
+          "ms": 0.008943000000726897,
+          "pssKiB": 816910,
+          "rssKiB": 1140656,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 102.04589999999916,
+          "pssKiB": 839474,
+          "rssKiB": 1163464,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 302.932354999999,
+          "pssKiB": 976604,
+          "rssKiB": 1300632,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 502.8361100000002,
+          "pssKiB": 1034048,
+          "rssKiB": 1358096,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 719.1265779999994,
+          "pssKiB": 1186706,
+          "rssKiB": 1510804,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 919.3454949999996,
+          "pssKiB": 1183711,
+          "rssKiB": 1507832,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1119.609828999999,
+          "pssKiB": 1189047,
+          "rssKiB": 1513168,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1319.6561509999992,
+          "pssKiB": 1188895,
+          "rssKiB": 1513020,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1519.2159219999994,
+          "pssKiB": 1169479,
+          "rssKiB": 1491252,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1720.0225219999993,
+          "pssKiB": 1179095,
+          "rssKiB": 1500872,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1919.5706919999993,
+          "pssKiB": 1179531,
+          "rssKiB": 1501360,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2119.6571569999996,
+          "pssKiB": 1180795,
+          "rssKiB": 1502624,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2319.827106999999,
+          "pssKiB": 1181847,
+          "rssKiB": 1503676,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2519.766345,
+          "pssKiB": 1187539,
+          "rssKiB": 1509372,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2720.085175,
+          "pssKiB": 1259999,
+          "rssKiB": 1581832,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2920.9060279999994,
+          "pssKiB": 1261407,
+          "rssKiB": 1583264,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3120.2143770000002,
+          "pssKiB": 1252235,
+          "rssKiB": 1574476,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3320.9546610000016,
+          "pssKiB": 1184519,
+          "rssKiB": 1506760,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3520.739685999999,
+          "pssKiB": 1194079,
+          "rssKiB": 1516320,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3721.0041,
+          "pssKiB": 1176295,
+          "rssKiB": 1498536,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3920.3495539999985,
+          "pssKiB": 1177961,
+          "rssKiB": 1501108,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4121.030836,
+          "pssKiB": 1134403,
+          "rssKiB": 1457556,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4229.338238999999,
+          "pssKiB": 1164511,
+          "rssKiB": 1487680,
+          "processes": 9,
+          "unavailable": []
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "pick": 0,
+      "temperature": "cold",
+      "input": {
+        "file": "/workspace/splashery/assets/toys/step-inside-360/room.jpg",
+        "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc"
+      },
+      "before": {
+        "ms": 0.0019529999990481883,
+        "pssKiB": 813390,
+        "rssKiB": 1137200,
+        "processes": 9,
+        "unavailable": []
+      },
+      "peakPssKiB": 1205627,
+      "peakRssKiB": 1527928,
+      "settled": {
+        "first3d": {
+          "ms": 3774.600000000559,
+          "fenceFailed": false
+        },
+        "holds": 0,
+        "graveyard": 0,
+        "nativeBuffer": [585, 1266],
+        "vram": {
+          "tex": 86199556,
+          "vb": 1934684,
+          "ib": 1506396,
+          "ub": 3456,
+          "sb": 0
+        }
+      },
+      "caches": [
+        {
+          "weightBytes": 0,
+          "retainedSourceBufferBytes": 31036688
+        }
+      ],
+      "cacheStates": [
+        {
+          "ms": 589.1470999999983,
+          "state": {
+            "weightBytes": 0,
+            "retainedSourceBufferBytes": 31036688
+          }
+        }
+      ],
+      "samples": [
+        {
+          "ms": 0.0019529999990481883,
+          "pssKiB": 813390,
+          "rssKiB": 1137200,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 99.69055399999706,
+          "pssKiB": 858722,
+          "rssKiB": 1182812,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 303.15047799999957,
+          "pssKiB": 940578,
+          "rssKiB": 1264624,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 503.48121600000013,
+          "pssKiB": 1029675,
+          "rssKiB": 1353772,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 703.7526049999979,
+          "pssKiB": 1094647,
+          "rssKiB": 1418756,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 903.2426180000002,
+          "pssKiB": 1095315,
+          "rssKiB": 1419428,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1104.3856879999985,
+          "pssKiB": 1097471,
+          "rssKiB": 1421612,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1304.2428949999994,
+          "pssKiB": 1087263,
+          "rssKiB": 1411404,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1505.0533679999971,
+          "pssKiB": 1087459,
+          "rssKiB": 1411600,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1705.3094409999976,
+          "pssKiB": 1089389,
+          "rssKiB": 1413556,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 1905.8252969999994,
+          "pssKiB": 1083641,
+          "rssKiB": 1407808,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2105.906615,
+          "pssKiB": 1082379,
+          "rssKiB": 1404236,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2306.1416759999993,
+          "pssKiB": 1108019,
+          "rssKiB": 1429876,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2506.8453960000006,
+          "pssKiB": 1197030,
+          "rssKiB": 1518896,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2706.589656,
+          "pssKiB": 1170870,
+          "rssKiB": 1493144,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 2906.3885059999993,
+          "pssKiB": 1109538,
+          "rssKiB": 1431812,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3107.5896869999997,
+          "pssKiB": 1090734,
+          "rssKiB": 1413008,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3307.574647999998,
+          "pssKiB": 1108998,
+          "rssKiB": 1431272,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3507.1107649999976,
+          "pssKiB": 1098262,
+          "rssKiB": 1420536,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3707.1190099999985,
+          "pssKiB": 1131546,
+          "rssKiB": 1453824,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 3907.328608,
+          "pssKiB": 1164746,
+          "rssKiB": 1487028,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4107.895700999998,
+          "pssKiB": 1192126,
+          "rssKiB": 1514412,
+          "processes": 9,
+          "unavailable": []
+        },
+        {
+          "ms": 4218.629590999997,
+          "pssKiB": 1205627,
+          "rssKiB": 1527928,
+          "processes": 9,
+          "unavailable": []
+        }
+      ]
+    }
+  ],
+  "finishedUTC": "2026-10-17T04:22:03.340Z"
+}

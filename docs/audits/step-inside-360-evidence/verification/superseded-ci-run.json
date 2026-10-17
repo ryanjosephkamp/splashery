@@ -1,0 +1,6 @@
+{
+  "runId": 39004175570,
+  "headSha": "0758b88a5437e9a4aa8fac292a098a28f447ebce",
+  "statusBeforeCancel": "queued",
+  "reason": "Superseded by final confidence-calibrated runtime ada669442; final-source full suite manually dispatched if no automatic run existed."
+}

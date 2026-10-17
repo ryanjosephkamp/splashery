@@ -1,0 +1,247 @@
+{
+  "createdUTC": "2026-10-17T05:28:25.491787+00:00",
+  "note": "Actual new model runs before and after the one-way unsupported-tile guard. All24benchmark inputs have no one-way-eligible face; all fields and raw tensors remain exactly equal. Controlled regressions exercise the added guard. Timing fields are excluded.",
+  "allEqual": true,
+  "cases": [
+    {
+      "group": "evidence",
+      "id": "room",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "evidence",
+      "id": "desk",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "evidence",
+      "id": "stairs",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "evidence",
+      "id": "arches",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "evidence",
+      "id": "steps",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "evidence",
+      "id": "lattice",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-validation",
+      "id": "still-life",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-validation",
+      "id": "forest",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-validation",
+      "id": "coast",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-validation",
+      "id": "fur",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-validation",
+      "id": "night",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-validation",
+      "id": "leaves",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-interior",
+      "id": "interior-01",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-interior",
+      "id": "interior-02",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-interior",
+      "id": "interior-03",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-interior",
+      "id": "interior-04",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-interior",
+      "id": "interior-05",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-interior",
+      "id": "interior-06",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-fresh-room",
+      "id": "fresh-room-01",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-fresh-room",
+      "id": "fresh-room-02",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-fresh-room",
+      "id": "fresh-room-03",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-fresh-room",
+      "id": "fresh-room-04",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-fresh-room",
+      "id": "fresh-room-05",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    },
+    {
+      "group": "final-fresh-room",
+      "id": "fresh-room-06",
+      "allTenRawTensorsEqual": true,
+      "bothBaselinesEqual": true,
+      "finalDepthEqual": true,
+      "calibrationEqual": true,
+      "beforePipelineHash": "3db2ecc992a876d7d1212c1c72ef0e039dcf2c79b6eb74ad5b9f4ace4ae5d080",
+      "afterPipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be"
+    }
+  ]
+}

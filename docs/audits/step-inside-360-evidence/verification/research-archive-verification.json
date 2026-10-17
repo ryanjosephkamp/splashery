@@ -1,0 +1,39 @@
+{
+  "archives": [
+    {
+      "archive": "pano-eight-yaw-review.tar.gz",
+      "sha256": "0432610693e09c866bdcbc64412aa1b807b88937f93e38a8d248b2e090f716ba",
+      "bytes": 3364434,
+      "members": 16,
+      "partsVerified": true
+    },
+    {
+      "archive": "pano-parent-research.tar.gz",
+      "sha256": "86386e0016093bd532fb8688dcb5410d8bfe171753955eb8e321b9f68c82ce29",
+      "bytes": 15320239,
+      "members": 63,
+      "partsVerified": true
+    },
+    {
+      "archive": "pano-review-evidence.tar.gz",
+      "sha256": "e79d40e6b2684a3155992b51c84cdd713914456e64688efbeb682633b17d40a8",
+      "bytes": 26151737,
+      "members": 143,
+      "partsVerified": true
+    },
+    {
+      "archive": "pano-confidence-review.tar.gz",
+      "sha256": "0c93f392601e7e5272f53a8c46a8c4043fd2c7d23703c9b0f26f010c51c3e4c6",
+      "bytes": 79459,
+      "members": 60,
+      "crcVerified": true
+    },
+    {
+      "archive": "pano-confidence-research.tar.gz",
+      "sha256": "4bf6f5b22081c2030e28ee4eb832d68a2d5ae6498feeecc5a4eaa24ba305ad3a",
+      "bytes": 32058,
+      "members": 30,
+      "crcVerified": true
+    }
+  ]
+}

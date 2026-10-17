@@ -1,0 +1,348 @@
+{
+  "pipelineHash": "3c9acac08c086842189a037f3fb40eebe7fb9c8c4fc995efd80b6c7078430458",
+  "note": "Actual WASM model, 294-pixel, 130-degree tiles (offline study); area-weighted depth metrics, per-method median scale calibration. Novel views use a software point-splat diagnostic and fixed source-visible masks, not the product GPU. Not physical-phone evidence.",
+  "scenes": [
+    {
+      "id": "room",
+      "spherical": {
+        "absRel": 0.32245181271526735,
+        "delta1": 0.3768911810719977,
+        "pixels": 34332
+      },
+      "naive": {
+        "absRel": 0.13697824392516686,
+        "delta1": 0.7536044803323872,
+        "pixels": 34332
+      },
+      "seam": {
+        "median": 0,
+        "pairs": 666
+      },
+      "overlapDisagreement": 0.2145052493083194,
+      "scale": 4.9647190187486405,
+      "naiveScale": 9.139858933182115,
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.23962550941081756,
+            "windows": 2841,
+            "maskedPixels": 45949
+          },
+          "naive": {
+            "ssim": 0.28526577950584275,
+            "windows": 2841,
+            "maskedPixels": 45949
+          },
+          "truthProjection": {
+            "ssim": 0.45294848679129107,
+            "windows": 2841,
+            "maskedPixels": 45949
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.19167402505714895,
+            "windows": 2670,
+            "maskedPixels": 44216
+          },
+          "naive": {
+            "ssim": 0.25616595826395316,
+            "windows": 2670,
+            "maskedPixels": 44216
+          },
+          "truthProjection": {
+            "ssim": 0.4499720160930922,
+            "windows": 2670,
+            "maskedPixels": 44216
+          }
+        }
+      },
+      "inferenceMs": 9619.900000000373
+    },
+    {
+      "id": "desk",
+      "spherical": {
+        "absRel": 0.20341545375813294,
+        "delta1": 0.6693900029029797,
+        "pixels": 30397
+      },
+      "naive": {
+        "absRel": 0.13554007616165903,
+        "delta1": 0.8460519334549504,
+        "pixels": 30397
+      },
+      "seam": {
+        "median": 0.004588206443637928,
+        "pairs": 539
+      },
+      "overlapDisagreement": 0.1690500868705744,
+      "scale": 1.428712806835134,
+      "naiveScale": 15.656142397241867,
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.4349379277631826,
+            "windows": 2604,
+            "maskedPixels": 42086
+          },
+          "naive": {
+            "ssim": 0.3739472708461719,
+            "windows": 2604,
+            "maskedPixels": 42086
+          },
+          "truthProjection": {
+            "ssim": 0.6742273465725473,
+            "windows": 2604,
+            "maskedPixels": 42086
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.44442084812647265,
+            "windows": 2480,
+            "maskedPixels": 41240
+          },
+          "naive": {
+            "ssim": 0.3525676496994651,
+            "windows": 2480,
+            "maskedPixels": 41240
+          },
+          "truthProjection": {
+            "ssim": 0.6680132445224412,
+            "windows": 2480,
+            "maskedPixels": 41240
+          }
+        }
+      },
+      "inferenceMs": 9271.5
+    },
+    {
+      "id": "stairs",
+      "spherical": {
+        "absRel": 0.17235043560975669,
+        "delta1": 0.8509878256729808,
+        "pixels": 31842
+      },
+      "naive": {
+        "absRel": 0.13160902925873977,
+        "delta1": 0.7586525953844485,
+        "pixels": 31842
+      },
+      "seam": {
+        "median": 0.010615962153421622,
+        "pairs": 630
+      },
+      "overlapDisagreement": 0.08023060553221618,
+      "scale": 1.119230116244348,
+      "naiveScale": 10.509166197086401,
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.3232798582777605,
+            "windows": 2051,
+            "maskedPixels": 33424
+          },
+          "naive": {
+            "ssim": 0.32003365479180473,
+            "windows": 2051,
+            "maskedPixels": 33424
+          },
+          "truthProjection": {
+            "ssim": 0.5404229909720034,
+            "windows": 2051,
+            "maskedPixels": 33424
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.30660056627056853,
+            "windows": 1983,
+            "maskedPixels": 32895
+          },
+          "naive": {
+            "ssim": 0.29114603401752026,
+            "windows": 1983,
+            "maskedPixels": 32895
+          },
+          "truthProjection": {
+            "ssim": 0.5099055752689681,
+            "windows": 1983,
+            "maskedPixels": 32895
+          }
+        }
+      },
+      "inferenceMs": 8572.900000000373
+    },
+    {
+      "id": "arches",
+      "spherical": {
+        "absRel": 0.35215383334179207,
+        "delta1": 0.3656611061528216,
+        "pixels": 35473
+      },
+      "naive": {
+        "absRel": 0.09542875638591468,
+        "delta1": 0.9327122409085413,
+        "pixels": 35473
+      },
+      "seam": {
+        "median": 0,
+        "pairs": 671
+      },
+      "overlapDisagreement": 0.20645739304888763,
+      "scale": 3.6233336280451764,
+      "naiveScale": 6.335710622591005,
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.1335144299190618,
+            "windows": 2433,
+            "maskedPixels": 42156
+          },
+          "naive": {
+            "ssim": 0.24839535580478608,
+            "windows": 2433,
+            "maskedPixels": 42156
+          },
+          "truthProjection": {
+            "ssim": 0.4578230262380668,
+            "windows": 2433,
+            "maskedPixels": 42156
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.08507897612112712,
+            "windows": 1962,
+            "maskedPixels": 35858
+          },
+          "naive": {
+            "ssim": 0.18335388073672876,
+            "windows": 1962,
+            "maskedPixels": 35858
+          },
+          "truthProjection": {
+            "ssim": 0.43486381116644507,
+            "windows": 1962,
+            "maskedPixels": 35858
+          }
+        }
+      },
+      "inferenceMs": 9145.899999999441
+    },
+    {
+      "id": "steps",
+      "spherical": {
+        "absRel": 0.17264237381084233,
+        "delta1": 0.7836532693865861,
+        "pixels": 32803
+      },
+      "naive": {
+        "absRel": 0.10206002881079414,
+        "delta1": 0.8402862660380783,
+        "pixels": 32803
+      },
+      "seam": {
+        "median": 0.010390332244104192,
+        "pairs": 642
+      },
+      "overlapDisagreement": 0.11481756688962043,
+      "scale": 0.8695563072007808,
+      "naiveScale": 8.296239755276655,
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.39616784841028746,
+            "windows": 2069,
+            "maskedPixels": 33812
+          },
+          "naive": {
+            "ssim": 0.4001645306309118,
+            "windows": 2069,
+            "maskedPixels": 33812
+          },
+          "truthProjection": {
+            "ssim": 0.7121852455547049,
+            "windows": 2069,
+            "maskedPixels": 33812
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.3728969746845386,
+            "windows": 1968,
+            "maskedPixels": 33151
+          },
+          "naive": {
+            "ssim": 0.3795194090770532,
+            "windows": 1968,
+            "maskedPixels": 33151
+          },
+          "truthProjection": {
+            "ssim": 0.6936804027210042,
+            "windows": 1968,
+            "maskedPixels": 33151
+          }
+        }
+      },
+      "inferenceMs": 10447.599999999627
+    },
+    {
+      "id": "lattice",
+      "spherical": {
+        "absRel": 0.1604376956903112,
+        "delta1": 0.7252560039309137,
+        "pixels": 33138
+      },
+      "naive": {
+        "absRel": 0.12250070509201452,
+        "delta1": 0.7958119548515633,
+        "pixels": 33138
+      },
+      "seam": {
+        "median": 0.007431373780369711,
+        "pairs": 646
+      },
+      "overlapDisagreement": 0.11865218997772704,
+      "scale": 0.8971841206663633,
+      "naiveScale": 9.05821854143288,
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.24516264563992918,
+            "windows": 2083,
+            "maskedPixels": 34902
+          },
+          "naive": {
+            "ssim": 0.25184545806508946,
+            "windows": 2083,
+            "maskedPixels": 34902
+          },
+          "truthProjection": {
+            "ssim": 0.4105028467193738,
+            "windows": 2083,
+            "maskedPixels": 34902
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.22822889527857573,
+            "windows": 1924,
+            "maskedPixels": 33728
+          },
+          "naive": {
+            "ssim": 0.2373369449258939,
+            "windows": 1924,
+            "maskedPixels": 33728
+          },
+          "truthProjection": {
+            "ssim": 0.39652478062666124,
+            "windows": 1924,
+            "maskedPixels": 33728
+          }
+        }
+      },
+      "inferenceMs": 9093.600000000559
+    }
+  ]
+}

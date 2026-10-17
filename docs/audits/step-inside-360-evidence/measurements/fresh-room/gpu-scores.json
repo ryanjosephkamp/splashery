@@ -1,0 +1,323 @@
+{
+  "createdUTC": "2026-10-17T05:21:56.166Z",
+  "pipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be",
+  "note": "Actual low-profile product recipe, Kit, and WebGL2 stage at 256×256, DSF 1. Sample responses replaced with the same input panorama and cached per-method globally calibrated depth. The truth-projection control uses exact depth. Fixed source-visible masks are shared with the software diagnostic. All methods clip radial distance to 200 m before the shared 16-bit cache encoding, avoiding out-of-range sky disparities dominating quantization. No hidden surface pixels are removed based on a prediction.",
+  "graphics": "llvmpipe",
+  "source": {
+    "src/pano3d/toy.js": "57f77ba9608af70aa63f9089c602a69cc7a838c572dca21860c307706a43e3d3",
+    "src/pano3d/core.js": "a2a4efa5e2f238041934bd3f07468b5affedb87df4441af6246f81ae4459fafa",
+    "src/pano3d/pipeline.js": "8a23939079b8cf4fdbfdbd3edda335cf46f37ac0391b19428a7920522a3faf44",
+    "src/pano3d/prior.js": "c87ff9f15f246b7b7d15a660373582a3ef21638b8966e2c3d887d80122959aa0",
+    "src/stage.js": "6aca8078565def583efb719f6ae21cf4cb27905598b9ac1ecb03e84c8e9c2e53",
+    "src/kit.js": "a3eb480a38905191d1a15dee4e2eef31dbcaa4e4269be0c92921880c3e54e415",
+    "tools/pano-gpu-views.mjs": "0d45b8201c4ad206faf8104b3210659560b5a030f43dde3a46718369a6b7c38a"
+  },
+  "scenes": [
+    {
+      "id": "fresh-room-01",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.40693579459585305,
+            "windows": 3838,
+            "maskedPixels": 62598,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.40456917619507693,
+            "windows": 3838,
+            "maskedPixels": 62598,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.41276708018015273,
+            "windows": 3838,
+            "maskedPixels": 62598,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.3940964364701571,
+            "windows": 3553,
+            "maskedPixels": 60224,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.3858742893183411,
+            "windows": 3553,
+            "maskedPixels": 60224,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.4110922696487656,
+            "windows": 3553,
+            "maskedPixels": 60224,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "fresh-room-02",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.6666998616331319,
+            "windows": 3824,
+            "maskedPixels": 62370,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.6777886547338947,
+            "windows": 3824,
+            "maskedPixels": 62370,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.68585586545948,
+            "windows": 3824,
+            "maskedPixels": 62370,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.6433301210546338,
+            "windows": 3591,
+            "maskedPixels": 59879,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.6645908368408483,
+            "windows": 3591,
+            "maskedPixels": 59879,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.6892565488491771,
+            "windows": 3591,
+            "maskedPixels": 59879,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "fresh-room-03",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.5616987025256084,
+            "windows": 3900,
+            "maskedPixels": 63105,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.572363917116675,
+            "windows": 3900,
+            "maskedPixels": 63105,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.575416029868838,
+            "windows": 3900,
+            "maskedPixels": 63105,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.4992359422069182,
+            "windows": 3454,
+            "maskedPixels": 60076,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.5254316691549988,
+            "windows": 3454,
+            "maskedPixels": 60076,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.5333600052221463,
+            "windows": 3454,
+            "maskedPixels": 60076,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "fresh-room-04",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.18389812402851827,
+            "windows": 3948,
+            "maskedPixels": 63389,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.18385468292227924,
+            "windows": 3948,
+            "maskedPixels": 63389,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.1835250373221616,
+            "windows": 3948,
+            "maskedPixels": 63389,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.17403584797543106,
+            "windows": 3859,
+            "maskedPixels": 62662,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.17135470788374568,
+            "windows": 3859,
+            "maskedPixels": 62662,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.1716959852230252,
+            "windows": 3859,
+            "maskedPixels": 62662,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "fresh-room-05",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.06942707905029567,
+            "windows": 3923,
+            "maskedPixels": 63094,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.06812056600124786,
+            "windows": 3923,
+            "maskedPixels": 63094,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.07069405237715266,
+            "windows": 3923,
+            "maskedPixels": 63094,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.0567661444432639,
+            "windows": 3479,
+            "maskedPixels": 60250,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.06250266114775085,
+            "windows": 3479,
+            "maskedPixels": 60250,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.07070738187594842,
+            "windows": 3479,
+            "maskedPixels": 60250,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    },
+    {
+      "id": "fresh-room-06",
+      "novel": {
+        "0.3": {
+          "spherical": {
+            "ssim": 0.11561420319774077,
+            "windows": 3938,
+            "maskedPixels": 62703,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.11407718199732891,
+            "windows": 3938,
+            "maskedPixels": 62703,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.11510657791238552,
+            "windows": 3938,
+            "maskedPixels": 62703,
+            "offset": [0.2999999996541948, 0, 0],
+            "buffer": [256, 256]
+          }
+        },
+        "0.8": {
+          "spherical": {
+            "ssim": 0.11478820859749407,
+            "windows": 3774,
+            "maskedPixels": 60941,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "naive": {
+            "ssim": 0.11821598086741848,
+            "windows": 3774,
+            "maskedPixels": 60941,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          },
+          "truthProjection": {
+            "ssim": 0.1179682058629501,
+            "windows": 3774,
+            "maskedPixels": 60941,
+            "offset": [0.7999999990778529, 0, -1.2246467977357227e-17],
+            "buffer": [256, 256]
+          }
+        }
+      }
+    }
+  ]
+}

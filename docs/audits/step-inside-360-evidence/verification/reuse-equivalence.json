@@ -1,0 +1,131 @@
+{
+  "note": "Fresh actual WASM inference on all18inputs before/after scratch-buffer reuse. Resultdepth and calibration, dimensions and values of all10rawpredictions, and bothrawbaselines compare exactly equal after JSONround-trip. Per-inference ms, total timing, and sourcehashes intentionally differ and are excluded.",
+  "scenes": [
+    {
+      "group": "evidence",
+      "input": "room",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "evidence",
+      "input": "desk",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "evidence",
+      "input": "stairs",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "evidence",
+      "input": "arches",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "evidence",
+      "input": "steps",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "evidence",
+      "input": "lattice",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-validation",
+      "input": "still-life",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-validation",
+      "input": "forest",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-validation",
+      "input": "coast",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-validation",
+      "input": "fur",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-validation",
+      "input": "night",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-validation",
+      "input": "leaves",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-interior",
+      "input": "interior-01",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-interior",
+      "input": "interior-02",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-interior",
+      "input": "interior-03",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-interior",
+      "input": "interior-04",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-interior",
+      "input": "interior-05",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    },
+    {
+      "group": "final-interior",
+      "input": "interior-06",
+      "resultCalibrationAndAllTensorValuesExactlyEqual": true,
+      "oldPipelineHash": "ad3de09a654a69302141a680134ef5c0bf077e5468ea2ed443f444690563045b",
+      "newPipelineHash": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
+    }
+  ]
+}

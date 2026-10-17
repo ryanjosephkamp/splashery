@@ -1,0 +1,28 @@
+{
+  "createdUTC": "2026-10-17T05:23:25.370Z",
+  "profile": "high",
+  "viewport": [1440, 900],
+  "deviceScaleFactor": 1,
+  "firstLookMs": 7008,
+  "count": 287817,
+  "buffer": [1072, 900],
+  "inside": {
+    "fov": 72
+  },
+  "legend": {
+    "title": "Curtained room",
+    "items": [
+      {
+        "text": "Depth ready. Distances use an estimated room scale."
+      },
+      {
+        "text": "0.00 m from center (estimated scale)"
+      },
+      {
+        "text": "Drag to look around; lean and step in Toy."
+      }
+    ]
+  },
+  "errors": [],
+  "note": "Actual product and renderer, 300,000 requested splat budget via recipe density, Mesa llvmpipe. Measurement during concurrent suite; not a phone latency claim."
+}

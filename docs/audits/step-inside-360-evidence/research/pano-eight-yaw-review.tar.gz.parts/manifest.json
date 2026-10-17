@@ -1,0 +1,18 @@
+{
+  "file": "pano-eight-yaw-review.tar.gz",
+  "bytes": 3364434,
+  "sha256": "0432610693e09c866bdcbc64412aa1b807b88937f93e38a8d248b2e090f716ba",
+  "parts": [
+    {
+      "file": "part-000",
+      "bytes": 2097152,
+      "sha256": "7660b1e8cd6aa3b10bf3ee6896ecd5ab1f6ebcca5a9afb7a330de0b99838dd60"
+    },
+    {
+      "file": "part-001",
+      "bytes": 1267282,
+      "sha256": "4e1f2075197906677ae3c51e7e522de0113087da8d4f2b5cd596cc54e9bb137b"
+    }
+  ],
+  "restore": "Concatenate part-* in filename order, then verify the complete SHA256 and extract with tar -xzf."
+}

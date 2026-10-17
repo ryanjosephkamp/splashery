@@ -1,12 +1,12 @@
 {
-  "pipelineHash": "1326d658d9b660bcba80fc380791b2a9a7bb57301fbf3bffb56bc399324dcec3",
-  "note": "Actual WASM model, 294-pixel tiles; area-weighted depth metrics, per-method median scale calibration. Novel views use a software point-splat diagnostic and fixed source-visible masks, not the product GPU. Not physical-phone evidence.",
+  "pipelineHash": "5440df1c83e025a282de0d1edd4966d9929981235702114f1de348e5594da4be",
+  "note": "Actual WASM model: six 294-pixel perspective tiles plus four 294-pixel equirectangular yaw views, compared with independent one-tile 294 and 392 baselines; area-weighted depth metrics, per-method median scale calibration. Novel views use a software point-splat diagnostic and fixed source-visible masks, not the product GPU. Not physical-phone evidence.",
   "scenes": [
     {
       "id": "room",
       "spherical": {
-        "absRel": 0.36546317093781205,
-        "delta1": 0.657126453949312,
+        "absRel": 0.0932088572213297,
+        "delta1": 0.8603866251113855,
         "pixels": 34332
       },
       "naive": {
@@ -14,17 +14,23 @@
         "delta1": 0.7536044803323872,
         "pixels": 34332
       },
+      "naive392": {
+        "absRel": 0.12654538679946978,
+        "delta1": 0.7784729721636626,
+        "pixels": 34332
+      },
       "seam": {
-        "median": 0.008453936778216372,
+        "median": 0.01048076988380299,
         "pairs": 666
       },
-      "overlapDisagreement": 0.0963768760237325,
-      "scale": 0.9526984832709463,
+      "overlapDisagreement": 0.0630873874584389,
+      "scale": 1.1236725221453598,
       "naiveScale": 9.139858933182115,
+      "naive392Scale": 8.037269626818746,
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.2813560417257053,
+            "ssim": 0.32366086226371743,
             "windows": 2841,
             "maskedPixels": 45949
           },
@@ -41,7 +47,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.2570164395367904,
+            "ssim": 0.29890745230092963,
             "windows": 2670,
             "maskedPixels": 44216
           },
@@ -57,13 +63,13 @@
           }
         }
       },
-      "inferenceMs": 19238.200000000186
+      "inferenceMs": 10963.299999998882
     },
     {
       "id": "desk",
       "spherical": {
-        "absRel": 0.1816907947185486,
-        "delta1": 0.7658581365694708,
+        "absRel": 0.11974867199892383,
+        "delta1": 0.8926182128392984,
         "pixels": 30397
       },
       "naive": {
@@ -71,17 +77,23 @@
         "delta1": 0.8460519334549504,
         "pixels": 30397
       },
+      "naive392": {
+        "absRel": 0.12799425075839982,
+        "delta1": 0.8200379616677134,
+        "pixels": 30397
+      },
       "seam": {
-        "median": 0.008391927078155906,
+        "median": 0.010434589069978148,
         "pairs": 539
       },
-      "overlapDisagreement": 0.14451784023832545,
-      "scale": 1.4783059127265636,
+      "overlapDisagreement": 0.06855102996147398,
+      "scale": 1.5511813186786232,
       "naiveScale": 15.656142397241867,
+      "naive392Scale": 15.96193221353826,
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.37640757151960963,
+            "ssim": 0.3516582804157241,
             "windows": 2604,
             "maskedPixels": 42086
           },
@@ -98,7 +110,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.3768231983951837,
+            "ssim": 0.34408699126147274,
             "windows": 2480,
             "maskedPixels": 41240
           },
@@ -114,13 +126,13 @@
           }
         }
       },
-      "inferenceMs": 17510.600000000093
+      "inferenceMs": 9113.400000000373
     },
     {
       "id": "stairs",
       "spherical": {
-        "absRel": 0.14750453042628425,
-        "delta1": 0.8537801126188022,
+        "absRel": 0.08281270148651157,
+        "delta1": 0.9170006191771607,
         "pixels": 31842
       },
       "naive": {
@@ -128,17 +140,23 @@
         "delta1": 0.7586525953844485,
         "pixels": 31842
       },
+      "naive392": {
+        "absRel": 0.10122766246046289,
+        "delta1": 0.8318283926398894,
+        "pixels": 31842
+      },
       "seam": {
-        "median": 0.009139231420472672,
+        "median": 0.010163816587614064,
         "pairs": 630
       },
-      "overlapDisagreement": 0.052591491915449685,
-      "scale": 1.0981030211630443,
+      "overlapDisagreement": 0.04615743734266782,
+      "scale": 1.2381917417778843,
       "naiveScale": 10.509166197086401,
+      "naive392Scale": 8.179020670494094,
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.3179214832927299,
+            "ssim": 0.3263369517510347,
             "windows": 2051,
             "maskedPixels": 33424
           },
@@ -155,7 +173,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.30435138383095367,
+            "ssim": 0.31314104152963995,
             "windows": 1983,
             "maskedPixels": 32895
           },
@@ -171,13 +189,13 @@
           }
         }
       },
-      "inferenceMs": 21794.900000000373
+      "inferenceMs": 9340.300000000745
     },
     {
       "id": "arches",
       "spherical": {
-        "absRel": 0.21674863049706458,
-        "delta1": 0.710157939776485,
+        "absRel": 0.11018428874204324,
+        "delta1": 0.8532435431909466,
         "pixels": 35473
       },
       "naive": {
@@ -185,17 +203,23 @@
         "delta1": 0.9327122409085413,
         "pixels": 35473
       },
+      "naive392": {
+        "absRel": 0.1977662040555458,
+        "delta1": 0.6699376132563071,
+        "pixels": 35473
+      },
       "seam": {
-        "median": 0.012218716093360261,
+        "median": 0.017041117567831377,
         "pairs": 671
       },
-      "overlapDisagreement": 0.07456799530453581,
-      "scale": 0.8169129338939531,
+      "overlapDisagreement": 0.017216659707848435,
+      "scale": 0.8618343575934794,
       "naiveScale": 6.335710622591005,
+      "naive392Scale": 5.0185322055784995,
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.21972086671557234,
+            "ssim": 0.2700108392085239,
             "windows": 2433,
             "maskedPixels": 42156
           },
@@ -212,7 +236,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.18001752891118558,
+            "ssim": 0.21085544390224184,
             "windows": 1962,
             "maskedPixels": 35858
           },
@@ -228,13 +252,13 @@
           }
         }
       },
-      "inferenceMs": 17367.399999999907
+      "inferenceMs": 9031.5
     },
     {
       "id": "steps",
       "spherical": {
-        "absRel": 0.1979426726359896,
-        "delta1": 0.6782830252100513,
+        "absRel": 0.06039133132605774,
+        "delta1": 0.9862917172214778,
         "pixels": 32803
       },
       "naive": {
@@ -242,17 +266,23 @@
         "delta1": 0.8402862660380783,
         "pixels": 32803
       },
+      "naive392": {
+        "absRel": 0.07612208679028995,
+        "delta1": 0.9563159933501565,
+        "pixels": 32803
+      },
       "seam": {
-        "median": 0.01102890280773976,
+        "median": 0.013319289700333184,
         "pairs": 642
       },
-      "overlapDisagreement": 0.06333469146943566,
-      "scale": 0.8858290526949066,
+      "overlapDisagreement": 0.03437909038006675,
+      "scale": 0.9757354871592131,
       "naiveScale": 8.296239755276655,
+      "naive392Scale": 7.2996781376148805,
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.3621350979802635,
+            "ssim": 0.4128818448982435,
             "windows": 2069,
             "maskedPixels": 33812
           },
@@ -269,7 +299,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.3582297352812969,
+            "ssim": 0.43284400354642855,
             "windows": 1968,
             "maskedPixels": 33151
           },
@@ -285,13 +315,13 @@
           }
         }
       },
-      "inferenceMs": 17974.799999999814
+      "inferenceMs": 8400.699999999255
     },
     {
       "id": "lattice",
       "spherical": {
-        "absRel": 0.1629259788555647,
-        "delta1": 0.7511992259828891,
+        "absRel": 0.06240235524566061,
+        "delta1": 0.9605511260459761,
         "pixels": 33138
       },
       "naive": {
@@ -299,17 +329,23 @@
         "delta1": 0.7958119548515633,
         "pixels": 33138
       },
+      "naive392": {
+        "absRel": 0.09619485574185668,
+        "delta1": 0.8672260872244191,
+        "pixels": 33138
+      },
       "seam": {
-        "median": 0.00921072564560224,
+        "median": 0.012440158022608998,
         "pairs": 646
       },
-      "overlapDisagreement": 0.0770262450809796,
-      "scale": 0.888481477214183,
+      "overlapDisagreement": 0.024247726790204736,
+      "scale": 1.0027136661020264,
       "naiveScale": 9.05821854143288,
+      "naive392Scale": 8.194788415451816,
       "novel": {
         "0.3": {
           "spherical": {
-            "ssim": 0.2577798009898673,
+            "ssim": 0.24769262052405974,
             "windows": 2083,
             "maskedPixels": 34902
           },
@@ -326,7 +362,7 @@
         },
         "0.8": {
           "spherical": {
-            "ssim": 0.23960604006471514,
+            "ssim": 0.27215225304984886,
             "windows": 1924,
             "maskedPixels": 33728
           },
@@ -342,7 +378,7 @@
           }
         }
       },
-      "inferenceMs": 19421.5
+      "inferenceMs": 8654.599999999627
     }
   ]
 }
