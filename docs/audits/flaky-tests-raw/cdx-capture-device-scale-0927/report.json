@@ -1,0 +1,435 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/run-092720/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/run-092720/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4204",
+      "url": "http://127.0.0.1:4204/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery"
+    }
+  },
+  "suites": [
+    {
+      "title": "cdx.spec.mjs",
+      "file": "cdx.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "real depth worker, playwright-first",
+          "file": "cdx.spec.mjs",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 91991,
+                      "error": {
+                        "message": "Error: Native protocol capture differs from the original PNG pixels",
+                        "stack": "Error: Native protocol capture differs from the original PNG pixels\n    at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)\n    at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)\n    at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)\n    at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19",
+                        "location": {
+                          "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                          "column": 18,
+                          "line": 221
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mmeasure.mjs:221\n\n  219 |     playwrightSHA256:createHash(\"sha256\").update(a.data).digest(\"hex\"),\n  220 |     protocolSHA256:createHash(\"sha256\").update(b.data).digest(\"hex\")}));\n> 221 |   if(!same)throw Error(\"Native protocol capture differs from the original PNG pixels\");\n      |                  ^\n  222 |   return results.playwright.png;\n  223 | }\n  224 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                            "column": 18,
+                            "line": 221
+                          },
+                          "message": "Error: Native protocol capture differs from the original PNG pixels\n\n   at measure.mjs:221\n\n  219 |     playwrightSHA256:createHash(\"sha256\").update(a.data).digest(\"hex\"),\n  220 |     protocolSHA256:createHash(\"sha256\").update(b.data).digest(\"hex\")}));\n> 221 |   if(!same)throw Error(\"Native protocol capture differs from the original PNG pixels\");\n      |                  ^\n  222 |   return results.playwright.png;\n  223 | }\n  224 |\n    at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)\n    at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)\n    at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)\n    at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-tQ5Lz0/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-tQ5Lz0/low-light.y4m\n"
+                        },
+                        {
+                          "text": "Native mirror progress: {\"nativeSeconds\":0.4999999999999982,\"frames\":5,\"wallMs\":4067.5,\"answers\":16,\"freshFrom\":14,\"freshAnswer\":15}\n"
+                        },
+                        {
+                          "text": "Native mirror capture: {\"before\":[{\"version\":3,\"latest\":3,\"view\":\"0,0,2.2738358974456787,0,0,-1\",\"sorted\":true,\"currentToy\":true,\"awaitingLod\":false,\"pendingLoads\":0,\"gpu\":false,\"requests\":0,\"responses\":0}],\"after\":[{\"version\":3,\"latest\":3,\"view\":\"0,0,2.2738358974456787,0,0,-1\",\"applied\":\"0,0,2.2738358974456787,0,0,-1\",\"sorted\":true,\"currentToy\":true,\"awaitingLod\":false,\"pendingLoads\":0,\"gpu\":false,\"requests\":2,\"responses\":1}],\"cameraBefore\":{\"cur\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"tgt\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"home\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"turntable\":false},\"cameraAfter\":{\"cur\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"tgt\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"home\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"turntable\":false}}\n"
+                        },
+                        {
+                          "text": "Paired native PNG: {\"order\":\"playwright-first\",\"index\":1,\"same\":false,\"playwrightMs\":1504.8822579999978,\"protocolMs\":2084.874014000001,\"width\":90,\"height\":112,\"protocolWidth\":45,\"protocolHeight\":56,\"playwrightSHA256\":\"1188615add2220bb7be7f1ce2cd79c60b6233f83811d34826e8e8e8b0a18ecce\",\"protocolSHA256\":\"dc8879449cfbdd5a8a300fc71d894d2928125c62be648f56ab2a1e393717b778\"}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T09:27:22.235Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-play-1ff29-ft-stays-below-the-baseline-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                        "column": 18,
+                        "line": 221
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "03b548a925114c4be1b2-8a5e307c2a3fc79cc89d",
+              "file": "cdx.spec.mjs",
+              "line": 23,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 91058,
+                      "error": {
+                        "message": "Error: Native protocol capture differs from the original PNG pixels",
+                        "stack": "Error: Native protocol capture differs from the original PNG pixels\n    at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)\n    at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)\n    at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)\n    at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19",
+                        "location": {
+                          "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                          "column": 18,
+                          "line": 221
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mmeasure.mjs:221\n\n  219 |     playwrightSHA256:createHash(\"sha256\").update(a.data).digest(\"hex\"),\n  220 |     protocolSHA256:createHash(\"sha256\").update(b.data).digest(\"hex\")}));\n> 221 |   if(!same)throw Error(\"Native protocol capture differs from the original PNG pixels\");\n      |                  ^\n  222 |   return results.playwright.png;\n  223 | }\n  224 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                            "column": 18,
+                            "line": 221
+                          },
+                          "message": "Error: Native protocol capture differs from the original PNG pixels\n\n   at measure.mjs:221\n\n  219 |     playwrightSHA256:createHash(\"sha256\").update(a.data).digest(\"hex\"),\n  220 |     protocolSHA256:createHash(\"sha256\").update(b.data).digest(\"hex\")}));\n> 221 |   if(!same)throw Error(\"Native protocol capture differs from the original PNG pixels\");\n      |                  ^\n  222 |   return results.playwright.png;\n  223 | }\n  224 |\n    at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)\n    at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)\n    at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)\n    at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-fVw2xh/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-fVw2xh/low-light.y4m\n"
+                        },
+                        {
+                          "text": "Native mirror progress: {\"nativeSeconds\":0.5999999999999979,\"frames\":6,\"wallMs\":5812.4000000003725,\"answers\":17,\"freshFrom\":14,\"freshAnswer\":15}\n"
+                        },
+                        {
+                          "text": "Native mirror capture: {\"before\":[{\"version\":3,\"latest\":3,\"view\":\"0,0,2.2738358974456787,0,0,-1\",\"sorted\":true,\"currentToy\":true,\"awaitingLod\":false,\"pendingLoads\":0,\"gpu\":false,\"requests\":0,\"responses\":0}],\"after\":[{\"version\":3,\"latest\":3,\"view\":\"0,0,2.2738358974456787,0,0,-1\",\"applied\":\"0,0,2.2738358974456787,0,0,-1\",\"sorted\":true,\"currentToy\":true,\"awaitingLod\":false,\"pendingLoads\":0,\"gpu\":false,\"requests\":2,\"responses\":1}],\"cameraBefore\":{\"cur\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"tgt\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"home\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"turntable\":false},\"cameraAfter\":{\"cur\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"tgt\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"home\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"turntable\":false}}\n"
+                        },
+                        {
+                          "text": "Paired native PNG: {\"order\":\"playwright-first\",\"index\":1,\"same\":false,\"playwrightMs\":1856.2525560000067,\"protocolMs\":1433.0924809999997,\"width\":90,\"height\":112,\"protocolWidth\":45,\"protocolHeight\":56,\"playwrightSHA256\":\"879345d221ac9992708e71fc789285568495470f273a06aa7b2709262d0a78b9\",\"protocolSHA256\":\"5da615475512d739e7b1ac60b6300492d311523489944edefaaa8f3de2b698d4\"}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T09:27:23.062Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-play-a446b-ft-stays-below-the-baseline-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                        "column": 18,
+                        "line": 221
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "03b548a925114c4be1b2-f50afa8d7ef87ad03c87",
+              "file": "cdx.spec.mjs",
+              "line": 23,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "real depth worker, protocol-first",
+          "file": "cdx.spec.mjs",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 93851,
+                      "error": {
+                        "message": "Error: Native protocol capture differs from the original PNG pixels",
+                        "stack": "Error: Native protocol capture differs from the original PNG pixels\n    at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)\n    at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)\n    at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)\n    at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19",
+                        "location": {
+                          "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                          "column": 18,
+                          "line": 221
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mmeasure.mjs:221\n\n  219 |     playwrightSHA256:createHash(\"sha256\").update(a.data).digest(\"hex\"),\n  220 |     protocolSHA256:createHash(\"sha256\").update(b.data).digest(\"hex\")}));\n> 221 |   if(!same)throw Error(\"Native protocol capture differs from the original PNG pixels\");\n      |                  ^\n  222 |   return results.playwright.png;\n  223 | }\n  224 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                            "column": 18,
+                            "line": 221
+                          },
+                          "message": "Error: Native protocol capture differs from the original PNG pixels\n\n   at measure.mjs:221\n\n  219 |     playwrightSHA256:createHash(\"sha256\").update(a.data).digest(\"hex\"),\n  220 |     protocolSHA256:createHash(\"sha256\").update(b.data).digest(\"hex\")}));\n> 221 |   if(!same)throw Error(\"Native protocol capture differs from the original PNG pixels\");\n      |                  ^\n  222 |   return results.playwright.png;\n  223 | }\n  224 |\n    at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)\n    at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)\n    at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)\n    at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-dN0cbk/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-dN0cbk/low-light.y4m\n"
+                        },
+                        {
+                          "text": "Native mirror progress: {\"nativeSeconds\":0.4999999999999982,\"frames\":5,\"wallMs\":4183.5,\"answers\":16,\"freshFrom\":14,\"freshAnswer\":15}\n"
+                        },
+                        {
+                          "text": "Native mirror capture: {\"before\":[{\"version\":3,\"latest\":3,\"view\":\"0,0,2.2738358974456787,0,0,-1\",\"sorted\":true,\"currentToy\":true,\"awaitingLod\":false,\"pendingLoads\":0,\"gpu\":false,\"requests\":0,\"responses\":0}],\"after\":[{\"version\":3,\"latest\":3,\"view\":\"0,0,2.2738358974456787,0,0,-1\",\"applied\":\"0,0,2.2738358974456787,0,0,-1\",\"sorted\":true,\"currentToy\":true,\"awaitingLod\":false,\"pendingLoads\":0,\"gpu\":false,\"requests\":2,\"responses\":1}],\"cameraBefore\":{\"cur\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"tgt\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"home\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"turntable\":false},\"cameraAfter\":{\"cur\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"tgt\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"home\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"turntable\":false}}\n"
+                        },
+                        {
+                          "text": "Paired native PNG: {\"order\":\"protocol-first\",\"index\":1,\"same\":false,\"playwrightMs\":2008.7361410000012,\"protocolMs\":1201.9397699999972,\"width\":90,\"height\":112,\"protocolWidth\":45,\"protocolHeight\":56,\"playwrightSHA256\":\"7ffcdcb621d24231fdbb58ef50021e6acd76c189de75c657378fd7331917a3ef\",\"protocolSHA256\":\"b3a5f94f81c31c87fddec85b3bce790b600f560d6581c3e7bdf8dcb6ddfaa0a2\"}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T09:27:22.287Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-prot-a034f-ft-stays-below-the-baseline-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                        "column": 18,
+                        "line": 221
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "03b548a925114c4be1b2-eaeff6d1b9947c8cef3b",
+              "file": "cdx.spec.mjs",
+              "line": 23,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 94578,
+                      "error": {
+                        "message": "Error: Native protocol capture differs from the original PNG pixels",
+                        "stack": "Error: Native protocol capture differs from the original PNG pixels\n    at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)\n    at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)\n    at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)\n    at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19",
+                        "location": {
+                          "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                          "column": 18,
+                          "line": 221
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mmeasure.mjs:221\n\n  219 |     playwrightSHA256:createHash(\"sha256\").update(a.data).digest(\"hex\"),\n  220 |     protocolSHA256:createHash(\"sha256\").update(b.data).digest(\"hex\")}));\n> 221 |   if(!same)throw Error(\"Native protocol capture differs from the original PNG pixels\");\n      |                  ^\n  222 |   return results.playwright.png;\n  223 | }\n  224 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                            "column": 18,
+                            "line": 221
+                          },
+                          "message": "Error: Native protocol capture differs from the original PNG pixels\n\n   at measure.mjs:221\n\n  219 |     playwrightSHA256:createHash(\"sha256\").update(a.data).digest(\"hex\"),\n  220 |     protocolSHA256:createHash(\"sha256\").update(b.data).digest(\"hex\")}));\n> 221 |   if(!same)throw Error(\"Native protocol capture differs from the original PNG pixels\");\n      |                  ^\n  222 |   return results.playwright.png;\n  223 | }\n  224 |\n    at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)\n    at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)\n    at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)\n    at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-1Qp1os/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-1Qp1os/low-light.y4m\n"
+                        },
+                        {
+                          "text": "Native mirror progress: {\"nativeSeconds\":0.5999999999999979,\"frames\":6,\"wallMs\":4684.5,\"answers\":18,\"freshFrom\":15,\"freshAnswer\":16}\n"
+                        },
+                        {
+                          "text": "Native mirror capture: {\"before\":[{\"version\":3,\"latest\":3,\"view\":\"0,0,2.2738358974456787,0,0,-1\",\"sorted\":true,\"currentToy\":true,\"awaitingLod\":false,\"pendingLoads\":0,\"gpu\":false,\"requests\":0,\"responses\":0}],\"after\":[{\"version\":3,\"latest\":3,\"view\":\"0,0,2.2738358974456787,0,0,-1\",\"applied\":\"0,0,2.2738358974456787,0,0,-1\",\"sorted\":true,\"currentToy\":true,\"awaitingLod\":false,\"pendingLoads\":0,\"gpu\":false,\"requests\":2,\"responses\":1}],\"cameraBefore\":{\"cur\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"tgt\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"home\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"turntable\":false},\"cameraAfter\":{\"cur\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"tgt\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"home\":{\"yaw\":0,\"pitch\":0,\"roll\":0,\"distance\":2.273835945129395},\"turntable\":false}}\n"
+                        },
+                        {
+                          "text": "Paired native PNG: {\"order\":\"protocol-first\",\"index\":1,\"same\":false,\"playwrightMs\":546.141724000001,\"protocolMs\":288.0300639999914,\"width\":90,\"height\":112,\"protocolWidth\":45,\"protocolHeight\":56,\"playwrightSHA256\":\"0873d45884d14391273872c24ec43f0ba664e41c852065b81abfd96dc343842a\",\"protocolSHA256\":\"15cf68871de50e112eb4ef4162919e004c2217a33bc27581c7d38867e29de967\"}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T09:27:22.724Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-prot-2944e-ft-stays-below-the-baseline-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs",
+                        "column": 18,
+                        "line": 221
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "03b548a925114c4be1b2-e0199080c5e0d17afd0d",
+              "file": "cdx.spec.mjs",
+              "line": 23,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T09:27:21.091Z",
+    "duration": 100253.469,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

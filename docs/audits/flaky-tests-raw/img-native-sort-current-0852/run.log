@@ -1,0 +1,157 @@
+[2m[WebServer] [22m(node:33923) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 30 tests using 1 worker
+
+(node:33934) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33934) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (23.6s)
+(node:34140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (23.0s)
+(node:34326) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34326) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (23.6s)
+(node:34516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (23.6s)
+(node:34706) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34706) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (23.1s)
+(node:34895) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34895) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   6 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (23.6s)
+(node:35085) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35085) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (23.1s)
+(node:35272) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35272) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (20.8s)
+(node:35460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (24.4s)
+(node:35651) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35651) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (22.4s)
+(node:35843) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35843) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (20.8s)
+(node:36034) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36034) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  12 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (21.6s)
+(node:36220) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36220) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  13 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (19.7s)
+(node:36404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  14 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (21.2s)
+(node:36592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  15 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (22.2s)
+(node:36802) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36802) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  16 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (21.7s)
+(node:36988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  17 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (22.0s)
+(node:37178) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37178) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  18 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (21.5s)
+(node:37365) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37365) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  19 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (22.3s)
+(node:37561) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37561) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  20 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (21.8s)
+(node:37747) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37747) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  21 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (23.3s)
+(node:37934) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37934) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  22 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (21.0s)
+(node:38134) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38134) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  23 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (22.9s)
+(node:38319) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38319) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  24 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (19.8s)
+(node:38507) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38507) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  25 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (23.0s)
+(node:38701) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38701) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  26 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (22.9s)
+(node:38890) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38890) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  27 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (22.3s)
+(node:39075) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39075) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  28 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (22.2s)
+(node:39268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  29 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (21.6s)
+(node:39459) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39459) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  30 [chromium] › .cache/flaky-tests/img/img-after.spec.mjs:111:5 › bouncy-ball: toys without the volume kind draw as before (webgl2) (20.9s)
+
+  30 passed (11.5m)

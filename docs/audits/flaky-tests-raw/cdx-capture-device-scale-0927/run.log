@@ -1,0 +1,156 @@
+[2m[WebServer] [22m(node:42612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 4 workers
+
+(node:42623) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42623) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-cdx-mir-tQ5Lz0/still.y4m
+Generated still: /tmp/splashery-cdx-mir-dN0cbk/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-tQ5Lz0/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-dN0cbk/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-1Qp1os/still.y4m
+Generated still: /tmp/splashery-cdx-mir-fVw2xh/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-1Qp1os/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-fVw2xh/low-light.y4m
+Native mirror progress: {"nativeSeconds":0.4999999999999982,"frames":5,"wallMs":4183.5,"answers":16,"freshFrom":14,"freshAnswer":15}
+Native mirror progress: {"nativeSeconds":0.4999999999999982,"frames":5,"wallMs":4067.5,"answers":16,"freshFrom":14,"freshAnswer":15}
+Native mirror progress: {"nativeSeconds":0.5999999999999979,"frames":6,"wallMs":5812.4000000003725,"answers":17,"freshFrom":14,"freshAnswer":15}
+Native mirror capture: {"before":[{"version":3,"latest":3,"view":"0,0,2.2738358974456787,0,0,-1","sorted":true,"currentToy":true,"awaitingLod":false,"pendingLoads":0,"gpu":false,"requests":0,"responses":0}],"after":[{"version":3,"latest":3,"view":"0,0,2.2738358974456787,0,0,-1","applied":"0,0,2.2738358974456787,0,0,-1","sorted":true,"currentToy":true,"awaitingLod":false,"pendingLoads":0,"gpu":false,"requests":2,"responses":1}],"cameraBefore":{"cur":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"tgt":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"home":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"turntable":false},"cameraAfter":{"cur":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"tgt":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"home":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"turntable":false}}
+Native mirror capture: {"before":[{"version":3,"latest":3,"view":"0,0,2.2738358974456787,0,0,-1","sorted":true,"currentToy":true,"awaitingLod":false,"pendingLoads":0,"gpu":false,"requests":0,"responses":0}],"after":[{"version":3,"latest":3,"view":"0,0,2.2738358974456787,0,0,-1","applied":"0,0,2.2738358974456787,0,0,-1","sorted":true,"currentToy":true,"awaitingLod":false,"pendingLoads":0,"gpu":false,"requests":2,"responses":1}],"cameraBefore":{"cur":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"tgt":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"home":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"turntable":false},"cameraAfter":{"cur":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"tgt":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"home":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"turntable":false}}
+Native mirror capture: {"before":[{"version":3,"latest":3,"view":"0,0,2.2738358974456787,0,0,-1","sorted":true,"currentToy":true,"awaitingLod":false,"pendingLoads":0,"gpu":false,"requests":0,"responses":0}],"after":[{"version":3,"latest":3,"view":"0,0,2.2738358974456787,0,0,-1","applied":"0,0,2.2738358974456787,0,0,-1","sorted":true,"currentToy":true,"awaitingLod":false,"pendingLoads":0,"gpu":false,"requests":2,"responses":1}],"cameraBefore":{"cur":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"tgt":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"home":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"turntable":false},"cameraAfter":{"cur":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"tgt":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"home":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"turntable":false}}
+Paired native PNG: {"order":"playwright-first","index":1,"same":false,"playwrightMs":1504.8822579999978,"protocolMs":2084.874014000001,"width":90,"height":112,"protocolWidth":45,"protocolHeight":56,"playwrightSHA256":"1188615add2220bb7be7f1ce2cd79c60b6233f83811d34826e8e8e8b0a18ecce","protocolSHA256":"dc8879449cfbdd5a8a300fc71d894d2928125c62be648f56ab2a1e393717b778"}
+Native mirror progress: {"nativeSeconds":0.5999999999999979,"frames":6,"wallMs":4684.5,"answers":18,"freshFrom":15,"freshAnswer":16}
+Paired native PNG: {"order":"playwright-first","index":1,"same":false,"playwrightMs":1856.2525560000067,"protocolMs":1433.0924809999997,"width":90,"height":112,"protocolWidth":45,"protocolHeight":56,"playwrightSHA256":"879345d221ac9992708e71fc789285568495470f273a06aa7b2709262d0a78b9","protocolSHA256":"5da615475512d739e7b1ac60b6300492d311523489944edefaaa8f3de2b698d4"}
+  ✘  1 [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, playwright-first › still: measured drift stays below the baseline (1.5m)
+Paired native PNG: {"order":"protocol-first","index":1,"same":false,"playwrightMs":2008.7361410000012,"protocolMs":1201.9397699999972,"width":90,"height":112,"protocolWidth":45,"protocolHeight":56,"playwrightSHA256":"7ffcdcb621d24231fdbb58ef50021e6acd76c189de75c657378fd7331917a3ef","protocolSHA256":"b3a5f94f81c31c87fddec85b3bce790b600f560d6581c3e7bdf8dcb6ddfaa0a2"}
+  ✘  4 [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, playwright-first › low-light: measured drift stays below the baseline (1.5m)
+  ✘  2 [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, protocol-first › still: measured drift stays below the baseline (1.6m)
+Native mirror capture: {"before":[{"version":3,"latest":3,"view":"0,0,2.2738358974456787,0,0,-1","sorted":true,"currentToy":true,"awaitingLod":false,"pendingLoads":0,"gpu":false,"requests":0,"responses":0}],"after":[{"version":3,"latest":3,"view":"0,0,2.2738358974456787,0,0,-1","applied":"0,0,2.2738358974456787,0,0,-1","sorted":true,"currentToy":true,"awaitingLod":false,"pendingLoads":0,"gpu":false,"requests":2,"responses":1}],"cameraBefore":{"cur":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"tgt":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"home":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"turntable":false},"cameraAfter":{"cur":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"tgt":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"home":{"yaw":0,"pitch":0,"roll":0,"distance":2.273835945129395},"turntable":false}}
+Paired native PNG: {"order":"protocol-first","index":1,"same":false,"playwrightMs":546.141724000001,"protocolMs":288.0300639999914,"width":90,"height":112,"protocolWidth":45,"protocolHeight":56,"playwrightSHA256":"0873d45884d14391273872c24ec43f0ba664e41c852065b81abfd96dc343842a","protocolSHA256":"15cf68871de50e112eb4ef4162919e004c2217a33bc27581c7d38867e29de967"}
+  ✘  3 [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, protocol-first › low-light: measured drift stays below the baseline (1.6m)
+
+
+  1) [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, playwright-first › still: measured drift stays below the baseline 
+
+    Error: Native protocol capture differs from the original PNG pixels
+
+       at measure.mjs:221
+
+      219 |     playwrightSHA256:createHash("sha256").update(a.data).digest("hex"),
+      220 |     protocolSHA256:createHash("sha256").update(b.data).digest("hex")}));
+    > 221 |   if(!same)throw Error("Native protocol capture differs from the original PNG pixels");
+          |                  ^
+      222 |   return results.playwright.png;
+      223 | }
+      224 |
+        at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)
+        at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)
+        at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)
+        at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-play-1ff29-ft-stays-below-the-baseline-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-play-1ff29-ft-stays-below-the-baseline-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, playwright-first › low-light: measured drift stays below the baseline 
+
+    Error: Native protocol capture differs from the original PNG pixels
+
+       at measure.mjs:221
+
+      219 |     playwrightSHA256:createHash("sha256").update(a.data).digest("hex"),
+      220 |     protocolSHA256:createHash("sha256").update(b.data).digest("hex")}));
+    > 221 |   if(!same)throw Error("Native protocol capture differs from the original PNG pixels");
+          |                  ^
+      222 |   return results.playwright.png;
+      223 | }
+      224 |
+        at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)
+        at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)
+        at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)
+        at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-play-a446b-ft-stays-below-the-baseline-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-play-a446b-ft-stays-below-the-baseline-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, protocol-first › still: measured drift stays below the baseline 
+
+    Error: Native protocol capture differs from the original PNG pixels
+
+       at measure.mjs:221
+
+      219 |     playwrightSHA256:createHash("sha256").update(a.data).digest("hex"),
+      220 |     protocolSHA256:createHash("sha256").update(b.data).digest("hex")}));
+    > 221 |   if(!same)throw Error("Native protocol capture differs from the original PNG pixels");
+          |                  ^
+      222 |   return results.playwright.png;
+      223 | }
+      224 |
+        at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)
+        at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)
+        at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)
+        at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-prot-a034f-ft-stays-below-the-baseline-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-prot-a034f-ft-stays-below-the-baseline-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, protocol-first › low-light: measured drift stays below the baseline 
+
+    Error: Native protocol capture differs from the original PNG pixels
+
+       at measure.mjs:221
+
+      219 |     playwrightSHA256:createHash("sha256").update(a.data).digest("hex"),
+      220 |     protocolSHA256:createHash("sha256").update(b.data).digest("hex")}));
+    > 221 |   if(!same)throw Error("Native protocol capture differs from the original PNG pixels");
+          |                  ^
+      222 |   return results.playwright.png;
+      223 | }
+      224 |
+        at capturePair (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:221:18)
+        at shot (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:248:12)
+        at measure (/workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/measure.mjs:341:18)
+        at /workspace/splashery/.cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:95:19
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-prot-2944e-ft-stays-below-the-baseline-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/cdx-cdp-pair/run-092720/results/cdx-real-depth-worker-prot-2944e-ft-stays-below-the-baseline-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, playwright-first › still: measured drift stays below the baseline 
+    [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, playwright-first › low-light: measured drift stays below the baseline 
+    [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, protocol-first › still: measured drift stays below the baseline 
+    [chromium] › .cache/flaky-tests/cdx-cdp-pair/cdx.spec.mjs:23:5 › real depth worker, protocol-first › low-light: measured drift stays below the baseline 

@@ -1,0 +1,42 @@
+{
+  "started": "2026-10-17T09:25:21.217735+00:00",
+  "head": "cf10f12f6fd15913059124a40391f3b2df8db5c4",
+  "command": [
+    "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/splashery/.cache/flaky-tests/quartz-projectile/config.mjs",
+    "--reporter=list,json",
+    "--retries=0",
+    "--output",
+    "/workspace/splashery/.cache/flaky-tests/quartz-projectile/run-092521/results",
+    ".cache/flaky-tests/quartz-projectile/quartz-projectile.spec.mjs",
+    "--workers=1"
+  ],
+  "environment": {
+    "SPLASHERY_CHROMIUM": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+    "SPLASHERY_GL": "llvmpipe",
+    "DISPLAY": ":91",
+    "SPLASHERY_PORT": "4187",
+    "PLAYWRIGHT_NODEJS_PATH": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node"
+  },
+  "diff": "",
+  "files": {
+    ".cache/flaky-tests/quartz-projectile/config.mjs": "58a3abd996f73dc90dca03dd13c873ab86b34d5d1ac870973e30e5ce2f9709ec",
+    ".cache/flaky-tests/quartz-projectile/control-preamble.mjs": "ca43d0f4e0414d73caea72449ea31729267a46b10de986997d0f2c426eba6f76",
+    ".cache/flaky-tests/quartz-projectile/quartz-projectile.spec.mjs": "baecf2c437a1912cd7556bbce842d22cae6b577ea6e96fe96ddad3e7da771aad",
+    ".cache/flaky-tests/quartz-projectile/original-quartz-target.mjs": "18ce5fcfa160cc0306bafc4c2b64818b973cfdce9fcff05319cbdcec8c8a9e17",
+    ".cache/flaky-tests/quartz-projectile/hands-on-after-snapshot.js": "d86ed907500973f76a8d4c0603e13e15b4ea9d835c76da75b71c23464b3ddfc5",
+    ".cache/flaky-tests/quartz-projectile/hands-on-before.js": "85e21029d2c3f5d80a550f285446c2fbedfb715fad0bee605c3f39b8ce11d000",
+    ".cache/flaky-tests/run-probe.py": "6a1516b1c58b47e58eede828c02058b86d2829af90ef57abae6978a92e7af360",
+    "tests/helpers/native-sort.mjs": "d4e4d92fb608bac6f7ef33fea051f94feda8a3f038c2a7a39083d0433ff7190e"
+  },
+  "burners": 2,
+  "node": "v22.20.0",
+  "browser": "Chromium 141.0.7390.37",
+  "cpu": "400000 100000",
+  "ended": "2026-10-17T09:25:42.125807+00:00",
+  "exit": 1,
+  "burner_pid": 42240
+}

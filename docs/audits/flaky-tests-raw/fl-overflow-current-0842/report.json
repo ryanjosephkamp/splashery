@@ -1,0 +1,1238 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/fl-overflow/config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/fl-overflow",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/fl-overflow/run-084244/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/fl-overflow",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/fl-overflow/run-084244/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/fl-overflow",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4185",
+      "url": "http://127.0.0.1:4185/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery"
+    }
+  },
+  "suites": [
+    {
+      "title": "fl-after.spec.mjs",
+      "file": "fl-after.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14455,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:42:46.196Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-0dbf87a8184533fa4e0a",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14139,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:43:01.584Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-b17473a52d769e6a59d3",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14882,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:43:16.592Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-6baf6c0691665e466ff3",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12680,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:43:32.406Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-217e3958eda3f0a10ba8",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15095,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:43:45.983Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-c16c2545afe5d57e74f8",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14999,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:44:01.971Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-769d8945f1abbedb879a",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13527,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:44:18.013Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-d5a16a18f7c36e395314",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16510,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:44:32.493Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-8a6ab5c979bf432d9985",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13495,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:44:49.950Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-1c1b71491a09ed0bf267",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15438,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:45:04.375Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-4baf8b5003114789ff50",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11843,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:45:20.702Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-ee91125c8c9204e9b84a",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15152,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:45:33.460Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-df697aadb9fe2b4aaaea",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15732,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:45:49.483Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-3f24547fce41c40c566e",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11883,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:46:06.097Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-d8df67bf9022048e5a96",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15263,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:46:18.836Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-cd0a69dc2f16e2a398dc",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13643,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:46:34.962Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-9a6acfb555876e2e2fec",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14778,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:46:49.503Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-5c1bd90b1bfbb7e100e0",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15698,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:47:05.152Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-36c1a6df90f54a5a04ff",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13976,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:47:21.708Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-e4d736e3a43846177941",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13372,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:47:36.547Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-9f0db58bc1dfdd853ac0",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14634,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:47:50.862Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-715ef2547b91f5c2ed3a",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13852,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:48:06.390Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-2a6d3b55cdb4c916a836",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14156,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:48:21.106Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-8275006d0fc5e223e175",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15613,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:48:36.111Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-c6b053b3e560bfe50dde",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15222,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:48:52.607Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-ae537f545b01a63ed757",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14885,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:49:08.749Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-792c7a08acd867a0a09f",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 26,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12933,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:49:24.501Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-d82a457992289da9ae82",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 27,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15515,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:49:38.306Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-01399319706c2103f353",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 28,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14605,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:49:54.704Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-5ef90a002b3b177ed6c9",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 29,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14059,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real Resource Timing entries before fluid: \u001b[33m250\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T08:50:10.203Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8527eac368c6b26adae0-d05dcd45a03490db675f",
+          "file": "fl-after.spec.mjs",
+          "line": 129,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T08:42:45.452Z",
+    "duration": 459148.11199999996,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

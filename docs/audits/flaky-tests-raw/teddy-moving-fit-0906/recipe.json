@@ -1,0 +1,38 @@
+{
+  "started": "2026-10-17T09:06:11.934077+00:00",
+  "head": "cf10f12f6fd15913059124a40391f3b2df8db5c4",
+  "command": [
+    "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/splashery/.cache/flaky-tests/teddy-camera/config.mjs",
+    "--reporter=list,json",
+    "--retries=0",
+    "--output",
+    "/workspace/splashery/.cache/flaky-tests/teddy-camera/run-090611/results",
+    ".cache/flaky-tests/teddy-camera/teddy-camera.spec.mjs",
+    "--workers=1"
+  ],
+  "environment": {
+    "SPLASHERY_CHROMIUM": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+    "SPLASHERY_GL": "llvmpipe",
+    "DISPLAY": ":91",
+    "SPLASHERY_PORT": "4186",
+    "PLAYWRIGHT_NODEJS_PATH": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node"
+  },
+  "diff": "",
+  "files": {
+    ".cache/flaky-tests/teddy-camera/config.mjs": "988da2728ca4b699d724d27c02cb59044486d463cd8a518d069e9910dea5a974",
+    ".cache/flaky-tests/teddy-camera/teddy-camera.spec.mjs": "0a667ac6c33f0db59992622c3793721653e06f2b9b9818f0b71b790fa15febf3",
+    ".cache/flaky-tests/run-probe.py": "6a1516b1c58b47e58eede828c02058b86d2829af90ef57abae6978a92e7af360",
+    "tests/helpers/native-sort.mjs": "d4e4d92fb608bac6f7ef33fea051f94feda8a3f038c2a7a39083d0433ff7190e"
+  },
+  "burners": 2,
+  "node": "v22.20.0",
+  "browser": "Chromium 141.0.7390.37",
+  "cpu": "400000 100000",
+  "ended": "2026-10-17T09:17:50.879678+00:00",
+  "exit": 1,
+  "burner_pid": 39694
+}
