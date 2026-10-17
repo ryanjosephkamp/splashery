@@ -67,86 +67,6 @@ export async function openMirror(page, base, { look = "plain", query = "" } = {}
   });
 }
 
-// One fresh depth answer, then a few frames drawn (the heights ease).
-async function nextAnswer(page) {
-  await page.evaluate(async () => {
-    const { MIRROR } = await import("/src/live/relief.js");
-    const cam = MIRROR.cam;
-    if (!cam || cam.closed) throw Error("Camera depth is unavailable before the fresh answer");
-    const draw = cam.draw;
-    let total = 0,
-      frames = 0,
-      invalidDt = null;
-    cam.draw = function (g, options = {}) {
-      const result = draw.call(this, g, options);
-      if (result === true && this === cam && cam === MIRROR.cam) {
-        const dt = options.dt === undefined ? 1 / 60 : options.dt;
-        if (!Number.isFinite(dt) || dt < 0) invalidDt = String(dt);
-        else {
-          total += dt;
-          frames++;
-        }
-      }
-      return result;
-    };
-    const check = () => {
-      if (cam !== MIRROR.cam || cam.closed) throw Error("Camera depth changed during observation");
-      if (invalidDt !== null) throw Error("Invalid native camera draw dt: " + invalidDt);
-    };
-    try {
-      const n0 = cam.answers;
-      const t0 = performance.now();
-      while (cam.answers === n0 && performance.now() - t0 < 30000) {
-        check();
-        cam.ask();
-        await new Promise((r) => setTimeout(r, 30));
-      }
-      check();
-      if (cam.answers === n0)
-        throw Error(
-          "No fresh native depth answer within 30000 ms: " +
-            JSON.stringify({ answers: cam.answers, busy: cam.busy, discarded: cam.discarded }),
-        );
-      const before = { total, frames, wall: performance.now() };
-      while (total - before.total < 0.4) {
-        check();
-        if (performance.now() - before.wall >= 30000)
-          throw Error(
-            "Native camera draws did not consume 0.4 seconds within 30000 ms: " +
-              JSON.stringify({
-                nativeSeconds: total - before.total,
-                frames: frames - before.frames,
-                answers: cam.answers,
-              }),
-          );
-        await new Promise((r) => setTimeout(r, 30));
-      }
-      check();
-    } finally {
-      cam.draw = draw;
-    }
-  });
-}
-
-// The face's cells: heights (0..1) and colors (r, g, b).
-async function cells(page) {
-  return page.evaluate((F) => {
-    return import("/src/live/relief.js").then(({ MIRROR }) => {
-      const cam = MIRROR.cam;
-      const { cols, rows } = cam;
-      const h = [];
-      const c = [];
-      for (let j = Math.floor(F.y0 * rows); j < F.y1 * rows; j++)
-        for (let i = Math.floor(F.x0 * cols); i < F.x1 * cols; i++) {
-          const k = j * cols + i;
-          h.push(cam.heights[k]);
-          c.push(cam.lastColors[k * 4], cam.lastColors[k * 4 + 1], cam.lastColors[k * 4 + 2]);
-        }
-      return { h, c };
-    });
-  }, FACE);
-}
-
 // The face's box on the page (CSS pixels), from where the picture shows.
 async function faceBox(page) {
   return page.evaluate(async (F) => {
@@ -260,7 +180,49 @@ async function cameraFace(page, clip) {
   return { width: Math.round(clip.width * 2), height: Math.round(clip.height * 2), data };
 }
 
-export async function measure(page, { answers = 10, turn = 0.35, dump = null } = {}) {
+const sampleModule = "/tests/helpers/mirror-sample.mjs";
+export async function measure(page, options = {}) {
+  let session;
+  try {
+    const setup = await page.evaluate(
+      async (url) => (await import(url)).prepareMeasurement(),
+      sampleModule,
+    );
+    session = await page.context().newCDPSession(page);
+    // Use the same native PNG capture and clip rounding as Playwright, without
+    // repeating its font/caret preparation for every already-held frame. Exact
+    // RGBA equality was checked in both capture orders across 48 screenshot pairs.
+    const capture = async (clip) => {
+      const { visualViewport } = await session.send("Page.getLayoutMetrics");
+      const viewport = page.viewportSize() || setup.viewport;
+      const x = Math.max(0, Math.min(clip.x, viewport.width));
+      const y = Math.max(0, Math.min(clip.y, viewport.height));
+      const width = Math.max(0, Math.min(clip.x + clip.width, viewport.width)) - x;
+      const height = Math.max(0, Math.min(clip.y + clip.height, viewport.height)) - y;
+      const nativeClip = {
+        x: visualViewport.pageX + x,
+        y: visualViewport.pageY + y,
+        width: Math.floor(width / visualViewport.scale + 1e-3),
+        height: Math.floor(height / visualViewport.scale + 1e-3),
+        scale: visualViewport.scale * setup.pixelRatio,
+      };
+      if (!nativeClip.width || !nativeClip.height) throw Error("Empty mirror screenshot clip");
+      const { data } = await session.send("Page.captureScreenshot", {
+        format: "png",
+        clip: nativeClip,
+        captureBeyondViewport: false,
+      });
+      return PNG.sync.read(Buffer.from(data, "base64"));
+    };
+    return await measurePrepared(page, options, capture);
+  } finally {
+    if (!page.isClosed())
+      await page.evaluate(async (url) => (await import(url)).finishMeasurement(), sampleModule);
+    if (!page.isClosed()) await session?.detach();
+  }
+}
+
+async function measurePrepared(page, { answers = 10, turn = 0.35, dump = null } = {}, capture) {
   const hj = [];
   const cj = [];
   const sj = [];
@@ -271,23 +233,17 @@ export async function measure(page, { answers = 10, turn = 0.35, dump = null } =
   let last = null;
   let lastShot = null;
   let lastTurned = null;
-  const cam = page.evaluate.bind(page);
   for (let k = 0; k < answers; k++) {
-    await nextAnswer(page);
-    const now = await cells(page);
-    const face = await shot(page, box);
-    // A little turned (the relief's grain shows there), then back.
-    await cam((d) => {
-      const c = window.__splashery.player.camera;
-      const s = c.getState();
-      c.setState({ ...s, yaw: s.yaw + d }, { snap: true });
-    }, turn);
-    const turned = await shot(page, box);
-    await cam((d) => {
-      const c = window.__splashery.player.camera;
-      const s = c.getState();
-      c.setState({ ...s, yaw: s.yaw - d }, { snap: true });
-    }, turn);
+    const now = await page.evaluate(
+      async ({ url, F, restore }) => (await import(url)).beginSample(F, restore),
+      { url: sampleModule, F: FACE, restore: k > 0 },
+    );
+    const face = await capture(box);
+    await page.evaluate(async ({ url, turn }) => (await import(url)).turnSample(turn), {
+      url: sampleModule,
+      turn,
+    });
+    const turned = await capture(box);
     if (last) {
       hj.push(meanAbs(now.h, last.h));
       cj.push(meanAbs(now.c, last.c));
@@ -305,6 +261,7 @@ export async function measure(page, { answers = 10, turn = 0.35, dump = null } =
     lastShot = face;
     lastTurned = turned;
   }
+  await page.evaluate(async (url) => (await import(url)).finishSample(), sampleModule);
   const camFace = await cameraFace(page, box);
   const src = fineDetail(camFace);
   // The camera's face was drawn at twice the CSS size, like the shots.
