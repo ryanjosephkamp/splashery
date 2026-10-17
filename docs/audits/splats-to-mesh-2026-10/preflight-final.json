@@ -1,0 +1,96 @@
+{
+  "fullSuiteCommit": "176f2e188e8e06298c72eb256dabbd26a2f29351",
+  "finalHead": "fc788ef7dd465f81d6709e2f5cf78874ba8dc52b",
+  "mergedMainCommit": "aedbe443373d60b2fd0d041e25b1c46d6d5fcd33",
+  "mainChanges": "Neuron and Photo to 3D study modules, three new spec files, shared lists, credits, and generated site pages.",
+  "matchingGitObjects": {
+    "src/mesh-export": {
+      "fullSuiteCommit": "edf79570a0917cebb6cf980bfda6822f82ff8957",
+      "finalHead": "edf79570a0917cebb6cf980bfda6822f82ff8957"
+    },
+    "src/viewers": {
+      "fullSuiteCommit": "693194bfa6c9d130231378dd1e67997821133eb1",
+      "finalHead": "693194bfa6c9d130231378dd1e67997821133eb1"
+    },
+    "src/kit.js": {
+      "fullSuiteCommit": "87947e64deab41cc4e7c707f098cffa2b3e8a9d8",
+      "finalHead": "87947e64deab41cc4e7c707f098cffa2b3e8a9d8"
+    },
+    "src/generators.js": {
+      "fullSuiteCommit": "a920c7bae63d290b69c3522df68af5bc0042bf41",
+      "finalHead": "a920c7bae63d290b69c3522df68af5bc0042bf41"
+    },
+    "src/packs/photo-3d.js": {
+      "fullSuiteCommit": "bf50555c3171c046cec905b1410a6baec0b2364c",
+      "finalHead": "bf50555c3171c046cec905b1410a6baec0b2364c"
+    },
+    "src/packs/shapes-torus.js": {
+      "fullSuiteCommit": "8bc79fcb7351f6a4bc4b0f912b31718a2a79e8e8",
+      "finalHead": "8bc79fcb7351f6a4bc4b0f912b31718a2a79e8e8"
+    },
+    "src/packs/balls.js": {
+      "fullSuiteCommit": "9c7224dee1e30a3df05713d945a05852e2619845",
+      "finalHead": "9c7224dee1e30a3df05713d945a05852e2619845"
+    },
+    "src/packs/playthings.js": {
+      "fullSuiteCommit": "221a35ac91ab6e7c053d19ca42a053518e60e507",
+      "finalHead": "221a35ac91ab6e7c053d19ca42a053518e60e507"
+    },
+    "src/packs/food.js": {
+      "fullSuiteCommit": "2e659f0f0268915d48fd08f9d069dd0b83ec416b",
+      "finalHead": "2e659f0f0268915d48fd08f9d069dd0b83ec416b"
+    },
+    "src/packs/gems.js": {
+      "fullSuiteCommit": "63f06ab33a917ef0db34dca181de4907a5fa83cf",
+      "finalHead": "63f06ab33a917ef0db34dca181de4907a5fa83cf"
+    },
+    "src/packs/games.js": {
+      "fullSuiteCommit": "b5ab94283793b6890ab203839773b5fd2aa79d10",
+      "finalHead": "b5ab94283793b6890ab203839773b5fd2aa79d10"
+    },
+    "manual": {
+      "fullSuiteCommit": "ebe446c3b10d87bb47f62c25b9e18acbb3b1f3da",
+      "finalHead": "ebe446c3b10d87bb47f62c25b9e18acbb3b1f3da"
+    },
+    "tools/mesh-export-benchmark.mjs": {
+      "fullSuiteCommit": "c370efc210bffd93725956e46923beac7a966fa0",
+      "finalHead": "c370efc210bffd93725956e46923beac7a966fa0"
+    }
+  },
+  "benchmarkAssetChanges": ["assets/toys/specimen-neuron/thumb.webp"],
+  "afterMergeTests": {
+    "passed": 52,
+    "exporterTests": 24,
+    "newMainTests": 28,
+    "durationMinutes": 1.2,
+    "specs": [
+      "cdx-mesh",
+      "cdx-mesh-ui",
+      "cdx-mesh-input",
+      "cdx-mesh-pose",
+      "cdx-pfb",
+      "nr1",
+      "p3d-next-method"
+    ]
+  },
+  "preflight": {
+    "passed": true,
+    "testsPassed": 272,
+    "durationMinutes": 4.9,
+    "chromium": "141.0.7390.37",
+    "renderer": "Mesa llvmpipe, headed Xvfb",
+    "checks": [
+      "main is merged in",
+      "Prettier",
+      "American English on added lines",
+      "site is current",
+      "shared lists parse",
+      "file sizes",
+      "shelf-wide specs"
+    ],
+    "largeFileExceptions": [
+      "manual/tinkerers-manual-5a041fbfff0d04f6.pdf",
+      "manual/tinkerers-manual.pdf"
+    ]
+  }
+}

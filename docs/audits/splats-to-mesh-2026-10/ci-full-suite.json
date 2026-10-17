@@ -1,0 +1,212 @@
+{
+  "run": "https://github.com/ryanjosephkamp/splashery/actions/runs/39001608591",
+  "commit": "176f2e188e8e06298c72eb256dabbd26a2f29351",
+  "finalHead": "fc788ef7dd465f81d6709e2f5cf78874ba8dc52b",
+  "scope": "All sixteen suites completed on the implementation commit before the final main merge. Final-head follow-up checks are in preflight-final.json.",
+  "totals": {
+    "files": 399,
+    "tests": 3392,
+    "passed": 3388,
+    "failed": 3,
+    "skipped": 1
+  },
+  "shards": [
+    {
+      "conclusion": "success",
+      "id": 117305768566,
+      "name": "Suite 13/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 202,
+      "passed": 202,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "failure",
+      "id": 117305768567,
+      "name": "Suite 16/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 181,
+      "passed": 180,
+      "failed": 1,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768576,
+      "name": "Suite 14/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 249,
+      "passed": 249,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768613,
+      "name": "Suite 3/16",
+      "files": 24,
+      "totalFiles": 24,
+      "tests": 222,
+      "passed": 222,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "failure",
+      "id": 117305768627,
+      "name": "Suite 6/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 223,
+      "passed": 222,
+      "failed": 1,
+      "skipped": 0
+    },
+    {
+      "conclusion": "failure",
+      "id": 117305768631,
+      "name": "Suite 15/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 253,
+      "passed": 252,
+      "failed": 1,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768633,
+      "name": "Suite 11/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 303,
+      "passed": 303,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768634,
+      "name": "Suite 9/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 216,
+      "passed": 216,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768635,
+      "name": "Suite 8/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 202,
+      "passed": 202,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768636,
+      "name": "Suite 5/16",
+      "files": 24,
+      "totalFiles": 24,
+      "tests": 150,
+      "passed": 150,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768640,
+      "name": "Suite 10/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 203,
+      "passed": 203,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768699,
+      "name": "Suite 2/16",
+      "files": 25,
+      "totalFiles": 25,
+      "tests": 229,
+      "passed": 229,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768712,
+      "name": "Suite 7/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 191,
+      "passed": 191,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768766,
+      "name": "Suite 12/16",
+      "files": 26,
+      "totalFiles": 26,
+      "tests": 197,
+      "passed": 197,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768772,
+      "name": "Suite 4/16",
+      "files": 24,
+      "totalFiles": 24,
+      "tests": 226,
+      "passed": 225,
+      "failed": 0,
+      "skipped": 1
+    },
+    {
+      "conclusion": "success",
+      "id": 117305768775,
+      "name": "Suite 1/16",
+      "files": 16,
+      "totalFiles": 16,
+      "tests": 145,
+      "passed": 145,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "failures": [
+    {
+      "spec": "pages-r2",
+      "test": "opaque tilted PDF faces cover their own paper backing (webgl2)",
+      "isolatedRecheck": "failed",
+      "baselineComparison": "baseline-pdf-check.json"
+    },
+    {
+      "spec": "phy",
+      "test": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+      "isolatedRecheck": "failed",
+      "baselineComparison": "baseline-pebbles-check.json"
+    },
+    {
+      "spec": "img-engine",
+      "test": "toys without the volume kind draw as before (webgl2)",
+      "isolatedRecheck": "passed",
+      "baselineComparison": "image-comparison-check.json"
+    }
+  ],
+  "allExistingSpecsGate": "not met"
+}

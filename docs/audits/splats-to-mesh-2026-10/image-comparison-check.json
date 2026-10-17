@@ -1,0 +1,53 @@
+{
+  "baselineCommit": "ceb51de7a015377d7f350119c27a792fc1a8a66d",
+  "comparisonCommit": "016d2eb857ea6ca9bc1bd64c25b027f28e025980",
+  "test": "img-engine: toys without the volume kind draw as before (webgl2)",
+  "ciRun": "https://github.com/ryanjosephkamp/splashery/actions/runs/39001608591",
+  "ciJobId": 117305768631,
+  "ciFailure": {
+    "toy": "bouncy-ball",
+    "assertion": "pixels that changed a lot",
+    "expectedAtMost": 220,
+    "received": 246
+  },
+  "ciIsolatedRecheck": "passed",
+  "localBrowser": "Chromium 141.0.7390.37",
+  "localRenderer": "Mesa llvmpipe, headed Xvfb",
+  "baseline": {
+    "passed": 3,
+    "failed": 0,
+    "durationMinutes": 4.2
+  },
+  "implementation": {
+    "passed": 3,
+    "failed": 0,
+    "durationMinutes": 4.3
+  },
+  "matchingGitBlobs": {
+    "tests/img-engine.spec.mjs": {
+      "baseline": "afca6aae68df7e93fc8ec5b063344f83ecb0d086",
+      "finalMerge": "afca6aae68df7e93fc8ec5b063344f83ecb0d086"
+    },
+    "src/packs/balls.js": {
+      "baseline": "9c7224dee1e30a3df05713d945a05852e2619845",
+      "finalMerge": "9c7224dee1e30a3df05713d945a05852e2619845"
+    },
+    "src/effects.js": {
+      "baseline": "c9f0d010c7b25f777365d42cd27b4fc72e4c2faf",
+      "finalMerge": "c9f0d010c7b25f777365d42cd27b4fc72e4c2faf"
+    },
+    "src/motion.js": {
+      "baseline": "09d1d1e17f10fc3d08296804adcc6f818511bfb7",
+      "finalMerge": "09d1d1e17f10fc3d08296804adcc6f818511bfb7"
+    },
+    "src/player.js": {
+      "baseline": "2584bf0dda4c766d118985371390f43950e81f76",
+      "finalMerge": "2584bf0dda4c766d118985371390f43950e81f76"
+    },
+    "src/stage.js": {
+      "baseline": "ae69355c44acc4c251ca933f1ff130576b701533",
+      "finalMerge": "ae69355c44acc4c251ca933f1ff130576b701533"
+    }
+  },
+  "conclusion": "Not reproduced locally on either checkout. Cause unestablished. The CI failure remains reported; no renderer or test was modified."
+}

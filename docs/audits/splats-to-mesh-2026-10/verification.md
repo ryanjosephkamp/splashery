@@ -18,8 +18,9 @@ SPLASHERY_CHROMIUM=/path/to/chromium141 SPLASHERY_GL=llvmpipe DISPLAY=:99 npx pl
 
 The initial full CI run also caught stale generated Showcase counts caused by adding the new tool.
 Regenerating `src/showcase/facts.json` changed only the total toy and kit counts, and its existing
-test now passes. The corrected implementation's full-suite run is linked in the JSON; its complete
-result will be recorded in the PR.
+test now passes. The corrected implementation's full-suite run is linked in the JSON. All sixteen
+suites completed: 399 spec files and 3,392 tests, with 3,388 passed, three failed, and one skipped.
+[Exact counts and job IDs](ci-full-suite.json). The all-existing-specs gate is not met.
 
 The existing Pebbles stacking assertion in `tests/phy.spec.mjs` also failed in CI and its isolated
 recheck. On unmodified `main`, three single-worker runs produced two passes and one failure; this
@@ -29,3 +30,16 @@ record the failing height threshold. No physics or test code was changed.
 ```sh
 SPLASHERY_CHROMIUM=/path/to/chromium141 SPLASHERY_GL=llvmpipe DISPLAY=:99 npx playwright test tests/phy.spec.mjs -g 'Pebbles:' --repeat-each=3 --workers=1
 ```
+
+The existing WebGL2 image-comparison assertion in `tests/img-engine.spec.mjs` failed once in CI for
+Bouncy ball (246 changed pixels against a 220-pixel limit), then passed the automatic isolated
+recheck. Three idle runs passed on each checkout, so it was not reproduced locally; its cause is
+unestablished. [Measurements and unchanged Git blobs](image-comparison-check.json). No renderer or
+test was changed.
+
+Current `main` at `aedbe4433` was merged after Neuron and the Photo to 3D study landed. Shared lists
+and generated pages were regenerated with both tools present. After the merge, all 52 tests passed
+(24 exporter tests and 28 tests newly added on main). The final preflight passes every check and 272
+tests in 4.9 minutes. Reconstruction, readers, benchmark recipes, benchmark code, and Manual files
+remain byte-identical to the full-suite commit.
+[Exact commits, Git objects, and checks](preflight-final.json).
