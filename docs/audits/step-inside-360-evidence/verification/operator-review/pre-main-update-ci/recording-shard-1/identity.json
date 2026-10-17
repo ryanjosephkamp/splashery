@@ -1,0 +1,32 @@
+{
+  "recordedUTC": "2026-10-17T19:48:37.189283+00:00",
+  "runId": 39057702542,
+  "jobId": 117468969965,
+  "artifactId": 12112502840,
+  "originalZipBytes": 11013472,
+  "originalZipSha256": "ffb0e1ed5781d83377708c34d1752e9ca882b809b4406da47b6376f8c952c6ec",
+  "case": "shr:202",
+  "knownInSuiteJson": false,
+  "isolatedRecheck": "passed",
+  "errors": [
+    "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\n  349 |   });\n  350 |   if (got.shown) expect(got.focused).toBe(true);\n> 351 |   else expect(got.body || got.focused).toBe(true);\n      |                                        ^\n  352 | }\n  353 |\n  354 | // One take from the Share tab, stopped from the pill; the preview opens.\n    at expectRecordFocused (/home/runner/work/splashery/splashery/tests/shr.spec.mjs:351:40)\n    at /home/runner/work/splashery/splashery/tests/shr.spec.mjs:337:7"
+  ],
+  "skippedCases": [
+    {
+      "title": "retained real counterexample clips decode to caution or poor",
+      "file": "cdx-v3d-calibration.spec.mjs",
+      "line": 215,
+      "annotations": [
+        {
+          "type": "skip",
+          "description": "Counterexample clips are kept privately outside the repository.",
+          "location": {
+            "file": "/home/runner/work/splashery/splashery/tests/cdx-v3d-calibration.spec.mjs",
+            "line": 217,
+            "column": 8
+          }
+        }
+      ]
+    }
+  ]
+}

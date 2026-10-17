@@ -1,0 +1,61 @@
+{
+  "recordedUTC": "2026-10-17T19:55:29.012698+00:00",
+  "codeCommit": "ec3dee4cf57016d1429017eea9671f418a901fb6",
+  "runId": 39057702542,
+  "files": [
+    {
+      "file": "cdx-pano-browser",
+      "shard": 2,
+      "expectedTests": 3,
+      "jobId": 117468970004,
+      "jobStatus": "completed",
+      "jobConclusion": "success",
+      "reportedTests": 3,
+      "fileReportedOk": true,
+      "logSha256": "d906924cd207b17540a6734afa1d81ea55fdc37a7b3d45e01d45e81ede7f77cf",
+      "log": "job-117468970004.log.gz",
+      "checkoutMatches": true
+    },
+    {
+      "file": "cdx-pano-core",
+      "shard": 4,
+      "expectedTests": 12,
+      "jobId": 117468969823,
+      "jobStatus": "completed",
+      "jobConclusion": "success",
+      "reportedTests": 12,
+      "fileReportedOk": true,
+      "logSha256": "124a168065c18375acef5a56d0c9e4a858a43d2a45ac4d05883262a0f557f364",
+      "log": "job-117468969823.log.gz",
+      "checkoutMatches": true
+    },
+    {
+      "file": "cdx-pano-prior",
+      "shard": 5,
+      "expectedTests": 4,
+      "jobId": 117468969994,
+      "jobStatus": "completed",
+      "jobConclusion": "success",
+      "reportedTests": 4,
+      "fileReportedOk": true,
+      "logSha256": "bf241732fc50a776731d376e8b6012acb7adcd7dca21d4a58f955ac21f03ace9",
+      "log": "job-117468969994.log.gz",
+      "checkoutMatches": true
+    },
+    {
+      "file": "p3d-golden",
+      "shard": 15,
+      "expectedTests": 77,
+      "jobId": 117468970054,
+      "jobStatus": "completed",
+      "jobConclusion": "success",
+      "reportedTests": 77,
+      "fileReportedOk": true,
+      "logSha256": "47ab159283c1db551e00759dc982f95a4587c4896889ad2fb7ed99e6ffe1cae8",
+      "log": "job-117468970054.log.gz",
+      "checkoutMatches": true
+    }
+  ],
+  "verifiedPassingTests": 96,
+  "note": "Per-file success and test counts are taken from each hosted job log. Pending files do not count as verified passes."
+}

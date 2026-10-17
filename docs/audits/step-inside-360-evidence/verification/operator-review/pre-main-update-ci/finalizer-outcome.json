@@ -1,0 +1,10 @@
+{
+  "id": 39057702542,
+  "status": "completed",
+  "conclusion": "cancelled",
+  "head_sha": "ec3dee4cf57016d1429017eea9671f418a901fb6",
+  "html_url": "https://github.com/ryanjosephkamp/splashery/actions/runs/39057702542",
+  "recordedUTC": "2026-10-17T20:19:25.166889+00:00",
+  "matrix": "All 16 shards had completed: 402 files, 3421 passed, 2 failed, and 1 skipped; both failed cases passed isolated rechecks.",
+  "note": "The combined-summary job was waiting for a runner when the legitimate latest-main merge was pushed. Its cancellation does not erase the complete matrix or its failures."
+}

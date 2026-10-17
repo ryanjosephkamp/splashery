@@ -1,0 +1,12 @@
+{
+  "recordedUTC": "2026-10-17T20:30:40.495232+00:00",
+  "codeCommit": "c02292e54916e7c2dcfa58f67a8dd68524102c46",
+  "mainCommit": "cad2c4479ad9279cb4ddc9bb1d6cc4f4387c1da3",
+  "localRelatedPassed": 96,
+  "preflightPassed": 272,
+  "currentRunId": 39066150615,
+  "currentRunStatus": "pending",
+  "currentRunUrl": "https://github.com/ryanjosephkamp/splashery/actions/runs/39066150615",
+  "fullSuitePassClaimed": false,
+  "earlierCompleteMatrix": "pre-main-update-ci/combined-matrix.json"
+}

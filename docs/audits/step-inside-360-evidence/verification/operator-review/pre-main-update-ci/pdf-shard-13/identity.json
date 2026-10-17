@@ -1,0 +1,14 @@
+{
+  "recordedUTC": "2026-10-17T19:46:14.470583+00:00",
+  "runId": 39057702542,
+  "jobId": 117468970074,
+  "artifactId": 12112537402,
+  "originalZipBytes": 7430832,
+  "originalZipSha256": "0c2d95aac033e5f3bf29a77f67136c26de126944a49b0535abc5e1dbd3094ec7",
+  "case": "pages-r2:495",
+  "knownInSuiteJson": false,
+  "isolatedRecheck": "passed",
+  "errors": [
+    "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 0.5\nReceived:   19.59197821242882\n\n  558 |     });\n  559 |     expect(difference.count).toBeGreaterThan(1000);\n> 560 |     expect(difference.mean).toBeLessThan(0.5);\n      |                             ^\n  561 |   });\n  562 |\n  563 | for (const renderer of [\"webgl2\", \"webgpu\"])\n    at /home/runner/work/splashery/splashery/tests/pages-r2.spec.mjs:560:29"
+  ]
+}

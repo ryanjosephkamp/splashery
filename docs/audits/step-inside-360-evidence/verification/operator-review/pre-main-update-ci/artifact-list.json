@@ -1,0 +1,114 @@
+[
+  {
+    "id": 12112805774,
+    "name": "suite-2-a1",
+    "size_in_bytes": 5764377,
+    "created_at": "2026-10-17T19:48:56Z",
+    "expired": false
+  },
+  {
+    "id": 12112767213,
+    "name": "suite-8-a1",
+    "size_in_bytes": 2121158,
+    "created_at": "2026-10-17T19:58:30Z",
+    "expired": false
+  },
+  {
+    "id": 12112622775,
+    "name": "suite-3-a1",
+    "size_in_bytes": 2038074,
+    "created_at": "2026-10-17T19:59:36Z",
+    "expired": false
+  },
+  {
+    "id": 12112548670,
+    "name": "suite-5-a1",
+    "size_in_bytes": 2846005,
+    "created_at": "2026-10-17T19:54:56Z",
+    "expired": false
+  },
+  {
+    "id": 12112537402,
+    "name": "suite-13-a1",
+    "size_in_bytes": 7430832,
+    "created_at": "2026-10-17T19:44:18Z",
+    "expired": false
+  },
+  {
+    "id": 12112502840,
+    "name": "suite-1-a1",
+    "size_in_bytes": 11013472,
+    "created_at": "2026-10-17T19:47:13Z",
+    "expired": false
+  },
+  {
+    "id": 12112217573,
+    "name": "suite-15-a1",
+    "size_in_bytes": 2118655,
+    "created_at": "2026-10-17T19:37:13Z",
+    "expired": false
+  },
+  {
+    "id": 12111794053,
+    "name": "suite-7-a1",
+    "size_in_bytes": 8133783,
+    "created_at": "2026-10-17T19:33:08Z",
+    "expired": false
+  },
+  {
+    "id": 12111563609,
+    "name": "suite-11-a1",
+    "size_in_bytes": 2120568,
+    "created_at": "2026-10-17T19:36:05Z",
+    "expired": false
+  },
+  {
+    "id": 12111538791,
+    "name": "suite-16-a1",
+    "size_in_bytes": 2211477,
+    "created_at": "2026-10-17T19:38:24Z",
+    "expired": false
+  },
+  {
+    "id": 12111533502,
+    "name": "suite-14-a1",
+    "size_in_bytes": 2123001,
+    "created_at": "2026-10-17T19:21:41Z",
+    "expired": false
+  },
+  {
+    "id": 12111488112,
+    "name": "suite-6-a1",
+    "size_in_bytes": 2122016,
+    "created_at": "2026-10-17T19:16:37Z",
+    "expired": false
+  },
+  {
+    "id": 12111475202,
+    "name": "suite-10-a1",
+    "size_in_bytes": 2120367,
+    "created_at": "2026-10-17T18:56:35Z",
+    "expired": false
+  },
+  {
+    "id": 12111297556,
+    "name": "suite-12-a1",
+    "size_in_bytes": 2345199,
+    "created_at": "2026-10-17T19:05:44Z",
+    "expired": false
+  },
+  {
+    "id": 12111246326,
+    "name": "suite-4-a1",
+    "size_in_bytes": 2039413,
+    "created_at": "2026-10-17T18:53:59Z",
+    "expired": false
+  },
+  {
+    "id": 12111054412,
+    "name": "suite-9-a1",
+    "size_in_bytes": 2120739,
+    "created_at": "2026-10-17T19:08:15Z",
+    "expired": false
+  }
+]
