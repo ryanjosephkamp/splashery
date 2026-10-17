@@ -345,3 +345,6 @@
 {"v":1,"t":"2026-10-17T05:08:49.550Z","harness":"claude-code","event":"tool","session":"6f7242bd-1fde-5424-a14b-170990965049","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-17T05:08:58.536Z","harness":"claude-code","event":"turn-end","session":"6f7242bd-1fde-5424-a14b-170990965049","cwd":"splashery"}
 {"v":1,"t":"2026-10-17T05:09:00.297Z","harness":"claude-code","event":"subagent-stop","session":"6f7242bd-1fde-5424-a14b-170990965049","agent":"a0e1fac905155d295"}
+{"v":1,"t":"2026-10-17T05:13:59.322Z","harness":"claude-code","event":"session-end","session":"6f7242bd-1fde-5424-a14b-170990965049","cwd":"splashery"}
+{"v":1,"t":"2026-10-17T05:27:02.568Z","harness":"claude-code","event":"session-start","session":"6f7242bd-1fde-5424-a14b-170990965049","cwd":"splashery"}
+{"v":1,"t":"2026-10-17T05:27:02.615Z","harness":"claude-code","event":"turn-start","session":"6f7242bd-1fde-5424-a14b-170990965049","cwd":"splashery"}
