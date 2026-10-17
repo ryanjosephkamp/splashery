@@ -87,6 +87,13 @@ test("reuse=0 keeps completed work passes live even when reuse is requested dire
           p.update(0);
           if (direct) originalUniforms.call(p.stage, p.stage.sheetUniforms, { reuse: true });
           await p.stage.captureFrame();
+          if (direct) {
+            // The first direct call can dirty an empty cache even without the
+            // Stage guard. A second identical call must still redraw with reuse=0.
+            draws = 0;
+            originalUniforms.call(p.stage, p.stage.sheetUniforms, { reuse: true });
+            await p.stage.captureFrame();
+          }
           return draws;
         };
         const idle = await sample();
