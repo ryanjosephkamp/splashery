@@ -1,0 +1,338 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/prepublish-cadence/config.mjs",
+    "rootDir": "/workspace/splashery",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/prepublish-cadence/run-110359/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/^\\/workspace\\/splashery\\/tests\\/(cdx-mir|lv7)\\.spec\\.mjs$/",
+          "/^\\/workspace\\/splashery\\/\\.cache\\/flaky-tests\\/prepublish-cadence\\/motion\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/prepublish-cadence/run-110359/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 2,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4213",
+      "url": "http://127.0.0.1:4213/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery"
+    }
+  },
+  "suites": [
+    {
+      "title": ".cache/flaky-tests/prepublish-cadence/motion.spec.mjs",
+      "file": ".cache/flaky-tests/prepublish-cadence/motion.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "native real-motion control exceeds both unchanged still limits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 67538,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated turn: /tmp/splashery-real-motion-HiMfuE/turn.y4m\n"
+                    },
+                    {
+                      "text": "Real native turn control: {\"heightJitter\":0.014192169854786616,\"colorJitter\":35.1960960960961,\"shownJitter\":30.875595238095237,\"shownJitterTurned\":35.123346560846564,\"grain\":0,\"sharpness\":0.9660539187827873,\"drawMs\":65.46999999992549,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:04:01.376Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "00f19e547d30f07e534f-aec88495cf36bfa8ae53",
+          "file": ".cache/flaky-tests/prepublish-cadence/motion.spec.mjs",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "tests/cdx-mir.spec.mjs",
+      "file": "tests/cdx-mir.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "real depth worker with a fake camera",
+          "file": "tests/cdx-mir.spec.mjs",
+          "line": 280,
+          "column": 6,
+          "specs": [
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 58117,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-XLBPLV/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-XLBPLV/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.0000012370661270242555,\"colorJitter\":0.4884384384384384,\"shownJitter\":0.6831018518518519,\"shownJitterTurned\":0.6560185185185186,\"grain\":0,\"sharpness\":0.8242780226017092,\"drawMs\":62.975,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:04:01.414Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "db378942a6b2d3daef43-82c8b1a81d51821856da",
+              "file": "tests/cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 58737,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.0036335280076978172,\"colorJitter\":1.5555555555555556,\"shownJitter\":1.4858465608465607,\"shownJitterTurned\":1.6378637566137566,\"grain\":0,\"sharpness\":0.45292141786805684,\"drawMs\":78.43500000014902,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:05:01.029Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "db378942a6b2d3daef43-a8d679648d892192154d",
+              "file": "tests/cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/lv7.spec.mjs",
+      "file": "tests/lv7.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "the mirror on a camera (a generated mannequin)",
+          "file": "tests/lv7.spec.mjs",
+          "line": 95,
+          "column": 6,
+          "specs": [
+            {
+              "title": "plain: steadier than before, frame to frame, and sharper",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 105818,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "lv7 mirror, plain: {\"heightJitter\":0.00004708254122519278,\"colorJitter\":0.4326576576576577,\"shownJitter\":0.5624007936507937,\"shownJitterTurned\":0.5300595238095238,\"grain\":0,\"sharpness\":0.6485572098889194,\"drawMs\":35.955000000074506,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        },
+                        {
+                          "text": "lv7 mirror, plain, held still: {\"frames\":34,\"color\":0.38170485919648683,\"height\":0.0010356374813616437,\"moved\":0.007238280237257666,\"backColor\":0.027413474810102586,\"backHeight\":0.00012017391569078772,\"backShown\":0.001974076428343,\"shown\":0.6753138885492063,\"flicker\":0.1383453589335942,\"shownTurned\":0.5623117178263887,\"flickerTurned\":0.1903204109086462}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:05:08.963Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c330481c57a6100e308-aa0ecc377ee4235122e4",
+              "file": "tests/lv7.spec.mjs",
+              "line": 106,
+              "column": 3
+            },
+            {
+              "title": "hologram: nothing drawn over the face, and steady",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 88685,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "lv7 mirror, hologram: {\"heightJitter\":4.756591610006384e-7,\"colorJitter\":0.456006006006006,\"shownJitter\":0.35059523809523807,\"shownJitterTurned\":0.3884589947089947,\"grain\":0,\"sharpness\":0.44054405505903355,\"drawMs\":51.81500000003725,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986},\"overFace\":6.394447227073675}\n"
+                        },
+                        {
+                          "text": "lv7 mirror, hologram, held still: {\"frames\":34,\"color\":0.17046098778983096,\"height\":0.0007956517194846513,\"moved\":0.004386836507428889,\"backColor\":0.006987869185186319,\"backHeight\":0.0000878349133045007,\"backShown\":0,\"shown\":0.34913069177772293,\"flicker\":0.03821694998165586,\"shownTurned\":0.2924516428193461,\"flickerTurned\":0.05044637397578574}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T11:06:57.980Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c330481c57a6100e308-c02c0d8e6e10c8847920",
+              "file": "tests/lv7.spec.mjs",
+              "line": 150,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T11:04:00.150Z",
+    "duration": 266605.554,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

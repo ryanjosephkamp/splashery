@@ -1,0 +1,43 @@
+[2m[WebServer] [22m(node:57896) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 4 workers
+
+(node:57908) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:57909) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:57907) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:57915) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:57909) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:57908) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:57915) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:57907) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Generated still: /tmp/splashery-depth-pipeline-m5beLe/still.y4m
+Generated still: /tmp/splashery-depth-pipeline-0upkKh/still.y4m
+Generated still: /tmp/splashery-depth-pipeline-gHYyy3/still.y4m
+Generated low-light: /tmp/splashery-depth-pipeline-m5beLe/low-light.y4m
+Generated low-light: /tmp/splashery-depth-pipeline-0upkKh/low-light.y4m
+Generated still: /tmp/splashery-depth-pipeline-sOS6E3/still.y4m
+Generated low-light: /tmp/splashery-depth-pipeline-gHYyy3/low-light.y4m
+Generated low-light: /tmp/splashery-depth-pipeline-sOS6E3/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.003068336140918168,"colorJitter":1.5867867867867869,"shownJitter":1.5520833333333333,"shownJitterTurned":1.6113756613756614,"grain":0,"sharpness":0.4560758436831347,"drawMs":199.5800000000745,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+cdx mirror still: {"heightJitter":0.000004359557889066301,"colorJitter":0.6310810810810811,"shownJitter":0.8268849206349206,"shownJitterTurned":0.740707671957672,"grain":0,"sharpness":0.8286547998019085,"drawMs":170.1699999999255,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+cdx mirror low-light: {"heightJitter":0.006747375785264078,"colorJitter":1.5327327327327327,"shownJitter":1.6572751322751322,"shownJitterTurned":1.595734126984127,"grain":0,"sharpness":0.44645019233877076,"drawMs":184.2949999999255,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+cdx mirror still: {"heightJitter":0.0003200191752733411,"colorJitter":0.6021021021021021,"shownJitter":0.7635251322751323,"shownJitterTurned":0.7026455026455026,"grain":0,"sharpness":0.8271784833690677,"drawMs":200.425,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Native depth pipeline receipt: {"clip":"low-light","events":20,"fineEvents":25,"samples":[{"index":0,"answers":14,"at":66049.30000000075,"native":{"frames":8,"seconds":0.7999999999999972},"minStillAge":0,"maxStillAge":5.299997329711914},{"index":1,"answers":19,"at":81952,"native":{"frames":24,"seconds":2.3999999999999915},"minStillAge":0,"maxStillAge":6.899995803833008},{"index":2,"answers":23,"at":92990,"native":{"frames":37,"seconds":3.699999999999987},"minStillAge":0,"maxStillAge":8.199995040893555},{"index":3,"answers":27,"at":103419.89999999851,"native":{"frames":49,"seconds":4.899999999999983},"minStillAge":0,"maxStillAge":9.399999618530273},{"index":4,"answers":31,"at":115444.5,"native":{"frames":63,"seconds":6.299999999999978},"minStillAge":0,"maxStillAge":10.800004959106445},{"index":5,"answers":36,"at":130709.30000000075,"native":{"frames":79,"seconds":7.899999999999972},"minStillAge":0,"maxStillAge":12.40001106262207}],"frames":2,"omitted":0}
+Native depth pipeline receipt: {"clip":"low-light","events":23,"fineEvents":25,"samples":[{"index":0,"answers":15,"at":66859.60000000149,"native":{"frames":10,"seconds":0.9999999999999964},"minStillAge":0,"maxStillAge":5.599997043609619},{"index":1,"answers":19,"at":81057.69999999925,"native":{"frames":24,"seconds":2.3999999999999915},"minStillAge":0,"maxStillAge":6.999995708465576},{"index":2,"answers":24,"at":94127.90000000224,"native":{"frames":38,"seconds":3.7999999999999865},"minStillAge":0,"maxStillAge":8.399995803833008},{"index":3,"answers":28,"at":104544.80000000075,"native":{"frames":50,"seconds":4.999999999999982},"minStillAge":0,"maxStillAge":9.600000381469727},{"index":4,"answers":32,"at":118039.80000000075,"native":{"frames":65,"seconds":6.499999999999977},"minStillAge":0,"maxStillAge":11.100006103515625},{"index":5,"answers":36,"at":131359.40000000224,"native":{"frames":80,"seconds":7.999999999999972},"minStillAge":0,"maxStillAge":12.600011825561523}],"frames":2,"omitted":0}
+  ✓  2 [chromium] › .cache/flaky-tests/cdx-pipeline/pipeline.spec.mjs:9:1 › low-light: original mirror drift with read-only native pipeline stages (3.1m)
+  ✓  1 [chromium] › .cache/flaky-tests/cdx-pipeline/pipeline.spec.mjs:9:1 › low-light: original mirror drift with read-only native pipeline stages (3.1m)
+Native depth pipeline receipt: {"clip":"still","events":2,"fineEvents":2,"samples":[{"index":0,"answers":16,"at":71282.5,"native":{"frames":16,"seconds":1.5999999999999943},"minStillAge":5.999996662139893,"maxStillAge":6.099996566772461},{"index":1,"answers":21,"at":85171.30000000075,"native":{"frames":31,"seconds":3.099999999999989},"minStillAge":7.499995231628418,"maxStillAge":7.599995136260986},{"index":2,"answers":25,"at":96588.80000000075,"native":{"frames":44,"seconds":4.399999999999984},"minStillAge":8.799997329711914,"maxStillAge":8.89999771118164},{"index":3,"answers":29,"at":108589,"native":{"frames":58,"seconds":5.799999999999979},"minStillAge":10.200002670288086,"maxStillAge":10.300003051757812},{"index":4,"answers":33,"at":120875,"native":{"frames":72,"seconds":7.199999999999974},"minStillAge":11.600008010864258,"maxStillAge":11.700008392333984},{"index":5,"answers":37,"at":135334,"native":{"frames":88,"seconds":8.799999999999969},"minStillAge":13.200014114379883,"maxStillAge":13.30001449584961}],"frames":2,"omitted":0}
+  ✓  4 [chromium] › .cache/flaky-tests/cdx-pipeline/pipeline.spec.mjs:9:1 › still: original mirror drift with read-only native pipeline stages (3.1m)
+Native depth pipeline receipt: {"clip":"still","events":4,"fineEvents":5,"samples":[{"index":0,"answers":16,"at":72214.30000000075,"native":{"frames":13,"seconds":1.2999999999999954},"minStillAge":6.299996376037598,"maxStillAge":6.299996376037598},{"index":1,"answers":21,"at":85716.80000000075,"native":{"frames":27,"seconds":2.6999999999999904},"minStillAge":7.699995040893555,"maxStillAge":7.699995040893555},{"index":2,"answers":25,"at":96372.30000000075,"native":{"frames":40,"seconds":3.999999999999986},"minStillAge":8.999998092651367,"maxStillAge":8.999998092651367},{"index":3,"answers":29,"at":107545.09999999776,"native":{"frames":53,"seconds":5.299999999999981},"minStillAge":10.300003051757812,"maxStillAge":10.300003051757812},{"index":4,"answers":33,"at":118853.59999999776,"native":{"frames":65,"seconds":6.499999999999977},"minStillAge":11.500007629394531,"maxStillAge":11.500007629394531},{"index":5,"answers":38,"at":133746.19999999925,"native":{"frames":81,"seconds":8.099999999999971},"minStillAge":13.100013732910156,"maxStillAge":13.100013732910156}],"frames":2,"omitted":0}
+  ✓  3 [chromium] › .cache/flaky-tests/cdx-pipeline/pipeline.spec.mjs:9:1 › still: original mirror drift with read-only native pipeline stages (3.1m)
+
+  4 passed (3.1m)

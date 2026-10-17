@@ -1,0 +1,44 @@
+{
+  "started": "2026-10-17T11:00:02.465217+00:00",
+  "head": "13aec72c853c5dd589d36c5ad3b87caae87c64dd",
+  "command": [
+    "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/splashery/.cache/flaky-tests/cdx-cadence/config.mjs",
+    "--reporter=list,json",
+    "--retries=0",
+    "--output",
+    "/workspace/splashery/.cache/flaky-tests/cdx-cadence/run-110002/results",
+    "/workspace/splashery/.cache/flaky-tests/cdx-cadence/pipeline.spec.mjs",
+    "--workers=4",
+    "--fully-parallel",
+    "--repeat-each=2"
+  ],
+  "environment": {
+    "SPLASHERY_CHROMIUM": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+    "SPLASHERY_GL": "llvmpipe",
+    "DISPLAY": ":91",
+    "SPLASHERY_PORT": "4212",
+    "PLAYWRIGHT_NODEJS_PATH": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node"
+  },
+  "diff": "",
+  "files": {
+    ".cache/flaky-tests/cdx-cadence/config.mjs": "3c768494ad39a2734415ec330430ce3c6718e7a7201b246784b6f531a471345e",
+    ".cache/flaky-tests/cdx-cadence/pipeline.spec.mjs": "fcfc3dddbe3478aeb68721b9a0669e2cbf583f5f9f5756ff1c7d3b8770e7ae47",
+    ".cache/flaky-tests/cdx-cadence/sample.mjs": "8ae11a3f53ee26b7f3b6ad101da4387419c654a0ca08dde00ec0cbb4312abe57",
+    ".cache/flaky-tests/cdx-cadence/measure.mjs": "8432091eac671b3f4ccac15aad90c3be24392ffb474085a763abc3ccb9d0ae75",
+    ".cache/flaky-tests/cdx-cadence/observer.js": "ae0ff2b105255ac54d4fccdeb452c47d6558ac0df85c94c63f0787793f3652de",
+    ".cache/flaky-tests/cdx-cadence/relief-observed.js": "87498d39d378b9e180b36160ddfde8334a58521a0cb6e05cfd809821e6d43f08",
+    ".cache/flaky-tests/run-probe.py": "6a1516b1c58b47e58eede828c02058b86d2829af90ef57abae6978a92e7af360",
+    "tests/helpers/native-sort.mjs": "d4e4d92fb608bac6f7ef33fea051f94feda8a3f038c2a7a39083d0433ff7190e"
+  },
+  "burners": 2,
+  "node": "v22.20.0",
+  "browser": "Chromium 141.0.7390.37",
+  "cpu": "400000 100000",
+  "ended": "2026-10-17T11:02:56.507564+00:00",
+  "exit": 0,
+  "burner_pid": 58699
+}

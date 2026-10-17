@@ -1,0 +1,38 @@
+{
+  "started": "2026-10-17T11:03:59.186754+00:00",
+  "head": "13aec72c853c5dd589d36c5ad3b87caae87c64dd",
+  "command": [
+    "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/splashery/.cache/flaky-tests/prepublish-cadence/config.mjs",
+    "--reporter=list,json",
+    "--retries=0",
+    "--output",
+    "/workspace/splashery/.cache/flaky-tests/prepublish-cadence/run-110359/results",
+    "--workers=2",
+    "--grep",
+    "measured drift stays below the baseline|steadier than before, frame to frame, and sharper|hologram: nothing drawn over the face, and steady|native real-motion control"
+  ],
+  "environment": {
+    "SPLASHERY_CHROMIUM": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+    "SPLASHERY_GL": "llvmpipe",
+    "DISPLAY": ":91",
+    "SPLASHERY_PORT": "4213",
+    "PLAYWRIGHT_NODEJS_PATH": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node"
+  },
+  "diff": "diff --git a/tests/helpers/mirror-sample.mjs b/tests/helpers/mirror-sample.mjs\nindex a4328c4a9..0c692d53d 100644\n--- a/tests/helpers/mirror-sample.mjs\n+++ b/tests/helpers/mirror-sample.mjs\n@@ -122,6 +122,7 @@ async function captureNativePNG(clip) {\n export async function collectSamples(F, clip, answers, delta) {\n   if (turned) throw Error(\"Previous mirror camera turn was not restored\");\n   const result = [];\n+  let images = Promise.resolve();\n   try {\n     for (let sample = 0; sample < answers; sample++) {\n       await waitNativeAnswer();\n@@ -136,20 +137,30 @@ export async function collectSamples(F, clip, answers, delta) {\n           h.push(cam.heights[k]);\n           c.push(cam.lastColors[k * 4], cam.lastColors[k * 4 + 1], cam.lastColors[k * 4 + 2]);\n         }\n-      const face = await captureNativePNG(clip);\n-      const camera = window.__splashery.player.camera,\n-        state = camera.getState();\n-      camera.setState({ ...state, yaw: state.yaw + delta }, { snap: true });\n-      turned = { camera, delta };\n-      const away = await captureNativePNG(clip);\n-      restoreCamera();\n-      result.push({ h, c, face, turned: away });\n+      const now = { h, c };\n+      result.push(now);\n+      images = images.then(async () => {\n+        now.face = await captureNativePNG(clip);\n+        const camera = window.__splashery.player.camera,\n+          state = camera.getState();\n+        camera.setState({ ...state, yaw: state.yaw + delta }, { snap: true });\n+        turned = { camera, delta };\n+        now.turned = await captureNativePNG(clip);\n+        restoreCamera();\n+      });\n+      // Observe rejection immediately; awaiting the chain below still propagates\n+      // any capture failure. No capture or failed assertion is retried.\n+      images.catch(() => {});\n     }\n+    await images;\n     return result;\n   } finally {\n+    // Join every in-flight native capture before restoring the camera on error.\n+    await images.catch(() => {});\n     restoreCamera();\n   }\n }\n+\n export function finishMeasurement() {\n   restoreCamera();\n   if (savedCarets)\n",
+  "files": {
+    ".cache/flaky-tests/prepublish-cadence/config.mjs": "57e60faf07ee85df2d2d79b6f721f52d790394bbbcabd1d7634da86f57a2df40",
+    ".cache/flaky-tests/prepublish-cadence/motion.spec.mjs": "68458b65a037c740b52dbf2ecdabdba266c629ccd759607c8c4c86a279bd23c9",
+    ".cache/flaky-tests/run-quiet.py": "f9589433cb62b4d07c39a956424e71b7b3b0879db79b5856342d304a8560e312",
+    ".cache/flaky-tests/rendered-view.mjs": "32186af45d1bfae714b05f3723d026ed0d426c756d6bb94c7a16427ce505a553"
+  },
+  "burners": 0,
+  "node": "v22.20.0",
+  "browser": "Chromium 141.0.7390.37",
+  "cpu": "400000 100000",
+  "ended": "2026-10-17T11:08:26.773413+00:00",
+  "exit": 0
+}

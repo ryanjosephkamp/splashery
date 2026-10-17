@@ -1,0 +1,310 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/cdx-cadence/config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/cdx-cadence",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-cadence/run-110002/results",
+        "repeatEach": 2,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/cdx-cadence",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/cdx-cadence/run-110002/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/cdx-cadence",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4212",
+      "url": "http://127.0.0.1:4212/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery"
+    }
+  },
+  "suites": [
+    {
+      "title": "pipeline.spec.mjs",
+      "file": "pipeline.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "still: original mirror drift with read-only native pipeline stages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 169142,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-depth-pipeline-F6nB42/still.y4m\n"
+                    },
+                    {
+                      "text": "Generated low-light: /tmp/splashery-depth-pipeline-F6nB42/low-light.y4m\n"
+                    },
+                    {
+                      "text": "cdx mirror still: {\"heightJitter\":0.0000015929072826832265,\"colorJitter\":0.4924174174174174,\"shownJitter\":0.6759589947089947,\"shownJitterTurned\":0.61630291005291,\"grain\":0,\"sharpness\":0.8322202567603427,\"drawMs\":210.75500000007452,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    },
+                    {
+                      "text": "Native depth pipeline receipt: {\"clip\":\"still\",\"events\":3,\"fineEvents\":3,\"samples\":[{\"index\":0,\"answers\":18,\"at\":84326.09999999776,\"native\":{\"frames\":18,\"seconds\":1.7999999999999936},\"minStillAge\":6.899995803833008,\"maxStillAge\":6.899995803833008},{\"index\":1,\"answers\":21,\"at\":91473.59999999776,\"native\":{\"frames\":25,\"seconds\":2.499999999999991},\"minStillAge\":7.599995136260986,\"maxStillAge\":7.599995136260986},{\"index\":2,\"answers\":24,\"at\":99949.69999999925,\"native\":{\"frames\":34,\"seconds\":3.399999999999988},\"minStillAge\":8.499996185302734,\"maxStillAge\":8.499996185302734},{\"index\":3,\"answers\":27,\"at\":107201.69999999925,\"native\":{\"frames\":42,\"seconds\":4.199999999999985},\"minStillAge\":9.299999237060547,\"maxStillAge\":9.299999237060547},{\"index\":4,\"answers\":29,\"at\":114318.29999999702,\"native\":{\"frames\":49,\"seconds\":4.899999999999983},\"minStillAge\":10.000001907348633,\"maxStillAge\":10.000001907348633},{\"index\":5,\"answers\":32,\"at\":122476.69999999925,\"native\":{\"frames\":58,\"seconds\":5.799999999999979},\"minStillAge\":10.900005340576172,\"maxStillAge\":10.900005340576172}],\"frames\":2,\"omitted\":0}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:00:04.484Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-depth-pipeline",
+                      "contentType": "application/json",
+                      "path": "/workspace/splashery/.cache/flaky-tests/cdx-cadence/run-110002/results/pipeline-still-original-mi-0626c-only-native-pipeline-stages-chromium/attachments/native-depth-pipeline-b384336b71e6f85b2efe962cdfd1afca0dbb0b03.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17bdf96d1bbe6754a1cf-d5c67c1a4ca118ec4b40",
+          "file": "pipeline.spec.mjs",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "low-light: original mirror drift with read-only native pipeline stages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 170939,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-depth-pipeline-b9ZoEi/still.y4m\n"
+                    },
+                    {
+                      "text": "Generated low-light: /tmp/splashery-depth-pipeline-b9ZoEi/low-light.y4m\n"
+                    },
+                    {
+                      "text": "cdx mirror low-light: {\"heightJitter\":0.004397307254105537,\"colorJitter\":1.4515765765765767,\"shownJitter\":1.4519510582010582,\"shownJitterTurned\":1.7232473544973546,\"grain\":0,\"sharpness\":0.4651152797316409,\"drawMs\":195.45999999996275,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    },
+                    {
+                      "text": "Native depth pipeline receipt: {\"clip\":\"low-light\",\"events\":20,\"fineEvents\":24,\"samples\":[{\"index\":0,\"answers\":17,\"at\":84050.30000000075,\"native\":{\"frames\":16,\"seconds\":1.5999999999999943},\"minStillAge\":0,\"maxStillAge\":6.699995994567871},{\"index\":1,\"answers\":21,\"at\":94193.19999999925,\"native\":{\"frames\":26,\"seconds\":2.5999999999999908},\"minStillAge\":0,\"maxStillAge\":7.699995040893555},{\"index\":2,\"answers\":24,\"at\":102626.30000000075,\"native\":{\"frames\":35,\"seconds\":3.4999999999999876},\"minStillAge\":0,\"maxStillAge\":8.599996566772461},{\"index\":3,\"answers\":27,\"at\":112059.89999999851,\"native\":{\"frames\":45,\"seconds\":4.499999999999984},\"minStillAge\":0,\"maxStillAge\":9.600000381469727},{\"index\":4,\"answers\":29,\"at\":120718.80000000075,\"native\":{\"frames\":54,\"seconds\":5.399999999999981},\"minStillAge\":0,\"maxStillAge\":10.500003814697266},{\"index\":5,\"answers\":31,\"at\":129235.69999999925,\"native\":{\"frames\":62,\"seconds\":6.199999999999978},\"minStillAge\":0,\"maxStillAge\":11.300006866455078}],\"frames\":2,\"omitted\":0}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:00:05.401Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-depth-pipeline",
+                      "contentType": "application/json",
+                      "path": "/workspace/splashery/.cache/flaky-tests/cdx-cadence/run-110002/results/pipeline-low-light-origina-bd1e1-only-native-pipeline-stages-chromium/attachments/native-depth-pipeline-de16997b107a67a37174921028f2c3a86ea336fe.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17bdf96d1bbe6754a1cf-b64d6148b1dc78be0cde",
+          "file": "pipeline.spec.mjs",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "still: original mirror drift with read-only native pipeline stages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 156914,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-depth-pipeline-kha4D2/still.y4m\n"
+                    },
+                    {
+                      "text": "Generated low-light: /tmp/splashery-depth-pipeline-kha4D2/low-light.y4m\n"
+                    },
+                    {
+                      "text": "cdx mirror still: {\"heightJitter\":0.0001605603302753455,\"colorJitter\":0.5359609609609609,\"shownJitter\":0.7178571428571429,\"shownJitterTurned\":0.6770833333333334,\"grain\":0,\"sharpness\":0.8220230276337377,\"drawMs\":166.925,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    },
+                    {
+                      "text": "Native depth pipeline receipt: {\"clip\":\"still\",\"events\":5,\"fineEvents\":5,\"samples\":[{\"index\":0,\"answers\":15,\"at\":70998.30000000075,\"native\":{\"frames\":11,\"seconds\":1.099999999999996},\"minStillAge\":5.599997043609619,\"maxStillAge\":5.6999969482421875},{\"index\":1,\"answers\":19,\"at\":81238.30000000075,\"native\":{\"frames\":22,\"seconds\":2.199999999999992},\"minStillAge\":6.699995994567871,\"maxStillAge\":6.7999958992004395},{\"index\":2,\"answers\":21,\"at\":89036.30000000075,\"native\":{\"frames\":30,\"seconds\":2.9999999999999893},\"minStillAge\":7.499995231628418,\"maxStillAge\":7.599995136260986},{\"index\":3,\"answers\":23,\"at\":94287,\"native\":{\"frames\":36,\"seconds\":3.599999999999987},\"minStillAge\":8.099994659423828,\"maxStillAge\":8.199995040893555},{\"index\":4,\"answers\":26,\"at\":101972.90000000224,\"native\":{\"frames\":45,\"seconds\":4.499999999999984},\"minStillAge\":8.999998092651367,\"maxStillAge\":9.099998474121094},{\"index\":5,\"answers\":29,\"at\":111633,\"native\":{\"frames\":54,\"seconds\":5.399999999999981},\"minStillAge\":9.900001525878906,\"maxStillAge\":10.000001907348633}],\"frames\":2,\"omitted\":0}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:00:05.218Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-depth-pipeline",
+                      "contentType": "application/json",
+                      "path": "/workspace/splashery/.cache/flaky-tests/cdx-cadence/run-110002/results/pipeline-still-original-mi-0626c-only-native-pipeline-stages-chromium-repeat1/attachments/native-depth-pipeline-fc9983300a0ba24a0200a382950e4928825931d6.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17bdf96d1bbe6754a1cf-a136a915ac8de638652d",
+          "file": "pipeline.spec.mjs",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "low-light: original mirror drift with read-only native pipeline stages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 158757,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Generated still: /tmp/splashery-depth-pipeline-bDocxo/still.y4m\n"
+                    },
+                    {
+                      "text": "Generated low-light: /tmp/splashery-depth-pipeline-bDocxo/low-light.y4m\n"
+                    },
+                    {
+                      "text": "cdx mirror low-light: {\"heightJitter\":0.0019088630447046714,\"colorJitter\":1.3768768768768769,\"shownJitter\":1.5326388888888889,\"shownJitterTurned\":1.4991402116402117,\"grain\":0,\"sharpness\":0.46116548479470315,\"drawMs\":182.11500000003724,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                    },
+                    {
+                      "text": "Native depth pipeline receipt: {\"clip\":\"low-light\",\"events\":16,\"fineEvents\":16,\"samples\":[{\"index\":0,\"answers\":15,\"at\":71804.69999999925,\"native\":{\"frames\":11,\"seconds\":1.099999999999996},\"minStillAge\":0,\"maxStillAge\":5.499997138977051},{\"index\":1,\"answers\":17,\"at\":79108.59999999776,\"native\":{\"frames\":18,\"seconds\":1.7999999999999936},\"minStillAge\":0.10000000149011612,\"maxStillAge\":6.199996471405029},{\"index\":2,\"answers\":19,\"at\":87247.59999999776,\"native\":{\"frames\":26,\"seconds\":2.5999999999999908},\"minStillAge\":0,\"maxStillAge\":6.999995708465576},{\"index\":3,\"answers\":21,\"at\":94833.30000000075,\"native\":{\"frames\":34,\"seconds\":3.399999999999988},\"minStillAge\":0,\"maxStillAge\":7.799994945526123},{\"index\":4,\"answers\":23,\"at\":101082.89999999851,\"native\":{\"frames\":41,\"seconds\":4.099999999999985},\"minStillAge\":0,\"maxStillAge\":8.499996185302734},{\"index\":5,\"answers\":25,\"at\":107335,\"native\":{\"frames\":48,\"seconds\":4.799999999999983},\"minStillAge\":0,\"maxStillAge\":9.19999885559082}],\"frames\":2,\"omitted\":0}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:00:04.540Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-depth-pipeline",
+                      "contentType": "application/json",
+                      "path": "/workspace/splashery/.cache/flaky-tests/cdx-cadence/run-110002/results/pipeline-low-light-origina-bd1e1-only-native-pipeline-stages-chromium-repeat1/attachments/native-depth-pipeline-3a7e833777077600d8eac5115f09b7cf26656b13.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17bdf96d1bbe6754a1cf-d1aaaf404b6f6a8d7d12",
+          "file": "pipeline.spec.mjs",
+          "line": 9,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T11:00:03.371Z",
+    "duration": 173107.124,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
