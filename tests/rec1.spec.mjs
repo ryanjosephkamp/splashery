@@ -207,7 +207,7 @@ test.describe("REC1: the countdown", () => {
     // drain, later on a busy page), by the page's own clock, and so holds no countdown either.
     expect(s.ended - s.seconds).toBeGreaterThan(0.35);
     expect(s.duration).toBeGreaterThan(s.seconds - 0.5);
-    expect(s.duration).toBeLessThan(s.ended + 0.25);
+    expect(s.duration).toBeLessThan(s.ended + 0.5);
     expect(s.duration).toBeLessThan(took + (s.ended - s.seconds) + 0.5);
     expect(errors).toEqual([]);
   });
@@ -325,9 +325,10 @@ test.describe("REC1: full-length takes", () => {
     const s = await study(page);
     expect(s.seconds).toBeGreaterThan(9.5);
     // The file's length: from the take's start to when the recorder stopped (Stop, then the
-    // 400 ms drain), by the page's own clock.
+    // 400 ms drain), by the page's own clock, within the brief's 0.5 s (a recorder stops a
+    // moment after it is asked to).
     expect(s.duration).toBeGreaterThan(s.seconds - 0.5);
-    expect(s.duration).toBeLessThan(s.ended + 0.25);
+    expect(s.duration).toBeLessThan(s.ended + 0.5);
     expect(s.ended - s.seconds).toBeLessThan(1.5);
     // The recorder was handed the take's frames right up to Stop. (Whether the file's last video
     // frame is that late is up to the browser's encoder: this sandbox renders the turning toy and
@@ -367,9 +368,10 @@ test.describe("REC1: full-length takes", () => {
     const s = await study(page, { from: 4 });
     expect(s.seconds).toBeCloseTo(60, 0);
     // The file's length: from the take's start to when the recorder stopped (Stop, then the
-    // 400 ms drain), by the page's own clock.
+    // 400 ms drain), by the page's own clock, within the brief's 0.5 s (a recorder stops a
+    // moment after it is asked to).
     expect(s.duration).toBeGreaterThan(s.seconds - 0.5);
-    expect(s.duration).toBeLessThan(s.ended + 0.25);
+    expect(s.duration).toBeLessThan(s.ended + 0.5);
     expect(s.ended - s.seconds).toBeLessThan(1.5);
     // The video's own frames reach the end (not only the sound). The recorder was handed them
     // right up to Stop; the file's last one is within the 1.5 s a busy encoder can drop when it
@@ -396,9 +398,10 @@ test.describe("REC1: full-length takes", () => {
     const s = await study(page, { from: 4 });
     expect(s.seconds).toBeGreaterThan(19.5);
     // The file's length: from the take's start to when the recorder stopped (Stop, then the
-    // 400 ms drain), by the page's own clock.
+    // 400 ms drain), by the page's own clock, within the brief's 0.5 s (a recorder stops a
+    // moment after it is asked to).
     expect(s.duration).toBeGreaterThan(s.seconds - 0.5);
-    expect(s.duration).toBeLessThan(s.ended + 0.25);
+    expect(s.duration).toBeLessThan(s.ended + 0.5);
     expect(s.ended - s.seconds).toBeLessThan(1.5);
     // Frames right up to Stop, and the file's last one within what a busy encoder can drop.
     expect(s.lastPushed).toBeGreaterThan(s.seconds - 0.25);

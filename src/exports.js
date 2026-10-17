@@ -153,7 +153,8 @@ export function recordSupport() {
 // Starts recording `canvas` (and the sound from `audio`, { ctx, node }, a
 // node every sound passes through, when there is one). Returns { stop(),
 // frame(), done }: frame() hands the canvas to the video after each render
-// (call it right after the render, as the stage's "postrender"), and done
+// (call it once the frame is on the canvas: the stage's "frameend" after a draw;
+// a WebGPU frame isn't there yet at "postrender"), and done
 // resolves to { blob, ext, seconds, frames, lastFrame, ended } after a stop or the time
 // limit (frames: how many were handed over; lastFrame: when the take's last one was; ended:
 // when the recorder stopped, after the drain; all in seconds from the take's start).
@@ -180,6 +181,7 @@ export function startRecording({
   fps = 30,
   stillFps = 10,
   background = null,
+  seed = null,
 }) {
   const sup = recordSupport();
   if (!sup.ok) throw new Error(sup.reason);
@@ -191,6 +193,11 @@ export function startRecording({
   out.height = H;
   const g = out.getContext("2d", { alpha: !background });
   g.imageSmoothingQuality = "high";
+  // The stage's background until its first frame (lane REC1 r2): never black.
+  if (background) {
+    g.fillStyle = background;
+    g.fillRect(0, 0, W, H);
+  }
   // Frames are handed over by requestFrame() (frame() and the steady clock).
   const video = out.captureStream(0);
   const track = video.getVideoTracks()[0];
@@ -268,13 +275,13 @@ export function startRecording({
   };
   // Copies the stage's frame into the video's canvas (right after a render,
   // while a WebGL canvas still holds its picture).
-  const copy = () => {
-    const w = canvas.width;
-    const h = canvas.height;
+  const copy = (src = canvas) => {
+    const w = src.width;
+    const h = src.height;
     if (!w || !h) return;
     if (w === W && h === H) {
       if (!background) g.clearRect(0, 0, W, H);
-      g.drawImage(canvas, 0, 0);
+      g.drawImage(src, 0, 0);
       return;
     }
     const s = Math.min(W, H) / Math.min(w, h);
@@ -284,10 +291,22 @@ export function startRecording({
       g.fillStyle = background;
       g.fillRect(0, 0, W, H);
     } else g.clearRect(0, 0, W, H);
-    g.drawImage(canvas, (W - dw) / 2, (H - dh) / 2, dw, dh);
+    g.drawImage(src, (W - dw) / 2, (H - dh) / 2, dw, dh);
   };
+  // `seed`, the stage's last frame before the take (a 2D canvas), stands in
+  // until the stage draws again: after the sheet folds away the stage can take
+  // a moment to draw at its new size, and no frame of a take is empty.
+  if (seed) copy(seed);
+  // The take begins on a settled stage: two drawn frames in a row at the same
+  // size (the phone sheet folding away resizes it as a take starts, and a slow
+  // GPU can draw the new size empty at first).
+  let settle = { size: "", draws: 0 };
   const frame = () => {
-    if (!begun) return begin(true);
+    if (!begun) {
+      const size = `${canvas.width}x${canvas.height}`;
+      settle = size === settle.size ? { size, draws: settle.draws + 1 } : { size, draws: 1 };
+      return settle.draws >= 2 ? begin(true) : undefined;
+    }
     if (rec.state !== "recording" || stopping) return;
     copy();
     if (performance.now() - lastFrame >= 1000 / fps - 2) push();
@@ -316,15 +335,18 @@ export function startRecording({
       rec.stop();
     }, DRAIN);
   };
-  // The take begins with the stage's first frame (the next render, or after
-  // half a second if none comes), so the file's clock, which starts at its
-  // first frame, and the take's time start together.
+  // The take begins with the stage's first settled frame (above), or after
+  // two seconds if none comes (a busy phone can take a while to draw), so the
+  // file's clock, which starts at its first frame, and the take's time start
+  // together.
   let begun = false;
   const begin = (drawn) => {
     if (begun) return;
     begun = true;
     clearTimeout(wait);
-    copy();
+    // Without a draw yet, the take opens on the seed (or the stage's
+    // background) until the first frame comes, not on a blank copy (lane REC1 r2).
+    if (drawn) copy();
     // A timeslice keeps memory in small pieces on long takes.
     rec.start(1000);
     t0 = performance.now();
@@ -347,7 +369,7 @@ export function startRecording({
       push();
     }, 1000 / fps);
   };
-  const wait = setTimeout(() => begin(false), 500);
+  const wait = setTimeout(() => begin(false), 2000);
   return { stop, frame, done, ext, canvas: out };
 }
 

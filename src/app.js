@@ -1877,6 +1877,13 @@ class App {
     // switched on while recording is in the video too).
     const ctx = this.sound.audio?.();
     const audio = ctx && this.sound.master ? { ctx, node: this.sound.master } : null;
+    // Lane REC1 r2: the stage's frame as it is now, while it shows the toy: the
+    // take repeats it until the stage draws again after the sheet folds away
+    // (a slow device can take a moment to draw at the new size).
+    this.recordWait = true;
+    stage.requestRender();
+    const seed = await Promise.race([stage.captureFrame(), new Promise((r) => setTimeout(r, 1500, null))]); // prettier-ignore
+    this.recordWait = false;
     // On a phone the sheet closes first, so the take starts at the stage's
     // own size (two frames for the new size to reach the canvas).
     this.ui.collapseSheet?.();
@@ -1896,13 +1903,22 @@ class App {
     stage.reduced = false;
     stage.setPixelRatio(Math.min(saved.cap ?? 3, 1920 / long));
     let rec;
-    // Each drawn frame goes into the video. Lane REC1: "postrender", right after a
-    // real draw ("frameend" also comes for an update that drew nothing, when a
-    // WebGL canvas is already blank to copy).
-    const kick = () => rec?.frame();
-    stage.app.on("postrender", kick);
+    // Each drawn frame goes into the video, copied at "frameend" (as the stage's
+    // own capture is): a WebGPU frame is submitted only after "postrender", so a
+    // copy there is blank (lane REC1 r2). "frameend" also comes for an update
+    // that drew nothing, when a WebGL canvas is already blank, so only a frame
+    // with a draw ("postrender" seen) is copied.
+    let drew = false;
+    const drawn = () => (drew = true);
+    const kick = () => {
+      if (drew) rec?.frame();
+      drew = false;
+    };
+    stage.app.on("postrender", drawn);
+    stage.app.on("frameend", kick);
     const restore = () => {
-      stage.app.off("postrender", kick);
+      stage.app.off("postrender", drawn);
+      stage.app.off("frameend", kick);
       stage.adaptive = saved.adaptive;
       stage.setPixelRatio(saved.cap);
     };
@@ -1915,6 +1931,7 @@ class App {
         canvas,
         audio,
         background: c.a < 1 ? null : `rgb(${rgb})`,
+        seed,
         maxSeconds: RECORD_LIMIT,
         onTick: (seconds) => {
           this.ui.setRecord({ state: "rec", seconds, limit: RECORD_LIMIT });
