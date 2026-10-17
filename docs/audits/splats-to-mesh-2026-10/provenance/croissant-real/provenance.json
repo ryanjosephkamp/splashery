@@ -1,0 +1,38 @@
+{
+  "id": "croissant-real",
+  "source": "https://polyhaven.com/a/croissant",
+  "author": "Greg Zaal, Dario Barresi",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:27:03.384Z",
+  "main": "sources/croissant-real/croissant-real.gltf",
+  "sourcePageSha256": "3dee73d3a075dd28a01937df9a937ffea6dfd3860444dcb38df4309dd40881b4",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "croissant-real.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/croissant/croissant_1k.gltf",
+      "sha256": "b6e1eb36f776e6b79500c51b57c0e29cd17598c2d8a20d0ec0513955a6cc3a2f"
+    },
+    {
+      "name": "textures/croissant_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/croissant/croissant_nor_gl_1k.jpg",
+      "sha256": "9706598c6aa7ec3f2311f3ab20eba3a2c2ea7dd1099a27ec269c19c8bd0411cf"
+    },
+    {
+      "name": "textures/croissant_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/croissant/croissant_diff_1k.jpg",
+      "sha256": "0eb9b98058f96f3c4f08f78c0a0b3cd6951edd24f9ca8347ff167e2d740d9405"
+    },
+    {
+      "name": "croissant.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/croissant/croissant.bin",
+      "sha256": "d770a5ab7e3bcf3572343d74c7941e87eda87349fe414dd4ab206fa5e1e1524a"
+    },
+    {
+      "name": "textures/croissant_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/croissant/croissant_arm_1k.jpg",
+      "sha256": "5184d5ac5874484b541b1f6249d400db83da129e7c72fe497f91d1dea2bd8708"
+    }
+  ]
+}

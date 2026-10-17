@@ -1,0 +1,38 @@
+{
+  "id": "lantern",
+  "source": "https://polyhaven.com/a/Lantern_01",
+  "author": "Rajil Jose Macatangay",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:27:05.439Z",
+  "main": "sources/lantern/lantern.gltf",
+  "sourcePageSha256": "122374c4f39cbe376390bef9e74b4a22a93cfdc4742c32b3bb6580c8477a138a",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "lantern.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/Lantern_01/Lantern_01_1k.gltf",
+      "sha256": "d3f8d7a7afec96d55d3b7f20c3e329c909d19d37047902a826bc157f77c27819"
+    },
+    {
+      "name": "textures/Lantern_01_brass_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Lantern_01/Lantern_01_brass_arm_1k.jpg",
+      "sha256": "479e7105b170713373fdcca0c2f7dcce81913990f60cd4cfba1631f80f550191"
+    },
+    {
+      "name": "Lantern_01.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/Lantern_01/Lantern_01.bin",
+      "sha256": "cb0c7eaaea361546201ba1c4324581ac7147c221851657b6e23d2f854beabe49"
+    },
+    {
+      "name": "textures/Lantern_01_brass_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Lantern_01/Lantern_01_brass_nor_gl_1k.jpg",
+      "sha256": "95f89554c659712c7591a2a3d61178c9c0c0ef2c26e133005f24e2366a10f9b8"
+    },
+    {
+      "name": "textures/Lantern_01_brass_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Lantern_01/Lantern_01_brass_diff_1k.jpg",
+      "sha256": "d19d4c9417719a89ad824ce3a142f38f5e58c47b8640edca5eacca66918b608e"
+    }
+  ]
+}

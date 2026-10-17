@@ -1,0 +1,93 @@
+{
+  "id": "wooden-elephant",
+  "input": "assets/toys/wooden-elephant/wooden-elephant.sog",
+  "inputSha256": "2c5351819838ecd9e7c66df8741263528dd2fe35e116fa5ab6df9099387b8982",
+  "inputSplats": 200000,
+  "source": "https://polyhaven.com/a/carved_wooden_elephant",
+  "sourceProvenanceSha256": "ba9b84d1f8551237e5c69376b4c834a62c52eb6bb006f9fbdafe812ff6a42db0",
+  "options": {
+    "resolution": 160,
+    "level": 1,
+    "triangleBudget": 100000,
+    "readyToPrint": true,
+    "printSize": 100,
+    "profile": "desktop",
+    "smoothIterations": 3,
+    "minComponent": 0.002
+  },
+  "elapsedSeconds": 2.844525361,
+  "processRssMiB": 451.36328125,
+  "output": ".cache/mesh-export/exports/desktop-print160-level1/wooden-elephant",
+  "scoring": {
+    "samplesPerSurface": 100000,
+    "chamfer": 0.013484233945189881,
+    "chamferPercent": 1.348423394518988,
+    "normalConsistency": 0.9018351309567494,
+    "signedNormalConsistency": 0.9007684382857672,
+    "sourceToMeshPercent": 1.3312017494705637,
+    "meshToSourcePercent": 1.3656450395674127
+  },
+  "topology": {
+    "vertices": 42336,
+    "triangles": 84676,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "nonmanifoldVertices": 0,
+    "inconsistentEdges": 0,
+    "invalidFaces": 0,
+    "degenerateFaces": 0,
+    "signedVolume": 117149.88942666445,
+    "watertight": true,
+    "manifold": true
+  },
+  "transform": {
+    "sourceCenter": [-0.005523698404431343, 0.04562372688087635, 0.002461053431034088],
+    "sourceScale": 18.001841290806627,
+    "inputCenter": [0.000056356191635131836, 0.000013887882232666016, -0.000011786818504333496],
+    "printScale": 0.02060033440589905
+  },
+  "reconstructionReport": {
+    "inputSplats": 200000,
+    "sampledSplats": 200000,
+    "triangles": 84676,
+    "vertices": 42336,
+    "resolution": 160,
+    "surfaceResolution": 70,
+    "level": 1,
+    "units": "mm",
+    "readyToPrint": true,
+    "printable": true,
+    "thicknessEstimateMm": 1.51934281365691,
+    "thicknessVerified": false,
+    "thicknessCheck": {
+      "minimumMm": 1.0072132763528192,
+      "sampledFaces": 2017,
+      "missingHits": 0,
+      "passed": true,
+      "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+    },
+    "printSize": 100,
+    "printTransform": {
+      "scale": 48.542901309099285,
+      "center": [-0.025420844554901123, 0.03060203790664673, 0.027208536863327026]
+    },
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 117149.8894266644
+    },
+    "warnings": [
+      "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+    ],
+    "removedTriangles": 0,
+    "work": 9332929,
+    "sparseBricks": 1060,
+    "bufferBytesEstimate": 71616016,
+    "elapsedMs": 2811.6202919999996
+  }
+}

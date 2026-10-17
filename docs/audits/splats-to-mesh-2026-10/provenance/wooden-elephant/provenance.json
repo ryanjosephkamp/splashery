@@ -1,0 +1,38 @@
+{
+  "id": "wooden-elephant",
+  "source": "https://polyhaven.com/a/carved_wooden_elephant",
+  "author": "Greg Zaal",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:26:58.576Z",
+  "main": "sources/wooden-elephant/wooden-elephant.gltf",
+  "sourcePageSha256": "dcd9a0d8a168cf369420af74009b701b6867e0980cdac26806a44d94c458c251",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "wooden-elephant.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/carved_wooden_elephant/carved_wooden_elephant_1k.gltf",
+      "sha256": "c2378354ecd283c5c8d9459b6829ef7e61bdefd6d0f7a6b2d628362bd9bbef25"
+    },
+    {
+      "name": "textures/carved_wooden_elephant_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/carved_wooden_elephant/carved_wooden_elephant_nor_gl_1k.jpg",
+      "sha256": "df066417c37f224d8d0acef8f221cc243ffcf4d8a4501aa0b8c0b82b4054c996"
+    },
+    {
+      "name": "textures/carved_wooden_elephant_rough_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/carved_wooden_elephant/carved_wooden_elephant_rough_1k.jpg",
+      "sha256": "b9d04ca7311882c05c4f1f5a94cbaacd1e0b935d844de7acd56d845d4331370b"
+    },
+    {
+      "name": "textures/carved_wooden_elephant_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/carved_wooden_elephant/carved_wooden_elephant_diff_1k.jpg",
+      "sha256": "420392c3087c709a7f1e0dd09042f1f194eb7edcb7551d124d6464f572d7f610"
+    },
+    {
+      "name": "carved_wooden_elephant.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/carved_wooden_elephant/carved_wooden_elephant.bin",
+      "sha256": "b732bc38c4e57c8630acfe8c9f1bd7623e1ba49b0c488863e13546171f283618"
+    }
+  ]
+}

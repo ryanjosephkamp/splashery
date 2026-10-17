@@ -1,0 +1,38 @@
+{
+  "id": "carrot-cake",
+  "source": "https://polyhaven.com/a/carrot_cake",
+  "author": "Greg Zaal, James Ray Cock",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:27:03.985Z",
+  "main": "sources/carrot-cake/carrot-cake.gltf",
+  "sourcePageSha256": "bf17a7059e32b3bc744dab4e24ae903681c584754b9c27888119e1be6743c7aa",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "carrot-cake.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/carrot_cake/carrot_cake_1k.gltf",
+      "sha256": "b0a743a0283bb2aea67d6d88bfb92b0afc5a2b5199f48ca4b9240330a28a87f6"
+    },
+    {
+      "name": "textures/carrot_cake_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/carrot_cake/carrot_cake_nor_gl_1k.jpg",
+      "sha256": "f85528c98f07a3270f0eccabca5ebc0e3b74e7d02e1d2d262d270baaf1888c80"
+    },
+    {
+      "name": "textures/carrot_cake_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/carrot_cake/carrot_cake_diff_1k.jpg",
+      "sha256": "1a1b7d88eb89f7243e605760fcbb53c6aa3d1e19d3b28049bb7b8e43158ca667"
+    },
+    {
+      "name": "carrot_cake.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/carrot_cake/carrot_cake.bin",
+      "sha256": "4390df681a8e7d1c1ec8640addb94e422073ccb88d0b1e73971e13cd48bb12cb"
+    },
+    {
+      "name": "textures/carrot_cake_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/carrot_cake/carrot_cake_arm_1k.jpg",
+      "sha256": "26405096b38d90dca735cf4e0f2ee39a337100a887e3d819804d19e86c92e7f7"
+    }
+  ]
+}

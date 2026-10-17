@@ -1,0 +1,94 @@
+{
+  "id": "alarm-clock",
+  "input": "assets/toys/alarm-clock/alarm-clock.sog",
+  "inputSha256": "2ce7e2bc6f289fa2d30976af73431e5773e5d2917f1f8478eba1e848a00af21a",
+  "inputSplats": 200000,
+  "source": "https://polyhaven.com/a/alarm_clock_01",
+  "sourceProvenanceSha256": "548ed99f713eed60f82218550428181a74860da86e5c53add94a2f091326b929",
+  "options": {
+    "resolution": 160,
+    "level": 1,
+    "triangleBudget": 100000,
+    "readyToPrint": true,
+    "printSize": 100,
+    "profile": "desktop",
+    "smoothIterations": 3,
+    "minComponent": 0.002
+  },
+  "elapsedSeconds": 2.8647910809999995,
+  "processRssMiB": 447.78515625,
+  "output": ".cache/mesh-export/exports/desktop-print160-level1/alarm-clock",
+  "scoring": {
+    "samplesPerSurface": 100000,
+    "chamfer": 0.012077235334787032,
+    "chamferPercent": 1.207723533478703,
+    "normalConsistency": 0.7902198866192753,
+    "signedNormalConsistency": 0.542883701108885,
+    "sourceToMeshPercent": 1.331400189023229,
+    "meshToSourcePercent": 1.0840468779341776
+  },
+  "topology": {
+    "vertices": 48752,
+    "triangles": 97544,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "nonmanifoldVertices": 0,
+    "inconsistentEdges": 0,
+    "invalidFaces": 0,
+    "degenerateFaces": 0,
+    "signedVolume": 145762.51789453794,
+    "watertight": true,
+    "manifold": true
+  },
+  "transform": {
+    "sourceCenter": [0.00001926720142364502, 0.07635144735104404, 0.009697350673377514],
+    "sourceScale": 11.919750227419899,
+    "inputCenter": [-0.000005334615707397461, -0.00007486343383789062, -0.00004157423973083496],
+    "printScale": 0.020836440920829775
+  },
+  "reconstructionReport": {
+    "inputSplats": 200000,
+    "sampledSplats": 200000,
+    "triangles": 97544,
+    "vertices": 48752,
+    "resolution": 160,
+    "surfaceResolution": 69,
+    "level": 1,
+    "units": "mm",
+    "readyToPrint": true,
+    "printable": false,
+    "thicknessEstimateMm": 1.51934281365691,
+    "thicknessVerified": false,
+    "thicknessCheck": {
+      "minimumMm": 0.6161285611731063,
+      "sampledFaces": 2033,
+      "missingHits": 0,
+      "passed": false,
+      "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+    },
+    "printSize": 100,
+    "printTransform": {
+      "scale": 47.99284118624693,
+      "center": [-0.00034540891647338867, 0.09169688820838928, -0.004785940051078796]
+    },
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 145762.517894538
+    },
+    "warnings": [
+      "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+      "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+    ],
+    "removedTriangles": 48,
+    "work": 9106766,
+    "sparseBricks": 1142,
+    "bufferBytesEstimate": 73135968,
+    "elapsedMs": 2846.385607
+  }
+}

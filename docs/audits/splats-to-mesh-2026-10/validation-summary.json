@@ -1,0 +1,131 @@
+{
+  "validator": "Khronos glTF Validator",
+  "license": "Apache-2.0",
+  "results": [
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/alarm-clock/alarm-clock.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/boombox/boombox.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/carrot-cake/carrot-cake.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/cat-statue/cat-statue.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/chess-set/chess-set.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/croissant-real/croissant-real.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/garden-gnome/garden-gnome.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/lantern/lantern.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/marble-bust/marble-bust.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/pomegranate/pomegranate.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/rubber-duck-real/rubber-duck-real.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/ukulele/ukulele.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/vintage-camera/vintage-camera.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/desktop-print160-level1/wooden-elephant/wooden-elephant.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/examples/apple/apple.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/examples/chess-set/chess-set.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/examples/diamond/diamond.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/examples/photo-forest/photo-forest.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/examples/photo-spiral-stairs/photo-spiral-stairs.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/examples/photo-still-life/photo-still-life.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/examples/rubber-duck/rubber-duck.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/examples/soccer-ball/soccer-ball.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/examples/torus/torus.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/runtime-desktop/cactus/runtime-capture.glb",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "file": ".cache/mesh-export/exports/runtime-phone/cactus/runtime-capture.glb",
+      "errors": 0,
+      "warnings": 0
+    }
+  ]
+}

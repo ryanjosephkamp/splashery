@@ -1,0 +1,48 @@
+{
+  "id": "boombox",
+  "source": "https://polyhaven.com/a/boombox",
+  "author": "Thomas Paul Mouilleron",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:27:02.815Z",
+  "main": "sources/boombox/boombox.gltf",
+  "sourcePageSha256": "a5e2e6472e0156f00786aa426a80191dc45abd2ee6dac9c9fb998c82421477f9",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "boombox.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/boombox/boombox_1k.gltf",
+      "sha256": "8f5851b81d0d0b16fadf9ca89133b59ee48718ed8d9f8244b87e4d293755d2d3"
+    },
+    {
+      "name": "textures/boombox_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boombox/boombox_nor_gl_1k.jpg",
+      "sha256": "684211254308ea8c8235852dc93b5c22dc80f62f2acfa83f71cf083076ab00cd"
+    },
+    {
+      "name": "textures/boombox_speakers_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boombox/boombox_speakers_arm_1k.jpg",
+      "sha256": "00d7de33b77f5c8f7386679dfcc9daad3f5ca124ced0021f641ecb6739364443"
+    },
+    {
+      "name": "textures/boombox_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boombox/boombox_diff_1k.jpg",
+      "sha256": "8ad03125524ecc218810f2b100dc047958184b3e98c6c2d89854fd7ec88be981"
+    },
+    {
+      "name": "boombox.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/boombox/boombox.bin",
+      "sha256": "2579a18ff22b3c3466cd557ce3e4bbe517091bb7158172bdf9371ca993f9c49f"
+    },
+    {
+      "name": "textures/boombox_speakers_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boombox/boombox_speakers_diff_1k.jpg",
+      "sha256": "4240a5bbbed85dab19e10c753aa6022a9d5e8d3d1c3ff05620b8e62459dcd1b3"
+    },
+    {
+      "name": "textures/boombox_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/boombox/boombox_arm_1k.jpg",
+      "sha256": "8fa0c9a71c2606a9acea192763adc733298267243a3abae75c75a2477f42cbf6"
+    }
+  ]
+}

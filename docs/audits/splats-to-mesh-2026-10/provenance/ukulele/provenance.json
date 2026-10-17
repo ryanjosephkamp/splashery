@@ -1,0 +1,38 @@
+{
+  "id": "ukulele",
+  "source": "https://polyhaven.com/a/Ukulele_01",
+  "author": "Joseph Burgan",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:27:00.305Z",
+  "main": "sources/ukulele/ukulele.gltf",
+  "sourcePageSha256": "78ecc947e9a403a82e6fb8d898826d81232e9b83a1eb612b64d6d41e7dda8800",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "ukulele.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/Ukulele_01/Ukulele_01_1k.gltf",
+      "sha256": "e0cd6068b9c6b59e716a9ec084a9104664375431d5dcd26c5a82d0567774e7f4"
+    },
+    {
+      "name": "textures/Ukulele_01_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Ukulele_01/Ukulele_01_nor_gl_1k.jpg",
+      "sha256": "314205982fc41422ed6ec9d35667716a6a1e1a395dd93f0c9c6b6932947c42c2"
+    },
+    {
+      "name": "textures/Ukulele_01_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Ukulele_01/Ukulele_01_arm_1k.jpg",
+      "sha256": "b6959977b2df720c09592db3e138366067421c93ff29c8d3acd352bd6e91fb47"
+    },
+    {
+      "name": "Ukulele_01.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/Ukulele_01/Ukulele_01.bin",
+      "sha256": "438fc03ff1a454e0063dd8c377629572e429920d0e03aba99799c17bdc1c0a0b"
+    },
+    {
+      "name": "textures/Ukulele_01_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Ukulele_01/Ukulele_01_diff_1k.jpg",
+      "sha256": "d13bfdbbbbaa4821a17098d52ac915e3a2eb1fc384374c919df174ce92ad5477"
+    }
+  ]
+}

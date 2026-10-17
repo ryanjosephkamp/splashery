@@ -1,0 +1,93 @@
+{
+  "id": "cat-statue",
+  "input": "assets/toys/cat-statue/cat-statue.sog",
+  "inputSha256": "4c1520c5de453b4074624bcc4fa43649969be2e14b8531fac39e4280370f34a0",
+  "inputSplats": 200000,
+  "source": "https://polyhaven.com/a/concrete_cat_statue",
+  "sourceProvenanceSha256": "ee5e7f5a11ddf47047d692d468175d1290d7521cb096dd28111e106d50ea97d0",
+  "options": {
+    "resolution": 160,
+    "level": 1,
+    "triangleBudget": 100000,
+    "readyToPrint": true,
+    "printSize": 100,
+    "profile": "desktop",
+    "smoothIterations": 3,
+    "minComponent": 0.002
+  },
+  "elapsedSeconds": 2.4421617019999977,
+  "processRssMiB": 521.7109375,
+  "output": ".cache/mesh-export/exports/desktop-print160-level1/cat-statue",
+  "scoring": {
+    "samplesPerSurface": 100000,
+    "chamfer": 0.013895450749026102,
+    "chamferPercent": 1.38954507490261,
+    "normalConsistency": 0.9365966132053734,
+    "signedNormalConsistency": 0.93653720045535,
+    "sourceToMeshPercent": 1.3724988053373988,
+    "meshToSourcePercent": 1.4065913444678213
+  },
+  "topology": {
+    "vertices": 42318,
+    "triangles": 84632,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "nonmanifoldVertices": 0,
+    "inconsistentEdges": 0,
+    "invalidFaces": 0,
+    "degenerateFaces": 0,
+    "signedVolume": 161693.44836075904,
+    "watertight": true,
+    "manifold": true
+  },
+  "transform": {
+    "sourceCenter": [-0.0017530061304569244, 0.13419437666539125, -0.022288065403699875],
+    "sourceScale": 6.706706004262098,
+    "inputCenter": [-0.00003018975257873535, 0.000004827976226806641, -0.000028580427169799805],
+    "printScale": 0.019931702017784117
+  },
+  "reconstructionReport": {
+    "inputSplats": 200000,
+    "sampledSplats": 200000,
+    "triangles": 84632,
+    "vertices": 42318,
+    "resolution": 160,
+    "surfaceResolution": 74,
+    "level": 1,
+    "units": "mm",
+    "readyToPrint": true,
+    "printable": true,
+    "thicknessEstimateMm": 1.51934281365691,
+    "thicknessVerified": false,
+    "thicknessCheck": {
+      "minimumMm": 1.3597508199956698,
+      "sampledFaces": 2016,
+      "missingHits": 0,
+      "passed": true,
+      "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+    },
+    "printSize": 100,
+    "printTransform": {
+      "scale": 50.17133003030786,
+      "center": [0.0010879933834075928, 0.04759517312049866, -0.017289936542510986]
+    },
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 161693.448360759
+    },
+    "warnings": [
+      "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+    ],
+    "removedTriangles": 0,
+    "work": 9149919,
+    "sparseBricks": 1093,
+    "bufferBytesEstimate": 71883688,
+    "elapsedMs": 2426.1774319999968
+  }
+}

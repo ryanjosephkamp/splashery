@@ -1,0 +1,38 @@
+{
+  "id": "marble-bust",
+  "source": "https://polyhaven.com/a/marble_bust_01",
+  "author": "Rico Cilliers",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:26:59.498Z",
+  "main": "sources/marble-bust/marble-bust.gltf",
+  "sourcePageSha256": "36f291ef56713ed3260b88a8ba2efbe2f7aada3ab809089b9d529056a070eca3",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "marble-bust.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/marble_bust_01/marble_bust_01_1k.gltf",
+      "sha256": "b6f192fc01be4349470b66f6f6948bd37620267bdbc86f4568e4d078f97ff09b"
+    },
+    {
+      "name": "marble_bust_01.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/marble_bust_01/marble_bust_01.bin",
+      "sha256": "0bb757c1bd00bfe42005c84e7f76df98ce04a532e595a2ddda8a0335cd959e33"
+    },
+    {
+      "name": "textures/marble_bust_01_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/marble_bust_01/marble_bust_01_nor_gl_1k.jpg",
+      "sha256": "3d355904cd54c2de90d5d4310b80d43816fa2dd509f0a3445d654eab8e237c5f"
+    },
+    {
+      "name": "textures/marble_bust_01_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/marble_bust_01/marble_bust_01_diff_1k.jpg",
+      "sha256": "cbb7dccdc62d7eaa240eef7b4956969bf6e73c7338b64f1378629838ea22383c"
+    },
+    {
+      "name": "textures/marble_bust_01_rough_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/marble_bust_01/marble_bust_01_rough_1k.jpg",
+      "sha256": "1c4502352dc936dd1f1c1a81b418706df1ce0445949874215015325f9b8921fb"
+    }
+  ]
+}

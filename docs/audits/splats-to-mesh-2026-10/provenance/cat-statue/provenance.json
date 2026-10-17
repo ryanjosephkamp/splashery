@@ -1,0 +1,38 @@
+{
+  "id": "cat-statue",
+  "source": "https://polyhaven.com/a/concrete_cat_statue",
+  "author": "Rico Cilliers, Riley Queen",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:27:05.994Z",
+  "main": "sources/cat-statue/cat-statue.gltf",
+  "sourcePageSha256": "77e9fce7500b51e252987170eb9c051ae1f12e56875eb458464abbdc7f0142c3",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "cat-statue.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/concrete_cat_statue/concrete_cat_statue_1k.gltf",
+      "sha256": "898110387c632808e6c6ffe818f48eaf32fcf1c8817de939bef428abb659e813"
+    },
+    {
+      "name": "concrete_cat_statue.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/concrete_cat_statue/concrete_cat_statue.bin",
+      "sha256": "489d9c3b5d8c3b8a606865f7fef002ac8535f883393696b448c1bd78a5a6a612"
+    },
+    {
+      "name": "textures/concrete_cat_statue_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/concrete_cat_statue/concrete_cat_statue_arm_1k.jpg",
+      "sha256": "8bac8a2c6fce9ef94cebd6152f456d06ef1585b892726725abb0cfdf262776c9"
+    },
+    {
+      "name": "textures/concrete_cat_statue_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/concrete_cat_statue/concrete_cat_statue_nor_gl_1k.jpg",
+      "sha256": "3bfa762ca05a501c1d1ecfd29cc485fb0a87c4caaed6081a9635564518463fca"
+    },
+    {
+      "name": "textures/concrete_cat_statue_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/concrete_cat_statue/concrete_cat_statue_diff_1k.jpg",
+      "sha256": "9577cdf54627a9ff0a430a1c998791afc863fefcdaf742650097c3e69f68ea3b"
+    }
+  ]
+}

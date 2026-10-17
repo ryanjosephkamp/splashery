@@ -1,0 +1,38 @@
+{
+  "id": "garden-gnome",
+  "source": "https://polyhaven.com/a/garden_gnome",
+  "author": "Bhargav Kubal",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:26:57.387Z",
+  "main": "sources/garden-gnome/garden-gnome.gltf",
+  "sourcePageSha256": "3d2942b5829bef1a61e458f1242051a9bc5d141cbb49f8fb01692c7746846d72",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "garden-gnome.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/garden_gnome/garden_gnome_1k.gltf",
+      "sha256": "613f28205e58f4a1c2a638e2bbef41873a7c25d11aa30c2fe53e7ed941e4403e"
+    },
+    {
+      "name": "textures/garden_gnome_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/garden_gnome/garden_gnome_nor_gl_1k.jpg",
+      "sha256": "b307397872a096621117e12dc28c4543a7021e6f01d3f341cf3b2346bc68ec89"
+    },
+    {
+      "name": "textures/garden_gnome_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/garden_gnome/garden_gnome_diff_1k.jpg",
+      "sha256": "83b80ce2bcdbba447886d87c0b7e386d7bde481b0874ecb6ddae703a2b19409d"
+    },
+    {
+      "name": "garden_gnome.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/garden_gnome/garden_gnome.bin",
+      "sha256": "d3b29486e4c7ad51ce564524e5e2b1c80afeef1b85ea4027a98ec3deca934b1d"
+    },
+    {
+      "name": "textures/garden_gnome_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/garden_gnome/garden_gnome_arm_1k.jpg",
+      "sha256": "6dab7c92e9beccada880a069c5ebd8024652dff2c298f25ff0d066dac0e931bb"
+    }
+  ]
+}

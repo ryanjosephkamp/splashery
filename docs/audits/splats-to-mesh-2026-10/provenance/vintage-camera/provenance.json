@@ -1,0 +1,68 @@
+{
+  "id": "vintage-camera",
+  "source": "https://polyhaven.com/a/Camera_01",
+  "author": "Rajil Jose Macatangay",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:27:02.182Z",
+  "main": "sources/vintage-camera/vintage-camera.gltf",
+  "sourcePageSha256": "d1c75f04441318175fe79f0d274e9ca8eaad73d7b88a603693a8eeac47463453",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "vintage-camera.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/Camera_01/Camera_01_1k.gltf",
+      "sha256": "9c5ca3104579c84ffcebdee5c6e5e09821fe8d4a5cd9ce95ed32d81507450ee3"
+    },
+    {
+      "name": "textures/Camera_01_lens_body_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Camera_01/Camera_01_lens_body_arm_1k.jpg",
+      "sha256": "6fef8a44334428a8f095315fa8043678994abcc671473cf43f7ca63ec10eb98f"
+    },
+    {
+      "name": "textures/Camera_01_body_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Camera_01/Camera_01_body_diff_1k.jpg",
+      "sha256": "89b77ec525e933f9f2702e2ccb0c8ba32ecef31dac241bc034e3eddc9481f4f7"
+    },
+    {
+      "name": "textures/Camera_01_strap_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Camera_01/Camera_01_strap_arm_1k.jpg",
+      "sha256": "17beca6e0542a1a28146b52cff06aad2e404541359e452deca83b74d01505c50"
+    },
+    {
+      "name": "textures/Camera_01_lens_body_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Camera_01/Camera_01_lens_body_nor_gl_1k.jpg",
+      "sha256": "3d5e695a57ce38f0e35558f43f30497fff2f8cc844c903c95462d105b58cb333"
+    },
+    {
+      "name": "Camera_01.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/Camera_01/Camera_01.bin",
+      "sha256": "d3d2c78458a4823bc9821c2ba3994c95d15b044c7a1444ba089b163f74c3fcf2"
+    },
+    {
+      "name": "textures/Camera_01_lens_body_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Camera_01/Camera_01_lens_body_diff_1k.jpg",
+      "sha256": "aafa05c5b106b960b21547ef9d4662083dfc7138261cbab1f10e143afe046b68"
+    },
+    {
+      "name": "textures/Camera_01_body_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Camera_01/Camera_01_body_nor_gl_1k.jpg",
+      "sha256": "c7ec0d96ae9b5f16559069f1a4c9a006f3ec1d49a7707269a280fe23786db144"
+    },
+    {
+      "name": "textures/Camera_01_body_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Camera_01/Camera_01_body_arm_1k.jpg",
+      "sha256": "a3b1928d258fdb23687fb005a3d764b008475abb13b47a2bb87ed81200274635"
+    },
+    {
+      "name": "textures/Camera_01_strap_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Camera_01/Camera_01_strap_diff_1k.jpg",
+      "sha256": "3d4c9cb463b330b7ea4fc713f6dc90a0c5e6d9d3ba707b6921fe0a2d1f9ab146"
+    },
+    {
+      "name": "textures/Camera_01_strap_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Camera_01/Camera_01_strap_nor_gl_1k.jpg",
+      "sha256": "5d4d99d5b1640d5a4d3c2227c264c232279773b5c92e4a6c50d2f34217880202"
+    }
+  ]
+}

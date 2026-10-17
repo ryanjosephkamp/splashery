@@ -1,0 +1,103 @@
+{
+  "id": "diamond",
+  "source": {
+    "kind": "toy",
+    "id": "diamond"
+  },
+  "inputSplats": 160000,
+  "options": {
+    "profile": "desktop",
+    "resolution": 160,
+    "level": 1,
+    "triangleBudget": 100000,
+    "readyToPrint": true,
+    "printSize": 100,
+    "smoothIterations": 3,
+    "minComponent": 0.002
+  },
+  "metadata": {
+    "name": "diamond",
+    "author": "Ryan and Splashery contributors",
+    "license": "CC0 1.0",
+    "source": "https://github.com/ryanjosephkamp/splashery",
+    "credits": []
+  },
+  "elapsedSeconds": 3.7180073250000025,
+  "files": [
+    {
+      "name": "diamond.glb",
+      "bytes": 2537152
+    },
+    {
+      "name": "diamond.obj",
+      "bytes": 10797061
+    },
+    {
+      "name": "diamond.mtl",
+      "bytes": 167
+    },
+    {
+      "name": "diamond.stl",
+      "bytes": 4224284
+    }
+  ],
+  "topology": {
+    "vertices": 42244,
+    "triangles": 84484,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "nonmanifoldVertices": 0,
+    "inconsistentEdges": 0,
+    "invalidFaces": 0,
+    "degenerateFaces": 0,
+    "signedVolume": 214599.31270681447,
+    "watertight": true,
+    "manifold": true
+  },
+  "reconstructionReport": {
+    "inputSplats": 160000,
+    "sampledSplats": 160000,
+    "triangles": 84484,
+    "vertices": 42244,
+    "resolution": 160,
+    "surfaceResolution": 70,
+    "budgetMethod": "grid resampling",
+    "level": 1,
+    "units": "mm",
+    "readyToPrint": true,
+    "printable": true,
+    "thicknessEstimateMm": 1.51934281365691,
+    "thicknessVerified": false,
+    "thicknessCheck": {
+      "minimumMm": 2.283209165270835,
+      "sampledFaces": 2012,
+      "missingHits": 0,
+      "passed": true,
+      "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+    },
+    "printSize": 100,
+    "printTransform": {
+      "scale": 54.52638398527712,
+      "center": [0.00013205409049987793, -0.001408904790878296, -0.013363748788833618]
+    },
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 214599.31270681426
+    },
+    "warnings": [
+      "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+      "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+    ],
+    "removedTriangles": 48,
+    "work": 7502445,
+    "sparseBricks": 1953,
+    "bufferBytesEstimate": 78919040,
+    "elapsedMs": 2739.6426630000024
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "rubber-duck-real",
+  "source": "https://polyhaven.com/a/rubber_duck_toy",
+  "author": "Plat251",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:28:06.036Z",
+  "main": "sources/rubber-duck-real/rubber-duck-real.gltf",
+  "sourcePageSha256": "319fd2546fe5c1380fa900372e2f1f3e51692d25c2cd6d12da9e10ae26929987",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "rubber-duck-real.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/rubber_duck_toy/rubber_duck_toy_1k.gltf",
+      "sha256": "dcf036297843dad2775841fc41208fae8c776066848d3f6e26efa42eb98d5016"
+    },
+    {
+      "name": "textures/rubber_duck_toy_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rubber_duck_toy/rubber_duck_toy_diff_1k.jpg",
+      "sha256": "c968d6185c3ec57a430818e6af85c2ba2880c7ee19ccb1a0171730926175cfd6"
+    },
+    {
+      "name": "rubber_duck_toy.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/rubber_duck_toy/rubber_duck_toy.bin",
+      "sha256": "381e1373b99a4ff23d5ee02cb66bfb5e7d897eaa280581f19b652c38ffd83314"
+    },
+    {
+      "name": "textures/rubber_duck_toy_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rubber_duck_toy/rubber_duck_toy_arm_1k.jpg",
+      "sha256": "07df1a805350811e8522dafce6133b98ce2f191326e7256315a15dfaaa4193a0"
+    },
+    {
+      "name": "textures/rubber_duck_toy_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rubber_duck_toy/rubber_duck_toy_nor_gl_1k.jpg",
+      "sha256": "fc00541d9708328f383498914a5ed9935231a87f15ec002d5675af3f2347b544"
+    }
+  ]
+}

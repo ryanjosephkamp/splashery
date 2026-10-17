@@ -1,0 +1,38 @@
+{
+  "id": "pomegranate",
+  "source": "https://polyhaven.com/a/food_pomegranate_01",
+  "author": "Oliver Harries",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:27:04.635Z",
+  "main": "sources/pomegranate/pomegranate.gltf",
+  "sourcePageSha256": "b8facdc111d1127900b239161777ba17da4985c9df0f50f2d3f4b5134e4b4156",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "pomegranate.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/food_pomegranate_01/food_pomegranate_01_1k.gltf",
+      "sha256": "75e8bac9feda588189245fe8d145313fe382ee11766101d4b97f1c63476d6698"
+    },
+    {
+      "name": "textures/food_pomegranate_01_rough_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/food_pomegranate_01/food_pomegranate_01_rough_1k.jpg",
+      "sha256": "9d7de886f101623d0d5beec5067734eed455a760445d27fbc7cdf4c7a9704898"
+    },
+    {
+      "name": "textures/food_pomegranate_01_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/food_pomegranate_01/food_pomegranate_01_diff_1k.jpg",
+      "sha256": "b5223d9988b083d850404faf995a23c607ecbcc6ddefed341f67d20fc4a495aa"
+    },
+    {
+      "name": "food_pomegranate_01.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/food_pomegranate_01/food_pomegranate_01.bin",
+      "sha256": "29df7ac780b968c82958f881dba50837811c6d0b428db5099ba3f418969a1951"
+    },
+    {
+      "name": "textures/food_pomegranate_01_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/food_pomegranate_01/food_pomegranate_01_nor_gl_1k.jpg",
+      "sha256": "1e040ab1af8c27f390eaf70d0dbef973554df31ecac6395375f1aed9d2d64df9"
+    }
+  ]
+}

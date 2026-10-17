@@ -1,0 +1,1347 @@
+{
+  "measured": "2026-10-17T02:47:19.476Z",
+  "environment": {
+    "platform": "linux",
+    "architecture": "x64",
+    "node": "v24.19.0",
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "physicalPhone": false
+  },
+  "methodology": "Deterministic area-weighted 100,000-point samples per surface (override --samples), arithmetic mean of the two directed nearest-sample Euclidean distances, divided by complete source bounding diagonal; normal consistency averages absolute face-normal dot products at those nearest samples. Source and output are aligned by the bake's trimmed bounds and print units; no ICP. Topology is checked independently with edge incidence, directed edges, and connected vertex links.",
+  "results": [
+    {
+      "id": "rubber-duck-real",
+      "input": "assets/toys/rubber-duck-real/rubber-duck-real.sog",
+      "inputSha256": "1561aa5eba7fadd27a1a70c76943dc945b109925a77510c29c48b02813858363",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/rubber_duck_toy",
+      "sourceProvenanceSha256": "f7c11a85d915b6bc89ed35328ec232a76dcf697d1e372d9e77d01cad82c71d4e",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 3.118103893,
+      "processRssMiB": 617.29296875,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/rubber-duck-real",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.012003366529941713,
+        "chamferPercent": 1.2003366529941712,
+        "normalConsistency": 0.918800946645129,
+        "signedNormalConsistency": 0.9185071269891041,
+        "sourceToMeshPercent": 1.1782731987171478,
+        "meshToSourcePercent": 1.222400107271195
+      },
+      "topology": {
+        "vertices": 36282,
+        "triangles": 72560,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 279395.74552330445,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [0.000009641051292419434, 0.1385946362956929, 0.004024840891361237],
+        "sourceScale": 6.36824862711842,
+        "inputCenter": [0.00001341104507446289, 0.000010281801223754883, -0.000008881092071533203],
+        "printScale": 0.019939460754394532
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 72560,
+        "vertices": 36282,
+        "resolution": 160,
+        "surfaceResolution": 58,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 3.7744789664374943,
+          "sampledFaces": 2016,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 50.15180762998349,
+          "center": [-0.0000020563602447509766, 0.024423182010650635, -0.0009399056434631348]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 279395.7455233044
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 9438851,
+        "sparseBricks": 1591,
+        "bufferBytesEstimate": 75166552,
+        "elapsedMs": 3099.927684
+      }
+    },
+    {
+      "id": "garden-gnome",
+      "input": "assets/toys/garden-gnome/garden-gnome.sog",
+      "inputSha256": "553bbeca4a432ae4c137bd5656d1b2c41334264e6b8c60f879ae5283c62fe831",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/garden_gnome",
+      "sourceProvenanceSha256": "03b050a8c4b2ed1fef60142137c13edc18582391641aa33da58205e73d170453",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.3517565479999996,
+      "processRssMiB": 445.55859375,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/garden-gnome",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.018460675285388747,
+        "chamferPercent": 1.8460675285388746,
+        "normalConsistency": 0.879930965751907,
+        "signedNormalConsistency": 0.8684761409714995,
+        "sourceToMeshPercent": 1.908045038318497,
+        "meshToSourcePercent": 1.7840900187592519
+      },
+      "topology": {
+        "vertices": 46574,
+        "triangles": 93144,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 50973.843556253494,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [-0.013241350650787354, 0.26996686393715663, 0.0054844580590724945],
+        "sourceScale": 3.333744056986554,
+        "inputCenter": [
+          -0.000010132789611816406, 0.0000028014183044433594, -0.000007525086402893066
+        ],
+        "printScale": 0.020845663547515866
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 93144,
+        "vertices": 46574,
+        "resolution": 160,
+        "surfaceResolution": 105,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 1.276356248286448,
+          "sampledFaces": 2025,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 47.97160799034233,
+          "center": [-0.00029781460762023926, 0.09362995624542236, 0.002444908022880554]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 50973.843556253494
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 9369545,
+        "sparseBricks": 485,
+        "bufferBytesEstimate": 67464744,
+        "elapsedMs": 2334.6004190000003
+      }
+    },
+    {
+      "id": "wooden-elephant",
+      "input": "assets/toys/wooden-elephant/wooden-elephant.sog",
+      "inputSha256": "2c5351819838ecd9e7c66df8741263528dd2fe35e116fa5ab6df9099387b8982",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/carved_wooden_elephant",
+      "sourceProvenanceSha256": "ba9b84d1f8551237e5c69376b4c834a62c52eb6bb006f9fbdafe812ff6a42db0",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.844525361,
+      "processRssMiB": 451.36328125,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/wooden-elephant",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.013484233945189881,
+        "chamferPercent": 1.348423394518988,
+        "normalConsistency": 0.9018351309567494,
+        "signedNormalConsistency": 0.9007684382857672,
+        "sourceToMeshPercent": 1.3312017494705637,
+        "meshToSourcePercent": 1.3656450395674127
+      },
+      "topology": {
+        "vertices": 42336,
+        "triangles": 84676,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 117149.88942666445,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [-0.005523698404431343, 0.04562372688087635, 0.002461053431034088],
+        "sourceScale": 18.001841290806627,
+        "inputCenter": [0.000056356191635131836, 0.000013887882232666016, -0.000011786818504333496],
+        "printScale": 0.02060033440589905
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 84676,
+        "vertices": 42336,
+        "resolution": 160,
+        "surfaceResolution": 70,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 1.0072132763528192,
+          "sampledFaces": 2017,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 48.542901309099285,
+          "center": [-0.025420844554901123, 0.03060203790664673, 0.027208536863327026]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 117149.8894266644
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 9332929,
+        "sparseBricks": 1060,
+        "bufferBytesEstimate": 71616016,
+        "elapsedMs": 2811.6202919999996
+      }
+    },
+    {
+      "id": "marble-bust",
+      "input": "assets/toys/marble-bust/marble-bust.sog",
+      "inputSha256": "d01ad4fb05e8459c71145686cbe79036e89a370426650acd97b627a57b3c8397",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/marble_bust_01",
+      "sourceProvenanceSha256": "702cf1ff76d0309b17304c2ee02fa93c76e0a871babfca3fc2db3af8cec98914",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.830586588000002,
+      "processRssMiB": 503.5390625,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/marble-bust",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.015766334881240237,
+        "chamferPercent": 1.5766334881240238,
+        "normalConsistency": 0.9256506853193154,
+        "signedNormalConsistency": 0.9240546914855268,
+        "sourceToMeshPercent": 1.580663917502888,
+        "meshToSourcePercent": 1.5726030587451598
+      },
+      "topology": {
+        "vertices": 42748,
+        "triangles": 85496,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 106469.91727596562,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [0.011013016104698181, 0.25308134741862887, 0.0032822974026203156],
+        "sourceScale": 3.5571755241988168,
+        "inputCenter": [-0.00001500546932220459, 2.980232238769531e-7, -0.000020384788513183594],
+        "printScale": 0.019226639866828918
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 85496,
+        "vertices": 42748,
+        "resolution": 160,
+        "surfaceResolution": 81,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.4043941746878975,
+          "sampledFaces": 2036,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 52.011168198207464,
+          "center": [0.005864828824996948, 0.015157490968704224, 0.006188094615936279]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 106469.91727596564
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 0,
+        "work": 9370772,
+        "sparseBricks": 880,
+        "bufferBytesEstimate": 70195696,
+        "elapsedMs": 2806.679623
+      }
+    },
+    {
+      "id": "ukulele",
+      "input": "assets/toys/ukulele/ukulele.sog",
+      "inputSha256": "6f99578fad6e72d61c80201b2d7bd2603b0392ff252796fff5b35f3ea87532d7",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/Ukulele_01",
+      "sourceProvenanceSha256": "d76735f4f8c777e0893ff0cc92712c328b244b13bc29a605c0806406eb57e9d0",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.6601244979999974,
+      "processRssMiB": 461.5234375,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/ukulele",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.022001498581846794,
+        "chamferPercent": 2.2001498581846795,
+        "normalConsistency": 0.8596632122895647,
+        "signedNormalConsistency": 0.569344072655888,
+        "sourceToMeshPercent": 2.354869337450298,
+        "meshToSourcePercent": 2.045430378919061
+      },
+      "topology": {
+        "vertices": 42806,
+        "triangles": 85608,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 21167.992713436,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [0.000029217451810836792, 0.2534884905908257, 0.0020972322672605515],
+        "sourceScale": 3.602513112539415,
+        "inputCenter": [
+          -0.000011175870895385742, 0.000003933906555175781, -0.000007402151823043823
+        ],
+        "printScale": 0.019867824912071227
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 85608,
+        "vertices": 42806,
+        "resolution": 160,
+        "surfaceResolution": 129,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.474371120481644,
+          "sampledFaces": 2039,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 50.332636029645265,
+          "center": [0.0003491342067718506, 0.032151371240615845, 0.0014423355460166931]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 21167.992713436
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 0,
+        "work": 9399880,
+        "sparseBricks": 272,
+        "bufferBytesEstimate": 65222472,
+        "elapsedMs": 2644.3797520000007
+      }
+    },
+    {
+      "id": "alarm-clock",
+      "input": "assets/toys/alarm-clock/alarm-clock.sog",
+      "inputSha256": "2ce7e2bc6f289fa2d30976af73431e5773e5d2917f1f8478eba1e848a00af21a",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/alarm_clock_01",
+      "sourceProvenanceSha256": "548ed99f713eed60f82218550428181a74860da86e5c53add94a2f091326b929",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.8647910809999995,
+      "processRssMiB": 447.78515625,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/alarm-clock",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.012077235334787032,
+        "chamferPercent": 1.207723533478703,
+        "normalConsistency": 0.7902198866192753,
+        "signedNormalConsistency": 0.542883701108885,
+        "sourceToMeshPercent": 1.331400189023229,
+        "meshToSourcePercent": 1.0840468779341776
+      },
+      "topology": {
+        "vertices": 48752,
+        "triangles": 97544,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 145762.51789453794,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [0.00001926720142364502, 0.07635144735104404, 0.009697350673377514],
+        "sourceScale": 11.919750227419899,
+        "inputCenter": [-0.000005334615707397461, -0.00007486343383789062, -0.00004157423973083496],
+        "printScale": 0.020836440920829775
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 97544,
+        "vertices": 48752,
+        "resolution": 160,
+        "surfaceResolution": 69,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.6161285611731063,
+          "sampledFaces": 2033,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 47.99284118624693,
+          "center": [-0.00034540891647338867, 0.09169688820838928, -0.004785940051078796]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 145762.517894538
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 48,
+        "work": 9106766,
+        "sparseBricks": 1142,
+        "bufferBytesEstimate": 73135968,
+        "elapsedMs": 2846.385607
+      }
+    },
+    {
+      "id": "vintage-camera",
+      "input": "assets/toys/vintage-camera/vintage-camera.sog",
+      "inputSha256": "f776ff476ed6c73c5f78bb58391b512884e8bca1a2ae1566b026cd7ffa489e80",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/Camera_01",
+      "sourceProvenanceSha256": "742b8b8072621da2e442cc320d6687087dd88bc8757318e9c54f355d51c172b7",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.679628506000001,
+      "processRssMiB": 518.40234375,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/vintage-camera",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.019294503639040325,
+        "chamferPercent": 1.9294503639040326,
+        "normalConsistency": 0.792849759633893,
+        "signedNormalConsistency": 0.6668806495765065,
+        "sourceToMeshPercent": 2.405628009535133,
+        "meshToSourcePercent": 1.4532727182729321
+      },
+      "topology": {
+        "vertices": 41132,
+        "triangles": 82280,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 41897.124310742256,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [-0.03119157999753952, 0.038956113421591, 0.06647315993905067],
+        "sourceScale": 7.307883394244911,
+        "inputCenter": [
+          -0.000054210424423217773, -0.00003318488597869873, -0.000016480684280395508
+        ],
+        "printScale": 0.020141236186027527
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 82280,
+        "vertices": 41132,
+        "resolution": 160,
+        "surfaceResolution": 89,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.7553953741192794,
+          "sampledFaces": 2007,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 49.64938550761471,
+          "center": [0.01711118221282959, 0.0017126649618148804, 0.032665520906448364]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 41897.12431074224
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 0,
+        "work": 9455181,
+        "sparseBricks": 557,
+        "bufferBytesEstimate": 67336944,
+        "elapsedMs": 2662.6370559999996
+      }
+    },
+    {
+      "id": "boombox",
+      "input": "assets/toys/boombox/boombox.sog",
+      "inputSha256": "c013fb1d846cc67dc2262fe84b1658bf34552f47b396b9d8aedb0547a1600be4",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/boombox",
+      "sourceProvenanceSha256": "15420964c76842a06f93ccef7d649b5ddc4b935374f16c947bd44c5182de4ee3",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.599718114999996,
+      "processRssMiB": 446.48046875,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/boombox",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.01903018211705034,
+        "chamferPercent": 1.9030182117050338,
+        "normalConsistency": 0.90079321783165,
+        "signedNormalConsistency": 0.891453401604676,
+        "sourceToMeshPercent": 1.9972394081193532,
+        "meshToSourcePercent": 1.8087970152907153
+      },
+      "topology": {
+        "vertices": 40776,
+        "triangles": 81552,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 97946.82706627356,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [0, 0.16035841405391693, 0.026118308305740356],
+        "sourceScale": 2.486940014116767,
+        "inputCenter": [0, -0.000014960765838623047, -0.000015914440155029297],
+        "printScale": 0.01892896831035614
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 81552,
+        "vertices": 40776,
+        "resolution": 160,
+        "surfaceResolution": 82,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.7898060634812097,
+          "sampledFaces": 2039,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 52.82908099396493,
+          "center": [-0.0000037848949432373047, 0.1788453459739685, -0.01675151288509369]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 97946.82706627359
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 0,
+        "work": 9644270,
+        "sparseBricks": 860,
+        "bufferBytesEstimate": 69771552,
+        "elapsedMs": 2582.759100999996
+      }
+    },
+    {
+      "id": "croissant-real",
+      "input": "assets/toys/croissant-real/croissant-real.sog",
+      "inputSha256": "e234fe7328f0964f16d0f24259c41783e63495e22f76eb727a7d6d56c19c1377",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/croissant",
+      "sourceProvenanceSha256": "f738faec5c3c518d3f09a8a607f1bd0992ddf025eb5e3902ae659d734c2c4b76",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.378159338000005,
+      "processRssMiB": 526.76171875,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/croissant-real",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.01843208483405939,
+        "chamferPercent": 1.8432084834059386,
+        "normalConsistency": 0.9124920073443112,
+        "signedNormalConsistency": 0.9118751607914248,
+        "sourceToMeshPercent": 1.828168577908535,
+        "meshToSourcePercent": 1.8582483889033423
+      },
+      "topology": {
+        "vertices": 46012,
+        "triangles": 92020,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 61342.00362330669,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [-0.0025251731276512146, 0.029545206067268737, 0.005160121247172356],
+        "sourceScale": 9.667703533130613,
+        "inputCenter": [-0.000038951635360717773, 0.000008851289749145508, 0.000006139278411865234],
+        "printScale": 0.02013496994972229
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 92020,
+        "vertices": 46012,
+        "resolution": 160,
+        "surfaceResolution": 105,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 1.9686219197500463,
+          "sampledFaces": 2045,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 49.66483697254251,
+          "center": [0.005815446376800537, 0.0038563013076782227, 0.0030598491430282593]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 61342.0036233067
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 9347919,
+        "sparseBricks": 493,
+        "bufferBytesEstimate": 67456096,
+        "elapsedMs": 2356.1113960000002
+      }
+    },
+    {
+      "id": "carrot-cake",
+      "input": "assets/toys/carrot-cake/carrot-cake.sog",
+      "inputSha256": "a3e32239fd68fa6863e2786ee1561c58941adb80da12e510e729a186af7271c7",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/carrot_cake",
+      "sourceProvenanceSha256": "033c237393f8845577cbba8f13bc272a2ab853b645694f405decf582e157311d",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.6159040370000004,
+      "processRssMiB": 454.15234375,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/carrot-cake",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.012912977993891305,
+        "chamferPercent": 1.2912977993891306,
+        "normalConsistency": 0.8935249233562567,
+        "signedNormalConsistency": 0.8908261921056305,
+        "sourceToMeshPercent": 1.279743696477121,
+        "meshToSourcePercent": 1.30285190230114
+      },
+      "topology": {
+        "vertices": 35596,
+        "triangles": 71192,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 240126.4258548935,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [-0.00016950815916061401, 0.04372076457366347, -0.0022635124623775482],
+        "sourceScale": 8.379291659887452,
+        "inputCenter": [-0.00005009770393371582, -0.000002473592758178711, -0.0000635981559753418],
+        "printScale": 0.019777176380157472
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 71192,
+        "vertices": 35596,
+        "resolution": 160,
+        "surfaceResolution": 58,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 1.3282799760220123,
+          "sampledFaces": 2035,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 50.56333526980649,
+          "center": [-0.0037456154823303223, 0.023160278797149658, 0.004727959632873535]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 240126.42585489346
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 9342508,
+        "sparseBricks": 1561,
+        "bufferBytesEstimate": 74830384,
+        "elapsedMs": 2602.680567999996
+      }
+    },
+    {
+      "id": "pomegranate",
+      "input": "assets/toys/pomegranate/pomegranate.sog",
+      "inputSha256": "6eaf4248d1dcb8dd53dddf2be69bbc1badf2fd8159f8c64245edd260fa729079",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/food_pomegranate_01",
+      "sourceProvenanceSha256": "df59e5d8f0bb1a2d60dbbdaebf7d7a553aef94923d34b37f0a651cf0c3cc01f6",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.5493517250000006,
+      "processRssMiB": 448.68359375,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/pomegranate",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.010668864599961204,
+        "chamferPercent": 1.0668864599961205,
+        "normalConsistency": 0.9186926806006983,
+        "signedNormalConsistency": 0.9159670691864178,
+        "sourceToMeshPercent": 1.0425690244739587,
+        "meshToSourcePercent": 1.0912038955182826
+      },
+      "topology": {
+        "vertices": 41854,
+        "triangles": 83704,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 472982.5290470764,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [-0.002995278686285019, 0.05563671514391899, 0.0001272875815629959],
+        "sourceScale": 16.253682026973436,
+        "inputCenter": [-0.00003260374069213867, -0.00010398030281066895, 0.000006616115570068359],
+        "printScale": 0.019645909667015078
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 83704,
+        "vertices": 41854,
+        "resolution": 160,
+        "surfaceResolution": 58,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 2.8435665807848576,
+          "sampledFaces": 2042,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 50.901180802992876,
+          "center": [0.005441457033157349, 0.03281724452972412, -0.001484900712966919]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 472982.52904707624
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 68,
+        "work": 9333279,
+        "sparseBricks": 1877,
+        "bufferBytesEstimate": 78244968,
+        "elapsedMs": 2533.7119319999983
+      }
+    },
+    {
+      "id": "lantern",
+      "input": "assets/toys/lantern/lantern.sog",
+      "inputSha256": "a07eec752178c1a457e991757253fbafa65a33beef8fdcd59262bf4c524e9cfa",
+      "inputSplats": 199481,
+      "source": "https://polyhaven.com/a/Lantern_01",
+      "sourceProvenanceSha256": "8850b7a1cce8cf438a2e002b97990fd1b9cfbaebba6e81081f3634b2d81fec21",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.460112396999997,
+      "processRssMiB": 518.83203125,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/lantern",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.014011155200249871,
+        "chamferPercent": 1.4011155200249872,
+        "normalConsistency": 0.7626916168334341,
+        "signedNormalConsistency": 0.5068055135114953,
+        "sourceToMeshPercent": 1.4273039485539274,
+        "meshToSourcePercent": 1.3749270914960467
+      },
+      "topology": {
+        "vertices": 42230,
+        "triangles": 84512,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 35731.66270501111,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [-0.00009086914360523224, 0.10645038712219301, 0.0007000882178544998],
+        "sourceScale": 8.106400543101826,
+        "inputCenter": [0.00000311434268951416, -0.03704869747161865, -0.000013396143913269043],
+        "printScale": 0.023531447649002075
+      },
+      "reconstructionReport": {
+        "inputSplats": 199481,
+        "sampledSplats": 199481,
+        "triangles": 84512,
+        "vertices": 42230,
+        "resolution": 160,
+        "surfaceResolution": 88,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.7617378701432094,
+          "sampledFaces": 2013,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 42.496323002142546,
+          "center": [-0.000059932470321655273, 0.22299164533615112, -0.004646897315979004]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 35731.6627050111
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 0,
+        "work": 9396314,
+        "sparseBricks": 536,
+        "bufferBytesEstimate": 67311144,
+        "elapsedMs": 2442.305124999999
+      }
+    },
+    {
+      "id": "cat-statue",
+      "input": "assets/toys/cat-statue/cat-statue.sog",
+      "inputSha256": "4c1520c5de453b4074624bcc4fa43649969be2e14b8531fac39e4280370f34a0",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/concrete_cat_statue",
+      "sourceProvenanceSha256": "ee5e7f5a11ddf47047d692d468175d1290d7521cb096dd28111e106d50ea97d0",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.4421617019999977,
+      "processRssMiB": 521.7109375,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/cat-statue",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.013895450749026102,
+        "chamferPercent": 1.38954507490261,
+        "normalConsistency": 0.9365966132053734,
+        "signedNormalConsistency": 0.93653720045535,
+        "sourceToMeshPercent": 1.3724988053373988,
+        "meshToSourcePercent": 1.4065913444678213
+      },
+      "topology": {
+        "vertices": 42318,
+        "triangles": 84632,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 161693.44836075904,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [-0.0017530061304569244, 0.13419437666539125, -0.022288065403699875],
+        "sourceScale": 6.706706004262098,
+        "inputCenter": [-0.00003018975257873535, 0.000004827976226806641, -0.000028580427169799805],
+        "printScale": 0.019931702017784117
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 84632,
+        "vertices": 42318,
+        "resolution": 160,
+        "surfaceResolution": 74,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 1.3597508199956698,
+          "sampledFaces": 2016,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 50.17133003030786,
+          "center": [0.0010879933834075928, 0.04759517312049866, -0.017289936542510986]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 161693.448360759
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 9149919,
+        "sparseBricks": 1093,
+        "bufferBytesEstimate": 71883688,
+        "elapsedMs": 2426.1774319999968
+      }
+    },
+    {
+      "id": "chess-set",
+      "input": "assets/toys/chess-set/chess-set.sog",
+      "inputSha256": "dc6490a0bd24d02fd3ac489cf5721ff71ceb3910bb20baa9f83a9b1426f11ddd",
+      "inputSplats": 200000,
+      "source": "https://polyhaven.com/a/chess_set",
+      "sourceProvenanceSha256": "01667b0adbca6e44c4c9ed951e2c6c68c7a62099db4fa782669169012fddb631",
+      "options": {
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "profile": "desktop",
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "elapsedSeconds": 2.7626318069999978,
+      "processRssMiB": 523.05859375,
+      "output": ".cache/mesh-export/exports/desktop-print160-level1/chess-set",
+      "scoring": {
+        "samplesPerSurface": 100000,
+        "chamfer": 0.014458738497593973,
+        "chamferPercent": 1.4458738497593973,
+        "normalConsistency": 0.8997703063776425,
+        "signedNormalConsistency": 0.8736478493580953,
+        "sourceToMeshPercent": 1.510805784050533,
+        "meshToSourcePercent": 1.380941915468262
+      },
+      "topology": {
+        "vertices": 36118,
+        "triangles": 72248,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 75170.40001067326,
+        "watertight": true,
+        "manifold": true
+      },
+      "transform": {
+        "sourceCenter": [-0.000022724270820617676, 0.04246206773677841, 0.0001266002655029297],
+        "sourceScale": 3.302208635360375,
+        "inputCenter": [
+          -0.000010728836059570312, -0.000003516674041748047, -0.000026881694793701172
+        ],
+        "printScale": 0.019205167293548583
+      },
+      "reconstructionReport": {
+        "inputSplats": 200000,
+        "sampledSplats": 200000,
+        "triangles": 72248,
+        "vertices": 36118,
+        "resolution": 160,
+        "surfaceResolution": 58,
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.31961722726899044,
+          "sampledFaces": 2007,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 52.069319923910314,
+          "center": [0.0006068944931030273, 0.040119074285030365, -0.0005219876766204834]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 75170.40001067329
+        },
+        "warnings": [
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 0,
+        "work": 8164622,
+        "sparseBricks": 712,
+        "bufferBytesEstimate": 67944712,
+        "elapsedMs": 2749.2345669999922
+      }
+    }
+  ],
+  "summary": {
+    "toys": 14,
+    "medianChamferPercent": 1.423494684892192,
+    "medianNormalConsistency": 0.9002817621046463,
+    "watertightManifold": 14,
+    "sampledThicknessPassed": 7,
+    "notReadyToPrint": [
+      "marble-bust",
+      "ukulele",
+      "alarm-clock",
+      "vintage-camera",
+      "boombox",
+      "lantern",
+      "chess-set"
+    ],
+    "failures": []
+  }
+}

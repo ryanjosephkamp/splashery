@@ -1,0 +1,2313 @@
+{
+  "measured": "2026-10-17T03:05:07.198Z",
+  "results": [
+    {
+      "id": "torus",
+      "source": {
+        "kind": "toy",
+        "id": "torus"
+      },
+      "inputSplats": 160000,
+      "options": {
+        "profile": "desktop",
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "metadata": {
+        "name": "torus",
+        "author": "Ryan and Splashery contributors",
+        "license": "CC0 1.0",
+        "source": "https://github.com/ryanjosephkamp/splashery",
+        "credits": []
+      },
+      "elapsedSeconds": 6.217853698,
+      "files": [
+        {
+          "name": "torus.glb",
+          "bytes": 2498908
+        },
+        {
+          "name": "torus.obj",
+          "bytes": 10667362
+        },
+        {
+          "name": "torus.mtl",
+          "bytes": 165
+        },
+        {
+          "name": "torus.stl",
+          "bytes": 4160684
+        }
+      ],
+      "topology": {
+        "vertices": 41606,
+        "triangles": 83212,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 165645.20623018086,
+        "watertight": true,
+        "manifold": true
+      },
+      "reconstructionReport": {
+        "inputSplats": 160000,
+        "sampledSplats": 160000,
+        "triangles": 83212,
+        "vertices": 41606,
+        "resolution": 160,
+        "surfaceResolution": 69,
+        "budgetMethod": "grid resampling",
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 11.760250738855099,
+          "sampledFaces": 2030,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 50.02276741576116,
+          "center": [-0.00017505884170532227, -0.00006446242332458496, 0.000021338462829589844]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 165645.20623018086
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 7574568,
+        "sparseBricks": 1600,
+        "bufferBytesEstimate": 75943192,
+        "elapsedMs": 4653.262702
+      }
+    },
+    {
+      "id": "soccer-ball",
+      "source": {
+        "kind": "toy",
+        "id": "soccer-ball"
+      },
+      "inputSplats": 160001,
+      "options": {
+        "profile": "desktop",
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "metadata": {
+        "name": "soccer-ball",
+        "author": "Ryan and Splashery contributors",
+        "license": "CC0 1.0",
+        "source": "https://github.com/ryanjosephkamp/splashery",
+        "credits": []
+      },
+      "elapsedSeconds": 5.331555957999999,
+      "files": [
+        {
+          "name": "soccer-ball.glb",
+          "bytes": 2573400
+        },
+        {
+          "name": "soccer-ball.obj",
+          "bytes": 11043923
+        },
+        {
+          "name": "soccer-ball.mtl",
+          "bytes": 171
+        },
+        {
+          "name": "soccer-ball.stl",
+          "bytes": 4284684
+        }
+      ],
+      "topology": {
+        "vertices": 42848,
+        "triangles": 85692,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 501453.98862451926,
+        "watertight": true,
+        "manifold": true
+      },
+      "reconstructionReport": {
+        "inputSplats": 160001,
+        "sampledSplats": 160001,
+        "triangles": 85692,
+        "vertices": 42848,
+        "resolution": 160,
+        "surfaceResolution": 58,
+        "budgetMethod": "grid resampling",
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 18.397866682150354,
+          "sampledFaces": 2041,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 50.099478001037156,
+          "center": [0.0008109211921691895, 0.0005786418914794922, -0.00003981590270996094]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 501453.9886245195
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 7994109,
+        "sparseBricks": 4267,
+        "bufferBytesEstimate": 97955056,
+        "elapsedMs": 4093.9043340000007
+      }
+    },
+    {
+      "id": "rubber-duck",
+      "source": {
+        "kind": "toy",
+        "id": "rubber-duck"
+      },
+      "inputSplats": 160000,
+      "options": {
+        "profile": "desktop",
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "metadata": {
+        "name": "rubber-duck",
+        "author": "Ryan and Splashery contributors",
+        "license": "CC0 1.0",
+        "source": "https://github.com/ryanjosephkamp/splashery",
+        "credits": []
+      },
+      "elapsedSeconds": 5.200851605000001,
+      "files": [
+        {
+          "name": "rubber-duck.glb",
+          "bytes": 2536312
+        },
+        {
+          "name": "rubber-duck.obj",
+          "bytes": 10832477
+        },
+        {
+          "name": "rubber-duck.mtl",
+          "bytes": 171
+        },
+        {
+          "name": "rubber-duck.stl",
+          "bytes": 4222884
+        }
+      ],
+      "topology": {
+        "vertices": 42230,
+        "triangles": 84456,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 186067.24014683528,
+        "watertight": true,
+        "manifold": true
+      },
+      "reconstructionReport": {
+        "inputSplats": 160000,
+        "sampledSplats": 160000,
+        "triangles": 84456,
+        "vertices": 42230,
+        "resolution": 160,
+        "surfaceResolution": 73,
+        "budgetMethod": "grid resampling",
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 3.1589892183405572,
+          "sampledFaces": 2011,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 52.118062340191095,
+          "center": [-0.005016148090362549, -0.0029456913471221924, -0.00047641992568969727]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 186067.2401468351
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 7550811,
+        "sparseBricks": 1808,
+        "bufferBytesEstimate": 77729352,
+        "elapsedMs": 3580.3392740000018
+      }
+    },
+    {
+      "id": "apple",
+      "source": {
+        "kind": "toy",
+        "id": "apple"
+      },
+      "inputSplats": 125261,
+      "options": {
+        "profile": "desktop",
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "metadata": {
+        "name": "apple",
+        "author": "Ryan and Splashery contributors",
+        "license": "CC0 1.0",
+        "source": "https://github.com/ryanjosephkamp/splashery",
+        "credits": []
+      },
+      "elapsedSeconds": 4.029010944000001,
+      "files": [
+        {
+          "name": "apple.glb",
+          "bytes": 2330252
+        },
+        {
+          "name": "apple.obj",
+          "bytes": 10022337
+        },
+        {
+          "name": "apple.mtl",
+          "bytes": 165
+        },
+        {
+          "name": "apple.stl",
+          "bytes": 3879484
+        }
+      ],
+      "topology": {
+        "vertices": 38796,
+        "triangles": 77588,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 386098.29230332555,
+        "watertight": true,
+        "manifold": true
+      },
+      "reconstructionReport": {
+        "inputSplats": 125261,
+        "sampledSplats": 125261,
+        "triangles": 77588,
+        "vertices": 38796,
+        "resolution": 160,
+        "surfaceResolution": 58,
+        "budgetMethod": "grid resampling",
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 2.416359770036386,
+          "sampledFaces": 2042,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 62.86935457645873,
+          "center": [-0.002156883478164673, -0.005749225616455078, 0.00006872415542602539]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 386098.2923033254
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 0,
+        "work": 6536718,
+        "sparseBricks": 3377,
+        "bufferBytesEstimate": 90129312,
+        "elapsedMs": 2918.858042
+      }
+    },
+    {
+      "id": "diamond",
+      "source": {
+        "kind": "toy",
+        "id": "diamond"
+      },
+      "inputSplats": 160000,
+      "options": {
+        "profile": "desktop",
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "metadata": {
+        "name": "diamond",
+        "author": "Ryan and Splashery contributors",
+        "license": "CC0 1.0",
+        "source": "https://github.com/ryanjosephkamp/splashery",
+        "credits": []
+      },
+      "elapsedSeconds": 3.7180073250000025,
+      "files": [
+        {
+          "name": "diamond.glb",
+          "bytes": 2537152
+        },
+        {
+          "name": "diamond.obj",
+          "bytes": 10797061
+        },
+        {
+          "name": "diamond.mtl",
+          "bytes": 167
+        },
+        {
+          "name": "diamond.stl",
+          "bytes": 4224284
+        }
+      ],
+      "topology": {
+        "vertices": 42244,
+        "triangles": 84484,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 214599.31270681447,
+        "watertight": true,
+        "manifold": true
+      },
+      "reconstructionReport": {
+        "inputSplats": 160000,
+        "sampledSplats": 160000,
+        "triangles": 84484,
+        "vertices": 42244,
+        "resolution": 160,
+        "surfaceResolution": 70,
+        "budgetMethod": "grid resampling",
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": true,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 2.283209165270835,
+          "sampledFaces": 2012,
+          "missingHits": 0,
+          "passed": true,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 54.52638398527712,
+          "center": [0.00013205409049987793, -0.001408904790878296, -0.013363748788833618]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 214599.31270681426
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+        ],
+        "removedTriangles": 48,
+        "work": 7502445,
+        "sparseBricks": 1953,
+        "bufferBytesEstimate": 78919040,
+        "elapsedMs": 2739.6426630000024
+      }
+    },
+    {
+      "id": "chess-set",
+      "source": {
+        "kind": "toy",
+        "id": "chess-set"
+      },
+      "inputSplats": 119345,
+      "options": {
+        "profile": "desktop",
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "metadata": {
+        "name": "chess-set",
+        "author": "Ryan and Splashery contributors",
+        "license": "CC0 1.0",
+        "source": "https://github.com/ryanjosephkamp/splashery",
+        "credits": []
+      },
+      "elapsedSeconds": 3.396469154999999,
+      "files": [
+        {
+          "name": "chess-set.glb",
+          "bytes": 2447944
+        },
+        {
+          "name": "chess-set.obj",
+          "bytes": 10227540
+        },
+        {
+          "name": "chess-set.mtl",
+          "bytes": 169
+        },
+        {
+          "name": "chess-set.stl",
+          "bytes": 4076484
+        }
+      ],
+      "topology": {
+        "vertices": 40748,
+        "triangles": 81528,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 52033.065315231644,
+        "watertight": true,
+        "manifold": true
+      },
+      "reconstructionReport": {
+        "inputSplats": 119345,
+        "sampledSplats": 119345,
+        "triangles": 81528,
+        "vertices": 40748,
+        "resolution": 160,
+        "surfaceResolution": 70,
+        "budgetMethod": "grid resampling",
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.48036225865386967,
+          "sampledFaces": 2039,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 62.09759319682378,
+          "center": [-0.00044798851013183594, -0.006905108690261841, -0.00015288591384887695]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 52033.065315231666
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 0,
+        "work": 6027109,
+        "sparseBricks": 695,
+        "bufferBytesEstimate": 68417328,
+        "elapsedMs": 2555.748914
+      }
+    },
+    {
+      "id": "photo-still-life",
+      "source": {
+        "kind": "toy",
+        "id": "photo-3d",
+        "options": {
+          "source": "still-life"
+        },
+        "controls": {
+          "flat": 0
+        }
+      },
+      "inputSplats": 158690,
+      "options": {
+        "profile": "desktop",
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "metadata": {
+        "name": "photo-still-life",
+        "author": "Antoine Vollon (Metropolitan Museum of Art Open Access)",
+        "license": "CC0 1.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg",
+        "credits": [
+          {
+            "label": "Forest path",
+            "title": "Forest Away Path",
+            "source": "https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg",
+            "author": "Seaq68 (from Pixabay, marked CC0 on Wikimedia Commons)",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Cobbled street",
+            "title": "Carleton Street off Leeman Road, York",
+            "source": "https://commons.wikimedia.org/wiki/File:Carleton_Street_off_Leeman_Road_York_Jul25.jpg",
+            "author": "Malcolmxl5",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Still life",
+            "title": "Still Life with Cheese",
+            "source": "https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg",
+            "author": "Antoine Vollon (Metropolitan Museum of Art Open Access)",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Spiral staircase",
+            "title": "Spiral Staircase, Keck Center (U.S. National Academies)",
+            "source": "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+            "author": "Jorge Mendoza",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Palace staircase",
+            "title": "Escalier monumental, Neue Burg, Vienna",
+            "source": "https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg",
+            "author": "Jebulon",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Wildflowers up close",
+            "title": "Wildflowers in foreground",
+            "source": "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+            "author": "PookieFugglestein",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Train on a viaduct (AI-made)",
+            "title": "Train on a viaduct, an AI-made picture (prompt D01)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Desert oasis (AI-made)",
+            "title": "Desert oasis, an AI-made picture (prompt D03)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Castle on a lake (AI-made)",
+            "title": "Castle on a lake, an AI-made picture (prompt D04)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Fishing cove (AI-made)",
+            "title": "Fishing cove, an AI-made picture (prompt D05)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Toy harbor (AI-made)",
+            "title": "Toy harbor, an AI-made picture (prompt D34)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Paper valley (AI-made)",
+            "title": "Paper valley, an AI-made picture (prompt D36)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Felt farm (AI-made)",
+            "title": "Felt farm, an AI-made picture (prompt D37)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Treehouse village (AI-made)",
+            "title": "Treehouse village, an AI-made picture (prompt D02)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Long library (AI-made)",
+            "title": "Long library, an AI-made picture (prompt D06)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Woodworking shop (AI-made)",
+            "title": "Woodworking shop, an AI-made picture (prompt D07)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Stone cloister (AI-made)",
+            "title": "Stone cloister, an AI-made picture (prompt D08)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Greenhouse (AI-made)",
+            "title": "Greenhouse, an AI-made picture (prompt D10)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Attic (AI-made)",
+            "title": "Attic, an AI-made picture (prompt D14)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Bamboo path (AI-made)",
+            "title": "Bamboo path, an AI-made picture (prompt D16)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Rice terraces (AI-made)",
+            "title": "Rice terraces, an AI-made picture (prompt D11)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Canyon at sunset (AI-made)",
+            "title": "Canyon at sunset, an AI-made picture (prompt D13)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Stone arch (AI-made)",
+            "title": "Stone arch, an AI-made picture (prompt D17)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Forest and fallen log (AI-made)",
+            "title": "Forest and fallen log, an AI-made picture (prompt D19)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Alpine lake (AI-made)",
+            "title": "Alpine lake, an AI-made picture (prompt D20)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Frozen waterfall (AI-made)",
+            "title": "Frozen waterfall, an AI-made picture (prompt D30)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Floating islands (AI-made)",
+            "title": "Floating islands, an AI-made picture (prompt D32)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Glass wave (AI-made)",
+            "title": "Glass wave, an AI-made picture (prompt D38)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Explorer's desk (AI-made)",
+            "title": "Explorer's desk, an AI-made picture (prompt D21)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Watchmaker's bench (AI-made)",
+            "title": "Watchmaker's bench, an AI-made picture (prompt D22)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Dragonfly (AI-made)",
+            "title": "Dragonfly, an AI-made picture (prompt D26)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Mushrooms (AI-made)",
+            "title": "Mushrooms, an AI-made picture (prompt D27)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Fruit market (AI-made)",
+            "title": "Fruit market, an AI-made picture (prompt D28)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Giant gears (AI-made)",
+            "title": "Giant gears, an AI-made picture (prompt D31)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Chess board (AI-made)",
+            "title": "Chess board, an AI-made picture (prompt D40)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "City of books (AI-made)",
+            "title": "City of books, an AI-made picture (prompt D29)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Stoneware (AI-made)",
+            "title": "Stoneware, an AI-made picture (prompt C54-P04)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Autumn squash (AI-made)",
+            "title": "Autumn squash, an AI-made picture (prompt C54-P05)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Wooden toys (AI-made)",
+            "title": "Wooden toys, an AI-made picture (prompt C54-P07)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Clay tools (AI-made)",
+            "title": "Clay tools, an AI-made picture (prompt C54-P09)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Tea tray (AI-made)",
+            "title": "Tea tray, an AI-made picture (prompt C54-P10)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Arched room (AI-made)",
+            "title": "Arched room, an AI-made picture (prompt C54-P12)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Plant studio (AI-made)",
+            "title": "Plant studio, an AI-made picture (prompt C54-P14)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Mossy stream (AI-made)",
+            "title": "Mossy stream, an AI-made picture (prompt C54-P16)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Dune grass (AI-made)",
+            "title": "Dune grass, an AI-made picture (prompt C54-P17)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Woodland path (AI-made)",
+            "title": "Woodland path, an AI-made picture (prompt C54-P20)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Pinecone (AI-made)",
+            "title": "Pinecone, an AI-made picture (prompt C54-P22)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Acorns (AI-made)",
+            "title": "Acorns, an AI-made picture (prompt C54-P23)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Fern curl (AI-made)",
+            "title": "Fern curl, an AI-made picture (prompt C54-P25)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Cliff terrace (AI-made)",
+            "title": "Cliff terrace, an AI-made picture (prompt C54-P27)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Mushroom house (AI-made)",
+            "title": "Mushroom house, an AI-made picture (prompt C54-P28)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Crystal court (AI-made)",
+            "title": "Crystal court, an AI-made picture (prompt C54-P29)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Tortoise (AI-made)",
+            "title": "Tortoise, an AI-made picture (prompt C54-P32)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Deer in a grove (AI-made)",
+            "title": "Deer in a grove, an AI-made picture (prompt C54-P34)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Paper canyon (AI-made)",
+            "title": "Paper canyon, an AI-made picture (prompt C54-P37)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Wood valley (AI-made)",
+            "title": "Wood valley, an AI-made picture (prompt C54-P40)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          }
+        ],
+        "id": "still-life",
+        "label": "Still life",
+        "title": "Still Life with Cheese",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "elapsedSeconds": 4.671024485000002,
+      "files": [
+        {
+          "name": "photo-still-life.glb",
+          "bytes": 2485672
+        },
+        {
+          "name": "photo-still-life.obj",
+          "bytes": 10375538
+        },
+        {
+          "name": "photo-still-life.mtl",
+          "bytes": 11565
+        },
+        {
+          "name": "photo-still-life.stl",
+          "bytes": 4106684
+        }
+      ],
+      "topology": {
+        "vertices": 41054,
+        "triangles": 82132,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 111197.07264491821,
+        "watertight": true,
+        "manifold": true
+      },
+      "reconstructionReport": {
+        "inputSplats": 158690,
+        "sampledSplats": 158690,
+        "triangles": 82132,
+        "vertices": 41054,
+        "resolution": 160,
+        "surfaceResolution": 56,
+        "budgetMethod": "grid resampling",
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.053903004756432525,
+          "sampledFaces": 2004,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 69.7848593387532,
+          "center": [-0.0005522668361663818, -0.000040024518966674805, 0.0033648312091827393]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 111197.07264491828
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 0,
+        "work": 12941899,
+        "sparseBricks": 1118,
+        "bufferBytesEstimate": 71922648,
+        "elapsedMs": 2970.2071729999952
+      }
+    },
+    {
+      "id": "photo-forest",
+      "source": {
+        "kind": "toy",
+        "id": "photo-3d",
+        "options": {
+          "source": "forest"
+        },
+        "controls": {
+          "flat": 0
+        }
+      },
+      "inputSplats": 158763,
+      "options": {
+        "profile": "desktop",
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "metadata": {
+        "name": "photo-forest",
+        "author": "Seaq68 (from Pixabay, marked CC0 on Wikimedia Commons)",
+        "license": "CC0 1.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg",
+        "credits": [
+          {
+            "label": "Forest path",
+            "title": "Forest Away Path",
+            "source": "https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg",
+            "author": "Seaq68 (from Pixabay, marked CC0 on Wikimedia Commons)",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Cobbled street",
+            "title": "Carleton Street off Leeman Road, York",
+            "source": "https://commons.wikimedia.org/wiki/File:Carleton_Street_off_Leeman_Road_York_Jul25.jpg",
+            "author": "Malcolmxl5",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Still life",
+            "title": "Still Life with Cheese",
+            "source": "https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg",
+            "author": "Antoine Vollon (Metropolitan Museum of Art Open Access)",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Spiral staircase",
+            "title": "Spiral Staircase, Keck Center (U.S. National Academies)",
+            "source": "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+            "author": "Jorge Mendoza",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Palace staircase",
+            "title": "Escalier monumental, Neue Burg, Vienna",
+            "source": "https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg",
+            "author": "Jebulon",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Wildflowers up close",
+            "title": "Wildflowers in foreground",
+            "source": "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+            "author": "PookieFugglestein",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Train on a viaduct (AI-made)",
+            "title": "Train on a viaduct, an AI-made picture (prompt D01)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Desert oasis (AI-made)",
+            "title": "Desert oasis, an AI-made picture (prompt D03)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Castle on a lake (AI-made)",
+            "title": "Castle on a lake, an AI-made picture (prompt D04)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Fishing cove (AI-made)",
+            "title": "Fishing cove, an AI-made picture (prompt D05)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Toy harbor (AI-made)",
+            "title": "Toy harbor, an AI-made picture (prompt D34)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Paper valley (AI-made)",
+            "title": "Paper valley, an AI-made picture (prompt D36)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Felt farm (AI-made)",
+            "title": "Felt farm, an AI-made picture (prompt D37)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Treehouse village (AI-made)",
+            "title": "Treehouse village, an AI-made picture (prompt D02)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Long library (AI-made)",
+            "title": "Long library, an AI-made picture (prompt D06)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Woodworking shop (AI-made)",
+            "title": "Woodworking shop, an AI-made picture (prompt D07)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Stone cloister (AI-made)",
+            "title": "Stone cloister, an AI-made picture (prompt D08)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Greenhouse (AI-made)",
+            "title": "Greenhouse, an AI-made picture (prompt D10)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Attic (AI-made)",
+            "title": "Attic, an AI-made picture (prompt D14)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Bamboo path (AI-made)",
+            "title": "Bamboo path, an AI-made picture (prompt D16)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Rice terraces (AI-made)",
+            "title": "Rice terraces, an AI-made picture (prompt D11)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Canyon at sunset (AI-made)",
+            "title": "Canyon at sunset, an AI-made picture (prompt D13)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Stone arch (AI-made)",
+            "title": "Stone arch, an AI-made picture (prompt D17)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Forest and fallen log (AI-made)",
+            "title": "Forest and fallen log, an AI-made picture (prompt D19)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Alpine lake (AI-made)",
+            "title": "Alpine lake, an AI-made picture (prompt D20)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Frozen waterfall (AI-made)",
+            "title": "Frozen waterfall, an AI-made picture (prompt D30)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Floating islands (AI-made)",
+            "title": "Floating islands, an AI-made picture (prompt D32)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Glass wave (AI-made)",
+            "title": "Glass wave, an AI-made picture (prompt D38)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Explorer's desk (AI-made)",
+            "title": "Explorer's desk, an AI-made picture (prompt D21)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Watchmaker's bench (AI-made)",
+            "title": "Watchmaker's bench, an AI-made picture (prompt D22)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Dragonfly (AI-made)",
+            "title": "Dragonfly, an AI-made picture (prompt D26)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Mushrooms (AI-made)",
+            "title": "Mushrooms, an AI-made picture (prompt D27)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Fruit market (AI-made)",
+            "title": "Fruit market, an AI-made picture (prompt D28)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Giant gears (AI-made)",
+            "title": "Giant gears, an AI-made picture (prompt D31)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Chess board (AI-made)",
+            "title": "Chess board, an AI-made picture (prompt D40)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "City of books (AI-made)",
+            "title": "City of books, an AI-made picture (prompt D29)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Stoneware (AI-made)",
+            "title": "Stoneware, an AI-made picture (prompt C54-P04)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Autumn squash (AI-made)",
+            "title": "Autumn squash, an AI-made picture (prompt C54-P05)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Wooden toys (AI-made)",
+            "title": "Wooden toys, an AI-made picture (prompt C54-P07)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Clay tools (AI-made)",
+            "title": "Clay tools, an AI-made picture (prompt C54-P09)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Tea tray (AI-made)",
+            "title": "Tea tray, an AI-made picture (prompt C54-P10)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Arched room (AI-made)",
+            "title": "Arched room, an AI-made picture (prompt C54-P12)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Plant studio (AI-made)",
+            "title": "Plant studio, an AI-made picture (prompt C54-P14)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Mossy stream (AI-made)",
+            "title": "Mossy stream, an AI-made picture (prompt C54-P16)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Dune grass (AI-made)",
+            "title": "Dune grass, an AI-made picture (prompt C54-P17)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Woodland path (AI-made)",
+            "title": "Woodland path, an AI-made picture (prompt C54-P20)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Pinecone (AI-made)",
+            "title": "Pinecone, an AI-made picture (prompt C54-P22)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Acorns (AI-made)",
+            "title": "Acorns, an AI-made picture (prompt C54-P23)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Fern curl (AI-made)",
+            "title": "Fern curl, an AI-made picture (prompt C54-P25)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Cliff terrace (AI-made)",
+            "title": "Cliff terrace, an AI-made picture (prompt C54-P27)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Mushroom house (AI-made)",
+            "title": "Mushroom house, an AI-made picture (prompt C54-P28)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Crystal court (AI-made)",
+            "title": "Crystal court, an AI-made picture (prompt C54-P29)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Tortoise (AI-made)",
+            "title": "Tortoise, an AI-made picture (prompt C54-P32)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Deer in a grove (AI-made)",
+            "title": "Deer in a grove, an AI-made picture (prompt C54-P34)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Paper canyon (AI-made)",
+            "title": "Paper canyon, an AI-made picture (prompt C54-P37)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Wood valley (AI-made)",
+            "title": "Wood valley, an AI-made picture (prompt C54-P40)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          }
+        ],
+        "id": "forest",
+        "label": "Forest path",
+        "title": "Forest Away Path",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "elapsedSeconds": 4.676232123000002,
+      "files": [
+        {
+          "name": "photo-forest.glb",
+          "bytes": 2569368
+        },
+        {
+          "name": "photo-forest.obj",
+          "bytes": 10699815
+        },
+        {
+          "name": "photo-forest.mtl",
+          "bytes": 11534
+        },
+        {
+          "name": "photo-forest.stl",
+          "bytes": 4247084
+        }
+      ],
+      "topology": {
+        "vertices": 42444,
+        "triangles": 84940,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 70194.05261360206,
+        "watertight": true,
+        "manifold": true
+      },
+      "reconstructionReport": {
+        "inputSplats": 158763,
+        "sampledSplats": 158763,
+        "triangles": 84940,
+        "vertices": 42444,
+        "resolution": 160,
+        "surfaceResolution": 69,
+        "budgetMethod": "grid resampling",
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.011939672343335928,
+          "sampledFaces": 2023,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 60.50886226842593,
+          "center": [-0.00047218799591064453, 0.0005549192428588867, 0.005218207836151123]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 70194.05261360205
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 0,
+        "work": 9990020,
+        "sparseBricks": 938,
+        "bufferBytesEstimate": 70632576,
+        "elapsedMs": 2799.743131000003
+      }
+    },
+    {
+      "id": "photo-spiral-stairs",
+      "source": {
+        "kind": "toy",
+        "id": "photo-3d",
+        "options": {
+          "source": "spiral-stairs"
+        },
+        "controls": {
+          "flat": 0
+        }
+      },
+      "inputSplats": 158763,
+      "options": {
+        "profile": "desktop",
+        "resolution": 160,
+        "level": 1,
+        "triangleBudget": 100000,
+        "readyToPrint": true,
+        "printSize": 100,
+        "smoothIterations": 3,
+        "minComponent": 0.002
+      },
+      "metadata": {
+        "name": "photo-spiral-stairs",
+        "author": "Jorge Mendoza",
+        "license": "CC0 1.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+        "credits": [
+          {
+            "label": "Forest path",
+            "title": "Forest Away Path",
+            "source": "https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg",
+            "author": "Seaq68 (from Pixabay, marked CC0 on Wikimedia Commons)",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Cobbled street",
+            "title": "Carleton Street off Leeman Road, York",
+            "source": "https://commons.wikimedia.org/wiki/File:Carleton_Street_off_Leeman_Road_York_Jul25.jpg",
+            "author": "Malcolmxl5",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Still life",
+            "title": "Still Life with Cheese",
+            "source": "https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg",
+            "author": "Antoine Vollon (Metropolitan Museum of Art Open Access)",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Spiral staircase",
+            "title": "Spiral Staircase, Keck Center (U.S. National Academies)",
+            "source": "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+            "author": "Jorge Mendoza",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Palace staircase",
+            "title": "Escalier monumental, Neue Burg, Vienna",
+            "source": "https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg",
+            "author": "Jebulon",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Wildflowers up close",
+            "title": "Wildflowers in foreground",
+            "source": "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+            "author": "PookieFugglestein",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          {
+            "label": "Train on a viaduct (AI-made)",
+            "title": "Train on a viaduct, an AI-made picture (prompt D01)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Desert oasis (AI-made)",
+            "title": "Desert oasis, an AI-made picture (prompt D03)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Castle on a lake (AI-made)",
+            "title": "Castle on a lake, an AI-made picture (prompt D04)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Fishing cove (AI-made)",
+            "title": "Fishing cove, an AI-made picture (prompt D05)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Toy harbor (AI-made)",
+            "title": "Toy harbor, an AI-made picture (prompt D34)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Paper valley (AI-made)",
+            "title": "Paper valley, an AI-made picture (prompt D36)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Felt farm (AI-made)",
+            "title": "Felt farm, an AI-made picture (prompt D37)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Treehouse village (AI-made)",
+            "title": "Treehouse village, an AI-made picture (prompt D02)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Long library (AI-made)",
+            "title": "Long library, an AI-made picture (prompt D06)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Woodworking shop (AI-made)",
+            "title": "Woodworking shop, an AI-made picture (prompt D07)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Stone cloister (AI-made)",
+            "title": "Stone cloister, an AI-made picture (prompt D08)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Greenhouse (AI-made)",
+            "title": "Greenhouse, an AI-made picture (prompt D10)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Attic (AI-made)",
+            "title": "Attic, an AI-made picture (prompt D14)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Bamboo path (AI-made)",
+            "title": "Bamboo path, an AI-made picture (prompt D16)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Rice terraces (AI-made)",
+            "title": "Rice terraces, an AI-made picture (prompt D11)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Canyon at sunset (AI-made)",
+            "title": "Canyon at sunset, an AI-made picture (prompt D13)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Stone arch (AI-made)",
+            "title": "Stone arch, an AI-made picture (prompt D17)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Forest and fallen log (AI-made)",
+            "title": "Forest and fallen log, an AI-made picture (prompt D19)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Alpine lake (AI-made)",
+            "title": "Alpine lake, an AI-made picture (prompt D20)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Frozen waterfall (AI-made)",
+            "title": "Frozen waterfall, an AI-made picture (prompt D30)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Floating islands (AI-made)",
+            "title": "Floating islands, an AI-made picture (prompt D32)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Glass wave (AI-made)",
+            "title": "Glass wave, an AI-made picture (prompt D38)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Explorer's desk (AI-made)",
+            "title": "Explorer's desk, an AI-made picture (prompt D21)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Watchmaker's bench (AI-made)",
+            "title": "Watchmaker's bench, an AI-made picture (prompt D22)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Dragonfly (AI-made)",
+            "title": "Dragonfly, an AI-made picture (prompt D26)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Mushrooms (AI-made)",
+            "title": "Mushrooms, an AI-made picture (prompt D27)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Fruit market (AI-made)",
+            "title": "Fruit market, an AI-made picture (prompt D28)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Giant gears (AI-made)",
+            "title": "Giant gears, an AI-made picture (prompt D31)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Chess board (AI-made)",
+            "title": "Chess board, an AI-made picture (prompt D40)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "City of books (AI-made)",
+            "title": "City of books, an AI-made picture (prompt D29)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Stoneware (AI-made)",
+            "title": "Stoneware, an AI-made picture (prompt C54-P04)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Autumn squash (AI-made)",
+            "title": "Autumn squash, an AI-made picture (prompt C54-P05)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Wooden toys (AI-made)",
+            "title": "Wooden toys, an AI-made picture (prompt C54-P07)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Clay tools (AI-made)",
+            "title": "Clay tools, an AI-made picture (prompt C54-P09)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Tea tray (AI-made)",
+            "title": "Tea tray, an AI-made picture (prompt C54-P10)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Arched room (AI-made)",
+            "title": "Arched room, an AI-made picture (prompt C54-P12)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Plant studio (AI-made)",
+            "title": "Plant studio, an AI-made picture (prompt C54-P14)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Mossy stream (AI-made)",
+            "title": "Mossy stream, an AI-made picture (prompt C54-P16)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Dune grass (AI-made)",
+            "title": "Dune grass, an AI-made picture (prompt C54-P17)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Woodland path (AI-made)",
+            "title": "Woodland path, an AI-made picture (prompt C54-P20)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Pinecone (AI-made)",
+            "title": "Pinecone, an AI-made picture (prompt C54-P22)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Acorns (AI-made)",
+            "title": "Acorns, an AI-made picture (prompt C54-P23)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Fern curl (AI-made)",
+            "title": "Fern curl, an AI-made picture (prompt C54-P25)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Cliff terrace (AI-made)",
+            "title": "Cliff terrace, an AI-made picture (prompt C54-P27)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Mushroom house (AI-made)",
+            "title": "Mushroom house, an AI-made picture (prompt C54-P28)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Crystal court (AI-made)",
+            "title": "Crystal court, an AI-made picture (prompt C54-P29)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Tortoise (AI-made)",
+            "title": "Tortoise, an AI-made picture (prompt C54-P32)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Deer in a grove (AI-made)",
+            "title": "Deer in a grove, an AI-made picture (prompt C54-P34)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Paper canyon (AI-made)",
+            "title": "Paper canyon, an AI-made picture (prompt C54-P37)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          },
+          {
+            "label": "Wood valley (AI-made)",
+            "title": "Wood valley, an AI-made picture (prompt C54-P40)",
+            "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+            "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+            "license": "AI-made by the owner",
+            "licenseUrl": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+          }
+        ],
+        "id": "spiral-stairs",
+        "label": "Spiral staircase",
+        "title": "Spiral Staircase, Keck Center (U.S. National Academies)",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "elapsedSeconds": 4.573203375999998,
+      "files": [
+        {
+          "name": "photo-spiral-stairs.glb",
+          "bytes": 2559976
+        },
+        {
+          "name": "photo-spiral-stairs.obj",
+          "bytes": 10593885
+        },
+        {
+          "name": "photo-spiral-stairs.mtl",
+          "bytes": 11590
+        },
+        {
+          "name": "photo-spiral-stairs.stl",
+          "bytes": 4230484
+        }
+      ],
+      "topology": {
+        "vertices": 42292,
+        "triangles": 84608,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "nonmanifoldVertices": 0,
+        "inconsistentEdges": 0,
+        "invalidFaces": 0,
+        "degenerateFaces": 0,
+        "signedVolume": 73808.70443217282,
+        "watertight": true,
+        "manifold": true
+      },
+      "reconstructionReport": {
+        "inputSplats": 158763,
+        "sampledSplats": 158763,
+        "triangles": 84608,
+        "vertices": 42292,
+        "resolution": 160,
+        "surfaceResolution": 69,
+        "budgetMethod": "grid resampling",
+        "level": 1,
+        "units": "mm",
+        "readyToPrint": true,
+        "printable": false,
+        "thicknessEstimateMm": 1.51934281365691,
+        "thicknessVerified": false,
+        "thicknessCheck": {
+          "minimumMm": 0.4458080118658555,
+          "sampledFaces": 2015,
+          "missingHits": 0,
+          "passed": false,
+          "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+        },
+        "printSize": 100,
+        "printTransform": {
+          "scale": 60.637639380381444,
+          "center": [-0.0008907914161682129, 0.0022149085998535156, 0.005040660500526428]
+        },
+        "topology": {
+          "watertight": true,
+          "manifold": true,
+          "boundaryEdges": 0,
+          "nonManifoldEdges": 0,
+          "nonManifoldVertices": 0,
+          "inconsistentEdges": 0,
+          "degenerate": 0,
+          "volume": 73808.70443217286
+        },
+        "warnings": [
+          "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+          "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+          "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+        ],
+        "removedTriangles": 0,
+        "work": 10540853,
+        "sparseBricks": 983,
+        "bufferBytesEstimate": 70980144,
+        "elapsedMs": 2827.3197720000026
+      }
+    }
+  ]
+}

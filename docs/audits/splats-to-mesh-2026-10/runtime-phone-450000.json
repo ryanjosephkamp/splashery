@@ -1,0 +1,84 @@
+{
+  "measured": "2026-10-17T02:48:09.981Z",
+  "profile": "phone",
+  "physicalPhone": false,
+  "description": "Node benchmark on the host CPU; actual shipped cactus scan, without duplicated splats. Phone means the lower algorithm budget, not physical phone hardware or CPU throttling.",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "node": "v24.19.0",
+  "inputSplats": 450000,
+  "uniqueSourceSplats": 450000,
+  "sourceSha256": "177ec427b42edaed928a1090f34107f6bb1479e16a22985698ebe424bb343b0c",
+  "options": {
+    "profile": "phone",
+    "resolution": 72,
+    "readyToPrint": true,
+    "printSize": 100,
+    "triangleBudget": 40000,
+    "level": 0.5
+  },
+  "reconstructionSeconds": 0.9521239490000001,
+  "totalSeconds": 0.960925886,
+  "rssBeforeMiB": 77.203125,
+  "rssAfterMiB": 192.03515625,
+  "processPeakRssMiB": 212.22265625,
+  "outputBytes": 963656,
+  "topology": {
+    "vertices": 16008,
+    "triangles": 32056,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "nonmanifoldVertices": 0,
+    "inconsistentEdges": 0,
+    "invalidFaces": 0,
+    "degenerateFaces": 0,
+    "signedVolume": 156121.2035500547,
+    "watertight": true,
+    "manifold": true
+  },
+  "reconstructionReport": {
+    "inputSplats": 450000,
+    "sampledSplats": 112500,
+    "triangles": 32056,
+    "vertices": 16008,
+    "resolution": 72,
+    "surfaceResolution": 47,
+    "level": 0.5,
+    "units": "mm",
+    "readyToPrint": true,
+    "printable": false,
+    "thicknessEstimateMm": 1.8042195912175807,
+    "thicknessVerified": false,
+    "thicknessCheck": {
+      "minimumMm": 0.12443811646446495,
+      "sampledFaces": 2004,
+      "missingHits": 0,
+      "passed": false,
+      "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+    },
+    "printSize": 100,
+    "printTransform": {
+      "scale": 48.44316578437158,
+      "center": [-0.004676848649978638, 0.004756748676300049, 0.011293619871139526]
+    },
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 156121.20355005472
+    },
+    "warnings": [
+      "Used 112,500 of 450,000 splats for this device budget.",
+      "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+      "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+    ],
+    "removedTriangles": 72,
+    "work": 5412847,
+    "sparseBricks": 150,
+    "bufferBytesEstimate": 8568768,
+    "elapsedMs": 951.84901
+  }
+}

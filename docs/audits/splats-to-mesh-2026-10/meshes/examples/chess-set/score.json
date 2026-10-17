@@ -1,0 +1,104 @@
+{
+  "id": "chess-set",
+  "source": {
+    "kind": "toy",
+    "id": "chess-set"
+  },
+  "inputSplats": 119345,
+  "options": {
+    "profile": "desktop",
+    "resolution": 160,
+    "level": 1,
+    "triangleBudget": 100000,
+    "readyToPrint": true,
+    "printSize": 100,
+    "smoothIterations": 3,
+    "minComponent": 0.002
+  },
+  "metadata": {
+    "name": "chess-set",
+    "author": "Ryan and Splashery contributors",
+    "license": "CC0 1.0",
+    "source": "https://github.com/ryanjosephkamp/splashery",
+    "credits": []
+  },
+  "elapsedSeconds": 3.396469154999999,
+  "files": [
+    {
+      "name": "chess-set.glb",
+      "bytes": 2447944
+    },
+    {
+      "name": "chess-set.obj",
+      "bytes": 10227540
+    },
+    {
+      "name": "chess-set.mtl",
+      "bytes": 169
+    },
+    {
+      "name": "chess-set.stl",
+      "bytes": 4076484
+    }
+  ],
+  "topology": {
+    "vertices": 40748,
+    "triangles": 81528,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "nonmanifoldVertices": 0,
+    "inconsistentEdges": 0,
+    "invalidFaces": 0,
+    "degenerateFaces": 0,
+    "signedVolume": 52033.065315231644,
+    "watertight": true,
+    "manifold": true
+  },
+  "reconstructionReport": {
+    "inputSplats": 119345,
+    "sampledSplats": 119345,
+    "triangles": 81528,
+    "vertices": 40748,
+    "resolution": 160,
+    "surfaceResolution": 70,
+    "budgetMethod": "grid resampling",
+    "level": 1,
+    "units": "mm",
+    "readyToPrint": true,
+    "printable": false,
+    "thicknessEstimateMm": 1.51934281365691,
+    "thicknessVerified": false,
+    "thicknessCheck": {
+      "minimumMm": 0.48036225865386967,
+      "sampledFaces": 2039,
+      "missingHits": 0,
+      "passed": false,
+      "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+    },
+    "printSize": 100,
+    "printTransform": {
+      "scale": 62.09759319682378,
+      "center": [-0.00044798851013183594, -0.006905108690261841, -0.00015288591384887695]
+    },
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 52033.065315231666
+    },
+    "warnings": [
+      "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+      "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+      "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+    ],
+    "removedTriangles": 0,
+    "work": 6027109,
+    "sparseBricks": 695,
+    "bufferBytesEstimate": 68417328,
+    "elapsedMs": 2555.748914
+  }
+}

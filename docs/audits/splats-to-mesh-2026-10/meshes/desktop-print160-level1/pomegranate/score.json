@@ -1,0 +1,93 @@
+{
+  "id": "pomegranate",
+  "input": "assets/toys/pomegranate/pomegranate.sog",
+  "inputSha256": "6eaf4248d1dcb8dd53dddf2be69bbc1badf2fd8159f8c64245edd260fa729079",
+  "inputSplats": 200000,
+  "source": "https://polyhaven.com/a/food_pomegranate_01",
+  "sourceProvenanceSha256": "df59e5d8f0bb1a2d60dbbdaebf7d7a553aef94923d34b37f0a651cf0c3cc01f6",
+  "options": {
+    "resolution": 160,
+    "level": 1,
+    "triangleBudget": 100000,
+    "readyToPrint": true,
+    "printSize": 100,
+    "profile": "desktop",
+    "smoothIterations": 3,
+    "minComponent": 0.002
+  },
+  "elapsedSeconds": 2.5493517250000006,
+  "processRssMiB": 448.68359375,
+  "output": ".cache/mesh-export/exports/desktop-print160-level1/pomegranate",
+  "scoring": {
+    "samplesPerSurface": 100000,
+    "chamfer": 0.010668864599961204,
+    "chamferPercent": 1.0668864599961205,
+    "normalConsistency": 0.9186926806006983,
+    "signedNormalConsistency": 0.9159670691864178,
+    "sourceToMeshPercent": 1.0425690244739587,
+    "meshToSourcePercent": 1.0912038955182826
+  },
+  "topology": {
+    "vertices": 41854,
+    "triangles": 83704,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "nonmanifoldVertices": 0,
+    "inconsistentEdges": 0,
+    "invalidFaces": 0,
+    "degenerateFaces": 0,
+    "signedVolume": 472982.5290470764,
+    "watertight": true,
+    "manifold": true
+  },
+  "transform": {
+    "sourceCenter": [-0.002995278686285019, 0.05563671514391899, 0.0001272875815629959],
+    "sourceScale": 16.253682026973436,
+    "inputCenter": [-0.00003260374069213867, -0.00010398030281066895, 0.000006616115570068359],
+    "printScale": 0.019645909667015078
+  },
+  "reconstructionReport": {
+    "inputSplats": 200000,
+    "sampledSplats": 200000,
+    "triangles": 83704,
+    "vertices": 41854,
+    "resolution": 160,
+    "surfaceResolution": 58,
+    "level": 1,
+    "units": "mm",
+    "readyToPrint": true,
+    "printable": true,
+    "thicknessEstimateMm": 1.51934281365691,
+    "thicknessVerified": false,
+    "thicknessCheck": {
+      "minimumMm": 2.8435665807848576,
+      "sampledFaces": 2042,
+      "missingHits": 0,
+      "passed": true,
+      "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+    },
+    "printSize": 100,
+    "printTransform": {
+      "scale": 50.901180802992876,
+      "center": [0.005441457033157349, 0.03281724452972412, -0.001484900712966919]
+    },
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 472982.52904707624
+    },
+    "warnings": [
+      "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+    ],
+    "removedTriangles": 68,
+    "work": 9333279,
+    "sparseBricks": 1877,
+    "bufferBytesEstimate": 78244968,
+    "elapsedMs": 2533.7119319999983
+  }
+}

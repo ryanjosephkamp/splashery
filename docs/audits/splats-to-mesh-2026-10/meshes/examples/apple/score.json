@@ -1,0 +1,103 @@
+{
+  "id": "apple",
+  "source": {
+    "kind": "toy",
+    "id": "apple"
+  },
+  "inputSplats": 125261,
+  "options": {
+    "profile": "desktop",
+    "resolution": 160,
+    "level": 1,
+    "triangleBudget": 100000,
+    "readyToPrint": true,
+    "printSize": 100,
+    "smoothIterations": 3,
+    "minComponent": 0.002
+  },
+  "metadata": {
+    "name": "apple",
+    "author": "Ryan and Splashery contributors",
+    "license": "CC0 1.0",
+    "source": "https://github.com/ryanjosephkamp/splashery",
+    "credits": []
+  },
+  "elapsedSeconds": 4.029010944000001,
+  "files": [
+    {
+      "name": "apple.glb",
+      "bytes": 2330252
+    },
+    {
+      "name": "apple.obj",
+      "bytes": 10022337
+    },
+    {
+      "name": "apple.mtl",
+      "bytes": 165
+    },
+    {
+      "name": "apple.stl",
+      "bytes": 3879484
+    }
+  ],
+  "topology": {
+    "vertices": 38796,
+    "triangles": 77588,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "nonmanifoldVertices": 0,
+    "inconsistentEdges": 0,
+    "invalidFaces": 0,
+    "degenerateFaces": 0,
+    "signedVolume": 386098.29230332555,
+    "watertight": true,
+    "manifold": true
+  },
+  "reconstructionReport": {
+    "inputSplats": 125261,
+    "sampledSplats": 125261,
+    "triangles": 77588,
+    "vertices": 38796,
+    "resolution": 160,
+    "surfaceResolution": 58,
+    "budgetMethod": "grid resampling",
+    "level": 1,
+    "units": "mm",
+    "readyToPrint": true,
+    "printable": true,
+    "thicknessEstimateMm": 1.51934281365691,
+    "thicknessVerified": false,
+    "thicknessCheck": {
+      "minimumMm": 2.416359770036386,
+      "sampledFaces": 2042,
+      "missingHits": 0,
+      "passed": true,
+      "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+    },
+    "printSize": 100,
+    "printTransform": {
+      "scale": 62.86935457645873,
+      "center": [-0.002156883478164673, -0.005749225616455078, 0.00006872415542602539]
+    },
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 386098.2923033254
+    },
+    "warnings": [
+      "The triangle budget required a coarser grid. Topology preservation could not be guaranteed; small details or disconnected pieces may be lost. Raise the triangle budget to retain more detail.",
+      "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested."
+    ],
+    "removedTriangles": 0,
+    "work": 6536718,
+    "sparseBricks": 3377,
+    "bufferBytesEstimate": 90129312,
+    "elapsedMs": 2918.858042
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "alarm-clock",
+  "source": "https://polyhaven.com/a/alarm_clock_01",
+  "author": "Yann Kervran, James Ray Cock",
+  "license": "CC0 1.0",
+  "licensePage": "https://polyhaven.com/license",
+  "checked": "2026-10-17T02:27:01.120Z",
+  "main": "sources/alarm-clock/alarm-clock.gltf",
+  "sourcePageSha256": "811a8142812740c81fd4c79c38cbda9166c8487b914a4124da444460c00739f3",
+  "licensePageSha256": "6f4f617c936d14d5a80db6a2ebec145c79277a760672501eef51bff7a0d4cbba",
+  "files": [
+    {
+      "name": "alarm-clock.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/alarm_clock_01/alarm_clock_01_1k.gltf",
+      "sha256": "ca16e83e334e28f8eaf2bf1fbf8ce043b7e4fe5d0e171d01a264b12f5f42a78c"
+    },
+    {
+      "name": "textures/alarm_clock_01_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/alarm_clock_01/alarm_clock_01_diff_1k.jpg",
+      "sha256": "deb82094c2c1aa8cda0a0ce7192b193a81c5376743344503764abbcd2db19ac1"
+    },
+    {
+      "name": "textures/alarm_clock_01_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/alarm_clock_01/alarm_clock_01_nor_gl_1k.jpg",
+      "sha256": "a0a7b35de5712e23d06832e49516ec0e1170aa159eb60ec9b2af0b0df2102fa4"
+    },
+    {
+      "name": "alarm_clock_01.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/alarm_clock_01/alarm_clock_01.bin",
+      "sha256": "74b589dc31596fe9350e8ef6d123571955d58cee9955060d831fa0f3055758c6"
+    },
+    {
+      "name": "textures/alarm_clock_01_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/alarm_clock_01/alarm_clock_01_arm_1k.jpg",
+      "sha256": "99727eb8908dfea5aac2a2353af7ff60857e40c50b396d7efbe15df685fe4918"
+    }
+  ]
+}

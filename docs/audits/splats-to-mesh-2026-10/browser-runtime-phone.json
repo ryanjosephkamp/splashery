@@ -1,0 +1,400 @@
+{
+  "measured": "2026-10-17T02:48:16.710Z",
+  "browser": "151.0.7922.173",
+  "hostCpu": "AMD EPYC 9V74 80-Core Processor",
+  "physicalPhone": false,
+  "cpuThrottlingRate": 4,
+  "workerCpuThrottling": "Unverified. CDP Emulation.setCPUThrottlingRate is set on the page; sending it directly to the worker returns 'Operation is only supported for pages, not workers'. Do not interpret this as measured 4x worker CPU emulation.",
+  "workerHeap": {
+    "measurement": "CDP Runtime.getHeapUsage snapshots from the module worker; fields reported individually. Requests may be serviced between JavaScript tasks, so observed snapshots do not prove the transient peak.",
+    "samples": 10,
+    "observedMaximaBytes": {
+      "usedSize": 39892196,
+      "totalSize": 67158016,
+      "embedderHeapUsedSize": 1116312,
+      "backingStorageSize": 41506034
+    }
+  },
+  "memory": {
+    "measurement": "125 ms samples of summed Linux VmRSS for CDP-listed Chromium processes; shared resident pages may be counted in more than one process. This is browser process RSS, not a physical phone measurement.",
+    "baselineMiB": 399.453125,
+    "observedPeakMiB": 604.58984375,
+    "samples": 13
+  },
+  "description": "Chromium mobile viewport/touch emulation with page CDP throttling set to 4x; worker CPU throttling is unverified. Actual 450k source decoded and converted in a module worker. This is not a physical phone measurement.",
+  "options": {
+    "profile": "phone",
+    "resolution": 72,
+    "level": 0.5,
+    "triangleBudget": 40000,
+    "readyToPrint": true,
+    "printSize": 100
+  },
+  "inputSplats": 450000,
+  "conversionSeconds": 1.2974000000001398,
+  "totalSeconds": 1.3123000000000467,
+  "report": {
+    "inputSplats": 450000,
+    "sampledSplats": 112500,
+    "triangles": 32056,
+    "vertices": 16008,
+    "resolution": 72,
+    "surfaceResolution": 47,
+    "level": 0.5,
+    "units": "mm",
+    "readyToPrint": true,
+    "printable": false,
+    "thicknessEstimateMm": 1.8042195912175807,
+    "thicknessVerified": false,
+    "thicknessCheck": {
+      "minimumMm": 0.12443811646446495,
+      "sampledFaces": 2004,
+      "missingHits": 0,
+      "passed": false,
+      "method": "Inward face-center ray samples; not a full-surface thickness certificate"
+    },
+    "printSize": 100,
+    "printTransform": {
+      "scale": 48.44316578437158,
+      "center": [-0.004676848649978638, 0.004756748676300049, 0.011293619871139526]
+    },
+    "topology": {
+      "watertight": true,
+      "manifold": true,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "nonManifoldVertices": 0,
+      "inconsistentEdges": 0,
+      "degenerate": 0,
+      "volume": 156121.20355005472
+    },
+    "warnings": [
+      "Used 112,500 of 450,000 splats for this device budget.",
+      "Thickness uses inward ray samples, not a full-surface certificate. Check the 1 mm minimum in your slicer; material strength and printer supports are not tested.",
+      "The 1 mm thickness check did not pass. This mesh is not ready to print. Increase the print size, or use a finer grid."
+    ],
+    "removedTriangles": 72,
+    "work": 5412847,
+    "sparseBricks": 150,
+    "bufferBytesEstimate": 8568768,
+    "elapsedMs": 1051.9000000001397
+  },
+  "fileBytes": 963456,
+  "progress": [
+    {
+      "fraction": 0,
+      "elapsedMs": 50.800000000046566,
+      "text": "Reading the source…"
+    },
+    {
+      "fraction": 0.02,
+      "elapsedMs": 243.10000000009313,
+      "text": "Checking splats and device budget…"
+    },
+    {
+      "fraction": 0.08,
+      "elapsedMs": 362.10000000009313,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.08837404444444445,
+      "elapsedMs": 371.80000000004657,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.09674808888888889,
+      "elapsedMs": 376.70000000018626,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.10512213333333334,
+      "elapsedMs": 400.20000000018626,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.11349617777777779,
+      "elapsedMs": 404.70000000018626,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.12187022222222223,
+      "elapsedMs": 409.9000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.13024426666666666,
+      "elapsedMs": 415.9000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.13861831111111111,
+      "elapsedMs": 421.5,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.14699235555555556,
+      "elapsedMs": 428.80000000004657,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.15536640000000002,
+      "elapsedMs": 451.4000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.16374044444444447,
+      "elapsedMs": 456.10000000009313,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.17211448888888892,
+      "elapsedMs": 462.70000000018626,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.18048853333333334,
+      "elapsedMs": 469.20000000018626,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.1888625777777778,
+      "elapsedMs": 479.10000000009313,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.1972366222222222,
+      "elapsedMs": 482,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.20561066666666666,
+      "elapsedMs": 488.20000000018626,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.21398471111111111,
+      "elapsedMs": 493.80000000004657,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.22235875555555557,
+      "elapsedMs": 504.10000000009313,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.23073280000000002,
+      "elapsedMs": 511.9000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.23910684444444447,
+      "elapsedMs": 516.6000000000931,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.24748088888888892,
+      "elapsedMs": 520.9000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.2558549333333333,
+      "elapsedMs": 525.1000000000931,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.2642289777777778,
+      "elapsedMs": 529.2000000001863,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.2726030222222222,
+      "elapsedMs": 532.5,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.28097706666666666,
+      "elapsedMs": 535.6000000000931,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.2893511111111111,
+      "elapsedMs": 539.4000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.29772515555555557,
+      "elapsedMs": 542.5,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.3060992,
+      "elapsedMs": 545.6000000000931,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.31447324444444447,
+      "elapsedMs": 549,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.32284728888888886,
+      "elapsedMs": 552,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.33122133333333337,
+      "elapsedMs": 555.2000000001863,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.33959537777777776,
+      "elapsedMs": 559.8000000000466,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.34796942222222227,
+      "elapsedMs": 562.9000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.3563434666666667,
+      "elapsedMs": 567.3000000000466,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.3647175111111111,
+      "elapsedMs": 571.2000000001863,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.3730915555555556,
+      "elapsedMs": 573.8000000000466,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.38146560000000007,
+      "elapsedMs": 577.5,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.38983964444444447,
+      "elapsedMs": 580.6000000000931,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.3982136888888889,
+      "elapsedMs": 584.5,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.40658773333333337,
+      "elapsedMs": 586.9000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.4149617777777778,
+      "elapsedMs": 589.9000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.4233358222222222,
+      "elapsedMs": 593.4000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.43170986666666666,
+      "elapsedMs": 599.7000000001863,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.44008391111111117,
+      "elapsedMs": 603.5,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.4484579555555556,
+      "elapsedMs": 607.7000000001863,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.456832,
+      "elapsedMs": 612.2000000001863,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.46520604444444447,
+      "elapsedMs": 615.8000000000466,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.4735800888888889,
+      "elapsedMs": 619.7000000001863,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.48195413333333337,
+      "elapsedMs": 624.3000000000466,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.4903281777777778,
+      "elapsedMs": 628.6000000000931,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.4987022222222222,
+      "elapsedMs": 632.7000000001863,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.5070762666666667,
+      "elapsedMs": 636.5,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.5154503111111112,
+      "elapsedMs": 640.9000000001397,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.5238243555555556,
+      "elapsedMs": 644.7000000001863,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.5321984,
+      "elapsedMs": 648.6000000000931,
+      "text": "Sampling Gaussian density and color…"
+    },
+    {
+      "fraction": 0.56,
+      "elapsedMs": 667.5,
+      "text": "Thickening thin features and filling enclosed cavities…"
+    },
+    {
+      "fraction": 0.68,
+      "elapsedMs": 756.5,
+      "text": "Extracting a shared-vertex surface…"
+    },
+    {
+      "fraction": 0.68,
+      "elapsedMs": 909.7000000001863,
+      "text": "Extracting a shared-vertex surface…"
+    },
+    {
+      "fraction": 0.82,
+      "elapsedMs": 1005.1000000000931,
+      "text": "Removing small disconnected pieces and smoothing…"
+    },
+    {
+      "fraction": 0.92,
+      "elapsedMs": 1070,
+      "text": "Checking edges, vertex links, and solid volume…"
+    },
+    {
+      "fraction": 1,
+      "elapsedMs": 1295.4000000001397,
+      "text": "Mesh ready."
+    }
+  ]
+}
