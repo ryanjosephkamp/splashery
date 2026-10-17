@@ -521,7 +521,7 @@ export const focusLevel = (value, depth) =>
 // unstained. H&E turns cytoplasm and neuropil pink and nuclei blue-purple. The spike color is
 // chosen to stand out on each.
 const ink = (o) => MATERIALS.map((m) => o[m] ?? o.cyto);
-const STAINS = {
+export const STAINS = {
   nissl: {
     ink: ink({ cyto: [0.6, 0.4, 0.8], nissl: [0.3, 0.11, 0.5], myelin: [0.84, 0.8, 0.92], fine: [0.7, 0.58, 0.86], nucleus: [0.84, 0.76, 0.93], nucleolus: [0.22, 0.07, 0.4], glia: [0.3, 0.13, 0.5], dendrite: [0.64, 0.47, 0.83], axon: [0.8, 0.71, 0.9], bouton: [0.72, 0.6, 0.87], lit: [0.94, 0.93, 0.97], clear: [0.94, 0.93, 0.97] }), // prettier-ignore
     dens: ink({ cyto: 1, nissl: 1.4, myelin: 0.6, fine: 0.6, nucleus: 0.6, nucleolus: 1.6, glia: 1.4, dendrite: 0.85, axon: 0.6, bouton: 0.6 }), // prettier-ignore
@@ -580,7 +580,8 @@ export function packTap(point) {
 }
 
 // Reuse all normal Kit effects. The toy adds a focus crossfade between neighboring levels, the
-// delayed HH wave, and a stimulus where a tap lands that spreads through the dendrites.
+// delayed HH wave, and a stimulus where a tap lands that spreads through the dendrites. The
+// stimulus glow is measured in the slide's plane, so the slide lights up around it too.
 // The same precomputed membrane trace is interpolated by both GPU backends.
 export function neuronModifier(o = {}, transform = null) {
   const values = WAVE.trace
@@ -620,8 +621,8 @@ void nfStart(vec3 rest) {
       delay = ${f(SOMA_MS)} * clamp(distance(rc, tap) / max(toSoma, 0.06), 0.0, 1.0) - 0.001;
     float ms = uSpMorph.x;
     if (ms >= 0.0 && ms < 3.0) {
-      float r = 0.05 + 0.07 * ms / 3.0;
-      nfStim = (1.0 - ms / 3.0) * (1.0 - smoothstep(0.4 * r, r, distance(rc, tap)));
+      float r = 0.08 + 0.08 * ms / 3.0;
+      nfStim = (1.0 - ms / 3.0) * (1.0 - smoothstep(0.3 * r, r, distance(rc.xy, tap.xy)));
     }
   }
   nfAct = nfActivation(delay, nfAn.w);
@@ -658,8 +659,8 @@ fn nfStart(rest: vec3f) {
       delay = ${f(SOMA_MS)} * clamp(distance(rc, tap) / max(toSoma, 0.06), 0.0, 1.0) - 0.001;
     }
     if (m.x >= 0.0 && m.x < 3.0) {
-      let r = 0.05 + 0.07 * m.x / 3.0;
-      nfStim = (1.0 - m.x / 3.0) * (1.0 - smoothstep(0.4 * r, r, distance(rc, tap)));
+      let r = 0.08 + 0.08 * m.x / 3.0;
+      nfStim = (1.0 - m.x / 3.0) * (1.0 - smoothstep(0.3 * r, r, distance(rc.xy, tap.xy)));
     }
   }
   nfAct = nfActivation(delay, nfAn.w);

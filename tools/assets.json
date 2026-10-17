@@ -12801,13 +12801,13 @@
       "id": "specimen-neuron",
       "file": "assets/toys/specimen-neuron/thumb.webp",
       "recipe": "src/packs/neuron.js",
-      "author": "Made by Ryan with Codex (GPT-6)",
+      "author": "Made by Ryan with Codex (GPT-6) and Claude (Opus 5.5)",
       "license": "CC0 1.0",
       "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "checked": "October 14, 2026",
-      "sha256": "789ebc33a3b807f9216262c4076a2b5d482618e45bd614a7b78d104a624166a2",
+      "checked": "October 16, 2026",
+      "sha256": "9347c7e1cfeeb122d717661a229d4ef2efc703110eea99a1e9b105f134aee458",
       "sourceNote": "Original procedural specimen, from a concept by Ryan Kamp. Math read from claude/portfolio-ref at 5191138bdf91c29093af1c6b02a466c6b8ac6aa6:ref/portfolio/specimen/specimen.js; no reference files, fonts, or renderer copied.",
-      "changes": "Procedural geometry ported onto the Kit; 32,768 visible desktop leaves or 8,192 on the phone profile; moment-matched focus levels. Thumbnail rendered with tools/make-thumbs.mjs."
+      "changes": "Procedural geometry ported onto the Kit; 32,768 visible desktop leaves or 8,192 on the phone profile; moment-matched focus levels. Lane NR1: textbook stain colors on a lit slide (2,048 of the leaves on desktop, 512 on the phone). Thumbnail rendered with tools/make-thumbs.mjs."
     }
   ]
 }
