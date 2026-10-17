@@ -1487,6 +1487,18 @@ export class Player {
     this.stage.requestRender();
   }
 
+  // Lane PT1 (engine r2): a tool row item with a `key` (one character)
+  // answers that key, ahead of the site's own keys while that toy is shown.
+  // Returns false when the toy has no such item.
+  toolKey(ch) {
+    const bar = this.toyInfo?.recipe?.toolbar;
+    if (!bar || !ch || ch.length !== 1) return false;
+    const item = bar.items().find((it) => it.key === ch && !it.hidden && !it.disabled);
+    if (!item) return false;
+    this.playTool(item.id);
+    return true;
+  }
+
   // Lane PT1 (engine): results a toy's drag, keyboard or tool row may hand
   // back besides taps. { options, key, pick } rebuilds the toy with those
   // options (as a tap's action.at may); { paint: { at, radius, color,
