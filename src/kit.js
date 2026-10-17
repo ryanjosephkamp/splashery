@@ -615,9 +615,23 @@ function kindOf(k) {
 }
 
 export class Kit {
-  constructor(seed, { count = 120000, options = {}, fit = true, media = null } = {}) {
+  constructor(
+    seed,
+    { count = 120000, options = {}, fit = true, media = null, shrink = 1, slider = null } = {},
+  ) {
     this.seed = seed >>> 0;
     this.count = count;
+    // Lane SPL1: with the labs Splats slider above the most a toy's tiers
+    // give it, the factor (under 1) a recipe may scale its fixed splat sizes
+    // by, so more splats make the toy sharper rather than thicker; 1
+    // otherwise. A recipe that has drawn every splat its data has (or all
+    // the detail its source has) sets `all` during its build, so the label
+    // says so when the toy falls short of the slider.
+    this.shrink = shrink;
+    // The labs Splats slider's count when it set this build, or null: a
+    // recipe may lift a cap of its own that the tiers keep (a simulation's).
+    this.slider = slider;
+    this.all = false;
     // Pictures (lane Books): a picture toy's media, opened before the build
     // ({ kind, count, name, aspect, aspects, names }), or null (not open, or
     // the Node tools). A book sizes its pages from it.
@@ -1328,10 +1342,10 @@ export function nearestColoring(buf) {
 // returns { g, buf, base, coloring, parts, recipe, lum }.
 export function* buildRecipe(
   recipe,
-  { seed, count, options = {}, clay = [], media = null },
+  { seed, count, options = {}, clay = [], media = null, shrink = 1, slider = null },
   applyClay,
 ) {
-  const k = new Kit(seed, { count, options, media });
+  const k = new Kit(seed, { count, options, media, shrink, slider });
   recipe.build(k, options);
   const it = k.emit();
   let r = it.next();
@@ -1353,6 +1367,64 @@ export function* buildRecipe(
   for (let i = 0; i < clay.length; i++) applyClay(ctx, clay[i], i);
   ctx.lum = meanLuminance(k.buf);
   yield 1;
+  return ctx;
+}
+
+// Lane SPL1: what a recipe says it draws when asked for `count` splats (the
+// labs Splats slider), or null when it follows the count. A recipe that
+// can't (a fixed grid, a fixed set of data) says so with
+// `splats(count, options)`, returning a count or { count, all }: `all` when
+// that is every splat it has. tests/spl1-engine.spec.mjs measures it.
+export function statedSplats(recipe, count, options) {
+  if (typeof recipe.splats !== "function") return null;
+  const s = recipe.splats(count, options);
+  const n = typeof s === "number" ? s : s?.count;
+  return Number.isFinite(n) ? { count: Math.max(0, Math.round(n)), all: !!s?.all } : null;
+}
+
+// Lane SPL1: builds a recipe to draw `count` splats (the labs Splats
+// slider). Holes (a color that returns null) and parts of a fixed size make
+// a toy draw more or fewer splats than its budget, so the build is measured
+// and done again with the budget scaled by what it missed: at most twice
+// more, the budget kept within half to two and a half times the count. A
+// recipe that states its count (statedSplats) is built once. The context
+// returned is always the last build's, since a recipe may keep state between
+// builds: when an earlier try came closer, it is built again at that budget.
+// One correction always runs; the builds after it stop at about `extraMs`
+// (3 s of extra building): the last build then stands, and the label says
+// how near it came.
+export function* buildRecipeTo(recipe, args, applyClay, { extraMs = 3000 } = {}) {
+  const target = args.count;
+  const now = () => performance.now();
+  let last = 0;
+  const build = function* (count) {
+    const t = now();
+    const ctx = yield* buildRecipe(recipe, { ...args, count }, applyClay);
+    last = now() - t;
+    return ctx;
+  };
+  if (statedSplats(recipe, target, args.options)) return yield* build(target);
+  const off = (n) => Math.abs(n - target);
+  let count = target;
+  let ctx = yield* build(count);
+  let extra = 0;
+  // A build after the first correction only while the extra builds stay
+  // within extraMs (judged by the last build's time).
+  const room = () => extra + last <= extraMs;
+  let best = { count, n: ctx.buf.count };
+  for (let pass = 0; pass < 2 && off(best.n) > target * 0.01 && (!pass || room()); pass++) {
+    const drawn = ctx.buf.count;
+    const next = Math.round(
+      Math.min(target * 2.5, Math.max(target * 0.5, (count * target) / Math.max(1, drawn))),
+    );
+    if (next === count) break;
+    count = next;
+    ctx = yield* build(count);
+    extra += last;
+    if (ctx.buf.count === drawn) break; // the count doesn't follow the budget
+    if (off(ctx.buf.count) < off(best.n)) best = { count, n: ctx.buf.count };
+  }
+  if (best.count !== count && room()) ctx = yield* build(best.count);
   return ctx;
 }
 
