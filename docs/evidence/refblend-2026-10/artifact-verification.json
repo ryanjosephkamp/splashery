@@ -1,0 +1,177 @@
+[
+  {
+    "id": "lantern",
+    "modelAndMeshHashesMatch": true,
+    "componentCountsMatch": true,
+    "tierCounts": {
+      "desktop": {
+        "assembled": 295514,
+        "animated": 295504,
+        "budget": 300000
+      },
+      "phone": {
+        "assembled": 88688,
+        "animated": 88672,
+        "budget": 90000
+      }
+    },
+    "clip": {
+      "width": 1080,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_frames": "60"
+    },
+    "rigidParts": 1,
+    "maxRigidDistanceChange": 8.11840727976687e-9,
+    "browserErrors": [],
+    "viewportProof": {
+      "id": "lantern",
+      "sizes": [
+        [390, 674],
+        [1440, 782]
+      ],
+      "tapped": true,
+      "browserErrors": []
+    }
+  },
+  {
+    "id": "alarm-clock",
+    "modelAndMeshHashesMatch": true,
+    "componentCountsMatch": true,
+    "tierCounts": {
+      "desktop": {
+        "assembled": 295459,
+        "animated": 295504,
+        "budget": 300000
+      },
+      "phone": {
+        "assembled": 88648,
+        "animated": 88641,
+        "budget": 90000
+      }
+    },
+    "clip": {
+      "width": 1080,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_frames": "60"
+    },
+    "rigidParts": 1,
+    "maxRigidDistanceChange": 0,
+    "browserErrors": [],
+    "viewportProof": {
+      "id": "alarm-clock",
+      "sizes": [
+        [390, 636],
+        [1440, 782]
+      ],
+      "tapped": true,
+      "browserErrors": []
+    }
+  },
+  {
+    "id": "rubber-duck-real",
+    "modelAndMeshHashesMatch": true,
+    "componentCountsMatch": true,
+    "tierCounts": {
+      "desktop": {
+        "assembled": 295514,
+        "animated": 295482,
+        "budget": 300000
+      },
+      "phone": {
+        "assembled": 88629,
+        "animated": 88649,
+        "budget": 90000
+      }
+    },
+    "clip": {
+      "width": 1080,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_frames": "60"
+    },
+    "rigidParts": 1,
+    "maxRigidDistanceChange": 0,
+    "browserErrors": [],
+    "viewportProof": {
+      "id": "rubber-duck-real",
+      "sizes": [
+        [390, 636],
+        [1440, 782]
+      ],
+      "tapped": true,
+      "browserErrors": []
+    }
+  },
+  {
+    "id": "chess-set",
+    "modelAndMeshHashesMatch": true,
+    "componentCountsMatch": true,
+    "tierCounts": {
+      "desktop": {
+        "assembled": 295552,
+        "animated": 295577,
+        "budget": 300000
+      },
+      "phone": {
+        "assembled": 88771,
+        "animated": 88758,
+        "budget": 90000
+      }
+    },
+    "clip": {
+      "width": 1080,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_frames": "60"
+    },
+    "rigidParts": 1,
+    "maxRigidDistanceChange": 0,
+    "browserErrors": [],
+    "viewportProof": {
+      "id": "chess-set",
+      "sizes": [
+        [390, 636],
+        [1440, 782]
+      ],
+      "tapped": true,
+      "browserErrors": []
+    }
+  },
+  {
+    "id": "modeling-kit-showcase",
+    "modelAndMeshHashesMatch": true,
+    "componentCountsMatch": true,
+    "tierCounts": {
+      "desktop": {
+        "assembled": 295590,
+        "animated": 295497,
+        "budget": 300000
+      },
+      "phone": {
+        "assembled": 88685,
+        "animated": 88679,
+        "budget": 90000
+      }
+    },
+    "clip": {
+      "width": 1080,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_frames": "60"
+    },
+    "rigidParts": 3,
+    "maxRigidDistanceChange": 3.110037782860786e-10,
+    "browserErrors": [],
+    "viewportProof": {
+      "id": "modeling-kit-showcase",
+      "sizes": [
+        [390, 636],
+        [1440, 782]
+      ],
+      "tapped": true,
+      "browserErrors": []
+    }
+  }
+]

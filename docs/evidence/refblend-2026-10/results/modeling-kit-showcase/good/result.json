@@ -1,0 +1,188 @@
+{
+  "schema": 1,
+  "pack": "modeling-kit-showcase",
+  "builder": "blender",
+  "minutes": 0.12421666666666667,
+  "status": "complete",
+  "credit": "Codex (GPT-6)",
+  "quality": "good",
+  "seed": 1,
+  "coordinates": "normalized-y-up",
+  "mesh": "result.glb",
+  "splat": "result.ply",
+  "normalization": {
+    "centerMeters": [
+      -0.030000001192092896,
+      0.4612500071525574,
+      0.027560405433177948
+    ],
+    "radiusMeters": 0.9121075083509247
+  },
+  "static": "static.ply",
+  "tiers": {
+    "desktop": {
+      "splats": 300000,
+      "emittedSplats": 295590,
+      "components": [
+        {
+          "file": "static.ply",
+          "splats": 174616
+        },
+        {
+          "file": "parts/drawer.ply",
+          "splats": 41548
+        },
+        {
+          "file": "parts/door.ply",
+          "splats": 17045
+        },
+        {
+          "file": "parts/swivel.ply",
+          "splats": 62288
+        }
+      ],
+      "file": "result.ply",
+      "static": "static.ply",
+      "parts": [
+        {
+          "name": "drawer",
+          "file": "parts/drawer.ply"
+        },
+        {
+          "name": "door",
+          "file": "parts/door.ply"
+        },
+        {
+          "name": "swivel",
+          "file": "parts/swivel.ply"
+        }
+      ]
+    },
+    "phone": {
+      "splats": 90000,
+      "emittedSplats": 88685,
+      "components": [
+        {
+          "file": "phone/static.ply",
+          "splats": 52409
+        },
+        {
+          "file": "phone/parts/drawer.ply",
+          "splats": 12462
+        },
+        {
+          "file": "phone/parts/door.ply",
+          "splats": 5115
+        },
+        {
+          "file": "phone/parts/swivel.ply",
+          "splats": 18693
+        }
+      ],
+      "file": "phone/result.ply",
+      "static": "phone/static.ply",
+      "parts": [
+        {
+          "name": "drawer",
+          "file": "phone/parts/drawer.ply"
+        },
+        {
+          "name": "door",
+          "file": "phone/parts/door.ply"
+        },
+        {
+          "name": "swivel",
+          "file": "phone/parts/swivel.ply"
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "drawer",
+      "pivotMeters": [
+        -0.45,
+        0.6,
+        0
+      ],
+      "motion": {
+        "part": "drawer",
+        "how": "slide",
+        "axis": "z",
+        "amount": 0.2
+      },
+      "mesh": "parts/drawer.glb",
+      "file": "parts/drawer.ply",
+      "pivot": [
+        -0.46047203313484414,
+        0.15212021782202,
+        -0.030216180856801306
+      ]
+    },
+    {
+      "name": "door",
+      "pivotMeters": [
+        -0.73,
+        0.3,
+        0.23
+      ],
+      "motion": {
+        "part": "door",
+        "how": "hinge",
+        "axis": "y",
+        "amount": -70
+      },
+      "mesh": "parts/door.glb",
+      "file": "parts/door.ply",
+      "pivot": [
+        -0.7674533894293838,
+        -0.17678837820784388,
+        0.22194707609942768
+      ]
+    },
+    {
+      "name": "swivel",
+      "pivotMeters": [
+        0.45,
+        0.43,
+        0
+      ],
+      "motion": {
+        "part": "swivel",
+        "how": "spin",
+        "axis": "y",
+        "amount": 360
+      },
+      "mesh": "parts/swivel.glb",
+      "file": "parts/swivel.ply",
+      "pivot": [
+        0.5262537549547476,
+        -0.034261319928236174,
+        -0.030216180856801306
+      ]
+    }
+  ],
+  "license": {
+    "images": "CC0",
+    "source": "Original procedural kit demonstration",
+    "author": "Codex (GPT-6)"
+  },
+  "materials": "Procedural base colors baked to textures; GLB keeps roughness and metallic factors. Splats are opaque, unlit surfaces.",
+  "provenance": {
+    "blender": "4.5.3 LTS",
+    "modelSha256": "f937461cef7860e829043f05aeae756622d19c6dc64d1e00e92fbfbc2db2fde9",
+    "inputs": [
+      {
+        "file": "pack.json",
+        "sha256": "d5901cbba26b902f270fe19073db020b6af4a2444b7c01e0daa922776ed8f67d"
+      },
+      {
+        "file": "images/00.png",
+        "sha256": "93720f1acbe0b0b2f0f265dd1b013c02382b122199cd60409ab8da67522d5745"
+      }
+    ],
+    "meshSha256": "4a163f63671bcb62fd38c15ff3cb849c70fa3f4333f82ad9c5ff8d81898c0980",
+    "splatSha256": "5a48473475a3504036bbb7568b6b68f67f7077fb1316943b2445a149791d8d57"
+  },
+  "scorer": "refblend-score-lite"
+}

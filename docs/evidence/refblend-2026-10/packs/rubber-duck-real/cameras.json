@@ -1,0 +1,82 @@
+[
+  {
+    "file": "images/00.png",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "fov": 40,
+      "distance": 3,
+      "target": [
+        0.0,
+        0.47586798667907715,
+        -0.0
+      ],
+      "orthoScale": 1.5
+    },
+    "source": "provided",
+    "seconds": 0.6584705799998574,
+    "size": 256,
+    "samples": 16,
+    "engine": "CYCLES"
+  },
+  {
+    "file": "images/01.png",
+    "camera": {
+      "yaw": 35,
+      "pitch": 22,
+      "fov": 40,
+      "distance": 3,
+      "target": [
+        0.0,
+        0.47586798667907715,
+        -0.0
+      ],
+      "orthoScale": 1.5
+    },
+    "source": "provided",
+    "seconds": 0.62979872599999,
+    "size": 256,
+    "samples": 16,
+    "engine": "CYCLES"
+  },
+  {
+    "file": "images/02.png",
+    "camera": {
+      "yaw": 90,
+      "pitch": 5,
+      "fov": 40,
+      "distance": 3,
+      "target": [
+        0.0,
+        0.47586798667907715,
+        -0.0
+      ],
+      "orthoScale": 1.5
+    },
+    "source": "provided",
+    "seconds": 0.8061709910000445,
+    "size": 256,
+    "samples": 16,
+    "engine": "CYCLES"
+  },
+  {
+    "file": "images/03.png",
+    "camera": {
+      "yaw": 180,
+      "pitch": 12,
+      "fov": 40,
+      "distance": 3,
+      "target": [
+        0.0,
+        0.47586798667907715,
+        -0.0
+      ],
+      "orthoScale": 1.5
+    },
+    "source": "provided",
+    "seconds": 0.8127273650000006,
+    "size": 256,
+    "samples": 16,
+    "engine": "CYCLES"
+  }
+]

@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "pack": "chess-set",
+  "builder": "blender",
+  "minutes": 0.28681666666666666,
+  "status": "complete",
+  "credit": "Codex (GPT-6)",
+  "quality": "draft",
+  "seed": 1,
+  "coordinates": "normalized-y-up",
+  "mesh": "result.glb",
+  "splat": "result.ply",
+  "normalization": {
+    "centerMeters": [
+      0,
+      0.10250000655651093,
+      0
+    ],
+    "radiusMeters": 0.7144972017748459
+  },
+  "static": "static.ply",
+  "tiers": {
+    "desktop": {
+      "splats": 300000,
+      "emittedSplats": 295559,
+      "components": [
+        {
+          "file": "static.ply",
+          "splats": 294208
+        },
+        {
+          "file": "parts/white-pawn.ply",
+          "splats": 1376
+        }
+      ],
+      "file": "result.ply",
+      "static": "static.ply",
+      "parts": [
+        {
+          "name": "white-pawn",
+          "file": "parts/white-pawn.ply"
+        }
+      ]
+    },
+    "phone": {
+      "splats": 90000,
+      "emittedSplats": 88665,
+      "components": [
+        {
+          "file": "phone/static.ply",
+          "splats": 88227
+        },
+        {
+          "file": "phone/parts/white-pawn.ply",
+          "splats": 410
+        }
+      ],
+      "file": "phone/result.ply",
+      "static": "phone/static.ply",
+      "parts": [
+        {
+          "name": "white-pawn",
+          "file": "phone/parts/white-pawn.ply"
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "white-pawn",
+      "pivotMeters": [
+        -0.3675,
+        0.033,
+        -0.262
+      ],
+      "motion": {
+        "part": "white-pawn",
+        "how": "bounce",
+        "axis": "y",
+        "amount": 0.08
+      },
+      "mesh": "parts/white-pawn.glb",
+      "file": "parts/white-pawn.ply",
+      "pivot": [
+        -0.5143477106517871,
+        -0.09727120887789276,
+        -0.3666914290905258
+      ]
+    }
+  ],
+  "license": {
+    "images": "CC0",
+    "source": "https://polyhaven.com/a/chess_set",
+    "author": "Riley Queen"
+  },
+  "materials": "Procedural base colors baked to textures; GLB keeps roughness and metallic factors. Splats are opaque, unlit surfaces.",
+  "provenance": {
+    "blender": "4.5.3 LTS",
+    "modelSha256": "8094f518bd5dfa7bd8c2536c442517f168a7f58ec28e39040de09c14ad6cd4c2",
+    "inputs": [
+      {
+        "file": "pack.json",
+        "sha256": "2a3051f6a8dbf3ebb1402878083e0b852a7c176b3eaea534dd1f0d8be823143c"
+      },
+      {
+        "file": "images/00.png",
+        "sha256": "cebd51b9336e09d3dfd8b25b2934d5884ceb51ee3c041f8663dbe1db9d473c52"
+      },
+      {
+        "file": "images/00-mask.png",
+        "sha256": "b4395280e1e26d47a93a9074e5af814ce547dd7d47c03431b6c67b55f6f4ba06"
+      },
+      {
+        "file": "images/01.png",
+        "sha256": "dd0f79fb6d82925039828e95213c90caee3b61326755e4249ce992f7ea049d7e"
+      },
+      {
+        "file": "images/01-mask.png",
+        "sha256": "bc9be2287470c5111e1c48064c4da1cc32ca0745bb7ae328a51491d91c4b4509"
+      },
+      {
+        "file": "images/02.png",
+        "sha256": "c0cbf52d9580a0744840ffc18476fc4808a3e244bac955ce020ca631ca056cf2"
+      },
+      {
+        "file": "images/02-mask.png",
+        "sha256": "6362b297af099fd4c1a84dce90875d31c4e1ff4d8f826e062e84ccc7adc6c472"
+      },
+      {
+        "file": "images/03.png",
+        "sha256": "15e49b06834805cd08e04c8edfcfbf2cf963052b9c556a508fdc65e8b661e4b9"
+      },
+      {
+        "file": "images/03-mask.png",
+        "sha256": "330f6027902d65dd24f754ebd2cb939643bbae1452d2166e0b66eb80dea360f1"
+      }
+    ],
+    "meshSha256": "d1e4d0d074107f10855df8081a25d259def516e3c75a95cc66fc94df6424e79d",
+    "splatSha256": "4a33bbc8809202e6ab5aa5250b14ce666d4eaae31f485c1347a5135d12251285"
+  },
+  "scorer": "refblend-score-lite"
+}

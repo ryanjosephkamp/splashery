@@ -1,0 +1,115 @@
+{
+  "blenderVersion": "4.5.3 LTS",
+  "parts": [
+    {
+      "name": "bell",
+      "pivotMeters": [
+        0.2,
+        0.72,
+        0
+      ],
+      "motion": {
+        "part": "bell",
+        "how": "wobble",
+        "axis": "z",
+        "amount": 12
+      },
+      "mesh": "parts/bell.glb"
+    }
+  ],
+  "static": true,
+  "cameras": [
+    {
+      "file": "images/00.png",
+      "camera": {
+        "yaw": 0,
+        "pitch": 0,
+        "fov": 40,
+        "distance": 3,
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "orthoScale": 1.5
+      },
+      "source": "provided",
+      "seconds": 0.1932493990002513,
+      "size": 256,
+      "samples": 4,
+      "engine": "CYCLES"
+    },
+    {
+      "file": "images/01.png",
+      "camera": {
+        "yaw": 35,
+        "pitch": 22,
+        "fov": 40,
+        "distance": 3,
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "orthoScale": 1.5
+      },
+      "source": "provided",
+      "seconds": 0.18200138300016988,
+      "size": 256,
+      "samples": 4,
+      "engine": "CYCLES"
+    },
+    {
+      "file": "images/02.png",
+      "camera": {
+        "yaw": 90,
+        "pitch": 5,
+        "fov": 40,
+        "distance": 3,
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "orthoScale": 1.5
+      },
+      "source": "provided",
+      "seconds": 0.10056186099973274,
+      "size": 256,
+      "samples": 4,
+      "engine": "CYCLES"
+    },
+    {
+      "file": "images/03.png",
+      "camera": {
+        "yaw": 180,
+        "pitch": 12,
+        "fov": 40,
+        "distance": 3,
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "orthoScale": 1.5
+      },
+      "source": "provided",
+      "seconds": 0.15504454000029,
+      "size": 256,
+      "samples": 4,
+      "engine": "CYCLES"
+    }
+  ],
+  "boundsBlender": [
+    [
+      -0.3779999911785126,
+      -0.19200001657009125,
+      -0.0029999916441738605
+    ],
+    [
+      0.3779999911785126,
+      0.1600000113248825,
+      1.01321542263031
+    ]
+  ]
+}

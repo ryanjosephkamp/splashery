@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "pack": "rubber-duck-real",
+  "builder": "blender",
+  "minutes": 0.28015,
+  "status": "complete",
+  "credit": "Codex (GPT-6)",
+  "quality": "good",
+  "seed": 1,
+  "coordinates": "normalized-y-up",
+  "mesh": "result.glb",
+  "splat": "result.ply",
+  "normalization": {
+    "centerMeters": [
+      -1.341104507446289e-7,
+      0.47999999672174454,
+      -1.1920928955078125e-7
+    ],
+    "radiusMeters": 0.7730696689790028
+  },
+  "static": "static.ply",
+  "tiers": {
+    "desktop": {
+      "splats": 300000,
+      "emittedSplats": 295526,
+      "components": [
+        {
+          "file": "static.ply",
+          "splats": 201728
+        },
+        {
+          "file": "parts/head.ply",
+          "splats": 93734
+        }
+      ],
+      "file": "result.ply",
+      "static": "static.ply",
+      "parts": [
+        {
+          "name": "head",
+          "file": "parts/head.ply"
+        }
+      ]
+    },
+    "phone": {
+      "splats": 90000,
+      "emittedSplats": 88648,
+      "components": [
+        {
+          "file": "phone/static.ply",
+          "splats": 60463
+        },
+        {
+          "file": "phone/parts/head.ply",
+          "splats": 28175
+        }
+      ],
+      "file": "phone/result.ply",
+      "static": "phone/static.ply",
+      "parts": [
+        {
+          "name": "head",
+          "file": "phone/parts/head.ply"
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "head",
+      "pivotMeters": [
+        0,
+        0.5,
+        0.07
+      ],
+      "motion": {
+        "part": "head",
+        "how": "wobble",
+        "axis": "z",
+        "amount": 12
+      },
+      "mesh": "parts/head.glb",
+      "file": "parts/head.ply",
+      "pivot": [
+        1.7347783275697427e-7,
+        0.025870893763908206,
+        0.09054826753420438
+      ]
+    }
+  ],
+  "license": {
+    "images": "CC0",
+    "source": "https://polyhaven.com/a/rubber_duck_toy",
+    "author": "Plat251"
+  },
+  "materials": "Procedural base colors baked to textures; GLB keeps roughness and metallic factors. Splats are opaque, unlit surfaces.",
+  "provenance": {
+    "blender": "4.5.3 LTS",
+    "modelSha256": "de1cb9d8310d646832c8b27c1b3c3bcd9b9a395e07e98178e2a39a67cc5562de",
+    "inputs": [
+      {
+        "file": "pack.json",
+        "sha256": "315a8709ad6c808ef30e1597e1e934d0e7bf8befe96cacef660a7795f3196aeb"
+      },
+      {
+        "file": "images/00.png",
+        "sha256": "bd5ebfafde532b9be03709e06e4113c32b552027db966a12c189a5c1ca521d00"
+      },
+      {
+        "file": "images/00-mask.png",
+        "sha256": "bada6ca6da6e0b42363be63db753016debbe79001f5924d85f6661344d8d5082"
+      },
+      {
+        "file": "images/01.png",
+        "sha256": "d40afc36683d535649a25e55b0be2836369c083ee122af4c0f8e9eba4b831da3"
+      },
+      {
+        "file": "images/01-mask.png",
+        "sha256": "3bb625027e99b03b09ed5f18279d40151b36a06ecb0120ebbe395853b00e9f53"
+      },
+      {
+        "file": "images/02.png",
+        "sha256": "e5ded49c80fa6e402c99b66a11e6c0e69dc771c1d615ceeff14dd90b3a5f8f10"
+      },
+      {
+        "file": "images/02-mask.png",
+        "sha256": "dd0da754550ca95fc782f5bb430bbaa1cce11f90b126112f9c518bdc47185f7b"
+      },
+      {
+        "file": "images/03.png",
+        "sha256": "7cf7be909b9451a335095c48bccfc7371eb73581f9898a031bd6d6c3f12c8ede"
+      },
+      {
+        "file": "images/03-mask.png",
+        "sha256": "0ee9c77151d9cef02064282c3f218e9c7c66d26c08a36472b95c8d92e94e8280"
+      }
+    ],
+    "meshSha256": "d80ff22d1e2c3f1e7ed397f3f23339ce132589c2aae8220c426cabb542f18220",
+    "splatSha256": "9598b3ec412d7e31ab750f18902ac33465f093fc308a9cc87618743019b79542"
+  },
+  "scorer": "refblend-score-lite"
+}

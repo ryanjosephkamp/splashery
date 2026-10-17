@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "scorer": "refblend-score-lite",
+  "units": "0-100",
+  "overall": {
+    "silhouetteIoU": 86.57593895234831
+  },
+  "pictures": [
+    {
+      "file": "images/00.png",
+      "silhouetteIoU": 83.1777108433735,
+      "maskMethod": "provided",
+      "camera": {
+        "yaw": 0,
+        "pitch": 0,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "file": "images/01.png",
+      "silhouetteIoU": 88.73566780291291,
+      "maskMethod": "provided",
+      "camera": {
+        "yaw": 35,
+        "pitch": 22,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "file": "images/02.png",
+      "silhouetteIoU": 89.51005025125627,
+      "maskMethod": "provided",
+      "camera": {
+        "yaw": 90,
+        "pitch": 5,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "file": "images/03.png",
+      "silhouetteIoU": 84.88032691185056,
+      "maskMethod": "provided",
+      "camera": {
+        "yaw": 180,
+        "pitch": 12,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Silhouette only; no boundary, color, edge, Chamfer, or volume score",
+    "View hints are not fitted cameras; supply images[].camera for calibrated scoring"
+  ]
+}

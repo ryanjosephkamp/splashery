@@ -1,0 +1,115 @@
+{
+  "blenderVersion": "4.5.3 LTS",
+  "parts": [
+    {
+      "name": "head",
+      "pivotMeters": [
+        0,
+        0.5,
+        0.07
+      ],
+      "motion": {
+        "part": "head",
+        "how": "wobble",
+        "axis": "z",
+        "amount": 12
+      },
+      "mesh": "parts/head.glb"
+    }
+  ],
+  "static": true,
+  "cameras": [
+    {
+      "file": "images/00.png",
+      "camera": {
+        "yaw": 0,
+        "pitch": 0,
+        "fov": 40,
+        "distance": 3,
+        "target": [
+          0,
+          0.47586798667907715,
+          0
+        ],
+        "orthoScale": 1.5
+      },
+      "source": "provided",
+      "seconds": 0.09247814799982734,
+      "size": 256,
+      "samples": 4,
+      "engine": "CYCLES"
+    },
+    {
+      "file": "images/01.png",
+      "camera": {
+        "yaw": 35,
+        "pitch": 22,
+        "fov": 40,
+        "distance": 3,
+        "target": [
+          0,
+          0.47586798667907715,
+          0
+        ],
+        "orthoScale": 1.5
+      },
+      "source": "provided",
+      "seconds": 0.10322494699994422,
+      "size": 256,
+      "samples": 4,
+      "engine": "CYCLES"
+    },
+    {
+      "file": "images/02.png",
+      "camera": {
+        "yaw": 90,
+        "pitch": 5,
+        "fov": 40,
+        "distance": 3,
+        "target": [
+          0,
+          0.47586798667907715,
+          0
+        ],
+        "orthoScale": 1.5
+      },
+      "source": "provided",
+      "seconds": 0.10995260400022744,
+      "size": 256,
+      "samples": 4,
+      "engine": "CYCLES"
+    },
+    {
+      "file": "images/03.png",
+      "camera": {
+        "yaw": 180,
+        "pitch": 12,
+        "fov": 40,
+        "distance": 3,
+        "target": [
+          0,
+          0.47586798667907715,
+          0
+        ],
+        "orthoScale": 1.5
+      },
+      "source": "provided",
+      "seconds": 0.09924701499994626,
+      "size": 256,
+      "samples": 4,
+      "engine": "CYCLES"
+    }
+  ],
+  "boundsBlender": [
+    [
+      -0.35599982738494873,
+      -0.49999985098838806,
+      0.01000000536441803
+    ],
+    [
+      0.3559999465942383,
+      0.5,
+      0.949999988079071
+    ]
+  ]
+}

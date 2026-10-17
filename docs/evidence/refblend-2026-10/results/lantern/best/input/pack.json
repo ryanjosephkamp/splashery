@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "id": "lantern",
+  "name": "Lantern 01",
+  "images": [
+    {
+      "file": "images/00.png",
+      "view": "front",
+      "mask": "images/00-mask.png",
+      "camera": {
+        "yaw": 0,
+        "pitch": 0,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "file": "images/01.png",
+      "view": "three-quarter",
+      "mask": "images/01-mask.png",
+      "camera": {
+        "yaw": 35,
+        "pitch": 22,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "file": "images/02.png",
+      "view": "right",
+      "mask": "images/02-mask.png",
+      "camera": {
+        "yaw": 90,
+        "pitch": 5,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "file": "images/03.png",
+      "view": "back",
+      "mask": "images/03-mask.png",
+      "camera": {
+        "yaw": 180,
+        "pitch": 12,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    }
+  ],
+  "budget": {
+    "minutes": 30,
+    "quality": "good"
+  },
+  "license": {
+    "images": "CC0",
+    "source": "https://polyhaven.com/a/Lantern_01",
+    "author": "Rajil Jose Macatangay"
+  },
+  "moves": [
+    {
+      "part": "handle",
+      "how": "hinge",
+      "axis": "x",
+      "amount": 50
+    }
+  ],
+  "size": {
+    "width": 0.4149094223976135,
+    "depth": 0.3302777409553528,
+    "height": 1,
+    "units": "m",
+    "source": "Normalized CC0 truth scale; largest dimension is one meter"
+  },
+  "notes": "Rebuild from the four pictures. Scorer truth geometry is stored separately.",
+  "parts": []
+}

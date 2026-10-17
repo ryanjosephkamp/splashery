@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "id": "modeling-kit-showcase",
+  "name": "Modeling kit showcase",
+  "images": [
+    {
+      "file": "images/00.png",
+      "view": "three-quarter",
+      "camera": {
+        "yaw": 35,
+        "pitch": 20,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 2.0,
+        "target": [
+          -0.05,
+          0.45,
+          0
+        ]
+      }
+    }
+  ],
+  "notes": "Original procedural demonstration, not a reconstruction benchmark. Drawer, door, and swivel move as solid pieces.",
+  "moves": [
+    {
+      "part": "drawer",
+      "how": "slide",
+      "axis": "z",
+      "amount": 0.2
+    },
+    {
+      "part": "door",
+      "how": "hinge",
+      "axis": "y",
+      "amount": -70
+    },
+    {
+      "part": "swivel",
+      "how": "spin",
+      "axis": "y",
+      "amount": 360
+    }
+  ],
+  "budget": {
+    "minutes": 30,
+    "quality": "good"
+  },
+  "license": {
+    "images": "CC0",
+    "source": "Original procedural kit demonstration",
+    "author": "Codex (GPT-6)"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "size": 1080,
+  "width": 1080,
+  "height": 1080,
+  "fps": 30,
+  "seconds": 2,
+  "frames": 60,
+  "tier": "phone",
+  "rigid": {
+    "parts": 3,
+    "maxDistanceChange": 3.110037782860786e-10
+  },
+  "browserErrors": [],
+  "provenance": {
+    "blender": "4.5.3 LTS",
+    "modelSha256": "f937461cef7860e829043f05aeae756622d19c6dc64d1e00e92fbfbc2db2fde9",
+    "inputs": [
+      {
+        "file": "pack.json",
+        "sha256": "d5901cbba26b902f270fe19073db020b6af4a2444b7c01e0daa922776ed8f67d"
+      },
+      {
+        "file": "images/00.png",
+        "sha256": "93720f1acbe0b0b2f0f265dd1b013c02382b122199cd60409ab8da67522d5745"
+      }
+    ],
+    "meshSha256": "4a163f63671bcb62fd38c15ff3cb849c70fa3f4333f82ad9c5ff8d81898c0980",
+    "splatSha256": "5a48473475a3504036bbb7568b6b68f67f7077fb1316943b2445a149791d8d57"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "file": "images/00.png",
+    "camera": {
+      "yaw": 35,
+      "pitch": 20,
+      "fov": 40,
+      "distance": 3,
+      "target": [
+        -0.05,
+        0.45,
+        0
+      ],
+      "orthoScale": 2.0
+    },
+    "source": "provided",
+    "seconds": 5.300376633000042,
+    "size": 256,
+    "samples": 16,
+    "engine": "CYCLES"
+  }
+]

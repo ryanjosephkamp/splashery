@@ -1,0 +1,14 @@
+{
+  "id": "alarm-clock",
+  "name": "Alarm Clock 01",
+  "source": "polyhaven:alarm_clock_01",
+  "page": "https://polyhaven.com/a/alarm_clock_01",
+  "author": "Yann Kervran, James Ray Cock",
+  "license": "CC0 1.0",
+  "splats": 200000,
+  "checked": "October 17, 2026",
+  "sourceSha256": "ca16e83e334e28f8eaf2bf1fbf8ce043b7e4fe5d0e171d01a264b12f5f42a78c",
+  "truthSha256": "1ce095ba683b4822be89270bca55d4c503178a947c4d532bed574e677ff5c2fa",
+  "changes": "Normalized assembly, product-photo renders, and foreground masks",
+  "credit": "Codex (GPT-6)"
+}

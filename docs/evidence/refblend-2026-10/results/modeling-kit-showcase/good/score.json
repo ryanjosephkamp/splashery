@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "scorer": "refblend-score-lite",
+  "units": "0-100",
+  "overall": {
+    "silhouetteIoU": 100
+  },
+  "pictures": [
+    {
+      "file": "images/00.png",
+      "silhouetteIoU": 100,
+      "maskMethod": "corner-color-distance-35",
+      "camera": {
+        "yaw": 35,
+        "pitch": 20,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 2,
+        "target": [
+          -0.05,
+          0.45,
+          0
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Silhouette only; no boundary, color, edge, Chamfer, or volume score",
+    "View hints are not fitted cameras; supply images[].camera for calibrated scoring"
+  ]
+}

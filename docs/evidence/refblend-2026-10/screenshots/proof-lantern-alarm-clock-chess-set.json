@@ -1,0 +1,47 @@
+[
+  {
+    "id": "lantern",
+    "sizes": [
+      [
+        390,
+        674
+      ],
+      [
+        1440,
+        782
+      ]
+    ],
+    "tapped": true,
+    "browserErrors": []
+  },
+  {
+    "id": "alarm-clock",
+    "sizes": [
+      [
+        390,
+        636
+      ],
+      [
+        1440,
+        782
+      ]
+    ],
+    "tapped": true,
+    "browserErrors": []
+  },
+  {
+    "id": "chess-set",
+    "sizes": [
+      [
+        390,
+        636
+      ],
+      [
+        1440,
+        782
+      ]
+    ],
+    "tapped": true,
+    "browserErrors": []
+  }
+]

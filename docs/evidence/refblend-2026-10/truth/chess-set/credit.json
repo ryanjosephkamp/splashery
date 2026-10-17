@@ -1,0 +1,14 @@
+{
+  "id": "chess-set",
+  "name": "Chess Set",
+  "source": "polyhaven:chess_set",
+  "page": "https://polyhaven.com/a/chess_set",
+  "author": "Riley Queen",
+  "license": "CC0 1.0",
+  "splats": 200000,
+  "checked": "October 17, 2026",
+  "sourceSha256": "3e21ecd0c2ffb703dfdb3f3ea7a379c1dbd4ec513ba2cb8e6cb1e5f276d7eb91",
+  "truthSha256": "b550cf3723352bd414b486534e10d973dbc7f55776e4f899e4a600d596f11f00",
+  "changes": "Normalized assembly, product-photo renders, and foreground masks",
+  "credit": "Codex (GPT-6)"
+}

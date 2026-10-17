@@ -1,0 +1,180 @@
+{
+  "schema": 1,
+  "licensePage": "https://polyhaven.com/license",
+  "entries": [
+    {
+      "id": "lantern",
+      "sourcePage": "https://polyhaven.com/a/Lantern_01",
+      "author": "Rajil Jose Macatangay",
+      "license": "CC0 1.0",
+      "checked": "October 17, 2026",
+      "api": "https://api.polyhaven.com/files/Lantern_01",
+      "changes": "Normalized assembly and rendered calibrated photos and masks; reconstructed new geometry from the photos",
+      "files": [
+        {
+          "file": "Lantern_01.bin",
+          "bytes": 864852,
+          "sha256": "cb0c7eaaea361546201ba1c4324581ac7147c221851657b6e23d2f854beabe49"
+        },
+        {
+          "file": "Lantern_01.gltf",
+          "bytes": 4866,
+          "sha256": "d3f8d7a7afec96d55d3b7f20c3e329c909d19d37047902a826bc157f77c27819"
+        },
+        {
+          "file": "textures/Lantern_01_brass_diff_1k.jpg",
+          "bytes": 140998,
+          "sha256": "d19d4c9417719a89ad824ce3a142f38f5e58c47b8640edca5eacca66918b608e"
+        },
+        {
+          "file": "textures/Lantern_01_brass_nor_gl_1k.jpg",
+          "bytes": 180646,
+          "sha256": "95f89554c659712c7591a2a3d61178c9c0c0ef2c26e133005f24e2366a10f9b8"
+        },
+        {
+          "file": "textures/Lantern_01_brass_arm_1k.jpg",
+          "bytes": 229054,
+          "sha256": "479e7105b170713373fdcca0c2f7dcce81913990f60cd4cfba1631f80f550191"
+        }
+      ]
+    },
+    {
+      "id": "alarm-clock",
+      "sourcePage": "https://polyhaven.com/a/alarm_clock_01",
+      "author": "Yann Kervran, James Ray Cock",
+      "license": "CC0 1.0",
+      "checked": "October 17, 2026",
+      "api": "https://api.polyhaven.com/files/alarm_clock_01",
+      "changes": "Normalized assembly and rendered calibrated photos and masks; reconstructed new geometry from the photos",
+      "files": [
+        {
+          "file": "alarm_clock_01.bin",
+          "bytes": 284408,
+          "sha256": "74b589dc31596fe9350e8ef6d123571955d58cee9955060d831fa0f3055758c6"
+        },
+        {
+          "file": "alarm_clock_01.gltf",
+          "bytes": 10056,
+          "sha256": "ca16e83e334e28f8eaf2bf1fbf8ce043b7e4fe5d0e171d01a264b12f5f42a78c"
+        },
+        {
+          "file": "textures/alarm_clock_01_arm_1k.jpg",
+          "bytes": 538163,
+          "sha256": "99727eb8908dfea5aac2a2353af7ff60857e40c50b396d7efbe15df685fe4918"
+        },
+        {
+          "file": "textures/alarm_clock_01_nor_gl_1k.jpg",
+          "bytes": 420026,
+          "sha256": "a0a7b35de5712e23d06832e49516ec0e1170aa159eb60ec9b2af0b0df2102fa4"
+        },
+        {
+          "file": "textures/alarm_clock_01_diff_1k.jpg",
+          "bytes": 404998,
+          "sha256": "deb82094c2c1aa8cda0a0ce7192b193a81c5376743344503764abbcd2db19ac1"
+        }
+      ]
+    },
+    {
+      "id": "rubber-duck-real",
+      "sourcePage": "https://polyhaven.com/a/rubber_duck_toy",
+      "author": "Plat251",
+      "license": "CC0 1.0",
+      "checked": "October 17, 2026",
+      "api": "https://api.polyhaven.com/files/rubber_duck_toy",
+      "changes": "Normalized assembly and rendered calibrated photos and masks; reconstructed new geometry from the photos",
+      "files": [
+        {
+          "file": "rubber_duck_toy.bin",
+          "bytes": 105376,
+          "sha256": "381e1373b99a4ff23d5ee02cb66bfb5e7d897eaa280581f19b652c38ffd83314"
+        },
+        {
+          "file": "rubber_duck_toy.gltf",
+          "bytes": 3180,
+          "sha256": "dcf036297843dad2775841fc41208fae8c776066848d3f6e26efa42eb98d5016"
+        },
+        {
+          "file": "textures/rubber_duck_toy_nor_gl_1k.jpg",
+          "bytes": 48768,
+          "sha256": "fc00541d9708328f383498914a5ed9935231a87f15ec002d5675af3f2347b544"
+        },
+        {
+          "file": "textures/rubber_duck_toy_arm_1k.jpg",
+          "bytes": 346707,
+          "sha256": "07df1a805350811e8522dafce6133b98ce2f191326e7256315a15dfaaa4193a0"
+        },
+        {
+          "file": "textures/rubber_duck_toy_diff_1k.jpg",
+          "bytes": 231027,
+          "sha256": "c968d6185c3ec57a430818e6af85c2ba2880c7ee19ccb1a0171730926175cfd6"
+        }
+      ]
+    },
+    {
+      "id": "chess-set",
+      "sourcePage": "https://polyhaven.com/a/chess_set",
+      "author": "Riley Queen",
+      "license": "CC0 1.0",
+      "checked": "October 17, 2026",
+      "api": "https://api.polyhaven.com/files/chess_set",
+      "changes": "Normalized assembly and rendered calibrated photos and masks; reconstructed new geometry from the photos",
+      "files": [
+        {
+          "file": "chess_set.bin",
+          "bytes": 1732220,
+          "sha256": "c73476fd032a2cb4a9c256f70573eed260708132fdc42fec161c6216711560b3"
+        },
+        {
+          "file": "chess_set.gltf",
+          "bytes": 53740,
+          "sha256": "3e21ecd0c2ffb703dfdb3f3ea7a379c1dbd4ec513ba2cb8e6cb1e5f276d7eb91"
+        },
+        {
+          "file": "textures/chess_set_pieces_white_diff_1k.jpg",
+          "bytes": 590948,
+          "sha256": "d9e06002509d73c3f343e1643f0c89ef84e24602f1f6858b5628e8f3e55ae77d"
+        },
+        {
+          "file": "textures/chess_set_pieces_black_diff_1k.jpg",
+          "bytes": 480796,
+          "sha256": "74471018f96f197c963cc89e7dae19960b03bc2e4bf448e4b0beb51bfee5b85d"
+        },
+        {
+          "file": "textures/chess_set_pieces_white_arm_1k.jpg",
+          "bytes": 841156,
+          "sha256": "9604c461ee6d5d4f5937891b0468ff7efd354299074b139d04029b03c326e434"
+        },
+        {
+          "file": "textures/chess_set_board_arm_1k.jpg",
+          "bytes": 756404,
+          "sha256": "67387308ce3a6424a1666e742c6556853344c01fbfcda8453b6e2e2f62bc6d30"
+        },
+        {
+          "file": "textures/chess_set_board_nor_gl_1k.jpg",
+          "bytes": 227381,
+          "sha256": "bc5657ec58e0e04a2e8fa6d50ec0f6e3009b1c22b8391ccdde1a4d5d9db30d4d"
+        },
+        {
+          "file": "textures/chess_set_board_diff_1k.jpg",
+          "bytes": 602985,
+          "sha256": "cca44d214f48ebe2205362a3996265d1fed727e094835bec2c873e91c653eaa5"
+        },
+        {
+          "file": "textures/chess_set_pieces_black_arm_1k.jpg",
+          "bytes": 833327,
+          "sha256": "e0413b36e970c645bd9b6192bfe788b318d9bd9f4f3746cf137552bfee118982"
+        },
+        {
+          "file": "textures/chess_set_pieces_black_nor_gl_1k.jpg",
+          "bytes": 421230,
+          "sha256": "b92343bba552e82f271f86def504e806e73c6f5dfc4469a90fa5b4f66013bfcd"
+        },
+        {
+          "file": "textures/chess_set_pieces_white_nor_gl_1k.jpg",
+          "bytes": 443642,
+          "sha256": "51c31dc44d1d0f01c10b759be7903bea9d5b04781b63dc45738dd70a6e31dd6c"
+        }
+      ]
+    }
+  ]
+}

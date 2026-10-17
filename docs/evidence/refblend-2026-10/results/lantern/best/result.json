@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "pack": "lantern",
+  "builder": "blender",
+  "minutes": 0.2731166666666667,
+  "status": "complete",
+  "credit": "Codex (GPT-6)",
+  "quality": "best",
+  "seed": 1,
+  "coordinates": "normalized-y-up",
+  "mesh": "result.glb",
+  "splat": "result.ply",
+  "normalization": {
+    "centerMeters": [
+      0,
+      0.503000020980835,
+      0
+    ],
+    "radiusMeters": 0.5679410290765745
+  },
+  "static": "static.ply",
+  "tiers": {
+    "desktop": {
+      "splats": 300000,
+      "emittedSplats": 295568,
+      "components": [
+        {
+          "file": "static.ply",
+          "splats": 286739
+        },
+        {
+          "file": "parts/handle.ply",
+          "splats": 8704
+        }
+      ],
+      "file": "result.ply",
+      "static": "static.ply",
+      "parts": [
+        {
+          "name": "handle",
+          "file": "parts/handle.ply"
+        }
+      ]
+    },
+    "phone": {
+      "splats": 90000,
+      "emittedSplats": 88642,
+      "components": [
+        {
+          "file": "phone/static.ply",
+          "splats": 86065
+        },
+        {
+          "file": "phone/parts/handle.ply",
+          "splats": 2608
+        }
+      ],
+      "file": "phone/result.ply",
+      "static": "phone/static.ply",
+      "parts": [
+        {
+          "name": "handle",
+          "file": "phone/parts/handle.ply"
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "handle",
+      "pivotMeters": [
+        0,
+        0.65,
+        0
+      ],
+      "motion": {
+        "part": "handle",
+        "how": "hinge",
+        "axis": "x",
+        "amount": 50
+      },
+      "mesh": "parts/handle.glb",
+      "file": "parts/handle.ply",
+      "pivot": [
+        0,
+        0.25882965218796566,
+        0
+      ]
+    }
+  ],
+  "license": {
+    "images": "CC0",
+    "source": "https://polyhaven.com/a/Lantern_01",
+    "author": "Rajil Jose Macatangay"
+  },
+  "materials": "Procedural base colors baked to textures; GLB keeps roughness and metallic factors. Splats are opaque, unlit surfaces.",
+  "provenance": {
+    "blender": "4.5.3 LTS",
+    "modelSha256": "ac61c7da826082894ccd84fe7f755e9fc1172ea340e9c98a0275abaf7e41da8b",
+    "inputs": [
+      {
+        "file": "pack.json",
+        "sha256": "283d18e30ad13a13a4fee436e6eb3aa44149635b5be545a9e8853c0576b3a578"
+      },
+      {
+        "file": "images/00.png",
+        "sha256": "f44ebf16af1987c3290f564cbee9e17d1c609a325be5a8f01e7badb435456131"
+      },
+      {
+        "file": "images/00-mask.png",
+        "sha256": "e101c18ba9881e05ee8596ce3cf483d74eaa408ce14160956fbafb0741f3a5af"
+      },
+      {
+        "file": "images/01.png",
+        "sha256": "8ea7aab3434d983e48f9cea0de6e5623f4a9aba2fd56db246096eee300bbd7d6"
+      },
+      {
+        "file": "images/01-mask.png",
+        "sha256": "4a97bca4c7fb5ad7b766179b28227c64e7b045c23d8cda9caff9a4087a7e9758"
+      },
+      {
+        "file": "images/02.png",
+        "sha256": "7bf4bdd9d5bc7460468f6ed4582416518af9aaa6c0c3f010065a7616937dc39a"
+      },
+      {
+        "file": "images/02-mask.png",
+        "sha256": "e064f06333eb263fff653772756ff75a9988edcc44e9204172f35834b3b24cf0"
+      },
+      {
+        "file": "images/03.png",
+        "sha256": "198edc7e6c2fdea56ff6f46d49c2b0749f76a3088f04acd988b4341a514414b3"
+      },
+      {
+        "file": "images/03-mask.png",
+        "sha256": "5d2556bbdaac339267c599e50c70682d4b7ae149e23407fd09b939d280ef2af4"
+      }
+    ],
+    "meshSha256": "9117f1bac59c16ad46c0e362419a6fbbb6e4faa32ff13e96215127840ef1da71",
+    "splatSha256": "e1576f2e5c1258e0fbe3636c3f2e663a80a5cdc6201b9e2e6287680ba3298af5"
+  },
+  "scorer": "refblend-score-lite"
+}

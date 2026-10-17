@@ -1,0 +1,85 @@
+{
+  "blenderVersion": "4.5.3 LTS",
+  "parts": [
+    {
+      "name": "drawer",
+      "pivotMeters": [
+        -0.45,
+        0.6,
+        0
+      ],
+      "motion": {
+        "part": "drawer",
+        "how": "slide",
+        "axis": "z",
+        "amount": 0.2
+      },
+      "mesh": "parts/drawer.glb"
+    },
+    {
+      "name": "door",
+      "pivotMeters": [
+        -0.73,
+        0.3,
+        0.23
+      ],
+      "motion": {
+        "part": "door",
+        "how": "hinge",
+        "axis": "y",
+        "amount": -70
+      },
+      "mesh": "parts/door.glb"
+    },
+    {
+      "name": "swivel",
+      "pivotMeters": [
+        0.45,
+        0.43,
+        0
+      ],
+      "motion": {
+        "part": "swivel",
+        "how": "spin",
+        "axis": "y",
+        "amount": 360
+      },
+      "mesh": "parts/swivel.glb"
+    }
+  ],
+  "static": true,
+  "cameras": [
+    {
+      "file": "images/00.png",
+      "camera": {
+        "yaw": 35,
+        "pitch": 20,
+        "fov": 40,
+        "distance": 3,
+        "target": [
+          -0.05,
+          0.45,
+          0
+        ],
+        "orthoScale": 2
+      },
+      "source": "provided",
+      "seconds": 0.32156406100011736,
+      "size": 256,
+      "samples": 16,
+      "engine": "CYCLES"
+    }
+  ],
+  "boundsBlender": [
+    [
+      -0.7699999809265137,
+      -0.29512080550193787,
+      0.0
+    ],
+    [
+      0.7099999785423279,
+      0.23999999463558197,
+      0.9225000143051147
+    ]
+  ]
+}

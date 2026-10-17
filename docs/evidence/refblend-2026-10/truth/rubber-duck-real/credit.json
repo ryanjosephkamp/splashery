@@ -1,0 +1,14 @@
+{
+  "id": "rubber-duck-real",
+  "name": "Rubber Duck Toy",
+  "source": "polyhaven:rubber_duck_toy",
+  "page": "https://polyhaven.com/a/rubber_duck_toy",
+  "author": "Plat251",
+  "license": "CC0 1.0",
+  "splats": 200000,
+  "checked": "October 17, 2026",
+  "sourceSha256": "dcf036297843dad2775841fc41208fae8c776066848d3f6e26efa42eb98d5016",
+  "truthSha256": "ab42ffda57abd2cf8feb179c30439f566a03a2b93225b97fae7cb6a86c5d6d92",
+  "changes": "Normalized assembly, product-photo renders, and foreground masks",
+  "credit": "Codex (GPT-6)"
+}

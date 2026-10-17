@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "pack": "alarm-clock",
+  "builder": "blender",
+  "minutes": 0.11393333333333333,
+  "status": "complete",
+  "credit": "Codex (GPT-6)",
+  "quality": "good",
+  "seed": 1,
+  "coordinates": "normalized-y-up",
+  "mesh": "result.glb",
+  "splat": "result.ply",
+  "normalization": {
+    "centerMeters": [
+      0,
+      0.5051077157258987,
+      -0.002499997615814209
+    ],
+    "radiusMeters": 0.6624859884317406
+  },
+  "static": "static.ply",
+  "tiers": {
+    "desktop": {
+      "splats": 300000,
+      "emittedSplats": 295459,
+      "components": [
+        {
+          "file": "static.ply",
+          "splats": 282189
+        },
+        {
+          "file": "parts/bell.ply",
+          "splats": 13315
+        }
+      ],
+      "file": "result.ply",
+      "static": "static.ply",
+      "parts": [
+        {
+          "name": "bell",
+          "file": "parts/bell.ply"
+        }
+      ]
+    },
+    "phone": {
+      "splats": 90000,
+      "emittedSplats": 88648,
+      "components": [
+        {
+          "file": "phone/static.ply",
+          "splats": 84652
+        },
+        {
+          "file": "phone/parts/bell.ply",
+          "splats": 3989
+        }
+      ],
+      "file": "phone/result.ply",
+      "static": "phone/static.ply",
+      "parts": [
+        {
+          "name": "bell",
+          "file": "phone/parts/bell.ply"
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "bell",
+      "pivotMeters": [
+        0.2,
+        0.72,
+        0
+      ],
+      "motion": {
+        "part": "bell",
+        "how": "wobble",
+        "axis": "z",
+        "amount": 12
+      },
+      "mesh": "parts/bell.glb",
+      "file": "parts/bell.ply",
+      "pivot": [
+        0.3018931773537533,
+        0.3243725724415721,
+        0.0037736611180747967
+      ]
+    }
+  ],
+  "license": {
+    "images": "CC0",
+    "source": "https://polyhaven.com/a/alarm_clock_01",
+    "author": "Yann Kervran, James Ray Cock"
+  },
+  "materials": "Procedural base colors baked to textures; GLB keeps roughness and metallic factors. Splats are opaque, unlit surfaces.",
+  "provenance": {
+    "blender": "4.5.3 LTS",
+    "modelSha256": "b887d4e247be8aa31adf4bb5a77393a039750b09ccb20b0b1dcec6ec41755cac",
+    "inputs": [
+      {
+        "file": "pack.json",
+        "sha256": "69c969408366eac2983fd668c2a404972eedb6c9439fc4f554fad8a2b55f3ae6"
+      },
+      {
+        "file": "images/00.png",
+        "sha256": "08a0ef23c03395be86c0343d4a3ab39fddc1598e203df7c7c24a8c853cdbf6cb"
+      },
+      {
+        "file": "images/00-mask.png",
+        "sha256": "2643c039b1dc56c6c89fd82115f86ea13067ea471d30096dfb220b9bdd55c29a"
+      },
+      {
+        "file": "images/01.png",
+        "sha256": "f2476b655debc11dc3bb2495e4dd07ff186b4a5c9ccd321df288e770d4ef3b2b"
+      },
+      {
+        "file": "images/01-mask.png",
+        "sha256": "a32cee600f4f65059b716f244bdf6b1f5194eabfb128eab76ad00a1bfd099069"
+      },
+      {
+        "file": "images/02.png",
+        "sha256": "610171fc56e0e3236416ee331c20ca9e5ee4d09caf4b49ba14b20fa01f5b0ce6"
+      },
+      {
+        "file": "images/02-mask.png",
+        "sha256": "4fd2d96dfd07dd7dbef643639badb9074783c0c11c15c945fd94b3432d272f2c"
+      },
+      {
+        "file": "images/03.png",
+        "sha256": "c1cbeae6c82ea71a3e05fa191516ca2eba80b704a34e6e6b4eaf91710d868e4c"
+      },
+      {
+        "file": "images/03-mask.png",
+        "sha256": "135b21916da7761c16f91d5be21f21cda50213743d92a44fd754c6ba9eefbd4e"
+      }
+    ],
+    "meshSha256": "1b619c467df1e690c313b145894dc9bd92bbe4261ad50bc474ab9ed26e127dff",
+    "splatSha256": "47f3838ae058d87e308af023edb85bacc98f60d89c22ba92beda98e7872d2ba5"
+  },
+  "scorer": "refblend-score-lite"
+}

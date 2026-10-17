@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "id": "chess-set",
+  "name": "Chess Set",
+  "images": [
+    {
+      "file": "images/00.png",
+      "mask": "images/00-mask.png",
+      "view": "front",
+      "camera": {
+        "yaw": 0,
+        "pitch": 0,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0.0,
+          0.10154125094413757,
+          -0.0
+        ]
+      }
+    },
+    {
+      "file": "images/01.png",
+      "mask": "images/01-mask.png",
+      "view": "three-quarter",
+      "camera": {
+        "yaw": 35,
+        "pitch": 22,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0.0,
+          0.10154125094413757,
+          -0.0
+        ]
+      }
+    },
+    {
+      "file": "images/02.png",
+      "mask": "images/02-mask.png",
+      "view": "right",
+      "camera": {
+        "yaw": 90,
+        "pitch": 5,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0.0,
+          0.10154125094413757,
+          -0.0
+        ]
+      }
+    },
+    {
+      "file": "images/03.png",
+      "mask": "images/03-mask.png",
+      "view": "back",
+      "camera": {
+        "yaw": 180,
+        "pitch": 12,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0.0,
+          0.10154125094413757,
+          -0.0
+        ]
+      }
+    }
+  ],
+  "size": {
+    "width": 1.0,
+    "depth": 1.0,
+    "height": 0.20308250188827515,
+    "units": "m",
+    "source": "Normalized CC0 truth scale; largest dimension is one meter"
+  },
+  "notes": "Rebuild from the four pictures. Scorer truth geometry is stored separately.",
+  "parts": [],
+  "moves": [
+    {
+      "part": "white-pawn",
+      "how": "bounce",
+      "axis": "y",
+      "amount": 0.08
+    }
+  ],
+  "budget": {
+    "minutes": 30,
+    "quality": "good"
+  },
+  "license": {
+    "images": "CC0",
+    "source": "https://polyhaven.com/a/chess_set",
+    "author": "Riley Queen"
+  }
+}

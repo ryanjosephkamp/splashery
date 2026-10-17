@@ -1,0 +1,14 @@
+{
+  "id": "lantern",
+  "name": "Lantern 01",
+  "source": "polyhaven:Lantern_01",
+  "page": "https://polyhaven.com/a/Lantern_01",
+  "author": "Rajil Jose Macatangay",
+  "license": "CC0 1.0",
+  "splats": 200000,
+  "checked": "October 17, 2026",
+  "sourceSha256": "d3f8d7a7afec96d55d3b7f20c3e329c909d19d37047902a826bc157f77c27819",
+  "truthSha256": "0b9913deeaac7a4ae2ca049effa49bd7f5254089dc322634931a7e61a8aa6deb",
+  "changes": "Normalized assembly, product-photo renders, and foreground masks",
+  "credit": "Codex (GPT-6)"
+}

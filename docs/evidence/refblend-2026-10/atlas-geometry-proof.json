@@ -1,0 +1,98 @@
+[
+  {
+    "id": "lantern",
+    "quality": "draft",
+    "orientedTriangleSha256": "73c38e481c8dc95dd85d83f0864bb9c0832b752dbc129ebfeb207247d712c174",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "lantern",
+    "quality": "good",
+    "orientedTriangleSha256": "5d5b61f3d298fe84ddaa332b0b6f8c44f8167b85381aa77e2ad49527c02258fb",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "lantern",
+    "quality": "best",
+    "orientedTriangleSha256": "a3b7d8bce9388b79774f8aef6f97efe9a072ced2712c8de16c070a3148595267",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "alarm-clock",
+    "quality": "draft",
+    "orientedTriangleSha256": "5e81e2bb4f5a870180d5feca2f73d2faa7203dc8caf5260d2c86f549ec409f0c",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "alarm-clock",
+    "quality": "good",
+    "orientedTriangleSha256": "fd92762f36feba87f8141adcddda94ccf1529e4226ccd4322568c92d7c4396f7",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "alarm-clock",
+    "quality": "best",
+    "orientedTriangleSha256": "49ebb5c966c7fae01d60a1f37480305ff3f3faac0c89236564e4100b0ff532e8",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "rubber-duck-real",
+    "quality": "draft",
+    "orientedTriangleSha256": "848e6fe7bd9c36111bea7c5d34ddd85082886fd39d15815c072ff383a9cd6a6e",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "rubber-duck-real",
+    "quality": "good",
+    "orientedTriangleSha256": "5e2deafc6628f78e0a53b0fff35b0711bd9422afddacece56c3ed69a574c4fc2",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "rubber-duck-real",
+    "quality": "best",
+    "orientedTriangleSha256": "cc8cd243a17a1ee8f61d1a7b787212b449bae2a4821719354897447e31a4b481",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "chess-set",
+    "quality": "draft",
+    "orientedTriangleSha256": "81bc8870defe2ba0e2fba97650ef81874cd53667ffc611a86b214aed7343143d",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "chess-set",
+    "quality": "good",
+    "orientedTriangleSha256": "3f27fa5290ef1863e324acc6d819b229aaaaf9e403e7b64a15817f38250c84a1",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  },
+  {
+    "id": "chess-set",
+    "quality": "best",
+    "orientedTriangleSha256": "a0992b51d381095fa8b38e9897d1f0a34682fde138bc2c38a334a47e9d9d9445",
+    "identicalTriangles": true,
+    "identicalSilhouette": true,
+    "volumeMeasurement": "Reused after exact oriented-triangle comparison; UV-only bake correction"
+  }
+]

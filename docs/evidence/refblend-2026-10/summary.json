@@ -1,0 +1,813 @@
+{
+  "schema": 1,
+  "credit": "Codex (GPT-6)",
+  "maker": "Made by Ryan with Codex (GPT-6)",
+  "generatedAssetsLicense": "CC0",
+  "matrix": [
+    {
+      "id": "lantern",
+      "quality": "draft",
+      "blind": true,
+      "silhouetteIoU": 83.12513388570386,
+      "volumeIoU": 0.6031705005600069,
+      "voxelResolution": 128,
+      "seconds": 4.962999999999999,
+      "meanRenderSeconds": 0.056880341000123735,
+      "renderSeconds": [
+        0.0780759079998461, 0.05560648700020465, 0.042829882000205544,
+        0.05100908700023865
+      ],
+      "modelSha256": "ac61c7da826082894ccd84fe7f755e9fc1172ea340e9c98a0275abaf7e41da8b",
+      "meshSha256": "122d7e1cfd0fc02c06a2fb80b4d6e50f8feee45ac705a0da2fe3760149345c90",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88637,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 85814
+          },
+          {
+            "file": "phone/parts/handle.ply",
+            "splats": 2843
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "handle",
+            "file": "phone/parts/handle.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295504,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 286071
+          },
+          {
+            "file": "parts/handle.ply",
+            "splats": 9374
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "handle",
+            "file": "parts/handle.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6027731,
+      "assembledDesktopBytes": 20094688,
+      "animatedPhoneBytes": 6029505
+    },
+    {
+      "id": "lantern",
+      "quality": "good",
+      "blind": true,
+      "silhouetteIoU": 86.50190946826989,
+      "volumeIoU": 0.636168893398726,
+      "voxelResolution": 128,
+      "seconds": 6.464,
+      "meanRenderSeconds": 0.1801229965001312,
+      "renderSeconds": [
+        0.20927654500019344, 0.1858620390003125, 0.14598690799994074,
+        0.1793664940000781
+      ],
+      "modelSha256": "ac61c7da826082894ccd84fe7f755e9fc1172ea340e9c98a0275abaf7e41da8b",
+      "meshSha256": "240cb5ef89cefaedb111a535b207cdae563734b100e4f31d65d2ec9c671da084",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88688,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 86064
+          },
+          {
+            "file": "phone/parts/handle.ply",
+            "splats": 2608
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "handle",
+            "file": "phone/parts/handle.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295514,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 286799
+          },
+          {
+            "file": "parts/handle.ply",
+            "splats": 8705
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "handle",
+            "file": "parts/handle.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6031199,
+      "assembledDesktopBytes": 20095368,
+      "animatedPhoneBytes": 6030525
+    },
+    {
+      "id": "lantern",
+      "quality": "best",
+      "blind": true,
+      "silhouetteIoU": 86.57593895234831,
+      "volumeIoU": 0.6361561866125761,
+      "voxelResolution": 128,
+      "seconds": 16.387,
+      "meanRenderSeconds": 1.1719484052500775,
+      "renderSeconds": [
+        1.3900756100001672, 1.213849540999945, 0.8649671510002008,
+        1.2189013189999969
+      ],
+      "modelSha256": "ac61c7da826082894ccd84fe7f755e9fc1172ea340e9c98a0275abaf7e41da8b",
+      "meshSha256": "9117f1bac59c16ad46c0e362419a6fbbb6e4faa32ff13e96215127840ef1da71",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88642,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 86065
+          },
+          {
+            "file": "phone/parts/handle.ply",
+            "splats": 2608
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "handle",
+            "file": "phone/parts/handle.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295568,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 286739
+          },
+          {
+            "file": "parts/handle.ply",
+            "splats": 8704
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "handle",
+            "file": "parts/handle.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6028071,
+      "assembledDesktopBytes": 20099040,
+      "animatedPhoneBytes": 6030593
+    },
+    {
+      "id": "alarm-clock",
+      "quality": "draft",
+      "blind": true,
+      "silhouetteIoU": 89.7949492748526,
+      "volumeIoU": 0.7976855965250013,
+      "voxelResolution": 128,
+      "seconds": 7.463,
+      "meanRenderSeconds": 0.15771429575011098,
+      "renderSeconds": [
+        0.1932493990002513, 0.18200138300016988, 0.10056186099973274,
+        0.15504454000029
+      ],
+      "modelSha256": "b887d4e247be8aa31adf4bb5a77393a039750b09ccb20b0b1dcec6ec41755cac",
+      "meshSha256": "d86c1920a3cb478330acb54df2eb6b64a536ecc80ba9e1d9dbcda081fba4faec",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88682,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 83544
+          },
+          {
+            "file": "phone/parts/bell.ply",
+            "splats": 5136
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "bell",
+            "file": "phone/parts/bell.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295476,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 278370
+          },
+          {
+            "file": "parts/bell.ply",
+            "splats": 17130
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "bell",
+            "file": "parts/bell.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6030791,
+      "assembledDesktopBytes": 20092784,
+      "animatedPhoneBytes": 6031069
+    },
+    {
+      "id": "alarm-clock",
+      "quality": "good",
+      "blind": true,
+      "silhouetteIoU": 90.45886602910716,
+      "volumeIoU": 0.777624873804144,
+      "voxelResolution": 128,
+      "seconds": 6.836,
+      "meanRenderSeconds": 0.25614735249996556,
+      "renderSeconds": [
+        0.2688917499999661, 0.28050377099998514, 0.17024964599977466,
+        0.30494424300013634
+      ],
+      "modelSha256": "b887d4e247be8aa31adf4bb5a77393a039750b09ccb20b0b1dcec6ec41755cac",
+      "meshSha256": "1b619c467df1e690c313b145894dc9bd92bbe4261ad50bc474ab9ed26e127dff",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88648,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 84652
+          },
+          {
+            "file": "phone/parts/bell.ply",
+            "splats": 3989
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "bell",
+            "file": "phone/parts/bell.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295459,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 282189
+          },
+          {
+            "file": "parts/bell.ply",
+            "splats": 13315
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "bell",
+            "file": "parts/bell.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6028479,
+      "assembledDesktopBytes": 20091628,
+      "animatedPhoneBytes": 6028417
+    },
+    {
+      "id": "alarm-clock",
+      "quality": "best",
+      "blind": true,
+      "silhouetteIoU": 90.48131320125682,
+      "volumeIoU": 0.7775398081758078,
+      "voxelResolution": 128,
+      "seconds": 11.436,
+      "meanRenderSeconds": 0.8917959419999306,
+      "renderSeconds": [
+        0.92682339699968, 1.0379785800000718, 0.6520116219999181,
+        0.9503701690000526
+      ],
+      "modelSha256": "b887d4e247be8aa31adf4bb5a77393a039750b09ccb20b0b1dcec6ec41755cac",
+      "meshSha256": "dbefb1c7661a52f3d6b5087a2f86b6a6452d2bfcaabb70348f3ddf2e2781fc05",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88607,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 84610
+          },
+          {
+            "file": "phone/parts/bell.ply",
+            "splats": 3989
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "bell",
+            "file": "phone/parts/bell.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295555,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 282202
+          },
+          {
+            "file": "parts/bell.ply",
+            "splats": 13288
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "bell",
+            "file": "parts/bell.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6025691,
+      "assembledDesktopBytes": 20098156,
+      "animatedPhoneBytes": 6025561
+    },
+    {
+      "id": "rubber-duck-real",
+      "quality": "draft",
+      "blind": true,
+      "silhouetteIoU": 94.71472089670974,
+      "volumeIoU": 0.9125882465593635,
+      "voxelResolution": 128,
+      "seconds": 5.491,
+      "meanRenderSeconds": 0.10122567849998632,
+      "renderSeconds": [
+        0.09247814799982734, 0.10322494699994422, 0.10995260400022744,
+        0.09924701499994626
+      ],
+      "modelSha256": "de1cb9d8310d646832c8b27c1b3c3bcd9b9a395e07e98178e2a39a67cc5562de",
+      "meshSha256": "d73083475df7b40c51f393905836fdce1ee028f6d3c46c5e01258bbce20421d0",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88643,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 60492
+          },
+          {
+            "file": "phone/parts/head.ply",
+            "splats": 28114
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "head",
+            "file": "phone/parts/head.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295484,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 201702
+          },
+          {
+            "file": "parts/head.ply",
+            "splats": 93819
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "head",
+            "file": "parts/head.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6028139,
+      "assembledDesktopBytes": 20093328,
+      "animatedPhoneBytes": 6026038
+    },
+    {
+      "id": "rubber-duck-real",
+      "quality": "good",
+      "blind": true,
+      "silhouetteIoU": 94.76882498102036,
+      "volumeIoU": 0.9103666171331076,
+      "voxelResolution": 128,
+      "seconds": 7.059,
+      "meanRenderSeconds": 0.3978577294999468,
+      "renderSeconds": [
+        0.3762723479999295, 0.45097719699970185, 0.4331529890000638,
+        0.33102838400009205
+      ],
+      "modelSha256": "de1cb9d8310d646832c8b27c1b3c3bcd9b9a395e07e98178e2a39a67cc5562de",
+      "meshSha256": "3ff6c0040fa25bb4c60c227ae85ecc976d6b009875a3e51d8710881d0f095b7d",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88629,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 60549
+          },
+          {
+            "file": "phone/parts/head.ply",
+            "splats": 28100
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "head",
+            "file": "phone/parts/head.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295514,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 201758
+          },
+          {
+            "file": "parts/head.ply",
+            "splats": 93724
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "head",
+            "file": "parts/head.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6027187,
+      "assembledDesktopBytes": 20095368,
+      "animatedPhoneBytes": 6028962
+    },
+    {
+      "id": "rubber-duck-real",
+      "quality": "best",
+      "blind": true,
+      "silhouetteIoU": 94.21903737920314,
+      "volumeIoU": 0.9035031396946994,
+      "voxelResolution": 128,
+      "seconds": 18.836000000000002,
+      "meanRenderSeconds": 1.3008232777498279,
+      "renderSeconds": [
+        1.3287155849998271, 1.494389647999924, 1.1903166509996481,
+        1.1898712269999123
+      ],
+      "modelSha256": "de1cb9d8310d646832c8b27c1b3c3bcd9b9a395e07e98178e2a39a67cc5562de",
+      "meshSha256": "d469276ca119bda5f3dd2e1774135d560a8a9f59d02f1c30961f1833c4ceef71",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88618,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 63127
+          },
+          {
+            "file": "phone/parts/head.ply",
+            "splats": 25611
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "head",
+            "file": "phone/parts/head.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295626,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 210138
+          },
+          {
+            "file": "parts/head.ply",
+            "splats": 85401
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "head",
+            "file": "parts/head.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6026439,
+      "assembledDesktopBytes": 20102984,
+      "animatedPhoneBytes": 6035014
+    },
+    {
+      "id": "chess-set",
+      "quality": "draft",
+      "blind": false,
+      "silhouetteIoU": 91.82622540368494,
+      "volumeIoU": 0.9434460207523365,
+      "voxelResolution": 128,
+      "seconds": 17.209,
+      "meanRenderSeconds": 0.16355888150008013,
+      "renderSeconds": [
+        0.1409369200000583, 0.21151072400016346, 0.1402558009999666,
+        0.16153208100013217
+      ],
+      "modelSha256": "8094f518bd5dfa7bd8c2536c442517f168a7f58ec28e39040de09c14ad6cd4c2",
+      "meshSha256": "d1e4d0d074107f10855df8081a25d259def516e3c75a95cc66fc94df6424e79d",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88665,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 88227
+          },
+          {
+            "file": "phone/parts/white-pawn.ply",
+            "splats": 410
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "white-pawn",
+            "file": "phone/parts/white-pawn.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295559,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 294208
+          },
+          {
+            "file": "parts/white-pawn.ply",
+            "splats": 1376
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "white-pawn",
+            "file": "parts/white-pawn.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6029635,
+      "assembledDesktopBytes": 20098428,
+      "animatedPhoneBytes": 6028144
+    },
+    {
+      "id": "chess-set",
+      "quality": "good",
+      "blind": false,
+      "silhouetteIoU": 92.39607774629152,
+      "volumeIoU": 0.9434280273789306,
+      "voxelResolution": 128,
+      "seconds": 47.858999999999995,
+      "meanRenderSeconds": 0.7401133390001178,
+      "renderSeconds": [
+        0.5117671420002807, 1.0680226819999916, 0.6021130250001079,
+        0.7785505070000909
+      ],
+      "modelSha256": "8094f518bd5dfa7bd8c2536c442517f168a7f58ec28e39040de09c14ad6cd4c2",
+      "meshSha256": "eba2c25b7c458963610aee67da4935ce67b21a746ed8d6b10930f91ace98417a",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88771,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 88499
+          },
+          {
+            "file": "phone/parts/white-pawn.ply",
+            "splats": 259
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "white-pawn",
+            "file": "phone/parts/white-pawn.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295552,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 294648
+          },
+          {
+            "file": "parts/white-pawn.ply",
+            "splats": 929
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "white-pawn",
+            "file": "parts/white-pawn.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6036843,
+      "assembledDesktopBytes": 20097952,
+      "animatedPhoneBytes": 6036372
+    },
+    {
+      "id": "chess-set",
+      "quality": "best",
+      "blind": false,
+      "silhouetteIoU": 92.31307791096359,
+      "volumeIoU": 0.943366861317624,
+      "voxelResolution": 128,
+      "seconds": 59.903999999999996,
+      "meanRenderSeconds": 1.2847021735001363,
+      "renderSeconds": [
+        0.8328895670001657, 1.9083302330000151, 0.9521787470002891,
+        1.445410147000075
+      ],
+      "modelSha256": "8094f518bd5dfa7bd8c2536c442517f168a7f58ec28e39040de09c14ad6cd4c2",
+      "meshSha256": "f790dde8768a67690657561c5d2d33c85eb074633ac945c04d8c96fa40ca8fc0",
+      "phone": {
+        "splats": 90000,
+        "emittedSplats": 88734,
+        "components": [
+          {
+            "file": "phone/static.ply",
+            "splats": 88568
+          },
+          {
+            "file": "phone/parts/white-pawn.ply",
+            "splats": 279
+          }
+        ],
+        "file": "phone/result.ply",
+        "static": "phone/static.ply",
+        "parts": [
+          {
+            "name": "white-pawn",
+            "file": "phone/parts/white-pawn.ply"
+          }
+        ]
+      },
+      "desktop": {
+        "splats": 300000,
+        "emittedSplats": 295570,
+        "components": [
+          {
+            "file": "static.ply",
+            "splats": 294625
+          },
+          {
+            "file": "parts/white-pawn.ply",
+            "splats": 922
+          }
+        ],
+        "file": "result.ply",
+        "static": "static.ply",
+        "parts": [
+          {
+            "name": "white-pawn",
+            "file": "parts/white-pawn.ply"
+          }
+        ]
+      },
+      "assembledPhoneBytes": 6034327,
+      "assembledDesktopBytes": 20099176,
+      "animatedPhoneBytes": 6042424
+    }
+  ],
+  "blindMedians": {
+    "draft": {
+      "silhouetteIoU": 89.7949492748526,
+      "volumeIoU": 0.7976855965250013
+    },
+    "good": {
+      "silhouetteIoU": 90.45886602910716,
+      "volumeIoU": 0.777624873804144
+    },
+    "best": {
+      "silhouetteIoU": 90.48131320125682,
+      "volumeIoU": 0.7775398081758078
+    }
+  },
+  "repeatability": [
+    {
+      "id": "lantern",
+      "sameModelSha256": true,
+      "perViewDelta": [0.0, 0.0, 0.0, 0.0],
+      "maxDelta": 0.0,
+      "overallDelta": 0.0
+    },
+    {
+      "id": "alarm-clock",
+      "sameModelSha256": true,
+      "perViewDelta": [0.0, 0.0, 0.0, 0.0],
+      "maxDelta": 0.0,
+      "overallDelta": 0.0
+    },
+    {
+      "id": "rubber-duck-real",
+      "sameModelSha256": true,
+      "perViewDelta": [0.0, 0.0, 0.0, 0.0],
+      "maxDelta": 0.0,
+      "overallDelta": 0.0
+    },
+    {
+      "id": "chess-set",
+      "sameModelSha256": true,
+      "perViewDelta": [0.0, 0.0, 0.0, 0.0],
+      "maxDelta": 0.0,
+      "overallDelta": 0.0
+    }
+  ],
+  "limitations": [
+    "Chess set excluded from blind medians because setup printed source dimensions",
+    "Voxel estimates, not exact Boolean volumes",
+    "Known cameras; fallback silhouette score only"
+  ]
+}

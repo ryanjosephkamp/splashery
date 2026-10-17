@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "id": "alarm-clock",
+  "name": "Alarm Clock 01",
+  "images": [
+    {
+      "file": "images/00.png",
+      "mask": "images/00-mask.png",
+      "view": "front",
+      "camera": {
+        "yaw": 0,
+        "pitch": 0,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0.0,
+          0.5,
+          -0.0
+        ]
+      }
+    },
+    {
+      "file": "images/01.png",
+      "mask": "images/01-mask.png",
+      "view": "three-quarter",
+      "camera": {
+        "yaw": 35,
+        "pitch": 22,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0.0,
+          0.5,
+          -0.0
+        ]
+      }
+    },
+    {
+      "file": "images/02.png",
+      "mask": "images/02-mask.png",
+      "view": "right",
+      "camera": {
+        "yaw": 90,
+        "pitch": 5,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0.0,
+          0.5,
+          -0.0
+        ]
+      }
+    },
+    {
+      "file": "images/03.png",
+      "mask": "images/03-mask.png",
+      "view": "back",
+      "camera": {
+        "yaw": 180,
+        "pitch": 12,
+        "fov": 40,
+        "distance": 3,
+        "orthoScale": 1.5,
+        "target": [
+          0.0,
+          0.5,
+          -0.0
+        ]
+      }
+    }
+  ],
+  "size": {
+    "width": 0.755937397480011,
+    "depth": 0.38327017426490784,
+    "height": 1.0,
+    "units": "m",
+    "source": "Normalized CC0 truth scale; largest dimension is one meter"
+  },
+  "notes": "Rebuild from the four pictures. Scorer truth geometry is stored separately.",
+  "parts": [],
+  "moves": [
+    {
+      "part": "bell",
+      "how": "wobble",
+      "axis": "z",
+      "amount": 12
+    }
+  ],
+  "budget": {
+    "minutes": 30,
+    "quality": "good"
+  },
+  "license": {
+    "images": "CC0",
+    "source": "https://polyhaven.com/a/alarm_clock_01",
+    "author": "Yann Kervran, James Ray Cock"
+  }
+}

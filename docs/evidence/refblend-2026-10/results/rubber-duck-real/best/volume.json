@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "volumeIoU": 0.9035031396946994,
+  "resolution": 128,
+  "voxelMeters": 0.007812509313225746,
+  "sampledVoxels": 1436672,
+  "occupiedResult": 558314,
+  "occupiedTruth": 559345,
+  "method": "Union per mesh; majority of three nonzero oriented BVH ray winding tests; fixed world-space grid; no alignment fitting",
+  "limitations": [
+    "Source open surfaces can make inside/outside ambiguous",
+    "Finite voxel resolution; not an exact Boolean volume"
+  ]
+}
