@@ -4047,8 +4047,8 @@ Proposals below are suggestions; the owner may change them.
     in place of the grainy rustle. Codex task 78c: the six Overprint forms, live form switches, and
     push recovery. Lane PT3 (the owner's walkthrough of October 17, 2026; Opus 5.5): every form in
     the toy's palette, a morph paired along a space-filling curve, crisp letters and QR modules,
-    more splats (half the Splats slider, up to 200,000), and two soft tines in place of the robotic
-    pad, which is now banned for new toys.
+    more splats (the Splats slider's count, up to 400,000), and two soft tines in place of the
+    robotic pad, which is now banned for new toys.
   - Sound: A soft tine as the cloud leaves, a faint breath of air under the flight, and a second
     tine a fifth up as the form lands.
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.

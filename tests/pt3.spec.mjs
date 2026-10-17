@@ -332,9 +332,14 @@ test("Shape morph's QR form scans in the toy's colors, and its count follows the
   expect(emoji.count).toBe(6000);
   expect(emoji.range).toBeGreaterThan(0.4);
   expect(emoji.off).toBe(0);
-  // Half the slider's count (the recipe's density), up to 200,000.
+  // The engine's budget for the slider (half of it before lane SPL1's
+  // engine, the count itself after), up to 400,000.
   await page.evaluate(() => window.__splashery.app.setSplats(300000));
-  await page.waitForFunction(() => window.__splashery.player.motion.ctx.buf.count === 150000, null, { timeout: 120_000 }); // prettier-ignore
+  await page.waitForFunction(() => {
+    const p = window.__splashery.player;
+    return p.motion.ctx.buf.count === Math.min(400000, p.splatBudget(0.5));
+  }, null, { timeout: 120_000 }); // prettier-ignore
+  expect(await page.evaluate(() => window.__splashery.player.motion.ctx.buf.count)).toBeGreaterThanOrEqual(150000); // prettier-ignore
   await page.evaluate(() => window.__splashery.app.setSplats(null));
   expect(errors).toEqual([]);
 });

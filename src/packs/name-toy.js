@@ -998,7 +998,10 @@ export const RECIPES = {
     },
     build(k, o) {
       let name = safeName(o.name);
-      const count = nameBudget(k.count, o.detail, browser() && !!window.__splashery?.player?.splats); // prettier-ignore
+      // The slider set this build: lane SPL1's engine says so (k.slider);
+      // before it, the player's own setting does.
+      const slid = k.slider != null || (browser() && !!window.__splashery?.player?.splats);
+      const count = nameBudget(k.count, o.detail, slid);
       k.count = count;
       const layout = nameLayout(name, count);
       name = layout.name; // "?" when nothing in it draws

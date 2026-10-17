@@ -50,9 +50,10 @@ Both toys are labs toys: the Operator merges after the full suite and the owner'
     (contrast over 4.5 everywhere; it scans in the browser test). Two-ink keeps its two inks.
   - A morph pairs the old cloud and the new form by rank along a 3D Hilbert curve through each one's
     own box (`pairForm`), so neighbors land near neighbors.
-  - Density 0.5 (30,000 to 140,000 by device; half the Splats slider, up to 200,000). The Lorenz
-    path is sampled between its steps; the gyroid and the Klein bottle overlap more; QR modules
-    shrink their splats at sides that meet the other shade, so modules read as clean squares.
+  - Density 0.5 (30,000 to 140,000 by device; the Splats slider's count up to 400,000 once lane
+    SPL1's engine is in, half of it before). The Lorenz path is sampled between its steps; the
+    gyroid and the Klein bottle overlap more; QR modules shrink their splats at sides that meet the
+    other shade, so modules read as clean squares.
 - `src/packs/name-toy.js`:
   - No sound while the view turns (it still counts as a touch, so the idle sway waits).
   - Toy Box's voices in the site's engine (`SOUNDS`): the bar (a sine on the letter's note, 0.55 s,

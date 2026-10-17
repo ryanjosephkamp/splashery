@@ -38,7 +38,7 @@ export const FORMS = [
 const formOf = (o) => (FORMS.some((f) => f.id === o.form) ? o.form : "word");
 const SHAPES = FORMS.filter((f) => f.id !== "word" && f.id !== "qr");
 export const MAX_FORMS = 16;
-export const MOST_SPLATS = 200000;
+export const MOST_SPLATS = 400000; // the Splats slider's most
 const MAX_WORD = 24; // as the Word box's own limit
 const unit = (v) => {
   const r = Math.hypot(...v) || 1;
@@ -596,7 +596,8 @@ export const RECIPES = {
     turntable: false,
     kernel: "sharp",
     // Lane PT3: 30,000 on low, 70,000 on mid, 100,000 on high, 140,000 on
-    // max, and half the Splats slider's count (up to 200,000).
+    // max; the Splats slider gives the count itself (lane SPL1's engine) or,
+    // before it, half the slider's count.
     density: 0.5,
     options: [
       { key: "form", label: "Form", type: "select", default: "word", choices: FORMS },
