@@ -1,8 +1,28 @@
 # Flaky tests — October 17, 2026
 
-Checkpoint, 04:49 UTC. Acceptance remains incomplete.
+Checkpoint, 06:06 UTC. Live acceptance receipts continue in
+[draft PR #703](https://github.com/ryanjosephkamp/splashery/pull/703).
 
 ## Summary
+
+**WORKING (four-hour checkpoint, 06:06 UTC):** Seven families have current-code Actions stress
+receipts at 30/30 per variant; the earlier split WebGPU comparisons also passed 30/30 per toy, with
+current-helper WebGPU still running. The native close-focus repair is red/green proved locally, all
+13 Share tests and the existing focus-preservation test pass, and all 16 target variants pass one
+complete cross-family validation run. The new mirror wait passes both unchanged clips once; formal
+30/30 is still required. Source publication follows the audit formatting gate. Remaining work:
+mirror and Share stress proof, retained controlled repetitions, final synchronization/preflight, and
+two clean full Actions runs. The 05:28–05:50 workspace outage returned a fresh checkout; externally
+backed-up proof and prepared controls were restored.
+
+Implementation head: `23664b6dc4e289b50ea3035346f4a8846379ff13`. Whole-repository Prettier and
+American English checks passed before publication.
+[The all-family 30-repetition Actions campaign](https://github.com/ryanjosephkamp/splashery/actions/runs/39004136389)
+is running on this immutable head; current song, quartz, fluid, teddy, sample audio, and physics
+checks each passed 30/30; every current-helper WebGL image toy also passed 30/30. Mirror and Share
+remain diagnostic until their causes and repairs are proved. The current native-sort helper passed
+all 16 complete FX/IMG checks locally, across both renderers, with no skips; this pilot used four
+workers and no extra burners, so it is validation rather than 30-run stress acceptance.
 
 Codex built this task 100 repair and stress harness. **WORKING:** started October 17, 2026, about
 02:06 UTC; deadline 14:06 UTC. This stays a draft until every variant passes 30/30 under recorded
@@ -11,8 +31,9 @@ load and two full Actions runs are clean.
 Published repairs observe native audio output and actual motion-tap storage, wait for the fitted
 camera and its rendered projection, observe complete fluid requests, split shader comparisons by toy
 at the original 240-second deadline, transport every RGBA byte losslessly, and repair two collision
-races in separate Engine commits. A native-sort readiness repair has reproduced and corrected the
-historical image failure in a controlled probe; it is published, and its final stress proof is next.
+races in separate Engine commits. The native-sort readiness repair reproduced and corrected the
+historical image failure in a controlled probe. All current-helper WebGL image toys now pass 30/30;
+current-helper WebGPU remains running.
 
 Task 50 [#581](https://github.com/ryanjosephkamp/splashery/pull/581) supplied turntable shutdown and
 camera-fit readiness. An actual completed frame is also needed to refresh the cached projection. Its
@@ -25,28 +46,55 @@ Baseline: immutable main `ceb51de7a015377d7f350119c27a792fc1a8a66d`.
 10 repetitions, four fully parallel workers, two constant CPU burners, Node 22.23.3, Chromium 141.
 Mesa llvmpipe was used except SwiftShader for PHY and sample audio.
 [Preserved raw evidence](https://github.com/ryanjosephkamp/splashery/tree/codex/flaky-tests-clips/docs/audits/flaky-tests-raw)
-is on the separate clips branch, currently `b4a41c691`; never merge it.
+is on the separate clips branch, currently `feb68b577`; never merge it.
 
-| Original case   |                                                       Before failures / completed |                                  After passes / completed | Cause and status                                                                                                                                                                                                                          |
-| --------------- | --------------------------------------------------------------------------------: | --------------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| cdx-mir:294     |                                                        Still 0/10; low-light 0/10 |                                                   Pending | Historical still drift 0.981 against 0.95. Native render/sampling diagnosis continues.                                                                                                                                                    |
-| fl:137          |                               0/10 CPU stress; retained filled-buffer failure 1/1 |                   30/30 Actions; filled-buffer repair 1/1 | Bounded Resource Timing loses late module entries. Complete request observation retains the original checks; repeating the controlled overflow receipt.                                                                                   |
-| hh1-toys:258    | 0/10 CPU stress; controlled camera failures observed before workspace replacement |                                             30/30 Actions | Unfinished fit and stale projection alter the unchanged gesture. The controlled camera-range receipt is being repeated.                                                                                                                   |
-| shr:202         |                                                          Phone 0/10; desktop 0/10 |                                                   Pending | Two recovered Actions artifacts fail the final phone focus check after keyboard close. Native recorder observer passed 10/10 at each size; focus lifecycle diagnosis continues.                                                           |
-| hh5-gems:154    | Target 0/100 local; 94/100 runs had unintended intact-neighbor unpins, 224 events |                      Target 30/30; zero unintended unpins | Queued impacts can undo reseating; generic impacts can free an intact joint without breaking it. Natural target failure was not reproduced. Native collision regressions reproduce both invalid transitions directly.                     |
-| fx4-engine:79   |                                                                   10/10 timed out |                            Actions WebGPU per-toy running | Three old/new/new comparisons shared one deadline. Each toy now retains the original 240-second deadline and all comparisons.                                                                                                             |
-| img-engine:85   |                 8/10 timed out; controlled native-sort pressure 1/1 pixel failure | All three WebGL toys 30/30 Actions; controlled repair 1/1 | After the camera moves, the applied worker sort can still belong to the previous view. Exact failure: 1,081 changed pixels against 220; native trace confirms the stale view.                                                             |
-| sndc-engine:122 |                        0/10 Actions; earlier local busy-runner failures, raw lost |   Native-entry observer 30/30 local; prior observer 29/30 | Require decoded sample and native clock progress. Actual tap storage timestamps acceptance. Native start now precedes metadata inspection; causal controls show the old observer delayed real playback, and production delays still fail. |
-| live2:207       |                                                                      4/10 Actions |                                             30/30 Actions | Wall-origin matching loses/misidentifies clicks as native audio progresses differently. Observe actual sample clicks and draws on native output time.                                                                                     |
-| phy:64          |                                10/10: seven camera-fit timeouts, three low stacks |                                             30/30 Actions | Turntable prevents fit settlement; stale projection sends drag rays to the wrong coordinates.                                                                                                                                             |
+| Original case   |                                                                                    Before failures / completed |                                                                      After passes / completed | Cause and status                                                                                                                                                                                                                                                                                                                              |
+| --------------- | -------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| cdx-mir:294     |                             Still 2/4 failures; low-light 0/4 in clean initial local cohort; Actions 0/10 each |                                                                                       Pending | The fixed 400 ms wait can consume only 100–200 ms of native mirror draw time. Original height threshold fails; replacing the wall wait with consumed draw progress is prepared, not yet published or proved.                                                                                                                                  |
+| fl:137          |                                                            0/10 CPU stress; retained filled-buffer failure 1/1 |                                                       30/30 Actions; filled-buffer repair 1/1 | Bounded Resource Timing loses late module entries. Complete request observation retains the original checks; repeating the controlled overflow receipt.                                                                                                                                                                                       |
+| hh1-toys:258    |                              0/10 CPU stress; controlled camera failures observed before workspace replacement |                                                                                 30/30 Actions | Unfinished fit and stale projection alter the unchanged gesture. The controlled camera-range receipt is being repeated.                                                                                                                                                                                                                       |
+| shr:202         | Phone and desktop 0/10 plus 0/30 each; native close boundary 1/1 failed; new real-source regression 1/1 failed | Native close repair 1/1; all 13 Share tests and focus preservation pass; formal 30/30 pending | The native dialog leaves Save focused inside the closed preview until a later frame, reproducing the historical false/false/false focus predicate. Explicitly blur only that closed-preview focus when Record is unavailable; visible Record and external focus are preserved. The earlier hidden-pill hypothesis was unproved and discarded. |
+| hh5-gems:154    |                              Target 0/100 local; 94/100 runs had unintended intact-neighbor unpins, 224 events |                                                          Target 30/30; zero unintended unpins | Queued impacts can undo reseating; generic impacts can free an intact joint without breaking it. Natural target failure was not reproduced. Native collision regressions reproduce both invalid transitions directly.                                                                                                                         |
+| fx4-engine:79   |                                                                                                10/10 timed out |                                                           All three WebGPU toys 30/30 Actions | Three old/new/new comparisons shared one deadline. Each toy now retains the original 240-second deadline and all comparisons. This receipt predates the native-sort helper; current-helper stress remains running.                                                                                                                            |
+| img-engine:85   |                                              8/10 timed out; controlled native-sort pressure 1/1 pixel failure |                       All three toys 30/30 Actions with current helper; controlled repair 1/1 | After the camera moves, the applied worker sort can still belong to the previous view. Exact failure: 1,081 changed pixels against 220; native trace confirms the stale view. Current-helper controlled repetitions remain pending.                                                                                                           |
+| sndc-engine:122 |                 0/10 Actions; earlier local busy-runner failures, raw lost; tighter prior observer 1/30 failed |                                                  Final observer 30/30 local and 30/30 Actions | Require decoded sample and native clock progress. Actual tap storage timestamps acceptance. Native start precedes metadata inspection; causal controls show the old observer delayed real playback, and production delays still fail.                                                                                                         |
+| live2:207       |                                                                                                   4/10 Actions |                                                                                 30/30 Actions | Wall-origin matching loses/misidentifies clicks as native audio progresses differently. Observe actual sample clicks and draws on native output time.                                                                                                                                                                                         |
+| phy:64          |                                                             10/10: seven camera-fit timeouts, three low stacks |                                                                                 30/30 Actions | Turntable prevents fit settlement; stale projection sends drag rays to the wrong coordinates.                                                                                                                                                                                                                                                 |
 
 [Actions campaign 1](https://github.com/ryanjosephkamp/splashery/actions/runs/38999164406) has
 completed teddy, song, and physics 30/30, plus the earlier sample marker 30/30.
 [Campaign 2](https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618) measures the
 request, split-loop, byte-transport, and final collision repairs. FL and quartz passed 30/30; each
-of the three WebGL image toys passed 30/30. WebGPU is still running. The image receipt predates the
-newly published native-sort helper; that helper still needs separate final proof. Every split toy,
-mirror clip, and preview size requires its own 30/30.
+of the three WebGL image toys passed 30/30. Each of the three WebGPU toys also passed 30/30
+([receipt](https://github.com/ryanjosephkamp/splashery/pull/703#issuecomment-6230157845)). Those
+older receipts predate the native-sort helper. The newer
+[campaign 3 image receipt](https://github.com/ryanjosephkamp/splashery/actions/runs/39004136389)
+confirms all three WebGL toys 30/30 with the current helper. Current-helper WebGPU is still running.
+Every split toy, mirror clip, and preview size requires its own 30/30.
+
+The local mirror baseline completed 20 original cases: still 7/10 and low-light 10/10 passed. The
+clean initial eight-case cohort finished before 05:09 UTC, with two still failures (0.0005963 and
+0.0005669 against 0.00055). A recovery-backup command briefly added about 30% of one CPU around
+05:10–05:11; later results are qualified for that incidental load. The first two complete failure
+traces were backed up externally before the subsequent workspace disconnect; the final full report
+awaits recovery. Camera fit and native toy/world readiness were observed, and the 400 ms wall wait
+often consumed only 0.1–0.2 seconds of actual mirror draws. A 0.4-second consumed-draw wait is
+prepared without changing any sample, threshold, or assertion. It still needs validation and 30/30
+proof.
+
+The Share focus diagnosis now has a native red/green control. A real recorded clip is saved and
+closed through the real controls; a microtask queued by actual `HTMLDialogElement.close()` observes
+the original complete focus predicate after the close handler finishes, before the next render.
+Original code leaves `rec-save` focused inside the closed dialog: shown/focused/body are all false.
+The one-line close-path repair blurs only a remaining closed-preview descendant when Record is
+unavailable, making body true in the same task. Both original Task 52 preservation controls pass. A
+new actual `tests/shr.spec.mjs` regression failed against original source in 8.841 seconds, then the
+repaired full Share file passed 13/13, and the original focus-preservation test passed 1/1. Existing
+Share expect lines remain unchanged. The cross-family validation then passed all 16 target variants:
+four workers and no extra burners for Mesa cases, two workers and no extra burners for physics and
+sample audio on SwiftShader. Mirror still height jitter was 0.00000822 against 0.00055; all original
+measurements and thresholds remained intact. This is validation, not 30-run stress acceptance. The
+first proposed ready-pill blur did not reproduce the cause and is not in tracked source.
 
 The final local quartz comparison used the same four workers and two continuous burner threads
 across both phases: original 100/100 target assertions passed, but 224 invalid neighbor frees
@@ -85,25 +133,34 @@ English currently pass. Final main merge, preflight, all retained 30/30 gates, a
 Actions runs remain pending. `phy:64` is removed from the known list after its retained Actions
 30/30 and the full PHY file passed 6/6 locally; `tests/taps.spec.mjs` is untouched.
 
-Changed existing expect expressions: `tests/fl.spec.mjs`'s three empty-list checks call the complete
-request collector instead of the bounded Resource Timing query. The matcher and expected empty list
-are identical. Shader expect lines moved with the split; all expressions remain unchanged. Audio,
-camera, and quartz expect expressions remain byte-identical. New Engine assertions are strict
-regressions and preservation controls. Final line-number inventory will be recorded after the
-remaining repairs.
+Every changed existing expect line at source `23664b6`: `tests/fl.spec.mjs` lines 139, 142, and 145
+(original lines 141, 144, and 147) change `expect(await fluidFiles(page)).toEqual([])` to
+`expect(fluidFiles()).toEqual([])`. The collector now retains complete request events instead of
+querying the bounded Resource Timing buffer; the matcher and expected empty list are identical.
+`tests/fx4-engine.spec.mjs` line 98 (original 96) and `tests/img-engine.spec.mjs` line 104
+(original 100) change only indentation of `expect(errors).toEqual([])` when the comparisons move
+into per-toy tests. No other existing expect line differs. New Engine assertions in
+`tests/heb-engine.spec.mjs` are strict regressions and preservation controls. This inventory will be
+checked again after the remaining repairs.
 
 ## Deviations
 
-The workspace disconnected and returned as a fresh checkout twice, about 03:25 and 03:43 UTC.
-Published source and Actions evidence survived. Lost acceptance receipts are being repeated;
-completed reports are also backed up outside the workspace.
+The workspace disconnected and returned as a fresh checkout twice, about 03:25 and 03:43 UTC. It
+disconnected again about 05:28 UTC while a quiet four-case Share focus control was starting.
+Published source and Actions evidence survived. Lost acceptance receipts are repeated; completed
+reports and prepared controls are also backed up outside the workspace. The Share control cannot
+count until its complete result is recovered. The environment entered starting around 05:42 and
+reconnected at 05:50 as a fresh checkout; local probe folders were lost. External backups were
+restored and checksum-verified. The initial Share control was repeated; its interrupted run does not
+count.
 
 Early native Git transport and email-privacy failures required publishing identical verified file
 bytes through the official GitHub API, with separate logical commits, checked expected heads, and no
-force update. Native Git worked briefly, then returned persistent HTTP 503 responses after 04:20
-UTC. The official API still publishes verified trees with expected-head checks. The command-line
-Actions credential also expired, so an explicit PR label can trigger the same immutable stress
-matrix. No published history was replaced.
+force update. Native Git returned persistent HTTP 503 responses from 04:20 through 04:51 UTC, then
+recovered at 04:52. The official API published verified trees with expected-head checks during the
+outage; native refs were subsequently aligned with the exact published commit objects. The
+command-line Actions credential also expired, so an explicit PR label can trigger the same immutable
+stress matrix. No published history was replaced.
 
 The audio boundary follow-up `c8ae05ed1` was pushed before repeating the required whole-repository
 formatting gate. The full Prettier and American English checks were then run and passed, before
@@ -111,12 +168,13 @@ further implementation publication. This was a publication-order deviation.
 
 ## Known issues
 
-Remaining: establish the mirror cause and Share focus lifecycle; complete retained paired stress and
-30/30 proofs for every variant, including the current image helper; merge latest main, pass
-preflight, and complete two clean full Actions runs. The source branch has moved since the baseline;
-its final merge remains required. The historical quartz target failure itself was not reproduced;
-its invalid intact-but-unpinned state is reproduced by native collisions and observed naturally on
-neighboring quartz pieces.
+Remaining: prove the prepared native-draw mirror wait and close-focus Share repair 30/30, complete
+retained controlled repetitions, finish current-helper WebGPU stress, pass final preflight, and
+complete two clean full Actions runs. The source branch has moved since the baseline; latest main
+`aedbe4433` has now been merged locally at `0ed4b84d2`; final synchronization and preflight remain
+required. The historical quartz target failure itself was not reproduced; its invalid
+intact-but-unpinned state is reproduced by native collisions and observed naturally on neighboring
+quartz pieces.
 
 ## What was cut
 
