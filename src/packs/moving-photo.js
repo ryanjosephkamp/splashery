@@ -2611,6 +2611,10 @@ export const MOVING_PHOTO = {
     MOVING.anchor = null;
     const { cols, rows } = clipGrid(clip, k.count);
     MOVING.grid = { cols, rows };
+    // Lane MP1 (with lane SPL1's Splats slider): a splat for every pixel the clip has is all the
+    // detail it holds, so a higher count would only add splats over the same pixels; the label
+    // then says "(all this toy has)".
+    if (clip.w * clip.h <= Math.floor(k.count * 0.8)) k.all = true;
     MOVING.frame = frameAt(clip, MOVING.t);
     const width = 2;
     const height = (width * rows) / cols;
