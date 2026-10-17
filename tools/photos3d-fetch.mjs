@@ -3,10 +3,15 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
 
-const args = Object.fromEntries(process.argv.slice(2).map((v) => v.replace(/^--/, "").split("=")));
+const args = Object.fromEntries(
+  process.argv.slice(2).map((v) => {
+    const parts = v.replace(/^--/, "").split("=");
+    return [parts.shift(), parts.length ? parts.join("=") : true];
+  }),
+);
 if (args.help) {
   console.log(
-    "node tools/photos3d-fetch.mjs [--out=.cache/photos3d/buddha]\nDownloads 24 original PNGs (about 105 MB); verifies every SHA-256 against tools/assets.json. Photos stay out of git.",
+    "node tools/photos3d-fetch.mjs [--dataset=<frozen-id>] [--out=.cache/photos3d/buddha]\nDefault: 24 Buddha originals (about 105 MB). Verifies every SHA-256 against tools/assets.json. Use a separate output directory per dataset. Photos stay out of git.",
   );
 } else {
   const assets = JSON.parse(await fs.readFile("tools/assets.json", "utf8"));

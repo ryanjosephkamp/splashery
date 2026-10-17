@@ -37,6 +37,8 @@ export async function solvePhotoGraph(
     const K = initialK.map((k) => ({ ...k, f: k.f * scale }));
     const candidates = [];
     for (const e of connected) {
+      await tick();
+      signal?.throwIfAborted();
       const a = e.matches.map(([f]) => normalized(features[e.i], K[e.i], f));
       const b = e.matches.map(([, f]) => normalized(features[e.j], K[e.j], f));
       const estimate = ransacE(
@@ -226,6 +228,7 @@ export async function solvePhotoGraph(
         k2: 0,
         fFeat: localK[0].f,
         rmsBA: rms,
+        rmsBAUnits: "pixels on a virtual sensor with 960-pixel focal length",
         calibration: unknownFocal
           ? "single-lens shared focal search, no distortion model"
           : "per-photo EXIF, fixed intrinsics in normalized BA",

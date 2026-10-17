@@ -139,6 +139,7 @@ export async function browserRound2(options) {
         profile: options.profile,
         featureSide: options.featureSide,
         assumeSingleLens: options.assumeSingleLens,
+        focal35: options.focal35,
         cpuMatching: options.cpuMatching,
         workers: options.profile === "phone" ? 2 : 4,
         signal: controller.signal,
@@ -165,6 +166,7 @@ export async function browserRound2(options) {
     row.cameras = recon.cams.map((c) => ({ ...c, R: Array.from(c.R), t: Array.from(c.t) }));
     row.points = recon.points.length;
     row.rmsBA = recon.rmsBA;
+    row.rmsBAUnits = recon.rmsBAUnits;
     // A portable geometry checkpoint contains no input photographs or appearance samples.
     row.checkpoint = {
       settings: solution.settings,
@@ -183,15 +185,26 @@ export async function browserRound2(options) {
     const masks = options.masks;
     const heldOut =
       options.folds === "all"
-        ? row.cameras.map((c) => c.name)
+        ? files.map((f) => f.name).sort()
         : options.folds
           ? options.folds.split(",")
           : [null];
+    row.plannedFolds = heldOut;
     for (const name of heldOut) {
       controller.signal.throwIfAborted();
       const foldStart = performance.now();
       const fold = { heldOut: name, status: "running" };
       row.folds.push(fold);
+      if (name && !row.cameras.some((c) => c.name === name)) {
+        fold.status = "unregistered";
+        fold.reason =
+          solution.rejected.find((p) => p.name === name)?.reason ||
+          solution.graph.photos.find((p) => p.name === name)?.reason ||
+          "No solved camera";
+        fold.seconds = 0;
+        await globalThis.probeFold?.(fold);
+        continue;
+      }
       try {
         if (name && !masks?.photos?.[name])
           throw new Error("No frozen object mask for held-out photo");
@@ -298,5 +311,13 @@ export async function browserRound2(options) {
     clearTimeout(timer);
     activeSession?.dispose();
     row.seconds = (performance.now() - started) / 1000;
+    row.foldCounts = {
+      planned: row.plannedFolds?.length || 0,
+      complete: row.folds.filter((f) => f.status === "complete").length,
+      failed: row.folds.filter((f) => f.status === "failed").length,
+      unregistered: row.folds.filter((f) => f.status === "unregistered").length,
+      unfinished:
+        (row.plannedFolds?.length || 0) - row.folds.filter((f) => f.status !== "running").length,
+    };
   }
 }

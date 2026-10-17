@@ -321,7 +321,7 @@ export async function browserProbe({ profile, timeoutMs, trainSteps, match }) {
   return row;
 }
 
-async function photoProbe(options, out) {
+async function photoProbe(options, out, provenance) {
   const input = path.resolve(options.input);
   const assets = options.dataset
     ? JSON.parse(await fs.readFile("tools/assets.json", "utf8"))
@@ -346,6 +346,20 @@ async function photoProbe(options, out) {
     throw new Error("Input photos differ from frozen dataset");
   const masks = options.masks ? JSON.parse(await fs.readFile(options.masks, "utf8")) : null;
   const resume = options.resume ? JSON.parse(await fs.readFile(options.resume, "utf8")) : null;
+  if (resume && !resume.geometryProvenance?.commit)
+    throw new Error("Geometry checkpoint lacks solver-origin provenance");
+  if (resume) {
+    const origin = resume.geometryProvenance;
+    if (!/^[a-f0-9]{40}$/.test(origin.commit) || !Array.isArray(origin.sourceHashes))
+      throw new Error("Invalid geometry source provenance");
+    for (const [file, hash] of origin.sourceHashes) {
+      const bytes = execFileSync("git", ["show", `${origin.commit}:${file}`], {
+        maxBuffer: 16 * 1024 * 1024,
+      });
+      if (sha(bytes) !== hash)
+        throw new Error(`Geometry source hash differs from its originating commit: ${file}`);
+    }
+  }
   if (masks && sources.some((s) => masks.photos?.[s.name]?.sourceSha256 !== s.sha256))
     throw new Error("Evaluation mask identities differ from the input photographs");
   if (
@@ -420,7 +434,11 @@ async function photoProbe(options, out) {
     await page.exposeFunction("probeCheckpoint", (data) =>
       fs.writeFile(
         out.replace(/\.json$/, "") + ".geometry.json",
-        JSON.stringify({ ...data, sources }) + "\n",
+        JSON.stringify({
+          ...data,
+          sources,
+          geometryProvenance: resume?.geometryProvenance || provenance,
+        }) + "\n",
       ),
     );
     await page.exposeFunction("probeFold", (data) =>
@@ -443,6 +461,7 @@ async function photoProbe(options, out) {
         match: options.match,
         featureSide: options.featureSide ? Number(options.featureSide) : undefined,
         assumeSingleLens: options.assumeSingleLens === "true",
+        focal35: options.focal35 ? Number(options.focal35) : undefined,
         cpuMatching: options.match === "cpu",
         iterations: Number(options.iterations || 0),
         seed: options.seed ? Number(options.seed) : undefined,
@@ -453,13 +472,21 @@ async function photoProbe(options, out) {
       timeoutMs + 5000,
       () => browserServer.kill(),
     );
+    const truth = options.truth ? JSON.parse(await fs.readFile(options.truth, "utf8")) : null;
     return {
       ...row,
+      ...(truth
+        ? {
+            cameraScore: scoreCameras(row.cameras || [], truth.cameras, truth.sceneSize),
+            truthSha256: sha(await fs.readFile(options.truth)),
+          }
+        : {}),
       sources,
       browser: browser.version(),
       shuffleSeed: Number(options.shuffle || 0),
       maskSha256: options.masks ? sha(await fs.readFile(options.masks)) : null,
       resumeSha256: options.resume ? sha(await fs.readFile(options.resume)) : null,
+      geometryProvenance: resume?.geometryProvenance || provenance,
     };
   } catch (e) {
     return {
@@ -481,11 +508,15 @@ async function photoProbe(options, out) {
 
 async function main() {
   const options = Object.fromEntries(
-    process.argv.slice(2).map((a) => a.replace(/^--/, "").split("=")),
+    process.argv.slice(2).map((a) => {
+      const parts = a.replace(/^--/, "").split("=");
+      return [parts.shift(), parts.length ? parts.join("=") : true];
+    }),
   );
+  options.round2 = options.round2 === true || options.round2 === "true";
   if (options.help || (!options.input && !options.control)) {
     console.log(
-      "node tools/photos3d-probe.mjs --input=<photo-directory> [--profile=phone|high] [--shuffle=104] [--steps=2] [--timeout=600000] --out=<raw.json>\nOr --control=uniform|mixed [--count=24] [--calibration=free] [--sentinel=red|blue]. Exact-correspondence controls are not image-set benchmarks.",
+      "node tools/photos3d-probe.mjs --input=<photo-directory> [--profile=phone|high] [--shuffle=104] [--steps=2] [--timeout=600000] --out=<raw.json>\nRound two: add --round2 [--dataset=<frozen-id>] [--featureSide=1280|1600] [--assumeSingleLens=true|--focal35=<mm>] [--match=cpu] [--iterations=200] [--folds=all|photo-name] [--masks=<annotation.json>] [--resume=<geometry.json>] [--truth=<exact-cameras.json>]. Use a separate --port per simultaneous probe.\nOr --control=uniform|mixed [--count=24] [--calibration=free] [--sentinel=red|blue] [--round2]. Exact-correspondence controls are not image-set benchmarks.",
     );
     return;
   }
@@ -512,7 +543,9 @@ async function main() {
   await fs.writeFile(out, JSON.stringify({ provenance, status: "running" }, null, 2) + "\n");
   let result;
   try {
-    result = options.control ? await controlProbe(options) : await photoProbe(options, out);
+    result = options.control
+      ? await controlProbe(options)
+      : await photoProbe(options, out, provenance);
   } catch (e) {
     result = { error: { name: e.name, message: e.message, stack: e.stack } };
   }
