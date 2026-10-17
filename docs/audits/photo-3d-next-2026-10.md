@@ -26,7 +26,8 @@ Eight-sample raw targets failed a noise control: identical room cameras, indepen
 gave 0.587 masked SSIM error. The final color protocol uses 16 samples and normal/albedo-guided
 OpenImageDenoise in the official Blender 4.3.2 build; that control falls to 0.0082. Cameras, exact
 depth, and masks are reused unchanged. This one-view control does not certify convergence on every
-scene. Target rasters stay outside Git. Rendering and all primary scores finished within two hours.
+scene. Target rasters stay outside Git. Classic yardstick rendering and scoring finished within two
+hours.
 
 | Method    | Median error | Error gain | Boundary MAE | Boundary gain | Edge F1 |
 | --------- | -----------: | ---------: | -----------: | ------------: | ------: |
@@ -105,7 +106,7 @@ Their relief geometry and baseline depth model remain fixed. No owner vote is in
 | Ribbons, layered-b                          | 20 selected phone inputs; streak gain 89.2%; texture-loss delta +0.045; 0 ribbon regressions >5%  | Full 118-input gate unestablished                 |
 | Blind owner preference: ≥14/20              | Twenty anonymous pairs recorded; no owner votes received                                          | Unmeasured                                        |
 | Cost: ≤25% time; ≤150 MiB memory            | Five fresh-browser trials on one phone-profile input; A +7.4%, B +49.1%; no observed PSS increase | B fails the screen; device/corpus gate unmeasured |
-| Classic and existing specs                  | Initial golden: 77 passed, 76 samples at both budgets; final verification below                   | Verification recorded below                       |
+| Classic and existing specs                  | Final golden: 77 passed; 56 live-input checks passed; full CI below                               | Classic passes; full-suite gate unmet             |
 
 The ribbon scout uses the original atlas probes and verifies source-depth bytes. It is not the
 118-input acceptance gate. B also loses one extra pinecone probe at −30° and one train probe at +20°
@@ -131,12 +132,20 @@ The synthetic vote-download smoke test is not an owner review.
 
 ## Verification, scope, and cuts
 
-Initial Classic golden: 77 passed; method tests: 13 passed; camera checks: 1,152 points. Browser
-baseline parity: all 12 scenes byte-identical; review-page smoke test passed with synthetic choices
-only. Full-suite status: running. Final preflight: pending. Classic files, golden pins, Moving
-photo, the Splat mirror, shared lists, and vendored runtimes are not edited. No shared engine commit
-is needed. The retained change is offline evaluation code, tests, and unconnected research
-prototypes. A positive shipping result is not claimed.
+Classic golden: initial 77 and final 77 passed; new method tests: 13 passed. Camera checks cover
+1,152 points. Moving photo, Splat mirror, and live-input checks: 56 passed across five files, with
+no skips. Browser baseline parity: all 12 scenes byte-identical; review-page smoke test passed with
+synthetic choices only. Full-suite status: all 393 spec files from 16 completed CI shards; 3,349
+passed, 1 failed, 1 skipped. Final preflight: passed. Classic files, golden pins, Moving photo, the
+Splat mirror, shared lists, and vendored runtimes are not edited. No shared engine commit is needed.
+The retained change is offline evaluation code, tests, and unconnected research prototypes. A
+positive shipping result is not claimed.
+
+The CI recording-preview focus case (`shr:202`, assertion at line 351) fails initially and alone.
+The same case passes locally on unchanged main with Chromium 141 and 151, and on this branch
+with 141. The cause remains unresolved; a fully green regression suite is not claimed. The single CI
+skip is the retained real-clip counterexample fixture, which is kept privately outside the
+repository and was unavailable.
 
 Excluded pilots include incorrect portrait-FOV targets, unstable eight-sample colors, unexecuted
 overlays, 294-side scouts, and native integer-decoder inputs. They do not enter the primary tables.

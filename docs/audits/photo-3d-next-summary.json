@@ -1,5 +1,5 @@
 {
-  "status": "negative_result_verification_in_progress",
+  "status": "clean_negative",
   "goalMet": false,
   "builder": "Codex (GPT-6)",
   "baseline": "144cc80ec6f3aee0b248a076fbf6159f6008d84f",
@@ -228,8 +228,57 @@
     "cameraPoints": 1152,
     "reviewPage": "passed; synthetic vote download only",
     "browserBaselineByteIdenticalScenes": 12,
-    "fullSuite": "running",
-    "preflight": "pending"
+    "fullSuite": "all 393 spec files from 16 completed CI shards; 3,349 passed, 1 failed, 1 skipped",
+    "preflight": "passed",
+    "fullSuiteCommit": "95b30a91f8df5304d2ae35b940380b0bc36f2641",
+    "fullSuiteFiles": 393,
+    "fullSuiteStartedUTC": "2026-10-16T23:14:15Z",
+    "mergedMain": "d49c387ecb0172732618298e0e73c80df78199f3",
+    "ciRun": "https://github.com/ryanjosephkamp/splashery/actions/runs/38980331170",
+    "ciMergeCommit": "0d93418b0f4d6415e4048257d4788c9d87f7203b",
+    "ciTreeEqualsLocalMergedTree": true,
+    "preflightPassed": 270,
+    "goldenFinalPassed": 77,
+    "goldenMethodUnexpected": 0,
+    "movingMirrorPassed": 56,
+    "movingMirrorFiles": ["live", "live3", "live5", "lv7", "smd-moving"],
+    "recorderBaselineChromium151": "one mobile case passed; CI uses bundled Chromium 141",
+    "recorderBaselineChromium141": "passed one mobile case on unchanged main",
+    "recorderBranchChromium141": "passed the same case",
+    "recorderCI": "failed initially and alone; not reproduced locally; unresolved",
+    "finalMergedMain": "d49c387ecb0172732618298e0e73c80df78199f3",
+    "finalPreflight": "passed",
+    "finalPreflightPassed": 270,
+    "fullSuiteStats": {
+      "filesReported": 393,
+      "filesExpected": 393,
+      "tests": 3351,
+      "passed": 3349,
+      "failed": 1,
+      "skipped": 1,
+      "exitCode": 1
+    },
+    "ciAggregation": "tools/ci-report.mjs over all 16 uploaded artifact report sets",
+    "ciSkipped": [
+      {
+        "file": "cdx-v3d-calibration",
+        "line": 215,
+        "title": "retained real counterexample clips decode to caution or poor",
+        "annotations": [
+          {
+            "type": "skip",
+            "description": "Counterexample clips are kept privately outside the repository.",
+            "location": {
+              "file": "/home/runner/work/splashery/splashery/tests/cdx-v3d-calibration.spec.mjs",
+              "line": 217,
+              "column": 8
+            }
+          }
+        ]
+      }
+    ],
+    "verificationCompletedUTC": "2026-10-17T00:37:27.607324+00:00",
+    "complete": true
   },
   "evidenceBranch": "codex/photo-3d-next-clips",
   "ruleCheck": "none"
