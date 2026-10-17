@@ -189,6 +189,10 @@ passed. An existing resume test copies the new metadata helper into its temporar
 assertions remain unchanged. New checks live under `tools/blender/tests/`. The unrelated superpowers
 plan was removed, original SETUP.md steps restored, and CREDITS.md kept from main.
 
+Full preflight passed after merging main: all 271 browser tests (7.5 minutes), plus formatting,
+American English, generated-site checks, shared-list parsing, and file sizes. The full command
+finished in 529.52 seconds. Generated test screenshots were restored.
+
 Rule check: the one-line existing test fixture update and regenerated license page/service worker
 extend the task file's strict paths; they are required to keep the existing checks and generated
 site current. No runtime behavior or historical fixture changed.
