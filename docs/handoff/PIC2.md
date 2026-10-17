@@ -29,17 +29,17 @@ The Storybook is public, so its sound change waits for the owner's "good". The r
   quiet and its page sound is a cue from the drive for a tap that queues a turn (as in Your book),
   and the lift is a short, soft `rustle`. The lift change also reaches Your book's, the Storybook's,
   and the lab's Pop out.
-- **The Picture lab**: the slide (`labSlide`, lane Polish) is gone; a page change calls
-  `pics.go()` at once and the sheet shows the new page when it's built. Its tap is quiet. Its
-  `TOY_SOUNDS` entry (needed on the shelf) is now a faint card tap that plays only on the Sound
-  Board. `tests/pol-pages.spec.mjs`'s slide test now checks the in-place change instead.
-- **Softer page turns**: `PAGE_SOUNDS` (Your book's five styles, and the Storybook, which plays
-  the hardcover page) at about half the volume (1.1 to 0.55), pitch 0.94, and a lighter hardcover
+- **The Picture lab**: the slide (`labSlide`, lane Polish) is gone; a page change calls `pics.go()`
+  at once and the sheet shows the new page when it's built. Its tap is quiet. Its `TOY_SOUNDS` entry
+  (needed on the shelf) is now a faint card tap that plays only on the Sound Board.
+  `tests/pol-pages.spec.mjs`'s slide test now checks the in-place change instead.
+- **Softer page turns**: `PAGE_SOUNDS` (Your book's five styles, and the Storybook, which plays the
+  hardcover page) at about half the volume (1.1 to 0.55), pitch 0.94, and a lighter hardcover
   landing (0.3 to 0.14); the album's page 1.2 to 0.6 and its thud 0.45 to 0.2; the pulled page's
   settle 0.12 to 0.08; the Sound Board's `your-book` and `book` entries to match.
 - **Picture QR**: `contrast` defaults to 0 and `size` to `most`. Only the options a person changes
-  go into a link, so a link that carries its own contrast and size opens as it was. The new sound
-  is a `drip` and five soft `marimba` notes.
+  go into a link, so a link that carries its own contrast and size opens as it was. The new sound is
+  a `drip` and five soft `marimba` notes.
 - **#656, kept**: all of its runtime code (`src/qr-craft/` detail, scan pool, second reader
   (zxing-wasm 3.1.4, vendored), fast raster and blur kernels, frame, views, policy;
   `src/qr/picture-errors.js`, `src/qr/picture-padding.js`, `src/qr/circle.js`'s dot-free sticker),
