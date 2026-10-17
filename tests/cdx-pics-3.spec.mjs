@@ -1,3 +1,4 @@
-// Task 101: the same picture cases, distributed across six files.
+// Task 101: register the unchanged cases here so failure reports point to this file.
+import { test } from "@playwright/test";
 import { pictureCases } from "./cdx-pics-cases.mjs";
-pictureCases(2);
+for (const [title, run] of pictureCases(2)) test(title, run);
