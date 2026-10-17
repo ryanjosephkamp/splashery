@@ -19,7 +19,8 @@ code.
 
 - READY: `docs/audits/ux-phone-2026-10.md` (15 proposals, top five with mockups) and
   `tools/pages/ux1/index.html` (the mockups beside captures of main).
-- No product code, so no tests or clips; prettier and the American English check pass.
+- No product code, so no clips. Prettier, the American English check, and `node tools/preflight.mjs`
+  (after merging main) pass.
 
 ## How to look at it
 
