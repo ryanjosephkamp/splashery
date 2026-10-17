@@ -66,7 +66,11 @@ Both toys are labs toys: the Operator merges after the full suite and the owner'
 
 ## State
 
-- WORKING (October 17, 2026), PR #717. Clips, thumbnails and preflight next.
+- READY (October 17, 2026), PR #717. Clips on Effect review page 2, lane PT3: `pt3-shape-morph` and
+  `pt3-name-toy` (1080 px, 30 fps, with sound). Preflight passed; `tests/pt3.spec.mjs` (10 tests)
+  passes, and so do `pt1`, `pt1-engine`, `cdx-pfc` and `cdx-pfd` after their expectations moved to
+  the new behavior. `docs/evidence/shape-morph.json` follows the new palette, pairing and line
+  numbers.
 
 ## Decisions and open questions
 
