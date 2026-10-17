@@ -220,6 +220,48 @@ test("speed gates reject missing runs, failed visuals, and unrelated regressions
   expect(() => freezeTargets(after)).toThrow("complete, error-free baseline");
 });
 
+test("idle redraws reuse GPU work, then a look change and a tap invalidate it", async ({
+  page,
+}) => {
+  await page.goto("/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=cactus");
+  await page.waitForFunction(
+    () => window.__splashery?.ready && document.body.dataset.firstToyFrame === "true",
+  );
+  const r = await page.evaluate(() => {
+    const { app, player: p } = window.__splashery;
+    app.setAutoplay({ turntable: false });
+    p.opts.idleDelay = 1e9;
+    p.idle.weight = 0;
+    p.camera.cur = { ...p.camera.home };
+    p.camera.tgt = { ...p.camera.home };
+    p.camera.vel.yaw = p.camera.vel.pitch = 0;
+    p.update(0);
+    const placement = p.stage.toy.entity.gsplat._placement;
+    const before = placement.dirtyVersion;
+    p.time += 1;
+    p.update(0);
+    const idle = placement.dirtyVersion;
+    const packed = p.stage.toy.entity.gsplat.getParameter("uSpParts[0]");
+    const old = packed[0];
+    packed[0] += 0.1;
+    p.stage.setUniforms({ "uSpParts[0]": packed }, { reuse: true });
+    const mutated = placement.dirtyVersion;
+    packed[0] = old;
+    p.stage.setUniforms({ "uSpParts[0]": packed }, { reuse: true });
+    const restored = placement.dirtyVersion;
+    p.scene.look.exposure = 1.2;
+    p.update(0);
+    const look = placement.dirtyVersion;
+    p.act(null);
+    p.update(0.1);
+    return { before, idle, mutated, restored, look, tap: placement.dirtyVersion };
+  });
+  expect(r.idle).toBe(r.before);
+  expect(r.mutated).toBeGreaterThan(r.idle);
+  expect(r.look).toBeGreaterThan(r.restored);
+  expect(r.tap).toBeGreaterThan(r.look);
+});
+
 test("stopping the CLI finishes its active sample and does not open the next toy", async ({
   baseURL,
 }, testInfo) => {
@@ -357,6 +399,177 @@ test("paired resume rejects changed settings and incompatible cached samples", a
   ).toBe(false);
 });
 
+test("clock-driven and unknown splat behaviors cannot be cached as static", async () => {
+  const { shaderUsesClock } = await import("../src/parameter-cache.js");
+  for (const kind of [1, 4, 7, 13, 15, 22, 24, 999]) {
+    expect(shaderUsesClock({ count: 1, anim: new Float32Array([0, kind, 0, 0]) })).toBe(true);
+  }
+  for (const kind of [0, 14, 17, 19, 20, 23, 25, 26]) {
+    expect(shaderUsesClock({ count: 1, anim: new Float32Array([0, kind, 0, 0]) })).toBe(false);
+  }
+});
+
+test("completed idle draws skip the main splat work pass until a look or tap changes", async ({
+  page,
+}) => {
+  await page.goto("/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=cactus");
+  await page.waitForFunction(() => window.__splashery?.ready);
+  const r = await page.evaluate(async () => {
+    const { app, player: p } = window.__splashery;
+    app.setAutoplay({ turntable: false });
+    p.opts.idleDelay = 1e9;
+    p.idle.weight = 0;
+    const handlers = p.stage.updateHandlers.splice(0);
+    const restore = [];
+    let draws = 0;
+    try {
+      p.update(0);
+      await p.stage.captureFrame();
+      for (const camera of p.stage.app.renderer.gsplatDirector.camerasMap.values()) {
+        for (const layer of camera.layersMap.values()) {
+          const pass = layer.gsplatManager.world.workBuffer.renderPass;
+          const original = pass.renderSplat;
+          pass.renderSplat = function (...args) {
+            if (args[0].node === p.stage.toy.entity) draws++;
+            return original.apply(this, args);
+          };
+          restore.push(() => {
+            pass.renderSplat = original;
+          });
+        }
+      }
+      const sample = async () => {
+        draws = 0;
+        p.update(0);
+        await p.stage.captureFrame();
+        return draws;
+      };
+      const idle = await sample();
+      p.scene.look.exposure = 1.2;
+      const look = await sample();
+      p.act(null);
+      p.update(0.1);
+      const tap = await sample();
+      return { hooks: restore.length, idle, look, tap };
+    } finally {
+      for (const fn of restore) fn();
+      p.stage.updateHandlers.push(...handlers);
+    }
+  });
+  expect(r.hooks).toBeGreaterThan(0);
+  expect(r.idle).toBe(0);
+  expect(r.look).toBeGreaterThan(0);
+  expect(r.tap).toBeGreaterThan(0);
+});
+
+test("imported spherical harmonics retain per-frame color updates", async ({ page }) => {
+  const n = 64;
+  const ply = makePly(n);
+  const offset = ply.indexOf("end_header\n") + "end_header\n".length;
+  const header = ply
+    .subarray(0, offset)
+    .toString()
+    .replace(
+      "end_header\n",
+      `${Array.from({ length: 9 }, (_, i) => `property float f_rest_${i}`).join("\n")}\nend_header\n`,
+    );
+  const body = Buffer.alloc(n * 23 * 4);
+  for (let i = 0; i < n; i++) {
+    ply.copy(body, i * 23 * 4, offset + i * 14 * 4, offset + (i + 1) * 14 * 4);
+    for (let j = 0; j < 9; j++) body.writeFloatLE(0.3 * Math.cos(i + j), (i * 23 + 14 + j) * 4);
+  }
+  await page.goto("/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=cactus");
+  await page.waitForFunction(() => window.__splashery?.ready);
+  await page.setInputFiles("#byo-file", {
+    name: "directional.ply",
+    mimeType: "application/octet-stream",
+    buffer: Buffer.concat([Buffer.from(header), body]),
+  });
+  await page.waitForFunction(() => window.__splashery.player.toyInfo?.kind === "file");
+  const r = await page.evaluate(async () => {
+    const { app, player: p } = window.__splashery;
+    const pc = await import("/src/pc.js");
+    app.setAutoplay({ turntable: false });
+    p.opts.idleDelay = 1e9;
+    p.idle.weight = 0;
+    p.update(0);
+    return {
+      bands: p.stage.toy.resource.gsplatData.shBands,
+      always: p.stage.toy.entity.gsplat.workBufferUpdate === pc.WORKBUFFER_UPDATE_ALWAYS,
+    };
+  });
+  expect(r.bands).toBe(1);
+  expect(r.always).toBe(true);
+});
+
+test("retagging a settled rig invalidates its cached GPU surface", async ({ page }) => {
+  await page.goto("/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=dog-plush");
+  await page.waitForFunction(() => window.__splashery?.ready);
+  const r = await page.evaluate(async () => {
+    const { app, player: p } = window.__splashery;
+    const { tagRig } = await import("/src/rig.js");
+    app.setAutoplay({ turntable: false });
+    p.opts.idleDelay = 1e9;
+    p.idle.weight = 0;
+    p.update(0);
+    await p.stage.captureFrame();
+    const placement = p.stage.toy.entity.gsplat._placement;
+    const before = placement.dirtyVersion;
+    const tagged = tagRig(p.stage, p.toyInfo.rig);
+    return { before, after: placement.dirtyVersion, tagged };
+  });
+  expect(r.tagged).toBe(true);
+  expect(r.after).toBeGreaterThan(r.before);
+});
+
+test("recipe render settings follow the active tier and preserve URL overrides", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=cactus");
+  await page.waitForFunction(() => window.__splashery?.ready);
+  const result = await page.evaluate(async () => {
+    const { app, player: p } = window.__splashery;
+    const recipe = p.toyInfo.recipe;
+    const original = recipe.render;
+    const seen = [];
+    recipe.render = ({ profile, options }) => {
+      seen.push({ profile, options: { ...options } });
+      return { cull: "off", dpr: profile === "low" ? 2.4 : "native", adapt: "off" };
+    };
+    const sample = async () => {
+      await app.chooseToy("cactus");
+      await p.stage.captureFrame();
+      return {
+        dpr: p.stage.sharp?.dpr ?? null,
+        cull: p.stage.sharp?.cull ?? null,
+        profile: p.profile,
+      };
+    };
+    try {
+      const low = await sample();
+      p.setProfile("high");
+      const high = await sample();
+      p.setProfile("low");
+      const url = new URL(location.href);
+      url.searchParams.set("dpr", "1.75");
+      history.replaceState(null, "", url);
+      const override = await sample();
+      return { low, high, override, seen, expectedOptions: p.toyInfo.options || {} };
+    } finally {
+      recipe.render = original;
+    }
+  });
+  expect(result.low.dpr).toBe(2.4);
+  expect(result.high.dpr).toBe(Math.min(3, await page.evaluate(() => devicePixelRatio)));
+  expect(result.override.dpr).toBe(1.75);
+  expect(result.low.cull).toEqual({ minPixelSize: 0, minContribution: 0 });
+  expect(result.seen.map((s) => s.profile)).toEqual(["low", "high", "low"]);
+  expect(
+    result.seen.every((s) => JSON.stringify(s.options) === JSON.stringify(result.expectedOptions)),
+  ).toBe(true);
+});
+
 test("resolution declarations require exact targeted canvases and native appearance evidence", async () => {
   const { compareRuns } = await import("../tools/phone-speed-compare.mjs");
   const targets = Array.from({ length: 15 }, (_, i) => ({ id: `toy${i}`, metric: "idle.median" }));
@@ -479,6 +692,70 @@ test("phone draws use a synchronous pixel readback and preserve the read framebu
   expect(result.reads).toBeGreaterThanOrEqual(result.frames + 1);
   expect(result.frames).toBeGreaterThanOrEqual(8);
   expect(result.error).toBe(0);
+});
+
+test("picture toys reuse only the primary surface and invalidate it for a page turn", async ({
+  page,
+}) => {
+  await page.goto("/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=photo-album");
+  await page.waitForFunction(
+    () =>
+      window.__splashery?.ready &&
+      window.__splashery.player.pictures?.sheets.some((sh) => sh.slot?.surface),
+    null,
+    { timeout: 120000 },
+  );
+  const result = await page.evaluate(async () => {
+    const { app, player: p } = window.__splashery;
+    app.setAutoplay({ turntable: false });
+    p.opts.idleDelay = 1e9;
+    p.idle.weight = 0;
+    p.camera.cur = { ...p.camera.home };
+    p.camera.tgt = { ...p.camera.home };
+    p.camera.vel.yaw = p.camera.vel.pitch = 0;
+    for (let i = 0; i < 6; i++) await p.stage.captureFrame();
+    p.update(0);
+    const g = p.stage.toy.entity.gsplat;
+    const version = () => g._placement.dirtyVersion;
+    const before = version();
+    let sheetWrites = 0,
+      faceWrites = 0;
+    const undo = [];
+    for (const sheet of p.stage.toy.sheets) {
+      const setParameter = sheet.entity.gsplat.setParameter;
+      sheet.entity.gsplat.setParameter = function (...args) {
+        sheetWrites++;
+        return setParameter.apply(this, args);
+      };
+      undo.push(() => (sheet.entity.gsplat.setParameter = setParameter));
+      if (sheet.surface) {
+        const setUniforms = sheet.surface.setUniforms;
+        sheet.surface.setUniforms = function (...args) {
+          faceWrites++;
+          return setUniforms.apply(this, args);
+        };
+        undo.push(() => (sheet.surface.setUniforms = setUniforms));
+      }
+    }
+    try {
+      p.update(0);
+      const idle = version();
+      p.camera.cur.yaw += 0.1;
+      p.camera.tgt.yaw = p.camera.cur.yaw;
+      p.update(0);
+      const camera = version();
+      p.act(null);
+      p.update(0.1);
+      return { before, idle, camera, turn: version(), sheetWrites, faceWrites };
+    } finally {
+      for (const restore of undo) restore();
+    }
+  });
+  expect(result.idle).toBe(result.before);
+  expect(result.camera).toBeGreaterThan(result.idle);
+  expect(result.turn).toBeGreaterThan(result.camera);
+  expect(result.sheetWrites).toBeGreaterThan(0);
+  expect(result.faceWrites).toBeGreaterThan(0);
 });
 
 test("phone page retains browser resize notifications and still marks real errors", async ({

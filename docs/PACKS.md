@@ -39,6 +39,11 @@ export const RECIPES = {
 };
 ```
 
+An optional `render` object sets the toy's Sharpness controls (`cull`, `dpr`, `adapt`, and `aa`). It
+can instead be a function, `render({ profile, options })`, receiving the active tier and resolved
+recipe options on each load. Return an object or `null` to keep the defaults. The existing labs
+restriction and URL overrides still apply; switching tiers resolves the budget again.
+
 ## 2. Coordinates and size
 
 - **+Y is up.** The default camera looks from the front-right, slightly above: +Z faces the viewer,

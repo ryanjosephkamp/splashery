@@ -3,6 +3,7 @@
 // the engine directly lives here or in paint.js / loaders.js.
 
 import * as pc from "./pc.js";
+import { ParameterCache } from "./parameter-cache.js";
 import { updateTokenBounds } from "./token-bounds.js";
 import {
   MODIFIER,
@@ -65,6 +66,7 @@ export class Stage {
   // moving, and comes back for the first still frame.
   constructor(canvas, device, { weak = false, pixelRatio = 2, adaptive = true } = {}) {
     this.canvas = canvas;
+    this.parameterCache = new ParameterCache();
     this.device = device;
     // Fix11: on WebGPU the engine sends its command encoder before it uploads a texture's data,
     // and a texture first needed inside a render pass (its own fallback for an unset sampler, made
@@ -577,7 +579,7 @@ export class Stage {
     this.graveyard = keep;
   }
 
-  setUniforms(u) {
+  setUniforms(u, { reuse = false } = {}) {
     const g = this.toy?.entity.gsplat;
     if (!g) return;
     this.sheetUniforms = u;
@@ -585,7 +587,17 @@ export class Stage {
     if (this.device.isWebGPU && this.toy.kit && !this.toy.customModifier) {
       updateTokenBounds(this.toy.resource, u["uSpTokens[0]"], g);
     }
-    for (const k in u) g.setParameter(k, u[k]);
+    // SH-bearing imports previously refreshed view-dependent color on every
+    // frame. AUTO uses the engine's coarser colorUpdateAngle threshold.
+    const sphericalHarmonics = this.toy.resource.gsplatData?.shBands > 0;
+    if (reuse && !this.toy.customModifier && !sphericalHarmonics) {
+      g.workBufferUpdate = pc.WORKBUFFER_UPDATE_AUTO;
+      this.parameterCache.assign(g, u, { ignoreCamera: !this.toy.kit });
+    } else {
+      this.parameterCache.forget(g);
+      g.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
+      for (const k in u) g.setParameter(k, u[k]);
+    }
     // Pictures: a kit toy's picture sheets move with it.
     for (const sh of this.toy.sheets || []) {
       const sg = sh.entity.gsplat;

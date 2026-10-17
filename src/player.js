@@ -11,6 +11,7 @@ import { Painter } from "./paint.js";
 import { generate, normalizeGenerator, applyClay, PROFILES } from "./generators.js";
 import { buildRecipe, meanLuminance, Kit } from "./kit.js";
 import { MotionDriver } from "./motion.js";
+import { shaderUsesClock } from "./parameter-cache.js";
 import { rigLayout, tagRig } from "./rig.js";
 import { posePass } from "./pose.js";
 import { poseUniforms, poseUp, poseGravity } from "./effects-pose.js"; // lane Any pose
@@ -504,13 +505,19 @@ export class Player {
     // Lab: a sharper splat kernel, labs only (src/kernels.js).
     const kernelParam = new URLSearchParams(location.search).get("kernel");
     this.stage.setKernel(pickKernel({ labs: labsOn(), param: kernelParam, recipe: info.kernel }));
+    // A recipe may choose its render budget for the current tier and options.
+    // Resolve it on each load so changing tiers never retains the previous budget.
+    const render = info.recipe?.render;
     // Sharpness: the render levers (src/sharpness.js): adapt "drag" for
     // every toy, the rest labs only.
     this.stage.setSharpness(
       pickSharpness({
         labs: labsOn(),
         params: new URLSearchParams(location.search),
-        recipe: info.recipe?.render,
+        recipe:
+          typeof render === "function"
+            ? render({ profile: this.profile, options: info.options || {} })
+            : render,
         native: window.devicePixelRatio || 1,
       }),
     );
@@ -659,6 +666,7 @@ export class Player {
       r = it.next();
     }
     const ctx = r.value;
+    ctx.shaderClock = shaderUsesClock(ctx.buf);
     const container = this.makeContainer(ctx.buf);
     this.disposeProcedural();
     // Lab: a recipe may bring its own GPU program for its splats (a field).
@@ -1767,7 +1775,26 @@ export class Player {
     poseUniforms(u, this.stage.toyPose, hs && { axis: hs.axis, point: hs.point, amount: this.handsOn.squishAmp() }, grav, info.half); // prettier-ignore
     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
     if (info.kind === "kit") u["uSpLeaf[0]"] = this.leafUniform(); // Pictures
-    this.stage.setUniforms(u);
+    const animating =
+      this.driver.isAnimating(effects, this.time) ||
+      this.motion.isAnimating(motion, this.time) ||
+      this.idle.weight > 0;
+    // Reuse only a built-in, unpainted surface with no live textures. The
+    // complete non-clock uniforms are still compared, including mutable part
+    // and token arrays, so a pose, camera, or look change invalidates it.
+    // Picture media lives on separate sheets, which Stage still updates fully.
+    const reuse =
+      !animating &&
+      !this.stroke &&
+      !this.scene.paint.stamps.length &&
+      !this.patternOn &&
+      !this.screen &&
+      !this.photo &&
+      !this.fluids &&
+      !this.arcade &&
+      !this.chunks &&
+      !this.proc?.ctx?.shaderClock;
+    this.stage.setUniforms(u, { reuse });
     this.chunks?.update(this.motion.out); // lane Powers of ten
     this.photoFrame(info, u); // lane Photo fidelity
     // Redraw a live screen when the recipe says its picture changed.
@@ -1798,10 +1825,6 @@ export class Player {
       this.stage.setAddonUniforms({ ...u, ...this.motion.addonU, uSpPat: [0, 0, 0, 0] });
     }
     const dripping = this.painter.tick(this.time, (s) => this.scene.paint.stamps.push(s));
-    const animating =
-      this.driver.isAnimating(effects, this.time) ||
-      this.motion.isAnimating(motion, this.time) ||
-      this.idle.weight > 0;
     const busy = moving || animating || dripping || !!this.stroke || gliding || handsBusy;
     if (busy) {
       this.pickDirty = this.pickDirty || animating || handsBusy;

@@ -192,6 +192,9 @@ export function tagRig(stage, rig) {
   proc.setParameter("uRigC[0]", cc);
   proc.setParameter("uRigK[0]", k);
   proc.process();
+  // A stream write does not dirty the placement. Its cached work buffer may
+  // already contain the initial empty tags while the first toy was loading.
+  g.workBufferUpdate = pc.WORKBUFFER_UPDATE_ONCE;
   // WebGPU may run the pass with the frame, so it is freed with the toy.
   toy.rigProc?.destroy();
   toy.rigProc = proc;
