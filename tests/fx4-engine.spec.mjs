@@ -15,7 +15,7 @@ const withoutRim = (src) => {
 // Renders the current toy at its home view with the clock stopped, and
 // returns its pixels.
 async function still(page, size = [390, 844]) {
-  return page.evaluate(async (size) => {
+  const image = await page.evaluate(async (size) => {
     const { player } = window.__splashery;
     player.opts.idleDelay = 1e9;
     player.idle.weight = 0;
@@ -33,12 +33,17 @@ async function still(page, size = [390, 844]) {
     player.camera.tgt = { ...player.camera.home };
     await stage.captureFrame();
     const c = await stage.captureFrame();
-    const px = Array.from(c.getContext("2d").getImageData(0, 0, c.width, c.height).data);
+    const bytes = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+    let binary = "";
+    for (let i = 0; i < bytes.length; i += 8192)
+      binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
+    const px = btoa(binary);
     stage.setFixedSize(null);
     stage.updateHandlers.length = 0;
     stage.updateHandlers.push(...handlers);
     return { w: c.width, h: c.height, px };
   }, size);
+  return { ...image, px: Buffer.from(image.px, "base64") };
 }
 
 async function open(browser, renderer, { before = false } = {}) {
