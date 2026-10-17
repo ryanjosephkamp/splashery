@@ -16,6 +16,14 @@ export const TOY_SOUNDS = {
   // Lane PT1: Toy Box's xylophone bar; each letter has its own note up a
   // major scale (src/packs/name-toy.js), and the drive plays every sound.
   "name-toy": { voice: "bar", f: "C5", decay: 0.55, vol: 0.28 },
+  // Lane NR1: a lab cue, not the sound of a real nerve cell. Clean sine layers in time with
+  // the picture: a soft tick for the stimulus, a falling tone as the cell body's spike peaks
+  // (0.8 s), and a quiet ding as it reaches the terminals (2.1 s).
+  "specimen-neuron": [
+    { voice: "tone", f: 1100, to: 0.6, decay: 0.08, vol: 0.3 },
+    { voice: "tone", f: "E5", to: 0.5, decay: 0.55, vol: 0.38, at: 0.8 },
+    { voice: "ding", f: "B5", decay: 0.45, vol: 0.22, at: 2.14 },
+  ],
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": { voice: "squish", pitch: 1.3, bright: 0.5, decay: 0.5 },
   // Photoreal r3 (the owner's review of October 3, 2026): the first sound only, as the boat rocks.

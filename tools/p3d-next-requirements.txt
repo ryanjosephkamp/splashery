@@ -1,0 +1,18 @@
+# Offline research only. No Python package, model, or backend is shipped.
+# Install the CPU wheels with --extra-index-url https://download.pytorch.org/whl/cpu.
+# Official Blender 4.3.2, its bundled NumPy, and OpenImageDenoise render stable target colors.
+# Bootstrap with: python3 tools/p3d-next-setup.py --blender-only.
+torch==2.14.1+cpu
+torchvision==0.29.1+cpu
+onnxruntime==1.31.0
+onnx==1.23.2
+numpy==2.3.5
+scipy==1.17.0
+opencv-python-headless==4.13.0.92
+safetensors==0.8.0
+einops==0.8.2
+omegaconf==2.4.0
+addict==2.4.0
+huggingface_hub==2.2.0
+transformers==5.20.1
+utils3d_moge @ git+https://github.com/EasternJournalist/utils3d-moge.git@62f09d58509485564e24d5d9f6aac9ee9ebc0c37
