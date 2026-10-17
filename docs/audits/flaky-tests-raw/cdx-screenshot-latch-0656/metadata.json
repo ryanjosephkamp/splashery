@@ -1,0 +1,5 @@
+{
+  "purpose": "Unexecuted causal screenshot-transfer probe. Both variants use published native0.4 wait and original one capture + page screenshot. Latch variant holds actual existing rendered canvas until screenshot completes, then releases in finally. Native video/worker/player updates remain unmodified. Original6samples and all assertions preserved. No sort readiness or output-based selection added.",
+  "status": "prepared, not run",
+  "additional_diagnostic_guard": "EveryPNGmustretainluminancerangeatleast10; recordedmean/std/min/maxandlastactualface/turnedPNGretained. This preventsblankcanvasspuriouspasses."
+}
