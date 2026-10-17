@@ -84,7 +84,7 @@ export async function matchGraph(
   frames,
   features,
   calibration,
-  { signal, gpu, cpuMatching = false, onProgress = () => {} } = {},
+  { signal, gpu, cpuMatching = false, workers = 4, onProgress = () => {} } = {},
 ) {
   const pairs = allPairs(frames.length);
   let gpuMatches = null;
@@ -93,7 +93,12 @@ export async function matchGraph(
   );
   onProgress({
     stage: "matcher-backend",
-    backend: gpu && !cpuMatching && !software ? "WebGPU" : "cooperative CPU",
+    backend:
+      gpu && !cpuMatching && !software
+        ? "WebGPU"
+        : typeof Worker !== "undefined" && workers
+          ? "CPU workers"
+          : "cooperative CPU",
     pairs: pairs.length,
   });
   if (gpu && !cpuMatching && !software) {
@@ -106,6 +111,32 @@ export async function matchGraph(
       signal?.throwIfAborted();
       onProgress({ stage: "matcher-fallback", reason: error.message });
     }
+  }
+  if (!gpuMatches && typeof Worker !== "undefined" && workers) {
+    const results = new Array(pairs.length);
+    let done = 0;
+    await runWorkerPool({
+      url: new URL("./pair-worker.js", import.meta.url),
+      size: workers,
+      jobs: pairs,
+      signal,
+      label: "photo pair worker",
+      message: ([i, j]) => ({
+        i,
+        j,
+        a: features[i],
+        b: features[j],
+        ka: calibration[i],
+        kb: calibration[j],
+      }),
+      onResult: (edge, _, index) => {
+        results[index] = edge;
+        done++;
+        if (done % 8 === 0 || done === pairs.length)
+          onProgress({ stage: "matching", done, total: pairs.length });
+      },
+    });
+    return results;
   }
   const edges = [];
   for (let p = 0; p < pairs.length; p++) {

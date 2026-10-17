@@ -6,6 +6,7 @@ import { makeControl, scoreCameras } from "../tools/photos3d-controls.mjs";
 import { PNG } from "pngjs";
 import { matchSift } from "../vendor/splatjs/src/sfm/sift.js";
 import { polygonMask, scoreHeldOut } from "../tools/photos3d-evaluate.mjs";
+import jpeg from "jpeg-js";
 
 test("masked metrics score object pixels, exclude holes, and distinguish a changed held-out render", () => {
   const width = 28,
@@ -76,6 +77,59 @@ test("lens selection rejects outliers and incomplete EXIF independent of input o
   expect(byName(groupLenses([...frames].reverse()))).toEqual(byName(rows));
   expect(groupLenses([frames.at(-1)])[0].accepted).toBe(false);
   expect(groupLenses([frames.at(-1)], { assumeSingleLens: true })[0].source).toMatch(/assumption/);
+  const physical = frames.map((f, i) => ({
+    ...f,
+    exif: { fmm: i < 8 ? 55 : 24, model: "camera" },
+  }));
+  expect(groupLenses(physical, { assumeSingleLens: true }).filter((r) => r.accepted)).toHaveLength(
+    8,
+  );
+  expect(
+    groupLenses([{ ...frames[0], exif: { f35: Infinity } }], { assumeSingleLens: true })[0].reason,
+  ).toMatch(/Invalid/);
+});
+
+test("real JPEG decoding honors EXIF orientation and reads the per-photo focal", async ({
+  page,
+}) => {
+  const tiff = Buffer.alloc(56);
+  tiff.write("II");
+  tiff.writeUInt16LE(42, 2);
+  tiff.writeUInt32LE(8, 4);
+  tiff.writeUInt16LE(2, 8);
+  tiff.writeUInt16LE(0x112, 10);
+  tiff.writeUInt16LE(3, 12);
+  tiff.writeUInt32LE(1, 14);
+  tiff.writeUInt16LE(6, 18);
+  tiff.writeUInt16LE(0x8769, 22);
+  tiff.writeUInt16LE(4, 24);
+  tiff.writeUInt32LE(1, 26);
+  tiff.writeUInt32LE(38, 30);
+  tiff.writeUInt16LE(1, 38);
+  tiff.writeUInt16LE(0xa405, 40);
+  tiff.writeUInt16LE(3, 42);
+  tiff.writeUInt32LE(1, 44);
+  tiff.writeUInt16LE(28, 48);
+  const encoded = jpeg.encode(
+    {
+      width: 32,
+      height: 16,
+      data: Buffer.alloc(32 * 16 * 4, 255),
+      exifBuffer: Buffer.concat([Buffer.from("Exif\0\0"), tiff]),
+    },
+    80,
+  ).data;
+  await page.goto("/");
+  const result = await page.evaluate(async (bytes) => {
+    const { decodeFrames } = await import("/vendor/splatjs/src/io/frames.js");
+    const frames = await decodeFrames(
+      [new File([new Uint8Array(bytes)], "oriented.jpg", { type: "image/jpeg" })],
+      { featMaxDim: 960, trainMaxDim: 320 },
+    );
+    return frames.map(({ fw, fh, exif }) => ({ fw, fh, exif }));
+  }, Array.from(encoded));
+  expect(result).toHaveLength(1);
+  expect(result[0]).toMatchObject({ fw: 16, fh: 32, exif: { f35: 28 } });
 });
 
 test("graph diagnostics include isolated components and track conflicts cannot merge identities", () => {
@@ -168,6 +222,24 @@ test("browser photo API keeps picker order out of graph results and reports ever
   expect(result.error).toMatch(/No geometrically verified/);
   expect(result.recon).toBeNull();
   expect(result.aborted).toBe("AbortError");
+});
+
+test("parallel CPU matching preserves the calibrated all-pair graph", async ({ page }) => {
+  await page.goto("/");
+  const result = await page.evaluate(async () => {
+    const { makeControl } = await import("/tools/photos3d-controls.mjs");
+    const { matchGraph } = await import("/src/photos3d/graph.js");
+    const c = makeControl({ count: 8 });
+    const K = c.truth.map((p) => ({ f: p.f, cx: 240, cy: 180 }));
+    const sequential = await matchGraph(c.images, c.feats, K, { workers: 0 });
+    const parallel = await matchGraph(c.images, c.feats, K, { workers: 2 });
+    return {
+      equal: JSON.stringify(sequential) === JSON.stringify(parallel),
+      accepted: parallel.filter((e) => e.accepted).length,
+    };
+  });
+  expect(result.equal).toBe(true);
+  expect(result.accepted).toBe(28);
 });
 
 test("held-out RGB and masks cannot affect sparse/surface seeds, uploaded targets, or trained parameters", async ({

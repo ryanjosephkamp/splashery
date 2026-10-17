@@ -346,6 +346,14 @@ async function photoProbe(options, out) {
     throw new Error("Input photos differ from frozen dataset");
   const masks = options.masks ? JSON.parse(await fs.readFile(options.masks, "utf8")) : null;
   const resume = options.resume ? JSON.parse(await fs.readFile(options.resume, "utf8")) : null;
+  if (masks && sources.some((s) => masks.photos?.[s.name]?.sourceSha256 !== s.sha256))
+    throw new Error("Evaluation mask identities differ from the input photographs");
+  if (
+    resume &&
+    JSON.stringify(resume.sources?.slice().sort((a, b) => a.name.localeCompare(b.name))) !==
+      JSON.stringify(sources.slice().sort((a, b) => a.name.localeCompare(b.name)))
+  )
+    throw new Error("Geometry checkpoint input hashes differ");
   const port = Number(options.port || 4184);
   const base = `http://127.0.0.1:${port}`;
   const server = spawn(process.execPath, ["tools/cdx-mp2-server.mjs", String(port)], {
@@ -410,7 +418,10 @@ async function photoProbe(options, out) {
       fs.writeFile(out.replace(/\.json$/, "") + ".ply", Buffer.from(data)),
     );
     await page.exposeFunction("probeCheckpoint", (data) =>
-      fs.writeFile(out.replace(/\.json$/, "") + ".geometry.json", JSON.stringify(data) + "\n"),
+      fs.writeFile(
+        out.replace(/\.json$/, "") + ".geometry.json",
+        JSON.stringify({ ...data, sources }) + "\n",
+      ),
     );
     await page.exposeFunction("probeFold", (data) =>
       fs.appendFile(out.replace(/\.json$/, "") + ".folds.jsonl", JSON.stringify(data) + "\n"),
