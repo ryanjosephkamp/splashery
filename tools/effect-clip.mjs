@@ -2,10 +2,14 @@
 // Renders a toy's tap effect as a looping GIF clip, for judging an effect as
 // motion at phone size (filmstrips hide bending, smear and speckle).
 //
-//   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-clip.mjs <out-dir> [--size=320] [--secs=3.5] [--fps=15] [--before=0.4] [--taps=1] [--gap=0.25] [--at=x,y,z] [--seq=x,y,z;x,y,z] [--keys=HELLO] [--bg=#111111] [--opt=key=value] [--pgn=game.pgn] [--strip=8] id[:secs] ...
+//   node tools/cdx-mp2-server.mjs 4173 &
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-clip.mjs <out-dir> [--size=320] [--secs=3.5] [--fps=15] [--before=0.4] [--taps=1] [--gap=0.25] [--at=x,y,z] [--seq=x,y,z;x,y,z] [--keys=HELLO] [--bg=#111111] [--opt=key=value] [--pgn=game.pgn] [--strip=8] [--mp4] id[:secs] ...
 //
-// Writes <out-dir>/<id>.gif. The clock is stepped by hand, so a clip shows
+// Writes <out-dir>/<id>.gif. --mp4 writes <out-dir>/<id>.mp4 instead: lossless
+// frames encoded once as H.264 (CRF 18) by ffmpeg (SPLASHERY_FFMPEG, or ffmpeg
+// on the PATH), with no 256-color GIF step, so fine detail and soft gradients
+// stay clean. Review clips use `--mp4 --size=1080 --fps=30`: a 320 GIF looks
+// grainy on a phone. The clock is stepped by hand, so a clip shows
 // the effect at its real speed however slow the renderer is. It starts
 // --before seconds ahead of the tap and runs --secs after it. --seq taps a
 // list of points (recipe coordinates) --gap seconds apart; --keys types
@@ -16,6 +20,7 @@
 // before the tap), for checking a clip without playing it.
 
 import { chromium } from "@playwright/test";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -44,6 +49,8 @@ const seq = opt("seq", "")
   : null;
 const keys = opt("keys", "");
 const stripN = Number(opt("strip", 0));
+const mp4 = args.includes("--mp4");
+const ffmpeg = process.env.SPLASHERY_FFMPEG || "ffmpeg";
 
 fs.mkdirSync(outDir, { recursive: true });
 const browser = await chromium.launch({
@@ -57,13 +64,20 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({ viewport: { width: 1000, height: 700 } });
 page.on("pageerror", (e) => console.error("page error:", e.message));
+// With --mp4 each frame leaves the page as a PNG, written to a scratch folder.
+let frameDir = null;
+await page.exposeFunction("__clipFrame", (n, url) => {
+  fs.writeFileSync(path.join(frameDir, `${String(n).padStart(5, "0")}.png`), Buffer.from(url.split(",")[1], "base64")); // prettier-ignore
+});
 await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 for (const spec of ids) {
   const [id, own] = spec.split(":");
   const secs = own ? Number(own) : secsAll;
+  if (mp4) frameDir = fs.mkdtempSync(path.join(outDir, `.${id}-frames-`));
   const { bytes, strip } = await page.evaluate(
-    async ({ id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys, pgn, stripN }) => {
+    // prettier-ignore
+    async ({ id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys, pgn, stripN, mp4 }) => {
       const { app, player } = window.__splashery;
       const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
       await app.chooseToy(id);
@@ -113,6 +127,10 @@ for (const spec of ids) {
         pending = 0;
         const c = await stage.captureFrame();
         if (pickAt.has(n)) shots.push({ bmp: await createImageBitmap(c), t: n * step - before });
+        if (mp4) {
+          await window.__clipFrame(n++, c.toDataURL("image/png"));
+          return;
+        }
         n++;
         const rgba = c.getContext("2d").getImageData(0, 0, size, size).data;
         const palette = quantize(rgba, 256, { format: "rgb565" });
@@ -154,13 +172,16 @@ for (const spec of ids) {
         });
         strip = out.toDataURL("image/png");
       }
-      return { bytes: Array.from(gif.bytes()), strip };
+      return { bytes: mp4 ? [] : Array.from(gif.bytes()), strip };
     },
-    { id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys, pgn, stripN },
+    { id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys, pgn, stripN, mp4 },
   );
-  const out = path.join(outDir, `${id}.gif`);
-  fs.writeFileSync(out, Buffer.from(bytes));
+  const out = path.join(outDir, `${id}.${mp4 ? "mp4" : "gif"}`);
+  if (mp4) {
+    execFileSync(ffmpeg, ["-y", "-loglevel", "error", "-framerate", String(fps), "-i", path.join(frameDir, "%05d.png"), "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2", "-c:v", "libx264", "-preset", "slow", "-crf", "18", "-pix_fmt", "yuv420p", "-movflags", "+faststart", out]); // prettier-ignore
+    fs.rmSync(frameDir, { recursive: true, force: true });
+  } else fs.writeFileSync(out, Buffer.from(bytes));
   if (strip) fs.writeFileSync(path.join(outDir, `${id}-strip.png`), Buffer.from(strip.split(",")[1], "base64")); // prettier-ignore
-  console.log(`${id}: ${out} (${(bytes.length / 1024).toFixed(0)} KB)`);
+  console.log(`${id}: ${out} (${(fs.statSync(out).size / 1024).toFixed(0)} KB)`);
 }
 await browser.close();

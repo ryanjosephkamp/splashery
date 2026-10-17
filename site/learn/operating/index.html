@@ -892,21 +892,25 @@
             <li>
               Render each clip:
               <code
-                >node tools/effect-clip.mjs --strip=8 --size=320 &lt;toy
-                id&gt;:&lt;seconds&gt;</code
+                >node tools/effect-clip.mjs &lt;out-dir&gt; --mp4 --size=1080 --fps=30 --strip=8
+                &lt;toy id&gt;:&lt;seconds&gt;</code
               >
               (the server must be running; <code>--taps</code>, <code>--opt=key=value</code> and
-              <code>--pgn=</code> are in the tool's header). It writes a looping GIF. Watch it
-              before posting. For a drag, use <code>node tools/drag-clip.mjs</code> instead. To save
-              space, post an MP4 instead of the GIF (about five times smaller) and add
-              <code>&quot;video&quot;: true</code> to its card:
-              <code>pip install imageio-ffmpeg</code>, then run its <code>ffmpeg</code> (<code
-                >python3 -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())'</code
-              >) with
+              <code>--pgn=</code> are in the tool's header). It writes a sharp MP4: add
+              <code>&quot;video&quot;: true</code> to its card. Watch it before posting. Since
+              October 17, 2026, review clips are 1080 pixels at 30 frames a second: the old
+              320-pixel, 15-frame GIFs looked grainy on the owner's phone. Without
+              <code>--mp4</code> the tool writes a small GIF, fine for a quick check.
+              <code>--mp4</code> needs <code>ffmpeg</code> on the PATH; where it isn't,
+              <code>pip install imageio-ffmpeg</code> and set <code>SPLASHERY_FFMPEG</code> to
+              <code
+                >$(python3 -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())')</code
+              >. For a drag, use <code>node tools/drag-clip.mjs</code> instead (GIF only for now;
+              post it as an MP4 with that <code>ffmpeg</code>:
               <code
                 >-i clip.gif -movflags +faststart -pix_fmt yuv420p -vf
                 &quot;scale=trunc(iw/2)*2:trunc(ih/2)*2&quot; -c:v libx264 -crf 23 clip.mp4</code
-              >.
+              >).
             </li>
             <li>
               Read page 2 once in the session (a session must read an artifact before it can add to
