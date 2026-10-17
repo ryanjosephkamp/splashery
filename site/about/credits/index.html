@@ -296,6 +296,11 @@
                   >Video to 3D real-clip benchmark tools (task 88, not shipped)</a
                 >
               </li>
+              <li>
+                <a href="#photo-to-3d-next-offline-research-tools-codex-task-99-not-shipped"
+                  >Photo to 3D next: offline research tools (Codex task 99; not shipped)</a
+                >
+              </li>
             </ul>
           </li>
         </ul>
@@ -10033,6 +10038,43 @@ subject to the following conditions:
               is served with the site.
             </li>
           </ul>
+          <h3 id="photo-to-3d-next-offline-research-tools-codex-task-99-not-shipped">
+            Photo to 3D next: offline research tools (Codex task 99; not shipped)
+          </h3>
+          <p>
+            <code>tools/p3d-next-requirements.txt</code> pins these for the truth-view yardstick and
+            the depth bake-off. They run offline on a build machine; no package, model, or weight
+            from this list is served by the site.
+          </p>
+          <ul>
+            <li>PyTorch 2.14.1 and torchvision 0.29.1, CPU builds (BSD-3-Clause).</li>
+            <li>ONNX Runtime 1.31.0 (MIT) and ONNX 1.23.2 (Apache-2.0).</li>
+            <li>NumPy 2.3.5 and SciPy 1.17.0 (BSD-3-Clause).</li>
+            <li>
+              OpenCV, <code>opencv-python-headless</code> 4.13.0.92 (Apache-2.0; its packaging
+              scripts are MIT).
+            </li>
+            <li>safetensors 0.8.0, Transformers 5.20.1, and huggingface_hub 2.2.0 (Apache-2.0).</li>
+            <li>einops 0.8.2 and addict 2.4.0 (MIT); OmegaConf 2.4.0 (BSD-3-Clause).</li>
+            <li>
+              utils3d (MoGe's helper, commit <code>62f09d58</code>; MIT,
+              <a
+                href="https://github.com/EasternJournalist/utils3d-moge/blob/62f09d58509485564e24d5d9f6aac9ee9ebc0c37/LICENSE"
+                target="_blank"
+                rel="noopener"
+                >https://github.com/EasternJournalist/utils3d-moge/blob/62f09d58509485564e24d5d9f6aac9ee9ebc0c37/LICENSE</a
+              >).
+            </li>
+            <li>
+              Blender 4.3.2 (GPL-2.0-or-later) with its bundled OpenImageDenoise (Apache-2.0):
+              renders the truth views, as with the Studio truth tools above. Never shipped.
+            </li>
+          </ul>
+          <p>
+            The model weights the bake-off compared are fetched at run time from their official
+            pages; each one's license is in <code>docs/audits/</code> (task 99's report), and none
+            is vendored.
+          </p>
         </div>
       </section>
       <p class="note">
