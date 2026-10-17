@@ -23,3 +23,7 @@ Source bodies were temporary research input. This branch preserves their hashes 
 unlicensed implementation files, author demo scenes, or weights. The manifest snapshots are
 sufficient to identify what was checked but do not guarantee future URL content. Model revisions are
 recorded separately below.
+
+Final repository preflight: all 270 tests and every other step passed after merging current main.
+See `preflight.log` and `verification.json`. Generated repository screenshots were restored; none
+are in the deliverable branch. The full suite beyond preflight was not run.

@@ -1,0 +1,10 @@
+{
+  "preflight": "270 passed (8.6m); every preflight step passed",
+  "base_main": "ceb51de7a",
+  "chromium": "/usr/bin/chromium",
+  "model": "Codex (GPT-6)",
+  "prototype_sha256": {
+    "tools/pages/frontier-relight.html": "3e7efbe2969c9024568aab4ac4a013604568c9d781c745e6dfabaebcb200d92f",
+    "tools/pages/frontier-lod.html": "08e4588b852b0c204aa4bba51d48cdcfa2e83cd77a949d8db9e779c2561d9214"
+  }
+}
