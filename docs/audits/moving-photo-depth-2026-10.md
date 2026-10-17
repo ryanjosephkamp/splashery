@@ -23,19 +23,19 @@ way.
 
 ## What changed on October 10, 2026
 
-Before Codex task 32 ("stabilize moving photo depth", commit b2f661ea), each frame was stretched
-to its own 2nd to 98th percentile, eased over two frames each side. Task 32 aligned each answer to
-the one before on still pixels, added a seven-frame color-gated filter, and set **one range for the
+Before Codex task 32 ("stabilize moving photo depth", commit b2f661ea), each frame was stretched to
+its own 2nd to 98th percentile, eased over two frames each side. Task 32 aligned each answer to the
+one before on still pixels, added a seven-frame color-gated filter, and set **one range for the
 whole clip**. That made the depth far steadier but squeezed any clip whose model scale wanders over
 time: the answers drift (a camera move, a face coming closer, a cut), so the whole clip's 2nd to
 98th percentile is much wider than any one frame's, and each frame uses a sliver of it. Measured on
 the toy's own samples (the shown nearness, before and after that commit):
 
-| Sample                  | Contrast before | Contrast after |
-| ----------------------- | --------------- | -------------- |
-| Big Buck Bunny (short)  | 0.98            | 0.89           |
-| Sintel and the dragon   | 0.79            | 0.27           |
-| Galloping horse (GIF)   | 0.54            | 0.46           |
+| Sample                 | Contrast before | Contrast after |
+| ---------------------- | --------------- | -------------- |
+| Big Buck Bunny (short) | 0.98            | 0.89           |
+| Sintel and the dragon  | 0.79            | 0.27           |
+| Galloping horse (GIF)  | 0.54            | 0.46           |
 
 The relief's lift (`LIFT`, 0.9) and the Depth slider are unchanged since the toy began (October 2),
 so this is the "Max depth seems weaker" report.
@@ -44,30 +44,30 @@ so this is the "Max depth seems weaker" report.
 
 Contrast / jitter / ratio. Lower ratio is better at the same contrast.
 
-| Way                                     | Bunny (1 shot)        | Horse GIF (15 frames) | Sintel (2 shots)      | Bridge (1 shot)       | Machine (1 shot)      |
-| --------------------------------------- | --------------------- | --------------------- | --------------------- | --------------------- | --------------------- |
-| Each frame (before October 10)          | 0.977 / 0.011 / 0.011 | 0.545 / 0.303 / 0.556 | 0.791 / 0.119 / 0.151 | 0.734 / 0.046 / 0.062 | 0.859 / 0.062 / 0.072 |
-| Whole clip (October 10 to now)          | 0.893 / 0.005 / 0.006 | 0.462 / 0.090 / 0.194 | 0.266 / 0.013 / 0.048 | 0.723 / 0.014 / 0.020 | 0.342 / 0.016 / 0.046 |
-| Rolling range, 1 s                      | 0.975 / 0.005 / 0.005 | 0.502 / 0.106 / 0.211 | 0.677 / 0.043 / 0.064 | 0.731 / 0.015 / 0.020 | 0.706 / 0.035 / 0.049 |
-| Rolling range, 2 s                      | 0.972 / 0.005 / 0.005 | 0.518 / 0.108 / 0.208 | 0.591 / 0.037 / 0.063 | 0.727 / 0.014 / 0.020 | 0.580 / 0.034 / 0.058 |
-| **Rolling range in each shot, 1 s**     | 0.975 / 0.005 / 0.005 | 0.502 / 0.106 / 0.211 | 0.726 / 0.046 / 0.063 | 0.731 / 0.015 / 0.020 | 0.706 / 0.035 / 0.049 |
-| One range per shot                      | 0.893 / 0.005 / 0.006 | 0.462 / 0.090 / 0.194 | 0.374 / 0.018 / 0.048 | 0.723 / 0.014 / 0.020 | 0.342 / 0.016 / 0.046 |
-| One range per shot, filter twice as wide | 0.892 / 0.004 / 0.005 | 0.465 / 0.088 / 0.189 | 0.372 / 0.016 / 0.043 | 0.718 / 0.011 / 0.015 | 0.340 / 0.014 / 0.041 |
+| Way                                       | Bunny (1 shot)        | Horse GIF (15 frames) | Sintel (2 shots)      | Bridge (1 shot)       | Machine (1 shot)      |
+| ----------------------------------------- | --------------------- | --------------------- | --------------------- | --------------------- | --------------------- |
+| Each frame (before October 10)            | 0.977 / 0.011 / 0.011 | 0.545 / 0.303 / 0.556 | 0.791 / 0.119 / 0.151 | 0.734 / 0.046 / 0.062 | 0.859 / 0.062 / 0.072 |
+| Whole clip (October 10 to now)            | 0.893 / 0.005 / 0.006 | 0.462 / 0.090 / 0.194 | 0.266 / 0.013 / 0.048 | 0.723 / 0.014 / 0.020 | 0.342 / 0.016 / 0.046 |
+| Rolling range, 1 s                        | 0.975 / 0.005 / 0.005 | 0.502 / 0.106 / 0.211 | 0.677 / 0.043 / 0.064 | 0.731 / 0.015 / 0.020 | 0.706 / 0.035 / 0.049 |
+| Rolling range, 2 s                        | 0.972 / 0.005 / 0.005 | 0.518 / 0.108 / 0.208 | 0.591 / 0.037 / 0.063 | 0.727 / 0.014 / 0.020 | 0.580 / 0.034 / 0.058 |
+| **Rolling range in each shot, 1 s**       | 0.975 / 0.005 / 0.005 | 0.502 / 0.106 / 0.211 | 0.726 / 0.046 / 0.063 | 0.731 / 0.015 / 0.020 | 0.706 / 0.035 / 0.049 |
+| One range per shot                        | 0.893 / 0.005 / 0.006 | 0.462 / 0.090 / 0.194 | 0.374 / 0.018 / 0.048 | 0.723 / 0.014 / 0.020 | 0.342 / 0.016 / 0.046 |
+| One range per shot, filter twice as wide  | 0.892 / 0.004 / 0.005 | 0.465 / 0.088 / 0.189 | 0.372 / 0.016 / 0.043 | 0.718 / 0.011 / 0.015 | 0.340 / 0.014 / 0.041 |
 | One range per shot, keyframes (every 4th) | 0.924 / 0.005 / 0.005 | 0.709 / 0.013 / 0.019 | 0.474 / 0.022 / 0.046 | 0.730 / 0.012 / 0.017 | 0.299 / 0.011 / 0.037 |
 
 What they show:
 
 - **Normalizing the scale across frames** is the lever. One range for the whole clip (or for each
-  shot) is the steadiest but flattest; a frame's own range is the fullest but bounces (three to
-  ten times the jitter). A range eased over about a second follows the model's slow drift and not
-  its frame-to-frame noise: it gets back most of the old relief (Sintel 0.27 to 0.73, Machine 0.34
-  to 0.71) at the same twitch-to-relief ratio as today. Two seconds is a little flatter for no
-  steadier ratio.
+  shot) is the steadiest but flattest; a frame's own range is the fullest but bounces (three to ten
+  times the jitter). A range eased over about a second follows the model's slow drift and not its
+  frame-to-frame noise: it gets back most of the old relief (Sintel 0.27 to 0.73, Machine 0.34 to
+  0.71) at the same twitch-to-relief ratio as today. Two seconds is a little flatter for no steadier
+  ratio.
 - **Cuts**: easing the range only inside a shot (a frame starts a shot when more than 60% of its
   picture changed at once, `shotStarts`) keeps one shot's scale from leaking into the next. It
   matters for Sintel's short clip (two shots; 0.68 to 0.73) and costs nothing elsewhere.
-- **Temporal smoothing** (the color-gated filter twice as wide) lowers jitter by 10 to 20% on
-  every clip but doesn't touch the contrast; it would also smear fast motion. Not worth it alone.
+- **Temporal smoothing** (the color-gated filter twice as wide) lowers jitter by 10 to 20% on every
+  clip but doesn't touch the contrast; it would also smear fast motion. Not worth it alone.
 - **Keyframes** (the model on every fourth frame, the frames between blended) look steadiest on the
   horse only because 15 frames become four answers blended: the legs would slide between poses
   instead of galloping. On the others they change little. Not shipped. A long video already works
