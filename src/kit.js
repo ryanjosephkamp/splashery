@@ -18,7 +18,7 @@
 
 import { mulberry32, createNoise3, mixSeed } from "./noise.js";
 import { SplatBuffer, discRotation, randomDir, hexRgb, clayBudget, norm } from "./generators.js";
-import { KINDS, MORPH_RANGE, MAX_LEVERS, MAX_LEVER_GROUPS } from "./effects.js";
+import { KINDS, MORPH_RANGE, MAX_LEVERS, MAX_LEVER_GROUPS } from "./kit-tables.js";
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -903,7 +903,7 @@ export class Kit {
   }
 
   // The last two behavior values of a splat. Morph, band, fade and skin
-  // splats pack their data (see KINDS in effects.js); a morph's target is
+  // splats pack their data (see KINDS in kit-tables.js); a morph's target is
   // kept aside until the fit and packed by encodeMorphs().
   animParams(kind, p, pr, to, ch, skin) {
     // (A morph's channel may be 4 to 7: the same as 0 to 3, the splat
