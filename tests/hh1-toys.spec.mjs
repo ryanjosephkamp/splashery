@@ -5,6 +5,7 @@
 // teddy bear's limbs swing and settle.
 
 import { test, expect } from "@playwright/test";
+import { settleCamera } from "./helpers/settled-camera.mjs";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 
@@ -259,6 +260,7 @@ test("teddy bear: swung and dropped, its arms and head swing on it and settle", 
   page,
 }) => {
   await open(page, "teddy-bear");
+  await settleCamera(page);
   const s = await page.evaluate(() => {
     const { player } = window.__splashery;
     const h = player.handsOn;
