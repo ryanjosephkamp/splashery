@@ -114,6 +114,7 @@ task 78's portfolio toys had to be rebuilt in Claude lanes PT1 and PT2.
 | 97-math-pickers.md                | One toy for the 4D shapes, one for the attractors; old links keep working (after #197)                    | the Math pack, an alias map, tests                                       | no            |
 | 98-release-v1.md                  | Splashery v1.0: a readiness audit of every labs toy, the fixes, then all of them public (after 91 and 96) | an audit tool and report, the toys that need fixes, tests, release notes | no            |
 | 99-photo-3d-next.md               | Photo to 3D: freeze classic, a truer yardstick, a depth bake-off, a Layered labs variant                  | a golden spec, `src/photo3d/next/`, tools, tests                         | yes           |
+| 99b-photo-3d-hard-edge.md         | Photo to 3D: Layered A's fill with Classic's hard edges, measured, then a second blind vote               | `src/photo3d/next/`, tools, tests                                        | yes           |
 | 100-flaky-tests.md                | Flaky tests fixed at the cause: a stress recipe, each test 30 of 30, nothing loosened                     | test and runner files; Engine: commits for real races                    | no            |
 | 101-suite-speed.md                | A faster full suite: whole run under 25 minutes, nothing dropped                                          | the ten slowest spec files, `tools/suite.json`                           | no            |
 | 102-crisper-splats.md             | Crisper toys at phone size: a sharpness yardstick, `even: true`, text toys first                          | pack settings, `tools/crisp-score.mjs`, tests                            | no            |
@@ -126,6 +127,7 @@ task 78's portfolio toys had to be rebuilt in Claude lanes PT1 and PT2.
 | 109-screen-in-3d.md               | Screen in 3D: a shared window seen live as a relief of splats, fast enough to play a game through         | `src/screen3d/`, a labs toy, tests                                       | no            |
 | 110-trim-before-processing.md     | Trim a video before Moving photo to 3D or Video to 3D processes it                                        | `src/trim-sheet.js`, small hooks in two tools, tests                     | no            |
 | 111-offline.md                    | Splashery offline: the app plus chosen toys, saved with a service worker                                  | `src/offline/`, `sw.js`, tests, a manual section                         | no            |
+| 112-playtest-audit.md             | A real-browser playtest of every toy and feature, desktop and phone size, report only                     | a report and its data                                                    | yes           |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.

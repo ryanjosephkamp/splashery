@@ -394,6 +394,9 @@
       <span id="rec-time" class="rec-time">0:00</span>
       <button type="button" id="rec-stop" class="rec-stop">Stop</button>
     </div>
+    <!-- Lane REC1: the countdown's big number over the stage (never in the take: the take is the
+         canvas). The pill above says it to a screen reader and holds Cancel. -->
+    <div id="rec-count" class="rec-count" aria-hidden="true" hidden><span></span></div>
 
     <!-- Share lane: the preview sheet after a take stops. Watch it (play, pause, scrub), then Save,
          Share (where the device can share files), Record again, or Discard (which asks first).
@@ -1244,6 +1247,16 @@
                   <span class="record-dot" aria-hidden="true"></span>
                   <span class="record-label">Record</span>
                 </button>
+                <!-- Lane REC1: the countdown before a take starts (remembered on the device). -->
+                <label class="clip-field record-countdown">
+                  <span>Countdown</span>
+                  <select id="record-countdown" aria-label="Countdown before recording">
+                    <option value="0">Off</option>
+                    <option value="3">3 s</option>
+                    <option value="5" selected>5 s</option>
+                    <option value="10">10 s</option>
+                  </select>
+                </label>
                 <!-- Codex task 89: Record's quality choice goes here, beside the button. -->
               </div>
               <p class="note" id="record-note">
