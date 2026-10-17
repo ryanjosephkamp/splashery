@@ -134,7 +134,7 @@ test("a toy's samples load when it opens, and its first tap's sample starts with
     window.__starts = [];
     const start = AudioBufferSourceNode.prototype.start;
     AudioBufferSourceNode.prototype.start = function (when = 0, ...rest) {
-      if (this.buffer && this.buffer.duration > 0.05)
+      if (this.buffer && this.buffer === window.__sndcSample)
         window.__starts.push({ at: performance.now(), when, now: this.context.currentTime });
       return start.call(this, when, ...rest);
     };
@@ -143,10 +143,9 @@ test("a toy's samples load when it opens, and its first tap's sample starts with
   await pick(page, "dice");
   // Opening the toy fetches and decodes its sample (before any tap).
   await expect.poll(() => fetched, { timeout: 10_000 }).toContain("dice-throw.mp3");
-  await page.waitForFunction(async () => {
-    const { samplesReady } = await import("/src/voices.js");
-    const { toySound } = await import("/src/toy-sounds.js");
-    return samplesReady(toySound("dice"));
+  await page.evaluate(async () => {
+    const { loadSample } = await import("/src/voices.js");
+    window.__sndcSample = await loadSample(null, "dice-throw.mp3");
   });
   // A real click (its press wakes the audio), timed from the moment the
   // motion takes the tap.
@@ -154,9 +153,26 @@ test("a toy's samples load when it opens, and its first tap's sample starts with
     window.__starts = [];
     const m = window.__splashery.player.motion;
     const act = m.act.bind(m);
-    m.act = (...a) => ((window.__tapAt = performance.now()), act(...a));
+    m.act = (...a) => {
+      const result = act(...a);
+      // Measure after the motion accepts the action, including all wall time
+      // until audio dispatch; a pause before acceptance is not motion latency.
+      window.__tapAt = performance.now();
+      return result;
+    };
   });
-  await page.click("#toy-action");
+  // The press wakes the audio before its release takes the first toy tap.
+  // A newly created context can report running while its native clock is
+  // still at zero; wait for the output clock to actually advance.
+  await page.locator("#toy-action").hover();
+  await page.mouse.down();
+  await page.waitForFunction(() => {
+    const ctx = window.__splashery.app.sound.ctx;
+    return (
+      ctx?.state === "running" && ctx.currentTime > 0 && ctx.getOutputTimestamp().contextTime > 0
+    );
+  });
+  await page.mouse.up();
   await page.waitForTimeout(300);
   const r = await page.evaluate(() => {
     const first = window.__starts[0];
