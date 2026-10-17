@@ -87,7 +87,8 @@ slightly overshoot the reference contour.
   views do not reveal the wall thickness; the glass is an opaque surface in the splat toy.
 - Clock: the body depth, bell size and tilt, feet, rear plate, and hinge location. The side view and
   volume feedback exposed an overdeep case; moving the rim and rear details instead preserved the
-  silhouette while improving the volume overlap.
+  silhouette while improving the volume overlap. The reconstruction omits dial hands and numerals;
+  silhouette and volume scores do not validate those missing surface details.
 - Duck: a broad flat base, head depth, bill position, tapered tail, eye placement, and sampled color
   patches. The side silhouette exposed the first body's excessive rounding near the base.
 - Chess set, auxiliary: piece profiles, rank spacing, and the board. Knights remain generic turned
@@ -145,10 +146,18 @@ shared truth mesh mutation, and capture controls hidden before a click. Regressi
 the corrected cases.
 
 The final focused suite passed with Blender (15 tests) and without Blender (11 tests, with four
-Blender-only skips), including the joined-color regression. The first full preflight found two UI
-interaction failures in existing About and slider tests while rendering jobs ran; both passed in an
-isolated rerun. A fresh preflight is pending; its final status will replace this paragraph before
-handoff.
+Blender-only skips), including the joined-color regression. After fetching and merging main,
+`SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/preflight.mjs --quick` passed all six checks, and
+`SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/preflight.mjs` passed all checks and **271 tests in
+11.9 minutes**. Formatting, American English, generated-site consistency, shared-list parsing, and
+file sizes all passed.
+
+An earlier full run, concurrent with evidence work, failed formatting during an active test edit and
+two existing UI checks: the About text at 1440 by 900 (`tests/hta.spec.mjs`) and the surface-plotter
+slider (`tests/shb.spec.mjs`). Formatting was corrected; both UI checks passed individually and in
+the final full run. No site code, test expectations, or test baselines were changed. Generated
+screenshots were restored after verification. Independent review found no important remaining issue
+in the final bake-atlas and viewport-resize changes.
 
 The remaining practical limits are the missing task 113 full scorer and camera fitting, uncertain
 thin-wall geometry in the lantern, and material effects that opaque splats cannot represent. No site
