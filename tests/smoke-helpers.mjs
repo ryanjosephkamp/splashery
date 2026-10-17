@@ -4,12 +4,8 @@
 // Chromium offers no WebGPU adapter.
 
 import { expect } from "@playwright/test";
-import fs from "node:fs";
+
 import path from "node:path";
-import { PNG } from "pngjs";
-import { makePly, makeSplat, makeSpz } from "./fixtures.mjs";
-import { TOYS, CATEGORIES, searchToys } from "../src/toys.js";
-import { encodeSceneHash } from "../src/codec.js";
 
 const SHOTS = path.resolve("tests/screenshots");
 

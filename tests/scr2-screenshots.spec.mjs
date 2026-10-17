@@ -1,19 +1,7 @@
 // Task 101: independent screen checks, with all original cases and sizes.
-import { test, expect } from "@playwright/test";
-import fs from "node:fs";
-import { PNG } from "pngjs";
-import { buildRecipe } from "../src/kit.js";
-import { applyClay, PROFILES } from "../src/generators.js";
+import { test } from "@playwright/test";
 
-import {
-  openScreen,
-  settle,
-  tapAt,
-  screenPixels,
-  difference,
-  ON_TIME,
-  OFF_TIME,
-} from "./scr2-helpers.mjs";
+import { openScreen, settle, ON_TIME, OFF_TIME } from "./scr2-helpers.mjs";
 
 test("lane Screens r2 screenshots at 390x844 and 1440x900", async ({ page }) => {
   test.setTimeout(600_000);

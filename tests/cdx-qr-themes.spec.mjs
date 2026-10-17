@@ -2,7 +2,7 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import { createHash } from "node:crypto";
-import { PNG } from "pngjs";
+
 import { SAMPLES } from "../src/qr-craft/samples.js";
 import { THEMES, candidates, artwork } from "../tools/cdx-qr-themes-art.mjs";
 import { LINKS } from "../tools/cdx-qr-themes-links.mjs";
@@ -11,10 +11,8 @@ import {
   reusableMatrix,
   requirePassedMatrix,
 } from "../tools/cdx-qr-themes-evidence.mjs";
-import { layoutTrials, EVIDENCE } from "../tools/cdx-qr-themes.mjs";
-import { load } from "../tools/cdx-pics-qr.mjs";
-import { capturePicture } from "../tools/cdx-qr-themes-capture.mjs";
-import { renderedTrials } from "../tools/cdx-pics-review-browser.mjs";
+import { EVIDENCE } from "../tools/cdx-qr-themes.mjs";
+
 const PICTURES = SAMPLES.filter((s) => s.id.startsWith("cdx-theme-"));
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 

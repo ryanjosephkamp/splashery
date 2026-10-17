@@ -2,13 +2,10 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import { PNG } from "pngjs";
-import { buildRecipe } from "../src/kit.js";
-import { applyClay, PROFILES } from "../src/generators.js";
 
 import {
   openScreen,
   settle,
-  tapAt,
   screenPixels,
   difference,
   ON_TIME,

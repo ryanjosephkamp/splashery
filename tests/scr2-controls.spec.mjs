@@ -1,19 +1,10 @@
 // Task 101: independent screen checks, with all original cases and sizes.
 import { test, expect } from "@playwright/test";
-import fs from "node:fs";
-import { PNG } from "pngjs";
+
 import { buildRecipe } from "../src/kit.js";
 import { applyClay, PROFILES } from "../src/generators.js";
 
-import {
-  openScreen,
-  settle,
-  tapAt,
-  screenPixels,
-  difference,
-  ON_TIME,
-  OFF_TIME,
-} from "./scr2-helpers.mjs";
+import { openScreen, settle, tapAt, ON_TIME, OFF_TIME } from "./scr2-helpers.mjs";
 
 test("a GIF holds its frame while the set is off, and plays on when it comes back on", async ({
   page,

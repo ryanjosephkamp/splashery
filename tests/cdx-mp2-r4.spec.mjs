@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import fs from "node:fs/promises";
+
 import { openRender, renderFrame } from "../tools/cdx-mp2-render.mjs";
 
-import { android, watchPictures, chosenPicture } from "./cdx-mp2-r4-helpers.mjs";
+import { watchPictures } from "./cdx-mp2-r4-helpers.mjs";
 
 test("the accelerated and fallback reliefs render the same solid picture", async ({ page }) => {
   test.setTimeout(240_000);

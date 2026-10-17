@@ -1,7 +1,5 @@
 // Task 101: this independent phone group keeps its original fixtures and solo execution.
 import { test, expect } from "@playwright/test";
-import fs from "node:fs/promises";
-import { openRender, renderFrame } from "../tools/cdx-mp2-render.mjs";
 
 import { android, watchPictures, chosenPicture } from "./cdx-mp2-r4-helpers.mjs";
 

@@ -1,17 +1,12 @@
 // Task 58: the original assets, real picker, production layout, and browser exports.
 import { test, expect } from "@playwright/test";
-import fs from "node:fs";
-import { createHash } from "node:crypto";
+
 import { PNG } from "pngjs";
 import { SAMPLES } from "../src/qr-craft/samples.js";
-import { THEMES, candidates, artwork } from "../tools/cdx-qr-themes-art.mjs";
+import { THEMES } from "../tools/cdx-qr-themes-art.mjs";
 import { LINKS } from "../tools/cdx-qr-themes-links.mjs";
-import {
-  passedMatrix,
-  reusableMatrix,
-  requirePassedMatrix,
-} from "../tools/cdx-qr-themes-evidence.mjs";
-import { layoutTrials, EVIDENCE } from "../tools/cdx-qr-themes.mjs";
+
+import { layoutTrials } from "../tools/cdx-qr-themes.mjs";
 import { load } from "../tools/cdx-pics-qr.mjs";
 import { capturePicture } from "../tools/cdx-qr-themes-capture.mjs";
 import { renderedTrials } from "../tools/cdx-pics-review-browser.mjs";

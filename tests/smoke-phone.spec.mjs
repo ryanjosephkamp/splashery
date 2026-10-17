@@ -1,24 +1,7 @@
 // Task 101: independent smoke checks, with original fixtures and assertions.
 import { test, expect } from "@playwright/test";
-import fs from "node:fs";
-import path from "node:path";
-import { PNG } from "pngjs";
-import { makePly, makeSplat, makeSpz } from "./fixtures.mjs";
-import { TOYS, CATEGORIES, searchToys } from "../src/toys.js";
-import { encodeSceneHash } from "../src/codec.js";
 
-import {
-  SHOTS,
-  ORIGIN,
-  WEBGL,
-  NO_WEBGPU,
-  watchConsole,
-  loadApp,
-  waitForToy,
-  cameraStill,
-  countDifferentPixels,
-  inkPixels,
-} from "./smoke-helpers.mjs";
+import { watchConsole, loadApp, waitForToy } from "./smoke-helpers.mjs";
 
 test.describe("Splashery on a phone", () => {
   test.use({

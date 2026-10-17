@@ -4,11 +4,9 @@
 // switches it off, a tap on the picture plays and pauses; every style builds
 // within its tier's budget; and the lane's screenshots.
 
-import { test, expect } from "@playwright/test";
-import fs from "node:fs";
+import { expect } from "@playwright/test";
+
 import { PNG } from "pngjs";
-import { buildRecipe } from "../src/kit.js";
-import { applyClay, PROFILES } from "../src/generators.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 

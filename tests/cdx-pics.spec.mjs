@@ -2,16 +2,14 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import { createHash } from "node:crypto";
-import { PNG } from "pngjs";
+
 import { PICTURES } from "../src/packs/codex-picture-samples.js";
 import { QR_PICTURES } from "../src/qr-craft/codex-pictures.js";
 import { SAMPLES as QR_SAMPLES } from "../src/qr-craft/samples.js";
 import { DOT_SAMPLES } from "../src/packs/dot-samples.js";
-import { load, read, TEXT } from "../tools/cdx-pics-qr.mjs";
-import { pictureTrials } from "../tools/cdx-pics-review.mjs";
+
 import { LINKS } from "../tools/cdx-pics-links.mjs";
-import { capturePicture } from "../tools/cdx-pics-capture.mjs";
-import { renderedTrials } from "../tools/cdx-pics-review-browser.mjs";
+
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 const hash = (file) => createHash("sha256").update(fs.readFileSync(file)).digest("hex");
 
