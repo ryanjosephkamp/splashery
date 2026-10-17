@@ -152,14 +152,18 @@ test("a toy's samples load when it opens, and its first tap's sample starts with
   await page.evaluate(() => {
     window.__starts = [];
     const m = window.__splashery.player.motion;
-    const act = m.act.bind(m);
-    m.act = (...a) => {
-      const result = act(...a);
-      // Measure after the motion accepts the action, including all wall time
-      // until audio dispatch; a pause before acceptance is not motion latency.
-      window.__tapAt = performance.now();
-      return result;
-    };
+    let tap = m.tap;
+    Object.defineProperty(m, "tap", {
+      configurable: true,
+      enumerable: true,
+      get: () => tap,
+      set: (value) => {
+        tap = value;
+        // The action is accepted when MotionDriver stores its new tap.
+        // Keep all remaining action work and audio dispatch in the interval.
+        if (value) window.__tapAt = performance.now();
+      },
+    });
   });
   // The press wakes the audio before its release takes the first toy tap.
   // A newly created context can report running while its native clock is
