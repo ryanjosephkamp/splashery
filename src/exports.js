@@ -325,7 +325,13 @@ export function startRecording({
     if (begun) return;
     begun = true;
     clearTimeout(wait);
-    copy();
+    // Without a draw yet (half a second passed), the take opens on the stage's
+    // background until the first frame comes, not on a blank copy (lane REC1 r2).
+    if (drawn) copy();
+    else if (background) {
+      g.fillStyle = background;
+      g.fillRect(0, 0, W, H);
+    }
     // A timeslice keeps memory in small pieces on long takes.
     rec.start(1000);
     t0 = performance.now();
