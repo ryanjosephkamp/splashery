@@ -49,6 +49,10 @@ test("checker rejects wrong contracts, traversal, symlinks, and mismatched masks
   try {
     for (const patch of [
       { schema: 2 },
+      { id: 123 },
+      { id: true },
+      { parts: [{ name: ["seat"] }] },
+      { moves: [{ part: ["seat"], how: "spin", axis: "y", amount: 360 }] },
       { budget: { minutes: 0, quality: "good" } },
       { budget: { minutes: 1, quality: "great" } },
       { images: [] },

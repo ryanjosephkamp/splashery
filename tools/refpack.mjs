@@ -39,7 +39,8 @@ export function validatePack(pack, dir) {
     throw new Error(`Invalid pack: ${message}`);
   };
   if (!plain(pack) || pack.schema !== 1) fail("schema must be 1");
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(pack.id || "")) fail("id must be a lowercase slug");
+  if (typeof pack.id !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(pack.id))
+    fail("id must be a lowercase slug");
   if (typeof pack.name !== "string" || !pack.name.trim()) fail("name is required");
   if (!Array.isArray(pack.images) || !pack.images.length) fail("images must be a nonempty array");
   if (
@@ -71,7 +72,8 @@ export function validatePack(pack, dir) {
       pack.parts.some(
         (p) =>
           !plain(p) ||
-          !/^[a-z][a-z0-9-]*$/.test(p.name || "") ||
+          typeof p.name !== "string" ||
+          !/^[a-z][a-z0-9-]*$/.test(p.name) ||
           (p.material !== undefined && typeof p.material !== "string"),
       ))
   )
@@ -85,7 +87,8 @@ export function validatePack(pack, dir) {
       pack.moves.some(
         (m) =>
           !plain(m) ||
-          !/^[a-z][a-z0-9-]*$/.test(m.part || "") ||
+          typeof m.part !== "string" ||
+          !/^[a-z][a-z0-9-]*$/.test(m.part) ||
           !MOTIONS.includes(m.how) ||
           !["x", "y", "z"].includes(m.axis) ||
           !Number.isFinite(m.amount) ||
