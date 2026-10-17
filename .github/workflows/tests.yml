@@ -10,44 +10,19 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      stress_revision:
-        description: Optional task 100 stress revision (leave empty for the full suite)
-        required: false
-      stress_cases:
-        description: JSON array of task 100 families
-        default: '["cdx-mir","fl","hh1-toys","shr","hh5-gems","fx4-engine","img-engine","sndc-engine","live2","phy"]'
-        required: false
-      stress_repeat:
-        description: Repetitions per variant
-        default: "30"
-        required: false
-      stress_phase:
-        type: choice
-        options: [before, after, diagnostic]
-        default: before
-      stress_pr:
-        description: Draft PR for the exact failure receipts
-        required: false
 
 permissions:
   contents: read
 
 concurrency:
-  # Each explicit dispatch or label request names its subject. Independent
-  # measurements must not replace or serialize one another while waiting.
-  group:
-    tests-${{ github.event.pull_request.number || github.ref }}-${{ (github.event_name ==
-    'workflow_dispatch' || github.event.action == 'labeled') && github.run_id || 'suite' }}
-  cancel-in-progress:
-    ${{ github.event_name == 'pull_request' && github.event.label.name != 'stress-tests' }}
+  group: tests-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   SHARDS: 16
 
 jobs:
   checks:
-    if: ${{ !inputs.stress_revision }}
     name: Checks
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -83,9 +58,8 @@ jobs:
     # (`claude/operator-merge-*`), and on any PR labeled `full-suite` (the owner's call of
     # October 15, 2026). Other PRs get the Checks job only, so the runners don't queue up.
     if: >-
-      !inputs.stress_revision && github.event.label.name != 'stress-tests' && (github.event_name !=
-      'pull_request' || startsWith(github.head_ref, 'claude/operator-merge-') ||
-      contains(github.event.pull_request.labels.*.name, 'full-suite'))
+      github.event_name != 'pull_request' || startsWith(github.head_ref, 'claude/operator-merge-')
+      || contains(github.event.pull_request.labels.*.name, 'full-suite')
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     strategy:
@@ -233,76 +207,3 @@ jobs:
       - name: The suite failed
         if: steps.report.outputs.failed == '1'
         run: exit 1
-
-  stress:
-    # Add stress-tests to measure all ten families on the immutable PR head.
-    if: >-
-      (github.event_name == 'workflow_dispatch' && inputs.stress_revision != '') ||
-      (github.event_name == 'pull_request' && github.event.action == 'labeled' &&
-      github.event.label.name == 'stress-tests')
-    permissions:
-      contents: read
-      pull-requests: write
-    name: Stress ${{ matrix.case }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 180
-    strategy:
-      fail-fast: false
-      matrix:
-        case:
-          ${{ fromJSON(inputs.stress_cases ||
-          '["cdx-mir","fl","hh1-toys","shr","hh5-gems","fx4-engine","img-engine","sndc-engine","live2","phy"]')
-          }}
-    env:
-      DISPLAY: ":99"
-      SPLASHERY_GL:
-        ${{ contains(fromJSON('["phy","sndc-engine"]'), matrix.case) && 'swiftshader' || 'llvmpipe'
-        }}
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          path: runner
-          persist-credentials: false
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          ref: ${{ inputs.stress_revision || github.event.pull_request.head.sha }}
-          path: subject
-          fetch-depth: 0
-          persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: subject/package-lock.json
-      - run: npm ci
-        working-directory: subject
-      - name: The same browser and software renderer as the full suite
-        working-directory: subject
-        run: |
-          sudo apt-get update -q
-          sudo apt-get install -y -q xvfb libgl1-mesa-dri ffmpeg fonts-dejavu-core fonts-inter fonts-liberation fonts-liberation2 fonts-noto-color-emoji
-          npx playwright install --with-deps chromium
-          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-          Xvfb :99 -screen 0 1920x1080x24 -nolisten tcp &
-      - name: Four browsers beside two constant CPU burners
-        id: stress
-        env:
-          CASE: ${{ matrix.case }}
-          REPEAT: ${{ inputs.stress_repeat || 30 }}
-        run:
-          node runner/tools/flaky-tests.mjs --root="$PWD/subject" --only="$CASE" --repeat="$REPEAT"
-          --workers=4 --burners=2 --out="$RUNNER_TEMP/stress"
-      - name: Preserve counts and full assertion errors in the draft PR
-        if: always()
-        env:
-          GH_TOKEN: ${{ github.token }}
-          FLAKY_PHASE: ${{ inputs.stress_phase || 'after' }}
-          FLAKY_PR: ${{ inputs.stress_pr || github.event.pull_request.number }}
-        run: node runner/tools/flaky-tests-report.mjs "$RUNNER_TEMP/stress" --comment
-      - name: Raw evidence
-        if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: stress-${{ matrix.case }}-${{ inputs.stress_phase || 'after' }}
-          path: ${{ runner.temp }}/stress
-          retention-days: 7
