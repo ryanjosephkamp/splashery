@@ -1,5 +1,5 @@
 {
-  "note": "tools/suite.mjs: seconds are measured whole-file wall times from GitHub Actions run 39009564292 (head 5effb5b54, October 17, 2026), including every current spec file. Files on solo run alone when --jobs is above 1 because they check the wall clock; files on swiftshader use that renderer even with --gl=llvmpipe. Known tests still count as failures. Refresh the seconds with measured Actions file times or --save-times.",
+  "note": "tools/suite.mjs: seconds are measured whole-file wall times from GitHub Actions run 39009564292 (head 5effb5b54, October 17, 2026), for the original 436 spec files. REC1 uses 249 seconds from Actions run 39037985797 (head 937792f907, October 17, 2026); the other weights are unchanged pending the shared refresh after tasks 101 and 100 land. Files on solo run alone when --jobs is above 1 because they check the wall clock; files on swiftshader use that renderer even with --gl=llvmpipe. Known tests still count as failures. Refresh the seconds with measured Actions file times or --save-times.",
   "solo": [
     "bk",
     "cdx-mp2",
@@ -397,6 +397,7 @@
     "qrs-steps": 9,
     "qrs-study": 5,
     "qrs-toys": 134,
+    "rec1": 249,
     "rel": 229,
     "rel-engine": 3,
     "ro": 139,
