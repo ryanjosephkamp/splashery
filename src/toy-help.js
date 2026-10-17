@@ -21,6 +21,12 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "walk-inside": {
+    howTo:
+      "Tap to enter. Use WASD or the left stick to walk, drag to look, and tap the floor to go.",
+    about:
+      "Walk through a splat place on this device. A dense, opaque floor fit and a weighted 10 cm collision grid support a capsule body, 25 cm steps, 35° slopes, and sliding along walls. Small, faint floaters do not block movement. Amber haze marks the capture’s limits. Level & floor lets you flip, tilt, or scale a capture. The floor estimate is approximate, and unseen surfaces cannot be recovered.\n\nFirst person has no head bob. Character switches to Splashery Worlds’ imported character. On a desktop, Mouse look locks the pointer; Escape releases it. Without mouse lock, drag to look and click the floor to walk there. Files stay on this device. The two original test places are kit-built scenes, not photoreal captures. Made by Ryan with Codex (GPT-6), CC0; code MIT.",
+  },
   "name-toy": {
     howTo:
       "Type a name in Toy, emoji too. Pick Spin, Poke, Paint, Drop, or Blow on the stage, then touch the letters.",
