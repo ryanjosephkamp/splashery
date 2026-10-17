@@ -1,0 +1,992 @@
+[
+  {
+    "url": "https://onnxruntime.ai/docs/tutorials/web/ep-webgpu.html",
+    "checked_at_utc": "2026-10-17T02:18:24.340348+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://onnxruntime.ai/docs/tutorials/web/ep-webgpu.html",
+    "source_bytes": 57764,
+    "sha256_body": "09311327edd7c6715e147b0213e4fa10cd678f17008169b426c7bef4d084c201"
+  },
+  {
+    "url": "https://onnxruntime.ai/docs/tutorials/web/",
+    "checked_at_utc": "2026-10-17T02:18:24.341114+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://onnxruntime.ai/docs/tutorials/web/",
+    "source_bytes": 44799,
+    "sha256_body": "453edfa194961ad9c8bef77942d7481889c37c07b7eeb4207d6db98ae8b73ea8"
+  },
+  {
+    "url": "https://onnxruntime.ai/docs/tutorials/web/large-models.html",
+    "checked_at_utc": "2026-10-17T02:18:24.341603+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://onnxruntime.ai/docs/tutorials/web/large-models.html",
+    "source_bytes": 50821,
+    "sha256_body": "3e30ecdf617b7dd636de199a4fef4edf27b8a8ac85b2f34cf4103c7231bde0d3"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/hbb1/2d-gaussian-splatting/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:24.342097+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/hbb1/2d-gaussian-splatting/main/README.md",
+    "source_bytes": 13612,
+    "sha256_body": "0df0d1bbdd4ac2cf16ccaa37a5d3b86a5b68acd456dc1593f5869f558740ac01"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/hbb1/2d-gaussian-splatting/main/LICENSE.md",
+    "checked_at_utc": "2026-10-17T02:18:24.342546+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/hbb1/2d-gaussian-splatting/main/LICENSE.md",
+    "source_bytes": 4275,
+    "sha256_body": "cd5c95b3cfff3acc1bd412420c770f88809331c3db6872df11a970147aa8e81f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/trianglesplatting/triangle-splatting/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:24.342930+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/trianglesplatting/triangle-splatting/main/README.md",
+    "source_bytes": 6406,
+    "sha256_body": "bfb170b3774aa2141ecf306febcc6503c28556746b09ba3ddcee1c19bc3873c2"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/trianglesplatting/triangle-splatting/main/LICENSE.md",
+    "checked_at_utc": "2026-10-17T02:18:24.356226+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/trianglesplatting/triangle-splatting/main/LICENSE.md",
+    "source_bytes": 10801,
+    "sha256_body": "483246737d4e18f4ab3b040f4df37c6c48855e9e6e6683456085eb6e5e74fc90"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/trianglesplatting/diff-triangle-rasterization/main/LICENSE.md",
+    "checked_at_utc": "2026-10-17T02:18:24.360010+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/trianglesplatting/diff-triangle-rasterization/main/LICENSE.md",
+    "source_bytes": 10801,
+    "sha256_body": "483246737d4e18f4ab3b040f4df37c6c48855e9e6e6683456085eb6e5e74fc90"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/RongLiu-Leo/beta-splatting/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:24.674362+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/RongLiu-Leo/beta-splatting/main/README.md",
+    "source_bytes": 10076,
+    "sha256_body": "8a6bab8bc34e4179f6eca2247515b0c84f6a8883bd82ce66782b08c2dc2b619e"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/RongLiu-Leo/beta-splatting/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:24.701797+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/RongLiu-Leo/beta-splatting/main/LICENSE",
+    "source_bytes": 11357,
+    "sha256_body": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/RongLiu-Leo/beta-splatting/main/LICENSE_GAUSSIAN_SPLATTING.md",
+    "checked_at_utc": "2026-10-17T02:18:24.715369+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/RongLiu-Leo/beta-splatting/main/LICENSE_GAUSSIAN_SPLATTING.md",
+    "source_bytes": 4662,
+    "sha256_body": "c5ba70a2194af2aefe85dfe3da68608dcb3abd21a3aa53b55aa297c2f0b60eb3"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/RongLiu-Leo/universal-beta-splatting/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:24.730757+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/RongLiu-Leo/universal-beta-splatting/main/README.md",
+    "source_bytes": 9194,
+    "sha256_body": "8e28e366a7412032af3cd456f47669384d0ae721c402076662817d987cd26ed5"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/RongLiu-Leo/universal-beta-splatting/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:24.757671+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/RongLiu-Leo/universal-beta-splatting/main/LICENSE",
+    "source_bytes": 19346,
+    "sha256_body": "3711f963c05d0be80d53e5923308a6dee31b203da23435c9cfb7c7b6e4dd5e19"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/nv-tlabs/3dgrut/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:24.766235+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/nv-tlabs/3dgrut/main/README.md",
+    "source_bytes": 28826,
+    "sha256_body": "8fa4f34d556e2ce9f26060742f799b08ddaf1325c309ba2dfae467705535bfd1"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/nv-tlabs/3dgrut/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:24.819705+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/nv-tlabs/3dgrut/main/LICENSE",
+    "source_bytes": 11355,
+    "sha256_body": "7339fa418c9ad3e8e12e74ad0fd26a9cc4be8703f9c110728a992b193be85cb2"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSR/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:24.858296+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSR/main/README.md",
+    "source_bytes": 5419,
+    "sha256_body": "ed40f078c5e451c58eae716187e0128f0ce8575e467aab2440b4ed9c75e490b9"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSR/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:24.945394+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSR/main/LICENSE",
+    "source_bytes": 1080,
+    "sha256_body": "ade0a66629bdd7e01e46b3296b3851cff0fd27989bca53da470ad6e96ed620fb"
+  },
+  {
+    "url": "https://huggingface.co/stabilityai/TripoSR/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:24.970886+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/stabilityai/TripoSR/raw/main/README.md",
+    "source_bytes": 2488,
+    "sha256_body": "5c12ef5b850c6ee2aa7454b1a264f6f8dfa95164384dbb1ab374acd917aa558b"
+  },
+  {
+    "url": "https://huggingface.co/api/models/stabilityai/TripoSR?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:24.982829+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/stabilityai/TripoSR?blobs=true",
+    "source_bytes": 4181,
+    "sha256_body": "618f33592fab36ba7332c1afa1f25bfcb56df3ebb23c4288f7b731377b435dc0"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/microsoft/TRELLIS/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:24.992821+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/microsoft/TRELLIS/main/README.md",
+    "source_bytes": 22007,
+    "sha256_body": "675a1bab7837d22972a776dec8e2a2eb01f9211bd40b4c57112a8335ccb9ec3e"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/microsoft/TRELLIS/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:25.069322+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/microsoft/TRELLIS/main/LICENSE",
+    "source_bytes": 1141,
+    "sha256_body": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+  },
+  {
+    "url": "https://huggingface.co/microsoft/TRELLIS-image-large/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.080545+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/microsoft/TRELLIS-image-large/raw/main/README.md",
+    "source_bytes": 464,
+    "sha256_body": "9b64b43ea1d58635f14f2ebe5664c22be6fee8943943ece39a14e98b1da4378c"
+  },
+  {
+    "url": "https://huggingface.co/api/models/microsoft/TRELLIS-image-large?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:25.093129+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/microsoft/TRELLIS-image-large?blobs=true",
+    "source_bytes": 6355,
+    "sha256_body": "e8a8cbef0c2965ec898e9b61e7f080ec6218b471f412233c8393219ac15218b1"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/microsoft/TRELLIS.2/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.207284+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/microsoft/TRELLIS.2/main/README.md",
+    "source_bytes": 16212,
+    "sha256_body": "adc985d5a71fda0a5cb7287f58b6baa7de8db1568c4483ac210f3447b786552b"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/microsoft/TRELLIS.2/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:25.288945+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/microsoft/TRELLIS.2/main/LICENSE",
+    "source_bytes": 1140,
+    "sha256_body": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  },
+  {
+    "url": "https://huggingface.co/microsoft/TRELLIS.2-4B/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.312739+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/microsoft/TRELLIS.2-4B/raw/main/README.md",
+    "source_bytes": 6417,
+    "sha256_body": "ab08bd7f555372317d166220dbd2c17c73b5a238d45da018ef301c1e32aec8a8"
+  },
+  {
+    "url": "https://huggingface.co/api/models/microsoft/TRELLIS.2-4B?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:25.328677+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/microsoft/TRELLIS.2-4B?blobs=true",
+    "source_bytes": 6828,
+    "sha256_body": "7070e4b2935ec46941a3837f84cdc6f401bc2aaaf2538b32d09d550914f07860"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/apple/ml-sharp/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.347979+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/apple/ml-sharp/main/README.md",
+    "source_bytes": 4204,
+    "sha256_body": "988c298e23e8ea133bf01bd2f3ef0418c0961d1b94020304e96c247f82b17cbb"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/apple/ml-sharp/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:25.375165+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/apple/ml-sharp/main/LICENSE",
+    "source_bytes": 2672,
+    "sha256_body": "cf9fd1ebe78d3effd9f782d053ffbed7f69b033e5260e706c0f216e0bd4675fa"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/apple/ml-sharp/main/LICENSE_MODEL",
+    "checked_at_utc": "2026-10-17T02:18:25.404685+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/apple/ml-sharp/main/LICENSE_MODEL",
+    "source_bytes": 5815,
+    "sha256_body": "e177a921ef25a523c429c6916e819c769bb4942619aadd16afe0108105a2baaf"
+  },
+  {
+    "url": "https://ml-site.cdn-apple.com/models/sharp/sharp_2572gikvuh.pt",
+    "checked_at_utc": "2026-10-17T02:18:25.455835+00:00",
+    "status": 200,
+    "method": "HEAD",
+    "final_url": "https://ml-site.cdn-apple.com/models/sharp/sharp_2572gikvuh.pt",
+    "source_bytes": 2809738232,
+    "sha256_body": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/Stability-AI/stable-fast-3d/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.473327+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/Stability-AI/stable-fast-3d/main/README.md",
+    "source_bytes": 6083,
+    "sha256_body": "830acf3c0c9776f2ccf8d3edc41c1e85972e993b38b65eee06e6663a91ebaa7b"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/Stability-AI/stable-fast-3d/main/LICENSE.md",
+    "checked_at_utc": "2026-10-17T02:18:25.511742+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/Stability-AI/stable-fast-3d/main/LICENSE.md",
+    "source_bytes": 11727,
+    "sha256_body": "a0f992849ce25def8e531884edd7adf3c00cb8d2d4c59e49f0cb02597c29066e"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hunyuan3D-2/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.544891+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hunyuan3D-2/main/README.md",
+    "source_bytes": 18798,
+    "sha256_body": "edc4d006b977c8e28a0d3135ffc22b0dcad8e8dcb31fc9152c906eb21e29a886"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hunyuan3D-2/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:25.652232+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hunyuan3D-2/main/LICENSE",
+    "source_bytes": 17829,
+    "sha256_body": "94259df223918a5733677965c1bfe1774a2dba25042d9c3b47a3418ea6c1f324"
+  },
+  {
+    "url": "https://huggingface.co/tencent/Hunyuan3D-2/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.715433+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/tencent/Hunyuan3D-2/raw/main/README.md",
+    "source_bytes": 9518,
+    "sha256_body": "315092be8a8763bbc20ac7da187a224875990b34ea67a64a2a2fbd04c9716690"
+  },
+  {
+    "url": "https://huggingface.co/api/models/tencent/Hunyuan3D-2?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:25.718859+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/tencent/Hunyuan3D-2?blobs=true",
+    "source_bytes": 17909,
+    "sha256_body": "e7b17e53cbf65f1f16cab53bdafab9eb80a24251e52a6165a9ac316fd1f0958d"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSG/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.755825+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSG/main/README.md",
+    "source_bytes": 5719,
+    "sha256_body": "87024a832f6dc1e81ba3078485b282095fb31941898f81b1c6bfe02d5454288d"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSG/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:25.764773+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSG/main/LICENSE",
+    "source_bytes": 1125,
+    "sha256_body": "0fc2acd0176b345d3da59f466861ad09b78698de4200739aeaa2ffc9ae7a6842"
+  },
+  {
+    "url": "https://huggingface.co/VAST-AI/TripoSG/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.766817+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/VAST-AI/TripoSG/raw/main/README.md",
+    "source_bytes": 1465,
+    "sha256_body": "0f4c34a1a17acdbcff02c259d7f4f7b5df1b8956395c625c28da97930eb82ef3"
+  },
+  {
+    "url": "https://huggingface.co/briaai/RMBG-1.4/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.793498+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/briaai/RMBG-1.4/raw/main/README.md",
+    "source_bytes": 6395,
+    "sha256_body": "24e08231e4a1f467f69fd9a5f279c259544212dbeb581c710700f27effd07875"
+  },
+  {
+    "url": "https://huggingface.co/api/models/VAST-AI/TripoSG?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:25.813335+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/VAST-AI/TripoSG?blobs=true",
+    "source_bytes": 3205,
+    "sha256_body": "729c90fb592b9bfa46b1869aa184d59928ec9f7f28737b71ec919b65c13f00a0"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:25.905166+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/README.md",
+    "source_bytes": 9904,
+    "sha256_body": "987d1ab991c1b149276a0426bec7d8f3472d85c29ec976d96ea657aa960fad50"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:25.936771+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/LICENSE",
+    "source_bytes": 11357,
+    "sha256_body": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "url": "https://huggingface.co/depth-anything/Depth-Anything-V2-Small/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.006201+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/depth-anything/Depth-Anything-V2-Small/raw/main/README.md",
+    "source_bytes": 1958,
+    "sha256_body": "d96b19c959007126110b199a7c2e9c24530b61796a26f1af035420625a10f916"
+  },
+  {
+    "url": "https://huggingface.co/api/models/depth-anything/Depth-Anything-V2-Small?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:26.015788+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/depth-anything/Depth-Anything-V2-Small?blobs=true",
+    "source_bytes": 1394,
+    "sha256_body": "a7f6b8e346a94c73235f42300bb7a1c434187a8a56125f86d339e7f4de23d7c2"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/ByteDance-Seed/Depth-Anything-3/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.077292+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/ByteDance-Seed/Depth-Anything-3/main/README.md",
+    "source_bytes": 18759,
+    "sha256_body": "91679cf6df290b6af439c85f29a2440ce10353a1063ae4f599e9c734ec3096a8"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/ByteDance-Seed/Depth-Anything-3/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:26.123391+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/ByteDance-Seed/Depth-Anything-3/main/LICENSE",
+    "source_bytes": 11355,
+    "sha256_body": "78446e29c48900cda82620a8df183cca61f0a595e05a49d0401a5fd604dd1870"
+  },
+  {
+    "url": "https://huggingface.co/depth-anything/DA3-SMALL/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.149376+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/depth-anything/DA3-SMALL/raw/main/README.md",
+    "source_bytes": 4694,
+    "sha256_body": "0a711be055e4eb5293e31586e3176c09ce12eb2e79593f6b96a41f7fe5b415d0"
+  },
+  {
+    "url": "https://huggingface.co/depth-anything/DA3-BASE/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.159830+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/depth-anything/DA3-BASE/raw/main/README.md",
+    "source_bytes": 5682,
+    "sha256_body": "5388563071b4361b11d6d811b354d454f26aed2adba634fcf4ee3775c8eda480"
+  },
+  {
+    "url": "https://huggingface.co/api/models/depth-anything/DA3-SMALL?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:26.163478+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/depth-anything/DA3-SMALL?blobs=true",
+    "source_bytes": 1604,
+    "sha256_body": "9db19f900e500f10d2b6e7a132e41eb7f33540a845324b4faa75f86127004488"
+  },
+  {
+    "url": "https://huggingface.co/api/models/depth-anything/DA3-BASE?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:26.183573+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/depth-anything/DA3-BASE?blobs=true",
+    "source_bytes": 1545,
+    "sha256_body": "c3c1afb72f9311151383fde4d6d2bd7ce2b4e5e2b6b2fec44d63268b43f67ba3"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/microsoft/MoGe/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.332900+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/microsoft/MoGe/main/README.md",
+    "source_bytes": 15822,
+    "sha256_body": "b940dbb7c39bdc96cdd9a707b0ec7c19733c8ef92681b734ac4d9393adad5c21"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/microsoft/MoGe/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:26.333561+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/microsoft/MoGe/main/LICENSE",
+    "source_bytes": 12500,
+    "sha256_body": "ad7d951c80c5fc2b2bce035f2041bc0a0dbf9028c8ecc4c9a8e1fba8130b6b59"
+  },
+  {
+    "url": "https://huggingface.co/Ruicheng/moge-2-vits-normal/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.353357+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/Ruicheng/moge-2-vits-normal/raw/main/README.md",
+    "source_bytes": 87,
+    "sha256_body": "a0ff9e295aa3b2401702d4bfacb9011f1d3611b94169f9135d5edda92b47279d"
+  },
+  {
+    "url": "https://huggingface.co/api/models/Ruicheng/moge-2-vits-normal?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:26.407573+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/Ruicheng/moge-2-vits-normal?blobs=true",
+    "source_bytes": 1252,
+    "sha256_body": "b0e55f779fd61907bb3fe89994c9c1ca8b036908d4b8d49f648a19f7fe9a10a1"
+  },
+  {
+    "url": "https://huggingface.co/Ruicheng/moge-3-vitl/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.421810+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/Ruicheng/moge-3-vitl/raw/main/README.md",
+    "source_bytes": 51,
+    "sha256_body": "fc81933791979233a76c29e3a44ed91a44f69555121d2160fdfc39219fb59fd4"
+  },
+  {
+    "url": "https://huggingface.co/api/models/Ruicheng/moge-3-vitl?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:26.428752+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/Ruicheng/moge-3-vitl?blobs=true",
+    "source_bytes": 1000,
+    "sha256_body": "1bdc0c89c9a51b808840b5097cc9db3328fd74856b7e7042c9cfaed7d7dc11b6"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/baegwangbin/DSINE/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.459216+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/baegwangbin/DSINE/main/README.md",
+    "source_bytes": 13574,
+    "sha256_body": "85c4398e413f7315465b253ace0560e69a8b2054253deb6179734a9338cd739b"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/baegwangbin/DSINE/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:26.492013+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/baegwangbin/DSINE/main/LICENSE",
+    "source_bytes": 11713,
+    "sha256_body": "ec5c61024c3ce6fc3cb3e4b66592971921a679941150846dc9cd60154bff9844"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/apple/ml-depth-pro/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.502874+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/apple/ml-depth-pro/main/README.md",
+    "source_bytes": 3776,
+    "sha256_body": "5a10be5d4c040e382a82ffc356ce06f1f73a8f7ff4250e53efea98680b4ea1e0"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/apple/ml-depth-pro/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:26.530421+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/apple/ml-depth-pro/main/LICENSE",
+    "source_bytes": 2672,
+    "sha256_body": "21a6551d1f8f851d2d10b5c6cc56535956b983c3cb997d25f3db4dd6f59ef99f"
+  },
+  {
+    "url": "https://ml-site.cdn-apple.com/models/depth-pro/depth_pro.pt",
+    "checked_at_utc": "2026-10-17T02:18:26.632662+00:00",
+    "status": 200,
+    "method": "HEAD",
+    "final_url": "https://ml-site.cdn-apple.com/models/depth-pro/depth_pro.pt",
+    "source_bytes": 1904446787,
+    "sha256_body": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/facebookresearch/vggt/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.696551+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/facebookresearch/vggt/main/README.md",
+    "source_bytes": 14404,
+    "sha256_body": "56426b9aea25174ccbc4c2c37a3a22107fd8b5ac9dc5a8bf008e7457402ed3bd"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/facebookresearch/vggt/main/LICENSE.txt",
+    "checked_at_utc": "2026-10-17T02:18:26.738987+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/facebookresearch/vggt/main/LICENSE.txt",
+    "source_bytes": 10722,
+    "sha256_body": "b94e46746792d1adfa0ebdbccada5d4576d244ae230be9de8a46b5868fff001b"
+  },
+  {
+    "url": "https://huggingface.co/facebook/VGGT-1B/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.747679+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/facebook/VGGT-1B/raw/main/README.md",
+    "source_bytes": 2060,
+    "sha256_body": "d666ecaba89db88cb66bf06db6daddfdc2400e13f2a39e39c84e888b27fbc615"
+  },
+  {
+    "url": "https://huggingface.co/api/models/facebook/VGGT-1B?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:26.753687+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/facebook/VGGT-1B?blobs=true",
+    "source_bytes": 2748,
+    "sha256_body": "fc5febf27ea12cb44fdec6920d30a861946c7aebc09730e9e5d42dfc0807604c"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/hustvl/4DGaussians/master/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.754979+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/hustvl/4DGaussians/master/README.md",
+    "source_bytes": 13347,
+    "sha256_body": "b6bc3b450330ec548d5bfc8001eae2ea600615f900126ed047d553dc19fdf9af"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/hustvl/4DGaussians/master/LICENSE.md",
+    "checked_at_utc": "2026-10-17T02:18:26.791288+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/hustvl/4DGaussians/master/LICENSE.md",
+    "source_bytes": 11357,
+    "sha256_body": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/ingra14m/depth-diff-gaussian-rasterization/main/LICENSE.md",
+    "checked_at_utc": "2026-10-17T02:18:26.828844+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/ingra14m/depth-diff-gaussian-rasterization/main/LICENSE.md",
+    "source_bytes": 4275,
+    "sha256_body": "cd5c95b3cfff3acc1bd412420c770f88809331c3db6872df11a970147aa8e81f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/MediaX-SJTU/4DGC/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.895908+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/MediaX-SJTU/4DGC/main/README.md",
+    "source_bytes": 3603,
+    "sha256_body": "fb586f8a29eec81e4a4472779146c41533801a90eae7d8cefbcc5d1c2f7668c1"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/MediaX-SJTU/4DGCPro/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.904059+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/MediaX-SJTU/4DGCPro/main/README.md",
+    "source_bytes": 1290,
+    "sha256_body": "8a5c7115e7c875afa67d8160c6560228deec34beefecb4fe509b716b31874115"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lzhnb/GS-IR/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:26.906471+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/lzhnb/GS-IR/main/README.md",
+    "source_bytes": 6757,
+    "sha256_body": "115d542589d631f6fdf94a23e926497cb39c917055c465b01d1ae7af11871982"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lzhnb/GS-IR/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:26.976921+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/lzhnb/GS-IR/main/LICENSE",
+    "source_bytes": 1078,
+    "sha256_body": "eaf88512a83fc007481fee3c10b6b6e3dbab64bd6d0d3c64416decf86dbc9440"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lzhnb/GS-IR/main/submodules/diff-gaussian-rasterization/LICENSE.md",
+    "checked_at_utc": "2026-10-17T02:18:26.992758+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/lzhnb/GS-IR/main/submodules/diff-gaussian-rasterization/LICENSE.md",
+    "source_bytes": 4275,
+    "sha256_body": "cd5c95b3cfff3acc1bd412420c770f88809331c3db6872df11a970147aa8e81f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/ActiveVisionLab/gaussctrl/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:27.000346+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/ActiveVisionLab/gaussctrl/main/README.md",
+    "source_bytes": 9947,
+    "sha256_body": "e85ed4bea5b8daaf9f8c6c3841158995af6deba80b29a4b229c2358a3f23f866"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/ActiveVisionLab/gaussctrl/main/LICENSE.txt",
+    "checked_at_utc": "2026-10-17T02:18:27.005869+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/ActiveVisionLab/gaussctrl/main/LICENSE.txt",
+    "source_bytes": 1511,
+    "sha256_body": "7654eac16a09fb5153e8d63788b611140187cf8a7e540cb5c66df095de57898c"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/minghanqin/LangSplat/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:27.044863+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/minghanqin/LangSplat/main/README.md",
+    "source_bytes": 9599,
+    "sha256_body": "e4e2f44bc6a92db33a44e72c3c881c82ba28e08884c66cfa7406dee0f95f074b"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/minghanqin/LangSplat/main/LICENSE.md",
+    "checked_at_utc": "2026-10-17T02:18:27.091155+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/minghanqin/LangSplat/main/LICENSE.md",
+    "source_bytes": 4275,
+    "sha256_body": "cd5c95b3cfff3acc1bd412420c770f88809331c3db6872df11a970147aa8e81f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/facebookresearch/sam2/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:27.156470+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/facebookresearch/sam2/main/README.md",
+    "source_bytes": 16249,
+    "sha256_body": "eea69ee1042fb30933c5ca5019fbf0f6f9366cec5e792109281b5023a4f1589c"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/facebookresearch/sam2/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:27.157224+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/facebookresearch/sam2/main/LICENSE",
+    "source_bytes": 11357,
+    "sha256_body": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "url": "https://huggingface.co/facebook/sam2.1-hiera-tiny/raw/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:27.238923+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/facebook/sam2.1-hiera-tiny/raw/main/README.md",
+    "source_bytes": 19965,
+    "sha256_body": "dfa401b1b9358b9650ae487dd2f2bb336fd745c3609e3244adf2e97a22343857"
+  },
+  {
+    "url": "https://huggingface.co/api/models/facebook/sam2.1-hiera-tiny?blobs=true",
+    "checked_at_utc": "2026-10-17T02:18:27.242679+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/facebook/sam2.1-hiera-tiny?blobs=true",
+    "source_bytes": 4410,
+    "sha256_body": "6627e83dc0e1d8e8bf5d910bcdf568ac53da4bf4b9264c6e342e05e02f9c0ca9"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/dfki-av/Inpaint360GS/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:27.273775+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/dfki-av/Inpaint360GS/main/README.md",
+    "source_bytes": 8221,
+    "sha256_body": "d7ac9169e04f6dc54cdef9d54c042def33375beef393d55fd7e2c80150db7d66"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/dfki-av/Inpaint360GS/main/LICENSE.txt",
+    "checked_at_utc": "2026-10-17T02:18:27.295262+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/dfki-av/Inpaint360GS/main/LICENSE.txt",
+    "source_bytes": 11369,
+    "sha256_body": "41d805773f2aa0b36c2fb69491f64c3079fe3e0671c9848680645fc9e65d5a10"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/dfki-av/Inpaint360GS/main/submodules/diff-gaussian-rasterization/LICENSE.md",
+    "checked_at_utc": "2026-10-17T02:18:27.295924+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/dfki-av/Inpaint360GS/main/submodules/diff-gaussian-rasterization/LICENSE.md",
+    "source_bytes": 4275,
+    "sha256_body": "cd5c95b3cfff3acc1bd412420c770f88809331c3db6872df11a970147aa8e81f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/dfki-av/Inpaint360GS/main/LaMa/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:27.344103+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/dfki-av/Inpaint360GS/main/LaMa/LICENSE",
+    "source_bytes": 11348,
+    "sha256_body": "4ceeeac5a802e86c413c22b16cce8e9a22027b0250c97e6f8ac97c14cf0542c0"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/playcanvas/supersplat/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:27.357731+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/playcanvas/supersplat/main/README.md",
+    "source_bytes": 3197,
+    "sha256_body": "6571e965daee30b0b69bc9431194107669d2bdcbb9b1fda3e1505564dc1335c1"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/playcanvas/supersplat/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:27.362638+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/playcanvas/supersplat/main/LICENSE",
+    "source_bytes": 1064,
+    "sha256_body": "42fa51ddd556be151a29f381fb97ee975825dcc454e805ea3ea9c079cca04d34"
+  },
+  {
+    "url": "https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/",
+    "checked_at_utc": "2026-10-17T02:18:27.367545+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/",
+    "source_bytes": 129788,
+    "sha256_body": "3ac1b48aa09721aeecff08b883e0abc44b2d66575a81f4df95c04b0082c1dd38"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/playcanvas/splat-transform/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:27.562958+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/playcanvas/splat-transform/main/LICENSE",
+    "source_bytes": 1064,
+    "sha256_body": "42fa51ddd556be151a29f381fb97ee975825dcc454e805ea3ea9c079cca04d34"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/nianticlabs/spz/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:27.597622+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/nianticlabs/spz/main/README.md",
+    "source_bytes": 11938,
+    "sha256_body": "bd28be76252328d6fa65d7c098197075e6a6b15d7b43e0acbf67c75497c43318"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/nianticlabs/spz/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:27.616374+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/nianticlabs/spz/main/LICENSE",
+    "source_bytes": 1069,
+    "sha256_body": "d2b852220d1043148f523c4154e8bf7d9c5e419aede33b4c94115cfc457e4714"
+  },
+  {
+    "url": "https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog/",
+    "checked_at_utc": "2026-10-17T02:18:27.624737+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog/",
+    "source_bytes": 46174,
+    "sha256_body": "ac06868e10ef7b45e610b13af837c6573d45d9db3116bf03c72bc9666a0b007a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/sparkjsdev/spark/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:27.624958+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/sparkjsdev/spark/main/README.md",
+    "source_bytes": 6320,
+    "sha256_body": "ec54a48d4f7db7c99dc338b476eb0b80ee41b3d6eabf7372c10bcaa64b75daba"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/sparkjsdev/spark/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:27.631318+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/sparkjsdev/spark/main/LICENSE",
+    "source_bytes": 1088,
+    "sha256_body": "51829693e5dccd9ca1daa093991faac3aaa93238eb8fd5f5cb4130af85791d64"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/playcanvas/engine/main/src/scene/graphics/radix-sort/compute-radix-sort.js",
+    "checked_at_utc": "2026-10-17T02:18:27.689834+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/playcanvas/engine/main/src/scene/graphics/radix-sort/compute-radix-sort.js",
+    "source_bytes": 12743,
+    "sha256_body": "bc259af2dcc0052e4a8a161d2988811827aaec6860e8da25a78442b9122989dc"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/playcanvas/engine/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:27.733796+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/playcanvas/engine/main/LICENSE",
+    "source_bytes": 1064,
+    "sha256_body": "42fa51ddd556be151a29f381fb97ee975825dcc454e805ea3ea9c079cca04d34"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/xiaobiaodu/Mobile-GS/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:27.776474+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/xiaobiaodu/Mobile-GS/main/README.md",
+    "source_bytes": 3908,
+    "sha256_body": "850b986e89966e0ed4fa4a8871d97def8060e89f0948473589b73951646eaf6d"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/xiaobiaodu/Flux-GS/main/README.md",
+    "checked_at_utc": "2026-10-17T02:18:27.778297+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/xiaobiaodu/Flux-GS/main/README.md",
+    "source_bytes": 3851,
+    "sha256_body": "0c344f881fb9c5e7730c19aac2ed6401453b41f80059e6542bb123f0a4f6268b"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/xiaobiaodu/Flux-GS/main/LICENSE",
+    "checked_at_utc": "2026-10-17T02:18:27.826994+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://raw.githubusercontent.com/xiaobiaodu/Flux-GS/main/LICENSE",
+    "source_bytes": 11476,
+    "sha256_body": "c222118ecd54bc0e1840a06780b666559b5d8859cd2423b7bd7429917e3a068e"
+  },
+  {
+    "url": "https://huggingface.co/api/datasets/mobile-gs2/mobile-gs2",
+    "checked_at_utc": "2026-10-17T02:18:27.831757+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/datasets/mobile-gs2/mobile-gs2",
+    "source_bytes": 1236,
+    "sha256_body": "c1fe06692e40c5fe575a8071eae7967ba094466c42bc21bade073aafa914c3e1"
+  },
+  {
+    "url": "https://sparkjs.dev/docs/spark-renderer/",
+    "checked_at_utc": "2026-10-17T02:18:27.840929+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://sparkjs.dev/docs/spark-renderer/",
+    "source_bytes": 45238,
+    "sha256_body": "4be39bdf8f485792aa4d34557fd89a6898a3ee20affcc6e12628eef570ff2890"
+  },
+  {
+    "url": "https://arxiv.org/abs/2505.19175",
+    "checked_at_utc": "2026-10-17T02:18:27.898865+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://arxiv.org/abs/2505.19175",
+    "source_bytes": 43110,
+    "sha256_body": "2cb28082917108fe6e1cb6791c0624fe14d0a7858e04685aa6db22f6d5f6f9ff"
+  },
+  {
+    "url": "https://arxiv.org/abs/2510.03312",
+    "checked_at_utc": "2026-10-17T02:18:27.940806+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://arxiv.org/abs/2510.03312",
+    "source_bytes": 42904,
+    "sha256_body": "fe76d2da05e558541f45d626bea09fe361fdb0dd5e2ad97b6e66a33f6c996a5f"
+  },
+  {
+    "url": "https://arxiv.org/abs/2607.17967",
+    "checked_at_utc": "2026-10-17T02:18:27.976442+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://arxiv.org/abs/2607.17967",
+    "source_bytes": 42774,
+    "sha256_body": "f4eededf58ce01ebffb12930e34432d119d24c2843e1cfb4101a6464855102d8"
+  },
+  {
+    "url": "https://arxiv.org/abs/2511.06457",
+    "checked_at_utc": "2026-10-17T02:18:27.979574+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://arxiv.org/abs/2511.06457",
+    "source_bytes": 42062,
+    "sha256_body": "ef26179e66cbc165999f9789958f8b86f24b9ad8eeada43a041391c1152c1762"
+  },
+  {
+    "url": "https://arxiv.org/abs/2603.11531",
+    "checked_at_utc": "2026-10-17T02:18:27.988291+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://arxiv.org/abs/2603.11531",
+    "source_bytes": 43212,
+    "sha256_body": "d558eed70359302346dfb1b68658828f80d0f706414b9ac12ee1de7fbc40ad9e"
+  },
+  {
+    "url": "https://arxiv.org/abs/2606.30017",
+    "checked_at_utc": "2026-10-17T02:18:28.024878+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://arxiv.org/abs/2606.30017",
+    "source_bytes": 43642,
+    "sha256_body": "d2f869607009118f3428f358bbaed71c973459c51cb2ee0c16e9793976e81911"
+  },
+  {
+    "url": "https://huggingface.co/api/models/stabilityai/stable-fast-3d?blobs=true",
+    "checked_at_utc": "2026-10-17T02:21:43.595591+00:00",
+    "status": 200,
+    "method": "GET",
+    "final_url": "https://huggingface.co/api/models/stabilityai/stable-fast-3d?blobs=true",
+    "source_bytes": 4861,
+    "sha256_body": "6d641fa4f141220d4dd260de9a04e88e76588cae9ea1c7a551c790802ae57dbe"
+  }
+]

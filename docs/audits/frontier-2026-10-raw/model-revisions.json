@@ -1,0 +1,419 @@
+[
+  {
+    "id": "Ruicheng/moge-2-vitl-normal",
+    "revision": "cb0e8bbd6b1e243589717c78e750b1ba4c093acf",
+    "license": "mit",
+    "files": [
+      {
+        "path": "model.pt",
+        "bytes": 1323815904
+      }
+    ]
+  },
+  {
+    "id": "Ruicheng/moge-2-vits-normal",
+    "revision": "26b477f41595707c5db6770294c0d1721e8ed4ed",
+    "license": "mit",
+    "files": [
+      {
+        "path": "model.pt",
+        "bytes": 140550416
+      }
+    ]
+  },
+  {
+    "id": "Ruicheng/moge-3-vitl",
+    "revision": "184008f877d7ad1ad4c2cd2182a9bd1f63d0e5be",
+    "license": "mit",
+    "files": [
+      {
+        "path": "model.pt",
+        "bytes": 1481333394
+      }
+    ]
+  },
+  {
+    "id": "VAST-AI/TripoSG",
+    "revision": "2c1c516d22d58db486a058d98d31bb6177344e06",
+    "license": "mit",
+    "files": [
+      {
+        "path": "image_encoder_dinov2/model.safetensors",
+        "bytes": 1217522888
+      },
+      {
+        "path": "transformer/diffusion_pytorch_model.safetensors",
+        "bytes": 5758280104
+      },
+      {
+        "path": "vae/diffusion_pytorch_model.safetensors",
+        "bytes": 970685468
+      }
+    ]
+  },
+  {
+    "id": "briaai/RMBG-1.4",
+    "revision": "2ceba5a5efaec153162aedea169f76caf9b46cf8",
+    "license": "other",
+    "files": [
+      {
+        "path": "model.pth",
+        "bytes": 176718373
+      },
+      {
+        "path": "model.safetensors",
+        "bytes": 176381984
+      },
+      {
+        "path": "onnx/model.onnx",
+        "bytes": 176153355
+      },
+      {
+        "path": "onnx/model_fp16.onnx",
+        "bytes": 88217533
+      },
+      {
+        "path": "onnx/model_quantized.onnx",
+        "bytes": 44403226
+      },
+      {
+        "path": "pytorch_model.bin",
+        "bytes": 176574018
+      },
+      {
+        "path": "results.png",
+        "bytes": 1251942
+      },
+      {
+        "path": "t4.png",
+        "bytes": 2159885
+      }
+    ]
+  },
+  {
+    "id": "depth-anything/DA3-BASE",
+    "revision": "f4a6c9b3c95e41c82048423d3493a81ec3fa810e",
+    "license": "apache-2.0",
+    "files": [
+      {
+        "path": "model.safetensors",
+        "bytes": 541518028
+      }
+    ]
+  },
+  {
+    "id": "depth-anything/DA3-SMALL",
+    "revision": "e08cab65ca0ec38e7826075418411ab90cab4da3",
+    "license": "apache-2.0",
+    "files": [
+      {
+        "path": "model.safetensors",
+        "bytes": 137248940
+      }
+    ]
+  },
+  {
+    "id": "depth-anything/Depth-Anything-V2-Small",
+    "revision": "03876f8651c73a60fe4c2c48294e09fcb6838fcf",
+    "license": "apache-2.0",
+    "files": [
+      {
+        "path": "depth_anything_v2_vits.pth",
+        "bytes": 99218434
+      }
+    ]
+  },
+  {
+    "id": "facebook/VGGT-1B",
+    "revision": "860abec7937da0a4c03c41d3c269c366e82abdf9",
+    "license": "cc-by-nc-4.0",
+    "files": [
+      {
+        "path": "model.pt",
+        "bytes": 5026874952
+      },
+      {
+        "path": "model.safetensors",
+        "bytes": 5026367224
+      }
+    ]
+  },
+  {
+    "id": "facebook/sam2.1-hiera-tiny",
+    "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+    "license": "apache-2.0",
+    "files": [
+      {
+        "path": "model.safetensors",
+        "bytes": 155908064
+      },
+      {
+        "path": "sam2.1_hiera_tiny.pt",
+        "bytes": 156008466
+      }
+    ]
+  },
+  {
+    "id": "microsoft/TRELLIS-image-large",
+    "revision": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "license": "mit",
+    "files": [
+      {
+        "path": "ckpts/slat_dec_gs_swin8_B_64l8gs32_fp16.safetensors",
+        "bytes": 171450952
+      },
+      {
+        "path": "ckpts/slat_dec_mesh_swin8_B_64l8m256c_fp16.safetensors",
+        "bytes": 181903412
+      },
+      {
+        "path": "ckpts/slat_dec_rf_swin8_B_64l8r16_fp16.safetensors",
+        "bytes": 171450488
+      },
+      {
+        "path": "ckpts/slat_enc_swin8_B_64l8_fp16.safetensors",
+        "bytes": 173242816
+      },
+      {
+        "path": "ckpts/slat_flow_img_dit_L_64l8p2_fp16.safetensors",
+        "bytes": 1203755136
+      },
+      {
+        "path": "ckpts/ss_dec_conv3d_16l8_fp16.safetensors",
+        "bytes": 147591972
+      },
+      {
+        "path": "ckpts/ss_enc_conv3d_16l8_fp16.safetensors",
+        "bytes": 119068016
+      },
+      {
+        "path": "ckpts/ss_flow_img_dit_L_16l8_fp16.safetensors",
+        "bytes": 1130770840
+      }
+    ]
+  },
+  {
+    "id": "microsoft/TRELLIS.2-4B",
+    "revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "license": "mit",
+    "files": [
+      {
+        "path": "ckpts/shape_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948490494
+      },
+      {
+        "path": "ckpts/shape_enc_next_dc_f16c32_fp16.safetensors",
+        "bytes": 708797208
+      },
+      {
+        "path": "ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.safetensors",
+        "bytes": 2584574424
+      },
+      {
+        "path": "ckpts/slat_flow_img2shape_dit_1_3B_512_bf16.safetensors",
+        "bytes": 2584574424
+      },
+      {
+        "path": "ckpts/slat_flow_imgshape2tex_dit_1_3B_1024_bf16.safetensors",
+        "bytes": 2584672728
+      },
+      {
+        "path": "ckpts/slat_flow_imgshape2tex_dit_1_3B_512_bf16.safetensors",
+        "bytes": 2584672728
+      },
+      {
+        "path": "ckpts/ss_flow_img_dit_1_3B_64_bf16.safetensors",
+        "bytes": 2584426920
+      },
+      {
+        "path": "ckpts/tex_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948458812
+      },
+      {
+        "path": "ckpts/tex_enc_next_dc_f16c32_fp16.safetensors",
+        "bytes": 708797208
+      }
+    ]
+  },
+  {
+    "id": "stabilityai/TripoSR",
+    "revision": "5b521936b01fbe1890f6f9baed0254ab6351c04a",
+    "license": "mit",
+    "files": [
+      {
+        "path": "figures/output_examples.mp4",
+        "bytes": 2425685
+      },
+      {
+        "path": "model.ckpt",
+        "bytes": 1677246742
+      }
+    ]
+  },
+  {
+    "id": "stabilityai/stable-fast-3d",
+    "revision": "f0c9a8ffd62cb1bbc8a7a53c9f87a0be1b6be778",
+    "license": "other",
+    "files": [
+      {
+        "path": "model.safetensors",
+        "bytes": 4024289892
+      },
+      {
+        "path": "sf3d.gif",
+        "bytes": 2809667
+      }
+    ]
+  },
+  {
+    "id": "tencent/Hunyuan3D-2",
+    "revision": "9cd649ba6913f7a852e3286bad86bfa9a2d83dcf",
+    "license": "other",
+    "files": [
+      {
+        "path": "assets/images/arch.jpg",
+        "bytes": 1177273
+      },
+      {
+        "path": "assets/images/e2e-1.gif",
+        "bytes": 8786876
+      },
+      {
+        "path": "assets/images/e2e-2.gif",
+        "bytes": 9021984
+      },
+      {
+        "path": "assets/images/system.jpg",
+        "bytes": 1569660
+      },
+      {
+        "path": "assets/images/teaser.jpg",
+        "bytes": 1867475
+      },
+      {
+        "path": "hunyuan3d-delight-v2-0/text_encoder/model.safetensors",
+        "bytes": 680820392
+      },
+      {
+        "path": "hunyuan3d-delight-v2-0/tokenizer/vocab.json",
+        "bytes": 1059962
+      },
+      {
+        "path": "hunyuan3d-delight-v2-0/unet/diffusion_pytorch_model.safetensors",
+        "bytes": 3463772592
+      },
+      {
+        "path": "hunyuan3d-delight-v2-0/vae/diffusion_pytorch_model.safetensors",
+        "bytes": 167335342
+      },
+      {
+        "path": "hunyuan3d-dit-v2-0-fast/model.fp16.ckpt",
+        "bytes": 4931192715
+      },
+      {
+        "path": "hunyuan3d-dit-v2-0-fast/model.fp16.safetensors",
+        "bytes": 4930777530
+      },
+      {
+        "path": "hunyuan3d-dit-v2-0-turbo/model.fp16.ckpt",
+        "bytes": 4931245140
+      },
+      {
+        "path": "hunyuan3d-dit-v2-0-turbo/model.fp16.safetensors",
+        "bytes": 4930777530
+      },
+      {
+        "path": "hunyuan3d-dit-v2-0/model.ckpt",
+        "bytes": 4928568095
+      },
+      {
+        "path": "hunyuan3d-dit-v2-0/model.fp16.ckpt",
+        "bytes": 4928568095
+      },
+      {
+        "path": "hunyuan3d-dit-v2-0/model.fp16.safetensors",
+        "bytes": 4928151562
+      },
+      {
+        "path": "hunyuan3d-dit-v2-0/model.safetensors",
+        "bytes": 4928151562
+      },
+      {
+        "path": "hunyuan3d-dit-v2-0/model_fp16.ckpt",
+        "bytes": 4928568095
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0-turbo/image_encoder/model.safetensors",
+        "bytes": 1264217240
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0-turbo/text_encoder/pytorch_model.bin",
+        "bytes": 1361671895
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0-turbo/tokenizer/vocab.json",
+        "bytes": 1059962
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0-turbo/unet/diffusion_pytorch_model.bin",
+        "bytes": 7325432923
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0-turbo/unet/diffusion_pytorch_model.safetensors",
+        "bytes": 3722161032
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0-turbo/vae/diffusion_pytorch_model.bin",
+        "bytes": 334707217
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0/text_encoder/pytorch_model.bin",
+        "bytes": 1361671895
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0/tokenizer/vocab.json",
+        "bytes": 1059962
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0/unet/diffusion_pytorch_model.bin",
+        "bytes": 3663114747
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0/unet/diffusion_pytorch_model.safetensors",
+        "bytes": 3662636472
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0/vae/diffusion_pytorch_model.bin",
+        "bytes": 334707217
+      },
+      {
+        "path": "hunyuan3d-paint-v2-0/vae/diffusion_pytorch_model.safetensors",
+        "bytes": 167335310
+      },
+      {
+        "path": "hunyuan3d-vae-v2-0-turbo/model.fp16.ckpt",
+        "bytes": 407480196
+      },
+      {
+        "path": "hunyuan3d-vae-v2-0-turbo/model.fp16.safetensors",
+        "bytes": 407410402
+      },
+      {
+        "path": "hunyuan3d-vae-v2-0-withencoder/model.fp16.ckpt",
+        "bytes": 655648555
+      },
+      {
+        "path": "hunyuan3d-vae-v2-0-withencoder/model.fp16.safetensors",
+        "bytes": 655539066
+      },
+      {
+        "path": "hunyuan3d-vae-v2-0/model.fp16.ckpt",
+        "bytes": 428526216
+      },
+      {
+        "path": "hunyuan3d-vae-v2-0/model.fp16.safetensors",
+        "bytes": 428455666
+      }
+    ]
+  }
+]

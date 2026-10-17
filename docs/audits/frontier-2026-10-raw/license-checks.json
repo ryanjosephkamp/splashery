@@ -1,0 +1,422 @@
+[
+  {
+    "candidate": "ActiveVisionLab/gaussctrl",
+    "url": "https://raw.githubusercontent.com/ActiveVisionLab/gaussctrl/main/LICENSE.txt",
+    "license_classification": {
+      "key": "bsd-3-clause",
+      "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+      "spdx_id": "BSD-3-Clause",
+      "url": "https://api.github.com/licenses/bsd-3-clause",
+      "node_id": "MDc6TGljZW5zZTU="
+    },
+    "sha256_downloaded_text": "7654eac16a09fb5153e8d63788b611140187cf8a7e540cb5c66df095de57898c"
+  },
+  {
+    "candidate": "ByteDance-Seed/Depth-Anything-3",
+    "url": "https://raw.githubusercontent.com/ByteDance-Seed/Depth-Anything-3/main/LICENSE",
+    "license_classification": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "sha256_downloaded_text": "78446e29c48900cda82620a8df183cca61f0a595e05a49d0401a5fd604dd1870"
+  },
+  {
+    "candidate": "DepthAnything/Depth-Anything-V2",
+    "url": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/LICENSE",
+    "license_classification": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "sha256_downloaded_text": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "candidate": "RongLiu-Leo/beta-splatting",
+    "url": "https://raw.githubusercontent.com/RongLiu-Leo/beta-splatting/main/LICENSE",
+    "license_classification": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "sha256_downloaded_text": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "candidate": "RongLiu-Leo/universal-beta-splatting",
+    "url": "https://raw.githubusercontent.com/RongLiu-Leo/universal-beta-splatting/main/LICENSE",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "3711f963c05d0be80d53e5923308a6dee31b203da23435c9cfb7c7b6e4dd5e19"
+  },
+  {
+    "candidate": "Stability-AI/stable-fast-3d",
+    "url": "https://raw.githubusercontent.com/Stability-AI/stable-fast-3d/main/LICENSE.md",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "a0f992849ce25def8e531884edd7adf3c00cb8d2d4c59e49f0cb02597c29066e"
+  },
+  {
+    "candidate": "Tencent/Hunyuan3D-2",
+    "url": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hunyuan3D-2/main/LICENSE",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "94259df223918a5733677965c1bfe1774a2dba25042d9c3b47a3418ea6c1f324"
+  },
+  {
+    "candidate": "VAST-AI-Research/TripoSG",
+    "url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSG/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "0fc2acd0176b345d3da59f466861ad09b78698de4200739aeaa2ffc9ae7a6842"
+  },
+  {
+    "candidate": "VAST-AI-Research/TripoSR",
+    "url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSR/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "ade0a66629bdd7e01e46b3296b3851cff0fd27989bca53da470ad6e96ed620fb"
+  },
+  {
+    "candidate": "apple/ml-depth-pro",
+    "url": "https://raw.githubusercontent.com/apple-aiml-research/ml-depth-pro/main/LICENSE",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "21a6551d1f8f851d2d10b5c6cc56535956b983c3cb997d25f3db4dd6f59ef99f"
+  },
+  {
+    "candidate": "apple/ml-sharp",
+    "url": "https://raw.githubusercontent.com/apple-aiml-research/ml-sharp/main/LICENSE",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "cf9fd1ebe78d3effd9f782d053ffbed7f69b033e5260e706c0f216e0bd4675fa"
+  },
+  {
+    "candidate": "baegwangbin/DSINE",
+    "url": "https://raw.githubusercontent.com/baegwangbin/DSINE/main/LICENSE",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "ec5c61024c3ce6fc3cb3e4b66592971921a679941150846dc9cd60154bff9844"
+  },
+  {
+    "candidate": "dfki-av/Inpaint360GS",
+    "url": "https://raw.githubusercontent.com/dfki-av/Inpaint360GS/main/LICENSE.txt",
+    "license_classification": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "sha256_downloaded_text": "41d805773f2aa0b36c2fb69491f64c3079fe3e0671c9848680645fc9e65d5a10"
+  },
+  {
+    "candidate": "dreamgaussian/dreamgaussian",
+    "url": "https://raw.githubusercontent.com/dreamgaussian/dreamgaussian/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "ad69e3d0cd6a33bcea74b2d59b4cc8dfc1010d0020a0017c279d7c7dfdb0c318"
+  },
+  {
+    "candidate": "facebookresearch/sam2",
+    "url": "https://raw.githubusercontent.com/facebookresearch/sam2/main/LICENSE",
+    "license_classification": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "sha256_downloaded_text": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "candidate": "facebookresearch/vggt",
+    "url": "https://raw.githubusercontent.com/facebookresearch/vggt/main/LICENSE.txt",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "b94e46746792d1adfa0ebdbccada5d4576d244ae230be9de8a46b5868fff001b"
+  },
+  {
+    "candidate": "graphdeco-inria/gaussian-splatting-relighting",
+    "url": "https://raw.githubusercontent.com/graphdeco-inria/gaussian-splatting-relighting/main/LICENSE.md",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "c7257815d34fb5f8dcbb1e33e0461234e144ff7af7a993f268a657fb9abebb65"
+  },
+  {
+    "candidate": "hbb1/2d-gaussian-splatting",
+    "url": "https://raw.githubusercontent.com/hbb1/2d-gaussian-splatting/main/LICENSE.md",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "cd5c95b3cfff3acc1bd412420c770f88809331c3db6872df11a970147aa8e81f"
+  },
+  {
+    "candidate": "hustvl/4DGaussians",
+    "url": "https://raw.githubusercontent.com/hustvl/4DGaussians/master/LICENSE.md",
+    "license_classification": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "sha256_downloaded_text": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "candidate": "ingra14m/Deformable-3D-Gaussians",
+    "url": "https://raw.githubusercontent.com/ingra14m/Deformable-3D-Gaussians/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "157b958c81e225c76978d23309f496611aefb33f137ce05b9d8672c1a24614d8"
+  },
+  {
+    "candidate": "lzhnb/GS-IR",
+    "url": "https://raw.githubusercontent.com/lzhnb/GS-IR/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "eaf88512a83fc007481fee3c10b6b6e3dbab64bd6d0d3c64416decf86dbc9440"
+  },
+  {
+    "candidate": "maturk/dn-splatter",
+    "url": "https://raw.githubusercontent.com/maturk/dn-splatter/main/LICENSE",
+    "license_classification": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "sha256_downloaded_text": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "candidate": "microsoft/MoGe",
+    "url": "https://raw.githubusercontent.com/microsoft/MoGe/main/LICENSE",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "ad7d951c80c5fc2b2bce035f2041bc0a0dbf9028c8ecc4c9a8e1fba8130b6b59"
+  },
+  {
+    "candidate": "microsoft/TRELLIS.2",
+    "url": "https://raw.githubusercontent.com/microsoft/TRELLIS.2/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  },
+  {
+    "candidate": "microsoft/TRELLIS",
+    "url": "https://raw.githubusercontent.com/microsoft/TRELLIS/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+  },
+  {
+    "candidate": "minghanqin/LangSplat",
+    "url": "https://raw.githubusercontent.com/minghanqin/LangSplat/main/LICENSE.md",
+    "license_classification": {
+      "key": "other",
+      "name": "Other",
+      "spdx_id": "NOASSERTION",
+      "url": null,
+      "node_id": "MDc6TGljZW5zZTA="
+    },
+    "sha256_downloaded_text": "cd5c95b3cfff3acc1bd412420c770f88809331c3db6872df11a970147aa8e81f"
+  },
+  {
+    "candidate": "mkkellogg/GaussianSplats3D",
+    "url": "https://raw.githubusercontent.com/mkkellogg/GaussianSplats3D/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "eaf88512a83fc007481fee3c10b6b6e3dbab64bd6d0d3c64416decf86dbc9440"
+  },
+  {
+    "candidate": "nianticlabs/spz",
+    "url": "https://raw.githubusercontent.com/nianticlabs/spz/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "d2b852220d1043148f523c4154e8bf7d9c5e419aede33b4c94115cfc457e4714"
+  },
+  {
+    "candidate": "nv-tlabs/3dgrut",
+    "url": "https://raw.githubusercontent.com/nv-tlabs/3dgrut/main/LICENSE",
+    "license_classification": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "sha256_downloaded_text": "7339fa418c9ad3e8e12e74ad0fd26a9cc4be8703f9c110728a992b193be85cb2"
+  },
+  {
+    "candidate": "playcanvas/engine",
+    "url": "https://raw.githubusercontent.com/playcanvas/engine/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "42fa51ddd556be151a29f381fb97ee975825dcc454e805ea3ea9c079cca04d34"
+  },
+  {
+    "candidate": "playcanvas/splat-transform",
+    "url": "https://raw.githubusercontent.com/playcanvas/splat-transform/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "42fa51ddd556be151a29f381fb97ee975825dcc454e805ea3ea9c079cca04d34"
+  },
+  {
+    "candidate": "playcanvas/supersplat",
+    "url": "https://raw.githubusercontent.com/playcanvas/supersplat/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "42fa51ddd556be151a29f381fb97ee975825dcc454e805ea3ea9c079cca04d34"
+  },
+  {
+    "candidate": "sparkjsdev/spark",
+    "url": "https://raw.githubusercontent.com/sparkjsdev/spark/main/LICENSE",
+    "license_classification": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "sha256_downloaded_text": "51829693e5dccd9ca1daa093991faac3aaa93238eb8fd5f5cb4130af85791d64"
+  },
+  {
+    "candidate": "trianglesplatting/triangle-splatting",
+    "url": "https://raw.githubusercontent.com/trianglesplatting/triangle-splatting/main/LICENSE.md",
+    "license_classification": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "sha256_downloaded_text": "483246737d4e18f4ab3b040f4df37c6c48855e9e6e6683456085eb6e5e74fc90"
+  },
+  {
+    "candidate": "xiaobiaodu/Flux-GS",
+    "url": "https://raw.githubusercontent.com/xiaobiaodu/Flux-GS/main/LICENSE",
+    "license_classification": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "sha256_downloaded_text": "c222118ecd54bc0e1840a06780b666559b5d8859cd2423b7bd7429917e3a068e"
+  }
+]
