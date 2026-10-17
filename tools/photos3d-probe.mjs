@@ -8,6 +8,7 @@ import { pathToFileURL } from "node:url";
 import { chromium } from "@playwright/test";
 import { makeControl, scoreCameras } from "./photos3d-controls.mjs";
 import { runSfM } from "../vendor/splatjs/src/sfm/sfm.js";
+import { browserRound2 } from "./photos3d-evaluate.mjs";
 
 export function orderedFiles(files, seed = 0) {
   const out = [...files].sort();
@@ -293,8 +294,15 @@ export async function browserProbe({ profile, timeoutMs, trainSteps, match }) {
 
 async function photoProbe(options, out) {
   const input = path.resolve(options.input);
+  const assets = options.dataset
+    ? JSON.parse(await fs.readFile("tools/assets.json", "utf8"))
+    : null;
+  const dataset = assets?.photos3dBenchmarks.find((r) => r.id === options.dataset);
+  if (options.dataset && !dataset) throw new Error("Unknown frozen dataset");
   const names = orderedFiles(
-    (await fs.readdir(input)).filter((n) => /\.(png|jpe?g|heic)$/i.test(n)),
+    dataset
+      ? dataset.files.map((f) => f.name)
+      : (await fs.readdir(input)).filter((n) => /\.(png|jpe?g|heic)$/i.test(n)),
     Number(options.shuffle || 0),
   );
   if (names.length < 8 || names.length > 60) throw new Error("Use 8–60 photos");
@@ -302,6 +310,13 @@ async function photoProbe(options, out) {
   const sources = await Promise.all(
     files.map(async (f) => ({ name: path.basename(f), sha256: sha(await fs.readFile(f)) })),
   );
+  if (
+    dataset &&
+    sources.some((s) => s.sha256 !== dataset.files.find((f) => f.name === s.name)?.sha256)
+  )
+    throw new Error("Input photos differ from frozen dataset");
+  const masks = options.masks ? JSON.parse(await fs.readFile(options.masks, "utf8")) : null;
+  const resume = options.resume ? JSON.parse(await fs.readFile(options.resume, "utf8")) : null;
   const port = Number(options.port || 4184);
   const base = `http://127.0.0.1:${port}`;
   const server = spawn(process.execPath, ["tools/cdx-mp2-server.mjs", String(port)], {
@@ -356,20 +371,44 @@ async function photoProbe(options, out) {
     await page.goto(`${base}/photos3d-probe.html`);
     await page.setInputFiles("input", files);
     await page.exposeFunction("probeLog", (s) => {
-      if (/features:|matching .*pairs|usable pairs|SfM done|training finished/.test(s))
+      if (
+        options.round2 ||
+        /features:|matching .*pairs|usable pairs|SfM done|training finished/.test(s)
+      )
         console.log(s);
     });
     await page.exposeFunction("probePly", (data) =>
       fs.writeFile(out.replace(/\.json$/, "") + ".ply", Buffer.from(data)),
     );
+    await page.exposeFunction("probeCheckpoint", (data) =>
+      fs.writeFile(out.replace(/\.json$/, "") + ".geometry.json", JSON.stringify(data) + "\n"),
+    );
+    await page.exposeFunction("probeFold", (data) =>
+      fs.appendFile(out.replace(/\.json$/, "") + ".folds.jsonl", JSON.stringify(data) + "\n"),
+    );
+    await page.exposeFunction("probeRender", (name, data) => {
+      if (path.basename(name) !== name) throw new Error("Invalid render identity");
+      return fs.writeFile(
+        out.replace(/\.json$/, "") + `.${name}.render.png`,
+        Buffer.from(data.split(",")[1], "base64"),
+      );
+    });
     const timeoutMs = Number(options.timeout || 600000);
     if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) throw new Error("Invalid timeout");
     const row = await withWatchdog(
-      page.evaluate(browserProbe, {
+      page.evaluate(options.round2 ? browserRound2 : browserProbe, {
         profile: options.profile || "phone",
         timeoutMs,
         trainSteps: Number(options.steps || 0),
         match: options.match,
+        featureSide: options.featureSide ? Number(options.featureSide) : undefined,
+        assumeSingleLens: options.assumeSingleLens === "true",
+        cpuMatching: options.match === "cpu",
+        iterations: Number(options.iterations || 0),
+        seed: options.seed ? Number(options.seed) : undefined,
+        folds: options.folds,
+        masks,
+        resume,
       }),
       timeoutMs + 5000,
       () => browserServer.kill(),
@@ -379,6 +418,8 @@ async function photoProbe(options, out) {
       sources,
       browser: browser.version(),
       shuffleSeed: Number(options.shuffle || 0),
+      maskSha256: options.masks ? sha(await fs.readFile(options.masks)) : null,
+      resumeSha256: options.resume ? sha(await fs.readFile(options.resume)) : null,
     };
   } catch (e) {
     return {
@@ -417,6 +458,9 @@ async function main() {
     sourceHashes: [
       ...(await fingerprint("vendor/splatjs")),
       ...(await fingerprint("src/video3d")),
+      ...(await fingerprint("src/photos3d")),
+      ["tools/photos3d-evaluate.mjs", sha(await fs.readFile("tools/photos3d-evaluate.mjs"))],
+      ["tools/studio-truth/metrics.mjs", sha(await fs.readFile("tools/studio-truth/metrics.mjs"))],
       ["tools/photos3d-probe.mjs", sha(await fs.readFile("tools/photos3d-probe.mjs"))],
       ["tools/photos3d-controls.mjs", sha(await fs.readFile("tools/photos3d-controls.mjs"))],
       [

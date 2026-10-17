@@ -10,8 +10,15 @@ if (args.help) {
   );
 } else {
   const assets = JSON.parse(await fs.readFile("tools/assets.json", "utf8"));
-  const record = assets.photos3dBenchmarks.find((r) => r.id === "alicevision-buddha-24");
-  if (!record || record.license !== "CC-BY-4.0" || record.files.length !== 24)
+  const record = assets.photos3dBenchmarks.find(
+    (r) => r.id === (args.dataset || "alicevision-buddha-24"),
+  );
+  if (
+    !record ||
+    !["CC-BY-4.0", "CC0-1.0"].includes(record.license) ||
+    record.files.length < 8 ||
+    record.files.length > 60
+  )
     throw new Error("Missing frozen dataset record");
   const out = path.resolve(args.out || ".cache/photos3d/buddha");
   await fs.mkdir(out, { recursive: true });
