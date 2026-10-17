@@ -1384,6 +1384,11 @@ class App {
         e.preventDefault();
         return;
       }
+      // Lane PT1 (engine r2): a toy's tool row keys (Toy Box's 1 to 5).
+      if (!typing && player.toolKey(e.key)) {
+        e.preventDefault();
+        return;
+      }
       if (
         e.key === " " &&
         !this.ui.isTyping(e.target) &&

@@ -166,6 +166,11 @@
               <li><a href="#5g-hands-on-joints">5g. Hands-on: joints</a></li>
               <li><a href="#5h-hands-on-soft-parts">5h. Hands-on: soft parts</a></li>
               <li><a href="#6-behaviors">6. Behaviors</a></li>
+              <li>
+                <a href="#6b-where-a-kit-item-s-splats-are-the-provenance-api"
+                  >6b. Where a kit item's splats are (the provenance API)</a
+                >
+              </li>
               <li><a href="#7-house-rules">7. House rules</a></li>
               <li><a href="#7b-effect-quality">7b. Effect quality</a></li>
               <li><a href="#7c-sharp-kit-toys">7c. Sharp kit toys</a></li>
@@ -2364,6 +2369,94 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
               so the sound fits any typed input (the graph plotter's pen).
             </li>
           </ul>
+          <h2 id="6b-where-a-kit-item-s-splats-are-the-provenance-api">
+            6b. Where a kit item's splats are (the provenance API)
+          </h2>
+          <p>
+            Since lane SE1 (October 16, 2026), this is a stable API: specs, tools, and other
+            projects (the Shop's bench) may rely on it. Nothing here is new data; this section
+            documents what the kit already keeps.
+          </p>
+          <p>
+            Every <code>k.add(shape, opts)</code> and <code>k.cloud(opts, sample)</code> returns an
+            item and appends it to <code>k.items</code>, in the order the recipe called them. After
+            the build, the same kit is <code>ctx.kit</code> (from <code>buildRecipe()</code> in
+            <code>src/kit.js</code>, and <code>player.proc.ctx.kit</code> in the app), and each item
+            carries:
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Field</th>
+                  <th scope="col">What it is</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>kind</code></th>
+                  <td>
+                    The item's kind: <code>&quot;surface&quot;</code> (from <code>add()</code>) or
+                    <code>&quot;cloud&quot;</code> (from <code>cloud()</code>).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>start</code>/<code>end</code></th>
+                  <td>
+                    Its splats in <code>ctx.buf</code>: indices <code>start</code> to
+                    <code>end - 1</code>. Items are contiguous in call order, so item 0 starts at 0
+                    and each starts where the last ended.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>opts</code></th>
+                  <td>
+                    The options object the recipe passed, as passed (<code>part</code>,
+                    <code>kind</code> as a behavior name, <code>fit</code>, <code>color</code>, and
+                    so on; functions stay functions).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>shape</code></th>
+                  <td>
+                    Surfaces only: the shape object (<code>area</code>, <code>thick</code>,
+                    <code>dims</code>, <code>sample</code>).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>pos</code>, <code>q</code>, <code>sc</code></th>
+                  <td>
+                    Surfaces only: the placement (position, rotation <code>[x, y, z, w]</code>, and
+                    scale <code>[x, y, z]</code>) in recipe coordinates, before the fit.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>n</code></th>
+                  <td>
+                    The splats the budget gave the item. <code>end - start</code> can be fewer (a
+                    color function that returns <code>null</code> leaves a hole), so use the range.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Right after the build, the last item's <code>end</code> is <code>ctx.buf.count</code>:
+            the items cover every splat. Clay (<code>scene.clay</code>) pushes its splats after
+            that, so splats from <code>end</code> of the last item onward are clay. A splat's part
+            and behavior are in <code>ctx.buf.anim</code> (four floats a splat: x the part index,
+            plus 16 when the pattern layer skips it; y its <code>KINDS</code> value; z and w its
+            behavior's two values), because these can differ inside one item (<code>opts.part</code>
+            may be a function, a <code>to</code> or <code>skin</code> changes the behavior, and a
+            cloud's <code>sample()</code> gives each splat its own). <code>KINDS</code>,
+            <code>MORPH_RANGE</code>, <code>MAX_LEVERS</code>, and <code>MAX_LEVER_GROUPS</code> are
+            in <code>src/kit-tables.js</code>, and the file parsers (<code>parseSplat</code>,
+            <code>parseSpz</code>, <code>readPlyHeader</code>, <code>decimatePly</code>, and the
+            limits) are in <code>src/splat-parsers.js</code>. Both import in plain Node with no
+            engine and no DOM; <code>src/effects.js</code> and <code>src/loaders.js</code> re-export
+            them. <code>tests/se1.spec.mjs</code> checks the ranges, the imports, and the
+            re-exports.
+          </p>
           <h2 id="7-house-rules">7. House rules</h2>
           <ul>
             <li>
@@ -2938,6 +3031,14 @@ SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/kit.spec.
             <li><a href="../../learn/">Learn</a></li>
             <li><a href="../../new/">What's new</a></li>
             <li><a href="../../about/">About</a></li>
+            <li>
+              <a
+                href="https://ryanjosephkamp.github.io/splashery-one-frame/"
+                target="_blank"
+                rel="noopener"
+                >How it works</a
+              >
+            </li>
           </ul>
         </nav>
         <nav aria-label="More">

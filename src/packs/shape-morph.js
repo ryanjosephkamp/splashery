@@ -2,9 +2,13 @@
 // Only centers move on the GPU. A form change snapshots the cloud where it
 // is now, including an unfinished flight or push, then flies to new targets.
 // No portfolio renderer, font, or QR encoder is shipped here.
-import { BITMAP } from "../font.js";
+// Lane PT1: a list of forms the person sets (shapes, any words or names with
+// emoji, QR codes), in their order; a tap morphs to the next one, starting
+// where the tap landed and spreading from there. Words come from the shared
+// text module (src/text-splats.js), so emoji keep their colors.
 import { quatFromTo, quatEuler, quatRotate } from "../kit.js";
 import { PRESETS, compileProgram } from "./splat-equation.js";
+import { textSplats, cleanText, visibleCount, hasInk } from "../text-splats.js";
 
 const TAU = 2 * Math.PI;
 const GOLD = 0.6180339887498949;
@@ -14,6 +18,9 @@ const frac = (x) => x - Math.floor(x);
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const smooth = (x) => ((x = clamp(x)), x * x * (3 - 2 * x));
 export const FLIGHT_SECONDS = 1.8;
+// A tap's morph leaves the tapped place first: each splat waits this many
+// seconds for every unit it lies from the tap (the cloud is 1.64 across).
+export const WAVE_SECONDS = 0.38;
 export const FORMS = [
   { id: "word", label: "Word" },
   { id: "lorenz", label: "Lorenz attractor" },
@@ -23,14 +30,19 @@ export const FORMS = [
   { id: "qr", label: "QR code" },
 ];
 const formOf = (o) => (FORMS.some((f) => f.id === o.form) ? o.form : "word");
+const SHAPES = FORMS.filter((f) => f.id !== "word" && f.id !== "qr");
+export const MAX_FORMS = 16;
+const MAX_WORD = 24; // as the Word box's own limit
 const unit = (v) => {
   const r = Math.hypot(...v) || 1;
   return v.map((x) => x / r);
 };
 const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; // prettier-ignore
-export const wordOf = (value) => String(value || "SPLATS").normalize("NFD")
-  .replace(/[\u0300-\u036f]/g, "").toUpperCase().replace(/[^A-Z0-9 .,'!?-]/g, "?")
-  .trim().slice(0, 24) || "SPLATS"; // prettier-ignore
+// Any typed text: letters of any script, digits, symbols, and emoji.
+export const wordOf = (value) => {
+  const text = cleanText(value, 200);
+  return visibleCount(text) ? text : "SPLATS";
+};
 
 let encodeQR;
 const codes = new Map();
@@ -65,26 +77,25 @@ function finish(out) {
 function word(n, o) {
   const out = blank(n);
   out.flat = true;
-  const cells = [];
-  // Long words wrap, so they still read on a phone. Use the site's own font.
-  const text = wordOf(o.word);
-  const lines = text.match(/.{1,8}/g);
-  lines.forEach((line, row) => {
-    for (let ch = 0; ch < line.length; ch++) {
-      const glyph = BITMAP[line[ch]];
-      if (!glyph) continue;
-      for (let y = 0; y < 7; y++) for (let x = 0; x < 5; x++)
-        if ((glyph[y] >> (4 - x)) & 1) cells.push([ch * 6 + x - line.length * 3, row * 10 + y]); // prettier-ignore
-    }
-  });
+  // Long words wrap, so they still read on a phone. The device's own fonts.
+  // A word that draws nothing (U+3164, a private-use code point) shows
+  // SPLATS rather than collapsing the cloud to a point.
+  let text = wordOf(o.word);
+  if (!hasInk(text, { cols: 10 })) text = "SPLATS";
+  const t = textSplats(text, { count: n, seed: 78, cols: 10, depth: 0, colorKey: "morph" });
+  out.rgb = new Float32Array(n * 3).fill(-1);
+  let colored = false;
   for (let i = 0; i < n; i++) {
-    const cell = cells[i % cells.length];
-    const j = Math.floor(i / cells.length) + 1;
-    out.pos.set([cell[0] + frac(j * R2[0]), -cell[1] - frac(j * R2[1]), 0], i * 3);
+    out.pos.set([t.pos[i * 3], t.pos[i * 3 + 1], 0], i * 3);
     out.direction.set([0, 0, 1], i * 3);
-    out.radius[i] = 0.7 * Math.sqrt(cells.length / n);
-    out.ink[i] = cell[0] > 0 ? 1 : 0;
+    out.radius[i] = t.sigma[i] * 1.15;
+    out.ink[i] = t.pos[i * 3] > 0 ? 1 : 0;
+    if (t.layout.glyphs[t.glyph[i]]?.color) {
+      out.rgb.set(t.col.subarray(i * 3, i * 3 + 3), i * 3);
+      colored = true;
+    }
   }
+  if (!colored) out.rgb = null;
   return finish(out);
 }
 
@@ -268,9 +279,21 @@ const scatterDirection = (i) => [7, 11, 13].map((a) => (hash(i + a) / 4294967296
 
 // Centers in recipe units. This also snapshots an interrupted flight at
 // the next build; it is not an all-splats CPU update on every frame.
+// How far splat i still has to fly (1 at the start, 0 home): the whole
+// cloud at once, or (after a tap) a wave out from the tapped place.
+export function remainingFor(data, i) {
+  if (!data.from) return 0;
+  const o = data.origin;
+  if (!o) return data.remaining;
+  const f = data.from;
+  const d = Math.hypot(f[i * 3] - o[0], f[i * 3 + 1] - o[1], f[i * 3 + 2] - o[2]);
+  return 1 - smooth((data.elapsed - d * WAVE_SECONDS) / FLIGHT_SECONDS);
+}
+
 export function posePoint(data, i) {
   const p = Array.from(data.form.pos.subarray(i * 3, i * 3 + 3));
-  if (data.from) for (let a = 0; a < 3; a++) p[a] += (data.from[i * 3 + a] - p[a]) * data.remaining;
+  const left = remainingFor(data, i);
+  if (data.from) for (let a = 0; a < 3; a++) p[a] += (data.from[i * 3 + a] - p[a]) * left;
   const direction = scatterDirection(i);
   for (let a = 0; a < 3; a++) p[a] += direction[a] * data.scatter * 0.22;
   const push = data.push;
@@ -290,6 +313,7 @@ uniform vec4 uSpClock;
 uniform vec4 uSpMorph;
 uniform vec4 uSpTokens[96];
 const float SM_S = ${scale};
+float smLeft = 0.0;
 float smHash(uint i) {
   uint h = i * 747796405u + 2891336453u;
   h = ((h >> ((h >> 28u) + 4u)) ^ h) * 277803737u;
@@ -300,7 +324,16 @@ void modifySplatCenter(inout vec3 center) {
   float x = floor(a.z / 4096.0);
   float y = a.z - x * 4096.0;
   float z = mod(a.w, 4096.0);
-  center += (vec3(x,y,z) - 2048.0) / 1024.0 * uSpMorph.x;
+  vec3 off = (vec3(x,y,z) - 2048.0) / 1024.0;
+  float left = uSpMorph.x;
+  if (uSpMorph.z > 0.5) {
+    // A tap's wave: the flight starts later the further from the tap.
+    float d = length((center + off) / SM_S - uSpTokens[4].xyz / SM_S);
+    float u = clamp((uSpMorph.w - d * ${WAVE_SECONDS.toFixed(4)}) / ${FLIGHT_SECONDS.toFixed(4)}, 0.0, 1.0);
+    left = 1.0 - u * u * (3.0 - 2.0 * u);
+  }
+  center += off * left;
+  smLeft = length(off) > 1e-4 ? left : 0.0;
   vec3 p = center / SM_S;
   uint i = splat.index;
   p += (vec3(smHash(i+7u), smHash(i+11u), smHash(i+13u)) * 2.0 - 1.0) * uSpMorph.y * 0.22;
@@ -312,6 +345,11 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
   scale *= uSpClock.y;
 }
 void modifySplatColor(vec3 center, inout vec4 color) {
+  // In flight, every splat wears the cloud's own teal-to-pink ink, and its
+  // new form's colors come in as it lands.
+  float u = clamp(center.x / SM_S / 1.64 + 0.5, 0.0, 1.0);
+  vec3 ink = vec3(0.12 + 0.74 * u, 0.62 - 0.36 * u, 0.78 - 0.15 * u);
+  color.rgb = mix(color.rgb, ink, smoothstep(0.0, 0.35, smLeft));
   color.rgb *= uSpClock.z;
 }`;
   const wgsl = `
@@ -319,6 +357,7 @@ uniform uSpClock: vec4f;
 uniform uSpMorph: vec4f;
 uniform uSpTokens: array<vec4f, 96>;
 const SM_S: f32 = ${scale};
+var<private> smLeft: f32 = 0.0;
 fn smHash(i: u32) -> f32 {
   var h = i * 747796405u + 2891336453u;
   h = ((h >> ((h >> 28u) + 4u)) ^ h) * 277803737u;
@@ -329,7 +368,15 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   let x = floor(a.z / 4096.0);
   let y = a.z - x * 4096.0;
   let z = a.w - floor(a.w / 4096.0) * 4096.0;
-  *center += (vec3f(x,y,z) - vec3f(2048.0)) / 1024.0 * uniform.uSpMorph.x;
+  let off = (vec3f(x,y,z) - vec3f(2048.0)) / 1024.0;
+  var left = uniform.uSpMorph.x;
+  if (uniform.uSpMorph.z > 0.5) {
+    let d = length((*center + off) / SM_S - uniform.uSpTokens[4].xyz / SM_S);
+    let u = clamp((uniform.uSpMorph.w - d * ${WAVE_SECONDS.toFixed(4)}) / ${FLIGHT_SECONDS.toFixed(4)}, 0.0, 1.0);
+    left = 1.0 - u * u * (3.0 - 2.0 * u);
+  }
+  *center += off * left;
+  smLeft = select(0.0, left, length(off) > 1e-4);
   var p = *center / SM_S;
   let i = splat.index;
   p += (vec3f(smHash(i+7u), smHash(i+11u), smHash(i+13u)) * 2.0 - vec3f(1.0)) * uniform.uSpMorph.y * 0.22;
@@ -341,13 +388,18 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
   *scale *= uniform.uSpClock.y;
 }
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
-  *color = vec4f((*color).rgb * uniform.uSpClock.z, (*color).a);
+  let u = clamp(center.x / SM_S / 1.64 + 0.5, 0.0, 1.0);
+  let ink = vec3f(0.12 + 0.74 * u, 0.62 - 0.36 * u, 0.78 - 0.15 * u);
+  let rgb = mix((*color).rgb, ink, smoothstep(0.0, 0.35, smLeft));
+  *color = vec4f(rgb * uniform.uSpClock.z, (*color).a);
 }`;
   return { glsl, wgsl };
 }
 
 const inkColor = (second) => (second ? [0.98, 0.31, 0.15] : [0.035, 0.4, 0.43]);
 function colorAt(form, i, twoInk) {
+  // An emoji's own colors.
+  if (form.rgb && form.rgb[i * 3] >= 0) return Array.from(form.rgb.subarray(i * 3, i * 3 + 3));
   if (form.code) return form.ink[i] ? [0.035, 0.075, 0.08] : [0.99, 0.98, 0.95];
   if (twoInk) return inkColor(form.ink[i]);
   const u = clamp(form.pos[i * 3] / 1.64 + 0.5);
@@ -357,6 +409,71 @@ function colorAt(form, i, twoInk) {
     : 1;
   return [0.12 + 0.74 * u, 0.62 - 0.36 * u, 0.78 - 0.15 * u].map((x) => x * light);
 }
+
+// ---- The list of forms ------------------------------------------------------------
+// Saved in the scene as `forms`, a JSON list of strings: a shape's id, "w:"
+// and a word, or "q:" and a QR code's text. `at` is the one showing. The
+// one showing is also what the Form, Word, and QR text boxes say, so they
+// edit it in place (and older links, which have only those, open the
+// six-form list at their form).
+
+const SHAPE_IDS = SHAPES.map((f) => f.id);
+const entryOf = (o) => {
+  const form = formOf(o);
+  return form === "word" ? `w:${wordOf(o.word)}` : form === "qr" ? `q:${textOf(o)}` : form;
+};
+const validEntry = (e) =>
+  typeof e === "string" &&
+  (SHAPE_IDS.includes(e) || ((e.startsWith("w:") || e.startsWith("q:")) && e.length > 2));
+
+export function formList(o = {}) {
+  let list = null;
+  try {
+    const parsed = JSON.parse(o.forms || "null");
+    if (Array.isArray(parsed)) list = parsed.filter(validEntry).slice(0, MAX_FORMS);
+  } catch {
+    list = null;
+  }
+  const current = entryOf(o);
+  if (!list?.length) {
+    // The original six, with this link's word and QR text.
+    list = [`w:${wordOf(o.word)}`, ...SHAPE_IDS, `q:${textOf(o)}`];
+    const form = formOf(o);
+    const at = list.findIndex((e) => (form === "word" ? e.startsWith("w:") : form === "qr" ? e.startsWith("q:") : e === form)); // prettier-ignore
+    return { list, at: Math.max(0, at) };
+  }
+  const at = Math.max(0, Math.min(list.length - 1, Math.round(Number(o.at) || 0)));
+  list[at] = current;
+  return { list, at };
+}
+
+// The options that show entry `at` of `list`.
+export function showForm(list, at) {
+  const i = ((at % list.length) + list.length) % list.length;
+  const e = list[i];
+  const out = { forms: JSON.stringify(list), at: String(i) };
+  if (e.startsWith("w:")) Object.assign(out, { form: "word", word: e.slice(2) });
+  else if (e.startsWith("q:")) Object.assign(out, { form: "qr", qrText: e.slice(2) });
+  else out.form = e;
+  return out;
+}
+
+export function entryLabel(e) {
+  if (e.startsWith("w:")) {
+    const t = e.slice(2).replace(/\n/g, " ");
+    return [...t].length > 12 ? `${[...t].slice(0, 11).join("")}…` : t;
+  }
+  if (e.startsWith("q:")) return "QR code";
+  return { lorenz: "Lorenz", klein: "Klein bottle", gyroid: "Gyroid", loop: "Loop" }[e] || e;
+}
+
+let opts = {}; // the options of the last build in the browser
+let origin = null; // where the tap that asked for the next form landed
+const next = (o, point, step = 1) => {
+  const { list, at } = formList(o);
+  origin = point ? point.slice() : null;
+  return { options: showForm(list, at + step), key: "morph" };
+};
 
 export const RECIPES = {
   "shape-morph": {
@@ -375,12 +492,116 @@ export const RECIPES = {
         maxLength: 42,
       },
       { key: "twoInk", label: "Two-ink print", type: "switch", default: false },
+      // Lane PT1: the list of forms and the one showing (see formList).
+      { key: "forms", label: "Your forms", type: "text", default: "", hidden: true },
+      { key: "at", label: "Showing", type: "text", default: "", hidden: true },
     ],
     controls: [
+      { key: "morph", label: "Next form", type: "pulse", ease: 2.4, pausable: false },
       { key: "scatter", label: "Scatter and re-form", type: "pulse", ease: 2.4, pausable: false },
       { key: "push", label: "Push strength", type: "slider", default: 0.7 },
     ],
-    action: { key: "scatter", label: "Scatter and re-form" },
+    // A tap (or Play) morphs to the next form in the list, from the tap.
+    action: {
+      key: "morph",
+      label: "Next form",
+      at: (point) => next(opts, point),
+      play: () => next(opts, null),
+    },
+    // The list on the stage: a chip per form (tap one to go to it).
+    toolbar: {
+      label: "Your forms",
+      items() {
+        const { list, at } = formList(opts);
+        return [
+          { id: "scatter", text: "Scatter", label: "Scatter and re-form" },
+          ...list.map((e, i) => ({
+            id: `go-${i}`,
+            text: entryLabel(e),
+            label: `Morph to ${i + 1}: ${entryLabel(e)}`,
+            pressed: i === at,
+          })),
+        ];
+      },
+      activate(id) {
+        if (id === "scatter") return { key: "scatter" };
+        const { list, at } = formList(opts);
+        const i = Number(id.slice(3));
+        if (!Number.isInteger(i) || i === at) return null;
+        origin = null;
+        return { options: showForm(list, i), key: "morph" };
+      },
+    },
+    // The Toy tab's editor: add shapes, move and remove forms.
+    keyboard: {
+      label: "Edit your forms",
+      items() {
+        const { list } = formList(opts);
+        const full = list.length >= MAX_FORMS;
+        return [
+          ...SHAPES.map((f) => ({ id: `add-${f.id}`, text: `+ ${f.label}`, label: `Add the ${f.label}`, disabled: full })), // prettier-ignore
+          {
+            id: "add-qr",
+            text: "+ QR code",
+            label: "Add a QR code of the QR text",
+            disabled: full,
+          },
+          ...list.flatMap((e, i) => [
+            { id: `up-${i}`, text: `↑ ${i + 1}. ${entryLabel(e)}`, label: `Move ${i + 1}, ${entryLabel(e)}, earlier`, disabled: i === 0 }, // prettier-ignore
+            { id: `del-${i}`, text: `✕ ${i + 1}`, label: `Remove ${i + 1}, ${entryLabel(e)}`, disabled: list.length <= 1 }, // prettier-ignore
+          ]),
+        ];
+      },
+      status() {
+        const { list, at } = formList(opts);
+        return `${list.length} forms. Showing ${at + 1}: ${entryLabel(list[at])}.`;
+      },
+      activate(id) {
+        const { list, at } = formList(opts);
+        let show = at;
+        if (id.startsWith("add-")) {
+          if (list.length >= MAX_FORMS) return null;
+          list.push(id === "add-qr" ? `q:${textOf(opts)}` : id.slice(4));
+        } else if (id.startsWith("up-")) {
+          const i = Number(id.slice(3));
+          if (!(i > 0)) return null;
+          [list[i - 1], list[i]] = [list[i], list[i - 1]];
+          show = at === i ? i - 1 : at === i - 1 ? i : at;
+        } else if (id.startsWith("del-")) {
+          const i = Number(id.slice(4));
+          if (list.length <= 1 || !(i >= 0)) return null;
+          list.splice(i, 1);
+          show = at > i ? at - 1 : Math.min(at, list.length - 1);
+        } else return null;
+        origin = null;
+        return { options: showForm(list, show), key: "edit" };
+      },
+    },
+    input: {
+      title: "Add a word or name",
+      placeholder: "Words, names, or emoji…",
+      button: "Add",
+      fileButton: false,
+      note: "Each form you add joins the list, and the cloud morphs to it. A tap or Play morphs to the next form, starting where you tap. Pick a form on the stage to go straight to it. Add shapes or a QR code of the QR text, move forms earlier, or remove them under Edit your forms. Any language, digits, symbols, and emoji (flags and skin tones too) work, up to 24 characters.",
+      async read(text) {
+        const word = cleanText(text, 200);
+        const n = visibleCount(word);
+        if (!n) throw new Error("Type a word, a name, or an emoji first.");
+        if (n > MAX_WORD)
+          throw new Error(`Use up to ${MAX_WORD} letters, digits, symbols, or emoji.`);
+        if (typeof document !== "undefined" && !hasInk(word, { cols: 10 }))
+          throw new Error("Nothing in that text can be drawn here. Try letters, digits, or emoji.");
+        const { list } = formList(opts);
+        if (list.length >= MAX_FORMS) throw new Error(`The list holds up to ${MAX_FORMS} forms. Remove one first.`); // prettier-ignore
+        list.push(`w:${word}`);
+        origin = null;
+        return showForm(list, list.length - 1);
+      },
+      shown() {
+        const { list, at } = formList(opts);
+        return `Showing ${at + 1} of ${list.length}: ${entryLabel(list[at])}`;
+      },
+    },
     // Fetch nothing for the other five forms, including when QR text changes.
     async prepare(o) {
       if (formOf(o) !== "qr") return;
@@ -421,7 +642,10 @@ export const RECIPES = {
       if (!data?.form) return;
       if (data.start === null) data.start = t;
       data.t = t;
-      data.remaining = data.from ? 1 - smooth((t - data.start) / FLIGHT_SECONDS) : 0;
+      data.elapsed = t - data.start;
+      // The whole flight: with a tap's wave, it ends when the far side lands.
+      const span = FLIGHT_SECONDS + (data.origin ? data.reach * WAVE_SECONDS : 0);
+      data.remaining = data.from ? 1 - smooth(data.elapsed / span) : 0;
       data.scatter = Math.sin(Math.PI * clamp(c.scatter || 0));
       data.strength = c.push ?? 0.7;
       if (typeof window !== "undefined") live = data;
@@ -431,10 +655,12 @@ export const RECIPES = {
         const factor = seconds < 1.6 ? Math.exp(-4.5 * seconds) * Math.cos(19 * seconds) : 0;
         push.delta = push.from.map((x) => x * factor);
       }
-      out.morph = [data.remaining, data.scatter, 0, 0];
+      const wave = data.from && data.origin && data.remaining > 0;
+      out.morph = [data.remaining, data.scatter, wave ? 1 : 0, wave ? data.elapsed : 0];
       out.tokens = [
         { offset: push.at, visible: 0 },
         { offset: push.delta.map((x) => x * data.strength), visible: 0 },
+        { offset: data.origin || [0, 0, 0], visible: 0 },
       ];
     },
     build(k, o) {
@@ -450,7 +676,15 @@ export const RECIPES = {
         from = new Float32Array(n * 3);
         for (let i = 0; i < n; i++) from.set(posePoint(live, i), i * 3);
       }
-      k.data = { form, from, remaining: from ? 1 : 0, scatter: 0, start: null, t: 0,
+      // A tap's wave starts at the tapped place (recipe units).
+      const at = from && origin ? origin.slice() : null;
+      origin = null;
+      let reach = 0;
+      if (at)
+        for (let i = 0; i < n; i++)
+          reach = Math.max(reach, Math.hypot(from[i * 3] - at[0], from[i * 3 + 1] - at[1], from[i * 3 + 2] - at[2])); // prettier-ignore
+      if (typeof window !== "undefined") opts = { ...o };
+      k.data = { form, from, origin: at, reach, elapsed: 0, remaining: from ? 1 : 0, scatter: 0, start: null, t: 0,
         push: { at: [0, 0, 0], delta: [0, 0, 0], held: false, released: null },
         tapBox: { min: [-0.84, -0.84, -0.1], max: [0.84, 0.84, 0.1] } }; // prettier-ignore
       k.fitMorphs = false;
