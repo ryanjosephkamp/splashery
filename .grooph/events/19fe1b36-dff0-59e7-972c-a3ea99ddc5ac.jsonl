@@ -403,3 +403,5 @@
 {"v":1,"t":"2026-10-17T20:51:35.179Z","harness":"claude-code","event":"tool","session":"19fe1b36-dff0-59e7-972c-a3ea99ddc5ac","tool":"mcp__claude-code-remote__send_message","cwd":"splashery"}
 {"v":1,"t":"2026-10-17T20:51:47.833Z","harness":"claude-code","event":"turn-end","session":"19fe1b36-dff0-59e7-972c-a3ea99ddc5ac","cwd":"splashery"}
 {"v":1,"t":"2026-10-17T20:51:49.748Z","harness":"claude-code","event":"subagent-stop","session":"19fe1b36-dff0-59e7-972c-a3ea99ddc5ac","agent":"a3f0af034141299ba"}
+{"v":1,"t":"2026-10-17T20:52:13.085Z","harness":"claude-code","event":"turn-start","session":"19fe1b36-dff0-59e7-972c-a3ea99ddc5ac","cwd":"splashery"}
+{"v":1,"t":"2026-10-17T20:52:14.576Z","harness":"claude-code","event":"tool","session":"19fe1b36-dff0-59e7-972c-a3ea99ddc5ac","tool":"ReadNotifications","cwd":"splashery"}
