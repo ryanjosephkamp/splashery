@@ -70,6 +70,16 @@ class KnownGeometry(unittest.TestCase):
         self.assertTrue(np.all(np.isnan(depth)))
         self.assertTrue(np.all(mask==0))
 
+    def test_corrupt_canonical_scene_is_rejected_before_loading(self):
+        if bpy.app.version != (4,5,3):
+            self.skipTest('Canonical scene is specific to the pinned 4.5.3 build')
+        with tempfile.TemporaryDirectory() as folder:
+            file=Path(folder)/'night.blend'
+            file.write_bytes(b'corrupt scene')
+            with patch.object(generator,'CANONICAL_DIR',Path(folder)):
+                with self.assertRaisesRegex(ValueError,'SHA-256'):
+                    generator.build(7,'night')
+
     def test_resume_rejects_changed_camera_helper_before_mutating_outputs(self):
         with tempfile.TemporaryDirectory() as folder:
             folder=Path(folder)
@@ -77,6 +87,7 @@ class KnownGeometry(unittest.TestCase):
             helper=folder/'studio_truth_camera.py'
             shutil.copyfile(path,driver)
             shutil.copyfile(path.parent/helper.name,helper)
+            shutil.copyfile(path.parent/'studio_truth_images.py',folder/'studio_truth_images.py')
             output=folder/'output'
             argv=['test','--','--out',str(output),'--mode','still','--scenes','not-a-scene']
             with patch.object(generator,'__file__',str(driver)),patch.object(sys,'argv',argv):

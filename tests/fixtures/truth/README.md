@@ -12,6 +12,23 @@ blender -b --factory-startup --threads 4 --python-exit-code 1 \
   --out .cache/studio-truth/full --mode all
 ```
 
+For the pinned cloud installation, use:
+
+```sh
+bash tools/blender-cloud.sh --python tools/studio-truth-generate.py -- \
+  --out .cache/blender-truth/stills --mode still
+```
+
+This uses Blender 4.5.3 rather than the historical build above. New renders remove volatile JPEG
+comments without recompressing pixels, and the resume settings record the image helper's hash. Use a
+new directory; the historical fixture/archive bytes and their calibration remain unchanged. See
+[the cloud tool guide](../../../tools/blender/README.md).
+
+Blender 4.5.3 loads hash-checked canonical scenes from `tools/blender/truth-scenes/`; all procedural
+recipes remain in `build_procedural` in the generator. Their CC0 records and camera targets are in
+`tools/blender/truth-scenes.json`. Rebuilding scenes changed beauty sampling across fresh processes,
+so these versioned snapshots are used as fixed inputs.
+
 `--mode still` makes the 12 stills; `--mode clips` makes the sequences. The default still is
 1280×720. Each 640×360 sequence is 30 fps: handheld has 120 frames (4 seconds), and walk has 300
 frames (10 seconds). Depth and masks accompany every handheld frame; both sequences carry every

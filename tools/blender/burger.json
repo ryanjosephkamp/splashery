@@ -1,0 +1,8 @@
+{
+  "source": "https://kenney.nl/assets/food-kit",
+  "author": "Kenney",
+  "license": "CC0-1.0",
+  "checked": "October 17, 2026",
+  "sha256": "1eb55f71aeafdff7d4672d6bf0ef7f03d02a3e6055cc7c931bb5b985d30a1397",
+  "changes": "Existing self-contained GLB from Food Kit; no geometry changes in this task."
+}

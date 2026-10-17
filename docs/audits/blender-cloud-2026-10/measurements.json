@@ -1,0 +1,1165 @@
+{
+  "agent": "Codex (GPT-6)",
+  "clip_smoke": {
+    "coverage": "One scene, 2 handheld frames and 2 walk frames, 64x36, 30 fps; smoke_only=true",
+    "file_count": 15,
+    "files": {
+      "build-settings.json": {
+        "bytes": 606,
+        "sha256": "7dbe233fe146de2fde9bc0c04c54a5e45331d5b7884e0072f58648c0db3c3130"
+      },
+      "checksums.json": {
+        "bytes": 2140,
+        "sha256": "1ef9babbba64288db10984f9c9c1d5c1728ef16717ce173625467b895a6ea00a"
+      },
+      "manifest.json": {
+        "bytes": 1579,
+        "sha256": "a67f70e9d3aa8eed3a5f422cc7cf6d6c57638694e3195c04c70b76d583e85ca5"
+      },
+      "still-life/handheld.mp4": {
+        "bytes": 2436,
+        "sha256": "3f1be2837f1f9399cff0c809da226b40b30df06822e993aebf3e141eb92a781b"
+      },
+      "still-life/handheld/000000.depth.f32.gz": {
+        "bytes": 2318,
+        "sha256": "6eede830af00ef03f120efbd4ffe36d0cb337c330c73404e753d78f0b7e7e135"
+      },
+      "still-life/handheld/000000.jpg": {
+        "bytes": 1975,
+        "sha256": "32fddee48f95cddc830399afac72a624134a30b3460ef25f8795d6439a896a62"
+      },
+      "still-life/handheld/000000.mask.png": {
+        "bytes": 420,
+        "sha256": "a5420a11c28997999dd2f131d5db67fa3b1e653cb32333bb5c4e8db5d703d899"
+      },
+      "still-life/handheld/000001.depth.f32.gz": {
+        "bytes": 2283,
+        "sha256": "612f0c577afb72e7d4284072d656ec284e6a9a90141c1623e0e7da288c96b3c9"
+      },
+      "still-life/handheld/000001.jpg": {
+        "bytes": 1976,
+        "sha256": "48e081c32660c697c0912c5fe2b82975a8a4ab67063e43aaf6327a9ac4d98b17"
+      },
+      "still-life/handheld/000001.mask.png": {
+        "bytes": 420,
+        "sha256": "d541280270c74f416470b1f9f9342f9511bcae53fad4ef68a237353b24b180a7"
+      },
+      "still-life/handheld/poses.json": {
+        "bytes": 3086,
+        "sha256": "712d61958d306d6931042f33f271c3e154a2a14c39ed518b6117a336e540331e"
+      },
+      "still-life/walk.mp4": {
+        "bytes": 2455,
+        "sha256": "dbb9357e7f75f075ec785736aa5bc19b2190ead5a5bfc11eb082c103015c8743"
+      },
+      "still-life/walk/000000.jpg": {
+        "bytes": 1975,
+        "sha256": "32fddee48f95cddc830399afac72a624134a30b3460ef25f8795d6439a896a62"
+      },
+      "still-life/walk/000001.jpg": {
+        "bytes": 1973,
+        "sha256": "098bd2df977259909e758594e0f8b0b15ae0db0c57a0938d787d2d4395e3c0de"
+      },
+      "still-life/walk/poses.json": {
+        "bytes": 2946,
+        "sha256": "bd784f5ba662a0b8c0e1f7cfa3627392a68fb58a3b992b2713629ac1dea927a2"
+      }
+    },
+    "first": ".cache/blender-cloud-clips-canonical-a",
+    "identical": true,
+    "repeat": ".cache/blender-cloud-clips-canonical-b",
+    "total_bytes": 28588
+  },
+  "date": "October 17, 2026",
+  "eevee_probes": [
+    {
+      "backend": "EEVEE",
+      "blender": "4.5.3 LTS",
+      "devices": [],
+      "seconds": 35.7771,
+      "status": "rendered"
+    },
+    {
+      "backend": "EEVEE",
+      "blender": "4.5.3 LTS",
+      "devices": [],
+      "graphics": {
+        "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+        "vendor": "Mesa",
+        "version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1"
+      },
+      "seconds": 11.5573,
+      "status": "rendered"
+    }
+  ],
+  "environment": {
+    "architecture": "x86_64",
+    "concurrent_jobs": true,
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "exposed_vcpus": 5,
+    "glibc": "2.41",
+    "os": "Debian 13",
+    "physical_gpu": false,
+    "render_threads": 4
+  },
+  "evidence_images": {
+    "model-contact.jpg": {
+      "bytes": 36747,
+      "sha256": "710ca9601c9de8fb28a20290324277e33747d781bbc0a69ff8db0d9798787dfc"
+    },
+    "truth-contact.jpg": {
+      "bytes": 80456,
+      "sha256": "9bc6790e6441b11b08bf5c4f8f145d1884ba134aafeffa0f663fd5d6a22d421c"
+    }
+  },
+  "gpu_probes": {
+    "CPU": {
+      "backend": "CPU",
+      "blender": "4.5.3 LTS",
+      "devices": [],
+      "seconds": 0.0703,
+      "status": "rendered"
+    },
+    "CUDA": {
+      "backend": "CUDA",
+      "blender": "4.5.3 LTS",
+      "devices": [
+        {
+          "enabled": false,
+          "name": "AMD EPYC 9V74 80-Core Processor",
+          "type": "CPU"
+        }
+      ],
+      "error": "No CUDA device; CPU fallback explicitly disabled",
+      "seconds": 0.1001,
+      "status": "failed"
+    },
+    "HIP": {
+      "backend": "HIP",
+      "blender": "4.5.3 LTS",
+      "devices": [
+        {
+          "enabled": false,
+          "name": "AMD EPYC 9V74 80-Core Processor",
+          "type": "CPU"
+        }
+      ],
+      "error": "No HIP device; CPU fallback explicitly disabled",
+      "seconds": 0.0863,
+      "status": "failed"
+    },
+    "METAL": {
+      "backend": "METAL",
+      "blender": "4.5.3 LTS",
+      "devices": [],
+      "error": "bpy_struct: item.attr = val: enum \"METAL\" not found in ('NONE', 'CUDA', 'OPTIX', 'HIP', 'ONEAPI')",
+      "seconds": 0.0706,
+      "status": "failed"
+    },
+    "ONEAPI": {
+      "backend": "ONEAPI",
+      "blender": "4.5.3 LTS",
+      "devices": [
+        {
+          "enabled": false,
+          "name": "AMD EPYC 9V74 80-Core Processor",
+          "type": "CPU"
+        }
+      ],
+      "error": "No ONEAPI device; CPU fallback explicitly disabled",
+      "seconds": 0.0732,
+      "status": "failed"
+    },
+    "OPTIX": {
+      "backend": "OPTIX",
+      "blender": "4.5.3 LTS",
+      "devices": [
+        {
+          "enabled": false,
+          "name": "AMD EPYC 9V74 80-Core Processor",
+          "type": "CPU"
+        }
+      ],
+      "error": "No OPTIX device; CPU fallback explicitly disabled",
+      "seconds": 0.0957,
+      "status": "failed"
+    }
+  },
+  "install": {
+    "cold": {
+      "archive_bytes": 377397328,
+      "archive_sha256": "975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845",
+      "binary_sha256": "5e15447670804c855fef6033ac9b8fd82696b762095becf0df79b1c2f8034397",
+      "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+      "reused": false,
+      "seconds": 75.3107,
+      "url": "https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.3-linux-x64.tar.xz",
+      "version": "4.5.3"
+    },
+    "installed_mib": 1530.6172981262207,
+    "normal_setup_existing_browser_seconds": 14,
+    "warm": {
+      "archive_bytes": 377397328,
+      "archive_sha256": "975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845",
+      "binary_sha256": "5e15447670804c855fef6033ac9b8fd82696b762095becf0df79b1c2f8034397",
+      "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+      "reused": true,
+      "seconds": 3.8528,
+      "url": "https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.3-linux-x64.tar.xz",
+      "version": "4.5.3"
+    }
+  },
+  "limits": [
+    "Byte identity scoped to identical pinned build, source, model, settings, CPU architecture, and libraries",
+    "Cold installation is into an empty cache on the existing cloud image, not a clean OS",
+    "Only full stills regenerated; clips are 2-frame 64x36 smoke outputs, explicitly incomplete",
+    "No cross-architecture, GPU render, phone, or browser WebGPU measurement"
+  ],
+  "models": {
+    "file_count": 38,
+    "files": {
+      "checksums.json": {
+        "bytes": 4801,
+        "sha256": "40c6e0e06fb1b7d3ed4b7d7a2538946fb8bc05febdd6cb274079e51492465939"
+      },
+      "manifest.json": {
+        "bytes": 16764,
+        "sha256": "b7e762efbd1d40391ec1c6a485fa96e84cdf8b6668f6255a5cddaafac0953dca"
+      },
+      "panorama.depth.f32.gz": {
+        "bytes": 14543,
+        "sha256": "27925e9cdf2c3b1c68341c59c1ee79c38e9169457a8faa2678d7ee0d730bbc85"
+      },
+      "panorama.json": {
+        "bytes": 1161,
+        "sha256": "ded9ee9a69547c1dfbb621ab42b1ceae1a581de4bbeabf732f55cd04f6f88d6f"
+      },
+      "panorama.mask.png": {
+        "bytes": 16654,
+        "sha256": "8c1ae823baf80dc4b8ddf124bd26e33de9567449d5d9825479234b9c7cb4b1b2"
+      },
+      "panorama.png": {
+        "bytes": 398429,
+        "sha256": "7c413a83ab998cf48dce488270d9b589d5a582c7416720d2784ac8e1bbd35a87"
+      },
+      "view-000.depth.f32.gz": {
+        "bytes": 116270,
+        "sha256": "cc8979a6bd9eabac26346ee0f0a281a92e955a20c5c13c04080fb83a9e5f9701"
+      },
+      "view-000.json": {
+        "bytes": 1168,
+        "sha256": "34ab6f5ceb8f6ac5f0582f7004ed1f184c87e53a8cac164978615c3ee8f26dcd"
+      },
+      "view-000.mask.png": {
+        "bytes": 8478,
+        "sha256": "a761d553316a7047cd52b38e4774d0fbaf5e51e75f18bf8b4521cc81292cdd1c"
+      },
+      "view-000.png": {
+        "bytes": 227622,
+        "sha256": "08fd41ae9285363a7d6901f1edcca309c5299f9f1394be2d2bac1a4fd9cd9ae3"
+      },
+      "view-001.depth.f32.gz": {
+        "bytes": 119718,
+        "sha256": "e3e33bf0a9a4d8c7a967e4fbaf856e3750e66a2e19a61e354d057241c700f535"
+      },
+      "view-001.json": {
+        "bytes": 1363,
+        "sha256": "4f9abff130a34467f5be0bc913bbd4227d3c1fe7f870ccc8cbec67ba56afcb95"
+      },
+      "view-001.mask.png": {
+        "bytes": 8532,
+        "sha256": "005ce80e643fc72bb8abafb2b44b24530208b18f15be7109931dfddfaa0f22d2"
+      },
+      "view-001.png": {
+        "bytes": 227247,
+        "sha256": "236684d4a401794d4cbe57e040af89a16b67236a734a57dbbd3a732f7ac5d9ad"
+      },
+      "view-002.depth.f32.gz": {
+        "bytes": 122019,
+        "sha256": "27a606b8eba1eed478eac78a9f0dac48025d44c25cc2880279d27edbb7fc9404"
+      },
+      "view-002.json": {
+        "bytes": 1348,
+        "sha256": "c67ca8b8d8f05e27f84eddc387621b2307095179fcaefe83d8f7eb9cf8b33b4a"
+      },
+      "view-002.mask.png": {
+        "bytes": 8458,
+        "sha256": "dafae873caa843a147a04f77d404e9ecbdc3236431a0926e25b5d8a8a6ced436"
+      },
+      "view-002.png": {
+        "bytes": 226344,
+        "sha256": "e5e8f76cdd29a9aeab7218b02c2179a08845fbcda12d42e3f5ab2476a5fd9e29"
+      },
+      "view-003.depth.f32.gz": {
+        "bytes": 117631,
+        "sha256": "f4a9bfc70be9f5c041165a080ac93de71f690ccaa49e2e9622cab111654df104"
+      },
+      "view-003.json": {
+        "bytes": 1365,
+        "sha256": "f5b8c5fd5cabe189ac6a835a98c0dc0e20efa3de7dd4c44392ac925a7e4bab30"
+      },
+      "view-003.mask.png": {
+        "bytes": 8547,
+        "sha256": "ba6a35f80ea41bed0ca606e30783375e7e419b71098432334387d0cc2c589420"
+      },
+      "view-003.png": {
+        "bytes": 228194,
+        "sha256": "0a772e77bdd1299f83075180be18e65a437355309da58f868f0a97a8e6afcec8"
+      },
+      "view-004.depth.f32.gz": {
+        "bytes": 123663,
+        "sha256": "22826848a1958588fecd5c5315b98ad6d2811783d92134cc4396a20db224876c"
+      },
+      "view-004.json": {
+        "bytes": 1368,
+        "sha256": "47d091783c044de285228f0c84f767e107d22c2f1cf229ee6fafae9f0f61a000"
+      },
+      "view-004.mask.png": {
+        "bytes": 8478,
+        "sha256": "a761d553316a7047cd52b38e4774d0fbaf5e51e75f18bf8b4521cc81292cdd1c"
+      },
+      "view-004.png": {
+        "bytes": 222653,
+        "sha256": "f7f1ee6e0732c6dd7e8cc6bacf9fc606267c910c95ad6c4202325e3754d08162"
+      },
+      "view-005.depth.f32.gz": {
+        "bytes": 116332,
+        "sha256": "d2b88b9bef47bdf6d09f5ac0774671333dd1a10abaa31d12fc31440b75f6a702"
+      },
+      "view-005.json": {
+        "bytes": 1367,
+        "sha256": "58ce84e418e558b5a07f220f7fd0334442d24e1988a7dee39009ccb321f52869"
+      },
+      "view-005.mask.png": {
+        "bytes": 8532,
+        "sha256": "005ce80e643fc72bb8abafb2b44b24530208b18f15be7109931dfddfaa0f22d2"
+      },
+      "view-005.png": {
+        "bytes": 221232,
+        "sha256": "3c07ac79ee61b01757e6dd6f32c66fe3addb76dba2427373ae1632870db86e99"
+      },
+      "view-006.depth.f32.gz": {
+        "bytes": 121923,
+        "sha256": "96c956fd2e71ff94c5bcff3ec4899f741917789a3e8d8a725bdbcced53e17e6c"
+      },
+      "view-006.json": {
+        "bytes": 1349,
+        "sha256": "6789b59808ddcb16439648cf62e683120b92f47544dd2a6cec3cdb85b5b78187"
+      },
+      "view-006.mask.png": {
+        "bytes": 8458,
+        "sha256": "dafae873caa843a147a04f77d404e9ecbdc3236431a0926e25b5d8a8a6ced436"
+      },
+      "view-006.png": {
+        "bytes": 220701,
+        "sha256": "1208241071a39793d125216c3a796609de15580acfd39bafe79eea09f9762d9b"
+      },
+      "view-007.depth.f32.gz": {
+        "bytes": 120803,
+        "sha256": "24922691e2c5612b284e91438885d993126c37d32e9c0364c00717237603ec4a"
+      },
+      "view-007.json": {
+        "bytes": 1367,
+        "sha256": "03eaf0fc79f1c88b08a637e4555c725a3f2c1722a8548881b5a56e9e3e84265a"
+      },
+      "view-007.mask.png": {
+        "bytes": 8547,
+        "sha256": "ba6a35f80ea41bed0ca606e30783375e7e419b71098432334387d0cc2c589420"
+      },
+      "view-007.png": {
+        "bytes": 227059,
+        "sha256": "084db9e217b7e33aaecb4fb267a5b1904c79c9dd211f2174eebc7ce727b64f8f"
+      }
+    },
+    "first": ".cache/blender-cloud-model-canonical-a",
+    "identical": true,
+    "repeat": ".cache/blender-cloud-model-canonical-b",
+    "timings_a": [
+      {
+        "id": "view-000",
+        "pixels": 307200,
+        "rgb_seconds": 1.8380836359999648,
+        "truth_seconds": 1.4935047080000459
+      },
+      {
+        "id": "view-001",
+        "pixels": 307200,
+        "rgb_seconds": 1.8276689219999298,
+        "truth_seconds": 2.853840964000028
+      },
+      {
+        "id": "view-002",
+        "pixels": 307200,
+        "rgb_seconds": 2.62947604399983,
+        "truth_seconds": 3.383726843999966
+      },
+      {
+        "id": "view-003",
+        "pixels": 307200,
+        "rgb_seconds": 2.090413799999851,
+        "truth_seconds": 1.19790074499997
+      },
+      {
+        "id": "view-004",
+        "pixels": 307200,
+        "rgb_seconds": 1.4244340259999717,
+        "truth_seconds": 1.1846389400000135
+      },
+      {
+        "id": "view-005",
+        "pixels": 307200,
+        "rgb_seconds": 1.4192701780000334,
+        "truth_seconds": 1.5469543100000465
+      },
+      {
+        "id": "view-006",
+        "pixels": 307200,
+        "rgb_seconds": 1.2392043950001153,
+        "truth_seconds": 1.863973481999892
+      },
+      {
+        "id": "view-007",
+        "pixels": 307200,
+        "rgb_seconds": 1.716085178999947,
+        "truth_seconds": 1.362239916000135
+      },
+      {
+        "id": "panorama",
+        "pixels": 819200,
+        "rgb_seconds": 2.050588315000141,
+        "truth_seconds": 2.702902048999931
+      }
+    ],
+    "timings_b": [
+      {
+        "id": "view-000",
+        "pixels": 307200,
+        "rgb_seconds": 2.077699574999997,
+        "truth_seconds": 1.1700461400000677
+      },
+      {
+        "id": "view-001",
+        "pixels": 307200,
+        "rgb_seconds": 1.5336484529998415,
+        "truth_seconds": 1.0848955920000662
+      },
+      {
+        "id": "view-002",
+        "pixels": 307200,
+        "rgb_seconds": 2.081751422000025,
+        "truth_seconds": 1.3956961070000489
+      },
+      {
+        "id": "view-003",
+        "pixels": 307200,
+        "rgb_seconds": 2.235550647000082,
+        "truth_seconds": 2.6650068139999803
+      },
+      {
+        "id": "view-004",
+        "pixels": 307200,
+        "rgb_seconds": 2.2723603829999774,
+        "truth_seconds": 2.887884363000012
+      },
+      {
+        "id": "view-005",
+        "pixels": 307200,
+        "rgb_seconds": 2.7070185789998504,
+        "truth_seconds": 2.0682179350001206
+      },
+      {
+        "id": "view-006",
+        "pixels": 307200,
+        "rgb_seconds": 2.0778249210000013,
+        "truth_seconds": 2.2129190290002043
+      },
+      {
+        "id": "view-007",
+        "pixels": 307200,
+        "rgb_seconds": 1.7908908210001755,
+        "truth_seconds": 3.1869775929999378
+      },
+      {
+        "id": "panorama",
+        "pixels": 819200,
+        "rgb_seconds": 3.5436333820000527,
+        "truth_seconds": 6.51418635899995
+      }
+    ],
+    "total_bytes": 3290488
+  },
+  "provenance": {
+    "canonical_scenes": {
+      "author": "Ryan with Codex (GPT-6)",
+      "blender": "4.5.3 LTS",
+      "canonicalizer_sha256": "a0475b5b6d381009d0efd573c6d4e45178a329c9e59e5b112043f5e1c3e9620b",
+      "changes": "Original procedural geometry, materials, and lighting saved as compressed canonical sources to stabilize Cycles sampling. No outside assets.",
+      "checked": "October 17, 2026",
+      "credit": "made by Ryan with Codex (GPT-6)",
+      "generator_sha256": "85180b26ef7bedb150b02145ac8862be3d7847cd6a1a70d73242167df5419985",
+      "license": "CC0-1.0",
+      "recipe_sha256": "d059a43dc440492a76f4f65699d7c7155ca2cc43b737a8a197d600e295dc0f0b",
+      "scenes": {
+        "arches": {
+          "bytes": 198342,
+          "eye": [0.3, -3.0, 1.6],
+          "seed": 5609,
+          "sha256": "2851dba7c370e7755d71fd201b1f49b69e9f9281dd3aacb2360000efca46f763",
+          "target": [0.0, 7.0, 1.8]
+        },
+        "coast": {
+          "bytes": 193098,
+          "eye": [-3.0, -4.0, 3.7],
+          "seed": 5604,
+          "sha256": "5a983273b6bbcdf7e43fefc087f52eaf32188fa9eef293d3c2534cfa1921c138",
+          "target": [0.0, 4.0, 0.3]
+        },
+        "desk": {
+          "bytes": 102435,
+          "eye": [3.0, -3.0, 3.2],
+          "seed": 5605,
+          "sha256": "6eedc4ef15eb28c80070311360cf805369d019eff60ef97a7d5b0b6507aa2dde",
+          "target": [0, 1, 1]
+        },
+        "forest": {
+          "bytes": 247381,
+          "eye": [0.5, -3.0, 1.7],
+          "seed": 5602,
+          "sha256": "2344ce9a59468376637c578f47911d46387af689743e61f8c5eb6eaf0d16ab1b",
+          "target": [0.0, 7.0, 1.5]
+        },
+        "fur": {
+          "bytes": 254477,
+          "eye": [2, -3, 2],
+          "seed": 5606,
+          "sha256": "17e7ace2ea8d03d9c28f0671ae005da6737c5226c18ed96ab70abd7d11a2fa1b",
+          "target": [0.0, 1.0, 1.1]
+        },
+        "lattice": {
+          "bytes": 101885,
+          "eye": [2, -4, 2],
+          "seed": 5608,
+          "sha256": "0267c8e852d5332ee1fb09d370027325a0bce7be1b83ed999bae0cb694c71868",
+          "target": [0.0, 1.0, 1.3]
+        },
+        "leaves": {
+          "bytes": 158200,
+          "eye": [3.0, -4.0, 2.3],
+          "seed": 5610,
+          "sha256": "e963050146159bc264c81476a99cd1c8614c60f6fcffe966ab693a05b463b282",
+          "target": [0, 2, 1]
+        },
+        "night": {
+          "bytes": 131074,
+          "eye": [0.6, -3.0, 1.6],
+          "seed": 5607,
+          "sha256": "b33b8f1349508a66e94397ef40c21f80bd01c290f9865bdc0b27d90687b418d0",
+          "target": [0.0, 8.0, 1.6]
+        },
+        "room": {
+          "bytes": 96805,
+          "eye": [2.7, -4.0, 2.2],
+          "seed": 5601,
+          "sha256": "dfea89963d9320b3e3abc7218f6a15691f91323f3911b706b594e6feee70238a",
+          "target": [-0.5, 2.5, 1.3]
+        },
+        "stairs": {
+          "bytes": 98869,
+          "eye": [3.3, -3.0, 2.6],
+          "seed": 5603,
+          "sha256": "829936492ebb2083b79d6b1e7d753e0b60ea11eb16e99d4570dddb84ebe54096",
+          "target": [0.0, 2.0, 1.6]
+        },
+        "steps": {
+          "bytes": 93947,
+          "eye": [1, -5, 2],
+          "seed": 5611,
+          "sha256": "552c6a7cbc7fccee67b1ad9df074c9d62560e7712edf9fa2a3bd7c6b57fe4bc4",
+          "target": [0.0, 2.0, 1.2]
+        },
+        "still-life": {
+          "bytes": 108576,
+          "eye": [4.0, -6.0, 3.1],
+          "seed": 5600,
+          "sha256": "9dead16d8d09637cb311ff29adc34c766f19ba30dfa3955cb3e671a215e8762d",
+          "target": [0, 1, 1]
+        }
+      },
+      "schema": 1,
+      "source": "tools/studio-truth-generate.py::build_procedural"
+    },
+    "dataset_contract": {
+      "archive_sha256": "975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845",
+      "asset": {
+        "author": "Kenney",
+        "changes": "Existing self-contained GLB from Food Kit; no geometry changes in this task.",
+        "checked": "October 17, 2026",
+        "license": "CC0-1.0",
+        "sha256": "1eb55f71aeafdff7d4672d6bf0ef7f03d02a3e6055cc7c931bb5b985d30a1397",
+        "source": "https://kenney.nl/assets/food-kit"
+      },
+      "blender": "4.5.3 LTS",
+      "bounds": {
+        "max": [0.20204798877239227, 0.20204798877239227, 0.2900000214576721],
+        "min": [-0.20204798877239227, -0.20204798877239227, 0.0]
+      },
+      "build_hash": "67807e1800cc",
+      "camera": "+X right, +Y down, +Z forward; row-major matrices acting on column vectors",
+      "depth_encoding": "gzip float32 LE, top row first; NaN for no hit",
+      "determinism_scope": "Identical pinned build, source, input, settings, CPU architecture, and libraries",
+      "device": "CPU",
+      "engine": "CYCLES",
+      "mask": {
+        "0": "no geometric hit",
+        "1": "opaque geometric hit",
+        "3": "geometric hit with ambiguous appearance (metal, glass, alpha, emission)"
+      },
+      "model_sha256": "1eb55f71aeafdff7d4672d6bf0ef7f03d02a3e6055cc7c931bb5b985d30a1397",
+      "numpy": "1.26.4",
+      "panorama": {
+        "camera_to_world": [
+          [1.0, 0.0, 0.0, 0.0],
+          [0.0, -0.24253559112548828, 0.9701424837112427, -1.1179167032241821],
+          [0.0, -0.9701424837112427, -0.24253559112548828, 0.4244791865348816],
+          [0.0, 0.0, 0.0, 1.0]
+        ],
+        "clip_meters": [0.00032042438397184014, 6.408487796783447],
+        "depth": "panorama.depth.f32.gz",
+        "depth_convention": "radial distance, meters",
+        "height": 640,
+        "latitude_radians": [1.5707963267948966, -1.5707963267948966],
+        "longitude_radians": [-3.141592653589793, 3.141592653589793],
+        "mask": "panorama.mask.png",
+        "pose": "panorama.json",
+        "projection": "equirectangular",
+        "rgb": "panorama.png",
+        "width": 1280,
+        "world_to_camera": [
+          [1.0, 0.0, 0.0, 0.0],
+          [0.0, -0.24253560284868705, -0.9701425306040435, 0.14067071066260206],
+          [0.0, 0.9701425306040435, -0.24253560284868705, 1.1874898548733954],
+          [0.0, 0.0, 0.0, 1.0]
+        ]
+      },
+      "pixel_centers": "(x+0.5,y+0.5)",
+      "python": "3.11.11",
+      "samples": 16,
+      "schema": 1,
+      "seed": 105,
+      "source_sha256": {
+        "blender-cloud.sh": "2461927a106efd1f9ef4210b38ac9e72da22dd523f84a4bc664fbde5a0e05bd5",
+        "blender/install.py": "2036bdaec179cd3f1ee123cadcbf39c42d74ab5c6c2ae1e65122d85e86e3715a",
+        "blender/render.py": "22ecd65ba3acfd69d12c5f7067488263ec7b316be9d523720c7235464c4063f9",
+        "studio-truth-generate.py": "85180b26ef7bedb150b02145ac8862be3d7847cd6a1a70d73242167df5419985",
+        "studio_truth_camera.py": "c6484004609f177b1d2ac077b60d5470b143f32b85c956db8dfbaef65f1b215b",
+        "studio_truth_images.py": "aa6ab58407f3695c4a41cb43e29d1d73e9939ea33162a4fb171669fa961baad7"
+      },
+      "threads": 4,
+      "views": [
+        {
+          "K": [
+            [711.1111111111111, 0, 320.0],
+            [0, 711.1111111111111, 240.0],
+            [0, 0, 1]
+          ],
+          "camera_to_world": [
+            [1.0, 0.0, 0.0, 0.0],
+            [0.0, -0.24253559112548828, 0.9701424837112427, -1.1179167032241821],
+            [0.0, -0.9701424837112427, -0.24253559112548828, 0.4244791865348816],
+            [0.0, 0.0, 0.0, 1.0]
+          ],
+          "clip_meters": [0.00032042438397184014, 6.408487796783447],
+          "depth": "view-000.depth.f32.gz",
+          "depth_convention": "optical-axis Z, meters",
+          "height": 480,
+          "mask": "view-000.mask.png",
+          "pose": "view-000.json",
+          "projection": "pinhole",
+          "rgb": "view-000.png",
+          "width": 640,
+          "world_to_camera": [
+            [1.0, 0.0, 0.0, 0.0],
+            [0.0, -0.24253560284868705, -0.9701425306040435, 0.14067071066260206],
+            [0.0, 0.9701425306040435, -0.24253560284868705, 1.1874898548733954],
+            [0.0, 0.0, 0.0, 1.0]
+          ]
+        },
+        {
+          "K": [
+            [711.1111111111111, 0, 320.0],
+            [0, 711.1111111111111, 240.0],
+            [0, 0, 1]
+          ],
+          "camera_to_world": [
+            [0.7071067690849304, 0.17149855196475983, -0.6859943866729736, 0.7904865145683289],
+            [0.7071067690849304, -0.1714984029531479, 0.6859943866729736, -0.7904865145683289],
+            [1.1018448020649885e-7, -0.9701425433158875, -0.24253547191619873, 0.4244791865348816],
+            [0.0, 0.0, 0.0, 1.0]
+          ],
+          "clip_meters": [0.00032042438397184014, 6.408487796783447],
+          "depth": "view-001.depth.f32.gz",
+          "depth_convention": "optical-axis Z, meters",
+          "height": 480,
+          "mask": "view-001.mask.png",
+          "pose": "view-001.json",
+          "projection": "pinhole",
+          "rgb": "view-001.png",
+          "width": 640,
+          "world_to_camera": [
+            [0.7071067752178563, 0.7071068113584574, 1.0222112798216427e-7, -1.4822083353336136e-8],
+            [0.17149854712905555, -0.1714983959571878, -0.9701425352100724, 0.14067085612102329],
+            [-0.6859943308913438, 0.6859943686842844, -0.24253546521512925, 1.1874898221350496],
+            [0.0, 0.0, 0.0, 1.0]
+          ]
+        },
+        {
+          "K": [
+            [711.1111111111111, 0, 320.0],
+            [0, 711.1111111111111, 240.0],
+            [0, 0, 1]
+          ],
+          "camera_to_world": [
+            [7.549790126404332e-8, 0.24253559112548828, -0.9701424837112427, 1.1179167032241821],
+            [1.0, -1.831092788506794e-8, 7.324371864569912e-8, -6.845265661244596e-17],
+            [0.0, -0.9701424837112427, -0.24253559112548828, 0.4244791865348816],
+            [0.0, 0.0, 0.0, 1.0]
+          ],
+          "clip_meters": [0.00032042438397184014, 6.408487796783447],
+          "depth": "view-002.depth.f32.gz",
+          "depth_convention": "optical-axis Z, meters",
+          "height": 480,
+          "mask": "view-002.mask.png",
+          "pose": "view-002.json",
+          "projection": "pinhole",
+          "rgb": "view-002.png",
+          "width": 640,
+          "world_to_camera": [
+            [
+              7.549789849111246e-8, 0.9999999999999943, -4.59513706289343e-16, -8.440036151803173e-8
+            ],
+            [0.24253560284868564, -1.8310928996885293e-8, -0.9701425306040435, 0.14067071066260367],
+            [-0.9701425306040379, 7.324372498759278e-8, -0.24253560284868703, 1.187489854873389],
+            [0.0, 0.0, 0.0, 1.0]
+          ]
+        },
+        {
+          "K": [
+            [711.1111111111111, 0, 320.0],
+            [0, 711.1111111111111, 240.0],
+            [0, 0, 1]
+          ],
+          "camera_to_world": [
+            [-0.7071067690849304, 0.17149856686592102, -0.6859943270683289, 0.7904865145683289],
+            [0.7071067690849304, 0.17149853706359863, -0.6859943270683289, 0.7904865145683289],
+            [-2.4449990476682615e-8, -0.9701424837112427, -0.24253559112548828, 0.4244791865348816],
+            [0.0, 0.0, 0.0, 1.0]
+          ],
+          "clip_meters": [0.00032042438397184014, 6.408487796783447],
+          "depth": "view-003.depth.f32.gz",
+          "depth_convention": "optical-axis Z, meters",
+          "height": 480,
+          "mask": "view-003.mask.png",
+          "pose": "view-003.json",
+          "projection": "pinhole",
+          "rgb": "view-003.png",
+          "width": 640,
+          "world_to_camera": [
+            [-0.7071067896741025, 0.7071067969022267, -2.044422555718054e-8, 2.964413352865544e-9],
+            [0.17149858720975694, 0.17149855366464503, -0.9701425335086373, 0.14067069904992732],
+            [-0.6859943618493676, -0.6859943702356441, -0.24253559123030852, 1.1874899013240996],
+            [0.0, 0.0, 0.0, 1.0]
+          ]
+        },
+        {
+          "K": [
+            [711.1111111111111, 0, 320.0],
+            [0, 711.1111111111111, 240.0],
+            [0, 0, 1]
+          ],
+          "camera_to_world": [
+            [-1.0, -6.1077116697561e-8, -1.0538260397652266e-7, 1.3690531322489192e-16],
+            [8.742277657347586e-8, 0.24253547191619873, -0.9701425433158875, 1.1179167032241821],
+            [8.481252677938755e-8, -0.9701425433158875, -0.24253547191619873, 0.4244791865348816],
+            [0.0, 0.0, 0.0, 1.0]
+          ],
+          "clip_meters": [0.00032042438397184014, 6.408487796783447],
+          "depth": "view-004.depth.f32.gz",
+          "depth_convention": "optical-axis Z, meters",
+          "height": 480,
+          "mask": "view-004.mask.png",
+          "pose": "view-004.json",
+          "projection": "pinhole",
+          "rgb": "view-004.png",
+          "width": 640,
+          "world_to_camera": [
+            [
+              -0.9999999999999851, 8.742277929195212e-8, 8.481252811378685e-8,
+              -1.3373253801755612e-7
+            ],
+            [-6.107711548276589e-8, 0.24253546961477726, -0.9701425341101689, 0.1406708610952925],
+            [-1.0538260001559205e-7, -0.9701425341101648, -0.242535469614763, 1.1874898022379192],
+            [0.0, 0.0, 0.0, 1.0]
+          ]
+        },
+        {
+          "K": [
+            [711.1111111111111, 0, 320.0],
+            [0, 711.1111111111111, 240.0],
+            [0, 0, 1]
+          ],
+          "camera_to_world": [
+            [-0.7071067690849304, -0.17149856686592102, 0.6859943270683289, -0.7904865145683289],
+            [-0.7071067690849304, 0.17149853706359863, -0.6859943270683289, 0.7904865145683289],
+            [2.4449990476682615e-8, -0.9701424837112427, -0.24253559112548828, 0.4244791865348816],
+            [0.0, 0.0, 0.0, 1.0]
+          ],
+          "clip_meters": [0.00032042438397184014, 6.408487796783447],
+          "depth": "view-005.depth.f32.gz",
+          "depth_convention": "optical-axis Z, meters",
+          "height": 480,
+          "mask": "view-005.mask.png",
+          "pose": "view-005.json",
+          "projection": "pinhole",
+          "rgb": "view-005.png",
+          "width": 640,
+          "world_to_camera": [
+            [-0.7071067896741025, -0.7071067969022267, 2.044422555718054e-8, -2.964413352865544e-9],
+            [-0.17149858720975694, 0.17149855366464503, -0.9701425335086373, 0.14067069904992732],
+            [0.6859943618493676, -0.6859943702356441, -0.24253559123030852, 1.1874899013240996],
+            [0.0, 0.0, 0.0, 1.0]
+          ]
+        },
+        {
+          "K": [
+            [711.1111111111111, 0, 320.0],
+            [0, 711.1111111111111, 240.0],
+            [0, 0, 1]
+          ],
+          "camera_to_world": [
+            [7.549790126404332e-8, -0.24253559112548828, 0.9701424837112427, -1.1179167032241821],
+            [-1.0, -1.831092788506794e-8, 7.324371864569912e-8, 2.0535797645478279e-16],
+            [0.0, -0.9701424837112427, -0.24253559112548828, 0.4244791865348816],
+            [0.0, 0.0, 0.0, 1.0]
+          ],
+          "clip_meters": [0.00032042438397184014, 6.408487796783447],
+          "depth": "view-006.depth.f32.gz",
+          "depth_convention": "optical-axis Z, meters",
+          "height": 480,
+          "mask": "view-006.mask.png",
+          "pose": "view-006.json",
+          "projection": "pinhole",
+          "rgb": "view-006.png",
+          "width": 640,
+          "world_to_camera": [
+            [7.549789849111246e-8, -0.9999999999999943, 4.59513706289343e-16, 8.440036179184237e-8],
+            [
+              -0.24253560284868564, -1.8310928996885293e-8, -0.9701425306040435, 0.14067071066260367
+            ],
+            [0.9701425306040379, 7.324372498759278e-8, -0.24253560284868703, 1.187489854873389],
+            [0.0, 0.0, 0.0, 1.0]
+          ]
+        },
+        {
+          "K": [
+            [711.1111111111111, 0, 320.0],
+            [0, 711.1111111111111, 240.0],
+            [0, 0, 1]
+          ],
+          "camera_to_world": [
+            [0.7071067690849304, -0.17149855196475983, 0.6859943866729736, -0.7904865145683289],
+            [-0.7071067690849304, -0.1714984029531479, 0.6859943866729736, -0.7904865145683289],
+            [-1.1018448020649885e-7, -0.9701425433158875, -0.24253547191619873, 0.4244791865348816],
+            [0.0, 0.0, 0.0, 1.0]
+          ],
+          "clip_meters": [0.00032042438397184014, 6.408487796783447],
+          "depth": "view-007.depth.f32.gz",
+          "depth_convention": "optical-axis Z, meters",
+          "height": 480,
+          "mask": "view-007.mask.png",
+          "pose": "view-007.json",
+          "projection": "pinhole",
+          "rgb": "view-007.png",
+          "width": 640,
+          "world_to_camera": [
+            [
+              0.7071067752178563, -0.7071068113584574, -1.0222112798216427e-7, 1.4822083353336136e-8
+            ],
+            [-0.17149854712905555, -0.1714983959571878, -0.9701425352100724, 0.14067085612102329],
+            [0.6859943308913438, 0.6859943686842844, -0.24253546521512925, 1.1874898221350496],
+            [0.0, 0.0, 0.0, 1.0]
+          ]
+        }
+      ],
+      "world": "Blender right-handed Z-up, meters; original imported model coordinates"
+    },
+    "model": {
+      "author": "Kenney",
+      "changes": "Existing self-contained GLB from Food Kit; no geometry changes in this task.",
+      "checked": "October 17, 2026",
+      "license": "CC0-1.0",
+      "sha256": "1eb55f71aeafdff7d4672d6bf0ef7f03d02a3e6055cc7c931bb5b985d30a1397",
+      "source": "https://kenney.nl/assets/food-kit"
+    },
+    "truth": {
+      "credit": "made by Ryan with Codex (GPT-6)",
+      "license": "CC0-1.0",
+      "source": "tools/studio-truth-generate.py"
+    }
+  },
+  "schema": 1,
+  "spec": "User GOAL; docs/codex/105-blender-cloud.md absent from origin/main ceb51de7a",
+  "truth_stills": {
+    "file_count": 51,
+    "files": {
+      "arches/still/poses.json": {
+        "bytes": 1574,
+        "sha256": "747fc1acbc678673eda93928ecb9105d8d91dc9c0841be935bd0bd147b8a4db4"
+      },
+      "arches/still/still.depth.f32.gz": {
+        "bytes": 1850148,
+        "sha256": "34bd5e42e823577c9a600e3dc42c77322352dec26eb7336dd16f5b6291137818"
+      },
+      "arches/still/still.jpg": {
+        "bytes": 346176,
+        "sha256": "168df45477b22164475df2f975fd77c10ba8b5f14e2cc7383b5bc7f34940e304"
+      },
+      "arches/still/still.mask.png": {
+        "bytes": 28105,
+        "sha256": "4d016ec51493b6ba599ca7531ad8e2ffe71d5eeff2190b90c85f595b798a11b2"
+      },
+      "build-settings.json": {
+        "bytes": 607,
+        "sha256": "0d62bfdbeca80bcbd5eae68041dbc700b3e4437c5763d869141ffedca0270dde"
+      },
+      "checksums.json": {
+        "bytes": 7567,
+        "sha256": "7eb9923f3a37be1bd0782e8780f1382f8203674166dacd9cbb047a0054139435"
+      },
+      "coast/still/poses.json": {
+        "bytes": 1548,
+        "sha256": "6c375e64f8fee1670448ee249765b989234cc755703f3a388c322b4b200af65d"
+      },
+      "coast/still/still.depth.f32.gz": {
+        "bytes": 1480625,
+        "sha256": "ac6f1e81a277120c0bc7321599637d131fd322eb216fd305e97019dbc09fa868"
+      },
+      "coast/still/still.jpg": {
+        "bytes": 165873,
+        "sha256": "a911f7f37c3a78b69278a123879918dad0a2b510aa966c00655f7879c1126106"
+      },
+      "coast/still/still.mask.png": {
+        "bytes": 22812,
+        "sha256": "c5daed7ca28be3b333fb6a63a3fd09fff6b8af3db3d508040c910761115729b5"
+      },
+      "desk/still/poses.json": {
+        "bytes": 1538,
+        "sha256": "bc4c76c7ea1ec2300992ad23ed4a3dc5e296a88277189c0dd1d2b03293e760cc"
+      },
+      "desk/still/still.depth.f32.gz": {
+        "bytes": 992214,
+        "sha256": "6073305a84b081984232a92d32fe7c8121aa38f5d9ce0f1c88f3f72155efd2d8"
+      },
+      "desk/still/still.jpg": {
+        "bytes": 290737,
+        "sha256": "c60ac0091d49ad00533b00c6386e825c09bd2316ed6c45d7a932c44fc9a4d0ec"
+      },
+      "desk/still/still.mask.png": {
+        "bytes": 19727,
+        "sha256": "b1698945ee788d30f0da0fd20fe0f1281cfc348e0e762fc04ef4f25b2dc73c07"
+      },
+      "forest/still/poses.json": {
+        "bytes": 1562,
+        "sha256": "d2d7c0fc9c9ffab7c18417709ecc6856053c1df1883c910410131b43cf9f318c"
+      },
+      "forest/still/still.depth.f32.gz": {
+        "bytes": 1881163,
+        "sha256": "f3904f73964ebd479b0482449d5729232484816b08930364449d075b45b792fc"
+      },
+      "forest/still/still.jpg": {
+        "bytes": 317797,
+        "sha256": "affc0ff87945fb8acea86a9f3295750fedc45fbd4b4fe61e030b79e8f4002586"
+      },
+      "forest/still/still.mask.png": {
+        "bytes": 22798,
+        "sha256": "183ba5fbf6390956e281afc847bb56db420425ac6fa606366ec6b76e9bd412cd"
+      },
+      "fur/still/poses.json": {
+        "bytes": 1534,
+        "sha256": "4351d8be7c6f2137dc674e55e1e07efc54e6c26299d312397bd1a6072a08e4ed"
+      },
+      "fur/still/still.depth.f32.gz": {
+        "bytes": 846374,
+        "sha256": "35b7a3334861bd64240d747109b853a304a5f1d83b7b41e46c617fd9b060c64e"
+      },
+      "fur/still/still.jpg": {
+        "bytes": 225824,
+        "sha256": "67032176a45bc72d12ef76817028a084f59348f5f0c7ef69d44292f75e8262e0"
+      },
+      "fur/still/still.mask.png": {
+        "bytes": 22780,
+        "sha256": "4c912c4c8fca6c796a4979a541eb394cb0aed9aa1ca4309465447ad422cf1200"
+      },
+      "lattice/still/poses.json": {
+        "bytes": 1533,
+        "sha256": "62c8ad935bfa86f509a5c261878edf48080a5ff92ecc4d65299c339db24984c8"
+      },
+      "lattice/still/still.depth.f32.gz": {
+        "bytes": 1613982,
+        "sha256": "ecb01ad1248661f88014697a989a733a1dea3dbc85efc3347b78b2a8a0483c3d"
+      },
+      "lattice/still/still.jpg": {
+        "bytes": 355980,
+        "sha256": "809283bc2189f9f38dc775d05517468efdbd454bf75b20bdbf9806e6d22f8944"
+      },
+      "lattice/still/still.mask.png": {
+        "bytes": 22649,
+        "sha256": "4c4464b49190ac29e57bff7681e423a7d3a5e2f1b1377ecd867235436fb1cb95"
+      },
+      "leaves/still/poses.json": {
+        "bytes": 1548,
+        "sha256": "8baf4c9a690d44aec701bf6140547a4cab21d11617ae95e3684d496ba392d23f"
+      },
+      "leaves/still/still.depth.f32.gz": {
+        "bytes": 907963,
+        "sha256": "3b7a7b3e147c2b92e756e13fb9a001614a8f6cc97799c1d905e25523beb88f0c"
+      },
+      "leaves/still/still.jpg": {
+        "bytes": 257070,
+        "sha256": "a32c54b1285a1c766eaae7f0d52b3b19127193d01efa3d8ab4a347cde5cfb896"
+      },
+      "leaves/still/still.mask.png": {
+        "bytes": 22683,
+        "sha256": "99869149ef2db2071847c51b01d7d1d468b5493c5d5cc097153e8838637257a1"
+      },
+      "manifest.json": {
+        "bytes": 4700,
+        "sha256": "5e6de933de43a0d9ee6d87dc06d0bb5fc53be736320ecf6caa302ee296fd29de"
+      },
+      "night/still/poses.json": {
+        "bytes": 1564,
+        "sha256": "3fb6ae4848af93a486aa4c5e62782fe65f4fe738f8fc5233a0483dd313127569"
+      },
+      "night/still/still.depth.f32.gz": {
+        "bytes": 623762,
+        "sha256": "f7dec0a16cf10b7865097d53f6e9dda2bcde1684ba33a25e97bfbd60b1e36c68"
+      },
+      "night/still/still.jpg": {
+        "bytes": 337022,
+        "sha256": "6289fd3e0c0c21200d62117bd15cf4bbc62f057dae196681cf5336eb2361a04a"
+      },
+      "night/still/still.mask.png": {
+        "bytes": 23938,
+        "sha256": "08a7a68886d7e6414ceb1d5ab95743e57c9d3c19dd87d570d79e2d6a6965926c"
+      },
+      "room/still/poses.json": {
+        "bytes": 1564,
+        "sha256": "c0c19b3785a279fc3f1c8a6446f38511bf731137f5087c5685037dab1a95e655"
+      },
+      "room/still/still.depth.f32.gz": {
+        "bytes": 2644104,
+        "sha256": "a814be97e32b03225d9bd827ce3c35d2dadae340cc1cceeab3bc040b6364584b"
+      },
+      "room/still/still.jpg": {
+        "bytes": 350742,
+        "sha256": "ee247ba5b0833b57894ffff25f39fd34374718ca2c1478df1d95c39a52543bc5"
+      },
+      "room/still/still.mask.png": {
+        "bytes": 17815,
+        "sha256": "abc635d6a8a8f2b8addac77e1ce32aeead9fee077a0fcb042fe70b2816c14591"
+      },
+      "stairs/still/poses.json": {
+        "bytes": 1551,
+        "sha256": "8530456618f9ecf4507f4079643964b17c3ae669f25cc7c4f3993cd9c28211a1"
+      },
+      "stairs/still/still.depth.f32.gz": {
+        "bytes": 1424429,
+        "sha256": "d547cf5933a8a3665d3b3a89435ce40852fd0ce0d54eae0921525f5ca01fba45"
+      },
+      "stairs/still/still.jpg": {
+        "bytes": 264383,
+        "sha256": "cbeeaccf38968f91b84c4a9fae57670a3ff8ef0277c30b74a6cf523272c017b7"
+      },
+      "stairs/still/still.mask.png": {
+        "bytes": 28126,
+        "sha256": "92a692c13cfb6e4121792a5bdf4bb94f5831f4f097d741aff4b61875775b4764"
+      },
+      "steps/still/poses.json": {
+        "bytes": 1531,
+        "sha256": "d7266a6221951fcc3349ffe75b1e63e811f1bed7393f16bc5052b32f20590fef"
+      },
+      "steps/still/still.depth.f32.gz": {
+        "bytes": 1350363,
+        "sha256": "15aaaad4d6e674ee2ef313bd475553b8244263557f47c6df3418cd4362a88382"
+      },
+      "steps/still/still.jpg": {
+        "bytes": 215717,
+        "sha256": "70ca20ae2bc602255b7686d9bb0d8b2e9204f2488f1351eba48eb29047c336a6"
+      },
+      "steps/still/still.mask.png": {
+        "bytes": 19515,
+        "sha256": "64c6c10b887af9a0cda27f10cb80e41489be53c9f422c91f08ebf72cab490086"
+      },
+      "still-life/still/poses.json": {
+        "bytes": 1548,
+        "sha256": "5489c27cc0f3dda691e1f5dd8fe687da1e5b187920d994b387f94bbb2a4e8f89"
+      },
+      "still-life/still/still.depth.f32.gz": {
+        "bytes": 669722,
+        "sha256": "2fce6752cffe8f3e17f1e7ab49baa3a68bac47587a03fcb0ecdba291630fe2f2"
+      },
+      "still-life/still/still.jpg": {
+        "bytes": 218836,
+        "sha256": "76390894aa5149771ced2d9fb56633fc28e2a6bbc4a9cba49cb6a2e96d900b4c"
+      },
+      "still-life/still/still.mask.png": {
+        "bytes": 20730,
+        "sha256": "6a36ecbc11e1bc60999c460666688bd52c4feae1d2d647c3a96d31c3f785d126"
+      }
+    },
+    "first": ".cache/blender-cloud-truth-release-a",
+    "identical": true,
+    "repeat": ".cache/blender-cloud-truth-release-b",
+    "scene_seconds_a": {
+      "arches": 14.2,
+      "coast": 15.8,
+      "desk": 14.8,
+      "forest": 25.2,
+      "fur": 12.6,
+      "lattice": 13.8,
+      "leaves": 12.0,
+      "night": 14.1,
+      "room": 22.6,
+      "stairs": 17.5,
+      "steps": 10.1,
+      "still-life": 13.0
+    },
+    "scene_seconds_b": {
+      "arches": 9.5,
+      "coast": 13.3,
+      "desk": 12.1,
+      "forest": 13.8,
+      "fur": 10.2,
+      "lattice": 10.2,
+      "leaves": 7.7,
+      "night": 12.6,
+      "room": 14.1,
+      "stairs": 12.0,
+      "steps": 8.6,
+      "still-life": 9.2
+    },
+    "total_bytes": 19934153
+  },
+  "validation": {
+    "existing_blender_tests": 8,
+    "existing_camera_tests": 3,
+    "existing_node_tests": 16,
+    "existing_validation_tests": 3,
+    "fresh_truth_depth_frames": 12,
+    "fresh_truth_scenes": 12,
+    "installer_tests": 4,
+    "metadata_tests": 2,
+    "renderer_tests": 5,
+    "repeat_tests": 2,
+    "valid_depth_range_meters": [2.7508044242858887, 27.543182373046875]
+  }
+}

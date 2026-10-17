@@ -2034,3 +2034,15 @@ original test tone, with no external footage, people, or marks. Each is two seco
 the fast clip runs at 60 frames per second. MP4, WebM, MOV, and GIF files exercise the local-file
 path. [The generator](tools/cdx-mp2-r4-inputs.mjs) is MIT, and each file's hash, size, and source
 record is in `tools/assets.json`. These fixtures have no shelf entry or automatic fetch.
+
+## Blender cloud truth sources (Codex task 105)
+
+The twelve compressed scenes in `tools/blender/truth-scenes/` are original procedural scenes, made
+by Ryan with Codex (GPT-6), dedicated to CC0-1.0. They preserve the existing Studio truth geometry,
+materials, and lighting as fixed Blender 4.5.3 sources, because rebuilding scenes changed sampling
+noise across processes. The procedural recipes remain in `tools/studio-truth-generate.py` as
+`build_procedural`; `tools/blender/canonicalize-truth.py` rebuilds the source snapshots when
+requested. Source hashes, seeds, authorship, date, file hashes, and changes are recorded in
+`tools/blender/truth-scenes.json`. The sources are build-only and never loaded by visitors. The
+report's contact sheets reuse those CC0 scenes and the existing Kenney Food Kit model, with their
+provenance recorded in `docs/audits/blender-cloud-2026-10.md`.

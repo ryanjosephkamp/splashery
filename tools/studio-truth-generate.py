@@ -25,6 +25,10 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from studio_truth_camera import rays, write_depth
+from studio_truth_images import canonical_jpeg
+
+CANONICAL_DIR = Path(__file__).resolve().parent/'blender/truth-scenes'
+CANONICAL_RECORD = Path(__file__).resolve().parent/'blender/truth-scenes.json'
 
 SCENES = [
     ('still-life', 'Glass and metal still life', 'Transmission, reflections, and round depth edges'),
@@ -91,6 +95,18 @@ def rod(a, b, radius, mat, vertices=10):
 
 
 def build(index, name):
+    # Fixed serialized scene inputs stabilize Cycles sampling across fresh processes.
+    if bpy.app.version == (4, 5, 3):
+        record = json.loads(CANONICAL_RECORD.read_text())['scenes'][name]
+        file = CANONICAL_DIR/f'{name}.blend'
+        if hashlib.sha256(file.read_bytes()).hexdigest() != record['sha256']:
+            raise ValueError('Canonical scene SHA-256 mismatch')
+        bpy.ops.wm.open_mainfile(filepath=str(file), use_scripts=False)
+        return bpy.context.scene.camera, np.array(record['eye']), np.array(record['target'])
+    return build_procedural(index, name)
+
+
+def build_procedural(index, name):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     rng = random.Random(5600+index)
     ground = material('ground', (.26, .29, .30), texture=True)
@@ -329,6 +345,7 @@ def render(cam,eye,target,tree,flags,folder,kind,frames,width,height,samples):
         if not (folder/p['rgb']).exists():
             s.render.filepath=str(folder/p['rgb'])
             bpy.ops.render.render(write_still=True)
+            canonical_jpeg(folder/p['rgb'])
         if kind!='walk' and not (folder/p['depth']).exists(): depth(tree,flags,p,folder,stem)
         poses.append(p)
         if frame%10==0: print(f'TRUTH {folder.parent.name} {kind} {frame+1}/{frames}',flush=True)
@@ -353,6 +370,8 @@ def main():
     out.mkdir(parents=True,exist_ok=True)
     settings = {'source_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 'camera_helper_sha256':hashlib.sha256((Path(__file__).parent/'studio_truth_camera.py').read_bytes()).hexdigest(),
+                'canonical_scenes_sha256':hashlib.sha256(CANONICAL_RECORD.read_bytes()).hexdigest(),
+                'image_helper_sha256':hashlib.sha256((Path(__file__).parent/'studio_truth_images.py').read_bytes()).hexdigest(),
                 'blender':bpy.app.version_string,'samples':opt.samples,
                 'clip_samples':opt.clip_samples,'clip_side':opt.clip_side,'limit':opt.limit,
                 'ffmpeg':subprocess.check_output(['ffmpeg','-version'],text=True).splitlines()[0],
@@ -369,7 +388,9 @@ def main():
     manifest={'schema':1,'credit':'made by Ryan with Codex (GPT-6)','license':'CC0-1.0',
               'generator':{'blender':bpy.app.version_string,'seed_base':5600,'still_samples':opt.samples,
                            'clip_samples':opt.clip_samples,'cpu_threads':4,'source_sha256':settings['source_sha256'],
-                           'camera_helper_sha256':settings['camera_helper_sha256'],'ffmpeg':settings['ffmpeg'],
+                           'camera_helper_sha256':settings['camera_helper_sha256'],
+                           'image_helper_sha256':settings['image_helper_sha256'],
+                           'canonical_scenes_sha256':hashlib.sha256(CANONICAL_RECORD.read_bytes()).hexdigest(),'ffmpeg':settings['ffmpeg'],
                            'python':settings['python'],'numpy':settings['numpy']},
               'depth':{'convention':'optical-axis Z, meters','encoding':'gzip float32 LE, row-major top-to-bottom','invalid':'NaN',
                        'mask_bits':{'1':'valid first-hit geometry','2':'appearance ambiguous: metal, transmission, or emission'}},

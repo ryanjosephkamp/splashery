@@ -223,6 +223,11 @@
                   >Picture QR theme packs (Codex task 58)</a
                 >
               </li>
+              <li>
+                <a href="#blender-cloud-truth-sources-codex-task-105"
+                  >Blender cloud truth sources (Codex task 105)</a
+                >
+              </li>
             </ul>
           </li>
           <li>
@@ -294,6 +299,11 @@
               <li>
                 <a href="#video-to-3d-real-clip-benchmark-tools-task-88-not-shipped"
                   >Video to 3D real-clip benchmark tools (task 88, not shipped)</a
+                >
+              </li>
+              <li>
+                <a href="#blender-cloud-build-tools-codex-task-105-not-shipped"
+                  >Blender cloud build tools (Codex task 105; not shipped)</a
                 >
               </li>
             </ul>
@@ -8904,6 +8914,22 @@
             is MIT, and each file's hash, size, and source record is in
             <code>tools/assets.json</code>. These fixtures have no shelf entry or automatic fetch.
           </p>
+          <h2 id="blender-cloud-truth-sources-codex-task-105">
+            Blender cloud truth sources (Codex task 105)
+          </h2>
+          <p>
+            The twelve compressed scenes in <code>tools/blender/truth-scenes/</code> are original
+            procedural scenes, made by Ryan with Codex (GPT-6), dedicated to CC0-1.0. They preserve
+            the existing Studio truth geometry, materials, and lighting as fixed Blender 4.5.3
+            sources, because rebuilding scenes changed sampling noise across processes. The
+            procedural recipes remain in <code>tools/studio-truth-generate.py</code> as
+            <code>build_procedural</code>; <code>tools/blender/canonicalize-truth.py</code> rebuilds
+            the source snapshots when requested. Source hashes, seeds, authorship, date, file
+            hashes, and changes are recorded in <code>tools/blender/truth-scenes.json</code>. The
+            sources are build-only and never loaded by visitors. The report's contact sheets reuse
+            those CC0 scenes and the existing Kenney Food Kit model, with their provenance recorded
+            in <code>docs/audits/blender-cloud-2026-10.md</code>.
+          </p>
         </div>
       </section>
       <section class="md-file" aria-label="Third-party licenses">
@@ -10031,6 +10057,41 @@ subject to the following conditions:
               >): a virtual display for real Chromium verification with Mesa's software renderer.
               The installed X.Org copyright file identifies the canonical X11/MIT form. No X server
               is served with the site.
+            </li>
+          </ul>
+          <h3 id="blender-cloud-build-tools-codex-task-105-not-shipped">
+            Blender cloud build tools (Codex task 105; not shipped)
+          </h3>
+          <ul>
+            <li>
+              Blender 4.5.3 LTS (GNU GPL, bundled license texts in the downloaded distribution),
+              pinned as <code>blender-4.5.3-linux-x64.tar.xz</code>, SHA-256
+              <code>975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845</code>.
+              <a
+                href="https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.3.sha256"
+                target="_blank"
+                rel="noopener"
+                >Mirror checksum</a
+              >
+              checked October 17, 2026. <code>tools/blender/install.py</code> installs it only in
+              ignored <code>.cache/</code>; <code>tools/blender-cloud.sh</code> runs headless build
+              scripts. Blender and its bundled Python, NumPy, and libraries are never shipped. Their
+              license notices stay in the verified archive/install.
+            </li>
+            <li>
+              The original canonical scenes (<code>tools/blender/truth-scenes/*.blend</code>) are
+              CC0-1.0, made by Ryan with Codex (GPT-6); their record is
+              <code>tools/blender/truth-scenes.json</code>. They are build-only.
+            </li>
+            <li>
+              The existing Kenney Food Kit GLB (<code>assets/toys/model-splats/burger.glb</code>) is
+              the rendering example;
+              <a href="https://kenney.nl/assets/food-kit" target="_blank" rel="noopener"
+                >its live source page</a
+              >
+              confirmed CC0 on October 17, 2026. Author: Kenney. Input hash and provenance:
+              <code>tools/blender/burger.json</code>. Existing asset credit is unchanged; no new
+              model or texture ships.
             </li>
           </ul>
         </div>

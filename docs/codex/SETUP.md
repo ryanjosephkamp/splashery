@@ -50,17 +50,19 @@ Environment variables and secrets: none are needed. Don't add `HF_TOKEN` or any 
 It stops at the first problem, saying which step failed. In order:
 
 1. Checks the checkout (`package.json`, `tests/`, `src/`; and that assets aren't Git LFS pointers).
-2. Checks 3 GB of free disk (change with `CODEX_SETUP_MIN_FREE_MB`).
+2. Checks 5 GB of free disk (change with `CODEX_SETUP_MIN_FREE_MB`).
 3. Checks Node 20 or newer and npm.
 4. Checks `python3` (the tests start `python3 -m http.server`).
 5. `npm ci` from the lockfile (skipped when `node_modules` already matches it).
 6. `npx playwright install --with-deps chromium`: the browser and the system libraries it needs.
 7. Launches the browser once and checks it has WebGL2 (software rendering is fine).
-8. Prints what works.
+8. Installs and verifies pinned headless Blender 4.5.3 (Linux x86-64, Python 3.12 or newer).
+9. Prints what works.
 
 It never rebuilds assets, makes thumbnails or touches the repository's files, so the 1.1 GB checkout
-costs only the clone. Run it again any time: finished steps do nothing. `--skip-browser` skips step
-6 for a machine that already has Chromium (give its path in `SPLASHERY_CHROMIUM`).
+costs only the clone. Run it again any time: finished steps are reused; Blender rechecks the archive
+and installed file hashes. `--skip-browser` skips step 6 for a machine that already has Chromium
+(give its path in `SPLASHERY_CHROMIUM`).
 
 The tests, once setup works: `npx playwright test tests/<file>.spec.mjs`. Don't run the whole suite
 in Codex (it takes about an hour and a half, and the briefs say which files to run).
@@ -120,8 +122,9 @@ when apt can't reach its mirrors, or when the container isn't root.
 
 ### Disk space
 
-Setup needs about 3 GB after the clone: `node_modules` about 300 MB, Chromium about 600 MB with its
-libraries, plus test output.
+Setup checks for 5 GB free after the clone: Blender uses about 1.9 GB including its archive, plus
+temporary extraction; `node_modules` about 300 MB, Chromium about 600 MB with its libraries, plus
+test output.
 
 1. If the log says "only N MB free", pick a bigger container size if Codex offers one.
 2. Don't run the whole test suite: its screenshots, traces and `test-results/` can fill the disk.
@@ -132,3 +135,15 @@ libraries, plus test output.
 
 Reply to the Operator with: "Codex setup works" or the last 10 lines of the log. The Operator then
 checks the first task's pull request.
+
+## Headless Blender (October 17, 2026)
+
+Normal setup now installs pinned, hash-checked Blender 4.5.3 as a build tool. Pass `--skip-blender`
+for browser-only tasks. It needs Linux x86-64 and Python 3.12 or newer. Setup launches Blender's
+headless Python as a dependency check; CPU rendering does not need a GPU or display server.
+`--skip-browser` does not skip Blender. If the Blender step fails, the error names a download,
+platform, checksum, installed-file integrity, or runtime problem. See
+[the tool guide](../../tools/blender/README.md) for cache recovery and calibrated rendering
+commands, and [the measured cloud audit](../audits/blender-cloud-2026-10.md) for installation and
+render times. The older setup measurements above predate Blender; they do not describe today's cold
+setup time.
