@@ -1,0 +1,12 @@
+  features: 16/24
+matching 276 image pairs ...
+  usable pairs: 14 (14 E-filtered, rest raw) — matching + pair geometry 10.9s total
+  weakly connected frames (usable pairs <= 1): #2[deg 0, best raw 17, best E-inl 0, feats 345] #4[deg 1, best raw 51, best E-inl 40, feats 246] #6[deg 1, best raw 37, best E-inl 31, feats 209] #8[deg 1, best raw 43, best E-inl 34, feats 292] #10[deg 1, best raw 90, best E-inl 79, feats 287] #11[deg 0, best raw 29, best E-inl 20, feats 236] #12[deg 1, best raw 51, best E-inl 40, feats 290] #13[deg 1, best raw 90, best E-inl 79, feats 244] #14[deg 0, best raw 29, best E-inl 20, feats 319] #15[deg 0, best raw 32, best E-inl 24, feats 450] #16[deg 0, best raw 27, best E-inl 15, feats 240] #18[deg 1, best raw 74, best E-inl 72, feats 328] #20[deg 0, best raw 26, best E-inl 14, feats 258] #22[deg 0, best raw 13, best E-inl 0, feats 241]
+SfM done: 4/24 cameras registered, 85 points, median reproj 0.51px
+features: reused from the first pass (24 images)
+matching 276 image pairs ...
+  usable pairs: 15 (15 E-filtered, rest raw) — matching + pair geometry 10.9s total
+  weakly connected frames (usable pairs <= 1): #2[deg 0, best raw 17, best E-inl 0, feats 345] #6[deg 1, best raw 37, best E-inl 30, feats 209] #8[deg 1, best raw 43, best E-inl 34, feats 292] #10[deg 1, best raw 90, best E-inl 79, feats 287] #11[deg 0, best raw 29, best E-inl 20, feats 236] #12[deg 1, best raw 51, best E-inl 39, feats 290] #13[deg 1, best raw 90, best E-inl 79, feats 244] #14[deg 0, best raw 29, best E-inl 20, feats 319] #15[deg 0, best raw 32, best E-inl 24, feats 450] #16[deg 0, best raw 27, best E-inl 15, feats 240] #18[deg 1, best raw 74, best E-inl 72, feats 328] #20[deg 0, best raw 26, best E-inl 14, feats 258] #22[deg 0, best raw 13, best E-inl 0, feats 241]
+SfM done: 3/24 cameras registered, 92 points, median reproj 0.18px
+training finished early at 4 iterations
+{"out":"/workspace/splashery/.cache/photos3d/final/buddha-sorted-phone.json","seconds":45.120400000000025,"registered":4,"points":85,"firstViewSeconds":34.95459999999998}

@@ -1,0 +1,11 @@
+  features: 16/24
+matching 276 image pairs ...
+  usable pairs: 28 (28 E-filtered, rest raw) — matching + pair geometry 129.5s total
+  weakly connected frames (usable pairs <= 1): #1[deg 0, best raw 44, best E-inl 23, feats 743] #6[deg 1, best raw 135, best E-inl 109, feats 780] #7[deg 0, best raw 33, best E-inl 17, feats 1403] #11[deg 0, best raw 106, best E-inl 37, feats 1254] #15[deg 1, best raw 66, best E-inl 59, feats 943] #22[deg 1, best raw 104, best E-inl 77, feats 761]
+SfM done: 11/24 cameras registered, 759 points, BA rms 0.50px
+features: reused from the first pass (24 images)
+matching 276 image pairs ...
+  usable pairs: 30 (30 E-filtered, rest raw) — matching + pair geometry 186.7s total
+  weakly connected frames (usable pairs <= 1): #1[deg 0, best raw 44, best E-inl 23, feats 743] #7[deg 0, best raw 33, best E-inl 17, feats 1403] #11[deg 0, best raw 106, best E-inl 37, feats 1254] #15[deg 1, best raw 66, best E-inl 59, feats 943] #22[deg 1, best raw 104, best E-inl 77, feats 761]
+SfM done: 10/24 cameras registered, 1030 points, BA rms 0.49px
+{"out":"/workspace/splashery/.cache/photos3d/final/buddha-shuffled-desktop.json","seconds":372.5430000000001,"registered":11,"points":759}

@@ -1,0 +1,193 @@
+{
+  "primaryRows": [
+    {
+      "name": "buddha-shuffled-phone",
+      "registered": 4,
+      "seconds": 37.6245,
+      "sourceCommit": "0f2ad946655ace19706506e5055a3e6d75ca86f0",
+      "sourceHashesMatchCommit": true,
+      "score": null
+    },
+    {
+      "name": "buddha-sorted-phone",
+      "registered": 4,
+      "seconds": 45.120400000000025,
+      "sourceCommit": "0f2ad946655ace19706506e5055a3e6d75ca86f0",
+      "sourceHashesMatchCommit": true,
+      "score": null
+    },
+    {
+      "name": "buddha-shuffled-desktop",
+      "registered": 11,
+      "seconds": 372.5430000000001,
+      "sourceCommit": "0f2ad946655ace19706506e5055a3e6d75ca86f0",
+      "sourceHashesMatchCommit": true,
+      "score": null
+    },
+    {
+      "name": "control-60",
+      "registered": 60,
+      "seconds": 22.219095712,
+      "sourceCommit": "de6a91019f03f7767f649fc776be4792af64c050",
+      "sourceHashesMatchCommit": true,
+      "score": {
+        "registered": 60,
+        "total": 60,
+        "missing": [],
+        "rotationDegMedian": 0,
+        "rotationDegMax": 1.7075472925031877e-6,
+        "positionFractionMedian": 1.5068994998199475e-8,
+        "positionFractionMax": 4.108770425369063e-8,
+        "pass": true,
+        "fit": {
+          "scale": 0.7364106512179589,
+          "rotation": [
+            [0.9945218877324739, 0.010153222641926788, -0.10403425825669195],
+            [2.524661309871723e-9, -0.9952713638195445, -0.09713347703435957],
+            [-0.10452853591740681, 0.09660136867957891, -0.9898191555775206]
+          ],
+          "translation": [0.36584979229602776, 0.3415823621936536, 3.4808268820203088],
+          "rmsMeters": 4.798466047469392e-8
+        }
+      }
+    },
+    {
+      "name": "control-uniform",
+      "registered": 24,
+      "seconds": 5.481901289,
+      "sourceCommit": "de6a91019f03f7767f649fc776be4792af64c050",
+      "sourceHashesMatchCommit": true,
+      "score": {
+        "registered": 24,
+        "total": 24,
+        "missing": [],
+        "rotationDegMedian": 0,
+        "rotationDegMax": 1.7075472925031877e-6,
+        "positionFractionMedian": 1.484640623268535e-8,
+        "positionFractionMax": 3.5854393464470385e-8,
+        "pass": true,
+        "fit": {
+          "scale": 1.8227388995230926,
+          "rotation": [
+            [0.9659258316499707, 0.029388023762757714, -0.25714515708181657],
+            [5.048275256158696e-9, -0.9935326722630076, -0.11354659460295402],
+            [-0.25881902509535987, 0.10967758752474091, -0.9596788728754222]
+          ],
+          "translation": [0.9058665822732896, 0.39999996862679577, 3.3807403709481063],
+          "rmsMeters": 4.548377174911347e-8
+        }
+      }
+    },
+    {
+      "name": "control-mixed-free",
+      "registered": 24,
+      "seconds": 33.321488525,
+      "sourceCommit": "de6a91019f03f7767f649fc776be4792af64c050",
+      "sourceHashesMatchCommit": true,
+      "score": {
+        "registered": 24,
+        "total": 24,
+        "missing": [],
+        "rotationDegMedian": 0.45132473998295974,
+        "rotationDegMax": 1.8445669863207177,
+        "positionFractionMedian": 0.30060207995637467,
+        "positionFractionMax": 0.4157117540432455,
+        "pass": false,
+        "fit": {
+          "scale": 4.324812705731053,
+          "rotation": [
+            [0.9999353173779473, 0.0032047942877965014, -0.010912852690144617],
+            [0.002269901040045213, -0.9964100149990034, -0.08462818418798335],
+            [-0.011144891633941145, 0.08459793911945929, -0.9963528391524807]
+          ],
+          "translation": [0.046700041729557384, 0.3750583515186625, 4.156572230357478],
+          "rmsMeters": 0.8877454916446517
+        }
+      }
+    },
+    {
+      "name": "control-mixed-locked",
+      "registered": 24,
+      "seconds": 15.145333776,
+      "sourceCommit": "de6a91019f03f7767f649fc776be4792af64c050",
+      "sourceHashesMatchCommit": true,
+      "score": {
+        "registered": 24,
+        "total": 24,
+        "missing": [],
+        "rotationDegMedian": 0.5823370216098829,
+        "rotationDegMax": 1.3276506725351112,
+        "positionFractionMedian": 0.3335871666911167,
+        "positionFractionMax": 0.4394367447550109,
+        "pass": false,
+        "fit": {
+          "scale": 2.8815138342518924,
+          "rotation": [
+            [0.9994441773820145, -0.004608395946123167, -0.03301664707374327],
+            [-0.0075373102706404425, -0.9959903180760743, -0.08914300450738813],
+            [-0.032473454560185966, 0.08934231352233876, -0.9954714590400888]
+          ],
+          "translation": [0.13194304619209216, 0.40012034087347026, 4.262478197088192],
+          "rmsMeters": 0.9513255984835315
+        }
+      }
+    },
+    {
+      "name": "control-red",
+      "registered": 24,
+      "seconds": 4.891866897,
+      "sourceCommit": "de6a91019f03f7767f649fc776be4792af64c050",
+      "sourceHashesMatchCommit": true,
+      "score": {
+        "registered": 24,
+        "total": 24,
+        "missing": [],
+        "rotationDegMedian": 0,
+        "rotationDegMax": 1.7075472925031877e-6,
+        "positionFractionMedian": 1.484640623268535e-8,
+        "positionFractionMax": 3.5854393464470385e-8,
+        "pass": true,
+        "fit": {
+          "scale": 1.8227388995230926,
+          "rotation": [
+            [0.9659258316499707, 0.029388023762757714, -0.25714515708181657],
+            [5.048275256158696e-9, -0.9935326722630076, -0.11354659460295402],
+            [-0.25881902509535987, 0.10967758752474091, -0.9596788728754222]
+          ],
+          "translation": [0.9058665822732896, 0.39999996862679577, 3.3807403709481063],
+          "rmsMeters": 4.548377174911347e-8
+        }
+      }
+    },
+    {
+      "name": "control-blue",
+      "registered": 24,
+      "seconds": 4.2116700499999995,
+      "sourceCommit": "de6a91019f03f7767f649fc776be4792af64c050",
+      "sourceHashesMatchCommit": true,
+      "score": {
+        "registered": 24,
+        "total": 24,
+        "missing": [],
+        "rotationDegMedian": 0,
+        "rotationDegMax": 1.7075472925031877e-6,
+        "positionFractionMedian": 1.484640623268535e-8,
+        "positionFractionMax": 3.5854393464470385e-8,
+        "pass": true,
+        "fit": {
+          "scale": 1.8227388995230926,
+          "rotation": [
+            [0.9659258316499707, 0.029388023762757714, -0.25714515708181657],
+            [5.048275256158696e-9, -0.9935326722630076, -0.11354659460295402],
+            [-0.25881902509535987, 0.10967758752474091, -0.9596788728754222]
+          ],
+          "translation": [0.9058665822732896, 0.39999996862679577, 3.3807403709481063],
+          "rmsMeters": 4.548377174911347e-8
+        }
+      }
+    }
+  ],
+  "inputHashesMatchFrozenRecord": true,
+  "redBlueCameraBytesEquivalent": true,
+  "appearanceChangesSeedColor": true
+}

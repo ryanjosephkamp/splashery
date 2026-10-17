@@ -1,0 +1,20 @@
+[
+  {
+    "name": "buddha-shuffled-phone",
+    "trainerSplats": 14979,
+    "exportedSplats": 12607,
+    "steps": 2,
+    "sha256": "d3156a5f12ee6b0dd86c77ccdc986f9a7c92ef9d6abcdfe5beee1ea8c0d68259",
+    "finitePositions": true,
+    "note": "Existing Session.exportPlyBlob drops splats below its baked alpha threshold; exported count can be less than trainer count."
+  },
+  {
+    "name": "buddha-sorted-phone",
+    "trainerSplats": 14992,
+    "exportedSplats": 14360,
+    "steps": 4,
+    "sha256": "c9c549330bca9cbe41afa5a9063bc488619fc2d54387aacc8249967ca609f05f",
+    "finitePositions": true,
+    "note": "Existing Session.exportPlyBlob drops splats below its baked alpha threshold; exported count can be less than trainer count."
+  }
+]

@@ -1,0 +1,32 @@
+
+== main is merged in
+ok
+
+== prettier
+Checking formatting...
+All matched files use Prettier code style!
+ok
+
+== American English on added lines
+No British spellings found.
+ok
+
+== site/ is current
+site/ is current.
+ok
+
+== shared lists parse
+ok
+
+== file sizes
+ok
+
+== Preflight summary
+ok    main is merged in
+ok    prettier
+ok    American English on added lines
+ok    site/ is current
+ok    shared lists parse
+ok    file sizes
+
+All clear. Say in the PR that preflight passed.

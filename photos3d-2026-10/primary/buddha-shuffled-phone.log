@@ -1,0 +1,12 @@
+  features: 16/24
+matching 276 image pairs ...
+  usable pairs: 17 (17 E-filtered, rest raw) — matching + pair geometry 8.2s total
+  weakly connected frames (usable pairs <= 1): #0[deg 1, best raw 90, best E-inl 72, feats 287] #1[deg 0, best raw 17, best E-inl 0, feats 345] #4[deg 1, best raw 29, best E-inl 27, feats 236] #5[deg 1, best raw 43, best E-inl 34, feats 292] #6[deg 1, best raw 74, best E-inl 73, feats 328] #7[deg 0, best raw 13, best E-inl 0, feats 241] #11[deg 0, best raw 27, best E-inl 15, feats 240] #12[deg 1, best raw 51, best E-inl 35, feats 290] #14[deg 0, best raw 26, best E-inl 16, feats 258] #15[deg 1, best raw 32, best E-inl 29, feats 450] #16[deg 1, best raw 90, best E-inl 72, feats 244] #18[deg 1, best raw 37, best E-inl 31, feats 209] #22[deg 1, best raw 29, best E-inl 27, feats 319]
+SfM done: 4/24 cameras registered, 146 points, median reproj 0.36px
+features: reused from the first pass (24 images)
+matching 276 image pairs ...
+  usable pairs: 18 (18 E-filtered, rest raw) — matching + pair geometry 11.4s total
+  weakly connected frames (usable pairs <= 1): #0[deg 1, best raw 90, best E-inl 72, feats 287] #1[deg 0, best raw 17, best E-inl 0, feats 345] #4[deg 1, best raw 29, best E-inl 27, feats 236] #5[deg 1, best raw 43, best E-inl 34, feats 292] #6[deg 1, best raw 74, best E-inl 73, feats 328] #7[deg 0, best raw 13, best E-inl 0, feats 241] #11[deg 0, best raw 27, best E-inl 12, feats 240] #12[deg 1, best raw 51, best E-inl 35, feats 290] #14[deg 1, best raw 26, best E-inl 16, feats 258] #15[deg 1, best raw 32, best E-inl 26, feats 450] #18[deg 1, best raw 37, best E-inl 31, feats 209] #22[deg 1, best raw 29, best E-inl 27, feats 319]
+SfM done: 3/24 cameras registered, 95 points, median reproj 0.15px
+training finished early at 2 iterations
+{"out":"/workspace/splashery/.cache/photos3d/final/buddha-shuffled-phone.json","seconds":37.6245,"registered":4,"points":146,"firstViewSeconds":29.663400000000024}

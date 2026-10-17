@@ -1,0 +1,63 @@
+[1A[2K[2m[WebServer] [22m(node:4178) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 40 tests using 1 worker
+
+[1A[2K(node:4190) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:4190) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/40] [chromium] › tests/cdx-v3d-cpu-match.spec.mjs:12:1 › cooperative matching preserves every legacy match, tie, ratio, and input byte
+[1A[2K[2/40] [chromium] › tests/cdx-v3d-cpu-match.spec.mjs:34:1 › an already canceled match never reads a descriptor
+[1A[2K[3/40] [chromium] › tests/cdx-v3d-cpu-match.spec.mjs:48:1 › a busy match yields to a timer and stops without publishing partial matches
+[1A[2K[4/40] [chromium] › tests/cdx-v3d-cpu-match.spec.mjs:68:1 › cooperative CPU output equals actual WebGPU output across workgroup boundaries
+[1A[2K[5/40] [chromium] › tests/cdx-v3d-cpu-match.spec.mjs:116:1 › browser matching yields to an actual cancel timer before it can publish results
+[1A[2K[6/40] [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:16:1 › legacy initializer bytes remain unchanged unless robust bounds are explicitly enabled
+[1A[2K[7/40] [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:34:1 › one distant point cannot inflate robust bounds or normal-point scales, and remains in the seed
+[1A[2K[8/40] [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:56:1 › robust center and radius are invariant to point order, including even-sized clouds
+[1A[2K[9/40] [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:77:5 › Session passes robust bounds through legacy-capacity seeding with sigmoid conventions
+[1A[2K[10/40] [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:77:5 › Session passes robust bounds through legacy-capacity seeding with v2 conventions
+[1A[2K[11/40] [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:77:5 › Session passes robust bounds through bounded seeding with sigmoid conventions
+[1A[2K[12/40] [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:77:5 › Session passes robust bounds through bounded seeding with v2 conventions
+[1A[2K[13/40] [chromium] › tests/cdx-v3d-ssim.spec.mjs:2:1 › structural loss trains and exports with the default eight storage bindings
+[1A[2K[14/40] [chromium] › tests/cdx-v3d-surface-seed.spec.mjs:56:1 › surface seeding fills only supported 3D surfaces within the seed budget
+[1A[2K[15/40] [chromium] › tests/cdx-v3d-surface-seed.spec.mjs:84:1 › inconsistent views and unsupported geometry never invent a dense surface
+[1A[2K[16/40] [chromium] › tests/v3d.spec.mjs:4:1 › a kit cloud keeps a trained splat's own sizes and rotation
+[1A[2K[17/40] [chromium] › tests/v3d.spec.mjs:48:1 › the stretch and frame rate pick the right frames
+[1A[2K[18/40] [chromium] › tests/v3d.spec.mjs:109:1 › a frame close to 2:1 is trimmed, so it is not taken for a 360-degree panorama
+[1A[2K[19/40] [chromium] › tests/v3d.spec.mjs:126:1 › a sharp picture scores higher than the same picture blurred
+[1A[2K[20/40] [chromium] › tests/v3d.spec.mjs:140:1 › the PLY reader turns a small known PLY into the right splats
+[1A[2K[21/40] [chromium] › tests/v3d.spec.mjs:192:1 › the scene frame puts the cameras' up at +y and the video's view toward -z
+[1A[2K[22/40] [chromium] › tests/v3d.spec.mjs:241:1 › Splat.js loads only when a video is opened in this toy
+[1A[2K[23/40] [chromium] › tests/v3d.spec.mjs:292:1 › without WebGPU the toy says so plainly and keeps going
+[1A[2K[24/40] [chromium] › tests/v3d.spec.mjs:321:1 › screenshots at phone and desktop size
+[1A[2K[25/40] [chromium] › tests/v3d.spec.mjs:343:1 › a failed camera path is explained in plain words, with what to try
+[1A[2K[26/40] [chromium] › tests/v3d.spec.mjs:358:1 › the phone-safe setting is the lightest, and its rough time the shortest
+[1A[2K[27/40] [chromium] › tests/v3d.spec.mjs:424:1 › Replay flight: a drag turns the view while it flies, and switching it off pauses there
+[1A[2K[28/40] [chromium] › tests/v3d.spec.mjs:500:1 › on a phone the card asks first, with the setting and a rough time
+[1A[2K[29/40] [chromium] › tests/v3d.spec.mjs:525:1 › a failure shows what makes a video work, again
+[1A[2K(node:5467) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:5467) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[30/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:109:3 › low keeps completed slow stages and trains beyond fifteen minutes
+[1A[2K[31/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:109:3 › mid keeps completed slow stages and trains beyond fifteen minutes
+[1A[2K[32/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:109:3 › high keeps completed slow stages and trains beyond fifteen minutes
+[1A[2K[33/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:109:3 › max keeps completed slow stages and trains beyond fifteen minutes
+[1A[2K[34/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:131:1 › Stop on desktop still finishes and exports after a slow device fence
+[1A[2K[35/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:145:1 › Phone-safe still rejects a decode that exceeds its deadline
+[1A[2K[36/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:156:3 › Phone-safe retains its path deadline
+[1A[2K[37/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:156:3 › Phone-safe retains its seed deadline
+[1A[2K[38/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:156:3 › Phone-safe retains its export deadline
+[1A[2K[39/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:156:3 › Phone-safe retains its finish deadline
+[1A[2K[40/40] [chromium] › tests/cdx-v3d-tier-limits.spec.mjs:168:1 › Phone-safe retains its eight-minute training cap and stage timers
+[1A[2K  40 passed (2.9m)

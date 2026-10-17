@@ -1,0 +1,11 @@
+{
+  "observed": "2026-10-17T02:18:37.335Z",
+  "node": "v24.19.0",
+  "platform": "linux",
+  "architecture": "x64",
+  "cpuQuota": "400000 100000\n",
+  "memoryLimit": "17179869184\n",
+  "dri": false,
+  "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "note": "Software WebGPU diagnostic host; no physical phone. Process and GPU peak memory were not sampled."
+}
