@@ -71,8 +71,11 @@ splat capture.
 All 72 smoke/kit tests passed, including old share links, scene round trips, WebGPU, phone layouts,
 and the embed transfer check (9.2 MB). Full preflight passed all 272 shelf-wide tests and every
 static check after merging current main. See `smoke-kit.log`, `preflight.log`, and
-`preflight-summary.txt`. The implementation revision is `97430aa6e`; runtime feature evidence is
-at the unchanged runtime revision recorded in `cadence.json`.
+`preflight-summary.txt`. The final tested local revision is `97430aa6e`. GitHub email-privacy protection required a new
+public Codex publishing identity. The published commit has the identical tested file tree;
+`source-provenance.json` records the matching tree hashes. Local revision IDs in capture metadata
+are execution records, not public GitHub revisions. The original local history is preserved in the
+workspace. Runtime feature evidence matches the published `src/walk/` tree.
 
 ## Reproduce
 

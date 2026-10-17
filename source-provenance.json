@@ -1,0 +1,10 @@
+{
+  "publicCommit": "97b053dcdd838b56354c22ac46d6142f1f253b0e",
+  "publicTree": "073d08a07bfa3e5c2127bf82c92ea28b8a5b07ff",
+  "testedLocalRevision": "97430aa6ed20ddc0a4545fd7b962bf75edbc420c",
+  "testedTree": "073d08a07bfa3e5c2127bf82c92ea28b8a5b07ff",
+  "runtimeTree": "eafd06ac23618eb264241ebd119725a1c09cce14",
+  "featureRuntimeTree": "eafd06ac23618eb264241ebd119725a1c09cce14",
+  "localHistory": "Preserved in the workspace as codex/walk-inside-local; local revision IDs in execution metadata are not public GitHub revisions.",
+  "publication": "GitHub rejected the original commit identity under email-privacy protection. A new commit with a public Codex identity publishes the identical tested file tree. No published history was rewritten."
+}
