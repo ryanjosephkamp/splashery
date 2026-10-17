@@ -32,6 +32,9 @@ export const SITE = {
   // Who made it, as the About page spells it, and his own site (the owner's walkthrough, October 6, 2026).
   maker: "Ryan Kamp",
   makerSite: "https://ryanjosephkamp.github.io/",
+  // The one-page picture of how Splashery works (the Pitch page), linked under About in the
+  // footer (the owner's call of October 16, 2026). It lives on his own site for now.
+  howItWorks: "https://ryanjosephkamp.github.io/splashery-one-frame/",
   // While the site is a preview: pages ask search engines not to list them.
   // Set to false when the owner makes the site the front door.
   preview: true,
