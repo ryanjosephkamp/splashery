@@ -56,10 +56,14 @@ The raw measurements retain their original local source IDs. Original runtime
 `36f5df601963f418f71b98ee460783ea6191b0bc` has the same app bytes as public main
 `ceb51de7a015377d7f350119c27a792fc1a8a66d`. The raw branch's `measured-runtime-072.patch`
 reconstructs the original measured candidate from that public base, without commit metadata.
-`runtime-manifest.json` records every runtime file's SHA-256. The public candidate's shared engine
-and target recipe bytes match the measured candidate; incoming main's Neuron specimen is covered by
-a separate source-pinned comparison. These mappings reproduce the measured code without exposing
-private commit metadata or relabeling observations as new runs.
+`runtime-manifest.json` records every runtime file's SHA-256. The target recipe bytes match the
+measured candidate. A subsequent Engine compatibility fix makes cache invalidation optional for
+direct uniform uploads from minimal Stage adapters; normally constructed Stages invoke the same
+cache method. All nine unchanged bounds tests and all 16 speed tests pass with that fix. The first
+full-suite failure is retained. Incoming main's Neuron specimen passes a separate ten-pair
+source-pinned comparison, including every timing metric and matched hardware. These mappings
+reproduce the measured code without exposing private commit metadata or relabeling observations as
+new runs.
 
 ## Earlier work
 
