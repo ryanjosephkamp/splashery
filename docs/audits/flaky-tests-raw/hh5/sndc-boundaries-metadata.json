@@ -1,0 +1,85 @@
+{
+  "hashes": {
+    "src/app.js": "7c865ce12bc577ba6acf523e44f04d5b44657e3877332e3dc609f5652c9f14e7",
+    "tests/sndc-engine.spec.mjs": "98539eb9dbb366cff3301bf76644a6aaff75ac167917fbb138f5645127b7a50b",
+    ".cache/flaky-tests/hh5/sndc-boundaries-natural.spec.mjs": "10dedcb9d02be2e4e7d76b69a1a8704b398bfec5ef7891809206749ce9ca420a",
+    ".cache/flaky-tests/hh5/sndc-boundaries-ui-stall.spec.mjs": "73c3b5caa8022ff01fc9040d48892d58a48fd105de28256bc6dce98401fcef84",
+    ".cache/flaky-tests/hh5/app-audio-before.js": "7c865ce12bc577ba6acf523e44f04d5b44657e3877332e3dc609f5652c9f14e7",
+    ".cache/flaky-tests/hh5/app-audio-ui-after.js": "b7544269ff46faac256152f294d8863bab3cc1c8e620748a3b09da97685abf45",
+    ".cache/flaky-tests/hh5/analyze-sndc-boundaries.py": "09c44beef730512ca6f5e5f69fbb7ad6cf31c5eb707bf8bfd2e15e8a2d9917e3",
+    ".cache/flaky-tests/hh5/audio-cpu-observer.py": "7e0901eb462b5defd1e6caa363a2cae9d5645004359662c89aba737c7eee3612",
+    ".cache/flaky-tests/hh5/correlate-sndc-cpu.py": "d813e10c3e7222a5ff49d096ddeae51774d5f2fb3e7f8e426e5a285373a8d1d9"
+  },
+  "unchanged_original_expect_lines": 31,
+  "plan": {
+    "controls": {
+      "workers": 1,
+      "burners": 0,
+      "cases": [
+        "original app+80ms real UI delay",
+        "cache app after+same80ms real UI delay"
+      ],
+      "renderer": "SwiftShader"
+    },
+    "natural": {
+      "workers": 4,
+      "fully_parallel": true,
+      "burners": 2,
+      "repeat_each": 30,
+      "source_mode": "before",
+      "renderer": "SwiftShader",
+      "retries": 0,
+      "skips": 0
+    }
+  },
+  "scheduler_observer": {
+    "sampling_interval_ms": 25,
+    "process_scan_interval_ms": 1000,
+    "cpu_load": "No busy loop; read-only proc/cgroup sampling. Final rusage CPU and each sample work time recorded.",
+    "renderer_mapping": "Per-browser CDP SystemInfo.getProcessInfo before tap; all renderer candidates retained, no guessed exact target mapping.",
+    "clock_mapping": "performance.timeOrigin+event at compared with time.time_ns; page Date.now also recorded to bound origin offset.",
+    "slack": "Correlation brackets acceptance/start with nearest external samples and reports both sampling slack values."
+  },
+  "browser_observer_overhead": "4096 event records and boundary strings preallocated before tap; original sample detector and original30ms expectation unchanged. Wrappers and clock reads still add some overhead; diagnostic results are not acceptance proof.",
+  "natural_start_utc": "2026-10-17T04:32:01.964347+00:00",
+  "burner_pid": 31242,
+  "source_head": "0365e935a40eb5f97142e3a6bce7e286c5cfff09",
+  "renderer": "SwiftShader",
+  "port": 4181,
+  "completed_utc": "2026-10-17T04:37:16.512515+00:00",
+  "burners_stopped": true,
+  "observer_pid": 31253,
+  "observer_stopped": true,
+  "natural_completed": {
+    "passed": 30,
+    "failed": 0,
+    "retries": 0,
+    "skips": 0,
+    "duration_ms": 217866.08099999998,
+    "delay_min_ms": 0.8000000002793968,
+    "delay_max_ms": 9.799999999813739,
+    "max_wall_ms": 5.2999999998137355,
+    "max_native_lead_ms": 5.000000000000004
+  },
+  "ui_controls": {
+    "before": {
+      "failed": 1,
+      "delay_ms": 88.89999999990687,
+      "wall_ms": 83.89999999990687,
+      "native_lead_ms": 5.000000000000004
+    },
+    "after_cache_source_only": {
+      "passed": 1,
+      "delay_ms": 5.60000000009313,
+      "wall_ms": 0.6000000000931323,
+      "native_lead_ms": 4.999999999999997
+    }
+  },
+  "conclusion": "Prior uninstrumented31.1ms failure remains unresolved. No Engine fix shipped. Instrumented30-pass phase is diagnostic, not a fresh acceptance proof.",
+  "scheduler_limitations": [
+    "Actual sample intervals were affected by scheduling: median26.1ms,p9551.7ms,max516.8ms.",
+    "Each read can span scheduling delays; observer_work_ms is a conservative additional bound around capture.",
+    "Runqueue/throttling accounting can be credited after the corresponding interval; deltas can exceed sample wall duration.",
+    "Counter correlation is coarse evidence of contention, not exact attribution of off-CPU time."
+  ]
+}

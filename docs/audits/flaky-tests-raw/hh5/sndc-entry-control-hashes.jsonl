@@ -1,0 +1,6 @@
+{"path": "sndc-entry-old-getter.spec.mjs", "sha256": "d17cdee9559e66e1f8d029d365f5f6d58e2d8179e5959e35be58639f06674cc3", "unchanged_expect_lines": 31}
+{"path": "sndc-entry-new-getter.spec.mjs", "sha256": "e7018638049c22e2345a50ad13bccc95e5750d385ba3b060d67d342381f31772", "unchanged_expect_lines": 31}
+{"path": "sndc-entry-new-motion.spec.mjs", "sha256": "0990ab2c8bcbfb01e7112aacd5dd9d056d0d23329ff3000b9dc9892a7f9f8b33", "unchanged_expect_lines": 31}
+{"path": "sndc-entry-new-dispatch.spec.mjs", "sha256": "0614152b854f31690c941d46c690114165fd7455c33c05210f85940f7935faa3", "unchanged_expect_lines": 31}
+{"path": "sndc-entry-new-clean.spec.mjs", "sha256": "a5a0f362a17c52e16fa2ea389b6ffcf0e93e8fcec774bf7f3c551de3d69486e4", "unchanged_expect_lines": 31}
+{"candidate_sha256": "55a3a036ed1812c06d9b5fd86aec8231bf57da0f006a22188bcb71365822e33d"}

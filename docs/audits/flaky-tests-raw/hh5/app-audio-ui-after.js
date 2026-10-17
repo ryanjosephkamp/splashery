@@ -1,0 +1,2007 @@
+// Splashery app: the shelf, the tools, making toys, look, bring-your-own
+// files and sharing, on top of the shared Player runtime.
+
+import { Player, Gestures, ui2On } from "./player.js";
+import { createUI } from "./ui.js";
+import { showRendererDetails } from "./renderer-fallback.js";
+import { canPlay } from "./physics/hands-on.js"; // lane Physics
+import {
+  createScene,
+  normalizeScene,
+  normalizeLook,
+  THEMES,
+  APP_NAME,
+  formatBytes,
+  formatCount,
+  normalizeHex,
+  normalizeMotion,
+} from "./state.js";
+import { defaultEffects, effectDef } from "./effects.js";
+import { normalizePattern, flagInfo, loadFlags, DEFAULT_PATTERN } from "./patterns.js";
+import { Sound, soundEvents } from "./sound.js";
+import { specFor, samplesIn } from "./voices.js";
+import { toySound } from "./toy-sounds.js";
+import { SOUND_CREDITS } from "./sound-credits.js";
+import { normalizeGenerator, PROFILES } from "./generators.js";
+import { decodeSceneHash, parseHash } from "./codec.js";
+import { TOYS, findToy, holdsStill, onShelf } from "./toys.js";
+import { featuredToys } from "./featured.js";
+import {
+  extOf,
+  fileOpenError,
+  readPlyHeader,
+  decimatePly,
+  resourceFromProps,
+  LIMITS,
+} from "./loaders.js";
+import {
+  downloadBlob,
+  timestampName,
+  canvasToBlob,
+  encodeGIF,
+  webmSupport,
+  recordWebM,
+  recordSupport, // UI r5
+  startRecording,
+  canShareFile,
+  RECORD_LIMIT,
+  buildShareHash,
+  shareURL,
+  iframeSnippet,
+  elementSnippet,
+} from "./exports.js";
+
+const canvas = document.getElementById("stage");
+
+function showFallback(error, diagnostics) {
+  const fb = document.getElementById("fallback");
+  showRendererDetails(fb, error, diagnostics);
+  fb.hidden = false;
+  canvas.hidden = true;
+  document.getElementById("stage-zoom").hidden = true;
+  document.getElementById("panel").hidden = true;
+  document.body.dataset.ready = "true";
+  document.body.dataset.pageSettled = "true";
+}
+
+// How a toy likes flag colors laid on (recipe.patternProjection,
+// patternDetail and patternAmount), or null for the usual way; `usual`
+// gives the usual way itself.
+function flagLook(recipe, usual = false) {
+  if (usual) return { projection: "wrap", detail: DEFAULT_PATTERN.detail, amount: 1 };
+  if (!recipe?.patternProjection) return null;
+  return {
+    projection: recipe.patternProjection,
+    detail: recipe.patternDetail ?? DEFAULT_PATTERN.detail,
+    amount: recipe.patternAmount ?? 1,
+  };
+}
+const sameLook = (p, look) =>
+  p.projection === look.projection &&
+  Math.abs(p.detail - look.detail) < 1e-6 &&
+  Math.abs(p.amount - look.amount) < 1e-6;
+
+// ---- View settings (lane Viewer) -------------------------------------------------
+// The turntable is one setting for every toy, remembered on this device; the
+// tilt lock and flag colors belong to each toy, remembered for the visit.
+
+const TURNTABLE_KEY = "splashery.turntable";
+
+// The device's turntable choice: true, false, or null (never chosen).
+function turntablePref() {
+  try {
+    const v = localStorage.getItem(TURNTABLE_KEY);
+    return v === "on" ? true : v === "off" ? false : null;
+  } catch {
+    return null;
+  }
+}
+
+function rememberTurntable(on) {
+  try {
+    localStorage.setItem(TURNTABLE_KEY, on ? "on" : "off");
+  } catch {
+    // Private windows may refuse; the choice holds for this visit.
+  }
+}
+
+// Lane Pages r6: the top bar's Pop out (on or off, off when never chosen),
+// and whether its first-time line has been shown on this device.
+const POPOUT_KEY = "splashery.popout";
+function popOutPref() {
+  try {
+    return localStorage.getItem(POPOUT_KEY) === "on";
+  } catch {
+    return false;
+  }
+}
+function popOutHinted() {
+  try {
+    return localStorage.getItem(POPOUT_KEY) !== null;
+  } catch {
+    return true;
+  }
+}
+function rememberPopOut(on, hintOnly = false) {
+  try {
+    if (hintOnly) localStorage.setItem(POPOUT_KEY, popOutPref() ? "on" : "off");
+    else localStorage.setItem(POPOUT_KEY, on ? "on" : "off");
+  } catch {
+    // Private windows may refuse; the choice holds for this visit.
+  }
+}
+
+// Which toy a per-toy choice belongs to.
+const toyKey = (toy) => (toy.id ? `${toy.kind}:${toy.id}` : toy.kind);
+
+// ---- End of view settings -----------------------------------------------------------
+
+class App {
+  constructor() {
+    this.player = null;
+    this.ui = null;
+    this.tool = "orbit";
+    this.clayMode = "add";
+    this.claySize = 0.4;
+    this.busy = false;
+    this.file = null; // { name, size, bytes | resource } for a user's own splat
+    this.pendingLarge = null;
+    this.spaceHeld = false;
+    this.genTimer = 0;
+    this.generator = null;
+    this.toolState = null;
+    this.sound = new Sound();
+    this.tiltLocks = new Map(); // toy key -> locked (lane Viewer)
+    this.handsChoice = new Map(); // toy key -> Hands-on on (lane Physics)
+    this.spins = new Map(); // UI r3: toy key -> turntable, chosen for a toy that holds still
+    this.toyFlags = new Map(); // toy key -> its flag colors, or null (lane Viewer)
+    this.globalFlag = null; // UI r3: the top bar's flag, for every toy (a flag code)
+    this.popOut = popOutPref(); // lane Pages r6: the top bar's Pop out, for the page toys
+  }
+
+  async start() {
+    document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+    this.player = new Player(canvas);
+    try {
+      await this.player.init();
+    } catch (err) {
+      console.info("Splashery could not start a renderer:", err?.message || err);
+      showFallback(err, this.player.rendererDiagnostics);
+      return;
+    }
+    const player = this.player;
+    // Make can open while the first toy is loading; initialize its controls before that paint.
+    this.setGenerator({ count: PROFILES[player.profile].defaultCount }, { rebuild: false });
+    this.ui = createUI(this);
+    const ui = this.ui;
+    ui.setGenerator(this.generator);
+    player.on("theme", (theme) => {
+      document.documentElement.dataset.theme = theme;
+      ui.setLook(player.scene.look, theme);
+    });
+    player.on("message", (m) => ui.toast(m));
+    player.on("say", (m) => ui.toast(m, 6000)); // a tap's own message (lane Molecule viewer)
+    player.on("link", (l) => ui.confirmLink(l.url)); // lane Books r5: a link in a page
+    player.on("effects", (fx) => ui.setEffects(fx));
+    player.on("paint", (n) => ui.setPaintCount(n));
+    player.on("toy", (info) => this.onToy(info));
+    player.on("action", (r) => this.onAction(r));
+    // A toy's slider dragged on the toy itself: the panel's slider follows.
+    player.on("controls", (targets) => ui.setMotion(player.scene.motion, targets));
+    player.on("motion-preference", (reduced) => {
+      ui.setAutoplay(player.scene.autoplay, reduced);
+      ui.setMotion(player.scene.motion, player.scene.motion.controls);
+    });
+    player.on("tilt", (locked) => ui.setTiltLock(locked)); // lane Pages r6: a tilt the toy freed
+    // A tap that switches the toy's options rebuilds it the way the Toy tab does.
+    // A toy's own tap that switches its options (a periodic table tile) rebuilds it with no
+    // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
+    player.rebuild = (options) => this.setToyOptions(options, { quiet: Infinity });
+    // Lane Physics: a toy or piece tossed in Hands-on lands with a sound.
+    // Lane Hands-on H3: a toy that stops (or starts) being able to play
+    // Hands-on, a converter with a file open, shows or hides ✋ at once.
+    player.on("hands-available", () => this.showHands());
+    player.on("frame", () => {
+      const hits = player.handsOn.takeSounds();
+      if (hits.length) this.handsSounds(hits);
+    });
+    player.on("cue", (cues) => {
+      if (!player.motion.pausedKey) this.sound.resumeToy(); // Sound C: cues mean it runs
+      for (const spec of cues) this.sound.play(spec, { key: "cue" });
+    });
+    player.on("profile", () => {
+      this.updateRenderInfo();
+      ui.setDetail(player.detail, player.splats); // lane Kit lab
+    });
+    ui.setSound(this.sound.enabled);
+    // Pictures: video sound follows the speaker button; the Toy tab's
+    // picture panel and the status line follow the pages.
+    player.setMediaSound(this.sound.enabled);
+    player.setSound(this.sound);
+    player.on("pictures", (p) => {
+      ui.setPictures?.(p);
+      this.updateStatus();
+    });
+    player.on("chunks", () => this.updateStatus()); // lane Powers of ten
+    player.on("media", (m) => ui.setPictures?.(player.pictures?.info() || null, m));
+    const wm = webmSupport();
+    ui.setWebmUnavailable(wm.ok ? null : wm.reason);
+    const rs = recordSupport(); // UI r5
+    ui.setRecordUnavailable(rs.ok ? null : rs.reason);
+    ui.setTool("orbit");
+    ui.setClayMode("add");
+
+    this.bindGestures();
+    this.bindKeys();
+    this.bindDrop();
+
+    // Scene from the link, or the default.
+    let scene = null;
+    const { s } = parseHash(location.hash);
+    if (s) {
+      try {
+        scene = normalizeScene(await decodeSceneHash(s), player.profile);
+      } catch (err) {
+        ui.toast(`Could not read the shared scene: ${err.message}`, 5000);
+      }
+    }
+    if (!scene && !s) {
+      // ?first-toy=cactus pins smoke tests and screenshots. It only affects
+      // this app's default; shared scenes, saved scenes, and embeds keep theirs.
+      // Automated browsers (the test suite, clip tools) start on the shelf's first
+      // toy so runs repeat; ?first-toy=featured asks for the visitor's random pick.
+      const asked = new URLSearchParams(location.search).get("first-toy");
+      const pinned = findToy(asked);
+      const pool = featuredToys();
+      const first =
+        pinned && onShelf(pinned)
+          ? pinned
+          : navigator.webdriver && asked !== "featured"
+            ? TOYS[0]
+            : pool[Math.floor(Math.random() * pool.length)];
+      scene = createScene({ toy: { kind: "builtin", id: first.id } });
+    }
+    // An unreadable shared scene keeps the same fallback as before.
+    if (!scene) scene = createScene({ toy: { kind: "builtin", id: TOYS[0].id } });
+    try {
+      await this.applyScene(scene);
+    } catch (err) {
+      ui.toast(err.message, 6000);
+      await this.applyScene(createScene({ toy: { kind: "builtin", id: TOYS[0].id } }));
+    }
+    document.body.dataset.ready = "true";
+    document.body.dataset.pageSettled = "true";
+  }
+
+  // ---- Scenes -------------------------------------------------------------------
+
+  async applyScene(scene, { file = null } = {}) {
+    const player = this.player;
+    const ui = this.ui;
+    ui.resetMissingFileNotice?.();
+    // The device's turntable choice holds for links too (lane Viewer).
+    if (turntablePref() === false) scene.autoplay = { ...scene.autoplay, turntable: false };
+    player.scene = scene;
+    player.applyLook();
+    ui.setEffects(scene.effects);
+    ui.setAutoplay(scene.autoplay, player.reducedMotion);
+    ui.setDetail(player.detail, player.splats);
+    ui.setPaintCount(scene.paint.stamps.length);
+    ui.setPattern(scene.pattern);
+    if (scene.toy.kind === "file" && !file) {
+      const name = scene.toy.file.name;
+      ui.toast(
+        `This link uses someone's own splat file (${name}). Drop that file here to see it with these settings.`,
+        7000,
+      );
+      this.pendingFileScene = scene;
+      scene = { ...scene, toy: { kind: "builtin", id: TOYS[0].id } };
+      player.scene = scene;
+    }
+    // Pictures: a picture toy's own file cannot come with a link.
+    if (scene.toy.media?.file && player.mediaFile?.name !== scene.toy.media.file.name) {
+      ui.toast(
+        `This link shows someone's own file (${scene.toy.media.file.name}) with these settings. Open that file in the Toy tab to see it; the sample shows meanwhile.`,
+        7000,
+      );
+    }
+    // Lane Books: the same for a set of pictures.
+    if (scene.toy.media?.files && !Array.isArray(player.mediaFile)) {
+      ui.toast(
+        `This link shows someone's own pictures (${scene.toy.media.files.length}) with these settings. Open them in the Toy tab to see them; the sample shows meanwhile.`,
+        7000,
+      );
+    }
+    await this.loadToy(scene.toy, { file });
+    player.applySettings(scene);
+    ui.setLook(scene.look, player.resolvedTheme());
+    ui.setEffects(scene.effects);
+    ui.setPattern(scene.pattern);
+    ui.setMotion(scene.motion);
+    this.updateStatus();
+  }
+
+  // `quiet` (ms, lane Fix6): hold the loading overlay back that long, so a quick rebuild shows
+  // none; Infinity: never show it (a toy's own tap switching its options, such as the periodic
+  // table's element, while the toy stays on screen). 0: as before.
+  async loadToy(toy, { file = null, quiet = 0 } = {}) {
+    const ui = this.ui;
+    let shown = false;
+    let last = null;
+    const start = performance.now();
+    const hold = Math.max(120, quiet);
+    const timer = Number.isFinite(hold)
+      ? setTimeout(() => {
+          shown = true;
+          ui.progress.show(last?.label || "Loading…");
+          if (last) ui.progress.update(last.f, last.label);
+        }, hold)
+      : null;
+    try {
+      return await this.player.loadToy(toy, {
+        file,
+        onProgress: (f, label) => {
+          last = { f, label };
+          if (!shown && f < 1 && performance.now() - start >= quiet) {
+            shown = true;
+            clearTimeout(timer);
+            ui.progress.show(label);
+          }
+          if (shown) ui.progress.update(f, label);
+        },
+      });
+    } finally {
+      clearTimeout(timer);
+      ui.progress.hide();
+    }
+  }
+
+  onToy(info) {
+    const ui = this.ui;
+    const player = this.player;
+    const scene = player.scene;
+    this.sound.resumeToy(); // Sound C: a new or rebuilt toy starts unpaused
+    this.preloadSounds();
+    ui.setShelf(
+      scene.toy.kind === "builtin"
+        ? scene.toy.id
+        : scene.toy.kind === "procedural"
+          ? scene.toy.id
+          : null,
+    );
+    this.updateStatus();
+    canvas.setAttribute(
+      "aria-label",
+      `${info.label}, a toy made of ${formatCount(info.splats)} splats. Drag to turn it, scroll or pinch to zoom. With a tool selected, drag on the toy to use it.`,
+    );
+    if (info.kind === "procedural") {
+      this.generator = { ...info.generator };
+      ui.setGenerator(this.generator);
+      ui.setGeneratorNote("");
+    } else {
+      this.generator =
+        this.generator ||
+        normalizeGenerator({ count: PROFILES[player.profile].defaultCount }, player.profile);
+      ui.setGenerator(this.generator);
+      ui.setGeneratorNote("Pick a shape and press Make it to build your own toy.");
+    }
+    const clayOK = info.kind === "procedural" || info.kind === "kit";
+    ui.setClayAvailable(
+      clayOK,
+      clayOK ? "" : "Clay works on generated toys. Pick one or make one.",
+    );
+    ui.setToyPanel(info);
+    // The tilt lock (lane Viewer): the toy's own start, or the choice made
+    // for it earlier in this visit. A link's saved pose still wins (the
+    // scene's camera is set after this).
+    const key = toyKey(scene.toy);
+    // UI r3: a toy that holds still (a chart, a page, an instrument) starts locked.
+    const toyEntry = scene.toy.kind === "builtin" ? findToy(scene.toy.id) : null;
+    // UI r5: an entry's tilt: "free" starts unlocked even on a shelf that holds still.
+    const still = !!toyEntry && holdsStill(toyEntry) && toyEntry.tilt !== "free";
+    // Lane Live input r3: a recipe's own tiltLock (true or false) wins over that.
+    const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : (info.recipe?.tiltLock ?? still); // prettier-ignore
+    player.camera.setTiltLock(lock);
+    // Lane Live input r3: a toy's own tilt range (recipe.pitchRange), or none.
+    player.camera.setPitchRange(info.recipe?.pitchRange ?? null);
+    ui.setTiltLock(lock);
+    this.showPopOut(info); // lane Pages r6
+    // Lane Physics: Hands-on starts on for a toy that is hands-on already,
+    // or as it was left on this toy earlier in the visit.
+    if (this.handsChoice.has(key)) player.handsOn.setOn(this.handsChoice.get(key));
+    this.showHands();
+    // A toy that lays flag colors on its own way (the chess board: from
+    // above, gently) gets that way when it comes out with a flag on, and
+    // the next toy gets the usual way back, unless the look was changed.
+    const pat = scene.pattern;
+    const look = flagLook(info.recipe);
+    if (pat.id === "flag") {
+      const auto = this.autoFlagLook;
+      if (look && pat.projection === "wrap") this.setPattern(look);
+      else if (!look && auto && sameLook(pat, auto)) this.setPattern(flagLook(null, true));
+    }
+    this.autoFlagLook = look;
+    ui.setFileToy(info.kind === "file", scene.toy.flip);
+    this.renderCredits(info);
+    this.updateRenderInfo();
+    if (this.ui.currentTab() === "share") this.updateEmbed();
+  }
+
+  updateRenderInfo() {
+    const player = this.player;
+    const info = player.toyInfo;
+    if (!info) return;
+    this.ui.setRenderInfo(
+      `Rendering with ${player.deviceType === "webgpu" ? "WebGPU" : "WebGL2"} · ${player.profile} detail tier · ${formatCount(info.splats)} splats`,
+    );
+  }
+
+  // Detail is a preference of this browser (see readDetail in player.js).
+  // A new tier rebuilds the toy with its splat count, keeping the view.
+  async setDetail(detail) {
+    const player = this.player;
+    const changed = player.setDetail(detail);
+    this.ui.setDetail(player.detail, player.splats);
+    this.updateRenderInfo();
+    const scene = player.scene;
+    if (!changed || this.busy || scene.toy.kind === "file") return;
+    const cam = player.camera.getState();
+    try {
+      await this.loadToy(scene.toy);
+      player.camera.setState(cam, { snap: true });
+      player.stage.requestRender();
+    } catch (err) {
+      this.ui.toast(err.message, 5000);
+    }
+  }
+
+  // Lane Kit lab: the Detail slider (labs only; see setSplats in player.js).
+  async setSplats(n) {
+    const player = this.player;
+    const changed = player.setSplats(n);
+    this.ui.setDetail(player.detail, player.splats);
+    this.updateRenderInfo();
+    const scene = player.scene;
+    if (!changed || this.busy || scene.toy.kind === "file") return;
+    const cam = player.camera.getState();
+    try {
+      await this.loadToy(scene.toy);
+      player.camera.setState(cam, { snap: true });
+      player.stage.requestRender();
+    } catch (err) {
+      this.ui.toast(err.message, 5000);
+    }
+  }
+
+  renderCredits(info) {
+    const nodes = [];
+    const captured = TOYS.filter((t) => t.kind === "captured");
+    if (!captured.length) {
+      const p = document.createElement("p");
+      p.className = "credit";
+      p.textContent = "Every toy on the shelf is generated in your browser.";
+      nodes.push(p);
+    }
+    for (const t of captured) {
+      const c = t.credit;
+      const p = document.createElement("p");
+      p.className = "credit";
+      const strong = document.createElement("strong");
+      strong.textContent = t.label;
+      const a = document.createElement("a");
+      a.href = c.source;
+      a.textContent = c.title || "source";
+      const lic = document.createElement("a");
+      lic.href = c.licenseUrl;
+      lic.textContent = c.license;
+      p.append(strong, `: “`, a, `” by ${c.author}, `, lic, c.changes ? `. ${c.changes}` : ".");
+      if (info && info.id === t.id) p.setAttribute("aria-current", "true");
+      nodes.push(p);
+    }
+    const p = document.createElement("p");
+    p.className = "credit";
+    p.textContent =
+      "Every generated toy (the shapes and the toys from packs) is made in your browser from a recipe and a seed.";
+    nodes.push(p);
+    // A kit toy built from data files (the protein toy's structures).
+    for (const c of info?.recipe?.credits || []) {
+      const q = document.createElement("p");
+      q.className = "credit";
+      const strong = document.createElement("strong");
+      strong.textContent = c.label;
+      const a = document.createElement("a");
+      a.href = c.source;
+      a.textContent = c.title;
+      const lic = document.createElement("a");
+      lic.href = c.licenseUrl;
+      lic.textContent = c.license;
+      q.append(strong, ": ", a, ` by ${c.author}, `, lic, ".");
+      q.setAttribute("aria-current", "true");
+      nodes.push(q);
+    }
+    // Recorded samples in the toy's tap sound (src/sound-credits.js), one
+    // line per source (a sampled instrument's notes share one).
+    const sources = new Set();
+    const specs = [info?.id ? toySound(info.id) : null, ...this.recipeSounds()]; // Sound C
+    for (const file of samplesIn(specs, [], true)) {
+      const c = SOUND_CREDITS[file];
+      if (!c || sources.has(c.source)) continue;
+      sources.add(c.source);
+      const q = document.createElement("p");
+      q.className = "credit";
+      const strong = document.createElement("strong");
+      strong.textContent = c.label || "Sound";
+      const a = document.createElement("a");
+      a.href = c.source;
+      a.textContent = c.title;
+      const lic = document.createElement("a");
+      lic.href = c.licenseUrl;
+      lic.textContent = c.license;
+      q.append(strong, ": “", a, `” by ${c.author}, `, lic, ".");
+      q.setAttribute("aria-current", "true");
+      q.dataset.sample = file;
+      nodes.push(q);
+    }
+    const f = document.createElement("p");
+    f.className = "credit";
+    const flags = document.createElement("a");
+    flags.href = "https://commons.wikimedia.org/wiki/Category:SVG_flags_of_countries";
+    flags.textContent = "Wikimedia Commons";
+    f.append(
+      document.createTextNode("National flags for patterns: public-domain files from "),
+      flags,
+      document.createTextNode(" (each source is listed in assets/flags/flags.json)."),
+    );
+    nodes.push(f);
+    if (this.flagCredit) {
+      const c = this.flagCredit;
+      const q = document.createElement("p");
+      q.className = "credit";
+      const a = document.createElement("a");
+      a.href = c.source;
+      a.textContent = `Flag of ${c.name}`;
+      q.append(a, document.createTextNode(`: ${c.license}, from Wikimedia Commons.`));
+      q.setAttribute("aria-current", "true");
+      nodes.push(q);
+    }
+    this.ui.setCredits(nodes);
+  }
+
+  // The status line under the toy: name, splats, credit and colors.
+  async updateStatus() {
+    const player = this.player;
+    const info = player.toyInfo;
+    if (!info) return;
+    // Pictures: a picture toy's sheets count too (and lane Powers of ten: a
+    // toy's chunks on show).
+    const splats = info.splats + (player.pictures?.splats() || 0) + (player.chunks?.splats() || 0); // prettier-ignore
+    // Lane Photo sharp view: a toy drawn another way names what is on screen instead of its splats.
+    const shown = player.statusLabel?.(info);
+    const parts = [info.label, shown || `${formatCount(splats)} splats`];
+    if (info.credit) parts.push(`by ${info.credit.author} (${info.credit.license})`);
+    const pat = player.scene.pattern;
+    this.flagCredit = null;
+    if (pat.id === "flag" && pat.flag) {
+      const f = await flagInfo(pat.flag);
+      if (f) {
+        parts.push(`in the colors of ${f.the ? "the " : ""}${f.name}`);
+        this.flagCredit = f;
+      }
+    }
+    this.ui.setStatus(parts.join(" · "));
+    this.renderCredits(info);
+  }
+
+  async chooseToy(id) {
+    if (this.busy) return;
+    const toy = findToy(id);
+    if (!toy) return;
+    this.sound.stopHeld("toy"); // UI r3: the last toy's tune stops with it
+    const player = this.player;
+    const scene = player.scene;
+    // Flag colors belong to the toy they were chosen on (lane Viewer): keep
+    // this toy's, and bring back the next toy's own (none if it had none).
+    const pat = scene.pattern;
+    this.toyFlags.set(toyKey(scene.toy), pat.id === "flag" ? { ...pat } : null);
+    // UI r3: the top bar's flag, when one is set, goes on every toy.
+    const flag = this.globalFlag ? { ...pat, id: "flag", flag: this.globalFlag } : this.toyFlags.get(toyKey({ kind: "builtin", id })); // prettier-ignore
+    if (flag) scene.pattern = flag;
+    else if (pat.id === "flag") scene.pattern = { ...DEFAULT_PATTERN };
+    if (scene.pattern !== pat) this.ui.setPattern(scene.pattern);
+    scene.toy = { kind: "builtin", id };
+    scene.paint.stamps = [];
+    scene.motion = { ...scene.motion, controls: {} };
+    this.file = null;
+    this.ui.setPaintCount(0);
+    // Fold the phone sheet now, not after the load: a scan can take seconds
+    // on a phone, and folding it then would shut a panel opened meanwhile.
+    this.ui.collapseSheet();
+    try {
+      await this.loadToy(scene.toy);
+      player.camera.setState(toy.camera || createScene().camera, { asHome: true, snap: false });
+      this.holdStill(toy); // UI r3
+      player.syncDrop();
+      this.ui.setMotion(scene.motion);
+      await this.ui.showToyHelp();
+    } catch (err) {
+      this.ui.toast(err.message, 5000);
+    }
+  }
+
+  // UI r3: a toy picked from the shelf that holds still (a chart, a page, an
+  // instrument) starts with the turntable off, unless it was switched on for
+  // it this visit; the next toy gets the device's choice back.
+  holdStill(toy) {
+    const player = this.player;
+    const still = holdsStill(toy);
+    if (!still && !this.stillOut) return;
+    this.stillOut = still;
+    const on = still ? (this.spins.get(toyKey(player.scene.toy)) ?? false) : turntablePref() !== false; // prettier-ignore
+    player.scene.autoplay = { ...player.scene.autoplay, turntable: on };
+    player.camera.setTurntable(on);
+    this.ui.setAutoplay(player.scene.autoplay, player.reducedMotion);
+  }
+
+  // ---- Tools ------------------------------------------------------------------
+
+  setTool(tool) {
+    this.tool = tool;
+    this.ui.setTool(tool);
+    this.ui.setEffects(this.player.scene.effects);
+    canvas.classList.toggle("tool", tool !== "orbit");
+  }
+
+  setClayMode(mode) {
+    this.clayMode = mode;
+    this.ui.setClayMode(mode);
+  }
+
+  setEffectParam(id, key, value) {
+    const fx = this.player.scene.effects;
+    fx[id][key] = value;
+    this.player.setEffects(fx);
+    this.ui.setEffects(fx);
+  }
+
+  toggleEffect(id, on) {
+    const fx = this.player.scene.effects;
+    fx[id].on = on;
+    if (on) this.sound.play(id === "drop" ? "drop" : id === "dissolve" ? "whoosh" : "click");
+    const ex = effectDef(id).exclusive;
+    if (on && ex && fx[ex].on) {
+      fx[ex].on = false;
+      this.ui.toast(
+        `${effectDef(ex).label} switched off: it cannot run together with ${effectDef(id).label}.`,
+      );
+    }
+    this.player.setEffects(fx);
+    this.ui.setEffects(fx);
+    this.player.interact();
+  }
+
+  allEffectsOff() {
+    const fx = this.player.scene.effects;
+    for (const id in fx) if ("on" in fx[id]) fx[id].on = false;
+    this.player.setEffects(fx);
+    this.ui.setEffects(fx);
+  }
+
+  clearPaint() {
+    this.player.clearPaint();
+    this.ui.toast("Paint cleared.");
+  }
+
+  // Everything back to how the toy starts: the scene is rebuilt for the same
+  // toy with no flag colors or pattern, paint, clay, effects, toy options,
+  // motion or look changes; Detail goes back to Auto and the view resets.
+  async resetAll() {
+    const player = this.player;
+    const toy = player.scene.toy;
+    const fresh = createScene({ seed: player.scene.seed });
+    if (toy.kind === "builtin") fresh.toy = { kind: "builtin", id: toy.id };
+    else {
+      fresh.toy = structuredClone(toy);
+      delete fresh.toy.clay;
+      delete fresh.toy.options;
+    }
+    const file = toy.kind === "file" ? this.file : null;
+    if (toy.kind === "file" && !file) return;
+    await this.applyScene(fresh, { file });
+    if (player.detail !== "auto" || player.splats) await this.setDetail("auto");
+    this.resetCamera();
+    this.ui.toast("Everything is back to how it started.");
+  }
+
+  pokeRandom() {
+    this.player.pokeRandom();
+  }
+
+  resetCamera() {
+    this.player.resetCamera();
+  }
+
+  // ---- Top-bar settings (lane Viewer) -----------------------------------------------
+
+  // The turntable, on or off for every toy; remembered on this device.
+  toggleTurntable() {
+    const on = !this.player.scene.autoplay.turntable;
+    this.setAutoplay({ turntable: on });
+  }
+
+  // Lane Pages r6: the top bar's Pop out, one setting for every toy that
+  // has a control marked `global: "pop"` (Your book, the Photo album, the
+  // Picture lab), shown only while one is open. It is remembered on this
+  // device; a scene or link that had Pop out on turns it on for the visit.
+  // The first time such a toy opens on a device, a line says it is there.
+  showPopOut(info) {
+    const def = info.recipe?.controls?.find((c) => c.global === "pop");
+    if (def && (this.player.scene.motion.controls[def.key] ?? 0) > 0.5) this.popOut = true;
+    if (def) this.player.setGlobalControl(def.key, this.popOut);
+    this.ui.setPopOut(!!def, this.popOut);
+    if (!def || popOutHinted()) return;
+    rememberPopOut(null, true);
+    if (!this.popOut) this.ui.toast("Pop out is off. Turn it on at the top, then tap a figure to raise it.", 5200); // prettier-ignore
+  }
+
+  togglePopOut() {
+    this.popOut = !this.popOut;
+    rememberPopOut(this.popOut);
+    const def = this.player.toyInfo?.recipe?.controls?.find((c) => c.global === "pop");
+    if (def) this.player.setGlobalControl(def.key, this.popOut);
+    this.ui.setPopOut(!!def, this.popOut);
+    this.ui.toast(this.popOut ? "Pop out on: tap a figure to raise it." : "Pop out off.", 2500);
+  }
+
+  // The tilt lock for the toy on show; remembered for it during the visit.
+  toggleTiltLock() {
+    const player = this.player;
+    const lock = !player.camera.tiltLock;
+    this.tiltLocks.set(toyKey(player.scene.toy), lock);
+    player.camera.setTiltLock(lock);
+    this.ui.setTiltLock(lock);
+    this.ui.toast(
+      lock
+        ? "Tilt locked: dragging spins it left and right."
+        : "Tilt free: drag to turn it any way.",
+      2500,
+    );
+    player.stage.requestRender();
+  }
+
+  // ---- Hands-on (lane Physics) ----------------------------------------------------
+
+  showHands() {
+    const h = this.player.handsOn;
+    const info = this.player.toyInfo;
+    this.ui.setHands({ on: h.on, available: canPlay(info), action: !!info });
+  }
+
+  toggleHands() {
+    const h = this.player.handsOn;
+    h.setOn(!h.on);
+    this.handsChoice.set(toyKey(this.player.scene.toy), h.on);
+    this.showHands();
+    if (h.on && !h.own)
+      this.ui.toast("Hands-on: drag the toy to pick it up, and let go to toss it.", 3000); // prettier-ignore
+    else if (!h.on) this.ui.toast("Hands-on off: dragging turns the view.", 2200);
+    this.player.stage.requestRender();
+  }
+
+  resetHands() {
+    this.player.handsOn.reset();
+    this.player.stage.requestRender();
+  }
+
+  // ---- End of top-bar settings --------------------------------------------------------
+
+  bindGestures() {
+    const player = this.player;
+    const cam = player.camera;
+    this.gestures = new Gestures(canvas, {
+      classify: (e) => {
+        // While the phone sheet is open, a tap on the toy only closes it.
+        if (this.ui.sheetOpen()) return "orbit";
+        if (e.button === 1 || e.button === 2 || this.spaceHeld) return "orbit";
+        // UI r2: Shift or Option/Alt and a drag moves the toy (any tool).
+        if (ui2On() && (e.shiftKey || e.altKey) && e.pointerType !== "touch") return "orbit";
+        // A stretchy toy: with Orbit, a drag that starts on it stretches it
+        // (toolStart turns a drag that starts off it back into an orbit).
+        // Lane Physics: with Hands-on on, a drag that starts on any toy picks
+        // it up (toolStart); with it off, a toy's own drags turn the view.
+        if (this.tool === "orbit") {
+          const h = this.player.handsOn;
+          return (h.ownDrags() && this.player.canGrab()) || h.canGrab() ? "tool" : "orbit";
+        }
+        return "tool";
+      },
+      onTap: (e) => {
+        if (this.ui.sheetOpen()) this.ui.collapseSheet();
+        else if (this.tool === "orbit" && !this.spaceHeld) {
+          // UI r4: a press that a toy's drag already played (a key) is not a tap too.
+          if (player.dragFired) player.dragFired = false;
+          // Page focus (lane Books r4): a toy with recipe.focus takes double-taps.
+          else if (player.canFocus()) this.tapOrFocus(e);
+          else this.tapToy(e);
+        }
+      },
+      onInteract: () => {
+        player.dragFired = false; // UI r4: each press starts afresh
+        player.interact();
+        canvas.focus({ preventScroll: true });
+      },
+      onOrbitStart: (e) => {
+        cam.begin();
+        // UI r2: a drag begun with Shift or Option/Alt held moves the toy.
+        this.panDrag = ui2On() && !!(e?.shiftKey || e?.altKey) && e.type === "pointerdown";
+        canvas.classList.add(this.panDrag ? "panning" : "orbiting");
+      },
+      onOrbit: (dx, dy, dt) => {
+        // Pictures: close up on a page, a drag moves across it.
+        if (this.panDrag || player.pansHere()) player.panBy(dx, dy);
+        else cam.rotateBy(dx, dy, dt);
+        player.stage.requestRender();
+      },
+      onOrbitEnd: () => {
+        cam.end();
+        this.panDrag = false;
+        canvas.classList.remove("orbiting", "panning");
+      },
+      pairPinch: ui2On(), // UI r2: read two fingers' moves as pairs
+      onPinchStart: () => cam.begin(),
+      onPinch: ({ scale, dx, dy, twist, mode, dt }) => {
+        // Pictures: two fingers move a picture toy, as in a photo viewer.
+        if (player.pictures) player.panBy(dx, dy);
+        // A pinch only zooms: two fingers turn the toy only when they move
+        // together first (lane Viewer). UI r2: that two-finger drag moves
+        // the toy instead; one finger turns it.
+        else if (mode === "drag" && ui2On()) player.panBy(dx, dy);
+        else if (mode === "drag") cam.rotateBy(dx, dy, dt);
+        if (scale > 0) cam.zoomBy(1 / scale);
+        cam.rollBy(-twist);
+        player.stage.requestRender();
+      },
+      onPinchEnd: () => cam.end(),
+      onWheel: (e) => {
+        const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 120 : 1;
+        cam.zoomBy(Math.exp(e.deltaY * unit * (e.ctrlKey ? 0.01 : 0.0015)));
+        player.stage.requestRender();
+      },
+      // Page focus (lane Books r4): a toy that focuses on a page takes its
+      // double-taps in tapOrFocus (↺ and the R key still reset its view).
+      onDoubleTap: () => player.canFocus() || player.resetCamera(),
+      onToolStart: (e) => this.toolStart(e),
+      onToolMove: (e) => this.toolMove(e),
+      onToolEnd: (e) => this.toolEnd(e),
+    });
+  }
+
+  // A tap on the toy (with the Orbit tool) runs its action, or makes it hop.
+  async tapToy(e) {
+    const player = this.player;
+    const [x, y] = player.canvasPoint(e);
+    player.pickDirty = true;
+    // Lane Fix9 (engine): a toy with a tap box takes a tap anywhere in it.
+    const hit = (await player.pickAt(x, y)) || player.tapBoxAt(x, y);
+    if (hit) player.act(hit);
+  }
+
+  // Page focus (lane Books r4): on a toy that can focus on a page, a double-tap
+  // focuses (or lets go), so a single tap waits a moment to be sure.
+  tapOrFocus(e) {
+    const last = this.lastTap;
+    const at = { clientX: e.clientX, clientY: e.clientY };
+    if (
+      last &&
+      e.timeStamp - last.time < 320 &&
+      Math.hypot(e.clientX - last.x, e.clientY - last.y) < 30
+    ) {
+      clearTimeout(last.timer);
+      this.lastTap = null;
+      this.focusToy(at);
+      return;
+    }
+    const timer = setTimeout(() => {
+      this.lastTap = null;
+      this.tapToy(at);
+    }, 300);
+    this.lastTap = { time: e.timeStamp, x: e.clientX, y: e.clientY, timer };
+  }
+
+  async focusToy(e) {
+    const player = this.player;
+    const [x, y] = player.canvasPoint(e);
+    player.pickDirty = true;
+    const hit = await player.pickAt(x, y);
+    // (A double-tap the toy doesn't take resets the view, as elsewhere.)
+    if (!player.focusAt(hit || null)) player.resetCamera();
+  }
+
+  // Sound C: fetches and decodes the open toy's recorded samples (its tap
+  // sound's, and any its recipe's `sounds` lists for its cues, for the
+  // options it was built with), so its first tap sounds on time.
+  preloadSounds() {
+    const toy = this.player?.scene.toy;
+    if (!this.sound.enabled || toy?.kind !== "builtin") return;
+    this.sound.preload([this.ownSound(toy), ...this.recipeSounds()]);
+  }
+
+  // Lane Photo depth: a built-in toy's tap sound. Its recipe may pick it from its options
+  // (`toySound(options)`, as Photo to 3D's Sound choice does; [] is silence); anything else, and
+  // every recipe without the hook, has its sound from src/toy-sounds.js as before.
+  ownSound(toy) {
+    if (toy?.kind !== "builtin") return null;
+    const pick = this.player?.toyInfo?.recipe?.toySound?.(toy.options || {});
+    return pick !== undefined && pick !== null ? pick : toySound(toy.id);
+  }
+
+  // Sound C: the specs a kit recipe's `sounds` lists (the recorded samples
+  // its cues may play, for the options it was built with), as a list.
+  recipeSounds() {
+    const player = this.player;
+    const extra = player?.toyInfo?.recipe?.sounds;
+    const more = typeof extra === "function" ? extra(player.scene.toy?.options || {}) : extra;
+    return [].concat(more || []).filter(Boolean);
+  }
+
+  onAction(r) {
+    const player = this.player;
+    const recipe = player.toyInfo?.recipe;
+    // The toy's own sound (src/toy-sounds.js), else the recipe's, else a
+    // plain hop or pop. A toggle plays its on or off half.
+    const toy = player.scene.toy;
+    // The second half of a tap that switched the toy (Player.switchTo) has
+    // already sounded.
+    if (r.echo) {
+      this.ui.refreshInputShown?.(); // The panel follows the tap after audio dispatch.
+      this.ui.setMotion(player.scene.motion, player.motion.targets);
+      return;
+    }
+    const own = this.ownSound(toy);
+    // UI r3: a tap on a long effect that is running pauses its sound too, and
+    // the next one resumes it from the same place.
+    if (r.paused || r.resumed) {
+      // Sound C: all of the toy's sound, not only the notes still to come
+      // (a quiet tap's cue sounds too, so this comes first).
+      if (r.paused) this.sound.pauseToy();
+      else this.sound.resumeToy();
+      this.ui.refreshInputShown?.(); // The panel follows the tap after audio dispatch.
+      this.ui.setMotion(player.scene.motion, player.motion.targets);
+      return;
+    }
+    this.sound.resumeToy(); // Sound C: another control firing carries a paused effect on
+    // Some taps (a laptop key) make their own sound through cues.
+    if (recipe?.action?.quiet?.includes(r.key)) {
+      this.ui.refreshInputShown?.(); // The panel follows the tap after audio dispatch.
+      this.ui.setMotion(player.scene.motion, player.motion.targets);
+      return;
+    }
+    const spec = own || recipe?.action?.sound || (r.key === "hop" ? "hop" : "pop");
+    // UI r4: a drag across keys plays each key's note under its own key, so
+    // notes in quick succession overlap as on a real keyboard; a run faster
+    // than about 24 notes a second skips some notes so it never crackles.
+    if (r.drag) {
+      if (!this.dragNotes(performance.now())) {
+        this.ui.refreshInputShown?.();
+        return;
+      }
+      this.sound.play(specFor(spec, true), { key: `toy:${r.pick}`, pick: r.pick, gap: 0.03 });
+      this.ui.refreshInputShown?.(); // The panel follows the tap after audio dispatch.
+      this.ui.setMotion(player.scene.motion, player.motion.targets);
+      return;
+    }
+    const chosen = specFor(spec, r.key === "hop" || r.value > 0.5);
+    // A tap that picked an item (a xylophone bar) plays that item's note. A
+    // long effect's sound (a tune) plays held, so it can pause and never
+    // overlaps itself (UI r3).
+    // A toggle's long "on" tune (the music box's) plays held too, and stops
+    // when the toy is switched off (the lid closes, the tune stops).
+    const tune = r.pick === null && soundEvents(chosen).some((e) => e.t > 2);
+    if (r.toggle && !(r.value > 0.5)) this.sound.stopHeld("toy");
+    const held = (r.long || (r.toggle && tune)) && r.pick === null;
+    this.sound.play(chosen, { key: "toy", pick: r.pick, held });
+    this.ui.refreshInputShown?.(); // The panel follows the tap after audio dispatch.
+    this.ui.setMotion(player.scene.motion, player.motion.targets);
+  }
+
+  // UI r4: the voice cap for a drag across keys: at most 12 notes in any
+  // half second. True when this note may sound.
+  dragNotes(now) {
+    const t = (this.dragNoteTimes ||= []);
+    while (t.length && now - t[0] > 500) t.shift();
+    if (t.length >= 12) return false;
+    t.push(now);
+    return true;
+  }
+
+  act() {
+    this.player.act();
+  }
+
+  // ---- Motion, controls, options and patterns ---------------------------------
+
+  setMotion(partial) {
+    const player = this.player;
+    player.setMotion(normalizeMotion({ ...player.scene.motion, ...partial }));
+    this.ui.setMotion(player.scene.motion);
+    if (partial.move && partial.move !== "still") this.sound.play("click");
+  }
+
+  setControl(key, value) {
+    this.player.setControl(key, value);
+  }
+
+  // Rebuilds a kit toy with a changed option (color, style), or loads a
+  // scan's other look.
+  async setToyOption(key, value) {
+    return this.setToyOptions({ [key]: value });
+  }
+
+  // Sets several of a kit toy's options at once and rebuilds it.
+  async setToyOptions(partial, { quiet = 500 } = {}) {
+    const player = this.player;
+    const toy = player.scene.toy;
+    if (toy.kind !== "builtin") return;
+    toy.options = { ...(toy.options || {}), ...partial };
+    const cam = player.camera.getState();
+    try {
+      await this.loadToy(toy, { quiet });
+      player.camera.setState(cam, { snap: true });
+      player.syncDrop();
+    } catch (err) {
+      this.ui.toast(err.message, 5000);
+    }
+  }
+
+  // ---- Pictures (lane Pictures) ------------------------------------------------------
+  // Opens a file from this device or a web address on the picture toy that
+  // shows now. The media is opened first, so a file this browser can't read
+  // (or an address that refuses) leaves the toy as it was and throws a
+  // message for the Toy tab to show.
+  async openMedia(source) {
+    const player = this.player;
+    const toy = player.scene.toy;
+    if (toy.kind !== "builtin" || !player.pictures)
+      throw new Error("Pick a picture toy first (Picture lab).");
+    const { openMedia, checkMediaURL } = await import("./media.js");
+    const src = typeof source === "string" ? checkMediaURL(source) : source;
+    const media = await openMedia(src, { profile: player.profile });
+    player.adoptMedia(src, media);
+    const same = toy.media?.file && src.name === toy.media.file.name;
+    if (typeof src === "string") {
+      player.mediaFile = null;
+      toy.media = { url: src };
+    } else if (Array.isArray(src)) {
+      // A set of pictures (lane Books): the settings only, as for one file.
+      player.mediaFile = src;
+      toy.media = { files: src.map((f) => ({ name: f.name, bytes: f.size })) };
+    } else {
+      player.mediaFile = src;
+      toy.media = { file: { name: src.name, bytes: src.size }, ...(same && toy.media.page ? { page: toy.media.page } : {}) }; // prettier-ignore
+    }
+    const cam = player.camera.getState();
+    await this.loadToy(toy);
+    player.camera.setState(cam, { snap: true });
+    this.ui.toast(
+      typeof src === "string"
+        ? `${media.name} opened from the web.`
+        : Array.isArray(src)
+          ? `${media.name} opened. They stay on this device.`
+          : `${media.name} opened. It stays on this device.`,
+    );
+    if (this.ui.currentTab() === "share") this.updateEmbedSoon();
+    return media;
+  }
+
+  // A live stream (lane Live input: a shared screen or a camera, from
+  // src/live/panel.js) on the picture toy that shows now. It is never saved
+  // in the scene or a link; closeLiveMedia() goes back to what showed before.
+  async openLiveMedia(stream, name) {
+    const player = this.player;
+    const toy = player.scene.toy;
+    if (toy.kind !== "builtin" || !player.pictures) throw new Error("Pick a picture toy first.");
+    const { openMedia } = await import("./media.js");
+    const source = { live: true, stream, name };
+    const media = await openMedia(source);
+    player.closeMedia();
+    const key = `live:${stream.id}`;
+    player.liveMedia = { toy: toy.id, source, key };
+    player.pictureMedia = { key, media, ready: Promise.resolve(media) };
+    const cam = player.camera.getState();
+    await this.loadToy(toy);
+    player.camera.setState(cam, { snap: true });
+    return media;
+  }
+
+  async closeLiveMedia() {
+    const player = this.player;
+    if (!player.liveMedia) return;
+    const same = player.liveMedia.toy === player.scene.toy.id;
+    player.liveMedia = null;
+    player.closeMedia();
+    if (!same) return;
+    const cam = player.camera.getState();
+    await this.loadToy(player.scene.toy);
+    player.camera.setState(cam, { snap: true });
+  }
+
+  // Back to the toy's own sample.
+  async clearMedia() {
+    const player = this.player;
+    const toy = player.scene.toy;
+    if (!toy.media && !player.mediaFile) return;
+    delete toy.media;
+    player.mediaFile = null;
+    const cam = player.camera.getState();
+    await this.loadToy(toy);
+    player.camera.setState(cam, { snap: true });
+  }
+
+  // Pages and play, for the Toy tab's picture panel.
+  pictureStep(delta) {
+    const p = this.player.pictures;
+    if (!p) return;
+    p.go(p.page + delta);
+  }
+
+  // A page by its number (from 0), for the words box's search results.
+  pictureGo(n) {
+    this.player.pictures?.go(n, { exact: true });
+  }
+
+  // A video's place, from the Toy tab's scrub bar (lane Books).
+  pictureSeek(seconds) {
+    this.player.pictures?.seek(seconds);
+  }
+
+  pictureTogglePlay() {
+    this.player.pictures?.togglePlay();
+  }
+
+  // ---- End of pictures ---------------------------------------------------------------
+
+  // UI r3: the top bar's flag button sets flag colors for every toy (or none).
+  async setGlobalFlag(code) {
+    this.globalFlag = code || null;
+    this.toyFlags.clear();
+    this.ui.setGlobalFlag(this.globalFlag);
+    await this.setPattern(code ? { id: "flag", flag: code } : { id: "none" });
+  }
+
+  async setPattern(partial) {
+    const player = this.player;
+    const prev = player.scene.pattern;
+    const next = { ...prev, ...partial };
+    if (partial.id === "flag" && prev.id !== "flag") {
+      // A toy can prefer a way to lay a flag on (the chess board: from
+      // above, gently, keeping its light and dark squares).
+      const recipe = player.toyInfo?.recipe;
+      Object.assign(next, flagLook(recipe) || { projection: "wrap", amount: 1 });
+      next.repeats = 2;
+      if (!next.flag) next.flag = await this.defaultFlag();
+      this.sound.play("chime");
+    } else if (partial.id && partial.id !== "flag" && prev.id === "flag") {
+      next.repeats = 1;
+    }
+    player.scene.pattern = normalizePattern(next, normalizeHex);
+    this.ui.setPattern(player.scene.pattern);
+    await player.applyPattern();
+    this.updateStatus();
+    if (this.ui.currentTab() === "share") this.updateEmbedSoon();
+  }
+
+  // The visitor's own country (from the browser's language), else a random flag.
+  async defaultFlag() {
+    const flags = await loadFlags();
+    const region = (navigator.language || "").split("-")[1]?.toLowerCase();
+    const own = flags.find((f) => f.code === region);
+    return (own || flags[Math.floor(Math.random() * flags.length)])?.code || "";
+  }
+
+  // Lane Physics: landing sounds for Hands-on (a recipe's hands.sound
+  // picks its own, as the pebbles' clack).
+  handsSounds(hits) {
+    const recipe = this.player.toyInfo?.recipe;
+    for (const h of hits) {
+      const vol = Math.min(0.8, Math.max(0.12, h.speed / 7));
+      let spec = recipe?.hands?.sound?.(h, vol);
+      if (spec === undefined) {
+        if (h.soft > 0.3) spec = { voice: "squish", vol: vol * 0.9 };
+        else spec = { voice: "thud", vol };
+      }
+      if (spec) this.sound.play(spec, { key: "hands", gap: 0.05 });
+    }
+  }
+
+  toggleSound() {
+    this.sound.setEnabled(!this.sound.enabled);
+    this.ui.setSound(this.sound.enabled);
+    this.player.setMediaSound(this.sound.enabled); // Pictures
+    if (this.sound.enabled) this.sound.play("chime");
+    this.preloadSounds(); // Sound C
+  }
+
+  // Tool strokes. A stroke that starts off the toy becomes an orbit instead.
+  async toolStart(e) {
+    const player = this.player;
+    const [x, y] = player.canvasPoint(e);
+    const st = (this.toolState = {
+      tool: this.tool === "orbit" ? "grab" : this.tool,
+      x,
+      y,
+      last: 0,
+      busy: false,
+      lastPoint: null,
+      started: false,
+    });
+    player.stroke = st;
+    if (st.tool === "magnet") {
+      player.magnetAt(x, y, true);
+      st.started = true;
+      return;
+    }
+    st.busy = true;
+    player.pickDirty = true;
+    let hit = await player.pickAt(x, y);
+    st.busy = false;
+    if (this.toolState !== st) return;
+    // Lane Hands-on H3: with Hands-on on, a press just off a thin toy's
+    // splats still takes it (null when Hands-on is off).
+    if (!hit && st.tool === "grab") hit = player.handsOn.nearPress(x, y);
+    if (!hit) {
+      this.toOrbit();
+      return;
+    }
+    // Lane Physics: Hands-on picks up the toy (or the piece) under the finger.
+    if (st.tool === "grab" && player.handsOn.pressAt(hit, x, y)) {
+      st.tool = "hands";
+      st.started = true;
+      return;
+    }
+    if (st.tool === "grab" && !player.dragStartsHere(hit)) {
+      this.toOrbit();
+      return;
+    }
+    st.started = true;
+    if (st.tool === "grab") {
+      player.grabStart(hit, x, y);
+      return;
+    }
+    this.applyTool(st, hit, true);
+  }
+
+  toOrbit() {
+    const g = this.gestures;
+    this.toolState = null;
+    this.player.stroke = null;
+    if (g.gesture === "tool") {
+      g.gesture = "orbit";
+      this.player.camera.begin();
+      canvas.classList.add("orbiting");
+    }
+  }
+
+  applyTool(st, hit, first) {
+    const player = this.player;
+    const now = performance.now();
+    if (st.tool === "poke") {
+      player.driver.addPoke(hit, player.time);
+      player.stage.requestRender();
+      this.sound.play("poke", { gap: 0.12, pitch: 0.8 + Math.random() * 0.4 });
+    } else if (st.tool === "paint") {
+      const r = player.paintAt(hit, first);
+      st.spacing = r * 0.35;
+      if (first) this.sound.play("paint");
+    } else if (st.tool === "clay") {
+      this.sound.play("clay", { gap: 0.1 });
+      if (this.player.scene.toy.kind === "builtin") this.promoteToProcedural();
+      const op = player.clayAt(hit, this.clayMode, this.claySize);
+      if (op) this.player.scene.toy.clay = player.proc.clay.slice();
+    }
+    st.lastPoint = hit;
+    st.last = now;
+  }
+
+  async toolMove(e) {
+    const st = this.toolState;
+    if (!st || !st.started) return;
+    const player = this.player;
+    const [x, y] = player.canvasPoint(e);
+    if (st.tool === "magnet") {
+      player.magnetAt(x, y, true);
+      return;
+    }
+    if (st.tool === "grab") {
+      player.grabAt(x, y);
+      return;
+    }
+    if (st.tool === "hands") {
+      player.handsOn.moveTo(x, y); // lane Physics
+      player.stage.requestRender();
+      return;
+    }
+    const now = performance.now();
+    const minGap = st.tool === "poke" ? 150 : st.tool === "clay" ? 110 : 0;
+    if (st.busy || now - st.last < minGap) return;
+    st.busy = true;
+    const hit = await player.pickAt(x, y);
+    st.busy = false;
+    if (this.toolState !== st || !hit) return;
+    if (st.tool === "paint" && st.lastPoint) {
+      const d = Math.hypot(
+        hit[0] - st.lastPoint[0],
+        hit[1] - st.lastPoint[1],
+        hit[2] - st.lastPoint[2],
+      );
+      if (d < (st.spacing || 0)) return;
+    }
+    this.applyTool(st, hit, false);
+  }
+
+  toolEnd() {
+    const st = this.toolState;
+    this.toolState = null;
+    this.player.stroke = null;
+    if (!st) return;
+    if (st.tool === "magnet") this.player.magnetAt(st.x, st.y, false);
+    if (st.tool === "clay") this.player.refreshPaint();
+    if (st.tool === "hands") this.player.handsOn.release(); // lane Physics
+    if (st.tool === "grab" && st.started) {
+      // A real stretch plays the toy's sound as it springs back.
+      const stretched = this.player.grabEnd();
+      const toy = this.player.scene.toy;
+      const spec = this.ownSound(toy);
+      if (stretched > 0.15 && spec) this.sound.play(specFor(spec, true), { key: "toy" });
+      // Lane Physics: a stretchy toy may wobble as it springs back (the jelly).
+      const wobble = this.player.toyInfo?.recipe?.grab?.wobble;
+      if (stretched > 0.15 && wobble)
+        this.player.motion.act(this.player.time, null, { key: wobble });
+    }
+  }
+
+  // Editing a built-in generated toy makes it "your toy" with explicit params.
+  promoteToProcedural() {
+    const player = this.player;
+    const info = player.toyInfo;
+    if (!info || info.kind !== "procedural") return;
+    player.scene.toy = {
+      kind: "procedural",
+      id: info.id,
+      generator: { ...info.generator },
+      clay: [],
+    };
+  }
+
+  bindKeys() {
+    const player = this.player;
+    const cam = player.camera;
+    addEventListener("keydown", (e) => {
+      if (e.defaultPrevented) return;
+      if (e.key === "Escape") {
+        // Share lane: an open dialog (the recording's preview) handles its own Escape.
+        if (e.target?.closest?.("dialog[open]")) return;
+        this.ui.escape() || this.ui.collapseSheet();
+        e.preventDefault();
+        return;
+      }
+      // A toy that takes typing (the laptop) gets the keys it knows first.
+      const typing = this.ui.isTyping(e.target) || e.metaKey || e.ctrlKey || e.altKey;
+      if (!typing && player.toyInfo?.recipe?.typeKey && player.typeKey(e.key)) {
+        e.preventDefault();
+        return;
+      }
+      // Lane PT1 (engine r2): a toy's tool row keys (Toy Box's 1 to 5).
+      if (!typing && player.toolKey(e.key)) {
+        e.preventDefault();
+        return;
+      }
+      if (
+        e.key === " " &&
+        !this.ui.isTyping(e.target) &&
+        !(e.target instanceof HTMLButtonElement)
+      ) {
+        this.spaceHeld = true;
+        if (e.target === canvas) e.preventDefault();
+        return;
+      }
+      if (this.ui.isTyping(e.target) || e.metaKey || e.ctrlKey || e.altKey) return;
+      const tools = ["orbit", "poke", "paint", "magnet", "clay"];
+      if (/^[1-5]$/.test(e.key)) this.setTool(tools[Number(e.key) - 1]);
+      else if (e.key === "p" || e.key === "P") this.pokeRandom();
+      else if (e.key === "r" || e.key === "R") this.resetCamera();
+      else if (ui2On() && (e.key === "f" || e.key === "F"))
+        this.ui.toggleFocus(); // UI r2
+      else if (ui2On() && e.key === "[")
+        this.ui.togglePanel(); // UI r2
+      else if (ui2On() && (e.key === "g" || e.key === "G"))
+        this.ui.toggleGallery(); // UI r5
+      else if (e.target === canvas && e.key.startsWith("Arrow")) {
+        e.preventDefault();
+        const step = 36;
+        cam.begin();
+        if (e.key === "ArrowLeft") cam.rotateBy(-step, 0, 0);
+        if (e.key === "ArrowRight") cam.rotateBy(step, 0, 0);
+        if (e.key === "ArrowUp") cam.rotateBy(0, -step, 0);
+        if (e.key === "ArrowDown") cam.rotateBy(0, step, 0);
+        cam.end();
+        player.stage.requestRender();
+      } else if (e.key === "+" || e.key === "=") cam.zoomBy(0.85);
+      else if (e.key === "-" || e.key === "_") cam.zoomBy(1 / 0.85);
+      else return;
+      player.stage.requestRender();
+    });
+    addEventListener("keyup", (e) => {
+      if (e.key === " ") this.spaceHeld = false;
+    });
+    addEventListener("blur", () => (this.spaceHeld = false));
+  }
+
+  bindDrop() {
+    let depth = 0;
+    addEventListener("dragenter", (e) => {
+      if (!e.dataTransfer?.types?.includes("Files")) return;
+      e.preventDefault();
+      depth++;
+      this.ui.showDrop(true);
+    });
+    addEventListener("dragover", (e) => {
+      if (e.dataTransfer?.types?.includes("Files")) e.preventDefault();
+    });
+    addEventListener("dragleave", () => {
+      depth = Math.max(0, depth - 1);
+      if (!depth) this.ui.showDrop(false);
+    });
+    addEventListener("drop", (e) => {
+      e.preventDefault();
+      depth = 0;
+      this.ui.showDrop(false);
+      const f = e.dataTransfer?.files?.[0];
+      // Lane Molecule viewer (engine): a toy whose panel takes dropped files
+      // (input.drop) reads a file of a kind it opens; anything else loads as before.
+      if (f && this.ui.dropOnToy?.(f)) return;
+      if (f) this.openFile(f);
+    });
+  }
+
+  // ---- Making toys ---------------------------------------------------------------
+
+  setGenerator(g, { rebuild = true } = {}) {
+    this.generator = normalizeGenerator(g, this.player.profile);
+    if (!rebuild) return;
+    clearTimeout(this.genTimer);
+    this.genTimer = setTimeout(() => this.makeToy(this.generator), 250);
+  }
+
+  async makeToy(g) {
+    if (this.busy) return;
+    const player = this.player;
+    const generator = normalizeGenerator(g, player.profile);
+    this.generator = generator;
+    const scene = player.scene;
+    scene.toy = { kind: "procedural", id: null, generator, clay: [] };
+    scene.paint.stamps = [];
+    this.ui.setPaintCount(scene.paint.stamps.length);
+    this.file = null;
+    try {
+      await this.loadToy(scene.toy);
+      player.syncDrop();
+    } catch (err) {
+      this.ui.toast(err.message, 5000);
+    }
+  }
+
+  // ---- Look ---------------------------------------------------------------------
+
+  setLook(partial) {
+    const player = this.player;
+    player.scene.look = normalizeLook({ ...player.scene.look, ...partial });
+    const theme = player.applyLook();
+    this.ui.setLook(player.scene.look, theme);
+    player.stage.requestRender();
+    if (this.ui.currentTab() === "share") this.updateEmbedSoon();
+  }
+
+  setAutoplay(partial) {
+    const player = this.player;
+    // UI r3: switched for a toy that holds still, the turntable is that toy's
+    // choice for the visit; otherwise it is the device's (lane Viewer).
+    const toy = player.scene.toy;
+    const still = toy.kind === "builtin" && holdsStill(findToy(toy.id));
+    if ("turntable" in partial && still) this.spins.set(toyKey(toy), partial.turntable);
+    else if ("turntable" in partial) rememberTurntable(partial.turntable); // lane Viewer
+    player.scene.autoplay = { ...player.scene.autoplay, ...partial };
+    player.camera.setTurntable(player.scene.autoplay.turntable);
+    this.ui.setAutoplay(player.scene.autoplay, player.reducedMotion);
+    player.stage.requestRender();
+  }
+
+  // ---- Files ----------------------------------------------------------------------
+
+  async openFile(file) {
+    const ext = extOf(file.name);
+    if (ext === "json" || file.type === "application/json") return this.importJSONFile(file);
+    if (ext === "ksplat") {
+      this.ui.toast(fileOpenError(file), 6000);
+      return;
+    }
+    if (!["ply", "sog", "splat", "spz"].includes(ext)) {
+      this.ui.toast(
+        `Could not open “${file.name}”. This file type is not supported. Choose a PLY, SOG, SPLAT, SPZ, or JSON scene file.`,
+        6000,
+      );
+      return;
+    }
+    const limits = LIMITS[this.player.profile];
+    let count = 0;
+    let header = null;
+    if (ext === "ply") {
+      try {
+        header = readPlyHeader(new Uint8Array(await file.slice(0, 65536).arrayBuffer()));
+      } catch (err) {
+        this.ui.toast(fileOpenError(file, err), 6000);
+        return;
+      }
+      count = header?.count || 0;
+    } else if (ext === "splat") {
+      count = Math.floor(file.size / 32);
+    }
+    const tooBig = file.size > limits.warnBytes || count > limits.warnSplats;
+    if (tooBig) {
+      const canDownsample =
+        ext === "ply" && header && header.format === "binary_little_endian" && !header.compressed;
+      const what = count
+        ? `${formatBytes(file.size)} with ${formatCount(count)} splats`
+        : formatBytes(file.size);
+      this.pendingLarge = { file, header, count };
+      this.ui.showLargeFile(
+        `${file.name} is ${what}, which may be slow or run out of memory on this device.` +
+          (canDownsample
+            ? ` A lighter copy keeps about ${formatCount(limits.downsampleTo)} splats.`
+            : ""),
+        canDownsample,
+      );
+      return;
+    }
+    return this.loadUserFile(file);
+  }
+
+  async resolveLargeFile(choice) {
+    const pending = this.pendingLarge;
+    this.pendingLarge = null;
+    this.ui.showLargeFile(null);
+    if (!pending || choice === "cancel") return;
+    if (choice === "all") return this.loadUserFile(pending.file);
+    this.ui.progress.show("Making a lighter copy…");
+    try {
+      const bytes = new Uint8Array(await pending.file.arrayBuffer());
+      const header = readPlyHeader(bytes);
+      const props = decimatePly(bytes, header, LIMITS[this.player.profile].downsampleTo, 7);
+      const resource = resourceFromProps(this.player.stage, props);
+      await this.loadUserFile(pending.file, { resource });
+      this.ui.toast(`Loaded a lighter copy with ${formatCount(props.count)} splats.`);
+    } catch (err) {
+      this.ui.toast(fileOpenError(pending.file, err), 6000);
+    } finally {
+      this.ui.progress.hide();
+    }
+  }
+
+  async loadUserFile(file, { resource = null } = {}) {
+    const player = this.player;
+    const ext = extOf(file.name);
+    try {
+      const bytes = resource ? null : new Uint8Array(await file.arrayBuffer());
+      this.file = { name: file.name, size: file.size, bytes, resource };
+      const pending =
+        this.pendingFileScene && this.pendingFileScene.toy.file.name === file.name
+          ? this.pendingFileScene
+          : null;
+      this.pendingFileScene = null;
+      const scene = pending || player.scene;
+      scene.toy = {
+        kind: "file",
+        file: { name: file.name, bytes: file.size },
+        flip: pending ? pending.toy.flip : ext === "ply" || ext === "splat",
+      };
+      if (!pending) scene.paint.stamps = [];
+      if (pending) await this.applyScene(scene, { file: this.file });
+      else {
+        await this.loadToy(scene.toy, { file: this.file });
+        player.camera.setState(createScene().camera, { asHome: true, snap: false });
+        player.syncDrop();
+      }
+      this.ui.toast(`${file.name} loaded. It stays in your browser.`);
+    } catch (err) {
+      this.ui.toast(fileOpenError(file, err), 6000);
+    }
+  }
+
+  async setFlip(flip) {
+    const player = this.player;
+    if (player.scene.toy.kind !== "file" || !this.file) return;
+    player.scene.toy.flip = flip;
+    player.scene.paint.stamps = [];
+    await this.loadToy(player.scene.toy, { file: this.file });
+  }
+
+  async importJSONFile(file) {
+    try {
+      const obj = JSON.parse(await file.text());
+      const scene = normalizeScene(obj, this.player.profile);
+      const fileMatch =
+        scene.toy.kind === "file" && this.file && this.file.name === scene.toy.file.name;
+      await this.applyScene(scene, { file: fileMatch ? this.file : null });
+      this.ui.toast(`Loaded ${file.name}.`);
+    } catch (err) {
+      this.ui.toast(fileOpenError(file, err), 6000);
+    }
+  }
+
+  // ---- Share ------------------------------------------------------------------------
+
+  exportScene() {
+    const player = this.player;
+    const s = structuredClone(player.scene);
+    // Pictures: the page showing goes with the media.
+    if (s.toy.media && player.pictures) s.toy.media.page = player.pictures.page;
+    s.createdAt = new Date().toISOString();
+    s.camera = player.camera.getState();
+    if (s.toy.kind === "procedural" && player.proc) s.toy.clay = player.proc.clay.slice();
+    if (s.toy.kind === "builtin" && player.proc?.kit && player.proc.clay.length)
+      s.toy.clay = player.proc.clay.slice();
+    return normalizeScene(s, player.profile);
+  }
+
+  exportJSON() {
+    const scene = this.exportScene();
+    const blob = new Blob([JSON.stringify(scene, null, 2)], { type: "application/json" });
+    downloadBlob(blob, timestampName("json"));
+    const note = this.sceneSaveNote(scene);
+    this.ui.toast(
+      ["Scene saved as JSON.", note].filter(Boolean).join(" "),
+      note ? 10000 : undefined,
+    );
+  }
+
+  sceneSaveNote(scene) {
+    const clay = scene.toy.clay?.length
+      ? (this.player.proc?.clay.length ?? this.player.scene.toy.clay?.length ?? 0) -
+        scene.toy.clay.length
+      : 0;
+    const paint = this.player.scene.paint.stamps.length - scene.paint.stamps.length;
+    const omitted = [];
+    if (clay > 0) omitted.push(`${clay} clay edit${clay === 1 ? "" : "s"}`);
+    if (paint > 0) omitted.push(`${paint} paint stamp${paint === 1 ? "" : "s"}`);
+    return omitted.length
+      ? `The newest ${omitted.join(" and ")} ${clay + paint === 1 ? "was" : "were"} not included. Save limits are 2,000 clay edits and 4,000 paint stamps.`
+      : "";
+  }
+
+  async copyLink() {
+    const scene = this.exportScene();
+    const note = this.sceneSaveNote(scene);
+    const res = await buildShareHash(scene);
+    if (note) res.notes.push(note);
+    if (!res.ok) {
+      this.ui.setLinkNote(res.notes.join(" "));
+      this.ui.toast("The scene is too big for a link. Save the scene as a file instead.", 5000);
+      return;
+    }
+    const url = shareURL(res.hash);
+    history.replaceState(null, "", `#s=${res.hash}`);
+    // Pictures: a file from this device stays here; the link has the settings.
+    if (this.player.scene.toy.media?.file || this.player.scene.toy.media?.files)
+      res.notes.push(
+        "Your own file stays on this device: the link carries the settings only, and whoever opens it is asked to open the same file.",
+      );
+    this.ui.setLinkNote(res.notes.join(" "));
+    try {
+      await navigator.clipboard.writeText(url);
+      this.ui.toast("Link copied.");
+    } catch {
+      this.ui.toast("The link is in the address bar; copy it from there.");
+    }
+    return url;
+  }
+
+  updateEmbedSoon() {
+    clearTimeout(this.embedTimer);
+    this.embedTimer = setTimeout(() => this.updateEmbed(), 300);
+  }
+
+  async updateEmbed() {
+    const scene = this.exportScene();
+    const saveNote = this.sceneSaveNote(scene);
+    const res = await buildShareHash(scene);
+    if (saveNote) res.notes.push(saveNote);
+    const transparent = this.ui.embedTransparent();
+    const size = this.ui.embedSize();
+    if (!res.ok) {
+      this.ui.setEmbed({ iframe: "", element: "", note: res.notes.join(" ") });
+      return res;
+    }
+    const note = [
+      ...res.notes,
+      "The iframe works anywhere. The element needs one script tag and no iframe; both load the toy from GitHub Pages and fill their column at 4:3, up to the chosen width. The README lists more options, such as zoom and hiding the zoom buttons.",
+    ].join(" ");
+    this.ui.setEmbed({
+      iframe: iframeSnippet(res.hash, { transparent, size }),
+      element: elementSnippet(res.hash, { transparent, size }),
+      note,
+    });
+    return res;
+  }
+
+  async withBusy(label, fn) {
+    if (this.busy) return;
+    this.busy = true;
+    this.ui.setBusy(true);
+    this.ui.progress.show(label);
+    try {
+      return await fn((f, l) => this.ui.progress.update(f, l));
+    } catch (err) {
+      console.info(err);
+      this.ui.toast(err.message || String(err), 5000);
+    } finally {
+      this.ui.progress.hide();
+      this.ui.setBusy(false);
+      this.busy = false;
+    }
+  }
+
+  async exportPNG() {
+    return this.withBusy("Taking a picture…", async () => {
+      const shot = await this.player.stage.captureFrame();
+      const blob = await canvasToBlob(shot);
+      downloadBlob(blob, timestampName("png"));
+      this.ui.toast("Picture saved.");
+      return blob;
+    });
+  }
+
+  // Runs fn with a fixed-size, frozen player and restores it afterwards.
+  // label: a short message shown over the stage meanwhile (Stage.cover).
+  async withCapture(size, fn, { label = "" } = {}) {
+    const player = this.player;
+    // Engine (QR r4): the fixed size and the export camera stay off screen.
+    await player.stage.cover({ label });
+    const base = { cam: player.camera.getState(), time: player.time, idle: player.idle.weight };
+    const look = player.scene.look;
+    const fx = player.scene.effects;
+    const savedWind = { ...fx.wind };
+    if (look.background === "transparent") {
+      player.stage.setClearColor(hexRgb(THEMES[player.resolvedTheme()].page), 1);
+    }
+    player.idle.weight = 0;
+    player.stage.setFixedSize(size);
+    try {
+      return await fn(base, savedWind);
+    } finally {
+      fx.wind = savedWind;
+      player.stage.setFixedSize(null);
+      player.camera.setState(base.cam, { snap: true });
+      player.time = base.time;
+      player.idle.weight = base.idle;
+      player.applyLook();
+      player.resume();
+      player.stage.uncover();
+    }
+  }
+
+  anyAmbientOn() {
+    const fx = this.player.scene.effects;
+    return ["wind", "dissolve", "drop", "twist", "slice"].some((id) => fx[id].on);
+  }
+
+  async exportGIF({ kind = "turntable", frames = 48, size = 512 } = {}) {
+    const player = this.player;
+    return this.withBusy("Making a GIF…", (progress) =>
+      this.withCapture([size, size], async (base) => {
+        if (kind === "effects" && !this.anyAmbientOn()) {
+          player.scene.effects.wind = { ...player.scene.effects.wind, on: true, strength: 0.4 };
+          this.ui.toast("No effect was on, so the GIF uses a breeze.");
+        }
+        const loop = 4;
+        const blob = await encodeGIF({
+          frames,
+          size,
+          loopMs: loop * 1000,
+          onProgress: (f) => progress(f, "Making a GIF…"),
+          renderFrame: (i, n) => {
+            const pose =
+              kind === "turntable"
+                ? { ...base.cam, yaw: base.cam.yaw + (i / n) * Math.PI * 2 }
+                : base.cam;
+            return player.renderAt(base.time + (i / n) * loop, pose);
+          },
+        });
+        downloadBlob(blob, timestampName("gif"));
+        this.ui.toast(`GIF saved (${formatBytes(blob.size)}).`);
+        return blob;
+      }),
+    );
+  }
+
+  async exportWebM(seconds = 5) {
+    const wm = webmSupport();
+    if (!wm.ok) return;
+    const player = this.player;
+    return this.withBusy("Recording a video…", (progress) =>
+      this.withCapture([720, 720], async (base) => {
+        const blob = await recordWebM({
+          canvas,
+          seconds,
+          mime: wm.mime,
+          onProgress: (f) => progress(f, "Recording a video…"),
+          drawFrame: (t) => {
+            const pose = { ...base.cam, yaw: base.cam.yaw + t * Math.PI * 2 };
+            return player.renderAt(base.time + t * seconds, pose);
+          },
+        });
+        downloadBlob(blob, timestampName("webm"));
+        this.ui.toast(`Video saved (${formatBytes(blob.size)}).`);
+        return blob;
+      }),
+    );
+  }
+
+  // Lane PDF lab: Save as PDF (labs). Its dialog and pdf-lib load only when
+  // someone opens it (src/pdf-export/).
+  // Lane QR r4 part 2 (labs): the scene's link as a QR code, in a dialog
+  // (src/qr/share.js, loaded when someone opens it).
+  async openShareQR() {
+    if (this.busy) return;
+    try {
+      const { openShareQR } = await import("./qr/share.js");
+      return await openShareQR(this);
+    } catch (err) {
+      console.info(err);
+      this.ui.toast("The QR code couldn't load. Try again in a moment.", 5000);
+    }
+  }
+
+  async openPdfExport() {
+    if (this.busy) return;
+    try {
+      const { openPdfDialog } = await import("./pdf-export/index.js");
+      return openPdfDialog(this);
+    } catch (err) {
+      console.info(err);
+      this.ui.toast("Save as PDF couldn't load. Try again in a moment.", 5000);
+    }
+  }
+
+  // ---- UI r5: Record ---------------------------------------------------------------
+  // A live recording of the stage while someone plays, with the site's sound.
+  // The Share tab starts it; the pill on the stage shows the time, stops it and
+  // then saves (or, on a phone, shares) the video. 60 seconds at most.
+  async startRecord() {
+    if (this.recording || this.recordWait || this.busy) return;
+    const player = this.player;
+    const stage = player.stage;
+    // The site's sound (its context is made now, in the tap, so a sound
+    // switched on while recording is in the video too).
+    const ctx = this.sound.audio?.();
+    const audio = ctx && this.sound.master ? { ctx, node: this.sound.master } : null;
+    // On a phone the sheet closes first, so the take starts at the stage's
+    // own size (two frames for the new size to reach the canvas).
+    this.ui.collapseSheet?.();
+    this.recordWait = true;
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    this.recordWait = false;
+    // A steady size for the encoder: no drop in resolution while dragging,
+    // and at most 1920 pixels on the long side.
+    const saved = { adaptive: stage.adaptive, cap: stage.pixelCap };
+    const r = canvas.getBoundingClientRect();
+    const long = Math.max(r.width, r.height, 1);
+    stage.adaptive = false;
+    stage.reduced = false;
+    stage.setPixelRatio(Math.min(saved.cap ?? 3, 1920 / long));
+    let rec;
+    const kick = () => rec?.frame(); // each drawn frame goes into the video
+    stage.app.on("frameend", kick);
+    const restore = () => {
+      stage.app.off("frameend", kick);
+      stage.adaptive = saved.adaptive;
+      stage.setPixelRatio(saved.cap);
+    };
+    try {
+      rec = startRecording({
+        canvas,
+        audio,
+        maxSeconds: RECORD_LIMIT,
+        onTick: (seconds) => {
+          this.ui.setRecord({ state: "rec", seconds, limit: RECORD_LIMIT });
+          stage.requestRender(0); // a still toy still gives the video a few frames a second
+        },
+      });
+    } catch (err) {
+      restore();
+      this.ui.toast(`Could not record: ${err.message || err}`);
+      return;
+    }
+    this.recording = rec;
+    this.recorded = null;
+    this.ui.setRecord({ state: "rec", seconds: 0, limit: RECORD_LIMIT });
+    document.getElementById("rec-stop").focus({ preventScroll: true });
+    stage.requestRender();
+    rec.done
+      .then(({ blob, ext, seconds }) => {
+        this.recorded = { blob, name: timestampName(ext), seconds };
+        const share = !!canShareFile(blob, this.recorded.name);
+        this.ui.setRecord({ state: "ready", seconds, bytes: blob.size, share });
+      })
+      .catch((err) => {
+        this.ui.setRecord({ state: "off" });
+        this.ui.toast(`Could not record: ${err?.message || err}`);
+      })
+      .finally(() => {
+        this.recording = null;
+        restore();
+      });
+  }
+
+  stopRecord() {
+    if (!this.recording) return;
+    this.ui.setRecord({ state: "busy" });
+    this.recording.stop();
+  }
+
+  saveRecord() {
+    const r = this.recorded;
+    if (!r) return;
+    downloadBlob(r.blob, r.name);
+    this.ui.toast(`Video saved (${formatBytes(r.blob.size)}).`);
+  }
+
+  // The phone's share sheet (Save Video on an iPhone); saving is the fallback.
+  // Share lane: true when the video was shared or saved, false when the person
+  // canceled the share sheet (the preview then still asks before discarding).
+  async shareRecord() {
+    const r = this.recorded;
+    if (!r) return false;
+    const file = canShareFile(r.blob, r.name);
+    if (!file) return (this.saveRecord(), true);
+    try {
+      await navigator.share({ files: [file], title: "Splashery" });
+      return true;
+    } catch (err) {
+      if (err?.name === "AbortError") return false;
+      this.saveRecord();
+      return true;
+    }
+  }
+
+  closeRecord() {
+    this.recorded = null;
+    this.ui.setRecord({ state: "off" });
+  }
+}
+
+function hexRgb(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
+}
+
+const app = new App();
+app.start();
+
+// Test and console hooks (the smoke test drives the app through these).
+window.__splashery = {
+  app,
+  get player() {
+    return app.player;
+  },
+  get ready() {
+    return document.body.dataset.ready === "true";
+  },
+  get renderer() {
+    return app.player?.stage ? app.player.deviceType : null;
+  },
+  exportScene: () => app.exportScene(),
+  get defaultEffects() {
+    return defaultEffects();
+  },
+  name: APP_NAME,
+};

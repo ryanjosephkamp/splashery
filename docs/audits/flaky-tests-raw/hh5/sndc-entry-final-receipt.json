@@ -1,0 +1,71 @@
+{
+  "files_sha256": {
+    "sndc-entry-controls/report.json": "d231745d34b61050c95abf36a0423e5845ae3cc7b3bf28a4815b7e71c8578d81",
+    "sndc-entry-controls/results/.last-run.json": "fdb525c0de34b792b8521797ecac01edc170f95b2ec76eb28617e9c1cae5db4f",
+    "sndc-entry-controls/results/sndc-entry-new-dispatch-a--53354-mple-starts-with-the-motion-chromium/error-context.md": "e30e9aad35438392941e95ff0ab1774b8d5ecf55d369a113de820caa2a00f231",
+    "sndc-entry-controls/results/sndc-entry-new-dispatch-a--53354-mple-starts-with-the-motion-chromium/test-failed-1.png": "96b18299cfa1f7c1b50e7862e560f619b879decb6491e341e14b13fd0cf2f1fc",
+    "sndc-entry-controls/results/sndc-entry-new-dispatch-a--53354-mple-starts-with-the-motion-chromium/trace.zip": "d4383e99a266924c3843612f67d522dd335cf137e25dc99353f0a087db2fe692",
+    "sndc-entry-controls/results/sndc-entry-new-motion-a-to-7e2ba-mple-starts-with-the-motion-chromium/error-context.md": "e30e9aad35438392941e95ff0ab1774b8d5ecf55d369a113de820caa2a00f231",
+    "sndc-entry-controls/results/sndc-entry-new-motion-a-to-7e2ba-mple-starts-with-the-motion-chromium/test-failed-1.png": "f5b33968cc26f13a9f762e4052c89dfb5cbb3d306b4a5328cf44fa8e8c2359d9",
+    "sndc-entry-controls/results/sndc-entry-new-motion-a-to-7e2ba-mple-starts-with-the-motion-chromium/trace.zip": "9a869c30f00629e8322229789e43e404f2eaff113d5ab267a9ba5f2c518ba924",
+    "sndc-entry-controls/results/sndc-entry-old-getter-a-to-fd766-mple-starts-with-the-motion-chromium/error-context.md": "e30e9aad35438392941e95ff0ab1774b8d5ecf55d369a113de820caa2a00f231",
+    "sndc-entry-controls/results/sndc-entry-old-getter-a-to-fd766-mple-starts-with-the-motion-chromium/test-failed-1.png": "f5b33968cc26f13a9f762e4052c89dfb5cbb3d306b4a5328cf44fa8e8c2359d9",
+    "sndc-entry-controls/results/sndc-entry-old-getter-a-to-fd766-mple-starts-with-the-motion-chromium/trace.zip": "8fe7166dad71dfdecac05cb0b939aa2dbe416f4e664fab94063fa75592a6fad4",
+    "sndc-entry-controls/summary.json": "a0a5381c5b57713a1cb9e365b850c899070a74aa0a9aafbaedda34426458f9c5",
+    "sndc-entry-final/report.json": "a36b32d6e9ec8befb8f4c7cf2cdd68fb02d07b2bf83511761bfca365bdae4555",
+    "sndc-entry-final/results/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+    "sndc-entry-final/summary.json": "e5e9b9fa250040b66c70c9669e5ae548de83aad845cfde2e557681d55ad49fe2",
+    "sndc-entry-controls.log": "d19f6a47e2fda77fea3a8eea8484f4d5eea63a6503c494ae2098cfd50100dfda",
+    "sndc-entry-control-hashes.jsonl": "ae9e0d667a10c94a56117f031e32f472d41156025c313c63760ecc6c6f2b0b08",
+    "sndc-entry-final.log": "9a3d390b5899f01152fbe21562d52d5c7af10a664b1a752e6deaaeea23ee8d43",
+    "sndc-entry-final-metadata.json": "eaf21636042d9f9fd83c6bfc962352fd00376787a0c6a1bcdb2ba789b60e2a7d",
+    "sndc-entry-final-actual-spec.mjs": "431157dff92c0841fac8b6067409121170e2e0bc18d9439d0770dcedd5d4ca50"
+  },
+  "test_source_sha256": "431157dff92c0841fac8b6067409121170e2e0bc18d9439d0770dcedd5d4ca50",
+  "expect_expressions_changed": [],
+  "original_expect_lines_identical": 31,
+  "formula_unchanged": true,
+  "final_actual": {
+    "passed": 30,
+    "failed": 0,
+    "duration_ms": 200829.65699999998,
+    "sample_range_ms": [
+      0.8,
+      10.5
+    ],
+    "workers": 4,
+    "burners": 2,
+    "renderer": "SwiftShader",
+    "retries": 0,
+    "skips": 0
+  },
+  "prior_actual": {
+    "passed": 29,
+    "failed": 1,
+    "failure_ms": 31.100000000093132,
+    "exact_attribution": "not established"
+  },
+  "worklet_getter_control": {
+    "old": {
+      "delay_ms": 82.59999999962747,
+      "stall_native_interval": [
+        0.11029478458049886,
+        0.19156462585034015
+      ],
+      "actual_edge_native": 0.19156462585034015
+    },
+    "new": {
+      "delay_ms": 5.700000000186269,
+      "stall_native_interval": [
+        0.1219047619047619,
+        0.2002721088435374
+      ],
+      "actual_edge_native": 0.12691609977324264
+    }
+  },
+  "remaining_controls": {
+    "new_clean_ms": 6.0,
+    "post_acceptance_pre_return80ms_failed_ms": 86.20000000018626,
+    "Sound_play80ms_failed_ms": 87.29999999981374
+  }
+}

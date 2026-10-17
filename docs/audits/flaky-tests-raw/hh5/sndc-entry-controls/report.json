@@ -1,0 +1,437 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-probe.config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/hh5",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-controls/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/hh5",
+        "testIgnore": [],
+        "testMatch": [
+          "sndc-*.spec.mjs"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4181",
+      "url": "http://127.0.0.1:4181/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery/"
+    }
+  },
+  "suites": [
+    {
+      "title": "sndc-entry-new-clean.spec.mjs",
+      "file": "sndc-entry-new-clean.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6882,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "SNDC_ENTRY_CONTROL {\"timeOrigin\":1792212181832.8,\"tapAt\":5077.699999999721,\"starts\":[{\"at\":5078.699999999721,\"when\":0.1356122448979592,\"now\":0.1306122448979592}],\"nativeReturns\":[{\"at\":5078.699999999721,\"when\":0.1356122448979592,\"now\":0.1306122448979592}],\"edges\":[{\"kind\":\"ready\",\"frame\":3200},{\"kind\":\"edge\",\"frame\":5981,\"contextTime\":0.1356235827664399,\"sampleRate\":44100}]}\n"
+                    },
+                    {
+                      "text": "first sample: 6.0 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:43:01.415Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "530382492e96b5799b5c-ab78d13cb99ab44df150",
+          "file": "sndc-entry-new-clean.spec.mjs",
+          "line": 122,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "sndc-entry-new-dispatch.spec.mjs",
+      "file": "sndc-entry-new-dispatch.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7453,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m87.29999999981374\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m87.29999999981374\u001b[39m\n    at /workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-dispatch.spec.mjs:242:19",
+                    "location": {
+                      "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-dispatch.spec.mjs",
+                      "column": 19,
+                      "line": 242
+                    },
+                    "snippet": "  240 |   expect(r).toBeTruthy();\n  241 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);\n> 242 |   expect(r.delay).toBeLessThan(30);\n      |                   ^\n  243 |   expect(fetched.filter((f) => f === \"dice-throw.mp3\")).toHaveLength(1);\n  244 | });\n  245 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-dispatch.spec.mjs",
+                        "column": 19,
+                        "line": 242
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m87.29999999981374\u001b[39m\n\n  240 |   expect(r).toBeTruthy();\n  241 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);\n> 242 |   expect(r.delay).toBeLessThan(30);\n      |                   ^\n  243 |   expect(fetched.filter((f) => f === \"dice-throw.mp3\")).toHaveLength(1);\n  244 | });\n  245 |\n    at /workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-dispatch.spec.mjs:242:19"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "SNDC_ENTRY_CONTROL {\"timeOrigin\":1792212188640.4,\"tapAt\":5115.299999999814,\"starts\":[{\"at\":5197.5999999996275,\"when\":0.17624716553287983,\"now\":0.17124716553287983}],\"nativeReturns\":[{\"at\":5197.5999999996275,\"when\":0.17624716553287983,\"now\":0.17124716553287983}],\"edges\":[{\"kind\":\"ready\",\"frame\":3200},{\"kind\":\"edge\",\"frame\":7773,\"contextTime\":0.17625850340136054,\"sampleRate\":44100}]}\n"
+                    },
+                    {
+                      "text": "first sample: 87.3 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:43:08.546Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-dispatch-a--53354-mple-starts-with-the-motion-chromium/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-dispatch-a--53354-mple-starts-with-the-motion-chromium/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-dispatch-a--53354-mple-starts-with-the-motion-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-dispatch.spec.mjs",
+                    "column": 19,
+                    "line": 242
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ec67f63a1a7411b94120-19cf661cff2b3e517403",
+          "file": "sndc-entry-new-dispatch.spec.mjs",
+          "line": 122,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "sndc-entry-new-getter.spec.mjs",
+      "file": "sndc-entry-new-getter.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6511,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "SNDC_ENTRY_CONTROL {\"timeOrigin\":1792212197192.5,\"tapAt\":4827.200000000186,\"starts\":[{\"at\":4827.9000000003725,\"when\":0.1269047619047619,\"now\":0.1219047619047619}],\"nativeReturns\":[{\"at\":4827.9000000003725,\"when\":0.1269047619047619,\"now\":0.1219047619047619}],\"getter\":{\"at\":4828,\"nativeAt\":0.1219047619047619,\"end\":4908,\"nativeEnd\":0.2002721088435374},\"edges\":[{\"kind\":\"ready\",\"frame\":2688},{\"kind\":\"edge\",\"frame\":5597,\"contextTime\":0.12691609977324264,\"sampleRate\":44100}]}\n"
+                    },
+                    {
+                      "text": "first sample: 5.7 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:43:16.896Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "dbf51a7b45488762b87d-c23ce2d91aaaaf04750c",
+          "file": "sndc-entry-new-getter.spec.mjs",
+          "line": 122,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "sndc-entry-new-motion.spec.mjs",
+      "file": "sndc-entry-new-motion.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6642,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m86.20000000018626\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m86.20000000018626\u001b[39m\n    at /workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-motion.spec.mjs:246:19",
+                    "location": {
+                      "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-motion.spec.mjs",
+                      "column": 19,
+                      "line": 246
+                    },
+                    "snippet": "  244 |   expect(r).toBeTruthy();\n  245 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);\n> 246 |   expect(r.delay).toBeLessThan(30);\n      |                   ^\n  247 |   expect(fetched.filter((f) => f === \"dice-throw.mp3\")).toHaveLength(1);\n  248 | });\n  249 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-motion.spec.mjs",
+                        "column": 19,
+                        "line": 246
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m86.20000000018626\u001b[39m\n\n  244 |   expect(r).toBeTruthy();\n  245 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);\n> 246 |   expect(r.delay).toBeLessThan(30);\n      |                   ^\n  247 |   expect(fetched.filter((f) => f === \"dice-throw.mp3\")).toHaveLength(1);\n  248 | });\n  249 |\n    at /workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-motion.spec.mjs:246:19"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "SNDC_ENTRY_CONTROL {\"timeOrigin\":1792212203668.2,\"tapAt\":4480.5,\"starts\":[{\"at\":4561.700000000186,\"when\":0.22558956916099773,\"now\":0.22058956916099773}],\"nativeReturns\":[{\"at\":4561.700000000186,\"when\":0.22558956916099773,\"now\":0.22058956916099773}],\"edges\":[{\"kind\":\"ready\",\"frame\":4480},{\"kind\":\"edge\",\"frame\":9949,\"contextTime\":0.22560090702947846,\"sampleRate\":44100}]}\n"
+                    },
+                    {
+                      "text": "first sample: 86.2 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:43:23.581Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-motion-a-to-7e2ba-mple-starts-with-the-motion-chromium/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-motion-a-to-7e2ba-mple-starts-with-the-motion-chromium/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-motion-a-to-7e2ba-mple-starts-with-the-motion-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-motion.spec.mjs",
+                    "column": 19,
+                    "line": 246
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f5df2c11813a3a159c6d-e337e4113c8d9697436e",
+          "file": "sndc-entry-new-motion.spec.mjs",
+          "line": 122,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "sndc-entry-old-getter.spec.mjs",
+      "file": "sndc-entry-old-getter.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6887,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m82.59999999962747\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m82.59999999962747\u001b[39m\n    at /workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-old-getter.spec.mjs:250:19",
+                    "location": {
+                      "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-old-getter.spec.mjs",
+                      "column": 19,
+                      "line": 250
+                    },
+                    "snippet": "  248 |   expect(r).toBeTruthy();\n  249 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);\n> 250 |   expect(r.delay).toBeLessThan(30);\n      |                   ^\n  251 |   expect(fetched.filter((f) => f === \"dice-throw.mp3\")).toHaveLength(1);\n  252 | });\n  253 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-old-getter.spec.mjs",
+                        "column": 19,
+                        "line": 250
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m82.59999999962747\u001b[39m\n\n  248 |   expect(r).toBeTruthy();\n  249 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);\n> 250 |   expect(r.delay).toBeLessThan(30);\n      |                   ^\n  251 |   expect(fetched.filter((f) => f === \"dice-throw.mp3\")).toHaveLength(1);\n  252 | });\n  253 |\n    at /workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-old-getter.spec.mjs:250:19"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "SNDC_ENTRY_CONTROL {\"timeOrigin\":1792212211383.5,\"tapAt\":4542.9000000003725,\"starts\":[{\"at\":4625.5,\"when\":0.11529478458049887,\"now\":0.19156462585034015}],\"nativeReturns\":[{\"at\":4625.600000000093,\"when\":0.11529478458049887,\"now\":0.19156462585034015}],\"getter\":{\"at\":4543.9000000003725,\"nativeAt\":0.11029478458049886,\"end\":4625.300000000279,\"nativeEnd\":0.19156462585034015},\"edges\":[{\"kind\":\"ready\",\"frame\":3200},{\"kind\":\"edge\",\"frame\":8448,\"contextTime\":0.19156462585034015,\"sampleRate\":44100}]}\n"
+                    },
+                    {
+                      "text": "first sample: 82.6 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:43:31.099Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-old-getter-a-to-fd766-mple-starts-with-the-motion-chromium/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-old-getter-a-to-fd766-mple-starts-with-the-motion-chromium/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-old-getter-a-to-fd766-mple-starts-with-the-motion-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-old-getter.spec.mjs",
+                    "column": 19,
+                    "line": 250
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "34f7075ed1623682b3e3-7495e286f5ba7c998ac4",
+          "file": "sndc-entry-old-getter.spec.mjs",
+          "line": 122,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T04:43:00.317Z",
+    "duration": 38129.785,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,38 @@
+
+Running 12 tests using 1 worker
+··F·········
+
+  1) [chromium] › tests/shr.spec.mjs:202:5 › 390x844 › the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      349 |   });
+      350 |   if (got.shown) expect(got.focused).toBe(true);
+    > 351 |   else expect(got.body || got.focused).toBe(true);
+          |                                        ^
+      352 | }
+      353 |
+      354 | // One take from the Share tab, stopped from the pill; the preview opens.
+        at expectRecordFocused (/home/runner/work/splashery/splashery/tests/shr.spec.mjs:351:40)
+        at /home/runner/work/splashery/splashery/tests/shr.spec.mjs:337:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/ci-out/shard-8/results/shr/shr-390x844-the-preview-sh-049d1-d-frees-it-Save-still-saves-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/ci-out/shard-8/results/shr/shr-390x844-the-preview-sh-049d1-d-frees-it-Save-still-saves-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/ci-out/shard-8/results/shr/shr-390x844-the-preview-sh-049d1-d-frees-it-Save-still-saves-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../_temp/ci-out/shard-8/results/shr/shr-390x844-the-preview-sh-049d1-d-frees-it-Save-still-saves-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/shr.spec.mjs:202:5 › 390x844 › the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves 
+  11 passed (3.0m)

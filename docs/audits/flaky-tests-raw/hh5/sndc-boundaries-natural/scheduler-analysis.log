@@ -1,0 +1,1 @@
+{"observer_summary": [{"kind": "observer-summary", "interval_ms": 25, "samples": 7015, "elapsed_s": 224.1894347399998, "user_cpu_s": 6.242939, "system_cpu_s": 2.412152}], "observer_work_ms": {"samples": 7015, "max": 485.37123700043594, "mean": 2.84975703264303}}

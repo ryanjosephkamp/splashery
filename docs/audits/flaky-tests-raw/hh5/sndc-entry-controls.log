@@ -1,0 +1,129 @@
+[2m[WebServer] [22m(node:39632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:39643) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39643) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+SNDC_ENTRY_CONTROL {"timeOrigin":1792212181832.8,"tapAt":5077.699999999721,"starts":[{"at":5078.699999999721,"when":0.1356122448979592,"now":0.1306122448979592}],"nativeReturns":[{"at":5078.699999999721,"when":0.1356122448979592,"now":0.1306122448979592}],"edges":[{"kind":"ready","frame":3200},{"kind":"edge","frame":5981,"contextTime":0.1356235827664399,"sampleRate":44100}]}
+first sample: 6.0 ms after the tap
+  ✓  1 [chromium] › .cache/flaky-tests/hh5/sndc-entry-new-clean.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (6.9s)
+SNDC_ENTRY_CONTROL {"timeOrigin":1792212188640.4,"tapAt":5115.299999999814,"starts":[{"at":5197.5999999996275,"when":0.17624716553287983,"now":0.17124716553287983}],"nativeReturns":[{"at":5197.5999999996275,"when":0.17624716553287983,"now":0.17124716553287983}],"edges":[{"kind":"ready","frame":3200},{"kind":"edge","frame":7773,"contextTime":0.17625850340136054,"sampleRate":44100}]}
+first sample: 87.3 ms after the tap
+  ✘  2 [chromium] › .cache/flaky-tests/hh5/sndc-entry-new-dispatch.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (7.5s)
+(node:39880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+SNDC_ENTRY_CONTROL {"timeOrigin":1792212197192.5,"tapAt":4827.200000000186,"starts":[{"at":4827.9000000003725,"when":0.1269047619047619,"now":0.1219047619047619}],"nativeReturns":[{"at":4827.9000000003725,"when":0.1269047619047619,"now":0.1219047619047619}],"getter":{"at":4828,"nativeAt":0.1219047619047619,"end":4908,"nativeEnd":0.2002721088435374},"edges":[{"kind":"ready","frame":2688},{"kind":"edge","frame":5597,"contextTime":0.12691609977324264,"sampleRate":44100}]}
+first sample: 5.7 ms after the tap
+  ✓  3 [chromium] › .cache/flaky-tests/hh5/sndc-entry-new-getter.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (6.5s)
+SNDC_ENTRY_CONTROL {"timeOrigin":1792212203668.2,"tapAt":4480.5,"starts":[{"at":4561.700000000186,"when":0.22558956916099773,"now":0.22058956916099773}],"nativeReturns":[{"at":4561.700000000186,"when":0.22558956916099773,"now":0.22058956916099773}],"edges":[{"kind":"ready","frame":4480},{"kind":"edge","frame":9949,"contextTime":0.22560090702947846,"sampleRate":44100}]}
+first sample: 86.2 ms after the tap
+  ✘  4 [chromium] › .cache/flaky-tests/hh5/sndc-entry-new-motion.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (6.6s)
+(node:40090) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40090) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+SNDC_ENTRY_CONTROL {"timeOrigin":1792212211383.5,"tapAt":4542.9000000003725,"starts":[{"at":4625.5,"when":0.11529478458049887,"now":0.19156462585034015}],"nativeReturns":[{"at":4625.600000000093,"when":0.11529478458049887,"now":0.19156462585034015}],"getter":{"at":4543.9000000003725,"nativeAt":0.11029478458049886,"end":4625.300000000279,"nativeEnd":0.19156462585034015},"edges":[{"kind":"ready","frame":3200},{"kind":"edge","frame":8448,"contextTime":0.19156462585034015,"sampleRate":44100}]}
+first sample: 82.6 ms after the tap
+  ✘  5 [chromium] › .cache/flaky-tests/hh5/sndc-entry-old-getter.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (6.9s)
+
+
+  1) [chromium] › .cache/flaky-tests/hh5/sndc-entry-new-dispatch.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m30[39m
+    Received:   [31m87.29999999981374[39m
+
+      240 |   expect(r).toBeTruthy();
+      241 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);
+    > 242 |   expect(r.delay).toBeLessThan(30);
+          |                   ^
+      243 |   expect(fetched.filter((f) => f === "dice-throw.mp3")).toHaveLength(1);
+      244 | });
+      245 |
+        at /workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-dispatch.spec.mjs:242:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-dispatch-a--53354-mple-starts-with-the-motion-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-dispatch-a--53354-mple-starts-with-the-motion-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-dispatch-a--53354-mple-starts-with-the-motion-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-dispatch-a--53354-mple-starts-with-the-motion-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › .cache/flaky-tests/hh5/sndc-entry-new-motion.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m30[39m
+    Received:   [31m86.20000000018626[39m
+
+      244 |   expect(r).toBeTruthy();
+      245 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);
+    > 246 |   expect(r.delay).toBeLessThan(30);
+          |                   ^
+      247 |   expect(fetched.filter((f) => f === "dice-throw.mp3")).toHaveLength(1);
+      248 | });
+      249 |
+        at /workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-new-motion.spec.mjs:246:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-motion-a-to-7e2ba-mple-starts-with-the-motion-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-motion-a-to-7e2ba-mple-starts-with-the-motion-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-motion-a-to-7e2ba-mple-starts-with-the-motion-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-new-motion-a-to-7e2ba-mple-starts-with-the-motion-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › .cache/flaky-tests/hh5/sndc-entry-old-getter.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m30[39m
+    Received:   [31m82.59999999962747[39m
+
+      248 |   expect(r).toBeTruthy();
+      249 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);
+    > 250 |   expect(r.delay).toBeLessThan(30);
+          |                   ^
+      251 |   expect(fetched.filter((f) => f === "dice-throw.mp3")).toHaveLength(1);
+      252 | });
+      253 |
+        at /workspace/splashery/.cache/flaky-tests/hh5/sndc-entry-old-getter.spec.mjs:250:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-old-getter-a-to-fd766-mple-starts-with-the-motion-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-old-getter-a-to-fd766-mple-starts-with-the-motion-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-old-getter-a-to-fd766-mple-starts-with-the-motion-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/hh5/sndc-entry-controls/results/sndc-entry-old-getter-a-to-fd766-mple-starts-with-the-motion-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › .cache/flaky-tests/hh5/sndc-entry-new-dispatch.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+    [chromium] › .cache/flaky-tests/hh5/sndc-entry-new-motion.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+    [chromium] › .cache/flaky-tests/hh5/sndc-entry-old-getter.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+  2 passed (38.1s)

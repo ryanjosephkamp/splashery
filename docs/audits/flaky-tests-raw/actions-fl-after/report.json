@@ -1,0 +1,1183 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/splashery/splashery/subject/playwright.config.mjs",
+    "rootDir": "/home/runner/work/splashery/splashery/subject/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+      },
+      "gitCommit": {
+        "shortHash": "0b28beadf",
+        "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "subject": "Document recovered flake evidence and outstanding acceptance gates",
+        "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+        "author": {
+          "name": "Ryan Kamp",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792208885000
+        },
+        "committer": {
+          "name": "Ryan Kamp",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792208885000
+        },
+        "branch": "HEAD"
+      },
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+          },
+          "gitCommit": {
+            "shortHash": "0b28beadf",
+            "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "subject": "Document recovered flake evidence and outstanding acceptance gates",
+            "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+            "author": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "committer": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+          },
+          "gitCommit": {
+            "shortHash": "0b28beadf",
+            "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "subject": "Document recovered flake evidence and outstanding acceptance gates",
+            "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+            "author": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "committer": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "fl.spec.mjs",
+      "file": "fl.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 38000,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:08.671Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-dd9afd2c80eff5b5ee31",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 37262,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:08.270Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-7f2ec70bfc0f9444dd6b",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 40330,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:08.732Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-c0da4a18b1c5823080d5",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 38005,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:08.769Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-5bb99546a7668d0d1e2e",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 32454,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:57.773Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-0a27bfbf45d8b2967620",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 32504,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:57.668Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-673d1188eb99c7037526",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 35059,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:58.086Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-c76b08fae2f2ff355f8f",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 29601,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:01.430Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-ba5a25926818e2f03912",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 32116,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:33.837Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-1738ac8cc2f6e03baf87",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 29770,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:33.285Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-e8f7fec245be967fa130",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 34051,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:34.079Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-92ee22076eb0c4894e85",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 35540,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:36.726Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-cb005eb2613ec463ccc9",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 31479,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:06.403Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-8d48248696957687bb67",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 32493,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:09.421Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-1521ab575c1da1dde39b",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 30494,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:12.180Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-e0720519c78015822703",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 35692,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:15.488Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-34a7404a078c22dcd941",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 27352,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:41.089Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-4fc12d8ca038847d2983",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31354,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:44.878Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-8cc2495fcb0679cfaa14",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 33704,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:45.910Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-4368f10de18b3aec6f96",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 27887,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:54.515Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-502083b90042807f6855",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 28324,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:11.342Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-c86f836d8d625df324c7",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 33352,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:21.404Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-847f5bcb8de13e722a62",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 33680,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:21.787Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-35c8f5f706d19b711aa4",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 28599,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:25.634Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-f2fc60f88a74c173e234",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 32824,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:43.224Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-1d09fbcf3a23d6c99abc",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 32910,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:56.959Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-ee0cb3575cfd1ba8c8fa",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 26,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 33282,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:56.976Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-4fd1490ad0325d23d63a",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 27,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 33355,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:58.837Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-3923d67599f552cc5d51",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 28,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 21865,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:18:19.259Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-4f9b3224760674afaeb6",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 29,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 15367,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:18:32.262Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-8e5a8c66e4a84511c9f5",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T04:14:06.725Z",
+    "duration": 281618.447,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

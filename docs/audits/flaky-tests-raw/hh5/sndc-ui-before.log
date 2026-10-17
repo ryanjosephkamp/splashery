@@ -1,0 +1,47 @@
+[2m[WebServer] [22m(node:30828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:30839) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30839) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+SNDC_PROCESS_MAP {"origin":1792211471610.4,"now":5390.299999999814,"unix":1792211477000,"processInfo":[{"type":"browser","id":30851,"cpuTime":1.06},{"type":"renderer","id":30926,"cpuTime":0.01},{"type":"renderer","id":30927,"cpuTime":2.76},{"type":"GPU","id":30880,"cpuTime":11.38},{"type":"network.mojom.NetworkService","id":30882,"cpuTime":0.33},{"type":"storage.mojom.StorageService","id":30895,"cpuTime":0},{"type":"device.mojom.XRDeviceService","id":30951,"cpuTime":0}]}
+SNDC_BOUNDARIES {"timeOrigin":1792211471610.4,"tapAt":8609.799999999814,"starts":[{"at":8693.69999999972,"when":0.19656462585034015,"now":0.19156462585034015}],"events":[{"name":"Motion.act:enter","at":8609.5},{"name":"tap:accepted","at":8609.799999999814},{"name":"Motion.controlDef:enter","at":8609.799999999814},{"name":"Motion.controlDef:exit","at":8609.799999999814},{"name":"Motion.controlDef:enter","at":8609.799999999814},{"name":"Motion.controlDef:exit","at":8609.799999999814},{"name":"Motion.controlDef:enter","at":8609.799999999814},{"name":"Motion.controlDef:exit","at":8609.799999999814},{"name":"Motion.isLong:enter","at":8609.799999999814},{"name":"Motion.isLong:exit","at":8609.799999999814},{"name":"Motion.act:exit","at":8609.799999999814},{"name":"Stage.requestRender:enter","at":8609.899999999907},{"name":"Stage.requestRender:exit","at":8609.899999999907},{"name":"Player.emit:enter","at":8609.899999999907},{"name":"App.onAction:enter","at":8609.899999999907},{"name":"UI.stall:enter","at":8610},{"name":"UI.stall:exit","at":8691.799999999814},{"name":"UI.refreshInputShown:enter","at":8692.5},{"name":"UI.refreshInputShown:exit","at":8692.5},{"name":"App.ownSound:enter","at":8692.5},{"name":"App.ownSound:exit","at":8692.5},{"name":"Sound.resumeToy:enter","at":8692.5},{"name":"Sound.resumeToy:exit","at":8692.5},{"name":"Sound.play:enter","at":8692.599999999627},{"name":"Sound.audio:enter","at":8692.69999999972},{"name":"Sound.audio:exit","at":8692.69999999972},{"name":"Native.createBufferSource:enter","at":8693.299999999814},{"name":"Native.createBufferSource:exit","at":8693.299999999814},{"name":"Native.buffer:enter","at":8693.299999999814},{"name":"Native.buffer:exit","at":8693.299999999814},{"name":"Native.createGain:enter","at":8693.299999999814},{"name":"Native.createGain:exit","at":8693.299999999814},{"name":"Native.setValueAtTime:enter","at":8693.399999999907},{"name":"Native.setValueAtTime:exit","at":8693.399999999907},{"name":"Native.connect:enter","at":8693.399999999907},{"name":"Native.connect:exit","at":8693.399999999907},{"name":"Native.connect:enter","at":8693.399999999907},{"name":"Native.connect:exit","at":8693.399999999907},{"name":"Native.start:enter","at":8693.399999999907,"when":0.19656462585034015,"now":0.19156462585034015},{"name":"Native.start:exit","at":8693.69999999972,"now":0.19156462585034015,"output":{"contextTime":0.150055,"performanceTime":8688}},{"name":"Sound.play:exit","at":8693.69999999972},{"name":"App.onAction:exit","at":8693.799999999814},{"name":"Player.emit:exit","at":8693.899999999907},{"name":"Stage.requestRender:enter","at":8987.399999999907},{"name":"Stage.requestRender:exit","at":8987.399999999907},{"name":"Motion.controlDef:enter","at":8987.5},{"name":"Motion.controlDef:exit","at":8987.5},{"name":"Stage.requestRender:enter","at":8988},{"name":"Stage.requestRender:exit","at":8988},{"name":"Player.emit:enter","at":8988},{"name":"Motion.controlDef:enter","at":8988},{"name":"Motion.controlDef:exit","at":8988},{"name":"Motion.isLong:enter","at":8988},{"name":"Motion.isLong:exit","at":8988},{"name":"Player.emit:exit","at":8988.099999999627}],"ctx":{"now":0.7604535147392291,"output":{"contextTime":0.72006,"performanceTime":9255.299999999814}}}
+first sample: 88.9 ms after the tap
+  ✘  1 [chromium] › .cache/flaky-tests/hh5/sndc-boundaries-ui-stall.spec.mjs:131:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (13.6s)
+
+
+  1) [chromium] › .cache/flaky-tests/hh5/sndc-boundaries-ui-stall.spec.mjs:131:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m30[39m
+    Received:   [31m88.89999999990687[39m
+
+      270 |   expect(r).toBeTruthy();
+      271 |   console.log(`first sample: ${r.delay.toFixed(1)} ms after the tap`);
+    > 272 |   expect(r.delay).toBeLessThan(30);
+          |                   ^
+      273 |   expect(fetched.filter((f) => f === "dice-throw.mp3")).toHaveLength(1);
+      274 | });
+      275 |
+        at /workspace/splashery/.cache/flaky-tests/hh5/sndc-boundaries-ui-stall.spec.mjs:272:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/sndc-ui-before/results/sndc-boundaries-ui-stall-a-8666d-mple-starts-with-the-motion-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .cache/flaky-tests/hh5/sndc-ui-before/results/sndc-boundaries-ui-stall-a-8666d-mple-starts-with-the-motion-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/hh5/sndc-ui-before/results/sndc-boundaries-ui-stall-a-8666d-mple-starts-with-the-motion-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/hh5/sndc-ui-before/results/sndc-boundaries-ui-stall-a-8666d-mple-starts-with-the-motion-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › .cache/flaky-tests/hh5/sndc-boundaries-ui-stall.spec.mjs:131:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion 

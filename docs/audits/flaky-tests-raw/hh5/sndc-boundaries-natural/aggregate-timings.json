@@ -1,0 +1,33 @@
+{
+  "tap:accepted -> Sound.play:enter": {
+    "min_ms": 0.19999999972060323,
+    "max_ms": 1.1999999997206032,
+    "median_ms": 0.39999999990686774
+  },
+  "Sound.play:enter -> Original.start:timestamp": {
+    "min_ms": 0.39999999990686774,
+    "max_ms": 4.899999999906868,
+    "median_ms": 0.6999999997206032
+  },
+  "UI.refreshInputShown:enter -> UI.refreshInputShown:exit": {
+    "min_ms": 0.0,
+    "max_ms": 0.10000000009313226,
+    "median_ms": 0.0
+  },
+  "Native.createBufferSource:enter -> Native.createBufferSource:exit": {
+    "min_ms": 0.0,
+    "max_ms": 1.3000000002793968,
+    "median_ms": 0.0
+  },
+  "Native.buffer:enter -> Native.buffer:exit": {
+    "min_ms": 0.0,
+    "max_ms": 0.10000000009313226,
+    "median_ms": 0.0
+  },
+  "observer_actual_interval_ms": {
+    "min": 0.165283203125,
+    "median": 26.1015625,
+    "p95": 51.701171875,
+    "max": 516.814697265625
+  }
+}

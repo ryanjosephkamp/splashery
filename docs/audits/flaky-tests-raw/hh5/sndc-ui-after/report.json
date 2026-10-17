@@ -1,0 +1,124 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-probe.config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/hh5",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/hh5/sndc-ui-after/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/hh5",
+        "testIgnore": [],
+        "testMatch": [
+          "sndc-*.spec.mjs"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4181",
+      "url": "http://127.0.0.1:4181/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery/"
+    }
+  },
+  "suites": [
+    {
+      "title": "sndc-boundaries-ui-stall.spec.mjs",
+      "file": "sndc-boundaries-ui-stall.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7311,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "SNDC_PROCESS_MAP {\"origin\":1792211495998.5,\"now\":4404.4000000003725,\"unix\":1792211500402,\"processInfo\":[{\"type\":\"browser\",\"id\":31092,\"cpuTime\":0.67},{\"type\":\"renderer\",\"id\":31167,\"cpuTime\":0.01},{\"type\":\"renderer\",\"id\":31176,\"cpuTime\":1.79},{\"type\":\"GPU\",\"id\":31121,\"cpuTime\":11.92},{\"type\":\"network.mojom.NetworkService\",\"id\":31123,\"cpuTime\":0.31},{\"type\":\"storage.mojom.StorageService\",\"id\":31137,\"cpuTime\":0},{\"type\":\"device.mojom.XRDeviceService\",\"id\":31192,\"cpuTime\":0}]}\n"
+                    },
+                    {
+                      "text": "SNDC_BOUNDARIES {\"timeOrigin\":1792211495998.5,\"tapAt\":5338,\"starts\":[{\"at\":5338.600000000093,\"when\":0.05724489795918367,\"now\":0.052244897959183675}],\"events\":[{\"name\":\"Motion.act:enter\",\"at\":5337.800000000279},{\"name\":\"tap:accepted\",\"at\":5338},{\"name\":\"Motion.controlDef:enter\",\"at\":5338},{\"name\":\"Motion.controlDef:exit\",\"at\":5338},{\"name\":\"Motion.controlDef:enter\",\"at\":5338},{\"name\":\"Motion.controlDef:exit\",\"at\":5338},{\"name\":\"Motion.controlDef:enter\",\"at\":5338},{\"name\":\"Motion.controlDef:exit\",\"at\":5338},{\"name\":\"Motion.isLong:enter\",\"at\":5338},{\"name\":\"Motion.isLong:exit\",\"at\":5338},{\"name\":\"Motion.act:exit\",\"at\":5338},{\"name\":\"Stage.requestRender:enter\",\"at\":5338},{\"name\":\"Stage.requestRender:exit\",\"at\":5338},{\"name\":\"Player.emit:enter\",\"at\":5338},{\"name\":\"App.onAction:enter\",\"at\":5338},{\"name\":\"App.ownSound:enter\",\"at\":5338.100000000093},{\"name\":\"App.ownSound:exit\",\"at\":5338.100000000093},{\"name\":\"Sound.resumeToy:enter\",\"at\":5338.100000000093},{\"name\":\"Sound.resumeToy:exit\",\"at\":5338.100000000093},{\"name\":\"Sound.play:enter\",\"at\":5338.200000000186},{\"name\":\"Sound.audio:enter\",\"at\":5338.200000000186},{\"name\":\"Sound.audio:exit\",\"at\":5338.200000000186},{\"name\":\"Native.createBufferSource:enter\",\"at\":5338.4000000003725},{\"name\":\"Native.createBufferSource:exit\",\"at\":5338.5},{\"name\":\"Native.buffer:enter\",\"at\":5338.5},{\"name\":\"Native.buffer:exit\",\"at\":5338.5},{\"name\":\"Native.createGain:enter\",\"at\":5338.5},{\"name\":\"Native.createGain:exit\",\"at\":5338.5},{\"name\":\"Native.setValueAtTime:enter\",\"at\":5338.5},{\"name\":\"Native.setValueAtTime:exit\",\"at\":5338.5},{\"name\":\"Native.connect:enter\",\"at\":5338.5},{\"name\":\"Native.connect:exit\",\"at\":5338.5},{\"name\":\"Native.connect:enter\",\"at\":5338.5},{\"name\":\"Native.connect:exit\",\"at\":5338.5},{\"name\":\"Native.start:enter\",\"at\":5338.5,\"when\":0.05724489795918367,\"now\":0.052244897959183675},{\"name\":\"Native.start:exit\",\"at\":5338.600000000093,\"now\":0.052244897959183675,\"output\":{\"contextTime\":0.010098000000000001,\"performanceTime\":5338.100000000093}},{\"name\":\"Sound.play:exit\",\"at\":5338.600000000093},{\"name\":\"UI.stall:enter\",\"at\":5338.700000000186},{\"name\":\"UI.stall:exit\",\"at\":5418.700000000186},{\"name\":\"UI.refreshInputShown:enter\",\"at\":5418.700000000186},{\"name\":\"UI.refreshInputShown:exit\",\"at\":5418.800000000279},{\"name\":\"App.onAction:exit\",\"at\":5418.800000000279},{\"name\":\"Player.emit:exit\",\"at\":5418.800000000279},{\"name\":\"Stage.requestRender:enter\",\"at\":5419.300000000279},{\"name\":\"Stage.requestRender:exit\",\"at\":5419.300000000279},{\"name\":\"Motion.controlDef:enter\",\"at\":5419.300000000279},{\"name\":\"Motion.controlDef:exit\",\"at\":5419.300000000279},{\"name\":\"Stage.requestRender:enter\",\"at\":5419.600000000093},{\"name\":\"Stage.requestRender:exit\",\"at\":5419.600000000093},{\"name\":\"Player.emit:enter\",\"at\":5419.600000000093},{\"name\":\"Motion.controlDef:enter\",\"at\":5419.700000000186},{\"name\":\"Motion.controlDef:exit\",\"at\":5419.700000000186},{\"name\":\"Motion.isLong:enter\",\"at\":5419.700000000186},{\"name\":\"Motion.isLong:exit\",\"at\":5419.700000000186},{\"name\":\"Player.emit:exit\",\"at\":5419.700000000186},{\"name\":\"Stage.requestRender:enter\",\"at\":5551.700000000186},{\"name\":\"Stage.requestRender:exit\",\"at\":5551.700000000186},{\"name\":\"Motion.controlDef:enter\",\"at\":5551.700000000186},{\"name\":\"Motion.controlDef:exit\",\"at\":5551.800000000279},{\"name\":\"Stage.requestRender:enter\",\"at\":5551.9000000003725},{\"name\":\"Stage.requestRender:exit\",\"at\":5551.9000000003725},{\"name\":\"Player.emit:enter\",\"at\":5551.9000000003725},{\"name\":\"Motion.controlDef:enter\",\"at\":5551.9000000003725},{\"name\":\"Motion.controlDef:exit\",\"at\":5551.9000000003725},{\"name\":\"Motion.isLong:enter\",\"at\":5551.9000000003725},{\"name\":\"Motion.isLong:exit\",\"at\":5551.9000000003725},{\"name\":\"Player.emit:exit\",\"at\":5551.9000000003725},{\"name\":\"Stage.requestRender:enter\",\"at\":5715},{\"name\":\"Stage.requestRender:exit\",\"at\":5715},{\"name\":\"Motion.controlDef:enter\",\"at\":5715.100000000093},{\"name\":\"Motion.controlDef:exit\",\"at\":5715.100000000093},{\"name\":\"Stage.requestRender:enter\",\"at\":5715.200000000186},{\"name\":\"Stage.requestRender:exit\",\"at\":5715.200000000186},{\"name\":\"Player.emit:enter\",\"at\":5715.200000000186},{\"name\":\"Motion.controlDef:enter\",\"at\":5715.200000000186},{\"name\":\"Motion.controlDef:exit\",\"at\":5715.200000000186},{\"name\":\"Motion.isLong:enter\",\"at\":5715.200000000186},{\"name\":\"Motion.isLong:exit\",\"at\":5715.200000000186},{\"name\":\"Player.emit:exit\",\"at\":5715.300000000279}],\"ctx\":{\"now\":0.4818140589569161,\"output\":{\"contextTime\":0.44008499999999995,\"performanceTime\":5777.600000000093}}}\n"
+                    },
+                    {
+                      "text": "first sample: 5.6 ms after the tap\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:31:35.719Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2cab66952f4c25d08012-073569a343d04b684517",
+          "file": "sndc-boundaries-ui-stall.spec.mjs",
+          "line": 131,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T04:31:35.033Z",
+    "duration": 8248.989,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

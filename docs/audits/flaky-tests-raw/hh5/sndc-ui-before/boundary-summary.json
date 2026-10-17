@@ -1,0 +1,356 @@
+{
+  "stats": {
+    "startTime": "2026-10-17T04:31:10.276Z",
+    "duration": 15163.176,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "rows": [
+    {
+      "title": "a toy's samples load when it opens, and its first tap's sample starts with the motion",
+      "repeat": null,
+      "status": "failed",
+      "retry": 0,
+      "duration_ms": 13589,
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m30\u001b[39m\nReceived:   \u001b[31m88.89999999990687\u001b[39m",
+      "process_map": {
+        "origin": 1792211471610.4,
+        "now": 5390.299999999814,
+        "unix": 1792211477000,
+        "processInfo": [
+          {
+            "type": "browser",
+            "id": 30851,
+            "cpuTime": 1.06
+          },
+          {
+            "type": "renderer",
+            "id": 30926,
+            "cpuTime": 0.01
+          },
+          {
+            "type": "renderer",
+            "id": 30927,
+            "cpuTime": 2.76
+          },
+          {
+            "type": "GPU",
+            "id": 30880,
+            "cpuTime": 11.38
+          },
+          {
+            "type": "network.mojom.NetworkService",
+            "id": 30882,
+            "cpuTime": 0.33
+          },
+          {
+            "type": "storage.mojom.StorageService",
+            "id": 30895,
+            "cpuTime": 0
+          },
+          {
+            "type": "device.mojom.XRDeviceService",
+            "id": 30951,
+            "cpuTime": 0
+          }
+        ]
+      },
+      "diagnostic": {
+        "timeOrigin": 1792211471610.4,
+        "tapAt": 8609.799999999814,
+        "starts": [
+          {
+            "at": 8693.69999999972,
+            "when": 0.19656462585034015,
+            "now": 0.19156462585034015
+          }
+        ],
+        "events": [
+          {
+            "name": "Motion.act:enter",
+            "at": 8609.5
+          },
+          {
+            "name": "tap:accepted",
+            "at": 8609.799999999814
+          },
+          {
+            "name": "Motion.controlDef:enter",
+            "at": 8609.799999999814
+          },
+          {
+            "name": "Motion.controlDef:exit",
+            "at": 8609.799999999814
+          },
+          {
+            "name": "Motion.controlDef:enter",
+            "at": 8609.799999999814
+          },
+          {
+            "name": "Motion.controlDef:exit",
+            "at": 8609.799999999814
+          },
+          {
+            "name": "Motion.controlDef:enter",
+            "at": 8609.799999999814
+          },
+          {
+            "name": "Motion.controlDef:exit",
+            "at": 8609.799999999814
+          },
+          {
+            "name": "Motion.isLong:enter",
+            "at": 8609.799999999814
+          },
+          {
+            "name": "Motion.isLong:exit",
+            "at": 8609.799999999814
+          },
+          {
+            "name": "Motion.act:exit",
+            "at": 8609.799999999814
+          },
+          {
+            "name": "Stage.requestRender:enter",
+            "at": 8609.899999999907
+          },
+          {
+            "name": "Stage.requestRender:exit",
+            "at": 8609.899999999907
+          },
+          {
+            "name": "Player.emit:enter",
+            "at": 8609.899999999907
+          },
+          {
+            "name": "App.onAction:enter",
+            "at": 8609.899999999907
+          },
+          {
+            "name": "UI.stall:enter",
+            "at": 8610
+          },
+          {
+            "name": "UI.stall:exit",
+            "at": 8691.799999999814
+          },
+          {
+            "name": "UI.refreshInputShown:enter",
+            "at": 8692.5
+          },
+          {
+            "name": "UI.refreshInputShown:exit",
+            "at": 8692.5
+          },
+          {
+            "name": "App.ownSound:enter",
+            "at": 8692.5
+          },
+          {
+            "name": "App.ownSound:exit",
+            "at": 8692.5
+          },
+          {
+            "name": "Sound.resumeToy:enter",
+            "at": 8692.5
+          },
+          {
+            "name": "Sound.resumeToy:exit",
+            "at": 8692.5
+          },
+          {
+            "name": "Sound.play:enter",
+            "at": 8692.599999999627
+          },
+          {
+            "name": "Sound.audio:enter",
+            "at": 8692.69999999972
+          },
+          {
+            "name": "Sound.audio:exit",
+            "at": 8692.69999999972
+          },
+          {
+            "name": "Native.createBufferSource:enter",
+            "at": 8693.299999999814
+          },
+          {
+            "name": "Native.createBufferSource:exit",
+            "at": 8693.299999999814
+          },
+          {
+            "name": "Native.buffer:enter",
+            "at": 8693.299999999814
+          },
+          {
+            "name": "Native.buffer:exit",
+            "at": 8693.299999999814
+          },
+          {
+            "name": "Native.createGain:enter",
+            "at": 8693.299999999814
+          },
+          {
+            "name": "Native.createGain:exit",
+            "at": 8693.299999999814
+          },
+          {
+            "name": "Native.setValueAtTime:enter",
+            "at": 8693.399999999907
+          },
+          {
+            "name": "Native.setValueAtTime:exit",
+            "at": 8693.399999999907
+          },
+          {
+            "name": "Native.connect:enter",
+            "at": 8693.399999999907
+          },
+          {
+            "name": "Native.connect:exit",
+            "at": 8693.399999999907
+          },
+          {
+            "name": "Native.connect:enter",
+            "at": 8693.399999999907
+          },
+          {
+            "name": "Native.connect:exit",
+            "at": 8693.399999999907
+          },
+          {
+            "name": "Native.start:enter",
+            "at": 8693.399999999907,
+            "when": 0.19656462585034015,
+            "now": 0.19156462585034015
+          },
+          {
+            "name": "Native.start:exit",
+            "at": 8693.69999999972,
+            "now": 0.19156462585034015,
+            "output": {
+              "contextTime": 0.150055,
+              "performanceTime": 8688
+            }
+          },
+          {
+            "name": "Sound.play:exit",
+            "at": 8693.69999999972
+          },
+          {
+            "name": "App.onAction:exit",
+            "at": 8693.799999999814
+          },
+          {
+            "name": "Player.emit:exit",
+            "at": 8693.899999999907
+          },
+          {
+            "name": "Stage.requestRender:enter",
+            "at": 8987.399999999907
+          },
+          {
+            "name": "Stage.requestRender:exit",
+            "at": 8987.399999999907
+          },
+          {
+            "name": "Motion.controlDef:enter",
+            "at": 8987.5
+          },
+          {
+            "name": "Motion.controlDef:exit",
+            "at": 8987.5
+          },
+          {
+            "name": "Stage.requestRender:enter",
+            "at": 8988
+          },
+          {
+            "name": "Stage.requestRender:exit",
+            "at": 8988
+          },
+          {
+            "name": "Player.emit:enter",
+            "at": 8988
+          },
+          {
+            "name": "Motion.controlDef:enter",
+            "at": 8988
+          },
+          {
+            "name": "Motion.controlDef:exit",
+            "at": 8988
+          },
+          {
+            "name": "Motion.isLong:enter",
+            "at": 8988
+          },
+          {
+            "name": "Motion.isLong:exit",
+            "at": 8988
+          },
+          {
+            "name": "Player.emit:exit",
+            "at": 8988.099999999627
+          }
+        ],
+        "ctx": {
+          "now": 0.7604535147392291,
+          "output": {
+            "contextTime": 0.72006,
+            "performanceTime": 9255.299999999814
+          }
+        }
+      },
+      "wall_ms": 83.89999999990687,
+      "native_lead_ms": 5.000000000000004,
+      "delay_ms": 88.89999999990687,
+      "native_clock_read_before_dispatch": 0.19156462585034015,
+      "native_clock_at_start": 0.19156462585034015,
+      "largest_adjacent_gaps": [
+        {
+          "from": "UI.stall:enter",
+          "to": "UI.stall:exit",
+          "gap_ms": 81.79999999981374
+        },
+        {
+          "from": "UI.stall:exit",
+          "to": "UI.refreshInputShown:enter",
+          "gap_ms": 0.7000000001862645
+        },
+        {
+          "from": "Sound.audio:exit",
+          "to": "Native.createBufferSource:enter",
+          "gap_ms": 0.6000000000931323
+        },
+        {
+          "from": "Native.start:enter",
+          "to": "Native.start:exit",
+          "gap_ms": 0.2999999998137355
+        },
+        {
+          "from": "Motion.act:exit",
+          "to": "Stage.requestRender:enter",
+          "gap_ms": 0.10000000009313226
+        },
+        {
+          "from": "App.onAction:enter",
+          "to": "UI.stall:enter",
+          "gap_ms": 0.10000000009313226
+        },
+        {
+          "from": "Sound.play:enter",
+          "to": "Sound.audio:enter",
+          "gap_ms": 0.10000000009313226
+        },
+        {
+          "from": "Native.createGain:exit",
+          "to": "Native.setValueAtTime:enter",
+          "gap_ms": 0.10000000009313226
+        }
+      ]
+    }
+  ]
+}

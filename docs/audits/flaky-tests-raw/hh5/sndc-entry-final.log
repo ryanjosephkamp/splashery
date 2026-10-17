@@ -1,0 +1,187 @@
+[2m[WebServer] [22m(node:40420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 30 tests using 4 workers
+
+(node:40433) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40431) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40433) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40431) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:40444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 5.8 ms after the tap
+first sample: 5.9 ms after the tap
+first sample: 5.9 ms after the tap
+first sample: 5.9 ms after the tap
+  ✓   2 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (22.0s)
+  ✓   3 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (22.2s)
+(node:41051) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41051) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (24.2s)
+(node:41184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (25.2s)
+(node:41184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41306) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41306) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 5.6 ms after the tap
+first sample: 5.7 ms after the tap
+first sample: 5.8 ms after the tap
+first sample: 5.9 ms after the tap
+  ✓   5 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (21.2s)
+(node:41649) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41649) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   6 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (23.7s)
+(node:41783) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (22.8s)
+(node:41801) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41783) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (20.9s)
+(node:41817) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41801) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41817) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 5.8 ms after the tap
+first sample: 5.7 ms after the tap
+  ✓   9 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (24.6s)
+first sample: 5.9 ms after the tap
+first sample: 5.8 ms after the tap
+(node:42259) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42259) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (21.8s)
+(node:42283) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42283) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  12 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (21.9s)
+  ✓  10 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (26.3s)
+(node:42514) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42530) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42514) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42530) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 5.6 ms after the tap
+first sample: 5.7 ms after the tap
+  ✓  14 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (20.1s)
+(node:42852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 5.8 ms after the tap
+  ✓  13 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (25.3s)
+first sample: 5.9 ms after the tap
+(node:43000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  15 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (24.8s)
+(node:43142) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  16 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (24.2s)
+(node:43157) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43142) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43157) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 10.5 ms after the tap
+first sample: 5.1 ms after the tap
+  ✓  17 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (27.2s)
+(node:43490) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 0.8 ms after the tap
+first sample: 10.0 ms after the tap
+(node:43490) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  18 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (26.4s)
+(node:43535) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43535) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  19 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (26.1s)
+(node:43761) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  20 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (26.4s)
+(node:43761) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 6.8 ms after the tap
+first sample: 5.8 ms after the tap
+first sample: 6.3 ms after the tap
+  ✓  21 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (22.7s)
+(node:44111) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44111) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 5.9 ms after the tap
+  ✓  22 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (23.1s)
+(node:44207) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  24 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (20.1s)
+(node:44260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44207) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  23 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (25.5s)
+(node:44493) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44493) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 6.2 ms after the tap
+first sample: 6.0 ms after the tap
+first sample: 5.6 ms after the tap
+  ✓  26 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (22.6s)
+  ✓  25 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (25.0s)
+(node:44743) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 6.0 ms after the tap
+  ✓  27 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (22.6s)
+(node:44743) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  28 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (22.4s)
+first sample: 5.8 ms after the tap
+first sample: 5.7 ms after the tap
+  ✓  29 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (15.5s)
+  ✓  30 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (16.6s)
+
+  30 passed (3.3m)

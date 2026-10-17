@@ -1,0 +1,3223 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/splashery/splashery/subject/playwright.config.mjs",
+    "rootDir": "/home/runner/work/splashery/splashery/subject/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+      },
+      "gitCommit": {
+        "shortHash": "0b28beadf",
+        "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "subject": "Document recovered flake evidence and outstanding acceptance gates",
+        "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+        "author": {
+          "name": "Ryan Kamp",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792208885000
+        },
+        "committer": {
+          "name": "Ryan Kamp",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792208885000
+        },
+        "branch": "HEAD"
+      },
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+          },
+          "gitCommit": {
+            "shortHash": "0b28beadf",
+            "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "subject": "Document recovered flake evidence and outstanding acceptance gates",
+            "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+            "author": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "committer": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+          },
+          "gitCommit": {
+            "shortHash": "0b28beadf",
+            "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "subject": "Document recovered flake evidence and outstanding acceptance gates",
+            "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+            "author": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "committer": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "img-engine.spec.mjs",
+      "file": "img-engine.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 41715,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:23.163Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-e18c822aae90d085dab0",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 42487,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:23.110Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-37174dff7758ffe43fc3",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 47997,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:23.414Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-030c4015d2350e5fe165",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 42277,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:23.168Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-bde8fdde3ec47c185290",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 45691,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:07.786Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-5f0f37294bf31aff9b60",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 53378,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:06.957Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-31d320db9beddc53ae55",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 43790,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:08.809Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-375165f832a211b6c1d1",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 46476,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:15.099Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-621321130d0c476adb23",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 48261,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:53.280Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-44cc960c53440f465451",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 36712,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:14:55.502Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-fe62ac9ef21d2658af83",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 46407,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:03.189Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-1e5dfac863c10ba90ccd",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 52717,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:03.927Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-cf8a5235b9f459b21593",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 40972,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:34.571Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-aa185f25a1f6d3982104",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 44772,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:43.520Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-55e1beec6bc271c1f19a",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 50739,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:52.200Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-eb5e6f793eb71b6c6159",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 43373,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:15:59.355Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-83450a087e4d0deb8530",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 40460,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:18.972Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-6804ba773098eeb12230",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 49135,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:31.047Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-02da5875a82b46b26c32",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 41850,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:45.195Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-cf8b6345e5656a2850c7",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 46703,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:45.144Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-07976db7b5d6f9b45678",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 49805,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:03.026Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-1d4e81fb017b35ddb3b8",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 41234,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:22.944Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-91cfc527ac59141b1db0",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 44387,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:29.346Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-a545522ecfddea8d83e4",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 51625,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:34.553Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-24529e47c0059d26dcce",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 45404,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:56.373Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-36e1634d3a82bd6e5dc5",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 45160,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:18:07.232Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-f333e8fdae4f9ed8b575",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 55535,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:18:16.213Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-3cc4f0aa302a6e53d158",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 46159,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:18:28.102Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-58dc38993c0c4177a250",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 26,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 43958,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:18:44.795Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-6cc78cd5095d0da0f40d",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 27,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 49094,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:18:55.138Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-8724d429f4363f3843d0",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 28,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 39013,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:19:14.810Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-440fa69d8ea48d0823b3",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 29,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 43023,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:19:17.327Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-d76613514c062b94b34b",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 30,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 50751,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:19:32.449Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-7b26aabc38106972ae10",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 31,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 43497,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:19:47.657Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-279ae28f572d6c44b5c8",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 32,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 43103,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:19:56.488Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-f6eb3227d712c2c89411",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 33,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 52593,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:20:03.275Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-cf4729045cfb50ecb9c0",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 34,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 47214,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:20:26.993Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-d6c6cf78e6bd8dfcf689",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 35,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 42722,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:20:34.097Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-4d09fd932614f32c7c5e",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 36,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 50210,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:20:42.472Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-95177fae39c66a58403a",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 37,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 44239,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:20:58.087Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-568521204765dc2f7815",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 38,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 42624,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:21:17.283Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-39e162a395ce951f3de0",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 39,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 48046,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:21:19.717Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-afc9bd13ecc2ef777629",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 40,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 43696,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:21:35.964Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-be9aa16befe33b5756bd",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 41,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 39413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:21:45.322Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-8635fadd9b746f7b75e6",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 42,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 49394,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:22:02.559Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-10002e1c395788d5bef5",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 43,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 43844,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:22:10.348Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-caca4c43615b1f19f2b4",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 44,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 44116,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:22:21.987Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-9a65edfe530c91b2df63",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 45,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 49581,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:22:28.098Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-0b0a619d4e6deae7cfd5",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 46,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 43692,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:22:55.111Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-ca158fa7d2295c2e45ff",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 47,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 42040,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:22:56.920Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-5a337badeaa34c4a9ee4",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 48,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 51391,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:23:08.709Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-54f957e7e65ad0233107",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 49,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 44680,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:23:21.574Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-0626532b47abbdb0b1c4",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 51,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 42655,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:23:41.441Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-0b3fedbaca72f76ccd81",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 50,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 52525,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:23:40.982Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-de3bba2e0009a7a124a1",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 52,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 43112,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:24:04.102Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-4b9f8dede83b9f217b5f",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 53,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 45303,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:24:08.679Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-6e4ae732b97eb0849c71",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 54,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 49855,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:24:27.069Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-6bee4b3066498e93cbf6",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 55,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 40061,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:24:37.126Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-9647c10ed8fba82652f6",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 56,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 46006,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:24:49.313Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-73f6ebe1f005087e7c6b",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 57,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 50327,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:24:57.433Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-542bd479d21c9d9f4e92",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 58,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 41645,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:25:19.422Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-40a1b9eb1cff83fb2205",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 59,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 41014,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:25:19.606Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-beb387a5162832559824",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 60,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 50302,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:25:37.472Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-4ff943817b66dfb7e73a",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 61,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 38426,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:25:50.094Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-7d1ee0b8c5fdd6e8ba4a",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 62,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 37413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:26:02.737Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-4cd8197683e09e99b8f8",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 63,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 46930,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:26:02.932Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-5fa6263b3f0d1a9171e7",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 64,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 41024,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:26:30.116Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-208bb4051bd75b7a6057",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 65,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 37744,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:26:30.819Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-7a61f0371f0c0ede35fe",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 66,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 49867,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:26:44.098Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-9f8bcc207a9027ce60a7",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 67,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 44328,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:26:53.325Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-ce0b23941bc080af9a55",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 68,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 39989,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:27:11.043Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-fc082dda19427b375835",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 69,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 50606,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:27:13.359Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-a08ef7f2d413c785af00",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 70,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 41953,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:27:36.442Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-0ff20feedd827c39f3b5",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 71,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 40087,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:27:39.614Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-1176fa5a18ccd8e8df42",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 72,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 42374,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:27:53.124Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-0389e608796ffd62ce56",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 73,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 39635,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:28:06.407Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-1bb948605ac0e1496507",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 74,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 39304,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:28:20.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-b32682474de4b87c295a",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 75,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 44385,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:28:22.092Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-7708673887da883b82bd",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 76,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 39335,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:28:39.342Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-a2c0ff8fe94e189b7825",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 77,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 41398,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:28:48.613Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-eebc9459367cf00d8dee",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 78,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 43034,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:29:02.064Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-214f984afa6abce163a1",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 79,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 41604,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:29:09.019Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-bd802c7d32de9b4094cb",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 80,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 37765,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:29:21.177Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-df08956ba8b9ec9086e2",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 81,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 47978,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:29:32.812Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-51be173a959393dd475e",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 82,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 39445,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:29:47.960Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-d00c7362101bef0f4294",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 83,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 44610,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:29:53.378Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-e9f29307e3a52d7ede1f",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 84,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 46185,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:30:00.601Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-9bb1fd5c0765023bc99e",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 85,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 36069,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:30:23.341Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-064f7e2b2273f02ceff5",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 86,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 33903,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:30:29.352Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-a6f6e26dc7b4145c4540",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 87,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 32119,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:30:41.194Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-7c87f139dbec6c6cf49d",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T04:13:22.028Z",
+    "duration": 1071889.995,
+    "expected": 90,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,432 @@
+{
+  "stats": {
+    "startTime": "2026-10-17T04:44:44.352Z",
+    "duration": 200829.65699999998,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "rows": [
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 0,
+      "parallelIndex": 0,
+      "startTime": "2026-10-17T04:44:45.803Z",
+      "duration_ms": 22190,
+      "sample_ms": [
+        5.8
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 1,
+      "parallelIndex": 1,
+      "startTime": "2026-10-17T04:44:45.548Z",
+      "duration_ms": 24178,
+      "sample_ms": [
+        5.9
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 2,
+      "parallelIndex": 2,
+      "startTime": "2026-10-17T04:44:45.892Z",
+      "duration_ms": 25215,
+      "sample_ms": [
+        5.9
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 3,
+      "parallelIndex": 3,
+      "startTime": "2026-10-17T04:44:45.764Z",
+      "duration_ms": 21966,
+      "sample_ms": [
+        5.9
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 4,
+      "parallelIndex": 3,
+      "startTime": "2026-10-17T04:45:09.161Z",
+      "duration_ms": 21169,
+      "sample_ms": [
+        5.6
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 5,
+      "parallelIndex": 0,
+      "startTime": "2026-10-17T04:45:10.298Z",
+      "duration_ms": 23705,
+      "sample_ms": [
+        5.7
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 6,
+      "parallelIndex": 1,
+      "startTime": "2026-10-17T04:45:12.153Z",
+      "duration_ms": 22760,
+      "sample_ms": [
+        5.8
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 7,
+      "parallelIndex": 2,
+      "startTime": "2026-10-17T04:45:14.641Z",
+      "duration_ms": 20944,
+      "sample_ms": [
+        5.9
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 8,
+      "parallelIndex": 3,
+      "startTime": "2026-10-17T04:45:32.316Z",
+      "duration_ms": 24551,
+      "sample_ms": [
+        5.8
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 9,
+      "parallelIndex": 0,
+      "startTime": "2026-10-17T04:45:36.099Z",
+      "duration_ms": 26250,
+      "sample_ms": [
+        5.9
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 10,
+      "parallelIndex": 1,
+      "startTime": "2026-10-17T04:45:36.737Z",
+      "duration_ms": 21797,
+      "sample_ms": [
+        5.7
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 11,
+      "parallelIndex": 2,
+      "startTime": "2026-10-17T04:45:39.465Z",
+      "duration_ms": 21863,
+      "sample_ms": [
+        5.8
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 12,
+      "parallelIndex": 3,
+      "startTime": "2026-10-17T04:45:58.939Z",
+      "duration_ms": 25275,
+      "sample_ms": [
+        5.7
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 13,
+      "parallelIndex": 1,
+      "startTime": "2026-10-17T04:46:01.031Z",
+      "duration_ms": 20063,
+      "sample_ms": [
+        5.6
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 14,
+      "parallelIndex": 2,
+      "startTime": "2026-10-17T04:46:03.794Z",
+      "duration_ms": 24819,
+      "sample_ms": [
+        5.8
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 15,
+      "parallelIndex": 0,
+      "startTime": "2026-10-17T04:46:04.804Z",
+      "duration_ms": 24173,
+      "sample_ms": [
+        5.9
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 16,
+      "parallelIndex": 1,
+      "startTime": "2026-10-17T04:46:23.529Z",
+      "duration_ms": 27178,
+      "sample_ms": [
+        10.5
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 17,
+      "parallelIndex": 3,
+      "startTime": "2026-10-17T04:46:27.820Z",
+      "duration_ms": 26428,
+      "sample_ms": [
+        5.1
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 18,
+      "parallelIndex": 2,
+      "startTime": "2026-10-17T04:46:31.160Z",
+      "duration_ms": 26059,
+      "sample_ms": [
+        0.8
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 19,
+      "parallelIndex": 0,
+      "startTime": "2026-10-17T04:46:31.935Z",
+      "duration_ms": 26391,
+      "sample_ms": [
+        10.0
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 20,
+      "parallelIndex": 1,
+      "startTime": "2026-10-17T04:46:54.937Z",
+      "duration_ms": 22705,
+      "sample_ms": [
+        6.8
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 21,
+      "parallelIndex": 3,
+      "startTime": "2026-10-17T04:46:57.048Z",
+      "duration_ms": 23071,
+      "sample_ms": [
+        5.8
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 22,
+      "parallelIndex": 2,
+      "startTime": "2026-10-17T04:46:59.820Z",
+      "duration_ms": 25548,
+      "sample_ms": [
+        5.9
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 23,
+      "parallelIndex": 0,
+      "startTime": "2026-10-17T04:47:01.404Z",
+      "duration_ms": 20093,
+      "sample_ms": [
+        6.3
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 24,
+      "parallelIndex": 1,
+      "startTime": "2026-10-17T04:47:20.521Z",
+      "duration_ms": 25015,
+      "sample_ms": [
+        6.2
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 25,
+      "parallelIndex": 3,
+      "startTime": "2026-10-17T04:47:22.810Z",
+      "duration_ms": 22645,
+      "sample_ms": [
+        6.0
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 26,
+      "parallelIndex": 0,
+      "startTime": "2026-10-17T04:47:23.623Z",
+      "duration_ms": 22640,
+      "sample_ms": [
+        5.6
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 27,
+      "parallelIndex": 2,
+      "startTime": "2026-10-17T04:47:28.455Z",
+      "duration_ms": 22415,
+      "sample_ms": [
+        6.0
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 29,
+      "parallelIndex": 3,
+      "startTime": "2026-10-17T04:47:48.004Z",
+      "duration_ms": 16608,
+      "sample_ms": [
+        5.7
+      ],
+      "error": null
+    },
+    {
+      "file": "sndc-engine.spec.mjs",
+      "id": null,
+      "status": "passed",
+      "retry": 0,
+      "workerIndex": 28,
+      "parallelIndex": 1,
+      "startTime": "2026-10-17T04:47:47.840Z",
+      "duration_ms": 15493,
+      "sample_ms": [
+        5.8
+      ],
+      "error": null
+    }
+  ]
+}
