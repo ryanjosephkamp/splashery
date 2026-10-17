@@ -54,12 +54,12 @@ force push was used.
 
 The raw measurements retain their original local source IDs. Original runtime
 `36f5df601963f418f71b98ee460783ea6191b0bc` has the same app bytes as public main
-`ceb51de7a015377d7f350119c27a792fc1a8a66d`. The raw branch's
-`measured-runtime-072.patch` reconstructs the original measured candidate from that public base,
-without commit metadata. `runtime-manifest.json` records every runtime file's SHA-256. The public
-candidate's shared engine and target recipe bytes match the measured candidate; incoming main's
-Neuron specimen is covered by a separate source-pinned comparison. These mappings reproduce the
-measured code without exposing private commit metadata or relabeling observations as new runs.
+`ceb51de7a015377d7f350119c27a792fc1a8a66d`. The raw branch's `measured-runtime-072.patch`
+reconstructs the original measured candidate from that public base, without commit metadata.
+`runtime-manifest.json` records every runtime file's SHA-256. The public candidate's shared engine
+and target recipe bytes match the measured candidate; incoming main's Neuron specimen is covered by
+a separate source-pinned comparison. These mappings reproduce the measured code without exposing
+private commit metadata or relabeling observations as new runs.
 
 ## Earlier work
 
