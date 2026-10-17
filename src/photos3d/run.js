@@ -65,6 +65,8 @@ export async function solvePhotos(files, options = {}) {
         edges,
         new Set(solution.recon.cams.map((c) => c.imgIdx)),
       );
+      solution.recon.features = solution.recon.features.map(({ x, y }) => ({ x, y }));
+      for (const frame of retained) frame.gray = null;
     } catch (error) {
       signal?.throwIfAborted();
       solution.error = error.message;

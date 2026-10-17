@@ -12,7 +12,7 @@ export function polygonMask(width, height, annotation) {
     }
     return hit;
   };
-  const mask = Uint8Array.from({ length: width * height }, (_, i) => {
+  let mask = Uint8Array.from({ length: width * height }, (_, i) => {
     const x = ((i % width) + 0.5) / width,
       y = (Math.floor(i / width) + 0.5) / height;
     return +(
@@ -20,6 +20,21 @@ export function polygonMask(width, height, annotation) {
       !(annotation.holes || []).some((p) => inside(x, y, p))
     );
   });
+  const radius = annotation.erodePixels ?? 0;
+  if (!Number.isInteger(radius) || radius < 0 || radius > 16)
+    throw new Error("Invalid erosion radius");
+  if (radius) {
+    const source = mask;
+    mask = Uint8Array.from(source, (v, i) => {
+      if (!v) return 0;
+      const x = i % width,
+        y = Math.floor(i / width);
+      if (x < radius || y < radius || x + radius >= width || y + radius >= height) return 0;
+      for (let dy = -radius; dy <= radius; dy++)
+        for (let dx = -radius; dx <= radius; dx++) if (!source[i + dy * width + dx]) return 0;
+      return 1;
+    });
+  }
   if (!mask.some(Boolean)) throw new Error("Object mask is empty");
   return mask;
 }
@@ -209,7 +224,14 @@ export async function browserRound2(options) {
         const c2 = copy.getContext("2d", { willReadFrequently: true });
         c2.drawImage(canvas, 0, 0);
         const pixels = c2.getImageData(0, 0, frame.tw, frame.th).data;
-        if (name) fold.metrics = scoreHeldOut(frame, pixels, masks.photos[name]);
+        if (name)
+          fold.metrics = scoreHeldOut(frame, pixels, {
+            ...masks.photos[name],
+            erodePixels: Math.round(
+              ((masks.rasterization?.erodePixels || 0) * frame.tw) /
+                (masks.rasterization?.width || frame.tw),
+            ),
+          });
         fold.renderedRange = pixels.reduce(
           ([lo, hi], v, i) => (i % 4 === 3 ? [lo, hi] : [Math.min(lo, v), Math.max(hi, v)]),
           [255, 0],

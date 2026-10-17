@@ -113,9 +113,9 @@ test("graph diagnostics include isolated components and track conflicts cannot m
 });
 
 test("photo geometry recovers a calibrated orbit with per-photo focal lengths", async () => {
-  const control = makeControl({ count: 12, mixedFocal: true });
+  const control = makeControl({ count: 24, mixedFocal: true });
   const K = control.truth.map((c) => ({ f: c.f, cx: 240, cy: 180 }));
-  const edges = allPairs(12).map(([i, j]) =>
+  const edges = allPairs(24).map(([i, j]) =>
     verifyPair(
       i,
       j,
@@ -131,7 +131,7 @@ test("photo geometry recovers a calibrated orbit with per-photo focal lengths", 
   );
   const result = await solvePhotoGraph(control.images, control.feats, edges, K);
   const score = scoreCameras(result.cams, control.truth, control.sceneSize);
-  expect(score.registered).toBe(12);
+  expect(score.registered).toBe(24);
   expect(score.rotationDegMedian).toBeLessThan(2);
   expect(score.positionFractionMedian).toBeLessThan(0.02);
 });

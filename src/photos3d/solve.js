@@ -30,7 +30,7 @@ export async function solvePhotoGraph(
   const connected = edges.filter((e) => e.accepted);
   if (!connected.length) throw new Error("No geometrically verified photo pair");
   const baseTracks = buildTracks(features, edges);
-  const scales = unknownFocal ? [1, 0.8, 0.65, 0.575, 1.16, 1.3] : [1];
+  const scales = unknownFocal ? [0.575, 0.8, 1, 1.3, 1.7, 2.2, 3] : [1];
   let best = null;
   for (const scale of scales) {
     signal?.throwIfAborted();
@@ -180,6 +180,7 @@ export async function solvePhotoGraph(
             15,
           );
           poses.set(row.img, { R: Array.from(refined.R), t: [...refined.t] });
+          tried.delete(row.img);
           added++;
           triangulate();
           onProgress({
