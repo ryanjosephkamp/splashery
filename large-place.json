@@ -1,0 +1,53 @@
+{
+  "kind": "synthetic room densification; real browser worker; not a physical phone",
+  "chromium": "151.0.7922.173",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "phone": "390×844, DPR 3, CDP CPU rate 4",
+  "desktop": "1440×900, DPR 1, no CPU throttle",
+  "rows": [
+    {
+      "profile": "phone",
+      "count": 1000000,
+      "wallMs": 2232.600000000093,
+      "prepareMs": 1955.2000000001863,
+      "gridMs": 676.7999999998137,
+      "gridBytes": 3228750,
+      "gridDims": [105, 41, 125],
+      "drawn": 60000,
+      "sourceArrayBytes": 56000000
+    },
+    {
+      "profile": "phone",
+      "count": 2000000,
+      "wallMs": 4338.200000000186,
+      "prepareMs": 3839.600000000093,
+      "gridMs": 1323.6000000000931,
+      "gridBytes": 3228750,
+      "gridDims": [105, 41, 125],
+      "drawn": 60000,
+      "sourceArrayBytes": 112000000
+    },
+    {
+      "profile": "desktop",
+      "count": 1000000,
+      "wallMs": 2216.5,
+      "prepareMs": 2071,
+      "gridMs": 667.0999999996275,
+      "gridBytes": 3228750,
+      "gridDims": [105, 41, 125],
+      "drawn": 200000,
+      "sourceArrayBytes": 56000000
+    },
+    {
+      "profile": "desktop",
+      "count": 2000000,
+      "wallMs": 3912.899999999907,
+      "prepareMs": 3750,
+      "gridMs": 1304.7999999998137,
+      "gridBytes": 3228750,
+      "gridDims": [105, 41, 125],
+      "drawn": 200000,
+      "sourceArrayBytes": 112000000
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "method": "Chromium/Playwright; actual rendered frames; simulation stepped 1/30 second",
+  "resolution": "Full resolution opt-in; pixel ratio 1. Auto cadence measured separately.",
+  "sourceCommit": "0ab1af17ae4ca8d3e529f8c3e9414180d5eeed72",
+  "clipSize": null,
+  "frames": 0,
+  "fps": null,
+  "seconds": 0,
+  "errors": []
+}

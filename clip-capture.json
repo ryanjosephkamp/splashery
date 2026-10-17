@@ -1,0 +1,15 @@
+{
+  "method": "Chromium/Playwright; actual rendered frames; simulation stepped 1/30 second",
+  "resolution": "Full resolution opt-in; pixel ratio 1. Auto cadence measured separately.",
+  "clipSize": "608\u00d71080",
+  "frames": 600,
+  "fps": 30,
+  "seconds": 20,
+  "errors": [],
+  "completionHead": "e373552a0bedae74563dcf53ee79fbf1e6e527c3",
+  "sourceCommitsByRoom": {
+    "gallery": "0f7cc80bed4116615e9c57d4ac7a38ee7400c434",
+    "courtyard": "ad0d1b2ccc0fc8f4069a586f60cc989cb61cdde9"
+  },
+  "sourceNote": "The original capture tool stamped HEAD at completion. Contexts opened at the per-room revisions above. Latest screenshots separately show the subsequent status-banner refinement; captured movement and rendering are unchanged."
+}
