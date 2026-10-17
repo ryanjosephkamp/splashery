@@ -288,7 +288,7 @@ async function open(page) {
 }
 
 async function pixels(page) {
-  return page.evaluate(async () => {
+  const encoded = await page.evaluate(async () => {
     const { player } = window.__splashery;
     const cam = player.camera;
     player.camera.setTurntable(false);
@@ -298,8 +298,13 @@ async function pixels(page) {
     const c = await player.stage.captureFrame();
     const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
     // Every fourth pixel, all four channels.
-    return Array.from(d.filter((_, i) => (i >> 2) % 4 === 0));
+    const sampled = d.filter((_, i) => (i >> 2) % 4 === 0);
+    let binary = "";
+    for (let i = 0; i < sampled.length; i += 8192)
+      binary += String.fromCharCode(...sampled.subarray(i, i + 8192));
+    return btoa(binary);
   });
+  return Array.from(Buffer.from(encoded, "base64"));
 }
 const diff = (a, b) => a.reduce((s, v, i) => s + Math.abs(v - b[i]), 0) / a.length;
 // Pixels that glow: red well above green (the blue block tinted red).

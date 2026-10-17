@@ -160,6 +160,7 @@ test("without labs only the default applies: the cap of 3 and adapt drag", async
     ratio: 3,
   });
   expect(errors).toEqual([]);
+  await page.close();
 });
 
 test("?cull= lowers the cull, and a toy without it puts the defaults back", async ({ page }) => {
@@ -231,6 +232,7 @@ test("?dpr= sets the pixel-ratio cap, and the tier's cap comes back without it",
   });
   expect((await state(page)).ratio).toBe(3);
   expect(errors).toEqual([]);
+  await page.close();
 });
 
 test("adapt drag (the default) drops the resolution only during a drag", async ({ browser }) => {
