@@ -3,14 +3,30 @@
 Task: [103, faster toys on phones](../codex/103-phone-speed.md). Codex built the measurement tools,
 local phone page, and shared rendering optimization.
 
-All 15 frozen targets pass five-pair timing and appearance checks: idle-median improvements range
-from **29.6% to 55.3%**, with a **48.5% median**. Thirteen targets are RGB-identical at rest and
-mid-tap. Minimum SSIM is **0.995246** at phone width and **0.994008** at native width. All 466
-current toys have before/after first-view, idle/tap frame-time, heap, and transfer measurements. Two
-confirmed tap-p95 regressions are corrected with narrow recipe opt-outs, each checked with ten fresh
-pairs and exact RGB comparisons. Most declared catalog follow-ups remain incomplete, so **the
-complete goal is not met**. The following checkpoints retain their original dates; the PR and raw
-branch record the latest follow-up counts and CI status.
+The Operator's October 17 review supersedes the two resolution-based target results below. Both
+resolution caps are removed: Video to 3D again requests native DPR, and Photo album uses the normal
+tier resolution. The earlier fifteen-target timing gate is therefore **not a passing result for the
+current code**. The frozen targets and their original measurements remain unchanged as historical
+evidence. All 466 toys have before/after measurements, but 282 unrelated five-pair follow-ups and
+five ten-pair follow-ups remain incomplete, so **the complete goal is not met**.
+
+The review changes add a viewer-wide `?reuse=0` switch in Player and Stage, an actual work-pass
+camera-orbit test for Marble's rim parts, the missing Blackberry opt-out documentation, and a
+local-server dot-path guard. Twenty speed tests pass. The off-switch and server tests fail against
+the preceding implementation; the orbit test fails when camera invalidation is deliberately removed.
+Tap-regression diagnosis and fresh uncapped target measurements are in progress.
+
+Known issues for the uncapped targets: Photo album's retained three-pair cache-only pilot has an
+idle median of 637.25 ms before and 553.95 ms after, a **13.1%** improvement. The earlier prose's
+16.6% was incorrect. Video to 3D has no valid retained repeated cache-only comparison; the old
+single-sample pilot used the retired completion protocol and cannot support a speed claim. Fresh
+numbers will replace this explicit missing result. Neither target currently establishes the 25% gate
+at unchanged resolution.
+
+The preceding head, `576d872`, completed the full 399-file suite with 3,409 passes, three failures,
+and one skip. `fx4-engine:79` (WebGPU) and `pages-r2:495` (WebGL2 and WebGPU) each passed alone.
+They are outside `tools/suite.json`'s known list and still count as failures. A new full suite is
+required for the review changes. No assertion, skip, or known-failure list has been changed.
 
 The initial survey and early pairs were retired after finding that Chromium implements WebGL
 `finish()` as a flush rather than a wait. Only the corrected synchronous-readback measurements are
