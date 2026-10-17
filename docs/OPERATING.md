@@ -335,13 +335,17 @@ title, the active lanes' records, and a link each way.
 
 ### Steps for a lane
 
-1. Render each clip: `node tools/effect-clip.mjs --strip=8 --size=320 <toy id>:<seconds>` (the
-   server must be running; `--taps`, `--opt=key=value` and `--pgn=` are in the tool's header). It
-   writes a looping GIF. Watch it before posting. For a drag, use `node tools/drag-clip.mjs`
-   instead. To save space, post an MP4 instead of the GIF (about five times smaller) and add
-   `"video": true` to its card: `pip install imageio-ffmpeg`, then run its `ffmpeg`
-   (`python3 -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())'`) with
-   `-i clip.gif -movflags +faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -crf 23 clip.mp4`.
+1. Render each clip:
+   `node tools/effect-clip.mjs <out-dir> --mp4 --size=1080 --fps=30 --strip=8 <toy id>:<seconds>`
+   (the server must be running; `--taps`, `--opt=key=value` and `--pgn=` are in the tool's header).
+   It writes a sharp MP4: add `"video": true` to its card. Watch it before posting. Since October
+   17, 2026, review clips are 1080 pixels at 30 frames a second: the old 320-pixel, 15-frame GIFs
+   looked grainy on the owner's phone. Without `--mp4` the tool writes a small GIF, fine for a quick
+   check. `--mp4` needs `ffmpeg` on the PATH; where it isn't, `pip install imageio-ffmpeg` and set
+   `SPLASHERY_FFMPEG` to
+   `$(python3 -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())')`. For a drag, use
+   `node tools/drag-clip.mjs` instead (GIF only for now; post it as an MP4 with that `ffmpeg`:
+   `-i clip.gif -movflags +faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -crf 23 clip.mp4`).
 2. Read page 2 once in the session (a session must read an artifact before it can add to it):
    Artifact tool, `action: "read"`, `url` the page's link. "The page" in the steps below is page 2;
    nothing more goes on page 1.

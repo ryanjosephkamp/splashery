@@ -210,6 +210,8 @@ export function createUI(app) {
     recPill: $("rec-pill"),
     recTime: $("rec-time"),
     recStop: $("rec-stop"),
+    recordCountdown: $("record-countdown"), // lane REC1
+    recCount: $("rec-count"), // lane REC1
     recSave: $("rec-save"),
     recShare: $("rec-share"),
     recClose: $("rec-close"),
@@ -2446,8 +2448,41 @@ export function createUI(app) {
   };
   for (const b of clipButtons) b.addEventListener("click", () => showClip(b.dataset.clip));
   // UI r5: Record (the Share tab starts it; the pill on the stage shows the time and stops it).
-  els.recordStart.addEventListener("click", () => (app.recording ? app.stopRecord() : app.startRecord())); // prettier-ignore
+  // Lane REC1: during the countdown, Record (and the pill's button) cancels.
+  els.recordStart.addEventListener("click", () => (app.recording || app.recordCount ? app.stopRecord() : app.startRecord())); // prettier-ignore
   els.recStop.addEventListener("click", () => app.stopRecord());
+  // Lane REC1: the countdown before a take (0, 3, 5, or 10 seconds), remembered on the
+  // device. 5 by default; a test browser (navigator.webdriver) starts at Off unless it
+  // picks one, so the specs' takes start when they click.
+  const COUNT_KEY = "splashery.recordCountdown";
+  const COUNTS = ["0", "3", "5", "10"];
+  {
+    let saved = null;
+    try {
+      saved = localStorage.getItem(COUNT_KEY);
+    } catch {
+      // Private windows may refuse storage; the default applies.
+    }
+    els.recordCountdown.value = COUNTS.includes(saved) ? saved : navigator.webdriver ? "0" : "5";
+  }
+  els.recordCountdown.addEventListener("change", () => {
+    try {
+      localStorage.setItem(COUNT_KEY, els.recordCountdown.value);
+    } catch {
+      // The choice still applies now.
+    }
+  });
+  // The countdown's number sits on the stage's box (which moves with full screen).
+  function placeCount() {
+    const r = els.stage.getBoundingClientRect();
+    Object.assign(els.recCount.style, {
+      left: `${r.left}px`,
+      top: `${r.top}px`,
+      width: `${r.width}px`,
+      height: `${r.height}px`,
+    });
+  }
+  addEventListener("resize", () => !els.recCount.hidden && placeCount());
 
   // ---- Share lane: the preview sheet after Record -------------------------------------
   // When a take stops, the sheet plays it back (play, pause and scrub) before
@@ -3774,32 +3809,50 @@ export function createUI(app) {
     // UI r5: Record's state: "off", "rec" (with seconds and the limit),
     // "ready" (with seconds, bytes and whether the phone can share it) or "busy".
     // Share lane: "ready" opens the preview sheet; the pill is only for the take.
+    // Lane REC1: "count" is the countdown before the take (seconds = what is left):
+    // the big number on the stage, and the pill says it and holds Cancel.
     setRecord({ state, seconds = 0, limit = 60, bytes = 0, share = false }) {
       const hadFocus = els.recPill.contains(document.activeElement);
       const rec = state === "rec";
+      const count = state === "count";
       const ready = state === "ready";
       els.recPill.hidden = state === "off" || ready;
       els.recPill.classList.toggle("recording", rec);
-      els.recStop.hidden = !rec;
-      els.recTime.textContent = rec ? `${mmss(seconds)} / ${mmss(limit)}` : "Saving…";
-      els.recordStart.querySelector(".record-label").textContent = rec ? "Stop" : "Record";
+      els.recStop.hidden = !rec && !count;
+      els.recStop.textContent = count ? "Cancel" : "Stop";
+      els.recTime.textContent = rec ? `${mmss(seconds)} / ${mmss(limit)}` : count ? `Recording in ${seconds}` : "Saving…"; // prettier-ignore
+      els.recCount.hidden = !count;
+      if (count) {
+        placeCount();
+        const n = els.recCount.firstElementChild;
+        n.textContent = String(seconds);
+        n.classList.remove("pop");
+        void n.offsetWidth; // restarts the pop for each number
+        n.classList.add("pop");
+      }
+      els.recordStart.querySelector(".record-label").textContent = rec ? "Stop" : count ? "Cancel" : "Record"; // prettier-ignore
       els.recordStart.classList.toggle("recording", rec);
       els.recordStart.disabled = state === "busy";
       // Share lane: a finished take opens the preview sheet, which takes focus itself.
       if (ready) return openPreview({ bytes, share });
       // Task 52: keep keyboard focus through saving, but respect a visitor who moves away.
       if (hadFocus) {
-        const target = rec
-          ? els.recStop
-          : state === "busy"
-            ? els.recPill
-            : els.recordStart.checkVisibility()
-              ? els.recordStart
-              : els.sheetToggle.checkVisibility()
-                ? els.sheetToggle
-                : els.stage;
+        const target =
+          rec || count
+            ? els.recStop
+            : state === "busy"
+              ? els.recPill
+              : els.recordStart.checkVisibility()
+                ? els.recordStart
+                : els.sheetToggle.checkVisibility()
+                  ? els.sheetToggle
+                  : els.stage;
         target.focus({ preventScroll: true });
       }
+    },
+    // Lane REC1: the countdown's length in seconds (0 is off).
+    recordCountdown() {
+      return Number(els.recordCountdown.value) || 0;
     },
     setRecordUnavailable(reason) {
       els.recordRow.hidden = !!reason;

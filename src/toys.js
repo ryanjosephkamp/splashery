@@ -4415,6 +4415,17 @@ export const TOYS = [
     tags: "climate co2 carbon dioxide mauna loa keeling temperature warming gistemp nasa noaa record chart",
     camera: { yaw: 0.45, pitch: 0.22, roll: 0, distance: 3.3 },
   },
+  // ---- Pack: neuron (Codex task 78b) ----
+  {
+    id: "specimen-neuron",
+    label: "Neuron specimen",
+    category: "tiny",
+    kind: "kit",
+    pack: "neuron",
+    labs: true,
+    tags: "nerve cell axon stain golgi nissl histology spike focus gaussian hodgkin huxley specimen biology",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.5 },
+  },
 ];
 
 export function findToy(id) {

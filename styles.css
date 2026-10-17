@@ -2958,6 +2958,62 @@ button.record-start.recording .record-dot {
   border-radius: 2px;
 }
 
+/* Lane REC1: the countdown choice beside Record. */
+.record-main .record-countdown {
+  flex: 0 0 auto;
+  min-width: 84px;
+}
+
+/* Lane REC1: the countdown's number, big and centered over the stage (placed
+   on the stage's box by the script). Taps pass through to the toy. */
+.rec-count {
+  position: fixed;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.rec-count[hidden] {
+  display: none;
+}
+
+.rec-count span {
+  display: grid;
+  place-items: center;
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 55%);
+  color: #fff;
+  font-size: 92px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 6px 28px rgb(0 0 0 / 25%);
+}
+
+.rec-count span.pop {
+  animation: rec-count-pop 0.45s ease-out;
+}
+
+@keyframes rec-count-pop {
+  from {
+    transform: scale(1.3);
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rec-count span.pop {
+    animation: none;
+  }
+}
+
+body.gallery-page .rec-count {
+  display: none;
+}
+
 .share-record .note {
   margin: 8px 0 0;
 }

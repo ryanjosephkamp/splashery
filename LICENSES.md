@@ -416,6 +416,11 @@ trained from them) is ours, and the models and textures they use keep their own 
   (`npx grooph@0.4.0`, run by `tools/site-loop.mjs`) draws the project's lane loop as an SVG for the
   draft page "The loop a lane follows" (lane Site r2). Nothing of it is served; only the SVG it
   wrote is, and the draft page links to the GROOPH app on the owner's own site.
+- FFmpeg (LGPL-2.1-or-later, with optional GPL parts; distribution builds often report
+  GPL-2.0-or-later or GPL-3.0-or-later), https://ffmpeg.org/legal.html:
+  `tools/effect-clip.mjs --mp4` encodes the private review clips as H.264 with the installed build's
+  libx264. It runs only on the machine that makes a clip; no FFmpeg or x264 code and no clip is
+  served by the site.
 
 ## PDF motion audit build tools (Codex task 21; not shipped)
 
@@ -531,18 +536,41 @@ license. No new third-party browser library was added.
   virtual display for real Chromium verification with Mesa's software renderer. The installed X.Org
   copyright file identifies the canonical X11/MIT form. No X server is served with the site.
 
+## Photo to 3D next: offline research tools (Codex task 99; not shipped)
+
+`tools/p3d-next-requirements.txt` pins these for the truth-view yardstick and the depth bake-off.
+They run offline on a build machine; no package, model, or weight from this list is served by the
+site.
+
+- PyTorch 2.14.1 and torchvision 0.29.1, CPU builds (BSD-3-Clause).
+- ONNX Runtime 1.31.0 (MIT) and ONNX 1.23.2 (Apache-2.0).
+- NumPy 2.3.5 and SciPy 1.17.0 (BSD-3-Clause).
+- OpenCV, `opencv-python-headless` 4.13.0.92 (Apache-2.0; its packaging scripts are MIT).
+- safetensors 0.8.0, Transformers 5.20.1, and huggingface_hub 2.2.0 (Apache-2.0).
+- einops 0.8.2 and addict 2.4.0 (MIT); OmegaConf 2.4.0 (BSD-3-Clause).
+- utils3d (MoGe's helper, commit `62f09d58`; MIT,
+  https://github.com/EasternJournalist/utils3d-moge/blob/62f09d58509485564e24d5d9f6aac9ee9ebc0c37/LICENSE).
+- Blender 4.3.2 (GPL-2.0-or-later) with its bundled OpenImageDenoise (Apache-2.0): renders the truth
+  views, as with the Studio truth tools above. Never shipped.
+
+The model weights the bake-off compared are fetched at run time from their official pages; each
+one's license is in `docs/audits/` (task 99's report), and none is vendored.
+
 ## Blender cloud build tools (Codex task 105; not shipped)
 
-- Blender 4.5.3 LTS (GNU GPL, bundled license texts in the downloaded distribution), pinned as
-  `blender-4.5.3-linux-x64.tar.xz`, SHA-256
+- Blender 4.5.3 LTS (GPL-3.0-or-later, bundled license texts in the downloaded distribution), pinned
+  as `blender-4.5.3-linux-x64.tar.xz`, SHA-256
   `975c58fcb244273838534bba771e64ad87739216b0f9b39a888531a49a72d845`.
-  [Mirror checksum](https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.3.sha256)
-  checked October 17, 2026. `tools/blender/install.py` installs it only in ignored `.cache/`;
-  `tools/blender-cloud.sh` runs headless build scripts. Blender and its bundled Python, NumPy, and
-  libraries are never shipped. Their license notices stay in the verified archive/install.
+  [Official checksum](https://download.blender.org/release/Blender4.5/blender-4.5.3.sha256) checked
+  October 17, 2026. `tools/blender/install.py` installs it outside the repository in
+  `~/.cache/splashery-blender/`; `tools/blender-cloud.sh` runs headless build scripts. Blender and
+  its bundled Python, NumPy, and libraries are never shipped. Their license notices stay in the
+  verified archive/install.
 - The original canonical scenes (`tools/blender/truth-scenes/*.blend`) are CC0-1.0, made by Ryan
   with Codex (GPT-6); their record is `tools/blender/truth-scenes.json`. They are build-only.
 - The existing Kenney Food Kit GLB (`assets/toys/model-splats/burger.glb`) is the rendering example;
   [its live source page](https://kenney.nl/assets/food-kit) confirmed CC0 on October 17, 2026.
   Author: Kenney. Input hash and provenance: `tools/blender/burger.json`. Existing asset credit is
   unchanged; no new model or texture ships.
+
+Archive fallback: https://download.blender.org/release/Blender4.5/blender-4.5.3-linux-x64.tar.xz.

@@ -2035,14 +2035,22 @@ the fast clip runs at 60 frames per second. MP4, WebM, MOV, and GIF files exerci
 path. [The generator](tools/cdx-mp2-r4-inputs.mjs) is MIT, and each file's hash, size, and source
 record is in `tools/assets.json`. These fixtures have no shelf entry or automatic fetch.
 
-## Blender cloud truth sources (Codex task 105)
+## Neuron specimen (Codex task 78b, October 14, 2026)
 
-The twelve compressed scenes in `tools/blender/truth-scenes/` are original procedural scenes, made
-by Ryan with Codex (GPT-6), dedicated to CC0-1.0. They preserve the existing Studio truth geometry,
-materials, and lighting as fixed Blender 4.5.3 sources, because rebuilding scenes changed sampling
-noise across processes. The procedural recipes remain in `tools/studio-truth-generate.py` as
-`build_procedural`; `tools/blender/canonicalize-truth.py` rebuilds the source snapshots when
-requested. Source hashes, seeds, authorship, date, file hashes, and changes are recorded in
-`tools/blender/truth-scenes.json`. The sources are build-only and never loaded by visitors. The
-report's contact sheets reuse those CC0 scenes and the existing Kenney Food Kit model, with their
-provenance recorded in `docs/audits/blender-cloud-2026-10.md`.
+From a concept by Ryan Kamp. The procedural neuron, Gaussian moment-matching tree, and membrane
+model were ported from Ryan's own Specimen concept on `claude/portfolio-ref`, read directly from
+`ref/portfolio/specimen/specimen.js`. No reference pages, fonts, or renderers ship. The new
+procedural specimen and thumbnail are made by Ryan with Codex (GPT-6), CC0; the port's code is
+offered under Splashery's MIT license. The quiet synthesized tap cue is a visual aid, not a
+recording of a nerve cell.
+
+Lane NR1 (Claude, Opus 5.5, October 16, 2026) finished the toy: textbook Nissl, Golgi, and H&E stain
+colors on a lit slide, a focus that crossfades between levels and blurs like a microscope, a tap
+stimulus that spreads through the dendrites, and clean sine cues. Made by Ryan with Claude; geometry
+CC0, code MIT. The stain colors follow standard histology (cresyl violet, silver chromate,
+hematoxylin and eosin); no images were copied. The spike colors are visual aids.
+
+The [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model) page was
+opened on October 14, 2026. This toy integrates the concept's squid giant axon equations with a 0.01
+ms Euler step, samples the potential at 0.1 ms, and displays 7 model milliseconds per second.
+Geometry and timing are schematic, not a measured human neuron.
