@@ -123,6 +123,9 @@ task 78's portfolio toys had to be rebuilt in Claude lanes PT1 and PT2.
 | 106-splats-to-mesh.md             | Splats to mesh: GLB, OBJ, and STL export, scored against the Poly Haven source meshes                     | `src/mesh-export/`, a labs tool, tests                                   | yes           |
 | 107-step-inside-360.md            | Step inside a 360° photo: seamless spherical depth and a room of splats you can lean into                 | `src/pano3d/`, a labs tool, tests                                        | yes           |
 | 108-frontier-research.md          | The frontier: a survey of new 3D techniques a browser can run, and two prototype pages                    | a report, two pages under `tools/pages/`                                 | yes           |
+| 109-screen-in-3d.md               | Screen in 3D: a shared window seen live as a relief of splats, fast enough to play a game through         | `src/screen3d/`, a labs toy, tests                                       | no            |
+| 110-trim-before-processing.md     | Trim a video before Moving photo to 3D or Video to 3D processes it                                        | `src/trim-sheet.js`, small hooks in two tools, tests                     | no            |
+| 111-offline.md                    | Splashery offline: the app plus chosen toys, saved with a service worker                                  | `src/offline/`, `sw.js`, tests, a manual section                         | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
