@@ -9,9 +9,12 @@ import jpeg from "jpeg-js";
 import { packDepth } from "../src/pano3d/samples.js";
 import { maskedSSIM } from "./pano-metrics.mjs";
 const root = process.cwd(),
-  out = path.resolve(".cache/pano3d/evidence");
-const base = "http://127.0.0.1:4189";
-const server = spawn(process.execPath, ["tools/cdx-mp2-server.mjs", "4189"], { stdio: "ignore" });
+  out = path.resolve(process.env.SPLASHERY_PANO_EVIDENCE || ".cache/pano3d/evidence");
+const port = Number(process.env.SPLASHERY_PANO_PORT) || 4189;
+const base = "http://127.0.0.1:" + port;
+const server = spawn(process.execPath, ["tools/cdx-mp2-server.mjs", String(port)], {
+  stdio: "ignore",
+});
 for (let i = 0; i < 100; i++) {
   try {
     await fetch(base);
@@ -45,6 +48,8 @@ const results = {
 for (const f of [
   "src/pano3d/toy.js",
   "src/pano3d/core.js",
+  "src/pano3d/pipeline.js",
+  "src/pano3d/prior.js",
   "src/stage.js",
   "src/kit.js",
   "tools/pano-gpu-views.mjs",
@@ -55,7 +60,7 @@ for (const f of [
     .digest("hex");
 try {
   for (const row of scores.scenes) {
-    const dir = ".cache/pano3d/truth/" + row.id;
+    const dir = path.join(process.env.SPLASHERY_PANO_TRUTH || ".cache/pano3d/truth", row.id);
     const photo = await fs.readFile(dir + "/pano.jpg");
     const inference = JSON.parse(
       await fs.readFile(path.join(out, row.id + "-inference.json"), "utf8"),

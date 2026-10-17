@@ -8,10 +8,12 @@ import jpeg from "jpeg-js";
 import { maskedSSIM as ssim } from "./pano-metrics.mjs";
 import { direction, sample, median, TILES, project } from "../src/pano3d/core.js";
 const root = process.cwd(),
-  folder = path.resolve(".cache/pano3d/truth");
-const evidence = path.resolve(".cache/pano3d/evidence");
+  folder = path.resolve(process.env.SPLASHERY_PANO_TRUTH || ".cache/pano3d/truth");
+const evidence = path.resolve(process.env.SPLASHERY_PANO_EVIDENCE || ".cache/pano3d/evidence");
+const truthURL =
+  "/" + path.relative(root, folder).split(path.sep).map(encodeURIComponent).join("/") + "/";
 await fs.mkdir(evidence, { recursive: true });
-const port = 4187,
+const port = Number(process.env.SPLASHERY_PANO_PORT) || 4187,
   base = "http://127.0.0.1:" + port;
 const server = spawn(process.execPath, ["tools/cdx-mp2-server.mjs", String(port)], {
   stdio: "ignore",
@@ -30,7 +32,8 @@ const browser = await chromium.launch({
 });
 const manifest = JSON.parse(await fs.readFile(path.join(folder, "manifest.json"), "utf8"));
 const digest = crypto.createHash("sha256");
-for (const f of ["core.js", "pipeline.js"]) digest.update(await fs.readFile("src/pano3d/" + f));
+for (const f of ["core.js", "pipeline.js", "prior.js"])
+  digest.update(await fs.readFile("src/pano3d/" + f));
 const pipelineHash = digest.digest("hex");
 const results = [];
 try {
@@ -43,47 +46,53 @@ try {
     try {
       inference = JSON.parse(await fs.readFile(cache, "utf8"));
     } catch {}
-    if (inference?.pipelineHash !== pipelineHash || !inference.tiles) {
+    if (inference?.pipelineHash !== pipelineHash || !inference.tiles || !inference.naive392) {
       console.log("Inferring " + scene.id);
-      inference = await page.evaluate(async (id) => {
-        const { decodePhoto } = await import("/src/packs/photo-3d.js");
-        const photo = await decodePhoto(
-          await (await fetch("/.cache/pano3d/truth/" + id + "/pano.jpg")).blob(),
-        );
-        const code = [
-          "import { createDepthEngine } from " +
-            JSON.stringify(location.origin + "/src/depth/engine.js") +
-            ";",
-          "import { reconstruct } from " +
-            JSON.stringify(location.origin + "/src/pano3d/pipeline.js") +
-            ";",
-          "onmessage = async ({data:photo}) => { try {",
-          "const e=createDepthEngine(); const start=performance.now(); const tiles=[];",
-          "const result=await reconstruct(photo,async(p,o)=>{const d=await e.estimate(p,o); tiles.push(d); return d;});",
-          "const naive=await e.estimate(photo,{side:294});",
-          "postMessage({result,naive,tiles,ms:performance.now()-start});",
-          "} catch(e) {postMessage({error:e.message});}};",
-        ].join("\n");
-        const url = URL.createObjectURL(new Blob([code], { type: "text/javascript" }));
-        const w = new Worker(url, { type: "module" });
-        try {
-          const r = await new Promise((resolve, reject) => {
-            w.onmessage = ({ data }) =>
-              data.error ? reject(new Error(data.error)) : resolve(data);
-            w.onerror = (e) => reject(new Error(e.message));
-            w.postMessage(photo);
-          });
-          return {
-            ...r,
-            result: { ...r.result, depth: { ...r.result.depth, d: Array.from(r.result.depth.d) } },
-            naive: { ...r.naive, d: Array.from(r.naive.d) },
-            tiles: r.tiles.map((t) => ({ ...t, d: Array.from(t.d) })),
-          };
-        } finally {
-          w.terminate();
-          URL.revokeObjectURL(url);
-        }
-      }, scene.id);
+      inference = await page.evaluate(
+        async ({ id, truthURL }) => {
+          const { decodePhoto } = await import("/src/packs/photo-3d.js");
+          const photo = await decodePhoto(await (await fetch(truthURL + id + "/pano.jpg")).blob());
+          const code = [
+            "import { createDepthEngine } from " +
+              JSON.stringify(location.origin + "/src/depth/engine.js") +
+              ";",
+            "import { reconstruct } from " +
+              JSON.stringify(location.origin + "/src/pano3d/pipeline.js") +
+              ";",
+            "onmessage = async ({data:photo}) => { try {",
+            "const e=createDepthEngine(); const start=performance.now(); const tiles=[];",
+            "const result=await reconstruct(photo,async(p,o)=>{const d=await e.estimate(p,o); tiles.push(d); return d;});",
+            "const naive=await e.estimate(photo,{side:294});",
+            "const naive392=await e.estimate(photo,{side:392});",
+            "postMessage({result,naive,naive392,tiles,ms:performance.now()-start});",
+            "} catch(e) {postMessage({error:e.message});}};",
+          ].join("\n");
+          const url = URL.createObjectURL(new Blob([code], { type: "text/javascript" }));
+          const w = new Worker(url, { type: "module" });
+          try {
+            const r = await new Promise((resolve, reject) => {
+              w.onmessage = ({ data }) =>
+                data.error ? reject(new Error(data.error)) : resolve(data);
+              w.onerror = (e) => reject(new Error(e.message));
+              w.postMessage(photo);
+            });
+            return {
+              ...r,
+              result: {
+                ...r.result,
+                depth: { ...r.result.depth, d: Array.from(r.result.depth.d) },
+              },
+              naive: { ...r.naive, d: Array.from(r.naive.d) },
+              naive392: { ...r.naive392, d: Array.from(r.naive392.d) },
+              tiles: r.tiles.map((t) => ({ ...t, d: Array.from(t.d) })),
+            };
+          } finally {
+            w.terminate();
+            URL.revokeObjectURL(url);
+          }
+        },
+        { id: scene.id, truthURL },
+      );
       inference.pipelineHash = pipelineHash;
       await fs.writeFile(cache, JSON.stringify(inference));
     }
@@ -112,7 +121,8 @@ try {
       return { scale, d: Float32Array.from(d, (v) => v * scale) };
     };
     const aligned = calibrate(resize(predicted)),
-      baseline = calibrate(resize(naive, true));
+      baseline = calibrate(resize(naive, true)),
+      baseline392 = calibrate(resize(inference.naive392, true));
     const metrics = (d) => {
       let abs = 0,
         delta = 0,
@@ -149,7 +159,7 @@ try {
               jumps.push(Math.abs(d[i] - d[j]) / ((d[i] + d[j]) / 2));
           }
         }
-      return { median: median(jumps), pairs: jumps.length };
+      return { median: jumps.length ? median(jumps) : null, pairs: jumps.length };
     };
     // A declared software point-splat diagnostic, independent of the product GPU.
     // Mask is fixed from ground-truth source visibility; missing predicted pixels
@@ -230,10 +240,12 @@ try {
       id: scene.id,
       spherical: metrics(aligned.d),
       naive: metrics(baseline.d),
+      naive392: metrics(baseline392.d),
       seam: seamJumps(aligned.d),
       overlapDisagreement: inference.result.alignment.seamMedian,
       scale: aligned.scale,
       naiveScale: baseline.scale,
+      naive392Scale: baseline392.scale,
       novel,
       inferenceMs: inference.ms,
     };
@@ -244,7 +256,7 @@ try {
       JSON.stringify(
         {
           pipelineHash,
-          note: "Actual WASM model, 294-pixel tiles; area-weighted depth metrics, per-method median scale calibration. Novel views use a software point-splat diagnostic and fixed source-visible masks, not the product GPU. Not physical-phone evidence.",
+          note: "Actual WASM model: six 294-pixel perspective tiles plus four 294-pixel equirectangular yaw views, compared with independent one-tile 294 and 392 baselines; area-weighted depth metrics, per-method median scale calibration. Novel views use a software point-splat diagnostic and fixed source-visible masks, not the product GPU. Not physical-phone evidence.",
           scenes: results,
         },
         null,

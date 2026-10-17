@@ -12809,14 +12809,14 @@
       "checked": "October 17, 2026",
       "sha256": "6fbc5cbf7df6e24575bc048a12f48e77436efefc4b99b73e23ab767f85eda5bc",
       "sourceSha256": "25925683b0295bd1f98b73ac230d2dcf5a6941bcff81e893aa992734808148be",
-      "changes": "Poly Haven tonemapped JPEG reduced from 8192×4096 to 2048×1024 with Pillow, JPEG quality 88. Spherical radial depth is estimated by the shipped model through tools/pano-bake.mjs; baked caches use the existing Photo to 3D depth file format. No source pixels are synthesized.",
+      "changes": "Poly Haven tonemapped JPEG reduced from 8192×4096 to 2048×1024 with Pillow, JPEG quality 88. Spherical radial depth uses six overlapping perspective tiles and four yaw panorama priors from the shipped model through tools/pano-bake.mjs; caches use the existing Photo to 3D depth file format. No source pixels are synthesized.",
       "licenseChecked": "Both the live asset page and https://polyhaven.com/license declare CC0. Code made by Ryan with Codex (GPT-6), under MIT.",
       "depthFile": "assets/toys/step-inside-360/room.depth",
-      "depthSha256": "e8658f275f1888bdbf9d41fc2e082b89c316c5ba6b551937f3a6faf5e08326c8",
-      "depthPipelineSha256": "1326d658d9b660bcba80fc380791b2a9a7bb57301fbf3bffb56bc399324dcec3",
+      "depthSha256": "1bfa1c1deb390c4b2480aab010483606a0f0f606d124a5230d0a830f1d3cb8cf",
+      "depthPipelineSha256": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82",
       "thumbnail": {
         "file": "assets/toys/step-inside-360/thumb.webp",
-        "sha256": "77276eeceff0507afa974f4da5c81c9cb6ea692c39f61f38aef9118a2f520de6",
+        "sha256": "4fec1da7ba61cb645c790f1c59d40acf4160c8176d6754ce5602dd6574151b18",
         "changes": "Default sample rendered by tools/make-thumbs.mjs with the normal Kit and WebGL2 stage."
       }
     },
@@ -12832,11 +12832,11 @@
       "checked": "October 17, 2026",
       "sha256": "d93eb56914ccac629443d8f084eed3fede163b4b511b3f6b0ed41d8ede60f5a1",
       "sourceSha256": "269cb3f4528fe3bf0450037897e4e5d81f279ddb1b4470b441894a8e90de5587",
-      "changes": "Poly Haven tonemapped JPEG reduced from 8192×4096 to 2048×1024 with Pillow, JPEG quality 88. Spherical radial depth is estimated by the shipped model through tools/pano-bake.mjs; baked caches use the existing Photo to 3D depth file format. No source pixels are synthesized.",
+      "changes": "Poly Haven tonemapped JPEG reduced from 8192×4096 to 2048×1024 with Pillow, JPEG quality 88. Spherical radial depth uses six overlapping perspective tiles and four yaw panorama priors from the shipped model through tools/pano-bake.mjs; caches use the existing Photo to 3D depth file format. No source pixels are synthesized.",
       "licenseChecked": "Both the live asset page and https://polyhaven.com/license declare CC0. Code made by Ryan with Codex (GPT-6), under MIT.",
       "depthFile": "assets/toys/step-inside-360/room2.depth",
-      "depthSha256": "bf042299d283eefae1f7598b0dec11cedc8d71b37741146d72afbbf69bc9953c",
-      "depthPipelineSha256": "1326d658d9b660bcba80fc380791b2a9a7bb57301fbf3bffb56bc399324dcec3"
+      "depthSha256": "988d19b4fa5f01c23e9ed564cf51344480a8b45d515f9a8fa466ed20a578d926",
+      "depthPipelineSha256": "e655053877ba3c3276b50c9cfa48a43472cf78533d21c68648aa15ce470ace82"
     }
   ]
 }

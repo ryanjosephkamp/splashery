@@ -67,7 +67,7 @@ const study = {
   createdUTC: new Date().toISOString(),
   source: Object.fromEntries(sourceFiles.map((f) => [f, sha256(f)])),
   graphics,
-  note: "390×844, device scale factor 3, forced low profile, real WebGL2 splats and WASM depth. Desktop Chromium with software graphics and concurrent regression checks, not physical-phone evidence. First look includes an interactive constant-radius preview. Process-tree PSS sampled every 100 ms; short peaks can be missed. RSS double-counts shared pages.",
+  note: "390×844, device scale factor 3, forced low profile, real WebGL2 splats and WASM depth. Desktop Chromium with software graphics, not physical-phone evidence. Hardware and concurrent work affect timings. First look includes an interactive constant-radius preview. Process-tree PSS sampled every 100 ms; short peaks can be missed. RSS double-counts shared pages.",
   model: "Codex (GPT-6)",
   entries: [],
 };

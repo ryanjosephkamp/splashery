@@ -13,7 +13,8 @@ const hash = crypto
   .createHash("sha256")
   .update(await fs.readFile(model))
   .digest("hex");
-const out = ".cache/pano3d/evidence";
+const out = process.env.SPLASHERY_PANO_METRIC_OUT || ".cache/pano3d/evidence";
+await fs.mkdir(out, { recursive: true });
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || "/usr/bin/chromium",
   args: ["--no-sandbox"],
@@ -42,7 +43,7 @@ try {
           JSON.stringify(origin + "/.cache/pano3d/models/metric.onnx") +
           "});",
         "for(const tile of TILES){const d=await estimate(perspective(photo,tile,518)); tiles.push({...tile,...d,d:Float32Array.from(d.d,v=>1/Math.max(.001,v))});}",
-        "const raw=fuseDepth(tiles,{transforms:TILES.map(()=>({a:1,b:0}))});const aligned=fuseDepth(tiles,alignTiles(tiles));",
+        "const raw=fuseDepth(tiles,{transforms:TILES.map(()=>({a:1,b:0}))},512,256,{normalize:false});const aligned=fuseDepth(tiles,alignTiles(tiles),512,256,{normalize:false});",
         "const colors=resampleArea(photo,518,518),data=new Uint8ClampedArray(518*518*4);for(let i=0;i<518*518;i++){for(let c=0;c<3;c++)data[4*i+c]=colors[3*i+c]*255;data[4*i+3]=255;}",
         "const naive=await estimate({w:518,h:518,data});postMessage({raw,aligned,naive,ms:performance.now()-start});",
         "}catch(e){postMessage({error:e.message})}};",
@@ -112,7 +113,7 @@ try {
       JSON.stringify(
         {
           modelHash: hash,
-          note: "Offline static-518 indoor metric ONNX model; naive panorama is resized to the model's fixed square input. Each method has independent scale-only calibration. Not shipping, and no phone claim.",
+          note: "Offline static-518 indoor metric ONNX model; naive panorama is resized to the model's fixed square input. Fusion retains the unnormalized radial range before each method receives independent scale-only calibration; no .6-to-30 m preview clamp enters this metric comparison. Not shipping, and no phone claim.",
           scenes: results,
         },
         null,

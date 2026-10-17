@@ -1,127 +1,163 @@
 # Step inside a 360° photo: implementation and qualification
 
-Codex (GPT-6), October 17, 2026. Task 107. Branch: codex/step-inside-360.
+Codex (GPT-6), October 17, 2026. Task 107.
 [Draft PR #700](https://github.com/ryanjosephkamp/splashery/pull/700).
+[Eight clips, raw measurements, and reproducible research](https://github.com/ryanjosephkamp/splashery/tree/codex/step-inside-360-clips/docs/audits/step-inside-360-evidence).
+The evidence branch must never be merged.
 
-**The depth improvement gate is unmet. This is an experimental draft, not a qualified release.** The
-tool is available only in the labs Studio shelf. Classic Photo to 3D's implementation, model,
-renderer hooks, and existing tests were not edited.
+**The requested 20% depth improvement is unmet.** The final method improves all eighteen measured
+panoramas over the primary naive run, averaging about 14.6% lower AbsRel. This is an experimental
+labs draft, not a qualified release. Classic Photo to 3D remains byte-identical under its golden
+test. No existing test was loosened or skipped.
 
 ## Implementation
 
-The independent pipeline lives in src/pano3d/. The input reader accepts complete 2:1 equirectangular
-images, reads GPano dimensions, projection, pose, and initial heading, and rejects partial panoramas
-and cylindrical projections. Initial heading is relative to the panorama pose. Files stay in the
-page; inference uses the existing same-origin WASM depth engine in a dedicated worker. A saved link
-cannot retain a private local file and asks the person to reopen it.
+All new runtime code lives in src/pano3d/. Input accepts complete 2:1 equirectangular images and
+reads GPano dimensions, projection, pose heading, and initial heading. It rejects partial panoramas
+and cylindrical projections. The initial view uses the heading relative to the panorama pose.
+Private files stay in memory on the device; a shared custom-source link asks the visitor to reopen
+the file.
 
-An interactive constant-radius splat preview appears before custom inference finishes. Six
-overlapping 110-degree perspective views run the shipped relative-depth model at 294 pixels. The
-pure pipeline jointly fits scales and offsets in inverse radial depth, applies the perspective
-cosine correction, and feathers overlapping observations. Unsupported, constant-color views do not
-determine the calibration or the normalization median. Unsupported rays receive a distant shell,
-rather than fabricated measured geometry.
+An interactive constant-radius preview appears before custom inference finishes. Six overlapping
+110-degree perspective tiles run the shipped WASM depth model at a 294-pixel side. Joint robust
+affine alignment in inverse radial depth applies the perspective cosine correction. Four complete
+panorama yaw views, also at 294 pixels, supply global context. Their relative inverse-depth fields
+are robustly aligned, periodically feathered, and combined with one quarter of the locally aligned
+cube field in inverse depth. The whole-panorama prior uses local RGB confidence during calibration
+and normalization. It abstains for a completely featureless input. No true depth or validity mask
+enters production inference. Sequential yaw inputs reuse one scratch buffer, saving two full-size
+RGBA allocations; fresh model runs confirm byte-identical predictions and calibration on all
+eighteen inputs, and both sample depth caches remain byte-identical. No new model, weights, runtime
+dependency, or network service ships.
 
-Latitude rings close the polar caps. Extra samples favor the initial heading within the normal phone
-and desktop budgets. Explicit inward quaternions orient the anisotropic discs; Kit's explicit-scale
-path does not consume normals. The normal renderer's phone pixel cap applies. Drag uses the existing
-inside camera; tilt starts only after a tap and permission. Lean and step offsets stay within one
-estimated meter. The warning follows the direction of displacement, rather than the direction the
-person looks. Distances are relative estimates, not a metric measurement of the room.
+Latitude rings close both poles. Extra samples favor the initial heading within the normal phone and
+desktop budgets. Explicit inward quaternions orient the anisotropic discs. The normal renderer's
+phone pixel cap applies. Drag uses the existing inside camera; tilt starts only after a tap and
+permission. Lean and step remain within one estimated meter. The stretch warning samples the
+direction of displacement. Distances are relative estimates; a single image cannot supply hidden
+surfaces.
 
-Worker termination, source generations, decode versions, sensor teardown, and retry state handle
-exit, replacement, a delayed file decode, and a delayed sensor permission. No Engine commit or
-change to existing packs, player, app, stage, UI, effects, loaders, or stylesheet was needed. The
-new catalog entry uses the existing relative pack import path to load the independent module.
+Worker termination, source generations, decode versions, sensor teardown, and retry state cover
+replacement, exit, delayed file decoding, and delayed sensor permission. Existing packs, player,
+app, stage, UI, effects, loaders, and stylesheet are unchanged. No Engine hook was needed. Shared
+changes are the new tool's entries, generated pages, and the two generated Showcase shelf counts
+that increase by one for this tool.
 
-## Assets and licenses
+## Assets
 
-The live pages for [Small Empty Room 1](https://polyhaven.com/a/small_empty_room_1) and
+The live [Small Empty Room 1](https://polyhaven.com/a/small_empty_room_1),
 [Small Empty Room 2](https://polyhaven.com/a/small_empty_room_2), and
-[Poly Haven's license page](https://polyhaven.com/license), were opened and checked on October
-17, 2026. They identify Sergej Majboroda and CC0. The original tonemapped JPEGs were reduced from
-8192×4096 to 2048×1024 with Pillow, quality 88. Provenance, source and shipped hashes, and
-transformations are recorded in tools/assets.json. The baked depth files use the existing Photo to
-3D cache format and the new pipeline. A candidate lounge panorama with visible signage was
-discarded.
+[Poly Haven license](https://polyhaven.com/license) pages were opened on October 17, 2026. They
+identify Sergej Majboroda and CC0. Original 8192×4096 tonemapped JPEGs were reduced to 2048×1024
+with Pillow, JPEG quality 88. Source and shipped hashes, licenses, author, transformations, baked
+depth hashes, and the reconstruction hash are in tools/assets.json. Source pixels are not
+synthesized. A lounge candidate containing signage was discarded and is not published.
 
-No new third-party runtime, model, or weights ship. Existing Blender, Pillow, ffmpeg, and Playwright
-tools produce the local evidence.
+The samples' depth caches use the existing Photo to 3D cache format and the final panorama pipeline.
+Blender, Pillow, Playwright, and ffmpeg are local production and measurement tools, not new runtime
+dependencies. Original synthetic fixtures are CC0; the new code is MIT.
 
-## Reproducible yardstick
+## Yardstick and selection chronology
 
-Task 105's panorama truth tool had not landed on main when this task started. The local
-tools/pano-truth.mjs imports the existing tools/studio-truth-generate.py scene builder in Blender
-4.3.2. Six original CC0 scenes cover room, desk, stairs, arches, steps, and lattice. It renders
-equirectangular inputs, exact BVH radial depth and ambiguity masks, and independent held-out views
-at 0.3 m and 0.8 m.
+Task 105's spherical truth tool had not landed at task start. tools/pano-truth.mjs therefore imports
+the existing tools/studio-truth-generate.py scene builder in Blender 4.3.2. Six development scenes
+are room, desk, stairs, arches, steps, and lattice. A second group uses six previously unscored
+families: still-life, forest, coast, fur, night, and leaves. A third group adds six closed-enclosure
+and shifted-camera variants of the first group; these share base furniture families and are not six
+new independent scene families. Generators, exact radial BVH depth, opaque/ambiguous masks, input
+panoramas, and held-out 0.3 m and 0.8 m views are on the evidence branch.
 
-tools/pano-evaluate.mjs runs the actual shipped WASM model on the six perspective views and a naive
-one-tile equirectangular input at the same 294-pixel side. Each method receives one whole-sphere
-median scale calibration. AbsRel and delta1 use opaque, unambiguous truth pixels and spherical area
-weights. Seam jumps use adjacent valid pixels crossing dominant cube boundaries and the longitude
-wrap. Raw overlap disagreement is reported separately: feathering can hide a discontinuity without
-making depth accurate.
+The four-yaw, quarter-cube configuration was frozen on the original six before assessing the second
+and third groups. Those groups subsequently rejected floor and larger-resolution alternatives. They
+are no longer an untouched benchmark for any future method selection. All outcomes and the
+chronology are retained; no failing group is dropped from the eighteen-scene result.
 
-Held-out masked SSIM includes both a declared software point-splat diagnostic and the actual
-product's low-profile Kit/WebGL2 renderer, through tools/pano-gpu-views.mjs. Both use fixed
-source-visible masks from true geometry. Missing predicted pixels stay in the score. The GPU
-comparison uses exact 256×256 export buffers, a snapped 72-degree camera, and globally calibrated
-radial depths; all methods clip the cache's far distance to 200 m to preserve 16-bit precision. A
-true-depth reprojection control measures source sampling, occlusion, blur, and reference noise.
-Review caught the initial comparison camera easing its zoom; those scores are labeled rejected, and
-the fixed-camera run supersedes them.
+tools/pano-evaluate.mjs runs the actual shipped model and compares the final ten-inference pipeline
+with a naive one-tile equirectangular run at the same 294-pixel side. Benchmark inference times
+include both baseline inferences; phone timings are measured separately. Each method receives one
+whole-sphere median scale calibration. AbsRel and delta1 use opaque, unambiguous true-depth pixels
+with spherical area weights. This is a comparison of accuracy, not matched compute. An additional
+392-pixel naive control is reported, including its unstable zero predictions; it is not substituted
+for the primary baseline to claim success.
 
-tools/pano-clips.mjs records the real tool at 390×844, device scale factor 3, with the low profile
-and normal phone pixel cap. Eight recordings cover both CC0 samples and all six truth scenes. First
-look includes the interactive preview; depth-ready time is reported separately. Linux process-tree
-PSS and RSS are sampled every 100 ms. RSS double-counts shared pages and sampling can miss short
-peaks. Desktop software graphics, concurrent test load, and emulation do not establish
-physical-phone latency, memory, or sensor behavior.
+The final method improves every scene against the primary baseline. The original six average about
+9.9% better, the second six about 13.7% better, and the enclosure variants about 18.6% better. The
+pooled improvement is about 14.6%, below the 20% gate. Exact final model results, delta1, scales,
+source hashes, inference times, seam pairs, and raw outputs are in the evidence measurements.
 
-Panoramas, raw inference, measurements, review diagnostics, and recordings belong on the
-[separate evidence branch](https://github.com/ryanjosephkamp/splashery/tree/codex/step-inside-360-clips),
-which must never be merged. Its README records the exact source hashes, commands, gate outcomes, and
-eight video links. Earlier captures from changing runtime revisions are labeled rejected.
+Seam jumps use adjacent valid pixels crossing dominant cube boundaries or longitude wrap. A group
+with no valid seam pairs has a null median, not a passing zero. Raw per-tile overlap disagreement is
+reported separately. A small feathered seam does not establish accurate geometry. The complete phone
+recordings are supplied for visual judgment.
 
-## Experiments and limits
+Held-out masked SSIM includes both a labeled software point-splat diagnostic and the real Kit/WebGL2
+product renderer. Masks are fixed from true source visibility and retain missing predicted pixels.
+GPU measurements use a snapped 72-degree camera, exact 256×256 export buffers, and the same global
+depth calibration. Every method clips radial cache distance to 200 m before 16-bit encoding.
+True-depth reprojection controls expose sampling, occlusion, blur, and noisy references; they are
+not mathematical SSIM upper bounds. Initial easing-camera measurements are preserved as rejected and
+superseded by the snapped-camera runs.
 
-The six-scene 294-pixel run measures mean AbsRel 0.2120, versus 0.1207 for the naive input. Every
-scene misses the 20% improvement gate. Valid-pixel seam medians range from 0.839% to 1.222%; raw
-overlap disagreement remains materially larger and is separately reported. Eight complete
-phone-profile recordings show first look in 2.066–3.690 seconds, custom depth ready in 10.698–16.723
-seconds, and maximum sampled PSS of about 905 MiB. Three cold Classic conversions of the same
-shipped room image peak at 897–991 MiB in this environment. This is a limited desktop comparison,
-not a physical-phone qualification or a guaranteed memory ceiling.
+## Clips and phone limits
 
-Controlled tests exposed real implementation errors in affine offsets, unsupported normalization,
-disc orientation, metadata, and asynchronous lifecycle. Fixing those errors did not establish the
-requested 20% real-model improvement. Ground-truth-assisted affine fits are archived only as oracle
-diagnostics; they are not production results. Fixed validity cutoffs, featureless-view thresholds,
-and global one-tile priors also failed to establish the gate. A six-scene, same-model 518-pixel
-comparison also failed and increased inference cost, so it does not replace the smaller runtime
-setting.
+Eight complete native recordings show the two CC0 samples and six original synthetic inputs at
+390×844, device scale factor 3, low profile, normal phone pixel cap, and Mesa llvmpipe. They include
+a full turn, ceiling, floor, 0.3 m lean, 0.8 m step, warning, and return to center. Each posed view
+is allowed to draw. The recordings are not shortened to their final seconds.
 
-An offline indoor metric-model pilot was also evaluated, without adding it to the product:
-[model card](https://huggingface.co/77ukhtar/depth-anything-v2-metric-onnx/blob/a4259a3c45137b6eb32c84fcd95b86cd54c255b9/README.md),
-[upstream metric model documentation](https://github.com/DepthAnything/Depth-Anything-V2/blob/main/metric_depth/README.md),
-and
-[upstream Apache-2.0 license](https://github.com/DepthAnything/Depth-Anything-V2/blob/main/LICENSE).
-Its pinned 95 MiB export failed the first room pilot and was cut. It is neither a shipped weight nor
-a panorama-native comparison, and its result is not phone performance evidence.
+First-look timing includes the interactive preview; depth-ready timing is separate. The clock starts
+after the application is ready, immediately before selecting the tool, and excludes initial
+navigation and mobile bandwidth. Custom runs include the default sample and automated file
+selection. Source hashes and exact times accompany every clip.
 
-## Verification status
+Three quiet cold panorama conversions of the same 2048-pixel CC0 input peak at 993–999 MiB PSS,
+versus 1,177–1,235 MiB for three quiet Classic conversions. Both use the same 390×844, DSF 3
+viewport and their normal pixel caps; Classic has a 585×1266 stage buffer and the panorama controls
+leave a 585×700 buffer. These are observations, not a universal memory ceiling.
 
-The Classic golden run passed 77 tests, including both budgets for its 76 frozen samples. New tests
-cover spherical coordinates, coverage, joint affine calibration, sky support, cancellation, GPano
-validation, inward discs, movement limits, real browser input races, source replacement, and
-switching back to Classic. Final panorama tests passed 12/12 and the post-merge preflight passed all
-271 shelf-wide specs, formatting, English, generated-site, list, and size checks. The complete
-existing suite is running locally and requested in sharded CI; the PR and evidence README record its
-actual outcome.
+Memory uses Linux browser-process-tree PSS sampled every 100 ms. RSS double-counts shared pages, and
+sampling can miss short peaks. The evidence includes cold Classic conversions and panorama
+conversions of the same 2048-pixel CC0 input, as well as the eight clips. Desktop Chromium with
+software graphics and concurrent checks does not qualify physical-phone latency, RAM, GPU memory, or
+tilt sensors. This limitation is explicit even when the emulated first-look gate passes.
 
-Thumbnail, phone, and desktop captures are inspected separately from numerical depth scores. No
-merge or release qualification is claimed while the depth gate and physical-phone evidence remain
-unresolved.
+## Rejected alternatives
 
-Rule check: no rule exceptions were used.
+The initial six-view-only prototype had mean AbsRel 0.2120 against 0.1207 naive. Its original
+measurements remain in rejected evidence. Joint calibration, relative-residual, gauge, convergence,
+projection-FOV, 518-pixel, dense equatorial-tile, uncertainty-weighting, and RGB-confidence studies
+are archived. Ground-truth-assisted affine fits are oracle diagnostics only.
+
+A floor-plane offset improved development scores but failed the frozen closed-interior assessment,
+including a large regression. Both level and tilted-plane variants, per-rotation correction, and a
+numerical cancellation issue are preserved. No floor calibration remains in runtime code.
+
+Four 392-pixel yaw priors cleared 20% on the first six but regressed four of six closed interiors;
+the pooled eighteen-scene gain was only about 8.9%. Eight 294-pixel yaw views slightly worsened the
+six-scene development mean. Both alternatives were cut without further tuning on their assessments.
+
+An offline 95 MiB indoor metric-model pilot also failed. Its
+[pinned export card](https://huggingface.co/77ukhtar/depth-anything-v2-metric-onnx/blob/a4259a3c45137b6eb32c84fcd95b86cd54c255b9/README.md),
+[upstream documentation](https://github.com/DepthAnything/Depth-Anything-V2/blob/main/metric_depth/README.md),
+and [Apache-2.0 license](https://github.com/DepthAnything/Depth-Anything-V2/blob/main/LICENSE) were
+opened. A corrected comparison retains the unnormalized radial range before scoring; it still fails
+the room pilot. No alternative weights are published or shipped.
+
+## Verification
+
+New tests cover spherical wrap and coverage, affine calibration, sky normalization, GPano input,
+worker replacement, cancellation, delayed decode, inward discs, movement bounds, yaw shifts,
+featureless-prior fallback, periodic fusion, and switching back to Classic. Classic's golden test
+checks all 76 samples at both budgets. Final test counts and logs, post-merge preflight, the
+complete sharded suite outcome, renderer checks, and frozen-file identities are recorded in the PR
+and the evidence verification directory. Classic passed all 77 golden tests, and the final panorama
+run passed all 16 tests. Existing tests are unchanged.
+
+The existing Pebbles stacking assertion also fails on untouched current main (ceb51de7a) and on this
+branch, with identical test and shared engine blobs. The reproduction and logs are in the evidence
+verification directory. No physics code or existing test was changed to hide this blocker.
+
+The PR remains a draft. The unmet depth gate and missing physical-phone qualification prevent a
+release claim.
+
+Rule check: none.
