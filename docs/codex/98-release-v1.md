@@ -69,6 +69,11 @@ limits (phones without WebGL2, very slow renderers), and the credits pointer. Am
 plain words, no marketing claims. The owner adds the git tag and the GitHub release from this text;
 the Operator saves the checkpoint branch after the merge.
 
+Also `docs/releases/v1.0-toys.json`: a machine-readable list of every public toy at v1.0. For each
+toy it gives the id, label, shelf, the date it was added, whether it was labs-only before v1.0, its
+pack file, and its assets with their licenses. Build it with a small tool, `tools/release-toys.mjs`,
+so it can be made again for later releases. The Shop's site reads it.
+
 ## Verification
 
 - The audit table, before and after Part 2.
