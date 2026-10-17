@@ -1,0 +1,40 @@
+{
+  "started": "2026-10-17T05:54:00.793873+00:00",
+  "head": "23664b6dc4e289b50ea3035346f4a8846379ff13",
+  "command": [
+    "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/splashery/.cache/flaky-tests/shr-close-boundary/config.mjs",
+    "--reporter=list,json",
+    "--retries=0",
+    "--output",
+    "/workspace/splashery/.cache/flaky-tests/shr-close-boundary/run-055400/results",
+    "--workers=1",
+    "--grep",
+    "native preview"
+  ],
+  "environment": {
+    "SPLASHERY_CHROMIUM": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+    "SPLASHERY_GL": "llvmpipe",
+    "DISPLAY": ":91",
+    "SPLASHERY_PORT": "4192",
+    "PLAYWRIGHT_NODEJS_PATH": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node"
+  },
+  "diff": "",
+  "files": {
+    ".cache/flaky-tests/shr-close-boundary/config.mjs": "af2179abf848a7ef69a50a8c6f9ddb9108337822d723d4e2be699e023de3264a",
+    ".cache/flaky-tests/shr-close-boundary/focus.spec.mjs": "2706b3ea179dc2c031ba649f3c54bcf76e3037f5e1702445a85fadcc0f50acba",
+    ".cache/flaky-tests/shr-close-boundary/ui-before.js": "e3d4d614bd54d05a176bc5ae259849c5452d7feb6ed6be5cb30271b8ea65f2aa",
+    ".cache/flaky-tests/shr-close-boundary/ui-after.js": "697476298e68cddb62e9aa61c431e9cb70fcef796191c994434a51a9f02a8510",
+    ".cache/flaky-tests/run-quiet.py": "f9589433cb62b4d07c39a956424e71b7b3b0879db79b5856342d304a8560e312",
+    ".cache/flaky-tests/rendered-view.mjs": "ee40c43b3026abbaac8ac797202b0793f76aab99ff3cce07d79a8a99eb56b07c"
+  },
+  "burners": 0,
+  "node": "v22.20.0",
+  "browser": "Chromium 141.0.7390.37",
+  "cpu": "400000 100000",
+  "ended": "2026-10-17T05:54:09.881317+00:00",
+  "exit": 0
+}

@@ -1,0 +1,24 @@
+[2m[WebServer] [22m(node:2450) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 13 tests using 1 worker
+
+(node:2461) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2461) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/shr.spec.mjs:95:5 › 390x844 › the tabs go Toy, Share, Tools, Look, Make, then (i), and the arrow keys follow (5.5s)
+  ✓   2 [chromium] › tests/shr.spec.mjs:135:5 › 390x844 › the Share tab: Record first, then a clip and a picture, the link and the scene file, PDF, and the web page; nothing cut off or overlapping (6.8s)
+  ✓   3 [chromium] › tests/shr.spec.mjs:202:5 › 390x844 › the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves (20.7s)
+  ✓   4 [chromium] › tests/shr.spec.mjs:95:5 › 1440x900 › the tabs go Toy, Share, Tools, Look, Make, then (i), and the arrow keys follow (3.2s)
+  ✓   5 [chromium] › tests/shr.spec.mjs:135:5 › 1440x900 › the Share tab: Record first, then a clip and a picture, the link and the scene file, PDF, and the web page; nothing cut off or overlapping (3.6s)
+  ✓   6 [chromium] › tests/shr.spec.mjs:202:5 › 1440x900 › the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves (22.5s)
+  ✓   7 [chromium] › tests/shr.spec.mjs:357:3 › native preview focus › closing a phone preview releases its hidden focused control before the next frame (5.9s)
+  ✓   8 [chromium] › tests/shr.spec.mjs:409:3 › the preview sheet, more › a canceled share sheet doesn't count as saved; a finished share does (9.3s)
+  ✓   9 [chromium] › tests/shr.spec.mjs:445:3 › the preview sheet, more › Record again: a second take opens in the sheet, and the first take's listener is gone (13.1s)
+  ✓  10 [chromium] › tests/shr.spec.mjs:491:3 › the preview sheet, more › with no WebM recording, Save a clip opens on GIF and the Video side is off (2.4s)
+  ✓  11 [chromium] › tests/shr.spec.mjs:514:3 › a phone on its side (844×390) › the preview's buttons all fit on the screen (6.8s)
+  ✓  12 [chromium] › tests/shr.spec.mjs:549:3 › Clap to tap › with labs on, it is at the bottom of the Tools tab, not on the Toy tab, and asks for nothing until switched on (2.7s)
+  ✓  13 [chromium] › tests/shr.spec.mjs:578:3 › Clap to tap › with labs off, it isn't anywhere (2.2s)
+
+  13 passed (1.8m)

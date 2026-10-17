@@ -1,0 +1,59 @@
+[2m[WebServer] [22m(node:2058) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:2069) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2069) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/shr.spec.mjs:357:3 › native preview focus › closing a phone preview releases its hidden focused control before the next frame (7.2s)
+
+
+  1) [chromium] › tests/shr.spec.mjs:357:3 › native preview focus › closing a phone preview releases its hidden focused control before the next frame 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [2m    Object {[22m
+    [32m-     "body": true,[39m
+    [31m+     "body": false,[39m
+    [2m      "focused": false,[22m
+    [2m      "open": false,[22m
+    [2m      "shown": false,[22m
+    [2m    },[22m
+    [2m  ][22m
+
+      387 |     await expect(page.locator("#rec-preview")).toBeHidden();
+      388 |     await download;
+    > 389 |     expect(await page.evaluate(() => window.__recordCloseFocus)).toEqual([
+          |                                                                  ^
+      390 |       { open: false, shown: false, focused: false, body: true },
+      391 |     ]);
+      392 |     await expectRecordFocused(page);
+        at /workspace/splashery/tests/shr.spec.mjs:389:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/flaky-tests/shr-regression-before-results/shr-native-preview-focus-c-32477-ntrol-before-the-next-frame-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .cache/flaky-tests/shr-regression-before-results/shr-native-preview-focus-c-32477-ntrol-before-the-next-frame-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/flaky-tests/shr-regression-before-results/shr-native-preview-focus-c-32477-ntrol-before-the-next-frame-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/flaky-tests/shr-regression-before-results/shr-native-preview-focus-c-32477-ntrol-before-the-next-frame-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/shr.spec.mjs:357:3 › native preview focus › closing a phone preview releases its hidden focused control before the next frame 
+npm notice
+npm notice New major version of npm available! 10.9.3 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

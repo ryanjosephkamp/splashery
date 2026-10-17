@@ -1,0 +1,150 @@
+import { test as base, expect } from "@playwright/test";
+import fs from "node:fs";
+
+const sources = Object.fromEntries(["before", "after"].map((mode) =>
+  [mode, fs.readFileSync(new URL(`./ui-${mode}.js`, import.meta.url), "utf8")]));
+const test = base.extend({
+  uiMode: ["before", { option: true }],
+  page: async ({ page, uiMode }, use) => {
+    await page.route("**/src/ui.js", (route) => route.fulfill({
+      status: 200, contentType: "text/javascript", body: sources[uiMode],
+    }));
+    await page.addInitScript(() => {
+      const rows = (window.__shrFocus = []);
+      const snapshot = (kind, dialog) => {
+        const active = document.activeElement;
+        const pill = document.getElementById("rec-pill");
+        rows.push({ kind, at: performance.now(), dialog: dialog?.id,
+          open: dialog?.open, active: active?.id || active?.tagName,
+          activeInPill: !!pill?.contains(active), pillHidden: pill?.hidden });
+      };
+      for (const method of ["showModal", "close"]) {
+        const native = HTMLDialogElement.prototype[method];
+        HTMLDialogElement.prototype[method] = function (...args) {
+          snapshot(method + ":before", this);
+          const result = native.apply(this, args);
+          snapshot(method + ":after", this);
+          if (method === "close" && this.id === "rec-preview") queueMicrotask(() => {
+            const r = document.getElementById("record-start");
+            const got = { shown: !!r.offsetParent && r.getBoundingClientRect().height > 0,
+              focused: document.activeElement === r, body: document.activeElement === document.body };
+            rows.push({kind: "original-focus-at-close-microtask", active: document.activeElement?.id || document.activeElement?.tagName,
+              open: this.open, got, allowed: got.shown ? got.focused : got.body || got.focused });
+          });
+          return result;
+        };
+      }
+      for (const type of ["focusin", "focusout", "close", "cancel"])
+        document.addEventListener(type, (event) => snapshot(type, document.getElementById("rec-preview")), true);
+    });
+    await use(page);
+  },
+});
+test.afterEach(async ({ page, uiMode }, info) => {
+  const native = await page.evaluate(() => ({
+    events: window.__shrFocus, actualTake: window.__shrActualTake,
+    active: document.activeElement?.id || document.activeElement?.tagName,
+  }));
+  const receipt = { mode: uiMode, status: info.status, ...native };
+  console.log("SHR_READY_FOCUS " + JSON.stringify(receipt));
+  await info.attach("native-focus", { body: JSON.stringify(receipt, null, 2), contentType: "application/json" });
+});
+
+async function open(page, width, height) {
+  await page.setViewportSize({ width, height });
+  await page.goto("/?renderer=webgl2&profile=weak&labs=0");
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+}
+
+async function expectRecordFocused(page) {
+  const got = await page.evaluate(() => {
+    const r = document.getElementById("record-start");
+    return { shown: !!r.offsetParent && r.getBoundingClientRect().height > 0, focused: document.activeElement === r, body: document.activeElement === document.body }; // prettier-ignore
+  });
+  if (got.shown) expect(got.focused).toBe(true);
+  else expect(got.body || got.focused).toBe(true);
+}
+
+for (const mode of ["before", "after"]) {
+  test.describe(mode, () => {
+    test.use({ uiMode: mode });
+    test.describe("real phone recording", () => {
+      test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+
+test("native preview releases focus before the close task completes", async ({ page }, info) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await open(page, 390, 844);
+  await page.evaluate((id) => window.__splashery.app.chooseToy(id), "donut");
+  await page.waitForFunction(() => window.__splashery.player.toyInfo?.id === "donut", null, { timeout: 120000 });
+  await page.locator("#sheet-toggle").click();
+  await page.locator("#tab-share").click();
+  await expect(page.locator("#pane-share")).toBeVisible();
+  await page.locator("#record-start").focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#rec-stop")).toBeFocused();
+  // A real elapsed recording with actual footage; stop through its real keyboard control.
+  await expect(page.locator("#rec-time")).toHaveText(/^0:0[1-9] \/ 1:00$/);
+  await page.locator("#rec-stop").focus();
+  await page.keyboard.press("Enter");
+  const sheet = page.locator("#rec-preview");
+  await expect(sheet).toBeVisible({ timeout: 30000 });
+  await expect(page.locator("#rec-save")).toBeFocused();
+  const actualTake = await page.evaluate(() => {
+    const r = window.__splashery.app.recorded;
+    return (window.__shrActualTake = { bytes: r.blob.size, type: r.blob.type,
+      seconds: r.seconds, name: r.name, src: document.getElementById("rec-video").src });
+  });
+  expect(actualTake.bytes).toBeGreaterThan(0);
+  expect(actualTake.seconds).toBeGreaterThan(0);
+  expect(actualTake.type).toMatch(/^video\//);
+  await page.waitForFunction(() => {
+    const v = document.getElementById("rec-video");
+    return v.readyState >= 1 && Number.isFinite(v.duration) && v.duration > 0;
+  }, null, { timeout: 30000 });
+  const download = page.waitForEvent("download");
+  await page.keyboard.press("Enter");
+  await page.keyboard.press("Escape");
+  await expect(sheet).toBeHidden();
+  const hiddenReturnTargets = await page.evaluate(() => window.__shrFocus.filter((event) =>
+    event.kind === "showModal:before" && event.dialog === "rec-preview" && event.pillHidden && event.activeInPill));
+  // Retain this independent failure and still execute the original close-focus assertion.
+  expect.soft(hiddenReturnTargets).toEqual([]);
+  const closeFocus = await page.evaluate(() => window.__shrFocus.filter((e) => e.kind === "original-focus-at-close-microtask"));
+  expect.soft(closeFocus.map((e) => ({open: e.open, allowed: e.allowed}))).toEqual([{open: false, allowed: true}]);
+  // Preserve the original close-focus predicate before any file-save round trip.
+  try {
+    await expectRecordFocused(page);
+  } finally {
+    const saved = await download;
+    expect(saved.suggestedFilename()).toBe(actualTake.name);
+    const file = info.outputPath(saved.suggestedFilename());
+    await saved.saveAs(file);
+    await info.attach("actual-recording", { path: file, contentType: actualTake.type });
+  }
+  expect(errors).toEqual([]);
+});
+
+    });
+    test.describe("unchanged Task 52 controls", () => {
+      test.use({ hasTouch: false, isMobile: false });
+test("recording focus survives saving and an empty take without stealing later focus", async ({
+  page,
+}) => {
+  await open(page, 390, 844);
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "rec" }));
+  await page.locator("#rec-stop").focus();
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "busy" }));
+  await expect(page.locator("#rec-pill")).toBeFocused();
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "off" }));
+  await expect(page.locator("#sheet-toggle")).toBeFocused();
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "rec" }));
+  await page.locator("#rec-stop").focus();
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "busy" }));
+  await page.locator("#help-toggle").focus();
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "ready", bytes: 1000 }));
+  await expect(page.locator("#help-toggle")).toBeFocused();
+});
+    });
+  });
+}

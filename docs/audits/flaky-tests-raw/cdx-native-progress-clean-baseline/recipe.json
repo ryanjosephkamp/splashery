@@ -1,0 +1,39 @@
+{
+  "started": "2026-10-17T04:57:13.430155+00:00",
+  "head": "23664b6dc4e289b50ea3035346f4a8846379ff13",
+  "command": [
+    "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/splashery/.cache/flaky-tests/cdx-natural/config.mjs",
+    "--reporter=list,json",
+    "--retries=0",
+    "--output",
+    "/workspace/splashery/.cache/flaky-tests/cdx-natural/run-045713/results",
+    "--workers=4",
+    "--fully-parallel",
+    "--repeat-each=10",
+    "--grep",
+    "measured drift stays below the baseline"
+  ],
+  "environment": {
+    "SPLASHERY_CHROMIUM": "/workspace/splashery/.cache/runtime/chrome-linux/chrome",
+    "SPLASHERY_GL": "llvmpipe",
+    "DISPLAY": ":91",
+    "SPLASHERY_PORT": "4189",
+    "PLAYWRIGHT_NODEJS_PATH": "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node"
+  },
+  "diff": "",
+  "files": {
+    ".cache/flaky-tests/cdx-natural/config.mjs": "d30a0566238c7237928fe72e73027c4ae9fe8b04a9bc271431518f6b32e269d8",
+    ".cache/flaky-tests/cdx-natural/cdx.spec.mjs": "b0250de450009a78715cd1931ddc6185a5858f5bb4967dbbbcecc2fe8e57efb5",
+    ".cache/flaky-tests/cdx-natural/measure.mjs": "6137e229ee29d2ec633fce9d65f496e2dec6dedd484b91b7bb5d4b7fb78b99d0",
+    ".cache/flaky-tests/run-probe.py": "0ec7097015778a573aaed4e97e798826557d79752ce252c2b4884fe19816d8d9",
+    ".cache/flaky-tests/rendered-view.mjs": "32186af45d1bfae714b05f3723d026ed0d426c756d6bb94c7a16427ce505a553"
+  },
+  "burners": 2,
+  "node": "v22.20.0",
+  "browser": "Chromium 141.0.7390.37",
+  "cpu": "400000 100000"
+}

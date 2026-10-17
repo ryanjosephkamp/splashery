@@ -1,0 +1,96 @@
+{
+  "started": "2026-10-17T05:58:20.215240+00:00",
+  "head": "0ed4b84d2b34f8703b71b4a65f7bd43a80b8c68f",
+  "diff": "diff --git a/src/ui.js b/src/ui.js\nindex 8ee6aa0e5..002e8f21e 100644\n--- a/src/ui.js\n+++ b/src/ui.js\n@@ -2511,7 +2511,10 @@ export function createUI(app) {\n     hideConfirm();\n     releasePreview();\n     if (app.recorded) app.closeRecord();\n+    // A native dialog can retain its hidden button until the next frame.\n+    // Finish returning focus even when the phone's Record sheet is folded.\n     if (refocus && els.recordStart.offsetParent) els.recordStart.focus();\n+    else if (els.recPreview.contains(document.activeElement)) document.activeElement.blur();\n   }\n   els.recPreview.addEventListener(\"close\", letGo);\n   let confirmed = null;\ndiff --git a/tests/shr.spec.mjs b/tests/shr.spec.mjs\nindex c2885d61f..35403ec8a 100644\n--- a/tests/shr.spec.mjs\n+++ b/tests/shr.spec.mjs\n@@ -351,6 +351,49 @@ async function expectRecordFocused(page) {\n   else expect(got.body || got.focused).toBe(true);\n }\n \n+test.describe(\"native preview focus\", () => {\n+  test.use(PHONE);\n+\n+  test(\"closing a phone preview releases its hidden focused control before the next frame\", async ({\n+    page,\n+  }) => {\n+    const errors = watchErrors(page);\n+    await page.addInitScript(() => {\n+      window.__recordCloseFocus = [];\n+      const close = HTMLDialogElement.prototype.close;\n+      HTMLDialogElement.prototype.close = function (...args) {\n+        const result = close.apply(this, args);\n+        if (this.id === \"rec-preview\")\n+          queueMicrotask(() => {\n+            const r = document.getElementById(\"record-start\");\n+            window.__recordCloseFocus.push({\n+              open: this.open,\n+              shown: !!r.offsetParent && r.getBoundingClientRect().height > 0,\n+              focused: document.activeElement === r,\n+              body: document.activeElement === document.body,\n+            });\n+          });\n+        return result;\n+      };\n+    });\n+    await open(page);\n+    await pick(page, \"donut\");\n+    await showTab(page, \"share\");\n+    await takeOne(page, 1200);\n+    expect(await page.evaluate(() => window.__splashery.app.recorded.blob.size)).toBeGreaterThan(0);\n+    const download = page.waitForEvent(\"download\");\n+    await page.keyboard.press(\"Enter\");\n+    await page.keyboard.press(\"Escape\");\n+    await expect(page.locator(\"#rec-preview\")).toBeHidden();\n+    await download;\n+    expect(await page.evaluate(() => window.__recordCloseFocus)).toEqual([\n+      { open: false, shown: false, focused: false, body: true },\n+    ]);\n+    await expectRecordFocused(page);\n+    expect(errors).toEqual([]);\n+  });\n+});\n+\n // One take from the Share tab, stopped from the pill; the preview opens.\n async function takeOne(page, ms = 1500) {\n   await page.click(\"#record-start\");\ndiff --git a/tools/flaky-tests.mjs b/tools/flaky-tests.mjs\nindex 4b8d1845a..648a6e46d 100644\n--- a/tools/flaky-tests.mjs\n+++ b/tools/flaky-tests.mjs\n@@ -50,6 +50,7 @@ const args = [\n   `--repeat-each=${repeat}`,\n   `--workers=${workers}`,\n   \"--fully-parallel\",\n+  \"--retries=0\",\n   \"--reporter=list,json\",\n   `--output=${path.join(out, \"results\")}`,\n ];\ndiff --git a/tools/lv7-mirror-measure.mjs b/tools/lv7-mirror-measure.mjs\nindex 241842840..55dd11d2f 100644\n--- a/tools/lv7-mirror-measure.mjs\n+++ b/tools/lv7-mirror-measure.mjs\n@@ -72,14 +72,60 @@ async function nextAnswer(page) {\n   await page.evaluate(async () => {\n     const { MIRROR } = await import(\"/src/live/relief.js\");\n     const cam = MIRROR.cam;\n-    const n0 = cam.answers;\n-    const t0 = performance.now();\n-    while (cam.answers === n0 && performance.now() - t0 < 30000) {\n-      cam.ask();\n-      await new Promise((r) => setTimeout(r, 30));\n+    if (!cam || cam.closed) throw Error(\"Camera depth is unavailable before the fresh answer\");\n+    const draw = cam.draw;\n+    let total = 0,\n+      frames = 0,\n+      invalidDt = null;\n+    cam.draw = function (g, options = {}) {\n+      const result = draw.call(this, g, options);\n+      if (result === true && this === cam && cam === MIRROR.cam) {\n+        const dt = options.dt === undefined ? 1 / 60 : options.dt;\n+        if (!Number.isFinite(dt) || dt < 0) invalidDt = String(dt);\n+        else {\n+          total += dt;\n+          frames++;\n+        }\n+      }\n+      return result;\n+    };\n+    const check = () => {\n+      if (cam !== MIRROR.cam || cam.closed) throw Error(\"Camera depth changed during observation\");\n+      if (invalidDt !== null) throw Error(\"Invalid native camera draw dt: \" + invalidDt);\n+    };\n+    try {\n+      const n0 = cam.answers;\n+      const t0 = performance.now();\n+      while (cam.answers === n0 && performance.now() - t0 < 30000) {\n+        check();\n+        cam.ask();\n+        await new Promise((r) => setTimeout(r, 30));\n+      }\n+      check();\n+      if (cam.answers === n0)\n+        throw Error(\n+          \"No fresh native depth answer within 30000 ms: \" +\n+            JSON.stringify({ answers: cam.answers, busy: cam.busy, discarded: cam.discarded }),\n+        );\n+      const before = { total, frames, wall: performance.now() };\n+      while (total - before.total < 0.4) {\n+        check();\n+        if (performance.now() - before.wall >= 30000)\n+          throw Error(\n+            \"Native camera draws did not consume 0.4 seconds within 30000 ms: \" +\n+              JSON.stringify({\n+                nativeSeconds: total - before.total,\n+                frames: frames - before.frames,\n+                answers: cam.answers,\n+              }),\n+          );\n+        await new Promise((r) => setTimeout(r, 30));\n+      }\n+      check();\n+    } finally {\n+      cam.draw = draw;\n     }\n   });\n-  await page.waitForTimeout(400);\n }\n \n // The face's cells: heights (0..1) and colors (r, g, b).\n",
+  "plans": [
+    [
+      "shr-full",
+      "llvmpipe",
+      "4194",
+      [
+        "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+        "/workspace/splashery/node_modules/@playwright/test/cli.js",
+        "test",
+        "tests/shr.spec.mjs",
+        "--workers=2",
+        "--retries=0",
+        "--reporter=list,json",
+        "--output=/workspace/splashery/.cache/flaky-tests/prepublish-0558/shr-results"
+      ]
+    ],
+    [
+      "record-focus-preservation",
+      "llvmpipe",
+      "4195",
+      [
+        "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+        "/workspace/splashery/node_modules/@playwright/test/cli.js",
+        "test",
+        "tests/cdx-a11y-layout.spec.mjs",
+        "--grep",
+        "recording focus survives saving and an empty take",
+        "--workers=1",
+        "--retries=0",
+        "--reporter=list,json",
+        "--output=/workspace/splashery/.cache/flaky-tests/prepublish-0558/focus-results"
+      ]
+    ],
+    [
+      "smoke-mesa",
+      "llvmpipe",
+      "4196",
+      [
+        "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+        "tools/flaky-tests.mjs",
+        "--only=cdx-mir,fl,hh1-toys,shr,hh5-gems,fx4-engine,img-engine,live2",
+        "--repeat=1",
+        "--workers=4",
+        "--burners=0",
+        "--out=/workspace/splashery/.cache/flaky-tests/prepublish-0558/smoke-mesa"
+      ]
+    ],
+    [
+      "smoke-swiftshader",
+      "swiftshader",
+      "4197",
+      [
+        "/workspace/splashery/.cache/runtime/node-v22.20.0-linux-x64/bin/node",
+        "tools/flaky-tests.mjs",
+        "--only=sndc-engine,phy",
+        "--repeat=1",
+        "--workers=2",
+        "--burners=0",
+        "--out=/workspace/splashery/.cache/flaky-tests/prepublish-0558/smoke-swiftshader"
+      ]
+    ]
+  ],
+  "sourceHashes": {
+    "src/ui.js": "a2e8d19e61a552e8ed05ccce9c909b00df18ac9c34839c93f2530b050d5e4154",
+    "tests/shr.spec.mjs": "4b9d1b51fce628e8358da088394c8f837873ba85848cf8e0649ae77a3bf276a2",
+    "tools/lv7-mirror-measure.mjs": "a6d1441398ad036993fb47ac38c30e2da12c54b13787af143031b91b4250369c",
+    "tools/flaky-tests.mjs": "0e971a37d1069cc951d9ac78ed9e6661956ed247c38ad2a8b41d35319319041d"
+  },
+  "results": [
+    {
+      "name": "shr-full",
+      "exit": 0,
+      "ended": "2026-10-17T06:00:07.036707+00:00"
+    },
+    {
+      "name": "record-focus-preservation",
+      "exit": 0,
+      "ended": "2026-10-17T06:00:11.382998+00:00"
+    },
+    {
+      "name": "smoke-mesa",
+      "exit": 0,
+      "ended": "2026-10-17T06:04:49.979192+00:00"
+    },
+    {
+      "name": "smoke-swiftshader",
+      "exit": 0,
+      "ended": "2026-10-17T06:05:10.356652+00:00"
+    }
+  ],
+  "ended": "2026-10-17T06:05:10.357008+00:00"
+}

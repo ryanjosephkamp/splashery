@@ -1,0 +1,2 @@
+Stress recipe: 1 repeats, 2 workers, sndc-engine, phy. Logs: /workspace/splashery/.cache/flaky-tests/prepublish-0558/smoke-swiftshader
+Stress recipe finished: 0. See /workspace/splashery/.cache/flaky-tests/prepublish-0558/smoke-swiftshader/report.json

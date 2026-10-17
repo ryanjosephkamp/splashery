@@ -1,0 +1,17 @@
+{
+  "status": "cache-only unexecuted",
+  "real_take": "Native site controls/MediaRecorder, elapsed tick, nonempty actual clip, native metadata, saved actual download attached.",
+  "observation": "Native showModal/close entry+exit and focus events; no critical layout reads.",
+  "invariant": "No showModal entry may retain a hidden recording-pill descendant as return target.",
+  "original_SHR_focus_helper_byte_identical": true,
+  "Task52_control_byte_identical": true,
+  "source_candidate_only_change": "if (ready && hadFocus) document.activeElement.blur(); before pill hidden",
+  "runtime_recipe": "Planned single worker, no burners; no browser execution performed.",
+  "hashes": {
+    ".cache/flaky-tests/shr-ready-focus/config.mjs": "af2179abf848a7ef69a50a8c6f9ddb9108337822d723d4e2be699e023de3264a",
+    ".cache/flaky-tests/shr-ready-focus/ui-before.js": "e3d4d614bd54d05a176bc5ae259849c5452d7feb6ed6be5cb30271b8ea65f2aa",
+    ".cache/flaky-tests/shr-ready-focus/ui-after.js": "697476298e68cddb62e9aa61c431e9cb70fcef796191c994434a51a9f02a8510",
+    ".cache/flaky-tests/shr-ready-focus/ui.diff": "528b6dabd66a5e9ba39d6be5fc52ca313db2a94e4939d7aa2abf870707437714",
+    ".cache/flaky-tests/shr-ready-focus/focus.spec.mjs": "3b60bebdf911fea05f5d69485c85a6cdc87cd4c086a201baa57275b066bb8090"
+  }
+}

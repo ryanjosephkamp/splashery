@@ -1,0 +1,12 @@
+{
+  "native_boundary": "queueMicrotask after real HTMLDialog.close returns; original full focus predicate, no clocks replaced",
+  "original_UI": "e3d4d614bd54d05a176bc5ae259849c5452d7feb6ed6be5cb30271b8ea65f2aa",
+  "change": "Blur only focus remaining inside the closed preview when Record is unavailable. Preserve visible Record and external focus.",
+  "hashes": {
+    "config.mjs": "af2179abf848a7ef69a50a8c6f9ddb9108337822d723d4e2be699e023de3264a",
+    "focus.spec.mjs": "3c441361ad5f4cc0c48b5d8811fae51dea46e68bcb105544cc0ccea66a5c9755",
+    "ui-before.js": "e3d4d614bd54d05a176bc5ae259849c5452d7feb6ed6be5cb30271b8ea65f2aa",
+    "ui-after.js": "d565f7c9ba02983f422bb1ac492a40ec8e6fcd1d04ad6d826b1a13add8fcf290",
+    "ui.diff": "463807e0e0e4514d8cf99e27e4fca366e60d21a9fa291724b2eff19bde738b01"
+  }
+}

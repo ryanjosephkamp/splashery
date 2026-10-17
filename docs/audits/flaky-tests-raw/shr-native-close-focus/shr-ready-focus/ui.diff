@@ -1,0 +1,10 @@
+--- src/ui.js before
++++ src/ui.js candidate
+@@ -3778,6 +3778,7 @@
+       const hadFocus = els.recPill.contains(document.activeElement);
+       const rec = state === "rec";
+       const ready = state === "ready";
++      if (ready && hadFocus) document.activeElement.blur();
+       els.recPill.hidden = state === "off" || ready;
+       els.recPill.classList.toggle("recording", rec);
+       els.recStop.hidden = !rec;

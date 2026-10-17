@@ -1,0 +1,10 @@
+--- published ui.js
++++ closed-preview focus candidate
+@@ -2512,6 +2512,7 @@
+     releasePreview();
+     if (app.recorded) app.closeRecord();
+     if (refocus && els.recordStart.offsetParent) els.recordStart.focus();
++    else if (els.recPreview.contains(document.activeElement)) document.activeElement.blur();
+   }
+   els.recPreview.addEventListener("close", letGo);
+   let confirmed = null;

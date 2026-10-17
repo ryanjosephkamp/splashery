@@ -1,0 +1,692 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/playwright.config.mjs",
+    "rootDir": "/workspace/splashery/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/prepublish-0558/smoke-mesa/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/prepublish-0558/smoke-mesa/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4196",
+      "url": "http://127.0.0.1:4196/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "cdx-mir.spec.mjs",
+      "file": "cdx-mir.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "real depth worker with a fake camera",
+          "file": "cdx-mir.spec.mjs",
+          "line": 280,
+          "column": 6,
+          "specs": [
+            {
+              "title": "still: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 206869,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-mrY4Cm/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-mrY4Cm/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror still: {\"heightJitter\":0.00000822084897139051,\"colorJitter\":0.7883633633633633,\"shownJitter\":0.7928571428571428,\"shownJitterTurned\":0.8893518518518518,\"grain\":0,\"sharpness\":0.8155621676212891,\"drawMs\":95.075,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:00:14.286Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-07db22bf38edf533d4d7",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            },
+            {
+              "title": "low-light: measured drift stays below the baseline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 202945,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Generated still: /tmp/splashery-cdx-mir-zRgSPR/still.y4m\n"
+                        },
+                        {
+                          "text": "Generated low-light: /tmp/splashery-cdx-mir-zRgSPR/low-light.y4m\n"
+                        },
+                        {
+                          "text": "cdx mirror low-light: {\"heightJitter\":0.008118633176661559,\"colorJitter\":1.8421171171171171,\"shownJitter\":1.6771164021164022,\"shownJitterTurned\":1.7215939153439153,\"grain\":0,\"sharpness\":0.44185189738105374,\"drawMs\":110.0649999999965,\"grid\":\"423x317\",\"box\":{\"x\":175.39530108666827,\"y\":326.0134375635583,\"width\":45.74429746444068,\"height\":56.319093603815986}}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:00:14.360Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a768c30aa2ede5b178b-6536944f2aff44792ae6",
+              "file": "cdx-mir.spec.mjs",
+              "line": 294,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "fl.spec.mjs",
+      "file": "fl.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "nothing fluid loads on the shelf or in an embed until a fluid toy opens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 25510,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T06:00:14.259Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7df7a92059c4823c4404-dd9afd2c80eff5b5ee31",
+          "file": "fl.spec.mjs",
+          "line": 129,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "fx4-engine.spec.mjs",
+      "file": "fx4-engine.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 107973,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T06:00:14.249Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-6347d91e43497c4d79e8",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 116294,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T06:00:40.148Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-7d050e66155b0f3c0994",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 121718,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T06:02:02.609Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-02916d7ae1c799d74596",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "hh1-toys.spec.mjs",
+      "file": "hh1-toys.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "teddy bear: swung and dropped, its arms and head swing on it and settle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 16395,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "teddy: {\"swing\":1.1924465748623343,\"settled\":0.016887334454451397}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T06:02:36.523Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cc81d1ee1b9a681cd364-6a230c576f8daea63f92",
+          "file": "hh1-toys.spec.mjs",
+          "line": 259,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "hh5-gems.spec.mjs",
+      "file": "hh5-gems.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "quartz cluster: a big point snaps off the rock, rests, and clicks back into its place",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 14861,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T06:02:53.001Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "099dcfe147de55ada0e2-bdfa36600bc06a2fb0f8",
+          "file": "hh5-gems.spec.mjs",
+          "line": 154,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "img-engine.spec.mjs",
+      "file": "img-engine.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "beach-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 40401,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T06:03:08.017Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-e18c822aae90d085dab0",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 40403,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T06:03:39.860Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-37174dff7758ffe43fc3",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the volume kind draw as before (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 42284,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T06:03:43.792Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d3f7e568f6d31b89fe29-030c4015d2350e5fe165",
+          "file": "img-engine.spec.mjs",
+          "line": 92,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "live2.spec.mjs",
+      "file": "live2.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "in the browser",
+          "file": "live2.spec.mjs",
+          "line": 148,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the click track: each click is at the now mark within 50 ms of when it is heard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 33710,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "live2 sync: {\"latencyMs\":42,\"rows\":[{\"click\":1,\"offMs\":27},{\"click\":2.37,\"offMs\":17},{\"click\":3.81,\"offMs\":16},{\"click\":5.12,\"offMs\":25},{\"click\":6.9,\"offMs\":5},{\"click\":8.33,\"offMs\":17},{\"click\":9.47,\"offMs\":-2},{\"click\":11.06,\"offMs\":9},{\"click\":12.58,\"offMs\":9},{\"click\":13.71,\"offMs\":-3},{\"click\":15.2,\"offMs\":26},{\"click\":16.94,\"offMs\":8}]}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:03:48.792Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e487be3d144b94c96040-d65483bfbd015c8320a6",
+              "file": "live2.spec.mjs",
+              "line": 207,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "shr.spec.mjs",
+      "file": "shr.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "390x844",
+          "file": "shr.spec.mjs",
+          "line": 92,
+          "column": 8,
+          "specs": [
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 37852,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:04:04.461Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-0d1bd8069370fb71e4e8",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "1440x900",
+          "file": "shr.spec.mjs",
+          "line": 92,
+          "column": 8,
+          "specs": [
+            {
+              "title": "the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 29163,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-17T06:04:20.641Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5a71535c0a45cdfc79b-3646b9f6322ab6a9a8af",
+              "file": "shr.spec.mjs",
+              "line": 202,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T06:00:12.604Z",
+    "duration": 277353.84,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

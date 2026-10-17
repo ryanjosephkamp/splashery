@@ -1,0 +1,3223 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/splashery/splashery/subject/playwright.config.mjs",
+    "rootDir": "/home/runner/work/splashery/splashery/subject/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+      },
+      "gitCommit": {
+        "shortHash": "0b28beadf",
+        "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+        "subject": "Document recovered flake evidence and outstanding acceptance gates",
+        "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+        "author": {
+          "name": "Ryan Kamp",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792208885000
+        },
+        "committer": {
+          "name": "Ryan Kamp",
+          "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+          "time": 1792208885000
+        },
+        "branch": "HEAD"
+      },
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 30,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+          },
+          "gitCommit": {
+            "shortHash": "0b28beadf",
+            "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "subject": "Document recovered flake evidence and outstanding acceptance gates",
+            "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+            "author": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "committer": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "testMatch": [
+          "/.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/runner/work/_temp/stress/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/ryanjosephkamp/splashery/commit/0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "commitHash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "buildHref": "https://github.com/ryanjosephkamp/splashery/actions/runs/39000195618"
+          },
+          "gitCommit": {
+            "shortHash": "0b28beadf",
+            "hash": "0b28beadffb0d6fc25da9bffdcc305eee33c65b6",
+            "subject": "Document recovered flake evidence and outstanding acceptance gates",
+            "body": "Document recovered flake evidence and outstanding acceptance gates\n",
+            "author": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "committer": {
+              "name": "Ryan Kamp",
+              "email": "192532973+ryanjosephkamp@users.noreply.github.com",
+              "time": 1792208885000
+            },
+            "branch": "HEAD"
+          },
+          "actualWorkers": 4
+        },
+        "id": "chromium-media",
+        "name": "chromium-media",
+        "testDir": "/home/runner/work/splashery/splashery/subject/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/cdx-mp2.*\\.spec\\.mjs$/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4173",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "fx4-engine.spec.mjs",
+      "file": "fx4-engine.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 185723,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:46.140Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-6347d91e43497c4d79e8",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 200991,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:46.003Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-7d050e66155b0f3c0994",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 213860,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:45.770Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-02916d7ae1c799d74596",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 189098,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:13:45.939Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-90bb85e65c79dc21f6bd",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 167502,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:55.933Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-0cb250e849bbb1b7915e",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 206795,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:16:56.528Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-38a6829bd0bef33a9166",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 172441,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:13.531Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-547c0f852c8d0d65e4eb",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 177834,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:17:28.203Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-90a4812254b9add13100",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 211581,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:19:50.041Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-8646401afe81de9478f1",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 178741,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:20:10.148Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-36b5fef47f637a77ad3a",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 180277,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:20:29.601Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-545282d4de3cfaeb2797",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 205593,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:20:29.983Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-74394c02f1e22cc851b9",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 175150,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:23:15.021Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-8d7b17f356d27a39ebee",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 170904,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:23:26.802Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-492f3482dece307f3d26",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 195058,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:23:34.785Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-cd5dfb704582c83710d7",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 184513,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:24:01.203Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-8a869530396542e4671d",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 166977,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:26:14.374Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-1a121e4e2cc31ad907e6",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 207122,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:26:20.259Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-51ba705c7aeca2eb18eb",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 176538,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:26:55.801Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-ffeb3581e93bde690d36",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 178246,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:27:13.109Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-90a85db390af98f71739",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 206492,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:29:07.306Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-ead07cef8d2cd6d2ba0a",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 178377,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:29:53.345Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-e7561e004e7707abbb7a",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 170608,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:29:56.204Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-3efdc12fa8b9ccbf977a",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 207916,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:30:15.199Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-350c6d1314a4233420b2",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 178379,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:32:40.161Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-2deb5273d96fd9bcd91c",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 182805,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:32:49.640Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-c29042b14d7dad0370f1",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 211397,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:32:55.479Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-d07e0e7eeef7d29a6e5c",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 26,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 167922,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:33:47.998Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-40c255aa99a735a3f6f1",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 27,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 180823,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:35:43.475Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-65597d8bc4adeb8ec27d",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 28,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 205167,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:35:59.031Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-3e4e0113f3f8f8564b31",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 29,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 171270,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:36:30.633Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-5237e2cb5b78591c14ee",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 30,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 190615,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:36:38.996Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-75983ff173e21f125f4b",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 31,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 199698,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:38:51.512Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-caba392b1e2ee43a4436",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 32,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 176498,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:39:25.286Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-2b121f6d249b06046688",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 33,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 176733,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:39:30.214Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-5d61f196dc42e3719e77",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 34,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 212454,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:39:52.787Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-fafc77274d03ccf3cc10",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 35,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 166387,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:42:16.431Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-d75c71c308a28ffc4461",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 36,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 169571,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:42:25.223Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-9359937007e899e6c18f",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 37,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 206447,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:42:34.743Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-3573d5ea3c0e0251fe49",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 38,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 176494,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:43:30.484Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-b0c012a9dfa596481215",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 39,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 191009,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:45:06.820Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-891980e4718f9534eb6a",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 40,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 214773,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:45:20.998Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-83e51acdde46e90ce206",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 41,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 171320,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:46:05.831Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-59ffd9dd01f18b05c9da",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 42,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 178327,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:46:31.719Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-6dc1ab51500597f362a1",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 43,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 202559,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:48:25.745Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-45c7a5dec88caaeaec9a",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 44,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 179126,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:48:59.635Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-318680ad8d0fa4d3e8b1",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 45,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 179298,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:49:02.736Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-1b3c4a4a15c3f2e44949",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 46,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 208172,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:49:34.394Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-f8308a9a7ca9a851f5cf",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 47,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 179307,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:51:55.001Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-9835d8cebc4bcecc4327",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 48,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 171976,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:52:01.892Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-d717ae8fd58ca4fb991f",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 49,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 205085,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:52:05.852Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-1d2ec94ad4c2ef26e5bd",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 50,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 178309,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:53:05.173Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-6cf10c89754461be7736",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 51,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 187993,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:54:56.564Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-20df596bfbde55772fa8",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 52,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 205768,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:54:57.447Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-70612a8c43dc511c5b71",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 53,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 172557,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:55:37.389Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-173db77daff0f6ac166e",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 54,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 183022,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:56:05.755Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-032fd768ddb88835f87f",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 55,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 199221,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:58:11.142Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-bb43cbfc7c475049cb21",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 56,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 177948,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:58:26.497Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-1e6a9ac3b4b771caec4d",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 57,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 182157,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:58:33.886Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-163d6a865611dd7333ed",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 58,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 198882,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T04:59:12.869Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-f63f9831eb8a0e48a66d",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 59,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 156488,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:01:28.621Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-ae04936f7a1ccabd4b29",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 60,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 174357,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:01:34.007Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-b391ec4d872e343acc6d",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 61,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 208349,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:01:43.804Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-c14a23af8f8ec24b6dd4",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 62,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 176006,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:02:38.765Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-e3e0f20ef6f3db92403f",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 63,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 169359,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:04:09.412Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-bd2383381573d92ac7eb",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 64,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 210932,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:04:33.298Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-7970ca7d37c05f59134a",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 65,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 170846,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:05:15.874Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-9dbd92f60c340aff81f0",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 66,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 179810,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:05:41.885Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-f658b0cf68c0956cae23",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 67,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 202423,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:07:06.065Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-9b6ccdf14ab12676bbcb",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 68,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 172856,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:08:08.509Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-eb40fc8841b21484d6c6",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 69,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 165649,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:08:11.057Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-d6079b0c498a07ba88fe",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 70,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 198601,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:08:49.853Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-12926e4de47050708545",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 71,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 171536,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:10:33.896Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-5fa27f88d0f3c53081ae",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 72,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 183445,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:11:00.705Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-9865816990cfeffab69a",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 73,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 218678,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:11:04.065Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-1c2873ab6ebb3a54d9bf",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 74,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 182256,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:12:11.175Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-532bd280c87e52358555",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 75,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 181388,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:13:30.601Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-a69273fc1cfcb9592247",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 76,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 224027,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:14:08.452Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-578af1902823c6a0a24e",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 77,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 168741,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:14:45.800Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-d19ef8d0ad5bff2694c0",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 78,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 186301,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:15:19.815Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-ead98df7e339e16f6157",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 79,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 211610,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:16:37.349Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-2c1a145bd3d2c559d773",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 80,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 170057,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:17:39.048Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-58b42655dae657012a6f",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 81,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 171471,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:17:57.461Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-d47e4c8a048c2c3efd99",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 82,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 209516,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:18:31.444Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-500b48bed7070ed6c48a",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 83,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 179645,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:20:17.270Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-7f520cfdda57f3d8c758",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 84,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 162555,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:20:36.702Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-96d5ba3ee9c1a1321ef0",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 85,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 207240,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:20:54.482Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-eab3c77db69b77ef767d",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "beach-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 86,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 162725,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:22:04.102Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-5c269361bb2e1e2a694a",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "bouncy-ball: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 87,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 129547,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:23:20.926Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-acba0352247d8355442d",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "gift-box: toys without the rim kind draw as before (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 88,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 143701,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:23:24.432Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da67e8e9b352743b8abf-189598bb0aa9970961e8",
+          "file": "fx4-engine.spec.mjs",
+          "line": 88,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T04:13:43.842Z",
+    "duration": 4325025.66,
+    "expected": 90,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

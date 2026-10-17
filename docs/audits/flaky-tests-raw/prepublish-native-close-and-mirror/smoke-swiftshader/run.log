@@ -1,0 +1,18 @@
+[2m[WebServer] [22m(node:5027) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 2 workers
+
+(node:5038) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5039) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5038) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5039) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+first sample: 5.5 ms after the tap
+  ✓  2 [chromium] › tests/sndc-engine.spec.mjs:122:1 › a toy's samples load when it opens, and its first tap's sample starts with the motion (10.4s)
+  ✓  1 [chromium] › tests/phy.spec.mjs:67:1 › Pebbles: stones pick up and stack into a new cairn; a careless one topples (18.0s)
+
+  2 passed (19.1s)

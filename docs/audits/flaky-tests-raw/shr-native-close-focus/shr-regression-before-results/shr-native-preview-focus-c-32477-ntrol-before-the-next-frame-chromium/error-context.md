@@ -1,0 +1,719 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to controls" [ref=e2] [cursor=pointer]:
+    - /url: "#tabs"
+  - link "Skip to toy shelf" [ref=e3] [cursor=pointer]:
+    - /url: "#shelf"
+  - img "Donut, a toy made of 60k splats. Drag to turn it, scroll or pinch to zoom. With a tool selected, drag on the toy to use it." [ref=e4]
+  - group "Zoom the toy" [ref=e5]:
+    - button "Zoom in" [ref=e6] [cursor=pointer]: +
+    - button "Zoom out" [ref=e7] [cursor=pointer]: −
+  - banner:
+    - heading "Splashery home" [level=1]:
+      - link "Splashery home" [ref=e8] [cursor=pointer]:
+        - /url: ./site/
+        - text: Splashery
+  - paragraph: Donut · 60k splats
+  - button "Sound effects" [ref=e9] [cursor=pointer]:
+    - img [ref=e10]
+  - button "Turntable" [pressed] [ref=e13] [cursor=pointer]:
+    - img [ref=e14]
+  - button "Tilt lock" [ref=e18] [cursor=pointer]:
+    - img [ref=e19]
+  - button "Reset view" [ref=e22] [cursor=pointer]:
+    - img [ref=e23]
+  - button "Flag colors for every toy" [ref=e27] [cursor=pointer]:
+    - img [ref=e28]
+  - button "Playground" [ref=e30] [cursor=pointer]:
+    - img [ref=e31]
+  - button "Focus mode" [ref=e36] [cursor=pointer]:
+    - img [ref=e37]
+  - button "How to play" [ref=e39] [cursor=pointer]: "?"
+  - group "Play with the toy" [ref=e40]:
+    - button "Play" [ref=e41] [cursor=pointer]:
+      - img [ref=e42]
+    - button "Hands-on" [ref=e44] [cursor=pointer]:
+      - img [ref=e45]
+  - complementary "Splashery controls" [ref=e47]:
+    - generic [ref=e48]:
+      - group "Toy categories" [ref=e51]:
+        - button "Search toys" [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+        - button "Surprise me" [ref=e56] [cursor=pointer]
+        - button "All" [pressed] [ref=e57] [cursor=pointer]
+        - button "Featured" [ref=e58] [cursor=pointer]
+        - button "AI and computing" [ref=e59] [cursor=pointer]
+        - button "Space" [ref=e60] [cursor=pointer]
+        - button "Math" [ref=e61] [cursor=pointer]
+        - button "Atoms" [ref=e62] [cursor=pointer]
+        - button "Photoreal" [ref=e63] [cursor=pointer]
+        - button "Shapes" [ref=e64] [cursor=pointer]
+        - button "Toys" [ref=e65] [cursor=pointer]
+        - button "Balls" [ref=e66] [cursor=pointer]
+        - button "Music" [ref=e67] [cursor=pointer]
+        - button "Open me" [ref=e68] [cursor=pointer]
+        - button "Nature" [ref=e69] [cursor=pointer]
+        - button "Weather & fire" [ref=e70] [cursor=pointer]
+        - button "Food" [ref=e71] [cursor=pointer]
+        - button "Gems" [ref=e72] [cursor=pointer]
+        - button "Body" [ref=e73] [cursor=pointer]
+        - button "Tiny world" [ref=e74] [cursor=pointer]
+        - button "Clothing" [ref=e75] [cursor=pointer]
+        - button "Medieval" [ref=e76] [cursor=pointer]
+        - button "Animals" [ref=e77] [cursor=pointer]
+        - button "Holidays" [ref=e78] [cursor=pointer]
+        - button "Vehicles" [ref=e79] [cursor=pointer]
+        - button "Landmarks" [ref=e80] [cursor=pointer]
+      - navigation "Toy shelf" [ref=e81]:
+        - button "Perceptron" [ref=e82] [cursor=pointer]:
+          - generic [ref=e84]: Perceptron
+        - button "Multilayer perceptron" [ref=e85] [cursor=pointer]:
+          - generic [ref=e87]: Multilayer perceptron
+        - button "Neural network" [ref=e88] [cursor=pointer]:
+          - generic [ref=e90]: Neural network
+        - button "Convolutional network" [ref=e91] [cursor=pointer]:
+          - generic [ref=e93]: Convolutional network
+        - button "Recurrent network" [ref=e94] [cursor=pointer]:
+          - generic [ref=e96]: Recurrent network
+        - button "Transformer" [ref=e97] [cursor=pointer]:
+          - generic [ref=e99]: Transformer
+        - button "Looped transformer" [ref=e100] [cursor=pointer]:
+          - generic [ref=e102]: Looped transformer
+        - button "Diffusion model" [ref=e103] [cursor=pointer]:
+          - generic [ref=e105]: Diffusion model
+        - button "Gradient descent" [ref=e106] [cursor=pointer]:
+          - generic [ref=e108]: Gradient descent
+        - button "Word vectors" [ref=e109] [cursor=pointer]:
+          - generic [ref=e111]: Word vectors
+        - button "Sorting machine" [ref=e112] [cursor=pointer]:
+          - generic [ref=e114]: Sorting machine
+        - button "Half adder" [ref=e115] [cursor=pointer]:
+          - generic [ref=e117]: Half adder
+        - button "Turing machine" [ref=e118] [cursor=pointer]:
+          - generic [ref=e120]: Turing machine
+        - button "Difference engine" [ref=e121] [cursor=pointer]:
+          - generic [ref=e123]: Difference engine
+        - button "Enigma machine" [ref=e124] [cursor=pointer]:
+          - generic [ref=e126]: Enigma machine
+        - button "Bombe" [ref=e127] [cursor=pointer]:
+          - generic [ref=e129]: Bombe
+        - button "Sun" [ref=e130] [cursor=pointer]:
+          - generic [ref=e132]: Sun
+        - button "Solar system" [ref=e133] [cursor=pointer]:
+          - generic [ref=e135]: Solar system
+        - button "Mercury" [ref=e136] [cursor=pointer]:
+          - generic [ref=e138]: Mercury
+        - button "Venus" [ref=e139] [cursor=pointer]:
+          - generic [ref=e141]: Venus
+        - button "Earth" [ref=e142] [cursor=pointer]:
+          - generic [ref=e144]: Earth
+        - button "Moon" [ref=e145] [cursor=pointer]:
+          - generic [ref=e147]: Moon
+        - button "Mars" [ref=e148] [cursor=pointer]:
+          - generic [ref=e150]: Mars
+        - button "Jupiter" [ref=e151] [cursor=pointer]:
+          - generic [ref=e153]: Jupiter
+        - button "Saturn" [ref=e154] [cursor=pointer]:
+          - generic [ref=e156]: Saturn
+        - button "Uranus" [ref=e157] [cursor=pointer]:
+          - generic [ref=e159]: Uranus
+        - button "Neptune" [ref=e160] [cursor=pointer]:
+          - generic [ref=e162]: Neptune
+        - button "Tiny planet" [ref=e163] [cursor=pointer]:
+          - generic [ref=e165]: Tiny planet
+        - button "Aurora world" [ref=e166] [cursor=pointer]:
+          - generic [ref=e168]: Aurora world
+        - button "Asteroid" [ref=e169] [cursor=pointer]:
+          - generic [ref=e171]: Asteroid
+        - button "Comet" [ref=e172] [cursor=pointer]:
+          - generic [ref=e174]: Comet
+        - button "Meteor" [ref=e175] [cursor=pointer]:
+          - generic [ref=e177]: Meteor
+        - button "Star" [ref=e178] [cursor=pointer]:
+          - generic [ref=e180]: Star
+        - button "Pulsar" [ref=e181] [cursor=pointer]:
+          - generic [ref=e183]: Pulsar
+        - button "Black hole" [ref=e184] [cursor=pointer]:
+          - generic [ref=e186]: Black hole
+        - button "Star cluster" [ref=e187] [cursor=pointer]:
+          - generic [ref=e189]: Star cluster
+        - button "Ring nebula" [ref=e190] [cursor=pointer]:
+          - generic [ref=e192]: Ring nebula
+        - button "Nebula" [ref=e193] [cursor=pointer]:
+          - generic [ref=e195]: Nebula
+        - button "Supernova" [ref=e196] [cursor=pointer]:
+          - generic [ref=e198]: Supernova
+        - button "Spiral galaxy" [ref=e199] [cursor=pointer]:
+          - generic [ref=e201]: Spiral galaxy
+        - button "Lorenz attractor" [ref=e202] [cursor=pointer]:
+          - generic [ref=e204]: Lorenz attractor
+        - button "Möbius strip" [ref=e205] [cursor=pointer]:
+          - generic [ref=e207]: Möbius strip
+        - button "Klein bottle" [ref=e208] [cursor=pointer]:
+          - generic [ref=e210]: Klein bottle
+        - button "Menger sponge" [ref=e211] [cursor=pointer]:
+          - generic [ref=e213]: Menger sponge
+        - button "Hypercube" [ref=e214] [cursor=pointer]:
+          - generic [ref=e216]: Hypercube
+        - button "Torus knot" [ref=e217] [cursor=pointer]:
+          - generic [ref=e219]: Torus knot
+        - button "Gyroid" [ref=e220] [cursor=pointer]:
+          - generic [ref=e222]: Gyroid
+        - button "Mandelbulb" [ref=e223] [cursor=pointer]:
+          - generic [ref=e225]: Mandelbulb
+        - button "Sierpinski tetrahedron" [ref=e226] [cursor=pointer]:
+          - generic [ref=e228]: Sierpinski tetrahedron
+        - button "Platonic solids" [ref=e229] [cursor=pointer]:
+          - generic [ref=e231]: Platonic solids
+        - button "Seashell spiral" [ref=e232] [cursor=pointer]:
+          - generic [ref=e234]: Seashell spiral
+        - button "Graph plotter" [ref=e235] [cursor=pointer]:
+          - generic [ref=e237]: Graph plotter
+        - button "Surface plotter" [ref=e238] [cursor=pointer]:
+          - generic [ref=e240]: Surface plotter
+        - button "Circle and waves" [ref=e241] [cursor=pointer]:
+          - generic [ref=e243]: Circle and waves
+        - button "Fourier circles" [ref=e244] [cursor=pointer]:
+          - generic [ref=e246]: Fourier circles
+        - button "Pythagoras proof" [ref=e247] [cursor=pointer]:
+          - generic [ref=e249]: Pythagoras proof
+        - button "Electron orbital" [ref=e250] [cursor=pointer]:
+          - generic [ref=e252]: Electron orbital
+        - button "Atom" [ref=e253] [cursor=pointer]:
+          - generic [ref=e255]: Atom
+        - button "Molecule" [ref=e256] [cursor=pointer]:
+          - generic [ref=e258]: Molecule
+        - button "Protein" [ref=e259] [cursor=pointer]:
+          - generic [ref=e261]: Protein
+        - button "Crystal lattice" [ref=e262] [cursor=pointer]:
+          - generic [ref=e264]: Crystal lattice
+        - button "Periodic table" [ref=e265] [cursor=pointer]:
+          - generic [ref=e267]: Periodic table
+        - button "Cactus" [ref=e268] [cursor=pointer]:
+          - generic [ref=e270]: Cactus
+        - button "Strawberry" [ref=e271] [cursor=pointer]:
+          - generic [ref=e273]: Strawberry
+        - button "Heart cookie" [ref=e274] [cursor=pointer]:
+          - generic [ref=e276]: Heart cookie
+        - button "Honeybee" [ref=e277] [cursor=pointer]:
+          - generic [ref=e279]: Honeybee
+        - button "Cluster fly" [ref=e280] [cursor=pointer]:
+          - generic [ref=e282]: Cluster fly
+        - button "May beetle" [ref=e283] [cursor=pointer]:
+          - generic [ref=e285]: May beetle
+        - button "Millipede" [ref=e286] [cursor=pointer]:
+          - generic [ref=e288]: Millipede
+        - button "Carder bumblebee" [ref=e289] [cursor=pointer]:
+          - generic [ref=e291]: Carder bumblebee
+        - button "Raspberry" [ref=e292] [cursor=pointer]:
+          - generic [ref=e294]: Raspberry
+        - button "Blackberry" [ref=e295] [cursor=pointer]:
+          - generic [ref=e297]: Blackberry
+        - button "Blueberry" [ref=e298] [cursor=pointer]:
+          - generic [ref=e300]: Blueberry
+        - button "Grape" [ref=e301] [cursor=pointer]:
+          - generic [ref=e303]: Grape
+        - button "Cinnamon star cookie" [ref=e304] [cursor=pointer]:
+          - generic [ref=e306]: Cinnamon star cookie
+        - button "Tomatoes" [ref=e307] [cursor=pointer]:
+          - generic [ref=e309]: Tomatoes
+        - button "Mandeltorus" [ref=e310] [cursor=pointer]:
+          - generic [ref=e312]: Mandeltorus
+        - button "Basket" [ref=e313] [cursor=pointer]:
+          - generic [ref=e315]: Basket
+        - button "Real rubber duck" [ref=e316] [cursor=pointer]:
+          - generic [ref=e318]: Real rubber duck
+        - button "Garden gnome" [ref=e319] [cursor=pointer]:
+          - generic [ref=e321]: Garden gnome
+        - button "Wooden elephant" [ref=e322] [cursor=pointer]:
+          - generic [ref=e324]: Wooden elephant
+        - button "Marble bust" [ref=e325] [cursor=pointer]:
+          - generic [ref=e327]: Marble bust
+        - button "Ukulele" [ref=e328] [cursor=pointer]:
+          - generic [ref=e330]: Ukulele
+        - button "Real alarm clock" [ref=e331] [cursor=pointer]:
+          - generic [ref=e333]: Real alarm clock
+        - button "Vintage camera" [ref=e334] [cursor=pointer]:
+          - generic [ref=e336]: Vintage camera
+        - button "Boombox" [ref=e337] [cursor=pointer]:
+          - generic [ref=e339]: Boombox
+        - button "Real croissant" [ref=e340] [cursor=pointer]:
+          - generic [ref=e342]: Real croissant
+        - button "Carrot cake" [ref=e343] [cursor=pointer]:
+          - generic [ref=e345]: Carrot cake
+        - button "Pomegranate" [ref=e346] [cursor=pointer]:
+          - generic [ref=e348]: Pomegranate
+        - button "Lantern" [ref=e349] [cursor=pointer]:
+          - generic [ref=e351]: Lantern
+        - button "Cat statue" [ref=e352] [cursor=pointer]:
+          - generic [ref=e354]: Cat statue
+        - button "Horse statue" [ref=e355] [cursor=pointer]:
+          - generic [ref=e357]: Horse statue
+        - button "Real pencil" [ref=e358] [cursor=pointer]:
+          - generic [ref=e360]: Real pencil
+        - button "Real tin can" [ref=e361] [cursor=pointer]:
+          - generic [ref=e363]: Real tin can
+        - button "Torus" [ref=e364] [cursor=pointer]:
+          - generic [ref=e366]: Torus
+        - button "Jelly blob" [ref=e367] [cursor=pointer]:
+          - generic [ref=e369]: Jelly blob
+        - button "Neon knot" [ref=e370] [cursor=pointer]:
+          - generic [ref=e372]: Neon knot
+        - button "Building bricks" [ref=e373] [cursor=pointer]:
+          - generic [ref=e375]: Building bricks
+        - button "Rubber duck" [ref=e376] [cursor=pointer]:
+          - generic [ref=e378]: Rubber duck
+        - button "Spinning top" [ref=e379] [cursor=pointer]:
+          - generic [ref=e381]: Spinning top
+        - button "Dice" [ref=e382] [cursor=pointer]:
+          - generic [ref=e384]: Dice
+        - button "Newton's cradle" [ref=e385] [cursor=pointer]:
+          - generic [ref=e387]: Newton's cradle
+        - button "Teddy bear" [ref=e388] [cursor=pointer]:
+          - generic [ref=e390]: Teddy bear
+        - button "Yo-yo" [ref=e391] [cursor=pointer]:
+          - generic [ref=e393]: Yo-yo
+        - button "Puzzle cube" [ref=e394] [cursor=pointer]:
+          - generic [ref=e396]: Puzzle cube
+        - button "Spring toy" [ref=e397] [cursor=pointer]:
+          - generic [ref=e399]: Spring toy
+        - button "Kite" [ref=e400] [cursor=pointer]:
+          - generic [ref=e402]: Kite
+        - button "Paper plane" [ref=e403] [cursor=pointer]:
+          - generic [ref=e405]: Paper plane
+        - button "Origami crane" [ref=e406] [cursor=pointer]:
+          - generic [ref=e408]: Origami crane
+        - button "Balloon dog" [ref=e409] [cursor=pointer]:
+          - generic [ref=e411]: Balloon dog
+        - button "Soap bubbles" [ref=e412] [cursor=pointer]:
+          - generic [ref=e414]: Soap bubbles
+        - button "Wind-up robot" [ref=e415] [cursor=pointer]:
+          - generic [ref=e417]: Wind-up robot
+        - button "Chess set" [ref=e418] [cursor=pointer]:
+          - generic [ref=e420]: Chess set
+        - button "Basketball" [ref=e421] [cursor=pointer]:
+          - generic [ref=e423]: Basketball
+        - button "Soccer ball" [ref=e424] [cursor=pointer]:
+          - generic [ref=e426]: Soccer ball
+        - button "American football" [ref=e427] [cursor=pointer]:
+          - generic [ref=e429]: American football
+        - button "Tennis ball" [ref=e430] [cursor=pointer]:
+          - generic [ref=e432]: Tennis ball
+        - button "Baseball" [ref=e433] [cursor=pointer]:
+          - generic [ref=e435]: Baseball
+        - button "Softball" [ref=e436] [cursor=pointer]:
+          - generic [ref=e438]: Softball
+        - button "Beach ball" [ref=e439] [cursor=pointer]:
+          - generic [ref=e441]: Beach ball
+        - button "Golf ball" [ref=e442] [cursor=pointer]:
+          - generic [ref=e444]: Golf ball
+        - button "Rugby ball" [ref=e445] [cursor=pointer]:
+          - generic [ref=e447]: Rugby ball
+        - button "Volleyball" [ref=e448] [cursor=pointer]:
+          - generic [ref=e450]: Volleyball
+        - button "Water polo ball" [ref=e451] [cursor=pointer]:
+          - generic [ref=e453]: Water polo ball
+        - button "Ping-pong ball" [ref=e454] [cursor=pointer]:
+          - generic [ref=e456]: Ping-pong ball
+        - button "Cricket ball" [ref=e457] [cursor=pointer]:
+          - generic [ref=e459]: Cricket ball
+        - button "Bowling ball" [ref=e460] [cursor=pointer]:
+          - generic [ref=e462]: Bowling ball
+        - button "Pool ball" [ref=e463] [cursor=pointer]:
+          - generic [ref=e465]: Pool ball
+        - button "Pickleball" [ref=e466] [cursor=pointer]:
+          - generic [ref=e468]: Pickleball
+        - button "Dodgeball" [ref=e469] [cursor=pointer]:
+          - generic [ref=e471]: Dodgeball
+        - button "Medicine ball" [ref=e472] [cursor=pointer]:
+          - generic [ref=e474]: Medicine ball
+        - button "Lacrosse ball" [ref=e475] [cursor=pointer]:
+          - generic [ref=e477]: Lacrosse ball
+        - button "Squash ball" [ref=e478] [cursor=pointer]:
+          - generic [ref=e480]: Squash ball
+        - button "Bouncy ball" [ref=e481] [cursor=pointer]:
+          - generic [ref=e483]: Bouncy ball
+        - button "Marble" [ref=e484] [cursor=pointer]:
+          - generic [ref=e486]: Marble
+        - button "Hockey puck" [ref=e487] [cursor=pointer]:
+          - generic [ref=e489]: Hockey puck
+        - button "Shuttlecock" [ref=e490] [cursor=pointer]:
+          - generic [ref=e492]: Shuttlecock
+        - button "Flying disc" [ref=e493] [cursor=pointer]:
+          - generic [ref=e495]: Flying disc
+        - button "Acoustic guitar" [ref=e496] [cursor=pointer]:
+          - generic [ref=e498]: Acoustic guitar
+        - button "Snare drum" [ref=e499] [cursor=pointer]:
+          - generic [ref=e501]: Snare drum
+        - button "Xylophone" [ref=e502] [cursor=pointer]:
+          - generic [ref=e504]: Xylophone
+        - button "Toy piano" [ref=e505] [cursor=pointer]:
+          - generic [ref=e507]: Toy piano
+        - button "Grand piano" [ref=e508] [cursor=pointer]:
+          - generic [ref=e510]: Grand piano
+        - button "Upright piano" [ref=e511] [cursor=pointer]:
+          - generic [ref=e513]: Upright piano
+        - button "Harpsichord" [ref=e514] [cursor=pointer]:
+          - generic [ref=e516]: Harpsichord
+        - button "Electronic keyboard" [ref=e517] [cursor=pointer]:
+          - generic [ref=e519]: Electronic keyboard
+        - button "Treasure chest" [ref=e520] [cursor=pointer]:
+          - generic [ref=e522]: Treasure chest
+        - button "Storybook" [ref=e523] [cursor=pointer]:
+          - generic [ref=e525]: Storybook
+        - button "Laptop" [ref=e526] [cursor=pointer]:
+          - generic [ref=e528]: Laptop
+        - button "Music box" [ref=e529] [cursor=pointer]:
+          - generic [ref=e531]: Music box
+        - button "Alarm clock" [ref=e532] [cursor=pointer]:
+          - generic [ref=e534]: Alarm clock
+        - button "Gift box" [ref=e535] [cursor=pointer]:
+          - generic [ref=e537]: Gift box
+        - button "Umbrella" [ref=e538] [cursor=pointer]:
+          - generic [ref=e540]: Umbrella
+        - button "Desk fan" [ref=e541] [cursor=pointer]:
+          - generic [ref=e543]: Desk fan
+        - button "Desk lamp" [ref=e544] [cursor=pointer]:
+          - generic [ref=e546]: Desk lamp
+        - button "Potion bottle" [ref=e547] [cursor=pointer]:
+          - generic [ref=e549]: Potion bottle
+        - button "Telescope" [ref=e550] [cursor=pointer]:
+          - generic [ref=e552]: Telescope
+        - button "Fountain pen" [ref=e553] [cursor=pointer]:
+          - generic [ref=e555]: Fountain pen
+        - button "Oak tree" [ref=e556] [cursor=pointer]:
+          - generic [ref=e558]: Oak tree
+        - button "Pine tree" [ref=e559] [cursor=pointer]:
+          - generic [ref=e561]: Pine tree
+        - button "Palm tree" [ref=e562] [cursor=pointer]:
+          - generic [ref=e564]: Palm tree
+        - button "Cherry blossom" [ref=e565] [cursor=pointer]:
+          - generic [ref=e567]: Cherry blossom
+        - button "Maple tree" [ref=e568] [cursor=pointer]:
+          - generic [ref=e570]: Maple tree
+        - button "Bonsai" [ref=e571] [cursor=pointer]:
+          - generic [ref=e573]: Bonsai
+        - button "Weeping willow" [ref=e574] [cursor=pointer]:
+          - generic [ref=e576]: Weeping willow
+        - button "Sunflower" [ref=e577] [cursor=pointer]:
+          - generic [ref=e579]: Sunflower
+        - button "Rose" [ref=e580] [cursor=pointer]:
+          - generic [ref=e582]: Rose
+        - button "Dandelion" [ref=e583] [cursor=pointer]:
+          - generic [ref=e585]: Dandelion
+        - button "Tulips" [ref=e586] [cursor=pointer]:
+          - generic [ref=e588]: Tulips
+        - button "Daisies" [ref=e589] [cursor=pointer]:
+          - generic [ref=e591]: Daisies
+        - button "Lotus" [ref=e592] [cursor=pointer]:
+          - generic [ref=e594]: Lotus
+        - button "Toadstool" [ref=e595] [cursor=pointer]:
+          - generic [ref=e597]: Toadstool
+        - button "Fern" [ref=e598] [cursor=pointer]:
+          - generic [ref=e600]: Fern
+        - button "Saguaro cactus" [ref=e601] [cursor=pointer]:
+          - generic [ref=e603]: Saguaro cactus
+        - button "Coral reef" [ref=e604] [cursor=pointer]:
+          - generic [ref=e606]: Coral reef
+        - button "Pinecone" [ref=e607] [cursor=pointer]:
+          - generic [ref=e609]: Pinecone
+        - button "Acorns" [ref=e610] [cursor=pointer]:
+          - generic [ref=e612]: Acorns
+        - button "Succulent" [ref=e613] [cursor=pointer]:
+          - generic [ref=e615]: Succulent
+        - button "Bamboo" [ref=e616] [cursor=pointer]:
+          - generic [ref=e618]: Bamboo
+        - button "Pebbles" [ref=e619] [cursor=pointer]:
+          - generic [ref=e621]: Pebbles
+        - button "Kelp" [ref=e622] [cursor=pointer]:
+          - generic [ref=e624]: Kelp
+        - button "Campfire" [ref=e625] [cursor=pointer]:
+          - generic [ref=e627]: Campfire
+        - button "Storm cloud" [ref=e628] [cursor=pointer]:
+          - generic [ref=e630]: Storm cloud
+        - button "Lava lamp" [ref=e631] [cursor=pointer]:
+          - generic [ref=e633]: Lava lamp
+        - button "Snow globe" [ref=e634] [cursor=pointer]:
+          - generic [ref=e636]: Snow globe
+        - button "Volcano" [ref=e637] [cursor=pointer]:
+          - generic [ref=e639]: Volcano
+        - button "Ice swan" [ref=e640] [cursor=pointer]:
+          - generic [ref=e642]: Ice swan
+        - button "Candle" [ref=e643] [cursor=pointer]:
+          - generic [ref=e645]: Candle
+        - button "Tornado" [ref=e646] [cursor=pointer]:
+          - generic [ref=e648]: Tornado
+        - button "Rainbow" [ref=e649] [cursor=pointer]:
+          - generic [ref=e651]: Rainbow
+        - button "Iceberg" [ref=e652] [cursor=pointer]:
+          - generic [ref=e654]: Iceberg
+        - button "Waterfall" [ref=e655] [cursor=pointer]:
+          - generic [ref=e657]: Waterfall
+        - button "Ocean wave" [ref=e658] [cursor=pointer]:
+          - generic [ref=e660]: Ocean wave
+        - button "Geyser" [ref=e661] [cursor=pointer]:
+          - generic [ref=e663]: Geyser
+        - button "Ice cream" [ref=e664] [cursor=pointer]:
+          - generic [ref=e666]: Ice cream
+        - button "Watermelon" [ref=e667] [cursor=pointer]:
+          - generic [ref=e669]: Watermelon
+        - button "Birthday cake" [ref=e670] [cursor=pointer]:
+          - generic [ref=e672]: Birthday cake
+        - button "Popcorn" [ref=e673] [cursor=pointer]:
+          - generic [ref=e675]: Popcorn
+        - button "Jelly" [ref=e676] [cursor=pointer]:
+          - generic [ref=e678]: Jelly
+        - button "Pancakes" [ref=e679] [cursor=pointer]:
+          - generic [ref=e681]: Pancakes
+        - button "Cupcake" [ref=e682] [cursor=pointer]:
+          - generic [ref=e684]: Cupcake
+        - button "Lollipop" [ref=e685] [cursor=pointer]:
+          - generic [ref=e687]: Lollipop
+        - button "Candy cane" [ref=e688] [cursor=pointer]:
+          - generic [ref=e690]: Candy cane
+        - button "Macarons" [ref=e691] [cursor=pointer]:
+          - generic [ref=e693]: Macarons
+        - button "Donut" [pressed] [ref=e694] [cursor=pointer]:
+          - generic [ref=e696]: Donut
+        - button "Gummy bear" [ref=e697] [cursor=pointer]:
+          - generic [ref=e699]: Gummy bear
+        - button "Pretzel" [ref=e700] [cursor=pointer]:
+          - generic [ref=e702]: Pretzel
+        - button "Croissant" [ref=e703] [cursor=pointer]:
+          - generic [ref=e705]: Croissant
+        - button "Pizza" [ref=e706] [cursor=pointer]:
+          - generic [ref=e708]: Pizza
+        - button "Burger" [ref=e709] [cursor=pointer]:
+          - generic [ref=e711]: Burger
+        - button "Sushi" [ref=e712] [cursor=pointer]:
+          - generic [ref=e714]: Sushi
+        - button "Taco" [ref=e715] [cursor=pointer]:
+          - generic [ref=e717]: Taco
+        - button "Boiled egg" [ref=e718] [cursor=pointer]:
+          - generic [ref=e720]: Boiled egg
+        - button "Coffee" [ref=e721] [cursor=pointer]:
+          - generic [ref=e723]: Coffee
+        - button "Apple" [ref=e724] [cursor=pointer]:
+          - generic [ref=e726]: Apple
+        - button "Bananas" [ref=e727] [cursor=pointer]:
+          - generic [ref=e729]: Bananas
+        - button "Orange" [ref=e730] [cursor=pointer]:
+          - generic [ref=e732]: Orange
+        - button "Kiwi" [ref=e733] [cursor=pointer]:
+          - generic [ref=e735]: Kiwi
+        - button "Pineapple" [ref=e736] [cursor=pointer]:
+          - generic [ref=e738]: Pineapple
+        - button "Cherries" [ref=e739] [cursor=pointer]:
+          - generic [ref=e741]: Cherries
+        - button "Grapes" [ref=e742] [cursor=pointer]:
+          - generic [ref=e744]: Grapes
+        - button "Avocado" [ref=e745] [cursor=pointer]:
+          - generic [ref=e747]: Avocado
+        - button "Diamond" [ref=e748] [cursor=pointer]:
+          - generic [ref=e750]: Diamond
+        - button "Ruby" [ref=e751] [cursor=pointer]:
+          - generic [ref=e753]: Ruby
+        - button "Emerald" [ref=e754] [cursor=pointer]:
+          - generic [ref=e756]: Emerald
+        - button "Amethyst geode" [ref=e757] [cursor=pointer]:
+          - generic [ref=e759]: Amethyst geode
+        - button "Sapphire" [ref=e760] [cursor=pointer]:
+          - generic [ref=e762]: Sapphire
+        - button "Quartz cluster" [ref=e763] [cursor=pointer]:
+          - generic [ref=e765]: Quartz cluster
+        - button "Opal" [ref=e766] [cursor=pointer]:
+          - generic [ref=e768]: Opal
+        - button "Pearl" [ref=e769] [cursor=pointer]:
+          - generic [ref=e771]: Pearl
+        - button "Beating heart" [ref=e772] [cursor=pointer]:
+          - generic [ref=e774]: Beating heart
+        - button "Brain" [ref=e775] [cursor=pointer]:
+          - generic [ref=e777]: Brain
+        - button "Eye" [ref=e778] [cursor=pointer]:
+          - generic [ref=e780]: Eye
+        - button "Lungs" [ref=e781] [cursor=pointer]:
+          - generic [ref=e783]: Lungs
+        - button "Tooth" [ref=e784] [cursor=pointer]:
+          - generic [ref=e786]: Tooth
+        - button "Kidney" [ref=e787] [cursor=pointer]:
+          - generic [ref=e789]: Kidney
+        - button "Virus" [ref=e790] [cursor=pointer]:
+          - generic [ref=e792]: Virus
+        - button "Bacteriophage" [ref=e793] [cursor=pointer]:
+          - generic [ref=e795]: Bacteriophage
+        - button "Bacterium" [ref=e796] [cursor=pointer]:
+          - generic [ref=e798]: Bacterium
+        - button "Red blood cell" [ref=e799] [cursor=pointer]:
+          - generic [ref=e801]: Red blood cell
+        - button "Neuron" [ref=e802] [cursor=pointer]:
+          - generic [ref=e804]: Neuron
+        - button "Astrocyte" [ref=e805] [cursor=pointer]:
+          - generic [ref=e807]: Astrocyte
+        - button "Animal cell" [ref=e808] [cursor=pointer]:
+          - generic [ref=e810]: Animal cell
+        - button "DNA" [ref=e811] [cursor=pointer]:
+          - generic [ref=e813]: DNA
+        - button "White blood cell" [ref=e814] [cursor=pointer]:
+          - generic [ref=e816]: White blood cell
+        - button "Microglia" [ref=e817] [cursor=pointer]:
+          - generic [ref=e819]: Microglia
+        - button "Diatom" [ref=e820] [cursor=pointer]:
+          - generic [ref=e822]: Diatom
+        - button "Tardigrade" [ref=e823] [cursor=pointer]:
+          - generic [ref=e825]: Tardigrade
+        - button "Pollen grain" [ref=e826] [cursor=pointer]:
+          - generic [ref=e828]: Pollen grain
+        - button "Snowflake" [ref=e829] [cursor=pointer]:
+          - generic [ref=e831]: Snowflake
+        - button "Chromosome" [ref=e832] [cursor=pointer]:
+          - generic [ref=e834]: Chromosome
+        - button "Mitochondrion" [ref=e835] [cursor=pointer]:
+          - generic [ref=e837]: Mitochondrion
+        - button "Paramecium" [ref=e838] [cursor=pointer]:
+          - generic [ref=e840]: Paramecium
+        - button "Amoeba" [ref=e841] [cursor=pointer]:
+          - generic [ref=e843]: Amoeba
+        - button "Running shoe" [ref=e844] [cursor=pointer]:
+          - generic [ref=e846]: Running shoe
+        - button "Hoodie" [ref=e847] [cursor=pointer]:
+          - generic [ref=e849]: Hoodie
+        - button "Sunglasses" [ref=e850] [cursor=pointer]:
+          - generic [ref=e852]: Sunglasses
+        - button "Baseball cap" [ref=e853] [cursor=pointer]:
+          - generic [ref=e855]: Baseball cap
+        - button "Sword in the stone" [ref=e856] [cursor=pointer]:
+          - generic [ref=e858]: Sword in the stone
+        - button "Heraldic shield" [ref=e859] [cursor=pointer]:
+          - generic [ref=e861]: Heraldic shield
+        - button "Bow and target" [ref=e862] [cursor=pointer]:
+          - generic [ref=e864]: Bow and target
+        - button "Trebuchet" [ref=e865] [cursor=pointer]:
+          - generic [ref=e867]: Trebuchet
+        - button "Crossbow" [ref=e868] [cursor=pointer]:
+          - generic [ref=e870]: Crossbow
+        - button "Knight's helmet" [ref=e871] [cursor=pointer]:
+          - generic [ref=e873]: Knight's helmet
+        - button "Crown" [ref=e874] [cursor=pointer]:
+          - generic [ref=e876]: Crown
+        - button "Dragon egg" [ref=e877] [cursor=pointer]:
+          - generic [ref=e879]: Dragon egg
+        - button "Wizard's orb" [ref=e880] [cursor=pointer]:
+          - generic [ref=e882]: Wizard's orb
+        - button "Crystal ball" [ref=e883] [cursor=pointer]:
+          - generic [ref=e885]: Crystal ball
+        - button "Jellyfish" [ref=e886] [cursor=pointer]:
+          - generic [ref=e888]: Jellyfish
+        - button "School of fish" [ref=e889] [cursor=pointer]:
+          - generic [ref=e891]: School of fish
+        - button "Butterfly" [ref=e892] [cursor=pointer]:
+          - generic [ref=e894]: Butterfly
+        - button "Pufferfish" [ref=e895] [cursor=pointer]:
+          - generic [ref=e897]: Pufferfish
+        - button "Nautilus" [ref=e898] [cursor=pointer]:
+          - generic [ref=e900]: Nautilus
+        - button "Ladybug" [ref=e901] [cursor=pointer]:
+          - generic [ref=e903]: Ladybug
+        - button "Snail" [ref=e904] [cursor=pointer]:
+          - generic [ref=e906]: Snail
+        - button "Octopus" [ref=e907] [cursor=pointer]:
+          - generic [ref=e909]: Octopus
+        - button "Starfish" [ref=e910] [cursor=pointer]:
+          - generic [ref=e912]: Starfish
+        - button "Sea urchin" [ref=e913] [cursor=pointer]:
+          - generic [ref=e915]: Sea urchin
+        - button "Frog" [ref=e916] [cursor=pointer]:
+          - generic [ref=e918]: Frog
+        - button "Penguin" [ref=e919] [cursor=pointer]:
+          - generic [ref=e921]: Penguin
+        - button "Owl" [ref=e922] [cursor=pointer]:
+          - generic [ref=e924]: Owl
+        - button "Jack-o'-lantern" [ref=e925] [cursor=pointer]:
+          - generic [ref=e927]: Jack-o'-lantern
+        - button "Snowman" [ref=e928] [cursor=pointer]:
+          - generic [ref=e930]: Snowman
+        - button "Fireworks" [ref=e931] [cursor=pointer]:
+          - generic [ref=e933]: Fireworks
+        - button "Decorated tree" [ref=e934] [cursor=pointer]:
+          - generic [ref=e936]: Decorated tree
+        - button "Patterned egg" [ref=e937] [cursor=pointer]:
+          - generic [ref=e939]: Patterned egg
+        - button "Paper lantern" [ref=e940] [cursor=pointer]:
+          - generic [ref=e942]: Paper lantern
+        - button "Diya" [ref=e943] [cursor=pointer]:
+          - generic [ref=e945]: Diya
+        - button "Menorah" [ref=e946] [cursor=pointer]:
+          - generic [ref=e948]: Menorah
+        - button "Rocket" [ref=e949] [cursor=pointer]:
+          - generic [ref=e951]: Rocket
+        - button "Helicopter" [ref=e952] [cursor=pointer]:
+          - generic [ref=e954]: Helicopter
+        - button "Hot-air balloon" [ref=e955] [cursor=pointer]:
+          - generic [ref=e957]: Hot-air balloon
+        - button "Steam train" [ref=e958] [cursor=pointer]:
+          - generic [ref=e960]: Steam train
+        - button "Ocean liner" [ref=e961] [cursor=pointer]:
+          - generic [ref=e963]: Ocean liner
+        - button "Sports car" [ref=e964] [cursor=pointer]:
+          - generic [ref=e966]: Sports car
+        - button "Bus" [ref=e967] [cursor=pointer]:
+          - generic [ref=e969]: Bus
+        - button "Propeller plane" [ref=e970] [cursor=pointer]:
+          - generic [ref=e972]: Propeller plane
+        - button "Jet airliner" [ref=e973] [cursor=pointer]:
+          - generic [ref=e975]: Jet airliner
+        - button "Sailboat" [ref=e976] [cursor=pointer]:
+          - generic [ref=e978]: Sailboat
+        - button "Submarine" [ref=e979] [cursor=pointer]:
+          - generic [ref=e981]: Submarine
+        - button "Bicycle" [ref=e982] [cursor=pointer]:
+          - generic [ref=e984]: Bicycle
+        - button "Tractor" [ref=e985] [cursor=pointer]:
+          - generic [ref=e987]: Tractor
+        - button "Flying saucer" [ref=e988] [cursor=pointer]:
+          - generic [ref=e990]: Flying saucer
+        - button "Eiffel Tower" [ref=e991] [cursor=pointer]:
+          - generic [ref=e993]: Eiffel Tower
+        - button "Washington Monument" [ref=e994] [cursor=pointer]:
+          - generic [ref=e996]: Washington Monument
+        - button "Pyramids of Giza" [ref=e997] [cursor=pointer]:
+          - generic [ref=e999]: Pyramids of Giza
+        - button "Twisting supertall" [ref=e1000] [cursor=pointer]:
+          - generic [ref=e1002]: Twisting supertall
+        - button "Lighthouse" [ref=e1003] [cursor=pointer]:
+          - generic [ref=e1005]: Lighthouse
+        - button "Statue of Liberty" [ref=e1006] [cursor=pointer]:
+          - generic [ref=e1008]: Statue of Liberty
+        - button "White House" [ref=e1009] [cursor=pointer]:
+          - generic [ref=e1011]: White House
+        - button "Leaning Tower of Pisa" [ref=e1012] [cursor=pointer]:
+          - generic [ref=e1014]: Leaning Tower of Pisa
+        - button "Colosseum" [ref=e1015] [cursor=pointer]:
+          - generic [ref=e1017]: Colosseum
+        - button "Parthenon" [ref=e1018] [cursor=pointer]:
+          - generic [ref=e1020]: Parthenon
+        - button "Stonehenge" [ref=e1021] [cursor=pointer]:
+          - generic [ref=e1023]: Stonehenge
+        - button "Big Ben" [ref=e1024] [cursor=pointer]:
+          - generic [ref=e1026]: Big Ben
+        - button "Taj Mahal" [ref=e1027] [cursor=pointer]:
+          - generic [ref=e1029]: Taj Mahal
+        - button "Castle" [ref=e1030] [cursor=pointer]:
+          - generic [ref=e1032]: Castle
+        - button "Pagoda" [ref=e1033] [cursor=pointer]:
+          - generic [ref=e1035]: Pagoda
+        - button "Windmill" [ref=e1036] [cursor=pointer]:
+          - generic [ref=e1038]: Windmill
+      - status
+      - generic [ref=e1039]:
+        - toolbar "Tools" [ref=e1040]:
+          - button "Orbit" [pressed] [ref=e1041] [cursor=pointer]
+          - button "Poke" [ref=e1042] [cursor=pointer]
+          - button "Paint" [ref=e1043] [cursor=pointer]
+          - button "Magnet" [ref=e1044] [cursor=pointer]
+          - button "Clay" [ref=e1045] [cursor=pointer]
+        - button "More" [ref=e1046] [cursor=pointer]
+    - text: ON ON
+  - status: Video saved (52.1 KB).
+```

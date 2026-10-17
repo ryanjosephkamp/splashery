@@ -1,0 +1,13 @@
+import { defineConfig } from "@playwright/test";
+import base from "../../../playwright.config.mjs";
+const port = Number(process.env.SPLASHERY_PORT) || 4190;
+export default defineConfig({
+  ...base,
+  testDir: new URL("./", import.meta.url).pathname,
+  testMatch: "focus.spec.mjs",
+  workers: 1,
+  fullyParallel: false,
+  use: { ...base.use, baseURL: `http://127.0.0.1:${port}` },
+  projects: [{ name: "chromium", use: { browserName: "chromium" } }],
+  webServer: { ...base.webServer, cwd: "/workspace/splashery", url: `http://127.0.0.1:${port}/`, command: `node tools/cdx-mp2-server.mjs ${port}` },
+});

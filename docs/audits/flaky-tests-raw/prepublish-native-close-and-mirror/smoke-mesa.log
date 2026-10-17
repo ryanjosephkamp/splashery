@@ -1,0 +1,2 @@
+Stress recipe: 1 repeats, 4 workers, cdx-mir, fl, hh1-toys, shr, hh5-gems, fx4-engine, img-engine, live2. Logs: /workspace/splashery/.cache/flaky-tests/prepublish-0558/smoke-mesa
+Stress recipe finished: 0. See /workspace/splashery/.cache/flaky-tests/prepublish-0558/smoke-mesa/report.json

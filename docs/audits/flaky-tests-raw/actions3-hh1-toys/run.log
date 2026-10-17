@@ -1,0 +1,65 @@
+
+Running 30 tests using 4 workers
+
+teddy: {"swing":1.2247883602896033,"settled":0.03963721956269095}
+teddy: {"swing":1.1898939957296515,"settled":0.04121161989668559}
+teddy: {"swing":1.1843843239306349,"settled":0.011207482613865338}
+teddy: {"swing":1.1924465748623343,"settled":0.016887334454451397}
+  ✓   3 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (27.8s)
+  ✓   1 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (31.0s)
+  ✓   2 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (31.2s)
+  ✓   4 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (31.4s)
+teddy: {"swing":1.2327864047266783,"settled":0.013361114271572272}
+teddy: {"swing":1.2327864047266783,"settled":0.013361114271572272}
+teddy: {"swing":1.2247883602896033,"settled":0.03963721956269095}
+  ✓   5 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (24.0s)
+teddy: {"swing":1.2247883602896033,"settled":0.03963721956269095}
+  ✓   6 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (24.7s)
+  ✓   7 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (24.5s)
+  ✓   8 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (25.7s)
+teddy: {"swing":1.184279380519354,"settled":0.011099157439854679}
+teddy: {"swing":1.1924465748623343,"settled":0.016887334454451397}
+teddy: {"swing":1.2327864047266783,"settled":0.013361114271572272}
+teddy: {"swing":1.2252087054280167,"settled":0.020903781651679554}
+  ✓   9 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (26.1s)
+  ✓  11 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (25.0s)
+  ✓  12 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (23.8s)
+  ✓  10 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (27.6s)
+teddy: {"swing":1.2252087054280167,"settled":0.020903781651679554}
+  ✓  13 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (24.1s)
+teddy: {"swing":1.2252087054280167,"settled":0.020903781651679554}
+teddy: {"swing":1.2252087054280167,"settled":0.020903781651679554}
+teddy: {"swing":1.2327864047266783,"settled":0.013361114271572272}
+  ✓  15 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (25.5s)
+  ✓  16 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (24.5s)
+  ✓  14 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (25.8s)
+teddy: {"swing":1.1898939957296515,"settled":0.04121161989668559}
+teddy: {"swing":1.2252087054280167,"settled":0.020903781651679554}
+teddy: {"swing":1.2327864047266783,"settled":0.013361114271572272}
+  ✓  17 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (26.3s)
+teddy: {"swing":1.2247883602896033,"settled":0.03963721956269095}
+  ✓  19 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (25.3s)
+  ✓  20 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (25.2s)
+  ✓  18 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (26.3s)
+teddy: {"swing":1.2252087054280167,"settled":0.020903781651679554}
+teddy: {"swing":1.2247883602896033,"settled":0.03963721956269095}
+teddy: {"swing":1.217677900602658,"settled":0.017581877161398807}
+teddy: {"swing":1.2421040869912987,"settled":0.013740541684837015}
+  ✓  21 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (24.5s)
+  ✓  23 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (22.0s)
+  ✓  22 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (24.3s)
+  ✓  24 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (23.6s)
+teddy: {"swing":1.2252087054280167,"settled":0.020903781651679554}
+teddy: {"swing":1.1924465748623343,"settled":0.016887334454451397}
+teddy: {"swing":1.1884316691414605,"settled":0.02147101295295073}
+  ✓  25 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (22.6s)
+teddy: {"swing":1.2061123617018108,"settled":0.021074509212870296}
+  ✓  26 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (25.0s)
+  ✓  27 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (23.9s)
+  ✓  28 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (22.5s)
+teddy: {"swing":1.2061123617018108,"settled":0.021074509212870296}
+  ✓  29 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (14.5s)
+teddy: {"swing":1.2110767815973489,"settled":0.03328188255906528}
+  ✓  30 [chromium] › tests/hh1-toys.spec.mjs:259:1 › teddy bear: swung and dropped, its arms and head swing on it and settle (14.6s)
+
+  30 passed (3.7m)

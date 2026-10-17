@@ -1,0 +1,22 @@
+{
+  "clean_initial_cohort": {
+    "completed_before": "2026-10-17T05:08:54Z",
+    "still": {
+      "passed": 2,
+      "failed": 2
+    },
+    "low-light": {
+      "passed": 4,
+      "failed": 0
+    }
+  },
+  "incidental_archive_load": {
+    "bounded_interval_utc": [
+      "2026-10-17T05:10:10Z",
+      "2026-10-17T05:11:03Z"
+    ],
+    "cause": "A recovery archive briefly used about 30% of one CPU. Both retained failures and all eight retained completed cases predate it."
+  },
+  "retention": "The complete 20-case run was observed finishing 17 passed and three failed. Its final report was lost in the subsequent fresh checkout. This directory retains only the externally backed-up initial eight-case log, recipe, and two complete failure traces; count that uniform initial cohort for retained baseline evidence.",
+  "frozen_code": "Original SHA-256 verified after reconstructing the diagnostic helper from the prepared candidate: 6137e229ee29d2ec633fce9d65f496e2dec6dedd484b91b7bb5d4b7fb78b99d0. Code suffixes add .txt to preserve exact bytes."
+}

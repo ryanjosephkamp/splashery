@@ -1,0 +1,317 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/.cache/flaky-tests/shr-ready-focus/config.mjs",
+    "rootDir": "/workspace/splashery/.cache/flaky-tests/shr-ready-focus",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/.cache/flaky-tests/shr-ready-focus/run-055200/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/.cache/flaky-tests/shr-ready-focus",
+        "testIgnore": [],
+        "testMatch": [
+          "focus.spec.mjs"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node tools/cdx-mp2-server.mjs 4190",
+      "url": "http://127.0.0.1:4190/",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/workspace/splashery"
+    }
+  },
+  "suites": [
+    {
+      "title": "focus.spec.mjs",
+      "file": "focus.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "before",
+          "file": "focus.spec.mjs",
+          "line": 62,
+          "column": 8,
+          "specs": [],
+          "suites": [
+            {
+              "title": "real phone recording",
+              "file": "focus.spec.mjs",
+              "line": 64,
+              "column": 10,
+              "specs": [
+                {
+                  "title": "native preview never remembers its hidden recording pill as the return target",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 240000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 8394,
+                          "errors": [],
+                          "stdout": [
+                            {
+                              "text": "SHR_READY_FOCUS {\"mode\":\"before\",\"status\":\"passed\",\"events\":[{\"kind\":\"focusin\",\"at\":3758.2000000000116,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"sheet-toggle\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":4114.799999999988,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":4114.899999999994,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"tab-share\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":4372.399999999994,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":4372.600000000006,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"record-start\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":4540.899999999994,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":4541,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"sheet-toggle\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":4625.200000000012,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":4626.200000000012,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-stop\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":6997.899999999994,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":6999.5,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-pill\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":7024.200000000012,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"showModal:before\",\"at\":7025.700000000012,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":7035.200000000012,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"rec-close\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"showModal:after\",\"at\":7035.200000000012,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"rec-close\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":7035.200000000012,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":7035.399999999994,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"rec-save\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"cancel\",\"at\":7377.200000000012,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"rec-save\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"close:before\",\"at\":7377.399999999994,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"rec-save\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"close:after\",\"at\":7377.399999999994,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-save\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":7438.100000000006,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"close\",\"at\":7464.399999999994,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true}],\"actualTake\":{\"bytes\":102467,\"type\":\"video/webm\",\"seconds\":2.376100000000006,\"name\":\"splashery-20261017-055210.webm\",\"src\":\"blob:http://127.0.0.1:4190/2eb348ef-5b73-4ffb-9de3-f2325edfb8a2#t=0.001\"},\"active\":\"BODY\"}\n"
+                            }
+                          ],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-10-17T05:52:02.382Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "actual-recording",
+                              "contentType": "video/webm",
+                              "path": "/workspace/splashery/.cache/flaky-tests/shr-ready-focus/run-055200/results/focus-before-real-phone-re-d91f9-g-pill-as-the-return-target-chromium/attachments/actual-recording-f8760d304434a387bc9011413f25527e64abb1b8.webm"
+                            },
+                            {
+                              "name": "native-focus",
+                              "contentType": "application/json",
+                              "body": "ewogICJtb2RlIjogImJlZm9yZSIsCiAgInN0YXR1cyI6ICJwYXNzZWQiLAogICJldmVudHMiOiBbCiAgICB7CiAgICAgICJraW5kIjogImZvY3VzaW4iLAogICAgICAiYXQiOiAzNzU4LjIwMDAwMDAwMDAxMTYsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogInNoZWV0LXRvZ2dsZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c291dCIsCiAgICAgICJhdCI6IDQxMTQuNzk5OTk5OTk5OTg4LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJCT0RZIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3VzaW4iLAogICAgICAiYXQiOiA0MTE0Ljg5OTk5OTk5OTk5NCwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAidGFiLXNoYXJlIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3Vzb3V0IiwKICAgICAgImF0IjogNDM3Mi4zOTk5OTk5OTk5OTQsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogIkJPRFkiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDQzNzIuNjAwMDAwMDAwMDA2LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJyZWNvcmQtc3RhcnQiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNvdXQiLAogICAgICAiYXQiOiA0NTQwLjg5OTk5OTk5OTk5NCwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c2luIiwKICAgICAgImF0IjogNDU0MSwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAic2hlZXQtdG9nZ2xlIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3Vzb3V0IiwKICAgICAgImF0IjogNDYyNS4yMDAwMDAwMDAwMTIsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogIkJPRFkiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogZmFsc2UKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3VzaW4iLAogICAgICAiYXQiOiA0NjI2LjIwMDAwMDAwMDAxMiwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAicmVjLXN0b3AiLAogICAgICAiYWN0aXZlSW5QaWxsIjogdHJ1ZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNvdXQiLAogICAgICAiYXQiOiA2OTk3Ljg5OTk5OTk5OTk5NCwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDY5OTkuNSwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAicmVjLXBpbGwiLAogICAgICAiYWN0aXZlSW5QaWxsIjogdHJ1ZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNvdXQiLAogICAgICAiYXQiOiA3MDI0LjIwMDAwMDAwMDAxMiwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJzaG93TW9kYWw6YmVmb3JlIiwKICAgICAgImF0IjogNzAyNS43MDAwMDAwMDAwMTIsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogIkJPRFkiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDcwMzUuMjAwMDAwMDAwMDEyLAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiB0cnVlLAogICAgICAiYWN0aXZlIjogInJlYy1jbG9zZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJzaG93TW9kYWw6YWZ0ZXIiLAogICAgICAiYXQiOiA3MDM1LjIwMDAwMDAwMDAxMiwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogdHJ1ZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtY2xvc2UiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNvdXQiLAogICAgICAiYXQiOiA3MDM1LjIwMDAwMDAwMDAxMiwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogdHJ1ZSwKICAgICAgImFjdGl2ZSI6ICJCT0RZIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3VzaW4iLAogICAgICAiYXQiOiA3MDM1LjM5OTk5OTk5OTk5NCwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogdHJ1ZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtc2F2ZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJjYW5jZWwiLAogICAgICAiYXQiOiA3Mzc3LjIwMDAwMDAwMDAxMiwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogdHJ1ZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtc2F2ZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJjbG9zZTpiZWZvcmUiLAogICAgICAiYXQiOiA3Mzc3LjM5OTk5OTk5OTk5NCwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogdHJ1ZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtc2F2ZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJjbG9zZTphZnRlciIsCiAgICAgICJhdCI6IDczNzcuMzk5OTk5OTk5OTk0LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtc2F2ZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c291dCIsCiAgICAgICJhdCI6IDc0MzguMTAwMDAwMDAwMDA2LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJCT0RZIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImNsb3NlIiwKICAgICAgImF0IjogNzQ2NC4zOTk5OTk5OTk5OTQsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogIkJPRFkiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogdHJ1ZQogICAgfQogIF0sCiAgImFjdHVhbFRha2UiOiB7CiAgICAiYnl0ZXMiOiAxMDI0NjcsCiAgICAidHlwZSI6ICJ2aWRlby93ZWJtIiwKICAgICJzZWNvbmRzIjogMi4zNzYxMDAwMDAwMDAwMDYsCiAgICAibmFtZSI6ICJzcGxhc2hlcnktMjAyNjEwMTctMDU1MjEwLndlYm0iLAogICAgInNyYyI6ICJibG9iOmh0dHA6Ly8xMjcuMC4wLjE6NDE5MC8yZWIzNDhlZi01YjczLTRmZmItOWRlMy1mMjMyNWVkZmI4YTIjdD0wLjAwMSIKICB9LAogICJhY3RpdmUiOiAiQk9EWSIKfQ=="
+                            }
+                          ]
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "17c1c9a0d04c8e124af8-4d2b514dbf5581e8bf55",
+                  "file": "focus.spec.mjs",
+                  "line": 67,
+                  "column": 1
+                }
+              ]
+            },
+            {
+              "title": "unchanged Task 52 controls",
+              "file": "focus.spec.mjs",
+              "line": 120,
+              "column": 10,
+              "specs": [
+                {
+                  "title": "recording focus survives saving and an empty take without stealing later focus",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 240000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 2131,
+                          "errors": [],
+                          "stdout": [
+                            {
+                              "text": "SHR_READY_FOCUS {\"mode\":\"before\",\"status\":\"passed\",\"events\":[{\"kind\":\"focusin\",\"at\":951.8000000000175,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-stop\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":989.1000000000058,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":990.3999999999942,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-pill\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":1061.3000000000175,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":1062.5,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"sheet-toggle\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":1586.7000000000116,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":1587.2000000000116,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-stop\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":1710.3999999999942,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":1711.7000000000116,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-pill\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":1742.6000000000058,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":1743.2000000000116,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"help-toggle\",\"activeInPill\":false,\"pillHidden\":false}],\"active\":\"help-toggle\"}\n"
+                            }
+                          ],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-10-17T05:52:11.537Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "native-focus",
+                              "contentType": "application/json",
+                              "body": "ewogICJtb2RlIjogImJlZm9yZSIsCiAgInN0YXR1cyI6ICJwYXNzZWQiLAogICJldmVudHMiOiBbCiAgICB7CiAgICAgICJraW5kIjogImZvY3VzaW4iLAogICAgICAiYXQiOiA5NTEuODAwMDAwMDAwMDE3NSwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAicmVjLXN0b3AiLAogICAgICAiYWN0aXZlSW5QaWxsIjogdHJ1ZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNvdXQiLAogICAgICAiYXQiOiA5ODkuMTAwMDAwMDAwMDA1OCwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDk5MC4zOTk5OTk5OTk5OTQyLAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtcGlsbCIsCiAgICAgICJhY3RpdmVJblBpbGwiOiB0cnVlLAogICAgICAicGlsbEhpZGRlbiI6IGZhbHNlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c291dCIsCiAgICAgICJhdCI6IDEwNjEuMzAwMDAwMDAwMDE3NSwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c2luIiwKICAgICAgImF0IjogMTA2Mi41LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJzaGVldC10b2dnbGUiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNvdXQiLAogICAgICAiYXQiOiAxNTg2LjcwMDAwMDAwMDAxMTYsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogIkJPRFkiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogZmFsc2UKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3VzaW4iLAogICAgICAiYXQiOiAxNTg3LjIwMDAwMDAwMDAxMTYsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogInJlYy1zdG9wIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IHRydWUsCiAgICAgICJwaWxsSGlkZGVuIjogZmFsc2UKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3Vzb3V0IiwKICAgICAgImF0IjogMTcxMC4zOTk5OTk5OTk5OTQyLAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJCT0RZIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IGZhbHNlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c2luIiwKICAgICAgImF0IjogMTcxMS43MDAwMDAwMDAwMTE2LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtcGlsbCIsCiAgICAgICJhY3RpdmVJblBpbGwiOiB0cnVlLAogICAgICAicGlsbEhpZGRlbiI6IGZhbHNlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c291dCIsCiAgICAgICJhdCI6IDE3NDIuNjAwMDAwMDAwMDA1OCwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDE3NDMuMjAwMDAwMDAwMDExNiwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiaGVscC10b2dnbGUiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogZmFsc2UKICAgIH0KICBdLAogICJhY3RpdmUiOiAiaGVscC10b2dnbGUiCn0="
+                            }
+                          ]
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "17c1c9a0d04c8e124af8-a2e3fb51f865773ee54c",
+                  "file": "focus.spec.mjs",
+                  "line": 122,
+                  "column": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "after",
+          "file": "focus.spec.mjs",
+          "line": 62,
+          "column": 8,
+          "specs": [],
+          "suites": [
+            {
+              "title": "real phone recording",
+              "file": "focus.spec.mjs",
+              "line": 64,
+              "column": 10,
+              "specs": [
+                {
+                  "title": "native preview never remembers its hidden recording pill as the return target",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 240000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 6194,
+                          "errors": [],
+                          "stdout": [
+                            {
+                              "text": "SHR_READY_FOCUS {\"mode\":\"after\",\"status\":\"passed\",\"events\":[{\"kind\":\"focusin\",\"at\":1793.2999999999884,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"sheet-toggle\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":2239.899999999994,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":2240,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"tab-share\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":2574.6999999999825,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":2574.6999999999825,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"record-start\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":2670,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":2670.100000000006,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"sheet-toggle\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":2769.1999999999825,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":2771.7999999999884,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-stop\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":5066.299999999988,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":5069,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-pill\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":5133.100000000006,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":5133.399999999994,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-stop\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":5134.5,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"showModal:before\",\"at\":5135.100000000006,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":5145.6999999999825,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"rec-close\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"showModal:after\",\"at\":5145.799999999988,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"rec-close\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":5145.799999999988,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":5145.899999999994,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"rec-save\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"cancel\",\"at\":5466.100000000006,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"rec-save\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"close:before\",\"at\":5466.1999999999825,\"dialog\":\"rec-preview\",\"open\":true,\"active\":\"rec-save\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"close:after\",\"at\":5466.299999999988,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-save\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"close\",\"at\":5531.6999999999825,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-save\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":5534.899999999994,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true}],\"actualTake\":{\"bytes\":115396,\"type\":\"video/webm\",\"seconds\":2.3008000000000175,\"name\":\"splashery-20261017-055218.webm\",\"src\":\"blob:http://127.0.0.1:4190/1096d9e8-66f5-4864-bf7e-2be96617a266#t=0.001\"},\"active\":\"BODY\"}\n"
+                            }
+                          ],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-10-17T05:52:13.678Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "actual-recording",
+                              "contentType": "video/webm",
+                              "path": "/workspace/splashery/.cache/flaky-tests/shr-ready-focus/run-055200/results/focus-after-real-phone-rec-5bbd4-g-pill-as-the-return-target-chromium/attachments/actual-recording-a452186d4154a456fd8e35ee7f6312baa3310c95.webm"
+                            },
+                            {
+                              "name": "native-focus",
+                              "contentType": "application/json",
+                              "body": "ewogICJtb2RlIjogImFmdGVyIiwKICAic3RhdHVzIjogInBhc3NlZCIsCiAgImV2ZW50cyI6IFsKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDE3OTMuMjk5OTk5OTk5OTg4NCwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAic2hlZXQtdG9nZ2xlIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3Vzb3V0IiwKICAgICAgImF0IjogMjIzOS44OTk5OTk5OTk5OTQsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogIkJPRFkiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDIyNDAsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogInRhYi1zaGFyZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c291dCIsCiAgICAgICJhdCI6IDI1NzQuNjk5OTk5OTk5OTgyNSwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c2luIiwKICAgICAgImF0IjogMjU3NC42OTk5OTk5OTk5ODI1LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJyZWNvcmQtc3RhcnQiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNvdXQiLAogICAgICAiYXQiOiAyNjcwLAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJCT0RZIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3VzaW4iLAogICAgICAiYXQiOiAyNjcwLjEwMDAwMDAwMDAwNiwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAic2hlZXQtdG9nZ2xlIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3Vzb3V0IiwKICAgICAgImF0IjogMjc2OS4xOTk5OTk5OTk5ODI1LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJCT0RZIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IGZhbHNlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c2luIiwKICAgICAgImF0IjogMjc3MS43OTk5OTk5OTk5ODg0LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtc3RvcCIsCiAgICAgICJhY3RpdmVJblBpbGwiOiB0cnVlLAogICAgICAicGlsbEhpZGRlbiI6IGZhbHNlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c291dCIsCiAgICAgICJhdCI6IDUwNjYuMjk5OTk5OTk5OTg4LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJCT0RZIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IGZhbHNlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c2luIiwKICAgICAgImF0IjogNTA2OSwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAicmVjLXBpbGwiLAogICAgICAiYWN0aXZlSW5QaWxsIjogdHJ1ZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNvdXQiLAogICAgICAiYXQiOiA1MTMzLjEwMDAwMDAwMDAwNiwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDUxMzMuMzk5OTk5OTk5OTk0LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtc3RvcCIsCiAgICAgICJhY3RpdmVJblBpbGwiOiB0cnVlLAogICAgICAicGlsbEhpZGRlbiI6IGZhbHNlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c291dCIsCiAgICAgICJhdCI6IDUxMzQuNSwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAic2hvd01vZGFsOmJlZm9yZSIsCiAgICAgICJhdCI6IDUxMzUuMTAwMDAwMDAwMDA2LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJCT0RZIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3VzaW4iLAogICAgICAiYXQiOiA1MTQ1LjY5OTk5OTk5OTk4MjUsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IHRydWUsCiAgICAgICJhY3RpdmUiOiAicmVjLWNsb3NlIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogInNob3dNb2RhbDphZnRlciIsCiAgICAgICJhdCI6IDUxNDUuNzk5OTk5OTk5OTg4LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiB0cnVlLAogICAgICAiYWN0aXZlIjogInJlYy1jbG9zZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c291dCIsCiAgICAgICJhdCI6IDUxNDUuNzk5OTk5OTk5OTg4LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiB0cnVlLAogICAgICAiYWN0aXZlIjogIkJPRFkiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDUxNDUuODk5OTk5OTk5OTk0LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiB0cnVlLAogICAgICAiYWN0aXZlIjogInJlYy1zYXZlIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImNhbmNlbCIsCiAgICAgICJhdCI6IDU0NjYuMTAwMDAwMDAwMDA2LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiB0cnVlLAogICAgICAiYWN0aXZlIjogInJlYy1zYXZlIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImNsb3NlOmJlZm9yZSIsCiAgICAgICJhdCI6IDU0NjYuMTk5OTk5OTk5OTgyNSwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogdHJ1ZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtc2F2ZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJjbG9zZTphZnRlciIsCiAgICAgICJhdCI6IDU0NjYuMjk5OTk5OTk5OTg4LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtc2F2ZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJjbG9zZSIsCiAgICAgICJhdCI6IDU1MzEuNjk5OTk5OTk5OTgyNSwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAicmVjLXNhdmUiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNvdXQiLAogICAgICAiYXQiOiA1NTM0Ljg5OTk5OTk5OTk5NCwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9CiAgXSwKICAiYWN0dWFsVGFrZSI6IHsKICAgICJieXRlcyI6IDExNTM5NiwKICAgICJ0eXBlIjogInZpZGVvL3dlYm0iLAogICAgInNlY29uZHMiOiAyLjMwMDgwMDAwMDAwMDAxNzUsCiAgICAibmFtZSI6ICJzcGxhc2hlcnktMjAyNjEwMTctMDU1MjE4LndlYm0iLAogICAgInNyYyI6ICJibG9iOmh0dHA6Ly8xMjcuMC4wLjE6NDE5MC8xMDk2ZDllOC02NmY1LTQ4NjQtYmY3ZS0yYmU5NjYxN2EyNjYjdD0wLjAwMSIKICB9LAogICJhY3RpdmUiOiAiQk9EWSIKfQ=="
+                            }
+                          ]
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "17c1c9a0d04c8e124af8-95d3bcb05400cd2a724e",
+                  "file": "focus.spec.mjs",
+                  "line": 67,
+                  "column": 1
+                }
+              ]
+            },
+            {
+              "title": "unchanged Task 52 controls",
+              "file": "focus.spec.mjs",
+              "line": 120,
+              "column": 10,
+              "specs": [
+                {
+                  "title": "recording focus survives saving and an empty take without stealing later focus",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 240000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 2039,
+                          "errors": [],
+                          "stdout": [
+                            {
+                              "text": "SHR_READY_FOCUS {\"mode\":\"after\",\"status\":\"passed\",\"events\":[{\"kind\":\"focusin\",\"at\":927.5,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-stop\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":951.3999999999942,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":952.6999999999825,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-pill\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":1025.2999999999884,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusin\",\"at\":1030.6000000000058,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"sheet-toggle\",\"activeInPill\":false,\"pillHidden\":true},{\"kind\":\"focusout\",\"at\":1366.6999999999825,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":1367,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-stop\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":1472,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":1473.2999999999884,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"rec-pill\",\"activeInPill\":true,\"pillHidden\":false},{\"kind\":\"focusout\",\"at\":1570.2999999999884,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"BODY\",\"activeInPill\":false,\"pillHidden\":false},{\"kind\":\"focusin\",\"at\":1570.6000000000058,\"dialog\":\"rec-preview\",\"open\":false,\"active\":\"help-toggle\",\"activeInPill\":false,\"pillHidden\":false}],\"active\":\"help-toggle\"}\n"
+                            }
+                          ],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-10-17T05:52:19.884Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "native-focus",
+                              "contentType": "application/json",
+                              "body": "ewogICJtb2RlIjogImFmdGVyIiwKICAic3RhdHVzIjogInBhc3NlZCIsCiAgImV2ZW50cyI6IFsKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDkyNy41LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJyZWMtc3RvcCIsCiAgICAgICJhY3RpdmVJblBpbGwiOiB0cnVlLAogICAgICAicGlsbEhpZGRlbiI6IGZhbHNlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c291dCIsCiAgICAgICJhdCI6IDk1MS4zOTk5OTk5OTk5OTQyLAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJCT0RZIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IGZhbHNlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c2luIiwKICAgICAgImF0IjogOTUyLjY5OTk5OTk5OTk4MjUsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogInJlYy1waWxsIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IHRydWUsCiAgICAgICJwaWxsSGlkZGVuIjogZmFsc2UKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3Vzb3V0IiwKICAgICAgImF0IjogMTAyNS4yOTk5OTk5OTk5ODg0LAogICAgICAiZGlhbG9nIjogInJlYy1wcmV2aWV3IiwKICAgICAgIm9wZW4iOiBmYWxzZSwKICAgICAgImFjdGl2ZSI6ICJCT0RZIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3VzaW4iLAogICAgICAiYXQiOiAxMDMwLjYwMDAwMDAwMDAwNTgsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogInNoZWV0LXRvZ2dsZSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAia2luZCI6ICJmb2N1c291dCIsCiAgICAgICJhdCI6IDEzNjYuNjk5OTk5OTk5OTgyNSwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDEzNjcsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogInJlYy1zdG9wIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IHRydWUsCiAgICAgICJwaWxsSGlkZGVuIjogZmFsc2UKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3Vzb3V0IiwKICAgICAgImF0IjogMTQ3MiwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAiQk9EWSIsCiAgICAgICJhY3RpdmVJblBpbGwiOiBmYWxzZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNpbiIsCiAgICAgICJhdCI6IDE0NzMuMjk5OTk5OTk5OTg4NCwKICAgICAgImRpYWxvZyI6ICJyZWMtcHJldmlldyIsCiAgICAgICJvcGVuIjogZmFsc2UsCiAgICAgICJhY3RpdmUiOiAicmVjLXBpbGwiLAogICAgICAiYWN0aXZlSW5QaWxsIjogdHJ1ZSwKICAgICAgInBpbGxIaWRkZW4iOiBmYWxzZQogICAgfSwKICAgIHsKICAgICAgImtpbmQiOiAiZm9jdXNvdXQiLAogICAgICAiYXQiOiAxNTcwLjI5OTk5OTk5OTk4ODQsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogIkJPRFkiLAogICAgICAiYWN0aXZlSW5QaWxsIjogZmFsc2UsCiAgICAgICJwaWxsSGlkZGVuIjogZmFsc2UKICAgIH0sCiAgICB7CiAgICAgICJraW5kIjogImZvY3VzaW4iLAogICAgICAiYXQiOiAxNTcwLjYwMDAwMDAwMDAwNTgsCiAgICAgICJkaWFsb2ciOiAicmVjLXByZXZpZXciLAogICAgICAib3BlbiI6IGZhbHNlLAogICAgICAiYWN0aXZlIjogImhlbHAtdG9nZ2xlIiwKICAgICAgImFjdGl2ZUluUGlsbCI6IGZhbHNlLAogICAgICAicGlsbEhpZGRlbiI6IGZhbHNlCiAgICB9CiAgXSwKICAiYWN0aXZlIjogImhlbHAtdG9nZ2xlIgp9"
+                            }
+                          ]
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "17c1c9a0d04c8e124af8-299cca192f17221fc37d",
+                  "file": "focus.spec.mjs",
+                  "line": 122,
+                  "column": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T05:52:01.641Z",
+    "duration": 20374.420000000002,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
