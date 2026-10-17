@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photo to 3D: blind comparison</title>
+  <style>
+    body {
+      margin: 0 auto;
+      padding: 20px;
+      max-width: 850px;
+      font: 16px system-ui;
+      color: #202328;
+      background: #faf9f6;
+    }
+    h1 {
+      font-size: 26px;
+    }
+    article {
+      padding: 20px 0;
+      border-bottom: 1px solid #ccc;
+    }
+    .pair {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .view {
+      width: min(390px, 100%);
+    }
+    video {
+      width: 100%;
+      display: block;
+      background: white;
+    }
+    button {
+      margin: 10px 0;
+      padding: 10px 16px;
+      border: 1px solid #555;
+      border-radius: 6px;
+      background: white;
+      font: inherit;
+      cursor: pointer;
+    }
+    fieldset {
+      border: 0;
+      padding: 10px 0;
+    }
+    label {
+      margin-right: 20px;
+      white-space: nowrap;
+    }
+    .credit {
+      font-size: 13px;
+      color: #505660;
+    }
+    #save {
+      position: sticky;
+      bottom: 8px;
+      background: #202328;
+      color: white;
+    }
+  </style>
+  <h1>Photo to 3D: blind comparison</h1>
+  <p>
+    Play each pair, compare A and B, and choose the version that looks better. Save your choices
+    when all 20 pairs are complete.
+  </p>
+  <main id="pairs"></main>
+  <button id="save">Save choices</button>
+  <script type="module">
+    const pairs = [
+      {
+        number: 1,
+        id: "new-13-60172881",
+        category: "ribbons",
+        source: {
+          label: "Clear drinking glass",
+          author: "Photographer not identified on source page; museum source",
+          source: "https://commons.wikimedia.org/wiki/File:Water_glass_MET_ES704.jpg",
+          license: "CC0 1.0",
+          ai: false,
+        },
+        a: "01-a.mp4",
+        b: "01-b.mp4",
+      },
+      {
+        number: 2,
+        id: "truth-room",
+        category: "ribbons",
+        source: {
+          label: "Room interior",
+          author: "made by Ryan with Codex (GPT-6)",
+          source: "https://github.com/ryanjosephkamp/splashery/tree/main/tests/fixtures/truth",
+          license: "CC0 1.0",
+          ai: false,
+        },
+        a: "02-a.mp4",
+        b: "02-b.mp4",
+      },
+      {
+        number: 3,
+        id: "new-03-25399041",
+        category: "ribbons",
+        source: {
+          label: "Fruit platter",
+          author: "Tomwsulcer",
+          source:
+            "https://commons.wikimedia.org/wiki/File:Fruit_platter_at_a_party_with_kiwi_melons_strawberries_etc.JPG",
+          license: "CC0 1.0",
+          ai: false,
+        },
+        a: "03-a.mp4",
+        b: "03-b.mp4",
+      },
+      {
+        number: 4,
+        id: "cdx-hard-potting-bench",
+        category: "ribbons",
+        source: {
+          label: "Potting bench (AI-made)",
+          author: "Ryan, the owner of Splashery (made with an AI image tool)",
+          source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+          license: "AI-made by the owner",
+          ai: true,
+        },
+        a: "04-a.mp4",
+        b: "04-b.mp4",
+      },
+      {
+        number: 5,
+        id: "still-life",
+        category: "ribbons",
+        source: {
+          label: "Still life",
+          author: "Antoine Vollon (Metropolitan Museum of Art Open Access)",
+          source: "https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg",
+          license: "CC0 1.0",
+          ai: false,
+        },
+        a: "05-a.mp4",
+        b: "05-b.mp4",
+      },
+      {
+        number: 6,
+        id: "cdx-hard-polished-floor",
+        category: "ribbons",
+        source: {
+          label: "Polished floor (AI-made)",
+          author: "Ryan, the owner of Splashery (made with an AI image tool)",
+          source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+          license: "AI-made by the owner",
+          ai: true,
+        },
+        a: "06-a.mp4",
+        b: "06-b.mp4",
+      },
+      {
+        number: 7,
+        id: "dot-bamboo",
+        category: "ribbons",
+        source: {
+          label: "Bamboo path (AI-made)",
+          author: "Ryan, the owner of Splashery (made with an AI image tool)",
+          source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+          license: "AI-made by the owner",
+          ai: true,
+        },
+        a: "07-a.mp4",
+        b: "07-b.mp4",
+      },
+      {
+        number: 8,
+        id: "forest",
+        category: "ribbons",
+        source: {
+          label: "Forest path",
+          author: "Seaq68 (from Pixabay, marked CC0 on Wikimedia Commons)",
+          source: "https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg",
+          license: "CC0 1.0",
+          ai: false,
+        },
+        a: "08-a.mp4",
+        b: "08-b.mp4",
+      },
+      {
+        number: 9,
+        id: "cdx-hard-bicycle-spokes",
+        category: "ribbons",
+        source: {
+          label: "Bicycle spokes (AI-made)",
+          author: "Ryan, the owner of Splashery (made with an AI image tool)",
+          source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+          license: "AI-made by the owner",
+          ai: true,
+        },
+        a: "09-a.mp4",
+        b: "09-b.mp4",
+      },
+      {
+        number: 10,
+        id: "dot-cdx-moss-stream",
+        category: "ribbons",
+        source: {
+          label: "Mossy stream (AI-made)",
+          author: "Ryan, the owner of Splashery (made with an AI image tool)",
+          source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+          license: "AI-made by the owner",
+          ai: true,
+        },
+        a: "10-a.mp4",
+        b: "10-b.mp4",
+      },
+      {
+        number: 11,
+        id: "new-07-131897774",
+        category: "boundaries",
+        source: {
+          label: "Daisy close-up",
+          author: "Free Nature Stock",
+          source: "https://commons.wikimedia.org/wiki/File:Macro_flower_wallpaper.jpg",
+          license: "CC0 1.0",
+          ai: false,
+        },
+        a: "11-a.mp4",
+        b: "11-b.mp4",
+      },
+      {
+        number: 12,
+        id: "new-01-131641833",
+        category: "boundaries",
+        source: {
+          label: "Dog on a living-room floor",
+          author: "Picography",
+          source:
+            "https://commons.wikimedia.org/wiki/File:Picography-curious-dog-animal-pet-house-home-sm-1.jpg",
+          license: "CC0 1.0",
+          ai: false,
+        },
+        a: "12-a.mp4",
+        b: "12-b.mp4",
+      },
+      {
+        number: 13,
+        id: "new-02-104101424",
+        category: "boundaries",
+        source: {
+          label: "Chocolate cake on a plate",
+          author: "Daria Yakovleva; minor edits by Subsidiary account",
+          source:
+            "https://commons.wikimedia.org/wiki/File:Piece_of_chocolate_cake_on_a_white_plate_decorated_with_chocolate_sauce.jpg",
+          license: "CC0 1.0",
+          ai: false,
+        },
+        a: "13-a.mp4",
+        b: "13-b.mp4",
+      },
+      {
+        number: 14,
+        id: "new-19-62150806",
+        category: "boundaries",
+        source: {
+          label: "Dim room behind glass doors",
+          author: "Stephen Caserta caserta",
+          source: "https://commons.wikimedia.org/wiki/File:Empty_Room_(Unsplash).jpg",
+          license: "CC0 1.0",
+          ai: false,
+        },
+        a: "14-a.mp4",
+        b: "14-b.mp4",
+      },
+      {
+        number: 15,
+        id: "new-08-151156803",
+        category: "boundaries",
+        source: {
+          label: "Cactus flower and spines",
+          author: "RndmCrs",
+          source: "https://commons.wikimedia.org/wiki/File:Cactus_Plant_in_Gujarat,_India.jpg",
+          license: "CC0 1.0",
+          ai: false,
+        },
+        a: "15-a.mp4",
+        b: "15-b.mp4",
+      },
+      {
+        number: 16,
+        id: "cdx-hard-shed-lamps",
+        category: "thin parts",
+        source: {
+          label: "Lamps in a potting shed (AI-made)",
+          author: "Ryan, the owner of Splashery (made with an AI image tool)",
+          source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+          license: "AI-made by the owner",
+          ai: true,
+        },
+        a: "16-a.mp4",
+        b: "16-b.mp4",
+      },
+      {
+        number: 17,
+        id: "dot-attic",
+        category: "thin parts",
+        source: {
+          label: "Attic (AI-made)",
+          author: "Ryan, the owner of Splashery (made with an AI image tool)",
+          source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+          license: "AI-made by the owner",
+          ai: true,
+        },
+        a: "17-a.mp4",
+        b: "17-b.mp4",
+      },
+      {
+        number: 18,
+        id: "dot-cdx-fern-curl",
+        category: "thin parts",
+        source: {
+          label: "Fern curl (AI-made)",
+          author: "Ryan, the owner of Splashery (made with an AI image tool)",
+          source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+          license: "AI-made by the owner",
+          ai: true,
+        },
+        a: "18-a.mp4",
+        b: "18-b.mp4",
+      },
+      {
+        number: 19,
+        id: "dot-cdx-pinecone",
+        category: "thin parts",
+        source: {
+          label: "Pinecone (AI-made)",
+          author: "Ryan, the owner of Splashery (made with an AI image tool)",
+          source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+          license: "AI-made by the owner",
+          ai: true,
+        },
+        a: "19-a.mp4",
+        b: "19-b.mp4",
+      },
+      {
+        number: 20,
+        id: "dot-train",
+        category: "thin parts",
+        source: {
+          label: "Train on a viaduct (AI-made)",
+          author: "Ryan, the owner of Splashery (made with an AI image tool)",
+          source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+          license: "AI-made by the owner",
+          ai: true,
+        },
+        a: "20-a.mp4",
+        b: "20-b.mp4",
+      },
+    ];
+    const answers = new Map();
+    const host = document.getElementById("pairs");
+    for (const pair of pairs) {
+      const article = document.createElement("article");
+      const heading = document.createElement("h2");
+      heading.textContent = `Pair ${pair.number}: ${pair.category}`;
+      article.append(heading);
+      const views = document.createElement("div");
+      views.className = "pair";
+      const videos = [];
+      for (const label of ["a", "b"]) {
+        const frame = document.createElement("div");
+        frame.className = "view";
+        const title = document.createElement("strong");
+        title.textContent = label.toUpperCase();
+        const video = document.createElement("video");
+        video.src = pair[label];
+        video.controls = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.preload = "none";
+        frame.append(title, video);
+        views.append(frame);
+        videos.push(video);
+      }
+      article.append(views);
+      const play = document.createElement("button");
+      play.textContent = "Play both";
+      play.onclick = () => {
+        for (const v of videos) v.currentTime = 0;
+        for (const v of videos) v.play().catch(() => {});
+      };
+      article.append(play);
+      const choices = document.createElement("fieldset");
+      const legend = document.createElement("legend");
+      legend.textContent = "Which looks better?";
+      choices.append(legend);
+      for (const value of ["A", "B", "Tie"]) {
+        const label = document.createElement("label");
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = `pair-${pair.number}`;
+        radio.value = value;
+        radio.onchange = () => {
+          answers.set(pair.number, value);
+          document.getElementById("save").textContent = `Save choices (${answers.size}/20)`;
+        };
+        label.append(radio, document.createTextNode(` ${value}`));
+        choices.append(label);
+      }
+      article.append(choices);
+      const credit = document.createElement("p");
+      credit.className = "credit";
+      const ai = pair.source.ai || (pair.source.license || "").startsWith("AI-made");
+      credit.textContent = `${ai ? "AI-made Studio input. " : ""}${pair.source.label || pair.id}. ${pair.source.author || "Source credit in the review record"}. ${pair.source.license || "See the source record"}. `;
+      if (pair.source.source) {
+        const link = document.createElement("a");
+        link.href = pair.source.source;
+        link.textContent = "Source";
+        credit.append(link);
+      }
+      article.append(credit);
+      host.append(article);
+    }
+    document.getElementById("save").onclick = () => {
+      if (answers.size !== 20) {
+        alert(`Choose an answer for the remaining ${20 - answers.size} pairs.`);
+        return;
+      }
+      const rows = pairs.map((p) => ({
+        number: p.number,
+        id: p.id,
+        choice: answers.get(p.number),
+      }));
+      const url = URL.createObjectURL(
+        new Blob([JSON.stringify({ reviewedUTC: new Date().toISOString(), rows }, null, 2)], {
+          type: "application/json",
+        }),
+      );
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "photo-3d-hard-edge-votes.json";
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+  </script>
+</html>
