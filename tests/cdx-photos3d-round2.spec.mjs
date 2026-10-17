@@ -81,6 +81,7 @@ test("lens selection rejects outliers and incomplete EXIF independent of input o
     ...f,
     exif: { fmm: i < 8 ? 55 : 24, model: "camera" },
   }));
+  expect(groupLenses(physical, { focal35: 85 }).filter((r) => r.accepted)).toHaveLength(8);
   expect(groupLenses(physical, { assumeSingleLens: true }).filter((r) => r.accepted)).toHaveLength(
     8,
   );

@@ -30,7 +30,9 @@ mm-equivalent focal lengths calibrate each accepted photo independently. The sup
 contains one camera and a focal range of at most 10%; every incompatible or missing focal receives a
 rejection reason. `focal35` supplies a known manual calibration when EXIF is absent. A completely
 uncalibrated set needs the explicit `assumeSingleLens: true` option; its shared focal is searched,
-and distortion is not estimated. That assumption is returned in the lens diagnostics.
+and distortion is not estimated. Physical EXIF focal lengths identify compatible lens groups even
+when sensor dimensions are unknown. Manual calibration does not suppress contradictory physical lens
+metadata. The assumptions and rejections are returned in the lens diagnostics.
 
 Matching proposes every pair, up to 1,770, with identical geometric thresholds regardless of picker
 order. Names are canonicalized before feature extraction and seeded numeric work. SIFT uses its
@@ -43,7 +45,9 @@ For independent appearance evaluation, pass `heldOut: [name]` to `seedPhotos`. G
 photos' grayscale, as the task's solved-camera protocol permits. Sparse colors are then rebuilt from
 at least two training observations. Held-out RGB, masks, and cameras are absent from surface
 seeding, hull filtering, GPU target upload, loss, and environment fitting. Every fold starts a new
-trainer. `signal` cancels seeding; after it returns, the caller owns cancellation through
+trainer. The photo split disables the Session's additional automatic holdout and video-specific blur
+exclusions; every remaining registered photo trains, and disabled blur exclusions are reported.
+`signal` cancels seeding; after it returns, the caller owns cancellation through
 `session.dispose()`. Dispose the session after exporting or evaluating it.
 
 The module has no upload path, persistent storage, production UI, or acceptance claim. See the task

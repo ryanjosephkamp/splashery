@@ -19,6 +19,7 @@ export function groupLenses(frames, { assumeSingleLens = false, focal35 = null }
     name: frame.name,
     f35: frame.exif?.f35 ?? focal35,
     fmm: frame.exif?.fmm ?? null,
+    manual: frame.exif?.f35 == null && focal35 != null,
     camera: [frame.exif?.make, frame.exif?.model].filter(Boolean).join(" "),
   }));
   const usable = (v) => Number.isFinite(v) && v > 0;
@@ -28,7 +29,16 @@ export function groupLenses(frames, { assumeSingleLens = false, focal35 = null }
   // Densest 10% focal interval, then lowest focal, independent of caller order.
   const sorted = [...measured].sort((a, b) => a[key] - b[key] || a.name.localeCompare(b.name));
   const groups = sorted.map((r) =>
-    sorted.filter((q) => q.camera === r.camera && q[key] >= r[key] && q[key] <= r[key] * 1.1),
+    sorted.filter((q) => {
+      // A manual equivalent focal must not erase contradictory physical-lens metadata.
+      const physicalCompatible =
+        !(q.manual || r.manual) ||
+        (q.fmm == null && r.fmm == null) ||
+        (usable(q.fmm) && usable(r.fmm) && Math.max(q.fmm, r.fmm) / Math.min(q.fmm, r.fmm) <= 1.1);
+      return (
+        physicalCompatible && q.camera === r.camera && q[key] >= r[key] && q[key] <= r[key] * 1.1
+      );
+    }),
   );
   groups.sort(
     (a, b) => b.length - a.length || a[0][key] - b[0][key] || a[0].name.localeCompare(b[0].name),
