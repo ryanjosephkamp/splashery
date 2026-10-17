@@ -37,9 +37,10 @@ concurrency:
   # Each stress receipt names an immutable subject; independent measurements
   # must not replace one another while a different cohort is waiting.
   group:
-    tests-${{ github.event.pull_request.number || github.ref }}-${{ inputs.stress_revision &&
-    github.run_id || 'suite' }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    tests-${{ github.event.pull_request.number || github.ref }}-${{ (inputs.stress_revision ||
+    github.event.label.name == 'stress-tests') && github.run_id || 'suite' }}
+  cancel-in-progress:
+    ${{ github.event_name == 'pull_request' && github.event.label.name != 'stress-tests' }}
 
 env:
   SHARDS: 16
@@ -82,8 +83,9 @@ jobs:
     # (`claude/operator-merge-*`), and on any PR labeled `full-suite` (the owner's call of
     # October 15, 2026). Other PRs get the Checks job only, so the runners don't queue up.
     if: >-
-      !inputs.stress_revision && (github.event_name != 'pull_request' || startsWith(github.head_ref,
-      'claude/operator-merge-') || contains(github.event.pull_request.labels.*.name, 'full-suite'))
+      !inputs.stress_revision && github.event.label.name != 'stress-tests' && (github.event_name !=
+      'pull_request' || startsWith(github.head_ref, 'claude/operator-merge-') ||
+      contains(github.event.pull_request.labels.*.name, 'full-suite'))
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     strategy:
@@ -233,7 +235,11 @@ jobs:
         run: exit 1
 
   stress:
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.stress_revision != '' }}
+    # Add stress-tests to measure all ten families on the immutable PR head.
+    if: >-
+      (github.event_name == 'workflow_dispatch' && inputs.stress_revision != '') ||
+      (github.event_name == 'pull_request' && github.event.action == 'labeled' &&
+      github.event.label.name == 'stress-tests')
     permissions:
       contents: read
       pull-requests: write
@@ -243,7 +249,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        case: ${{ fromJSON(inputs.stress_cases) }}
+        case:
+          ${{ fromJSON(inputs.stress_cases ||
+          '["cdx-mir","fl","hh1-toys","shr","hh5-gems","fx4-engine","img-engine","sndc-engine","live2","phy"]')
+          }}
     env:
       DISPLAY: ":99"
       SPLASHERY_GL:
@@ -256,7 +265,7 @@ jobs:
           persist-credentials: false
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: ${{ inputs.stress_revision }}
+          ref: ${{ inputs.stress_revision || github.event.pull_request.head.sha }}
           path: subject
           fetch-depth: 0
           persist-credentials: false
@@ -279,7 +288,7 @@ jobs:
         id: stress
         env:
           CASE: ${{ matrix.case }}
-          REPEAT: ${{ inputs.stress_repeat }}
+          REPEAT: ${{ inputs.stress_repeat || 30 }}
         run:
           node runner/tools/flaky-tests.mjs --root="$PWD/subject" --only="$CASE" --repeat="$REPEAT"
           --workers=4 --burners=2 --out="$RUNNER_TEMP/stress"
@@ -287,13 +296,13 @@ jobs:
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
-          FLAKY_PHASE: ${{ inputs.stress_phase }}
-          FLAKY_PR: ${{ inputs.stress_pr }}
+          FLAKY_PHASE: ${{ inputs.stress_phase || 'after' }}
+          FLAKY_PR: ${{ inputs.stress_pr || github.event.pull_request.number }}
         run: node runner/tools/flaky-tests-report.mjs "$RUNNER_TEMP/stress" --comment
       - name: Raw evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: stress-${{ matrix.case }}-${{ inputs.stress_phase }}
+          name: stress-${{ matrix.case }}-${{ inputs.stress_phase || 'after' }}
           path: ${{ runner.temp }}/stress
           retention-days: 7

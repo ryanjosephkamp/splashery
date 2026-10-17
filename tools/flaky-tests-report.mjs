@@ -15,7 +15,8 @@ function walk(suite, titles = []) {
       for (const result of test.results)
         cases.push({
           title: [...titles, spec.title].join(" › "),
-          repeat: test.repeatEachIndex,
+          id: spec.id,
+          project: test.projectName,
           ...result,
         });
   for (const child of suite.suites || []) walk(child, [...titles, child.title]);
@@ -55,7 +56,7 @@ if (failed.length) {
       test.status
     ).replace(/\x1b\[[0-9;]*m/g, "");
     lines.push(
-      `**${test.title}, repetition ${test.repeat} (${test.status})**`,
+      `**${test.title}, case ${test.id} (${test.project}, ${test.startTime}, ${test.status})**`,
       "",
       "```text",
       error.slice(0, 2500),
