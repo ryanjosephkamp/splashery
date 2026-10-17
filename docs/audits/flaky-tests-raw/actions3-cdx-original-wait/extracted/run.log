@@ -1,0 +1,347 @@
+
+Running 60 tests using 4 workers
+
+Generated still: /tmp/splashery-cdx-mir-VZvO6e/still.y4m
+Generated still: /tmp/splashery-cdx-mir-7OpQKA/still.y4m
+Generated still: /tmp/splashery-cdx-mir-pDpKlh/still.y4m
+Generated still: /tmp/splashery-cdx-mir-9jP0v9/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-7OpQKA/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-VZvO6e/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-pDpKlh/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-9jP0v9/low-light.y4m
+cdx mirror still: {"heightJitter":0.000013598625187401298,"colorJitter":0.7625375375375375,"shownJitter":0.9308201058201058,"shownJitterTurned":0.8391203703703703,"grain":0,"sharpness":0.8287840525454564,"drawMs":219.29500000000115,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   1 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.1m)
+cdx mirror still: {"heightJitter":0.000007054925820714719,"colorJitter":0.7611861861861862,"shownJitter":0.8426917989417989,"shownJitterTurned":0.8017195767195767,"grain":0,"sharpness":0.8287574100977172,"drawMs":213.52000000000118,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   3 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.1m)
+Generated still: /tmp/splashery-cdx-mir-TOR9it/still.y4m
+cdx mirror low-light: {"heightJitter":0.007808376612510901,"colorJitter":1.5882132132132132,"shownJitter":1.6803902116402116,"shownJitterTurned":1.8341931216931218,"grain":0,"sharpness":0.4685844484782375,"drawMs":197.64500000000118,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Generated low-light: /tmp/splashery-cdx-mir-TOR9it/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-FNGFcF/still.y4m
+  ✓   4 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.2m)
+Generated low-light: /tmp/splashery-cdx-mir-FNGFcF/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-Sq6wDd/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-Sq6wDd/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.010273066197463253,"colorJitter":1.7072072072072073,"shownJitter":1.7119708994708995,"shownJitterTurned":1.5625992063492065,"grain":0,"sharpness":0.4561378675838182,"drawMs":205.325,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   2 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.5m)
+Generated still: /tmp/splashery-cdx-mir-cBP4Lo/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-cBP4Lo/low-light.y4m
+cdx mirror still: {"heightJitter":0.00000391296438268713,"colorJitter":0.6518768768768769,"shownJitter":0.7538690476190476,"shownJitterTurned":0.8580026455026455,"grain":0,"sharpness":0.8231208233672318,"drawMs":214.28499999999767,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   5 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.8m)
+cdx mirror still: {"heightJitter":0.0003133417488923212,"colorJitter":0.896021021021021,"shownJitter":0.9746031746031746,"shownJitterTurned":0.9260251322751323,"grain":0,"sharpness":0.8350039011679189,"drawMs":193.64500000000118,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✘   7 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.8m)
+Generated still: /tmp/splashery-cdx-mir-wnDl56/still.y4m
+cdx mirror low-light: {"heightJitter":0.00563815957405143,"colorJitter":1.8813813813813813,"shownJitter":1.759126984126984,"shownJitterTurned":1.6651455026455027,"grain":0,"sharpness":0.44429408265404235,"drawMs":209.47999999999882,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Generated low-light: /tmp/splashery-cdx-mir-wnDl56/low-light.y4m
+  ✓   6 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.0m)
+Generated still: /tmp/splashery-cdx-mir-N617KX/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-N617KX/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-Awtl3m/still.y4m
+cdx mirror low-light: {"heightJitter":0.0034409146009197642,"colorJitter":1.79496996996997,"shownJitter":1.7615079365079365,"shownJitterTurned":1.6508267195767197,"grain":0,"sharpness":0.45296538646257434,"drawMs":177.9899999999965,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓   8 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.7m)
+Generated low-light: /tmp/splashery-cdx-mir-Awtl3m/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-9hFVAh/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-9hFVAh/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.004060907917818776,"colorJitter":1.79496996996997,"shownJitter":1.7202050264550264,"shownJitterTurned":1.7509589947089947,"grain":0,"sharpness":0.45341310542804814,"drawMs":241.35,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+cdx mirror still: {"heightJitter":0.000017644538804217503,"colorJitter":0.7639639639639639,"shownJitter":0.8399140211640211,"shownJitterTurned":0.9025793650793651,"grain":0,"sharpness":0.8218799814603612,"drawMs":203.47999999999303,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  10 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.6m)
+  ✓   9 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.6m)
+Generated still: /tmp/splashery-cdx-mir-uTvVma/still.y4m
+Generated still: /tmp/splashery-cdx-mir-Ep725Y/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-Ep725Y/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-uTvVma/low-light.y4m
+cdx mirror still: {"heightJitter":0.0003150820220308798,"colorJitter":0.7497747747747747,"shownJitter":0.8398148148148148,"shownJitterTurned":0.8071428571428572,"grain":0,"sharpness":0.833953087929448,"drawMs":213.61500000000234,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  11 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.8m)
+Generated still: /tmp/splashery-cdx-mir-Xu28vR/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-Xu28vR/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.005721214296178775,"colorJitter":1.6572072072072073,"shownJitter":1.8039021164021165,"shownJitterTurned":1.5290343915343916,"grain":0,"sharpness":0.44705620389468237,"drawMs":240.975,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  12 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.2m)
+Generated still: /tmp/splashery-cdx-mir-2oZC1z/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-2oZC1z/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.008127036267002155,"colorJitter":1.3312312312312313,"shownJitter":1.8529761904761906,"shownJitterTurned":1.8674603174603175,"grain":0,"sharpness":0.4441234596737107,"drawMs":239.16500000000232,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  14 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.1m)
+cdx mirror still: {"heightJitter":0.0003115935548972171,"colorJitter":0.7845345345345346,"shownJitter":0.8450727513227513,"shownJitterTurned":0.8830687830687831,"grain":0,"sharpness":0.8292675118725022,"drawMs":186.4149999999907,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Generated still: /tmp/splashery-cdx-mir-Z4fBzG/still.y4m
+  ✓  13 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.3m)
+Generated low-light: /tmp/splashery-cdx-mir-Z4fBzG/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-kJ9IHK/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-kJ9IHK/low-light.y4m
+cdx mirror still: {"heightJitter":0.0003096611364870458,"colorJitter":0.8283783783783784,"shownJitter":0.9712632275132275,"shownJitterTurned":0.8350198412698413,"grain":0,"sharpness":0.8399387111591076,"drawMs":189.125,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✘  15 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.1m)
+Generated still: /tmp/splashery-cdx-mir-dil0UD/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-dil0UD/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.002851875589925561,"colorJitter":1.6528528528528528,"shownJitter":1.716931216931217,"shownJitterTurned":1.6779431216931218,"grain":0,"sharpness":0.4467664926762026,"drawMs":311.22000000000696,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  16 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.2m)
+Generated still: /tmp/splashery-cdx-mir-3ixnIw/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-3ixnIw/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.013697027806444346,"colorJitter":1.7769519519519519,"shownJitter":1.6661375661375661,"shownJitterTurned":1.7573412698412698,"grain":0,"sharpness":0.46061420064745723,"drawMs":247.225,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✘  18 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.7m)
+cdx mirror still: {"heightJitter":0.000006789897006374222,"colorJitter":0.6510510510510511,"shownJitter":0.8139880952380952,"shownJitterTurned":0.9540013227513228,"grain":0,"sharpness":0.8327712919511129,"drawMs":177.025,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  17 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.9m)
+Generated still: /tmp/splashery-cdx-mir-AN4kZK/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-AN4kZK/low-light.y4m
+cdx mirror still: {"heightJitter":0.000004068433164476274,"colorJitter":0.7082582582582583,"shownJitter":0.9060185185185186,"shownJitterTurned":0.8325066137566137,"grain":0,"sharpness":0.8309157033055075,"drawMs":162.09499999999534,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Generated still: /tmp/splashery-cdx-mir-jQCBhK/still.y4m
+  ✓  19 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.7m)
+Generated low-light: /tmp/splashery-cdx-mir-jQCBhK/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-4LM5ML/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-4LM5ML/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.0058183219170550235,"colorJitter":1.5792042042042043,"shownJitter":1.6341931216931216,"shownJitterTurned":1.6007936507936509,"grain":0,"sharpness":0.43937280299299797,"drawMs":249.2350000000093,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  20 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.9m)
+Generated still: /tmp/splashery-cdx-mir-CvUzKa/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-CvUzKa/low-light.y4m
+cdx mirror still: {"heightJitter":0.000007940268328597953,"colorJitter":0.7897147147147147,"shownJitter":0.8603835978835979,"shownJitterTurned":0.8976190476190476,"grain":0,"sharpness":0.831676531377314,"drawMs":240.6649999999907,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  21 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.9m)
+Generated still: /tmp/splashery-cdx-mir-GM0nv6/still.y4m
+cdx mirror low-light: {"heightJitter":0.003391876633841175,"colorJitter":1.862012012012012,"shownJitter":1.7873346560846561,"shownJitterTurned":1.7852513227513227,"grain":0,"sharpness":0.45010961485610756,"drawMs":232.56000000000932,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  22 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.9m)
+Generated low-light: /tmp/splashery-cdx-mir-GM0nv6/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-Op1XBP/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-Op1XBP/low-light.y4m
+cdx mirror still: {"heightJitter":0.000008399650320276483,"colorJitter":0.7786036036036036,"shownJitter":0.8588624338624339,"shownJitterTurned":0.875165343915344,"grain":0,"sharpness":0.8212480847736519,"drawMs":181.31999999999533,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  23 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.1m)
+Generated still: /tmp/splashery-cdx-mir-YRxzvp/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-YRxzvp/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.004217587235207493,"colorJitter":1.8832582582582582,"shownJitter":1.7241732804232803,"shownJitterTurned":1.713690476190476,"grain":0,"sharpness":0.4494167589270539,"drawMs":234.56499999999068,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  24 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.3m)
+Generated still: /tmp/splashery-cdx-mir-A12FYA/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-A12FYA/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.00562359282688179,"colorJitter":1.7753003003003003,"shownJitter":1.7498015873015873,"shownJitterTurned":1.6893518518518518,"grain":0,"sharpness":0.4629905267401482,"drawMs":231.63000000000466,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  26 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.6m)
+Generated still: /tmp/splashery-cdx-mir-VqlSvc/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-VqlSvc/low-light.y4m
+cdx mirror still: {"heightJitter":0.000004048030907372097,"colorJitter":0.7271021021021021,"shownJitter":0.8819113756613757,"shownJitterTurned":0.8901124338624339,"grain":0,"sharpness":0.8325949409577501,"drawMs":200.55,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  25 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.0m)
+Generated still: /tmp/splashery-cdx-mir-GLeOBe/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-GLeOBe/low-light.y4m
+cdx mirror still: {"heightJitter":0.0000025717524794844895,"colorJitter":0.66006006006006,"shownJitter":0.8723875661375662,"shownJitterTurned":0.8771825396825397,"grain":0,"sharpness":0.8213457467100577,"drawMs":176.21499999999068,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  27 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.1m)
+Generated still: /tmp/splashery-cdx-mir-ZIv9Zc/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-ZIv9Zc/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.00336504719882935,"colorJitter":1.552852852852853,"shownJitter":1.375595238095238,"shownJitterTurned":1.697255291005291,"grain":0,"sharpness":0.4343342801535861,"drawMs":262.06999999999533,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  28 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.9m)
+Generated still: /tmp/splashery-cdx-mir-bOdIvY/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-bOdIvY/low-light.y4m
+cdx mirror still: {"heightJitter":0.0003621808337131599,"colorJitter":0.8141141141141142,"shownJitter":0.8381283068783069,"shownJitterTurned":0.9058531746031746,"grain":0,"sharpness":0.8361674141578822,"drawMs":231.0100000000093,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+cdx mirror low-light: {"heightJitter":0.005539752054657485,"colorJitter":1.625900900900901,"shownJitter":1.6135912698412698,"shownJitterTurned":1.757638888888889,"grain":0,"sharpness":0.4408593249991703,"drawMs":271.09499999999537,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  29 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.8m)
+  ✓  30 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.6m)
+Generated still: /tmp/splashery-cdx-mir-4aIDAt/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-4aIDAt/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-kfnfft/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-kfnfft/low-light.y4m
+cdx mirror still: {"heightJitter":0.00001976439175573555,"colorJitter":0.815990990990991,"shownJitter":0.8842592592592593,"shownJitterTurned":0.8476190476190476,"grain":0,"sharpness":0.8308521307624599,"drawMs":226.89499999999535,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  31 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.0m)
+Generated still: /tmp/splashery-cdx-mir-36XoyQ/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-36XoyQ/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.00600145675267118,"colorJitter":1.70990990990991,"shownJitter":1.5854166666666667,"shownJitterTurned":1.7474867724867724,"grain":0,"sharpness":0.44203651602894717,"drawMs":247.45500000000465,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  32 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.4m)
+Generated still: /tmp/splashery-cdx-mir-f92Ook/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-f92Ook/low-light.y4m
+cdx mirror still: {"heightJitter":0.000002985816818099838,"colorJitter":0.7750750750750751,"shownJitter":0.8666997354497354,"shownJitterTurned":0.8699074074074075,"grain":0,"sharpness":0.8292754089549985,"drawMs":235.26999999999535,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  33 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.8m)
+Generated still: /tmp/splashery-cdx-mir-MZKtSN/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-MZKtSN/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.005676159684269412,"colorJitter":1.7515015015015014,"shownJitter":1.7646825396825396,"shownJitterTurned":1.5509920634920635,"grain":0,"sharpness":0.4496343578973084,"drawMs":218.04499999999535,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  34 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.5m)
+Generated still: /tmp/splashery-cdx-mir-inVg0n/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-inVg0n/low-light.y4m
+cdx mirror still: {"heightJitter":0.00015993389376514668,"colorJitter":0.7933183183183183,"shownJitter":0.8621362433862434,"shownJitterTurned":0.8408068783068783,"grain":0,"sharpness":0.8283210607318278,"drawMs":202.8350000000093,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  35 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.7m)
+Generated still: /tmp/splashery-cdx-mir-wQCGom/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-wQCGom/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.004958872650624127,"colorJitter":1.6531531531531531,"shownJitter":1.5756283068783068,"shownJitterTurned":1.771957671957672,"grain":0,"sharpness":0.4626064933762566,"drawMs":284.1350000000093,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  36 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.1m)
+Generated still: /tmp/splashery-cdx-mir-MZ5YxP/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-MZ5YxP/low-light.y4m
+cdx mirror still: {"heightJitter":0.00003053812217806374,"colorJitter":0.8463963963963964,"shownJitter":0.8858796296296296,"shownJitterTurned":0.9085648148148148,"grain":0,"sharpness":0.8342772299238111,"drawMs":219.45500000000465,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  37 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.9m)
+Generated still: /tmp/splashery-cdx-mir-Muipk6/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-Muipk6/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.004984588055611328,"colorJitter":1.7966966966966966,"shownJitter":1.8148478835978836,"shownJitterTurned":1.7001322751322752,"grain":0,"sharpness":0.44641668473709556,"drawMs":255.33999999999068,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  38 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.8m)
+cdx mirror still: {"heightJitter":0.000007084213398598336,"colorJitter":0.7008258258258259,"shownJitter":0.8808531746031746,"shownJitterTurned":0.9406746031746032,"grain":0,"sharpness":0.8331457772514728,"drawMs":194.49499999999534,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+Generated still: /tmp/splashery-cdx-mir-LUXtIE/still.y4m
+  ✓  39 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.7m)
+Generated low-light: /tmp/splashery-cdx-mir-LUXtIE/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-7GL9qv/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-7GL9qv/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.0075202084347807075,"colorJitter":1.5266516516516517,"shownJitter":1.6836309523809523,"shownJitterTurned":1.7523478835978836,"grain":0,"sharpness":0.4624395912050162,"drawMs":271.20999999998605,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  40 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.0m)
+Generated still: /tmp/splashery-cdx-mir-7tX5nw/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-7tX5nw/low-light.y4m
+cdx mirror still: {"heightJitter":0.000005130926231006245,"colorJitter":0.7539039039039039,"shownJitter":0.7940145502645503,"shownJitterTurned":0.8648148148148148,"grain":0,"sharpness":0.8283831156645766,"drawMs":190.7350000000093,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  41 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.9m)
+Generated still: /tmp/splashery-cdx-mir-cdXmDu/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-cdXmDu/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.0036901884569643852,"colorJitter":1.6106606606606606,"shownJitter":1.7067460317460317,"shownJitterTurned":1.7605820105820107,"grain":0,"sharpness":0.44133547339558177,"drawMs":262.6049999999814,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  42 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.1m)
+cdx mirror still: {"heightJitter":0.0000054639470469844235,"colorJitter":0.7600600600600601,"shownJitter":0.9004960317460318,"shownJitterTurned":0.8741732804232805,"grain":0,"sharpness":0.8264308894335439,"drawMs":225.63499999996276,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  43 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.0m)
+Generated still: /tmp/splashery-cdx-mir-sagRlm/still.y4m
+Generated still: /tmp/splashery-cdx-mir-FXA6Fd/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-sagRlm/low-light.y4m
+Generated low-light: /tmp/splashery-cdx-mir-FXA6Fd/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.003970055809865395,"colorJitter":1.6082582582582583,"shownJitter":1.6953042328042327,"shownJitterTurned":1.6143518518518518,"grain":0,"sharpness":0.4408463289803831,"drawMs":292.6649999999907,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  44 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.8m)
+Generated still: /tmp/splashery-cdx-mir-1m5eEp/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-1m5eEp/low-light.y4m
+cdx mirror still: {"heightJitter":0.000004274619592202676,"colorJitter":0.8753003003003003,"shownJitter":0.8040343915343915,"shownJitterTurned":0.8654100529100529,"grain":0,"sharpness":0.8307881213167395,"drawMs":233.58000000002795,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  45 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.8m)
+Generated still: /tmp/splashery-cdx-mir-InhYz0/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-InhYz0/low-light.y4m
+cdx mirror still: {"heightJitter":0.000029187448960435283,"colorJitter":0.7167417417417418,"shownJitter":0.8334656084656085,"shownJitterTurned":0.8105820105820106,"grain":0,"sharpness":0.8440605646290775,"drawMs":234.04500000001863,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  47 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.1m)
+Generated still: /tmp/splashery-cdx-mir-YzOs77/still.y4m
+cdx mirror low-light: {"heightJitter":0.005263913701380695,"colorJitter":1.7658408408408408,"shownJitter":1.8635251322751323,"shownJitterTurned":1.8000661375661375,"grain":0,"sharpness":0.43961250095097376,"drawMs":184.3899999999907,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  46 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.2m)
+Generated low-light: /tmp/splashery-cdx-mir-YzOs77/low-light.y4m
+Generated still: /tmp/splashery-cdx-mir-3Da1Bx/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-3Da1Bx/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.004567972009347097,"colorJitter":1.7234984984984985,"shownJitter":1.7158730158730158,"shownJitterTurned":1.8905753968253969,"grain":0,"sharpness":0.43740223654626165,"drawMs":239.575,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  48 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.9m)
+Generated still: /tmp/splashery-cdx-mir-RvyZI9/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-RvyZI9/low-light.y4m
+cdx mirror still: {"heightJitter":0.00017040313834005647,"colorJitter":0.7891141141141141,"shownJitter":0.9066798941798941,"shownJitterTurned":0.8842261904761904,"grain":0,"sharpness":0.8286627500460078,"drawMs":221.80500000002795,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  49 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.8m)
+Generated still: /tmp/splashery-cdx-mir-hhK5Uh/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-hhK5Uh/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.006365652085357421,"colorJitter":1.675,"shownJitter":1.6218915343915343,"shownJitterTurned":1.6860449735449736,"grain":0,"sharpness":0.44664668914834027,"drawMs":226.42999999998136,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  50 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.6m)
+Generated still: /tmp/splashery-cdx-mir-YGLcTC/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-YGLcTC/low-light.y4m
+cdx mirror still: {"heightJitter":0.000035125474017616866,"colorJitter":0.8164414414414415,"shownJitter":0.8062169312169312,"shownJitterTurned":0.8388558201058202,"grain":0,"sharpness":0.8364514542699959,"drawMs":264.0600000000093,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  51 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.4m)
+Generated still: /tmp/splashery-cdx-mir-6u6nfy/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-6u6nfy/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.007388911188185752,"colorJitter":1.8930930930930931,"shownJitter":1.7114748677248677,"shownJitterTurned":1.4789021164021163,"grain":0,"sharpness":0.4532039485853387,"drawMs":283.4,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  52 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (5.9m)
+Generated still: /tmp/splashery-cdx-mir-okBPCc/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-okBPCc/low-light.y4m
+cdx mirror still: {"heightJitter":0.00000695044149619502,"colorJitter":0.6709459459459459,"shownJitter":0.8277116402116402,"shownJitterTurned":0.9138888888888889,"grain":0,"sharpness":0.8239934045037325,"drawMs":213.92000000001863,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  53 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.0m)
+Generated still: /tmp/splashery-cdx-mir-kX4Xld/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-kX4Xld/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.009214988825758835,"colorJitter":1.8275525525525524,"shownJitter":1.8034391534391534,"shownJitterTurned":1.8948412698412698,"grain":0,"sharpness":0.4575160234418263,"drawMs":233.42000000001863,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  54 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.0m)
+Generated still: /tmp/splashery-cdx-mir-p2txw4/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-p2txw4/low-light.y4m
+cdx mirror still: {"heightJitter":0.0006261616953657017,"colorJitter":0.6037537537537537,"shownJitter":0.796031746031746,"shownJitterTurned":0.8173280423280423,"grain":0,"sharpness":0.8274202402734233,"drawMs":249.76999999997207,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✘  55 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.9m)
+Generated still: /tmp/splashery-cdx-mir-aKBTQI/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-aKBTQI/low-light.y4m
+cdx mirror low-light: {"heightJitter":0.004806156968278391,"colorJitter":1.8157657657657658,"shownJitter":1.6427248677248678,"shownJitterTurned":1.657175925925926,"grain":0,"sharpness":0.46190742683720376,"drawMs":252.31499999999068,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  56 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.0m)
+Generated still: /tmp/splashery-cdx-mir-V2Jmvb/still.y4m
+Generated low-light: /tmp/splashery-cdx-mir-V2Jmvb/low-light.y4m
+cdx mirror still: {"heightJitter":0.000034827467154812166,"colorJitter":0.7608858858858859,"shownJitter":0.8539021164021164,"shownJitterTurned":0.8269179894179894,"grain":0,"sharpness":0.8329048744341111,"drawMs":221.51999999997207,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  57 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (6.1m)
+cdx mirror low-light: {"heightJitter":0.005885512120853941,"colorJitter":1.7512762762762764,"shownJitter":1.8808531746031747,"shownJitterTurned":1.7229828042328041,"grain":0,"sharpness":0.4386173971250699,"drawMs":178.0850000000093,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  58 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (6.0m)
+cdx mirror still: {"heightJitter":0.0001662969404646942,"colorJitter":0.7266516516516517,"shownJitter":0.9177248677248677,"shownJitterTurned":0.8487433862433862,"grain":0,"sharpness":0.833968133644072,"drawMs":128.67999999998136,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  59 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline (5.4m)
+cdx mirror low-light: {"heightJitter":0.007316199811762786,"colorJitter":1.8497747747747748,"shownJitter":1.8301917989417988,"shownJitterTurned":2.0762896825396826,"grain":0,"sharpness":0.44244596928382246,"drawMs":85.17000000001863,"grid":"423x317","box":{"x":175.39530108666827,"y":326.0134375635583,"width":45.74429746444068,"height":56.319093603815986}}
+  ✓  60 [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline (4.8m)
+
+
+  1) [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.95[39m
+    Received:   [31m0.9746031746031746[39m
+
+      310 |         console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);
+      311 |         expect(m.heightJitter).toBeLessThan(height);
+    > 312 |         expect(m.shownJitter).toBeLessThan(shown);
+          |                               ^
+      313 |         // Record live timing, but guard cost with the identical-input
+      314 |         // relative benchmark below instead of a host-dependent ceiling.
+      315 |         expect(m.grid).toBe("423x317");
+        at /home/runner/work/splashery/splashery/subject/tests/cdx-mir.spec.mjs:312:31
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../_temp/stress/results/cdx-mir-real-depth-worker--94c1e-ft-stays-below-the-baseline-chromium-repeat3/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../_temp/stress/results/cdx-mir-real-depth-worker--94c1e-ft-stays-below-the-baseline-chromium-repeat3/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.95[39m
+    Received:   [31m0.9712632275132275[39m
+
+      310 |         console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);
+      311 |         expect(m.heightJitter).toBeLessThan(height);
+    > 312 |         expect(m.shownJitter).toBeLessThan(shown);
+          |                               ^
+      313 |         // Record live timing, but guard cost with the identical-input
+      314 |         // relative benchmark below instead of a host-dependent ceiling.
+      315 |         expect(m.grid).toBe("423x317");
+        at /home/runner/work/splashery/splashery/subject/tests/cdx-mir.spec.mjs:312:31
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../_temp/stress/results/cdx-mir-real-depth-worker--94c1e-ft-stays-below-the-baseline-chromium-repeat7/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../_temp/stress/results/cdx-mir-real-depth-worker--94c1e-ft-stays-below-the-baseline-chromium-repeat7/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.0135[39m
+    Received:   [31m0.013697027806444346[39m
+
+      309 |         const m = await measure(page, { answers: 6 });
+      310 |         console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);
+    > 311 |         expect(m.heightJitter).toBeLessThan(height);
+          |                                ^
+      312 |         expect(m.shownJitter).toBeLessThan(shown);
+      313 |         // Record live timing, but guard cost with the identical-input
+      314 |         // relative benchmark below instead of a host-dependent ceiling.
+        at /home/runner/work/splashery/splashery/subject/tests/cdx-mir.spec.mjs:311:32
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../_temp/stress/results/cdx-mir-real-depth-worker--3a6f8-ft-stays-below-the-baseline-chromium-repeat8/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../_temp/stress/results/cdx-mir-real-depth-worker--3a6f8-ft-stays-below-the-baseline-chromium-repeat8/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.00055[39m
+    Received:   [31m0.0006261616953657017[39m
+
+      309 |         const m = await measure(page, { answers: 6 });
+      310 |         console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);
+    > 311 |         expect(m.heightJitter).toBeLessThan(height);
+          |                                ^
+      312 |         expect(m.shownJitter).toBeLessThan(shown);
+      313 |         // Record live timing, but guard cost with the identical-input
+      314 |         // relative benchmark below instead of a host-dependent ceiling.
+        at /home/runner/work/splashery/splashery/subject/tests/cdx-mir.spec.mjs:311:32
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../_temp/stress/results/cdx-mir-real-depth-worker--94c1e-ft-stays-below-the-baseline-chromium-repeat27/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../_temp/stress/results/cdx-mir-real-depth-worker--94c1e-ft-stays-below-the-baseline-chromium-repeat27/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+    [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+    [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › low-light: measured drift stays below the baseline 
+    [chromium] › tests/cdx-mir.spec.mjs:294:5 › real depth worker with a fake camera › still: measured drift stays below the baseline 
+  56 passed (1.5h)

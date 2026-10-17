@@ -1,0 +1,16 @@
+{
+  "start": "2026-10-17T07:14:29.479974+00:00",
+  "head": "b87f6132c9764cf616fe2afa41c77d73799975ab",
+  "working_tree_diff": "diff --git a/tools/lv7-mirror-measure.mjs b/tools/lv7-mirror-measure.mjs\nindex 55dd11d2f..364e289b4 100644\n--- a/tools/lv7-mirror-measure.mjs\n+++ b/tools/lv7-mirror-measure.mjs\n@@ -170,8 +170,25 @@ async function faceBox(page) {\n }\n \n async function shot(page, clip) {\n-  await page.evaluate(() => window.__splashery.player.stage.captureFrame());\n-  return PNG.sync.read(await page.screenshot({ clip }));\n+  await page.evaluate(async () => {\n+    const { captureSortedFrame } = await import(\"/tests/helpers/native-sort.mjs\");\n+    const stage = window.__splashery.player.stage;\n+    if (window.__releaseMirrorShot) throw Error(\"Previous mirror screenshot hold was not released\");\n+    await captureSortedFrame(stage);\n+    // The screenshot can take several more native frames on a busy runner.\n+    // Keep this completed view until its PNG is copied; updates, video, and\n+    // the actual depth worker continue on their own clocks.\n+    window.__releaseMirrorShot = stage.holdRendering();\n+  });\n+  try {\n+    return PNG.sync.read(await page.screenshot({ clip }));\n+  } finally {\n+    if (!page.isClosed())\n+      await page.evaluate(() => {\n+        window.__releaseMirrorShot?.();\n+        window.__releaseMirrorShot = null;\n+      });\n+  }\n }\n \n const meanAbs = (a, b) => {\n",
+  "files": {
+    "tools/lv7-mirror-measure.mjs": "f2295ae9e7a8aa87daa206d3dbbea310b422df64e80c35a43869870979c9bb9f",
+    "tests/helpers/native-sort.mjs": "d4e4d92fb608bac6f7ef33fea051f94feda8a3f038c2a7a39083d0433ff7190e",
+    "tests/cdx-mir.spec.mjs": "27367671545f858e29727c373439aa02eb0b58e9d4a4dbb64e5546b32da87577",
+    "tests/lv7.spec.mjs": "b2e6f79069e4cd7801bf56c378e87daa032df0a63b05f69a3abc70b0ba64a2f1"
+  },
+  "workers": 2,
+  "burners": 0,
+  "renderer": "llvmpipe",
+  "retries": 0,
+  "purpose": "Changed mirror capture helper: twooriginalCDXclips and existingplain/hologrammeasurementchecks, validationonlynotstressacceptance."
+}
