@@ -1,8 +1,10 @@
 # Blender picture builds: public evidence
 
-Made by Ryan with Codex (GPT-6), October 17, 2026. Generated reconstruction geometry and splats are CC0. Tools and the measured audit live on `codex/build-from-pictures-blender`, in its draft PR. This branch holds public assets outside that PR.
+Made by Ryan with Codex (GPT-6), October 17, 2026. Generated reconstruction geometry and splats are CC0. Tools and the measured audit live on `codex/build-from-pictures-blender`, in [draft PR #725](https://github.com/ryanjosephkamp/splashery/pull/725). This branch holds public assets outside that PR.
 
 The three blind packs are lantern, alarm-clock, and rubber-duck-real. Their good median is 90.46% silhouette IoU and 77.76% volume IoU. The lantern individually misses both targets. Chess-set is auxiliary: setup exposed source dimensions before modeling. Modeling-kit-showcase is an original cabinet and chair, with references from the same script, and is not a reconstruction benchmark.
+
+The reconstructions remain coarse in some details: the clock omits dial hands and numerals, and chess knights use generic turned profiles. Silhouette and volume scores do not validate those details. The focused suite passed 15 tests with Blender, and 11 tests with four Blender-only skips without it. Quick preflight and the full 271-test preflight passed; the code PR's audit records the commands and earlier resolved failures.
 
 - `packs/`: public CC0 reference pictures, masks, known cameras, and motion requests. Only these inputs go to the builder.
 - `truth/`: separate scorer-only truth GLBs and source credit. Do not expose these to an agent doing a blind build.
