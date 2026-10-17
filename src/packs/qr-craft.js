@@ -794,11 +794,14 @@ const PICTURE = {
       default: 1,
     },
     { key: "picture", label: "Picture", type: "select", default: SAMPLES[0].id, choices: [...SAMPLES.map((s) => ({ id: s.id, label: s.label, group: s.group })), { id: "own", label: "Your own picture" }] }, // prettier-ignore
-    { key: "contrast", label: "Contrast", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 }, // prettier-ignore
+    // Lane PIC2 (the owner's walkthrough of October 17, 2026): the lowest contrast and the biggest
+    // code (the most detail) by default; the scan check still steps the margin up until it reads.
+    // A link or scene that carries its own contrast or size opens as it was.
+    { key: "contrast", label: "Contrast", type: "slider", min: 0, max: 1, step: 0.05, default: 0 }, // prettier-ignore
     { key: "center", label: "Center dot", type: "select", default: "small", choices: CENTERS.map((c) => ({ id: c.id, label: c.label })) }, // prettier-ignore
     { key: "level", label: "Error correction", type: "select", default: "H", choices: LEVELS.map((l) => ({ id: l, label: { L: "L: 7% can be lost", M: "M: 15%", Q: "Q: 25%", H: "H: 30%" }[l] })) }, // prettier-ignore
     { key: "style", label: "Picture style", type: "select", default: "color", choices: PIC_STYLES.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
-    { key: "size", label: "Code size", type: "select", default: "more", choices: SIZES_UP.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
+    { key: "size", label: "Code size", type: "select", default: "most", choices: SIZES_UP.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
   ],
   controls: [{ key: "turn", label: "Send a ripple", type: "pulse", ease: 3.6 }],
   action: {

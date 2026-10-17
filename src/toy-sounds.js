@@ -1937,15 +1937,16 @@ export const TOY_SOUNDS = {
       { voice: "wood", at: 0.5, f: 220, decay: 1.4 },
     ],
   },
-  // Sound B: real paper pages turning (no wind).
+  // Sound B: real paper pages turning (no wind). (The Storybook's turn plays Your book's hardcover
+  // page from its recipe; this is its Sound Board sample.) Lane PIC2: softer, as that page is.
   book: {
     on: [
-      { voice: "sample", file: "book-page.mp3", vol: 1.5, fallback: { voice: "pageflip", f: 1800 } }, // prettier-ignore
-      { voice: "sample", file: "book-page.mp3", at: 0.3, pitch: 1.1, vol: 0.9, fallback: { voice: "pageflip", f: 2000, decay: 0.9, vol: 0.6 } }, // prettier-ignore
+      { voice: "sample", file: "book-page.mp3", pitch: 0.94, vol: 0.7, fallback: { voice: "pageflip", f: 1700, vol: 0.5 } }, // prettier-ignore
+      { voice: "sample", file: "book-page.mp3", at: 0.3, pitch: 1.02, vol: 0.4, fallback: { voice: "pageflip", f: 1900, decay: 0.9, vol: 0.3 } }, // prettier-ignore
     ],
     off: [
-      { voice: "sample", file: "book-page.mp3", pitch: 0.9, vol: 1.5, fallback: { voice: "pageflip", f: 1600, decay: 1.1 } }, // prettier-ignore
-      { voice: "sample", file: "book-page.mp3", at: 0.35, pitch: 0.85, vol: 0.8, fallback: { voice: "pageflip", f: 1500, decay: 0.9, vol: 0.5 } }, // prettier-ignore
+      { voice: "sample", file: "book-page.mp3", pitch: 0.85, vol: 0.7, fallback: { voice: "pageflip", f: 1500, decay: 1.1, vol: 0.5 } }, // prettier-ignore
+      { voice: "sample", file: "book-page.mp3", at: 0.35, pitch: 0.8, vol: 0.38, fallback: { voice: "pageflip", f: 1400, decay: 0.9, vol: 0.25 } }, // prettier-ignore
     ],
   },
   // Sound B (the laptop is locked: only these): opening keeps only the
@@ -2698,25 +2699,31 @@ export const TOY_SOUNDS = {
   // ---- Pictures and pages (lane Pictures) -------------------------------------------
   // A page turning: a soft paper swish, then a light tap as it lands.
   // Sound B: a real paper page turning.
-  "picture-lab": { voice: "sample", file: "book-page.mp3", vol: 1.3, fallback: { voice: "pageflip", f: 1700, decay: 0.9, vol: 0.8 } }, // prettier-ignore
+  // Lane PIC2 (the owner's walkthrough of October 17, 2026): a page change in the lab is silent
+  // (its tap is quiet in the recipe), so this plays only on the Sound Board, as the soft tap of a
+  // card set down; a figure rising or laying back keeps its own cues.
+  "picture-lab": { voice: "thud", f: 210, decay: 0.18, vol: 0.12 },
 
   // ---- Pictures and pages (lane Books) ----------------------------------------------
   // Sound C (his note of October 2: a page sound per book type): each style plays its own real page
   // from the recipe (src/packs/pictures.js): glossy for the magazine, light for the paperback,
   // fuller for the hardcover (this one).
+  // Lane PIC2: softer (half as loud, a little lower, a lighter landing), as the recipe's.
   "your-book": [
     {
       voice: "sample",
       file: "your-book-hardcover.mp3",
-      vol: 1.1,
-      fallback: { voice: "pageflip", f: 1900, decay: 1.4, vol: 0.7 },
+      vol: 0.55,
+      pitch: 0.94,
+      fallback: { voice: "pageflip", f: 1700, decay: 1.4, vol: 0.35 },
     },
-    { voice: "thud", at: 0.82, f: 150, decay: 0.35, vol: 0.3 },
+    { voice: "thud", at: 0.86, f: 140, decay: 0.3, vol: 0.14 },
   ],
-  // A thick card page: a lower swish and a firmer thud.
+  // A thick card page: a lower swish and a firmer thud. Lane PIC2: softer, and it plays only when a
+  // page turns (a cue from the recipe), never on a tap that raises a photo.
   "photo-album": [
-    { voice: "sample", file: "book-page.mp3", pitch: 0.8, vol: 1.2, fallback: { voice: "pageflip", f: 1200, decay: 1.6, vol: 0.7 } }, // prettier-ignore
-    { voice: "thud", at: 0.88, f: 115, decay: 0.45, vol: 0.45 },
+    { voice: "sample", file: "book-page.mp3", pitch: 0.76, vol: 0.6, fallback: { voice: "pageflip", f: 1150, decay: 1.6, vol: 0.35 } }, // prettier-ignore
+    { voice: "thud", at: 0.9, f: 110, decay: 0.4, vol: 0.2 },
   ],
   // The frame knocks the wall, the wire creaks on the nail, and a softer knock.
   "picture-frame": [
@@ -2864,13 +2871,12 @@ export const TOY_SOUNDS = {
     { voice: "breath", f: 900, to: 1.1, decay: 1.1, vol: 0.04 },
     { voice: "wood", at: 2.6, f: 660, decay: 0.15, vol: 0.12 },
   ],
-  // Lane QR craft: soft and wooden, not electronic. Tiles turning over: a
-  // run of light wooden clicks under a soft breath.
+  // Lane PIC2 (the owner's walkthrough of October 17, 2026: no more wind and clicks): the ripple
+  // starts as a drop where the code is tapped, and soft marimba notes, rising and fading, follow
+  // the wave out across the tiles.
   "qr-picture": [
-    { voice: "breath", f: 760, to: 0.9, decay: 0.9, vol: 0.03 },
-    { voice: "wood", at: 0.5, f: 940, decay: 0.08, vol: 0.2 },
-    { voice: "wood", at: 1.4, f: 880, decay: 0.08, vol: 0.18 },
-    { voice: "wood", at: 2.3, f: 980, decay: 0.08, vol: 0.16 },
+    { voice: "drip", f: 950, n: 1, vol: 0.45 },
+    { voice: "marimba", at: 0.18, notes: "G4 C5 D5 E5 G5", step: 0.32, decay: 0.7, vol: 0.22 },
   ],
   // A run of wooden clacks for the toppling dominoes, settling to a rest.
   "qr-build": [

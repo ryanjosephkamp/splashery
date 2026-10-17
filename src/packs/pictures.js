@@ -54,17 +54,20 @@ const TOP = -0.014; // the top of a page block, under the pages
 // real page turning for each style, with a soft landing for the heavier
 // ones. Glossy and slick for the magazine, light and papery for the paperback
 // (and the stapled paper and spiral notebook), fuller for the hardcover.
-const PAGE = (file, o = {}) => ({ voice: "sample", file, vol: 1.1, ...o, fallback: { voice: "pageflip", f: 1900, decay: 1.4, vol: 0.7 } }); // prettier-ignore
+// Lane PIC2 (the owner's walkthrough of October 17, 2026): softer and less
+// in the way, not gone: half as loud, a little lower (so a little duller),
+// and the hardcover's landing lighter.
+const PAGE = (file, o = {}) => ({ voice: "sample", file, vol: 0.55, pitch: 0.94, ...o, fallback: { voice: "pageflip", f: 1700, decay: 1.4, vol: 0.35 } }); // prettier-ignore
 const PAGE_SOUNDS = {
-  hardcover: [PAGE("your-book-hardcover.mp3"), { voice: "thud", at: 0.82, f: 150, decay: 0.35, vol: 0.3 }], // prettier-ignore
+  hardcover: [PAGE("your-book-hardcover.mp3"), { voice: "thud", at: 0.86, f: 140, decay: 0.3, vol: 0.14 }], // prettier-ignore
   paperback: PAGE("your-book-paperback.mp3"),
-  magazine: PAGE("your-book-magazine.mp3"),
-  spiral: PAGE("your-book-paperback.mp3", { pitch: 0.92 }),
-  stapled: PAGE("your-book-paperback.mp3", { pitch: 1.08, vol: 0.9 }),
+  magazine: PAGE("your-book-magazine.mp3", { vol: 0.5 }),
+  spiral: PAGE("your-book-paperback.mp3", { pitch: 0.87 }),
+  stapled: PAGE("your-book-paperback.mp3", { pitch: 1.0, vol: 0.45 }),
 };
 
 // Lane Pages r6: a page pulled over and let fall back settles softly.
-const PAGE_SETTLE = { voice: "thud", f: 160, decay: 0.2, vol: 0.12 };
+const PAGE_SETTLE = { voice: "thud", f: 160, decay: 0.2, vol: 0.08 };
 const BOOK_STYLES = {
   hardcover: { bound: "side", cover: "board", T: 0.045, cb: 0.024, ov: 0.03, g: 0, curl: 1.25, coverCurl: 0 }, // prettier-ignore
   paperback: { bound: "side", cover: "card", T: 0.036, cb: 0.005, ov: 0, g: 0, curl: 1.25, coverCurl: 1.0 }, // prettier-ignore
@@ -1929,10 +1932,12 @@ const BOOK_RECIPE = {
       if (tp.n <= BOOK.tapN) continue;
       BOOK.tapN = tp.n;
       if (bk5Pick(tp.pick, pics, N)) continue; // lane Books r5
-      if (N && BOOK.queue.length < 3) BOOK.queue.push(tp.pick === 1 ? -1 : 1);
-      // Sound C: the page's own sound for this style (the album has its own tap sound).
-      const page = PAGE_SOUNDS[Object.keys(BOOK_STYLES).find((id) => BOOK_STYLES[id] === st)];
-      if (page) out.cues.push(page);
+      if (!N || BOOK.queue.length >= 3) continue;
+      BOOK.queue.push(tp.pick === 1 ? -1 : 1);
+      // Sound C: the page's own sound for this style (the album's is its tap
+      // sound). Lane PIC2: only a tap that turns a page plays it; a tap that
+      // raises or lays back a figure, or follows a link, has its own sound.
+      if (BOOK.pageSound) out.cues.push(BOOK.pageSound);
     }
     BOOK.N = N;
     if (BOOK.resume && pics && N) {
@@ -2638,7 +2643,8 @@ const ALBUM_RECIPE = {
     POP_CONTROL, // lane Books r5: a photo rises (lane Pages r6: the top bar's switch)
     LAYERS_CONTROL,
   ],
-  action: { key: "turn", label: "Turn the page", at: bookTapAt },
+  // Lane PIC2: the page sound is a cue from drive, for a turn only (as in Your book).
+  action: { key: "turn", label: "Turn the page", at: bookTapAt, quiet: ["turn"] },
   focus: bookFocus,
   // Heavier pages: they follow the finger with more lag and fall back more
   // readily.
@@ -3079,44 +3085,6 @@ function labFit(pics) {
   const a = pics?.aspect?.(pics.page) || 1;
   return a > 1 ? [1, 1 / a] : [a, 1];
 }
-// Lane Polish: a page change slides the page (and its card) off to one side
-// (LAB_SLIDE_OUT), and the next page in from the other once it is built
-// (LAB_SLIDE_IN), about a quarter of a second in all; a page changed from
-// the Toy tab slides in the same way. The pose of part "labpage".
-const LAB_SLIDE_OUT = 0.11;
-const LAB_SLIDE_IN = 0.15;
-const LAB_SLIDE_D = 2.6; // how far, in recipe units (off a phone's screen)
-function labSlide(pics, time) {
-  const page = pics?.page ?? 0;
-  if (!LAB.slide && LAB.shown >= 0 && page !== LAB.shown && pics?.kind === "pdf")
-    LAB.slide = { d: page > LAB.shown ? 1 : -1, to: page, phase: "wait", t0: time, n: 0 };
-  const S = LAB.slide;
-  if (!S || !pics) {
-    LAB.shown = page;
-    return { offset: [0, 0, 0], visible: 1 };
-  }
-  S.n++;
-  if (S.phase === "out") {
-    const w = clamp01((time - S.t0) / LAB_SLIDE_OUT);
-    if (w >= 1) {
-      if (pics.page !== S.to) pics.go(S.to);
-      Object.assign(S, { phase: "wait", t0: time, n: 0 });
-    }
-    return { offset: [-S.d * LAB_SLIDE_D * w * w, 0, 0], visible: 1 };
-  }
-  if (S.phase === "wait") {
-    // (A frame or two first, so the sheet has been asked for the new page.)
-    if ((S.n > 2 && pics.ready("page")) || time - S.t0 > 3)
-      Object.assign(S, { phase: "in", t0: time }); // prettier-ignore
-    else return { offset: [S.d * LAB_SLIDE_D, 0, 0], visible: 0 };
-  }
-  const w = clamp01((time - S.t0) / LAB_SLIDE_IN);
-  if (w >= 1) {
-    LAB.slide = null;
-    LAB.shown = pics.page;
-  }
-  return { offset: [S.d * LAB_SLIDE_D * (1 - w) * (1 - w), 0, 0], visible: 1 };
-}
 // The lab's page drawn before it becomes splats: the places figures left.
 function labDecorate(canvas, { variant }) {
   if (!variant?.startsWith("hole:")) return;
@@ -3162,11 +3130,12 @@ export const RECIPES = {
       LAYERS_CONTROL,
     ],
     // A tap on the left of the page goes back, on the right (or the middle)
-    // forward; the pages slide, they don't flip. (Lane Pages r6: a tap on a
-    // figure raises it, on a risen one lays it back.)
-    action: { key: "next", label: "Next page, or play and pause", at: (p) => labTapAt(p) }, // prettier-ignore
+    // forward; the page changes in place. (Lane Pages r6: a tap on a figure
+    // raises it, on a risen one lays it back.) Lane PIC2: a page change is
+    // silent (quiet); a figure rising or laying back keeps its own cues.
+    action: { key: "next", label: "Next page, or play and pause", at: (p) => labTapAt(p), quiet: ["next"] }, // prettier-ignore
     focus: (p) => focusToggle(LAB, p),
-    alive: () => PG.busy || !!BK5.drawing || LAB.pend !== 0 || !!LAB.slide, // lane Pages r6 (lane Polish: a slide)
+    alive: () => PG.busy || !!BK5.drawing || LAB.pend !== 0, // lane Pages r6
     drag: bk5Drag({ plane: "view", at: () => false, start() {}, move() {}, end() {} }), // lane Pages r6: Draw a box
     // What the toy opens before you open something of your own, and what
     // it accepts.
@@ -3212,12 +3181,12 @@ export const RECIPES = {
         else if (pics?.count > 1) LAB.pend = d;
       }
       if (LAB.pend && PG.pops.length) pgLayAll(time);
-      else if (LAB.pend && !LAB.slide) {
-        // Lane Polish: the page slides off, and the next one in (labSlide).
-        if (pics?.count > 1) LAB.slide = { d: LAB.pend, to: (pics.page + LAB.pend + pics.count) % pics.count, phase: "out", t0: time, n: 0 }; // prettier-ignore
+      else if (LAB.pend) {
+        // Lane PIC2: the page changes in place (no slide or turn): the
+        // sheet shows the next page once it is built.
+        if (pics?.count > 1) pics.go((pics.page + LAB.pend + pics.count) % pics.count);
         LAB.pend = 0;
       }
-      out.parts.labpage = labSlide(pics, time);
       out.sheets = { page: { page: pics?.page ?? 0 } };
       // Page focus: a double-tap fills the screen with the page. (Lane
       // Polish: on a phone held upright the lab opens that way, the page
@@ -3235,10 +3204,7 @@ export const RECIPES = {
       LAB.upright = bkPortrait();
       LAB.focus = LAB.upright;
       LAB.pend = 0;
-      LAB.slide = null;
-      LAB.shown = -1;
-      // (Lane Polish: the page and its card are one part, so a page change
-      // slides them.)
+      // (Lane Polish: the page and its card are one part.)
       const lp = k.part("labpage", { pivot: [0, 0, 0], axis: [0, 1, 0] });
       k.sheet({ id: "page", center: [0, 0, 0], width: 2, height: 2, normal: [0, 0, 1], part: lp }); // prettier-ignore
       // A thin gray card behind it, so a white page has an edge on a white
