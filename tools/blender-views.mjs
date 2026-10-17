@@ -7,6 +7,7 @@ import { createHash } from "node:crypto";
 import { execFileSync, spawnSync } from "node:child_process";
 import { parseArgs } from "node:util";
 import { NodeIO } from "@gltf-transform/core";
+import { ALL_EXTENSIONS } from "@gltf-transform/extensions";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const lockFile = path.join(root, "tools/blender/models-lock.json");
@@ -89,6 +90,16 @@ export async function pinModel(id, cache) {
   await prepareModel(id, cache);
 }
 
+export async function embedModel(json, resources) {
+  const supported = new Set(ALL_EXTENSIONS.map((extension) => extension.EXTENSION_NAME));
+  for (const name of json.extensionsUsed || []) {
+    if (!supported.has(name)) throw new Error(`Unsupported glTF extension: ${name}`);
+  }
+  const io = new NodeIO().registerExtensions(ALL_EXTENSIONS);
+  const doc = await io.readJSON({ json, resources });
+  return io.writeBinary(doc);
+}
+
 export async function prepareModel(id, cache) {
   const entry = selectModel(id);
   const lock = readJSON(lockFile)[id];
@@ -121,9 +132,7 @@ export async function prepareModel(id, cache) {
       if (!resources[name]) throw new Error(`Unpinned dependency: ${name}`);
     }
   }
-  const io = new NodeIO();
-  const doc = await io.readJSON({ json, resources });
-  const bytes = await io.writeBinary(doc);
+  const bytes = await embedModel(json, resources);
   const model = path.join(dir, "model.glb");
   const record = path.join(dir, "asset.json");
   fs.writeFileSync(model, bytes);

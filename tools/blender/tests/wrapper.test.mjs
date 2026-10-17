@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { localName, selectModel, prepareModel } from "../../blender-views.mjs";
+import { localName, selectModel, prepareModel, embedModel } from "../../blender-views.mjs";
 
 test("only recorded CC0 Poly Haven assets without logos are selected", () => {
   assert.equal(selectModel("rubber-duck-real").source, "polyhaven:rubber_duck_toy");
@@ -37,4 +37,26 @@ test("a corrupt cached model fails before importing or fetching dependencies", a
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test("packing preserves Poly Haven specular and refraction-index extensions", async () => {
+  const extensions = {
+    KHR_materials_ior: { ior: 1.4 },
+    KHR_materials_specular: { specularFactor: 0.3, specularColorFactor: [0.1, 0.2, 0.3] },
+  };
+  const json = {
+    asset: { version: "2.0" },
+    extensionsUsed: Object.keys(extensions),
+    materials: [{ extensions }],
+  };
+  const bytes = Buffer.from(await embedModel(json, {}));
+  const packed = JSON.parse(bytes.subarray(20, 20 + bytes.readUInt32LE(12)).toString());
+  assert.deepEqual(packed.materials[0].extensions, extensions);
+});
+
+test("unsupported extensions fail instead of silently changing materials", async () => {
+  await assert.rejects(
+    embedModel({ asset: { version: "2.0" }, extensionsUsed: ["UNKNOWN_material"] }, {}),
+    /Unsupported glTF extension/,
+  );
 });
