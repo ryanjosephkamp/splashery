@@ -1784,6 +1784,7 @@ export class Player {
     // and token arrays, so a pose, camera, or look change invalidates it.
     // Picture media lives on separate sheets, which Stage still updates fully.
     const reuse =
+      this.stage.workBufferReuse !== false &&
       info.recipe?.workBufferReuse !== false &&
       !animating &&
       !this.stroke &&

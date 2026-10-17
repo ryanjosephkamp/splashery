@@ -33,6 +33,7 @@ http
   .createServer((req, res) => {
     try {
       let name = decodeURIComponent(new URL(req.url, "http://127.0.0.1").pathname);
+      if (name.split("/").some((part) => part.startsWith("."))) throw new Error("missing");
       if (name.endsWith("/")) name += "index.html";
       const file = path.resolve(root, `.${name}`);
       if (!file.startsWith(`${root}${path.sep}`) || !fs.statSync(file).isFile())

@@ -66,6 +66,8 @@ export class Stage {
   // moving, and comes back for the first still frame.
   constructor(canvas, device, { weak = false, pixelRatio = 2, adaptive = true } = {}) {
     this.canvas = canvas;
+    // A stale-frame report can disable reuse for the entire viewer with ?reuse=0.
+    this.workBufferReuse = new URLSearchParams(location.search).get("reuse") !== "0";
     this.parameterCache = new ParameterCache();
     this.device = device;
     // Fix11: on WebGPU the engine sends its command encoder before it uploads a texture's data,
@@ -590,7 +592,12 @@ export class Stage {
     // SH-bearing imports previously refreshed view-dependent color on every
     // frame. AUTO uses the engine's coarser colorUpdateAngle threshold.
     const sphericalHarmonics = this.toy.resource.gsplatData?.shBands > 0;
-    if (reuse && !this.toy.customModifier && !sphericalHarmonics) {
+    if (
+      this.workBufferReuse !== false &&
+      reuse &&
+      !this.toy.customModifier &&
+      !sphericalHarmonics
+    ) {
       g.workBufferUpdate = pc.WORKBUFFER_UPDATE_AUTO;
       this.parameterCache.assign(g, u, { ignoreCamera: !this.toy.kit });
     } else {

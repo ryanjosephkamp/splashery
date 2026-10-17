@@ -1,6 +1,177 @@
 import { test, expect } from "@playwright/test";
 import { makePly } from "./fixtures.mjs";
 
+test("the LAN verification server refuses dot-paths and still serves byte ranges", async () => {
+  const { mkdtemp, mkdir, writeFile, rm } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const { join } = await import("node:path");
+  const { spawn } = await import("node:child_process");
+  const root = await mkdtemp(join(tmpdir(), "splashery-speed-server-"));
+  await mkdir(join(root, ".git"));
+  await writeFile(join(root, ".git/config"), "private git configuration");
+  await writeFile(join(root, ".env"), "private local settings");
+  await writeFile(join(root, "sample.webm"), "0123456789");
+  const port = 22000 + Math.floor(Math.random() * 20000);
+  const server = spawn(
+    process.execPath,
+    [new URL("../tools/cdx-mp2-server.mjs", import.meta.url).pathname, String(port)],
+    { cwd: root, stdio: ["ignore", "pipe", "pipe"] },
+  );
+  try {
+    await new Promise((resolve, reject) => {
+      server.stdout.once("data", resolve);
+      server.once("error", reject);
+      server.once("exit", (code) => reject(new Error(`Server exited ${code}`)));
+    });
+    const base = `http://127.0.0.1:${port}`;
+    for (const path of [
+      "/.git/config",
+      "/%2egit/config",
+      "/.env",
+      "/%2eenv",
+      "/public/%2e%2e/.git/config",
+    ]) {
+      for (const method of ["GET", "HEAD"]) {
+        const response = await fetch(`${base}${path}`, { method });
+        expect(response.status, `${method} ${path}`).toBe(404);
+      }
+    }
+    const range = await fetch(`${base}/sample.webm`, { headers: { Range: "bytes=2-5" } });
+    expect(range.status).toBe(206);
+    expect(range.headers.get("content-range")).toBe("bytes 2-5/10");
+    expect(await range.text()).toBe("2345");
+  } finally {
+    server.kill();
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("reuse=0 keeps completed work passes live even when reuse is requested directly", async ({
+  page,
+}) => {
+  for (const setting of ["", "&reuse=0", "&reuse=1"]) {
+    await page.goto(`/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=cactus${setting}`);
+    await page.waitForFunction(() => window.__splashery?.ready);
+    const result = await page.evaluate(async () => {
+      const { app, player: p } = window.__splashery;
+      app.setAutoplay({ turntable: false });
+      p.opts.idleDelay = 1e9;
+      p.idle.weight = 0;
+      const handlers = p.stage.updateHandlers.splice(0);
+      const restore = [];
+      let draws = 0;
+      let requested = 0;
+      const originalUniforms = p.stage.setUniforms;
+      try {
+        p.update(0);
+        await p.stage.captureFrame();
+        for (const camera of p.stage.app.renderer.gsplatDirector.camerasMap.values()) {
+          for (const layer of camera.layersMap.values()) {
+            const pass = layer.gsplatManager.world.workBuffer.renderPass;
+            const original = pass.renderSplat;
+            pass.renderSplat = function (...args) {
+              if (args[0].node === p.stage.toy.entity) draws++;
+              return original.apply(this, args);
+            };
+            restore.push(() => {
+              pass.renderSplat = original;
+            });
+          }
+        }
+        p.stage.setUniforms = function (u, options) {
+          requested += Number(options.reuse);
+          return originalUniforms.call(this, u, options);
+        };
+        const sample = async (direct = false) => {
+          draws = 0;
+          p.update(0);
+          if (direct) originalUniforms.call(p.stage, p.stage.sheetUniforms, { reuse: true });
+          await p.stage.captureFrame();
+          return draws;
+        };
+        const idle = await sample();
+        const direct = await sample(true);
+        return { idle, direct, requested, hooks: restore.length };
+      } finally {
+        p.stage.setUniforms = originalUniforms;
+        for (const fn of restore) fn();
+        p.stage.updateHandlers.push(...handlers);
+      }
+    });
+    expect(result.hooks).toBeGreaterThan(0);
+    if (setting === "&reuse=0") {
+      expect(result.idle).toBeGreaterThan(0);
+      expect(result.direct).toBeGreaterThan(0);
+      expect(result.requested).toBe(0);
+    } else {
+      expect(result.idle).toBe(0);
+      expect(result.direct).toBe(0);
+      expect(result.requested).toBe(2);
+    }
+  }
+});
+
+test("orbiting a rim kit toy redraws its cached work buffer", async ({ page }) => {
+  await page.goto("/?renderer=webgl2&profile=weak&labs=1&adapt=off&first-toy=marble");
+  await page.waitForFunction(() => window.__splashery?.ready);
+  const result = await page.evaluate(async () => {
+    const { app, player: p } = window.__splashery;
+    const { KINDS } = await import("/src/effects.js");
+    app.setAutoplay({ turntable: false });
+    p.opts.idleDelay = 1e9;
+    p.idle.weight = 0;
+    p.camera.cur = { ...p.camera.home };
+    p.camera.tgt = { ...p.camera.home };
+    p.camera.vel.yaw = p.camera.vel.pitch = 0;
+    const handlers = p.stage.updateHandlers.splice(0);
+    const restore = [];
+    let draws = 0;
+    try {
+      p.update(0);
+      await p.stage.captureFrame();
+      for (const camera of p.stage.app.renderer.gsplatDirector.camerasMap.values()) {
+        for (const layer of camera.layersMap.values()) {
+          const pass = layer.gsplatManager.world.workBuffer.renderPass;
+          const original = pass.renderSplat;
+          pass.renderSplat = function (...args) {
+            if (args[0].node === p.stage.toy.entity) draws++;
+            return original.apply(this, args);
+          };
+          restore.push(() => {
+            pass.renderSplat = original;
+          });
+        }
+      }
+      const sample = async () => {
+        draws = 0;
+        p.update(0);
+        await p.stage.captureFrame();
+        return draws;
+      };
+      const idle = await sample();
+      p.camera.cur.yaw += 0.7;
+      p.camera.tgt = { ...p.camera.cur };
+      const orbit = await sample();
+      const settled = await sample();
+      return {
+        idle,
+        orbit,
+        settled,
+        kit: p.toyInfo.kind,
+        rim: p.proc.ctx.buf.anim.some((v, i) => i % 4 === 1 && v === KINDS.rim),
+      };
+    } finally {
+      for (const fn of restore) fn();
+      p.stage.updateHandlers.push(...handlers);
+    }
+  });
+  expect(result.kit).toBe("kit");
+  expect(result.rim).toBe(true);
+  expect(result.idle).toBe(0);
+  expect(result.orbit).toBeGreaterThan(0);
+  expect(result.settled).toBe(0);
+});
+
 test("phone speed statistics retain missing samples and use real percentiles", async () => {
   const { distribution, rankSlowest } = await import("../tools/pages/phone-speed-metrics.js");
   expect(distribution([])).toEqual({ count: 0, median: null, p95: null });
