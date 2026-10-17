@@ -12967,7 +12967,15 @@
       ],
       "shipped": false,
       "scope": "External task 104 diagnostic input; photos are not committed. One object capture, not six sets.",
-      "licenseSource": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/LICENSE.md"
+      "licenseSource": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/LICENSE.md",
+      "evaluationMasks": {
+        "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+        "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+        "sha256": "7c60a58c0afb032a2a82e18c76f256aba84dbe3bacbff41fd7d86ff35470b51b",
+        "annotationSide": 320,
+        "erosionPixels": 2,
+        "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+      }
     },
     {
       "id": "alicevision-buddha-60",
@@ -13343,7 +13351,15 @@
       "scope": "External task 104 round-two diagnostic input; photos are not committed. Same Buddha capture as the 24-photo record, not an additional independent set.",
       "licenseSource": "https://github.com/alicevision/dataset_buddha/blob/9067f679eb5a772c3e818b7a12dc35882c071858/LICENSE.md",
       "inputCount": 60,
-      "originalCount": 67
+      "originalCount": 67,
+      "evaluationMasks": {
+        "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+        "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+        "sha256": "f0f73f807acce01897f2f0f818b3efe5a2baf300fe285ebd6fbd6e39b2defc53",
+        "annotationSide": 320,
+        "erosionPixels": 2,
+        "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+      }
     },
     {
       "id": "alansartlog-dice-watercolors-24",
@@ -13357,7 +13373,6 @@
       "changes": "24 of 33 original JPG photographs, evenly sampled by sorted filename using round(i*(N-1)/23); unmodified files. Selection frozen before solving.",
       "shipped": false,
       "scope": "External task 104 round-two diagnostic input; originals are not committed. One independent object capture.",
-      "maskStatus": "No source masks. Independent manual evaluation silhouettes are being prepared; photographs stay outside git.",
       "inputCount": 24,
       "originalCount": 33,
       "files": [
@@ -13604,7 +13619,15 @@
         }
       ],
       "attribution": "\"Photogrammetry Test Set: Dice - Turntable - Strong Lights - Heavily Textured w Watercolors\" by alansartlog / CC BY 4.0",
-      "perImageAttributionNote": "Append # [image number] to the title when attributing individual images, as requested by the source README."
+      "perImageAttributionNote": "Append # [image number] to the title when attributing individual images, as requested by the source README.",
+      "evaluationMasks": {
+        "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+        "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+        "sha256": "03613e67a47a53422e0d333182ce83561dca0860e7013e372400705e2da3fb3c",
+        "annotationSide": 320,
+        "erosionPixels": 2,
+        "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+      }
     },
     {
       "id": "alansartlog-skull-flash-24",
@@ -13618,7 +13641,6 @@
       "changes": "24 of 66 original JPG photographs, evenly sampled by sorted filename using round(i*(N-1)/23); unmodified files. Selection frozen before solving.",
       "shipped": false,
       "scope": "External task 104 round-two diagnostic input; originals are not committed. One independent object capture.",
-      "maskStatus": "No source masks. Independent manual evaluation silhouettes are being prepared; photographs stay outside git.",
       "inputCount": 24,
       "originalCount": 66,
       "files": [
@@ -13864,7 +13886,452 @@
         }
       ],
       "attribution": "\"Photogrammetry Test Set: Skull - Cameramoves - Flash - No Background\" by alansartlog / CC BY 4.0",
-      "perImageAttributionNote": "Append # [image number] to the title when attributing individual images, as requested by the source README."
+      "perImageAttributionNote": "Append # [image number] to the title when attributing individual images, as requested by the source README.",
+      "evaluationMasks": {
+        "source": "Independent input-only manual approximate silhouettes by Codex (GPT-6)",
+        "use": "Evaluation only, not ground truth; never supplied to geometry or training",
+        "sha256": "57e87bee2a8dd1d2fb675fdf22d3e1e9ec5db0d16fa12127eb5914bf28960bac",
+        "annotationSide": 320,
+        "erosionPixels": 2,
+        "stored": "codex/photos-to-3d-clips; original photographs stay out of git"
+      }
+    }
+  ],
+  "photos3dSynthetic": [
+    {
+      "id": "photos3d-synthetic-burger-double",
+      "kind": "rendered synthetic object, not a real capture",
+      "views": 24,
+      "source": "https://kenney.nl/assets/food-kit",
+      "author": "Kenney; calibrated renders made by Ryan with Codex (GPT-6)",
+      "license": "CC0-1.0",
+      "checked": "October 17, 2026",
+      "model": {
+        "source": "https://kenney.nl/assets/food-kit",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "checked": "October 17, 2026",
+        "sha256": "4faa54953d0b18ff8f455d7a3f1a04fc0222e5d2d41e969854d0a2b4ee3c3469",
+        "changes": "Unmodified burger-double.glb from Food Kit, with palette texture embedded using the existing pinned @gltf-transform/core and registered extensions, including KHR_texture_transform. Mesh geometry and texture transforms retained. Synthetic calibrated views, not real photographs. Archive SHA256 cdad90853682499b94c9fda2f87678b24bfd8f3264e0ed323f6b6a27fd7c6f6f.",
+        "originalModelSha256": "93ef8149094cb26a46ce8d05c0550c13ed68648b1978a8c3dfdac7f0b2b5dbe2"
+      },
+      "rendererSource": "https://github.com/ryanjosephkamp/splashery/tree/f7710637570ce34aa544e53175f5dc7b03b6c11c/tools/blender",
+      "rendererCommit": "f7710637570ce34aa544e53175f5dc7b03b6c11c",
+      "manifestSha256": "fec3f21749308b56e6034268be51a2ee9168887340490e655da544d1518831ad",
+      "changes": "24 rendered 960x720 orbit views at8samples using task105 pinned Blender4.5.3, with exact cameras and masks. All beauty images, source models, and generated datasets stay outside git.",
+      "shipped": false,
+      "files": [
+        {
+          "name": "view-000.png",
+          "bytes": 550401,
+          "sha256": "1e890aa454d1bfa970e038377ba129f70854117749a6118b24e9b568c98cdca8"
+        },
+        {
+          "name": "view-001.png",
+          "bytes": 546874,
+          "sha256": "2d347c6356585e38a3d059b5082907b5dc4b12b3d3ac62a96c29f67083514dc7"
+        },
+        {
+          "name": "view-002.png",
+          "bytes": 548392,
+          "sha256": "fa629c0298e12db35d05deeb88ea10237a6e957a88923506623ae62186879126"
+        },
+        {
+          "name": "view-003.png",
+          "bytes": 550732,
+          "sha256": "a24f6e453720a279c2766de14c802ff2a9454a9679f54fd5ee06d9342ec18d99"
+        },
+        {
+          "name": "view-004.png",
+          "bytes": 548226,
+          "sha256": "2abbec963012546e808ba9b9dc341b7f14fad4e782934da8ac3bf0ca26812613"
+        },
+        {
+          "name": "view-005.png",
+          "bytes": 547156,
+          "sha256": "c7543b5dcaf63b9e25c7efbed3308f37df094330c9dca4cff108746bbe186ef3"
+        },
+        {
+          "name": "view-006.png",
+          "bytes": 545942,
+          "sha256": "92c32907de362af89fe9f20fa68e0e4f130ffc6e6bc6847e3763b4f9be414e1a"
+        },
+        {
+          "name": "view-007.png",
+          "bytes": 546595,
+          "sha256": "382710c43fa481eb1c9f835e17f62d8bf58726c8ab205880b001f1c601b8e16b"
+        },
+        {
+          "name": "view-008.png",
+          "bytes": 548642,
+          "sha256": "3bfc6fe1eb4eda8d8ed5817974d7a00e9be2f6ee347d6eec0dd58218650cecb7"
+        },
+        {
+          "name": "view-009.png",
+          "bytes": 550640,
+          "sha256": "4ffa1f8063673c4ec507a797f83bd2df86d39b1d5a9f29ca643d5432a284acbf"
+        },
+        {
+          "name": "view-010.png",
+          "bytes": 542024,
+          "sha256": "2cec89bfe9634f281aa2d2fa1ab5663a705394896a9ea2c15dc96143a577b2f0"
+        },
+        {
+          "name": "view-011.png",
+          "bytes": 537610,
+          "sha256": "0c026fe6340e6d06f01470236e006e93502ad4d419b5aaa5481f941b50440d6d"
+        },
+        {
+          "name": "view-012.png",
+          "bytes": 531386,
+          "sha256": "34956feb24d3e1974cf86a6ac16c8c4e34a4631db3ccb61b73a2b8213d48c5a5"
+        },
+        {
+          "name": "view-013.png",
+          "bytes": 527345,
+          "sha256": "18e7d1961a6b3c9a123e43f8726094ed84299459c9e6c4b7126a7b3ffc565e9f"
+        },
+        {
+          "name": "view-014.png",
+          "bytes": 524375,
+          "sha256": "dfe1aa1f234550f43ab98a2f4e9606541b4a21fa193a630864e29685a9bb8fee"
+        },
+        {
+          "name": "view-015.png",
+          "bytes": 528828,
+          "sha256": "1c6021325e4389cf50f576132f93e836afd33db8e0672a173f5a2c72f6cbc7dd"
+        },
+        {
+          "name": "view-016.png",
+          "bytes": 526270,
+          "sha256": "2c5059340dd6fb54b5dac15462dbab3e8398125883494e3fa365f712eb8a9ec2"
+        },
+        {
+          "name": "view-017.png",
+          "bytes": 525446,
+          "sha256": "d9d9d6603a4f6119971853d0fea59cf433b1cde2ca9f1a53f1fdd4ad623d819a"
+        },
+        {
+          "name": "view-018.png",
+          "bytes": 527316,
+          "sha256": "37adc95acb8ed8522d8302daee923a39a3ffefcca11b915e85c25ab2bd9163a1"
+        },
+        {
+          "name": "view-019.png",
+          "bytes": 537110,
+          "sha256": "bac66eff16e1ee1491c840799063b57c7a46c1fd3b59b5284b8487d054308aa3"
+        },
+        {
+          "name": "view-020.png",
+          "bytes": 542871,
+          "sha256": "4d15c79b908316aafb3e2b451057ac8d622f686117f829ed7193133c12b322d2"
+        },
+        {
+          "name": "view-021.png",
+          "bytes": 548344,
+          "sha256": "38c6ac444b26c0a4193d319f8a3c6c600ce2dc613293e6a1198b609ec9865e9e"
+        },
+        {
+          "name": "view-022.png",
+          "bytes": 548615,
+          "sha256": "6104326f9cb9753ac5453de5a93eab548880c9ddde975a5afe92542b9c71ec6c"
+        },
+        {
+          "name": "view-023.png",
+          "bytes": 548535,
+          "sha256": "c1bc98ff90a854091ede0e352b44c8138a30ad97ecfb9f74165885814937a0ae"
+        }
+      ]
+    },
+    {
+      "id": "photos3d-synthetic-cake-birthday",
+      "kind": "rendered synthetic object, not a real capture",
+      "views": 24,
+      "source": "https://kenney.nl/assets/food-kit",
+      "author": "Kenney; calibrated renders made by Ryan with Codex (GPT-6)",
+      "license": "CC0-1.0",
+      "checked": "October 17, 2026",
+      "model": {
+        "source": "https://kenney.nl/assets/food-kit",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "checked": "October 17, 2026",
+        "sha256": "5c9f797259fa626c084091a618e9681ce49a5e96f31956241dc37faef16ac5c4",
+        "changes": "Unmodified cake-birthday.glb from Food Kit, with palette texture embedded using the existing pinned @gltf-transform/core and registered extensions, including KHR_texture_transform. Mesh geometry and texture transforms retained. Synthetic calibrated views, not real photographs. Archive SHA256 cdad90853682499b94c9fda2f87678b24bfd8f3264e0ed323f6b6a27fd7c6f6f.",
+        "originalModelSha256": "3102379c244fa77cdd4818c316037f576f3fb172d28f161ae9e8deead55dac69"
+      },
+      "rendererSource": "https://github.com/ryanjosephkamp/splashery/tree/f7710637570ce34aa544e53175f5dc7b03b6c11c/tools/blender",
+      "rendererCommit": "f7710637570ce34aa544e53175f5dc7b03b6c11c",
+      "manifestSha256": "ffdd12396d6cb0000d306232e26e8bc276a4de8f0823a847e6b2679263c9eb1b",
+      "changes": "24 rendered 960x720 orbit views at8samples using task105 pinned Blender4.5.3, with exact cameras and masks. All beauty images, source models, and generated datasets stay outside git.",
+      "shipped": false,
+      "files": [
+        {
+          "name": "view-000.png",
+          "bytes": 455378,
+          "sha256": "a1623417107dc62d35524d4c81c174bfaaee2a1e438ecf7a51a4011e0eb3ac1e"
+        },
+        {
+          "name": "view-001.png",
+          "bytes": 449851,
+          "sha256": "be69d19f584609867c6dacdbfa29899eeaa2425e7fd59a5477f93115ae23d21a"
+        },
+        {
+          "name": "view-002.png",
+          "bytes": 444957,
+          "sha256": "65c2c076f97040818f3c77b178b6df58ebd6c80c53fc928b56c05a74a48f4fe8"
+        },
+        {
+          "name": "view-003.png",
+          "bytes": 446557,
+          "sha256": "b03e84ee6340136756305b8d2e12493755e702af9f32c6967d4e05c7877ccd73"
+        },
+        {
+          "name": "view-004.png",
+          "bytes": 451004,
+          "sha256": "095530d3d3e5b7ab6e4e38d9b807c19878754db7d6685b6a95bde31de905f4b4"
+        },
+        {
+          "name": "view-005.png",
+          "bytes": 458730,
+          "sha256": "49c05f97de681fd451a3ac108eaa1c55b502911aea5e3ce8d1259f9d451ab476"
+        },
+        {
+          "name": "view-006.png",
+          "bytes": 462476,
+          "sha256": "cf003ec11dac2712df62be6291f19588cabbacf38ffa6529061b57d981786462"
+        },
+        {
+          "name": "view-007.png",
+          "bytes": 466863,
+          "sha256": "06e1d3cff74d87f24ab552e6dc32dff25adfe767a6f4dcccfd4237973cff06fb"
+        },
+        {
+          "name": "view-008.png",
+          "bytes": 470812,
+          "sha256": "1f4beb98784d0c34078e1c6c403b73ebc54e4af194a1b1932ddc8c7c4ecb5475"
+        },
+        {
+          "name": "view-009.png",
+          "bytes": 471356,
+          "sha256": "be8fe82e5ca585223b8579e17fb915b5ada020770b10a7ddf2b98bd054ba936b"
+        },
+        {
+          "name": "view-010.png",
+          "bytes": 469264,
+          "sha256": "bd491403a3dfddc5c61906b3b315ef21e1351d0ec82c88dfcc28535da2053cb9"
+        },
+        {
+          "name": "view-011.png",
+          "bytes": 469807,
+          "sha256": "d440ac3a4d179377fd73a598463b3ffaafeb8e987fe608d39b344b59b7928300"
+        },
+        {
+          "name": "view-012.png",
+          "bytes": 467235,
+          "sha256": "b840045e4bca56eaa4f7abdae7fac6891d32441ca979cd047b1e1e4e2b833c52"
+        },
+        {
+          "name": "view-013.png",
+          "bytes": 464407,
+          "sha256": "c93e6fda9ba7dccc813b9a853e9058a79ce112a940005f9134366b0e7a6e1c87"
+        },
+        {
+          "name": "view-014.png",
+          "bytes": 461325,
+          "sha256": "c2fa55dde7abb6ae7ec7cc4bc055090fdf03c60f9722f74f3779f1fff67254c4"
+        },
+        {
+          "name": "view-015.png",
+          "bytes": 462883,
+          "sha256": "da463e5144de6c020a5da0415f22374575127640aa6bf1c42f46b1c994254b0b"
+        },
+        {
+          "name": "view-016.png",
+          "bytes": 464556,
+          "sha256": "c22bd3dc3b6e5e4133638fa88140a0cfb836bf9e9bf9386260890d600600b5c2"
+        },
+        {
+          "name": "view-017.png",
+          "bytes": 466818,
+          "sha256": "ad4eb195b21fd58056717e86763dc89946a395edec651e726019f83e1cd972e7"
+        },
+        {
+          "name": "view-018.png",
+          "bytes": 465777,
+          "sha256": "002f44e5d0b107ffdb23e58d44c0cdd6d469a0a9f451800af831d87fa2909a08"
+        },
+        {
+          "name": "view-019.png",
+          "bytes": 467708,
+          "sha256": "0ef8c656f540d7822c3bebefefbd4b5b3d3a20938953a8cdf0ee0e7e439373c1"
+        },
+        {
+          "name": "view-020.png",
+          "bytes": 469239,
+          "sha256": "fbdb60bcd76e5477660719d6744f2712a792c6e431c08414821732e74cd8d8f7"
+        },
+        {
+          "name": "view-021.png",
+          "bytes": 467591,
+          "sha256": "8de11e8c8f20250d9f92a05fdfa21d1a156dc12ee0098ed7a5f3aa9980fadc02"
+        },
+        {
+          "name": "view-022.png",
+          "bytes": 465794,
+          "sha256": "4a46758283e77166694ba44a7da49205a4792b3f64fc094de4b7db279a784971"
+        },
+        {
+          "name": "view-023.png",
+          "bytes": 461112,
+          "sha256": "01a1fd9d52eff9ecc16f095fdfdd4188081d73e1792f362052c18e1d442d1915"
+        }
+      ]
+    },
+    {
+      "id": "photos3d-synthetic-donut-sprinkles",
+      "kind": "rendered synthetic object, not a real capture",
+      "views": 24,
+      "source": "https://kenney.nl/assets/food-kit",
+      "author": "Kenney; calibrated renders made by Ryan with Codex (GPT-6)",
+      "license": "CC0-1.0",
+      "checked": "October 17, 2026",
+      "model": {
+        "source": "https://kenney.nl/assets/food-kit",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "checked": "October 17, 2026",
+        "sha256": "c85f9fdc913d0097d19ae81f8988eb410b5c41ee10bf0b0039fa9002a241fb2d",
+        "changes": "Unmodified donut-sprinkles.glb from Food Kit, with palette texture embedded using the existing pinned @gltf-transform/core and registered extensions, including KHR_texture_transform. Mesh geometry and texture transforms retained. Synthetic calibrated views, not real photographs. Archive SHA256 cdad90853682499b94c9fda2f87678b24bfd8f3264e0ed323f6b6a27fd7c6f6f.",
+        "originalModelSha256": "f45946b7e81221e9d45fdfab45ee89eeb095ff0d7fb6a3ad9988919cf587d3b7"
+      },
+      "rendererSource": "https://github.com/ryanjosephkamp/splashery/tree/f7710637570ce34aa544e53175f5dc7b03b6c11c/tools/blender",
+      "rendererCommit": "f7710637570ce34aa544e53175f5dc7b03b6c11c",
+      "manifestSha256": "b26a22a30af2117461bf17480d37f34f8f94dd79d27ac0a48c5c6358ca721a83",
+      "changes": "24 rendered 960x720 orbit views at8samples using task105 pinned Blender4.5.3, with exact cameras and masks. All beauty images, source models, and generated datasets stay outside git.",
+      "shipped": false,
+      "files": [
+        {
+          "name": "view-000.png",
+          "bytes": 414372,
+          "sha256": "ca036e88d8bfc915df3cdbb7d2ce270784727d344815847506a3d71de9e5852e"
+        },
+        {
+          "name": "view-001.png",
+          "bytes": 414711,
+          "sha256": "bdb0016659aa7dfe2486276591717cf54163782522e26977bccac7e3c6fa391d"
+        },
+        {
+          "name": "view-002.png",
+          "bytes": 414921,
+          "sha256": "c2d2f25fc81e3c35a82fccbbb7a4f0af207aed5fb6dca47e658a9a0721945523"
+        },
+        {
+          "name": "view-003.png",
+          "bytes": 414557,
+          "sha256": "c98fde589b516cfb69d766651a71ab1387097c3c0a0c6e94657af111a9dac7f1"
+        },
+        {
+          "name": "view-004.png",
+          "bytes": 415480,
+          "sha256": "a545ec6e641db59e575e12bac7a71881356bc27ae5fd308761675db4f5d3627f"
+        },
+        {
+          "name": "view-005.png",
+          "bytes": 420586,
+          "sha256": "518cc81dfe370a6c8a60c1099918f228c2cf5bf0f0de4a97a326e38e21e53ed4"
+        },
+        {
+          "name": "view-006.png",
+          "bytes": 425627,
+          "sha256": "a68c20d30f11829c3369280228352e1dc4d186a639fa9b3b69f13ddb9d15dcf2"
+        },
+        {
+          "name": "view-007.png",
+          "bytes": 427789,
+          "sha256": "07989db57467eb5b312cd101c9aa9fc1d87a76f8f27342c33361b0279238eb0c"
+        },
+        {
+          "name": "view-008.png",
+          "bytes": 429666,
+          "sha256": "7789491542d827aed74e46a3d1abc0bab9b57291b3591511d7993f8a85f98f30"
+        },
+        {
+          "name": "view-009.png",
+          "bytes": 433405,
+          "sha256": "13eb35f0bf9d9e912228eca8eeced2baa12c285dae2523e5fbe520a3dc1e541d"
+        },
+        {
+          "name": "view-010.png",
+          "bytes": 436668,
+          "sha256": "c373f14ba4ae28d713c80de890e015ab233441f1459c5aa71dede3bc59b34dd0"
+        },
+        {
+          "name": "view-011.png",
+          "bytes": 436641,
+          "sha256": "5a2ef4e1a973f99bb3053edbf9af44d4f36853527357c64a97f102971caf0c71"
+        },
+        {
+          "name": "view-012.png",
+          "bytes": 435371,
+          "sha256": "2bbd0dae7a7877e1de79df7bb56e8747ce41680d94a02ed37520c0e51989a677"
+        },
+        {
+          "name": "view-013.png",
+          "bytes": 436372,
+          "sha256": "e68d1ff1a382556624adb24f517f530ce6245bb89eac98676cd59b293a795694"
+        },
+        {
+          "name": "view-014.png",
+          "bytes": 437796,
+          "sha256": "a255bda19a45ba5f84380c57be79f85a7da71d2d068b39abe99046f5835d68b6"
+        },
+        {
+          "name": "view-015.png",
+          "bytes": 436226,
+          "sha256": "e904d429c80c2888375f739e4cff9634ff2f5105c9126496d97de8ff6dd26457"
+        },
+        {
+          "name": "view-016.png",
+          "bytes": 434552,
+          "sha256": "07a37f1339ac6266c18b54cbc18cf430b735939942ff6173d731bb6d460136fc"
+        },
+        {
+          "name": "view-017.png",
+          "bytes": 435991,
+          "sha256": "122601cf262b887eeec7a3bed396050bd783a8893ce6d2715de3c9a6a1b8854d"
+        },
+        {
+          "name": "view-018.png",
+          "bytes": 435678,
+          "sha256": "099f91367abf4f31ef6c3523b8c529b14ba4a933190754c4ba9b68705c72c50e"
+        },
+        {
+          "name": "view-019.png",
+          "bytes": 432995,
+          "sha256": "2e26a55acbc2e276714f3f41aa82e748990ca748bd159f26d59a8d519d7ff815"
+        },
+        {
+          "name": "view-020.png",
+          "bytes": 428681,
+          "sha256": "6f00d0f0a0cc0af5fe0972809d0120e0e5c88bf817ab2d4788e0ca2b141f3324"
+        },
+        {
+          "name": "view-021.png",
+          "bytes": 428408,
+          "sha256": "74aebfce09481658942798494966ad88bf8a0f0a34bd8faaf3d68297e70cc023"
+        },
+        {
+          "name": "view-022.png",
+          "bytes": 425286,
+          "sha256": "55951796ef5440dadb65d416f332017c2de83b1e7e34cd1437e0611111005dff"
+        },
+        {
+          "name": "view-023.png",
+          "bytes": 418805,
+          "sha256": "c2fa1273ed1c3cb29249a78022b81dae799390c9f5d9b561f56f10b9a4aee067"
+        }
+      ]
     }
   ]
 }
